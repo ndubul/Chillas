@@ -20,7 +20,12 @@ namespace Dev2.Data
         {
             if (warewolfEvalResult.IsWarewolfAtomListresult)
             {
-                _listResult = warewolfEvalResult as WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomListresult;                
+                var warewolfAtomListresult = warewolfEvalResult as WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomListresult;
+                if(warewolfAtomListresult != null)
+                {
+                    warewolfAtomListresult.Item.ResetCurrentEnumerator();
+                    _listResult = warewolfAtomListresult;
+                }
             }
             else if (warewolfEvalResult.IsWarewolfAtomResult)
             {
@@ -50,7 +55,7 @@ namespace Dev2.Data
                     _scalarResult = WarewolfDataEvaluationCommon.WarewolfEvalResult.NewWarewolfAtomResult(DataASTMutable.WarewolfAtom.NewDataString(stringValue)) as WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomResult;
                 }
             }
-            _maxValue = _listResult != null ? _listResult.Item.Count(atom => !atom.IsNothing) : 1;
+            _maxValue = _listResult != null ? _listResult.Item.Count(atom => atom!=null && !atom.IsNothing) : 1;
             _currentValue = 0;
         }        
 
@@ -66,7 +71,7 @@ namespace Dev2.Data
             _currentValue++;
             if (_listResult != null)
             {
-                var warewolfAtomToString = ExecutionEnvironment.WarewolfAtomToString(_listResult.Item.GetNextValue());                
+                var warewolfAtomToString = ExecutionEnvironment.WarewolfAtomToString(_listResult.Item.GetNextValue());                     
                 warewolfAtomToString = DoCalcution(warewolfAtomToString);
                 return warewolfAtomToString;
             }
