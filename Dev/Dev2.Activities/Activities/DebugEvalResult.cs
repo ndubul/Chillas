@@ -20,7 +20,7 @@ namespace Dev2.Activities
 
         public DebugEvalResult(string inputVariable, string label, IExecutionEnvironment environment, bool isDataMerge = false)
         {
-            _inputVariable = inputVariable;
+            _inputVariable = inputVariable.Trim();
             _positionInput = "";
             _label = label;
             try
@@ -63,7 +63,11 @@ namespace Dev2.Activities
                 }
                 else
                 {
-                    _inputVariable = environment.EvalToExpression(_inputVariable);
+                    var evalToExpression = environment.EvalToExpression(_inputVariable);
+                    if (DataListUtil.IsEvaluated(evalToExpression))
+                    {
+                        _inputVariable = evalToExpression;
+                    }
                     _evalResult = environment.Eval(_inputVariable);
                 }
                 if (_inputVariable.Contains(".WarewolfPositionColumn")) _positionInput = _inputVariable.Replace(".WarewolfPositionColumn", ""); 
