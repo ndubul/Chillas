@@ -10,6 +10,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Theme.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <customControlsConverters:EmptyStringToBoolConverter x:Key="EmptyStringToBoolConverter" />
@@ -38,9 +39,7 @@
         <interfaceImplementors:CalculateIntellisenseProvider />
     </interfaceImplementors:CompositeIntellisenseProvider>
 
-    <Style x:Key="DatagridIntellisenseTextBoxStyle"
-           TargetType="{x:Type ui:IntellisenseTextBox}"
-           BasedOn="{StaticResource ActivityIntellisenseTextBoxStyle}">
+    <Style x:Key="DatagridIntellisenseTextBoxStyle" TargetType="{x:Type ui:IntellisenseTextBox}" BasedOn="{StaticResource ActivityIntellisenseTextBoxStyle}">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Padding" Value="2,5,0,0" />
         <Setter Property="Margin" Value="0" />
@@ -48,19 +47,13 @@
         <Setter Property="Width" Value="Auto" />
         <Setter Property="MaxHeight" Value="23" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=HasError}"
-                         Value="True">
-                <Setter Property="Foreground"
-                        Value="{StaticResource ValidationErrorElement}" />
-                <Setter Property="BorderBrush"
-                        Value="{StaticResource ValidationErrorElement}" />
+            <DataTrigger Binding="{Binding Path=HasError}" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource ValidationErrorElement}" />
+                <Setter Property="BorderBrush" Value="{StaticResource ValidationErrorElement}" />
             </DataTrigger>
-            <Trigger Property="Validation.HasError"
-                     Value="True">
-                <Setter Property="Foreground"
-                        Value="{StaticResource ValidationErrorElement}" />
-                <Setter Property="BorderBrush"
-                        Value="{StaticResource ValidationErrorElement}" />
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource ValidationErrorElement}" />
+                <Setter Property="BorderBrush" Value="{StaticResource ValidationErrorElement}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -78,7 +71,6 @@
         <Setter Property="Width" Value="Auto"/>
         <Setter Property="CanUserAddRows" Value="False" />
         <Setter Property="GridLinesVisibility" Value="None" />
-        <Setter Property="BorderBrush" Value="{StaticResource ButtonBorderBrush}" />
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Hidden"/>
@@ -114,30 +106,25 @@
         <Setter Property="Height" Value="Auto" />
     </Style>      
     
-    <Style x:Key="ActivityMapppingDataGridIntellisenseTextBoxStyle"
-           TargetType="{x:Type ui:IntellisenseTextBox}"
-           BasedOn="{StaticResource DatagridIntellisenseTextBoxStyle}">
+    <Style x:Key="ActivityMapppingDataGridIntellisenseTextBoxStyle" TargetType="{x:Type ui:IntellisenseTextBox}" BasedOn="{StaticResource DatagridIntellisenseTextBoxStyle}">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="WrapInBrackets" Value="True"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="AllowUserInsertLine" Value="False"/>
     </Style>
     
-    <Style x:Key="ActivityMapppingIntellisenseTextBoxStyle"
-           TargetType="{x:Type ui:IntellisenseTextBox}">
+    <Style x:Key="ActivityMapppingIntellisenseTextBoxStyle" TargetType="{x:Type ui:IntellisenseTextBox}">
         <Setter Property="WrapInBrackets" Value="False"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0,3"/>
         <Setter Property="Width" Value="Auto"/>
     </Style>
        
-    <Style x:Key="ActivityMapppingComboBoxStyle"
-           TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ActivityComboBoxStyle}">
+    <Style x:Key="ActivityMapppingComboBoxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ActivityComboBoxStyle}">
         <Setter Property="Margin" Value="0,3"/>
     </Style>
     
-    <Style x:Key="ActivityMapppingLabelStyle"
-           TargetType="{x:Type Label}">
+    <Style x:Key="ActivityMapppingLabelStyle" TargetType="{x:Type Label}">
         <Setter Property="Margin" Value="0,0,5,0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -167,9 +154,7 @@
                                         Visibility="{Binding IsRefreshing, Converter={StaticResource BoolToVisibilityConverter}}"
                                         AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RefreshProgressBar_AutoID}" />
     
-    <Style x:Key="ActivityRefreshButtonStyle"
-           TargetType="{x:Type Button}"
-           BasedOn="{StaticResource ActivityEditButtonStyle}">
+    <Style x:Key="ActivityRefreshButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ActivityEditButtonStyle}">
         <Setter Property="Content" Value="{DynamicResource RefreshImage}" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=IsRefreshing, Mode=TwoWay}" Value="true">

@@ -7,28 +7,22 @@
                     xmlns:adorners="clr-namespace:Dev2.Activities.Adorners;assembly=Dev2.Activities.Designers">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Resources/SplitterExpansionButton.xaml" />
+        <!--<ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Resources/SplitterExpansionButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Resources/SplitterPanel.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Resources/Brushes.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/DataTemplatesIntellisense.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/ToggleButtonMetro.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/DataTemplatesIntellisense.xaml" />-->
+        <ResourceDictionary Source="pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Theme.xaml"></ResourceDictionary>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Resources/Icons.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!--Fix For the annoying binding issue that would cause studio to hang in debug, it has to be here to apply to menu items globally-->
     <Style TargetType="{x:Type MenuItem}">
-        <Setter Property="HorizontalContentAlignment"
-                Value="Left" />
-        <Setter Property="VerticalContentAlignment"
-                Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
-    <SolidColorBrush x:Key="DebugItemLabelBrush"
-                     Color="Black" />
-    <SolidColorBrush x:Key="DebugItemValueBrush"
-                     Color="#05C47C" />
-    <SolidColorBrush x:Key="DebugItemVariableBrush"
-                     Color="#7F1769" />
+    <SolidColorBrush x:Key="DebugItemLabelBrush" Color="Black" />
+    <SolidColorBrush x:Key="DebugItemValueBrush" Color="#05C47C" />
+    <SolidColorBrush x:Key="DebugItemVariableBrush" Color="#7F1769" />
 
     <Storyboard x:Key="FlashingAnimationStoryBoard">
         <DoubleAnimation Storyboard.TargetProperty="Opacity"
@@ -39,28 +33,19 @@
                          Duration="0:0:1" />
     </Storyboard>
 
-    <Style x:Key="ImageTickStyle"
-           TargetType="{x:Type Image}">
-        <Setter Property="Height"
-                Value="15" />
-        <Setter Property="Width"
-                Value="15" />
-        <Setter Property="Source"
-                Value="/Images/ActionSuccessful-16.png" />
+    <Style x:Key="ImageTickStyle" TargetType="{x:Type Image}">
+        <Setter Property="Height" Value="15" />
+        <Setter Property="Width" Value="15" />
+        <Setter Property="Source" Value="/Images/ActionSuccessful-16.png" />
     </Style>
 
-    <Style x:Key="ImageCloseStyle"
-           TargetType="{x:Type Image}">
-        <Setter Property="Height"
-                Value="15" />
-        <Setter Property="Width"
-                Value="15" />
-        <Setter Property="Source"
-                Value="/Images/Close_Box_Red.png" />
+    <Style x:Key="ImageCloseStyle" TargetType="{x:Type Image}">
+        <Setter Property="Height" Value="15" />
+        <Setter Property="Width" Value="15" />
+        <Setter Property="Source" Value="/Images/Close_Box_Red.png" />
     </Style>
 
-    <Style x:Key="FlashingFrameworkElement"
-           TargetType="{x:Type FrameworkElement}">
+    <Style x:Key="FlashingFrameworkElement" TargetType="{x:Type FrameworkElement}">
         <Style.Triggers>
             <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                 <BeginStoryboard Storyboard="{StaticResource FlashingAnimationStoryBoard}" />
@@ -68,20 +53,13 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="BottomRightResizeThumbStyle"
-           TargetType="{x:Type Thumb}">
-        <Setter Property="Cursor"
-                Value="SizeNWSE" />
-        <Setter Property="Width"
-                Value="12" />
-        <Setter Property="Height"
-                Value="12" />
-        <Setter Property="Grid.Column"
-                Value="1" />
-        <Setter Property="HorizontalAlignment"
-                Value="Right" />
-        <Setter Property="VerticalAlignment"
-                Value="Bottom" />
+    <Style x:Key="BottomRightResizeThumbStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="Cursor" Value="SizeNWSE" />
+        <Setter Property="Width" Value="12" />
+        <Setter Property="Height" Value="12" />
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
@@ -143,7 +121,7 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Rectangle x:Name="Bd" Fill="Transparent" 
-                                   Stroke="{StaticResource ButtonBorderBrush}" StrokeThickness="1" />
+                                   StrokeThickness="1" />
                         <ContentControl x:Name="ContentControl" Foreground="{TemplateBinding Foreground}" IsTabStop="False"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                         Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">

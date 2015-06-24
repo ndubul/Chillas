@@ -51,7 +51,7 @@
                       CanUserSortColumns="False"
                       HorizontalAlignment="Stretch"
                       BorderThickness="1"
-                      BorderBrush="{StaticResource ButtonBorderBrush}"
+                      
                       Visibility="{Binding InputsVisibility}">
                 <DataGrid.CellStyle>
                     <Style TargetType="{x:Type DataGridCell}">

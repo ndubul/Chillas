@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:custoControls="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.CustomControls">
 
-    <ResourceDictionary.MergedDictionaries>
+    <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/CommonMetro.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/ComboBoxMetroBrushes.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/TextBoxMetro.xaml" />
@@ -11,7 +11,7 @@
 
     <custoControls:GridLengthConverter x:Key="GridLengthConverter" />
 
-    <!-- *********************************  ComboBoxToggleButton Style   ********************************* -->
+    --><!-- *********************************  ComboBoxToggleButton Style   ********************************* --><!--
     <Style x:Key="ComboBoxToggleButtonStyle"
            TargetType="ToggleButton">
         <Setter Property="FontSize"
@@ -125,7 +125,7 @@
         </Setter>
     </Style>
 
-    <!-- *********************************  ComboBoxItem Style  ********************************* -->
+    --><!-- *********************************  ComboBoxItem Style  ********************************* --><!--
     <Style x:Key="ComboBoxItemStyle"
            TargetType="ComboBoxItem">
         <Setter Property="FontSize"
@@ -270,7 +270,7 @@
         </Setter>
     </Style>
 
-    <!-- *********************************  ComboBoxEditableTextBox Style  ********************************* -->
+    --><!-- *********************************  ComboBoxEditableTextBox Style  ********************************* --><!--
     <Style x:Key="ComboBoxEditableTextBoxStyle"
            TargetType="{x:Type TextBox}">
         <Setter Property="Foreground"
@@ -321,7 +321,7 @@
         </Setter>
     </Style>
 
-    <!-- *********************************  ComboBoxEditable Template  ********************************* -->
+    --><!-- *********************************  ComboBoxEditable Template  ********************************* --><!--
     <ControlTemplate x:Key="ComboBoxEditableTemplate"
                      TargetType="{x:Type ComboBox}">
         <Grid x:Name="MainGrid"
@@ -454,9 +454,9 @@
         </Grid>
     </ControlTemplate>
 
-    <!-- *********************************  ComboBox Style  ********************************* -->
+    --><!-- *********************************  ComboBox Style  ********************************* -->
     <!-- NOTE: Minwidth is used to control the width of the selector togglebutton -->
-    <!-- Yes this is an extreme hack - dont have time to implement attached prop - please do: ComboBoxToggleButton.Width -->
+    <!-- Yes this is an extreme hack - dont have time to implement attached prop - please do: ComboBoxToggleButton.Width --><!--
     <Style x:Key="ComboBoxStyle"
            TargetType="{x:Type ComboBox}">
         <Setter Property="Padding"
@@ -530,7 +530,7 @@
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="FocusStates">
                                 <VisualState x:Name="Unfocused" />
-                                <!--<VisualState x:Name="Focused">
+                                --><!--<VisualState x:Name="Focused">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="focused">
                                             <DiscreteObjectKeyFrame KeyTime="0">
@@ -540,7 +540,7 @@
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
-                                </VisualState>-->
+                                </VisualState>--><!--
                                 <VisualState x:Name="FocusedDropDown">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
@@ -679,9 +679,9 @@
         </Style.Triggers>
     </Style>
 
-    <!-- *********************************  Implicit Styles  ********************************* -->
+    --><!-- *********************************  Implicit Styles  ********************************* --><!--
     <Style BasedOn="{StaticResource ComboBoxStyle}"
            TargetType="{x:Type ComboBox}" />
     <Style BasedOn="{StaticResource ComboBoxItemStyle}"
-           TargetType="{x:Type ComboBoxItem}" />
+           TargetType="{x:Type ComboBoxItem}" />-->
 </ResourceDictionary>

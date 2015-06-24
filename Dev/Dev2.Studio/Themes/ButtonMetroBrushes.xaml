@@ -5,7 +5,7 @@
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- Button Brushes -->
+     <!--Button Brushes--> 
     <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{StaticResource Color_009b}" />
     <SolidColorBrush x:Key="ButtonBorderBrush" Color="{StaticResource WarewolfLightGrey}" />
     <SolidColorBrush x:Key="ButtonHoverBackgroundBrush" Color="{StaticResource Color_009b}" />

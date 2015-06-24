@@ -94,7 +94,7 @@
                                             Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverterPositive}}"
                                             AutomationProperties.AutomationId="UI_SettingsProgress_Indicator" />
         
-        <Border Grid.Row="1" Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="{StaticResource ButtonBorderBrush}">
+        <Border Grid.Row="1" Grid.Column="0" BorderThickness="0,0,1,0">
 
             <StackPanel
                         Orientation="Vertical"

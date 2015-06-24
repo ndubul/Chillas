@@ -2,11 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <ResourceDictionary.MergedDictionaries>
+    <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/Brushes.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- *********************************  ValidationToolTip Template  ********************************* -->
+    --><!-- *********************************  ValidationToolTip Template  ********************************* --><!--
     <ControlTemplate x:Key="ValidationToolTipTemplate">
         <Grid x:Name="Root" Margin="5,0" Opacity="0" RenderTransformOrigin="0,0">
             <Grid.RenderTransform>
@@ -59,6 +59,6 @@
     <SolidColorBrush x:Key="WorkflowSelectedBorderBrush" Color="{StaticResource WarewolfOrange}" />
     <SolidColorBrush x:Key="ShellBarViewBackground" Color="{StaticResource WarewolfLightGrey}" />
     <SolidColorBrush x:Key="DesignerBackground" Color="{StaticResource WarewolfDarkGrey}" />
-    <SolidColorBrush x:Key="SolidWhite" Color="{StaticResource WarewolfWhite}" />
+    <SolidColorBrush x:Key="SolidWhite" Color="{StaticResource WarewolfWhite}" />-->
     
 </ResourceDictionary>

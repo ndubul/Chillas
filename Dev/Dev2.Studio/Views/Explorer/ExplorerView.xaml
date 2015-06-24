@@ -20,11 +20,9 @@
              Name="Explorer">
 
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding NavigationViewModel.RenameCommand}"
-                    Key="F2" />
+        <KeyBinding Command="{Binding NavigationViewModel.RenameCommand}" Key="F2" />
     </UserControl.InputBindings>
-
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="24" />
@@ -44,37 +42,30 @@
         <navigationViews:NavigationView x:Name="TheNavigationView"
                                         DataContext="{Binding DataContext.NavigationViewModel, ElementName=Explorer}"
                                         Grid.Row="1"
+                                        Margin="{StaticResource ControlBorderTop}"
                                         Grid.ColumnSpan="2"
                                         AutomationProperties.AutomationId="UI_NavigationViewUserControl_AutoID">
             
             <navigationViews:NavigationView.ItemContainerStyle>
-                <Style TargetType="{x:Type TreeViewItem}"
-                       BasedOn="{StaticResource {x:Type TreeViewItem}}">
+                <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
                     <!--<Setter Property="Visibility"
                             Value="{Binding IsFiltered, Converter={StaticResource BoolToVisibilityConverterNegative}, Mode=OneWay}" />-->
-                    <Setter Property="IsExpanded"
-                            Value="{Binding IsExplorerExpanded, Mode=TwoWay}" />
-                    <Setter Property="IsSelected"
-                            Value="{Binding IsExplorerSelected, Mode=TwoWay}" />
+                    <Setter Property="IsExpanded" Value="{Binding IsExplorerExpanded, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsExplorerSelected, Mode=TwoWay}" />
                     <EventSetter Event="RequestBringIntoView" Handler="TreeViewItemRequestBringIntoView"/>
                     <EventSetter Event="TreeViewItem.Drop" Handler="TreeViewDrop"/>
                     <!-- This is a hack. Need to rethink how to get this behavior attached properly-->
-                    <Setter Property="behavior:AttachBehavior.BehaviorType"
-                            Value="{x:Type behavior2:BringIntoViewWhenSelectedBehavior}" />
+                    <Setter Property="behavior:AttachBehavior.BehaviorType" Value="{x:Type behavior2:BringIntoViewWhenSelectedBehavior}" />
 
-                    <Setter Property="AutomationProperties.AutomationId"
-                            Value="{Binding Path=DataContext.DisplayName,
+                    <Setter Property="AutomationProperties.AutomationId" Value="{Binding Path=DataContext.DisplayName,
                         RelativeSource={RelativeSource Self},Converter={StaticResource StringToAutomationIdConverter}}" />
                     <Style.Triggers>
-                        <Trigger Property="IsEnabled"
-                                 Value="False">
-                            <Setter Property="FontWeight"
-                                    Value="UltraLight" />
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="FontWeight" Value="UltraLight" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding IsConnected}"
-                                     Value="False">
-                            <Setter Property="ContentControl.Foreground"
-                                    Value="{StaticResource DisabledForegroundBrush}" />
+                        <DataTrigger Binding="{Binding IsConnected}" Value="False">
+                            <Setter Property="ContentControl.Foreground" Value="{StaticResource DisabledForegroundBrush}" />
+                            <!-- {StaticResource BrushDisabledForeground} -->
                         </DataTrigger>
                         <DataTrigger Value="False">
                             <DataTrigger.Binding>
@@ -84,8 +75,7 @@
                                     <Binding Path="ResourceType" />
                                 </MultiBinding>
                             </DataTrigger.Binding>
-                            <Setter Property="ContentControl.Foreground"
-                                    Value="{StaticResource DisabledForegroundBrush}" />
+                            <Setter Property="ContentControl.Foreground" Value="{StaticResource DisabledForegroundBrush}" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -94,8 +84,7 @@
             <navigationViews:NavigationView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type explorer2:ExplorerItemModel}"
                                           ItemsSource="{Binding Path=Children}">
-                    <Border IsHitTestVisible="True"
-                            Background="{StaticResource BrushNearTransparent}">
+                    <Border IsHitTestVisible="True" Background="{StaticResource BrushNearTransparent}">
                         <Border.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform />
@@ -118,26 +107,21 @@
                             <ContextMenu AutomationProperties.AutomationId ="UI_ConnectContextMenu_AutoID">
                                 <ContextMenu.Resources>
                                     <Style TargetType="{x:Type MenuItem}" >
-                                        <Setter Property="HorizontalContentAlignment"
-                                                Value="Left" />
-                                        <Setter Property="VerticalContentAlignment"
-                                                Value="Center" />
+                                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                        <Setter Property="VerticalContentAlignment" Value="Center" />
                                     </Style>
                                 </ContextMenu.Resources>
 
-                                <MenuItem Header="Connect"
-                                          Command="{Binding ConnectCommand}"
+                                <MenuItem Header="Connect" Command="{Binding ConnectCommand}"
                                           AutomationProperties.AutomationId ="UI_ConnectContextMenuItem_AutoID">
                                     <MenuItem.Visibility>
                                         <MultiBinding Converter="{StaticResource MultipleBoolToVisibilityValueConverter}">
-                                            <Binding Path="IsLocalHost"
-                                                     Converter="{StaticResource BooleanInvertConverter}"/>
+                                            <Binding Path="IsLocalHost" Converter="{StaticResource BooleanInvertConverter}"/>
                                             <Binding Path="CanConnect" />
                                         </MultiBinding>
                                     </MenuItem.Visibility>
                                 </MenuItem>
-                                <MenuItem Header="Disconnect"
-                                          Command="{Binding DisconnectCommand}"
+                                <MenuItem Header="Disconnect" Command="{Binding DisconnectCommand}"
                                           AutomationProperties.AutomationId="UI_DisconnectContextMenuItem_AutoID">
                                     <MenuItem.Visibility>
                                         <MultiBinding Converter="{StaticResource MultipleBoolToVisibilityValueConverter}">
@@ -287,12 +271,11 @@
                                                                      Visibility="{Binding IsRefreshing, Converter={StaticResource BoolToVisibilityConverterPositive}}"
                                                                      AutomationProperties.AutomationId="UI_IndicatorRefresh_AutoID" />
 
-                                <StackPanel Orientation="Horizontal"
-                                    AllowDrop="True"
+                                <StackPanel Orientation="Horizontal" 
+                                            AllowDrop="True"
                                             Margin="3,1,0,1"
                                             Visibility="{Binding IsRefreshing, Converter={StaticResource BoolToVisibilityConverterNegative}}">
-                                    <Image Width="17"
-                                           Height="17" AllowDrop="True">
+                                    <Image Width="17" Height="17" AllowDrop="True">
                                         <Image.Source>
                                             <MultiBinding Converter="{StaticResource ExplorerItemModelToIconConverter}">
                                                 <Binding Path="ResourceType"/>
@@ -306,25 +289,23 @@
                                         </i:Interaction.Triggers>
                                     </Image>
                                     <Button Visibility="{Binding IsVersion, Converter={StaticResource BoolToVisConverter}}"
-                                            Style="{StaticResource AuthButtonStyle}" />
+                                            Style="{StaticResource ButtonStyle}" />
                                     <Button Visibility="{Binding CanEdit, Converter={StaticResource BoolToVisConverter}}"
                                             ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipView}"
-                                            Style="{StaticResource AuthButtonStyle}"
+                                            Style="{StaticResource ButtonStyle}"
                                             AutomationProperties.AutomationId="UI_CanEdit_AutoID">
                                         <Button.InputBindings>
-                                            <MouseBinding Gesture="LeftClick"
-                                                          Command="{Binding EditCommand}" />
+                                            <MouseBinding Gesture="LeftClick" Command="{Binding EditCommand}" />
                                         </Button.InputBindings>
                                         <Image Style="{StaticResource AuthViewIconStyle}" />
                                     </Button>
                                     <Button Visibility="{Binding CanExecute, Converter={StaticResource BoolToVisConverter}}"
                                             ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipExecute}"
-                                            Style="{StaticResource AuthButtonStyle}"
+                                            Style="{StaticResource ButtonStyle}"
                                             AutomationProperties.AutomationId="UI_CanExecute_AutoID">
                                         <Image Style="{StaticResource AuthExecuteIconStyle}" />
                                         <Button.InputBindings>
-                                            <MouseBinding Gesture="LeftClick"
-                                                          Command="{Binding DebugCommand}" />
+                                            <MouseBinding Gesture="LeftClick" Command="{Binding DebugCommand}" />
                                         </Button.InputBindings>
                                     </Button>
                                     <Image Style="{StaticResource AuthNoneIconStyle}"

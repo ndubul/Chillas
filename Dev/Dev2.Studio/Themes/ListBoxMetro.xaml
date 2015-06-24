@@ -2,12 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <ResourceDictionary.MergedDictionaries>
+    <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/CommonMetro.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/ListBoxMetroBrushes.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- *********************************  ListBoxItem Style  ********************************* -->
+    --><!-- *********************************  ListBoxItem Style  ********************************* --><!--
     <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
         <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
@@ -101,7 +101,7 @@
         </Setter>
     </Style>
     
-    <!-- *********************************  ListBox Style  ********************************* -->
+    --><!-- *********************************  ListBox Style  ********************************* --><!--
     <Style x:Key="ListBoxStyle" TargetType="ListBox">
         <Setter Property="Padding" Value="0" />
         <Setter Property="Background" Value="{StaticResource ListBoxBackgroundBrush}" />
@@ -194,7 +194,7 @@
         </Setter>
     </Style>
 
-    <!-- *********************************  Implicit Styles  ********************************* -->
+    --><!-- *********************************  Implicit Styles  ********************************* --><!--
     <Style BasedOn="{StaticResource ListBoxItemStyle}" TargetType="{x:Type ListBoxItem}" />
-    <Style BasedOn="{StaticResource ListBoxStyle}" TargetType="{x:Type ListBox}" />
+    <Style BasedOn="{StaticResource ListBoxStyle}" TargetType="{x:Type ListBox}" />-->
 </ResourceDictionary>

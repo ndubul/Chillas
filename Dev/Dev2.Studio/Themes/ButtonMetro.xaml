@@ -2,12 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:adorners="clr-namespace:Dev2.Activities.Adorners;assembly=Dev2.Activities.Designers">
 
-    <ResourceDictionary.MergedDictionaries>
+    <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/CommonMetro.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/ButtonMetroBrushes.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- *********************************  ButtonStyle  ********************************* -->
+    --><!-- *********************************  ButtonStyle  ********************************* --><!--
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
@@ -92,7 +92,7 @@
         </Setter>
     </Style>
 
-    <!-- *********************************  Implicit Styles  ********************************* -->
+    --><!-- *********************************  Implicit Styles  ********************************* --><!--
     <Style BasedOn="{StaticResource ButtonStyle}" TargetType="{x:Type Button}" />   
 
     <Style x:Key="ActivityDesignerButtonStyle"
@@ -174,5 +174,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 </ResourceDictionary>

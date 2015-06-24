@@ -2,12 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     
-    <ResourceDictionary.MergedDictionaries>
+    <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="CommonMetro.xaml" />
         <ResourceDictionary Source="WindowMetroBrushes.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- *********************************  Borderless Window Style  ********************************* -->
+    --><!-- *********************************  Borderless Window Style  ********************************* --><!--
 
     <Style x:Key="WindowBorderlessStyle" TargetType="Window">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
@@ -19,6 +19,6 @@
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}" />
         <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
-    </Style>
+    </Style>-->
     
 </ResourceDictionary>

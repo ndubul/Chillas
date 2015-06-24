@@ -30,19 +30,14 @@
         <Storyboard x:Key="OnLoaded">
             <DoubleAnimation 
                 Storyboard.TargetName="LayoutRoot"
-                Storyboard.TargetProperty="(UIElement.Opacity)"
-                From="0.0" To="1.0" Duration="0:0:0.3" />
+                Storyboard.TargetProperty="(UIElement.Opacity)" From="0.0" To="1.0" Duration="0:0:0.3" />
             <DoubleAnimation 
             Storyboard.TargetName="LayoutRoot"
-            Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
-            From="0.8" To="1" Duration="0:0:0.3" />
+            Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX" From="0.8" To="1" Duration="0:0:0.3" />
             <DoubleAnimation 
             Storyboard.TargetName="LayoutRoot"
-            Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
-            From="0.8" To="1" Duration="0:0:0.3" />
+            Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" From="0.8" To="1" Duration="0:0:0.3" />
         </Storyboard>
-
-
 
         <!-- ========== DockableTabGroupPaneTemplate ========== -->
         <ControlTemplate x:Key="NewButtonTabGroupPaneTemplate" TargetType="{x:Type igDock:TabGroupPane}">
@@ -58,14 +53,12 @@
 								Style="{DynamicResource {x:Static igDock:TabGroupPane.DocumentCloseButtonStyleKey}}" />
                         <!-- Drop down menu for open files in Window -->
                         <Menu x:Name="filesMenu" DockPanel.Dock="Right" Visibility="Visible">
-                            <MenuItem x:Name="PART_FilesMenuItem" 
-							Style="{DynamicResource {x:Static igDock:TabGroupPane.DocumentFilesMenuItemStyleKey}}" />
+                            <MenuItem x:Name="PART_FilesMenuItem" Style="{DynamicResource {x:Static igDock:TabGroupPane.DocumentFilesMenuItemStyleKey}}" />
                         </Menu>
                         <!-- ********** Tab Buttons Dock panel -->
                         <DockPanel DockPanel.Dock="Left" HorizontalAlignment="Left">
                             <ItemsPresenter x:Name="PART_TabHeaderPanel" Margin="5,2,10,0"  KeyboardNavigation.TabIndex="1" DockPanel.Dock="Left" />
                         </DockPanel>
-
                     </DockPanel>
                 </DockPanel>
                 <Border x:Name="ContentPanel"

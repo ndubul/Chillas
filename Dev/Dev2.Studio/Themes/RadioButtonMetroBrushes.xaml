@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <ResourceDictionary.MergedDictionaries>
+    <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- RadioButton Brushes -->
+    --><!-- RadioButton Brushes --><!--
     <SolidColorBrush x:Key="RadioButtonBackgroundBrush" Color="{StaticResource Color_009b}" />
     <SolidColorBrush x:Key="RadioButtonHoverBackgroundBrush" Color="{StaticResource Color_009b}" />
     <SolidColorBrush x:Key="RadioButtonPressedBackgroundBrush" Color="{StaticResource Color_009b}" />
@@ -18,6 +18,6 @@
     <SolidColorBrush x:Key="RadioButtonFocusedBorderBrush" Color="{StaticResource WarewolfOrange}" />
     <SolidColorBrush x:Key="RadioButtonInvalidUnfocusedBorderBrush" Color="{StaticResource Color_029b}" />
     <SolidColorBrush x:Key="RadioButtonInvalidFocusedBorderBrush" Color="{StaticResource Color_028b}" />
-    <SolidColorBrush x:Key="RadioButtonCheckBackgroundBrush" Color="{StaticResource WarewolfDarkGrey}" />
+    <SolidColorBrush x:Key="RadioButtonCheckBackgroundBrush" Color="{StaticResource WarewolfDarkGrey}" />-->
     
 </ResourceDictionary>

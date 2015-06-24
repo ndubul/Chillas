@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <ResourceDictionary.MergedDictionaries>
+    <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/CommonMetro.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/GroupBoxMetroBrushes.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- *********************************  GroupBox Style  ********************************* -->
+    --><!-- *********************************  GroupBox Style  ********************************* --><!--
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter" />
     <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
@@ -52,7 +52,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!-- *********************************  Implicit Styles  ********************************* -->
-    <Style BasedOn="{StaticResource GroupBoxStyle}" TargetType="{x:Type GroupBox}" />
+    --><!-- *********************************  Implicit Styles  ********************************* --><!--
+    <Style BasedOn="{StaticResource GroupBoxStyle}" TargetType="{x:Type GroupBox}" />-->
 
 </ResourceDictionary>

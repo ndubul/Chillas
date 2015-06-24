@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <ResourceDictionary.MergedDictionaries>
+    <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/CommonMetro.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Warewolf Studio;component/Themes/SliderMetroBrushes.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- *********************************  SliderRepeatButton Style  ********************************* -->
+    --><!-- *********************************  SliderRepeatButton Style  ********************************* --><!--
     <Style x:Key="SliderRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="Focusable" Value="false" />
@@ -20,7 +20,7 @@
         </Setter>
     </Style>
 
-    <!-- *********************************  Slider Horizontal Thumb Style  ********************************* -->
+    --><!-- *********************************  Slider Horizontal Thumb Style  ********************************* --><!--
     <Style x:Key="HSliderThumbStyle" TargetType="{x:Type Thumb}">
         <Setter Property="Background" Value="{StaticResource SliderThumbBackgroundBrush}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -51,7 +51,7 @@
         </Setter>
     </Style>
 
-    <!-- *********************************  Slider Vertical Thumb Style  ********************************* -->
+    --><!-- *********************************  Slider Vertical Thumb Style  ********************************* --><!--
     <Style x:Key="VSliderThumbStyle" TargetType="{x:Type Thumb}">
         <Setter Property="Background" Value="{StaticResource SliderThumbBackgroundBrush}" />
         <Setter Property="MinHeight" Value="8" />
@@ -81,7 +81,7 @@
         </Setter>
     </Style>
 
-    <!-- *********************************  Slider Style  ********************************* -->
+    --><!-- *********************************  Slider Style  ********************************* --><!--
     <Style x:Key="SliderStyle" TargetType="{x:Type Slider}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
@@ -209,7 +209,7 @@
         </Style.Triggers>
     </Style>
     
-    <!-- *********************************  Implicit Styles  ********************************* -->
-    <Style BasedOn="{StaticResource SliderStyle}" TargetType="{x:Type Slider}" />
+    --><!-- *********************************  Implicit Styles  ********************************* --><!--
+    <Style BasedOn="{StaticResource SliderStyle}" TargetType="{x:Type Slider}" />-->
     
 </ResourceDictionary>
