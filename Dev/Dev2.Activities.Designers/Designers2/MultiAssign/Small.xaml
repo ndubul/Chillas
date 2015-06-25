@@ -56,19 +56,15 @@
         </i:Interaction.Behaviors>       
 
         <DataGrid.Columns>
-            <DataGridTemplateColumn Width="27"                                    
-                                    IsReadOnly="True">
+            <DataGridTemplateColumn Width="27" IsReadOnly="True">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Label Content="{Binding ModelItem, 
-                                              NotifyOnTargetUpdated=True, 
-                                              Converter={converters:RowToIndexConverter}}"/>
+                        <Label Content="{Binding ModelItem, NotifyOnTargetUpdated=True, Converter={converters:RowToIndexConverter}}"/>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
 
-            <DataGridTemplateColumn Width="*"
-                                    d:DataContext="{d:DesignInstance Type=activities:ActivityDTO}">
+            <DataGridTemplateColumn Width="*" d:DataContext="{d:DesignInstance Type=activities:ActivityDTO}">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <ui:IntellisenseTextBox DefaultText="{Binding WatermarkTextVariable}"
@@ -92,18 +88,15 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
 
-            <DataGridTemplateColumn IsReadOnly="True"
-                                    Width="20">
+            <DataGridTemplateColumn IsReadOnly="True" Width="20">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Label Content="="
-                               VerticalAlignment="Center" />
+                        <Label Content="=" VerticalAlignment="Center" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
 
-            <DataGridTemplateColumn Width="*"
-                                    d:DataContext="{d:DesignInstance Type=activities:ActivityDTO}">
+            <DataGridTemplateColumn Width="*" d:DataContext="{d:DesignInstance Type=activities:ActivityDTO}">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <ui:IntellisenseTextBox DefaultText="{Binding WatermarkTextValue}"

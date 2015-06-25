@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ui="clr-namespace:Dev2.UI"
              xmlns:scheduler="clr-namespace:Dev2.Settings.Scheduler"
-    xmlns:attachedProperties="clr-namespace:Dev2.Activities.AttachedProperties;assembly=Dev2.Activities.Designers"
+             xmlns:attachedProperties="clr-namespace:Dev2.Activities.AttachedProperties;assembly=Dev2.Activities.Designers"
              xmlns:customControls="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
              xmlns:core="clr-namespace:Dev2.Activities.Designers2.Core;assembly=Dev2.Activities.Designers"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:help="clr-namespace:Dev2.Activities.Designers2.Core.Help;assembly=Dev2.Activities.Designers"
              xmlns:help1="clr-namespace:Dev2.Help" xmlns:connections="clr-namespace:Dev2.CustomControls.Connections"
-    xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces.Scheduler.Interfaces;assembly=Dev2.Common.Interfaces"
-    Padding="10"
+             xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces.Scheduler.Interfaces;assembly=Dev2.Common.Interfaces"
+             Padding="10"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d"
@@ -20,83 +20,48 @@
              AutomationProperties.AutomationId="UI_SchedulerView_AutoID">
 
     <UserControl.Resources>
-        <Style x:Key="SchedulerDataGridStyle"
-               TargetType="{x:Type DataGrid}">
-            <Setter Property="GridLinesVisibility"
-                    Value="All" />
-            <Setter Property="HorizontalGridLinesBrush"
-                    Value="{StaticResource DataGridBorderBrush}" />
-            <Setter Property="VerticalGridLinesBrush"
-                    Value="{StaticResource DataGridBorderBrush}" />
-            <Setter Property="HeadersVisibility"
-                    Value="Column" />
-            <Setter Property="BorderThickness"
-                    Value="1,1,0,0" />
-            <Setter Property="BorderBrush"
-                    Value="{StaticResource DataGridBorderBrush}" />
-            <Setter Property="AutoGenerateColumns"
-                    Value="False" />
-            <Setter Property="CanUserAddRows"
-                    Value="False" />
-            <Setter Property="CanUserDeleteRows"
-                    Value="False" />
-            <Setter Property="CanUserReorderColumns"
-                    Value="True" />
-            <Setter Property="CanUserResizeColumns"
-                    Value="True" />
-            <Setter Property="CanUserResizeRows"
-                    Value="False" />
-            <Setter Property="CanUserSortColumns"
-                    Value="True" />
-            <Setter Property="Background"
-                    Value="White" />
-            <Setter Property="SelectionMode"
-                    Value="Single" />             
+        <Style x:Key="SchedulerDataGridStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="GridLinesVisibility" Value="All" />
+            <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource DataGridBorderBrush}" />
+            <Setter Property="VerticalGridLinesBrush" Value="{StaticResource DataGridBorderBrush}" />
+            <Setter Property="HeadersVisibility" Value="Column" />
+            <Setter Property="BorderThickness" Value="1,1,0,0" />
+            <Setter Property="BorderBrush" Value="{StaticResource DataGridBorderBrush}" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="CanUserAddRows" Value="False" />
+            <Setter Property="CanUserDeleteRows" Value="False" />
+            <Setter Property="CanUserReorderColumns" Value="True" />
+            <Setter Property="CanUserResizeColumns" Value="True" />
+            <Setter Property="CanUserResizeRows" Value="False" />
+            <Setter Property="CanUserSortColumns" Value="True" />
+            <!--<Setter Property="Background" Value="White" />-->
+            <Setter Property="SelectionMode" Value="Single" />             
         </Style>
 
-        <Style x:Key="SchedulerDataGridHeaderStyle"
-               TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="Background"
-                    Value="{StaticResource ShellBarViewBackground}" />
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
-            <Setter Property="Padding"
-                    Value="3,0" />
-            <Setter Property="BorderThickness"
-                    Value="0,0,1,1" />
-            <Setter Property="BorderBrush"
-                    Value="{StaticResource DataGridBorderBrush}" />
-            <Setter Property="Foreground"
-                    Value="{StaticResource BrushDarkForeground}" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Center" />
-            <Setter Property="FontWeight"
-                    Value="SemiBold" />
-            <Setter Property="Height"
-                    Value="Auto" />
+        <Style x:Key="SchedulerDataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="{StaticResource ShellBarViewBackground}" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="3,0" />
+            <Setter Property="BorderThickness" Value="0,0,1,1" />
+            <Setter Property="BorderBrush" Value="{StaticResource DataGridBorderBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource BrushDarkForeground}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Height" Value="Auto" />
             <Style.Triggers>
-                <Trigger Property="IsMouseOver"
-                         Value="True">
-                    <Setter Property="Cursor"
-                            Value="Hand" />
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
                 </Trigger>
             </Style.Triggers>
         </Style>              
 
-        <Style x:Key="PermissionsGridTextBlockStyle"
-               TargetType="{x:Type TextBlock}"
-               BasedOn="{StaticResource TextBlockStyle}">
-            <Setter Property="FontWeight"
-                    Value="{StaticResource DefaultFontWeight}" />
-            <Setter Property="Padding"
-                    Value="3,1,3,1" />
+        <Style x:Key="PermissionsGridTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockStyle}">
+            <Setter Property="FontWeight" Value="{StaticResource DefaultFontWeight}" />
+            <Setter Property="Padding" Value="3,1,3,1" />
         </Style>
 
-        <Style x:Key="ReadOnlyTextBoxStyle"
-               TargetType="TextBox"
-               BasedOn="{StaticResource TextBoxStyle}">
-            <Setter Property="Background"
-                    Value="Transparent" />
+        <Style x:Key="ReadOnlyTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}">
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -110,15 +75,10 @@
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsReadOnly"
-                                     Value="True">
-                                <Setter Value="Transparent"
-                                        Property="Background" />
-                                <Setter Value="Black"
-                                        Property="Foreground" />
-                                <Setter TargetName="PART_ContentHost"
-                                        Property="Background"
-                                        Value="Transparent" />
+                            <Trigger Property="IsReadOnly" Value="True">
+                                <Setter Value="Transparent" Property="Background" />
+                                <Setter Value="Black" Property="Foreground" />
+                                <Setter TargetName="PART_ContentHost" Property="Background" Value="Transparent" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -129,8 +89,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"
-                              MinWidth="320" />
+            <ColumnDefinition Width="320" MinWidth="320" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

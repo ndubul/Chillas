@@ -45,6 +45,7 @@
     <Reference Include="InfragisticsWPF4.v12.1">
       <HintPath>..\Binaries\InfragisticsWPF4.v12.1.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />

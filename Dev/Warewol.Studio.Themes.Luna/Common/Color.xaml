@@ -130,4 +130,9 @@
 
     <Color x:Key="Copied">#FFFFE8A6</Color>
     <Color x:Key="ColorMouseOver">#4CEBB716</Color>
+
+    <Color x:Key="Color_006b">#FFE7E7E7</Color>
+    <!--15% Black-->
+    <Color x:Key="Color_021b">#00000000</Color>
+    <Color x:Key="Color_026b">#FFF1CDB2</Color>
 </ResourceDictionary>
