@@ -11,14 +11,13 @@
     <i:Interaction.Behaviors>
         <behaviors:UserControlFocusNextAndPreviousBehaviour />
     </i:Interaction.Behaviors>
-    <Grid LostKeyboardFocus="UIElement_OnLostKeyboardFocus">
+    <Grid LostKeyboardFocus="UIElement_OnLostKeyboardFocus" Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="2" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0"
-              Margin="0">
+        <Grid Grid.Row="0" Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -34,9 +33,7 @@
                     Margin="0,0,2,0"
                     Command="{Binding FindUnusedAndMissingCommand}"
                     ToolTip="Removes all unused variables from the variable list">
-                <Image Source="{StaticResource RemoveUnusedVariable-32}"
-                       Height="15"
-                       Width="15" />
+                <Image Source="{StaticResource RemoveUnusedVariable-32}" Height="15" Width="15" />
             </Button>
             <Button Grid.Column="2"
                     AutomationProperties.AutomationId="UI_Sortbtn_AutoID"
@@ -49,10 +46,7 @@
             </Button>
         </Grid>
 
-        <Rectangle Grid.Row="1"
-                   Height="1"
-                   StrokeThickness="0"
-                    />
+        <Rectangle Grid.Row="1" Height="1" StrokeThickness="0" />
 
         <TreeView Grid.Row="2"
                   AllowDrop="True"
@@ -68,23 +62,19 @@
                   Grid.IsSharedSizeScope="True"
                   AutomationProperties.AutomationId="UI_VariableTreeView_AutoID">
             <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type Models:DataListItemModel}"
-                                          ItemsSource="{Binding Path=Children}">
+                <HierarchicalDataTemplate DataType="{x:Type Models:DataListItemModel}" ItemsSource="{Binding Path=Children}">
                     <Grid HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="38"
-                                              SharedSizeGroup="B" />
-                            <ColumnDefinition Width="38"
-                                              SharedSizeGroup="C" />
-                            <ColumnDefinition Width="Auto"
-                                              SharedSizeGroup="A" />
+                            <ColumnDefinition Width="38" SharedSizeGroup="B" />
+                            <ColumnDefinition Width="38" SharedSizeGroup="C" />
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="A" />
                         </Grid.ColumnDefinitions>
 
                         <TextBox x:Name="NameTxt"
                                  Grid.Column="0"
                                  LostFocus="NametxtFocusLost"
-                                 Background="{StaticResource LightForegroundBrush}"
+                                 Background="{StaticResource TransparentBrush}"
                                  TextChanged="NametxtTextChanged"
                                  HorizontalAlignment="Stretch"
                                  MinWidth="75"
@@ -94,25 +84,16 @@
                                  IsEnabled="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.IsEditable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  AutomationProperties.AutomationId="UI_NameTextBox_AutoID">
                             <TextBox.Style>
-                                <Style TargetType="TextBox"
-                                       BasedOn="{StaticResource {x:Type TextBox}}">
-                                    <Setter Property="Width"
-                                            Value="Auto" />
-                                    <Setter Property="Height"
-                                            Value="20" />
-
-                                    <Setter Property="HorizontalAlignment"
-                                            Value="Stretch" />
+                                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                    <Setter Property="Width" Value="Auto" />
+                                    <Setter Property="Height" Value="20" />
+                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
                                     <Style.Triggers>
-                                        <Trigger Property="Text"
-                                                 Value="">
-                                            <Setter Property="Background"
-                                                    Value="{StaticResource DataListItemName}" />
+                                        <Trigger Property="Text" Value="">
+                                            <Setter Property="Background" Value="{StaticResource DataListItemName}" />
                                         </Trigger>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.HasError, UpdateSourceTrigger=PropertyChanged}"
-                                                     Value="true">
-                                            <Setter Property="BorderBrush"
-                                                    Value="{StaticResource ValidationErrorElement}" />
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.HasError, UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                            <Setter Property="BorderBrush" Value="{StaticResource ValidationErrorElement}" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -121,6 +102,7 @@
                                 <behaviors:TextboxSelectAllOnFocusBehavior />
                             </i:Interaction.Behaviors>
                         </TextBox>
+                        
                         <CheckBox IsTabStop="False"
                                   Grid.Column="1"
                                   HorizontalAlignment="Center"
@@ -131,7 +113,7 @@
                                   Unchecked="Inputcbx_OnChecked"
                                   Visibility="{Binding IsUsed,Converter={StaticResource BoolToVisibilityConverterPositive}}"
                                   AutomationProperties.AutomationId="UI_IsInputCheckbox_AutoID" />
-
+                        
                         <CheckBox IsTabStop="False"
                                   Grid.Column="2"
                                   HorizontalAlignment="Center"
@@ -151,9 +133,7 @@
                                 Margin="0,-2,0,-2"
                                 Visibility="{Binding IsUsed,Converter={StaticResource BoolToVisibilityConverterNegative}}"
                                 Focusable="False">
-                            <Image Source="{StaticResource RemoveUnusedVariable-32}"
-                                   Width="11"
-                                   Height="11" />
+                            <Image Source="{StaticResource RemoveUnusedVariable-32}" Width="11" Height="11" />
                             <Button.ToolTip>
                                 <ToolTip ContentStringFormat="Remove [[{0}]] from the variable list">
                                     <Binding Path="DisplayName" />
@@ -169,15 +149,11 @@
                                  IsEnabled="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.IsEditable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  AutomationProperties.AutomationId="UI_DescriptionTextBox_AutoID">
                             <TextBox.Style>
-                                <Style TargetType="TextBox"
-                                       BasedOn="{StaticResource {x:Type TextBox}}">
-                                    <Setter Property="Height"
-                                            Value="20" />
+                                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                    <Setter Property="Height" Value="20" />
                                     <Style.Triggers>
-                                        <Trigger Property="Text"
-                                                 Value="">
-                                            <Setter Property="Background"
-                                                    Value="{StaticResource DataListItemDescription}" />
+                                        <Trigger Property="Text" Value="">
+                                            <Setter Property="Background" Value="{StaticResource DataListItemDescription}" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -185,8 +161,7 @@
                         </TextBox>
                     </Grid>
                 </HierarchicalDataTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type Models:DataListHeaderItemModel}"
-                                          ItemsSource="{Binding Path=Children}">
+                <HierarchicalDataTemplate DataType="{x:Type Models:DataListHeaderItemModel}" ItemsSource="{Binding Path=Children}">
                     <StackPanel Background="{StaticResource BrushMouseOver}">
                         <Grid Height="24">
                             <Grid.ColumnDefinitions>
@@ -220,43 +195,28 @@
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
             <TreeView.ItemContainerStyle>
-                <Style TargetType="{x:Type TreeViewItem}"
-                       BasedOn="{StaticResource {x:Type TreeViewItem}}">
-                    <Setter Property="Focusable"
-                            Value="False" />
-                    <Setter Property="IsExpanded"
-                            Value="{Binding IsExpanded,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                    <Setter Property="FontWeight"
-                            Value="Normal" />
-                    <Setter Property="HorizontalAlignment"
-                            Value="Stretch" />
-                    <Setter Property="HorizontalContentAlignment"
-                            Value="Stretch" />
-                    <Setter Property="Visibility"
-                            Value="{Binding IsVisable, Converter={StaticResource BoolToVisConverter}}" />
-                    <Setter Property="KeyboardNavigation.TabNavigation"
-                            Value="Continue" />
-                    <Setter Property="AutomationProperties.AutomationId"
-                            Value="{Binding Path=DataContext.Name, RelativeSource={RelativeSource Self},Converter={StaticResource StringToAutomationIdConverter}}" />
+                <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+                    <Setter Property="Focusable" Value="False" />
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    <Setter Property="FontWeight" Value="Normal" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Visibility" Value="{Binding IsVisable, Converter={StaticResource BoolToVisConverter}}" />
+                    <Setter Property="KeyboardNavigation.TabNavigation" Value="Continue" />
+                    <Setter Property="AutomationProperties.AutomationId" Value="{Binding Path=DataContext.Name, RelativeSource={RelativeSource Self},Converter={StaticResource StringToAutomationIdConverter}}" />
                     <Setter Property="ItemContainerStyle">
                         <Setter.Value>
-                            <Style TargetType="{x:Type TreeViewItem}"
-                                   BasedOn="{StaticResource {x:Type TreeViewItem}}">
-                                <Setter Property="AutomationProperties.AutomationId"
-                                        Value="{Binding Path=DataContext, RelativeSource={RelativeSource Self},Converter={StaticResource DataListItemModelToAutomationIdConverter}}" />
+                            <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+                                <Setter Property="AutomationProperties.AutomationId" Value="{Binding Path=DataContext, RelativeSource={RelativeSource Self},Converter={StaticResource DataListItemModelToAutomationIdConverter}}" />
                             </Style>
                         </Setter.Value>
                     </Setter>
                     <Style.Triggers>
-                        <Trigger Property="IsSelected"
-                                 Value="True">
-                            <Setter Property="FontWeight"
-                                    Value="Bold" />
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FontWeight" Value="Bold" />
                         </Trigger>
-                        <Trigger Property="IsEnabled"
-                                 Value="False">
-                            <Setter Property="FontWeight"
-                                    Value="UltraLight" />
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="FontWeight" Value="UltraLight" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>

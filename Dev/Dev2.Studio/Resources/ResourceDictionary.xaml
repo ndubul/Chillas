@@ -118,8 +118,7 @@
                                 <VisualState x:Name="Unfocused" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle x:Name="Bd" Fill="Transparent" 
-                                   StrokeThickness="1" />
+                        <Rectangle x:Name="Bd" Fill="Transparent" StrokeThickness="1" />
                         <ContentControl x:Name="ContentControl" Foreground="{TemplateBinding Foreground}" IsTabStop="False"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                         Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -613,8 +612,7 @@
 
     <VisualBrush x:Key="DataListItemName" TileMode="None" Stretch="None" AlignmentX="Left">
         <VisualBrush.Transform>
-            <TranslateTransform X="5"
-                                Y="0" />
+            <TranslateTransform X="5" Y="0" />
         </VisualBrush.Transform>
         <VisualBrush.Visual>
             <Grid>
@@ -628,13 +626,9 @@
         </VisualBrush.Visual>
     </VisualBrush>
 
-    <VisualBrush x:Key="MultiAssignVariableName"
-                 TileMode="None"
-                 Stretch="None"
-                 AlignmentX="Left">
+    <VisualBrush x:Key="MultiAssignVariableName" TileMode="None" Stretch="None" AlignmentX="Left">
         <VisualBrush.Transform>
-            <TranslateTransform X="5"
-                                Y="0" />
+            <TranslateTransform X="5" Y="0" />
         </VisualBrush.Transform>
         <VisualBrush.Visual>
             <Grid>
@@ -648,13 +642,9 @@
         </VisualBrush.Visual>
     </VisualBrush>
 
-    <VisualBrush x:Key="MultiAssignValue"
-                 TileMode="None"
-                 Stretch="None"
-                 AlignmentX="Left">
+    <VisualBrush x:Key="MultiAssignValue" TileMode="None" Stretch="None" AlignmentX="Left">
         <VisualBrush.Transform>
-            <TranslateTransform X="5"
-                                Y="0" />
+            <TranslateTransform X="5" Y="0" />
         </VisualBrush.Transform>
         <VisualBrush.Visual>
             <Grid>
@@ -668,13 +658,9 @@
         </VisualBrush.Visual>
     </VisualBrush>
 
-    <VisualBrush x:Key="DataListItemDescription"
-                 TileMode="None"
-                 Stretch="None"
-                 AlignmentX="Left">
+    <VisualBrush x:Key="DataListItemDescription" TileMode="None" Stretch="None" AlignmentX="Left">
         <VisualBrush.Transform>
-            <TranslateTransform X="5"
-                                Y="0" />
+            <TranslateTransform X="5" Y="0" />
         </VisualBrush.Transform>
         <VisualBrush.Visual>
             <Grid>
@@ -689,31 +675,20 @@
     </VisualBrush>
 
     <DataTemplate DataType="{x:Type bdsm:OperatorType}">
-        <StackPanel Orientation="Horizontal"
-                    Margin="10">
-            <RadioButton GroupName="Test"
-                         IsChecked="{Binding Selected}"
-                         Margin="10" />
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <RadioButton GroupName="Test" IsChecked="{Binding Selected}" Margin="10" />
             <Label Content="Value Of" />
-            <TextBox Text="{Binding TagName, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
-                     MinWidth="100" />
+            <TextBox Text="{Binding TagName, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" MinWidth="100" />
             <Label Content="{Binding FriendlyName}" />
-            <TextBox Text="{Binding Value, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
-                     MinWidth="100">
+            <TextBox Text="{Binding Value, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" MinWidth="100">
                 <TextBox.Style>
-
                     <Style TargetType="{x:Type TextBox}">
-
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding ShowEndValue}"
-                                         Value="True">
-                                <Setter Property="Visibility"
-                                        Value="Visible" />
+                            <DataTrigger Binding="{Binding ShowEndValue}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding ShowEndValue}"
-                                         Value="False">
-                                <Setter Property="Visibility"
-                                        Value="Hidden" />
+                            <DataTrigger Binding="{Binding ShowEndValue}" Value="False">
+                                <Setter Property="Visibility" Value="Hidden" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -739,21 +714,17 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ExpanderDownHeaderStyle"
-           TargetType="{x:Type ToggleButton}">
+    <Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border Padding="{TemplateBinding Padding}">
-                        <Grid Background="Transparent"
-                              SnapsToDevicePixels="False">
+                        <Grid Background="Transparent" SnapsToDevicePixels="False">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="15" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image x:Name="arrow"
-                                   Source="../Images/GroupExpander-16.png"
-                                   Width="9" />
+                            <Image x:Name="arrow" Source="../Images/GroupExpander-16.png" Width="9" />
                             <ContentPresenter Grid.Column="1"
                                               HorizontalAlignment="Left"
                                               Margin="4,0,0,0"
@@ -766,36 +737,24 @@
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked"
-                                           Value="true" />
-                                <Condition Property="IsMouseOver"
-                                           Value="false" />
+                                <Condition Property="IsChecked" Value="true" />
+                                <Condition Property="IsMouseOver" Value="false" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Source"
-                                    TargetName="arrow"
-                                    Value="../Images/GroupCollapser-16.png" />
+                            <Setter Property="Source" TargetName="arrow" Value="../Images/GroupCollapser-16.png" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked"
-                                           Value="true" />
-                                <Condition Property="IsMouseOver"
-                                           Value="true" />
+                                <Condition Property="IsChecked" Value="true" />
+                                <Condition Property="IsMouseOver" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Source"
-                                    TargetName="arrow"
-                                    Value="../Images/GroupCollapser-16.png" />
+                            <Setter Property="Source" TargetName="arrow" Value="../Images/GroupCollapser-16.png" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked"
-                                           Value="false" />
-                                <Condition Property="IsMouseOver"
-                                           Value="true" />
+                                <Condition Property="IsChecked" Value="false" />
+                                <Condition Property="IsMouseOver" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Source"
-                                    TargetName="arrow"
-                                    Value="../Images/GroupExpander-16.png" />
+                            <Setter Property="Source" TargetName="arrow" Value="../Images/GroupExpander-16.png" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -803,20 +762,13 @@
         </Setter>
     </Style>
 
-    <Style x:Key="PlusMinusExpander"
-           TargetType="{x:Type Expander}">
-        <Setter Property="Foreground"
-                Value="{StaticResource {x:Static SystemColors.ControlTextBrushKey}}" />
-        <Setter Property="Background"
-                Value="Transparent" />
-        <Setter Property="HorizontalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="VerticalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="BorderBrush"
-                Value="Transparent" />
-        <Setter Property="BorderThickness"
-                Value="1" />
+    <Style x:Key="PlusMinusExpander" TargetType="{x:Type Expander}">
+        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Expander}">
@@ -852,16 +804,11 @@
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsExpanded"
-                                 Value="true">
-                            <Setter Property="Visibility"
-                                    TargetName="ExpandSite"
-                                    Value="Visible" />
+                        <Trigger Property="IsExpanded" Value="true">
+                            <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible" />
                         </Trigger>
-                        <Trigger Property="IsEnabled"
-                                 Value="false">
-                            <Setter Property="Foreground"
-                                    Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -870,14 +817,10 @@
     </Style>
 
     <Style TargetType="customControls:FilterTextBox">
-        <Setter Property="SearchText"
-                Value="" />
-        <Setter Property="HorizontalAlignment"
-                Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="VerticalContentAlignment"
-                Value="Center" />
+        <Setter Property="SearchText" Value="" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="AutomationProperties.AutomationId" Value="UI_DatalistFilterTextBox_AutoID"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -894,18 +837,15 @@
                             <TextBox x:Name="TheTextBox"
                                      Grid.Column="0"
                                      Text="{Binding Path=SearchText,Mode=TwoWay, 
-                                 UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}"
+                                     UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}"
                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                      AutomationProperties.AutomationId="UI_TextBox_AutoID">
                                 <TextBox.Style>
-                                    <Style TargetType="TextBox"
-                                           BasedOn="{StaticResource {x:Type TextBox}}">
+                                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                                         <Style.Triggers>
-                                            <Trigger Property="Text"
-                                                     Value="">
-                                                <Setter Property="Background"
-                                                        Value="{StaticResource SearchHint}" />
+                                            <Trigger Property="Text" Value="">
+                                                <Setter Property="Background" Value="{StaticResource SearchHint}" />
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>

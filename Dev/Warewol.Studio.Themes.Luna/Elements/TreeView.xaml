@@ -14,6 +14,7 @@
 
 
     <!--  TreeView Brushes  -->
+    <SolidColorBrush x:Key="TreeViewBackgroundTransparentBrush" Color="{StaticResource WarewolfTransparent}" />
     <SolidColorBrush x:Key="TreeViewBackgroundBrush" Color="{StaticResource Color_009}" />
     <SolidColorBrush x:Key="TreeViewBorderBrush" Color="{StaticResource Color_004}" />
     <SolidColorBrush x:Key="TreeViewItemBackgroundBrush" Color="{StaticResource Color_009}" />
@@ -95,7 +96,7 @@
     </Style>
 
     <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
-        <Setter Property="Background" Value="{StaticResource BrushTransparent}" />
+        <Setter Property="Background" Value="{StaticResource TreeViewBackgroundTransparentBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize-Normal}" />
@@ -126,10 +127,10 @@
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TreeViewItemHoverBackgroundBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TreeViewBackgroundTransparentBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TreeViewItemHoverBorderBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TreeViewBackgroundTransparentBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
