@@ -1024,7 +1024,6 @@ You need Administrator permission.</value>
   <data name="ViewInBrowserLabel" xml:space="preserve">
     <value>View Results In Browser</value>
   </data>
-
   <data name="DevUrl" xml:space="preserve">
     <value>http://dev2.co.za/</value>
   </data>
@@ -1040,5 +1039,7 @@ You need Administrator permission.</value>
   <data name="ExpertHelpUrl" xml:space="preserve">
     <value>http://warewolf.io/knowledge-base/</value>
   </data>
-
+  <data name="WarewolfCopyright" xml:space="preserve">
+    <value>Copyright © 2015 Warewolf, All rights reserved.</value>
+  </data>
 </root>
