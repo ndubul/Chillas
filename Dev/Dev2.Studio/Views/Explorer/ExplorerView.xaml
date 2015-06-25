@@ -34,7 +34,7 @@
 
         <connections:ConnectControl DataContext="{Binding ConnectControlViewModel}"
                              Grid.ColumnSpan="2"
-                             Margin="2,2,2,0"
+                             Margin="{StaticResource ControlBorderBottom}"
                              EditButtonAutomationID="UI_ExplorerEditBtn_AutoID"
                              ConnectButtonAutomationID="UI_ExplorerConnectBtn_AutoID"
                              ServerComboBoxAutomationID="UI_ExplorerServerCbx_AutoID"/>
@@ -42,7 +42,6 @@
         <navigationViews:NavigationView x:Name="TheNavigationView"
                                         DataContext="{Binding DataContext.NavigationViewModel, ElementName=Explorer}"
                                         Grid.Row="1"
-                                        Margin="{StaticResource ControlBorderTop}"
                                         Grid.ColumnSpan="2"
                                         AutomationProperties.AutomationId="UI_NavigationViewUserControl_AutoID">
             
