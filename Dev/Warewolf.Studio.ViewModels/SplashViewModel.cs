@@ -26,6 +26,7 @@ namespace Warewolf.Studio.ViewModels
             DevUrl = devUri;
             Uri warewolfUri = new Uri(Resources.Languages.Core.WarewolfUrl);
             WarewolfUrl = warewolfUri;
+            WarewolfCopyright = Resources.Languages.Core.WarewolfCopyright;
 
             ContributorsCommand = new DelegateCommand(() => externalProcessExecutor.OpenInBrowser(ContributorsUrl));
             CommunityCommand = new DelegateCommand(() => externalProcessExecutor.OpenInBrowser(CommunityUrl));
@@ -50,13 +51,7 @@ namespace Warewolf.Studio.ViewModels
         public Uri CommunityUrl { get; set; }
         public Uri ExpertHelpUrl { get; set; }
         [ExcludeFromCodeCoverage]
-        public string WarewolfCopyright
-        {
-            get
-            {
-                return Resources.Languages.Core.WarewolfCopyright;
-            }
-        }
+        public string WarewolfCopyright { get; set; }
 
         void ShowServerVersion()
         {

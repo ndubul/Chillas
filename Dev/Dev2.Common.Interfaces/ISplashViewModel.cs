@@ -19,5 +19,6 @@ namespace Dev2.Common.Interfaces
         Uri ContributorsUrl { get; set; }
         Uri CommunityUrl { get; set; }
         Uri ExpertHelpUrl { get; set; }
+        string WarewolfCopyright { get; set; }
     }
 }
