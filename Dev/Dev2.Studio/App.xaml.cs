@@ -18,12 +18,15 @@ using System.Windows;
 using System.Windows.Threading;
 using Dev2.Common;
 using Dev2.Common.Common;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Wrappers;
 using Dev2.CustomControls.Progress;
 using Dev2.Diagnostics.Debug;
 using Dev2.Instrumentation;
 using Dev2.Utils;
 using log4net.Config;
+using Warewolf.Studio.ViewModels;
+using Warewolf.Studio.Views;
 // ReSharper disable RedundantUsingDirective
 using Dev2.Studio.Core.AppResources.Browsers;
 using Dev2.Studio.Core.Helpers;
@@ -107,19 +110,7 @@ namespace Dev2.Studio
             Browser.Startup();
 
             new Bootstrapper().Start();
-
-            base.OnStartup(e);
-            var settingsConfigFile = HelperUtils.GetStudioLogSettingsConfigFile();
-            if (!File.Exists(settingsConfigFile))
-            {
-                File.WriteAllText(settingsConfigFile, GlobalConstants.DefaultStudioLogFileConfig);
-            }
-            XmlConfigurator.ConfigureAndWatch(new FileInfo(settingsConfigFile));
-            _mainViewModel = MainWindow.DataContext as MainViewModel;
-            
-            //2013.07.01: Ashley Lewis for bug 9817 - setup exception handler on 'this', with main window data context as the popup dialog controller
-            _appExceptionHandler = new AppExceptionHandler(this, _mainViewModel);
-
+            InitializeShell(e);
 #if ! (DEBUG)
             var versionChecker = new VersionChecker();
             if(versionChecker.GetNewerVersion())
@@ -128,6 +119,58 @@ namespace Dev2.Studio
                 dialog.ShowDialog();
             }
 #endif
+        }
+
+        public static ISplashView _splashView;
+
+        private ManualResetEvent ResetSplashCreated;
+        private Thread SplashThread;
+        protected void InitializeShell(StartupEventArgs e)
+        {
+            ResetSplashCreated = new ManualResetEvent(false);
+
+            SplashThread = new Thread(ShowSplash);
+            SplashThread.SetApartmentState(ApartmentState.STA);
+            SplashThread.IsBackground = true;
+            SplashThread.Name = "Splash Screen";
+            SplashThread.Start();
+            ResetSplashCreated.WaitOne();
+            base.OnStartup(e);
+            var settingsConfigFile = HelperUtils.GetStudioLogSettingsConfigFile();
+            if (!File.Exists(settingsConfigFile))
+            {
+                File.WriteAllText(settingsConfigFile, GlobalConstants.DefaultStudioLogFileConfig);
+            }
+            XmlConfigurator.ConfigureAndWatch(new FileInfo(settingsConfigFile));
+            _mainViewModel = MainWindow.DataContext as MainViewModel;
+            //MainWindow.Show();
+            if (MainWindow.IsVisible)
+            {
+                _splashView.CloseSplash();
+            }
+            _appExceptionHandler = new AppExceptionHandler(this, _mainViewModel);
+        }
+
+
+        private void ShowSplash()
+        {
+            // Create the window 
+
+            var server = new Warewolf.Studio.AntiCorruptionLayer.Server(new Uri(AppSettings.LocalHost));
+            server.EnvironmentConnection.Connect(Guid.Empty);
+            var splashViewModel = new SplashViewModel(server, new ExternalProcessExecutor());
+
+            SplashPage splashPage = new SplashPage();
+            splashPage.DataContext = splashViewModel;
+            _splashView = splashPage;
+            // Show it 
+            splashPage.Show(false);
+            // Now that the window is created, allow the rest of the startup to run 
+            if (ResetSplashCreated != null)
+            {
+                ResetSplashCreated.Set();
+            }
+            System.Windows.Threading.Dispatcher.Run();
         }
 
         protected override void OnExit(ExitEventArgs e)

@@ -40,7 +40,7 @@ namespace Dev2.Studio.Views
 
         void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Dev2SplashScreen.Close(TimeSpan.FromSeconds(0.3));
+            //Dev2SplashScreen.Close(TimeSpan.FromSeconds(0.3));
         }
 
         public void ClearToolboxSelection()

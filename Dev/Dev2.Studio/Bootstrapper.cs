@@ -120,12 +120,12 @@ namespace Dev2
             }
             // ReSharper restore HeuristicUnreachableCode
         }
-
-        protected override void StartRuntime()
-        {
-            Dev2SplashScreen.Show();
-            base.StartRuntime();
-        }
+//
+//        protected override void StartRuntime()
+//        {
+//            //Dev2SplashScreen.Show();
+//            base.StartRuntime();
+//        }
 
         #region Overrides of BootstrapperBase
 

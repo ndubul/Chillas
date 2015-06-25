@@ -149,6 +149,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop">
+      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Win32.TaskScheduler, Version=2.1.0.16125, Culture=neutral, PublicKeyToken=0d013ddd5178a2ae, processorArchitecture=MSIL">
@@ -1226,6 +1237,18 @@
     <ProjectReference Include="..\Warewol.Studio.Themes.Luna\Warewolf.Studio.Themes.Luna.csproj">
       <Project>{18717e42-df21-45a4-9527-f0bb95d7135d}</Project>
       <Name>Warewolf.Studio.Themes.Luna</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warewolf.Studio.AntiCorruptionLayer\Warewolf.Studio.AntiCorruptionLayer.csproj">
+      <Project>{cc1b89cd-3222-4019-a0d1-58664f92cc47}</Project>
+      <Name>Warewolf.Studio.AntiCorruptionLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warewolf.Studio.ViewModels\Warewolf.Studio.ViewModels.csproj">
+      <Project>{C52B12C2-6A1D-4C4F-A878-CF283662A226}</Project>
+      <Name>Warewolf.Studio.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warewolf.Studio.Views\Warewolf.Studio.Views.csproj">
+      <Project>{F0D6A8C9-FF25-40C9-99DB-CCBC21ABDC36}</Project>
+      <Name>Warewolf.Studio.Views</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
