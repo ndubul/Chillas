@@ -116,6 +116,7 @@ namespace Dev2.Studio
             }
             XmlConfigurator.ConfigureAndWatch(new FileInfo(settingsConfigFile));
             _mainViewModel = MainWindow.DataContext as MainViewModel;
+            
             //2013.07.01: Ashley Lewis for bug 9817 - setup exception handler on 'this', with main window data context as the popup dialog controller
             _appExceptionHandler = new AppExceptionHandler(this, _mainViewModel);
 
