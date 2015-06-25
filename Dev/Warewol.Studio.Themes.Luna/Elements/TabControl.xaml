@@ -6,12 +6,6 @@
         <ResourceDictionary Source="../Common/Styles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <!--  Tab Control Button Brushes  -->
-    <SolidColorBrush x:Key="WarewolfLight" Color="{StaticResource WarewolfPanelGrey}" />
-    <SolidColorBrush x:Key="Warewolf-White" Color="{StaticResource Color_009}" />
-    <SolidColorBrush x:Key="WarewolfDark" Color="{StaticResource WarewolfHeaderGrey}" />
-    <SolidColorBrush x:Key="WarewolfOr" Color="{StaticResource WarewolfOrange}" />
-
 
     <!--  *********************************  TabControlStyle  *********************************  -->
     <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
@@ -52,6 +46,7 @@
     </Style>
 
     <Style TargetType="{x:Type TabItem}">
+        <Setter Property="BorderBrush" Value="{StaticResource WarewolfWhite}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -62,10 +57,7 @@
                                 <VisualState x:Name="Selected">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WarewolfLight}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WarewolfWhite}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{TemplateBinding BorderBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>

@@ -5,18 +5,14 @@
     </ResourceDictionary.MergedDictionaries>-->
 
     <DataTemplate x:Key="DefaultDefaultTextTemplate">
-        <ContentControl Content="{Binding}" FontWeight="Normal" 
-                        
-                        Focusable="False" FontStyle="Italic" />
+        <ContentControl Content="{Binding}" FontWeight="Normal" Focusable="False" FontStyle="Italic" />
     </DataTemplate>
-
     <DataTemplate x:Key="DefaultItemTemplate">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition SharedSizeGroup="CakeA" />
                 <ColumnDefinition SharedSizeGroup="CakeB" />
             </Grid.ColumnDefinitions>
-
             <TextBlock Grid.Column="0">
                 <Run Text="{Binding Name, Mode=OneWay}" />
             </TextBlock>

@@ -39,15 +39,15 @@
                 <Grid>
                     <TextBlock HorizontalAlignment="Center" Text="Mark the Input checkbox in the variable window to set workflow inputs." />
                     <DataGrid SelectionMode="Single" 
-                          AutoGenerateColumns="False" 
-                          EnableRowVirtualization="True" 
-                          ItemsSource="{Binding WorkflowInputs}" 
-                          Visibility="{Binding WorkflowInputCount, Converter={StaticResource IntToVisibilityConverter}}"
-                          HeadersVisibility="None" 
-                          CanUserDeleteRows="True" 
-                          x:Name="DataListInputs" 
-                          SelectionChanged="DataListInputsSelectionChanged"
-                          LoadingRow="DataListInputs_OnLoadingRow">
+                              AutoGenerateColumns="False" 
+                              EnableRowVirtualization="True" 
+                              ItemsSource="{Binding WorkflowInputs}" 
+                              Visibility="{Binding WorkflowInputCount, Converter={StaticResource IntToVisibilityConverter}}"
+                              HeadersVisibility="None" 
+                              CanUserDeleteRows="True" 
+                              x:Name="DataListInputs" 
+                              SelectionChanged="DataListInputsSelectionChanged"
+                              LoadingRow="DataListInputs_OnLoadingRow">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
                                 <Setter Property="AutomationProperties.AutomationId">
@@ -93,7 +93,16 @@
                                 </DataGridTemplateColumn.CellStyle>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <ui:IntellisenseTextBox x:Name="txtValue" FilterType="All" WrapInBrackets="False" Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,2,1,2" Width="Auto" PreviewKeyDown="IntellisenseTextBoxPreviewKeyDown" GotFocus="TextBoxGotFocus" TextChanged="TextBoxTextChanged" MaxHeight="39">
+                                        <ui:IntellisenseTextBox x:Name="txtValue" 
+                                                                FilterType="All" 
+                                                                WrapInBrackets="False" 
+                                                                Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                                Margin="0,2,1,2" 
+                                                                Width="Auto" 
+                                                                PreviewKeyDown="IntellisenseTextBoxPreviewKeyDown" 
+                                                                GotFocus="TextBoxGotFocus" 
+                                                                TextChanged="TextBoxTextChanged" 
+                                                                MaxHeight="39">
                                             <AutomationProperties.AutomationId>
                                                 <MultiBinding StringFormat="UI_{0}txt_AutoID">
                                                     <Binding Path="DisplayValue"/>
@@ -121,7 +130,11 @@
                 <ColumnDefinition Width="25px" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <CheckBox AutomationProperties.AutomationId="UI_RememberInputsCb_AutoID" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="cbxRememberInputs" IsChecked="{Binding Path=RememberInputs, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <CheckBox AutomationProperties.AutomationId="UI_RememberInputsCb_AutoID" 
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Center" 
+                      x:Name="cbxRememberInputs" 
+                      IsChecked="{Binding Path=RememberInputs, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Label VerticalAlignment="Center" Content="Remember Debug Inputs" Grid.Column="1" />
         </Grid>
         <Grid Grid.Row="2" Margin="2">
@@ -131,9 +144,43 @@
                 <ColumnDefinition Width="110" />
                 <ColumnDefinition Width="110" />
             </Grid.ColumnDefinitions>
-            <Button Content="Cancel" AutomationProperties.AutomationId="UI_Cancelbtn_AutoID" Click="CancelClicked" Command="{Binding Path=CancelCommand}" Grid.Row="0" Grid.Column="0" MaxHeight="25" MinWidth="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,5,0" />
-            <Button Content="Debug (F6)" AutomationProperties.AutomationId="UI_Executebtn_AutoID" Click="ExecuteClicked" Command="{Binding Path=OkCommand}" Grid.Row="0" Grid.Column="1" MaxHeight="25" MinWidth="100" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,25,0" Grid.ColumnSpan="2" Width="115"/>
-            <Button Content="View In Browser (F7)" AutomationProperties.AutomationId="UI_Browserbtn_AutoID" Click="ExecuteClicked" Command="{Binding Path=ViewInBrowserCommand}" Grid.Row="0" Grid.Column="2" MaxHeight="25" MinWidth="100" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,5,0" Grid.ColumnSpan="2" Width="121"/>
+            <Button Content="Cancel" 
+                    AutomationProperties.AutomationId="UI_Cancelbtn_AutoID" 
+                    Click="CancelClicked" 
+                    Command="{Binding Path=CancelCommand}" 
+                    Grid.Row="0" 
+                    Grid.Column="0" 
+                    MaxHeight="25" 
+                    MinWidth="100" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="5,0,5,0" />
+            <Button Content="Debug (F6)" 
+                    AutomationProperties.AutomationId="UI_Executebtn_AutoID" 
+                    Click="ExecuteClicked" 
+                    Command="{Binding Path=OkCommand}" 
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    MaxHeight="25" 
+                    MinWidth="100" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Top" 
+                    Margin="0,0,25,0" 
+                    Grid.ColumnSpan="2" 
+                    Width="115"/>
+            <Button Content="View In Browser (F7)" 
+                    AutomationProperties.AutomationId="UI_Browserbtn_AutoID" 
+                    Click="ExecuteClicked" 
+                    Command="{Binding Path=ViewInBrowserCommand}" 
+                    Grid.Row="0" 
+                    Grid.Column="2" 
+                    MaxHeight="25" 
+                    MinWidth="100" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Top" 
+                    Margin="0,0,5,0" 
+                    Grid.ColumnSpan="2" 
+                    Width="121"/>
         </Grid>
     </Grid>
 </Window>

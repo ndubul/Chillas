@@ -5,6 +5,7 @@
                     xmlns:behaviors="clr-namespace:Dev2.Studio.AppResources.Behaviors;assembly=Dev2.CustomControls"
                     xmlns:core="clr-namespace:Dev2.Activities.Designers2.Core"
                     x:Class="ArbitraryNameToEliminateBogusGenericsErrorActivityDesignerStyle">
+    
     <!--Using of the actual color codes in this fine as we cant reference the Colors.xaml file in the studio-->
     <ControlTemplate x:Key="ActivityDesignerTemplate" TargetType="{x:Type sap:ActivityDesigner}">
         <ControlTemplate.Resources>
@@ -12,8 +13,7 @@
                 <TextBlock Margin="3,1,3,1" TextTrimming="CharacterEllipsis"
                            Text="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Text}" />
             </ControlTemplate>
-            <Style x:Key="nameTextBoxStyle"
-                   TargetType="{x:Type TextBox}">
+            <Style x:Key="nameTextBoxStyle" TargetType="{x:Type TextBox}">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=ModelItem.IsPrimarySelection,RelativeSource={RelativeSource TemplatedParent}}" Value="False">
                         <Setter Property="Control.Template" Value="{DynamicResource unselectedNameTextBoxTemplate}" />
@@ -144,17 +144,16 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <core:ActivityDesignerToggleButton Width="20"
-                                                              Height="20"
-                                                              ToolTip="{Binding ToolTip}"
-                                                              IsChecked="{Binding IsChecked, Mode=TwoWay}"                                                                                                                               
-                                                              Content="{Binding Image, Mode=TwoWay}"
-                                                               Style="{StaticResource ActivityToggleButtonStyle}" />
+                                                                   Height="20"
+                                                                   ToolTip="{Binding ToolTip}"
+                                                                   IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                                   Content="{Binding Image, Mode=TwoWay}"
+                                                                   Style="{StaticResource ActivityToggleButtonStyle}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"
-                                            Focusable="False" />
+                                <StackPanel Orientation="Horizontal" Focusable="False" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -183,8 +182,7 @@
                                   ItemsSource="{Binding ElementName=PART_ContentPresenter, Path=Content.RightButtons}"> 
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"
-                                            Focusable="False" />
+                                <StackPanel Orientation="Horizontal" Focusable="False" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
@@ -237,8 +235,8 @@
         <Setter Property="Control.BorderThickness" Value="2" />
     </Style>
 
-    <Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">        
-          <Setter Property="Opacity" Value="0.3" />
+    <Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+        <Setter Property="Opacity" Value="0.3" />
         <Setter Property="Width" Value="16" />
         <Setter Property="Height" Value="16" />
         <Setter Property="Template">
@@ -258,10 +256,8 @@
                               Fill="{TemplateBinding Foreground}" />
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled"
-                                 Value="False">
-                            <Setter Property="Opacity"
-                                    Value="0.3" />
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.3" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -271,15 +267,12 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Opacity" Value="1" />
             </Trigger>
-             
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Opacity" Value="1" />
             </Trigger>
-
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.3" />
             </Trigger>
-
             <Trigger Property="IsEnabled" Value="True" />
         </Style.Triggers>
     </Style>

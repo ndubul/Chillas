@@ -221,6 +221,10 @@
       <Project>{a58b157b-960b-4e84-8957-24e4884c5c77}</Project>
       <Name>Dev2.Studio.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warewol.Studio.Themes.Luna\Warewolf.Studio.Themes.Luna.csproj">
+      <Project>{18717e42-df21-45a4-9527-f0bb95d7135d}</Project>
+      <Name>Warewolf.Studio.Themes.Luna</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Validation\" />
