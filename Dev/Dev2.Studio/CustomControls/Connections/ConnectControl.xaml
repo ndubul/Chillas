@@ -70,18 +70,18 @@
                     <Binding Path="IsDropDownEnabled" />
                 </MultiBinding>
             </Button.IsEnabled>
-            <fa:FontAwesome Icon="Link" 
-                            Grid.Column="2" 
-                            Height="22" 
-                            Width="22" 
-                            Margin="0,0,0,-3"
+            <Button.Content>
+                <StackPanel HorizontalAlignment="Stretch">
+                    <fa:FontAwesome Icon="Link" FontSize="16"
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center"></fa:FontAwesome>
+                </StackPanel>
+            </Button.Content>
         </Button>
         <customControls:CircularProgressBar Grid.Column="2" 
                                             Height="22" 
                                             Width="22"
-                                            Margin="0,0,2,0"
+                                            Margin="3,0,2,0"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
                                             Visibility="{Binding IsConnectButtonSpinnerVisible, Converter={StaticResource BoolToVisibilityConverterPositive}}"
             AutomationProperties.AutomationId="UI_IndicatorConnecting_AutoID" />
