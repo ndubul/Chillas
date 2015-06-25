@@ -2211,6 +2211,15 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copyright © 2015 Warewolf, All rights reserved..
+        /// </summary>
+        public static string WarewolfCopyright {
+            get {
+                return ResourceManager.GetString("WarewolfCopyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://warewolf.io/.
         /// </summary>
         public static string WarewolfUrl {
