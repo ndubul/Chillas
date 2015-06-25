@@ -55,9 +55,11 @@ namespace Dev2.CustomControls
 
             _textBox = GetTemplateChild(PART_TextBox) as TextBox;
             _button = GetTemplateChild(PART_ButtonBase) as ButtonBase;
+            
 
             if (_button != null)
             {
+                _button.Margin = new Thickness(3, 0, 0, 0);
                 _button.Click += ButtonClick;
             }
         }
