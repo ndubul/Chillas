@@ -59,6 +59,7 @@
                   x:Name="ScalarExplorer"
                   BorderThickness="0"
                   HorizontalContentAlignment="Stretch"
+                  ItemContainerStyle="{StaticResource TreeViewItemExpandedStyle}"
                   Grid.IsSharedSizeScope="True"
                   AutomationProperties.AutomationId="UI_VariableTreeView_AutoID">
             <TreeView.Resources>
@@ -141,7 +142,7 @@
                             </Button.ToolTip>
                         </Button>
 
-                        <TextBox x:Name="DescriptionTxt"
+                        <!--<TextBox x:Name="DescriptionTxt"
                                  IsTabStop="False"
                                  MinWidth="75"
                                  Grid.Column="3"
@@ -158,12 +159,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </TextBox.Style>
-                        </TextBox>
+                        </TextBox>-->
                     </Grid>
                 </HierarchicalDataTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type Models:DataListHeaderItemModel}" ItemsSource="{Binding Path=Children}">
                     <StackPanel Background="{StaticResource BrushMouseOver}">
-                        <Grid Height="24">
+                        <Grid Height="24" Margin="{StaticResource ControlBorderRight}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition SharedSizeGroup="B" />
@@ -173,10 +174,9 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding DisplayName}"
                                            FontWeight="SemiBold"
-                                           Margin="0,0,5,0"
+                                           
                                            Foreground="Black" />
-                                <TextBlock Grid.Column="0"
-                                           Text="Name"
+                                <TextBlock Text="Name"
                                            FontWeight="SemiBold"
                                            Foreground="Black" />
                             </StackPanel>
@@ -194,33 +194,6 @@
                     </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
-            <TreeView.ItemContainerStyle>
-                <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
-                    <Setter Property="Focusable" Value="False" />
-                    <Setter Property="IsExpanded" Value="{Binding IsExpanded,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                    <Setter Property="FontWeight" Value="Normal" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="Visibility" Value="{Binding IsVisable, Converter={StaticResource BoolToVisConverter}}" />
-                    <Setter Property="KeyboardNavigation.TabNavigation" Value="Continue" />
-                    <Setter Property="AutomationProperties.AutomationId" Value="{Binding Path=DataContext.Name, RelativeSource={RelativeSource Self},Converter={StaticResource StringToAutomationIdConverter}}" />
-                    <Setter Property="ItemContainerStyle">
-                        <Setter.Value>
-                            <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
-                                <Setter Property="AutomationProperties.AutomationId" Value="{Binding Path=DataContext, RelativeSource={RelativeSource Self},Converter={StaticResource DataListItemModelToAutomationIdConverter}}" />
-                            </Style>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="FontWeight" Value="Bold" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="FontWeight" Value="UltraLight" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TreeView.ItemContainerStyle>
         </TreeView>
     </Grid>
 </UserControl>

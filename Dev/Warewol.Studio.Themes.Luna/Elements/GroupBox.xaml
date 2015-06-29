@@ -8,7 +8,7 @@
 
     <!--  GroupBox Brushes  -->
     <SolidColorBrush x:Key="GroupBoxBorderBrush" Color="{StaticResource WarewolfPanelGrey}" />
-
+    <SolidColorBrush x:Key="TextBoxBorderBrush" Color="{StaticResource WarewolfWatermark}" />
 
     <!--  *********************************  GroupBox Style  *********************************  -->
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter" />
@@ -58,5 +58,7 @@
     </Style>
     <!--  *********************************  Implicit Styles  *********************************  -->
     <Style BasedOn="{StaticResource GroupBoxStyle}" TargetType="{x:Type GroupBox}" />
-
+    <Style x:Key="ActivityGroupBoxStyle" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource GroupBoxStyle}">
+        <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorderBrush}" />
+    </Style>
 </ResourceDictionary>

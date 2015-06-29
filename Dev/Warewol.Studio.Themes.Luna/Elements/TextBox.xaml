@@ -8,12 +8,8 @@
         <ResourceDictionary Source="../Common/Color.xaml" />
         <ResourceDictionary Source="../Common/Brushes.xaml" />
         <ResourceDictionary Source="../Common/Styles.xaml" />
-
-
         <ResourceDictionary Source="../Elements/ValidationToolTip.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
-
 
     <!--  TextBox Brushes  -->
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource WarewolfBlack}" />
@@ -34,7 +30,6 @@
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
     <!--Images-->
-
     <DrawingImage x:Key="System-Document">
         <DrawingImage.Drawing>
             <DrawingGroup>
@@ -44,7 +39,6 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
-
     <DrawingImage x:Key="System-DocumentHover">
         <DrawingImage.Drawing>
             <DrawingGroup>
@@ -96,7 +90,6 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
-
 
     <!--  *********************************  TextBox Style  *********************************  -->
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
@@ -271,7 +264,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <!--  *********************************  No Border TextBox Style  *********************************  -->
     <Style x:Key="XamGridTextBoxStyle" TargetType="TextBox">
         <Setter Property="BorderThickness" Value="1" />
@@ -445,8 +437,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
     <!--  *********************************  TextBox Style  *********************************  -->
     <Style x:Key="VariableListTextBox" TargetType="TextBox">
         <Setter Property="BorderThickness" Value="1" />
@@ -685,8 +675,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
     <!--  *********************************  TextBox Style  *********************************  -->
     <Style x:Key="MultiLineTextBoxStyle" TargetType="TextBox">
         <Setter Property="BorderThickness" Value="1" />
@@ -855,7 +843,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <!--  *********************************  Implicit Styles  *********************************  -->
     <Style BasedOn="{StaticResource TextBoxStyle}" TargetType="{x:Type TextBox}" />
+    <Style x:Key="Dev2TextboxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Margin" Value="1" />
+        <Setter Property="Height" Value="21" />
+    </Style>
 </ResourceDictionary>

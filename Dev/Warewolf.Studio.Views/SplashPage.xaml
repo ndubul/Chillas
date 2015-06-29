@@ -27,9 +27,9 @@
         <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
 
             <!-- WAREWOL LOGO -->
@@ -40,6 +40,7 @@
                    HorizontalAlignment="Left"
                    Source="/Warewolf.Studio.Themes.Luna;component/Images/Warewolf-logo-transparent.png"
                    Stretch="Fill" />
+                
             </Grid>
 
             <!-- WAREWOLF VERSIONS -->

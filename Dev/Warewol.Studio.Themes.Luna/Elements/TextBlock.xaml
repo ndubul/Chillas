@@ -6,7 +6,6 @@
         <ResourceDictionary Source="../Common/Styles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-
     <!--  TextBox Brushes  -->
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource WarewolfWhite}" />
     <SolidColorBrush x:Key="TextBoxBackgroundBrush" Color="{StaticResource WarewolfWhite}" />
@@ -16,8 +15,6 @@
     <SolidColorBrush x:Key="TextBoxHoverBorderBrush" Color="{StaticResource WarewolfOrange}" />
     <SolidColorBrush x:Key="TextBoxFocusedBrush" Color="{StaticResource WarewolfOrange}" />
     <SolidColorBrush x:Key="TextBoxReadOnlyBackgroundBrush" Color="{StaticResource WarewolfPanelGrey}" />
-
-
 
     <!--  *********************************  TextBlock Style  *********************************  -->
     <Style x:Key="TextBlockStyle" TargetType="TextBlock">
@@ -38,7 +35,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <Style TargetType="TextBlock" x:Key="HoverUnderlineStyle">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -46,10 +42,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <!--  *********************************  Implicit Styles  *********************************  -->
     <Style BasedOn="{StaticResource TextBlockStyle}" TargetType="{x:Type TextBlock}" />
-
     <Style x:Key="TextBlockOrangeNumberStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
@@ -70,7 +64,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <Style x:Key="TextBlockOrangeHeaderStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{StaticResource FontSize-Normal}" />
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
@@ -90,7 +83,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <Style x:Key="SourceHeaderWhite" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize-Larger}" />
@@ -114,7 +106,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
     <Style x:Key="TextBlockWhiteStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="{StaticResource FontSize-Normal}" />
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
@@ -135,7 +126,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <Style x:Key="MenuTextBlockStyle" TargetType="TextBlock">
 <!--        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />-->
         <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
@@ -146,8 +136,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="TextWrapping" Value="NoWrap" />
     </Style>
-
-
     <Style x:Key="TextPanelHeaderStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize-Larger}" />
@@ -156,7 +144,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
-    
     <Style x:Key="SourceHeader" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize-Larger}" />
@@ -180,7 +167,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
     <Style x:Key="TextPanelSubHeaderStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
@@ -189,9 +175,12 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
-
-
-
+    <Style x:Key="Dev2HeadingTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontStretch" Value="Medium" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+    </Style>
     <Style x:Key="ErrorTextBlockStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize-Normal}" />

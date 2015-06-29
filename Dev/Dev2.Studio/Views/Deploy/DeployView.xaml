@@ -48,17 +48,12 @@
                                      EditButtonAutomationID="UI_SourceServerEditbtn_AutoID"
                                      ServerComboBoxAutomationID="UI_SourceServercbx_AutoID" />
 
-                <nv:NavigationView Grid.Row="1"
-                                   DataContext="{Binding Source}"
-                                   x:Name="SourceNavigationView">
+                <nv:NavigationView Grid.Row="1" DataContext="{Binding Source}" x:Name="SourceNavigationView">
 
                     <nv:NavigationView.ItemContainerStyle>
-                        <Style TargetType="{x:Type TreeViewItem}"
-                               BasedOn="{StaticResource {x:Type TreeViewItem}}">
-                            <Setter Property="IsExpanded"
-                                    Value="{Binding IsDeploySourceExpanded, Mode=TwoWay}" />
-                            <Setter Property="IsSelected"
-                                    Value="{Binding IsDeploySourceSelected, Mode=TwoWay}" />
+                        <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+                            <Setter Property="IsExpanded" Value="{Binding IsDeploySourceExpanded, Mode=TwoWay}" />
+                            <Setter Property="IsSelected" Value="{Binding IsDeploySourceSelected, Mode=TwoWay}" />
                             <Setter Property="AutomationProperties.AutomationId">
                                 <Setter.Value>
                                     <MultiBinding StringFormat="UI_SourceServer_{0}_AutoID">
@@ -67,48 +62,35 @@
                                 </Setter.Value>
                             </Setter>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsOverwrite}"
-                                             Value="true">
-                                    <Setter Property="Background"
-                                            Value="#F3700D" />
-                                    <Setter Property="Foreground"
-                                            Value="White" />
+                                <DataTrigger Binding="{Binding IsOverwrite}" Value="true">
+                                    <Setter Property="Background" Value="#F3700D" />
+                                    <Setter Property="Foreground" Value="White" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding IsConnected}"
-                                             Value="False">
-                                    <Setter Property="ContentControl.Foreground"
-                                            Value="{StaticResource DisabledForegroundBrush}" />
+                                <DataTrigger Binding="{Binding IsConnected}" Value="False">
+                                    <Setter Property="ContentControl.Foreground" Value="{StaticResource DisabledForegroundBrush}" />
                                 </DataTrigger>
-                                <Trigger Property="IsEnabled"
-                                         Value="False">
-                                    <Setter Property="FontWeight"
-                                            Value="UltraLight" />
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="FontWeight" Value="UltraLight" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </nv:NavigationView.ItemContainerStyle>
 
                     <nv:NavigationView.ItemTemplate>
-                        <HierarchicalDataTemplate  DataType="{x:Type models:ExplorerItemModel}"
-                                                   ItemsSource="{Binding Path=DeployChildren}">
+                        <HierarchicalDataTemplate  DataType="{x:Type models:ExplorerItemModel}" ItemsSource="{Binding Path=DeployChildren}">
                             <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Horizontal"
-                                            AllowDrop="True"
-                                            Height="20"
+                                <StackPanel Orientation="Horizontal" AllowDrop="True" Height="20"
                                             Visibility="{Binding IsAuthorizedDeployFrom, Converter={StaticResource BoolToVisibilityConverterPositive}}">
                                     <StackPanel.ContextMenu>
                                         <ContextMenu Visibility="{Binding CanSelectDependencies, Converter={StaticResource BoolToVisConverter}}">
-                                            <MenuItem Header="Select All Dependencies"
-                                                      Click="MenuItem_OnClick"
+                                            <MenuItem Header="Select All Dependencies" Click="MenuItem_OnClick"
                                                       Visibility="{Binding CanSelectDependencies,Converter={StaticResource BoolToVisConverter}}" />
                                         </ContextMenu>
                                     </StackPanel.ContextMenu>
                                     <!--TODO i:Interaction.Behaviors>
                                     <local:NavigationItemViewModelMouseDownBehavior SelectOnClick="True" />
                                 </i:Interaction.Behaviors-->
-
-                                    <CheckBox IsChecked="{Binding IsChecked,Mode=TwoWay}"
-                                              Margin="0,0,5,0">
+                                    <CheckBox IsChecked="{Binding IsChecked,Mode=TwoWay}" Margin="0,0,5,0">
                                         <AutomationProperties.AutomationId>
                                             <MultiBinding StringFormat="UI_CheckBox{0}_AutoID">
                                                 <Binding Path="DisplayName" />
@@ -119,10 +101,8 @@
                                         <!--2013.07.04: Ashley lewis for bug 9811 - moved to DataTemplates.xaml -->
                                     </ContentControl>
                                 </StackPanel>
-                                <ContentControl Content="{Binding}"
-                                                Height="20"
+                                <ContentControl Content="{Binding}" Height="20"
                                                 Visibility="{Binding IsAuthorizedDeployFrom, Converter={StaticResource BoolToVisibilityConverterNegative}}" />
-
                                 <Border Style="{StaticResource UnauthorizedTreeViewBorderStyle}"
                                         Visibility="{Binding IsAuthorizedDeployFrom, Converter={StaticResource BoolToVisibilityConverterNegative}}">
                                     <StackPanel Style="{StaticResource UnauthorizedTreeViewStackPanelStyle}">
@@ -141,8 +121,7 @@
 
             <GridSplitter Width="2.5" />
 
-            <Grid Grid.Column="1"
-                  Margin="2.5,0,0,0">
+            <Grid Grid.Column="1" Margin="2.5,0,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -156,19 +135,13 @@
                                      EditButtonAutomationID="UI_DestinationServerEditbtn_AutoID"
                                      ServerComboBoxAutomationID="UI_DestinationServercbx_AutoID" />
 
-                <nv:NavigationView Grid.Row="2"
-                                   DataContext="{Binding Target}"
-                                   x:Name="TargetNavigationView">
+                <nv:NavigationView Grid.Row="2" DataContext="{Binding Target}" x:Name="TargetNavigationView">
 
                     <nv:NavigationView.ItemContainerStyle>
-                        <Style TargetType="{x:Type TreeViewItem}"
-                               BasedOn="{StaticResource {x:Type TreeViewItem}}">
-                            <Setter Property="IsExpanded"
-                                    Value="{Binding IsExpanded, Mode=TwoWay}" />
-                            <Setter Property="IsSelected"
-                                    Value="{Binding IsSelected, Mode=TwoWay}" />
-                            <Setter Property="Visibility"
-                                    Value="{Binding IsFiltered, Converter={StaticResource BoolToVisibilityConverterNegative}, Mode=OneWay}" />
+                        <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                            <Setter Property="Visibility" Value="{Binding IsFiltered, Converter={StaticResource BoolToVisibilityConverterNegative}, Mode=OneWay}" />
                             <Setter Property="AutomationProperties.AutomationId">
                                 <Setter.Value>
                                     <MultiBinding StringFormat="UI_DestinationServer_{0}_AutoID">
@@ -177,48 +150,34 @@
                                 </Setter.Value>
                             </Setter>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsOverwrite}"
-                                             Value="true">
-                                    <Setter Property="Background"
-                                            Value="#F3700D" />
-                                    <Setter Property="Foreground"
-                                            Value="White" />
+                                <DataTrigger Binding="{Binding IsOverwrite}" Value="true">
+                                    <Setter Property="Background" Value="#F3700D" />
+                                    <Setter Property="Foreground" Value="White" />
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding IsConnected}"
-                                             Value="False">
-                                    <Setter Property="ContentControl.Foreground"
-                                            Value="{StaticResource DisabledForegroundBrush}" />
+                                <DataTrigger Binding="{Binding IsConnected}" Value="False">
+                                    <Setter Property="ContentControl.Foreground" Value="{StaticResource DisabledForegroundBrush}" />
                                 </DataTrigger>
-                                <Trigger Property="IsEnabled"
-                                         Value="False">
-                                    <Setter Property="FontWeight"
-                                            Value="UltraLight" />
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="FontWeight" Value="UltraLight" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </nv:NavigationView.ItemContainerStyle>
 
                     <nv:NavigationView.ItemTemplate>
-                        <HierarchicalDataTemplate DataType="{x:Type models:ExplorerItemModel}"
-                                                  ItemsSource="{Binding Path=DeployChildren}">
+                        <HierarchicalDataTemplate DataType="{x:Type models:ExplorerItemModel}" ItemsSource="{Binding Path=DeployChildren}">
                             <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Horizontal"
-                                            AllowDrop="True"
-                                            Height="20"
+                                <StackPanel Orientation="Horizontal" AllowDrop="True" Height="20"
                                             Visibility="{Binding IsAuthorizedDeployTo, Converter={StaticResource BoolToVisibilityConverterPositive}}">
                                     <!--<i:Interaction.Behaviors>
                                         <local:NavigationItemViewModelMouseDownBehavior />
                                     </i:Interaction.Behaviors>-->
-
                                     <ContentControl Content="{Binding}">
                                         <!--2013.07.04: Ashley lewis for bug 9811 - moved to DataTemplates.xaml -->
                                     </ContentControl>
                                 </StackPanel>
-
-                                <ContentControl Content="{Binding}"
-                                                Height="20"
+                                <ContentControl Content="{Binding}" Height="20"
                                                 Visibility="{Binding IsAuthorizedDeployTo, Converter={StaticResource BoolToVisibilityConverterNegative}}" />
-
                                 <Border Style="{StaticResource UnauthorizedTreeViewBorderStyle}"
                                         Visibility="{Binding IsAuthorizedDeployTo, Converter={StaticResource BoolToVisibilityConverterNegative}}">
                                     <StackPanel Style="{StaticResource UnauthorizedTreeViewStackPanelStyle}">
@@ -235,21 +194,17 @@
                 </nv:NavigationView>
             </Grid>
 
-            <Grid Grid.ColumnSpan="2"
-                  Grid.Row="1"
-                  Background="#7F7F7F">
+            <Grid Grid.ColumnSpan="2" Grid.Row="1" Background="#7F7F7F">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-
                 <TextBlock Grid.Column="0"
                            Grid.Row="0"
                            Foreground="White"
@@ -264,15 +219,10 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"
-                                                      SharedSizeGroup="AA" />
-                                    <ColumnDefinition Width="*"
-                                                      SharedSizeGroup="BB" />
+                                    <ColumnDefinition Width="*" SharedSizeGroup="AA" />
+                                    <ColumnDefinition Width="*" SharedSizeGroup="BB" />
                                 </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Column="0"
-                                           Foreground="White"
-                                           HorizontalAlignment="Right">
+                                <TextBlock Grid.Column="0" Foreground="White" HorizontalAlignment="Right">
                                     <Run Text="{Binding Name}" />
                                     <Run Text=" : " />
                                 </TextBlock>
@@ -299,15 +249,11 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"
-                                                      SharedSizeGroup="AA" />
-                                    <ColumnDefinition Width="*"
-                                                      SharedSizeGroup="BB" />
+                                    <ColumnDefinition Width="*" SharedSizeGroup="AA" />
+                                    <ColumnDefinition Width="*" SharedSizeGroup="BB" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0"
-                                           Foreground="White"
-                                           HorizontalAlignment="Right">
+                                <TextBlock Grid.Column="0" Foreground="White" HorizontalAlignment="Right">
                                     <Run Text="{Binding Name}" />
                                     <Run Text=" : " />
                                 </TextBlock>

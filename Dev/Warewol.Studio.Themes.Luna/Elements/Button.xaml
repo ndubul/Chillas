@@ -17,16 +17,11 @@
     <SolidColorBrush x:Key="ButtonPressedBackgroundBrush" Color="{StaticResource WarewolfHeaderButtonGrey}" />
     <SolidColorBrush x:Key="ButtonPressedBorderBrush" Color="{StaticResource WarewolfOrange}" />
     <SolidColorBrush x:Key="ButtonPressedTransparentBrush" Color="{StaticResource WarewolfTransparent}" />
-
-
     <SolidColorBrush x:Key="ButtonForeGroundBrush" Color="{StaticResource WarewolfWhite}" />
-
     <SolidColorBrush x:Key="DisabledVisualElement" Color="{StaticResource WarewolfButtonGrey}" />
     <SolidColorBrush x:Key="DisabledSideMenuVisualElement" Color="{StaticResource WarewolfMenuGrey}" />
 
-
     <!--  *********************************  ButtonStyle  *********************************  -->
-
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="25" />
         <Setter Property="Height" Value="25" />
@@ -199,7 +194,6 @@
             </Trigger>-->
         </Style.Triggers>
     </Style>
-
     <Style x:Key="BasicButton" TargetType="{x:Type Button}">
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="MinWidth" Value="25" />
@@ -271,8 +265,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
     <Style x:Key="TabButton" TargetType="{x:Type Button}">
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="MinWidth" Value="25" />
@@ -345,9 +337,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
-
     <Style x:Key="RoundedButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="25" />
         <Setter Property="Height" Value="25" />
@@ -452,19 +441,14 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <!--  *********************************  Implicit Styles  *********************************  -->
     <Style BasedOn="{StaticResource ButtonStyle}" TargetType="{x:Type Button}" />
-
     <Style x:Key="ActivityDesignerButtonStyle"
            BasedOn="{StaticResource ButtonStyle}"
            TargetType="{x:Type Button}">
         <Setter Property="MinWidth" Value="75" />
         <Setter Property="Margin" Value="0" />
     </Style>
-
-
-
     <Style x:Key="ExplorerTreeButtonStyle" TargetType="{x:Type Button}">
         <!--<Setter Property="Width" Value="14" />
         <Setter Property="Height" Value="14" />
@@ -550,8 +534,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
     <Style x:Key="SideMenuButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="115" />
         <Setter Property="Height" Value="35" />
@@ -624,8 +606,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
     <Style x:Key="SideMenuImageButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="115" />
         <Setter Property="Height" Value="35" />
@@ -698,8 +678,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
     <Style x:Key="PopupButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="25" />
         <Setter Property="Height" Value="25" />
@@ -787,7 +765,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <Style x:Key="PopupRoundedCornerButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="25" />
         <Setter Property="Height" Value="25" />
@@ -974,4 +951,96 @@
             </Trigger>-->
         </Style.Triggers>
     </Style>
+    <Style x:Key="BlueHeadingStyle" TargetType="{x:Type Button}">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="#00509F" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <TextBlock Text="{TemplateBinding Content}" Background="{TemplateBinding Background}" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="LightBlue" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="LinkButton" TargetType="{x:Type Button}">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{StaticResource BrushAccentColor}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <TextBlock Text="{TemplateBinding Content}" Background="{TemplateBinding Background}" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="LightBlue" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ContentLinkButton" TargetType="{x:Type Button}">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="Blue" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <ContentControl Content="{TemplateBinding Content}" Background="{TemplateBinding Background}" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="LightBlue" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--<Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+        <Setter Property="Opacity" Value="0.3" />
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding Border.CornerRadius}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <Path x:Name="CloseGlyph"
+                              Width="12"
+                              Height="12"
+                              Stretch="Fill"
+                              Opacity="1"
+                              Data="M8.4446707,-0.6250003 L10.625006,1.5604857 L7.1956725,4.9880161 L10.625,8.4285631 L8.5070467,10.625005 L5.0209293,7.1613607 L1.5554626,10.625 L-0.62499386,8.4862156 L2.8442898,5.0018182 L-0.625,1.5548685 L1.602536,-0.62499505 L5.0254283,2.8090899 z"
+                              Fill="{TemplateBinding Foreground}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.3" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+         <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value="1" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.3" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True" />
+        </Style.Triggers>
+    </Style>-->
 </ResourceDictionary>

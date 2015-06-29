@@ -10,7 +10,6 @@
 
     <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
 
-
     <!--  Data Grid Button Brushes  -->
     <SolidColorBrush x:Key="DataGridBackgroundBrush" Color="{StaticResource WarewolfWhite}" />
     <SolidColorBrush x:Key="DataGridBorderBrush" Color="{StaticResource WarewolfWatermark}" />
@@ -64,7 +63,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style TargetType="{x:Type DataGridRow}">
         <Setter Property="AutomationProperties.AutomationId">
             <Setter.Value>
@@ -163,7 +161,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style x:Key="SpacedDataGridRowStyle" TargetType="{x:Type DataGridRow}">
         <Setter Property="AutomationProperties.AutomationId">
             <Setter.Value>
@@ -264,7 +261,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style x:Key="NonSelectableDataGridRowStyle" TargetType="{x:Type DataGridRow}">
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalAlignment" Value="Left" />
@@ -352,7 +348,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style x:Key="DefaultDataGridCellStyle" TargetType="{x:Type DataGridCell}">
         <Setter Property="AutomationProperties.AutomationId" Value="UI_DataGridCell_AutoID" />
         <Setter Property="Background" Value="{StaticResource DataGridBackgroundBrush}" />
@@ -402,9 +397,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource DefaultDataGridCellStyle}" />
-
     <Style TargetType="{x:Type DataGridRowHeader}">
         <Setter Property="Background" Value="{StaticResource DataGridBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource DataGridBorderBrush}" />
