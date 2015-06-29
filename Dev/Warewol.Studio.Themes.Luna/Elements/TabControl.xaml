@@ -6,6 +6,8 @@
         <ResourceDictionary Source="../Common/Styles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <SolidColorBrush x:Key="TabItemBorderBrush" Color="{StaticResource WarewolfWhite}" />
+    <SolidColorBrush x:Key="TabItemSelectedBackgroundBrush" Color="{StaticResource WarewolfButtonGrey}" />
 
     <!--  *********************************  TabControlStyle  *********************************  -->
     <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
@@ -36,7 +38,7 @@
                                 KeyboardNavigation.TabIndex="2"
                                 KeyboardNavigation.TabNavigation="Local">
                             <ContentPresenter x:Name="PART_SelectedContentHost"
-                                              Margin="4"
+                                              Margin="0"
                                               ContentSource="SelectedContent" />
                         </Border>
                     </Grid>
@@ -45,8 +47,16 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type TabItem}">
-        <Setter Property="BorderBrush" Value="{StaticResource WarewolfWhite}"></Setter>
+    <Style x:Key="TabForegroundStyle">
+        <Setter Property="TextBlock.Foreground" Value="{StaticResource WareWolfWhiteBrush}" />
+    </Style>
+    <Style x:Key="TabBackgroundStyle">
+        <Setter Property="TextBlock.Background" Value="{StaticResource WareWolfWhiteBrush}" />
+        <Setter Property="Border.BorderBrush" Value="{StaticResource TabItemSelectedBackgroundBrush}" />
+    </Style>
+
+    <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
+        <Setter Property="BorderBrush" Value="{StaticResource TabItemBorderBrush}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -85,6 +95,10 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Panel.ZIndex" Value="100" />
+                            <!--<Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemSelectedBackgroundBrush}" />
+                            <Setter TargetName="ContentSite" Property="Style" Value="{StaticResource SidebarTabForegroundStyle}" />-->
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemBorderBrush}" />
+                            <Setter TargetName="ContentSite" Property="Style" Value="{StaticResource TabBackgroundStyle}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

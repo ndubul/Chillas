@@ -8,9 +8,11 @@
         xmlns:provider="clr-namespace:Dev2.Intellisense.Provider;assembly=Dev2.Intellisense"
         xmlns:interfaceImplementors="clr-namespace:Dev2.Studio.InterfaceImplementors;assembly=Dev2.Intellisense"
         Title="Debug"         
-        Width="470"        
-        Height="400"       
-        ResizeMode="NoResize"
+        Width="470" 
+        Height="400"
+        Style="{StaticResource WindowBorderlessStyle}"
+        MouseDown="WorkflowInputDataView_OnMouseDown"
+        Closed="WorkflowInputDataView_OnClosed"
         WindowStartupLocation="CenterOwner"
         cal:Message.Attach="[Event Closed] = [Action ViewClosed]"
         FocusManager.FocusedElement="{Binding ElementName=DataListInputs}"
@@ -28,18 +30,17 @@
     <i:Interaction.Behaviors>
         <local:WindowCloseBehviour CloseIndicator="{Binding CloseRequested}" />
     </i:Interaction.Behaviors>
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TabControl x:Name="TabItems" SelectionChanged="TabControlSelectionChanged">
-            <TabItem AutomationProperties.AutomationId="UI_InputDataTab_AutoID" Header="Input Data" IsSelected="True">
+        <TabControl x:Name="TabItems" SelectionChanged="TabControlSelectionChanged" Style="{StaticResource TabControlStyle}">
+            <TabItem Style="{StaticResource TabItemStyle}" AutomationProperties.AutomationId="UI_InputDataTab_AutoID" Header="Input Data" IsSelected="True">
                 <Grid>
                     <TextBlock HorizontalAlignment="Center" Text="Mark the Input checkbox in the variable window to set workflow inputs." />
-                    <DataGrid SelectionMode="Single" 
-                              AutoGenerateColumns="False" 
+                    <DataGrid Style="{StaticResource DataGridStyle}"
                               EnableRowVirtualization="True" 
                               ItemsSource="{Binding WorkflowInputs}" 
                               Visibility="{Binding WorkflowInputCount, Converter={StaticResource IntToVisibilityConverter}}"
@@ -48,24 +49,8 @@
                               x:Name="DataListInputs" 
                               SelectionChanged="DataListInputsSelectionChanged"
                               LoadingRow="DataListInputs_OnLoadingRow">
-                        <DataGrid.RowStyle>
-                            <Style TargetType="DataGridRow">
-                                <Setter Property="AutomationProperties.AutomationId">
-                                    <Setter.Value>
-                                        <MultiBinding StringFormat="UI_InputData_Row_{0}_AutoID">
-                                            <Binding Path="Tag" RelativeSource="{RelativeSource Mode=Self}" />
-                                        </MultiBinding>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGrid.RowStyle>
-                        <DataGrid.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Focusable" Value="False"/>
-                            </Style>
-                        </DataGrid.CellStyle>
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Width="1*"  IsReadOnly="False">
+                            <DataGridTemplateColumn Width="1*" IsReadOnly="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Label ToolTip="{Binding Path=Description}" Content="{Binding Path=DisplayValue, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsTabStop="False">
@@ -80,29 +65,17 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn Width="1*"  IsReadOnly="False">
-                                <DataGridTemplateColumn.CellStyle>
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="AutomationProperties.AutomationId">
-                                            <Setter.Value>
-                                                <MultiBinding StringFormat="UI_InputData_Row_{0}_Cell_AutoID">
-                                                    <Binding Path="(DataGridRow.Tag)" RelativeSource="{RelativeSource AncestorType=DataGridRow}" />
-                                                </MultiBinding>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </DataGridTemplateColumn.CellStyle>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <ui:IntellisenseTextBox x:Name="txtValue" 
                                                                 FilterType="All" 
                                                                 WrapInBrackets="False" 
                                                                 Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                                                Margin="0,2,1,2" 
+                                                                Margin="1" 
                                                                 Width="Auto" 
                                                                 PreviewKeyDown="IntellisenseTextBoxPreviewKeyDown" 
                                                                 GotFocus="TextBoxGotFocus" 
-                                                                TextChanged="TextBoxTextChanged" 
-                                                                MaxHeight="39">
+                                                                TextChanged="TextBoxTextChanged">
                                             <AutomationProperties.AutomationId>
                                                 <MultiBinding StringFormat="UI_{0}txt_AutoID">
                                                     <Binding Path="DisplayValue"/>
@@ -121,66 +94,52 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="XML" AutomationProperties.AutomationId="UI_XMLTab_AutoID">
-                <ContentControl x:Name="XmlOutput" AllowDrop="False" />
+            <TabItem Style="{StaticResource TabItemStyle}" Header="XML" AutomationProperties.AutomationId="UI_XMLTab_AutoID">
+                <Grid Background="White">
+                    <ContentControl x:Name="XmlOutput" AllowDrop="False" />
+                </Grid>
             </TabItem>
         </TabControl>
         <Grid Grid.Row="1" Name="grdWorkflowTransition">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="25px" />
-                <ColumnDefinition />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <CheckBox AutomationProperties.AutomationId="UI_RememberInputsCb_AutoID" 
                       VerticalAlignment="Center" 
-                      HorizontalAlignment="Center" 
+                      HorizontalAlignment="Left" 
+                      Margin="-5,0,0,0"
                       x:Name="cbxRememberInputs" 
+                      Content="Remember Debug Inputs"
                       IsChecked="{Binding Path=RememberInputs, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-            <Label VerticalAlignment="Center" Content="Remember Debug Inputs" Grid.Column="1" />
         </Grid>
-        <Grid Grid.Row="2" Margin="2">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="110"/>
-                <ColumnDefinition Width="110" />
-                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Content="Cancel" 
                     AutomationProperties.AutomationId="UI_Cancelbtn_AutoID" 
                     Click="CancelClicked" 
                     Command="{Binding Path=CancelCommand}" 
-                    Grid.Row="0" 
                     Grid.Column="0" 
-                    MaxHeight="25" 
-                    MinWidth="100" 
+                    Width="Auto"
                     HorizontalAlignment="Left" 
-                    VerticalAlignment="Top" 
-                    Margin="5,0,5,0" />
-            <Button Content="Debug (F6)" 
-                    AutomationProperties.AutomationId="UI_Executebtn_AutoID" 
-                    Click="ExecuteClicked" 
-                    Command="{Binding Path=OkCommand}" 
-                    Grid.Row="0" 
-                    Grid.Column="1" 
-                    MaxHeight="25" 
-                    MinWidth="100" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Top" 
-                    Margin="0,0,25,0" 
-                    Grid.ColumnSpan="2" 
-                    Width="115"/>
-            <Button Content="View In Browser (F7)" 
-                    AutomationProperties.AutomationId="UI_Browserbtn_AutoID" 
-                    Click="ExecuteClicked" 
-                    Command="{Binding Path=ViewInBrowserCommand}" 
-                    Grid.Row="0" 
-                    Grid.Column="2" 
-                    MaxHeight="25" 
-                    MinWidth="100" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Top" 
-                    Margin="0,0,5,0" 
-                    Grid.ColumnSpan="2" 
-                    Width="121"/>
+                    VerticalAlignment="Center" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Debug (F6)" 
+                        AutomationProperties.AutomationId="UI_Executebtn_AutoID" 
+                        Click="ExecuteClicked" 
+                        Command="{Binding Path=OkCommand}" 
+                        VerticalAlignment="Center" 
+                        Width="Auto"/>
+                <Button Content="View In Browser (F7)" 
+                        AutomationProperties.AutomationId="UI_Browserbtn_AutoID" 
+                        Click="ExecuteClicked" 
+                        Command="{Binding Path=ViewInBrowserCommand}" 
+                        VerticalAlignment="Center" 
+                        Margin="{StaticResource ControlBorderLeft}"
+                        Width="Auto"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
