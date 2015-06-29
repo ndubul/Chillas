@@ -59,6 +59,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         public string GetServerVersion()
         {
+            if(!EnvironmentConnection.IsConnected)
+            {
+                EnvironmentConnection.Connect(Guid.Empty);
+            }
             return ProxyLayer.AdminManagerProxy.GetServerVersion();
         }
 

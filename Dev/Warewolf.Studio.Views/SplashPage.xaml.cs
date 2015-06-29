@@ -28,6 +28,7 @@ namespace Warewolf.Studio.Views
                     content.Children.Add(_blackoutGrid);
                 }
             }
+            Topmost = true;
             InitializeComponent();
         }
 

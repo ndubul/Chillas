@@ -23,6 +23,7 @@ using Dev2.Common.Wrappers;
 using Dev2.CustomControls.Progress;
 using Dev2.Diagnostics.Debug;
 using Dev2.Instrumentation;
+using Dev2.Interfaces;
 using Dev2.Utils;
 using log4net.Config;
 using Warewolf.Studio.ViewModels;
@@ -109,7 +110,7 @@ namespace Dev2.Studio
 
             Browser.Startup();
 
-            new Bootstrapper().Start();
+            
             InitializeShell(e);
 #if ! (DEBUG)
             var versionChecker = new VersionChecker();
@@ -135,20 +136,29 @@ namespace Dev2.Studio
             SplashThread.Name = "Splash Screen";
             SplashThread.Start();
             ResetSplashCreated.WaitOne();
+            new Bootstrapper().Start();
+            
             base.OnStartup(e);
-            var settingsConfigFile = HelperUtils.GetStudioLogSettingsConfigFile();
-            if (!File.Exists(settingsConfigFile))
-            {
-                File.WriteAllText(settingsConfigFile, GlobalConstants.DefaultStudioLogFileConfig);
-            }
-            XmlConfigurator.ConfigureAndWatch(new FileInfo(settingsConfigFile));
             _mainViewModel = MainWindow.DataContext as MainViewModel;
-            //MainWindow.Show();
-            if (MainWindow.IsVisible)
+            if(_mainViewModel != null)
             {
-                _splashView.CloseSplash();
+                _mainViewModel.ExplorerViewModel.NavigationViewModel.PropertyChanged += (sender, args) =>
+                {
+                    if (args.PropertyName == "ExplorerItemModels")
+                    {
+                        _splashView.CloseSplash();
+                    }
+                };
+                var settingsConfigFile = HelperUtils.GetStudioLogSettingsConfigFile();
+                if (!File.Exists(settingsConfigFile))
+                {
+                    File.WriteAllText(settingsConfigFile, GlobalConstants.DefaultStudioLogFileConfig);
+                }
+                XmlConfigurator.ConfigureAndWatch(new FileInfo(settingsConfigFile));
+                _appExceptionHandler = new AppExceptionHandler(this, _mainViewModel);
             }
-            _appExceptionHandler = new AppExceptionHandler(this, _mainViewModel);
+            //MainWindow.Show();
+            
         }
 
 
@@ -157,20 +167,23 @@ namespace Dev2.Studio
             // Create the window 
 
             var server = new Warewolf.Studio.AntiCorruptionLayer.Server(new Uri(AppSettings.LocalHost));
-            server.EnvironmentConnection.Connect(Guid.Empty);
+            
             var splashViewModel = new SplashViewModel(server, new ExternalProcessExecutor());
 
             SplashPage splashPage = new SplashPage();
             splashPage.DataContext = splashViewModel;
             _splashView = splashPage;
             // Show it 
-            splashPage.Show(false);
+            _splashView.Show(false);
+            
             // Now that the window is created, allow the rest of the startup to run 
             if (ResetSplashCreated != null)
             {
                 ResetSplashCreated.Set();
             }
+            splashViewModel.ShowServerVersion();
             System.Windows.Threading.Dispatcher.Run();
+            
         }
 
         protected override void OnExit(ExitEventArgs e)
