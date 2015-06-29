@@ -9,8 +9,8 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!--  Brushes  -->
-    <SolidColorBrush x:Key="WindowBorderBrush" Color="{StaticResource Color_024}" />
-    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource Color_011}" />
+    <SolidColorBrush x:Key="WindowBorderBrush" Color="{StaticResource WarewolfLightCharcoal}" />
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WarewolfPanelGrey}" />
 
     <!--  *********************************  Borderless Window Style  *********************************  -->
 

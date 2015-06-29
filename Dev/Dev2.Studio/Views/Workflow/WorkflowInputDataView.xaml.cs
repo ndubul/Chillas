@@ -16,6 +16,7 @@ using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Threading;
 using Dev2.Data.Interfaces;
 using Dev2.Studio.ViewModels.Workflow;
@@ -36,12 +37,14 @@ namespace Dev2.Studio.Views.Workflow
         {
             InitializeComponent();
             SetUpTextEditor();
+            AddBlackOutEffect();
         }
 
         private TextEditor _editor;
         private AbstractFoldingStrategy _foldingStrategy;
         private FoldingManager _foldingManager;
         DispatcherTimer _foldingUpdateTimer;
+        Grid _blackoutGrid;
 
         private void SetUpTextEditor()
         {
@@ -259,6 +262,38 @@ namespace Dev2.Studio.Views.Workflow
         void DataListInputs_OnLoadingRow(object sender, DataGridRowEventArgs e)
         {
             e.Row.Tag = e.Row.GetIndex();
+        }
+
+        void WorkflowInputDataView_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {if (Mouse.LeftButton == MouseButtonState.Pressed)
+            this.DragMove();
+        }
+
+        void WorkflowInputDataView_OnClosed(object sender, EventArgs e)
+        {
+            RemoveBlackOutEffect();
+        }
+        void RemoveBlackOutEffect()
+        {
+            Application.Current.MainWindow.Effect = null;
+            var content = Application.Current.MainWindow.Content as Grid;
+            if (content != null)
+            {
+                content.Children.Remove(_blackoutGrid);
+            }
+        }
+        void AddBlackOutEffect()
+        {
+            var effect = new BlurEffect { Radius = 10, KernelType = KernelType.Gaussian, RenderingBias = RenderingBias.Quality };
+            var content = Application.Current.MainWindow.Content as Grid;
+            _blackoutGrid = new Grid();
+            _blackoutGrid.Background = new SolidColorBrush(Colors.Black);
+            _blackoutGrid.Opacity = 0.75;
+            if (content != null)
+            {
+                content.Children.Add(_blackoutGrid);
+            }
+            Application.Current.MainWindow.Effect = effect;
         }
     }
 }

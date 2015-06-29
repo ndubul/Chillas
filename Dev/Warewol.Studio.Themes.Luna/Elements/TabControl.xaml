@@ -47,9 +47,14 @@
         </Setter>
     </Style>
 
-    <Style x:Key="SidebarTabForegroundStyle">
+    <Style x:Key="TabForegroundStyle">
         <Setter Property="TextBlock.Foreground" Value="{StaticResource WareWolfWhiteBrush}" />
     </Style>
+    <Style x:Key="TabBackgroundStyle">
+        <Setter Property="TextBlock.Background" Value="{StaticResource WareWolfWhiteBrush}" />
+        <Setter Property="Border.BorderBrush" Value="{StaticResource TabItemSelectedBackgroundBrush}" />
+    </Style>
+
     <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
         <Setter Property="BorderBrush" Value="{StaticResource TabItemBorderBrush}"></Setter>
         <Setter Property="Template">
@@ -92,6 +97,8 @@
                             <Setter Property="Panel.ZIndex" Value="100" />
                             <!--<Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemSelectedBackgroundBrush}" />
                             <Setter TargetName="ContentSite" Property="Style" Value="{StaticResource SidebarTabForegroundStyle}" />-->
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemBorderBrush}" />
+                            <Setter TargetName="ContentSite" Property="Style" Value="{StaticResource TabBackgroundStyle}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -433,4 +433,21 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
+        <Setter Property="GridLinesVisibility" Value="All" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource DataGridBorderBrush}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource DataGridBorderBrush}" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="BorderThickness" Value="0,1,0,0" />
+        <Setter Property="BorderBrush" Value="{StaticResource DataGridBorderBrush}" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="CanUserDeleteRows" Value="False" />
+        <Setter Property="CanUserReorderColumns" Value="True" />
+        <Setter Property="CanUserResizeColumns" Value="True" />
+        <Setter Property="CanUserResizeRows" Value="False" />
+        <Setter Property="CanUserSortColumns" Value="True" />
+        <!--<Setter Property="Background" Value="White" />-->
+        <Setter Property="SelectionMode" Value="Single" />
+    </Style>
 </ResourceDictionary>

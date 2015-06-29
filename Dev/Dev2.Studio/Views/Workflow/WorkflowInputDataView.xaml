@@ -10,7 +10,9 @@
         Title="Debug"         
         Width="470" 
         Height="400"
-        ResizeMode="NoResize"
+        Style="{StaticResource WindowBorderlessStyle}"
+        MouseDown="WorkflowInputDataView_OnMouseDown"
+        Closed="WorkflowInputDataView_OnClosed"
         WindowStartupLocation="CenterOwner"
         cal:Message.Attach="[Event Closed] = [Action ViewClosed]"
         FocusManager.FocusedElement="{Binding ElementName=DataListInputs}"
@@ -38,8 +40,7 @@
             <TabItem Style="{StaticResource TabItemStyle}" AutomationProperties.AutomationId="UI_InputDataTab_AutoID" Header="Input Data" IsSelected="True">
                 <Grid>
                     <TextBlock HorizontalAlignment="Center" Text="Mark the Input checkbox in the variable window to set workflow inputs." />
-                    <DataGrid SelectionMode="Single" 
-                              AutoGenerateColumns="False" 
+                    <DataGrid Style="{StaticResource DataGridStyle}"
                               EnableRowVirtualization="True" 
                               ItemsSource="{Binding WorkflowInputs}" 
                               Visibility="{Binding WorkflowInputCount, Converter={StaticResource IntToVisibilityConverter}}"
@@ -70,7 +71,7 @@
                                                                 FilterType="All" 
                                                                 WrapInBrackets="False" 
                                                                 Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                                                Margin="1,1,1,1" 
+                                                                Margin="1" 
                                                                 Width="Auto" 
                                                                 PreviewKeyDown="IntellisenseTextBoxPreviewKeyDown" 
                                                                 GotFocus="TextBoxGotFocus" 
@@ -94,7 +95,9 @@
                 </Grid>
             </TabItem>
             <TabItem Style="{StaticResource TabItemStyle}" Header="XML" AutomationProperties.AutomationId="UI_XMLTab_AutoID">
-                <ContentControl x:Name="XmlOutput" AllowDrop="False" />
+                <Grid Background="White">
+                    <ContentControl x:Name="XmlOutput" AllowDrop="False" />
+                </Grid>
             </TabItem>
         </TabControl>
         <Grid Grid.Row="1" Name="grdWorkflowTransition">
