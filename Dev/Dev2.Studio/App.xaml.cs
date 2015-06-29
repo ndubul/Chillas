@@ -23,12 +23,12 @@ using Dev2.Common.Wrappers;
 using Dev2.CustomControls.Progress;
 using Dev2.Diagnostics.Debug;
 using Dev2.Instrumentation;
+// ReSharper disable RedundantUsingDirective
 using Dev2.Interfaces;
 using Dev2.Utils;
 using log4net.Config;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
-// ReSharper disable RedundantUsingDirective
 using Dev2.Studio.Core.AppResources.Browsers;
 using Dev2.Studio.Core.Helpers;
 using Dev2.Studio.Diagnostics;
