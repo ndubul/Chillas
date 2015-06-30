@@ -33,14 +33,10 @@
             </Grid.RowDefinitions>
 
             <!-- WAREWOL LOGO -->
-            <Grid Margin="10" Grid.Row="0" VerticalAlignment="Center">
-                <Image x:Name="LogoImage"
-                   Width="300"
-                   Height="75"
-                   HorizontalAlignment="Left"
-                   Source="/Warewolf.Studio.Themes.Luna;component/Images/Warewolf-logo-transparent.png"
-                   Stretch="Fill" />
-                
+            <Grid Margin="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <ContentControl Style="{StaticResource WarewolfVectorStyle}" 
+                                HorizontalAlignment="Left"
+                                Height="140" Width="300" />
             </Grid>
 
             <!-- WAREWOLF VERSIONS -->

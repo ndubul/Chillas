@@ -103,6 +103,7 @@
         <ResourceDictionary Source="Images/Utility-Random.xaml" />
         <ResourceDictionary Source="Images/Utility-SendMail.xaml" />
         <ResourceDictionary Source="Images/Utility-SystemInformation.xaml" />
+        <ResourceDictionary Source="Images/WarewolfTransparent.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
