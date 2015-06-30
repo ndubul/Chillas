@@ -144,10 +144,7 @@ namespace Dev2.Studio
             {
                 _mainViewModel.ExplorerViewModel.NavigationViewModel.PropertyChanged += (sender, args) =>
                 {
-                    if (args.PropertyName == "ExplorerItemModels")
-                    {
-                        _splashView.CloseSplash();
-                    }
+                    _splashView.CloseSplash();
                 };
                 var settingsConfigFile = HelperUtils.GetStudioLogSettingsConfigFile();
                 if (!File.Exists(settingsConfigFile))
