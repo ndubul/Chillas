@@ -38,8 +38,8 @@
                                             <GradientStopCollection>
                                                 <GradientStop Color="#FFBA151B" Offset="0"/>
                                                 <GradientStop Color="#FFBA151B" Offset="0.116564"/>
-                                                <GradientStop Color="#FFFFFFFF" Offset="0.51912674"/>
-                                                <GradientStop Color="#FFFFFFFF" Offset="1"/>
+                                                <GradientStop Color="#FFF3700D" Offset="0.51912674"/>
+                                                <GradientStop Color="#FFF3700D" Offset="1"/>
                                             </GradientStopCollection>
                                         </LinearGradientBrush.GradientStops>
                                     </LinearGradientBrush>
@@ -50,10 +50,10 @@
                                 <!--Unknown tag: sodipodi:namedview-->
                                 <!--Unknown tag: metadata-->
                                 <Canvas x:Name="layer1">
-                                    <TextBlock FontSize="4" FontFamily="Source Sans Pro" Foreground="White" Canvas.Left="50" Canvas.Top="29" x:Name="text3474" TextDecorations="{x:Null}"><Span FontSize="4"><Run Text="Easy Service Bus (ESB)"/></Span></TextBlock>
+                                    <TextBlock FontSize="3.41106319" FontWeight="Normal" FontFamily="Myriad Pro" Foreground="White" Canvas.Left="52" Canvas.Top="21" x:Name="text3474"><Span FontSize="3.41106319"><Run Text="Easy Service Bus (ESB)"/></Span></TextBlock>
                                     <Canvas x:Name="g3478">
                                         <Canvas.RenderTransform>
-                                            <MatrixTransform Matrix="0.14936772 0 0 -0.18089873 -40.558648 135.16941"/>
+                                            <MatrixTransform Matrix="0.14936772 0 0 -0.14992953 -40.558648 113.90861"/>
                                         </Canvas.RenderTransform>
                                         <Canvas x:Name="g3480">
                                             <Canvas x:Name="g3486">

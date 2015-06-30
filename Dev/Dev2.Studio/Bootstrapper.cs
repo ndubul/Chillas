@@ -28,7 +28,6 @@ using Dev2.Studio.Core.Helpers;
 using Dev2.Studio.Core.Services;
 using Dev2.Studio.Core.Services.System;
 using Dev2.Studio.Factory;
-using Dev2.Studio.StartupResources;
 using Dev2.Studio.ViewModels;
 
 namespace Dev2
