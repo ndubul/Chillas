@@ -53,20 +53,19 @@
                                 Visibility="{Binding WorkflowInputCount, Converter={StaticResource IntToVisibilityConverter}}"
                                 x:Name="DataListInputs" >
                         <ig:XamGrid.Columns>
-                            <ig:TemplateColumn Key="Description" Width="1*" IsReadOnly="False">
+                            <ig:TemplateColumn Key="Description" Width="1*" IsReadOnly="False" HorizontalContentAlignment="Stretch">
                                 <ig:TemplateColumn.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                                            <StackPanel.ContextMenu>
+                                        <Grid Background="Transparent" HorizontalAlignment="Stretch">
+                                            <Grid.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="Delete Last Recordset Row (Shift+Delete)" Click="MenuItemDeleteRow"/>
                                                     <MenuItem Header="Add Blank Row To Recordset (Shift+Enter)" Click="MenuItemAddRow"/>
                                                 </ContextMenu>
-                                            </StackPanel.ContextMenu>
-                                            <Label ToolTip="{Binding Path=Description}" 
-                                                   Content="{Binding Path=DisplayValue, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                                   IsTabStop="False"/>
-                                        </StackPanel>
+                                            </Grid.ContextMenu>
+                                            <TextBlock ToolTip="{Binding Path=Description}" 
+                                                   Text="{Binding Path=DisplayValue, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                        </Grid>
                                     </DataTemplate>
                                 </ig:TemplateColumn.ItemTemplate>
                             </ig:TemplateColumn>
