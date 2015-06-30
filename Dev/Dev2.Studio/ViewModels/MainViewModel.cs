@@ -315,6 +315,8 @@ namespace Dev2.Studio.ViewModels
         }
 
 
+
+
         public AuthorizeCommand<string> NewResourceCommand
         {
             get
@@ -573,6 +575,8 @@ namespace Dev2.Studio.ViewModels
         public void Handle(ShowNewResourceWizard message)
         {
             Dev2Logger.Log.Info(message.GetType().Name);
+
+
             ShowNewResourceWizard(message.ResourceType, message.ResourcePath);
         }
 
@@ -877,6 +881,13 @@ namespace Dev2.Studio.ViewModels
         {
             ActivateOrCreateUniqueWorkSurface<SchedulerViewModel>(WorkSurfaceContext.Scheduler);
         }
+
+        [ExcludeFromCodeCoverage] //Excluded due to needing a parent window
+        public void AddEmailWorkSurface()
+        {
+            ActivateOrCreateUniqueWorkSurface<EmailSourceViewModel>(WorkSurfaceContext.EmailSource);
+        }
+
 
         public async void AddHelpTabWorkSurface(string uriToDisplay)
         {
