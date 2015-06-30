@@ -46,7 +46,7 @@
         <!--Unknown tag: sodipodi:namedview-->
         <!--Unknown tag: metadata-->
         <Canvas x:Name="layer1">
-            <TextBlock xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" FontSize="5.04279804" FontWeight="Normal" FontFamily="Myriad Pro" Foreground="White" Canvas.Left="41" Canvas.Top="29" x:Name="text3474"><Span FontSize="5.04279804"><Run Text="Easy Service Bus (ESB)"/></Span></TextBlock>
+            <TextBlock FontSize="4" FontFamily="Source Sans Pro" Foreground="White" Canvas.Left="50" Canvas.Top="29" x:Name="text3474" TextDecorations="{x:Null}"><Span FontSize="4"><Run Text="Easy Service Bus (ESB)"/></Span></TextBlock>
             <Canvas x:Name="g3478">
                 <Canvas.RenderTransform>
                     <MatrixTransform Matrix="0.14936772 0 0 -0.18089873 -40.558648 135.16941"/>
