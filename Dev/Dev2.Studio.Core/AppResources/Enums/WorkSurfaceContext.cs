@@ -49,7 +49,9 @@ namespace Dev2.Studio.Core.AppResources.Enums
         [Description("Reverse Dependency Visualiser")]
         ReverseDependencyVisualiser,
 
-        Help
+        Help,
+
+        EmailSource
     }
 
 }
