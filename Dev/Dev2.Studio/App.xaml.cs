@@ -142,10 +142,7 @@ namespace Dev2.Studio
             _mainViewModel = MainWindow.DataContext as MainViewModel;
             if(_mainViewModel != null)
             {
-                _mainViewModel.ExplorerViewModel.NavigationViewModel.PropertyChanged += (sender, args) =>
-                {
-                    _splashView.CloseSplash();
-                };
+                _splashView.CloseSplash();
                 var settingsConfigFile = HelperUtils.GetStudioLogSettingsConfigFile();
                 if (!File.Exists(settingsConfigFile))
                 {
