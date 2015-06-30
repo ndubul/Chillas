@@ -706,6 +706,10 @@ namespace Dev2.Studio.ViewModels
                     View.ClearToolboxSearch();
                 }
             }
+            else if (resourceType == "EmailSource")
+            {
+                AddEmailWorkSurface();
+            }
             else if(resourceType=="DropboxSource")
             {
                 CreateOAuthType(ActiveEnvironment, resourceType, resourcePath);
