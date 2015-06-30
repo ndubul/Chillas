@@ -41,6 +41,7 @@
 
         <ResourceDictionary Source="Elements/Explorer/Explorer.xaml" />
         <ResourceDictionary Source="Elements/HyperLink.xaml" />
+        <ResourceDictionary Source="Elements/xamGrid.xaml"/>
         
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -42,7 +42,7 @@
     <!--  *******************************************************************************************  -->
 
     <!--  *********************************  XamHeaderedItemsControl Style  *********************************  -->
-    <!--<Style x:Key="XamHeaderedItemsControlStyle" TargetType="igPrim:XamHeaderedItemsControl">
+    <Style x:Key="XamHeaderedItemsControlStyle" TargetType="igPrim:XamHeaderedItemsControl">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="igPrim:XamHeaderedItemsControl">
@@ -60,10 +60,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style BasedOn="{StaticResource XamHeaderedItemsControlStyle}" TargetType="igPrim:XamHeaderedItemsControl" />-->
+    <Style BasedOn="{StaticResource XamHeaderedItemsControlStyle}" TargetType="igPrim:XamHeaderedItemsControl" />
 
     <!--  *********************************  XamMenuSeparator Style  *********************************  -->
-    <!--<Style x:Key="XamMenuSeparatorStyle" TargetType="igMenu:XamMenuSeparator">
+    <Style x:Key="XamMenuSeparatorStyle" TargetType="igMenu:XamMenuSeparator">
         <Setter Property="Background" Value="{StaticResource MenuSeparatorBackgroundBrush}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -110,10 +110,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style BasedOn="{StaticResource XamMenuSeparatorStyle}" TargetType="igMenu:XamMenuSeparator" />-->
+    <Style BasedOn="{StaticResource XamMenuSeparatorStyle}" TargetType="igMenu:XamMenuSeparator" />
 
     <!--  *********************************  XamMenu Style  *********************************  -->
-    <!--<Style x:Key="XamMenuStyle" TargetType="igMenu:XamMenu">
+    <Style x:Key="XamMenuStyle" TargetType="igMenu:XamMenu">
         <Setter Property="Background" Value="{StaticResource MenuBackgroundBrush}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize-Normal}" />
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
@@ -141,10 +141,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style BasedOn="{StaticResource XamMenuStyle}" TargetType="igMenu:XamMenu" />-->
+    <Style BasedOn="{StaticResource XamMenuStyle}" TargetType="igMenu:XamMenu" />
 
     <!--  *********************************  XamContextMenu Style  *********************************  -->
-    <!--<Style x:Key="XamContextMenuStyle" TargetType="igMenu:XamContextMenu">
+    <Style x:Key="XamContextMenuStyle" TargetType="igMenu:XamContextMenu">
         <Setter Property="Padding" Value="2" />
         <Setter Property="FontSize" Value="{StaticResource FontSize-Normal}" />
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
@@ -172,13 +172,13 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style BasedOn="{StaticResource XamContextMenuStyle}" TargetType="igMenu:XamContextMenu" />-->
+    <Style BasedOn="{StaticResource XamContextMenuStyle}" TargetType="igMenu:XamContextMenu" />
 
     <!--  ********************************* WPF SPECIFIC RESOURCES *********************************  -->
     <!--  *******************************************************************************************  -->
 
     <!--  *********************************  XamMenuItem Style  *********************************  -->
-    <!--<Style x:Key="XamMenuItemStyle" TargetType="igMenu:XamMenuItem">
+    <Style x:Key="XamMenuItemStyle" TargetType="igMenu:XamMenuItem">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="IsTabStop" Value="True" />
         <Setter Property="IsEnabled" Value="True" />
@@ -397,5 +397,5 @@
         </Setter>
 
     </Style>
-    <Style BasedOn="{StaticResource XamMenuItemStyle}" TargetType="igMenu:XamMenuItem" />-->
+    <Style BasedOn="{StaticResource XamMenuItemStyle}" TargetType="igMenu:XamMenuItem" />
 </ResourceDictionary>

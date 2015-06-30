@@ -24,6 +24,8 @@ using Dev2.UI;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Highlighting;
+using Infragistics.Controls.Grids;
+using Infragistics.Controls.Grids.Primitives;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.Views.Workflow
@@ -121,9 +123,9 @@ namespace Dev2.Studio.Views.Workflow
             int indexToSelect;
             var vm = DataContext as WorkflowInputDataViewModel;
 
-            if(vm != null && (vm.AddBlankRow(DataListInputs.SelectedItem as IDataListItem, out indexToSelect)))
+            if (vm != null && (vm.AddBlankRow(DataListInputs.ActiveItem as IDataListItem, out indexToSelect)))
             {
-                DataListInputs.SelectedIndex = indexToSelect;
+                DataListInputs.ActiveItem = indexToSelect;
                 Dispatcher.BeginInvoke(new Action(FocusOnAddition), DispatcherPriority.ApplicationIdle);
             }
         }
@@ -131,10 +133,10 @@ namespace Dev2.Studio.Views.Workflow
         private void FocusOnAddition()
         {
             var row = GetSelectedRow(DataListInputs);
-            if(row != null)
+            if (row != null)
             {
                 var intelbox = FindByName("txtValue", row) as IntellisenseTextBox;
-                if(intelbox != null)
+                if (intelbox != null)
                 {
                     intelbox.Focus();
                 }
@@ -145,9 +147,9 @@ namespace Dev2.Studio.Views.Workflow
         {
             int indexToSelect;
             var vm = DataContext as WorkflowInputDataViewModel;
-            if(vm != null && (vm.RemoveRow(DataListInputs.SelectedItem as IDataListItem, out indexToSelect)))
+            if (vm != null && (vm.RemoveRow(DataListInputs.ActiveItem as IDataListItem, out indexToSelect)))
             {
-                DataListInputs.SelectedIndex = indexToSelect;
+                DataListInputs.ActiveItem = indexToSelect;
             }
         }
 
@@ -166,9 +168,9 @@ namespace Dev2.Studio.Views.Workflow
             if((e.Key == Key.Enter || e.Key == Key.Return) && e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
             {
                 var vm = DataContext as WorkflowInputDataViewModel;
-                if(vm != null && (vm.AddBlankRow(DataListInputs.SelectedItem as IDataListItem, out indexToSelect)))
+                if (vm != null && (vm.AddBlankRow(DataListInputs.ActiveItem as IDataListItem, out indexToSelect)))
                 {
-                    DataListInputs.SelectedIndex = indexToSelect;
+                    DataListInputs.ActiveItem = indexToSelect;
                     Dispatcher.BeginInvoke(new Action(FocusOnAddition), DispatcherPriority.ApplicationIdle);
                 }
                 e.Handled = true;
@@ -176,9 +178,9 @@ namespace Dev2.Studio.Views.Workflow
             else if(e.Key == Key.Delete && e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
             {
                 var vm = DataContext as WorkflowInputDataViewModel;
-                if(vm != null && (vm.RemoveRow(DataListInputs.SelectedItem as IDataListItem, out indexToSelect)))
+                if (vm != null && (vm.RemoveRow(DataListInputs.ActiveItem as IDataListItem, out indexToSelect)))
                 {
-                    DataListInputs.SelectedIndex = indexToSelect;
+                    DataListInputs.ActiveItem = indexToSelect;
                 }
 
                 e.Handled = true;
@@ -223,10 +225,14 @@ namespace Dev2.Studio.Views.Workflow
             return null;
         }
 
-        public static DataGridRow GetSelectedRow(DataGrid grid)
+        public static CellsPanel GetSelectedRow(XamGrid grid)
         {
-            var row = (DataGridRow)grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem);
-            return row;
+            if(grid.ActiveCell != null)
+            {
+                var row = grid.ActiveCell.Row;
+                return row.Control;
+            }
+            return null;
         }
 
         private void ExecuteClicked(object sender, RoutedEventArgs e)

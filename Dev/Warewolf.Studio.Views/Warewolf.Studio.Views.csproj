@@ -35,6 +35,18 @@
     <Reference Include="FontAwesome.WPF">
       <HintPath>..\packages\FontAwesome.WPF.4.3.0.3\lib\FontAwesome.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF4.Controls.Grids.XamGrid.v14.2">
+      <HintPath>..\Binaries\InfragisticsWPF4.Controls.Grids.XamGrid.v14.2.dll</HintPath>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.Controls.Menus.XamMenu.v14.2">
+      <HintPath>..\Binaries\InfragisticsWPF4.Controls.Menus.XamMenu.v14.2.dll</HintPath>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.Controls.Menus.XamMenu.v14.2.Design">
+      <HintPath>..\Binaries\InfragisticsWPF4.Controls.Menus.XamMenu.v14.2.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.v14.2">
+      <HintPath>..\Binaries\InfragisticsWPF4.v14.2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Mvvm">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
     </Reference>
@@ -44,6 +56,7 @@
     <Reference Include="Microsoft.Practices.Prism.SharedInterfaces">
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Windows.Design.Extensibility, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -62,6 +75,12 @@
     <Compile Include="SplashPage.xaml.cs">
       <DependentUpon>SplashPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XamGridEx\ContextMenuSettings.cs" />
+    <Compile Include="XamGrid\ContextMenuOpeningEventArgs.cs" />
+    <Compile Include="XamGrid\ContextMenuSettings.cs" />
+    <Compile Include="XamGrid\WatermarkAdorner.cs" />
+    <Compile Include="XamGrid\WatermarkTextBox.cs" />
+    <Compile Include="XamGrid\XamGridEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="SplashPage.xaml">

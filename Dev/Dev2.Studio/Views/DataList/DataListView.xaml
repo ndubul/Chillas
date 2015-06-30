@@ -174,9 +174,9 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding DisplayName}"
                                            FontWeight="SemiBold"
-                                           
                                            Foreground="Black" />
-                                <TextBlock Text="Name"
+                                <TextBlock Grid.Column="0"
+                                           Text="Name"
                                            FontWeight="SemiBold"
                                            Foreground="Black" />
                             </StackPanel>
