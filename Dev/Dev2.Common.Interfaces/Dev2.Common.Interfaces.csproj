@@ -75,6 +75,9 @@
     <Reference Include="Caliburn.Micro">
       <HintPath>..\Binaries\Caliburn.Micro.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Client">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
@@ -95,8 +98,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\Microsoft.Win32.TaskSchedulerEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -137,6 +141,7 @@
     <Compile Include="Core\Convertors\DateAndTime\ITimeZoneTO.cs" />
     <Compile Include="Core\DynamicServices\Globals.cs" />
     <Compile Include="Core\DynamicServices\IDynamicServiceObject.cs" />
+    <Compile Include="Core\EmailServiceSourceDefinition.cs" />
     <Compile Include="Core\Globals.cs" />
     <Compile Include="Core\Graph\IDataBrowser.cs" />
     <Compile Include="Core\Graph\IDataSourceShape.cs" />
@@ -162,6 +167,7 @@
     <Compile Include="Data\TO\IErrorResultTO.cs" />
     <Compile Include="DB\IDataProviderSanitizer.cs" />
     <Compile Include="DB\IDBHelper.cs" />
+    <Compile Include="DB\ISourceBase.cs" />
     <Compile Include="Diagnostics\Debug\Enums.cs" />
     <Compile Include="Diagnostics\Debug\IDebugDispatcher.cs" />
     <Compile Include="Diagnostics\Debug\IDebugItem.cs" />
@@ -175,19 +181,25 @@
     <Compile Include="Enums\enScriptType.cs" />
     <Compile Include="Enums\PopulateOptions.cs" />
     <Compile Include="Explorer\IExplorerItem.cs" />
+    <Compile Include="Help\IHelpDescriptor.cs" />
+    <Compile Include="Help\IHelpDescriptorViewModel.cs" />
+    <Compile Include="Help\IHelpWindowModel.cs" />
     <Compile Include="Hosting\ExecStatus.cs" />
     <Compile Include="Hosting\IHostContext.cs" />
     <Compile Include="IAdminManager.cs" />
     <Compile Include="IAssignValue.cs" />
+    <Compile Include="IEmailServiceSource.cs" />
     <Compile Include="IEnvironment.cs" />
     <Compile Include="IExecutionToken.cs" />
     <Compile Include="IExternalProcessExecutor.cs" />
     <Compile Include="IFrameworkRepository.cs" />
+    <Compile Include="IManageEmailSourceViewModel.cs" />
     <Compile Include="Infrastructure\Communication\IExecuteMessage.cs" />
     <Compile Include="Infrastructure\Events\IEventPublisher.cs" />
     <Compile Include="Infrastructure\IExplorerRepositorySync.cs" />
     <Compile Include="Infrastructure\IExplorerResourceRepository.cs" />
     <Compile Include="Infrastructure\IExplorerServerResourceRepository.cs" />
+    <Compile Include="Infrastructure\IWindowsGroupPermission.cs" />
     <Compile Include="Infrastructure\Providers\Errors\ErrorType.cs" />
     <Compile Include="Infrastructure\Providers\Errors\FixType.cs" />
     <Compile Include="Infrastructure\Providers\Errors\IActionableErrorInfo.cs" />
@@ -208,14 +220,23 @@
     <Compile Include="IServer.cs" />
     <Compile Include="ISplashView.cs" />
     <Compile Include="ISplashViewModel.cs" />
+    <Compile Include="IStudioUpdateManager.cs" />
+    <Compile Include="IUpdatesHelp.cs" />
     <Compile Include="IVersionStrategy.cs" />
     <Compile Include="IWarewolfIterator.cs" />
     <Compile Include="IWarewolfListIterator.cs" />
     <Compile Include="PathOperations\IResult.cs" />
     <Compile Include="Patterns\ISpookyLoadable.cs" />
+    <Compile Include="PopupController\IDev2MessageBoxViewModel.cs" />
+    <Compile Include="PopupController\IMessage.cs" />
+    <Compile Include="PopupController\IPopupController.cs" />
+    <Compile Include="PopupController\IPopupMessageBoxFactory.cs" />
+    <Compile Include="PopupController\IPopupMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime\Configuration\Settings\ILoggingSettings.cs" />
     <Compile Include="Runtime\IExplorerItemFactory.cs" />
+    <Compile Include="Runtime\ServiceModel\AuthenticationType.cs" />
+    <Compile Include="SaveDialogue\IRequestServiceNameViewModel.cs" />
     <Compile Include="Scheduler\Interfaces\IClientSchedulerFactory.cs" />
     <Compile Include="Scheduler\Interfaces\IDirectoryHelper.cs" />
     <Compile Include="Scheduler\Interfaces\IEventInfo.cs" />
@@ -231,6 +252,7 @@
     <Compile Include="Scheduler\Interfaces\ScheduleRunStatus.cs" />
     <Compile Include="Scripting\IScriptingContext.cs" />
     <Compile Include="Security\Permissions.cs" />
+    <Compile Include="ServerProxyLayer\IUpdateManager.cs" />
     <Compile Include="ServerStats.cs" />
     <Compile Include="Services\Sql\IDbFactory.cs" />
     <Compile Include="Services\Sql\IDbServer.cs" />
@@ -238,14 +260,18 @@
     <Compile Include="StringTokenizer\Interfaces\IDev2TokenOp.cs" />
     <Compile Include="Studio\Controller\IPopUp.cs" />
     <Compile Include="Studio\Core\Activities\IServiceXmlTranslator.cs" />
+    <Compile Include="Studio\Core\Enums.cs" />
     <Compile Include="Studio\Core\IAutoMappingOutputAction.cs" />
+    <Compile Include="Studio\Core\IEnvironmentConnection.cs" />
     <Compile Include="Studio\IDialogueViewModel.cs" />
     <Compile Include="Studio\IdialogViewModelFactory.cs" />
+    <Compile Include="Threading\IAsyncWorker.cs" />
     <Compile Include="UndoFramework\IAction.cs" />
     <Compile Include="UndoFramework\IActionHistory.cs" />
     <Compile Include="UndoFramework\IMultiAction.cs" />
     <Compile Include="UndoFramework\ITransaction.cs" />
     <Compile Include="UndoFramework\SimpleHistoryNode.cs" />
+    <Compile Include="WarewolfException.cs" />
     <Compile Include="WindowsTaskScheduler\Wrappers\IAction.cs" />
     <Compile Include="WindowsTaskScheduler\Wrappers\IActionCollection.cs" />
     <Compile Include="WindowsTaskScheduler\Wrappers\IDev2Task.cs" />
@@ -276,6 +302,7 @@
   <ItemGroup>
     <Folder Include="Core\Convertors\DateTime\" />
     <Folder Include="Core\Data\" />
+    <Folder Include="Email\" />
     <Folder Include="Infrastructure\Services\" />
     <Folder Include="Studio\Core\AppResources\Enums\" />
     <Folder Include="Studio\Core\DataList\" />
