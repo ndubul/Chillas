@@ -22,7 +22,6 @@ using Dev2.Common;
 using Dev2.Common.ExtMethods;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
-using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.ConnectionHelpers;
@@ -70,7 +69,6 @@ using Dev2.Webs;
 using Dev2.Webs.Callbacks;
 using Dev2.Workspaces;
 using Infragistics.Windows.DockManager.Events;
-using Microsoft.Practices.Prism.PubSubEvents;
 using ServiceStack.Common;
 using Warewolf.Studio.ViewModels;
 

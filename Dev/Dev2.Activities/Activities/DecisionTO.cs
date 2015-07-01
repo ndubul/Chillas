@@ -35,6 +35,7 @@ namespace Dev2.Activities
         bool _isSearchCriteriaVisible;
         bool _isFromFocused;
         bool _isToFocused;
+        private Data.SystemTemplates.Models.Dev2Decision a;
 
         public DecisionTO()
             : this("Match", "Match On", "Equal", 0)
@@ -56,6 +57,12 @@ namespace Dev2.Activities
             To = to;
             IsSearchTypeFocused = false;
             IsMatchValueFocused = false;
+        }
+
+        public DecisionTO(Data.SystemTemplates.Models.Dev2Decision a)
+        {
+            // TODO: Complete member initialization
+            this.a = a;
         }
 
         [FindMissing]
@@ -258,5 +265,7 @@ namespace Dev2.Activities
 
             return ruleSet;
         }
+
+        public Data.SystemTemplates.Models.Dev2Decision Decision { get; set; }
     }
 }

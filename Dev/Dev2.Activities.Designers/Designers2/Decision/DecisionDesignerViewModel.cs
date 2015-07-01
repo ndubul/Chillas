@@ -14,12 +14,15 @@ using System.Activities.Presentation.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using Dev2.Activities.Designers2.Core;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
+using Dev2.Data.SystemTemplates.Models;
 using Dev2.DataList;
+using Dev2.DataList.Contract;
 using Dev2.Providers.Validation.Rules;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
@@ -56,7 +59,35 @@ namespace Dev2.Activities.Designers2.Decision
         string DisplayText { get { return GetProperty<string>(); } }
         string TrueArmText { get { return GetProperty<string>(); } }
         string FalseArmText { get { return GetProperty<string>(); } }
+        string ExpressionText
+        {
+            get { return GetProperty<string>(); } 
+            set {SetProperty(value);}
 
+        }
+        public ObservableCollection<DecisionTO> Tos
+        {
+
+            get
+            {
+                IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
+                var val = new StringBuilder(Dev2DecisionStack.ExtractModelFromWorkflowPersistedData(ExpressionText));
+                var decisions =  compiler.ConvertFromJsonToModel<Dev2DecisionStack>(val);
+                return  new ObservableCollection<DecisionTO>(decisions.TheStack.Select(a=> new DecisionTO(a)));
+            }
+            set
+            {
+                IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
+                var val = new Dev2DecisionStack();
+                foreach(var decisionTO in value)
+                {
+                    val.TheStack.Add(decisionTO.Decision);
+                }
+
+               ExpressionText= compiler.ConvertModelToJson(val).ToString();
+
+            }
+        } 
         public bool IsDisplayTextFocused { get { return (bool)GetValue(IsDisplayTextFocusedProperty); } set { SetValue(IsDisplayTextFocusedProperty, value); } }
         public static readonly DependencyProperty IsDisplayTextFocusedProperty = DependencyProperty.Register("IsDisplayTextFocused", typeof(bool), typeof(DecisionDesignerViewModel), new PropertyMetadata(default(bool)));
 
