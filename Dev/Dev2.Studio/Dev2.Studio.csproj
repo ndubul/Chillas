@@ -418,6 +418,7 @@
     <Compile Include="ViewModels\Navigation\INavigationViewModel.cs" />
     <Compile Include="ViewModels\NewDatabaseSourceViewModel.cs" />
     <Compile Include="ViewModels\NewServerSourceViewModel.cs" />
+    <Compile Include="ViewModels\NewWebSourceViewModel.cs" />
     <Compile Include="ViewModels\Workflow\DataListConversionUtils.cs" />
     <Compile Include="ViewModels\Workflow\WorkflowDesignerDataPartUtils.cs" />
     <Compile Include="ViewModels\WorkSurface\IWorkSurfaceContextViewModel.cs" />

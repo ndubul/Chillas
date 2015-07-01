@@ -71,6 +71,8 @@
     <Compile Include="ManageEmailSourceModel.cs" />
     <Compile Include="ManageEmailSourceViewModel.cs" />
     <Compile Include="ManageNewServerViewModel.cs" />
+    <Compile Include="ManageWebServiceSourceModel.cs" />
+    <Compile Include="ManageWebserviceSourceViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceBaseImpl.cs" />
     <Compile Include="SplashViewModel.cs" />
