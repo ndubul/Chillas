@@ -1,7 +1,11 @@
 using System.Windows;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Core.Help;
+using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Explorer;
+using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.Studio.Controller;
+using Dev2.Common.Interfaces.Studio.ViewModels.Dialogues;
 using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.WorkSurface;
 using Warewolf.Studio.ViewModels;
@@ -14,12 +18,18 @@ namespace Dev2.Settings.Scheduler
         ManageEmailSourceViewModel _vm;
         readonly IPopupController _popupController;
         public EmailSourceViewModel(IEventAggregator eventPublisher, ManageEmailSourceViewModel vm, IPopupController popupController)
-            : base(eventPublisher)
+            : base(new EventAggregator())
         {
             ViewModel = vm;
             _popupController = popupController;
         }
-
+        public EmailSourceViewModel()
+            : base(new EventAggregator())
+        {
+            IManageEmailSourceModel model = new ManageEmailSourceModel(CustomContainer.Get<IStudioUpdateManager>(),CustomContainer.Get<IQueryManager>(),"todo");
+            ViewModel = new ManageEmailSourceViewModel(model,CustomContainer.Get<IRequestServiceNameViewModel>(),CustomContainer.Get< Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
+            _popupController = CustomContainer.Get<IPopupController>();
+        }
         #region Implementation of IHelpSource
 
         public string HelpText
