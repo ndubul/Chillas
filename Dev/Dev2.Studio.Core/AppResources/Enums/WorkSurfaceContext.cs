@@ -52,7 +52,8 @@ namespace Dev2.Studio.Core.AppResources.Enums
         Help,
 
         EmailSource,
-        ServerSource
+        ServerSource,
+        DbSource
     }
 
 }

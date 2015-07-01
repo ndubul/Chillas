@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Email;
@@ -51,9 +52,9 @@ namespace Dev2.Common.Interfaces.ServerProxyLayer
         ///// </summary>
         ///// <param name="resource"></param>
         ///// <returns></returns>
-        //IList<string> TestDbConnection(IDbSource resource);
+        IList<string> TestDbConnection(IDbSource resource);
 
-        //void  SaveDbSource(IDbSource toDbSource, Guid serverWorkspaceID);
+        void SaveDbSource(IDbSource toDbSource, Guid serverWorkspaceID);
 
         //void SaveDbService(IDatabaseService dbService);
 

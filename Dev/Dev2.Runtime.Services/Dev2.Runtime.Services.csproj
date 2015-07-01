@@ -180,6 +180,7 @@
     <Compile Include="ESB\Management\Services\RenameFolderService.cs" />
     <Compile Include="ESB\Management\Services\RenameItemService.cs" />
     <Compile Include="ESB\Management\Services\RollbackTo.cs" />
+    <Compile Include="ESB\Management\Services\SaveDbSourceSource.cs" />
     <Compile Include="ESB\Management\Services\SaveScheduledResource.cs" />
     <Compile Include="ESB\Management\Services\ClearLog.cs" />
     <Compile Include="ESB\Management\Services\DeleteResource.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="ESB\Management\Services\SettingsRead.cs" />
     <Compile Include="ESB\Management\Services\SettingsWrite.cs" />
     <Compile Include="ESB\Management\Services\TestConnectionService.cs" />
+    <Compile Include="ESB\Management\Services\TestDbSourceService.cs" />
     <Compile Include="Execution\ExecutionToken.cs" />
     <Compile Include="Hosting\CompileMessageRepo.cs" />
     <Compile Include="Hosting\ExplorerItemFactory.cs" />

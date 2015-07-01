@@ -22,6 +22,7 @@ using Dev2.Common;
 using Dev2.Common.ExtMethods;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
+using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.ConnectionHelpers;
@@ -69,6 +70,7 @@ using Dev2.Webs;
 using Dev2.Webs.Callbacks;
 using Dev2.Workspaces;
 using Infragistics.Windows.DockManager.Events;
+using Microsoft.Practices.Prism.PubSubEvents;
 using ServiceStack.Common;
 using Warewolf.Studio.ViewModels;
 
@@ -379,7 +381,7 @@ namespace Dev2.Studio.ViewModels
         {
         }
 
-        public MainViewModel(IEventAggregator eventPublisher, IAsyncWorker asyncWorker, IEnvironmentRepository environmentRepository,
+        public MainViewModel(Caliburn.Micro.IEventAggregator eventPublisher, IAsyncWorker asyncWorker, IEnvironmentRepository environmentRepository,
             IVersionChecker versionChecker, bool createDesigners = true, IBrowserPopupController browserPopupController = null,
             IPopupController popupController = null, IWindowManager windowManager = null, IWebController webController = null, IStudioResourceRepository studioResourceRepository = null, IConnectControlSingleton connectControlSingleton = null, IConnectControlViewModel connectControlViewModel = null)
             : base(eventPublisher)
@@ -721,6 +723,10 @@ namespace Dev2.Studio.ViewModels
             {
                 AddNewServerSourceSurface();
             }
+            else if (resourceType == "DbSource")
+            {
+                AddNewDbSourceSurface();
+            }
             else
             {
                 var resourceModel = ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
@@ -734,6 +740,13 @@ namespace Dev2.Studio.ViewModels
         {
             var server = CustomContainer.Get<IServer>();
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource), new NewServerSourceViewModel(EventPublisher, new ManageNewServerViewModel(new ServerSource(), server.UpdateRepository,null , "", Guid.NewGuid()), PopupProvider));
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+        void AddNewDbSourceSurface()
+        {
+            var server = CustomContainer.Get<IServer>();
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbSource), new NewDatabaseSourceViewModel(EventPublisher, new ManageDatabaseSourceViewModel(new ManageDatabaseSourceModel(server.UpdateRepository,server.QueryProxy,ActiveEnvironment.Name), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator()), PopupProvider));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 

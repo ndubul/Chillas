@@ -65,6 +65,8 @@
     <Compile Include="Help\HelpModel.cs" />
     <Compile Include="Help\IHelpChangedEvent.cs" />
     <Compile Include="IDockViewModel.cs" />
+    <Compile Include="ManageDatabaseSourceModel.cs" />
+    <Compile Include="ManageDatabaseSourceViewModel.cs" />
     <Compile Include="ManageEmailSourceModel.cs" />
     <Compile Include="ManageEmailSourceViewModel.cs" />
     <Compile Include="ManageNewServerViewModel.cs" />

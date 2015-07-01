@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Email;
@@ -67,16 +68,16 @@ namespace Warewolf.Studio.AntiCorruptionLayer
     //        UpdateManagerProxy.TestConnection(resource);
     //    }
 
-    //    public IList<string> TestDbConnection(IDbSource serverSource)
-    //    {
-    //        return UpdateManagerProxy.TestDbConnection(serverSource);
-    //    }
+        public IList<string> TestDbConnection(IDbSource serverSource)
+        {
+            return UpdateManagerProxy.TestDbConnection(serverSource);
+        }
 
-    //    public void Save(IDbSource toDbSource)
-    //    {
-    //        UpdateManagerProxy.SaveDbSource( toDbSource, GlobalConstants.ServerWorkspaceID);
+        public void Save(IDbSource toDbSource)
+        {
+            UpdateManagerProxy.SaveDbSource(toDbSource, GlobalConstants.ServerWorkspaceID);
 
-    //    }
+        }
 
     //    public void Save(IWebService model)
     //    {
