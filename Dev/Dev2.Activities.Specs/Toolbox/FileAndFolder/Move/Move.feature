@@ -52,7 +52,7 @@ Scenario Outline: Move file at location
 	 
 
 
-#cenario Outline: Move file at location1
+#cenario Outline: Move file Validation
 #   Given I have a variable "[[a]]" with a value '<Val1>'
 #	Given I have a variable "[[b]]" with a value '<Val2>'
 #	Given I have a variable "[[rec(1).a]]" with a value '<Val1>'

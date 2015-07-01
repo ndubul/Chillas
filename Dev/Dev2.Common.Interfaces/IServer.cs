@@ -14,9 +14,9 @@ namespace Dev2.Common.Interfaces
         //[JsonIgnore]
         //IExplorerRepository ExplorerRepository { get; }
        // [JsonIgnore]
-       // IStudioUpdateManager UpdateRepository { get; }
+        IStudioUpdateManager UpdateRepository { get; }
        // [JsonIgnore]
-       // IQueryManager QueryProxy { get; }
+      //  IQueryManager QueryProxy { get; }
       //  bool IsConnected();
       //  void ReloadTools();
       //  void Disconnect();

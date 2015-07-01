@@ -171,7 +171,6 @@
     <Compile Include="PathOperations\Extension\PathExtensions.cs" />
     <Compile Include="PathOperations\Interfaces\IDestinationUserNamePassword.cs" />
     <Compile Include="PulseLogger.cs" />
-    <Compile Include="ServiceModel\AuthenticationType.cs" />
     <Compile Include="ServiceModel\Connection.cs" />
     <Compile Include="ServiceModel\OauthSource.cs" />
     <Compile Include="ServiceModel\Helper\ServiceUtils.cs" />

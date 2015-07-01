@@ -21,6 +21,7 @@ using Dev2.AppResources.Repositories;
 using Dev2.Common;
 using Dev2.Common.ExtMethods;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.ConnectionHelpers;
@@ -62,12 +63,14 @@ using Dev2.Studio.Views;
 using Dev2.Studio.Views.ResourceManagement;
 using Dev2.Threading;
 using Dev2.Utils;
+using Dev2.ViewModels;
 using Dev2.Views.DropBox;
 using Dev2.Webs;
 using Dev2.Webs.Callbacks;
 using Dev2.Workspaces;
 using Infragistics.Windows.DockManager.Events;
 using ServiceStack.Common;
+using Warewolf.Studio.ViewModels;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.ViewModels
@@ -714,6 +717,10 @@ namespace Dev2.Studio.ViewModels
             {
                 CreateOAuthType(ActiveEnvironment, resourceType, resourcePath);
             }
+            else if(resourceType == "Server")
+            {
+                AddNewServerSourceSurface();
+            }
             else
             {
                 var resourceModel = ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
@@ -721,6 +728,13 @@ namespace Dev2.Studio.ViewModels
                 resourceModel.ID = Guid.Empty;
                 DisplayResourceWizard(resourceModel, false);
             }
+        }
+
+        void AddNewServerSourceSurface()
+        {
+            var server = CustomContainer.Get<IServer>();
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource), new NewServerSourceViewModel(EventPublisher, new ManageNewServerViewModel(new ServerSource(), server.UpdateRepository,null , "", Guid.NewGuid()), PopupProvider));
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
         public void CreateOAuthType(IEnvironmentModel activeEnvironment, string resourceType, string resourcePath, bool shouldAuthorise = true)
