@@ -25,7 +25,7 @@ namespace Dev2.ViewModels
 
         public override object GetView(object context = null)
         {
-            var view = new ManageServerControl();           
+            var view = new ManageDatabaseSourceControl();
             return view;
         }
 
@@ -48,7 +48,7 @@ namespace Dev2.ViewModels
 
         protected override void OnViewLoaded(object view)
         {
-            var loadedView = view as ManageServerControl;
+            var loadedView = view as ManageDatabaseSourceControl;
             if (loadedView != null)
             {
                 loadedView.DataContext = ViewModel;
