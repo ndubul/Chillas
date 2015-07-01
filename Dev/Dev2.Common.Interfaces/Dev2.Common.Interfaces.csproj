@@ -191,11 +191,13 @@
     <Compile Include="Hosting\IHostContext.cs" />
     <Compile Include="IAdminManager.cs" />
     <Compile Include="IAssignValue.cs" />
+    <Compile Include="ICheckControlEnabledView.cs" />
     <Compile Include="IEmailServiceSource.cs" />
     <Compile Include="IEnvironment.cs" />
     <Compile Include="IExecutionToken.cs" />
     <Compile Include="IExternalProcessExecutor.cs" />
     <Compile Include="IFrameworkRepository.cs" />
+    <Compile Include="IManageDatabaseSourceView.cs" />
     <Compile Include="IManageDatabaseSourceViewModel.cs" />
     <Compile Include="IManageEmailSourceViewModel.cs" />
     <Compile Include="IManageNewServerViewModel.cs" />
