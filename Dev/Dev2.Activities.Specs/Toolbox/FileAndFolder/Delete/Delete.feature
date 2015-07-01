@@ -29,7 +29,7 @@ Scenario Outline: Delete file at location
 
 
 
-#Scenario Outline: Delete file at location1
+#Scenario Outline: Delete file Validation
 #    Given I have a variable "[[a]]" with a value '<Val1>'
 #	Given I have a variable "[[b]]" with a value '<Val2>'
 #	Given I have a variable "[[rec(1).a]]" with a value '<Val1>'

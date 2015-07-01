@@ -28,10 +28,8 @@ Scenario Outline: Create file at location
 		| 5  | FTPS       | [[path]]    | ftp://rsaklfsvrsbspdc:1002/FORTESTING/test.txt                 | True     | IntegrationTester            | I73573r0               | [[result]] | Success | NO           |
 		| 6  | SFTP       | [[path]]    | sftp://localhost/test.txt                                      | True     | dev2                         | Q/ulw&]                | [[result]] | Success | NO           |
 
-
-
 	
-#Scenario Outline: Create File at location1
+#Scenario Outline: Check Validation Messages
 #    Given I have a variable "[[a]]" with a value '<Val1>'
 #	Given I have a variable "[[b]]" with a value '<Val2>'
 #	Given I have a variable "[[rec(1).a]]" with a value '<Val1>'
@@ -103,31 +101,6 @@ Scenario Outline: Create file at location
 #		| 45 | Local Files | A                              |           |             | ""                  | True     | Test                  | ""       | [[result]]             | ""      | AN           | True             | Please supply valid File Name                                                                                                                                                                                                  | 1.Please supply valid File Name                                                                                                                                                                                                     |
 #		| 46 | Local Files | [[var@]]                       |           |             |                     | True     | [[var@]]              | ""       | [[var@]]               | ""      | AN           | True             | Username - Variable name [[$#]] contains invalid character(s)   Result - Variable name [[var@]] contains invalid character(s)                                                                                                  | 1.Username - Variable name [[$#]] contains invalid character(s)  2.Result - Variable name [[var@]] contains invalid character(s)                                                                                                    |
 #		| 47 | Local Files | C#$%#$]]                       |           |             |                     | True     | C#$%#$]]              | ""       | C#$%#$]]               | ""      | AN           | True             | File or Folder - Invalid expression: opening and closing brackets don't match  Username - Invalid expression: opening and closing brackets don't match   Result - Invalid expression: opening and closing brackets don't match | 1.File or Folder - Invalid expression: opening and closing brackets don't match 2.Username - Invalid expression: opening and closing brackets don't match   3.Result - Invalid expression: opening and closing brackets don't match |                                                      
-#			     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			     
 
 

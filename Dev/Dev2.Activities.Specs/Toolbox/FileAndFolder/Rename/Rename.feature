@@ -51,7 +51,7 @@ Scenario Outline: Rename file at location
 
 
 
-#Scenario Outline: Rename file at location1
+#Scenario Outline: Rename file validation
 #    Given I have a variable "[[a]]" with a value '<Val1>'
 #	Given I have a variable "[[b]]" with a value '<Val2>'
 #	Given I have a variable "[[rec(1).a]]" with a value '<Val1>'
