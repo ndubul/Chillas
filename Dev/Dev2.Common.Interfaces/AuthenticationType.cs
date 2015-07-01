@@ -12,7 +12,7 @@
 
 
 // ReSharper disable CheckNamespace
-namespace Dev2.Common.Interfaces.Runtime.ServiceModel
+namespace Dev2.Runtime.ServiceModel.Data
 // ReSharper restore CheckNamespace
 {
     public enum AuthenticationType
