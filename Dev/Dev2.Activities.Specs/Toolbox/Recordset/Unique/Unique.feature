@@ -37,12 +37,7 @@ Scenario: Find unique records in an empty recordset
 	Then the unique result will be
 	| rec       | unique |
 	And the execution has "AN" error
-#	And the debug inputs as  
-#	| #           |  | Return Fields   |
-#	| In Field(s) |  | [[rs(*).row]] = |
-#	And the debug output as 
-#	|  |                    |
-#	| 1 | [[rec(1).unique]] = |
+
 
 Scenario: Find unique records in a recordset and the in field is blank
 	Given I have the following duplicated recordset
@@ -221,27 +216,27 @@ Scenario: Executing Unique record tool with empty In Return and Result Field
 	And the debug output as 
 	|  |  |
 
-##This Test Scenario should be passed after the bug 11994 is fixed
-#Scenario: Find unique records and assigning result in two variables
-#	Given I have the following duplicated recordset
-#	| rs       | val |
-#	| rs().row | 10  |
-#	| rs().row | 20  |
-#	| rs().row | 20  |
-#	| rs().row | 30  |
-#	And I want to find unique in field "[[rs().row]]" with the return field "[[rs().row]]"
-#	And The result variable is "[[a]],[[b]]"
-#	When the unique tool is executed	
-#	Then the unique result will be
-#	| rec          | unique |
-#	| rec().unique | 10     |
-#	| rec().unique | 20     |
-#	| rec().unique | 30     |
-#	And the execution has "NO" error
-#	And the debug inputs as  
-#	| #           |                    | Return Fields  |
-#	| In Field(s) | [[rs(4).row]] = 30 | [[rs().row]] = |	
-#	And the debug output as 
-#	| # |                  |
-#	| 1 | [[a]] = 10,20,30 |
-#	| 2 | [[b]] = 10,20,30 |
+#This Test Scenario should be passed after the bug 11994 is fixed
+Scenario: Find unique records and assigning result in two variables
+	Given I have the following duplicated recordset
+	| rs       | val |
+	| rs().row | 10  |
+	| rs().row | 20  |
+	| rs().row | 20  |
+	| rs().row | 30  |
+	And I want to find unique in field "[[rs().row]]" with the return field "[[rs().row]]"
+	And The result variable is "[[a]],[[b]]"
+	When the unique tool is executed	
+	Then the unique result will be
+	| rec          | unique |
+	| rec().row | 10     |
+	| rec().row | 20     |
+	| rec().row | 30     |
+	And the execution has "NO" error
+	And the debug inputs as  
+	| #           |                    | Return Fields  |
+	| In Field(s) | [[rs(4).row]] = 30 | [[rs().row]] = |	
+	And the debug output as 
+	| # |                  |
+	| 1 | [[a]] = 10,20,30 |
+	| 2 | [[b]] = 10,20,30 |

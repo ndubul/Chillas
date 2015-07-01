@@ -2,40 +2,30 @@ using System.Windows;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Core.Help;
 using Dev2.Common.Interfaces;
-using Dev2.Common.Interfaces.Explorer;
-using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.Studio.Controller;
-using Dev2.Common.Interfaces.Studio.ViewModels.Dialogues;
 using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.WorkSurface;
-using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
 
-namespace Dev2.Settings.Scheduler
+namespace Dev2.ViewModels
 {
-    public class EmailSourceViewModel : BaseWorkSurfaceViewModel, IHelpSource, IStudioTab
+    public class NewServerSourceViewModel : BaseWorkSurfaceViewModel, IHelpSource, IStudioTab
     {
         string _helpText;
-        ManageEmailSourceViewModel _vm;
+        IManageNewServerViewModel _vm;
         readonly IPopupController _popupController;
-        public EmailSourceViewModel(IEventAggregator eventPublisher, ManageEmailSourceViewModel vm, IPopupController popupController)
-            : base(new EventAggregator())
+        string _displayName;
+
+        public NewServerSourceViewModel(IEventAggregator eventPublisher, IManageNewServerViewModel vm, IPopupController popupController)
+            : base(eventPublisher)
         {
             ViewModel = vm;
-            _popupController = popupController;
+            _popupController = popupController;            
         }
-        public EmailSourceViewModel()
-            : base(new EventAggregator())
-        {
-            IManageEmailSourceModel model = new ManageEmailSourceModel(CustomContainer.Get<IStudioUpdateManager>(),CustomContainer.Get<IQueryManager>(),"todo");
-            ViewModel = new ManageEmailSourceViewModel(model,CustomContainer.Get<IRequestServiceNameViewModel>(),CustomContainer.Get< Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
-            _popupController = CustomContainer.Get<IPopupController>();
-        }
-
 
         public override object GetView(object context = null)
         {
-            var view = new ManageEmailSourceControl();
+            var view = new ManageServerControl();           
             return view;
         }
 
@@ -44,15 +34,29 @@ namespace Dev2.Settings.Scheduler
             base.OnViewAttached(view, ViewModel);
         }
 
+        public override string DisplayName
+        {
+            get
+            {
+                return ViewModel.HeaderText;
+            }
+            set
+            {
+                _displayName = value;
+            }
+        }
+
         protected override void OnViewLoaded(object view)
         {
-            var loadedView = view as ManageEmailSourceControl;
+            var loadedView = view as ManageServerControl;
             if (loadedView != null)
             {
                 loadedView.DataContext = ViewModel;
                 base.OnViewLoaded(loadedView);
             }
         }
+
+
         #region Implementation of IHelpSource
 
         public string HelpText
@@ -66,7 +70,7 @@ namespace Dev2.Settings.Scheduler
                 _helpText = value;
             }
         }
-        public ManageEmailSourceViewModel ViewModel
+        public IManageNewServerViewModel ViewModel
         {
             get
             {
@@ -84,7 +88,7 @@ namespace Dev2.Settings.Scheduler
 
         public bool DoDeactivate()
         {
-            if (ViewModel.HasChanged )
+            if (ViewModel.IsOkEnabled )
             {
                 MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowSchedulerCloseConfirmation();
                 if(showSchedulerCloseConfirmation == MessageBoxResult.Cancel || showSchedulerCloseConfirmation == MessageBoxResult.None)

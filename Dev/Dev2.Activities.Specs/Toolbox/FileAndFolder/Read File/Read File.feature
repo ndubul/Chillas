@@ -29,7 +29,7 @@ Scenario Outline: Read File at location
 
 
 	
-#Scenario Outline: Read File at location1
+#Scenario Outline: Read File validation
 #    Given I have a variable "[[a]]" with a value '<Val1>'
 #	Given I have a variable "[[b]]" with a value '<Val2>'
 #	Given I have a variable "[[rec(1).a]]" with a value '<Val1>'

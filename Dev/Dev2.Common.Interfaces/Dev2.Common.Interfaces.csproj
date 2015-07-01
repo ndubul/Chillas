@@ -122,6 +122,7 @@
       <Link>Properties\AssemblyCommonInfo.cs</Link>
     </Compile>
     <Compile Include="Activity\IWorkflowActivityMessage.cs" />
+    <Compile Include="AuthenticationType.cs" />
     <Compile Include="Communication\IMemo.cs" />
     <Compile Include="Communication\ISerializer.cs" />
     <Compile Include="ComponentModel\IWorkflowDescriptor.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Core\Graph\IPath.cs" />
     <Compile Include="Core\Graph\IPathSegment.cs" />
     <Compile Include="Core\Graph\OutputFormats.cs" />
+    <Compile Include="Core\ServerSource.cs" />
     <Compile Include="DataList\Contract\enTranslationDepth.cs" />
     <Compile Include="DataList\Contract\IBinaryDataListItem.cs" />
     <Compile Include="Data\IDev2Definition.cs" />
@@ -194,6 +196,7 @@
     <Compile Include="IExternalProcessExecutor.cs" />
     <Compile Include="IFrameworkRepository.cs" />
     <Compile Include="IManageEmailSourceViewModel.cs" />
+    <Compile Include="IManageNewServerViewModel.cs" />
     <Compile Include="Infrastructure\Communication\IExecuteMessage.cs" />
     <Compile Include="Infrastructure\Events\IEventPublisher.cs" />
     <Compile Include="Infrastructure\IExplorerRepositorySync.cs" />
@@ -218,6 +221,7 @@
     <Compile Include="IPulseLogger.cs" />
     <Compile Include="IQueryManager.cs" />
     <Compile Include="IServer.cs" />
+    <Compile Include="IServerSource.cs" />
     <Compile Include="ISplashView.cs" />
     <Compile Include="ISplashViewModel.cs" />
     <Compile Include="IStudioUpdateManager.cs" />
@@ -235,7 +239,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime\Configuration\Settings\ILoggingSettings.cs" />
     <Compile Include="Runtime\IExplorerItemFactory.cs" />
-    <Compile Include="Runtime\ServiceModel\AuthenticationType.cs" />
     <Compile Include="SaveDialogue\IRequestServiceNameViewModel.cs" />
     <Compile Include="Scheduler\Interfaces\IClientSchedulerFactory.cs" />
     <Compile Include="Scheduler\Interfaces\IDirectoryHelper.cs" />
@@ -304,6 +307,7 @@
     <Folder Include="Core\Data\" />
     <Folder Include="Email\" />
     <Folder Include="Infrastructure\Services\" />
+    <Folder Include="Runtime\ServiceModel\" />
     <Folder Include="Studio\Core\AppResources\Enums\" />
     <Folder Include="Studio\Core\DataList\" />
   </ItemGroup>

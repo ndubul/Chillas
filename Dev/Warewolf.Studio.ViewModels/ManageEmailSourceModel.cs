@@ -1,6 +1,5 @@
 ﻿using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Email;
-using Dev2.Common.Interfaces.Explorer;
 
 using Dev2.Common.Interfaces.Studio.ViewModels.Dialogues;
 

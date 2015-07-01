@@ -54,7 +54,7 @@ Scenario Outline: Read Folder file at location
 
 	
 	
-#Scenario Outline: Read Folder file at location1	
+#Scenario Outline: Read Folder file validation
 #    Given I have a variable "[[a]]" with a value '<Val1>'
 #	Given I have a variable "[[b]]" with a value '<Val2>'
 #	Given I have a variable "[[rec(1).a]]" with a value '<Val1>'

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Dev2.Common;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Email;
 using Dev2.Common.Interfaces.ErrorHandling;
@@ -73,48 +74,48 @@ namespace Warewolf.Studio.ServerProxyLayer
 
         }
 
-        ///// <summary>
-        ///// Save a resource to the server
-        ///// </summary>
-        ///// <param name="resource">resource to save</param>
-        ///// <param name="workspaceId">the workspace to save to</param>
-        ///// <exception cref="WarewolfSaveException">Unable to contact server</exception>
-        //public void SaveServerSource(IServerSource resource, Guid workspaceId)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("SaveServerSourceService");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("ServerSource", serialiser.SerializeToBuilder(resource));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output == null)
-        //        throw new WarewolfSaveException( "Unable to contact server",null);
-        //    if (output.HasError)
-        //        throw new WarewolfSaveException(output.Message.ToString(), null);
+        /// <summary>
+        /// Save a resource to the server
+        /// </summary>
+        /// <param name="resource">resource to save</param>
+        /// <param name="workspaceId">the workspace to save to</param>
+        /// <exception cref="WarewolfSaveException">Unable to contact server</exception>
+        public void SaveServerSource(IServerSource resource, Guid workspaceId)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("SaveServerSourceService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("ServerSource", serialiser.SerializeToBuilder(resource));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output == null)
+                throw new WarewolfSaveException( "Unable to contact server",null);
+            if (output.HasError)
+                throw new WarewolfSaveException(output.Message.ToString(), null);
 
             
-        //}
+        }
 
-        ///// <summary>
-        ///// Tests if a valid connection to a server can be made
-        ///// </summary>
-        ///// <param name="resource"></param>
-        ///// <returns></returns>
-        //public string TestConnection(IServerSource resource)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("TestConnectionService");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("ServerSource", serialiser.SerializeToBuilder(resource));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output == null)
-        //        return "Unable to contact server";
-        //    if (output.HasError)
-        //        return output.Message.ToString();
+        /// <summary>
+        /// Tests if a valid connection to a server can be made
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <returns></returns>
+        public string TestConnection(IServerSource resource)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("TestConnectionService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("ServerSource", serialiser.SerializeToBuilder(resource));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output == null)
+                return "Unable to contact server";
+            if (output.HasError)
+                return output.Message.ToString();
 
-        //    return output.Message.ToString();
+            return output.Message.ToString();
 
 
-        //}
+        }
 
         ///// <summary>
         ///// Tests if a valid connection to a server can be made returns 'Success' on a successful connection
