@@ -220,7 +220,6 @@
     <Compile Include="Interfaces\IDev2TOFn.cs" />
     <Compile Include="IPulseLogger.cs" />
     <Compile Include="IQueryManager.cs" />
-    <Compile Include="IRequestServiceNameView.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="IServerSource.cs" />
     <Compile Include="ISplashView.cs" />

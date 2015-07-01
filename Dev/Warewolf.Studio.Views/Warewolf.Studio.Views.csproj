@@ -88,9 +88,6 @@
       <DependentUpon>ManageServerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestServiceNameView.xaml.cs">
-      <DependentUpon>RequestServiceNameView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SplashPage.xaml.cs">
       <DependentUpon>SplashPage.xaml</DependentUpon>
     </Compile>
@@ -111,10 +108,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ManageServerControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="RequestServiceNameView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
