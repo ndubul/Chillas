@@ -39,7 +39,6 @@ Scenario: Execute a foreach over a tool using a recordset with 4 rows
 	|                | [[rs(3)]] = |
 	|                | [[rs(4)]] = |
 	
-#This Scenarios should pass after the bug 12021 is fixed
 #Scenario: Execute a foreach over a tool using a recordset with invalid
 #	Given There is a recordset in the datalist with this shape
 #	| rs             | value |
@@ -47,53 +46,24 @@ Scenario: Execute a foreach over a tool using a recordset with 4 rows
 #	| [[rs().field]] | 2     |
 #	| [[rs().field]] | 3     |
 #	| [[rs().field]] | 6     |	
-#	And I have selected the foreach type as "InRecordset" and used "[[rs()]]+1"	
+#	And I have selected the foreach type as "<type>" and used "<input>"
 #	And the underlying dropped activity is a(n) "Tool"
 #	When the foreach tool is executed	
-#	Then the foreach executes 4 times
-#	And the execution has "AN" error
-#	And the debug inputs as
-#	|                | Recordset           |
-#
-#Scenario: Execute a foreach using a recordset with invalid
-#	Given There is a recordset in the datalist with this shape
-#	| rs             | value |
-#	| [[rs().field]] | 1     |
-#	| [[rs().field]] | 2     |
-#	| [[rs().field]] | 3     |
-#	| [[rs().field]] | 6     |	
-#	And I have selected the foreach type as "InRecordset" and used "[[rs().a]]"	
-#	And the underlying dropped activity is a(n) "Tool"
-#	When the foreach tool is executed	
-#	Then the foreach executes 4 times
-#	And the execution has "AN" error
-#	And the debug inputs as
-#	|                | Recordset           |
-#
-#Scenario: Execute a foreach using a recordset with special character
-#	Given There is a recordset in the datalist with this shape
-#	| rs             | value |
-#	| [[rs().field]] | 1     |
-#	| [[rs().field]] | 2     |
-#	| [[rs().field]] | 3     |
-#	| [[rs().field]] | 6     |	
-#	And I have selected the foreach type as "InRecordset" and used "[[rs()]]#$%3"	
-#	And the underlying dropped activity is a(n) "Tool"
-#	When the foreach tool is executed	
-#	Then the foreach executes 4 times
-#	And the execution has "AN" error
-#	And the debug inputs as
-#	|                | Recordset           |
+#	Then the foreach executes 0 times
+#	And the execution has '<error>' error
+#	Examples: 
+#	| type        | input        | error                                                                       |
+#	| InRecordset | [[rs()]]+1   | Only recordset names can be used with * in Recordset. Invalid: [[rs()]]+1   |
+#	| InRecordset | [[rs().a]]   | Only recordset names can be used with * in Recordset. Invalid: [[rs().a]]   |
+#	| InRecordset | [[rs()]]#$%3 | Only recordset names can be used with * in Recordset. Invalid: [[rs()]]#$%3 |
+
 
 Scenario: Execute a foreach over a tool for range 0 to 0
 	And I have selected the foreach type as "InRange" from 0 to 0
 	And the underlying dropped activity is a(n) "Tool"
 	When the foreach tool is executed
 	Then the foreach executes 0 times
-	And the execution has "AN" error
-#	And the debug inputs as
-#	|            | From | To |
-#	| * in Range | 0    | 0  |	
+	And the execution has "NO" error
 
 Scenario: Execute a foreach over a tool for range 1 to 5
 	And I have selected the foreach type as "InRange" from 1 to 5
@@ -101,9 +71,9 @@ Scenario: Execute a foreach over a tool for range 1 to 5
 	When the foreach tool is executed
 	Then the foreach executes 5 times
 	And the execution has "NO" error
-#	And the debug inputs as
-#	|            | From | To |
-#	| * in Range | 1    | 5  |
+	And the debug inputs as
+	|            | From | To |
+	| * in Range | 1    | 5  |
 
 Scenario: Execute a foreach over a tool for range 9 to 10
 	And I have selected the foreach type as "InRange" from 9 to 10
@@ -111,9 +81,9 @@ Scenario: Execute a foreach over a tool for range 9 to 10
 	When the foreach tool is executed
 	Then the foreach executes 2 times
 	And the execution has "NO" error
-#	And the debug inputs as
-#	|           | From | To |
-#	| * in Range | 9    | 10 |
+	And the debug inputs as
+	|           | From | To |
+	| * in Range | 9    | 10 |
 
 Scenario: Execute a foreach over a tool with Csv Indexes 1,2,3
 	And I have selected the foreach type as "InCSV" as "1,2,3"

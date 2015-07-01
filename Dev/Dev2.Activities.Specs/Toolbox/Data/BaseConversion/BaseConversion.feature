@@ -537,35 +537,30 @@ Examples:
 	| 12 | Hex          | Base 64 |
 
 #Bug 12177
-#Scenario Outline: Converting varibles with data  
-#	Given I have a convert variable "[[a]]" with a value of "QUE="
-#	And I convert a variable "[[a]]test" from type '<From>' to type '<To>' 
-#	When the base conversion tool is executed
-#	Then the execution has "AN" error
-#	And the debug inputs as  
-#	| #  | Convert      | From    | To   |
-#	| 1  | [[a]]test =  | <From>  | <To> |
-#	And the debug output as  
-#	| #  |              |
-#Examples: 
-#	| no | From         | To      |
-#	| 1  | Base 64      | Binary  |
-#	| 2  | Base 64      | Text    |
-#	| 3  | Base 64      | Hex     |
-#	| 4  | Base 64      | Base 64 |
-#	| 5  | Binary       | Binary  |
-#	| 6  | Binary       | Text    |
-#	| 7  | Binary       | Hex     |
-#	| 8  | Binary       | Base 64 |
-#	| 9  | Text         | Binary  |
-#	| 10 | Text         | Text    |
-#	| 11 | Text         | Hex     |
-#	| 12 | Text         | Base 64 |
-#	| 13 | Hex          | Binary  |
-#	| 14 | Hex          | Text    |
-#	| 15 | Hex          | Hex     |
-#	| 16 | Hex          | Base 64 |
-#
+Scenario Outline: Converting varibles with data  
+	Given I have a convert variable "[[a]]" with a value of "QUE="
+	And I convert a variable "[[a]]test" from type '<From>' to type '<To>' 
+	When the base conversion tool is executed
+	Then the execution has "AN" error
+Examples: 
+	| no | From         | To      |
+	| 1  | Base 64      | Binary  |
+	| 2  | Base 64      | Text    |
+	| 3  | Base 64      | Hex     |
+	| 4  | Base 64      | Base 64 |
+	| 5  | Binary       | Binary  |
+	| 6  | Binary       | Text    |
+	| 7  | Binary       | Hex     |
+	| 8  | Binary       | Base 64 |
+	| 9  | Text         | Binary  |
+	| 10 | Text         | Text    |
+	| 11 | Text         | Hex     |
+	| 12 | Text         | Base 64 |
+	| 13 | Hex          | Binary  |
+	| 14 | Hex          | Text    |
+	| 15 | Hex          | Hex     |
+	| 16 | Hex          | Base 64 |
+
 
 
 Scenario Outline: Validation messages when Convert Invalid Variables  
@@ -573,11 +568,6 @@ Scenario Outline: Validation messages when Convert Invalid Variables
 	And I convert a variable '<Variable>' from type '<From>' to type '<To>' 	
 	When the base conversion tool is executed
 	Then the execution has "AN" error
-#	And the debug inputs as  
-#	| #  | Convert      | From    | To   |
-#	| 1  | <Variable> = | <From>  | <To> |
-#	And the debug output as  
-#	| #   |   |
 Examples: 
 	| No  | Variable                                  | Value            | From    | To      | Error                                                                                                                                                                                                                                                   |
 	| 1   | [[my(-1).var]]                            | QUE=             | Base 64 | Binary  | Recordset index -1 is not greater than zero                                                                                                                                                                                                             |
@@ -626,7 +616,7 @@ Examples:
 	| 44  | [[var.()]]                                | AA               | Text    | Binary  | Variable name [[var.()]] contains invalid character(s)                                                                                                                                                                                                  |
 	| 45  | [[]]                                      | AA               | Text    | Base 64 | Variable [[]] is missing a name                                                                                                                                                                                                                         |
 	| 46  | [[()]]                                    | AA               | Text    | Hex     | Variable name [[()]] contains invalid character(s)                                                                                                                                                                                                      |
-	#| 47  | 19                                        | AA               | Text    | Base 64 | [[var[[a]]]]                                                                                                                                                                                                                                            |
+	| 47  | 19                                        | AA               | Text    | Base 64 | [[var[[a]]]]                                                                                                                                                                                                                                            |
 	| 48  | [[var[[]]                                 | AA               | Text    | Text    | Invalid region detected: An open [[ without a related close ]]                                                                                                                                                                                          |
 	| 49  | [[var1.a]]                                | AA               | Text    | Hex     | Variable name [[var1.a]] contains invalid character(s)                                                                                                                                                                                                  |
 	| 50  | [[rec()!a]]                               | AA               | Text    | Binary  | Recordset name [[rec()!a]] contains invalid character(s)                                                                                                                                                                                                |
@@ -654,7 +644,7 @@ Examples:
 	| 72  | [[var.()]]                                | 0100000101000001 | Binary  | Hex     | Variable name [[var.()]] contains invalid character(s)                                                                                                                                                                                                  |
 	| 73  | [[]]                                      | 0100000101000001 | Binary  | Base 64 | Variable [[]] is missing a name                                                                                                                                                                                                                         |
 	| 74  | [[()]]                                    | 0100000101000001 | Binary  | Hex     | Variable name [[()]] contains invalid character(s)                                                                                                                                                                                                      |
-	#| 75  | 19                                        | 0100000101000001 | Binary  | Base 64 | [[var[[a]]]]                                                                                                                                                                                                                                            |
+	| 75  | 19                                        | 0100000101000001 | Binary  | Base 64 | [[var[[a]]]]                                                                                                                                                                                                                                            |
 	| 75  | [[var[[]]                                 | 0100000101000001 | Binary  | Text    | Invalid region detected: An open [[ without a related close ]]                                                                                                                                                                                          |
 	| 77  | [[var1.a]]                                | 0100000101000001 | Binary  | Hex     | Variable name [[var1.a]] contains invalid character(s)                                                                                                                                                                                                  |
 	| 78  | [[rec()!a]]                               | 0100000101000001 | Binary  | Hex     | Recordset name [[rec()!a]] contains invalid character(s)                                                                                                                                                                                                |
@@ -682,7 +672,7 @@ Examples:
 	| 100 | [[var.()]]                                | 0x4141           | Hex     | Binary  | Variable name [[var.()]] contains invalid character(s)                                                                                                                                                                                                  |
 	| 101 | [[]]                                      | 0x4141           | Hex     | Base 64 | Variable [[]] is missing a name                                                                                                                                                                                                                         |
 	| 102 | [[()]]                                    | 0x4141           | Hex     | Binary  | Variable name [[()]] contains invalid character(s)                                                                                                                                                                                                      |
-	#| 103 | 19                                        | 0x4141           | Hex     | Base 64 | [[var[[a]]]]                                                                                                                                                                                                                                            |
+	| 103 | 19                                        | 0x4141           | Hex     | Base 64 | [[var[[a]]]]                                                                                                                                                                                                                                            |
 	| 104 | [[var[[]]                                 | 0x4141           | Hex     | Text    | Invalid region detected: An open [[ without a related close ]]                                                                                                                                                                                          |
 	| 105 | [[var1.a]]                                | 0x4141           | Hex     | Binary  | Variable name [[var1.a]] contains invalid character(s)                                                                                                                                                                                                  |
 	| 106 | [[rec()!a]]                               | 0x4141           | Hex     | Binary  | Recordset name [[rec()!a]] contains invalid character(s)                                                                                                                                                                                                |

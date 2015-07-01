@@ -70,20 +70,24 @@ namespace Dev2.Activities.Specs.Toolbox.ControlFlow.Decision
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("decide if variable [[A]] is alphanumeric (True)")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Decide if variable [[A]] is alphanumeric (True)")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Decision")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Tool-Decision")]
         public virtual void DecideIfVariableAIsAlphanumericTrue()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is alphanumeric (True)", ((string[])(null)));
-#line 6
-this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Decide if variable [[A]] is alphanumeric (True)", new string[] {
+                        "Tool-Decision"});
 #line 7
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.And("decide if \"[[A]]\" \"IsAlphanumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
+ testRunner.And("decide if \"[[A]]\" \"IsAlphanumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 10
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 12
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -94,14 +98,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 30",
                         "String",
                         "YES"});
-#line 12
+#line 13
  testRunner.Then("the debug inputs as", ((string)(null)), table1, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table2.AddRow(new string[] {
                         "YES"});
-#line 15
+#line 16
  testRunner.And("the debug output as", ((string)(null)), table2, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -113,15 +117,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsAlphanumericFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is alphanumeric (False)", ((string[])(null)));
-#line 20
-this.ScenarioSetup(scenarioInfo);
 #line 21
- testRunner.Given("a decision variable \"[[A]]\" value \"@\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 22
- testRunner.And("decide if \"[[A]]\" \"IsAlphanumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"@\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 23
+ testRunner.And("decide if \"[[A]]\" \"IsAlphanumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 24
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 25
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 26
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -132,14 +138,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = @",
                         "String",
                         "YES"});
-#line 26
+#line 27
  testRunner.Then("the debug inputs as", ((string)(null)), table3, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table4.AddRow(new string[] {
                         "NO"});
-#line 29
+#line 30
  testRunner.And("the debug output as", ((string)(null)), table4, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -151,15 +157,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsBase64True()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Base64 (True)", ((string[])(null)));
-#line 34
-this.ScenarioSetup(scenarioInfo);
 #line 35
- testRunner.Given("a decision variable \"[[A]]\" value \"dHNoZXBv\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 36
- testRunner.And("decide if \"[[A]]\" \"IsBase64\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"dHNoZXBv\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 37
+ testRunner.And("decide if \"[[A]]\" \"IsBase64\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 38
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 39
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 40
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -170,14 +178,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = dHNoZXBv",
                         "String",
                         "YES"});
-#line 40
+#line 41
  testRunner.Then("the debug inputs as", ((string)(null)), table5, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table6.AddRow(new string[] {
                         "YES"});
-#line 43
+#line 44
  testRunner.And("the debug output as", ((string)(null)), table6, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -189,15 +197,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsBase64False()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Base64 (False)", ((string[])(null)));
-#line 47
-this.ScenarioSetup(scenarioInfo);
 #line 48
- testRunner.Given("a decision variable \"[[A]]\" value \"011110\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 49
- testRunner.And("decide if \"[[A]]\" \"IsBase64\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"011110\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 50
+ testRunner.And("decide if \"[[A]]\" \"IsBase64\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 51
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 52
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 53
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -208,14 +218,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 011110",
                         "String",
                         "YES"});
-#line 53
+#line 54
  testRunner.Then("the debug inputs as", ((string)(null)), table7, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table8.AddRow(new string[] {
                         "NO"});
-#line 56
+#line 57
  testRunner.And("the debug output as", ((string)(null)), table8, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -227,15 +237,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsBinaryTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Binary (True)", ((string[])(null)));
-#line 60
-this.ScenarioSetup(scenarioInfo);
 #line 61
- testRunner.Given("a decision variable \"[[A]]\" value \"011110\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 62
- testRunner.And("decide if \"[[A]]\" \"IsBinary\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"011110\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 63
+ testRunner.And("decide if \"[[A]]\" \"IsBinary\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 65
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 66
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
@@ -246,14 +258,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 011110",
                         "String",
                         "YES"});
-#line 66
+#line 67
  testRunner.Then("the debug inputs as", ((string)(null)), table9, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table10.AddRow(new string[] {
                         "YES"});
-#line 69
+#line 70
  testRunner.And("the debug output as", ((string)(null)), table10, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -265,15 +277,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsBinaryFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Binary (False)", ((string[])(null)));
-#line 74
-this.ScenarioSetup(scenarioInfo);
 #line 75
- testRunner.Given("a decision variable \"[[A]]\" value \"dHNoZXBv\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 76
- testRunner.And("decide if \"[[A]]\" \"IsBinary\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"dHNoZXBv\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 77
+ testRunner.And("decide if \"[[A]]\" \"IsBinary\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 78
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 79
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 80
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -284,14 +298,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = dHNoZXBv",
                         "String",
                         "YES"});
-#line 80
+#line 81
  testRunner.Then("the debug inputs as", ((string)(null)), table11, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table12.AddRow(new string[] {
                         "NO"});
-#line 83
+#line 84
  testRunner.And("the debug output as", ((string)(null)), table12, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -303,15 +317,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsADateTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is a Date (True)", ((string[])(null)));
-#line 88
-this.ScenarioSetup(scenarioInfo);
 #line 89
- testRunner.Given("a decision variable \"[[A]]\" value \"2010-01-10\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 90
- testRunner.And("decide if \"[[A]]\" \"IsDate\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"2010-01-10\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 91
+ testRunner.And("decide if \"[[A]]\" \"IsDate\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 92
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 93
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 94
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
@@ -322,14 +338,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 2010-01-10",
                         "String",
                         "YES"});
-#line 94
+#line 95
  testRunner.Then("the debug inputs as", ((string)(null)), table13, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table14.AddRow(new string[] {
                         "YES"});
-#line 97
+#line 98
  testRunner.And("the debug output as", ((string)(null)), table14, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -341,15 +357,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsADateFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is a Date (False)", ((string[])(null)));
-#line 102
-this.ScenarioSetup(scenarioInfo);
 #line 103
- testRunner.Given("a decision variable \"[[A]]\" value \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 104
- testRunner.And("decide if \"[[A]]\" \"IsDate\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 105
+ testRunner.And("decide if \"[[A]]\" \"IsDate\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 106
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 107
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 108
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
@@ -360,14 +378,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = Hello World",
                         "String",
                         "YES"});
-#line 108
+#line 109
  testRunner.Then("the debug inputs as", ((string)(null)), table15, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table16.AddRow(new string[] {
                         "NO"});
-#line 111
+#line 112
  testRunner.And("the debug output as", ((string)(null)), table16, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -379,15 +397,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsAnEmailTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is an Email (True)", ((string[])(null)));
-#line 115
-this.ScenarioSetup(scenarioInfo);
 #line 116
- testRunner.Given("a decision variable \"[[A]]\" value \"testmail@freemail.net\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 117
- testRunner.And("decide if \"[[A]]\" \"IsEmail\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"testmail@freemail.net\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 118
+ testRunner.And("decide if \"[[A]]\" \"IsEmail\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 119
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 120
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 121
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
@@ -398,14 +418,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = testmail@freemail.net",
                         "String",
                         "YES"});
-#line 121
+#line 122
  testRunner.Then("the debug inputs as", ((string)(null)), table17, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table18.AddRow(new string[] {
                         "YES"});
-#line 124
+#line 125
  testRunner.And("the debug output as", ((string)(null)), table18, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -417,15 +437,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsAnEmailFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is an Email (False)", ((string[])(null)));
-#line 128
-this.ScenarioSetup(scenarioInfo);
 #line 129
- testRunner.Given("a decision variable \"[[A]]\" value \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 130
- testRunner.And("decide if \"[[A]]\" \"IsEmail\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 131
+ testRunner.And("decide if \"[[A]]\" \"IsEmail\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 132
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 133
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 134
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
@@ -436,14 +458,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = Hello World",
                         "String",
                         "YES"});
-#line 134
+#line 135
  testRunner.Then("the debug inputs as", ((string)(null)), table19, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table20.AddRow(new string[] {
                         "NO"});
-#line 137
+#line 138
  testRunner.And("the debug output as", ((string)(null)), table20, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -455,15 +477,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsHexTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Hex (True)", ((string[])(null)));
-#line 141
-this.ScenarioSetup(scenarioInfo);
 #line 142
- testRunner.Given("a decision variable \"[[A]]\" value \"1E\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 143
- testRunner.And("decide if \"[[A]]\" \"IsHex\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"1E\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 144
+ testRunner.And("decide if \"[[A]]\" \"IsHex\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 145
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 146
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 147
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
@@ -474,14 +498,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 1E",
                         "String",
                         "YES"});
-#line 147
+#line 148
  testRunner.Then("the debug inputs as", ((string)(null)), table21, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table22.AddRow(new string[] {
                         "YES"});
-#line 150
+#line 151
  testRunner.And("the debug output as", ((string)(null)), table22, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -493,15 +517,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsHexFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Hex (False)", ((string[])(null)));
-#line 154
-this.ScenarioSetup(scenarioInfo);
 #line 155
- testRunner.Given("a decision variable \"[[A]]\" value \"KLM\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 156
- testRunner.And("decide if \"[[A]]\" \"IsHex\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"KLM\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 157
+ testRunner.And("decide if \"[[A]]\" \"IsHex\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 158
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 159
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 160
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
@@ -512,14 +538,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = KLM",
                         "String",
                         "YES"});
-#line 160
+#line 161
     testRunner.Then("the debug inputs as", ((string)(null)), table23, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table24.AddRow(new string[] {
                         "NO"});
-#line 163
+#line 164
  testRunner.And("the debug output as", ((string)(null)), table24, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -531,15 +557,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsNumericTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Numeric (True)", ((string[])(null)));
-#line 168
-this.ScenarioSetup(scenarioInfo);
 #line 169
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 170
- testRunner.And("decide if \"[[A]]\" \"IsNumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 171
+ testRunner.And("decide if \"[[A]]\" \"IsNumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 172
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 173
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 174
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
@@ -550,14 +578,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 30",
                         "String",
                         "YES"});
-#line 174
+#line 175
  testRunner.Then("the debug inputs as", ((string)(null)), table25, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table26.AddRow(new string[] {
                         "YES"});
-#line 177
+#line 178
  testRunner.And("the debug output as", ((string)(null)), table26, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -569,15 +597,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsNumericFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Numeric (False)", ((string[])(null)));
-#line 182
-this.ScenarioSetup(scenarioInfo);
 #line 183
- testRunner.Given("a decision variable \"[[A]]\" value \"3R\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 184
- testRunner.And("decide if \"[[A]]\" \"IsNumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"3R\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 185
+ testRunner.And("decide if \"[[A]]\" \"IsNumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 186
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 187
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 188
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
@@ -588,14 +618,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 3R",
                         "String",
                         "YES"});
-#line 188
+#line 189
    testRunner.Then("the debug inputs as", ((string)(null)), table27, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table28.AddRow(new string[] {
                         "NO"});
-#line 191
+#line 192
  testRunner.And("the debug output as", ((string)(null)), table28, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -607,15 +637,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsRegexTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Regex (True)", ((string[])(null)));
-#line 196
-this.ScenarioSetup(scenarioInfo);
 #line 197
- testRunner.Given("a decision variable \"[[A]]\" value \"tshepo.ntlhokoa@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 198
- testRunner.And("is \"[[A]]\" \"IsRegEx\" \"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"tshepo.ntlhokoa@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 199
+ testRunner.And("is \"[[A]]\" \"IsRegEx\" \"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 200
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 201
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 202
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
@@ -626,14 +658,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = tshepo.ntlhokoa@dev2.co.za",
                         "String",
                         "YES"});
-#line 202
+#line 203
  testRunner.Then("the debug inputs as", ((string)(null)), table29, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table30.AddRow(new string[] {
                         "String"});
-#line 205
+#line 206
  testRunner.And("the debug output as", ((string)(null)), table30, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -645,15 +677,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsRegexFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Regex (False)", ((string[])(null)));
-#line 210
-this.ScenarioSetup(scenarioInfo);
 #line 211
- testRunner.Given("a decision variable \"[[A]]\" value \"787877787\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 212
- testRunner.And("is \"[[A]]\" \"IsRegEx\" \"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"787877787\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 213
+ testRunner.And("is \"[[A]]\" \"IsRegEx\" \"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 214
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 215
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 216
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
@@ -664,14 +698,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 787877787",
                         "String",
                         "YES"});
-#line 216
+#line 217
  testRunner.Then("the debug inputs as", ((string)(null)), table31, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table32.AddRow(new string[] {
                         "String"});
-#line 219
+#line 220
  testRunner.And("the debug output as", ((string)(null)), table32, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -683,15 +717,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsTextTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Text (True)", ((string[])(null)));
-#line 225
-this.ScenarioSetup(scenarioInfo);
 #line 226
- testRunner.Given("a decision variable \"[[A]]\" value \"Hello Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 227
- testRunner.And("decide if \"[[A]]\" \"IsText\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Hello Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 228
+ testRunner.And("decide if \"[[A]]\" \"IsText\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 229
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 230
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 231
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
@@ -702,14 +738,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = Hello Africa",
                         "String",
                         "YES"});
-#line 231
+#line 232
  testRunner.Then("the debug inputs as", ((string)(null)), table33, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table34.AddRow(new string[] {
                         "YES"});
-#line 234
+#line 235
  testRunner.And("the debug output as", ((string)(null)), table34, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -721,15 +757,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsTextFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] is Text (False)", ((string[])(null)));
-#line 238
-this.ScenarioSetup(scenarioInfo);
 #line 239
- testRunner.Given("a decision variable \"[[A]]\" value \"3000\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 240
- testRunner.And("decide if \"[[A]]\" \"IsText\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"3000\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 241
+ testRunner.And("decide if \"[[A]]\" \"IsText\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 242
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 243
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 244
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
@@ -740,14 +778,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 3000",
                         "String",
                         "YES"});
-#line 244
+#line 245
  testRunner.Then("the debug inputs as", ((string)(null)), table35, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table36.AddRow(new string[] {
                         "NO"});
-#line 247
+#line 248
  testRunner.And("the debug output as", ((string)(null)), table36, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -759,15 +797,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsXMLTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Is XML (True)", ((string[])(null)));
-#line 251
-this.ScenarioSetup(scenarioInfo);
 #line 252
- testRunner.Given("a decision variable \"[[A]]\" value \"<A></A>\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 253
- testRunner.And("decide if \"[[A]]\" \"IsXML\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"<A></A>\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 254
+ testRunner.And("decide if \"[[A]]\" \"IsXML\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 255
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 256
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 257
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
@@ -778,14 +818,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = <A></A>",
                         "String",
                         "YES"});
-#line 257
+#line 258
  testRunner.Then("the debug inputs as", ((string)(null)), table37, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table38.AddRow(new string[] {
                         "YES"});
-#line 260
+#line 261
  testRunner.And("the debug output as", ((string)(null)), table38, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -797,15 +837,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsXMLFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Is XML (False)", ((string[])(null)));
-#line 264
-this.ScenarioSetup(scenarioInfo);
 #line 265
- testRunner.Given("a decision variable \"[[A]]\" value \"@\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 266
- testRunner.And("decide if \"[[A]]\" \"IsXML\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"@\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 267
+ testRunner.And("decide if \"[[A]]\" \"IsXML\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 268
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 269
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 270
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
@@ -816,14 +858,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = @",
                         "String",
                         "YES"});
-#line 270
+#line 271
  testRunner.Then("the debug inputs as", ((string)(null)), table39, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table40.AddRow(new string[] {
                         "NO"});
-#line 273
+#line 274
  testRunner.And("the debug output as", ((string)(null)), table40, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -835,15 +877,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotAlphanumericTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Alphanumeric (True)", ((string[])(null)));
-#line 277
-this.ScenarioSetup(scenarioInfo);
 #line 278
- testRunner.Given("a decision variable \"[[A]]\" value \"@#$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 279
- testRunner.And("decide if \"[[A]]\" \"IsNotAlphanumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"@#$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 280
+ testRunner.And("decide if \"[[A]]\" \"IsNotAlphanumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 281
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 282
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 283
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
@@ -854,14 +898,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = @#$",
                         "String",
                         "YES"});
-#line 283
+#line 284
  testRunner.Then("the debug inputs as", ((string)(null)), table41, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table42.AddRow(new string[] {
                         "YES"});
-#line 286
+#line 287
  testRunner.And("the debug output as", ((string)(null)), table42, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -873,15 +917,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotAlphanumericFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Alphanumeric (False)", ((string[])(null)));
-#line 290
-this.ScenarioSetup(scenarioInfo);
 #line 291
- testRunner.Given("a decision variable \"[[A]]\" value \"Hello\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 292
- testRunner.And("decide if \"[[A]]\" \"IsNotAlphanumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Hello\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 293
+ testRunner.And("decide if \"[[A]]\" \"IsNotAlphanumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 294
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 295
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 296
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
@@ -892,14 +938,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = Hello",
                         "String",
                         "YES"});
-#line 296
+#line 297
  testRunner.Then("the debug inputs as", ((string)(null)), table43, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table44.AddRow(new string[] {
                         "NO"});
-#line 299
+#line 300
  testRunner.And("the debug output as", ((string)(null)), table44, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -911,15 +957,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotBase64True()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Base64 (True)", ((string[])(null)));
-#line 303
-this.ScenarioSetup(scenarioInfo);
 #line 304
- testRunner.Given("a decision variable \"[[A]]\" value \"011110\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 305
- testRunner.And("decide if \"[[A]]\" \"IsNotBase64\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"011110\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 306
+ testRunner.And("decide if \"[[A]]\" \"IsNotBase64\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 307
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 308
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 309
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
@@ -930,14 +978,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 011110",
                         "String",
                         "YES"});
-#line 309
+#line 310
  testRunner.Then("the debug inputs as", ((string)(null)), table45, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table46.AddRow(new string[] {
                         "YES"});
-#line 312
+#line 313
  testRunner.And("the debug output as", ((string)(null)), table46, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -949,15 +997,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotBase64False()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Base64 (False)", ((string[])(null)));
-#line 317
-this.ScenarioSetup(scenarioInfo);
 #line 318
- testRunner.Given("a decision variable \"[[A]]\" value \"dHNoZXBv\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 319
- testRunner.And("decide if \"[[A]]\" \"IsNotBase64\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"dHNoZXBv\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 320
+ testRunner.And("decide if \"[[A]]\" \"IsNotBase64\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 321
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 322
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 323
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
@@ -968,14 +1018,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = dHNoZXBv",
                         "String",
                         "YES"});
-#line 323
+#line 324
  testRunner.Then("the debug inputs as", ((string)(null)), table47, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table48.AddRow(new string[] {
                         "NO"});
-#line 326
+#line 327
  testRunner.And("the debug output as", ((string)(null)), table48, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -987,15 +1037,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotBinaryTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Binary (True)", ((string[])(null)));
-#line 330
-this.ScenarioSetup(scenarioInfo);
 #line 331
- testRunner.Given("a decision variable \"[[A]]\" value \"dHNoZXBv\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 332
- testRunner.And("decide if \"[[A]]\" \"IsNotBinary\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"dHNoZXBv\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 333
+ testRunner.And("decide if \"[[A]]\" \"IsNotBinary\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 334
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 335
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 336
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1006,14 +1058,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = dHNoZXBv",
                         "String",
                         "YES"});
-#line 336
+#line 337
  testRunner.Then("the debug inputs as", ((string)(null)), table49, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table50.AddRow(new string[] {
                         "YES"});
-#line 339
+#line 340
  testRunner.And("the debug output as", ((string)(null)), table50, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1025,15 +1077,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotBinaryFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Binary (False)", ((string[])(null)));
-#line 343
-this.ScenarioSetup(scenarioInfo);
 #line 344
- testRunner.Given("a decision variable \"[[A]]\" value \"0111100\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 345
- testRunner.And("decide if \"[[A]]\" \"IsNotBinary\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"0111100\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 346
+ testRunner.And("decide if \"[[A]]\" \"IsNotBinary\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 347
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 348
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 349
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1044,14 +1098,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 0111100",
                         "String",
                         "YES"});
-#line 349
+#line 350
  testRunner.Then("the debug inputs as", ((string)(null)), table51, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table52 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table52.AddRow(new string[] {
                         "NO"});
-#line 352
+#line 353
  testRunner.And("the debug output as", ((string)(null)), table52, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1063,15 +1117,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotDateTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Date (True)", ((string[])(null)));
-#line 356
-this.ScenarioSetup(scenarioInfo);
 #line 357
- testRunner.Given("a decision variable \"[[A]]\" value \"Gracious\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 358
- testRunner.And("decide if \"[[A]]\" \"IsNotDate\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Gracious\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 359
+ testRunner.And("decide if \"[[A]]\" \"IsNotDate\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 360
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 361
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 362
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table53 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1082,14 +1138,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = Gracious",
                         "String",
                         "YES"});
-#line 362
+#line 363
  testRunner.Then("the debug inputs as", ((string)(null)), table53, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table54 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table54.AddRow(new string[] {
                         "YES"});
-#line 365
+#line 366
  testRunner.And("the debug output as", ((string)(null)), table54, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1101,15 +1157,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotDateFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Date (False)", ((string[])(null)));
-#line 369
-this.ScenarioSetup(scenarioInfo);
 #line 370
- testRunner.Given("a decision variable \"[[A]]\" value \"2010-01-10\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 371
- testRunner.And("decide if \"[[A]]\" \"IsNotDate\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"2010-01-10\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 372
+ testRunner.And("decide if \"[[A]]\" \"IsNotDate\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 373
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 374
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 375
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table55 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1120,14 +1178,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 2010-01-10",
                         "String",
                         "YES"});
-#line 375
+#line 376
  testRunner.Then("the debug inputs as", ((string)(null)), table55, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table56 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table56.AddRow(new string[] {
                         "NO"});
-#line 378
+#line 379
  testRunner.And("the debug output as", ((string)(null)), table56, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1139,15 +1197,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotEmailTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Email (True)", ((string[])(null)));
-#line 383
-this.ScenarioSetup(scenarioInfo);
 #line 384
- testRunner.Given("a decision variable \"[[A]]\" value \"Graciuos\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 385
- testRunner.And("decide if \"[[A]]\" \"IsNotEmail\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Graciuos\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 386
+ testRunner.And("decide if \"[[A]]\" \"IsNotEmail\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 387
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 388
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 389
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table57 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1158,14 +1218,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = Graciuos",
                         "String",
                         "YES"});
-#line 389
+#line 390
  testRunner.Then("the debug inputs as", ((string)(null)), table57, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table58 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table58.AddRow(new string[] {
                         "YES"});
-#line 392
+#line 393
  testRunner.And("the debug output as", ((string)(null)), table58, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1177,15 +1237,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotEmailFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Email (False)", ((string[])(null)));
-#line 397
-this.ScenarioSetup(scenarioInfo);
 #line 398
- testRunner.Given("a decision variable \"[[A]]\" value \"testmail@freemail.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 399
- testRunner.And("decide if \"[[A]]\" \"IsNotEmail\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"testmail@freemail.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 400
+ testRunner.And("decide if \"[[A]]\" \"IsNotEmail\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 401
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 402
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 403
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table59 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1196,14 +1258,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = testmail@freemail.com",
                         "String",
                         "YES"});
-#line 403
+#line 404
  testRunner.Then("the debug inputs as", ((string)(null)), table59, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table60 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table60.AddRow(new string[] {
                         "NO"});
-#line 406
+#line 407
  testRunner.And("the debug output as", ((string)(null)), table60, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1215,15 +1277,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotHexTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Hex (True)", ((string[])(null)));
-#line 411
-this.ScenarioSetup(scenarioInfo);
 #line 412
- testRunner.Given("a decision variable \"[[A]]\" value \"0111000\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 413
- testRunner.And("decide if \"[[A]]\" \"IsNotHex\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"0111000\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 414
+ testRunner.And("decide if \"[[A]]\" \"IsNotHex\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 415
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 416
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 417
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table61 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1234,14 +1298,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 0111000",
                         "String",
                         "YES"});
-#line 417
+#line 418
  testRunner.Then("the debug inputs as", ((string)(null)), table61, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table62 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table62.AddRow(new string[] {
                         "YES"});
-#line 420
+#line 421
  testRunner.And("the debug output as", ((string)(null)), table62, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1253,15 +1317,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotHexFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Hex (False)", ((string[])(null)));
-#line 425
-this.ScenarioSetup(scenarioInfo);
 #line 426
- testRunner.Given("a decision variable \"[[A]]\" value \"1E\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 427
- testRunner.And("decide if \"[[A]]\" \"IsNotHex\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"1E\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 428
+ testRunner.And("decide if \"[[A]]\" \"IsNotHex\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 429
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 430
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 431
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table63 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1272,14 +1338,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 1E",
                         "String",
                         "YES"});
-#line 431
+#line 432
  testRunner.Then("the debug inputs as", ((string)(null)), table63, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table64 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table64.AddRow(new string[] {
                         "NO"});
-#line 434
+#line 435
  testRunner.And("the debug output as", ((string)(null)), table64, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1291,15 +1357,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotNumericTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Numeric (True)", ((string[])(null)));
-#line 439
-this.ScenarioSetup(scenarioInfo);
 #line 440
- testRunner.Given("a decision variable \"[[A]]\" value \"Red sox\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 441
- testRunner.And("decide if \"[[A]]\" \"IsNotNumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Red sox\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 442
+ testRunner.And("decide if \"[[A]]\" \"IsNotNumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 443
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 444
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 445
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table65 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1310,14 +1378,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = Red sox",
                         "String",
                         "YES"});
-#line 445
+#line 446
  testRunner.Then("the debug inputs as", ((string)(null)), table65, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table66 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table66.AddRow(new string[] {
                         "YES"});
-#line 448
+#line 449
  testRunner.And("the debug output as", ((string)(null)), table66, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1329,15 +1397,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotNumericFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Numeric (False)", ((string[])(null)));
-#line 452
-this.ScenarioSetup(scenarioInfo);
 #line 453
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 454
- testRunner.And("decide if \"[[A]]\" \"IsNotNumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 455
+ testRunner.And("decide if \"[[A]]\" \"IsNotNumeric\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 456
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 457
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 458
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table67 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1348,14 +1418,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 30",
                         "String",
                         "YES"});
-#line 458
+#line 459
  testRunner.Then("the debug inputs as", ((string)(null)), table67, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table68 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table68.AddRow(new string[] {
                         "NO"});
-#line 461
+#line 462
  testRunner.And("the debug output as", ((string)(null)), table68, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1367,15 +1437,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotRegexTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Regex (True)", ((string[])(null)));
-#line 465
-this.ScenarioSetup(scenarioInfo);
 #line 466
- testRunner.Given("a decision variable \"[[A]]\" value \"6\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 467
- testRunner.And("is \"[[A]]\" \"NotRegEx\" \"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"6\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 468
+ testRunner.And("is \"[[A]]\" \"NotRegEx\" \"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 469
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 470
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 471
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table69 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1386,14 +1458,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 6",
                         "String",
                         "YES"});
-#line 471
+#line 472
  testRunner.Then("the debug inputs as", ((string)(null)), table69, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table70 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table70.AddRow(new string[] {
                         "String"});
-#line 474
+#line 475
  testRunner.And("the debug output as", ((string)(null)), table70, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1405,15 +1477,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotRegexFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Regex (False)", ((string[])(null)));
-#line 478
-this.ScenarioSetup(scenarioInfo);
 #line 479
- testRunner.Given("a decision variable \"[[A]]\" value \"tshepo.ntlhokoa@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 480
- testRunner.And("is \"[[A]]\" \"NotRegEx\" \"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"tshepo.ntlhokoa@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 481
+ testRunner.And("is \"[[A]]\" \"NotRegEx\" \"^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 482
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 483
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 484
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table71 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1424,14 +1498,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = tshepo.ntlhokoa@dev2.co.za",
                         "String",
                         "YES"});
-#line 484
+#line 485
  testRunner.Then("the debug inputs as", ((string)(null)), table71, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table72 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table72.AddRow(new string[] {
                         "NO"});
-#line 487
+#line 488
  testRunner.And("the debug output as", ((string)(null)), table72, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1443,15 +1517,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotTextTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Text (True)", ((string[])(null)));
-#line 491
-this.ScenarioSetup(scenarioInfo);
 #line 492
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 493
- testRunner.And("decide if \"[[A]]\" \"IsNotText\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 494
+ testRunner.And("decide if \"[[A]]\" \"IsNotText\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 495
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 496
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 497
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table73 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1462,14 +1538,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 30",
                         "String",
                         "YES"});
-#line 497
+#line 498
  testRunner.Then("the debug inputs as", ((string)(null)), table73, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table74 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table74.AddRow(new string[] {
                         "YES"});
-#line 500
+#line 501
  testRunner.And("the debug output as", ((string)(null)), table74, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1481,15 +1557,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotTextFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not Text (False)", ((string[])(null)));
-#line 505
-this.ScenarioSetup(scenarioInfo);
 #line 506
- testRunner.Given("a decision variable \"[[A]]\" value \"Gracious\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 507
- testRunner.And("decide if \"[[A]]\" \"IsNotText\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Gracious\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 508
+ testRunner.And("decide if \"[[A]]\" \"IsNotText\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 509
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 510
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 511
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table75 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1500,14 +1578,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = Gracious",
                         "String",
                         "YES"});
-#line 511
+#line 512
  testRunner.Then("the debug inputs as", ((string)(null)), table75, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table76 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table76.AddRow(new string[] {
                         "NO"});
-#line 514
+#line 515
  testRunner.And("the debug output as", ((string)(null)), table76, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1519,15 +1597,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotXMLTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not XML (True)", ((string[])(null)));
-#line 519
-this.ScenarioSetup(scenarioInfo);
 #line 520
- testRunner.Given("a decision variable \"[[A]]\" value \"A A\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 521
- testRunner.And("decide if \"[[A]]\" \"IsNotXML\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"A A\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 522
+ testRunner.And("decide if \"[[A]]\" \"IsNotXML\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 523
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 524
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 525
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table77 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1538,14 +1618,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = A A",
                         "String",
                         "YES"});
-#line 525
+#line 526
  testRunner.Then("the debug inputs as", ((string)(null)), table77, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table78 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table78.AddRow(new string[] {
                         "YES"});
-#line 528
+#line 529
  testRunner.And("the debug output as", ((string)(null)), table78, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1557,15 +1637,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotXMLFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Not XML (False)", ((string[])(null)));
-#line 533
-this.ScenarioSetup(scenarioInfo);
 #line 534
- testRunner.Given("a decision variable \"[[A]]\" value \"<A></A>\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 535
- testRunner.And("decide if \"[[A]]\" \"IsNotXML\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"<A></A>\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 536
+ testRunner.And("decide if \"[[A]]\" \"IsNotXML\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 537
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 538
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 539
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table79 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1576,14 +1658,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = <A></A>",
                         "String",
                         "YES"});
-#line 539
+#line 540
  testRunner.Then("the debug inputs as", ((string)(null)), table79, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table80 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table80.AddRow(new string[] {
                         "NO"});
-#line 542
+#line 543
  testRunner.And("the debug output as", ((string)(null)), table80, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1595,19 +1677,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsBetweenVariableBAndCTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Is Between variable [[B]] and [[C]] (True)", ((string[])(null)));
-#line 546
-this.ScenarioSetup(scenarioInfo);
 #line 547
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 548
- testRunner.And("a decision variable \"[[B]]\" value \"20\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 549
- testRunner.And("a decision variable \"[[C]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"20\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 550
- testRunner.And("check if \"[[A]]\" \"IsBetween\" \"[[B]]\" and \"[[C]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[C]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 551
+ testRunner.And("check if \"[[A]]\" \"IsBetween\" \"[[B]]\" and \"[[C]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 552
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 553
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 554
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table81 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1630,14 +1714,14 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "String",
                         "YES"});
-#line 554
+#line 555
  testRunner.Then("the debug inputs as", ((string)(null)), table81, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table82 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table82.AddRow(new string[] {
                         "YES"});
-#line 560
+#line 561
  testRunner.And("the debug output as", ((string)(null)), table82, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1649,19 +1733,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsNotBetweenVariableBAndCTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Is Not Between variable [[B]] and [[C]] (True)", ((string[])(null)));
-#line 564
-this.ScenarioSetup(scenarioInfo);
 #line 565
- testRunner.Given("a decision variable \"[[A]]\" value \"20\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 566
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"20\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 567
- testRunner.And("a decision variable \"[[C]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 568
- testRunner.And("check if \"[[A]]\" \"NotBetween\" \"[[B]]\" and \"[[C]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[C]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 569
+ testRunner.And("check if \"[[A]]\" \"NotBetween\" \"[[B]]\" and \"[[C]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 570
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 571
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 572
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table83 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1684,14 +1770,14 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "String",
                         "YES"});
-#line 572
+#line 573
  testRunner.Then("the debug inputs as", ((string)(null)), table83, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table84 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table84.AddRow(new string[] {
                         "YES"});
-#line 578
+#line 579
  testRunner.And("the debug output as", ((string)(null)), table84, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1703,19 +1789,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsBetweenVariableBAndCFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Is Between variable [[B]] and [[C]] (False)", ((string[])(null)));
-#line 582
-this.ScenarioSetup(scenarioInfo);
 #line 583
- testRunner.Given("a decision variable \"[[A]]\" value \"20\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 584
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"20\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 585
- testRunner.And("a decision variable \"[[C]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 586
- testRunner.And("check if \"[[A]]\" \"IsBetween\" \"[[B]]\" and \"[[C]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[C]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 587
+ testRunner.And("check if \"[[A]]\" \"IsBetween\" \"[[B]]\" and \"[[C]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 588
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 589
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 590
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table85 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1738,14 +1826,14 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "String",
                         "YES"});
-#line 590
+#line 591
  testRunner.Then("the debug inputs as", ((string)(null)), table85, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table86 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table86.AddRow(new string[] {
                         "NO"});
-#line 596
+#line 597
  testRunner.And("the debug output as", ((string)(null)), table86, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1757,19 +1845,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAIsNotBetweenVariableBAndCFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Is Not Between variable [[B]] and [[C]] (False)", ((string[])(null)));
-#line 600
-this.ScenarioSetup(scenarioInfo);
 #line 601
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 602
- testRunner.And("a decision variable \"[[B]]\" value \"20\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 603
- testRunner.And("a decision variable \"[[C]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"20\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 604
- testRunner.And("check if \"[[A]]\" \"NotBetween\" \"[[B]]\" and \"[[C]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[C]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 605
+ testRunner.And("check if \"[[A]]\" \"NotBetween\" \"[[B]]\" and \"[[C]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 606
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 607
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 608
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table87 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1792,14 +1882,14 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "String",
                         "YES"});
-#line 608
+#line 609
  testRunner.Then("the debug inputs as", ((string)(null)), table87, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table88 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table88.AddRow(new string[] {
                         "NO"});
-#line 614
+#line 615
  testRunner.And("the debug output as", ((string)(null)), table88, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1813,23 +1903,25 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] equals variable [[B]] and [[B]] equals [[C]] Mode is AND" +
                     "", ((string[])(null)));
-#line 618
-this.ScenarioSetup(scenarioInfo);
 #line 619
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 620
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 621
- testRunner.And("a decision variable \"[[C]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 622
- testRunner.And("is \"[[A]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[C]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 623
- testRunner.And("is \"[[C]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("is \"[[A]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 624
- testRunner.And("the decision mode is \"AND\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("is \"[[C]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 625
+ testRunner.And("the decision mode is \"AND\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 626
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 627
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 628
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table89 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1852,14 +1944,14 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "String",
                         "YES"});
-#line 628
+#line 629
  testRunner.Then("the debug inputs as", ((string)(null)), table89, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table90 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table90.AddRow(new string[] {
                         "YES"});
-#line 634
+#line 635
  testRunner.And("the debug output as", ((string)(null)), table90, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1871,23 +1963,25 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAEqualsVariableBAndBEqualsCModeIsOR()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] equals variable [[B]] and [[B]] equals [[C]] Mode is OR", ((string[])(null)));
-#line 638
-this.ScenarioSetup(scenarioInfo);
 #line 639
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 640
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 641
- testRunner.And("a decision variable \"[[C]]\" value \"31\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 642
- testRunner.And("is \"[[A]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[C]]\" value \"31\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 643
- testRunner.And("is \"[[C]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("is \"[[A]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 644
- testRunner.And("the decision mode is \"OR\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("is \"[[C]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 645
+ testRunner.And("the decision mode is \"OR\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 646
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 647
+ testRunner.Then("the decision result should be \"true\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 648
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table91 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1910,14 +2004,14 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "String",
                         "NO"});
-#line 648
+#line 649
  testRunner.Then("the debug inputs as", ((string)(null)), table91, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table92 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table92.AddRow(new string[] {
                         "YES"});
-#line 654
+#line 655
  testRunner.And("the debug output as", ((string)(null)), table92, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1929,17 +2023,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAEqualsVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] equals variable [[B]] (True)", ((string[])(null)));
-#line 658
-this.ScenarioSetup(scenarioInfo);
 #line 659
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 660
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 661
- testRunner.And("is \"[[A]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 662
+ testRunner.And("is \"[[A]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 663
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 664
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 665
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table93 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1954,14 +2050,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 30",
                         "String",
                         "YES"});
-#line 665
+#line 666
  testRunner.Then("the debug inputs as", ((string)(null)), table93, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table94 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table94.AddRow(new string[] {
                         "YES"});
-#line 669
+#line 670
  testRunner.And("the debug output as", ((string)(null)), table94, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1973,17 +2069,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAEqualsVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] equals variable [[B]] (False)", ((string[])(null)));
-#line 673
-this.ScenarioSetup(scenarioInfo);
 #line 674
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 675
- testRunner.And("a decision variable \"[[B]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 676
- testRunner.And("is \"[[A]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 677
+ testRunner.And("is \"[[A]]\" \"IsEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 678
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 679
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 680
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table95 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1998,14 +2096,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 40",
                         "String",
                         "YES"});
-#line 680
+#line 681
  testRunner.Then("the debug inputs as", ((string)(null)), table95, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table96 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table96.AddRow(new string[] {
                         "NO"});
-#line 684
+#line 685
  testRunner.And("the debug output as", ((string)(null)), table96, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2017,17 +2115,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAGreaterThanVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] greater than variable [[B]] (True)", ((string[])(null)));
-#line 689
-this.ScenarioSetup(scenarioInfo);
 #line 690
- testRunner.Given("a decision variable \"[[A]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 691
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 692
- testRunner.And("is \"[[A]]\" \"IsGreaterThan\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 693
+ testRunner.And("is \"[[A]]\" \"IsGreaterThan\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 694
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 695
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 696
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table97 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2042,14 +2142,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 30",
                         "String",
                         "YES"});
-#line 696
+#line 697
  testRunner.Then("the debug inputs as", ((string)(null)), table97, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table98 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table98.AddRow(new string[] {
                         "YES"});
-#line 700
+#line 701
  testRunner.And("the debug output as", ((string)(null)), table98, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2061,17 +2161,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAGreaterThanVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] greater than variable [[B]] (False)", ((string[])(null)));
-#line 704
-this.ScenarioSetup(scenarioInfo);
 #line 705
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 706
- testRunner.And("a decision variable \"[[B]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 707
- testRunner.And("is \"[[A]]\" \"IsGreaterThan\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 708
+ testRunner.And("is \"[[A]]\" \"IsGreaterThan\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 709
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 710
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 711
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table99 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2086,14 +2188,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 40",
                         "String",
                         "YES"});
-#line 711
+#line 712
  testRunner.Then("the debug inputs as", ((string)(null)), table99, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table100 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table100.AddRow(new string[] {
                         "NO"});
-#line 715
+#line 716
  testRunner.And("the debug output as", ((string)(null)), table100, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2105,17 +2207,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableALessThanVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] less than variable [[B]] (True)", ((string[])(null)));
-#line 719
-this.ScenarioSetup(scenarioInfo);
 #line 720
- testRunner.Given("a decision variable \"[[A]]\" value \"20\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 721
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"20\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 722
- testRunner.And("is \"[[A]]\" \"IsLessThan\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 723
+ testRunner.And("is \"[[A]]\" \"IsLessThan\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 724
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 725
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 726
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table101 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2130,14 +2234,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 30",
                         "String",
                         "YES"});
-#line 726
+#line 727
  testRunner.Then("the debug inputs as", ((string)(null)), table101, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table102 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table102.AddRow(new string[] {
                         "YES"});
-#line 730
+#line 731
  testRunner.And("the debug output as", ((string)(null)), table102, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2149,17 +2253,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableALessThanVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] less than variable [[B]] (False)", ((string[])(null)));
-#line 735
-this.ScenarioSetup(scenarioInfo);
 #line 736
- testRunner.Given("a decision variable \"[[A]]\" value \"70\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 737
- testRunner.And("a decision variable \"[[B]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"70\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 738
- testRunner.And("is \"[[A]]\" \"IsLessThan\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 739
+ testRunner.And("is \"[[A]]\" \"IsLessThan\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 740
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 741
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 742
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table103 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2174,14 +2280,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 40",
                         "String",
                         "YES"});
-#line 742
+#line 743
  testRunner.Then("the debug inputs as", ((string)(null)), table103, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table104 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table104.AddRow(new string[] {
                         "NO"});
-#line 746
+#line 747
  testRunner.And("the debug output as", ((string)(null)), table104, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2193,17 +2299,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotEqualsVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] not equals variable [[B]] (True)", ((string[])(null)));
-#line 750
-this.ScenarioSetup(scenarioInfo);
 #line 751
- testRunner.Given("a decision variable \"[[A]]\" value \"38\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 752
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"38\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 753
- testRunner.And("is \"[[A]]\" \"IsNotEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 754
+ testRunner.And("is \"[[A]]\" \"IsNotEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 755
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 756
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 757
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table105 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2218,14 +2326,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 30",
                         "String",
                         "YES"});
-#line 757
+#line 758
  testRunner.Then("the debug inputs as", ((string)(null)), table105, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table106 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table106.AddRow(new string[] {
                         "YES"});
-#line 761
+#line 762
  testRunner.And("the debug output as", ((string)(null)), table106, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2237,17 +2345,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableANotEqualsVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] not equals variable [[B]] (False)", ((string[])(null)));
-#line 766
-this.ScenarioSetup(scenarioInfo);
 #line 767
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 768
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 769
- testRunner.And("is \"[[A]]\" \"IsNotEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 770
+ testRunner.And("is \"[[A]]\" \"IsNotEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 771
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 772
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 773
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table107 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2262,14 +2372,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 30",
                         "String",
                         "YES"});
-#line 773
+#line 774
  testRunner.Then("the debug inputs as", ((string)(null)), table107, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table108 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table108.AddRow(new string[] {
                         "NO"});
-#line 777
+#line 778
  testRunner.And("the debug output as", ((string)(null)), table108, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2281,17 +2391,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAEqualOrGreaterThanVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] equal or greater than variable [[B]] (True)", ((string[])(null)));
-#line 781
- this.ScenarioSetup(scenarioInfo);
 #line 782
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ this.ScenarioSetup(scenarioInfo);
 #line 783
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 784
- testRunner.And("is \"[[A]]\" \"IsGreaterThanOrEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 785
+ testRunner.And("is \"[[A]]\" \"IsGreaterThanOrEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 786
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 787
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 788
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table109 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2306,14 +2418,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 30",
                         "String",
                         "YES"});
-#line 788
+#line 789
  testRunner.Then("the debug inputs as", ((string)(null)), table109, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table110 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table110.AddRow(new string[] {
                         "YES"});
-#line 792
+#line 793
  testRunner.And("the debug output as", ((string)(null)), table110, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2325,17 +2437,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAEqualOrGreaterThanVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] equal or greater than variable [[B]] (False)", ((string[])(null)));
-#line 796
-this.ScenarioSetup(scenarioInfo);
 #line 797
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 798
- testRunner.And("a decision variable \"[[B]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 799
- testRunner.And("is \"[[A]]\" \"IsGreaterThanOrEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 800
+ testRunner.And("is \"[[A]]\" \"IsGreaterThanOrEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 801
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 802
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 803
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table111 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2350,14 +2464,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 40",
                         "String",
                         "YES"});
-#line 803
+#line 804
  testRunner.Then("the debug inputs as", ((string)(null)), table111, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table112 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table112.AddRow(new string[] {
                         "NO"});
-#line 807
+#line 808
  testRunner.And("the debug output as", ((string)(null)), table112, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2369,17 +2483,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAEqualOrLessThanVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] equal or less than variable [[B]] (True)", ((string[])(null)));
-#line 811
-this.ScenarioSetup(scenarioInfo);
 #line 812
- testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 813
- testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 814
- testRunner.And("is \"[[A]]\" \"IsLessThanOrEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"30\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 815
+ testRunner.And("is \"[[A]]\" \"IsLessThanOrEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 816
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 817
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 818
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table113 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2394,14 +2510,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 30",
                         "String",
                         "YES"});
-#line 818
+#line 819
  testRunner.Then("the debug inputs as", ((string)(null)), table113, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table114 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table114.AddRow(new string[] {
                         "YES"});
-#line 822
+#line 823
  testRunner.And("the debug output as", ((string)(null)), table114, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2413,17 +2529,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAEqualOrLessThanVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] equal or less than variable [[B]] (False)", ((string[])(null)));
-#line 826
-this.ScenarioSetup(scenarioInfo);
 #line 827
- testRunner.Given("a decision variable \"[[A]]\" value \"60\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 828
- testRunner.And("a decision variable \"[[B]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"60\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 829
- testRunner.And("is \"[[A]]\" \"IsLessThanOrEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"40\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 830
+ testRunner.And("is \"[[A]]\" \"IsLessThanOrEqual\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 831
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 832
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 833
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table115 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2438,14 +2556,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = 40",
                         "String",
                         "YES"});
-#line 833
+#line 834
  testRunner.Then("the debug inputs as", ((string)(null)), table115, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table116 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table116.AddRow(new string[] {
                         "NO"});
-#line 837
+#line 838
  testRunner.And("the debug output as", ((string)(null)), table116, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2457,17 +2575,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAStartsWithVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Starts With variable [[B]] (True)", ((string[])(null)));
-#line 842
-this.ScenarioSetup(scenarioInfo);
 #line 843
- testRunner.Given("a decision variable \"[[A]]\" value \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 844
- testRunner.And("a decision variable \"[[B]]\" value \"Hello\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 845
- testRunner.And("is \"[[A]]\" \"IsStartsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"Hello\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 846
+ testRunner.And("is \"[[A]]\" \"IsStartsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 847
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 848
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 849
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table117 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2482,14 +2602,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = Hello",
                         "String",
                         "YES"});
-#line 849
+#line 850
  testRunner.Then("the debug inputs as", ((string)(null)), table117, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table118 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table118.AddRow(new string[] {
                         "YES"});
-#line 853
+#line 854
  testRunner.And("the debug output as", ((string)(null)), table118, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2501,17 +2621,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAStartsWithVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Starts With variable [[B]] (False)", ((string[])(null)));
-#line 858
-this.ScenarioSetup(scenarioInfo);
 #line 859
- testRunner.Given("a decision variable \"[[A]]\" value \"Hello Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 860
- testRunner.And("a decision variable \"[[B]]\" value \"World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Hello Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 861
- testRunner.And("is \"[[A]]\" \"IsStartsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 862
+ testRunner.And("is \"[[A]]\" \"IsStartsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 863
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 864
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 865
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table119 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2526,14 +2648,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = World",
                         "String",
                         "YES"});
-#line 865
+#line 866
  testRunner.Then("the debug inputs as", ((string)(null)), table119, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table120 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table120.AddRow(new string[] {
                         "NO"});
-#line 869
+#line 870
  testRunner.And("the debug output as", ((string)(null)), table120, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2545,17 +2667,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAEndsWithVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Ends With variable [[B]] (True)", ((string[])(null)));
-#line 874
-this.ScenarioSetup(scenarioInfo);
 #line 875
- testRunner.Given("a decision variable \"[[A]]\" value \"Hello Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 876
- testRunner.And("a decision variable \"[[B]]\" value \"Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Hello Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 877
- testRunner.And("is \"[[A]]\" \"IsEndsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 878
+ testRunner.And("is \"[[A]]\" \"IsEndsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 879
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 880
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 881
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table121 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2570,14 +2694,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = Africa",
                         "String",
                         "YES"});
-#line 881
+#line 882
  testRunner.Then("the debug inputs as", ((string)(null)), table121, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table122 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table122.AddRow(new string[] {
                         "YES"});
-#line 885
+#line 886
  testRunner.And("the debug output as", ((string)(null)), table122, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2589,17 +2713,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAEndsWithVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Ends With variable [[B]] (False)", ((string[])(null)));
-#line 889
-this.ScenarioSetup(scenarioInfo);
 #line 890
- testRunner.Given("a decision variable \"[[A]]\" value \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 891
- testRunner.And("a decision variable \"[[B]]\" value \"Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 892
- testRunner.And("is \"[[A]]\" \"IsEndsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 893
+ testRunner.And("is \"[[A]]\" \"IsEndsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 894
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 895
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 896
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table123 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2614,14 +2740,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = Africa",
                         "String",
                         "YES"});
-#line 896
+#line 897
  testRunner.Then("the debug inputs as", ((string)(null)), table123, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table124 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table124.AddRow(new string[] {
                         "NO"});
-#line 900
+#line 901
  testRunner.And("the debug output as", ((string)(null)), table124, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2633,17 +2759,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAContainsVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Contains variable [[B]] (True)", ((string[])(null)));
-#line 905
-this.ScenarioSetup(scenarioInfo);
 #line 906
- testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 907
- testRunner.And("a decision variable \"[[B]]\" value \"fantastic\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 908
- testRunner.And("is \"[[A]]\" \"IsContains\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"fantastic\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 909
+ testRunner.And("is \"[[A]]\" \"IsContains\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 910
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 911
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 912
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table125 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2658,14 +2786,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = fantastic",
                         "String",
                         "YES"});
-#line 912
+#line 913
  testRunner.Then("the debug inputs as", ((string)(null)), table125, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table126 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table126.AddRow(new string[] {
                         "YES"});
-#line 916
+#line 917
  testRunner.And("the debug output as", ((string)(null)), table126, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2677,17 +2805,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableAContainsVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Contains variable [[B]] (False)", ((string[])(null)));
-#line 921
-this.ScenarioSetup(scenarioInfo);
 #line 922
- testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 923
- testRunner.And("a decision variable \"[[B]]\" value \"terrible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 924
- testRunner.And("is \"[[A]]\" \"IsContains\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"terrible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 925
+ testRunner.And("is \"[[A]]\" \"IsContains\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 926
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 927
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 928
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table127 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2702,14 +2832,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = terrible",
                         "String",
                         "YES"});
-#line 928
+#line 929
  testRunner.Then("the debug inputs as", ((string)(null)), table127, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table128 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table128.AddRow(new string[] {
                         "NO"});
-#line 932
+#line 933
  testRunner.And("the debug output as", ((string)(null)), table128, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2721,17 +2851,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableADoesnTStartsWithVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Doesn\'t Starts With variable [[B]] (True)", ((string[])(null)));
-#line 937
-this.ScenarioSetup(scenarioInfo);
 #line 938
- testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 939
- testRunner.And("a decision variable \"[[B]]\" value \"country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 940
- testRunner.And("is \"[[A]]\" \"NotStartsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 941
+ testRunner.And("is \"[[A]]\" \"NotStartsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 942
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 943
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 944
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table129 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2746,14 +2878,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = country",
                         "String",
                         "YES"});
-#line 944
+#line 945
  testRunner.Then("the debug inputs as", ((string)(null)), table129, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table130 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table130.AddRow(new string[] {
                         "YES"});
-#line 948
+#line 949
  testRunner.And("the debug output as", ((string)(null)), table130, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2765,17 +2897,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableADoesnTStartsWithVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Doesn\'t Starts With variable [[B]] (False)", ((string[])(null)));
-#line 953
-this.ScenarioSetup(scenarioInfo);
 #line 954
- testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 955
- testRunner.And("a decision variable \"[[B]]\" value \"South\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 956
- testRunner.And("is \"[[A]]\" \"NotStartsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"South\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 957
+ testRunner.And("is \"[[A]]\" \"NotStartsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 958
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 959
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 960
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table131 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2790,14 +2924,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = South",
                         "String",
                         "YES"});
-#line 960
+#line 961
  testRunner.Then("the debug inputs as", ((string)(null)), table131, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table132 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table132.AddRow(new string[] {
                         "NO"});
-#line 964
+#line 965
  testRunner.And("the debug output as", ((string)(null)), table132, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2809,17 +2943,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableADoesnTEndsWithVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Doesn\'t Ends With variable [[B]] (True)", ((string[])(null)));
-#line 968
-this.ScenarioSetup(scenarioInfo);
 #line 969
- testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 970
- testRunner.And("a decision variable \"[[B]]\" value \"continent\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 971
- testRunner.And("is \"[[A]]\" \"NotEndsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"continent\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 972
+ testRunner.And("is \"[[A]]\" \"NotEndsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 973
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 974
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 975
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table133 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2834,14 +2970,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = continent",
                         "String",
                         "YES"});
-#line 975
+#line 976
  testRunner.Then("the debug inputs as", ((string)(null)), table133, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table134 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table134.AddRow(new string[] {
                         "YES"});
-#line 979
+#line 980
  testRunner.And("the debug output as", ((string)(null)), table134, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2853,17 +2989,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableADoesnTEndsWithVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Doesn\'t Ends With variable [[B]] (False)", ((string[])(null)));
-#line 983
-this.ScenarioSetup(scenarioInfo);
 #line 984
- testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 985
- testRunner.And("a decision variable \"[[B]]\" value \"country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 986
- testRunner.And("is \"[[A]]\" \"NotEndsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 987
+ testRunner.And("is \"[[A]]\" \"NotEndsWith\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 988
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 989
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 990
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table135 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2878,14 +3016,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = country",
                         "String",
                         "YES"});
-#line 990
+#line 991
  testRunner.Then("the debug inputs as", ((string)(null)), table135, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table136 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table136.AddRow(new string[] {
                         "NO"});
-#line 994
+#line 995
  testRunner.And("the debug output as", ((string)(null)), table136, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2897,17 +3035,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableADoesnTContainsVariableBTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Doesn\'t Contains variable [[B]] (True)", ((string[])(null)));
-#line 998
-this.ScenarioSetup(scenarioInfo);
 #line 999
- testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 1000
- testRunner.And("a decision variable \"[[B]]\" value \"Nile\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 1001
- testRunner.And("is \"[[A]]\" \"NotContain\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"Nile\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1002
+ testRunner.And("is \"[[A]]\" \"NotContain\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1003
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 1004
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1005
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table137 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2922,14 +3062,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = Nile",
                         "String",
                         "YES"});
-#line 1005
+#line 1006
  testRunner.Then("the debug inputs as", ((string)(null)), table137, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table138 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table138.AddRow(new string[] {
                         "YES"});
-#line 1009
+#line 1010
  testRunner.And("the debug output as", ((string)(null)), table138, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2941,17 +3081,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfVariableADoesnTContainsVariableBFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if variable [[A]] Doesn\'t Contains variable [[B]] (False)", ((string[])(null)));
-#line 1013
-this.ScenarioSetup(scenarioInfo);
 #line 1014
- testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 1015
- testRunner.And("a decision variable \"[[B]]\" value \"Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 1016
- testRunner.And("is \"[[A]]\" \"NotContain\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" value \"Africa\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1017
+ testRunner.And("is \"[[A]]\" \"NotContain\" \"[[B]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1018
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 1019
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1020
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table139 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2966,14 +3108,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[B]] = Africa",
                         "String",
                         "YES"});
-#line 1020
+#line 1021
  testRunner.Then("the debug inputs as", ((string)(null)), table139, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table140 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table140.AddRow(new string[] {
                         "NO"});
-#line 1024
+#line 1025
  testRunner.And("the debug output as", ((string)(null)), table140, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2985,15 +3127,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfThereIsAnErrorTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if There Is An Error (True)", ((string[])(null)));
-#line 1029
-this.ScenarioSetup(scenarioInfo);
 #line 1030
+this.ScenarioSetup(scenarioInfo);
+#line 1031
  testRunner.Given("a decision variable \"[[rec(-1).row]]\" value \"South Africa is a fantastic country\"" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1031
- testRunner.And("I want to check \"IsError\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1032
+ testRunner.And("I want to check \"IsError\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1033
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 1034
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table141 = new TechTalk.SpecFlow.Table(new string[] {
                         "",
@@ -3003,14 +3147,14 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "String",
                         "YES"});
-#line 1034
+#line 1035
  testRunner.Then("the debug inputs as", ((string)(null)), table141, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table142 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table142.AddRow(new string[] {
                         "YES"});
-#line 1037
+#line 1038
  testRunner.And("the debug output as", ((string)(null)), table142, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3022,14 +3166,16 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfThereIsAnErrorFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if There Is An Error (False)", ((string[])(null)));
-#line 1041
-this.ScenarioSetup(scenarioInfo);
 #line 1042
- testRunner.Given("a decision variable \"[[rec().row]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 1043
- testRunner.And("I want to check \"IsError\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[rec().row]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 1044
+ testRunner.And("I want to check \"IsError\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1045
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 1046
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table143 = new TechTalk.SpecFlow.Table(new string[] {
                         "",
@@ -3039,14 +3185,14 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "String",
                         "YES"});
-#line 1046
+#line 1047
  testRunner.Then("the debug inputs as", ((string)(null)), table143, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table144 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table144.AddRow(new string[] {
                         "NO"});
-#line 1049
+#line 1050
  testRunner.And("the debug output as", ((string)(null)), table144, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3058,14 +3204,16 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfThereIsNoErrorTrue()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if There Is No Error (True)", ((string[])(null)));
-#line 1053
-this.ScenarioSetup(scenarioInfo);
 #line 1054
- testRunner.Given("a decision variable \"[[rec().row]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 1055
- testRunner.And("I want to check \"IsNotError\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[rec().row]]\" value \"South Africa is a fantastic country\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 1056
+ testRunner.And("I want to check \"IsNotError\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1057
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 1058
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table145 = new TechTalk.SpecFlow.Table(new string[] {
                         "",
@@ -3075,14 +3223,14 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "String",
                         "YES"});
-#line 1058
+#line 1059
  testRunner.Then("the debug inputs as", ((string)(null)), table145, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table146 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table146.AddRow(new string[] {
                         "YES"});
-#line 1061
+#line 1062
  testRunner.And("the debug output as", ((string)(null)), table146, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3094,16 +3242,18 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfThereIsNoErrorFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if There Is No Error (False)", ((string[])(null)));
-#line 1065
-this.ScenarioSetup(scenarioInfo);
 #line 1066
+this.ScenarioSetup(scenarioInfo);
+#line 1067
  testRunner.Given("a decision variable \"[[rec(-1).row]]\" value \"South Africa is a fantastic country\"" +
                     "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 1067
- testRunner.And("I want to check \"IsNotError\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1068
+ testRunner.And("I want to check \"IsNotError\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1069
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 1070
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1071
  testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table147 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3114,14 +3264,14 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "String",
                         "YES"});
-#line 1071
+#line 1072
  testRunner.Then("the debug inputs as", ((string)(null)), table147, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table148 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table148.AddRow(new string[] {
                         "NO"});
-#line 1074
+#line 1075
  testRunner.And("the debug output as", ((string)(null)), table148, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3133,15 +3283,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecideIfTextWithSpaceIsEqualToSameTextWithExtraSpaceFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("decide if text with space is equal to same text with extra space (False)", ((string[])(null)));
-#line 1078
-this.ScenarioSetup(scenarioInfo);
 #line 1079
- testRunner.Given("a decision variable \"[[A]]\" value \"123 234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 1080
- testRunner.And("is \"[[A]]\" \"IsEqual\" \"123   234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[A]]\" value \"123 234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 1081
+ testRunner.And("is \"[[A]]\" \"IsEqual\" \"123   234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1082
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 1083
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1084
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table149 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3152,14 +3304,14 @@ this.ScenarioSetup(scenarioInfo);
                         "[[A]] = 123 234",
                         "String",
                         "YES"});
-#line 1084
+#line 1085
  testRunner.Then("the debug inputs as", ((string)(null)), table149, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table150 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table150.AddRow(new string[] {
                         "NO"});
-#line 1087
+#line 1088
  testRunner.And("the debug output as", ((string)(null)), table150, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3171,15 +3323,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DecisionUsingRecordsetAppendNotation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Decision using recordset append notation", ((string[])(null)));
-#line 1091
-this.ScenarioSetup(scenarioInfo);
 #line 1092
- testRunner.Given("a decision variable \"[[rec(1).a]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 1093
- testRunner.And("is \"[[rec().a]]\" \"IsEqual\" \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[rec(1).a]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 1094
+ testRunner.And("is \"[[rec().a]]\" \"IsEqual\" \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1095
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 1096
+ testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1097
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table151 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3190,15 +3344,87 @@ this.ScenarioSetup(scenarioInfo);
                         "[[rec().a]] = 1",
                         "String",
                         "YES"});
-#line 1097
+#line 1098
  testRunner.Then("the debug inputs as", ((string)(null)), table151, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table152 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table152.AddRow(new string[] {
                         "YES"});
-#line 1100
+#line 1101
  testRunner.And("the debug output as", ((string)(null)), table152, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Executing Decision with malformed variables")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Decision")]
+        public virtual void ExecutingDecisionWithMalformedVariables()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Executing Decision with malformed variables", ((string[])(null)));
+#line 1106
+this.ScenarioSetup(scenarioInfo);
+#line 1107
+ testRunner.Given("a decision variable \"[[a]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 1108
+ testRunner.And("is \"[[[[a]]\" \"IsEqual\" \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1109
+ testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 1110
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1111
+ testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table153 = new TechTalk.SpecFlow.Table(new string[] {
+                        "",
+                        "Statement",
+                        "Require All decisions to be True"});
+#line 1112
+ testRunner.Then("the debug inputs as", ((string)(null)), table153, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table154 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table154.AddRow(new string[] {
+                        "NO"});
+#line 1114
+ testRunner.And("the debug output as", ((string)(null)), table154, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Executing Decision with malformed recordset")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Decision")]
+        public virtual void ExecutingDecisionWithMalformedRecordset()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Executing Decision with malformed recordset", ((string[])(null)));
+#line 1118
+this.ScenarioSetup(scenarioInfo);
+#line 1119
+ testRunner.Given("a decision variable \"[[rec(1).a]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 1120
+ testRunner.And("is \"[[[[rec().a]]\" \"IsEqual\" \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1121
+ testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 1122
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1123
+ testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table155 = new TechTalk.SpecFlow.Table(new string[] {
+                        "",
+                        "Statement",
+                        "Require All decisions to be True"});
+#line 1124
+ testRunner.Then("the debug inputs as", ((string)(null)), table155, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table156 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table156.AddRow(new string[] {
+                        "NO"});
+#line 1126
+ testRunner.And("the debug output as", ((string)(null)), table156, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -3209,30 +3435,74 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ExecutingDecisionWithRecordsetContainsSpclCharacterAsIndex()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Executing Decision with recordset contains spcl character as index", ((string[])(null)));
-#line 1129
-this.ScenarioSetup(scenarioInfo);
 #line 1130
- testRunner.Given("a decision variable \"[[rec(1).a]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 1131
- testRunner.And("is \"[[rec(&).a]]\" \"IsEqual\" \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("a decision variable \"[[rec(1).a]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 1132
+ testRunner.And("is \"[[rec(&).a]]\" \"IsEqual\" \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1133
  testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 1134
+ testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1135
  testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table153 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table157 = new TechTalk.SpecFlow.Table(new string[] {
                         "",
                         "Statement",
                         "Require All decisions to be True"});
-#line 1135
- testRunner.Then("the debug inputs as", ((string)(null)), table153, "Then ");
+#line 1136
+ testRunner.Then("the debug inputs as", ((string)(null)), table157, "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table154 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table158 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table154.AddRow(new string[] {
+            table158.AddRow(new string[] {
                         "NO"});
-#line 1137
- testRunner.And("the debug output as", ((string)(null)), table154, "And ");
+#line 1138
+ testRunner.And("the debug output as", ((string)(null)), table158, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Runtime invalid recordset variable negative test")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Decision")]
+        public virtual void RuntimeInvalidRecordsetVariableNegativeTest()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Runtime invalid recordset variable negative test", ((string[])(null)));
+#line 1143
+this.ScenarioSetup(scenarioInfo);
+#line 1144
+       testRunner.Given("a decision variable \"[[A]]\" value \"rec(1).%\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 1145
+       testRunner.And("a decision variable \"[[rec(1).a]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1146
+       testRunner.And("is \"[[[[A]]]]\" \"IsEqual\" \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1147
+       testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 1148
+       testRunner.Then("the decision result should be \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1149
+       testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table159 = new TechTalk.SpecFlow.Table(new string[] {
+                        "",
+                        "Statement",
+                        "Require All decisions to be True"});
+            table159.AddRow(new string[] {
+                        "[[[[A]]]] =",
+                        "String",
+                        "YES"});
+#line 1150
+       testRunner.Then("the debug inputs as", ((string)(null)), table159, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table160 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table160.AddRow(new string[] {
+                        "NO"});
+#line 1153
+       testRunner.And("the debug output as", ((string)(null)), table160, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -3243,36 +3513,38 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void RuntimeInvalidRecordsetVariablePositveTest()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Runtime invalid recordset variable positve test", ((string[])(null)));
-#line 1156
-this.ScenarioSetup(scenarioInfo);
 #line 1157
-       testRunner.Given("a decision variable \"[[A]]\" value \"rec(1).a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 1158
-       testRunner.And("a decision variable \"[[rec(1).a]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+       testRunner.Given("a decision variable \"[[A]]\" value \"rec(1).a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 1159
-       testRunner.And("is \"[[[[A]]]]\" \"IsEqual\" \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+       testRunner.And("a decision variable \"[[rec(1).a]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1160
+       testRunner.And("is \"[[[[A]]]]\" \"IsEqual\" \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1161
        testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 1162
+       testRunner.Then("the decision result should be \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 1163
        testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table155 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table161 = new TechTalk.SpecFlow.Table(new string[] {
                         "",
                         "Statement",
                         "Require All decisions to be True"});
-            table155.AddRow(new string[] {
+            table161.AddRow(new string[] {
                         "[[[[A]]]] = 1",
                         "String",
                         "YES"});
-#line 1163
-       testRunner.Then("the debug inputs as", ((string)(null)), table155, "Then ");
+#line 1164
+       testRunner.Then("the debug inputs as", ((string)(null)), table161, "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table156 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table162 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table156.AddRow(new string[] {
+            table162.AddRow(new string[] {
                         "YES"});
-#line 1166
-       testRunner.And("the debug output as", ((string)(null)), table156, "And ");
+#line 1167
+       testRunner.And("the debug output as", ((string)(null)), table162, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
