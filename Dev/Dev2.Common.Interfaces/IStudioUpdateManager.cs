@@ -1,11 +1,13 @@
+using System.Collections.Generic;
 using Dev2.Common.Interfaces.Email;
+using Dev2.Common.Interfaces.ServerProxyLayer;
 
 namespace Dev2.Common.Interfaces
 {
     public interface IStudioUpdateManager
     {
         void Save(IServerSource serverSource);
-        //void Save(IDbSource toDbSource);
+        void Save(IDbSource toDbSource);
         //void Save(IWebService model);
         //void Save(IWebServiceSource model);
         //void Save(IDatabaseService toDbSource);
@@ -15,7 +17,7 @@ namespace Dev2.Common.Interfaces
         string TestConnection(IServerSource serverSource);
         //void TestConnection(IWebServiceSource serverSource);
         string TestConnection(IEmailServiceSource emailServiceSourceSource);
-        //IList<string> TestDbConnection(IDbSource serverSource);
+        IList<string> TestDbConnection(IDbSource serverSource);
         //DataTable TestDbService(IDatabaseService inputValues);
         //string TestWebService(IWebService inputValues);
 

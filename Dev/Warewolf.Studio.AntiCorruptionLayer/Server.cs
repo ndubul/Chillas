@@ -120,14 +120,14 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //            }
 //        }
 
-//        public IQueryManager QueryProxy
-//        {
-//            get
-//            {
-//                return _proxyLayer.QueryManagerProxy;
-//            }
-//        }
-        //
+        public IQueryManager QueryProxy
+        {
+            get
+            {
+                return _proxyLayer.QueryManagerProxy;
+            }
+        }
+        
 //        public bool IsConnected()
 //        {
 //            return EnvironmentConnection.IsConnected;

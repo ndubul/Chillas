@@ -147,6 +147,7 @@
     <Compile Include="Activities\Debug\DebugItemWarewolfAtomResult.cs" />
     <Compile Include="Activities\Debug\DebugItemWarewolfRecordset.cs" />
     <Compile Include="Activities\Debug\DebugTOParams.cs" />
+    <Compile Include="Activities\DecisionTO.cs" />
     <Compile Include="Activities\DsfBaseActivity.cs" />
     <Compile Include="Activities\DsfDecision.cs" />
     <Compile Include="Activities\DsfDropBoxFileActivity.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
@@ -117,38 +118,38 @@ namespace Warewolf.Studio.ServerProxyLayer
 
         }
 
-        ///// <summary>
-        ///// Tests if a valid connection to a server can be made returns 'Success' on a successful connection
-        ///// </summary>
-        ///// <param name="resource"></param>
-        ///// <returns></returns>
-        ///// <exception cref="WarewolfTestException">Unable to contact Server</exception>
-        //public IList<string> TestDbConnection(IDbSource resource)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("TestDbSourceService");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("DbSource", serialiser.SerializeToBuilder(resource));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output == null)
-        //        throw new WarewolfTestException("Unable to contact Server", null);
-        //    if(output.HasError)
-        //        throw new WarewolfTestException(output.Message.ToString(),null);
-        //    return serialiser.Deserialize<List<string>>(output.Message);
-        //}
+        /// <summary>
+        /// Tests if a valid connection to a server can be made returns 'Success' on a successful connection
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <returns></returns>
+        /// <exception cref="WarewolfTestException">Unable to contact Server</exception>
+        public IList<string> TestDbConnection(IDbSource resource)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("TestDbSourceService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("DbSource", serialiser.SerializeToBuilder(resource));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output == null)
+                throw new WarewolfTestException("Unable to contact Server", null);
+            if (output.HasError)
+                throw new WarewolfTestException(output.Message.ToString(), null);
+            return serialiser.Deserialize<List<string>>(output.Message);
+        }
 
-        ///// <exception cref="WarewolfSaveException">When saving the Database Source errors.</exception>
-        //public void SaveDbSource(IDbSource toDbSource, Guid serverWorkspaceID)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("SaveDbSourceService");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("DbSource", serialiser.SerializeToBuilder(toDbSource));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if(output.HasError)
-        //        throw  new WarewolfSaveException(output.Message.ToString(),null);
-            
-        //}
+        /// <exception cref="WarewolfSaveException">When saving the Database Source errors.</exception>
+        public void SaveDbSource(IDbSource toDbSource, Guid serverWorkspaceID)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("SaveDbSourceService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("DbSource", serialiser.SerializeToBuilder(toDbSource));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output.HasError)
+                throw new WarewolfSaveException(output.Message.ToString(), null);
+
+        }
 
         ///// <exception cref="WarewolfSaveException">Thrown when saving the Database service fails.</exception>
         //public void SaveDbService(IDatabaseService dbService)

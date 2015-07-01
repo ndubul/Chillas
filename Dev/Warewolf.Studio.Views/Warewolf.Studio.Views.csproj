@@ -35,6 +35,9 @@
     <Reference Include="FontAwesome.WPF">
       <HintPath>..\packages\FontAwesome.WPF.4.3.0.3\lib\FontAwesome.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF4.Controls.Editors.XamComboEditor.v14.2">
+      <HintPath>..\Binaries\InfragisticsWPF4.Controls.Editors.XamComboEditor.v14.2.dll</HintPath>
+    </Reference>
     <Reference Include="InfragisticsWPF4.Controls.Grids.XamGrid.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Grids.XamGrid.v14.2.dll</HintPath>
     </Reference>
@@ -43,6 +46,13 @@
     </Reference>
     <Reference Include="InfragisticsWPF4.Controls.Menus.XamMenu.v14.2.Design">
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Menus.XamMenu.v14.2.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.DataManager.v14.2, Version=14.2.20142.2024, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Binaries\InfragisticsWPF4.DataManager.v14.2.dll</HintPath>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.DataPresenter.v14.2">
+      <HintPath>..\Binaries\InfragisticsWPF4.DataPresenter.v14.2.dll</HintPath>
     </Reference>
     <Reference Include="InfragisticsWPF4.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.v14.2.dll</HintPath>
@@ -61,7 +71,9 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\System.Windows.Interactivity.dll</HintPath>
@@ -80,6 +92,10 @@
   <ItemGroup>
     <Compile Include="CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FocusExtension.cs" />
+    <Compile Include="ManageDatabaseSourceControl.xaml.cs">
+      <DependentUpon>ManageDatabaseSourceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ManageEmailSourceControl.xaml.cs">
       <DependentUpon>ManageEmailSourceControl.xaml</DependentUpon>
@@ -102,6 +118,10 @@
     <Page Include="CircularProgressBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ManageDatabaseSourceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ManageEmailSourceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +160,10 @@
     <ProjectReference Include="..\Warewolf.Studio.Resources\Warewolf.Studio.Resources.csproj">
       <Project>{CB565C94-8833-4911-B20F-0921EE3C286C}</Project>
       <Name>Warewolf.Studio.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warewolf.Studio.ViewModels\Warewolf.Studio.ViewModels.csproj">
+      <Project>{C52B12C2-6A1D-4C4F-A878-CF283662A226}</Project>
+      <Name>Warewolf.Studio.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

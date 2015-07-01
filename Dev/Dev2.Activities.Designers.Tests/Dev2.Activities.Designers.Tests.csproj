@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="CaseConvert\CaseConvertDesignerViewModelTests.cs" />
     <Compile Include="CEventHelperTests.cs" />
+    <Compile Include="Decision\DecisionTests.cs" />
     <Compile Include="Dropbox\DropboxFileOpsTest.cs" />
     <Compile Include="CreateJsonDesignerViewModelTests\CreateJsonDesignerViewModelTests.cs" />
     <Compile Include="RecordsLength\CountRecordsDesignerViewModelTests.cs" />
