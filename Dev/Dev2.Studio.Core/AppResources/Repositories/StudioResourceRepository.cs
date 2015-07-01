@@ -444,7 +444,7 @@ namespace Dev2.AppResources.Repositories
             }
             model.Parent.RemoveChild(model);
             model.ResourcePath = newPath;
-            ItemAddedMessageHandler(new ServerExplorerItem(model.DisplayName,model.ResourceId,model.ResourceType,null,model.Permissions,newPath+"\\"+model.DisplayName){ServerId = model.EnvironmentId});
+            ItemAddedMessageHandler(new ServerExplorerItem(model.DisplayName, model.ResourceId, model.ResourceType, null, model.Permissions, newPath + "\\" + model.DisplayName, "", "") { ServerId = model.EnvironmentId });
 
             RefreshVersionHistory(model.EnvironmentId, model.ResourceId);
         }
@@ -825,7 +825,7 @@ namespace Dev2.AppResources.Repositories
                                           item.Children == null
                                               ? null
                                               : item.Children.Select(MapData).ToList(),
-                                          item.Permissions, item.ResourcePath);
+                                          item.Permissions, item.ResourcePath, "", "");
 
         }
 

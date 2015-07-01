@@ -37,7 +37,7 @@ namespace Dev2.Infrastructure.Tests.SharedModels
 
 
             //------------Execute Test---------------------------
-            var serverExplorerItem = new ServerExplorerItem(name, guid, explorerItemType, children, permissions, "/");
+            var serverExplorerItem = new ServerExplorerItem(name, guid, explorerItemType, children, permissions, "/", "", "");
             //------------Assert Results-------------------------
 
             Assert.AreEqual(children, serverExplorerItem.Children);
@@ -61,7 +61,7 @@ namespace Dev2.Infrastructure.Tests.SharedModels
 
 
             //------------Execute Test---------------------------
-            var serverExplorerItem = new ServerExplorerItem(name, guid, explorerItemType, children, permissions, "");
+            var serverExplorerItem = new ServerExplorerItem(name, guid, explorerItemType, children, permissions, "", "", "");
             //------------Assert Results-------------------------
 
             Assert.AreEqual(guid.GetHashCode(), serverExplorerItem.GetHashCode());
@@ -82,9 +82,9 @@ namespace Dev2.Infrastructure.Tests.SharedModels
 
 
             //------------Execute Test---------------------------
-            var serverExplorerItem = new ServerExplorerItem(name, guid, explorerItemType, children, permissions, "");
-            var serverExplorerItem2 = new ServerExplorerItem(name, guid, explorerItemType, children, Permissions.Administrator, "");
-            var serverExplorerItem3 = new ServerExplorerItem(name, Guid.NewGuid(), explorerItemType, children, permissions, "");
+            var serverExplorerItem = new ServerExplorerItem(name, guid, explorerItemType, children, permissions, "","","");
+            var serverExplorerItem2 = new ServerExplorerItem(name, guid, explorerItemType, children, Permissions.Administrator, "","","");
+            var serverExplorerItem3 = new ServerExplorerItem(name, Guid.NewGuid(), explorerItemType, children, permissions, "", "", "");
             //------------Assert Results-------------------------
 
             Assert.AreEqual(serverExplorerItem, serverExplorerItem2);

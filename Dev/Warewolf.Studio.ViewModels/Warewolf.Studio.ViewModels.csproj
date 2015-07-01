@@ -69,6 +69,7 @@
     <Compile Include="ManageEmailSourceViewModel.cs" />
     <Compile Include="ManageNewServerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestServiceNameViewModel.cs" />
     <Compile Include="SourceBaseImpl.cs" />
     <Compile Include="SplashViewModel.cs" />
     <Compile Include="ViewModelUtils.cs" />
