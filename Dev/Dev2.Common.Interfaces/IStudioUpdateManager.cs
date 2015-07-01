@@ -9,13 +9,13 @@ namespace Dev2.Common.Interfaces
         void Save(IServerSource serverSource);
         void Save(IDbSource toDbSource);
         //void Save(IWebService model);
-        //void Save(IWebServiceSource model);
+        void Save(IWebServiceSource model);
         //void Save(IDatabaseService toDbSource);
         //void Save(IPluginSource source);
         void Save(IEmailServiceSource emailServiceSource);
 
         string TestConnection(IServerSource serverSource);
-        //void TestConnection(IWebServiceSource serverSource);
+        void TestConnection(IWebServiceSource serverSource);
         string TestConnection(IEmailServiceSource emailServiceSourceSource);
         IList<string> TestDbConnection(IDbSource serverSource);
         //DataTable TestDbService(IDatabaseService inputValues);

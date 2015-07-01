@@ -157,6 +157,7 @@
     <Compile Include="Core\Graph\IPathSegment.cs" />
     <Compile Include="Core\Graph\OutputFormats.cs" />
     <Compile Include="Core\ServerSource.cs" />
+    <Compile Include="Core\WebServiceSourceDefinition.cs" />
     <Compile Include="DataList\Contract\enTranslationDepth.cs" />
     <Compile Include="DataList\Contract\IBinaryDataListItem.cs" />
     <Compile Include="Data\IDev2Definition.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="IManageDatabaseSourceViewModel.cs" />
     <Compile Include="IManageEmailSourceViewModel.cs" />
     <Compile Include="IManageNewServerViewModel.cs" />
+    <Compile Include="IManageWebserviceSourceViewModel.cs" />
     <Compile Include="Infrastructure\Communication\IExecuteMessage.cs" />
     <Compile Include="Infrastructure\Events\IEventPublisher.cs" />
     <Compile Include="Infrastructure\IExplorerRepositorySync.cs" />
@@ -269,6 +271,7 @@
     <Compile Include="Security\Permissions.cs" />
     <Compile Include="ServerProxyLayer\IDbSource.cs" />
     <Compile Include="ServerProxyLayer\IUpdateManager.cs" />
+    <Compile Include="ServerProxyLayer\IWebServiceSource.cs" />
     <Compile Include="ServerStats.cs" />
     <Compile Include="Services\Sql\IDbFactory.cs" />
     <Compile Include="Services\Sql\IDbServer.cs" />

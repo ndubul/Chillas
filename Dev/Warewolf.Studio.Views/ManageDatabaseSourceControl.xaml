@@ -178,16 +178,18 @@
               x:Name="DatabaseComboxContainer" 
               Visibility="{Binding Path=TestPassed,Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{Binding ElementName=Authentication, Path=ActualWidth}"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" 
+                       Margin="{StaticResource ControlBorderTop}"
                        Text="{Binding DatabaseLabel}"/>
             <StackPanel Grid.Column="1" >
                 <ComboBox x:Name="DatabaseComboxBox" 
+                          Margin="{StaticResource ControlBorderTop}"
                           ItemsSource="{Binding DatabaseNames}" 
                           SelectedItem="{Binding DatabaseName}" >
                     <i:Interaction.Behaviors>

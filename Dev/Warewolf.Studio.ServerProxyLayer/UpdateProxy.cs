@@ -178,31 +178,31 @@ namespace Warewolf.Studio.ServerProxyLayer
         //    return serialiser.Deserialize<DataTable>(output.Message);
         //}
 
-        ///// <exception cref="WarewolfSaveException">Thrown when an error occurs saving the Webservice Source.</exception>
-        //public void SaveWebserviceSource(IWebServiceSource resource, Guid serverWorkspaceID)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("SaveWebserviceSource");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("WebserviceSource", serialiser.SerializeToBuilder(resource));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output.HasError)
-        //        throw new WarewolfSaveException(output.Message.ToString(), null);
-        //}
+        /// <exception cref="WarewolfSaveException">Thrown when an error occurs saving the Webservice Source.</exception>
+        public void SaveWebserviceSource(IWebServiceSource resource, Guid serverWorkspaceID)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("SaveWebserviceSource");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("WebserviceSource", serialiser.SerializeToBuilder(resource));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output.HasError)
+                throw new WarewolfSaveException(output.Message.ToString(), null);
+        }
 
-        ///// <exception cref="WarewolfTestException">Unable to contact Server</exception>
-        //public void TestConnection(IWebServiceSource resource)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("TestWebserviceSource");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("WebserviceSource", serialiser.SerializeToBuilder(resource));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output == null)
-        //        throw new WarewolfTestException("Unable to contact Server", null);
-        //    if (output.HasError)
-        //        throw new WarewolfTestException(output.Message.ToString(), null);
-        //}
+        /// <exception cref="WarewolfTestException">Unable to contact Server</exception>
+        public void TestConnection(IWebServiceSource resource)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("TestWebserviceSource");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("WebserviceSource", serialiser.SerializeToBuilder(resource));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output == null)
+                throw new WarewolfTestException("Unable to contact Server", null);
+            if (output.HasError)
+                throw new WarewolfTestException(output.Message.ToString(), null);
+        }
 
         //public string TestWebService(IWebService service)
         //{

@@ -60,9 +60,9 @@ namespace Dev2.Common.Interfaces.ServerProxyLayer
 
         //DataTable TestDbService(IDatabaseService inputValues);
 
-        //void SaveWebserviceSource(IWebServiceSource resource, Guid serverWorkspaceID);
+        void SaveWebserviceSource(IWebServiceSource resource, Guid serverWorkspaceID);
 
-        //void TestConnection(IWebServiceSource resource);
+        void TestConnection(IWebServiceSource resource);
 
         //string TestWebService(IWebService inputValues);
 
