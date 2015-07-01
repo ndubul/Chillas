@@ -35,7 +35,7 @@
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="Label"
+        <Style TargetType="TextBlock"
                BasedOn="{StaticResource LabelStyle}"
                x:Key="WizardTitleLableStyle">
             <Setter Property="Foreground"
@@ -66,9 +66,9 @@
                         AutomationProperties.AutomationId="LeftTitleStackPanel"
                         Orientation="Horizontal"
                         Style="{StaticResource StackPanelTopBorder}">
-                <Label Style="{StaticResource WizardTitleLableStyle}"
+                <TextBlock Style="{StaticResource WizardTitleLableStyle}"
                        AutomationProperties.AutomationId="LeftTitle"
-                       Content="{Binding LeftTitle}" />
+                       Text="{Binding LeftTitle}" />
             </StackPanel>
             <StackPanel Grid.Column="1"
                         Margin="-1,0,0,0"
@@ -76,10 +76,10 @@
                         AutomationProperties.AutomationId="RightTitleStackPanel"
                         HorizontalAlignment="Right"
                         Style="{StaticResource StackPanelTopBorder}">
-                <Label Style="{StaticResource WizardTitleLableStyle}"
+                <TextBlock Style="{StaticResource WizardTitleLableStyle}"
                        AutomationProperties.AutomationId="RightTitle"
                        HorizontalAlignment="Right"
-                       Content="{Binding RightTitle}" />
+                       Text="{Binding RightTitle}" />
             </StackPanel>
         </Grid>
 
