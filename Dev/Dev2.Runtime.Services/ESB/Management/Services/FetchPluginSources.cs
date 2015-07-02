@@ -17,8 +17,6 @@ namespace Dev2.Runtime.ESB.Management.Services
 {
     public class FetchPluginSources : IEsbManagementEndpoint
     {
-
-
         public string HandlesType()
         {
             return "FetchPluginSources";
@@ -26,7 +24,6 @@ namespace Dev2.Runtime.ESB.Management.Services
 
         public StringBuilder Execute(Dictionary<string, StringBuilder> values, IWorkspace theWorkspace)
         {
-
             var serializer = new Dev2JsonSerializer();
 
             // ReSharper disable MaximumChainedReferences
@@ -45,7 +42,6 @@ namespace Dev2.Runtime.ESB.Management.Services
                             Name = res.AssemblyName,
                             FullName = res.AssemblyLocation,
                             Children = new IDllListing[0],
-
                         }
                     };
                 }
@@ -72,7 +68,6 @@ namespace Dev2.Runtime.ESB.Management.Services
             {
                 return ResourceCatalog.Instance;
             }
-
         }
     }
 }

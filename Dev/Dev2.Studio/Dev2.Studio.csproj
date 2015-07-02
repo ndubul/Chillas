@@ -127,6 +127,10 @@
     <Reference Include="InfragisticsWPF4.Controls.Grids.XamGrid.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Grids.XamGrid.v14.2.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF4.Controls.Interactions.XamDialogWindow.v14.2, Version=14.2.20142.2024, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Binaries\InfragisticsWPF4.Controls.Interactions.XamDialogWindow.v14.2.dll</HintPath>
+    </Reference>
     <Reference Include="InfragisticsWPF4.DockManager.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.DockManager.v14.2.dll</HintPath>
     </Reference>
@@ -437,9 +441,12 @@
     <Compile Include="ViewModels\Help\IHelpViewWrapper.cs" />
     <Compile Include="ViewModels\Help\HelpViewWrapper.cs" />
     <Compile Include="ViewModels\Navigation\INavigationViewModel.cs" />
+    <Compile Include="ViewModels\NewDatabaseServiceViewModel.cs" />
     <Compile Include="ViewModels\NewDatabaseSourceViewModel.cs" />
+    <Compile Include="ViewModels\NewPluginServiceViewModel.cs" />
     <Compile Include="ViewModels\NewPluginSourceViewModel.cs" />
     <Compile Include="ViewModels\NewServerSourceViewModel.cs" />
+    <Compile Include="ViewModels\NewWebserviceViewModel.cs" />
     <Compile Include="ViewModels\NewWebSourceViewModel.cs" />
     <Compile Include="ViewModels\Workflow\DataListConversionUtils.cs" />
     <Compile Include="ViewModels\Workflow\WorkflowDesignerDataPartUtils.cs" />

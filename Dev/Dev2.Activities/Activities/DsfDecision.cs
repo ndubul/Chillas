@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Activities;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Dev2.Activities.Debug;
 using Dev2.Common.Interfaces.Diagnostics.Debug;
@@ -9,6 +10,7 @@ using Dev2.Data.SystemTemplates.Models;
 using Dev2.Data.Util;
 using Dev2.DataList.Contract;
 using Dev2.Diagnostics;
+using Dev2.TO;
 using Newtonsoft.Json;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
 using Warewolf.Storage;
@@ -21,16 +23,62 @@ namespace Dev2.Activities
        public IEnumerable<IDev2Activity> TrueArm { get; set; }
        public IEnumerable<IDev2Activity> FalseArm { get; set; }
        public Dev2DecisionStack Conditions { get; set; }
-       public DsfFlowDecisionActivity _inner;    
+       public DsfFlowDecisionActivity _inner;
+
         #region Overrides of DsfNativeActivity<string>
-        public DsfDecision(DsfFlowDecisionActivity inner)
+        public DsfDecision(DsfFlowDecisionActivity inner):this()
         {
             _inner = inner;
         }
         public DsfDecision()
-        {
- 
+        {        
+            Decisions = new List<DecisionTO>();
+            var dev2Decisions = Conditions.TheStack;
+            if(dev2Decisions != null && dev2Decisions.Count > 0)
+            {
+                Decisions = Unlimited.Applications.BusinessDesignStudio.Activities.Util.BuildDecisionListFromStack(dev2Decisions);
+            }
         }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public List<DecisionTO> Decisions { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string TrueArmText
+        {
+            get
+            {
+                return Conditions.TrueArmText;
+            }
+            set
+            {
+                Conditions.TrueArmText = value;
+            }
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string FalseArmText
+        {
+            get
+            {
+                return Conditions.FalseArmText;
+            }
+            set
+            {
+                Conditions.FalseArmText = value;
+            }
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool RequireAllDecisionsToBeTrue
+        {
+            get
+            {
+                return Conditions.Mode == Dev2DecisionMode.AND;
+            }
+            set
+            {
+                Conditions.Mode = value ? Dev2DecisionMode.AND : Dev2DecisionMode.OR;
+            }
+        }
+
         /// <summary>
         /// When overridden runs the activity's execution logic 
         /// </summary>

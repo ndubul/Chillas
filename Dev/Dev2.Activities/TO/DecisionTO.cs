@@ -9,16 +9,14 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
-using System.Collections.Generic;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
 using Dev2.Interfaces;
 using Dev2.Providers.Validation.Rules;
-using Dev2.TO;
 using Dev2.Util;
 using Dev2.Utilities;
 using Dev2.Validation;
 
-namespace Dev2.Activities
+namespace Dev2.TO
 {
     public class DecisionTO : ValidatedObject, IDev2TOFn
     {
@@ -40,8 +38,6 @@ namespace Dev2.Activities
         {
         }
 
-        // TODO: Remove WhereOptionList property - DO NOT USE FOR BINDING, USE VIEWMODEL PROPERTY INSTEAD!
-        public IList<string> WhereOptionList { get; set; }
         public DecisionTO(string matchValue, string searchCriteria, string searchType, int indexNum, bool inserted = false, string from = "", string to = "")
         {
             Inserted = inserted;

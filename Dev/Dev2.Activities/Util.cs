@@ -10,6 +10,10 @@
 */
 
 using System;
+using System.Collections.Generic;
+using Dev2.Data.Decisions.Operations;
+using Dev2.Data.SystemTemplates.Models;
+using Dev2.TO;
 
 // ReSharper disable CheckNamespace
 namespace Unlimited.Applications.BusinessDesignStudio.Activities
@@ -327,6 +331,18 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
 
             return value.EndsWith(comparisonValue);
 
+        }
+
+        public static List<DecisionTO> BuildDecisionListFromStack(IList<Dev2Decision> dev2Decisions)
+        {
+            var returnList = new List<DecisionTO>();
+            var i = 1;
+            foreach(var dev2Decision in dev2Decisions)
+            {
+                returnList.Add(new DecisionTO(dev2Decision.Col1, dev2Decision.Col2, DecisionDisplayHelper.GetDisplayValue(dev2Decision.EvaluationFn), i, false, dev2Decision.Col2, dev2Decision.Col3));
+                i++;
+            }
+            return returnList;
         }
     }
 }

@@ -28,6 +28,8 @@ using Dev2.Providers.Validation.Rules;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Messages;
+using Dev2.Studio.Core.Activities.Utils;
+using Dev2.TO;
 using Dev2.Validation;
 
 namespace Dev2.Activities.Designers2.Decision
@@ -137,7 +139,7 @@ namespace Dev2.Activities.Designers2.Decision
             }
 
             var mi = Tos[index];
-            
+
             var searchType = mi.SearchType;
 
             if(searchType == "Is Between" || searchType == "Not Between")
@@ -181,8 +183,8 @@ namespace Dev2.Activities.Designers2.Decision
 
         protected override IEnumerable<IActionableErrorInfo> ValidateCollectionItem(ModelItem mi)
         {
-            yield break;
-        }
+                yield break;
+            }
 
         //protected override IEnumerable<IActionableErrorInfo> ValidateCollectionItem(DecisionTO mi)
         //{

@@ -11,6 +11,7 @@
 
 using System;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Communication;
@@ -53,6 +54,14 @@ namespace Dev2.Controller
         /// <param name="dataListId">The data list unique identifier.</param>
         /// <returns></returns>
         T ExecuteCommand<T>(IEnvironmentConnection connection, Guid workspaceId, Guid dataListId);
+
+        /// <summary>
+        /// Executes the command async.
+        /// </summary>
+        /// <param name="connection">The connection.</param>
+        /// <param name="workspaceId">The workspace unique identifier.</param>
+        /// <returns></returns>
+        Task<T> ExecuteCommandAsync<T>(IEnvironmentConnection connection, Guid workspaceId);
     }
 
     public class CommunicationController : ICommunicationController
@@ -97,6 +106,16 @@ namespace Dev2.Controller
             return ExecuteCommand<T>(connection, workspaceId, Guid.Empty);
         }
 
+        /// <summary>
+        /// Executes the command async.
+        /// </summary>
+        /// <param name="connection">The connection.</param>
+        /// <param name="workspaceId">The workspace unique identifier.</param>
+        /// <returns></returns>
+        public Task<T> ExecuteCommandAsync<T>(IEnvironmentConnection connection, Guid workspaceId)
+        {
+            return Task.FromResult(ExecuteCommand<T>(connection, workspaceId));
+        }
         /// <summary>
         /// Executes the command.
         /// </summary>

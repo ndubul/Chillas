@@ -17,8 +17,6 @@ namespace Dev2.Runtime.ESB.Management.Services
 {
     public class FetchPluginNamespaces : IEsbManagementEndpoint
     {
-
-
         public string HandlesType()
         {
             return "FetchPluginNameSpaces";
@@ -29,10 +27,6 @@ namespace Dev2.Runtime.ESB.Management.Services
             var serializer = new Dev2JsonSerializer();
             try
             {
-
-
-
-
                 var dbSource = serializer.Deserialize<IPluginSource>(values["source"]);
                 // ReSharper disable MaximumChainedReferences
                 PluginServices services = new PluginServices();
@@ -47,7 +41,6 @@ namespace Dev2.Runtime.ESB.Management.Services
             }
             catch (Exception e)
             {
-
                 return serializer.SerializeToBuilder(new ExecuteMessage()
                 {
                     HasError = true,
@@ -55,8 +48,6 @@ namespace Dev2.Runtime.ESB.Management.Services
                 });
             }
         }
-
-
 
         public DynamicService CreateServiceEntry()
         {
@@ -75,7 +66,6 @@ namespace Dev2.Runtime.ESB.Management.Services
             {
                 return ResourceCatalog.Instance;
             }
-
         }
     }
 }

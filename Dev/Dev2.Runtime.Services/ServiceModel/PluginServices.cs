@@ -21,6 +21,15 @@ using Newtonsoft.Json;
 namespace Dev2.Runtime.ServiceModel
 {
     // BUG 9500 - 2013.05.31 - TWR : created
+    public interface IPluginServices
+    {
+        RecordsetList Test(string args, Guid workspaceId, Guid dataListId);
+
+        NamespaceList Namespaces(string args, Guid workspaceId, Guid dataListId);
+
+        ServiceMethodList Methods(string args, Guid workspaceId, Guid dataListId);
+    }
+
     public class PluginServices : Services
     {
         #region CTOR

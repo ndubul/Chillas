@@ -75,18 +75,19 @@
     <Reference Include="Caliburn.Micro">
       <HintPath>..\Binaries\Caliburn.Micro.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Client">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.0.0\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.Prism.Mvvm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.Prism.Mvvm.Desktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.Desktop.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
     </Reference>
@@ -170,9 +171,15 @@
     <Compile Include="Data\IUpgradePath.cs" />
     <Compile Include="Data\ResourceType.cs" />
     <Compile Include="Data\TO\IErrorResultTO.cs" />
+    <Compile Include="DB\IDatabaseService.cs" />
     <Compile Include="DB\IDataProviderSanitizer.cs" />
+    <Compile Include="DB\IDbAction.cs" />
     <Compile Include="DB\IDBHelper.cs" />
+    <Compile Include="DB\IDbServiceModel.cs" />
+    <Compile Include="DB\IManageDbServiceViewModel.cs" />
     <Compile Include="DB\IServiceInput.cs" />
+    <Compile Include="DB\IServiceMappings.cs" />
+    <Compile Include="DB\IServiceOutputMapping.cs" />
     <Compile Include="DB\ISourceBase.cs" />
     <Compile Include="Diagnostics\Debug\Enums.cs" />
     <Compile Include="Diagnostics\Debug\IDebugDispatcher.cs" />
@@ -199,7 +206,14 @@
     <Compile Include="IDllListing.cs" />
     <Compile Include="IEmailServiceSource.cs" />
     <Compile Include="IEnvironment.cs" />
+    <Compile Include="IEnvironmentViewModel.cs" />
     <Compile Include="IExecutionToken.cs" />
+    <Compile Include="IExplorerItemViewModel.cs" />
+    <Compile Include="IExplorerRepository.cs" />
+    <Compile Include="IExplorerTreeItem.cs" />
+    <Compile Include="IExplorerUpdateManager.cs" />
+    <Compile Include="IExplorerView.cs" />
+    <Compile Include="IExplorerViewModel.cs" />
     <Compile Include="IExternalProcessExecutor.cs" />
     <Compile Include="IFrameworkRepository.cs" />
     <Compile Include="IManageDatabaseSourceView.cs" />
@@ -209,6 +223,7 @@
     <Compile Include="IManagePluginSourceModel.cs" />
     <Compile Include="IManagePluginSourceViewModel.cs" />
     <Compile Include="IManageWebserviceSourceViewModel.cs" />
+    <Compile Include="IManageWebServiceViewModel.cs" />
     <Compile Include="INamespaceItem.cs" />
     <Compile Include="Infrastructure\Communication\IExecuteMessage.cs" />
     <Compile Include="Infrastructure\Events\IEventPublisher.cs" />
@@ -232,9 +247,13 @@
     <Compile Include="Infrastructure\SharedModels\IDbColumnList.cs" />
     <Compile Include="Interfaces\IDev2TOFn.cs" />
     <Compile Include="IPluginAction.cs" />
+    <Compile Include="IPluginService.cs" />
+    <Compile Include="IPluginServiceModel.cs" />
+    <Compile Include="IPluginServiceViewModel.cs" />
     <Compile Include="IPluginSource.cs" />
     <Compile Include="IPulseLogger.cs" />
     <Compile Include="IQueryManager.cs" />
+    <Compile Include="IRequestServiceNameView.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="IServerSource.cs" />
     <Compile Include="ISplashView.cs" />
@@ -247,6 +266,7 @@
     <Compile Include="NameValue.cs" />
     <Compile Include="PathOperations\IResult.cs" />
     <Compile Include="Patterns\ISpookyLoadable.cs" />
+    <Compile Include="PluginServiceDefinition.cs" />
     <Compile Include="PopupController\IDev2MessageBoxViewModel.cs" />
     <Compile Include="PopupController\IMessage.cs" />
     <Compile Include="PopupController\IPopupController.cs" />
@@ -293,6 +313,9 @@
     <Compile Include="UndoFramework\ITransaction.cs" />
     <Compile Include="UndoFramework\SimpleHistoryNode.cs" />
     <Compile Include="WarewolfException.cs" />
+    <Compile Include="WebRequestMethod.cs" />
+    <Compile Include="WebServices\IWebService.cs" />
+    <Compile Include="WebService\IWebServiceModel.cs" />
     <Compile Include="WindowsTaskScheduler\Wrappers\IAction.cs" />
     <Compile Include="WindowsTaskScheduler\Wrappers\IActionCollection.cs" />
     <Compile Include="WindowsTaskScheduler\Wrappers\IDev2Task.cs" />

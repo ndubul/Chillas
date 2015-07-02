@@ -4,7 +4,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
+using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.Explorer;
+using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Communication;
 using Dev2.Controller;
 using Dev2.Studio.Core.Interfaces;
@@ -13,13 +15,10 @@ namespace Warewolf.Studio.ServerProxyLayer
 {
     public class QueryManagerProxy:ProxyBase, IQueryManager{
 
-
-
         public QueryManagerProxy(ICommunicationControllerFactory communicationControllerFactory, IEnvironmentConnection connection):base(communicationControllerFactory,connection)
         {
 
         }
-
 
         #region Implementation of IQueryManager
 
@@ -91,14 +90,6 @@ namespace Warewolf.Studio.ServerProxyLayer
         /// <returns></returns>
         //IXamlResource FetchResourceWithXaml(Guid resourceId);
 
-        /// <summary>
-        /// Loads the Tree.
-        /// </summary>
-        /// <returns></returns>
-        public Task<IExplorerItem> Load()
-        {
-            return null;
-        }
 
         /// <summary>
         /// Get a list of tables froma db source
@@ -137,18 +128,18 @@ namespace Warewolf.Studio.ServerProxyLayer
         //    return new XamlResource(resource, xaml);
         //}
 
-        ///// <summary>
-        ///// Loads the Tree.
-        ///// </summary>
-        ///// <returns></returns>
-        //public async Task<IExplorerItem> Load()
-        //{
-        //    var comsController = CommunicationControllerFactory.CreateController("FetchExplorerItemsService");
+        /// <summary>
+        /// Loads the Tree.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IExplorerItem> Load()
+        {
+            var comsController = CommunicationControllerFactory.CreateController("FetchExplorerItemsService");
 
-        //    var workspaceId = Connection.WorkspaceID;
-        //    var result = await comsController.ExecuteCommandAsync<IExplorerItem>(Connection, workspaceId);            
-        //    return result;
-        //}
+            var workspaceId = Connection.WorkspaceID;
+            var result = await comsController.ExecuteCommandAsync<IExplorerItem>(Connection, workspaceId);            
+            return result;
+        }
         #endregion
 
         //public IList<IToolDescriptor> FetchTools()
@@ -174,48 +165,46 @@ namespace Warewolf.Studio.ServerProxyLayer
             return serializer.Deserialize<IList<string>>(result.Message.ToString());
         }
 
-        //public IList<IDbSource> FetchDbSources()
-        //{
-        //    var comsController = CommunicationControllerFactory.CreateController("FetchDbSources");
+        public IList<IDbSource> FetchDbSources()
+        {
+            var comsController = CommunicationControllerFactory.CreateController("FetchDbSources");
 
-        //    var workspaceId = Connection.WorkspaceID;
-        //    var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-        //    if (result.HasError)
-        //    {
-        //        throw new WarewolfSupportServiceException(result.Message.ToString(), null);
-        //    }
-        //    Dev2JsonSerializer serializer = new Dev2JsonSerializer();
-        //    return serializer.Deserialize<IList<IDbSource>>(result.Message.ToString());
-        //}
+            var workspaceId = Connection.WorkspaceID;
+            var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
+            if (result.HasError)
+            {
+                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+            }
+            Dev2JsonSerializer serializer = new Dev2JsonSerializer();
+            return serializer.Deserialize<IList<IDbSource>>(result.Message.ToString());
+        }
 
-        //public IList<IDbAction> FetchDbActions(IDbSource source)
-        //{
-        //    Dev2JsonSerializer serializer = new Dev2JsonSerializer();
-        //    var comsController = CommunicationControllerFactory.CreateController("FetchDbActions");
-        //    comsController.AddPayloadArgument("source", serializer.SerializeToBuilder(source));
-        //    var workspaceId = Connection.WorkspaceID;
-        //    var payload = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-        //    if(payload.HasError)
-        //        throw new WarewolfTestException(payload.Message.ToString(),null);
-        //    return serializer.Deserialize<IList<IDbAction>>( payload.Message);
-        //}
+        public IList<IDbAction> FetchDbActions(IDbSource source)
+        {
+            Dev2JsonSerializer serializer = new Dev2JsonSerializer();
+            var comsController = CommunicationControllerFactory.CreateController("FetchDbActions");
+            comsController.AddPayloadArgument("source", serializer.SerializeToBuilder(source));
+            var workspaceId = Connection.WorkspaceID;
+            var payload = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
+            if (payload.HasError)
+                throw new WarewolfTestException(payload.Message.ToString(), null);
+            return serializer.Deserialize<IList<IDbAction>>(payload.Message);
+        }
 
-        //public IEnumerable<IWebServiceSource> FetchWebServiceSources()
-        //{
+        public IEnumerable<IWebServiceSource> FetchWebServiceSources()
+        {
+            var comsController = CommunicationControllerFactory.CreateController("FetchWebServiceSources");
 
-        //    var comsController = CommunicationControllerFactory.CreateController("FetchWebServiceSources");
-
-        //    var workspaceId = Connection.WorkspaceID;
-        //    var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-        //    if (result.HasError)
-        //    {
-        //        throw new WarewolfSupportServiceException(result.Message.ToString(), null);
-        //    }
-        //    Dev2JsonSerializer serializer = new Dev2JsonSerializer();
-        //    List<IWebServiceSource> fetchWebServiceSources = serializer.Deserialize<List<IWebServiceSource>>(result.Message.ToString());
-        //    return fetchWebServiceSources;
-        
-        //}
+            var workspaceId = Connection.WorkspaceID;
+            var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
+            if (result.HasError)
+            {
+                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+            }
+            Dev2JsonSerializer serializer = new Dev2JsonSerializer();
+            List<IWebServiceSource> fetchWebServiceSources = serializer.Deserialize<List<IWebServiceSource>>(result.Message.ToString());
+            return fetchWebServiceSources;
+        }
 
         //public ObservableCollection<IWebServiceSource> WebSources { get; set; }
 
@@ -278,6 +267,4 @@ namespace Warewolf.Studio.ServerProxyLayer
             return serializer.Deserialize<List<IPluginAction>>(result.Message.ToString());
         }
     }
-         
-    
 }

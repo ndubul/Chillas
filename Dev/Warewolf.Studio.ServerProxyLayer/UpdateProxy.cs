@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
+using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.Email;
 using Dev2.Common.Interfaces.ErrorHandling;
 using Dev2.Common.Interfaces.Infrastructure.Communication;
 using Dev2.Common.Interfaces.ServerProxyLayer;
-
+using Dev2.Common.Interfaces.WebServices;
 using Dev2.Communication;
 using Dev2.Controller;
 using Dev2.Studio.Core.Interfaces;
@@ -151,32 +153,32 @@ namespace Warewolf.Studio.ServerProxyLayer
 
         }
 
-        ///// <exception cref="WarewolfSaveException">Thrown when saving the Database service fails.</exception>
-        //public void SaveDbService(IDatabaseService dbService)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("SaveDbService");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("DbService", serialiser.SerializeToBuilder(dbService));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output.HasError)
-        //        throw new WarewolfSaveException(output.Message.ToString(), null);
-        //}
+        /// <exception cref="WarewolfSaveException">Thrown when saving the Database service fails.</exception>
+        public void SaveDbService(IDatabaseService dbService)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("SaveDbService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("DbService", serialiser.SerializeToBuilder(dbService));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output.HasError)
+                throw new WarewolfSaveException(output.Message.ToString(), null);
+        }
 
-        ///// <exception cref="WarewolfTestException">Unable to contact Server</exception>
-        //public DataTable TestDbService(IDatabaseService service)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("TestDbService");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("DbService", serialiser.SerializeToBuilder(service));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output == null)
-        //        throw new WarewolfTestException("Unable to contact Server", null);
-        //    if (output.HasError)
-        //        throw new WarewolfTestException(output.Message.ToString(), null);
-        //    return serialiser.Deserialize<DataTable>(output.Message);
-        //}
+        /// <exception cref="WarewolfTestException">Unable to contact Server</exception>
+        public DataTable TestDbService(IDatabaseService service)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("TestDbService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("DbService", serialiser.SerializeToBuilder(service));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output == null)
+                throw new WarewolfTestException("Unable to contact Server", null);
+            if (output.HasError)
+                throw new WarewolfTestException(output.Message.ToString(), null);
+            return serialiser.Deserialize<DataTable>(output.Message);
+        }
 
         /// <exception cref="WarewolfSaveException">Thrown when an error occurs saving the Webservice Source.</exception>
         public void SaveWebserviceSource(IWebServiceSource resource, Guid serverWorkspaceID)
@@ -204,30 +206,30 @@ namespace Warewolf.Studio.ServerProxyLayer
                 throw new WarewolfTestException(output.Message.ToString(), null);
         }
 
-        //public string TestWebService(IWebService service)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("TestWebService");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("WebService", serialiser.SerializeToBuilder(service));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output == null)
-        //        throw new WarewolfTestException("Unable to contact Server", null);
-        //    if (output.HasError)
-        //        throw new WarewolfTestException(output.Message.ToString(), null);
-        //    return output.Message.ToString();
-        //}
+        public string TestWebService(IWebService service)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("TestWebService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("WebService", serialiser.SerializeToBuilder(service));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output == null)
+                throw new WarewolfTestException("Unable to contact Server", null);
+            if (output.HasError)
+                throw new WarewolfTestException(output.Message.ToString(), null);
+            return output.Message.ToString();
+        }
 
-        //public void SaveWebservice(IWebService model, Guid serverWorkspaceID)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("SaveWebService");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("Webservice", serialiser.SerializeToBuilder(model));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output.HasError)
-        //        throw new WarewolfSaveException(output.Message.ToString(), null);
-        //}
+        public void SaveWebservice(IWebService model, Guid serverWorkspaceID)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("SaveWebService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("Webservice", serialiser.SerializeToBuilder(model));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output.HasError)
+                throw new WarewolfSaveException(output.Message.ToString(), null);
+        }
 
         public void SavePluginSource(IPluginSource source, Guid serverWorkspaceID)
         {
@@ -240,30 +242,30 @@ namespace Warewolf.Studio.ServerProxyLayer
                 throw new WarewolfSaveException(output.Message.ToString(), null);
         }
 
-        //public string TestPluginService(IPluginService plugin)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("TestPluginService");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("PluginService", serialiser.SerializeToBuilder(plugin));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output == null)
-        //        throw new WarewolfTestException("Unable to contact Server", null);
-        //    if (output.HasError)
-        //        throw new WarewolfTestException(output.Message.ToString(), null);
-        //    return output.Message.ToString();
-        //}
+        public string TestPluginService(IPluginService plugin)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("TestPluginService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("PluginService", serialiser.SerializeToBuilder(plugin));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output == null)
+                throw new WarewolfTestException("Unable to contact Server", null);
+            if (output.HasError)
+                throw new WarewolfTestException(output.Message.ToString(), null);
+            return output.Message.ToString();
+        }
 
-        //public void SavePluginService(IPluginService service)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("SavePluginService");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("PluginService", serialiser.SerializeToBuilder(service));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output.HasError)
-        //        throw new WarewolfSaveException(output.Message.ToString(), null);
-        //}
+        public void SavePluginService(IPluginService service)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("SavePluginService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("PluginService", serialiser.SerializeToBuilder(service));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output.HasError)
+                throw new WarewolfSaveException(output.Message.ToString(), null);
+        }
 
         public string TestEmailServiceSource(IEmailServiceSource emailServiceSource)
         {
