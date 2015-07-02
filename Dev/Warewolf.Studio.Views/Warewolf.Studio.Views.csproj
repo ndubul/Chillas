@@ -112,6 +112,9 @@
     <Compile Include="ManageEmailSourceControl.xaml.cs">
       <DependentUpon>ManageEmailSourceControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ManagePluginSourceControl.xaml.cs">
+      <DependentUpon>ManagePluginSourceControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ManageServerControl.xaml.cs">
       <DependentUpon>ManageServerControl.xaml</DependentUpon>
     </Compile>
@@ -131,8 +134,6 @@
     <Compile Include="XamGridEx\ContextMenuSettings.cs" />
     <Compile Include="XamGrid\ContextMenuOpeningEventArgs.cs" />
     <Compile Include="XamGrid\ContextMenuSettings.cs" />
-    <Compile Include="XamGrid\WatermarkAdorner.cs" />
-    <Compile Include="XamGrid\WatermarkTextBox.cs" />
     <Compile Include="XamGrid\XamGridEx.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,10 @@
     <Page Include="ManageEmailSourceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ManagePluginSourceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ManageServerControl.xaml">
       <Generator>MSBuild:Compile</Generator>

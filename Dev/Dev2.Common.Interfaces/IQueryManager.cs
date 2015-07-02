@@ -76,7 +76,7 @@ namespace Dev2.Common.Interfaces
        // IList<IPluginSource> FetchPluginSources();
 
         //IList<IPluginAction> PluginActions(IPluginSource source, INamespaceItem ns);
-       // List<IDllListing> GetDllListings(IDllListing listing);
+        List<IDllListing> GetDllListings(IDllListing listing);
 
        // ICollection<INamespaceItem> FetchNamespaces(IPluginSource source);
     }

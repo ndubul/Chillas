@@ -11,7 +11,7 @@ namespace Dev2.Common.Interfaces
         //void Save(IWebService model);
         void Save(IWebServiceSource model);
         //void Save(IDatabaseService toDbSource);
-        //void Save(IPluginSource source);
+        void Save(IPluginSource source);
         void Save(IEmailServiceSource emailServiceSource);
 
         string TestConnection(IServerSource serverSource);
