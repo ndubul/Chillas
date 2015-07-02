@@ -87,6 +87,8 @@ namespace Warewolf.Studio.ViewModels
             NameSpaces = new ObservableCollection<INamespaceItem>();
             Sources = _model.RetrieveSources();
             Header = Resources.Languages.Core.PluginServiceNewHeaderLabel;
+            HeaderText = Resources.Languages.Core.PluginServiceNewHeaderLabel;
+            ResourceName = HeaderText;
             RefreshCommand = new DelegateCommand(Refresh);
             ErrorText = "";
             HeaderText = Resources.Languages.Core.PluginServiceNewHeaderLabel;

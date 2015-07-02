@@ -18,5 +18,9 @@ namespace Dev2.Common.Interfaces.Infrastructure
         IExplorerItem Load(ResourceType type, string filter);
         IExplorerItem Load(string filter);
         void MessageSubscription(IExplorerRepositorySync sync);
+
+        IExplorerItem UpdateItem(IResource resource);
+
+
     }
 }

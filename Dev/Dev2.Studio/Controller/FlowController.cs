@@ -281,7 +281,7 @@ namespace Dev2.Studio.Controller
 
         public void Handle(ConfigureDecisionExpressionMessage message)
         {
-            ConfigureDecisionExpression(message);
+            //ConfigureDecisionExpression(message);
         }
 
         public void Handle(ConfigureSwitchExpressionMessage message)

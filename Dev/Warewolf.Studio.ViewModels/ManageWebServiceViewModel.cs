@@ -75,6 +75,7 @@ namespace Warewolf.Studio.ViewModels
         bool _canEditResponse;
         bool _isInputsEmptyRows;
         bool _isOutputMappingEmptyRows;
+        string _headerText;
 
         #region Implementation of IManageWebServiceViewModel
 
@@ -119,13 +120,14 @@ namespace Warewolf.Studio.ViewModels
         {
             WebService = new WebServiceDefinition();
             Header = Resources.Languages.Core.WebserviceTabHeader;
+            HeaderText = Resources.Languages.Core.WebserviceTabHeader;
             ResourceName = Resources.Languages.Core.WebserviceTabHeader;
             WebRequestMethods = new ObservableCollection<WebRequestMethod>(Dev2EnumConverter.GetEnumsToList<WebRequestMethod>());
             SelectedWebRequestMethod = WebRequestMethods.First();
-            //Sources = Model.Sources;
+            Sources = Model.Sources;
             Inputs = new ObservableCollection<IServiceInput>();
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
-            //EditWebSourceCommand = new DelegateCommand(() => Model.EditSource(SelectedSource), () => SelectedSource != null);
+            EditWebSourceCommand = new DelegateCommand(() => Model.EditSource(SelectedSource), () => SelectedSource != null);
             var variables = new ObservableCollection<NameValue>();
             variables.CollectionChanged += VariablesOnCollectionChanged;
             Variables = variables;
@@ -135,10 +137,10 @@ namespace Warewolf.Studio.ViewModels
             Headers.Add(new ObservableAwareNameValue(headerCollection, UpdateRequestVariables));
             RequestBody = "";
             Response = "";
-            //TestCommand = new DelegateCommand(() => Test(_model, ToModel()), CanTest);
-            //CreateNewSourceCommand = new DelegateCommand(_model.CreateNewSource);
+            TestCommand = new DelegateCommand(() => Test(_model, ToModel()), CanTest);
+            CreateNewSourceCommand = new DelegateCommand(_model.CreateNewSource);
             SaveCommand = new DelegateCommand(Save, CanSave);
-            //NewWebSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
+            NewWebSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
             PasteResponseCommand = new DelegateCommand(HandlePasteResponse);
             RemoveHeaderCommand = new DelegateCommand(DeleteCell);
             AddHeaderCommand = new DelegateCommand(Add);
@@ -477,6 +479,16 @@ namespace Warewolf.Studio.ViewModels
             {
                 _resourceName = value;
                 OnPropertyChanged(_resourceName);
+            }
+        }
+        public string HeaderText
+        {
+            get { return _headerText; }
+            set
+            {
+                _headerText = value;
+                OnPropertyChanged(() => HeaderText);
+                OnPropertyChanged(() => Header);
             }
         }
 

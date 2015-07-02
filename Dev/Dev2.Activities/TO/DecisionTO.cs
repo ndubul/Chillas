@@ -23,16 +23,15 @@ namespace Dev2.TO
         int _indexNum;
         string _searchType;
         bool _isSearchCriteriaEnabled;
-        bool _isSearchCriteriaFocused;
         bool _isSearchTypeFocused;
         string _matchValue;
-        bool _isMatchValueFocused;
         string _searchCriteria;
         string _from;
         string _to;
         bool _isSearchCriteriaVisible;
         bool _isFromFocused;
         bool _isToFocused;
+        private Data.SystemTemplates.Models.Dev2Decision a;
 
         public DecisionTO()
             : this("Match", "Match On", "Equal", 0)
@@ -51,7 +50,13 @@ namespace Dev2.TO
             From = @from;
             To = to;
             IsSearchTypeFocused = false;
-            IsMatchValueFocused = false;
+        //    IsMatchValueFocused = false;
+        }
+
+        public DecisionTO(Data.SystemTemplates.Models.Dev2Decision a)
+        {
+            // TODO: Complete member initialization
+            this.a = a;
         }
 
         [FindMissing]
@@ -118,9 +123,9 @@ namespace Dev2.TO
             }
         }
 
-        public bool IsMatchValueFocused { get { return _isMatchValueFocused; } set { OnPropertyChanged(ref _isMatchValueFocused, value); } }
+    //    public bool IsMatchValueFocused { get { return _isMatchValueFocused; } set { OnPropertyChanged(ref _isMatchValueFocused, value); } }
 
-        public bool IsSearchCriteriaFocused { get { return _isSearchCriteriaFocused; } set { OnPropertyChanged(ref _isSearchCriteriaFocused, value); } }
+     //   public bool IsSearchCriteriaFocused { get { return _isSearchCriteriaFocused; } set { OnPropertyChanged(ref _isSearchCriteriaFocused, value); } }
 
         public string SearchType
         {
@@ -254,5 +259,7 @@ namespace Dev2.TO
 
             return ruleSet;
         }
+
+        public Data.SystemTemplates.Models.Dev2Decision Decision { get; set; }
     }
 }
