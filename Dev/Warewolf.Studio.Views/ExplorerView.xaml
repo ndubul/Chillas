@@ -65,7 +65,7 @@
                                               Margin="{StaticResource ControlBorderTopRight}"
                                               Grid.Column="0"
                                               x:Name="SearchTextBox" 
-                                              Style="{StaticResource SearchTextBoxStyle}"
+                                              Style="{StaticResource SearchTextboxStyle}"
                                               ClearSearchCommand="{Binding ClearSearchTextCommand}"
                                               LabelText="Filter"
                                               HorizontalAlignment="Stretch"
