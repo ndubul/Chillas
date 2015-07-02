@@ -68,7 +68,7 @@ namespace Dev2.Common.Interfaces.ServerProxyLayer
 
         //void SaveWebservice(IWebService model, Guid serverWorkspaceID);
 
-        //void SavePluginSource(IPluginSource source, Guid serverWorkspaceID);
+        void SavePluginSource(IPluginSource source, Guid serverWorkspaceID);
 
         //string TestPluginService(IPluginService inputValues);
 

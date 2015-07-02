@@ -8,8 +8,6 @@
         xmlns:provider="clr-namespace:Dev2.Intellisense.Provider;assembly=Dev2.Intellisense"
         xmlns:interfaceImplementors="clr-namespace:Dev2.Studio.InterfaceImplementors;assembly=Dev2.Intellisense"
         xmlns:ig="http://schemas.infragistics.com/xaml"
-        xmlns:xamGrid="clr-namespace:Warewolf.Studio.Views.XamGrid;assembly=Warewolf.Studio.Views"
-        xmlns:xamGridEx="clr-namespace:Warewolf.Studio.Views.XamGridEx;assembly=Warewolf.Studio.Views"
         Title="Debug"         
         Width="470" 
         Height="400"

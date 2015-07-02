@@ -38,7 +38,6 @@ namespace Dev2.Communication
             };
         public string Serialize<T>(T message)
         {
-            VerifyArgument.IsNotNull("message", message);
             return JsonConvert.SerializeObject(message, Formatting, _serializerSettings);
         }
 

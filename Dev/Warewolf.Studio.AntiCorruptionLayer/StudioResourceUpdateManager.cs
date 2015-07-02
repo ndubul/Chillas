@@ -40,10 +40,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             UpdateManagerProxy.SaveServerSource(serverSource, GlobalConstants.ServerWorkspaceID);
         }
 
-    //    public void Save(IPluginSource source)
-    //    {
-    //        UpdateManagerProxy.SavePluginSource(source, GlobalConstants.ServerWorkspaceID);
-    //    }
+        public void Save(IPluginSource source)
+        {
+            UpdateManagerProxy.SavePluginSource(source, GlobalConstants.ServerWorkspaceID);
+        }
 
         public void Save(IEmailServiceSource emailServiceSource)
         {

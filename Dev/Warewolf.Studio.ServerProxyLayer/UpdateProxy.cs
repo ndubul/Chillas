@@ -229,16 +229,16 @@ namespace Warewolf.Studio.ServerProxyLayer
         //        throw new WarewolfSaveException(output.Message.ToString(), null);
         //}
 
-        //public void SavePluginSource(IPluginSource source, Guid serverWorkspaceID)
-        //{
-        //    var con = Connection;
-        //    var comsController = CommunicationControllerFactory.CreateController("SavePluginSource");
-        //    Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
-        //    comsController.AddPayloadArgument("PluginSource", serialiser.SerializeToBuilder(source));
-        //    var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-        //    if (output.HasError)
-        //        throw new WarewolfSaveException(output.Message.ToString(), null);
-        //}
+        public void SavePluginSource(IPluginSource source, Guid serverWorkspaceID)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("SavePluginSource");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("PluginSource", serialiser.SerializeToBuilder(source));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output.HasError)
+                throw new WarewolfSaveException(output.Message.ToString(), null);
+        }
 
         //public string TestPluginService(IPluginService plugin)
         //{

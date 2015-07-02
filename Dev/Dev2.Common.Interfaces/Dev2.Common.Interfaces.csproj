@@ -156,6 +156,7 @@
     <Compile Include="Core\Graph\IPath.cs" />
     <Compile Include="Core\Graph\IPathSegment.cs" />
     <Compile Include="Core\Graph\OutputFormats.cs" />
+    <Compile Include="Core\PluginSourceDefinition.cs" />
     <Compile Include="Core\ServerSource.cs" />
     <Compile Include="Core\WebServiceSourceDefinition.cs" />
     <Compile Include="DataList\Contract\enTranslationDepth.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Data\TO\IErrorResultTO.cs" />
     <Compile Include="DB\IDataProviderSanitizer.cs" />
     <Compile Include="DB\IDBHelper.cs" />
+    <Compile Include="DB\IServiceInput.cs" />
     <Compile Include="DB\ISourceBase.cs" />
     <Compile Include="Diagnostics\Debug\Enums.cs" />
     <Compile Include="Diagnostics\Debug\IDebugDispatcher.cs" />
@@ -181,6 +183,7 @@
     <Compile Include="Diagnostics\Debug\IDebugState.cs" />
     <Compile Include="Diagnostics\Debug\IDebugSubItem.cs" />
     <Compile Include="Diagnostics\Debug\IDebugWriter.cs" />
+    <Compile Include="DllListing.cs" />
     <Compile Include="Enums\enRandomType.cs" />
     <Compile Include="Enums\enScriptType.cs" />
     <Compile Include="Enums\PopulateOptions.cs" />
@@ -193,6 +196,7 @@
     <Compile Include="IAdminManager.cs" />
     <Compile Include="IAssignValue.cs" />
     <Compile Include="ICheckControlEnabledView.cs" />
+    <Compile Include="IDllListing.cs" />
     <Compile Include="IEmailServiceSource.cs" />
     <Compile Include="IEnvironment.cs" />
     <Compile Include="IExecutionToken.cs" />
@@ -202,7 +206,10 @@
     <Compile Include="IManageDatabaseSourceViewModel.cs" />
     <Compile Include="IManageEmailSourceViewModel.cs" />
     <Compile Include="IManageNewServerViewModel.cs" />
+    <Compile Include="IManagePluginSourceModel.cs" />
+    <Compile Include="IManagePluginSourceViewModel.cs" />
     <Compile Include="IManageWebserviceSourceViewModel.cs" />
+    <Compile Include="INamespaceItem.cs" />
     <Compile Include="Infrastructure\Communication\IExecuteMessage.cs" />
     <Compile Include="Infrastructure\Events\IEventPublisher.cs" />
     <Compile Include="Infrastructure\IExplorerRepositorySync.cs" />
@@ -224,6 +231,8 @@
     <Compile Include="Infrastructure\SharedModels\IDbColumn.cs" />
     <Compile Include="Infrastructure\SharedModels\IDbColumnList.cs" />
     <Compile Include="Interfaces\IDev2TOFn.cs" />
+    <Compile Include="IPluginAction.cs" />
+    <Compile Include="IPluginSource.cs" />
     <Compile Include="IPulseLogger.cs" />
     <Compile Include="IQueryManager.cs" />
     <Compile Include="IServer.cs" />
@@ -235,6 +244,7 @@
     <Compile Include="IVersionStrategy.cs" />
     <Compile Include="IWarewolfIterator.cs" />
     <Compile Include="IWarewolfListIterator.cs" />
+    <Compile Include="NameValue.cs" />
     <Compile Include="PathOperations\IResult.cs" />
     <Compile Include="Patterns\ISpookyLoadable.cs" />
     <Compile Include="PopupController\IDev2MessageBoxViewModel.cs" />
