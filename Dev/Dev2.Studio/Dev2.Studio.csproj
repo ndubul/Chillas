@@ -434,6 +434,7 @@
     <Compile Include="ViewModels\Help\IHelpViewWrapper.cs" />
     <Compile Include="ViewModels\Help\HelpViewWrapper.cs" />
     <Compile Include="ViewModels\Navigation\INavigationViewModel.cs" />
+    <Compile Include="ViewModels\NewDatabaseServiceViewModel.cs" />
     <Compile Include="ViewModels\NewDatabaseSourceViewModel.cs" />
     <Compile Include="ViewModels\NewPluginSourceViewModel.cs" />
     <Compile Include="ViewModels\NewServerSourceViewModel.cs" />

@@ -90,6 +90,7 @@
     <Compile Include="Help\HelpModel.cs" />
     <Compile Include="Help\IHelpChangedEvent.cs" />
     <Compile Include="IDockViewModel.cs" />
+    <Compile Include="ManageDatabaseServiceViewModel.cs" />
     <Compile Include="ManageDatabaseSourceModel.cs" />
     <Compile Include="ManageDatabaseSourceViewModel.cs" />
     <Compile Include="ManageEmailSourceModel.cs" />

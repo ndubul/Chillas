@@ -166,19 +166,19 @@ namespace Dev2.Runtime.ServiceModel
         #region DbTest
 
         // POST: Service/Services/DbTest
-        public Recordset DbTest(string args, Guid workspaceId, Guid dataListId)
+        public Recordset DbTest(DbService args, Guid workspaceId, Guid dataListId)
         {
             try
             {
-                var service = JsonConvert.DeserializeObject<DbService>(args);
-                service.Source = _resourceCatalog.GetResource<DbSource>(workspaceId, service.Source.ResourceID);
-                if(string.IsNullOrEmpty(service.Recordset.Name))
+                var service = args;
+
+                if (string.IsNullOrEmpty(service.Recordset.Name))
                 {
                     service.Recordset.Name = service.Method.Name;
                 }
 
                 var addFields = service.Recordset.Fields.Count == 0;
-                if(addFields)
+                if (addFields)
                 {
                     service.Recordset.Fields.Clear();
                 }
@@ -186,7 +186,7 @@ namespace Dev2.Runtime.ServiceModel
 
                 return FetchRecordset(service, addFields);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 RaiseError(ex);
                 return new Recordset { HasErrors = true, ErrorMessage = ex.Message };

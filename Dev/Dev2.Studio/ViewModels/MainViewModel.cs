@@ -727,6 +727,10 @@ namespace Dev2.Studio.ViewModels
             {
                 AddNewDbSourceSurface();
             }
+            else if (resourceType == "DatabaseService")
+            {
+                AddNewDbServiceSurface();
+            }
             else if (resourceType == "WebSource")
             {
                 AddNewWebSourceSurface();
@@ -755,6 +759,13 @@ namespace Dev2.Studio.ViewModels
         {
             var server = CustomContainer.Get<IServer>();
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbSource), new NewDatabaseSourceViewModel(EventPublisher, new ManageDatabaseSourceViewModel(new ManageDatabaseSourceModel(server.UpdateRepository,server.QueryProxy,ActiveEnvironment.Name), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator()), PopupProvider));
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+        void AddNewDbServiceSurface()
+        {
+            var server = CustomContainer.Get<IServer>();
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbService), new NewDatabaseServiceViewModel(EventPublisher, new ManageDatabaseServiceViewModel(null, null), PopupProvider));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 

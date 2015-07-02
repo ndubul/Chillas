@@ -97,6 +97,9 @@
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="FocusExtension.cs" />
+    <Compile Include="ManageDatabaseServiceControl.xaml.cs">
+      <DependentUpon>ManageDatabaseServiceControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ManageDatabaseSourceControl.xaml.cs">
       <DependentUpon>ManageDatabaseSourceControl.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,9 @@
     <Compile Include="ManageWebserviceSourceControl.xaml.cs">
       <DependentUpon>ManageWebserviceSourceControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MappingsView.xaml.cs">
+      <DependentUpon>MappingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NotConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashPage.xaml.cs">
@@ -125,6 +131,10 @@
     <Page Include="CircularProgressBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ManageDatabaseServiceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ManageDatabaseSourceControl.xaml">
       <SubType>Designer</SubType>
@@ -143,6 +153,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ManageWebserviceSourceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MappingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
