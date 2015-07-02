@@ -252,7 +252,15 @@ namespace Warewolf.Studio.ViewModels
                 CanExecute = false;
                 return;
             }
-            var resourcePermission = permissions.FirstOrDefault(permission => permission.ResourceID == ResourceId);
+            IWindowsGroupPermission resourcePermission = null;
+            foreach(var permission in permissions)
+            {
+                if(permission!=null && permission.ResourceID == ResourceId)
+                {
+                    resourcePermission = permission;
+                    break;
+                }
+            }
             if (resourcePermission != null)
             {
                 SetFromPermission(resourcePermission);
