@@ -59,20 +59,20 @@ namespace Warewolf.Studio.ViewModels
         public ManageDatabaseServiceViewModel(IDbServiceModel model, IRequestServiceNameViewModel saveDialog)
             : base(ResourceType.DbService)
         {
-            //if (model == null)
-            //{
-            //    throw new ArgumentNullException("model");
-            //}
-            //if (saveDialog == null)
-            //{
-            //    throw new ArgumentNullException("saveDialog");
-            //}
-            //_model = model;
+            if (model == null)
+            {
+                throw new ArgumentNullException("model");
+            }
+            if (saveDialog == null)
+            {
+                throw new ArgumentNullException("saveDialog");
+            }
+            _model = model;
             _saveDialog = saveDialog;
             CanEditSource = false;
-            //CreateNewSourceCommand = new DelegateCommand(model.CreateNewSource);
-            //EditSourceCommand = new DelegateCommand(() => model.EditSource(SelectedSource));
-            //Sources = model.RetrieveSources();
+            CreateNewSourceCommand = new DelegateCommand(model.CreateNewSource);
+            EditSourceCommand = new DelegateCommand(() => model.EditSource(SelectedSource));
+            Sources = model.RetrieveSources();
 
             Header = Resources.Languages.Core.DatabaseServiceDBSourceTabHeader;
             TestProcedureCommand = new DelegateCommand(TestAction, CanTestProcedure);

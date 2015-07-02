@@ -247,6 +247,9 @@
     <Compile Include="Infrastructure\SharedModels\IDbColumnList.cs" />
     <Compile Include="Interfaces\IDev2TOFn.cs" />
     <Compile Include="IPluginAction.cs" />
+    <Compile Include="IPluginService.cs" />
+    <Compile Include="IPluginServiceModel.cs" />
+    <Compile Include="IPluginServiceViewModel.cs" />
     <Compile Include="IPluginSource.cs" />
     <Compile Include="IPulseLogger.cs" />
     <Compile Include="IQueryManager.cs" />
@@ -263,6 +266,7 @@
     <Compile Include="NameValue.cs" />
     <Compile Include="PathOperations\IResult.cs" />
     <Compile Include="Patterns\ISpookyLoadable.cs" />
+    <Compile Include="PluginServiceDefinition.cs" />
     <Compile Include="PopupController\IDev2MessageBoxViewModel.cs" />
     <Compile Include="PopupController\IMessage.cs" />
     <Compile Include="PopupController\IPopupController.cs" />

@@ -1,11 +1,22 @@
-﻿using System.Collections.Generic;
+﻿
+/*
+*  Warewolf - The Easy Service Bus
+*  Copyright 2015 by Warewolf Ltd <alpha@warewolf.io>
+*  Licensed under GNU Affero General Public License 3.0 or later. 
+*  Some rights reserved.
+*  Visit our website for more information <http://warewolf.io/>
+*  AUTHORS <http://warewolf.io/authors.php> , CONTRIBUTORS <http://warewolf.io/contributors.php>
+*  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
+*/
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Dev2.Common;
-using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Core.DynamicServices;
 using Dev2.Common.Interfaces.Data;
+using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Communication;
 using Dev2.DynamicServices;
 using Dev2.DynamicServices.Objects;
@@ -15,11 +26,11 @@ using Dev2.Workspaces;
 
 namespace Dev2.Runtime.ESB.Management.Services
 {
-    public class FetchPluginSources : IEsbManagementEndpoint
+    public class FetchWebSources : IEsbManagementEndpoint
     {
         public string HandlesType()
         {
-            return "FetchPluginSources";
+            return "FetchWebServiceSources";
         }
 
         public StringBuilder Execute(Dictionary<string, StringBuilder> values, IWorkspace theWorkspace)
@@ -27,23 +38,22 @@ namespace Dev2.Runtime.ESB.Management.Services
             var serializer = new Dev2JsonSerializer();
 
             // ReSharper disable MaximumChainedReferences
-            List<PluginSourceDefinition> list = Resources.GetResourceList(GlobalConstants.ServerWorkspaceID).Where(a => a.ResourceType == ResourceType.PluginSource).Select(a =>
+            List<IWebServiceSource> list = Resources.GetResourceList(GlobalConstants.ServerWorkspaceID).Where(a => a.ResourceType == ResourceType.WebSource).Select(a =>
             {
-                var res = Resources.GetResource<PluginSource>(GlobalConstants.ServerWorkspaceID, a.ResourceID);
+                var res = Resources.GetResource<WebSource>(GlobalConstants.ServerWorkspaceID, a.ResourceID);
                 if (res != null)
                 {
-                    return new PluginSourceDefinition()
+                    return new WebServiceSourceDefinition
                     {
-                        Id = res.ResourceID,
                         Name = res.ResourceName,
                         Path = res.ResourcePath,
-                        SelectedDll = new DllListing()
-                        {
-                            Name = res.AssemblyName,
-                            FullName = res.AssemblyLocation,
-                            Children = new IDllListing[0],
-                        }
-                    };
+                        Id = res.ResourceID,
+                        UserName = res.UserName,
+                        Password = res.Password,
+                        AuthenticationType = res.AuthenticationType,
+                        DefaultQuery = res.DefaultQuery,
+                        HostName = res.Address
+                    } as IWebServiceSource;
                 }
                 return null;
             }).ToList();

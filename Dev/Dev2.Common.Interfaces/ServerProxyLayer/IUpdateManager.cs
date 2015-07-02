@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using Dev2.Common.Interfaces.Data;
+using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.Email;
+using Dev2.Common.Interfaces.WebServices;
 
 namespace Dev2.Common.Interfaces.ServerProxyLayer
 {
@@ -56,23 +59,23 @@ namespace Dev2.Common.Interfaces.ServerProxyLayer
 
         void SaveDbSource(IDbSource toDbSource, Guid serverWorkspaceID);
 
-        //void SaveDbService(IDatabaseService dbService);
+        void SaveDbService(IDatabaseService dbService);
 
-        //DataTable TestDbService(IDatabaseService inputValues);
+        DataTable TestDbService(IDatabaseService inputValues);
 
         void SaveWebserviceSource(IWebServiceSource resource, Guid serverWorkspaceID);
 
         void TestConnection(IWebServiceSource resource);
 
-        //string TestWebService(IWebService inputValues);
+        string TestWebService(IWebService inputValues);
 
-        //void SaveWebservice(IWebService model, Guid serverWorkspaceID);
+        void SaveWebservice(IWebService model, Guid serverWorkspaceID);
 
         void SavePluginSource(IPluginSource source, Guid serverWorkspaceID);
 
-        //string TestPluginService(IPluginService inputValues);
+        string TestPluginService(IPluginService inputValues);
 
-        //void SavePluginService(IPluginService toDbSource);
+        void SavePluginService(IPluginService toDbSource);
 
         string TestEmailServiceSource(IEmailServiceSource emailServiceSource);
 

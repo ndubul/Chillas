@@ -2,51 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Dev2.Common;
-using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Core.DynamicServices;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Communication;
 using Dev2.DynamicServices;
 using Dev2.DynamicServices.Objects;
 using Dev2.Runtime.Hosting;
-using Dev2.Runtime.ServiceModel;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Workspaces;
 
 namespace Dev2.Runtime.ESB.Management.Services
 {
-    public class FetchPluginNamespaces : IEsbManagementEndpoint
+    public class FetchDbSources : IEsbManagementEndpoint
     {
         public string HandlesType()
         {
-            return "FetchPluginNameSpaces";
+            return "FetchDbSources";
         }
 
         public StringBuilder Execute(Dictionary<string, StringBuilder> values, IWorkspace theWorkspace)
         {
             var serializer = new Dev2JsonSerializer();
-            try
+
+            // ReSharper disable MaximumChainedReferences
+            List<DbSourceDefinition> list = Resources.GetResourceList(GlobalConstants.ServerWorkspaceID).Where(a => a.ResourceType == ResourceType.DbSource).Select(a =>
             {
-                var dbSource = serializer.Deserialize<IPluginSource>(values["source"]);
-                // ReSharper disable MaximumChainedReferences
-                PluginServices services = new PluginServices();
-                var src = ResourceCatalog.Instance.GetResource<PluginSource>(GlobalConstants.ServerWorkspaceID, dbSource.Id);
-                var methods = services.Namespaces(serializer.Serialize(src), Guid.Empty, Guid.Empty).Select(a => a as INamespaceItem).ToList();
-                return serializer.SerializeToBuilder(new ExecuteMessage()
+                var res = Resources.GetResource<DbSource>(GlobalConstants.ServerWorkspaceID, a.ResourceID);
+                if (res != null)
                 {
-                    HasError = false,
-                    Message = serializer.SerializeToBuilder(methods)
-                });
-                // ReSharper restore MaximumChainedReferences
-            }
-            catch (Exception e)
-            {
-                return serializer.SerializeToBuilder(new ExecuteMessage()
-                {
-                    HasError = true,
-                    Message = new StringBuilder(e.Message)
-                });
-            }
+                    return new DbSourceDefinition()
+                    {
+                        AuthenticationType = res.AuthenticationType,
+                        DbName = res.DatabaseName,
+                        Id = res.ResourceID,
+                        Name = res.ResourceName,
+                        Password = res.Password,
+                        Path = res.ResourcePath,
+                        ServerName = res.Server,
+                        Type = enSourceType.SqlDatabase,
+                        UserName = res.UserID
+                    };
+                }
+                return null;
+            }).ToList();
+            return serializer.SerializeToBuilder(new ExecuteMessage() { HasError = false, Message = serializer.SerializeToBuilder(list) });
+            // ReSharper restore MaximumChainedReferences
         }
 
         public DynamicService CreateServiceEntry()

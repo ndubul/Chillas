@@ -1,25 +1,37 @@
-﻿using System;
+﻿
+/*
+*  Warewolf - The Easy Service Bus
+*  Copyright 2015 by Warewolf Ltd <alpha@warewolf.io>
+*  Licensed under GNU Affero General Public License 3.0 or later. 
+*  Some rights reserved.
+*  Visit our website for more information <http://warewolf.io/>
+*  AUTHORS <http://warewolf.io/authors.php> , CONTRIBUTORS <http://warewolf.io/contributors.php>
+*  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Dev2.Common;
-using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core.DynamicServices;
+using Dev2.Common.Interfaces.DB;
+using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Communication;
 using Dev2.DynamicServices;
 using Dev2.DynamicServices.Objects;
 using Dev2.Runtime.Hosting;
-using Dev2.Runtime.ServiceModel;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Workspaces;
+using Warewolf.Core;
 
 namespace Dev2.Runtime.ESB.Management.Services
 {
-    public class FetchPluginNamespaces : IEsbManagementEndpoint
+    public class FetchDbActions : IEsbManagementEndpoint
     {
         public string HandlesType()
         {
-            return "FetchPluginNameSpaces";
+            return "FetchDbActions";
         }
 
         public StringBuilder Execute(Dictionary<string, StringBuilder> values, IWorkspace theWorkspace)
@@ -27,11 +39,11 @@ namespace Dev2.Runtime.ESB.Management.Services
             var serializer = new Dev2JsonSerializer();
             try
             {
-                var dbSource = serializer.Deserialize<IPluginSource>(values["source"]);
+                var dbSource = serializer.Deserialize<IDbSource>(values["source"]);
                 // ReSharper disable MaximumChainedReferences
-                PluginServices services = new PluginServices();
-                var src = ResourceCatalog.Instance.GetResource<PluginSource>(GlobalConstants.ServerWorkspaceID, dbSource.Id);
-                var methods = services.Namespaces(serializer.Serialize(src), Guid.Empty, Guid.Empty).Select(a => a as INamespaceItem).ToList();
+                ServiceModel.Services services = new ServiceModel.Services();
+                var src = ResourceCatalog.Instance.GetResource<DbSource>(GlobalConstants.ServerWorkspaceID, dbSource.Id);
+                var methods = services.FetchMethods(src).Select(CreateDbAction);
                 return serializer.SerializeToBuilder(new ExecuteMessage()
                 {
                     HasError = false,
@@ -47,6 +59,18 @@ namespace Dev2.Runtime.ESB.Management.Services
                     Message = new StringBuilder(e.Message)
                 });
             }
+        }
+
+        DbAction CreateDbAction(ServiceMethod a)
+        {
+            // ReSharper disable MaximumChainedReferences
+            var Inputs = a.Parameters.Select(b => new ServiceInput(b.Name, b.DefaultValue ?? "") as IServiceInput).ToList();
+            // ReSharper restore MaximumChainedReferences
+            return new DbAction()
+            {
+                Name = a.Name,
+                Inputs = Inputs
+            };
         }
 
         public DynamicService CreateServiceEntry()

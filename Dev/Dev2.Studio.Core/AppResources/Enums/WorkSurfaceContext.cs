@@ -57,7 +57,8 @@ namespace Dev2.Studio.Core.AppResources.Enums
         DbService,
         WebSource,
         WebService,
-        PluginSource
+        PluginSource,
+        PluginService
     }
 
 }

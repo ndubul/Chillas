@@ -1164,7 +1164,7 @@
     <Style x:Key="XamGridStyle" TargetType="ig:XamGrid">
         <Setter Property="Background" Value="{StaticResource XamGridBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource XamGridBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="1,0,0,0" />
         <Setter Property="FixedRowSeparatorStyle" Value="{StaticResource FixedRowSeparatorStyle}" />
         <Setter Property="Template">
             <Setter.Value>

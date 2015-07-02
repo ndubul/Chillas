@@ -170,9 +170,12 @@
     <Compile Include="ESB\Management\Services\AddFolderService.cs" />
     <Compile Include="ESB\Management\Services\DeleteItemService.cs" />
     <Compile Include="ESB\Management\Services\DeleteVersion.cs" />
+    <Compile Include="ESB\Management\Services\FetchDbActions.cs" />
+    <Compile Include="ESB\Management\Services\FetchDbSources.cs" />
     <Compile Include="ESB\Management\Services\FetchPluginActions.cs" />
     <Compile Include="ESB\Management\Services\FetchPluginNamespaces.cs" />
     <Compile Include="ESB\Management\Services\FetchPluginSources.cs" />
+    <Compile Include="ESB\Management\Services\FetchWebSources.cs" />
     <Compile Include="ESB\Management\Services\GetComputeNames.cs" />
     <Compile Include="ESB\Management\Services\GetDirectoriesRelativeToServer.cs" />
     <Compile Include="ESB\Management\Services\FetchExplorerItems.cs" />
@@ -188,6 +191,7 @@
     <Compile Include="ESB\Management\Services\RollbackTo.cs" />
     <Compile Include="ESB\Management\Services\SaveDbService.cs" />
     <Compile Include="ESB\Management\Services\SaveDbSourceSource.cs" />
+    <Compile Include="ESB\Management\Services\SavePluginService.cs" />
     <Compile Include="ESB\Management\Services\SavePluginSource.cs" />
     <Compile Include="ESB\Management\Services\SaveScheduledResource.cs" />
     <Compile Include="ESB\Management\Services\ClearLog.cs" />
@@ -228,6 +232,7 @@
     <Compile Include="ESB\Management\Services\TestConnectionService.cs" />
     <Compile Include="ESB\Management\Services\TestDbService.cs" />
     <Compile Include="ESB\Management\Services\TestDbSourceService.cs" />
+    <Compile Include="ESB\Management\Services\TestPluginService.cs" />
     <Compile Include="ESB\Management\Services\TestWebService.cs" />
     <Compile Include="ESB\Management\Services\TestWebserviceSourceService.cs" />
     <Compile Include="Execution\ExecutionToken.cs" />

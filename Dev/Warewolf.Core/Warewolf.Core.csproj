@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseService.cs" />
+    <Compile Include="DbAction.cs" />
     <Compile Include="DbInput.cs" />
     <Compile Include="DbOutputMapping.cs" />
     <Compile Include="HelpDescriptor.cs" />

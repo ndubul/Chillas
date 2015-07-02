@@ -102,6 +102,7 @@
     <Compile Include="CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ComboBoxToMaxItemWidthConverter.cs" />
     <Compile Include="ExplorerView.xaml.cs">
       <DependentUpon>ExplorerView.xaml</DependentUpon>
     </Compile>
@@ -114,6 +115,9 @@
     </Compile>
     <Compile Include="ManageEmailSourceControl.xaml.cs">
       <DependentUpon>ManageEmailSourceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePluginServiceControl.xaml.cs">
+      <DependentUpon>ManagePluginServiceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ManagePluginSourceControl.xaml.cs">
       <DependentUpon>ManagePluginSourceControl.xaml</DependentUpon>
@@ -162,6 +166,10 @@
     <Page Include="ManageEmailSourceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ManagePluginServiceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ManagePluginSourceControl.xaml">
       <SubType>Designer</SubType>

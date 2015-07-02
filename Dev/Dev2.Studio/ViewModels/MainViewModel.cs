@@ -744,6 +744,10 @@ namespace Dev2.Studio.ViewModels
             {
                 AddNewPluginSourceSurface();
             }
+            else if (resourceType == "ResourceService")
+            {
+                AddNewPluginServiceSurface();
+            }
             else
             {
                 var resourceModel = ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
@@ -770,7 +774,7 @@ namespace Dev2.Studio.ViewModels
         void AddNewDbServiceSurface()
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbService), new NewDatabaseServiceViewModel(EventPublisher, new ManageDatabaseServiceViewModel(null, null), PopupProvider));
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbService), new NewDatabaseServiceViewModel(EventPublisher, new ManageDatabaseServiceViewModel(new ManageDbServiceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid())), PopupProvider));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
@@ -784,7 +788,7 @@ namespace Dev2.Studio.ViewModels
         void AddNewWebServiceSurface()
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebService), new NewWebserviceViewModel(EventPublisher, new ManageWebServiceViewModel(null, null), PopupProvider));
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebService), new NewWebserviceViewModel(EventPublisher, new ManageWebServiceViewModel(new ManageWebServiceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid())), PopupProvider));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
@@ -792,6 +796,13 @@ namespace Dev2.Studio.ViewModels
         {
             var server = CustomContainer.Get<IServer>();
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginSource), new NewPluginSourceViewModel(EventPublisher, new ManagePluginSourceViewModel(new ManagePluginSourceModel(server.UpdateRepository,server.QueryProxy, ActiveEnvironment.Name), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator()), PopupProvider));
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+        void AddNewPluginServiceSurface()
+        {
+            var server = CustomContainer.Get<IServer>();
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginService), new NewPluginServiceViewModel(EventPublisher, new ManagePluginServiceViewModel(new ManagePluginServiceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid())), PopupProvider));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
