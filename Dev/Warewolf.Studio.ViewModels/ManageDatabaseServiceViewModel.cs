@@ -53,6 +53,8 @@ namespace Warewolf.Studio.ViewModels
         private bool _isInputsEmptyRows;
         private bool _isOutputMappingEmptyRows;
         private bool _showRecordSet;
+        string _headerText;
+        string _resourceName;
 
         /// <exception cref="ArgumentNullException"><paramref name="model"/> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="saveDialog"/> is <see langword="null" />.</exception>
@@ -75,6 +77,8 @@ namespace Warewolf.Studio.ViewModels
             Sources = model.RetrieveSources();
 
             Header = Resources.Languages.Core.DatabaseServiceDBSourceTabHeader;
+            HeaderText = Resources.Languages.Core.DatabaseServiceDBSourceTabHeader;
+            ResourceName = HeaderText;
             TestProcedureCommand = new DelegateCommand(TestAction, CanTestProcedure);
             Inputs = new ObservableCollection<IServiceInput>();
             SaveCommand = new DelegateCommand(Save, CanSave);
@@ -291,6 +295,29 @@ namespace Warewolf.Studio.ViewModels
                     }
                 }
                 OnPropertyChanged(() => RecordsetName);
+            }
+        }
+
+        public string HeaderText
+        {
+            get { return _headerText; }
+            set
+            {
+                _headerText = value;
+                OnPropertyChanged(() => HeaderText);
+                OnPropertyChanged(() => Header);
+            }
+        }
+        public string ResourceName
+        {
+            get
+            {
+                return _resourceName;
+            }
+            set
+            {
+                _resourceName = value;
+                OnPropertyChanged(_resourceName);
             }
         }
 
