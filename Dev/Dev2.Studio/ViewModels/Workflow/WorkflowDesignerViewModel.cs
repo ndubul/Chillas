@@ -669,7 +669,12 @@ namespace Dev2.Studio.ViewModels.Workflow
         protected void InitializeFlowDecision(ModelItem mi)
         {
             Dev2Logger.Log.Info("Publish message of type - " + typeof(ConfigureDecisionExpressionMessage));
-            EventPublisher.Publish(new ConfigureDecisionExpressionMessage { ModelItem = mi, EnvironmentModel = _resourceModel.Environment, IsNew = true });
+            ModelProperty modelProperty = mi.Properties["Action"];
+            
+            // PBI 9135 - 2013.07.15 - TWR - Changed to "as" check so that database activity also flows through this
+            ModelProperty modelProperty1 = mi.Properties["Action"];
+            InitialiseWithAction(modelProperty1);
+           // EventPublisher.Publish(new ConfigureDecisionExpressionMessage { ModelItem = mi, EnvironmentModel = _resourceModel.Environment, IsNew = true });
         }
 
         public void EditActivity(ModelItem modelItem, Guid parentEnvironmentID, IEnvironmentRepository catalog)
@@ -1729,7 +1734,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                         EventPublisher.Publish(new ConfigureSwitchExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment });
                     }
 
-                    // Handle Decision Edits
+                    //// Handle Decision Edits
                     if (dp != null && !WizardEngineAttachedProperties.GetDontOpenWizard(dp) && item.ItemType == typeof(FlowDecision))
                     {
                         EventPublisher.Publish(new ConfigureDecisionExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment });
