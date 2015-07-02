@@ -64,71 +64,71 @@ Scenario: Count a number of records in a recordset with 0 rows
 	And the debug output as 
 	|                |
 	| [[result]] = 0 |
-#Below 3 scenarios should be passed after the bug 12136 is fixed.
+
 #This 3 scenarios are getting passed but error is not actually generating in studio and in browser too,
 # please investigate why this specs are getting passed without the functionality is not coming right
-#Scenario: Count record with invalid variables
-#	Given I have a recordset with this shape
-#	| rs       |   |
-#	| rs().row | 1 |
-#	| rs().row | 2 |
-#	| rs().row | 3 |
-#	| rs().row | 4 |
-#	| rs().row | 5 |
-#	| rs().row | 6 |
-#	| rs().row | 7 |
-#	| rs().row | 8 |
-#	And count on record "[[rs().#$]]"	
-#	When the count tool is executed
-#	Then the result count should be 0
-#	And the execution has "AN" error
-#	And the debug inputs as  
-#	| Recordset          |
-#	And the debug output as 
-#	|              |
-#	| [[result]] = |
+Scenario: Count record with invalid variables
+	Given I have a recordset with this shape
+	| rs       |   |
+	| rs().row | 1 |
+	| rs().row | 2 |
+	| rs().row | 3 |
+	| rs().row | 4 |
+	| rs().row | 5 |
+	| rs().row | 6 |
+	| rs().row | 7 |
+	| rs().row | 8 |
+	And count on record "[[rs().#$]]"	
+	When the count tool is executed
+	Then the result count should be 0
+	And the execution has "AN" error
+	And the debug inputs as  
+	| Recordset          |
+	And the debug output as 
+	|              |
+	| [[result]] = |
 
-#Scenario: Count only one column record
-#	Given I have a recordset with this shape
-#	| rs       |   |
-#	| rs().row | 1 |
-#	| rs().row | 2 |
-#	| rs().row | 3 |
-#	| rs().row | 4 |
-#	| rs().row | 5 |
-#	| rs().row | 6 |
-#	| rs().row | 7 |
-#	| rs().row | 8 |
-#	And count on record "[[rs(*).row]]"	
-#	When the count tool is executed
-#	Then the result count should be 0
-#	And the execution has "AN" error
-#	And the debug inputs as  
-#	| Recordset          |
-#	And the debug output as 
-#	|              |
-#	| [[result]] = |
-#
-#Scenario: Count only one coloumn record
-#	Given I have a recordset with this shape
-#	| rs       |   |
-#	| rs().row | 1 |
-#	| rs().row | 2 |
-#	| rs().row | 3 |
-#	| rs().row | 4 |
-#	| fs().row | 5 |
-#	| fs().row | 6 |
-#	| fs().row | 7 |
-#	| fs().row | 8 |
-#	And count on record "[[rs().row]],[[fs().row]]"	
-#	When the count tool is executed
-#	Then the result count should be 0
-#	And the execution has "AN" error
-#	And the debug inputs as  
-#	| Recordset          |
-#	And the debug output as 
-	#|              |
-	#| [[result]] = |
+Scenario: Count only one column record
+	Given I have a recordset with this shape
+	| rs       |   |
+	| rs().row | 1 |
+	| rs().row | 2 |
+	| rs().row | 3 |
+	| rs().row | 4 |
+	| rs().row | 5 |
+	| rs().row | 6 |
+	| rs().row | 7 |
+	| rs().row | 8 |
+	And count on record "[[rs(*).row]]"	
+	When the count tool is executed
+	Then the result count should be 0
+	And the execution has "AN" error
+	And the debug inputs as  
+	| Recordset          |
+	And the debug output as 
+	|              |
+	| [[result]] = |
+
+Scenario: Count only one coloumn record
+	Given I have a recordset with this shape
+	| rs       |   |
+	| rs().row | 1 |
+	| rs().row | 2 |
+	| rs().row | 3 |
+	| rs().row | 4 |
+	| fs().row | 5 |
+	| fs().row | 6 |
+	| fs().row | 7 |
+	| fs().row | 8 |
+	And count on record "[[rs().row]],[[fs().row]]"	
+	When the count tool is executed
+	Then the result count should be 0
+	And the execution has "AN" error
+	And the debug inputs as  
+	| Recordset          |
+	And the debug output as 
+	|              |
+	| [[result]] = |
 
 Scenario: Count a number of records when two recordsets are defined.
 	Given I have a recordset with this shape
@@ -156,27 +156,26 @@ Scenario: Count a number of records when two recordsets are defined.
 	|                |
 	| [[result]] = 5 |
 
-##This Test Scenario should be passed after the bug 11994 is fixed
-#Scenario: Executing Count with two variables in result field
-#	Given I have a recordset with this shape
-#	| rs        |   |
-#	| rs(1).row | 1 |
-#	| rs(2).row | 2 |
-#	| rs(3).row | 3 |
-#	| rs(4).row | 4 |
-#	And count on record "[[rs()]]"
-#    And result variable as "[[b]][[a]]"	
-#	When the count tool is executed
-#	Then the result count should be 0
-#	And the execution has "AN" error
-#	And the debug inputs as  
-#	| Recordset         |
-#	| [[rs(1).row]] = 1 |
-#	| [[rs(2).row]] = 2 |
-#	| [[rs(3).row]] = 3 |
-#	| [[rs(4).row]] = 4 |
-#	And the debug output as 
-#	|                |
-#	| [[rs().r]] = 4 |
-#	| [[a]] = 4      |
+Scenario: Executing Count with two variables in result field
+	Given I have a recordset with this shape
+	| rs        |   |
+	| rs(1).row | 1 |
+	| rs(2).row | 2 |
+	| rs(3).row | 3 |
+	| rs(4).row | 4 |
+	And count on record "[[rs()]]"
+    And result variable as "[[b]][[a]]"	
+	When the count tool is executed
+	Then the result count should be 0
+	And the execution has "AN" error
+	And the debug inputs as  
+	| Recordset         |
+	| [[rs(1).row]] = 1 |
+	| [[rs(2).row]] = 2 |
+	| [[rs(3).row]] = 3 |
+	| [[rs(4).row]] = 4 |
+	And the debug output as 
+	|                |
+	| [[rs().r]] = 4 |
+	| [[a]] = 4      |
 

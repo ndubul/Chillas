@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Dev2.Common;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Email;
-using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 
 using Dev2.Controller;
@@ -33,11 +34,11 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         IUpdateManager UpdateManagerProxy { get; set; }
 
-    //    public void Save(IServerSource serverSource)
-    //    {
+        public void Save(IServerSource serverSource)
+        {
 
-    //        UpdateManagerProxy.SaveServerSource(serverSource, GlobalConstants.ServerWorkspaceID);
-    //    }
+            UpdateManagerProxy.SaveServerSource(serverSource, GlobalConstants.ServerWorkspaceID);
+        }
 
     //    public void Save(IPluginSource source)
     //    {
@@ -49,55 +50,55 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             UpdateManagerProxy.SaveEmailServiceSource(emailServiceSource, GlobalConstants.ServerWorkspaceID);
         }
 
-    //    public string TestConnection(IServerSource serverSource)
-    //    {
+        public string TestConnection(IServerSource serverSource)
+        {
 
 
-    //        return UpdateManagerProxy.TestConnection(serverSource);
+            return UpdateManagerProxy.TestConnection(serverSource);
 
-    //    }
+        }
 
         public string TestConnection(IEmailServiceSource emailServiceSource)
         {
             return UpdateManagerProxy.TestEmailServiceSource(emailServiceSource);
         }
 
-    //    public void TestConnection(IWebServiceSource resource)
-    //    {
-    //        UpdateManagerProxy.TestConnection(resource);
-    //    }
+        public void TestConnection(IWebServiceSource resource)
+        {
+            UpdateManagerProxy.TestConnection(resource);
+        }
 
-    //    public IList<string> TestDbConnection(IDbSource serverSource)
-    //    {
-    //        return UpdateManagerProxy.TestDbConnection(serverSource);
-    //    }
+        public IList<string> TestDbConnection(IDbSource serverSource)
+        {
+            return UpdateManagerProxy.TestDbConnection(serverSource);
+        }
 
-    //    public void Save(IDbSource toDbSource)
-    //    {
-    //        UpdateManagerProxy.SaveDbSource( toDbSource, GlobalConstants.ServerWorkspaceID);
+        public void Save(IDbSource toDbSource)
+        {
+            UpdateManagerProxy.SaveDbSource(toDbSource, GlobalConstants.ServerWorkspaceID);
 
-    //    }
+        }
 
     //    public void Save(IWebService model)
     //    {
     //        UpdateManagerProxy.SaveWebservice(model,GlobalConstants.ServerWorkspaceID);
     //    }
 
-    //    public void Save(IWebServiceSource resource)
-    //    {
-    //        try
-    //        {
-    //            UpdateManagerProxy.SaveWebserviceSource(resource, GlobalConstants.ServerWorkspaceID);
-    //            if(WebServiceSourceSaved != null)
-    //            {
-    //                WebServiceSourceSaved(resource);
-    //            }
-    //        }
-    //        catch(Exception)
-    //        {
-    //            //
-    //        }
-    //    }
+        public void Save(IWebServiceSource resource)
+        {
+            try
+            {
+                UpdateManagerProxy.SaveWebserviceSource(resource, GlobalConstants.ServerWorkspaceID);
+                if (WebServiceSourceSaved != null)
+                {
+                    WebServiceSourceSaved(resource);
+                }
+            }
+            catch (Exception)
+            {
+                //
+            }
+        }
 
     //    public void Save(IDatabaseService toDbSource)
     //    {
@@ -115,7 +116,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
     //         return UpdateManagerProxy.TestWebService(inputValues);
     //    }
 
-    //    public event Action<IWebServiceSource> WebServiceSourceSaved;
+        public event Action<IWebServiceSource> WebServiceSourceSaved;
 
     //    public string TestPluginService(IPluginService inputValues)
     //    {

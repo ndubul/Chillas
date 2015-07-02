@@ -22,6 +22,7 @@ using Dev2.Common.Interfaces.Runtime;
 using Dev2.Common.Interfaces.Versioning;
 using Dev2.Common.Interfaces.Wrappers;
 using Dev2.Common.Wrappers;
+using Dev2.Explorer;
 using Dev2.Runtime.Security;
 
 namespace Dev2.Runtime.Hosting
@@ -31,6 +32,7 @@ namespace Dev2.Runtime.Hosting
         IExplorerRepositorySync _sync;
         readonly IFile _file;
         public static IExplorerServerResourceRepository Instance { get; private set; }
+        private IExplorerItem _root;
 
         static ServerExplorerRepository()
         {
@@ -71,7 +73,7 @@ namespace Dev2.Runtime.Hosting
 
         public IExplorerItem Load(Guid workSpaceId)
         {
-            return ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId);
+            return _root ?? (_root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId));
         }
 
         public IExplorerItem Load(ResourceType type, Guid workSpaceId)
@@ -155,6 +157,51 @@ namespace Dev2.Runtime.Hosting
                     Directory.Move(s, t);
                 }
             }
+        }
+
+        public IExplorerItem Find(Guid id)
+        {
+            var items = Load(Guid.Empty);
+            return Find(items, id);
+        }
+
+        public IExplorerItem UpdateItem(IResource resource)
+        {
+            if (Find(resource.ResourceID) == null)
+            {
+                return AddItemToCollection(new ServerExplorerItem(resource.ResourceName, resource.ResourceID, resource.ResourceType, null, resource.UserPermissions, resource.ResourcePath));
+            }
+            return Find(resource.ResourceID);
+        }
+
+        public IExplorerItem AddItemToCollection(IExplorerItem serverExplorerItem)
+        {
+            IExplorerItem parent = FindParent(serverExplorerItem.ResourcePath, _root);
+            parent.Children.Add(serverExplorerItem);
+
+            return serverExplorerItem;
+        }
+
+        IExplorerItem FindParent(string resourcePath, IExplorerItem rooItem)
+        {
+            if (resourcePath.Contains("\\"))
+            {
+                string name = resourcePath.Substring(0, resourcePath.IndexOf("\\", StringComparison.Ordinal));
+                var next = rooItem.Children.FirstOrDefault(a => a.DisplayName == name);
+                return FindParent(resourcePath.Substring(1 + resourcePath.IndexOf("\\", StringComparison.Ordinal)), next);
+            }
+            return rooItem;
+        }
+
+        public IExplorerItem Find(IExplorerItem item, Guid itemToFind)
+        {
+            if (item.ResourceId == itemToFind)
+                return item;
+            if (item.Children == null || item.Children.Count == 0)
+            {
+                return null;
+            }
+            return item.Children.Select(child => Find(child, itemToFind)).FirstOrDefault(found => found != null);
         }
 
         public void MessageSubscription(IExplorerRepositorySync sync)

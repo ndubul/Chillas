@@ -19,9 +19,9 @@ using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Common.Interfaces.Infrastructure.Events;
 using Dev2.Common.Interfaces.Infrastructure.SharedModels;
-using Dev2.Common.Interfaces.Runtime.ServiceModel;
 using Dev2.Common.Interfaces.Studio.Core.Network;
 using Dev2.Common.Interfaces.Threading;
+using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.AspNet.SignalR.Client;
 
 // ReSharper disable CheckNamespace

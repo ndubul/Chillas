@@ -169,6 +169,7 @@
     <Compile Include="ESB\Management\Services\AddFolderService.cs" />
     <Compile Include="ESB\Management\Services\DeleteItemService.cs" />
     <Compile Include="ESB\Management\Services\DeleteVersion.cs" />
+    <Compile Include="ESB\Management\Services\GetComputeNames.cs" />
     <Compile Include="ESB\Management\Services\GetDirectoriesRelativeToServer.cs" />
     <Compile Include="ESB\Management\Services\FetchExplorerItems.cs" />
     <Compile Include="ESB\Management\Services\GetServerVersion.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="ESB\Management\Services\RenameFolderService.cs" />
     <Compile Include="ESB\Management\Services\RenameItemService.cs" />
     <Compile Include="ESB\Management\Services\RollbackTo.cs" />
+    <Compile Include="ESB\Management\Services\SaveDbSourceSource.cs" />
     <Compile Include="ESB\Management\Services\SaveScheduledResource.cs" />
     <Compile Include="ESB\Management\Services\ClearLog.cs" />
     <Compile Include="ESB\Management\Services\DeleteResource.cs" />
@@ -208,11 +210,16 @@
     <Compile Include="ESB\Management\Services\FetchDependantCompileMessages.cs" />
     <Compile Include="ESB\Management\Services\GetDependanciesOnList.cs" />
     <Compile Include="ESB\Management\Services\RenameResource.cs" />
+    <Compile Include="ESB\Management\Services\SaveServerSource.cs" />
+    <Compile Include="ESB\Management\Services\SaveWebserviceSource.cs" />
     <Compile Include="ESB\Management\Services\SecurityEncryption.cs" />
     <Compile Include="ESB\Management\Services\SecurityRead.cs" />
     <Compile Include="ESB\Management\Services\SecurityWrite.cs" />
     <Compile Include="ESB\Management\Services\SettingsRead.cs" />
     <Compile Include="ESB\Management\Services\SettingsWrite.cs" />
+    <Compile Include="ESB\Management\Services\TestConnectionService.cs" />
+    <Compile Include="ESB\Management\Services\TestDbSourceService.cs" />
+    <Compile Include="ESB\Management\Services\TestWebserviceSourceService.cs" />
     <Compile Include="Execution\ExecutionToken.cs" />
     <Compile Include="Hosting\CompileMessageRepo.cs" />
     <Compile Include="Hosting\ExplorerItemFactory.cs" />

@@ -39,7 +39,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             _environmentConnection = new ServerProxy(uri,credentials,new AsyncWorker()) { ItemAddedMessageAction = ItemAdded };
             _serverId = Guid.NewGuid();
             _proxyLayer = new StudioServerProxy(new CommunicationControllerFactory(), EnvironmentConnection);
-            //UpdateRepository = new StudioResourceUpdateManager(new CommunicationControllerFactory(), EnvironmentConnection);
+            UpdateRepository = new StudioResourceUpdateManager(new CommunicationControllerFactory(), EnvironmentConnection);
             //EnvironmentConnection.PermissionsModified += RaisePermissionsModifiedEvent;
            // EnvironmentConnection.NetworkStateChanged += RaiseNetworkStateChangeEvent;
         }
@@ -120,12 +120,14 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //            }
 //        }
 
-//        public IQueryManager QueryProxy { get
-//        {
-//            return _proxyLayer.QueryManagerProxy;
-//        }
-//        }
-//
+        public IQueryManager QueryProxy
+        {
+            get
+            {
+                return _proxyLayer.QueryManagerProxy;
+            }
+        }
+        
 //        public bool IsConnected()
 //        {
 //            return EnvironmentConnection.IsConnected;
@@ -150,7 +152,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
        // public event NetworkStateChanged NetworkStateChanged;
        // public event ItemAddedEvent ItemAddedEvent;
 
-        //public IStudioUpdateManager UpdateRepository { get; private set; }
+        public IStudioUpdateManager UpdateRepository { get; private set; }
 //        public IExplorerItem ExplorerItems { get; set; }
         public StudioServerProxy ProxyLayer
         {

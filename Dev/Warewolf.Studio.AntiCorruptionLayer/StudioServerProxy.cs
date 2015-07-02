@@ -1,4 +1,5 @@
 ﻿using System;
+using Dev2.Common.Interfaces;
 using Dev2.Controller;
 using Dev2.Studio.Core.Interfaces;
 using Warewolf.Studio.ServerProxyLayer;
@@ -21,7 +22,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             {
                 throw new ArgumentNullException("environmentConnection");
             }
-            //QueryManagerProxy = new QueryManagerProxy(controllerFactory, environmentConnection);
+            QueryManagerProxy = new QueryManagerProxy(controllerFactory, environmentConnection);
            // UpdateManagerProxy = new ExplorerUpdateManagerProxy(controllerFactory,environmentConnection);
             //VersionManager = new VersionManagerProxy(environmentConnection, controllerFactory); //todo:swap
             AdminManagerProxy = new AdminManagerProxy(controllerFactory, environmentConnection); //todo:swap
@@ -30,7 +31,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         public AdminManagerProxy AdminManagerProxy { get; set; }
 
       //  public Dev2.Common.Interfaces.ServerProxyLayer.IVersionManager VersionManager { get; set; }
-       // public QueryManagerProxy QueryManagerProxy { get; set; }
+        public IQueryManager QueryManagerProxy { get; set; }
        // public ExplorerUpdateManagerProxy UpdateManagerProxy { get; set; }
 
 //        #region Implementation of IExplorerRepository

@@ -1,4 +1,4 @@
-
+﻿
 /*
 *  Warewolf - The Easy Service Bus
 *  Copyright 2015 by Warewolf Ltd <alpha@warewolf.io>
@@ -9,17 +9,25 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System.Windows;
 
-
-// ReSharper disable CheckNamespace
-namespace Dev2.Common.Interfaces.Runtime.ServiceModel
-// ReSharper restore CheckNamespace
+namespace Dev2.Activities.Designers2.Decision
 {
-    public enum AuthenticationType
+    public partial class Large
     {
-        Windows,
-        User,
-        Anonymous,
-        Public
+        public Large()
+        {
+            InitializeComponent();
+            DataGrid = LargeDataGrid;
+        }
+
+        #region Overrides of ActivityDesignerTemplate
+
+        protected override IInputElement GetInitialFocusElement()
+        {
+            return DataGrid;
+        }
+
+        #endregion
     }
 }

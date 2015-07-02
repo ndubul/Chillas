@@ -36,19 +36,19 @@ Scenario Outline: Write file at location
 		| FTP with Append Bottom   | [[path]] | ftp://rsaklfsvrsbspdc:1001/FORTESTING/filetowrite2.txt          | Append Bottom | warewolf rules | ""                | ""       | [[result]]             | Success | NO           |
 		| FTPS with Append Bottom  | [[path]] | ftp://rsaklfsvrsbspdc:1002/FORTESTING/filetowrite2.txt          | Append Bottom | warewolf rules | integrationtester | I73573r0 | [[result]]             | Success | NO           |
 		| SFTP with Append Bottom  | [[path]] | sftp://localhost/filetowrite2.txt                               | Append Bottom | warewolf rules | dev2              | Q/ulw&]  | [[result]]             | Success | NO           |
-#Bug12180| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[result]][[a]]        | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[a]]*]]               | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[var@]]               | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[var]]00]]            | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[(1var)]]             | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[var[[a]]]]           | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[var.a]]              | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[@var]]               | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[var 1]]              | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[rec(1).[[rec().1]]]] | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[rec(@).a]]           | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[rec"()".a]]          | Failure | NO           |
-		#| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[result]][[a]]        | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[result]][[a]]        | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[a]]*]]               | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[var@]]               | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[var]]00]]            | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[(1var)]]             | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[var[[a]]]]           | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[var.a]]              | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[@var]]               | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[var 1]]              | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[rec(1).[[rec().1]]]] | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[rec(@).a]]           | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[rec"()".a]]          | Failure | NO           |
+		| Local with Overwrite     | [[path]] | c:\filetowrite0.txt                                             | Overwrite     | warewolf rules | ""                | ""       | [[result]][[a]]        | Failure | NO           |
 
 
 Scenario: Write file with carriage returns
@@ -73,7 +73,7 @@ Scenario: Write file when contents has variables that cannot be evealuated
 
 
 	
-#Scenario Outline: Write file at location1
+#Scenario Outline: Write file validation
 #    Given I have a variable "[[a]]" with a value '<Val1>'
 #	Given I have a variable "[[b]]" with a value '<Val2>'
 #	Given I have a variable "[[rec(1).a]]" with a value '<Val1>'
