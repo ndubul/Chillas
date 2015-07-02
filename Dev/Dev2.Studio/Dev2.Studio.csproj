@@ -197,6 +197,9 @@
     <Reference Include="Microsoft.Win32.TaskSchedulerEditor">
       <HintPath>..\Binaries\Microsoft.Win32.TaskSchedulerEditor.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\Binaries\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -1276,6 +1279,10 @@
     <ProjectReference Include="..\Warewolf.Studio.Core\Warewolf.Studio.Core.csproj">
       <Project>{F9FE2CE9-625E-4E7F-8F4C-FCE28BB59510}</Project>
       <Name>Warewolf.Studio.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warewolf.Studio.ServerProxyLayer\Warewolf.Studio.ServerProxyLayer.csproj">
+      <Project>{C35C7C88-1EAE-4421-AC03-CEFA26461D6C}</Project>
+      <Name>Warewolf.Studio.ServerProxyLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warewolf.Studio.CustomControls\Warewolf.Studio.CustomControls.csproj">
       <Project>{1bd5cc42-66c7-4a1b-af1f-e6f2d4372b44}</Project>

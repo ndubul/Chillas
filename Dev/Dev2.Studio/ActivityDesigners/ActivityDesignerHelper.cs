@@ -25,6 +25,7 @@ using Dev2.Activities.Designers2.DataMerge;
 using Dev2.Activities.Designers2.DataSplit;
 using Dev2.Activities.Designers2.DateTime;
 using Dev2.Activities.Designers2.DateTimeDifference;
+using Dev2.Activities.Designers2.Decision;
 using Dev2.Activities.Designers2.Delete;
 using Dev2.Activities.Designers2.DeleteRecords;
 using Dev2.Activities.Designers2.DropBox.Upload;
@@ -114,6 +115,8 @@ namespace Dev2.Studio.ActivityDesigners
                 { typeof(DsfScriptingJavaScriptActivity), typeof(DsfScriptingJavaScriptDesigner) },
                 { typeof(DsfDropBoxFileActivity), typeof(DropboxUploadFileDesigner) },
                 { typeof(DsfCreateJsonActivity), typeof(CreateJsonDesigner) },
+                { typeof(DsfFlowDecisionActivity), typeof(DecisionDesigner) },
+
                 // Travis.Frisinger : 25.09.2012 - Removed Http Activity as it is out of sync with the current release 1 plans
             };
 

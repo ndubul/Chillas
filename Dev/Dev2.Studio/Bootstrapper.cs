@@ -13,13 +13,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Windows;
 using Caliburn.Micro;
+using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Explorer;
+using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
+using Dev2.Controller;
 using Dev2.Diagnostics;
 using Dev2.Interfaces;
+using Dev2.Network;
 using Dev2.Services;
 using Dev2.Studio;
 using Dev2.Studio.Controller;
@@ -29,6 +35,11 @@ using Dev2.Studio.Core.Services;
 using Dev2.Studio.Core.Services.System;
 using Dev2.Studio.Factory;
 using Dev2.Studio.ViewModels;
+using Dev2.Threading;
+using Microsoft.Practices.Prism.PubSubEvents;
+using Moq;
+using Warewolf.Studio.AntiCorruptionLayer;
+using Warewolf.Studio.ServerProxyLayer;
 
 namespace Dev2
 {
@@ -71,6 +82,14 @@ namespace Dev2
             CustomContainer.Register<IMainViewModel>(new MainViewModel());
             CustomContainer.Register<IWindowsServiceManager>(new WindowsServiceManager());
             CustomContainer.Register<IDialogViewModelFactory>(new DialogViewModelFactory());
+            var fact = new CommunicationControllerFactory();
+            var conn = new ServerProxy("http://localHost:3142",CredentialCache.DefaultNetworkCredentials, new AsyncWorker());
+           conn.Connect(Guid.NewGuid());
+            CustomContainer.Register<IStudioUpdateManager>(new StudioResourceUpdateManager(fact,conn));
+            CustomContainer.Register<IQueryManager>(new QueryManagerProxy(fact,conn));
+            CustomContainer.Register<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>(new Microsoft.Practices.Prism.PubSubEvents.EventAggregator());
+            CustomContainer.Register <IRequestServiceNameViewModel>(new Mock<IRequestServiceNameViewModel>().Object);
+            
             ClassRoutedEventHandlers.RegisterEvents();
         }
 

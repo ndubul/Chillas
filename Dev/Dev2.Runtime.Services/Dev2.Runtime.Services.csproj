@@ -189,6 +189,7 @@
     <Compile Include="ESB\Management\Services\RenameFolderService.cs" />
     <Compile Include="ESB\Management\Services\RenameItemService.cs" />
     <Compile Include="ESB\Management\Services\RollbackTo.cs" />
+    <Compile Include="ESB\Management\Services\SaveEmailServiceSource.cs" />
     <Compile Include="ESB\Management\Services\SaveDbService.cs" />
     <Compile Include="ESB\Management\Services\SaveDbSourceSource.cs" />
     <Compile Include="ESB\Management\Services\SavePluginService.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="ESB\Management\Services\TestPluginService.cs" />
     <Compile Include="ESB\Management\Services\TestWebService.cs" />
     <Compile Include="ESB\Management\Services\TestWebserviceSourceService.cs" />
+    <Compile Include="ESB\Management\Services\TestEmailServiceSource.cs" />
     <Compile Include="Execution\ExecutionToken.cs" />
     <Compile Include="Hosting\CompileMessageRepo.cs" />
     <Compile Include="Hosting\ExplorerItemFactory.cs" />
