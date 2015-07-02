@@ -52,6 +52,7 @@ namespace Warewolf.Studio.ViewModels
             PerformLoadAll();
             // ReSharper restore MaximumChainedReferences
             _warewolfserverName = updateManager.ServerName;
+            ResourceName = HeaderText;
         }
 
         public ICommand RefreshCommand { get; set; }
