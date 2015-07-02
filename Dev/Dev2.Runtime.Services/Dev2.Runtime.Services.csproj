@@ -218,6 +218,7 @@
     <Compile Include="ESB\Management\Services\GetDependanciesOnList.cs" />
     <Compile Include="ESB\Management\Services\RenameResource.cs" />
     <Compile Include="ESB\Management\Services\SaveServerSource.cs" />
+    <Compile Include="ESB\Management\Services\SaveWebService.cs" />
     <Compile Include="ESB\Management\Services\SaveWebserviceSource.cs" />
     <Compile Include="ESB\Management\Services\SecurityEncryption.cs" />
     <Compile Include="ESB\Management\Services\SecurityRead.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="ESB\Management\Services\TestConnectionService.cs" />
     <Compile Include="ESB\Management\Services\TestDbService.cs" />
     <Compile Include="ESB\Management\Services\TestDbSourceService.cs" />
+    <Compile Include="ESB\Management\Services\TestWebService.cs" />
     <Compile Include="ESB\Management\Services\TestWebserviceSourceService.cs" />
     <Compile Include="Execution\ExecutionToken.cs" />
     <Compile Include="Hosting\CompileMessageRepo.cs" />

@@ -442,6 +442,7 @@
     <Compile Include="ViewModels\NewDatabaseSourceViewModel.cs" />
     <Compile Include="ViewModels\NewPluginSourceViewModel.cs" />
     <Compile Include="ViewModels\NewServerSourceViewModel.cs" />
+    <Compile Include="ViewModels\NewWebserviceViewModel.cs" />
     <Compile Include="ViewModels\NewWebSourceViewModel.cs" />
     <Compile Include="ViewModels\Workflow\DataListConversionUtils.cs" />
     <Compile Include="ViewModels\Workflow\WorkflowDesignerDataPartUtils.cs" />

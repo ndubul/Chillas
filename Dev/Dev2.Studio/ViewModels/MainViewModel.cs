@@ -736,6 +736,10 @@ namespace Dev2.Studio.ViewModels
             {
                 AddNewWebSourceSurface();
             }
+            else if (resourceType == "WebService")
+            {
+                AddNewWebServiceSurface();
+            }
             else if (resourceType == "ResourceSource")
             {
                 AddNewPluginSourceSurface();
@@ -774,6 +778,13 @@ namespace Dev2.Studio.ViewModels
         {
             var server = CustomContainer.Get<IServer>();
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), new NewWebSourceViewModel(EventPublisher, new ManageWebserviceSourceViewModel(new ManageWebServiceSourceModel(server.UpdateRepository, ActiveEnvironment.Name), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator()), PopupProvider));
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+        void AddNewWebServiceSurface()
+        {
+            var server = CustomContainer.Get<IServer>();
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebService), new NewWebserviceViewModel(EventPublisher, new ManageWebServiceViewModel(null, null), PopupProvider));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 

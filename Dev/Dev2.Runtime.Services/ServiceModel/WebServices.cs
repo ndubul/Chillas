@@ -27,6 +27,11 @@ using Newtonsoft.Json;
 namespace Dev2.Runtime.ServiceModel
 {
     // PBI 1220 - 2013.05.20 - TWR - Created
+    public interface IWebServices
+    {
+        void TestWebService(WebService service);
+    }
+
     public class WebServices : Services
     {
         static readonly WebExecuteString DefaultWebExecute = WebSources.Execute;
