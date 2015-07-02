@@ -73,6 +73,7 @@ using Infragistics.Windows.DockManager.Events;
 using Microsoft.Practices.Prism.PubSubEvents;
 using ServiceStack.Common;
 using Warewolf.Studio.ViewModels;
+using Warewolf.Studio.Views;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.ViewModels
@@ -743,7 +744,7 @@ namespace Dev2.Studio.ViewModels
         void AddNewServerSourceSurface()
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource), new NewServerSourceViewModel(EventPublisher, new ManageNewServerViewModel(new ServerSource(), server.UpdateRepository,null , "", Guid.NewGuid()), PopupProvider));
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource), new NewServerSourceViewModel(EventPublisher, new ManageNewServerViewModel(new ServerSource(), server.UpdateRepository,new RequestServiceNameViewModel(new EnvironmentViewModel(server),new RequestServiceNameView(), Guid.Empty ) , "", Guid.NewGuid()), PopupProvider));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 

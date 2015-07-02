@@ -48,6 +48,9 @@
     <Reference Include="InfragisticsWPF4.Controls.Grids.XamGrid.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Grids.XamGrid.v14.2.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF4.Controls.Interactions.XamDialogWindow.v14.2">
+      <HintPath>..\Binaries\InfragisticsWPF4.Controls.Interactions.XamDialogWindow.v14.2.dll</HintPath>
+    </Reference>
     <Reference Include="InfragisticsWPF4.Controls.Menus.XamMenu.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Menus.XamMenu.v14.2.dll</HintPath>
     </Reference>
@@ -201,10 +204,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Elements\SearchTextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Elements\Slider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -258,6 +257,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Page Include="Elements\xamComboEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\xamDialogWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

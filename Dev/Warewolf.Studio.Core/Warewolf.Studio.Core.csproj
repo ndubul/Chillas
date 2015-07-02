@@ -113,6 +113,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Popup\WarewolfPopupMessage.cs" />
     <Compile Include="ResourceTypeToIconConverter.cs" />
+    <Compile Include="ResourceTypeToIconVisibility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dev2.Common.Interfaces\Dev2.Common.Interfaces.csproj">
