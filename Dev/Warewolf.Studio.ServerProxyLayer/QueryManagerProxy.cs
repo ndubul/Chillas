@@ -219,64 +219,64 @@ namespace Warewolf.Studio.ServerProxyLayer
 
         //public ObservableCollection<IWebServiceSource> WebSources { get; set; }
 
-        //public List<IDllListing> GetDllListings(IDllListing listing)
-        //{
-        //    Dev2JsonSerializer serializer = new Dev2JsonSerializer();
-        //    var comsController = CommunicationControllerFactory.CreateController("GetDllListingsService");
-        //    comsController.AddPayloadArgument("currentDllListing", serializer.Serialize(listing));
-        //    var workspaceId = Connection.WorkspaceID;
-        //    var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-        //    if (result.HasError)
-        //    {
-        //        throw new WarewolfSupportServiceException(result.Message.ToString(), null);
-        //    }
-        //    var dllListings = serializer.Deserialize<List<IDllListing>>(result.Message.ToString());
-        //    return dllListings;
-        //}
+        public List<IDllListing> GetDllListings(IDllListing listing)
+        {
+            Dev2JsonSerializer serializer = new Dev2JsonSerializer();
+            var comsController = CommunicationControllerFactory.CreateController("GetDllListingsService");
+            comsController.AddPayloadArgument("currentDllListing", serializer.Serialize(listing));
+            var workspaceId = Connection.WorkspaceID;
+            var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
+            if (result.HasError)
+            {
+                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+            }
+            var dllListings = serializer.Deserialize<List<IDllListing>>(result.Message.ToString());
+            return dllListings;
+        }
 
-        //public ICollection<INamespaceItem> FetchNamespaces(IPluginSource source)
-        //{
-        //    Dev2JsonSerializer serializer = new Dev2JsonSerializer();
-        //    var comsController = CommunicationControllerFactory.CreateController("FetchPluginNameSpaces");
-        //    comsController.AddPayloadArgument("source", serializer.SerializeToBuilder(source));
-        //    var workspaceId = Connection.WorkspaceID;
-        //    var payload = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-        //    if (payload.HasError)
-        //        throw new WarewolfTestException(payload.Message.ToString(), null);
-        //    return serializer.Deserialize<List<INamespaceItem>>(payload.Message);
-        //}
+        public ICollection<INamespaceItem> FetchNamespaces(IPluginSource source)
+        {
+            Dev2JsonSerializer serializer = new Dev2JsonSerializer();
+            var comsController = CommunicationControllerFactory.CreateController("FetchPluginNameSpaces");
+            comsController.AddPayloadArgument("source", serializer.SerializeToBuilder(source));
+            var workspaceId = Connection.WorkspaceID;
+            var payload = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
+            if (payload.HasError)
+                throw new WarewolfTestException(payload.Message.ToString(), null);
+            return serializer.Deserialize<List<INamespaceItem>>(payload.Message);
+        }
 
-        //public IList<IPluginSource> FetchPluginSources()
-        //{
-        //    var comsController = CommunicationControllerFactory.CreateController("FetchPluginSources");
+        public IList<IPluginSource> FetchPluginSources()
+        {
+            var comsController = CommunicationControllerFactory.CreateController("FetchPluginSources");
 
-        //    var workspaceId = Connection.WorkspaceID;
-        //    var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-        //    if (result.HasError)
-        //    {
-        //        throw new WarewolfSupportServiceException(result.Message.ToString(), null);
-        //    }
-        //    Dev2JsonSerializer serializer = new Dev2JsonSerializer();
-        //    return serializer.Deserialize<List<IPluginSource>>(result.Message.ToString());
-        //}
+            var workspaceId = Connection.WorkspaceID;
+            var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
+            if (result.HasError)
+            {
+                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+            }
+            Dev2JsonSerializer serializer = new Dev2JsonSerializer();
+            return serializer.Deserialize<List<IPluginSource>>(result.Message.ToString());
+        }
 
-        //public IList<IPluginAction> PluginActions(IPluginSource source, INamespaceItem ns)
-        //{
-        //    Dev2JsonSerializer serializer = new Dev2JsonSerializer();
-        //    var comsController = CommunicationControllerFactory.CreateController("FetchPluginActions");
-            
-        //    comsController.AddPayloadArgument("source", serializer.SerializeToBuilder(source));
-        //    comsController.AddPayloadArgument("namespace", serializer.SerializeToBuilder(ns));
-        //    var workspaceId = Connection.WorkspaceID;
-        //    var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-        //    if (result.HasError)
-        //    {
-        //        throw new WarewolfSupportServiceException(result.Message.ToString(), null);
-        //    }
+        public IList<IPluginAction> PluginActions(IPluginSource source, INamespaceItem ns)
+        {
+            Dev2JsonSerializer serializer = new Dev2JsonSerializer();
+            var comsController = CommunicationControllerFactory.CreateController("FetchPluginActions");
+
+            comsController.AddPayloadArgument("source", serializer.SerializeToBuilder(source));
+            comsController.AddPayloadArgument("namespace", serializer.SerializeToBuilder(ns));
+            var workspaceId = Connection.WorkspaceID;
+            var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
+            if (result.HasError)
+            {
+                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+            }
 
 
-        //    return serializer.Deserialize<List<IPluginAction>>(result.Message.ToString());
-        //}
+            return serializer.Deserialize<List<IPluginAction>>(result.Message.ToString());
+        }
     }
          
     

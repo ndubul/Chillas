@@ -40,10 +40,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             UpdateManagerProxy.SaveServerSource(serverSource, GlobalConstants.ServerWorkspaceID);
         }
 
-    //    public void Save(IPluginSource source)
-    //    {
-    //        UpdateManagerProxy.SavePluginSource(source, GlobalConstants.ServerWorkspaceID);
-    //    }
+        public void Save(IPluginSource source)
+        {
+            UpdateManagerProxy.SavePluginSource(source, GlobalConstants.ServerWorkspaceID);
+        }
 
         public void Save(IEmailServiceSource emailServiceSource)
         {
@@ -63,10 +63,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             return UpdateManagerProxy.TestEmailServiceSource(emailServiceSource);
         }
 
-    //    public void TestConnection(IWebServiceSource resource)
-    //    {
-    //        UpdateManagerProxy.TestConnection(resource);
-    //    }
+        public void TestConnection(IWebServiceSource resource)
+        {
+            UpdateManagerProxy.TestConnection(resource);
+        }
 
         public IList<string> TestDbConnection(IDbSource serverSource)
         {
@@ -84,21 +84,21 @@ namespace Warewolf.Studio.AntiCorruptionLayer
     //        UpdateManagerProxy.SaveWebservice(model,GlobalConstants.ServerWorkspaceID);
     //    }
 
-    //    public void Save(IWebServiceSource resource)
-    //    {
-    //        try
-    //        {
-    //            UpdateManagerProxy.SaveWebserviceSource(resource, GlobalConstants.ServerWorkspaceID);
-    //            if(WebServiceSourceSaved != null)
-    //            {
-    //                WebServiceSourceSaved(resource);
-    //            }
-    //        }
-    //        catch(Exception)
-    //        {
-    //            //
-    //        }
-    //    }
+        public void Save(IWebServiceSource resource)
+        {
+            try
+            {
+                UpdateManagerProxy.SaveWebserviceSource(resource, GlobalConstants.ServerWorkspaceID);
+                if (WebServiceSourceSaved != null)
+                {
+                    WebServiceSourceSaved(resource);
+                }
+            }
+            catch (Exception)
+            {
+                //
+            }
+        }
 
     //    public void Save(IDatabaseService toDbSource)
     //    {
@@ -116,7 +116,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
     //         return UpdateManagerProxy.TestWebService(inputValues);
     //    }
 
-    //    public event Action<IWebServiceSource> WebServiceSourceSaved;
+        public event Action<IWebServiceSource> WebServiceSourceSaved;
 
     //    public string TestPluginService(IPluginService inputValues)
     //    {

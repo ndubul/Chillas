@@ -725,6 +725,14 @@ namespace Dev2.Studio.ViewModels
             {
                 AddNewDbSourceSurface();
             }
+            else if (resourceType == "WebSource")
+            {
+                AddNewWebSourceSurface();
+            }
+            else if (resourceType == "ResourceSource")
+            {
+                AddNewPluginSourceSurface();
+            }
             else
             {
                 var resourceModel = ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
@@ -745,6 +753,20 @@ namespace Dev2.Studio.ViewModels
         {
             var server = CustomContainer.Get<IServer>();
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbSource), new NewDatabaseSourceViewModel(EventPublisher, new ManageDatabaseSourceViewModel(new ManageDatabaseSourceModel(server.UpdateRepository,server.QueryProxy,ActiveEnvironment.Name), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator()), PopupProvider));
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+        void AddNewWebSourceSurface()
+        {
+            var server = CustomContainer.Get<IServer>();
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), new NewWebSourceViewModel(EventPublisher, new ManageWebserviceSourceViewModel(new ManageWebServiceSourceModel(server.UpdateRepository, ActiveEnvironment.Name), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator()), PopupProvider));
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+        void AddNewPluginSourceSurface()
+        {
+            var server = CustomContainer.Get<IServer>();
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginSource), new NewPluginSourceViewModel(EventPublisher, new ManagePluginSourceViewModel(new ManagePluginSourceModel(server.UpdateRepository,server.QueryProxy, ActiveEnvironment.Name), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator()), PopupProvider));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
