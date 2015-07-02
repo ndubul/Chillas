@@ -1,11 +1,16 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Explorer;
+using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Controller;
 using Dev2.Network;
 using Dev2.Runtime.ServiceModel.Data;
+using Dev2.Services.Security;
 using Dev2.Threading;
 
 namespace Warewolf.Studio.AntiCorruptionLayer
@@ -40,7 +45,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             _serverId = Guid.NewGuid();
             _proxyLayer = new StudioServerProxy(new CommunicationControllerFactory(), EnvironmentConnection);
             UpdateRepository = new StudioResourceUpdateManager(new CommunicationControllerFactory(), EnvironmentConnection);
-            //EnvironmentConnection.PermissionsModified += RaisePermissionsModifiedEvent;
+            EnvironmentConnection.PermissionsModified += RaisePermissionsModifiedEvent;
            // EnvironmentConnection.NetworkStateChanged += RaiseNetworkStateChangeEvent;
         }
 
@@ -74,14 +79,14 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //            }
 //        }
 //
-//        void RaisePermissionsModifiedEvent(object sender, List<IWindowsGroupPermission> e)
-//        {
+        void RaisePermissionsModifiedEvent(object sender, List<WindowsGroupPermission> windowsGroupPermissions)
+        {
 //            if (PermissionsChanged != null)
 //            {
 //                PermissionsChanged(new PermissionsChangedArgs(e));
 //            }
-//            Permissions = e;
-//        }
+            Permissions = windowsGroupPermissions.Select(permission => permission as IWindowsGroupPermission).ToList();
+        }
 
         #region Implementation of IServer
 //
@@ -95,12 +100,12 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //            return null;
 //        }
 //
-//        public async Task<IExplorerItem> LoadExplorer()
-//        {
-//            var result = await ProxyLayer.QueryManagerProxy.Load();
-//            ExplorerItems = result;
-//            return result;
-//        }
+        public async Task<IExplorerItem> LoadExplorer()
+        {
+            var result = await ProxyLayer.QueryManagerProxy.Load();
+            ExplorerItems = result;
+            return result;
+        }
 //
 //        public IList<IServer> GetServerConnections()
 //        {
@@ -116,7 +121,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //        {
 //            get
 //            {
-//                return ProxyLayer;
+//                return ProxyLayer.UpdateManagerProxy;
 //            }
 //        }
 
@@ -146,14 +151,14 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //        {
 //        }
 
-       // public List<IWindowsGroupPermission> Permissions { get; private set; }
+        public List<IWindowsGroupPermission> Permissions { get; private set; }
 
        // public event PermissionsChanged PermissionsChanged;
        // public event NetworkStateChanged NetworkStateChanged;
        // public event ItemAddedEvent ItemAddedEvent;
 
         public IStudioUpdateManager UpdateRepository { get; private set; }
-//        public IExplorerItem ExplorerItems { get; set; }
+        public IExplorerItem ExplorerItems { get; set; }
         public StudioServerProxy ProxyLayer
         {
             get

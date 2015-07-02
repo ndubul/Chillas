@@ -41,6 +41,9 @@
     <Reference Include="InfragisticsWPF4.Controls.Grids.XamGrid.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Grids.XamGrid.v14.2.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF4.Controls.Interactions.XamDialogWindow.v14.2">
+      <HintPath>..\Binaries\InfragisticsWPF4.Controls.Interactions.XamDialogWindow.v14.2.dll</HintPath>
+    </Reference>
     <Reference Include="InfragisticsWPF4.Controls.Menus.XamDataTree.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Menus.XamDataTree.v14.2.dll</HintPath>
     </Reference>
@@ -56,6 +59,9 @@
     </Reference>
     <Reference Include="InfragisticsWPF4.DataPresenter.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.DataPresenter.v14.2.dll</HintPath>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.DragDrop.v14.2">
+      <HintPath>..\Binaries\InfragisticsWPF4.DragDrop.v14.2.dll</HintPath>
     </Reference>
     <Reference Include="InfragisticsWPF4.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.v14.2.dll</HintPath>
@@ -96,6 +102,9 @@
     <Compile Include="CircularProgressBar.xaml.cs">
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExplorerView.xaml.cs">
+      <DependentUpon>ExplorerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FocusExtension.cs" />
     <Compile Include="ManageDatabaseServiceControl.xaml.cs">
       <DependentUpon>ManageDatabaseServiceControl.xaml</DependentUpon>
@@ -120,9 +129,15 @@
     </Compile>
     <Compile Include="NotConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenameTreeNode.cs" />
+    <Compile Include="RequestServiceNameView.xaml.cs">
+      <DependentUpon>RequestServiceNameView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SplashPage.xaml.cs">
       <DependentUpon>SplashPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WidthConverter.cs" />
+    <Compile Include="XamGridEx\ContextMenuSettings.cs" />
     <Compile Include="XamGrid\ContextMenuOpeningEventArgs.cs" />
     <Compile Include="XamGrid\ContextMenuSettings.cs" />
     <Compile Include="XamGrid\XamGridEx.cs" />
@@ -135,6 +150,10 @@
     <Page Include="ManageDatabaseServiceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExplorerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ManageDatabaseSourceControl.xaml">
       <SubType>Designer</SubType>
@@ -155,6 +174,10 @@
     <Page Include="ManageWebserviceSourceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RequestServiceNameView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MappingsView.xaml">
       <SubType>Designer</SubType>

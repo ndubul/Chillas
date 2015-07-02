@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using Dev2.CustomControls.Converters;
+using Infragistics.Controls.Primitives;
 
 namespace Warewolf.Studio.Views
 {
@@ -16,7 +16,7 @@ namespace Warewolf.Studio.Views
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return _convertor.Convert(!(bool)value, targetType, parameter, culture);
+            return _convertor.Convert( !(bool)value,targetType,parameter,culture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

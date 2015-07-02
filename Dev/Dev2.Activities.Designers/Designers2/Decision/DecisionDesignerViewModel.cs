@@ -24,6 +24,7 @@ using Dev2.Providers.Validation.Rules;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Activities.Utils;
+using Dev2.TO;
 using Dev2.Validation;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
 
@@ -44,6 +45,7 @@ namespace Dev2.Activities.Designers2.Decision
             SearchTypeUpdatedCommand = new DelegateCommand(OnSearchTypeChanged);
 
             dynamic mi = ModelItem;
+            
             InitializeItems(mi.ResultsCollection);
         }
 
@@ -53,9 +55,9 @@ namespace Dev2.Activities.Designers2.Decision
 
         public ObservableCollection<string> WhereOptions { get; private set; }
 
-        string DisplayText { get { return GetProperty<string>(); } }
-        string TrueArmText { get { return GetProperty<string>(); } }
-        string FalseArmText { get { return GetProperty<string>(); } }
+        public string DisplayText { set{ SetProperty(value);} get { return GetProperty<string>(); } }
+        public string TrueArmText { set { SetProperty(value); } get { return GetProperty<string>(); } }
+        public string FalseArmText { set { SetProperty(value); } get { return GetProperty<string>(); } }
 
         public bool IsDisplayTextFocused { get { return (bool)GetValue(IsDisplayTextFocusedProperty); } set { SetValue(IsDisplayTextFocusedProperty, value); } }
         public static readonly DependencyProperty IsDisplayTextFocusedProperty = DependencyProperty.Register("IsDisplayTextFocused", typeof(bool), typeof(DecisionDesignerViewModel), new PropertyMetadata(default(bool)));

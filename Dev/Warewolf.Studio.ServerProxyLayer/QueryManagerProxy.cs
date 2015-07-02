@@ -91,14 +91,6 @@ namespace Warewolf.Studio.ServerProxyLayer
         /// <returns></returns>
         //IXamlResource FetchResourceWithXaml(Guid resourceId);
 
-        /// <summary>
-        /// Loads the Tree.
-        /// </summary>
-        /// <returns></returns>
-        public Task<IExplorerItem> Load()
-        {
-            return null;
-        }
 
         /// <summary>
         /// Get a list of tables froma db source
@@ -137,18 +129,18 @@ namespace Warewolf.Studio.ServerProxyLayer
         //    return new XamlResource(resource, xaml);
         //}
 
-        ///// <summary>
-        ///// Loads the Tree.
-        ///// </summary>
-        ///// <returns></returns>
-        //public async Task<IExplorerItem> Load()
-        //{
-        //    var comsController = CommunicationControllerFactory.CreateController("FetchExplorerItemsService");
+        /// <summary>
+        /// Loads the Tree.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IExplorerItem> Load()
+        {
+            var comsController = CommunicationControllerFactory.CreateController("FetchExplorerItemsService");
 
-        //    var workspaceId = Connection.WorkspaceID;
-        //    var result = await comsController.ExecuteCommandAsync<IExplorerItem>(Connection, workspaceId);            
-        //    return result;
-        //}
+            var workspaceId = Connection.WorkspaceID;
+            var result = await comsController.ExecuteCommandAsync<IExplorerItem>(Connection, workspaceId);            
+            return result;
+        }
         #endregion
 
         //public IList<IToolDescriptor> FetchTools()

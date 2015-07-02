@@ -205,7 +205,14 @@
     <Compile Include="IDllListing.cs" />
     <Compile Include="IEmailServiceSource.cs" />
     <Compile Include="IEnvironment.cs" />
+    <Compile Include="IEnvironmentViewModel.cs" />
     <Compile Include="IExecutionToken.cs" />
+    <Compile Include="IExplorerItemViewModel.cs" />
+    <Compile Include="IExplorerRepository.cs" />
+    <Compile Include="IExplorerTreeItem.cs" />
+    <Compile Include="IExplorerUpdateManager.cs" />
+    <Compile Include="IExplorerView.cs" />
+    <Compile Include="IExplorerViewModel.cs" />
     <Compile Include="IExternalProcessExecutor.cs" />
     <Compile Include="IFrameworkRepository.cs" />
     <Compile Include="IManageDatabaseSourceView.cs" />
@@ -241,6 +248,7 @@
     <Compile Include="IPluginSource.cs" />
     <Compile Include="IPulseLogger.cs" />
     <Compile Include="IQueryManager.cs" />
+    <Compile Include="IRequestServiceNameView.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="IServerSource.cs" />
     <Compile Include="ISplashView.cs" />
