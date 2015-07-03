@@ -11,12 +11,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Claims;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
 using Caliburn.Micro;
 using Dev2.AppResources.Repositories;
 using Dev2.Common;
@@ -703,6 +703,12 @@ namespace Dev2.Studio.ViewModels
                 case "DbSource":
                     EditDbSource(resourceModel);
                     break;
+                case "WebSource":
+                    EditWebSource(resourceModel);
+                    break;
+                case "Plugin":
+                    EditPluginSource(resourceModel);
+                    break;
                 case "DbService":
                     EditDbService(resourceModel);
                 break;
@@ -727,11 +733,41 @@ namespace Dev2.Studio.ViewModels
             };
             EditResource(def);
         }
+        void EditPluginSource(IContextualResourceModel resourceModel)
+        {
+            var db = new PluginSource(resourceModel.WorkflowXaml.ToXElement());
+            var def = new PluginSourceDefinition()
+            {
+                 SelectedDll = new DllListing(){FullName = db.AssemblyName, Name = db.AssemblyName, Children = new Collection<IDllListing>(),IsDirectory = false},
+                 Id = db.ResourceID,
+                 Name = db.ResourceName,
+                 Path = db.ResourcePath
+            };
+            EditResource(def);
+        }
+        void EditWebSource(IContextualResourceModel resourceModel)
+        {
+            var db = new WebSource(resourceModel.WorkflowXaml.ToXElement());
+            var def = new WebServiceSourceDefinition()
+            {
+                AuthenticationType = db.AuthenticationType,
+                DefaultQuery = db.DefaultQuery,
+                Id = db.ResourceID,
+                Name = db.ResourceName,
+                Password = db.Password,
+                Path = db.ResourcePath,
+                HostName = db.Address,
+                
+                UserName = db.UserName
+            };
+            EditResource(def);
+        }
 
         void EditDbService(IContextualResourceModel resourceModel)
         {
             var dbsvc = new DbService(resourceModel.WorkflowXaml.ToXElement());
             var db = dbsvc.Source as DbSource;
+            var server = CustomContainer.Get<IServer>();
 
             if(db != null)
             {
@@ -780,6 +816,25 @@ namespace Dev2.Studio.ViewModels
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
+        public void EditResource(IPluginSource selectedSource)
+        {
+
+            var server = CustomContainer.Get<IServer>();
+            var dbSourceViewModel = new ManagePluginSourceViewModel(new ManagePluginSourceModel(server.UpdateRepository, server.QueryProxy, "") ,new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource);
+            var vm = new NewPluginSourceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginSource), vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+        public void EditResource(IWebServiceSource selectedSource)
+        {
+
+            var server = CustomContainer.Get<IServer>();
+            var dbSourceViewModel = new ManageWebserviceSourceViewModel(new ManageWebServiceSourceModel(server.UpdateRepository,  ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource);
+            var vm = new NewWebSourceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
 
         public void EditResource(IDatabaseService selectedSource)
         {
