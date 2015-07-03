@@ -1,3 +1,5 @@
+using System;
+using System.Net;
 using System.Windows;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Core.Help;
@@ -6,6 +8,7 @@ using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Common.Interfaces.Studio.ViewModels.Dialogues;
+using Dev2.ConnectionHelpers;
 using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.WorkSurface;
 using Warewolf.Studio.ViewModels;
@@ -28,7 +31,10 @@ namespace Dev2.Settings.Scheduler
             : base(new EventAggregator())
         {
             IManageEmailSourceModel model = new ManageEmailSourceModel(CustomContainer.Get<IStudioUpdateManager>(),CustomContainer.Get<IQueryManager>(),"todo");
-            ViewModel = new ManageEmailSourceViewModel(model,CustomContainer.Get<IRequestServiceNameViewModel>(),CustomContainer.Get< Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
+            var svr = CustomContainer.Get<IServer>();
+            var nm = new RequestServiceNameViewModel(new EnvironmentViewModel(svr), new RequestServiceNameView(), Guid.NewGuid());
+            ViewModel = new ManageEmailSourceViewModel(model,
+               nm, CustomContainer.Get< Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
             _popupController = CustomContainer.Get<IPopupController>();
         }
 

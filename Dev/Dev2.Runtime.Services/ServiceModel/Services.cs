@@ -107,16 +107,6 @@ namespace Dev2.Runtime.ServiceModel
             try
             {
                 var service = DeserializeService(args);
-                var dbService = service as DbService;
-                if (dbService != null)
-                {
-                    var source = _resourceCatalog.GetResource<DbSource>(workspaceId, dbService.Source.ResourceID);
-                    if (source.ServerType == enSourceType.MySqlDatabase)
-                    {
-                        var broker = new MySqlDatabaseBroker();
-                        broker.UpdateServiceOutParameters(dbService, source);
-                    }
-                }
                 _resourceCatalog.SaveResource(workspaceId, service);
 
                 if(workspaceId != GlobalConstants.ServerWorkspaceID)
@@ -166,12 +156,39 @@ namespace Dev2.Runtime.ServiceModel
         #region DbTest
 
         // POST: Service/Services/DbTest
+        public Recordset DbTest(string args, Guid workspaceId, Guid dataListId)
+        {
+            try
+            {
+                var service = JsonConvert.DeserializeObject<DbService>(args);
+                service.Source = _resourceCatalog.GetResource<DbSource>(workspaceId, service.Source.ResourceID);
+                if(string.IsNullOrEmpty(service.Recordset.Name))
+                {
+                    service.Recordset.Name = service.Method.Name;
+                }
+
+                var addFields = service.Recordset.Fields.Count == 0;
+                if (addFields)
+                {
+                    service.Recordset.Fields.Clear();
+                }
+                service.Recordset.Records.Clear();
+
+                return FetchRecordset(service, addFields);
+            }
+            catch (Exception ex)
+            {
+                RaiseError(ex);
+                return new Recordset { HasErrors = true, ErrorMessage = ex.Message };
+            }
+        }
+        // POST: Service/Services/DbTest
         public Recordset DbTest(DbService args, Guid workspaceId, Guid dataListId)
         {
             try
             {
                 var service = args;
-
+          
                 if (string.IsNullOrEmpty(service.Recordset.Name))
                 {
                     service.Recordset.Name = service.Method.Name;
@@ -192,7 +209,6 @@ namespace Dev2.Runtime.ServiceModel
                 return new Recordset { HasErrors = true, ErrorMessage = ex.Message };
             }
         }
-
         #endregion
 
         #region FetchRecordset
@@ -211,22 +227,34 @@ namespace Dev2.Runtime.ServiceModel
                 {
                     case enSourceType.SqlDatabase:
                         {
-                            var broker = CreateDatabaseBroker();
-                            var outputDescription = broker.TestService(dbService);
+                               var broker = CreateDatabaseBroker();
+            var outputDescription = broker.TestService(dbService);
 
-                            if (outputDescription == null || outputDescription.DataSourceShapes == null || outputDescription.DataSourceShapes.Count == 0)
-                            {
-                                throw new Exception("Error retrieving shape from service output.");
-                            }
+            if(outputDescription == null || outputDescription.DataSourceShapes == null || outputDescription.DataSourceShapes.Count == 0)
+            {
+                throw new Exception("Error retrieving shape from service output.");
+            }
 
-                            dbService.Recordset.Name = dbService.Recordset.Name.Replace(".", "_");
-                            dbService.Recordset.Fields.Clear();
+            // Clear out the Recordset.Fields list because the sequence and
+            // number of fields may have changed since the last invocation.
+            //
+            // Create a copy of the Recordset.Fields list before clearing it
+            // so that we don't lose the user-defined aliases.
+            //
 
-                            ServiceMappingHelper smh = new ServiceMappingHelper();
+            if(dbService.Recordset != null)
+            {
+                if(dbService.Recordset.Name != null)
+                {
+                    dbService.Recordset.Name = dbService.Recordset.Name.Replace(".", "_");
+                }
+                dbService.Recordset.Fields.Clear();
 
-                            smh.MapDbOutputs(outputDescription, ref dbService, addFields);
+                ServiceMappingHelper smh = new ServiceMappingHelper();
 
-                            return dbService.Recordset;
+                smh.MapDbOutputs(outputDescription, ref dbService, addFields);
+            }
+                return dbService.Recordset;
                         }
 
                     case enSourceType.MySqlDatabase:

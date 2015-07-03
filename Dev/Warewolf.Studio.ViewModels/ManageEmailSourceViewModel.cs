@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
@@ -423,63 +424,45 @@ namespace Warewolf.Studio.ViewModels
         private void TestConnection()
         {
             _token = new CancellationTokenSource();
-            Testing = true;
-            TestFailed = false;
-            TestPassed = false;
-            try
-            {
-                SetupProgressSpinner();
-                TestMessage = "Passed";
-                TestFailed = false;
-                TestPassed = true;
-                Testing = false;
-            }
-            catch(Exception e)
-            {
 
-                TestFailed = true;
-                TestPassed = false;
-                Testing = false;
-                TestMessage = e.Message;
-            }
-            
-            //var t = new Task(
-            //    SetupProgressSpinner, _token.Token);
 
-            //t.ContinueWith(a => Dispatcher.CurrentDispatcher.Invoke(() =>
-            //{
-            //    if (!_token.IsCancellationRequested)
-            //        switch (t.Status)
-            //        {
-            //            case TaskStatus.Faulted:
-            //            {
-            //                TestFailed = true;
-            //                TestPassed = false;
-            //                Testing = false;
-            //                TestMessage = t.Exception != null ? t.Exception.Message : "Failed";
-            //                break;
-            //            }
-            //            case TaskStatus.RanToCompletion:
-            //            {
-            //                TestMessage = "Passed";
-            //                TestFailed = false;
-            //                TestPassed = true;
-            //                Testing = false;
-            //                break;
-            //            }
-            //        }
-            //}));
-            //t.Start();
+            var t = new Task(
+                SetupProgressSpinner, _token.Token);
+
+            t.ContinueWith(a => Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                if (!_token.IsCancellationRequested)
+                    switch (t.Status)
+                    {
+                        case TaskStatus.Faulted:
+                            {
+                                TestFailed = true;
+                                TestPassed = false;
+                                Testing = false;
+                                TestMessage = t.Exception != null ? t.Exception.Message : "Failed";
+                                break;
+                            }
+                        case TaskStatus.RanToCompletion:
+                            {
+                                TestMessage = "Passed";
+                                TestFailed = false;
+                                TestPassed = true;
+                                Testing = false;
+                                break;
+                            }
+                    }
+            }));
+            t.Start();
         }
 
         void SetupProgressSpinner()
         {
-            //Dispatcher.CurrentDispatcher.Invoke(() =>
-            //{
-            //    Testing = true;
-            //    TestFailed = false;
-            //    TestPassed = false;
-            //});
+            Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                Testing = true;
+                TestFailed = false;
+                TestPassed = false;
+            });
 
             string s = _updateManager.TestConnection(ToNewSource());
             if (s.Length > 0) ;

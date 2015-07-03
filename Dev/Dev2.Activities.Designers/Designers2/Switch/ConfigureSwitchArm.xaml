@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Dev2.Activities.Designers2.Switch.ConfigureSwitchArm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto"
+             d:DesignHeight="200" d:DesignWidth="300">
+    <Grid Margin="{StaticResource ElementBorder}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Background="{StaticResource WareWolfMenuBrush}" HorizontalAlignment="Stretch" Orientation="Horizontal">
+            <TextBlock Margin="5" Text="Switch Flow" Style="{StaticResource SourceHeader}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="{StaticResource ControlBorderTop}">
+            <TextBlock Text="Switch on [[a]] when the case is:" Margin="{StaticResource ControlBorderRight}" />
+            <TextBox MinWidth="200" MaxWidth="200" Margin="{StaticResource ControlBorderRight}" />
+            <Button Content="Done" Margin="{StaticResource ControlBorderRight}" />
+            <Button Content="Cancel" />
+        </StackPanel>
+    </Grid>
+</UserControl>

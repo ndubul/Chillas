@@ -61,11 +61,7 @@ namespace Warewolf.Studio.ViewModels
         {
             PerformInitialise(updateManager, aggregator);
             // ReSharper disable MaximumChainedReferences
-            new Task(() =>
-            {
-                var names = _updateManager.GetComputerNames().Select(name => new ComputerName { Name = name } as IComputerName).ToList();
-                Dispatcher.CurrentDispatcher.Invoke(() => ComputerNames = names);
-            }).Start();
+            GetLoadComputerNamesTask().Start();
             // ReSharper restore MaximumChainedReferences
             _warewolfserverName = updateManager.ServerName;
         }
@@ -90,6 +86,16 @@ namespace Warewolf.Studio.ViewModels
             _testFailed = false;
             DatabaseNames = new List<string>();
             ComputerNames = new List<IComputerName>();
+            
+        }
+
+        Task GetLoadComputerNamesTask()
+        {
+            return new Task(() =>
+            {
+                var names = _updateManager.GetComputerNames().Select(name => new ComputerName { Name = name } as IComputerName).ToList();
+                Dispatcher.CurrentDispatcher.Invoke(() => ComputerNames = names);
+            });
         }
 
         bool CanCancelTest()
@@ -120,6 +126,7 @@ namespace Warewolf.Studio.ViewModels
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
             PerformInitialise(updateManager, aggregator);
             RequestServiceNameViewModel = requestServiceNameViewModel;
+            GetLoadComputerNamesTask().Start();
 
         }
         public ManageDatabaseSourceViewModel(IManageDatabaseSourceModel updateManager, IEventAggregator aggregator, IDbSource dbSource)
@@ -128,11 +135,7 @@ namespace Warewolf.Studio.ViewModels
             PerformInitialise(updateManager, aggregator);
             _warewolfserverName = "localhost";
             _dbSource = dbSource;
-            var task = new Task(() =>
-            {
-                var names = _updateManager.GetComputerNames().Select(name => new ComputerName { Name = name } as IComputerName).ToList();
-                Dispatcher.CurrentDispatcher.Invoke(() => ComputerNames = names);
-            });
+            var task = GetLoadComputerNamesTask();
             task.ContinueWith(task1 =>
             {
                 FromDbSource(dbSource);

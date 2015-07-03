@@ -44,8 +44,11 @@ namespace Dev2.Runtime.ESB.Management.Services
                 }
                 catch (SmtpException e)
                 {
-                    msg.HasError = true;
-                    msg.Message = new StringBuilder(e.Message);
+                    msg.HasError = false;
+                    msg.Message = new StringBuilder( e.Message);
+                    return serializer.SerializeToBuilder(msg);
+                    //msg.HasError = true;
+                    //msg.Message = new StringBuilder(e.Message);
                 }
             }
             catch (Exception err)
