@@ -16,7 +16,7 @@
                                xmlns:activities1="clr-namespace:Dev2.Activities;assembly=Dev2.Activities"
                                xmlns:decision="clr-namespace:Dev2.Activities.Designers2.Decision"
                                xmlns:to="clr-namespace:Dev2.TO;assembly=Dev2.Activities"
-                               Width="350"
+                               Width="400"
                                MinWidth="350"
                                MinHeight="380"
                                Height="350"
@@ -101,8 +101,6 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <ui:IntellisenseTextBox DefaultText="Match Value"
-                                                        
-                                                        FilterType="All"
                                                         Grid.Column="0"
                                                         Grid.ColumnSpan="2"
                                                         AllowUserCalculateMode="False"
@@ -114,7 +112,6 @@
                                                         AllowUserInsertLine="True"
                                                         MaxHeight="52"
                                                         Padding="3"
-                                                      
                                                         Text="{Binding MatchValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         IsEnabled="{Binding IsSearchCriteriaEnabled, UpdateSourceTrigger=PropertyChanged}"
                                                         Visibility="{Binding IsSearchCriteriaVisible,Converter={StaticResource BoolToVisibilityConverter},UpdateSourceTrigger=PropertyChanged}"
@@ -147,7 +144,6 @@
                                                         AcceptsReturn="False"
                                                         MaxHeight="52"
                                                         Padding="3"
-                                                        
                                                         Text="{Binding From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Visibility="{Binding IsSearchCriteriaVisible,Converter={StaticResource BoolToVisibilityConverterInverse},UpdateSourceTrigger=PropertyChanged}"
                                                         Style="{StaticResource DatagridIntellisenseTextBoxStyle}">
@@ -463,13 +459,6 @@
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>
-        </Grid>
-        <Grid Grid.Row="5"
-              Grid.Column="0"
-              Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Done" Margin="{StaticResource ControlBorderRight}"></Button>
-            </StackPanel>
         </Grid>
     </Grid>
 </core:ActivityDesignerTemplate>

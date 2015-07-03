@@ -63,6 +63,7 @@ using Dev2.Services.Security;
 using Dev2.Studio.ActivityDesigners;
 using Dev2.Studio.AppResources.AttachedProperties;
 using Dev2.Studio.AppResources.ExtensionMethods;
+using Dev2.Studio.Controller;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Activities.Services;
 using Dev2.Studio.Core.Activities.Utils;
@@ -671,10 +672,8 @@ namespace Dev2.Studio.ViewModels.Workflow
             Dev2Logger.Log.Info("Publish message of type - " + typeof(ConfigureDecisionExpressionMessage));
             ModelProperty modelProperty = mi.Properties["Action"];
             
-            // PBI 9135 - 2013.07.15 - TWR - Changed to "as" check so that database activity also flows through this
-            ModelProperty modelProperty1 = mi.Properties["Action"];
-            InitialiseWithAction(modelProperty1);
-           // EventPublisher.Publish(new ConfigureDecisionExpressionMessage { ModelItem = mi, EnvironmentModel = _resourceModel.Environment, IsNew = true });
+            InitialiseWithAction(modelProperty);
+            FlowController.ConfigureDecisionExpression(new ConfigureDecisionExpressionMessage { ModelItem = mi, EnvironmentModel = _resourceModel.Environment, IsNew = true });
         }
 
         public void EditActivity(ModelItem modelItem, Guid parentEnvironmentID, IEnvironmentRepository catalog)
@@ -1158,7 +1157,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                 {
                     builder.AddCustomAttributes(designerAttribute.Key, new DesignerAttribute(designerAttribute.Value));
                 }
-
+                
                 MetadataStore.AddAttributeTable(builder.CreateTable());
 
                 _wd.Context.Services.Subscribe<ModelService>(ModelServiceSubscribe);

@@ -17,10 +17,12 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
-using Caliburn.Micro;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Common;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
+using Dev2.Data.Decisions.Operations;
+using Dev2.Data.SystemTemplates;
 using Dev2.Data.SystemTemplates.Models;
 using Dev2.DataList;
 using Dev2.DataList.Contract;
@@ -28,9 +30,9 @@ using Dev2.Providers.Validation.Rules;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Messages;
-using Dev2.Studio.Core.Activities.Utils;
 using Dev2.TO;
 using Dev2.Validation;
+using Newtonsoft.Json;
 
 namespace Dev2.Activities.Designers2.Decision
 {
@@ -47,18 +49,52 @@ namespace Dev2.Activities.Designers2.Decision
 
             WhereOptions = new ObservableCollection<string>(FindRecsetOptions.FindAll().Select(c => c.HandlesType()));
             SearchTypeUpdatedCommand = new DelegateCommand(OnSearchTypeChanged);
-            Tos = new  ObservableCollection<DecisionTO>(new[]{new DecisionTO() });
-            Tos.CollectionChanged += Tos_CollectionChanged;
-
+            ConfigureDecisionExpression(ModelItem);
             
   
         }
 
-        void Tos_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        void ConfigureDecisionExpression(ModelItem mi)
         {
 
-            IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
+            var condition = mi;
+            var expression = condition.Properties[GlobalConstants.ExpressionPropertyText];
+            var ds = DataListConstants.DefaultStack;
 
+            if(expression != null && expression.Value != null)
+            {
+                //we got a model, push it in to the Model region ;)
+                // but first, strip and extract the model data ;)
+
+                var eval = Dev2DecisionStack.ExtractModelFromWorkflowPersistedData(expression.Value.ToString());
+
+                if(!string.IsNullOrEmpty(eval))
+                {
+                    ds = JsonConvert.DeserializeObject<Dev2DecisionStack>(eval);
+                }
+            }
+            else
+            {
+                ExpressionText = JsonConvert.SerializeObject(ds);
+            }
+
+            var displayName = mi.Properties[GlobalConstants.DisplayNamePropertyText];
+            if (displayName != null && displayName.Value != null)
+            {
+                ds.DisplayText = displayName.Value.ToString();
+            }
+            Tos = ToObservableCollection();
+            Tos.CollectionChanged += Tos_CollectionChanged;
+        }
+
+        void Tos_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+           GetExpressionText();
+        }
+
+        public void GetExpressionText()
+        {
+            IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
             var stack = SetupTos(_observables);
             ExpressionText = compiler.ConvertModelToJson(stack).ToString();
         }
@@ -72,12 +108,7 @@ namespace Dev2.Activities.Designers2.Decision
         string DisplayText { get { return GetProperty<string>(); } }
         string TrueArmText { get { return GetProperty<string>(); } }
         string FalseArmText { get { return GetProperty<string>(); } }
-        string ExpressionText
-        {
-            get { return GetProperty<string>(); } 
-            set {SetProperty(value);}
-
-        }
+        public string ExpressionText { get; set; }
         public ObservableCollection<DecisionTO> Tos
         {
 
@@ -97,9 +128,19 @@ namespace Dev2.Activities.Designers2.Decision
         ObservableCollection<DecisionTO> ToObservableCollection()
         {
             IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
-            var val = new StringBuilder(Dev2DecisionStack.ExtractModelFromWorkflowPersistedData(ExpressionText));
-            var decisions = compiler.ConvertFromJsonToModel<Dev2DecisionStack>(val);
-            return new ObservableCollection<DecisionTO>(decisions.TheStack.Select(a => new DecisionTO(a)));
+            if(!String.IsNullOrWhiteSpace(ExpressionText))
+            {
+                var val = new StringBuilder(Dev2DecisionStack.ExtractModelFromWorkflowPersistedData(ExpressionText));
+                var decisions = compiler.ConvertFromJsonToModel<Dev2DecisionStack>(val);
+                if(decisions != null)
+                {
+                    if(decisions.TheStack != null)
+                    {
+                        return new ObservableCollection<DecisionTO>(decisions.TheStack.Select(a => new DecisionTO(a)));
+                    }
+                }
+            }
+            return new ObservableCollection<DecisionTO>{new DecisionTO()};
         }
 
         static Dev2DecisionStack SetupTos(ObservableCollection<DecisionTO> value)
@@ -109,7 +150,19 @@ namespace Dev2.Activities.Designers2.Decision
             val.TheStack = new List<Dev2Decision>();
             foreach(var decisionTO in value.Where(a=>!a.IsEmpty()))
             {
-                val.TheStack.Add(decisionTO.Decision);
+                var dev2Decision = new Dev2Decision();
+                dev2Decision.Col1 = decisionTO.MatchValue;
+                if(!String.IsNullOrEmpty(decisionTO.SearchCriteria))
+                {
+                    dev2Decision.Col2 = decisionTO.SearchCriteria;
+                }
+                dev2Decision.EvaluationFn = DecisionDisplayHelper.GetValue(decisionTO.SearchType);
+                if(!String.IsNullOrEmpty(decisionTO.From) || !String.IsNullOrEmpty(decisionTO.To))
+                {
+                    dev2Decision.Col2 = decisionTO.From;
+                    dev2Decision.Col3 = decisionTO.To;
+                }
+                val.TheStack.Add(dev2Decision);
             }
             return val;
         }

@@ -10,17 +10,18 @@
                                  mc:Ignorable="d"
                                  Style="{DynamicResource ContentViewStyle}">
 
-    <sap:ActivityDesigner.Icon>
-        <DrawingBrush Stretch="Uniform">
-            <DrawingBrush.Drawing>
-                <ImageDrawing Rect="0, 0, 16, 16"
-                              ImageSource="{StaticResource ToolDecision-32}" />
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
-    </sap:ActivityDesigner.Icon>
+<!--    <sap:ActivityDesigner.Icon>-->
+<!--        <DrawingBrush Stretch="Uniform">-->
+<!--            <DrawingBrush.Drawing>-->
+<!--                <ImageDrawing Rect="0, 0, 16, 16"-->
+<!--                              ImageSource="{StaticResource ToolDecision-32}" />-->
+<!--            </DrawingBrush.Drawing>-->
+<!--        </DrawingBrush>-->
+<!--    </sap:ActivityDesigner.Icon>-->
 
     <sap:ActivityDesigner.Resources>
         <local:Large x:Key="Large" AutomationProperties.AutomationId="LargeViewContent" />
+        <local:Small x:Key="Small" AutomationProperties.AutomationId="LargeViewContent" />
 
         <Style x:Key="ContentViewStyle"
                BasedOn="{StaticResource ActivityDesignerStyle}"

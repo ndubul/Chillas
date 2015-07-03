@@ -15,6 +15,7 @@
 using System.Activities.Presentation.Model;
 using System.Windows;
 using Caliburn.Micro;
+using Dev2.Activities.Designers2.Decision;
 using Dev2.Common;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Data.SystemTemplates;
@@ -57,7 +58,7 @@ namespace Dev2.Studio.Controller
         #region Fields
 
         private readonly IPopupController _popupController;
-        private Dev2DecisionCallbackHandler _callBackHandler;
+        private static Dev2DecisionCallbackHandler _callBackHandler;
 
         #endregion Fields
 
@@ -78,7 +79,7 @@ namespace Dev2.Studio.Controller
         ///     Configures the decision expression.
         ///     Travis.Frisinger - Developed for new Decision Wizard
         /// </summary>
-        void ConfigureDecisionExpression(ConfigureDecisionExpressionMessage args)
+        public static  void ConfigureDecisionExpression(ConfigureDecisionExpressionMessage args)
         {
             var condition = ConfigureActivity<DsfFlowDecisionActivity>(args.ModelItem, GlobalConstants.ConditionPropertyText, args.IsNew);
             if(condition == null)
@@ -111,12 +112,12 @@ namespace Dev2.Studio.Controller
             var val = JsonConvert.SerializeObject(ds);
 
             // Now invoke the Wizard ;)
-            _callBackHandler = StartDecisionWizard(args.EnvironmentModel, val);
+            _callBackHandler = StartDecisionWizard(condition);
 
             // Wizard finished...
             try
             {
-                string tmp = WebHelper.CleanModelData(_callBackHandler);
+                string tmp = WebHelper.CleanModelData(_callBackHandler.ModelData);
                 var dds = JsonConvert.DeserializeObject<Dev2DecisionStack>(tmp);
 
                 if(dds == null)
@@ -131,9 +132,7 @@ namespace Dev2.Studio.Controller
             }
             catch
             {
-                _popupController.Show(GlobalConstants.DecisionWizardErrorString,
-                                      GlobalConstants.DecisionWizardErrorHeading, MessageBoxButton.OK,
-                                      MessageBoxImage.Error, null);
+                //
             }
         }
 
@@ -265,9 +264,27 @@ namespace Dev2.Studio.Controller
 
         #region Protected Methods
 
-        protected virtual Dev2DecisionCallbackHandler StartDecisionWizard(IEnvironmentModel environmentModel, string val)
+        protected static Dev2DecisionCallbackHandler StartDecisionWizard(IEnvironmentModel environmentModel, string val)
         {
             return RootWebSite.ShowDecisionDialog(environmentModel, val);
+        }
+
+        protected static Dev2DecisionCallbackHandler StartDecisionWizard(ModelItem mi)
+        {
+            var large = new Large();
+            var dataContext = new DecisionDesignerViewModel(mi);
+            large.DataContext = dataContext;
+            var window = new Window();
+            window.Content = large;
+            var showDialog = window.ShowDialog();
+            var dev2DecisionCallbackHandler = new Dev2DecisionCallbackHandler();
+            if(showDialog.HasValue)
+            {
+                dataContext.GetExpressionText();
+                dev2DecisionCallbackHandler.ModelData = dataContext.ExpressionText;
+                return dev2DecisionCallbackHandler;
+            }
+            return dev2DecisionCallbackHandler;
         }
 
         protected virtual Dev2DecisionCallbackHandler StartSwitchDropWizard(IEnvironmentModel environmentModel, string val)
@@ -303,7 +320,7 @@ namespace Dev2.Studio.Controller
 
         #region ConfigureActivity
 
-        ModelItem ConfigureActivity<T>(ModelItem modelItem, string propertyName, bool isNew) where T : class, IFlowNodeActivity, new()
+        static ModelItem ConfigureActivity<T>(ModelItem modelItem, string propertyName, bool isNew) where T : class, IFlowNodeActivity, new()
         {
             var property = modelItem.Properties[propertyName];
             if(property == null)

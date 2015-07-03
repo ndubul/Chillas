@@ -80,7 +80,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Views
             var category = GetToolboxCategoryByName("Control Flow");
             if(category != null)
             {
-                category.Add(new ToolboxItemWrapper(typeof(DsfFlowDecisionActivity), "/Images/ToolDecision-32.png", "Decision"));
+                category.Add(new ToolboxItemWrapper(typeof(FlowDecision), "/Images/ToolDecision-32.png", "Decision"));
                 category.Add(new ToolboxItemWrapper(typeof(FlowSwitch<string>), "/images/ToolSwitch-32.png", "Switch"));
                 category.Add(new ToolboxItemWrapper(typeof(DsfSequenceActivity), "/images/ToolSequence-32.png", "Sequence"));
             }

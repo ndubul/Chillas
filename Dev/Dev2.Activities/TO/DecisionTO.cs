@@ -10,6 +10,7 @@
 */
 
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
+using Dev2.Data.Decisions.Operations;
 using Dev2.Interfaces;
 using Dev2.Providers.Validation.Rules;
 using Dev2.Util;
@@ -31,7 +32,6 @@ namespace Dev2.TO
         bool _isSearchCriteriaVisible;
         bool _isFromFocused;
         bool _isToFocused;
-        private Data.SystemTemplates.Models.Dev2Decision a;
 
         public DecisionTO()
             : this("Match", "Match On", "Equal", 0)
@@ -55,8 +55,16 @@ namespace Dev2.TO
 
         public DecisionTO(Data.SystemTemplates.Models.Dev2Decision a)
         {
-            // TODO: Complete member initialization
-            this.a = a;
+            Inserted = false;
+            MatchValue = a.Col1;
+            SearchCriteria = a.Col2;
+            SearchType = DecisionDisplayHelper.GetDisplayValue(a.EvaluationFn);
+            IndexNumber = 1;
+            IsSearchCriteriaEnabled = false;
+            IsSearchCriteriaVisible = true;
+            From = a.Col2;
+            To = a.Col3;
+            IsSearchTypeFocused = false;
         }
 
         [FindMissing]
