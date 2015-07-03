@@ -12,8 +12,10 @@
 
 #region
 
+using System;
 using System.Activities.Presentation.Model;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Decision;
@@ -23,12 +25,14 @@ using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Data.SystemTemplates;
 using Dev2.Data.SystemTemplates.Models;
 using Dev2.Services.Events;
+using Dev2.Studio.Core.AppResources.ExtensionMethods;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
 using Dev2.Webs;
 using Dev2.Webs.Callbacks;
 using Newtonsoft.Json;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
+using Warewolf.Studio.Views;
 
 #endregion
 
@@ -226,12 +230,13 @@ namespace Dev2.Studio.Controller
             var large = new Large();
             var dataContext = new DecisionDesignerViewModel(mi);
             large.DataContext = dataContext;
-            var window = new Window();
-            window.Style = Application.Current.TryFindResource("WindowBorderlessStyle") as Style;
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.Width = 350;
-            window.Height = 400;
-            window.Content = large;
+            var window = new WindowBorderLess();
+            var contentPresenter = window.FindChild<ContentPresenter>();
+            if (contentPresenter != null)
+            {
+                contentPresenter.Content = large;
+            }
+            
             var showDialog = window.ShowDialog();
             var dev2DecisionCallbackHandler = new Dev2DecisionCallbackHandler();
             if(showDialog.HasValue)
@@ -241,15 +246,6 @@ namespace Dev2.Studio.Controller
                 return dev2DecisionCallbackHandler;
             }
             return dev2DecisionCallbackHandler;
-        }
-
-        void DecisionDesigner_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Mouse.LeftButton == MouseButtonState.Pressed)
-            {
-                var window = (Window)sender;
-                window.DragMove();
-            }
         }
 
         protected virtual Dev2DecisionCallbackHandler StartSwitchDropWizard(IEnvironmentModel environmentModel, string val)
