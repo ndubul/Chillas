@@ -90,27 +90,6 @@ namespace Dev2.Studio.Controller
             }
 
             var expression = condition.Properties[GlobalConstants.ExpressionPropertyText];
-            var ds = DataListConstants.DefaultStack;
-
-            if(expression != null && expression.Value != null)
-            {
-                //we got a model, push it in to the Model region ;)
-                // but first, strip and extract the model data ;)
-
-                var eval = Dev2DecisionStack.ExtractModelFromWorkflowPersistedData(expression.Value.ToString());
-
-                if(!string.IsNullOrEmpty(eval))
-                {
-                    ds = JsonConvert.DeserializeObject<Dev2DecisionStack>(eval);
-                }
-            }
-
-            var displayName = args.ModelItem.Properties[GlobalConstants.DisplayNamePropertyText];
-            if(displayName != null && displayName.Value != null)
-            {
-                ds.DisplayText = displayName.Value.ToString();
-            }
-
 
             // Now invoke the Wizard ;)
             _callBackHandler = StartDecisionWizard(condition);
@@ -177,25 +156,12 @@ namespace Dev2.Studio.Controller
 
         public void ConfigureSwitchCaseExpression(ConfigureCaseExpressionMessage args)
         {
-            IEnvironmentModel environment = args.EnvironmentModel;
-            ModelItem switchCase = args.ModelItem;
-
-            string modelData =
-                JsonConvert.SerializeObject(new Dev2Switch
-                    {
-                        SwitchVariable = "",
-                        SwitchExpression = args.ExpressionText
-                    });
-
-            // now invoke the wizard ;)
-            _callBackHandler = RootWebSite.ShowSwitchDragDialog(environment, modelData);
-
-            // Wizard finished...
-            // Now Fetch from DL and push the model data into the workflow
+            _callBackHandler = ShowSwitchDragDialog(args.ModelItem,args.ExpressionText);
             try
             {
                 var ds = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
-                Utilities.ActivityHelper.SetSwitchKeyProperty(ds, switchCase);
+                ds.SwitchVariable = "";
+                Utilities.ActivityHelper.SetSwitchKeyProperty(ds, args.ModelItem);
             }
             catch
             {
@@ -205,26 +171,27 @@ namespace Dev2.Studio.Controller
             }
         }
 
+        Dev2DecisionCallbackHandler ShowSwitchDragDialog(ModelItem modelData, string variable = "")
+        {
+            var large = new ConfigureSwitchArm();
+            var dataContext = new SwitchDesignerViewModel(modelData);
+            dataContext.SwitchVariable = variable;
+            large.DataContext = dataContext;
+            var window = new Window();
+            window.Content = large;
+            var callBack = new Dev2DecisionCallbackHandler();
+            if(window.ShowDialog().HasValue)
+            {
+                callBack.ModelData = JsonConvert.SerializeObject(dataContext.Switch);
+            }
+            return callBack;
+        }
+
         // 28.01.2013 - Travis.Frisinger : Added for Case Edits
         public void EditSwitchCaseExpression(EditCaseExpressionMessage args)
         {
-            IEnvironmentModel environment = args.EnvironmentModel;
             ModelProperty switchCaseValue = args.ModelItem.Properties["Case"];
-
-            string modelData = JsonConvert.SerializeObject(DataListConstants.DefaultCase);
-
-            // Extract existing value ;)
-            if(switchCaseValue != null)
-            {
-                string val = switchCaseValue.ComputedValue.ToString();
-                modelData = JsonConvert.SerializeObject(new Dev2Switch { SwitchVariable = val });
-            }
-
-            // now invoke the wizard ;)
-            _callBackHandler = RootWebSite.ShowSwitchDragDialog(environment, modelData);
-
-            // Wizard finished...
-            // Now Fetch from DL and push the model data into the workflow
+            _callBackHandler = ShowSwitchDragDialog(args.ModelItem);
             try
             {
                 var ds = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);

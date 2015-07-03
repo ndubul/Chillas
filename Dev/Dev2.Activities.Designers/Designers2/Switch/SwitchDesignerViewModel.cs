@@ -16,7 +16,7 @@ namespace Dev2.Activities.Designers2.Switch
         void Initialize()
         {
             var expressionText = ModelItem.Properties[GlobalConstants.SwitchExpressionTextPropertyText];
-
+            ModelProperty switchCaseValue = ModelItem.Properties["Case"];
             Dev2Switch ds;
             if (expressionText != null && expressionText.Value != null)
             {
@@ -37,11 +37,17 @@ namespace Dev2.Activities.Designers2.Switch
             {
                 ds.DisplayText = displayName.Value.ToString();
             }
-
+            if (switchCaseValue != null)
+            {
+                string val = switchCaseValue.ComputedValue.ToString();
+                ds.SwitchExpression = val;
+            }
             DisplayText = ds.DisplayText;
             SwitchVariable = ds.SwitchVariable;
+            SwitchExpression = ds.SwitchExpression;
         }
 
+        public string SwitchExpression { get; set; }
         public string SwitchVariable { get; set; }
         public string DisplayText { get; set; }
 
@@ -52,6 +58,7 @@ namespace Dev2.Activities.Designers2.Switch
                 var dev2Switch = new Dev2Switch();
                 dev2Switch.DisplayText = DisplayText;
                 dev2Switch.SwitchVariable = SwitchVariable;
+                dev2Switch.SwitchExpression = SwitchExpression;
                 return dev2Switch;
             }
         }
