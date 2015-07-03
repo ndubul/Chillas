@@ -16,6 +16,7 @@ using System.Activities.Presentation.Model;
 using System.Windows;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Decision;
+using Dev2.Activities.Designers2.Switch;
 using Dev2.Common;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Data.SystemTemplates;
@@ -142,43 +143,12 @@ namespace Dev2.Studio.Controller
             {
                 return;
             }
-
             var expressionText = expression.Properties[GlobalConstants.SwitchExpressionTextPropertyText];
-            
-            Dev2Switch ds;
-            if(expressionText != null && expressionText.Value != null)
-            {
-                ds = new Dev2Switch();
-                var val = Utilities.ActivityHelper.ExtractData(expressionText.Value.ToString());
-                if(!string.IsNullOrEmpty(val))
-                {
-                    ds.SwitchVariable = val;
-                }
-            }
-            else
-            {
-                ds = DataListConstants.DefaultSwitch;
-            }
-
-            var displayName = args.ModelItem.Properties[GlobalConstants.DisplayNamePropertyText];
-            if(displayName != null && displayName.Value != null)
-            {
-                ds.DisplayText = displayName.Value.ToString();
-            }
-
-            var webModel = JsonConvert.SerializeObject(ds);
-
-            // now invoke the wizard ;)
-            _callBackHandler = StartSwitchDropWizard(args.EnvironmentModel, webModel);
-
-            // Wizard finished...
-            // Now Fetch from DL and push the model data into the workflow
+            _callBackHandler = StartSwitchDropWizard(expression);
             try
             {
                 var resultSwitch = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
                 Utilities.ActivityHelper.InjectExpression(resultSwitch, expressionText);
-
-                // PBI 9220 - 2013.04.29 - TWR
                 Utilities.ActivityHelper.SetDisplayName(args.ModelItem, resultSwitch); // MUST use args.ModelItem otherwise it won't be visible!
             }
             catch
@@ -187,6 +157,21 @@ namespace Dev2.Studio.Controller
                                       GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
                                       MessageBoxImage.Error, null);
             }
+        }
+
+        Dev2DecisionCallbackHandler StartSwitchDropWizard(ModelItem modelItem)
+        {
+            var large = new ConfigureSwitch();
+            var dataContext = new SwitchDesignerViewModel(modelItem);
+            large.DataContext = dataContext;
+            var window = new Window();
+            window.Content = large;
+            var callBack = new Dev2DecisionCallbackHandler();
+            if(window.ShowDialog().HasValue)
+            {
+                callBack.ModelData = JsonConvert.SerializeObject(dataContext.Switch);
+            }
+            return callBack;
         }
 
         public void ConfigureSwitchCaseExpression(ConfigureCaseExpressionMessage args)
