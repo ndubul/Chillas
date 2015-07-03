@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using Dev2.Common.Interfaces.Studio.ViewModels;
 
 namespace Dev2.Common.Interfaces.SaveDialog
 {

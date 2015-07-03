@@ -30,7 +30,6 @@ namespace Warewolf.Studio.ViewModels
             {
                 ServerName = serverName.Substring(0, serverName.IndexOf("(", StringComparison.Ordinal));
             }
-
         }
 
         #region Implementation of IManageDatabaseSourceModel

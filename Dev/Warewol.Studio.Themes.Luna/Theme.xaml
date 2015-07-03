@@ -21,6 +21,7 @@
         <ResourceDictionary Source="Elements/ProgressBar.xaml" />
         <ResourceDictionary Source="Elements/RadioButton.xaml" />
         <ResourceDictionary Source="Elements/Slider.xaml" />
+        
         <ResourceDictionary Source="Elements/TabControl.xaml" />
         <ResourceDictionary Source="Elements/TextBlock.xaml" />
         <ResourceDictionary Source="Elements/TextBox.xaml" />
@@ -43,6 +44,8 @@
         <ResourceDictionary Source="Elements/HyperLink.xaml" />
         <ResourceDictionary Source="Elements/xamGrid.xaml"/>
         <ResourceDictionary Source="Elements/xamComboEditor.xaml"/>
+        <ResourceDictionary Source="Elements/xamDialogWindow.xaml"/>
+        <ResourceDictionary Source="Elements/DockManager/MainDockManager.xaml"/>
         
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

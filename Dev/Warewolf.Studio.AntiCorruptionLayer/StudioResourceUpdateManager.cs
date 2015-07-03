@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.Email;
 using Dev2.Common.Interfaces.ServerProxyLayer;
-
+using Dev2.Common.Interfaces.WebServices;
 using Dev2.Controller;
 using Dev2.Studio.Core.Interfaces;
 using Warewolf.Studio.ServerProxyLayer;
@@ -40,10 +42,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             UpdateManagerProxy.SaveServerSource(serverSource, GlobalConstants.ServerWorkspaceID);
         }
 
-    //    public void Save(IPluginSource source)
-    //    {
-    //        UpdateManagerProxy.SavePluginSource(source, GlobalConstants.ServerWorkspaceID);
-    //    }
+        public void Save(IPluginSource source)
+        {
+            UpdateManagerProxy.SavePluginSource(source, GlobalConstants.ServerWorkspaceID);
+        }
 
         public void Save(IEmailServiceSource emailServiceSource)
         {
@@ -79,10 +81,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         }
 
-    //    public void Save(IWebService model)
-    //    {
-    //        UpdateManagerProxy.SaveWebservice(model,GlobalConstants.ServerWorkspaceID);
-    //    }
+        public void Save(IWebService model)
+        {
+            UpdateManagerProxy.SaveWebservice(model, GlobalConstants.ServerWorkspaceID);
+        }
 
         public void Save(IWebServiceSource resource)
         {
@@ -100,32 +102,32 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             }
         }
 
-    //    public void Save(IDatabaseService toDbSource)
-    //    {
-    //        UpdateManagerProxy.SaveDbService(toDbSource);
+        public void Save(IDatabaseService toDbSource)
+        {
+            UpdateManagerProxy.SaveDbService(toDbSource);
 
-    //    }
+        }
 
-    //    public DataTable TestDbService(IDatabaseService inputValues)
-    //    {
-    //        return UpdateManagerProxy.TestDbService(inputValues);
-    //    }
+        public DataTable TestDbService(IDatabaseService inputValues)
+        {
+            return UpdateManagerProxy.TestDbService(inputValues);
+        }
 
-    //    public string TestWebService(IWebService inputValues)
-    //    {
-    //         return UpdateManagerProxy.TestWebService(inputValues);
-    //    }
+        public string TestWebService(IWebService inputValues)
+        {
+            return UpdateManagerProxy.TestWebService(inputValues);
+        }
 
         public event Action<IWebServiceSource> WebServiceSourceSaved;
 
-    //    public string TestPluginService(IPluginService inputValues)
-    //    {
-    //        return UpdateManagerProxy.TestPluginService(inputValues);
-    //    }
+        public string TestPluginService(IPluginService inputValues)
+        {
+            return UpdateManagerProxy.TestPluginService(inputValues);
+        }
 
-    //    public void Save(IPluginService toDbSource)
-    //    {
-    //        UpdateManagerProxy.SavePluginService(toDbSource);
-    //    }
+        public void Save(IPluginService toDbSource)
+        {
+            UpdateManagerProxy.SavePluginService(toDbSource);
+        }
     }
 }

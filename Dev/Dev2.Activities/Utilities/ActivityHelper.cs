@@ -90,12 +90,12 @@ namespace Dev2.Utilities
 
         public static void SetArmTextDefaults(Dev2DecisionStack dds)
         {
-            if(String.IsNullOrEmpty(dds.TrueArmText.Trim()))
+            if(String.IsNullOrEmpty(dds.TrueArmText.Trim()) || String.IsNullOrEmpty(dds.TrueArmText))
             {
                 dds.TrueArmText = GlobalConstants.DefaultTrueArmText;
             }
 
-            if(String.IsNullOrEmpty(dds.FalseArmText.Trim()))
+            if (String.IsNullOrEmpty(dds.FalseArmText.Trim()) || String.IsNullOrEmpty(dds.FalseArmText))
             {
                 dds.FalseArmText = GlobalConstants.DefaultFalseArmText;
             }

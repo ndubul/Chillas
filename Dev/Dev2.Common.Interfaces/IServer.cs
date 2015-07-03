@@ -1,6 +1,10 @@
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Dev2.Common.Interfaces.Data;
-
+using Dev2.Common.Interfaces.Explorer;
+using Dev2.Common.Interfaces.Infrastructure;
+using Newtonsoft.Json;
 
 namespace Dev2.Common.Interfaces
 {
@@ -8,20 +12,20 @@ namespace Dev2.Common.Interfaces
     {
         //Task<bool> Connect();
         //List<IResource> Load();
-       // Task<IExplorerItem> LoadExplorer();
+        Task<IExplorerItem> LoadExplorer();
        // IList<IServer> GetServerConnections();
         //IList<IToolDescriptor> LoadTools();
-        //[JsonIgnore]
-        //IExplorerRepository ExplorerRepository { get; }
-       // [JsonIgnore]
+//        [JsonIgnore]
+//        IExplorerRepository ExplorerRepository { get; }
+        [JsonIgnore]
         IStudioUpdateManager UpdateRepository { get; }
-       // [JsonIgnore]
+        [JsonIgnore]
         IQueryManager QueryProxy { get; }
       //  bool IsConnected();
       //  void ReloadTools();
       //  void Disconnect();
      //   void Edit();
-        //List<IWindowsGroupPermission> Permissions { get; } 
+        List<IWindowsGroupPermission> Permissions { get; } 
 
        // event PermissionsChanged PermissionsChanged;
        // event NetworkStateChanged NetworkStateChanged;

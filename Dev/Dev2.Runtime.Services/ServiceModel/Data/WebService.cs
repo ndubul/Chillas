@@ -10,13 +10,14 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Dev2.Common;
 using Dev2.Common.Common;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core.DynamicServices;
 using Dev2.Common.Interfaces.Core.Graph;
-using Dev2.Data.ServiceModel;
 using Dev2.Data.Util;
 using Dev2.Util;
 using Newtonsoft.Json;
@@ -34,7 +35,7 @@ namespace Dev2.Runtime.ServiceModel.Data
         public string RequestUrl { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public WebRequestMethod RequestMethod { get; set; }
+        public Dev2.Data.ServiceModel.WebRequestMethod RequestMethod { get; set; }
 
         public string RequestHeaders { get; set; }
         public string RequestBody { get; set; }
@@ -80,8 +81,8 @@ namespace Dev2.Runtime.ServiceModel.Data
 
             RequestUrl = action.AttributeSafe("RequestUrl");
             JsonPath = action.AttributeSafe("JsonPath");
-            WebRequestMethod requestMethod;
-            RequestMethod = Enum.TryParse(action.AttributeSafe("RequestMethod"), true, out requestMethod) ? requestMethod : WebRequestMethod.Get;
+            Dev2.Data.ServiceModel.WebRequestMethod requestMethod;
+            RequestMethod = Enum.TryParse(action.AttributeSafe("RequestMethod"), true, out requestMethod) ? requestMethod : Dev2.Data.ServiceModel.WebRequestMethod.Get;
             RequestHeaders = action.ElementSafe("RequestHeaders");
             RequestBody = action.ElementSafe("RequestBody");
 
@@ -89,6 +90,8 @@ namespace Dev2.Runtime.ServiceModel.Data
             Method = CreateInputsMethod(action);
             Recordsets = CreateOutputsRecordsetList(action);
         }
+
+        public List<NameValue> Headers { get; set; } 
 
         #endregion
 

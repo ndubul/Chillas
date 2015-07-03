@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
@@ -423,6 +424,8 @@ namespace Warewolf.Studio.ViewModels
         private void TestConnection()
         {
             _token = new CancellationTokenSource();
+
+
             var t = new Task(
                 SetupProgressSpinner, _token.Token);
 
@@ -432,21 +435,21 @@ namespace Warewolf.Studio.ViewModels
                     switch (t.Status)
                     {
                         case TaskStatus.Faulted:
-                        {
-                            TestFailed = true;
-                            TestPassed = false;
-                            Testing = false;
-                            TestMessage = t.Exception != null ? t.Exception.Message : "Failed";
-                            break;
-                        }
+                            {
+                                TestFailed = true;
+                                TestPassed = false;
+                                Testing = false;
+                                TestMessage = t.Exception != null ? t.Exception.Message : "Failed";
+                                break;
+                            }
                         case TaskStatus.RanToCompletion:
-                        {
-                            TestMessage = "Passed";
-                            TestFailed = false;
-                            TestPassed = true;
-                            Testing = false;
-                            break;
-                        }
+                            {
+                                TestMessage = "Passed";
+                                TestFailed = false;
+                                TestPassed = true;
+                                Testing = false;
+                                break;
+                            }
                     }
             }));
             t.Start();
@@ -460,7 +463,9 @@ namespace Warewolf.Studio.ViewModels
                 TestFailed = false;
                 TestPassed = false;
             });
-            _updateManager.TestConnection(ToNewSource());
+
+            string s = _updateManager.TestConnection(ToNewSource());
+            if (s.Length > 0) ;
         }
         IEmailServiceSource ToNewSource()
         {

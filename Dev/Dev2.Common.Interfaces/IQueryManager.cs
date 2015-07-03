@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Dev2.Common.Interfaces.Data;
+using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.Explorer;
+using Dev2.Common.Interfaces.ServerProxyLayer;
 
 namespace Dev2.Common.Interfaces
 {
@@ -63,21 +65,21 @@ namespace Dev2.Common.Interfaces
 
         IList<string> GetComputerNames();
 
-        //IList<IDbSource> FetchDbSources();
+        IList<IDbSource> FetchDbSources();
 
-       // IList<IDbAction> FetchDbActions(IDbSource source);
+        IList<IDbAction> FetchDbActions(IDbSource source);
 
-       // IEnumerable<IWebServiceSource> FetchWebServiceSources();
+        IEnumerable<IWebServiceSource> FetchWebServiceSources();
 
        // ObservableCollection<IWebServiceSource> WebSources { get; set; }
 
 
 
-       // IList<IPluginSource> FetchPluginSources();
+        IList<IPluginSource> FetchPluginSources();
 
-        //IList<IPluginAction> PluginActions(IPluginSource source, INamespaceItem ns);
-       // List<IDllListing> GetDllListings(IDllListing listing);
+        IList<IPluginAction> PluginActions(IPluginSource source, INamespaceItem ns);
+        List<IDllListing> GetDllListings(IDllListing listing);
 
-       // ICollection<INamespaceItem> FetchNamespaces(IPluginSource source);
+        ICollection<INamespaceItem> FetchNamespaces(IPluginSource source);
     }
 }

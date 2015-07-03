@@ -14,22 +14,30 @@ using System.Activities.Presentation.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Common;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
+using Dev2.Data.Decisions.Operations;
+using Dev2.Data.SystemTemplates;
+using Dev2.Data.SystemTemplates.Models;
 using Dev2.DataList;
+using Dev2.DataList.Contract;
+using Dev2.Interfaces;
 using Dev2.Providers.Validation.Rules;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
-using Dev2.Studio.Core.Activities.Utils;
+using Dev2.Studio.Core.Messages;
+using Dev2.TO;
 using Dev2.Validation;
-using Unlimited.Applications.BusinessDesignStudio.Activities;
+using Newtonsoft.Json;
 
 namespace Dev2.Activities.Designers2.Decision
 {
-    public class DecisionDesignerViewModel : ActivityCollectionDesignerViewModel<DecisionTO>
+    public class DecisionDesignerViewModel : ActivityCollectionDesignerObservableViewModel<DecisionTO>
     {
         public Func<string> GetDatalistString = () => DataListSingleton.ActiveDataList.Resource.DataList;
         readonly IList<string> _requiresSearchCriteria = new List<string> { "Doesn't Contain", "Contains", "=", "<> (Not Equal)", "Ends With", "Doesn't Start With", "Doesn't End With", "Starts With", "Is Regex", "Not Regex", ">", "<", "<=", ">=" };
@@ -42,9 +50,53 @@ namespace Dev2.Activities.Designers2.Decision
 
             WhereOptions = new ObservableCollection<string>(FindRecsetOptions.FindAll().Select(c => c.HandlesType()));
             SearchTypeUpdatedCommand = new DelegateCommand(OnSearchTypeChanged);
+            ConfigureDecisionExpression(ModelItem);
+            InitializeItems(new ObservableCollection<IDev2TOFn>(Tos));
+  
+        }
 
-            dynamic mi = ModelItem;
-            InitializeItems(mi.ResultsCollection);
+        void ConfigureDecisionExpression(ModelItem mi)
+        {
+
+            var condition = mi;
+            var expression = condition.Properties[GlobalConstants.ExpressionPropertyText];
+            var ds = DataListConstants.DefaultStack;
+
+            if(expression != null && expression.Value != null)
+            {
+                //we got a model, push it in to the Model region ;)
+                // but first, strip and extract the model data ;)
+
+                var eval = Dev2DecisionStack.ExtractModelFromWorkflowPersistedData(expression.Value.ToString());
+
+                if(!string.IsNullOrEmpty(eval))
+                {
+                    ExpressionText = eval;
+                }
+            }
+            else
+            {
+                ExpressionText = JsonConvert.SerializeObject(ds);
+            }
+
+            var displayName = mi.Properties[GlobalConstants.DisplayNamePropertyText];
+            if (displayName != null && displayName.Value != null)
+            {
+                ds.DisplayText = displayName.Value.ToString();
+            }
+            Tos = ToObservableCollection();
+        }
+
+
+        public void GetExpressionText()
+        {
+            IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
+            var stack = SetupTos(_observables);
+            stack.Mode = RequireAllDecisionsToBeTrue ? Dev2DecisionMode.AND : Dev2DecisionMode.OR;
+            stack.DisplayText = DisplayText;
+            stack.FalseArmText = FalseArmText;
+            stack.TrueArmText = TrueArmText;
+            ExpressionText = compiler.ConvertModelToJson(stack).ToString();
         }
 
         public override string CollectionName { get { return "ResultsCollection"; } }
@@ -53,9 +105,71 @@ namespace Dev2.Activities.Designers2.Decision
 
         public ObservableCollection<string> WhereOptions { get; private set; }
 
-        string DisplayText { get { return GetProperty<string>(); } }
-        string TrueArmText { get { return GetProperty<string>(); } }
-        string FalseArmText { get { return GetProperty<string>(); } }
+        public string DisplayText { get; set; }
+        public string TrueArmText { get; set; }
+        public string FalseArmText { get; set; }
+        public string ExpressionText { get; set; }
+        public bool RequireAllDecisionsToBeTrue
+        {
+            get; set;
+        }
+        public ObservableCollection<DecisionTO> Tos
+        {
+
+            get
+            {
+                return _observables;
+            }
+            set
+            {
+                IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
+                _observables = value;
+                var stack = SetupTos(value);
+                ExpressionText = compiler.ConvertModelToJson(stack).ToString();
+            }
+        }
+
+        ObservableCollection<DecisionTO> ToObservableCollection()
+        {
+            IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
+            if(!String.IsNullOrWhiteSpace(ExpressionText))
+            {
+                var val = new StringBuilder(ExpressionText);
+                var decisions = compiler.ConvertFromJsonToModel<Dev2DecisionStack>(val);
+                if(decisions != null)
+                {
+                    if(decisions.TheStack != null)
+                    {
+                        return new ObservableCollection<DecisionTO>(decisions.TheStack.Select(a => new DecisionTO(a)));
+                    }
+                }
+            }
+            return new ObservableCollection<DecisionTO>{new DecisionTO()};
+        }
+
+        static Dev2DecisionStack SetupTos(ObservableCollection<DecisionTO> value)
+        {
+           
+            var val = new Dev2DecisionStack();
+            val.TheStack = new List<Dev2Decision>();
+            foreach(var decisionTO in value.Where(a=>!a.IsEmpty()))
+            {
+                var dev2Decision = new Dev2Decision();
+                dev2Decision.Col1 = decisionTO.MatchValue;
+                if(!String.IsNullOrEmpty(decisionTO.SearchCriteria))
+                {
+                    dev2Decision.Col2 = decisionTO.SearchCriteria;
+                }
+                dev2Decision.EvaluationFn = DecisionDisplayHelper.GetValue(decisionTO.SearchType);
+                if(!String.IsNullOrEmpty(decisionTO.From) || !String.IsNullOrEmpty(decisionTO.To))
+                {
+                    dev2Decision.Col2 = decisionTO.From;
+                    dev2Decision.Col3 = decisionTO.To;
+                }
+                val.TheStack.Add(dev2Decision);
+            }
+            return val;
+        }
 
         public bool IsDisplayTextFocused { get { return (bool)GetValue(IsDisplayTextFocusedProperty); } set { SetValue(IsDisplayTextFocusedProperty, value); } }
         public static readonly DependencyProperty IsDisplayTextFocusedProperty = DependencyProperty.Register("IsDisplayTextFocused", typeof(bool), typeof(DecisionDesignerViewModel), new PropertyMetadata(default(bool)));
@@ -65,6 +179,7 @@ namespace Dev2.Activities.Designers2.Decision
 
         public bool IsFalseArmFocused { get { return (bool)GetValue(IsFalseArmFocusedProperty); } set { SetValue(IsFalseArmFocusedProperty, value); } }
         public static readonly DependencyProperty IsFalseArmFocusedProperty = DependencyProperty.Register("IsFalseArmFocused", typeof(bool), typeof(DecisionDesignerViewModel), new PropertyMetadata(default(bool)));
+        ObservableCollection<DecisionTO> _observables;
 
         void OnSearchTypeChanged(object indexObj)
         {
@@ -75,29 +190,29 @@ namespace Dev2.Activities.Designers2.Decision
                 index = 0;
             }
 
-            if(index < 0 || index >= ItemCount)
+            if(index < 0 || index >= Tos.Count)
             {
                 return;
             }
 
-            var mi = ModelItemCollection[index];
+            var mi = Tos[index];
 
-            var searchType = mi.GetProperty("SearchType") as string;
+            var searchType = mi.SearchType;
 
             if(searchType == "Is Between" || searchType == "Not Between")
             {
-                mi.SetProperty("IsSearchCriteriaVisible", false);
+                mi.IsSearchCriteriaVisible = false;
             }
             else
             {
-                mi.SetProperty("IsSearchCriteriaVisible", true);
+                mi.IsSearchCriteriaVisible= true;
             }
 
             var requiresCriteria = _requiresSearchCriteria.Contains(searchType);
-            mi.SetProperty("IsSearchCriteriaEnabled", requiresCriteria);
+            mi.IsSearchCriteriaEnabled= requiresCriteria;
             if(!requiresCriteria)
             {
-                mi.SetProperty("SearchCriteria", string.Empty);
+                mi.SearchCriteria= string.Empty;
             }
         }
 
@@ -123,33 +238,38 @@ namespace Dev2.Activities.Designers2.Decision
             }
         }
 
-        protected override IEnumerable<IActionableErrorInfo> ValidateCollectionItem(ModelItem mi)
+        protected override IEnumerable<IActionableErrorInfo> ValidateCollectionItem(IDev2TOFn mi)
         {
-            var dto = mi.GetCurrentValue() as FindRecordsTO;
-            if(dto == null)
-            {
-                yield break;
-            }
-            foreach (var error in dto.GetRuleSet("MatchValue", GetDatalistString()).ValidateRules("'Match'", () => mi.SetProperty("IsMatchValueFocused", true)))
-            {
-                yield return error;
-            }
-
-            foreach (var error in dto.GetRuleSet("SearchCriteria", GetDatalistString()).ValidateRules("'Match'", () => mi.SetProperty("IsSearchCriteriaFocused", true)))
-            {
-                yield return error;
-            }
-
-            foreach(var error in dto.GetRuleSet("From", GetDatalistString()).ValidateRules("'From'", () => mi.SetProperty("IsFromFocused", true)))
-            {
-                yield return error;
-            }
-
-            foreach(var error in dto.GetRuleSet("To", GetDatalistString()).ValidateRules("'To'", () => mi.SetProperty("IsToFocused", true)))
-            {
-                yield return error;
-            }
+            yield break;
         }
+
+        //protected override IEnumerable<IActionableErrorInfo> ValidateCollectionItem(DecisionTO mi)
+        //{
+        //    var dto = mi;
+        //    if(dto == null)
+        //    {
+        //        yield break;
+        //    }
+        //    //foreach (var error in dto.GetRuleSet("MatchValue", GetDatalistString()).ValidateRules("'Match'", () => mi.IsMatchValueFocused=true)))
+        //    //{
+        //    //    yield return error;
+        //    //}
+
+        //    //foreach (var error in dto.GetRuleSet("SearchCriteria", GetDatalistString()).ValidateRules("'Match'", () => mi.IsSearchCriteriaFocused= true)))
+        //    //{
+        //    //    yield return error;
+        //    //}
+
+        //    //foreach(var error in dto.GetRuleSet("From", GetDatalistString()).ValidateRules("'From'", () => mi.SetProperty("IsFromFocused", true)))
+        //    //{
+        //    //    yield return error;
+        //    //}
+
+        //    //foreach(var error in dto.GetRuleSet("To", GetDatalistString()).ValidateRules("'To'", () => mi.SetProperty("IsToFocused", true)))
+        //    //{
+        //    //    yield return error;
+        //    //}
+        //}
 
         public IRuleSet GetRuleSet(string propertyName)
         {
@@ -174,5 +294,14 @@ namespace Dev2.Activities.Designers2.Decision
             }
             return ruleSet;
         }
+
+        #region Implementation of IHandle<ConfigureDecisionExpressionMessage>
+
+        public void Handle(ConfigureDecisionExpressionMessage message)
+        {
+            ShowLarge = true;
+        }
+
+        #endregion
     }
 }

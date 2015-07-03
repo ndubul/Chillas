@@ -7,7 +7,7 @@ using Infragistics.Controls.Menus;
 
 namespace Warewolf.Studio.Views.XamGrid
 {
-    public class ContextMenuSettings : SettingsBase
+    public class ContextMenuSettings : Infragistics.Controls.Grids.SettingsBase
     {
         ContextMenuManager _contextMenuMgr;
 

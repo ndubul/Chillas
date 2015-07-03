@@ -147,7 +147,6 @@
     <Compile Include="Activities\Debug\DebugItemWarewolfAtomResult.cs" />
     <Compile Include="Activities\Debug\DebugItemWarewolfRecordset.cs" />
     <Compile Include="Activities\Debug\DebugTOParams.cs" />
-    <Compile Include="Activities\DecisionTO.cs" />
     <Compile Include="Activities\DsfBaseActivity.cs" />
     <Compile Include="Activities\DsfDecision.cs" />
     <Compile Include="Activities\DsfDropBoxFileActivity.cs" />
@@ -291,6 +290,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="TO\DataColumnMapping.cs" />
+    <Compile Include="TO\DecisionTO.cs" />
     <Compile Include="TO\JsonMappingCompoundTo.cs" />
     <Compile Include="TO\JsonMappingTo.cs" />
     <Compile Include="TO\ValidatedObject.cs" />

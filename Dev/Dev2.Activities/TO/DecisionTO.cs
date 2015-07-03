@@ -9,26 +9,23 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
-using System.Collections.Generic;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
+using Dev2.Data.Decisions.Operations;
 using Dev2.Interfaces;
 using Dev2.Providers.Validation.Rules;
-using Dev2.TO;
 using Dev2.Util;
 using Dev2.Utilities;
 using Dev2.Validation;
 
-namespace Dev2.Activities
+namespace Dev2.TO
 {
     public class DecisionTO : ValidatedObject, IDev2TOFn
     {
         int _indexNum;
         string _searchType;
         bool _isSearchCriteriaEnabled;
-        bool _isSearchCriteriaFocused;
         bool _isSearchTypeFocused;
         string _matchValue;
-        bool _isMatchValueFocused;
         string _searchCriteria;
         string _from;
         string _to;
@@ -41,8 +38,6 @@ namespace Dev2.Activities
         {
         }
 
-        // TODO: Remove WhereOptionList property - DO NOT USE FOR BINDING, USE VIEWMODEL PROPERTY INSTEAD!
-        public IList<string> WhereOptionList { get; set; }
         public DecisionTO(string matchValue, string searchCriteria, string searchType, int indexNum, bool inserted = false, string from = "", string to = "")
         {
             Inserted = inserted;
@@ -55,7 +50,21 @@ namespace Dev2.Activities
             From = @from;
             To = to;
             IsSearchTypeFocused = false;
-            IsMatchValueFocused = false;
+        //    IsMatchValueFocused = false;
+        }
+
+        public DecisionTO(Data.SystemTemplates.Models.Dev2Decision a)
+        {
+            Inserted = false;
+            MatchValue = a.Col1;
+            SearchCriteria = a.Col2;
+            SearchType = DecisionDisplayHelper.GetDisplayValue(a.EvaluationFn);
+            IndexNumber = 1;
+            IsSearchCriteriaEnabled = false;
+            IsSearchCriteriaVisible = true;
+            From = a.Col2;
+            To = a.Col3;
+            IsSearchTypeFocused = false;
         }
 
         [FindMissing]
@@ -122,9 +131,9 @@ namespace Dev2.Activities
             }
         }
 
-        public bool IsMatchValueFocused { get { return _isMatchValueFocused; } set { OnPropertyChanged(ref _isMatchValueFocused, value); } }
+    //    public bool IsMatchValueFocused { get { return _isMatchValueFocused; } set { OnPropertyChanged(ref _isMatchValueFocused, value); } }
 
-        public bool IsSearchCriteriaFocused { get { return _isSearchCriteriaFocused; } set { OnPropertyChanged(ref _isSearchCriteriaFocused, value); } }
+     //   public bool IsSearchCriteriaFocused { get { return _isSearchCriteriaFocused; } set { OnPropertyChanged(ref _isSearchCriteriaFocused, value); } }
 
         public string SearchType
         {
@@ -258,5 +267,7 @@ namespace Dev2.Activities
 
             return ruleSet;
         }
+
+        public Data.SystemTemplates.Models.Dev2Decision Decision { get; set; }
     }
 }

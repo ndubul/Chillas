@@ -8,8 +8,6 @@
         xmlns:provider="clr-namespace:Dev2.Intellisense.Provider;assembly=Dev2.Intellisense"
         xmlns:interfaceImplementors="clr-namespace:Dev2.Studio.InterfaceImplementors;assembly=Dev2.Intellisense"
         xmlns:ig="http://schemas.infragistics.com/xaml"
-        xmlns:xamGrid="clr-namespace:Warewolf.Studio.Views.XamGrid;assembly=Warewolf.Studio.Views"
-        xmlns:xamGridEx="clr-namespace:Warewolf.Studio.Views.XamGridEx;assembly=Warewolf.Studio.Views"
         Title="Debug"         
         Width="470" 
         Height="400"
@@ -46,9 +44,11 @@
             <TabItem Style="{StaticResource TabItemStyle}" AutomationProperties.AutomationId="UI_InputDataTab_AutoID" Header="Input Data" IsSelected="True">
                 <Grid>
                     <TextBlock HorizontalAlignment="Center" Text="Mark the Input checkbox in the variable window to set workflow inputs." />
-                    <ig:XamGrid ItemsSource="{Binding WorkflowInputs}" 
+                    <Border BorderBrush="{StaticResource XamGridBorderBrush}" BorderThickness="1">
+                        <ig:XamGrid ItemsSource="{Binding WorkflowInputs}" 
                                 AutoGenerateColumns="False"
                                 Style="{StaticResource XamGridStyle}"
+                                    BorderThickness="0"
                                 HeaderVisibility="Hidden"
                                 Visibility="{Binding WorkflowInputCount, Converter={StaticResource IntToVisibilityConverter}}"
                                 x:Name="DataListInputs" >
@@ -98,6 +98,7 @@
                             </ig:TemplateColumn>
                         </ig:XamGrid.Columns>
                     </ig:XamGrid>
+                    </Border>
                 </Grid>
             </TabItem>
             <TabItem Style="{StaticResource TabItemStyle}" Header="XML" AutomationProperties.AutomationId="UI_XMLTab_AutoID">

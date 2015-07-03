@@ -28,5 +28,16 @@ namespace Dev2.Webs
             tmp = Dev2DecisionStack.RemoveNaughtyCharsFromModel(tmp);
             return tmp;
         }
+
+        internal static string CleanModelData(string callBackHandler)
+        {
+            // Remove naughty chars...
+            string tmp = callBackHandler;
+            // remove the silly Choose... from the string
+            tmp = Dev2DecisionStack.RemoveDummyOptionsFromModel(tmp.ToStringBuilder());
+            // remove [[]], &, !
+            tmp = Dev2DecisionStack.RemoveNaughtyCharsFromModel(tmp);
+            return tmp;
+        }
     }
 }

@@ -63,6 +63,7 @@ using Dev2.Services.Security;
 using Dev2.Studio.ActivityDesigners;
 using Dev2.Studio.AppResources.AttachedProperties;
 using Dev2.Studio.AppResources.ExtensionMethods;
+using Dev2.Studio.Controller;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Activities.Services;
 using Dev2.Studio.Core.Activities.Utils;
@@ -669,7 +670,10 @@ namespace Dev2.Studio.ViewModels.Workflow
         protected void InitializeFlowDecision(ModelItem mi)
         {
             Dev2Logger.Log.Info("Publish message of type - " + typeof(ConfigureDecisionExpressionMessage));
-            EventPublisher.Publish(new ConfigureDecisionExpressionMessage { ModelItem = mi, EnvironmentModel = _resourceModel.Environment, IsNew = true });
+            ModelProperty modelProperty = mi.Properties["Action"];
+            
+            InitialiseWithAction(modelProperty);
+            FlowController.ConfigureDecisionExpression(new ConfigureDecisionExpressionMessage { ModelItem = mi, EnvironmentModel = _resourceModel.Environment, IsNew = true });
         }
 
         public void EditActivity(ModelItem modelItem, Guid parentEnvironmentID, IEnvironmentRepository catalog)
@@ -1153,7 +1157,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                 {
                     builder.AddCustomAttributes(designerAttribute.Key, new DesignerAttribute(designerAttribute.Value));
                 }
-
+                
                 MetadataStore.AddAttributeTable(builder.CreateTable());
 
                 _wd.Context.Services.Subscribe<ModelService>(ModelServiceSubscribe);
@@ -1729,10 +1733,10 @@ namespace Dev2.Studio.ViewModels.Workflow
                         EventPublisher.Publish(new ConfigureSwitchExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment });
                     }
 
-                    // Handle Decision Edits
+                    //// Handle Decision Edits
                     if (dp != null && !WizardEngineAttachedProperties.GetDontOpenWizard(dp) && item.ItemType == typeof(FlowDecision))
                     {
-                        EventPublisher.Publish(new ConfigureDecisionExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment });
+                        FlowController.ConfigureDecisionExpression(new ConfigureDecisionExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment});
                     }
                 }
 

@@ -3,25 +3,26 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Infragistics.Controls.Grids;
 using Infragistics.Controls.Grids.Primitives;
+using Warewolf.Studio.CustomControls;
 
 namespace Warewolf.Studio.Views.XamGrid
 {
     public class XamGridEx : Infragistics.Controls.Grids.XamGrid
     {
-        private Views.XamGridEx.ContextMenuSettings _contextMenuSettings;
+        private ContextMenuSettings _contextMenuSettings;
 
         /// <summary>
         ///     Gets a reference to the <see cref="ContextMenuSettings" /> object that
         ///     controls all the properties concerning the display of a context menu
         ///     in this <see cref="XamGrid" />.
         /// </summary>
-        public Views.XamGridEx.ContextMenuSettings ContextMenuSettings
+        public ContextMenuSettings ContextMenuSettings
         {
             get
             {
                 if (_contextMenuSettings == null)
                 {
-                    _contextMenuSettings = new Views.XamGridEx.ContextMenuSettings();
+                    _contextMenuSettings = new ContextMenuSettings();
                     _contextMenuSettings.Grid = this;
                 }
 

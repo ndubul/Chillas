@@ -17,6 +17,8 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -165,6 +167,9 @@
     <Compile Include="Designers2\Comment\Small.xaml.cs">
       <DependentUpon>Small.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Designers2\Core\ActivityCollectionDesignerDecisionViewModel.cs" />
+    <Compile Include="Designers2\Core\ActivityCollectionDesignerObservableViewModel_TDev2TO.cs" />
+    <Compile Include="Designers2\Core\DecisionCollectionViewModel.cs" />
     <Compile Include="Designers2\Core\CEventHelper.cs" />
     <Compile Include="Designers2\CreateJSON\Large.xaml.cs">
       <DependentUpon>Large.xaml</DependentUpon>
@@ -182,6 +187,9 @@
     <Compile Include="Designers2\Decision\DecisionDesignerViewModel.cs" />
     <Compile Include="Designers2\Decision\Large.xaml.cs">
       <DependentUpon>Large.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Designers2\Decision\Small.xaml.cs">
+      <DependentUpon>Small.xaml</DependentUpon>
     </Compile>
     <Compile Include="Designers2\DropBox\Upload\DropboxUploadFileDesigner.xaml.cs">
       <DependentUpon>DropboxUploadFileDesigner.xaml</DependentUpon>
@@ -545,6 +553,13 @@
     </Compile>
     <Compile Include="Designers2\SqlBulkInsert\SqlBulkInsertDesignerViewModel.cs" />
     <Compile Include="Designers2\GatherSystemInformation\GatherSystemInformationDesignerViewModel.cs" />
+    <Compile Include="Designers2\Switch\ConfigureSwitch.xaml.cs">
+      <DependentUpon>ConfigureSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Designers2\Switch\ConfigureSwitchArm.xaml.cs">
+      <DependentUpon>ConfigureSwitchArm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Designers2\Switch\SwitchDesignerViewModel.cs" />
     <Compile Include="Designers2\UniqueRecords\UniqueRecordsDesigner.xaml.cs">
       <DependentUpon>UniqueRecordsDesigner.xaml</DependentUpon>
     </Compile>
@@ -770,6 +785,10 @@
     <Page Include="Designers2\Decision\Large.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Designers2\Decision\Small.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Designers2\DropBox\Upload\DropboxUploadFileDesigner.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -1103,6 +1122,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Designers2\Switch\ConfigureSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Designers2\Switch\ConfigureSwitchArm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Designers2\UniqueRecords\UniqueRecordsDesigner.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1260,6 +1287,13 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
