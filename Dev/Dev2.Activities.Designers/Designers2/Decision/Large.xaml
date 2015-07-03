@@ -60,7 +60,7 @@
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                x:Name="LargeDataGrid"
-                               ItemsSource="{Binding Tos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               ItemsSource="{Binding Collection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource ActivityMapppingDataGridStyle}"
                                Margin="0,3">
             <i:Interaction.Behaviors>
@@ -362,7 +362,7 @@
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
                   Content="Require All decisions To Be True"
-                  IsChecked="{Binding ModelItem.RequireAllTrue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  IsChecked="{Binding RequireAllDecisionsToBeTrue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ToolTip="{x:Static help:HelpTextResources.FindToolTipRequireAllMatchesToBeTrue}"
                   AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RequireAllTrue_AutoID}">
             <i:Interaction.Behaviors>
@@ -387,7 +387,7 @@
                                     DefaultText="[[Display text]]"
                                     WrapInBrackets="True"
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
-                                    Text="{Binding ModelItem.DisplayText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding DisplayText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     attachedProperties:FocusSetter.IsFocused="{Binding IsDisplayTextFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Result_AutoID}"
                                     ToolTip="{x:Static help:HelpTextResources.FindToolTipResult}">
@@ -396,7 +396,7 @@
                                      DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="DisplayText"
-                                         SourcePropertyValue="{Binding ModelItem.DisplayText, UpdateSourceTrigger=PropertyChanged}"
+                                         SourcePropertyValue="{Binding DisplayText, UpdateSourceTrigger=PropertyChanged}"
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>
@@ -418,7 +418,7 @@
                                     DefaultText="[[True arm text]]"
                                     WrapInBrackets="True"
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
-                                    Text="{Binding ModelItem.TrueArmText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding TrueArmText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     attachedProperties:FocusSetter.IsFocused="{Binding IsTrueArmFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Result_AutoID}"
                                     ToolTip="{x:Static help:HelpTextResources.FindToolTipResult}">
@@ -427,7 +427,7 @@
                                      DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="TrueArmText"
-                                         SourcePropertyValue="{Binding ModelItem.TrueArmText, UpdateSourceTrigger=PropertyChanged}"
+                                         SourcePropertyValue="{Binding TrueArmText, UpdateSourceTrigger=PropertyChanged}"
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>
@@ -448,7 +448,7 @@
                                     DefaultText="[[False arm text]]"
                                     WrapInBrackets="True"
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
-                                    Text="{Binding ModelItem.FalseArmText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding FalseArmText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     attachedProperties:FocusSetter.IsFocused="{Binding IsFalseArmFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Result_AutoID}"
                                     ToolTip="{x:Static help:HelpTextResources.FindToolTipResult}">
@@ -457,7 +457,7 @@
                                      DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="FalseArmText"
-                                         SourcePropertyValue="{Binding ModelItem.FalseArmText, UpdateSourceTrigger=PropertyChanged}"
+                                         SourcePropertyValue="{Binding FalseArmText, UpdateSourceTrigger=PropertyChanged}"
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>

@@ -26,6 +26,7 @@ using Dev2.Data.SystemTemplates;
 using Dev2.Data.SystemTemplates.Models;
 using Dev2.DataList;
 using Dev2.DataList.Contract;
+using Dev2.Interfaces;
 using Dev2.Providers.Validation.Rules;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
@@ -36,7 +37,7 @@ using Newtonsoft.Json;
 
 namespace Dev2.Activities.Designers2.Decision
 {
-    public class DecisionDesignerViewModel : ActivityCollectionDesignerViewModel<DecisionTO>
+    public class DecisionDesignerViewModel : ActivityCollectionDesignerObservableViewModel<DecisionTO>
     {
         public Func<string> GetDatalistString = () => DataListSingleton.ActiveDataList.Resource.DataList;
         readonly IList<string> _requiresSearchCriteria = new List<string> { "Doesn't Contain", "Contains", "=", "<> (Not Equal)", "Ends With", "Doesn't Start With", "Doesn't End With", "Starts With", "Is Regex", "Not Regex", ">", "<", "<=", ">=" };
@@ -50,7 +51,7 @@ namespace Dev2.Activities.Designers2.Decision
             WhereOptions = new ObservableCollection<string>(FindRecsetOptions.FindAll().Select(c => c.HandlesType()));
             SearchTypeUpdatedCommand = new DelegateCommand(OnSearchTypeChanged);
             ConfigureDecisionExpression(ModelItem);
-            
+            InitializeItems(new ObservableCollection<IDev2TOFn>(Tos));
   
         }
 
@@ -70,7 +71,7 @@ namespace Dev2.Activities.Designers2.Decision
 
                 if(!string.IsNullOrEmpty(eval))
                 {
-                    ds = JsonConvert.DeserializeObject<Dev2DecisionStack>(eval);
+                    ExpressionText = eval;
                 }
             }
             else
@@ -84,18 +85,17 @@ namespace Dev2.Activities.Designers2.Decision
                 ds.DisplayText = displayName.Value.ToString();
             }
             Tos = ToObservableCollection();
-            Tos.CollectionChanged += Tos_CollectionChanged;
         }
 
-        void Tos_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-           GetExpressionText();
-        }
 
         public void GetExpressionText()
         {
             IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
             var stack = SetupTos(_observables);
+            stack.Mode = RequireAllDecisionsToBeTrue ? Dev2DecisionMode.AND : Dev2DecisionMode.OR;
+            stack.DisplayText = DisplayText;
+            stack.FalseArmText = FalseArmText;
+            stack.TrueArmText = TrueArmText;
             ExpressionText = compiler.ConvertModelToJson(stack).ToString();
         }
 
@@ -105,10 +105,14 @@ namespace Dev2.Activities.Designers2.Decision
 
         public ObservableCollection<string> WhereOptions { get; private set; }
 
-        string DisplayText { get { return GetProperty<string>(); } }
-        string TrueArmText { get { return GetProperty<string>(); } }
-        string FalseArmText { get { return GetProperty<string>(); } }
+        public string DisplayText { get; set; }
+        public string TrueArmText { get; set; }
+        public string FalseArmText { get; set; }
         public string ExpressionText { get; set; }
+        public bool RequireAllDecisionsToBeTrue
+        {
+            get; set;
+        }
         public ObservableCollection<DecisionTO> Tos
         {
 
@@ -130,7 +134,7 @@ namespace Dev2.Activities.Designers2.Decision
             IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
             if(!String.IsNullOrWhiteSpace(ExpressionText))
             {
-                var val = new StringBuilder(Dev2DecisionStack.ExtractModelFromWorkflowPersistedData(ExpressionText));
+                var val = new StringBuilder(ExpressionText);
                 var decisions = compiler.ConvertFromJsonToModel<Dev2DecisionStack>(val);
                 if(decisions != null)
                 {
@@ -234,10 +238,10 @@ namespace Dev2.Activities.Designers2.Decision
             }
         }
 
-        protected override IEnumerable<IActionableErrorInfo> ValidateCollectionItem(ModelItem mi)
+        protected override IEnumerable<IActionableErrorInfo> ValidateCollectionItem(IDev2TOFn mi)
         {
-                yield break;
-            }
+            yield break;
+        }
 
         //protected override IEnumerable<IActionableErrorInfo> ValidateCollectionItem(DecisionTO mi)
         //{

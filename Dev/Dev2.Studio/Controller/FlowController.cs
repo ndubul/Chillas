@@ -110,7 +110,6 @@ namespace Dev2.Studio.Controller
                 ds.DisplayText = displayName.Value.ToString();
             }
 
-            var val = JsonConvert.SerializeObject(ds);
 
             // Now invoke the Wizard ;)
             _callBackHandler = StartDecisionWizard(condition);
