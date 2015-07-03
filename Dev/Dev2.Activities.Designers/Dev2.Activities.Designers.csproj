@@ -547,6 +547,12 @@
     </Compile>
     <Compile Include="Designers2\SqlBulkInsert\SqlBulkInsertDesignerViewModel.cs" />
     <Compile Include="Designers2\GatherSystemInformation\GatherSystemInformationDesignerViewModel.cs" />
+    <Compile Include="Designers2\Switch\ConfigureSwitch.xaml.cs">
+      <DependentUpon>ConfigureSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Designers2\Switch\ConfigureSwitchArm.xaml.cs">
+      <DependentUpon>ConfigureSwitchArm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Designers2\UniqueRecords\UniqueRecordsDesigner.xaml.cs">
       <DependentUpon>UniqueRecordsDesigner.xaml</DependentUpon>
     </Compile>
@@ -1104,6 +1110,14 @@
     <Page Include="Designers2\SqlBulkInsert\SqlBulkInsertDesigner.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Designers2\Switch\ConfigureSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Designers2\Switch\ConfigureSwitchArm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Designers2\UniqueRecords\UniqueRecordsDesigner.xaml">
       <Generator>MSBuild:Compile</Generator>

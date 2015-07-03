@@ -913,7 +913,7 @@ namespace Dev2.Studio.ViewModels
             
             if(View != null)
             {
-                View.ClearToolboxSelection();
+                //View.ClearToolboxSelection();
             }
         }
 
