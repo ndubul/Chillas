@@ -16,12 +16,16 @@ using System.Linq;
 using System.Security.Claims;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Linq;
 using Caliburn.Micro;
 using Dev2.AppResources.Repositories;
 using Dev2.Common;
+using Dev2.Common.Common;
 using Dev2.Common.ExtMethods;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
+using Dev2.Common.Interfaces.Core.DynamicServices;
+using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.ConnectionHelpers;
@@ -32,6 +36,7 @@ using Dev2.Helpers;
 using Dev2.Instrumentation;
 using Dev2.Interfaces;
 using Dev2.Runtime.Configuration.ViewModels.Base;
+using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Security;
 using Dev2.Services.Events;
 using Dev2.Services.Security;
@@ -691,9 +696,39 @@ namespace Dev2.Studio.ViewModels
             {
                 resourceModel.Environment.ResourceRepository.ReloadResource(resourceModel.ID, resourceModel.ResourceType, ResourceModelEqualityComparer.Current, true);
             }
+            switch (resourceModel.ServerResourceType)
+            {
+                case "DbSource":
+                
+                var db = new DbSource(resourceModel.WorkflowXaml.ToXElement());
+                var def = new DbSourceDefinition()
+                {
+                    AuthenticationType = db.AuthenticationType,
+                    DbName = db.DatabaseName,
+                    Id = db.ResourceID,
+                    Name = db.DatabaseName,
+                    Password = db.Password,
+                    Path = db.ResourcePath,
+                    ServerName = db.Server,
+                    Type = enSourceType.SqlDatabase,
+                    UserName = db.UserID
 
+                };
+                EditResource(def);
+                break;
+            }
             WebController.DisplayDialogue(resourceModel, isedit);
         }
+
+        public void EditResource(IDbSource selectedSource)
+        {
+
+            var server = CustomContainer.Get<IServer>();
+            var dbSourceViewModel = new ManageDatabaseSourceViewModel(new ManageDatabaseSourceModel(server.UpdateRepository, server.QueryProxy, ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator() ,selectedSource);
+            var vm = new NewDatabaseSourceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource),vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        } 
 
         private void ShowNewResourceWizard(string resourceType)
         {
