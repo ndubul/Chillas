@@ -1736,7 +1736,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                     //// Handle Decision Edits
                     if (dp != null && !WizardEngineAttachedProperties.GetDontOpenWizard(dp) && item.ItemType == typeof(FlowDecision))
                     {
-                        EventPublisher.Publish(new ConfigureDecisionExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment });
+                        FlowController.ConfigureDecisionExpression(new ConfigureDecisionExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment});
                     }
                 }
 
