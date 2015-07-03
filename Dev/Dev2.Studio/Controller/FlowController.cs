@@ -14,6 +14,7 @@
 
 using System.Activities.Presentation.Model;
 using System.Windows;
+using System.Windows.Input;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Decision;
 using Dev2.Activities.Designers2.Switch;
@@ -259,6 +260,10 @@ namespace Dev2.Studio.Controller
             var dataContext = new DecisionDesignerViewModel(mi);
             large.DataContext = dataContext;
             var window = new Window();
+            window.Style = Application.Current.TryFindResource("WindowBorderlessStyle") as Style;
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            window.Width = 350;
+            window.Height = 400;
             window.Content = large;
             var showDialog = window.ShowDialog();
             var dev2DecisionCallbackHandler = new Dev2DecisionCallbackHandler();
@@ -269,6 +274,15 @@ namespace Dev2.Studio.Controller
                 return dev2DecisionCallbackHandler;
             }
             return dev2DecisionCallbackHandler;
+        }
+
+        void DecisionDesigner_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                var window = (Window)sender;
+                window.DragMove();
+            }
         }
 
         protected virtual Dev2DecisionCallbackHandler StartSwitchDropWizard(IEnvironmentModel environmentModel, string val)
