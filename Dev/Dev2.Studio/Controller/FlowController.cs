@@ -148,8 +148,12 @@ namespace Dev2.Studio.Controller
             var large = new ConfigureSwitch();
             var dataContext = new SwitchDesignerViewModel(modelItem);
             large.DataContext = dataContext;
-            var window = new Window();
-            window.Content = large;
+            var window = new WindowBorderLess();
+            var contentPresenter = window.FindChild<ContentPresenter>();
+            if (contentPresenter != null)
+            {
+                contentPresenter.Content = large;
+            }
             var callBack = new Dev2DecisionCallbackHandler();
             if(window.ShowDialog().HasValue)
             {
@@ -181,8 +185,12 @@ namespace Dev2.Studio.Controller
             var dataContext = new SwitchDesignerViewModel(modelData);
             dataContext.SwitchVariable = variable;
             large.DataContext = dataContext;
-            var window = new Window();
-            window.Content = large;
+            var window = new WindowBorderLess();
+            var contentPresenter = window.FindChild<ContentPresenter>();
+            if (contentPresenter != null)
+            {
+                contentPresenter.Content = large;
+            }
             var callBack = new Dev2DecisionCallbackHandler();
             if(window.ShowDialog().HasValue)
             {
