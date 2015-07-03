@@ -246,26 +246,26 @@ namespace Warewolf.Studio.ViewModels
 
         public void SetPermissions(List<IWindowsGroupPermission> permissions)
         {
-            if (ResourceType == ResourceType.Folder)
-            {
-                CanEdit = false;
-                CanExecute = false;
-                return;
-            }
-            var resourcePermission = permissions.FirstOrDefault(permission => permission.ResourceID == ResourceId);
-            if (resourcePermission != null)
-            {
-                SetFromPermission(resourcePermission);
-            }
-            else
-            {
-                var serverPermission =
-                    permissions.FirstOrDefault(permission => permission.IsServer && permission.ResourceID == Guid.Empty);
-                if (serverPermission != null)
-                {
-                    SetFromServer(serverPermission);
-                }
-            }
+            //if (ResourceType == ResourceType.Folder)
+            //{
+            //    CanEdit = false;
+            //    CanExecute = false;
+            //    return;
+            //}
+            //var resourcePermission = permissions.FirstOrDefault(permission => permission.ResourceID == ResourceId);
+            //if (resourcePermission != null)
+            //{
+            //    SetFromPermission(resourcePermission);
+            //}
+            //else
+            //{
+            //    var serverPermission =
+            //        permissions.FirstOrDefault(permission => permission.IsServer && permission.ResourceID == Guid.Empty);
+            //    if (serverPermission != null)
+            //    {
+            //        SetFromServer(serverPermission);
+            //    }
+            //}
         }
 
         void SetFromServer(IWindowsGroupPermission serverPermission)

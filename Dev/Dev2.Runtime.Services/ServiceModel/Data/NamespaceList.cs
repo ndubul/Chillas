@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using Dev2.Common.Interfaces;
 using Newtonsoft.Json;
 
 namespace Dev2.Runtime.ServiceModel.Data
@@ -25,7 +26,7 @@ namespace Dev2.Runtime.ServiceModel.Data
     }
 
     [Serializable]
-    public class NamespaceItem
+    public class NamespaceItem:INamespaceItem
     {
         #region ToString
 
