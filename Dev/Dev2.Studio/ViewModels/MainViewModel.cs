@@ -25,6 +25,7 @@ using Dev2.Common.ExtMethods;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Core.DynamicServices;
+using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
@@ -75,6 +76,7 @@ using Dev2.Webs.Callbacks;
 using Dev2.Workspaces;
 using Infragistics.Windows.DockManager.Events;
 using ServiceStack.Common;
+using Warewolf.Core;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
 
@@ -699,8 +701,40 @@ namespace Dev2.Studio.ViewModels
             switch (resourceModel.ServerResourceType)
             {
                 case "DbSource":
-                
-                var db = new DbSource(resourceModel.WorkflowXaml.ToXElement());
+                    EditDbSource(resourceModel);
+                    break;
+                case "DbService":
+                    EditDbService(resourceModel);
+                break;
+            }
+            WebController.DisplayDialogue(resourceModel, isedit);
+        }
+
+        void EditDbSource(IContextualResourceModel resourceModel)
+        {
+            var db = new DbSource(resourceModel.WorkflowXaml.ToXElement());
+            var def = new DbSourceDefinition()
+            {
+                AuthenticationType = db.AuthenticationType,
+                DbName = db.DatabaseName,
+                Id = db.ResourceID,
+                Name = db.DatabaseName,
+                Password = db.Password,
+                Path = db.ResourcePath,
+                ServerName = db.Server,
+                Type = enSourceType.SqlDatabase,
+                UserName = db.UserID
+            };
+            EditResource(def);
+        }
+
+        void EditDbService(IContextualResourceModel resourceModel)
+        {
+            var dbsvc = new DbService(resourceModel.WorkflowXaml.ToXElement());
+            var db = dbsvc.Source as DbSource;
+
+            if(db != null)
+            {
                 var def = new DbSourceDefinition()
                 {
                     AuthenticationType = db.AuthenticationType,
@@ -712,13 +746,29 @@ namespace Dev2.Studio.ViewModels
                     ServerName = db.Server,
                     Type = enSourceType.SqlDatabase,
                     UserName = db.UserID
+                };
+
+                var svc = new DatabaseService()
+                {
+                    Action = new DbAction()
+                    {
+                        Inputs = new List<IServiceInput>(dbsvc.Method.Parameters.Select(a => new ServiceInput(a.Name, a.Value)))
+                        ,
+                        Name = dbsvc.Method.Name
+                    },
+                    Id = dbsvc.ResourceID,
+                    Inputs = new List<IServiceInput>(dbsvc.Method.Parameters.Select(a => new ServiceInput(a.Name, a.Value))),
+                    Name = dbsvc.ResourceName,
+                    OutputMappings = new IServiceOutputMapping[0],
+                    Path = dbsvc.ResourcePath,
+                    Source = def
 
                 };
-                EditResource(def);
-                break;
+                EditResource(svc);
             }
-            WebController.DisplayDialogue(resourceModel, isedit);
+         
         }
+
 
         public void EditResource(IDbSource selectedSource)
         {
@@ -727,6 +777,17 @@ namespace Dev2.Studio.ViewModels
             var dbSourceViewModel = new ManageDatabaseSourceViewModel(new ManageDatabaseSourceModel(server.UpdateRepository, server.QueryProxy, ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator() ,selectedSource);
             var vm = new NewDatabaseSourceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource),vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+
+        public void EditResource(IDatabaseService selectedSource)
+        {
+
+            var server = CustomContainer.Get<IServer>();
+            var dbSourceViewModel = new ManageDatabaseServiceViewModel(new ManageDbServiceModel(server.UpdateRepository, server.QueryProxy, ""),null, selectedSource);
+            var vm = new NewDatabaseServiceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbService), vm);
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         } 
 
