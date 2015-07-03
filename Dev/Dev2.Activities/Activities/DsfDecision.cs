@@ -28,7 +28,7 @@ namespace Dev2.Activities
         #region Overrides of DsfNativeActivity<string>
         public DsfDecision(DsfFlowDecisionActivity inner):this()
         {
-            _inner = inner;
+            _inner = inner;            
         }
         public DsfDecision()
         {        

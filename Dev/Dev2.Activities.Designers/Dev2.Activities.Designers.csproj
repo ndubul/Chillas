@@ -168,6 +168,7 @@
       <DependentUpon>Small.xaml</DependentUpon>
     </Compile>
     <Compile Include="Designers2\Core\ActivityCollectionDesignerDecisionViewModel.cs" />
+    <Compile Include="Designers2\Core\ActivityCollectionDesignerObservableViewModel_TDev2TO.cs" />
     <Compile Include="Designers2\Core\DecisionCollectionViewModel.cs" />
     <Compile Include="Designers2\Core\CEventHelper.cs" />
     <Compile Include="Designers2\CreateJSON\Large.xaml.cs">
@@ -186,6 +187,9 @@
     <Compile Include="Designers2\Decision\DecisionDesignerViewModel.cs" />
     <Compile Include="Designers2\Decision\Large.xaml.cs">
       <DependentUpon>Large.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Designers2\Decision\Small.xaml.cs">
+      <DependentUpon>Small.xaml</DependentUpon>
     </Compile>
     <Compile Include="Designers2\DropBox\Upload\DropboxUploadFileDesigner.xaml.cs">
       <DependentUpon>DropboxUploadFileDesigner.xaml</DependentUpon>
@@ -555,6 +559,7 @@
     <Compile Include="Designers2\Switch\ConfigureSwitchArm.xaml.cs">
       <DependentUpon>ConfigureSwitchArm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Designers2\Switch\SwitchDesignerViewModel.cs" />
     <Compile Include="Designers2\UniqueRecords\UniqueRecordsDesigner.xaml.cs">
       <DependentUpon>UniqueRecordsDesigner.xaml</DependentUpon>
     </Compile>
@@ -780,6 +785,10 @@
     <Page Include="Designers2\Decision\Large.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Designers2\Decision\Small.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Designers2\DropBox\Upload\DropboxUploadFileDesigner.xaml">
       <Generator>MSBuild:Compile</Generator>

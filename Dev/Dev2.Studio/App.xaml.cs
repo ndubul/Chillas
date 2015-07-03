@@ -161,6 +161,7 @@ namespace Dev2.Studio
             // Create the window 
 
             var server = new Warewolf.Studio.AntiCorruptionLayer.Server(new Uri(AppSettings.LocalHost));
+            server.ResourceName = "localhost";
             CustomContainer.Register<IServer>(server);
             var splashViewModel = new SplashViewModel(server, new ExternalProcessExecutor());
 

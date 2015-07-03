@@ -16,7 +16,7 @@
                                xmlns:activities1="clr-namespace:Dev2.Activities;assembly=Dev2.Activities"
                                xmlns:decision="clr-namespace:Dev2.Activities.Designers2.Decision"
                                xmlns:to="clr-namespace:Dev2.TO;assembly=Dev2.Activities"
-                               Width="350"
+                               Width="400"
                                MinWidth="350"
                                MinHeight="380"
                                Height="350"
@@ -43,8 +43,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="50*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -60,7 +60,7 @@
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                x:Name="LargeDataGrid"
-                               ItemsSource="{Binding Tos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               ItemsSource="{Binding Collection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource ActivityMapppingDataGridStyle}"
                                Margin="0,3">
             <i:Interaction.Behaviors>
@@ -101,10 +101,9 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <ui:IntellisenseTextBox DefaultText="Match Value"
-                                                        
-                                                        FilterType="All"
                                                         Grid.Column="0"
                                                         Grid.ColumnSpan="2"
+                                                        Margin="0,0,2,0"
                                                         AllowUserCalculateMode="False"
                                                         ScrollViewer.VerticalScrollBarVisibility="Hidden"
                                                         VerticalScrollBarVisibility="Hidden"
@@ -114,7 +113,6 @@
                                                         AllowUserInsertLine="True"
                                                         MaxHeight="52"
                                                         Padding="3"
-                                                      
                                                         Text="{Binding MatchValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         IsEnabled="{Binding IsSearchCriteriaEnabled, UpdateSourceTrigger=PropertyChanged}"
                                                         Visibility="{Binding IsSearchCriteriaVisible,Converter={StaticResource BoolToVisibilityConverter},UpdateSourceTrigger=PropertyChanged}"
@@ -147,7 +145,6 @@
                                                         AcceptsReturn="False"
                                                         MaxHeight="52"
                                                         Padding="3"
-                                                        
                                                         Text="{Binding From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Visibility="{Binding IsSearchCriteriaVisible,Converter={StaticResource BoolToVisibilityConverterInverse},UpdateSourceTrigger=PropertyChanged}"
                                                         Style="{StaticResource DatagridIntellisenseTextBoxStyle}">
@@ -205,7 +202,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 
-                <DataGridTemplateColumn Width="150"
+                <DataGridTemplateColumn Width="*"
                                         Header="MatchType"
                                         HeaderStyle="{StaticResource ActivityMapppingDataGridHeaderStyle}"
                                         d:DataContext="{d:DesignInstance Type=to:DecisionTO}">
@@ -365,7 +362,7 @@
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
                   Content="Require All decisions To Be True"
-                  IsChecked="{Binding ModelItem.RequireAllTrue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  IsChecked="{Binding RequireAllDecisionsToBeTrue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ToolTip="{x:Static help:HelpTextResources.FindToolTipRequireAllMatchesToBeTrue}"
                   AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RequireAllTrue_AutoID}">
             <i:Interaction.Behaviors>
@@ -378,7 +375,7 @@
               Grid.Column="0"
               Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="{Binding ElementName=TrueArmLabel, Path=ActualWidth}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
@@ -386,11 +383,11 @@
                    Content="Display text" />
 
             <ui:IntellisenseTextBox Grid.Column="1"
-                                    Margin="0,2,0,2"
+                                    Margin="2,2,0,2"
                                     DefaultText="[[Display text]]"
                                     WrapInBrackets="True"
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
-                                    Text="{Binding ModelItem.DisplayText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding DisplayText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     attachedProperties:FocusSetter.IsFocused="{Binding IsDisplayTextFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Result_AutoID}"
                                     ToolTip="{x:Static help:HelpTextResources.FindToolTipResult}">
@@ -399,7 +396,7 @@
                                      DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="DisplayText"
-                                         SourcePropertyValue="{Binding ModelItem.DisplayText, UpdateSourceTrigger=PropertyChanged}"
+                                         SourcePropertyValue="{Binding DisplayText, UpdateSourceTrigger=PropertyChanged}"
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>
@@ -408,10 +405,11 @@
               Grid.Column="0"
               Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
+                   x:Name="TrueArmLabel"
                    Style="{StaticResource ActivityLabelStyle}"
                    Content="True arm text" />
 
@@ -420,7 +418,7 @@
                                     DefaultText="[[True arm text]]"
                                     WrapInBrackets="True"
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
-                                    Text="{Binding ModelItem.TrueArmText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding TrueArmText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     attachedProperties:FocusSetter.IsFocused="{Binding IsTrueArmFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Result_AutoID}"
                                     ToolTip="{x:Static help:HelpTextResources.FindToolTipResult}">
@@ -429,7 +427,7 @@
                                      DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="TrueArmText"
-                                         SourcePropertyValue="{Binding ModelItem.TrueArmText, UpdateSourceTrigger=PropertyChanged}"
+                                         SourcePropertyValue="{Binding TrueArmText, UpdateSourceTrigger=PropertyChanged}"
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>
@@ -438,7 +436,7 @@
               Grid.Column="0"
               Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="{Binding ElementName=TrueArmLabel, Path=ActualWidth}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
@@ -446,11 +444,11 @@
                    Content="False arm text" />
 
             <ui:IntellisenseTextBox Grid.Column="1"
-                                    Margin="0,2,0,2"
+                                    Margin="2,2,0,2"
                                     DefaultText="[[False arm text]]"
                                     WrapInBrackets="True"
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
-                                    Text="{Binding ModelItem.FalseArmText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding FalseArmText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     attachedProperties:FocusSetter.IsFocused="{Binding IsFalseArmFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Result_AutoID}"
                                     ToolTip="{x:Static help:HelpTextResources.FindToolTipResult}">
@@ -459,17 +457,10 @@
                                      DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="FalseArmText"
-                                         SourcePropertyValue="{Binding ModelItem.FalseArmText, UpdateSourceTrigger=PropertyChanged}"
+                                         SourcePropertyValue="{Binding FalseArmText, UpdateSourceTrigger=PropertyChanged}"
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>
-        </Grid>
-        <Grid Grid.Row="5"
-              Grid.Column="0"
-              Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Done" Margin="{StaticResource ControlBorderRight}"></Button>
-            </StackPanel>
         </Grid>
     </Grid>
 </core:ActivityDesignerTemplate>

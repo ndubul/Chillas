@@ -518,7 +518,7 @@ namespace Warewolf.Studio.ViewModels
                     //Inputs = explorerItem.Inputs,
                     //Outputs = explorerItem.Outputs
                 };
-                itemCreated.SetPermissions(server.Permissions);
+                //itemCreated.SetPermissions(server.Permissions);
 				if (isDialog)
                 {
                     SetPropertiesForDialog(itemCreated);

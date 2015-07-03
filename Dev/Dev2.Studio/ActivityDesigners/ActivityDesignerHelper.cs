@@ -10,6 +10,7 @@
 */
 
 using System;
+using System.Activities.Statements;
 using System.Collections.Generic;
 using Dev2.Activities;
 using Dev2.Activities.Designers2.BaseConvert;
@@ -115,7 +116,7 @@ namespace Dev2.Studio.ActivityDesigners
                 { typeof(DsfScriptingJavaScriptActivity), typeof(DsfScriptingJavaScriptDesigner) },
                 { typeof(DsfDropBoxFileActivity), typeof(DropboxUploadFileDesigner) },
                 { typeof(DsfCreateJsonActivity), typeof(CreateJsonDesigner) },
-                { typeof(DsfFlowDecisionActivity), typeof(DecisionDesigner) },
+               // { typeof(DsfFlowDecisionActivity), typeof(DecisionDesigner) },
 
                 // Travis.Frisinger : 25.09.2012 - Removed Http Activity as it is out of sync with the current release 1 plans
             };
