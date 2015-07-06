@@ -1324,7 +1324,7 @@ namespace Dev2.Studio.ViewModels
                 NotifyOfPropertyChange(() => ViewInBrowserCommand);
                 if (MenuViewModel != null)
                 {
-                    NotifyOfPropertyChange(() => MenuViewModel.DeployCommand);
+                    NotifyOfPropertyChange(() => MenuViewModel.ExecuteServiceCommand);
                     NotifyOfPropertyChange(() => MenuViewModel.SaveCommand);
                 }
             }
@@ -1979,8 +1979,6 @@ namespace Dev2.Studio.ViewModels
         }
 
         #endregion
-
-        public event System.Action ActiveServerChanged;
 
         public async Task<bool> CheckForNewVersion()
         {
