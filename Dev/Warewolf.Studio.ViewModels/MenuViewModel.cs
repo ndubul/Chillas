@@ -35,13 +35,15 @@ namespace Warewolf.Studio.ViewModels
             }
             _viewModel = mainViewModel;
             _isOverLock = false;
-            _viewModel.ActiveServerChanged += ShellViewModelOnActiveServerChanged;
+            //_viewModel.ActiveServerChanged += ShellViewModelOnActiveServerChanged;
             NewCommand = _viewModel.NewResourceCommand;
             DeployCommand = _viewModel.DeployCommand;
             SaveCommand = _viewModel.SaveCommand;
             OpenSchedulerCommand = _viewModel.SchedulerCommand;
             OpenSettingsCommand = _viewModel.SettingsCommand;
             ExecuteServiceCommand = _viewModel.DebugCommand;
+            OnPropertyChanged(() => SaveCommand);
+            OnPropertyChanged(() => ExecuteServiceCommand);
             CheckForNewVersion(_viewModel);
             CheckForNewVersionCommand = new DelegateCommand(_viewModel.DisplayDialogForNewVersion);
 
@@ -195,20 +197,20 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        void ShellViewModelOnActiveServerChanged()
-        {
-            UpdateCommandExecutionBaseOnPermissions();
-        }
+        //void ShellViewModelOnActiveServerChanged()
+        //{
+        //    UpdateCommandExecutionBaseOnPermissions();
+        //}
 
-        void UpdateCommandExecutionBaseOnPermissions()
-        {
-            CanCreateNewService = true;
-            CanDeploy = true;
-            CanSave = true;
-            CanSetSchedules = true;
-            CanSetSettings = true;
-            CanExecuteService = true;
-        }
+        //void UpdateCommandExecutionBaseOnPermissions()
+        //{
+        //    CanCreateNewService = true;
+        //    CanDeploy = true;
+        //    CanSave = true;
+        //    CanSetSchedules = true;
+        //    CanSetSettings = true;
+        //    CanExecuteService = true;
+        //}
 
         public bool CanExecuteService { get; set; }
         public bool CanSetSettings { get; set; }

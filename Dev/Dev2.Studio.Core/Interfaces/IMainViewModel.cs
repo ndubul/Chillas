@@ -32,7 +32,7 @@ namespace Dev2.Interfaces
 
         void AddWorkSurfaceContext(IContextualResourceModel resourceModel);
 
-        event Action ActiveServerChanged;
+        //event Action ActiveServerChanged;
         bool MenuExpanded { get; set; }
         double MenuPanelWidth { get; set; }
         AuthorizeCommand SaveCommand { get; }
