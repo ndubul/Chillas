@@ -12,12 +12,10 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Dev2.Common;
-using Dev2.Common.Common;
 using Dev2.Common.Interfaces.Communication;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Diagnostics.Debug;
@@ -201,7 +199,7 @@ namespace Dev2.Runtime.WebServer.Hubs
                         if (Context.User.Identity != null)
                         // ReSharper restore ConditionIsAlwaysTrueOrFalse
                         {
-                            user = Use;
+                            user = UserName;
                             // set correct principle ;)
                             Thread.CurrentPrincipal = Context.User;
                             Dev2Logger.Log.Debug("Execute Command Invoked For [ " + user + " ] For Service [ " + request.ServiceName + " ]");
@@ -300,7 +298,7 @@ namespace Dev2.Runtime.WebServer.Hubs
             var debugSerializated = _serializer.Serialize(debugState);
 
             var hubCallerConnectionContext = Clients;
-            var user = hubCallerConnectionContext.User(Use);
+            var user = hubCallerConnectionContext.User(UserName);
             //var user = hubCallerConnectionContext.All;
             user.SendDebugState(debugSerializated);
         }
@@ -404,7 +402,7 @@ namespace Dev2.Runtime.WebServer.Hubs
             var workspaceId = Server.GetWorkspaceID(Context.User.Identity);
             ResourceCatalog.Instance.LoadResourceActivityCache(workspaceId);
             var hubCallerConnectionContext = Clients;
-            var user = hubCallerConnectionContext.User(User);
+            var user = hubCallerConnectionContext.User(UserName);
             user.SendWorkspaceID(workspaceId);
             user.SendServerID(HostSecurityProvider.Instance.ServerID);
             PermissionsHaveBeenModified(null, null);
