@@ -16,13 +16,11 @@ using System;
 using System.Activities.Presentation.Model;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Decision;
 using Dev2.Activities.Designers2.Switch;
 using Dev2.Common;
 using Dev2.Common.Interfaces.Studio.Controller;
-using Dev2.Data.SystemTemplates;
 using Dev2.Data.SystemTemplates.Models;
 using Dev2.Services.Events;
 using Dev2.Studio.Core.AppResources.ExtensionMethods;
@@ -164,7 +162,6 @@ namespace Dev2.Studio.Controller
             try
             {
                 var ds = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
-                ds.SwitchVariable = "";
                 Utilities.ActivityHelper.SetSwitchKeyProperty(ds, args.ModelItem);
             }
             catch
@@ -195,7 +192,9 @@ namespace Dev2.Studio.Controller
         public void EditSwitchCaseExpression(EditCaseExpressionMessage args)
         {
             ModelProperty switchCaseValue = args.ModelItem.Properties["Case"];
-            _callBackHandler = ShowSwitchDragDialog(args.ModelItem);
+            var switchVal = args.ModelItem.Properties["ParentFlowSwitch"];
+            var variable = SwitchExpressionValue(switchVal);
+            _callBackHandler = ShowSwitchDragDialog(args.ModelItem, variable);
             try
             {
                 var ds = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
@@ -204,7 +203,7 @@ namespace Dev2.Studio.Controller
                 {
                     if(switchCaseValue != null)
                     {
-                        switchCaseValue.SetValue(ds.SwitchVariable);
+                        switchCaseValue.SetValue(ds.SwitchExpression);
                     }
                 }
             }
@@ -216,6 +215,42 @@ namespace Dev2.Studio.Controller
             }
         }
 
+        static string SwitchExpressionValue(ModelProperty activityExpression)
+        {
+            var tmpModelItem = activityExpression.Value;
+
+            var switchExpressionValue = string.Empty;
+
+            if(tmpModelItem != null)
+            {
+                var tmpProperty = tmpModelItem.Properties["Expression"];
+
+                if(tmpProperty != null)
+                {
+                    if(tmpProperty.Value != null)
+                    {
+                        var value = tmpProperty.ComputedValue as DsfFlowSwitchActivity;
+                        if(value != null)
+                        {
+                            var tmp = value.ExpressionText;
+                            if(!string.IsNullOrEmpty(tmp))
+                            {
+                                int start = tmp.IndexOf("(", StringComparison.Ordinal);
+                                int end = tmp.IndexOf(",", StringComparison.Ordinal);
+
+                                if(start < end && start >= 0)
+                                {
+                                    start += 2;
+                                    end -= 1;
+                                    switchExpressionValue = tmp.Substring(start, (end - start));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return switchExpressionValue;
+        }
         #endregion public methods
 
         #region Protected Methods

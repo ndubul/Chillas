@@ -515,44 +515,10 @@ namespace Dev2.Studio.ViewModels.Workflow
                    mi.Parent.Parent.Parent != null &&
                    mi.Parent.Parent.Parent.ItemType == typeof(FlowSwitch<string>))
             {
-                #region Extract the Switch Expression ;)
-
                 ModelProperty activityExpression = mi.Parent.Parent.Parent.Properties["Expression"];
-
                 if (activityExpression != null)
                 {
-                    var tmpModelItem = activityExpression.Value;
-
-                    var switchExpressionValue = string.Empty;
-
-                    if (tmpModelItem != null)
-                    {
-                        var tmpProperty = tmpModelItem.Properties["ExpressionText"];
-
-                        if (tmpProperty != null)
-                        {
-                            if (tmpProperty.Value != null)
-                            {
-                                var tmp = tmpProperty.Value.ToString();
-
-                                if (!string.IsNullOrEmpty(tmp))
-                                {
-                                    int start = tmp.IndexOf("(", StringComparison.Ordinal);
-                                    int end = tmp.IndexOf(",", StringComparison.Ordinal);
-
-                                    if (start < end && start >= 0)
-                                    {
-                                        start += 2;
-                                        end -= 1;
-                                        switchExpressionValue = tmp.Substring(start, (end - start));
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                #endregion
-
+                    var switchExpressionValue = SwitchExpressionValue(activityExpression);
                     ModelProperty modelProperty = mi.Properties["Key"];
                     if (modelProperty != null && ((modelProperty.Value != null) && modelProperty.Value.ToString().Contains("Case")))
                     {
@@ -561,6 +527,40 @@ namespace Dev2.Studio.ViewModels.Workflow
                     }
                 }
             }
+        }
+
+        static string SwitchExpressionValue(ModelProperty activityExpression)
+        {
+            var tmpModelItem = activityExpression.Value;
+
+            var switchExpressionValue = string.Empty;
+
+            if(tmpModelItem != null)
+            {
+                var tmpProperty = tmpModelItem.Properties["ExpressionText"];
+
+                if(tmpProperty != null)
+                {
+                    if(tmpProperty.Value != null)
+                    {
+                        var tmp = tmpProperty.Value.ToString();
+
+                        if(!string.IsNullOrEmpty(tmp))
+                        {
+                            int start = tmp.IndexOf("(", StringComparison.Ordinal);
+                            int end = tmp.IndexOf(",", StringComparison.Ordinal);
+
+                            if(start < end && start >= 0)
+                            {
+                                start += 2;
+                                end -= 1;
+                                switchExpressionValue = tmp.Substring(start, (end - start));
+                            }
+                        }
+                    }
+                }
+            }
+            return switchExpressionValue;
         }
 
         protected void InitializeFlowStep(ModelItem mi)
