@@ -271,7 +271,7 @@ namespace Dev2.Studio.Views
             var vm = DataContext as MainViewModel;
             if (vm != null)
             {
-                //vm.MenuPanelWidth = e.NewSize.Width;
+                vm.MenuPanelWidth = e.NewSize.Width;
             }
         }
 

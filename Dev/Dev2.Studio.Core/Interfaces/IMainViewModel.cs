@@ -9,6 +9,8 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Dev2.Security;
 using Dev2.Studio.Core.Interfaces;
@@ -29,5 +31,17 @@ namespace Dev2.Interfaces
         void UpdatePane(IContextualResourceModel model);
 
         void AddWorkSurfaceContext(IContextualResourceModel resourceModel);
+
+        event Action ActiveServerChanged;
+        bool MenuExpanded { get; set; }
+        double MenuPanelWidth { get; set; }
+        AuthorizeCommand SaveCommand { get; }
+        AuthorizeCommand DebugCommand { get; }
+        AuthorizeCommand SettingsCommand { get; }
+        AuthorizeCommand SchedulerCommand { get; }
+
+        void DisplayDialogForNewVersion();
+
+        Task<bool> CheckForNewVersion();
     }
 }

@@ -224,6 +224,7 @@
     <Compile Include="IManagePluginSourceViewModel.cs" />
     <Compile Include="IManageWebserviceSourceViewModel.cs" />
     <Compile Include="IManageWebServiceViewModel.cs" />
+    <Compile Include="IMenuView.cs" />
     <Compile Include="INamespaceItem.cs" />
     <Compile Include="Infrastructure\Communication\IExecuteMessage.cs" />
     <Compile Include="Infrastructure\Events\IEventPublisher.cs" />
@@ -264,6 +265,8 @@
     <Compile Include="IVersionStrategy.cs" />
     <Compile Include="IWarewolfIterator.cs" />
     <Compile Include="IWarewolfListIterator.cs" />
+    <Compile Include="IWarewolfWebClient.cs" />
+    <Compile Include="IWebLatestVersionDialog.cs" />
     <Compile Include="NameValue.cs" />
     <Compile Include="PathOperations\IResult.cs" />
     <Compile Include="Patterns\ISpookyLoadable.cs" />
@@ -307,6 +310,7 @@
     <Compile Include="Studio\Core\IEnvironmentConnection.cs" />
     <Compile Include="Studio\IDialogueViewModel.cs" />
     <Compile Include="Studio\IdialogViewModelFactory.cs" />
+    <Compile Include="Studio\IMenuViewModel.cs" />
     <Compile Include="Threading\IAsyncWorker.cs" />
     <Compile Include="UndoFramework\IAction.cs" />
     <Compile Include="UndoFramework\IActionHistory.cs" />

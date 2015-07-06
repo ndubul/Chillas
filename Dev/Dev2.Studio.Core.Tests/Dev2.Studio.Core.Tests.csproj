@@ -215,6 +215,8 @@
     <Compile Include="ClientExplorerRepositoryTest.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\WarewolfWebClient.cs" />
+    <Compile Include="Helpers\WarewolfWebClient_2.cs" />
     <Compile Include="IntellisenseProvider\CompositeIntellisenseProviderTests.cs" />
     <Compile Include="ConverterTests\BoolToStringConvertTests.cs" />
     <Compile Include="ConverterTests\CalculateIntellisenseTextConverterTests.cs" />
@@ -487,6 +489,10 @@
     <ProjectReference Include="..\Dev2.Util\Dev2.Util.csproj">
       <Project>{1990550D-EA6F-4DAC-9B5E-8571E86923ED}</Project>
       <Name>Dev2.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warewolf.Studio.Core\Warewolf.Studio.Core.csproj">
+      <Project>{F9FE2CE9-625E-4E7F-8F4C-FCE28BB59510}</Project>
+      <Name>Warewolf.Studio.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
