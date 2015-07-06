@@ -215,8 +215,6 @@
     <Compile Include="ClientExplorerRepositoryTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helpers\WarewolfWebClient.cs" />
-    <Compile Include="Helpers\WarewolfWebClient_2.cs" />
     <Compile Include="IntellisenseProvider\CompositeIntellisenseProviderTests.cs" />
     <Compile Include="ConverterTests\BoolToStringConvertTests.cs" />
     <Compile Include="ConverterTests\CalculateIntellisenseTextConverterTests.cs" />
