@@ -65,7 +65,7 @@ namespace Dev2.Runtime.ESB.Management.Services
         {
             // ReSharper disable MaximumChainedReferences
             var Inputs = a.Parameters.Select(b => new ServiceInput(b.Name, b.DefaultValue ?? "") as IServiceInput).ToList();
-            // ReSharper restore MaximumChainedReferences
+            // ReSharper restore MaximumChainedReferencse
             return new DbAction()
             {
                 Name = a.Name,
