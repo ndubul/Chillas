@@ -298,8 +298,8 @@ namespace Dev2.Runtime.WebServer.Hubs
             var debugSerializated = _serializer.Serialize(debugState);
 
             var hubCallerConnectionContext = Clients;
-            var user = hubCallerConnectionContext.User(UserName);
-            //var user = hubCallerConnectionContext.All;
+            //var user = hubCallerConnectionContext.User(UserName);
+            var user = hubCallerConnectionContext.All;
             user.SendDebugState(debugSerializated);
         }
 
