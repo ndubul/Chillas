@@ -35,7 +35,6 @@ namespace Warewolf.Studio.ViewModels
             }
             _viewModel = mainViewModel;
             _isOverLock = false;
-            //_viewModel.ActiveServerChanged += ShellViewModelOnActiveServerChanged;
             NewCommand = _viewModel.NewResourceCommand;
             DeployCommand = _viewModel.DeployCommand;
             SaveCommand = _viewModel.SaveCommand;
@@ -196,21 +195,6 @@ namespace Warewolf.Studio.ViewModels
                 OnPropertyChanged(() => LockImage);
             }
         }
-
-        //void ShellViewModelOnActiveServerChanged()
-        //{
-        //    UpdateCommandExecutionBaseOnPermissions();
-        //}
-
-        //void UpdateCommandExecutionBaseOnPermissions()
-        //{
-        //    CanCreateNewService = true;
-        //    CanDeploy = true;
-        //    CanSave = true;
-        //    CanSetSchedules = true;
-        //    CanSetSettings = true;
-        //    CanExecuteService = true;
-        //}
 
         public bool CanExecuteService { get; set; }
         public bool CanSetSettings { get; set; }

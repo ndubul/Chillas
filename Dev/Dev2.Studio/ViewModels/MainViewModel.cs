@@ -1980,8 +1980,6 @@ namespace Dev2.Studio.ViewModels
 
         #endregion
 
-        //public event System.Action ActiveServerChanged;
-
         public async Task<bool> CheckForNewVersion()
         {
             var hasNewVersion = await Version.GetNewerVersionAsync();
