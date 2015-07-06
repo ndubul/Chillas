@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Claims;
@@ -19,9 +20,13 @@ using System.Windows.Input;
 using Caliburn.Micro;
 using Dev2.AppResources.Repositories;
 using Dev2.Common;
+using Dev2.Common.Common;
 using Dev2.Common.ExtMethods;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
+using Dev2.Common.Interfaces.Core.DynamicServices;
+using Dev2.Common.Interfaces.DB;
+using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.ConnectionHelpers;
@@ -32,6 +37,7 @@ using Dev2.Helpers;
 using Dev2.Instrumentation;
 using Dev2.Interfaces;
 using Dev2.Runtime.Configuration.ViewModels.Base;
+using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Security;
 using Dev2.Services.Events;
 using Dev2.Services.Security;
@@ -70,6 +76,7 @@ using Dev2.Webs.Callbacks;
 using Dev2.Workspaces;
 using Infragistics.Windows.DockManager.Events;
 using ServiceStack.Common;
+using Warewolf.Core;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
 
@@ -691,9 +698,153 @@ namespace Dev2.Studio.ViewModels
             {
                 resourceModel.Environment.ResourceRepository.ReloadResource(resourceModel.ID, resourceModel.ResourceType, ResourceModelEqualityComparer.Current, true);
             }
-
+            switch (resourceModel.ServerResourceType)
+            {
+                case "DbSource":
+                    EditDbSource(resourceModel);
+                    break;
+                case "WebSource":
+                    EditWebSource(resourceModel);
+                    break;
+                case "Plugin":
+                    EditPluginSource(resourceModel);
+                    break;
+                case "DbService":
+                    EditDbService(resourceModel);
+                break;
+            }
             WebController.DisplayDialogue(resourceModel, isedit);
         }
+
+        void EditDbSource(IContextualResourceModel resourceModel)
+        {
+            var db = new DbSource(resourceModel.WorkflowXaml.ToXElement());
+            var def = new DbSourceDefinition()
+            {
+                AuthenticationType = db.AuthenticationType,
+                DbName = db.DatabaseName,
+                Id = db.ResourceID,
+                Name = db.DatabaseName,
+                Password = db.Password,
+                Path = db.ResourcePath,
+                ServerName = db.Server,
+                Type = enSourceType.SqlDatabase,
+                UserName = db.UserID
+            };
+            EditResource(def);
+        }
+        void EditPluginSource(IContextualResourceModel resourceModel)
+        {
+            var db = new PluginSource(resourceModel.WorkflowXaml.ToXElement());
+            var def = new PluginSourceDefinition()
+            {
+                 SelectedDll = new DllListing(){FullName = db.AssemblyName, Name = db.AssemblyName, Children = new Collection<IDllListing>(),IsDirectory = false},
+                 Id = db.ResourceID,
+                 Name = db.ResourceName,
+                 Path = db.ResourcePath
+            };
+            EditResource(def);
+        }
+        void EditWebSource(IContextualResourceModel resourceModel)
+        {
+            var db = new WebSource(resourceModel.WorkflowXaml.ToXElement());
+            var def = new WebServiceSourceDefinition()
+            {
+                AuthenticationType = db.AuthenticationType,
+                DefaultQuery = db.DefaultQuery,
+                Id = db.ResourceID,
+                Name = db.ResourceName,
+                Password = db.Password,
+                Path = db.ResourcePath,
+                HostName = db.Address,
+                
+                UserName = db.UserName
+            };
+            EditResource(def);
+        }
+
+        void EditDbService(IContextualResourceModel resourceModel)
+        {
+            var dbsvc = new DbService(resourceModel.WorkflowXaml.ToXElement());
+            var db = dbsvc.Source as DbSource;
+            var server = CustomContainer.Get<IServer>();
+
+            if(db != null)
+            {
+                var def = new DbSourceDefinition()
+                {
+                    AuthenticationType = db.AuthenticationType,
+                    DbName = db.DatabaseName,
+                    Id = db.ResourceID,
+                    Name = db.DatabaseName,
+                    Password = db.Password,
+                    Path = db.ResourcePath,
+                    ServerName = db.Server,
+                    Type = enSourceType.SqlDatabase,
+                    UserName = db.UserID
+                };
+
+                var svc = new DatabaseService()
+                {
+                    Action = new DbAction()
+                    {
+                        Inputs = new List<IServiceInput>(dbsvc.Method.Parameters.Select(a => new ServiceInput(a.Name, a.Value)))
+                        ,
+                        Name = dbsvc.Method.Name
+                    },
+                    Id = dbsvc.ResourceID,
+                    Inputs = new List<IServiceInput>(dbsvc.Method.Parameters.Select(a => new ServiceInput(a.Name, a.Value))),
+                    Name = dbsvc.ResourceName,
+                    OutputMappings = new IServiceOutputMapping[0],
+                    Path = dbsvc.ResourcePath,
+                    Source = def
+
+                };
+                EditResource(svc);
+            }
+         
+        }
+
+
+        public void EditResource(IDbSource selectedSource)
+        {
+
+            var server = CustomContainer.Get<IServer>();
+            var dbSourceViewModel = new ManageDatabaseSourceViewModel(new ManageDatabaseSourceModel(server.UpdateRepository, server.QueryProxy, ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator() ,selectedSource);
+            var vm = new NewDatabaseSourceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource),vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+        public void EditResource(IPluginSource selectedSource)
+        {
+
+            var server = CustomContainer.Get<IServer>();
+            var dbSourceViewModel = new ManagePluginSourceViewModel(new ManagePluginSourceModel(server.UpdateRepository, server.QueryProxy, "") ,new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource);
+            var vm = new NewPluginSourceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginSource), vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+        public void EditResource(IWebServiceSource selectedSource)
+        {
+
+            var server = CustomContainer.Get<IServer>();
+            var dbSourceViewModel = new ManageWebserviceSourceViewModel(new ManageWebServiceSourceModel(server.UpdateRepository,  ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource);
+            var vm = new NewWebSourceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
+        public void EditResource(IDatabaseService selectedSource)
+        {
+
+            var server = CustomContainer.Get<IServer>();
+            var dbSourceViewModel = new ManageDatabaseServiceViewModel(new ManageDbServiceModel(server.UpdateRepository, server.QueryProxy, ""),null, selectedSource);
+            var vm = new NewDatabaseServiceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbService), vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        } 
 
         private void ShowNewResourceWizard(string resourceType)
         {
