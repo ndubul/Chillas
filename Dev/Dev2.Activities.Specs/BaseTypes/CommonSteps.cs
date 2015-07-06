@@ -22,7 +22,6 @@ using Dev2.Common.Interfaces.Diagnostics.Debug;
 using Dev2.Data.PathOperations.Enums;
 using Dev2.Data.Util;
 using Dev2.DataList.Contract;
-using Dev2.DataList.Contract.Binary_Objects;
 using Dev2.Diagnostics;
 using Dev2.PathOperations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -146,7 +145,7 @@ namespace Dev2.Activities.Specs.BaseTypes
             ScenarioContext.Current.Add("webserviceToCall", onErrorWebserviceToCall);
         }
 
-        void CreateSourceFileWithSomeDummyData()
+        void CreateSourceFileWithSomeDummyData(int numberOfGuids = 1)
         {
             try
             {
@@ -157,7 +156,7 @@ namespace Dev2.Activities.Specs.BaseTypes
                     ScenarioContext.Current.Get<string>(SourcePasswordHolder),
                     true);
                 StringBuilder sb = new StringBuilder();
-                Enumerable.Range(1, 1000).ToList().ForEach(x => sb.Append(Guid.NewGuid().ToString()));
+                Enumerable.Range(1, numberOfGuids).ToList().ForEach(x => sb.Append(Guid.NewGuid().ToString()));
                 var ops = ActivityIOFactory.CreatePutRawOperationTO(WriteType.Overwrite, sb.ToString());
                 IActivityIOOperationsEndPoint sourceEndPoint = ActivityIOFactory.CreateOperationEndPointFromIOPath(source);
                 if (sourceEndPoint.PathIs(sourceEndPoint.IOPath) == enPathType.File)
@@ -191,6 +190,15 @@ namespace Dev2.Activities.Specs.BaseTypes
             ScenarioContext.Current.Add(SourcePasswordHolder, password.Replace('"', ' ').Trim());
 
             CreateSourceFileWithSomeDummyData();
+        }
+
+        [Given(@"source credentials as '(.*)' and '(.*)' for zip tests")]
+        public void GivenSourceCredentialsAsAndForZipTests(string userName, string password)
+        {
+            ScenarioContext.Current.Add(SourceUsernameHolder, userName.Replace('"', ' ').Trim());
+            ScenarioContext.Current.Add(SourcePasswordHolder, password.Replace('"', ' ').Trim());
+
+            CreateSourceFileWithSomeDummyData(1000);
         }
 
         [Given(@"I have a destination path '(.*)' with value '(.*)'")]
@@ -504,10 +512,7 @@ namespace Dev2.Activities.Specs.BaseTypes
 
         public static List<IDebugItemResult> GetInputDebugItems(Activity act, IExecutionEnvironment env)
         {
-            ErrorResultTO errors;
-            var comiler = DataListFactory.CreateDataListCompiler();
             var result = ScenarioContext.Current.Get<IDSFDataObject>("result");
-            IBinaryDataList dl = comiler.FetchBinaryDataList(result.DataListID, out errors);
 
             try
             {

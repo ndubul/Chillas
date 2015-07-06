@@ -94,9 +94,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -137,7 +136,6 @@
       <Link>Properties\AssemblyCommonInfo.cs</Link>
     </Compile>
     <Compile Include="ConverterTests\Base\BaseConvertTest.cs" />
-    <Compile Include="ConverterTests\Case\CaseConverterTests.cs" />
     <Compile Include="ConverterTests\DateTimeTests\DateTimeComparerTests.cs" />
     <Compile Include="ConverterTests\DateTimeTests\DateTimeFormatterTests.cs" />
     <Compile Include="ConverterTests\DateTimeTests\DateTimeParserTests.cs" />
@@ -162,11 +160,8 @@
     <Compile Include="ConverterTests\GraphTests\StringTests\XmlTests\XmlNavigatorTests.cs" />
     <Compile Include="ConverterTests\GraphTests\StringTests\XmlTests\XmlPathSegmentTests.cs" />
     <Compile Include="ConverterTests\GraphTests\StringTests\XmlTests\XmlPathTests.cs" />
-    <Compile Include="DataList\BinaryDataListItemTest.cs" />
-    <Compile Include="DataList\BinaryDataListTest.cs" />
     <Compile Include="DataList\BrokerTest.cs" />
     <Compile Include="DataList\DebugToTests.cs" />
-    <Compile Include="DataList\Dev2DataListBuilderTest.cs" />
     <Compile Include="Dev2.Network\MockNetworkServer.cs" />
     <Compile Include="Dev2.Network\MockNetworkContext.cs" />
     <Compile Include="Dev2RandomTests.cs" />
@@ -199,10 +194,7 @@
     <Compile Include="Parsing\TokenizerTest.cs" />
     <Compile Include="Parsing\LanguageParserTest.cs" />
     <Compile Include="PathOperationTests\ActivityIOFactoryTests.cs" />
-    <Compile Include="DataListCompilerTest.cs" />
-    <Compile Include="DataListFactoryTest.cs" />
     <Compile Include="DataListCleaningUtilTest.cs" />
-    <Compile Include="Dev2DataLanguageParserTest.cs" />
     <Compile Include="ParserStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -215,7 +207,6 @@
       <DependentUpon>TestStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="RecordsetSearch\AbstractRecsetSearchValidation_GenerateInputRange.cs" />
-    <Compile Include="Repository\SimulationRespositoryTest.cs" />
     <Compile Include="TokenizerTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -280,8 +271,12 @@
     <None Include="App.config" />
     <CodeAnalysisDictionary Include="Fakes\mscorlib.fakes" />
     <CodeAnalysisDictionary Include="Fakes\System.fakes" />
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ConverterTests\Case\" />
+    <Folder Include="Repository\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)'=='true'">
     <PreBuildEvent>"$(DevEnvDir)tf" get /recursive $(ProjectDir)</PreBuildEvent>

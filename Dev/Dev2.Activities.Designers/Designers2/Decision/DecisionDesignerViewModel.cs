@@ -14,6 +14,7 @@ using System.Activities.Presentation.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+//using System.Text;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
@@ -21,11 +22,12 @@ using Dev2.Activities.Designers2.Core;
 using Dev2.Common;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
+using Dev2.Communication;
 using Dev2.Data.Decisions.Operations;
 using Dev2.Data.SystemTemplates;
 using Dev2.Data.SystemTemplates.Models;
+using Dev2.Data.Util;
 using Dev2.DataList;
-using Dev2.DataList.Contract;
 using Dev2.Interfaces;
 using Dev2.Providers.Validation.Rules;
 using Dev2.Runtime.Configuration.ViewModels.Base;
@@ -33,7 +35,6 @@ using Dev2.Studio.Core;
 using Dev2.Studio.Core.Messages;
 using Dev2.TO;
 using Dev2.Validation;
-using Newtonsoft.Json;
 
 namespace Dev2.Activities.Designers2.Decision
 {
@@ -76,7 +77,8 @@ namespace Dev2.Activities.Designers2.Decision
             }
             else
             {
-                ExpressionText = JsonConvert.SerializeObject(ds);
+                Dev2JsonSerializer ser = new Dev2JsonSerializer();
+                ExpressionText = ser.Serialize(ds);
             }
 
             var displayName = mi.Properties[GlobalConstants.DisplayNamePropertyText];
@@ -90,13 +92,13 @@ namespace Dev2.Activities.Designers2.Decision
 
         public void GetExpressionText()
         {
-            IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
+            //IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
             var stack = SetupTos(_observables);
             stack.Mode = RequireAllDecisionsToBeTrue ? Dev2DecisionMode.AND : Dev2DecisionMode.OR;
             stack.DisplayText = DisplayText;
             stack.FalseArmText = FalseArmText;
             stack.TrueArmText = TrueArmText;
-            ExpressionText = compiler.ConvertModelToJson(stack).ToString();
+            ExpressionText = DataListUtil.ConvertModelToJson(stack).ToString();
         }
 
         public override string CollectionName { get { return "ResultsCollection"; } }
@@ -118,27 +120,27 @@ namespace Dev2.Activities.Designers2.Decision
 
             get
             {
-                return _observables;
+                return  _observables;
             }
             set
             {
-                IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
+               
                 _observables = value;
                 var stack = SetupTos(value);
-                ExpressionText = compiler.ConvertModelToJson(stack).ToString();
+                ExpressionText = DataListUtil.ConvertModelToJson(stack).ToString();
             }
         }
 
         ObservableCollection<DecisionTO> ToObservableCollection()
         {
-            IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
-            if(!String.IsNullOrWhiteSpace(ExpressionText))
+
+            if (!String.IsNullOrWhiteSpace(ExpressionText))
             {
                 var val = new StringBuilder(ExpressionText);
-                var decisions = compiler.ConvertFromJsonToModel<Dev2DecisionStack>(val);
-                if(decisions != null)
+                var decisions  = DataListUtil.ConvertFromJsonToModel<Dev2DecisionStack>(val);
+                if (decisions != null)
                 {
-                    if(decisions.TheStack != null)
+                    if (decisions.TheStack != null)
                     {
                         return new ObservableCollection<DecisionTO>(decisions.TheStack.Select(a => new DecisionTO(a)));
                     }
@@ -180,6 +182,7 @@ namespace Dev2.Activities.Designers2.Decision
         public bool IsFalseArmFocused { get { return (bool)GetValue(IsFalseArmFocusedProperty); } set { SetValue(IsFalseArmFocusedProperty, value); } }
         public static readonly DependencyProperty IsFalseArmFocusedProperty = DependencyProperty.Register("IsFalseArmFocused", typeof(bool), typeof(DecisionDesignerViewModel), new PropertyMetadata(default(bool)));
         ObservableCollection<DecisionTO> _observables;
+
 
         void OnSearchTypeChanged(object indexObj)
         {
