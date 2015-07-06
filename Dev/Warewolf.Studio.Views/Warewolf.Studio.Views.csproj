@@ -140,6 +140,9 @@
     <Compile Include="MappingsView.xaml.cs">
       <DependentUpon>MappingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NotConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenameTreeNode.cs" />
@@ -200,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ManageWebserviceSourceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,6 +10,7 @@
 */
 
 using System;
+using System.Threading.Tasks;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.Core.Helpers
@@ -22,5 +23,7 @@ namespace Dev2.Studio.Core.Helpers
         string StartPageUri { get; }
         string LatestVersionCheckSum { get; }
         string CommunityPageUri { get;}
+
+        Task<bool> GetNewerVersionAsync();
     }
 }

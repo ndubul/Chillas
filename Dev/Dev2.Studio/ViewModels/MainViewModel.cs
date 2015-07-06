@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
@@ -70,6 +71,7 @@ using Dev2.Studio.Views.ResourceManagement;
 using Dev2.Threading;
 using Dev2.Utils;
 using Dev2.ViewModels;
+using Dev2.Views.Dialogs;
 using Dev2.Views.DropBox;
 using Dev2.Views.SharepointServerSource;
 using Dev2.Webs;
@@ -123,6 +125,8 @@ namespace Dev2.Studio.ViewModels
         private ICommand _showStartPageCommand;
         bool _hasActiveConnection;
         bool _canDebug = true;
+        double _menuPanelWidth;
+        bool _menuExpanded;
 
         #endregion
 
@@ -388,7 +392,7 @@ namespace Dev2.Studio.ViewModels
         {
         }
 
-        public MainViewModel(Caliburn.Micro.IEventAggregator eventPublisher, IAsyncWorker asyncWorker, IEnvironmentRepository environmentRepository,
+        public MainViewModel(IEventAggregator eventPublisher, IAsyncWorker asyncWorker, IEnvironmentRepository environmentRepository,
             IVersionChecker versionChecker, bool createDesigners = true, IBrowserPopupController browserPopupController = null,
             IPopupController popupController = null, IWindowManager windowManager = null, IWebController webController = null, IStudioResourceRepository studioResourceRepository = null, IConnectControlSingleton connectControlSingleton = null, IConnectControlViewModel connectControlViewModel = null)
             : base(eventPublisher)
@@ -414,6 +418,8 @@ namespace Dev2.Studio.ViewModels
             WebController = webController ?? new WebController();
             EnvironmentRepository = environmentRepository;
             FlowController = new FlowController(PopupProvider);
+            _menuPanelWidth = 60;
+            _menuExpanded = false;
 
             if(ExplorerViewModel == null)
             {
@@ -1017,7 +1023,7 @@ namespace Dev2.Studio.ViewModels
             }
         }
 
-        public System.Action<IContextualResourceModel, IEnvironmentModel, string, string> ShowSaveDialog
+        public Action<IContextualResourceModel, IEnvironmentModel, string, string> ShowSaveDialog
         {
             get { return _showSaveDialog ?? RootWebSite.ShowNewOAuthsourceSaveDialog; }
             set { _showSaveDialog = value; }
@@ -1196,6 +1202,22 @@ namespace Dev2.Studio.ViewModels
             }
         }
 
+        public void SaveService()
+        {
+        }
+
+        public void ExecuteService()
+        {
+        }
+
+        public void OpenScheduler()
+        {
+        }
+
+        public void OpenSettings()
+        {
+        }
+
         #endregion
 
         #region Overrides
@@ -1300,6 +1322,11 @@ namespace Dev2.Studio.ViewModels
                 NotifyOfPropertyChange(() => QuickDebugCommand);
                 NotifyOfPropertyChange(() => QuickViewInBrowserCommand);
                 NotifyOfPropertyChange(() => ViewInBrowserCommand);
+                if (MenuViewModel != null)
+                {
+                    NotifyOfPropertyChange(() => MenuViewModel.DeployCommand);
+                    NotifyOfPropertyChange(() => MenuViewModel.SaveCommand);
+                }
             }
             base.OnActivationProcessed(item, success);
         }
@@ -1444,6 +1471,19 @@ namespace Dev2.Studio.ViewModels
         #endregion delete
 
         #region WorkspaceItems management
+
+        public double MenuPanelWidth
+        {
+            get
+            {
+                return _menuPanelWidth;
+            }
+            set
+            {
+                _menuPanelWidth = value;
+                //OnPropertyChanged(() => MenuPanelWidth);
+            }
+        }
 
         private void SaveWorkspaceItems()
         {
@@ -1924,6 +1964,7 @@ namespace Dev2.Studio.ViewModels
         Action<IContextualResourceModel, IEnvironmentModel, string, string> _showSaveDialog;
         Action<IContextualResourceModel, IEnvironmentModel, string, string,string,AuthenticationType> _showSharepointServerSourceSaveDialog;
         IDropboxFactory _dropboxFactory;
+        IMenuViewModel _menuViewModel;
 
         public bool IsDownloading()
         {
@@ -1938,5 +1979,48 @@ namespace Dev2.Studio.ViewModels
         }
 
         #endregion
+
+        public event System.Action ActiveServerChanged;
+
+        public async Task<bool> CheckForNewVersion()
+        {
+            var hasNewVersion = await Version.GetNewerVersionAsync();
+            return hasNewVersion;
+        }
+
+        public async void DisplayDialogForNewVersion()
+        {
+            var hasNewVersion = await CheckForNewVersion();
+            if (hasNewVersion)
+            {
+                var dialog = new WebLatestVersionDialog();
+                dialog.ShowDialog();
+            }
+        }
+
+
+        public bool MenuExpanded
+        {
+            get
+            {
+                return _menuExpanded;
+            }
+            set
+            {
+                _menuExpanded = value;
+                NotifyOfPropertyChange(() => MenuExpanded);
+            }
+        }
+        public IMenuViewModel MenuViewModel
+        {
+            get
+            {
+                if (_menuViewModel == null)
+                {
+                    _menuViewModel = new MenuViewModel(this);
+                }
+                return _menuViewModel;
+            }
+        }
     }
 }

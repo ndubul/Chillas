@@ -15,6 +15,7 @@
         xmlns:behaviors="clr-namespace:Dev2.Studio.AppResources.Behaviors"
         xmlns:help="clr-namespace:Dev2.Help"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:views1="clr-namespace:Warewolf.Studio.Views;assembly=Warewolf.Studio.Views"
         Background="{StaticResource WareWolfBackGroundBrush}"
         FontFamily="{StaticResource DefaultFontFamily}"
         ShowInTaskbar="True"
@@ -237,10 +238,11 @@
                                   MaxWidth="150" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <!--<Grid Grid.Column="0">
+            <Grid Grid.Column="0">
                 <ContentControl Width="60"
                                 SizeChanged="SlidingMenuPane_OnSizeChanged"
-                                regions:RegionManager.RegionName="{x:Static core:RegionNames.Menu}">
+                                >
+                    <views1:MenuView DataContext="{Binding MenuViewModel}"/>
                     <ContentControl.Style>
                         <Style>
                             <Style.Triggers>
@@ -270,7 +272,7 @@
                         </Style>
                     </ContentControl.Style>
                 </ContentControl>
-            </Grid>-->
+            </Grid>
             <Grid Grid.Column="1">
                 <igDock:XamDockManager x:Name="DockManager"
                                             AllowMaximizeFloatingWindows="True"
@@ -283,13 +285,9 @@
                                             UnpinnedTabHoverAction="Flyout">
                     <igDock:XamDockManager.Panes>
 
-
-
-
                         <igDock:SplitPane Width="300"
                                                SplitterOrientation="Horizontal"
                                                igDock:XamDockManager.InitialLocation="DockedRight">
-
 
                             <igDock:ContentPane x:Name="Variables"
                                                      AllowClose="False"

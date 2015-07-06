@@ -359,8 +359,10 @@
         </controls:Dev2DataGrid>
 
         <CheckBox Grid.Row="1"
+                  Margin="-6,0,0,0"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
+                  Style="{StaticResource CheckBoxStyle}"
                   Content="Require All decisions To Be True"
                   IsChecked="{Binding RequireAllDecisionsToBeTrue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ToolTip="{x:Static help:HelpTextResources.FindToolTipRequireAllMatchesToBeTrue}"
@@ -372,6 +374,7 @@
         </CheckBox>
 
         <Grid Grid.Row="2"
+              Margin="-8,0,0,0"
               Grid.Column="0"
               Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -402,6 +405,7 @@
             </ui:IntellisenseTextBox>
         </Grid>
         <Grid Grid.Row="3"
+              Margin="-8,0,0,0"
               Grid.Column="0"
               Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -433,6 +437,7 @@
             </ui:IntellisenseTextBox>
         </Grid>
         <Grid Grid.Row="4"
+              Margin="-8,0,0,0"
               Grid.Column="0"
               Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
