@@ -196,7 +196,7 @@ namespace Warewolf.Studio.ViewModels
 
         void SetupHeaderTextFromExisting()
         {
-            HeaderText = Resources.Languages.Core.PluginSourceEditHeaderLabel + _warewolfserverName.Trim() + "\\" + (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
+            HeaderText = (_pluginSource == null ? Resources.Languages.Core.PluginSourceNewHeaderLabel +" " : Resources.Languages.Core.PluginSourceEditHeaderLabel )+ _warewolfserverName.Trim() + "\\" + (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
             Header = ((_pluginSource == null ? ResourceName : _pluginSource.Name));
         }
 
