@@ -292,7 +292,7 @@
                     <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <StackPanel Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualWidth}"
                             MaxHeight="180" 
-                            Margin="{StaticResource ControlBorderTop}">
+                            Margin="{StaticResource ElementBorderTop}">
                             <ig:XamGrid x:Name="VariablesGrid" 
                                         ItemsSource="{Binding Variables}" 
                                 AutoGenerateColumns="False"
