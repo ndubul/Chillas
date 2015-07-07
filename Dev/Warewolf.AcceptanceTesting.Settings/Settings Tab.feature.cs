@@ -70,12 +70,12 @@ namespace Warewolf.AcceptanceTesting.Settings
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Settings Opened")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Default Security Settings")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Settings")]
-        public virtual void SettingsOpened()
+        public virtual void DefaultSecuritySettings()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Settings Opened", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Default Security Settings", new string[] {
                         "Settings"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
@@ -117,7 +117,7 @@ this.ScenarioSetup(scenarioInfo);
                         "No",
                         "No",
                         "No",
-                        "Enabled"});
+                        "Disabled"});
             table1.AddRow(new string[] {
                         "",
                         "Yes",
@@ -248,64 +248,21 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.And("Logging is not selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Windows Group",
-                        "Can Edit Windows Group",
-                        "Deploy To",
-                        "Deploy From",
-                        "Administrator",
-                        "View",
-                        "Execute",
-                        "Contribute",
-                        "Delete Row"});
-            table4.AddRow(new string[] {
-                        "Warewolf Administrator",
-                        "No",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Disabled"});
-            table4.AddRow(new string[] {
-                        "Public",
-                        "No",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Disabled"});
-            table4.AddRow(new string[] {
-                        "",
-                        "Yes",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-#line 46
- testRunner.And("Server Permissions are \"Visible\" as", ((string)(null)), table4, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Resource",
                         "Windows Group",
                         "View",
                         "Execute",
                         "Contribute"});
-            table5.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "WORKFLOWS\\My Category\\Dice Roll",
                         "Public",
                         "Yes",
                         "Yes",
                         "Yes"});
-#line 52
- testRunner.When("I add resource permission", ((string)(null)), table5, "When ");
+#line 46
+ testRunner.When("I add resource permission", ((string)(null)), table4, "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Resource",
                         "Can Edit Resource",
                         "Windows Group",
@@ -313,7 +270,7 @@ this.ScenarioSetup(scenarioInfo);
                         "View",
                         "Execute",
                         "Contribute"});
-            table6.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "WORKFLOWS\\My Category\\Dice Roll",
                         "Yes",
                         "Public",
@@ -321,7 +278,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Yes",
                         "Yes",
                         "Yes"});
-            table6.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "",
                         "Yes",
                         "",
@@ -329,15 +286,15 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         ""});
-#line 55
- testRunner.Then("Resource Permissions are \"Visible\" as", ((string)(null)), table6, "Then ");
-#line 59
+#line 49
+ testRunner.Then("Resource Permissions are \"Visible\" as", ((string)(null)), table5, "Then ");
+#line 53
     testRunner.Then("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 60
+#line 54
  testRunner.When("I save the settings", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 61
+#line 55
  testRunner.Then("settings saved successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 62
+#line 56
  testRunner.And("the validation message is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -349,20 +306,20 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DuplicateServerPermissionsCannotBeSaved()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Duplicate server permissions cannot be saved", ((string[])(null)));
-#line 65
+#line 59
 this.ScenarioSetup(scenarioInfo);
-#line 66
+#line 60
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 67
+#line 61
  testRunner.And("selected server is \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
+#line 62
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
+#line 63
  testRunner.And("Security is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
+#line 64
  testRunner.And("Logging is not selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Windows Group",
                         "Can Edit Windows Group",
                         "Deploy To",
@@ -372,7 +329,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Execute",
                         "Contribute",
                         "Delete Row"});
-            table7.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "Warewolf Administrator",
                         "Yes",
                         "Yes",
@@ -382,7 +339,17 @@ this.ScenarioSetup(scenarioInfo);
                         "Yes",
                         "Yes",
                         "Disabled"});
-            table7.AddRow(new string[] {
+            table6.AddRow(new string[] {
+                        "Public",
+                        "Yes",
+                        "Yes",
+                        "Yes",
+                        "Yes",
+                        "Yes",
+                        "Yes",
+                        "Yes",
+                        "Disabled"});
+            table6.AddRow(new string[] {
                         "Public",
                         "Yes",
                         "Yes",
@@ -392,25 +359,15 @@ this.ScenarioSetup(scenarioInfo);
                         "Yes",
                         "Yes",
                         "Enabled"});
-            table7.AddRow(new string[] {
-                        "Public",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Yes",
-                        "Enabled"});
-#line 71
- testRunner.And("Server Permissions are \"Visible\" as", ((string)(null)), table7, "And ");
-#line 76
+#line 65
+ testRunner.And("Server Permissions are \"Visible\" as", ((string)(null)), table6, "And ");
+#line 70
     testRunner.Then("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 77
+#line 71
  testRunner.When("I save the settings", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 78
+#line 72
  testRunner.Then("settings not successfully saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 79
+#line 73
  testRunner.And("the validation message is \"Duplicate server permission\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -422,20 +379,20 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DuplicateResourcePermissionsCannotBeSaved()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Duplicate resource permissions cannot be saved", ((string[])(null)));
-#line 81
+#line 75
 this.ScenarioSetup(scenarioInfo);
-#line 82
+#line 76
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 83
+#line 77
  testRunner.And("selected server is \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
+#line 78
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 85
+#line 79
  testRunner.And("Security is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 86
+#line 80
  testRunner.And("Logging is not selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Resources",
                         "Can Edit Resource",
                         "Windows Group",
@@ -443,7 +400,7 @@ this.ScenarioSetup(scenarioInfo);
                         "View",
                         "Execute",
                         "Contribute"});
-            table8.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "WORKFLOWS\\My Category\\Dice Roll",
                         "Yes",
                         "Public",
@@ -451,7 +408,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Yes",
                         "Yes",
                         "Yes"});
-            table8.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "WORKFLOWS\\My Category\\Dice Roll",
                         "Yes",
                         "Public",
@@ -459,15 +416,15 @@ this.ScenarioSetup(scenarioInfo);
                         "Yes",
                         "Yes",
                         "Yes"});
-#line 87
- testRunner.When("Resource Permissions are \"Visible\" as", ((string)(null)), table8, "When ");
-#line 91
+#line 81
+ testRunner.When("Resource Permissions are \"Visible\" as", ((string)(null)), table7, "When ");
+#line 85
     testRunner.Then("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 92
+#line 86
  testRunner.When("I save the settings", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 93
+#line 87
  testRunner.Then("settings not successfully saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 94
+#line 88
  testRunner.And("the validation message is \"Duplicate resource permission\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -476,19 +433,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SaveEnablesWhenIChangeServerLogs(string no, string serverlogs, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save enables when I change server logs", exampleTags);
-#line 96
+#line 90
 this.ScenarioSetup(scenarioInfo);
-#line 97
+#line 91
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 98
+#line 92
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 99
+#line 93
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 100
+#line 94
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 101
+#line 95
  testRunner.When(string.Format("Server System Logs setup as \'{0}\'", serverlogs), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 102
+#line 96
  testRunner.And("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -499,10 +456,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "None:No logging")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "None")]
         public virtual void SaveEnablesWhenIChangeServerLogs_1()
         {
-            this.SaveEnablesWhenIChangeServerLogs("1", "None:No logging", ((string[])(null)));
+            this.SaveEnablesWhenIChangeServerLogs("1", "None", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -510,10 +467,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "2")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "Fatal: Only log events that are fatal")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "Fatal")]
         public virtual void SaveEnablesWhenIChangeServerLogs_2()
         {
-            this.SaveEnablesWhenIChangeServerLogs("2", "Fatal: Only log events that are fatal", ((string[])(null)));
+            this.SaveEnablesWhenIChangeServerLogs("2", "Fatal", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -521,10 +478,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "3")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "Error: Log fatal and warning events")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "Error")]
         public virtual void SaveEnablesWhenIChangeServerLogs_3()
         {
-            this.SaveEnablesWhenIChangeServerLogs("3", "Error: Log fatal and warning events", ((string[])(null)));
+            this.SaveEnablesWhenIChangeServerLogs("3", "Error", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -532,10 +489,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "4")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "4")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "Warn: Log error, fatal and warning events")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "Warn")]
         public virtual void SaveEnablesWhenIChangeServerLogs_4()
         {
-            this.SaveEnablesWhenIChangeServerLogs("4", "Warn: Log error, fatal and warning events", ((string[])(null)));
+            this.SaveEnablesWhenIChangeServerLogs("4", "Warn", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -543,10 +500,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "6")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "6")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "Info: Log system info incluing pulse data, fatal, error and warning events")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "Info")]
         public virtual void SaveEnablesWhenIChangeServerLogs_6()
         {
-            this.SaveEnablesWhenIChangeServerLogs("6", "Info: Log system info incluing pulse data, fatal, error and warning events", ((string[])(null)));
+            this.SaveEnablesWhenIChangeServerLogs("6", "Info", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -554,30 +511,28 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "7")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "7")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "Trace: Log detailed system information, Includes events from all the levels above" +
-            "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Serverlogs", "Trace")]
         public virtual void SaveEnablesWhenIChangeServerLogs_7()
         {
-            this.SaveEnablesWhenIChangeServerLogs("7", "Trace: Log detailed system information, Includes events from all the levels above" +
-                    "", ((string[])(null)));
+            this.SaveEnablesWhenIChangeServerLogs("7", "Trace", ((string[])(null)));
         }
         
         public virtual void SaveEnablesWhenIChangeStudioLogs(string no, string studiologs, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save enables when I change studio logs", exampleTags);
-#line 113
+#line 107
 this.ScenarioSetup(scenarioInfo);
-#line 114
+#line 108
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 115
+#line 109
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 116
+#line 110
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 117
+#line 111
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 118
+#line 112
  testRunner.When(string.Format("Studio System Logs selected \'{0}\'", studiologs), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 119
+#line 113
  testRunner.And("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -588,10 +543,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "None:No logging")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "None")]
         public virtual void SaveEnablesWhenIChangeStudioLogs_1()
         {
-            this.SaveEnablesWhenIChangeStudioLogs("1", "None:No logging", ((string[])(null)));
+            this.SaveEnablesWhenIChangeStudioLogs("1", "None", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -599,10 +554,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "2")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "Fatal: Only log events that are fatal")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "Fatal")]
         public virtual void SaveEnablesWhenIChangeStudioLogs_2()
         {
-            this.SaveEnablesWhenIChangeStudioLogs("2", "Fatal: Only log events that are fatal", ((string[])(null)));
+            this.SaveEnablesWhenIChangeStudioLogs("2", "Fatal", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -610,10 +565,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "3")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "Error: Log fatal and warning events")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "Error")]
         public virtual void SaveEnablesWhenIChangeStudioLogs_3()
         {
-            this.SaveEnablesWhenIChangeStudioLogs("3", "Error: Log fatal and warning events", ((string[])(null)));
+            this.SaveEnablesWhenIChangeStudioLogs("3", "Error", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -621,10 +576,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "4")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "4")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "Warn: Log error, fatal and warning events")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "Warn")]
         public virtual void SaveEnablesWhenIChangeStudioLogs_4()
         {
-            this.SaveEnablesWhenIChangeStudioLogs("4", "Warn: Log error, fatal and warning events", ((string[])(null)));
+            this.SaveEnablesWhenIChangeStudioLogs("4", "Warn", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -632,10 +587,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "6")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "6")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "Info: Log system info incluing pulse data, fatal, error and warning events")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "Info")]
         public virtual void SaveEnablesWhenIChangeStudioLogs_6()
         {
-            this.SaveEnablesWhenIChangeStudioLogs("6", "Info: Log system info incluing pulse data, fatal, error and warning events", ((string[])(null)));
+            this.SaveEnablesWhenIChangeStudioLogs("6", "Info", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -643,12 +598,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Settings Tab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "7")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "7")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "Trace: Log detailed system information, Includes events from all the levels above" +
-            "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Studiologs", "Trace")]
         public virtual void SaveEnablesWhenIChangeStudioLogs_7()
         {
-            this.SaveEnablesWhenIChangeStudioLogs("7", "Trace: Log detailed system information, Includes events from all the levels above" +
-                    "", ((string[])(null)));
+            this.SaveEnablesWhenIChangeStudioLogs("7", "Trace", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -657,23 +610,23 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ServerLogFileHyperLinkIsOpeningLogFile()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Server Log File hyper link is opening log file", ((string[])(null)));
-#line 130
+#line 124
 this.ScenarioSetup(scenarioInfo);
-#line 131
+#line 125
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 132
+#line 126
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 133
+#line 127
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 134
+#line 128
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 135
+#line 129
  testRunner.And("Server Log File hyper link is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 136
+#line 130
  testRunner.And("Studio Log File hyper link is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 137
+#line 131
  testRunner.When("I click \"Server Log File\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 138
+#line 132
  testRunner.Then("\"Localhost server Log.txt - Notepad\" is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -685,23 +638,23 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void StudioLogFileHyperLinkIsOpeningLogFile()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Studio Log File hyper link is opening log file", ((string[])(null)));
-#line 141
+#line 135
 this.ScenarioSetup(scenarioInfo);
-#line 142
+#line 136
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 143
+#line 137
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 144
+#line 138
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 145
+#line 139
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 146
+#line 140
  testRunner.And("Server Log File hyper link is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 147
+#line 141
  testRunner.And("Studio Log File hyper link is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 148
+#line 142
  testRunner.When("I click \"Studio Log File\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 149
+#line 143
  testRunner.Then("\"Warewolf Studio.log - Notepad\" is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -713,19 +666,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ServerAndStudioDefaultFileSize()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Server and studio default file size", ((string[])(null)));
-#line 152
+#line 146
 this.ScenarioSetup(scenarioInfo);
-#line 153
+#line 147
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 154
+#line 148
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 155
+#line 149
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 156
+#line 150
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 157
+#line 151
  testRunner.And("Max Log file Size for Server default is \"200\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 158
+#line 152
  testRunner.And("Max Log file Size for Studio default is \"200\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -737,31 +690,31 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ServerAndStudioLogFileSizeOnlyAcceptsNumbers()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Server and studio log file size only accepts numbers", ((string[])(null)));
-#line 161
+#line 155
 this.ScenarioSetup(scenarioInfo);
-#line 162
+#line 156
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 163
+#line 157
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 164
+#line 158
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 165
+#line 159
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 166
+#line 160
  testRunner.When("I edit Max Log file Size for Server \"abc\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 167
+#line 161
  testRunner.Then("Max Log file Size for Server default is \"200\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 168
+#line 162
  testRunner.When("I edit Max Log file Size for Studio \"abc\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 169
+#line 163
  testRunner.Then("Max Log file Size for Studio default is \"200\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 170
+#line 164
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 171
+#line 165
  testRunner.When("I edit Max Log file Size for Server \"100\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 172
+#line 166
  testRunner.Then("Max Log file Size for Server default is \"100\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 173
+#line 167
  testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

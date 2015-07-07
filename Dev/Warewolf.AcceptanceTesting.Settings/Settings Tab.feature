@@ -4,7 +4,7 @@
 	I want to be shown and allowed to edit the server settings
 
 @Settings
-Scenario: Settings Opened
+Scenario: Default Security Settings
 	Given I have settings tab opened
 	And selected server is "localhost"
 	And Security is selected
@@ -12,7 +12,7 @@ Scenario: Settings Opened
 	And Server Permissions are "Visible" as
 	| Windows Group          | Can Edit Windows Group | Deploy To | Deploy From | Administrator | View | Execute | Contribute | Delete Row |
 	| Warewolf Administrator | No                     | Yes       | Yes         | Yes           | Yes  | Yes     | Yes        | Disabled   |
-	| Public                 | No                     | No        | No          | No            | No   | No      | No         | Enabled    |
+	| Public                 | No                     | No        | No          | No            | No   | No      | No         | Disabled   |
 	|                        | Yes                    |           |             |               |      |         |            |            |
 	And Resource Permissions are "Visible" as
 	| Resource | Can Edit Resource | Windows Group | Can Edit Windows Group | View | Execute | Contribute |
@@ -42,13 +42,7 @@ Scenario: Selecting Resource Permissions
 	And selected server is "localhost"
 	And "Save" is "Disabled"
 	And Security is selected
-	And Logging is not selected
-	And Server Permissions are "Visible" as 
-	| Windows Group          | Can Edit Windows Group | Deploy To | Deploy From | Administrator | View | Execute | Contribute | Delete Row |
-	| Warewolf Administrator | No                     | Yes       | Yes         | Yes           | Yes  | Yes     | Yes        | Disabled   |
-	| Public                 | No                     | Yes       | Yes         | Yes           | Yes  | Yes     | Yes        | Disabled   |
-	|                        | Yes                    |           |             |               |      |         |            |            |
-	
+	And Logging is not selected	
 	When I add resource permission
 	| Resource                        | Windows Group | View | Execute | Contribute |
 	| WORKFLOWS\My Category\Dice Roll | Public        | Yes  | Yes     | Yes        |
@@ -71,7 +65,7 @@ Scenario: Duplicate server permissions cannot be saved
 	And Server Permissions are "Visible" as
 	| Windows Group          | Can Edit Windows Group | Deploy To | Deploy From | Administrator | View | Execute | Contribute | Delete Row |
 	| Warewolf Administrator | Yes                    | Yes       | Yes         | Yes           | Yes  | Yes     | Yes        | Disabled   |
-	| Public                 | Yes                    | Yes       | Yes         | Yes           | Yes  | Yes     | Yes        | Enabled    |
+	| Public                 | Yes                    | Yes       | Yes         | Yes           | Yes  | Yes     | Yes        | Disabled   |
 	| Public                 | Yes                    | Yes       | Yes         | Yes           | Yes  | Yes     | Yes        | Enabled    | 
     Then Save is "Enabled"
 	When I save the settings
@@ -101,13 +95,13 @@ Scenario Outline: Save enables when I change server logs
 	When Server System Logs setup as '<Serverlogs>'
 	And Save is "Enabled"
 Examples: 
-     | No | Serverlogs                                                                        |
-     | 1  | None:No logging                                                                   |
-     | 2  | Fatal: Only log events that are fatal                                             |
-     | 3  | Error: Log fatal and warning events                                               |
-     | 4  | Warn: Log error, fatal and warning events                                         |
-     | 6  | Info: Log system info incluing pulse data, fatal, error and warning events        |
-     | 7  | Trace: Log detailed system information, Includes events from all the levels above |
+     | No | Serverlogs |
+     | 1  | None       |
+     | 2  | Fatal      |
+     | 3  | Error      |
+     | 4  | Warn       |
+     | 6  | Info       |
+     | 7  | Trace      |
      
 
 Scenario Outline: Save enables when I change studio logs
@@ -118,13 +112,13 @@ Scenario Outline: Save enables when I change studio logs
 	When Studio System Logs selected '<Studiologs>'
 	And Save is "Enabled"
 Examples: 
-     | No | Studiologs                                                                        |
-     | 1  | None:No logging                                                                   |
-     | 2  | Fatal: Only log events that are fatal                                             |
-     | 3  | Error: Log fatal and warning events                                               |
-     | 4  | Warn: Log error, fatal and warning events                                         |
-     | 6  | Info: Log system info incluing pulse data, fatal, error and warning events        |
-     | 7  | Trace: Log detailed system information, Includes events from all the levels above |
+     | No | Studiologs |
+     | 1  | None       |
+     | 2  | Fatal      |
+     | 3  | Error      |
+     | 4  | Warn       |
+     | 6  | Info       |
+     | 7  | Trace      |
 
 	
 Scenario: Server Log File hyper link is opening log file
