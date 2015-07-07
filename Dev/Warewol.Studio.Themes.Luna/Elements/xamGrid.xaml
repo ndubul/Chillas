@@ -3119,8 +3119,618 @@
     </Style>
     <Style BasedOn="{StaticResource HeaderCellControlStyle}" TargetType="igPrim:HeaderCellControl" />
 
-    
-    
+    <Style x:Key="EmptyHeaderCellControlStyle" TargetType="igPrim:HeaderCellControl">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Normal}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{StaticResource WareWolfBlackBrush}" />
+        <Setter Property="Background" Value="{StaticResource HeaderCellBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource HeaderCellBorderBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,1,0" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="ResizingThreshold" Value="20" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="igPrim:HeaderCellControl">
+                    <igPrim:SimpleClickableContainer x:Name="NormalFill"
+                                                     Background="{TemplateBinding Background}"
+                                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                                     BorderThickness="{TemplateBinding BorderThickness}">
+                        <igBase:Commanding.Commands>
+                            <igBase:CommandSourceCollection>
+                                <igBase:XamGridColumnCommandSource CommandType="Select" EventName="SimpleClick" />
+                                <igBase:XamGridColumnCommandSource CommandType="SortToggle" EventName="SimpleClick" />
+                            </igBase:CommandSourceCollection>
+                        </igBase:Commanding.Commands>
+                        <Grid x:Name="Bd">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <igPrim:HeaderDropDownControl x:Name="HiddenLeftAdjacentColumnsElement"
+                                                          Width="Auto"
+                                                          Padding="0"
+                                                          Visibility="Collapsed">
+                                <ToolTipService.ToolTip>
+                                    <ToolTip Content="{Binding Cell.Column.ColumnLayout.Grid.ColumnChooserSettings.HiddenColumnIndicatorToolTipText, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </ToolTipService.ToolTip>
+                                <igPrim:HeaderDropDownControl.OpenButtonContent>
+                                    <Grid HorizontalAlignment="Left">
+                                        <Rectangle Width="30"
+                                                   Margin="-15,0"
+                                                   HorizontalAlignment="Stretch"
+                                                   Fill="{StaticResource TransparentBrush}" />
+                                        <Rectangle Width="10"
+                                                   HorizontalAlignment="Left"
+                                                   Fill="{StaticResource HiddenColumnIndicatorBrush}" />
+                                    </Grid>
+                                </igPrim:HeaderDropDownControl.OpenButtonContent>
+                                <Grid>
+                                    <Border x:Name="ColumnChooserBd"
+                                            MaxHeight="200"
+                                            Background="{StaticResource PopupBackgroundBrush}"
+                                            BorderBrush="{StaticResource PopupBorderBrush}"
+                                            BorderThickness="1"
+                                            Padding="1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition MinWidth="25" MaxWidth="25" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Border Grid.RowSpan="2" Background="{StaticResource ColumnChooserPopupVSeparatorBackgroundBrush}" />
+                                            <ListBox Grid.ColumnSpan="2"
+                                                     Margin="0"
+                                                     Background="{StaticResource TransparentBrush}"
+                                                     BorderThickness="0"
+                                                     DataContext="{x:Null}"
+                                                     ItemContainerStyle="{StaticResource ColumnChooserListBoxItemStyle}"
+                                                     ItemsSource="{Binding Cell.ColumnsHiddenToLeft,
+                                                                           RelativeSource={RelativeSource TemplatedParent}}"
+                                                     Padding="0"
+                                                     Style="{StaticResource ListBoxStyle}">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding DisplayNameResolved}" />
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                                <igBase:Commanding.Commands>
+                                                    <igBase:CommandSourceCollection>
+                                                        <igBase:XamGridColumnCommandSource CommandType="Show"
+                                                                                           EventName="SelectionChanged"
+                                                                                           ParameterBinding="{Binding SelectedItem}" />
+                                                        <igPrim:XamGridPopupCommandSource CommandType="ClosePopup" EventName="SelectionChanged" />
+                                                    </igBase:CommandSourceCollection>
+                                                </igBase:Commanding.Commands>
+                                            </ListBox>
+                                            <StackPanel Grid.Row="1"
+                                                        Grid.ColumnSpan="2"
+                                                        Background="{StaticResource TransparentBrush}">
+                                                <Rectangle Height="2"
+                                                           Margin="33,0,0,0"
+                                                           HorizontalAlignment="Stretch"
+                                                           Fill="{StaticResource SeparatorBrush}"
+                                                           Stretch="Fill" />
+                                                <Button Margin="0,1,0,0" Style="{StaticResource ColumnChooserDialogButtonStyle}">
+                                                    <igBase:Commanding.Commands>
+                                                        <igBase:CommandSourceCollection>
+                                                            <igBase:XamGridColumnChooserCommandSource CommandType="Open" EventName="Click" />
+                                                            <igPrim:XamGridPopupCommandSource CommandType="ClosePopup" EventName="Click" />
+                                                        </igBase:CommandSourceCollection>
+                                                    </igBase:Commanding.Commands>
+                                                    <TextBlock Foreground="{StaticResource ForegroundBrush}" 
+                                                               Text="{Binding Cell.Column.ColumnLayout.Grid.ColumnChooserSettings.ColumnChooserDisplayText, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </igPrim:HeaderDropDownControl>
+                            <!--<ContentControl x:Name="contentControl"
+                                            KeyboardNavigation.IsTabStop="False"
+                                            Foreground="Transparent">
+                                <ContentPresenter x:Name="headerContent"
+                                              Grid.Column="1"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </ContentControl>-->
+                            <Grid x:Name="SortAndPinIndicators"
+                                  Grid.Column="2"
+                                  Margin="0,0,20,0"
+                                  HorizontalAlignment="Right"
+                                  Background="{TemplateBinding Background}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid Height="Auto">
+                                    <Path x:Name="SortedDescending"
+                                          Width="10"
+                                          Height="6"
+                                          Data="M 9,1 C9,1 5,6 5,6 5,6 1,1 1,1 1,1 9,1 9,1 z"
+                                          Fill="{StaticResource GlyphBackgroundBrush}"
+                                          Stretch="Fill"
+                                          UseLayoutRounding="False"
+                                          Visibility="Collapsed" />
+                                </Grid>
+                                <Grid Height="Auto">
+                                    <Path x:Name="SortedAscending"
+                                          Width="10"
+                                          Height="6"
+                                          Data="M 9,6 C9,6 5,1 5,1 5,1 1,6 1,6 1,6 9,6 9,6 z"
+                                          Fill="{StaticResource GlyphBackgroundBrush}"
+                                          Stretch="Fill"
+                                          UseLayoutRounding="False"
+                                          Visibility="Collapsed" />
+                                </Grid>
+                                <igPrim:HeaderDropDownControl x:Name="SummaryHeaderDropDownControl"
+                                                              Grid.Column="1"
+                                                              Background="{StaticResource TransparentBrush}"
+                                                              Visibility="Collapsed">
+                                    <igPrim:HeaderDropDownControl.OpenButtonContent>
+                                        <Grid Background="{StaticResource TransparentBrush}">
+                                            <Path x:Name="summarySigmaIcon"
+                                                  Width="10"
+                                                  Height="12"
+                                                  Margin="0"
+                                                  Data="M 0,0 C0,0 5,0 5,0 5,0 5,1 5,1 5,1 2,1 2,1 2,1 4,3.5 4,3.5 4,3.5 2,6 2,6 2,6 5,6 5,6 5,6 5,7 5,7 5,7 0,7 0,7 0,7 0,6 0,6 0,6 2,3.5625 2,3.5625 2,3.5625 0,1 0,1 0,1 0,0 0,0 z"
+                                                  Fill="{StaticResource GlyphBackgroundBrush}"
+                                                  Stretch="Fill"
+                                                  StrokeThickness="0"
+                                                  UseLayoutRounding="False" />
+                                        </Grid>
+                                    </igPrim:HeaderDropDownControl.OpenButtonContent>
+                                    <igPrim:SummarySelectionControl Cell="{Binding Cell, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </igPrim:HeaderDropDownControl>
+                                <igPrim:HeaderDropDownControl x:Name="FilterHeaderDropDownControl"
+                                                              Grid.Column="2"
+                                                              Width="30"
+                                                              AllowResizing="true"
+                                                              Background="{StaticResource TransparentBrush}"
+                                                              Visibility="Collapsed">
+                                    <igPrim:HeaderDropDownControl.OpenButtonContent>
+                                        <Grid>
+                                            <Path x:Name="clearFilterGlyphStroke"
+                                                  Width="14"
+                                                  Height="10"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Data="M 0,0 C0,0 11,0 11,0 11,0 7,4 7,4 7,4 7,8 7,8 7,8 4,8 4,8 4,8 4,4 4,4 4,4 0,0 0,0 z"
+                                                  Fill="{StaticResource GlyphBackgroundBrush}"
+                                                  Stretch="Fill" />
+                                            <Path x:Name="clearFilterGlyphFill"
+                                                  Width="14"
+                                                  Height="10"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Data="M 0,0 C0,0 11,0 11,0 11,0 7,4 7,4 7,4 7,8 7,8 7,8 4,8 4,8 4,8 4,4 4,4 4,4 0,0 0,0 z"
+                                                  Stretch="Fill" />
+                                            <Path x:Name="redFilterGlyphFill"
+                                                  Width="14"
+                                                  Height="10"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Data="M 0,0 C0,0 11,0 11,0 11,0 7,4 7,4 7,4 7,8 7,8 7,8 4,8 4,8 4,8 4,4 4,4 4,4 0,0 0,0 z"
+                                                  Fill="{StaticResource HeaderCellRedFilterGlyphBackgroundBrush}"
+                                                  Stretch="Fill"
+                                                  Visibility="Collapsed" />
+                                        </Grid>
+                                    </igPrim:HeaderDropDownControl.OpenButtonContent>
+                                    <igPrim:FilterSelectorControl Width="250"
+                                                                  Height="370"
+                                                                  MinWidth="300"
+                                                                  MinHeight="370"
+                                                                  MaxWidth="800"
+                                                                  MaxHeight="800"
+                                                                  HorizontalContentAlignment="Stretch"
+                                                                  VerticalContentAlignment="Stretch"
+                                                                  Cell="{Binding Cell,
+                                                                                 RelativeSource={RelativeSource TemplatedParent}}" />
+                                </igPrim:HeaderDropDownControl>
+                                <Button x:Name="PinnedIndicator"
+                                        Grid.Column="3"
+                                        Width="30"
+                                        Style="{StaticResource HeaderDropDownButtonStyle}"
+                                        Visibility="Collapsed">
+                                    <Grid Background="{StaticResource TransparentBrush}">
+                                        <igBase:Commanding.Command>
+                                            <igBase:XamGridColumnCommandSource CommandType="Unfix" EventName="MouseLeftButtonDown" />
+                                        </igBase:Commanding.Command>
+                                        <Path Width="10"
+                                              Height="14"
+                                              Data="M1.9999808,0 L7.9999809,0 L7.9999809,8.0000019 L10,8.0000019 L10,10.000002 L6.0000005,10.000002 L6.0000005,14.000002 L4.0000005,14.000002 L4.0000005,10.000002 L0,10.000002 L0,8.0000019 L1.9999808,8.0000019 z"
+                                              Fill="{StaticResource GlyphBackgroundBrush}"
+                                              Stretch="Fill" />
+                                    </Grid>
+                                </Button>
+                                <Button x:Name="UnpinnedIndicator"
+                                        Grid.Column="3"
+                                        Width="30"
+                                        Style="{StaticResource HeaderDropDownButtonStyle}"
+                                        Visibility="Collapsed">
+                                    <Grid Background="{StaticResource TransparentBrush}">
+                                        <igBase:Commanding.Command>
+                                            <igBase:XamGridColumnCommandSource CommandType="Fix" EventName="MouseLeftButtonDown" />
+                                        </igBase:Commanding.Command>
+                                        <Path Width="14"
+                                              Height="10"
+                                              Data="M4,0 L6,0 L6,1.9999999 L14,1.9999999 L14,8 L6,8 L6,10 L4,10 L4,8 L4,6 L0,6 L0,4 L4,4 L4,1.9999999 z"
+                                              Fill="{StaticResource GlyphBackgroundBrush}"
+                                              Stretch="Fill" />
+                                    </Grid>
+                                </Button>
+                                <Button x:Name="VisibilityToggleButton"
+                                        Grid.Column="4"
+                                        Width="30"
+                                        Style="{StaticResource HeaderDropDownButtonStyle}"
+                                        Visibility="Collapsed">
+                                    <Grid Background="{StaticResource TransparentBrush}">
+                                        <igBase:Commanding.Command>
+                                            <igBase:XamGridColumnCommandSource CommandType="Hide" EventName="MouseLeftButtonDown" />
+                                        </igBase:Commanding.Command>
+                                        <Path Width="12"
+                                              Height="8"
+                                              Data="M9.8222179,1.1322494E-06 L12.663995,1.1322494E-06 L8.6729612,5.0000014 L12.663995,10.000002 L9.8222179,10.000002 L5.8309941,4.9573879 z M3.9912238,0 L6.8330007,0 L2.8419673,5 L6.8330007,10 L3.9912238,10 L0,4.9573865 z"
+                                              Fill="{StaticResource GlyphBackgroundBrush}"
+                                              Stretch="Fill"
+                                              UseLayoutRounding="False" />
+                                    </Grid>
+                                </Button>
+                            </Grid>
+                            <igPrim:HeaderDropDownControl x:Name="HiddenRightAdjacentColumnsElement"
+                                                          Grid.Column="4"
+                                                          Width="Auto"
+                                                          VerticalAlignment="Stretch"
+                                                          Padding="0"
+                                                          Visibility="Collapsed">
+                                <ToolTipService.ToolTip>
+                                    <ToolTip Content="{Binding Cell.Column.ColumnLayout.Grid.ColumnChooserSettings.HiddenColumnIndicatorToolTipText, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </ToolTipService.ToolTip>
+                                <igPrim:HeaderDropDownControl.OpenButtonContent>
+                                    <Grid>
+                                        <Rectangle Width="30"
+                                                   Margin="-15,0"
+                                                   HorizontalAlignment="Stretch"
+                                                   Fill="{StaticResource TransparentBrush}" />
+                                        <Rectangle Width="10"
+                                                   HorizontalAlignment="Right"
+                                                   Fill="{StaticResource HiddenColumnIndicatorBrush}" />
+                                    </Grid>
+                                </igPrim:HeaderDropDownControl.OpenButtonContent>
+                                <Grid>
+                                    <Border x:Name="ColumnChooserBdRight"
+                                            MaxHeight="200"
+                                            Background="{StaticResource PopupBackgroundBrush}"
+                                            BorderBrush="{StaticResource PopupBorderBrush}"
+                                            BorderThickness="1"
+                                            Padding="1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition MinWidth="24" MaxWidth="24" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Border Grid.RowSpan="2" Background="{StaticResource ColumnChooserPopupVSeparatorBackgroundBrush}" />
+                                            <ListBox Grid.ColumnSpan="2"
+                                                     Margin="0"
+                                                     Background="{StaticResource TransparentBrush}"
+                                                     BorderThickness="0"
+                                                     DataContext="{x:Null}"
+                                                     ItemContainerStyle="{StaticResource ColumnChooserListBoxItemStyle}"
+                                                     ItemsSource="{Binding Cell.ColumnsHiddenToRight,
+                                                                           RelativeSource={RelativeSource TemplatedParent}}"
+                                                     Padding="0"
+                                                     Style="{StaticResource ListBoxStyle}">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding DisplayNameResolved}" />
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                                <igBase:Commanding.Commands>
+                                                    <igBase:CommandSourceCollection>
+                                                        <igBase:XamGridColumnCommandSource CommandType="Show"
+                                                                                           EventName="SelectionChanged"
+                                                                                           ParameterBinding="{Binding SelectedItem}" />
+                                                        <igPrim:XamGridPopupCommandSource CommandType="ClosePopup" EventName="SelectionChanged" />
+                                                    </igBase:CommandSourceCollection>
+                                                </igBase:Commanding.Commands>
+                                            </ListBox>
+                                            <StackPanel Grid.Row="1"
+                                                        Grid.ColumnSpan="2"
+                                                        Background="{StaticResource TransparentBrush}">
+                                                <Rectangle Height="2"
+                                                           Margin="33,0,0,0"
+                                                           HorizontalAlignment="Stretch"
+                                                           Fill="{StaticResource SeparatorBrush}"
+                                                           Stretch="Fill" />
+                                                <Button Margin="0,1,0,0" Style="{StaticResource ColumnChooserDialogButtonStyle}">
+                                                    <igBase:Commanding.Commands>
+                                                        <igBase:CommandSourceCollection>
+                                                            <igBase:XamGridColumnChooserCommandSource CommandType="Open" EventName="Click" />
+                                                            <igPrim:XamGridPopupCommandSource CommandType="ClosePopup" EventName="Click" />
+                                                        </igBase:CommandSourceCollection>
+                                                    </igBase:Commanding.Commands>
+                                                    <TextBlock Foreground="{StaticResource ForegroundBrush}" Text="{Binding Cell.Column.ColumnLayout.Grid.ColumnChooserSettings.ColumnChooserDisplayText, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </igPrim:HeaderDropDownControl>
+                        </Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <!--<ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Duration="00:00:00.001"
+                                                                       Storyboard.TargetName="Bd"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HeaderCellHoverBackgroundBrush}" /> 
+                                        </ObjectAnimationUsingKeyFrames>-->
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Duration="00:00:00.001"
+                                                                       Storyboard.TargetName="SortAndPinIndicators"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HeaderCellHoverBackgroundBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentControl" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WareWolfOrangeBrush}">
+
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>-->
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Moving">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="NormalFill"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HeaderCellMovingBackgroundBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="NormalFill"
+                                                                       Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HeaderCellMovingBorderBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="NormalFill"
+                                                                       Storyboard.TargetProperty="BorderThickness">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Thickness>1</Thickness>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SortAndPinIndicators" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FixedIndicatorStates">
+                                <VisualState x:Name="NotFixable" />
+                                <VisualState x:Name="Pinned">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="PinnedIndicator"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unpinned">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="UnpinnedIndicator"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SummaryStates">
+                                <VisualState x:Name="Summable">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="SummaryHeaderDropDownControl"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unsummable" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SortedStates">
+                                <VisualState x:Name="NotSorted" />
+                                <VisualState x:Name="Ascending">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="SortedAscending"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Descending">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="SortedDescending"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="HeaderFilterStates">
+                                <VisualState x:Name="NoIcon">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="FilterHeaderDropDownControl"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="FilterIcon">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="FilterHeaderDropDownControl"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="HeaderFilterAppliedStates">
+                                <VisualState x:Name="NotFiltered">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                       Storyboard.TargetName="clearFilterGlyphFill"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                       Storyboard.TargetName="redFilterGlyphFill"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Filtered">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                       Storyboard.TargetName="clearFilterGlyphFill"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"
+                                                                       Storyboard.TargetName="redFilterGlyphFill"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="VisibilityIconStates">
+                                <VisualState x:Name="VisibilityIconHidden" />
+                                <VisualState x:Name="VisibilityIconVisible">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="VisibilityToggleButton"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="LeftAdjacentColumnHiddenStates">
+                                <VisualState x:Name="NoHiddenLeftAdjacentColumns" />
+                                <VisualState x:Name="HiddenLeftAdjacentColumns">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="HiddenLeftAdjacentColumnsElement"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="RightAdjacentColumnHiddenStates">
+                                <VisualState x:Name="NoHiddenRightAdjacentColumns" />
+                                <VisualState x:Name="LastVisibleColumnWithHiddenRightAdjacentColumns">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0"
+                                                                       Storyboard.TargetName="HiddenRightAdjacentColumnsElement"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </igPrim:SimpleClickableContainer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <!--  *********************************  ExpansionIndicatorHeaderCellControl Style  *********************************  -->
     <Style x:Key="ExpansionIndicatorHeaderCellControlStyle" TargetType="igPrim:ExpansionIndicatorHeaderCellControl">
         <Setter Property="FontSize" Value="{StaticResource FontSize-Normal}" />
