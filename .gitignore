@@ -173,6 +173,14 @@
 /Dev/Dev2.Server.Tests/obj
 /Dev/Dev2.Sql.Tests/bin
 /Dev/Dev2.Sql.Tests/obj
+/Dev/ConsoleApplicationToTestNetwork/bin
+/Dev/ConsoleApplicationToTestNetwork/obj
+/Dev/Dev2.SignalR.Wrappers/bin
+/Dev/Dev2.SignalR.Wrappers/obj
+/Dev/Dev2.SignalR.Wrappers.Old/bin
+/Dev/Dev2.SignalR.Wrappers.Old/obj
+/Dev/Dev2.SignalR.Wrappers.New/bin
+/Dev/Dev2.SignalR.Wrappers.New/obj
 /Dev/Dev2.TaskScheduler.Wrappers.Test/bin
 /Dev/Dev2.TaskScheduler.Wrappers.Test/obj
 /Dev/Example Shipper/Example Shipper/bin
