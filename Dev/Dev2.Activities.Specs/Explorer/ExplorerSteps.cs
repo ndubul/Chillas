@@ -111,7 +111,7 @@ namespace Dev2.Activities.Specs.Explorer
             ExecuteService(() =>
                 {
                     var repository = ScenarioContext.Current.Get<StudioResourceRepository>("repository");
-                    repository.Load(localhost, new TestAsyncWorker());
+                    repository.Load(localhost, new SynchronousAsyncWorker());
                     var resourcePath = ScenarioContext.Current.Get<string>("path");
                     var displayName = resourcePath.Split("\\".ToArray()).Last();
                     var parent = repository.FindItem(i => i.DisplayName == displayName);
@@ -211,7 +211,7 @@ namespace Dev2.Activities.Specs.Explorer
             ExecuteService(() =>
             {
                 var repository = ScenarioContext.Current.Get<StudioResourceRepository>("repository");
-                repository.Load(localhost, new TestAsyncWorker());
+                repository.Load(localhost, new SynchronousAsyncWorker());
                 var resourcePath = ScenarioContext.Current.Get<string>("path");
                 var displayName = resourcePath.Split("\\".ToArray()).Last();
                 var parent = repository.FindItem(i => i.DisplayName == displayName);
@@ -258,7 +258,7 @@ namespace Dev2.Activities.Specs.Explorer
             ExecuteService(() =>
             {
                 var repository = ScenarioContext.Current.Get<StudioResourceRepository>("repository");
-                repository.Load(localhost, new TestAsyncWorker());
+                repository.Load(localhost, new SynchronousAsyncWorker());
                 var resourcePath = ScenarioContext.Current.Get<string>("path");
                 var displayName = resourcePath.Split("\\".ToArray()).Last();
                 var parent = repository.FindItem(i => i.DisplayName == displayName);
@@ -324,7 +324,7 @@ namespace Dev2.Activities.Specs.Explorer
             ExecuteService(() =>
             {
                 var repository = ScenarioContext.Current.Get<StudioResourceRepository>("repository");
-                repository.Load(localhost, new TestAsyncWorker());
+                repository.Load(localhost, new SynchronousAsyncWorker());
                 var filterString = ScenarioContext.Current.Get<string>("filterString");
                 var filterResult = repository.Filter(s => s.DisplayName.Contains(filterString));
                 ScenarioContext.Current.Add("filterResult", filterResult);

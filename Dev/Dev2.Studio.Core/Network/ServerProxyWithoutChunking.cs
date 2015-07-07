@@ -28,6 +28,7 @@ using Dev2.Common.Common;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Infrastructure.Events;
 using Dev2.Common.Interfaces.Studio.Controller;
+using Dev2.Common.Interfaces.Threading;
 using Dev2.Communication;
 using Dev2.ConnectionHelpers;
 using Dev2.Data.ServiceModel.Messages;

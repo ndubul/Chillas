@@ -10,6 +10,7 @@
 */
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Dev2.Common.Interfaces.Threading
@@ -30,6 +31,18 @@ namespace Dev2.Common.Interfaces.Threading
         /// <summary>
         /// Starts the specified background action and continues with the UI action 
         /// on the thread this was invoked from (typically the UI thread).
+        /// </summary>
+        /// <param name="backgroundAction">The background action.</param>
+        /// <param name="uiAction">The UI action.</param>
+        /// <param name="cancellationTokenSource">Allows the task to be cancelled.</param>
+        /// <returns></returns>
+        /// <author>Trevor.Williams-Ros</author>
+        /// <date>2013/08/08</date>
+        Task Start(Action backgroundAction, Action uiAction,CancellationTokenSource cancellationTokenSource);
+
+        /// <summary>
+        /// Starts the specified background action and continues with the UI action 
+        /// on the thread this was invoked from (typically the UI thread).
         /// calls an error handler should an exception occur
         /// </summary>
         /// <param name="backgroundAction">The background action.</param>
@@ -46,7 +59,7 @@ namespace Dev2.Common.Interfaces.Threading
         /// <author>Trevor.Williams-Ros</author>
         /// <date>2013/08/08</date>
         Task Start(Action backgroundAction);
-
+        
         /// <summary>
         /// Starts the specified background function and continues with the UI action 
         /// on the thread this was invoked from (typically the UI thread).
@@ -57,5 +70,42 @@ namespace Dev2.Common.Interfaces.Threading
         /// <author>Trevor.Williams-Ros</author>
         /// <date>2013/10/12</date>
         Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction);
+
+        /// <summary>
+        /// Starts the specified background function and continues with the UI action 
+        /// on the thread this was invoked from (typically the UI thread).
+        /// </summary>
+        /// <param name="backgroundFunc">The background function - returns the result to be processed on the UI thread.</param>
+        /// <param name="uiAction">The UI action to be taken on the given background result.</param>
+        /// <param name="cancellationTokenSource">Allows the task to be cancelled.</param>
+        /// <returns></returns>
+        /// <author>Trevor.Williams-Ros</author>
+        /// <date>2013/10/12</date>
+        Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction,CancellationTokenSource cancellationTokenSource);
+
+        /// <summary>
+        /// Starts the specified background function and continues with the UI action 
+        /// on the thread this was invoked from (typically the UI thread).
+        /// </summary>
+        /// <param name="backgroundFunc">The background function - returns the result to be processed on the UI thread.</param>
+        /// <param name="uiAction">The UI action to be taken on the given background result.</param>
+        /// <param name="onError">ACtion to perform if an error occurs during execution of the Task</param>
+        /// <returns></returns>
+        /// <author>Trevor.Williams-Ros</author>
+        /// <date>2013/10/12</date>
+        Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction, Action<Exception> onError);
+
+        /// <summary>
+        /// Starts the specified background function and continues with the UI action 
+        /// on the thread this was invoked from (typically the UI thread).
+        /// </summary>
+        /// <param name="backgroundFunc">The background function - returns the result to be processed on the UI thread.</param>
+        /// <param name="uiAction">The UI action to be taken on the given background result.</param>
+        /// <param name="cancellationTokenSource">Allows the task to be cancelled.</param>
+        /// <param name="onError">ACtion to perform if an error occurs during execution of the Task</param>
+        /// <returns></returns>
+        /// <author>Trevor.Williams-Ros</author>
+        /// <date>2013/10/12</date>
+        Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction, CancellationTokenSource cancellationTokenSource, Action<Exception> onError);
     }
 }

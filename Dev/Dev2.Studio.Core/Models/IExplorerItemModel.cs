@@ -16,10 +16,10 @@ using System.Windows.Input;
 using Dev2.AppResources.Repositories;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Security;
+using Dev2.Common.Interfaces.Threading;
 using Dev2.Common.Interfaces.Versioning;
 using Dev2.ConnectionHelpers;
 using Dev2.Runtime.Configuration.ViewModels.Base;
-using Dev2.Threading;
 
 namespace Dev2.Models
 {
