@@ -23,6 +23,7 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Security;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
+using Dev2.Common.Interfaces.Threading;
 using Dev2.Common.Interfaces.Versioning;
 using Dev2.ConnectionHelpers;
 using Dev2.Core.Tests.Environments;
@@ -36,7 +37,6 @@ using Dev2.Studio.Core;
 using Dev2.Studio.Core.AppResources.DependencyInjection.EqualityComparers;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
-using Dev2.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
@@ -1862,6 +1862,7 @@ namespace Dev2.Core.Tests.ModelTests
             //------------Setup for test--------------------------
             var aggregator = new Mock<EventAggregator>();
 #pragma warning disable 219
+            // ReSharper disable NotAccessedVariable
             Guid resourceGuid;
 
             string oldName;

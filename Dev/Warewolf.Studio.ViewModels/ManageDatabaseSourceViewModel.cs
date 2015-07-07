@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -24,6 +23,7 @@ using Dev2.Common.Interfaces.Core.DynamicServices;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
+using Dev2.Common.Interfaces.Threading;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
@@ -35,6 +35,7 @@ namespace Warewolf.Studio.ViewModels
 {
     public class ManageDatabaseSourceViewModel : BindableBase, IManageDatabaseSourceViewModel, IDockViewModel, IDisposable
     {
+        IAsyncWorker AsyncWorker { get; set; }
         private enSourceType _serverType;
         private AuthenticationType _authenticationType;
         private IComputerName _serverName;
@@ -57,14 +58,6 @@ namespace Warewolf.Studio.ViewModels
         string _headerText;
         private bool _isDisposed;
 
-        public ManageDatabaseSourceViewModel(IManageDatabaseSourceModel updateManager, IEventAggregator aggregator)
-        {
-            PerformInitialise(updateManager, aggregator);
-            // ReSharper disable MaximumChainedReferences
-            GetLoadComputerNamesTask().Start();
-            // ReSharper restore MaximumChainedReferences
-            _warewolfserverName = updateManager.ServerName;
-        }
 
         private void PerformInitialise(IManageDatabaseSourceModel updateManager, IEventAggregator aggregator)
         {
@@ -89,15 +82,18 @@ namespace Warewolf.Studio.ViewModels
             
         }
 
-        Task GetLoadComputerNamesTask()
+        void GetLoadComputerNamesTask(Action additionalUiAction)
         {
-            return new Task(() =>
+            AsyncWorker.Start(() => _updateManager.GetComputerNames().Select(name => new ComputerName { Name = name } as IComputerName).ToList(), names =>
             {
-                var names = _updateManager.GetComputerNames().Select(name => new ComputerName { Name = name } as IComputerName).ToList();
-                Dispatcher.CurrentDispatcher.Invoke(() => ComputerNames = names);
+                ComputerNames = names;
+                if(additionalUiAction != null)
+                {
+                    additionalUiAction();
+                }
             });
         }
-
+        
         bool CanCancelTest()
         {
             return Testing;
@@ -121,29 +117,32 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public ManageDatabaseSourceViewModel(IManageDatabaseSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator)
+        public ManageDatabaseSourceViewModel(IAsyncWorker asyncWorker)
+        {
+            AsyncWorker = asyncWorker;
+        }
+
+        public ManageDatabaseSourceViewModel(IManageDatabaseSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator, IAsyncWorker asyncWorker):this(asyncWorker)
         {
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
             PerformInitialise(updateManager, aggregator);
             RequestServiceNameViewModel = requestServiceNameViewModel;
-            GetLoadComputerNamesTask().Start();
+            GetLoadComputerNamesTask(null);
 
         }
-        public ManageDatabaseSourceViewModel(IManageDatabaseSourceModel updateManager, IEventAggregator aggregator, IDbSource dbSource)
+        public ManageDatabaseSourceViewModel(IManageDatabaseSourceModel updateManager, IEventAggregator aggregator, IDbSource dbSource, IAsyncWorker asyncWorker)
+            : this(asyncWorker)
         {
             VerifyArgument.IsNotNull("dbSource", dbSource);
             PerformInitialise(updateManager, aggregator);
-            _warewolfserverName = "localhost";
+            _warewolfserverName = updateManager.ServerName;
             _dbSource = dbSource;
-            var task = GetLoadComputerNamesTask();
-            task.ContinueWith(task1 =>
+            GetLoadComputerNamesTask(() =>
             {
                 FromDbSource(dbSource);
                 SetupHeaderTextFromExisting();
             });
-            task.Start();
-
-
+            
         }
 
         void SetupHeaderTextFromExisting()
@@ -176,7 +175,7 @@ namespace Warewolf.Studio.ViewModels
         {
             var helpDescriptor = new HelpDescriptor("", helpText, null);
             VerifyArgument.IsNotNull("helpDescriptor", helpDescriptor);
-            _aggregator.GetEvent<HelpChangedEvent>().Publish(helpDescriptor);
+           // _aggregator.GetEvent<HelpChangedEvent>().Publish(helpDescriptor);
 
         }
 
@@ -259,36 +258,22 @@ namespace Warewolf.Studio.ViewModels
         {
 
             _token = new CancellationTokenSource();
-            var t = new Task<IList<string>>(
-                SetupProgressSpinner, _token.Token);
-
-            t.ContinueWith(a => Dispatcher.CurrentDispatcher.Invoke(() =>
+            AsyncWorker.Start(SetupProgressSpinner, a =>
             {
-                if (!_token.IsCancellationRequested)
-                    switch (t.Status)
-                    {
-                        case TaskStatus.Faulted:
-                            {
-                                TestFailed = true;
-                                TestPassed = false;
-                                Testing = false;
-                                TestMessage = t.Exception != null ? t.Exception.Message : "Failed";
-                                DatabaseNames.Clear();
-                                break;
-                            }
-                        case TaskStatus.RanToCompletion:
-                            {
-                                DatabaseNames = t.Result;
-                                TestMessage = "Passed";
-                                TestFailed = false;
-                                TestPassed = true;
-                                Testing = false;
-                                break;
-                            }
-                    }
-            }));
-            t.Start();
-
+                DatabaseNames = a;
+                TestMessage = "Passed";
+                TestFailed = false;
+                TestPassed = true;
+                Testing = false;
+            },
+            _token, exception =>
+            {
+                TestFailed = true;
+                TestPassed = false;
+                Testing = false;
+                TestMessage = exception != null ? exception.Message : "Failed";
+                DatabaseNames.Clear();
+            });
 
             OnPropertyChanged(() => DatabaseNames);
         }

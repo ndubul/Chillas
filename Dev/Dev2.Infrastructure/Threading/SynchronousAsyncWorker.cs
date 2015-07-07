@@ -12,21 +12,22 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Dev2.Common.Interfaces.Threading;
 
-namespace Dev2.Common.Interfaces.Threading
+namespace Dev2.Threading
 {
-    public interface IAsyncWorker
+    public class SynchronousAsyncWorker : IAsyncWorker
     {
-        /// <summary>
-        /// Starts the specified background action and continues with the UI action 
-        /// on the thread this was invoked from (typically the UI thread).
-        /// </summary>
-        /// <param name="backgroundAction">The background action.</param>
-        /// <param name="uiAction">The UI action.</param>
-        /// <returns></returns>
-        /// <author>Trevor.Williams-Ros</author>
-        /// <date>2013/08/08</date>
-        Task Start(Action backgroundAction, Action uiAction);
+        public Task Start(Action backgroundAction, Action uiAction)
+        {
+            var task = new Task(() =>
+            {
+                backgroundAction.Invoke();
+                uiAction.Invoke();
+            });
+            task.RunSynchronously();
+            return task;
+        }
 
         /// <summary>
         /// Starts the specified background action and continues with the UI action 
@@ -38,7 +39,19 @@ namespace Dev2.Common.Interfaces.Threading
         /// <returns></returns>
         /// <author>Trevor.Williams-Ros</author>
         /// <date>2013/08/08</date>
-        Task Start(Action backgroundAction, Action uiAction,CancellationTokenSource cancellationTokenSource);
+        public Task Start(Action backgroundAction, Action uiAction, CancellationTokenSource cancellationTokenSource)
+        {
+            var task = new Task(() =>
+            {
+                if(!cancellationTokenSource.IsCancellationRequested)
+                {
+                    backgroundAction.Invoke();
+                    uiAction.Invoke();
+                }
+            },cancellationTokenSource.Token);
+            task.RunSynchronously();
+            return task;
+        }
 
         /// <summary>
         /// Starts the specified background action and continues with the UI action 
@@ -48,7 +61,16 @@ namespace Dev2.Common.Interfaces.Threading
         /// <param name="backgroundAction">The background action.</param>
         /// <param name="uiAction">The UI action.</param>
         /// <param name="onError"></param>
-        Task Start(Action backgroundAction, Action uiAction, Action<Exception> onError);
+        public Task Start(Action backgroundAction, Action uiAction, Action<Exception> onError)
+        {
+            var task = new Task(() =>
+            {
+                backgroundAction.Invoke();
+                uiAction.Invoke();
+            });
+            task.RunSynchronously();
+            return task;
+        }
 
         /// <summary>
         /// Starts the specified background action and continues with the UI action 
@@ -58,18 +80,23 @@ namespace Dev2.Common.Interfaces.Threading
         /// <returns></returns>
         /// <author>Trevor.Williams-Ros</author>
         /// <date>2013/08/08</date>
-        Task Start(Action backgroundAction);
-        
-        /// <summary>
-        /// Starts the specified background function and continues with the UI action 
-        /// on the thread this was invoked from (typically the UI thread).
-        /// </summary>
-        /// <param name="backgroundFunc">The background function - returns the result to be processed on the UI thread.</param>
-        /// <param name="uiAction">The UI action to be taken on the given background result.</param>
-        /// <returns></returns>
-        /// <author>Trevor.Williams-Ros</author>
-        /// <date>2013/10/12</date>
-        Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction);
+        public Task Start(Action backgroundAction)
+        {
+            var task = new Task(backgroundAction.Invoke);
+            task.RunSynchronously();
+            return task;
+        }
+
+        public Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction)
+        {
+            var task = new Task(() =>
+            {
+                var result = backgroundFunc.Invoke();
+                uiAction.Invoke(result);
+            });
+            task.RunSynchronously();
+            return task;
+        }
 
         /// <summary>
         /// Starts the specified background function and continues with the UI action 
@@ -81,7 +108,19 @@ namespace Dev2.Common.Interfaces.Threading
         /// <returns></returns>
         /// <author>Trevor.Williams-Ros</author>
         /// <date>2013/10/12</date>
-        Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction,CancellationTokenSource cancellationTokenSource);
+        public Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction, CancellationTokenSource cancellationTokenSource)
+        {
+            var task = new Task(() =>
+            {
+                if(!cancellationTokenSource.IsCancellationRequested)
+                {
+                    var result = backgroundFunc.Invoke();
+                    uiAction.Invoke(result);
+                }
+            },cancellationTokenSource.Token);
+            task.RunSynchronously();
+            return task;
+        }
 
         /// <summary>
         /// Starts the specified background function and continues with the UI action 
@@ -93,7 +132,16 @@ namespace Dev2.Common.Interfaces.Threading
         /// <returns></returns>
         /// <author>Trevor.Williams-Ros</author>
         /// <date>2013/10/12</date>
-        Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction, Action<Exception> onError);
+        public Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction, Action<Exception> onError)
+        {
+            var task = new Task(() =>
+            {
+                var result = backgroundFunc.Invoke();
+                uiAction.Invoke(result);
+            });
+            task.RunSynchronously();
+            return task;
+        }
 
         /// <summary>
         /// Starts the specified background function and continues with the UI action 
@@ -106,6 +154,18 @@ namespace Dev2.Common.Interfaces.Threading
         /// <returns></returns>
         /// <author>Trevor.Williams-Ros</author>
         /// <date>2013/10/12</date>
-        Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction, CancellationTokenSource cancellationTokenSource, Action<Exception> onError);
+        public Task Start<TBackgroundResult>(Func<TBackgroundResult> backgroundFunc, Action<TBackgroundResult> uiAction, CancellationTokenSource cancellationTokenSource, Action<Exception> onError)
+        {
+            var task = new Task(() =>
+            {
+                if (!cancellationTokenSource.IsCancellationRequested)
+                {
+                    var result = backgroundFunc.Invoke();
+                    uiAction.Invoke(result);
+                }
+            }, cancellationTokenSource.Token);
+            task.RunSynchronously();
+            return task;
+        }
     }
 }

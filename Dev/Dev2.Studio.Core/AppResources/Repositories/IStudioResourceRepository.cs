@@ -14,10 +14,10 @@ using System.Collections.ObjectModel;
 using System.Text;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Security;
+using Dev2.Common.Interfaces.Threading;
 using Dev2.Common.Interfaces.Versioning;
 using Dev2.Models;
 using Dev2.Studio.Core.Interfaces;
-using Dev2.Threading;
 
 namespace Dev2.AppResources.Repositories
 {

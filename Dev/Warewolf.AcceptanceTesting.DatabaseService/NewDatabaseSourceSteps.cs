@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Runtime.ServiceModel.Data;
+using Dev2.Threading;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -25,9 +27,11 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             Utils.SetupResourceDictionary();
             var databaseSourceControlView = new ManageDatabaseSourceControl();
             var mockStudioUpdateManager = new Mock<IManageDatabaseSourceModel>();
+            mockStudioUpdateManager.Setup(model => model.GetComputerNames()).Returns(new List<string> { "TEST", "RSAKLFSVRGENDEV", "RSAKLFSVROTHER" });
             var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
+            mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Returns(MessageBoxResult.OK);
             var mockEventAggregator = new Mock<IEventAggregator>();
-            var manageDatabaseSourceControlViewModel = new ManageDatabaseSourceViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object);
+            var manageDatabaseSourceControlViewModel = new ManageDatabaseSourceViewModel(mockStudioUpdateManager.Object,mockRequestServiceNameViewModel.Object, mockEventAggregator.Object,new SynchronousAsyncWorker());
             databaseSourceControlView.DataContext = manageDatabaseSourceControlViewModel;
             Utils.ShowTheViewForTesting(databaseSourceControlView);
             FeatureContext.Current.Add(Utils.ViewNameKey, databaseSourceControlView);
@@ -59,7 +63,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
             manageDatabaseSourceControl.EnterServerName(serverName);
             var viewModel = ScenarioContext.Current.Get<ManageDatabaseSourceViewModel>("viewModel");
-            Assert.AreEqual(serverName,viewModel.ServerName);
+            Assert.AreEqual(serverName,viewModel.ServerName.Name);
         }
 
         [Given(@"Database dropdown is ""(.*)""")]
@@ -164,7 +168,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         [When(@"Test Connecton is ""(.*)""")]
         public void ThenTestConnectonIs(string successString)
         {
-            var mockUpdateManager = ScenarioContext.Current.Get<Mock<IStudioUpdateManager>>("updateManager");
+            var mockUpdateManager = ScenarioContext.Current.Get<Mock<IManageDatabaseSourceModel>>("updateManager");
             var isSuccess = String.Equals(successString, "Successful", StringComparison.InvariantCultureIgnoreCase);
             if (isSuccess)
             {
@@ -179,6 +183,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             }
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
             manageDatabaseSourceControl.PerformTestConnection();
+            Thread.Sleep(1000);
         }
 
         [When(@"the validation message as ""(.*)""")]
@@ -200,8 +205,9 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         public void Cleanup()
         {
             var mockUpdateManager = ScenarioContext.Current.Get<Mock<IManageDatabaseSourceModel>>("updateManager");
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
             var mockEventAggregator = new Mock<IEventAggregator>();
-            var viewModel = new ManageDatabaseSourceViewModel(mockUpdateManager.Object, mockEventAggregator.Object);
+            var viewModel = new ManageDatabaseSourceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker());
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
             manageDatabaseSourceControl.DataContext = viewModel;
             FeatureContext.Current.Remove("viewModel");
