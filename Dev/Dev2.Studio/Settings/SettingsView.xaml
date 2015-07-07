@@ -14,59 +14,49 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance settings:SettingsViewModel}"
              AutomationProperties.AutomationId="UI_SettingsView_AutoID">
-    
+
     <UserControl.Resources>
         <logging:LoggingView x:Key="LogSettingsView"
                              AutomationProperties.AutomationId="LogSettingsViewContent" DataContext="{Binding LogSettingsViewModel, Mode=OneWay}"/>
         <security:SecurityView x:Key="SecurityView"
                                AutomationProperties.AutomationId="SecurityViewContent" DataContext="{Binding SecurityViewModel, Mode=OneWay}" />
 
-        <Style x:Key="ContentViewStyle"
-               TargetType="{x:Type ContentControl}">
+        <Style x:Key="ContentViewStyle" TargetType="{x:Type ContentControl}">
             <Setter Property="Margin" Value="10,0,0,0"/>
-            <Style.Triggers>                
+            <Style.Triggers>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding Path=IsLoading, Mode=OneWay}"
-                                   Value="False" />
-                        <Condition Binding="{Binding Path=ShowSecurity, Mode=TwoWay}"
-                                   Value="True" />
-                        <Condition Binding="{Binding Path=ShowLogging, Mode=TwoWay}"
-                                   Value="False" />
+                        <Condition Binding="{Binding Path=IsLoading, Mode=OneWay}" Value="False" />
+                        <Condition Binding="{Binding Path=ShowSecurity, Mode=TwoWay}" Value="True" />
+                        <Condition Binding="{Binding Path=ShowLogging, Mode=TwoWay}" Value="False" />
                     </MultiDataTrigger.Conditions>
-                    <Setter Property="Content"
-                            Value="{StaticResource SecurityView}" />
+                    <Setter Property="Content" Value="{StaticResource SecurityView}" />
                 </MultiDataTrigger>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding Path=IsLoading, Mode=OneWay}"
-                                   Value="False" />
-                        <Condition Binding="{Binding Path=ShowSecurity, Mode=TwoWay}"
-                                   Value="False" />
-                        <Condition Binding="{Binding Path=ShowLogging, Mode=TwoWay}"
-                                   Value="True" />
+                        <Condition Binding="{Binding Path=IsLoading, Mode=OneWay}" Value="False" />
+                        <Condition Binding="{Binding Path=ShowSecurity, Mode=TwoWay}" Value="False" />
+                        <Condition Binding="{Binding Path=ShowLogging, Mode=TwoWay}" Value="True" />
                     </MultiDataTrigger.Conditions>
-                    <Setter Property="Content"
-                            Value="{StaticResource LogSettingsView}" />
+                    <Setter Property="Content" Value="{StaticResource LogSettingsView}" />
                 </MultiDataTrigger>
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="SettingsToggleButtonStyle"
+        <!--<Style x:Key="SettingsToggleButtonStyle"
                BasedOn="{StaticResource ToggleButtonStyle}"
                TargetType="{x:Type ToggleButton}">
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="BorderThickness" Value="0"/>
-        </Style>
-        
+        </Style>-->
     </UserControl.Resources>
-    
-    <Grid>       
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="100" />
             <ColumnDefinition Width="*" />
@@ -93,22 +83,21 @@
                                             Margin="0,10,0,0"
                                             Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverterPositive}}"
                                             AutomationProperties.AutomationId="UI_SettingsProgress_Indicator" />
-        
+
         <Border Grid.Row="1" Grid.Column="0" BorderThickness="0,0,1,0">
 
-            <StackPanel
-                        Orientation="Vertical"
+            <StackPanel Orientation="Horizontal"
                         Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverterNegative}}">
 
                 <ToggleButton Content="{Binding SecurityHeader}"
                               IsChecked="{Binding ShowSecurity, Mode=TwoWay}"
-                              Style="{StaticResource SettingsToggleButtonStyle}"
+                              
                               AutomationProperties.AutomationId="UI_SecuritySettings_AutoID"/>
 
                 <ToggleButton Content="{Binding LogHeader}"
                               Visibility="{Binding HasLogSettings, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverterPositive}}"
                               IsChecked="{Binding ShowLogging, Mode=TwoWay}"
-                              Style="{StaticResource SettingsToggleButtonStyle}" />
+                              Style="{StaticResource ToggleButtonStyle}" />
 
             </StackPanel>
 
