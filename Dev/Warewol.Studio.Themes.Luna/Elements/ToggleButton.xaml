@@ -24,20 +24,20 @@
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonHoverBackgroundBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WareWolfWhiteBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="Stroke">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonHoverBorderBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WareWolfWhiteBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="Fill">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPressedBackgroundBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WareWolfWhiteBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="Stroke">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPressedBorderBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WareWolfWhiteBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Duration="0"
                                                                        Storyboard.TargetName="ContentControl"
@@ -73,6 +73,13 @@
                                                                        Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource LightForegroundBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FocusedVisualElement" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Unchecked" />
@@ -94,24 +101,26 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Rectangle x:Name="Bd"
-                                   Fill="{StaticResource ButtonBackgroundBrush}"
-                                   Stroke="{StaticResource ButtonBorderBrush}"
-                                   StrokeThickness="1" />
-                        <Rectangle x:Name="checked"
-                                   Fill="{StaticResource ButtonPressedBackgroundBrush}"
-                                   Stroke="{StaticResource ButtonPressedBorderBrush}"
+                                   Fill="{StaticResource WareWolfWhiteBrush}"
+                                   Stroke="{StaticResource WareWolfWhiteBrush}"
                                    StrokeThickness="1"
+                                   Opacity="0.1"/>
+                        <Rectangle x:Name="checked"
+                                   Fill="{StaticResource WareWolfWhiteBrush}"
+                                   Stroke="{StaticResource WareWolfWhiteBrush}"
+                                   StrokeThickness="1"
+                                   Opacity="1"
                                    Visibility="Collapsed" />
                         <ContentControl x:Name="ContentControl"
                                         Margin="{TemplateBinding Padding}"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                         Foreground="{TemplateBinding Foreground}">
-                            <ContentPresenter x:Name="contentPresenter" />
+                                <ContentPresenter x:Name="contentPresenter" />
                         </ContentControl>
                         <Rectangle x:Name="FocusedVisualElement"
-                                   Stroke="{StaticResource ButtonPressedBorderBrush}"
-                                   StrokeThickness="2"
+                                   Stroke="{StaticResource WareWolfMenuBrush}"
+                                   StrokeThickness="1"
                                    Visibility="Collapsed" />
                         <Rectangle x:Name="DisabledVisualElement"
                                    Fill="{StaticResource DisabledVisualElement}"
@@ -120,6 +129,18 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="true">
+                <Setter Property="Opacity" >
+                    <Setter.Value>1</Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="false">
+                <Setter Property="Opacity" >
+                    <Setter.Value>0.5</Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!--  *********************************  Implicit Styles  *********************************  -->

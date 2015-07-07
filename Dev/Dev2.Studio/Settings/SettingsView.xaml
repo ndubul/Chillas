@@ -8,6 +8,7 @@
              xmlns:security="clr-namespace:Dev2.Settings.Security"
              xmlns:customControls="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
              xmlns:ui="clr-namespace:Dev2.UI" xmlns:connections="clr-namespace:Dev2.CustomControls.Connections"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
     Padding="10"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -42,40 +43,28 @@
                 </MultiDataTrigger>
             </Style.Triggers>
         </Style>
-
-        <!--<Style x:Key="SettingsToggleButtonStyle"
-               BasedOn="{StaticResource ToggleButtonStyle}"
-               TargetType="{x:Type ToggleButton}">
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="BorderThickness" Value="0"/>
-        </Style>-->
     </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="100" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <connections:ConnectControl  DataContext="{Binding ConnectControlViewModel}"
                            Grid.Row="0"
-                           Grid.Column="0"
-                           Grid.ColumnSpan="2"
                            Width="400"
-                           Margin="0,0,0,10"
                            HorizontalAlignment="Left"
                            ConnectButtonAutomationID="UI_SettingsServerConnectButton_AutoID"
                            EditButtonAutomationID="UI_SettingsServerEditButton_AutoID"
                            ServerComboBoxAutomationID="UI_SettingsServerComboBox_AutoID"/>
 
         <customControls:CircularProgressBar Grid.Row="1"
-                                            Grid.Column="0"
-                                            Grid.ColumnSpan="2"
                                             Height="30"
                                             Width="30"
                                             VerticalAlignment="Top"
@@ -84,32 +73,38 @@
                                             Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverterPositive}}"
                                             AutomationProperties.AutomationId="UI_SettingsProgress_Indicator" />
 
-        <Border Grid.Row="1" Grid.Column="0" BorderThickness="0,0,1,0">
+        <Border Grid.Row="1" BorderThickness="0,0,0,0" Margin="{StaticResource ElementBorderTop}">
 
             <StackPanel Orientation="Horizontal"
                         Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverterNegative}}">
-
-                <ToggleButton Content="{Binding SecurityHeader}"
-                              IsChecked="{Binding ShowSecurity, Mode=TwoWay}"
-                              
-                              AutomationProperties.AutomationId="UI_SecuritySettings_AutoID"/>
-
-                <ToggleButton Content="{Binding LogHeader}"
-                              Visibility="{Binding HasLogSettings, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverterPositive}}"
+                <ToggleButton IsChecked="{Binding ShowSecurity, Mode=TwoWay}"
+                              Style="{StaticResource ToggleButtonStyle}"
+                              AutomationProperties.AutomationId="UI_SecuritySettings_AutoID">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Lock" FontSize="16" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
+                        <TextBlock Text="{Binding SecurityHeader}"/>
+                    </StackPanel>
+                    
+                </ToggleButton>
+                <ToggleButton Visibility="{Binding HasLogSettings, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverterPositive}}"
                               IsChecked="{Binding ShowLogging, Mode=TwoWay}"
-                              Style="{StaticResource ToggleButtonStyle}" />
-
+                              Style="{StaticResource ToggleButtonStyle}" >
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Table" FontSize="16" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
+                        <TextBlock Text="{Binding LogHeader}"/>
+                    </StackPanel>
+                </ToggleButton>
             </StackPanel>
 
         </Border>
-        <Grid  Grid.Row="1" Grid.Column="1">
+        <Grid  Grid.Row="2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ContentControl Grid.Row="0" Style="{StaticResource ContentViewStyle}" Margin="0,0,0,10" />
+            <ContentControl Grid.Row="0" Style="{StaticResource ContentViewStyle}" Margin="0,-1,0,0" />
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal"
+            <!--<StackPanel Grid.Row="1" Orientation="Horizontal"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Right">
 
@@ -136,7 +131,7 @@
                         Width="90"
                         Height="28" 
                         AutomationProperties.AutomationId="UI_SaveSettingsbtn_AutoID"/>
-            </StackPanel>
+            </StackPanel>-->
 
         </Grid>
     </Grid>
