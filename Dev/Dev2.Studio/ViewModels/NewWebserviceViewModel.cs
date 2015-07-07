@@ -49,7 +49,7 @@ namespace Dev2.ViewModels
         {
             get
             {
-                return ViewModel.Name;
+                return ViewModel.ResourceName;
             }
             set
             {
