@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Dev2.Common;
+using Dev2.Common.Common;
 using Dev2.Common.Interfaces.Communication;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Diagnostics.Debug;
@@ -41,30 +42,14 @@ namespace Dev2.Runtime.WebServer.Hubs
     {
         static readonly ConcurrentDictionary<Guid, StringBuilder> MessageCache = new ConcurrentDictionary<Guid, StringBuilder>();
         readonly Dev2JsonSerializer _serializer = new Dev2JsonSerializer();
-        string _userName;
 
         public EsbHub()
         {
-            UserName = Context.User.Identity.Name;
         }
 
         public EsbHub(Server server)
             : base(server)
         {
-
-            UserName = Context.User.Identity.Name;
-        }
-
-        public string UserName
-        {
-            get
-            {
-                return _userName;
-            }
-            set
-            {
-                _userName = value;
-            }
         }
 
         #region Implementation of IDebugWriter
@@ -142,9 +127,9 @@ namespace Dev2.Runtime.WebServer.Hubs
         {
             // Set Requesting User as per what is authorized ;)
             // Sneaky people may try to forge packets to get payload ;)
-            if (UserName != null)
+            if (Context.User.Identity.Name != null)
             {
-                receipt.User = UserName;
+                receipt.User = Context.User.Identity.Name;
             }
 
             try
@@ -199,7 +184,7 @@ namespace Dev2.Runtime.WebServer.Hubs
                         if (Context.User.Identity != null)
                         // ReSharper restore ConditionIsAlwaysTrueOrFalse
                         {
-                            user = UserName;
+                            user = Context.User.Identity.Name;
                             // set correct principle ;)
                             Thread.CurrentPrincipal = Context.User;
                             Dev2Logger.Log.Debug("Execute Command Invoked For [ " + user + " ] For Service [ " + request.ServiceName + " ]");
@@ -298,7 +283,7 @@ namespace Dev2.Runtime.WebServer.Hubs
             var debugSerializated = _serializer.Serialize(debugState);
 
             var hubCallerConnectionContext = Clients;
-            //var user = hubCallerConnectionContext.User(UserName);
+          //  var user = hubCallerConnectionContext.User(Context.User.Identity.Name);
             var user = hubCallerConnectionContext.All;
             user.SendDebugState(debugSerializated);
         }
@@ -402,7 +387,7 @@ namespace Dev2.Runtime.WebServer.Hubs
             var workspaceId = Server.GetWorkspaceID(Context.User.Identity);
             ResourceCatalog.Instance.LoadResourceActivityCache(workspaceId);
             var hubCallerConnectionContext = Clients;
-            var user = hubCallerConnectionContext.User(UserName);
+            var user = hubCallerConnectionContext.User(Context.User.Identity.Name);
             user.SendWorkspaceID(workspaceId);
             user.SendServerID(HostSecurityProvider.Instance.ServerID);
             PermissionsHaveBeenModified(null, null);
