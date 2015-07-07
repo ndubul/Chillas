@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Warewolf.AcceptanceTesting.Explorer.Settings
+namespace Warewolf.AcceptanceTesting.Settings
 {
     using TechTalk.SpecFlow;
     
@@ -49,7 +49,7 @@ namespace Warewolf.AcceptanceTesting.Explorer.Settings
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "Settings Tab")))
             {
-                Warewolf.AcceptanceTesting.Explorer.Settings.SettingsTabFeature.FeatureSetup(null);
+                Warewolf.AcceptanceTesting.Settings.SettingsTabFeature.FeatureSetup(null);
             }
         }
         

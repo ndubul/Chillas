@@ -233,11 +233,6 @@
     </Compile>
     <Compile Include="Plugins\PluginSourceSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\Settings Tab.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Settings Tab.feature</DependentUpon>
-    </Compile>
     <Compile Include="Tools\Control Flow - Switch.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -368,10 +363,6 @@
     <None Include="Plugins\PluginSource.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PluginSource.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Settings\Settings Tab.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Settings Tab.feature.cs</LastGenOutput>
     </None>
     <None Include="Tools\Control Flow - Switch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
