@@ -78,7 +78,7 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="ExpandPath" Property="Stroke" Value="{StaticResource TreeViewArrowHoverBorderBrush}" />
-                            <Setter TargetName="ExpandPath" Property="Fill" Value="{StaticResource TreeViewArrowHoverBackgroundBrush}" />
+                            <Setter TargetName="ExpandPath" Property="Fill" Value="{StaticResource TreeViewArrowHoverBorderBrush}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -203,8 +203,8 @@
                         <Rectangle x:Name="BgSelected"
                                    Grid.Column="1"
                                    Grid.ColumnSpan="2"
-                                   Fill="{StaticResource TreeViewItemSelectedBackgroundBrush}"
-                                   Stroke="{StaticResource TreeViewItemSelectedBorderBrush}"
+                                   Fill="Transparent"
+                                   Stroke="Transparent"
                                    StrokeThickness="1"
                                    Visibility="Collapsed" />
 
@@ -227,7 +227,7 @@
                                    Grid.Column="1"
                                    Grid.ColumnSpan="2"
                                    IsHitTestVisible="False"
-                                   Stroke="{StaticResource TreeViewItemPressedBorderBrush}"
+                                   Stroke="Transparent"
                                    StrokeThickness="1"
                                    Visibility="Collapsed" />
                         <Rectangle x:Name="DisabledVisualElement"
