@@ -194,6 +194,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warewolf.AcceptanceTesting.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warewolf.AcceptanceTesting.Settings", "Warewolf.AcceptanceTesting.Settings\Warewolf.AcceptanceTesting.Settings.csproj", "{9F5B231B-8C58-4630-8A09-5CB6049C44C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warewolf.AcceptanceTesting.DatabaseSource", "Warewolf.AcceptanceTesting.DatabaseSource\Warewolf.AcceptanceTesting.DatabaseSource.csproj", "{2406B584-C85C-4676-8186-5523618EEB5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1408,6 +1410,18 @@ Global
 		{9F5B231B-8C58-4630-8A09-5CB6049C44C6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9F5B231B-8C58-4630-8A09-5CB6049C44C6}.Release|x64.ActiveCfg = Release|Any CPU
 		{9F5B231B-8C58-4630-8A09-5CB6049C44C6}.Release|x86.ActiveCfg = Release|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Release|x64.ActiveCfg = Release|Any CPU
+		{2406B584-C85C-4676-8186-5523618EEB5B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

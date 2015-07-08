@@ -93,12 +93,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="DBServiceSteps.cs" />
-    <Compile Include="New Database Source.feature.cs">
-      <DependentUpon>New Database Source.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="NewDatabaseSourceSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityBootstrapperForDatabaseSourceConnectorTesting.cs" />
   </ItemGroup>
@@ -111,10 +105,6 @@
     <None Include="DBService Inspector.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>DBService Inspector.feature.cs</LastGenOutput>
-    </None>
-    <None Include="New Database Source.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>New Database Source.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
