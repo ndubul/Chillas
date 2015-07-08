@@ -70,7 +70,7 @@
                                         <DoubleAnimation Duration="0"
                                                          Storyboard.TargetName="disabled"
                                                          Storyboard.TargetProperty="(UIElement.Opacity)"
-                                                         To="1" />
+                                                         To="0.4" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
