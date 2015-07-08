@@ -115,7 +115,7 @@ Scenario: Refreshing plugin source action step
 	
 	
 
-Scenario: Plugin service is not saving when test is unsuccesfull
+Scenario: Plugin service GetType test
     Given I have "New Plugin Service Connector" tab opened
 	When I select "Email Plugin" as source
 	And "2 Select a namespace" is "Enabled"
@@ -124,16 +124,12 @@ Scenario: Plugin service is not saving when test is unsuccesfull
 	When I select "GetType" as action
 	And "4 Provide Test Values" is "Enabled" 
 	And "Test" is "Enabled"
-	| host | port | from | to |
-	| test | 23   | 21   | 21 |
+	When "Test" is selected
 	When test connection is "Unsuccessfull"
 	Then the "Test Result" has validation error "True"
 	Then Save is "Disabled"
-	And "5 Edit Dfault and Mapping Names" is "Enabled" 
-	And Inputs looks like
-	| Input   | Default Value | Required Field | Empty Null |
-	Then  Outputs looks like
-	| Output | Output Alias |
+	And "5 Edit Dfault and Mapping Names" is "Disabled" 
+	
 	
 	
 	
