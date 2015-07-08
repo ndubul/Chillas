@@ -88,6 +88,7 @@ namespace Dev2.Services.Security
             set
             {
                 OnPropertyChanged(ref _isDeleted, value);
+                OnPropertyChanged("CanChangeName");
             }
         }
 
@@ -95,7 +96,7 @@ namespace Dev2.Services.Security
         {
             get
             {
-                if (IsBuiltInAdministrators || IsBuiltInGuests)
+                if (IsBuiltInAdministrators || IsBuiltInGuests || IsDeleted)
                 {
                     return false;
                 }
@@ -134,7 +135,6 @@ namespace Dev2.Services.Security
                            {
                                IsDeleted = !IsDeleted;
                                EnableCellEditing = !IsDeleted;
-                               CanChangeName = !IsDeleted;
                            }, o => CanRemove));
             }
         }
