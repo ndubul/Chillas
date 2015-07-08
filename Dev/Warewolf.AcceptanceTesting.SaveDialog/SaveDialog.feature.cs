@@ -87,7 +87,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 11
  testRunner.When("I create \"New Folder\" in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
- testRunner.And("I should see \"6\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I should see \"6\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -96,11 +96,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Saving a Workflow in localhost")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void SavingAWorkflowInLocalhost()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving a Workflow in localhost", new string[] {
-                        "ignore"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving a Workflow in localhost", ((string[])(null)));
 #line 27
 this.ScenarioSetup(scenarioInfo);
 #line 28
@@ -121,11 +119,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Saving a Workflow in localhost folder")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void SavingAWorkflowInLocalhostFolder()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving a Workflow in localhost folder", new string[] {
-                        "ignore"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving a Workflow in localhost folder", ((string[])(null)));
 #line 35
 this.ScenarioSetup(scenarioInfo);
 #line 36
@@ -143,12 +139,12 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Save button is Enabled when I enter new name for resource")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Save button is Enabled when I enter new name for resource and filter")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        public virtual void SaveButtonIsEnabledWhenIEnterNewNameForResource()
+        public virtual void SaveButtonIsEnabledWhenIEnterNewNameForResourceAndFilter()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save button is Enabled when I enter new name for resource", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save button is Enabled when I enter new name for resource and filter", ((string[])(null)));
 #line 43
 this.ScenarioSetup(scenarioInfo);
 #line 44
@@ -156,38 +152,19 @@ this.ScenarioSetup(scenarioInfo);
 #line 45
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 46
- testRunner.And("I open \"Folder 1\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("\"Save\" is \"disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 47
- testRunner.When("I enter name \"Savewf\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("Filter is \"Folder 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 48
- testRunner.Then("save button is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should see \"1\" folders\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 49
- testRunner.And("validation message is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Save button is disabled when name is empty")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        public virtual void SaveButtonIsDisabledWhenNameIsEmpty()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save button is disabled when name is empty", ((string[])(null)));
+ testRunner.And("I open \"Folder 1\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 50
+ testRunner.When("I enter name \"Savewf\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 51
-this.ScenarioSetup(scenarioInfo);
+ testRunner.Then("save button is \"enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 52
- testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 53
- testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
- testRunner.When("I open \"Folder 1\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 55
- testRunner.When("I enter name \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 56
- testRunner.Then("save button is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 57
- testRunner.And("validation message is \"\'Name\' cannot be empty.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("validation message is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -199,19 +176,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SaveWithDuplicateNameAndExpectValidation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save with duplicate name and expect validation", ((string[])(null)));
-#line 59
+#line 54
 this.ScenarioSetup(scenarioInfo);
-#line 60
+#line 55
     testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 56
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
+#line 57
  testRunner.When("I open \"Folder 2\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 63
+#line 58
  testRunner.When("I enter name \"Folder 2 Child 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 64
+#line 59
  testRunner.Then("save button is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 65
+#line 60
  testRunner.And("validation message is \"An item with name \'Folder 2 Child 1\' already exists in thi" +
                     "s folder.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -225,19 +202,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SaveResourceNamesWithSpecialCharacterExpectValidation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save resource names with special character expect validation", ((string[])(null)));
-#line 67
+#line 62
 this.ScenarioSetup(scenarioInfo);
-#line 68
+#line 63
     testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 69
+#line 64
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
+#line 65
  testRunner.When("I open \"Folder 1\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 71
+#line 66
  testRunner.When("I enter name \"Save@#$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 72
+#line 67
  testRunner.Then("save button is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 73
+#line 68
  testRunner.And("validation message is \"\'Name\' contains invalid characters.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -247,30 +224,28 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opening New workflow and saving")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void OpeningNewWorkflowAndSaving()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening New workflow and saving", new string[] {
-                        "ignore"});
-#line 76
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening New workflow and saving", ((string[])(null)));
+#line 71
 this.ScenarioSetup(scenarioInfo);
-#line 77
-    testRunner.Given("I have an New workflow \"Unsaved1\" is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 78
+#line 72
+    testRunner.Given("I have a New workflow \"Unsaved 1\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 73
  testRunner.When("I press \"Ctrl+s\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 79
+#line 74
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 80
- testRunner.Then("save button is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 81
- testRunner.And("cancel button is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
+#line 75
+ testRunner.Then("\"Save\" is \"disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 76
+ testRunner.And("\"Cancel\" is \"enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
  testRunner.When("I enter name \"New\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 83
+#line 78
  testRunner.Then("save button is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 84
+#line 79
  testRunner.When("I save \"localhost/New\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 85
+#line 80
  testRunner.Then("the \"New\" workflow is saved \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -280,32 +255,24 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opening Save dialog and canceling")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void OpeningSaveDialogAndCanceling()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening Save dialog and canceling", new string[] {
-                        "ignore"});
-#line 88
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening Save dialog and canceling", ((string[])(null)));
+#line 83
 this.ScenarioSetup(scenarioInfo);
-#line 89
-    testRunner.Given("I have an New workflow \"Unsaved1\" is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 90
+#line 84
+    testRunner.Given("I have a New workflow \"Unsaved 1\" a open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 85
  testRunner.When("I press \"Ctrl+s\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 91
+#line 86
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 92
- testRunner.Then("save button is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 93
+#line 87
  testRunner.And("cancel button is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 94
- testRunner.When("I enter name \"New\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 95
- testRunner.Then("save button is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 96
- testRunner.When("I cancel the save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 97
+#line 88
+ testRunner.When("I click \"Cancel\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 89
  testRunner.Then("the save dialog is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 98
+#line 90
  testRunner.Then("the \"New\" workflow is saved \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -315,115 +282,88 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Saving multiple workflows by using shortcutkey")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void SavingMultipleWorkflowsByUsingShortcutkey()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving multiple workflows by using shortcutkey", new string[] {
-                        "ignore"});
-#line 101
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving multiple workflows by using shortcutkey", ((string[])(null)));
+#line 93
 this.ScenarioSetup(scenarioInfo);
-#line 102
-    testRunner.Given("I have an New workflow \"Unsaved1\" is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 103
- testRunner.And("I have an New workflow \"Unsaved2\" is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 104
- testRunner.And("I have an \"Saved1\" workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 105
- testRunner.And("I have an \"Saved2\" workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 106
- testRunner.And("I have an \"Saved3\" workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 107
+#line 94
+    testRunner.Given("I have a New workflow \"Unsaved 1\"  open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 95
+ testRunner.And("I have a New workflow \"Unsaved 2\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 96
+ testRunner.And("I have a \"Saved1\" workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 97
+ testRunner.And("I have a \"Saved2\" workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 98
+ testRunner.And("I have a \"Saved3\" workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 99
  testRunner.When("I press \"Ctrl+Shift+S\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 108
+#line 100
  testRunner.Then("the \"Saved1\" workflow is saved \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 109
+#line 101
  testRunner.Then("the \"Saved2\" workflow is saved \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 110
+#line 102
  testRunner.Then("the \"Saved3\" workflow is saved \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 111
+#line 103
     testRunner.And("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 112
+#line 104
+ testRunner.And("the Save Dialog title is \"Save: Unsaved 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 105
+ testRunner.And("the title connection is \"localhost (http://computername:3142/dsf)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 106
  testRunner.When("I cancel the save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 113
+#line 107
  testRunner.And("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 108
+ testRunner.And("the Save Dialog title is \"Save: Unsaved 2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 109
+ testRunner.And("the title connection is \"localhost (http://computername:3142/dsf)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 110
+ testRunner.When("I enter name \"New\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 111
+ testRunner.Then("save button is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 112
+ testRunner.When("I save \"localhost/New\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 113
+ testRunner.Then("the \"New\" workflow is saved \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Save textbox is updating names when selecting resource names")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Save Doesnt Allow Nested Duplicate")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        public virtual void SaveTextboxIsUpdatingNamesWhenSelectingResourceNames()
+        public virtual void SaveDoesntAllowNestedDuplicate()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save textbox is updating names when selecting resource names", new string[] {
-                        "ignore"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save Doesnt Allow Nested Duplicate", ((string[])(null)));
 #line 116
 this.ScenarioSetup(scenarioInfo);
 #line 117
-    testRunner.Given("I have an New workflow \"Unsaved1\" is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("I have an New workflow \"Unsaved 1\" is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 118
  testRunner.When("I press \"Ctrl+s\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 119
- testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 120
- testRunner.Then("save button is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 121
- testRunner.And("cancel button is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 122
-    testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 123
- testRunner.And("I should see \"5\" folders in \"localhost\" save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 124
- testRunner.When("I select \"localhost/Folder 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 125
- testRunner.When("I open \"Folder 1\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 126
- testRunner.Then("I should see \"8\" children for \"Folder 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 127
- testRunner.When("I select \"localhost/Folder 1/children1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 128
- testRunner.Then("save textbox  name is \"children1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 129
- testRunner.When("I save \"localhost/children1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 130
- testRunner.Then("validation message is thrown \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 131
- testRunner.Then("validation message is \"Name already exists\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 132
- testRunner.Then("the \"children1\" workflow is saved \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Path is updating on save dialog when selcting folders")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        public virtual void PathIsUpdatingOnSaveDialogWhenSelctingFolders()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Path is updating on save dialog when selcting folders", new string[] {
-                        "ignore"});
-#line 135
-this.ScenarioSetup(scenarioInfo);
-#line 136
-    testRunner.Given("I have an New workflow \"Unsaved1\" is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 137
- testRunner.When("click \"Save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 138
  testRunner.Then("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 139
- testRunner.And("the path in the title as \"localhost\\\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 140
- testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 141
- testRunner.And("I should see \"5\" folders in \"localhost\" save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 142
+#line 120
  testRunner.When("I select \"localhost/Folder 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 143
- testRunner.Then("the path in the title as \"localhost\\Folder 1\\\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 121
+ testRunner.When("I open \"Folder 1\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 122
+ testRunner.Then("I should see \"8\" children for \"Folder 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 123
+ testRunner.When("I select \"localhost/Folder 1/children1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 124
+ testRunner.Then("save name is \"children1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 125
+ testRunner.When("I save \"localhost/children1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 126
+ testRunner.Then("validation message is thrown \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 127
+ testRunner.Then("validation message is \"Name already exists\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 128
+ testRunner.Then("the \"children1\" workflow is saved \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -432,31 +372,31 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Star is representing the workflow is unsaved")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void StarIsRepresentingTheWorkflowIsUnsaved()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Star is representing the workflow is unsaved", new string[] {
-                        "ignore"});
-#line 146
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Star is representing the workflow is unsaved", ((string[])(null)));
+#line 131
 this.ScenarioSetup(scenarioInfo);
-#line 147
-   testRunner.Given("I have an New workflow \"Unsaved1\" is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 148
-   testRunner.When("I edit \"Unsaved1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 149
-   testRunner.Then("the New workflow \"Unsaved1\" is open with Star notation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 150
-   testRunner.When("I save \"Unsaved1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 151
-   testRunner.Then("the New workflow \"Unsaved1\" is open without Star notation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 152
-   testRunner.When("I edit \"Unsaved1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 153
-   testRunner.Then("I have an \"Unsaved1\" workflow open with Star notation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 154
-   testRunner.When("I save \"Unsaved1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 155
-   testRunner.Then("I have an \"Unsaved1\" workflow without Star notation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 132
+   testRunner.Given("I have an New workflow \"Unsaved 1\" is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 133
+   testRunner.When("I edit \"Unsaved 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 134
+   testRunner.Then("the New workflow \"Unsaved 1\" is open with Star notation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 135
+   testRunner.When("I save \"Unsaved 1\" as \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 136
+   testRunner.Then("the New workflow \"New Workflow\" is open without Star notation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 137
+   testRunner.And("\"Unsaved 1\" is \"invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 138
+   testRunner.When("I edit \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 139
+   testRunner.Then("I have an \"New Workflow\" workflow open with Star notation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 140
+   testRunner.When("I save \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 141
+   testRunner.Then("I have an \"New Workflow\" workflow without Star notation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

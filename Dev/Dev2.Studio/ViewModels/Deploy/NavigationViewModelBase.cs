@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using Caliburn.Micro;
 using Dev2.AppResources.Repositories;
@@ -24,6 +25,7 @@ using Dev2.Models;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
 using Dev2.Studio.Core.ViewModels.Base;
+using Microsoft.Practices.Prism.Commands;
 
 namespace Dev2.ViewModels.Deploy
 {
@@ -56,6 +58,7 @@ namespace Dev2.ViewModels.Deploy
             EventAggregator.Subscribe(this);
             EnvironmentRepository = environmentRepository;
             StudioResourceRepository = studioResourceRepository;
+            ClearSearchTextCommand = new DelegateCommand(() => SearchText = "");
         }
         
         public IEnvironmentRepository EnvironmentRepository { get; set; }
@@ -162,10 +165,26 @@ namespace Dev2.ViewModels.Deploy
             return task;
         }
 
+        public ICommand ClearSearchTextCommand { get; private set; }
+
         protected void UpdateNavigationView(IEnumerable<IExplorerItemModel> expandedList = null, IExplorerItemModel selectedItem = null)
         {
             UpdateSearchFilter(_searchFilter);
             SetTreeStateBack(expandedList, selectedItem);
+        }
+
+        public string SearchText
+        {
+            get
+            {
+                return _searchFilter;
+            }
+            set
+            {
+                _searchFilter = value;
+                UpdateSearchFilter(_searchFilter);
+                OnPropertyChanged(SearchText);
+            }
         }
 
         /// <summary>
@@ -175,7 +194,6 @@ namespace Dev2.ViewModels.Deploy
         /// <date>2/25/2013</date>
         public void UpdateSearchFilter(string searhFilter)
         {
-            _searchFilter = searhFilter;
             if(Application.Current != null && Application.Current.Dispatcher != null && Application.Current.Dispatcher.CheckAccess())
             {
                 try
