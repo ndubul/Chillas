@@ -84,7 +84,7 @@ Scenario: Opening saved Plugin Service
 	The the Save Dialog is opened	
 
 
-Scenario: While editing service, changing plugin source resets all the steps 
+Scenario: Refreshing plugin source action step 
 	Given I have "Edit Plugin Service - IntegrationTestPluginNull" tab opened
 	And "testingPluginSrc" is selected as source
 	And "Edit" button is "Enabled"
