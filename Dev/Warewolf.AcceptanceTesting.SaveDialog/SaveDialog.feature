@@ -9,7 +9,7 @@ Scenario: Creating Folder from Save Dialog under localhost
 	And the "localhost" server is visible in save dialog
 	And I should see "5" folders
 	When I create "New Folder" in "localhost"
-	And I should see "6" folders
+	Then I should see "6" folders
 
 #CODED UI
 #Scenario: Right click Items on folder
@@ -23,7 +23,7 @@ Scenario: Creating Folder from Save Dialog under localhost
 #	And I shouldn't see "New workflow service"
 #	And I shouldn't see "New Plugin service"
 
-@ignore
+
 Scenario: Saving a Workflow in localhost
 	Given the Save Dialog is opened
 	And the "localhost" server is visible in save dialog
@@ -31,7 +31,7 @@ Scenario: Saving a Workflow in localhost
 	When I save "localhost/Newworkflow"
 	Then "NewWorkflow" is visible in "localhost"
 
-@ignore	
+
 Scenario: Saving a Workflow in localhost folder
 	Given the Save Dialog is opened
 	And the "localhost" server is visible in save dialog
@@ -40,21 +40,16 @@ Scenario: Saving a Workflow in localhost folder
 	Then "NewWorkflow" is visible in "Folder 1"	
 
 	
-Scenario: Save button is Enabled when I enter new name for resource
+Scenario: Save button is Enabled when I enter new name for resource and filter
 	Given the Save Dialog is opened
 	And the "localhost" server is visible in save dialog
+	Then "Save" is "disabled"
+	And Filter is "Folder 1"
+	Then I should see "1" folders"
 	And I open "Folder 1" in save dialog 
 	When I enter name "Savewf"
-	Then save button is "Enabled"
+	Then save button is "enabled"
 	And validation message is ""
-
-Scenario: Save button is disabled when name is empty
-	Given the Save Dialog is opened
-	And the "localhost" server is visible in save dialog
-	When I open "Folder 1" in save dialog 
-	When I enter name ""
-	Then save button is "Disabled"
-	And validation message is "'Name' cannot be empty."
 
 Scenario: Save with duplicate name and expect validation
     Given the Save Dialog is opened
@@ -72,84 +67,75 @@ Scenario: Save resource names with special character expect validation
 	Then save button is "Disabled"
 	And validation message is "'Name' contains invalid characters."
 
-@ignore
+
 Scenario: Opening New workflow and saving
-    Given I have an New workflow "Unsaved1" is open
+    Given I have a New workflow "Unsaved 1" open
 	When I press "Ctrl+s"
 	Given the Save Dialog is opened
-	Then save button is "Disabled"
-	And cancel button is "Enabled"
+	Then "Save" is "disabled"
+	And "Cancel" is "enabled"
 	When I enter name "New"
 	Then save button is "Enabled"
 	When I save "localhost/New"
 	Then the "New" workflow is saved "True"
 
-@ignore
+
 Scenario: Opening Save dialog and canceling
-    Given I have an New workflow "Unsaved1" is open
+    Given I have a New workflow "Unsaved 1" a open
 	When I press "Ctrl+s"
 	Given the Save Dialog is opened
-	Then save button is "Disabled"
 	And cancel button is "Enabled"
-	When I enter name "New"
-	Then save button is "Enabled"
-	When I cancel the save dialog
+	When I click "Cancel"
 	Then the save dialog is closed
 	Then the "New" workflow is saved "False"
 
-@ignore
+
 Scenario: Saving multiple workflows by using shortcutkey
-    Given I have an New workflow "Unsaved1" is open
-	And I have an New workflow "Unsaved2" is open
-	And I have an "Saved1" workflow open
-	And I have an "Saved2" workflow open
-	And I have an "Saved3" workflow open
+    Given I have a New workflow "Unsaved 1"  open
+	And I have a New workflow "Unsaved 2" open
+	And I have a "Saved1" workflow open
+	And I have a "Saved2" workflow open
+	And I have a "Saved3" workflow open
 	When I press "Ctrl+Shift+S"
 	Then the "Saved1" workflow is saved "True" 
 	Then the "Saved2" workflow is saved "True" 
 	Then the "Saved3" workflow is saved "True" 
-    And the Save Dialog is opened 
+    And the Save Dialog is opened
+	And the Save Dialog title is "Save: Unsaved 1" 
+	And the title connection is "localhost (http://computername:3142/dsf)
 	When I cancel the save dialog
 	And the Save Dialog is opened 
+	And the Save Dialog title is "Save: Unsaved 2" 
+	And the title connection is "localhost (http://computername:3142/dsf)
+	When I enter name "New"
+	Then save button is "Enabled"
+	When I save "localhost/New"
+	Then the "New" workflow is saved "True"
 
-@ignore
-Scenario: Save textbox is updating names when selecting resource names
-    Given I have an New workflow "Unsaved1" is open
+
+Scenario: Save Doesnt Allow Nested Duplicate
+    Given I have an New workflow "Unsaved 1" is open
 	When I press "Ctrl+s"
-	Given the Save Dialog is opened
-	Then save button is "Disabled"
-	And cancel button is "Enabled"
-    And the "localhost" server is visible in save dialog
-	And I should see "5" folders in "localhost" save dialog
+	Then the Save Dialog is opened
 	When I select "localhost/Folder 1"
 	When I open "Folder 1" in save dialog 
 	Then I should see "8" children for "Folder 1"
 	When I select "localhost/Folder 1/children1"
-	Then save textbox  name is "children1"
+	Then save name is "children1"
 	When I save "localhost/children1"
 	Then validation message is thrown "True"
 	Then validation message is "Name already exists"
 	Then the "children1" workflow is saved "False"
 
-@ignore
-Scenario: Path is updating on save dialog when selcting folders
-    Given I have an New workflow "Unsaved1" is open
-	When click "Save"
-	Then the Save Dialog is opened
-	And the path in the title as "localhost\"
-	And the "localhost" server is visible in save dialog
-	And I should see "5" folders in "localhost" save dialog
-	When I select "localhost/Folder 1"
-	Then the path in the title as "localhost\Folder 1\"
 
-@ignore
 Scenario: Star is representing the workflow is unsaved
-   Given I have an New workflow "Unsaved1" is open 
-   When I edit "Unsaved1"
-   Then the New workflow "Unsaved1" is open with Star notation
-   When I save "Unsaved1"
-   Then the New workflow "Unsaved1" is open without Star notation
-   When I edit "Unsaved1"
-   Then I have an "Unsaved1" workflow open with Star notation
-   When I save "Unsaved1"
-   Then I have an "Unsaved1" workflow without Star notation
+   Given I have an New workflow "Unsaved 1" is open 
+   When I edit "Unsaved 1"
+   Then the New workflow "Unsaved 1" is open with Star notation
+   When I save "Unsaved 1" as "New Workflow"
+   Then the New workflow "New Workflow" is open without Star notation
+   And "Unsaved 1" is "invisible"
+   When I edit "New Workflow"
+   Then I have an "New Workflow" workflow open with Star notation
+   When I save "New Workflow"
+   Then I have an "New Workflow" workflow without Star notation
