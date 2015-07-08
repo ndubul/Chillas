@@ -82,35 +82,45 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
    testRunner.Given("I open New Web Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
-   testRunner.And("I type Address as \"http://RSAKLFSVRTFSBLD/IntegrationTestSite\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.Then("\"New DB Service\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 10
-   testRunner.And("I type Default Query as \"/GetCountries.ashx?extension=json&prefix=a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I type Address as \"http://RSAKLFSVRTFSBLD/IntegrationTestSite\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
-   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I type Default Query as \"/GetCountries.ashx?extension=json&prefix=a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
-   testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
-   testRunner.Then("\"View Results in Browser\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
-   testRunner.And("\"TestDefault\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("\"Cancel Test\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 15
-   testRunner.And("I Select Authentication Type as \"Anonymous\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.Then("\"Test/Default\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 16
-   testRunner.And("Username field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I Select Authentication Type as \"Anonymous\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 17
-   testRunner.And("Password field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("Username field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
-   testRunner.When("Test Connecton is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.And("Password field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 19
-   testRunner.Then("\"View Results in Browser\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.And("I click \"Test Connection\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
-   testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("\"Cancel Test\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
-   testRunner.And("\"TestDefault\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.When("Test Connecton is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 22
-   testRunner.When("I save the source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.And("\"Cancel Test\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
+   testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 24
+   testRunner.And("\"Test/Default\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+   testRunner.When("I save the source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 26
    testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 27
+   testRunner.When("I click Test/Default hyperlink", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 28
+   testRunner.Then("the browser window opens with the hyperlink in it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -122,36 +132,28 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void CreatingNewWebSourceUnderAuthTypeAsUser()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating New Web Source under auth type as user", ((string[])(null)));
-#line 26
-this.ScenarioSetup(scenarioInfo);
-#line 27
-   testRunner.Given("I open New Web Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 28
-   testRunner.And("I type Address as \"http://RSAKLFSVRTFSBLD/IntegrationTestSite\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
-   testRunner.And("I type Default Query as \"/GetCountries.ashx?extension=json&prefix=a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 30
-   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 31
-   testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.Given("I open New Web Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 32
-   testRunner.Then("\"View Results in Browser\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.And("I type Address as \"http://RSAKLFSVRTFSBLD/IntegrationTestSite\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 33
-   testRunner.And("\"TestDefault\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I type Default Query as \"/GetCountries.ashx?extension=json&prefix=a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 34
-   testRunner.And("I Select Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
-   testRunner.And("Username field is \"IntegrationTester\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
-   testRunner.And("Password field is \"I73573r0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I Select Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 37
-   testRunner.When("Test Connecton is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.And("Username field is \"IntegrationTester\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 38
-   testRunner.Then("\"View Results in Browser\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.And("Password field is \"I73573r0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 39
-   testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.When("Test Connecton is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 40
-   testRunner.And("\"TestDefault\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 41
    testRunner.When("I save the source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 42
@@ -180,25 +182,17 @@ this.ScenarioSetup(scenarioInfo);
 #line 50
    testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
-   testRunner.Then("\"View Results in Browser\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 52
-   testRunner.And("\"TestDefault\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
    testRunner.And("I Select Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
+#line 52
    testRunner.And("Username field is \"IntegrationTester\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 53
    testRunner.And("Password field is \"I73573r0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 54
    testRunner.When("Test Connecton is \"UnSuccessful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 57
+#line 55
    testRunner.And("Validation message is thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
-   testRunner.Then("\"View Results in Browser\" is \"Not Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 59
+#line 56
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 60
-   testRunner.And("\"TestDefault\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -210,38 +204,30 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void IncorrectAddressUserAuthTypeIsNotAllowingToSave()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Incorrect address user auth type is not allowing to save", ((string[])(null)));
-#line 62
+#line 58
 this.ScenarioSetup(scenarioInfo);
-#line 63
+#line 59
    testRunner.Given("I open New Web Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 64
+#line 60
    testRunner.And("I type Address as \"sdfsdfd\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
+#line 61
    testRunner.And("I type Default Query as \"/GetCountries.ashx?extension=json&prefix=a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
+#line 62
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
+#line 63
    testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
-   testRunner.Then("\"View Results in Browser\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 69
-   testRunner.And("\"TestDefault\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
+#line 64
    testRunner.And("I Select Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
+#line 65
    testRunner.And("Username field is \"test\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 72
+#line 66
    testRunner.And("Password field is \"I73573r0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 73
+#line 67
    testRunner.When("Test Connecton is \"UnSuccessful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 74
+#line 68
    testRunner.And("Validation message is thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
-   testRunner.Then("\"View Results in Browser\" is \"Not Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 76
+#line 69
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 77
-   testRunner.And("\"TestDefault\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -253,57 +239,53 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestingAuthTypeAsWindowsAndSwapingItResetsTheTestConnection()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Testing Auth type as Windows and swaping it resets the test connection", ((string[])(null)));
-#line 80
+#line 72
 this.ScenarioSetup(scenarioInfo);
-#line 81
+#line 73
    testRunner.Given("I open New Web Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 82
+#line 74
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+#line 75
    testRunner.And("I type Address as \"http://RSAKLFSVRTFSBLD/IntegrationTestSite\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
+#line 76
    testRunner.And("I type Default Query as \"/GetCountries.ashx?extension=json&prefix=a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 85
+#line 77
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 86
+#line 78
    testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 87
-   testRunner.Then("\"View Results in Browser\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 88
-   testRunner.And("\"TestDefault\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 89
+#line 79
    testRunner.And("I Select Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 90
+#line 80
    testRunner.And("Username field is \"test\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 91
+#line 81
    testRunner.And("Password field is \"I73573r0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
+#line 82
    testRunner.When("Test Connecton is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 93
+#line 83
    testRunner.And("Validation message is Not thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 94
+#line 84
    testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
+#line 85
    testRunner.And("I Select Authentication Type as \"Anonymous\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 96
+#line 86
    testRunner.And("Username field is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 97
+#line 87
    testRunner.And("Password field is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 98
+#line 88
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 99
+#line 89
    testRunner.When("Test Connecton is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 100
+#line 90
    testRunner.And("Validation message is Not thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 101
+#line 91
    testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 102
+#line 92
    testRunner.And("I Select Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 103
+#line 93
    testRunner.And("Username field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 104
+#line 94
    testRunner.And("Password field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 105
+#line 95
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -316,55 +298,39 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EditingSavedWebSource()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editing saved Web Source", ((string[])(null)));
-#line 108
+#line 98
 this.ScenarioSetup(scenarioInfo);
-#line 109
+#line 99
    testRunner.Given("I open \"Edit Source - Test\" web source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 110
+#line 100
    testRunner.And("Address is \"http://RSAKLFSVRTFSBLD/IntegrationTestSite\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 111
+#line 101
    testRunner.And("Default Query is \"/GetCountries.ashx?extension=json&prefix=a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 102
+   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 103
+   testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 104
+   testRunner.And("Select Authentication Type as \"Anonymous\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 105
+   testRunner.And("Username field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 106
+   testRunner.And("Password field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 107
+   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 108
+   testRunner.When("I change Address to \"http://RSAKLFSVRTFSBLD/IntegrationTestSite\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 109
+   testRunner.And("I change Default Query to \"/GetCountries.ashx?extension=json&prefix=b\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 110
+   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 111
+   testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 112
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 113
-   testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 114
-   testRunner.Then("\"View Results in Browser\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 115
-   testRunner.And("\"TestDefault\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 116
-   testRunner.And("Select Authentication Type as \"Anonymous\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 117
-   testRunner.And("Username field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 118
-   testRunner.And("Password field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 119
-   testRunner.When("Test Connecton is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 120
-   testRunner.Then("\"View Results in Browser\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 121
-   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 122
-   testRunner.And("\"TestDefault\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 123
-   testRunner.When("I change Address to \"http://RSAKLFSVRTFSBLD/IntegrationTestSite\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 124
-   testRunner.And("I change Default Query to \"/GetCountries.ashx?extensio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 125
-   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 126
-   testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 127
-   testRunner.Then("\"View Results in Browser\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 128
-   testRunner.And("\"TestDefault\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 129
-   testRunner.Then("\"View Results in Browser\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 130
-   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 131
    testRunner.When("Test Connecton is \"Successfull\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 132
+#line 114
    testRunner.Then("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -377,53 +343,45 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EditingSavedWebSourceAuthType()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editing saved Web Source auth type", ((string[])(null)));
-#line 136
-this.ScenarioSetup(scenarioInfo);
-#line 137
+#line 116
+ this.ScenarioSetup(scenarioInfo);
+#line 117
    testRunner.Given("I open \"Edit Source - Test\" web source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 138
+#line 118
    testRunner.And("Address as \"http://RSAKLFSVRTFSBLD/IntegrationTestSite\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 139
+#line 119
    testRunner.And("Default Query as \"/GetCountries.ashx?extension=json&prefix=a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 140
+#line 120
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 141
+#line 121
    testRunner.And("\"Test Connection\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 142
-   testRunner.Then("\"View Results in Browser\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 143
-  testRunner.And("\"TestDefault\" is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 144
+#line 122
    testRunner.And("Select Authentication Type as \"Anonymous\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 145
+#line 123
    testRunner.And("Username field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 146
+#line 124
    testRunner.And("Password field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 147
+#line 125
    testRunner.When("Test Connecton is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 148
-   testRunner.Then("\"View Results in Browser\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 149
+#line 126
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 150
-   testRunner.And("\"TestDefault\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 151
+#line 127
    testRunner.When("I edit Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 152
+#line 128
    testRunner.And("Username field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 153
+#line 129
    testRunner.And("Password field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 154
+#line 130
    testRunner.When("Test Connecton is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 155
+#line 131
    testRunner.And("Username field is \"IntegrationTester\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 156
+#line 132
    testRunner.And("Password field is \"I73573r0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 157
+#line 133
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 158
+#line 134
    testRunner.When("Test Connecton is \"Successfull\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 159
+#line 135
    testRunner.Then("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

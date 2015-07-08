@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3CD8F730-F6E5-4642-9927-6F6665D92021}</ProjectGuid>
+    <ProjectGuid>{9F5B231B-8C58-4630-8A09-5CB6049C44C6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Warewolf.AcceptanceTesting.DatabaseService</RootNamespace>
-    <AssemblyName>Warewolf.AcceptanceTesting.DatabaseService</AssemblyName>
+    <RootNamespace>Warewolf.AcceptanceTesting.Settings</RootNamespace>
+    <AssemblyName>Warewolf.AcceptanceTesting.Settings</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -37,37 +37,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FontAwesome.WPF">
-      <HintPath>..\packages\FontAwesome.WPF.4.3.0.3\lib\FontAwesome.WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Composition">
-      <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Mvvm">
-      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.PubSubEvents">
-      <HintPath>..\packages\Prism.PubSubEvents.1.0.0\lib\portable-sl4+wp7+windows8+net40\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces">
-      <HintPath>..\packages\Prism.Mvvm.1.1.1\lib\net45\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Prism.UnityExtensions">
-      <HintPath>..\packages\Prism.UnityExtensions.5.0.1\lib\NET45\Microsoft.Practices.Prism.UnityExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\Binaries\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
     <Reference Include="TechTalk.SpecFlow">
       <HintPath>..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -82,67 +55,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DB Service.feature.cs">
-      <DependentUpon>DB Service.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="DBService Inspector.feature.cs">
-      <DependentUpon>DBService Inspector.feature</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="DBServiceSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnityBootstrapperForDatabaseSourceConnectorTesting.cs" />
+    <Compile Include="Settings Tab.feature.cs">
+      <DependentUpon>Settings Tab.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="DB Service.feature">
+    <None Include="packages.config" />
+    <None Include="Settings Tab.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>DB Service.feature.cs</LastGenOutput>
+      <LastGenOutput>Settings Tab.feature.cs</LastGenOutput>
     </None>
-    <None Include="DBService Inspector.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>DBService Inspector.feature.cs</LastGenOutput>
-    </None>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Dev2.Common.Interfaces\Dev2.Common.Interfaces.csproj">
-      <Project>{13C0C6E9-7DC3-4DC3-8535-031C263CEE0B}</Project>
-      <Name>Dev2.Common.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dev2.Infrastructure\Dev2.Infrastructure.csproj">
-      <Project>{615EAE6D-040C-4364-B708-63DC8755CD4F}</Project>
-      <Name>Dev2.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warewolf.AcceptanceTesting.Core\Warewolf.AcceptanceTesting.Core.csproj">
-      <Project>{cb0f5535-5e1d-41f9-a23c-f59fdc816b75}</Project>
-      <Name>Warewolf.AcceptanceTesting.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warewolf.Core\Warewolf.Core.csproj">
-      <Project>{8FD23CE0-02BB-48E1-A914-BA467938CE78}</Project>
-      <Name>Warewolf.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warewolf.Studio.Core\Warewolf.Studio.Core.csproj">
-      <Project>{F9FE2CE9-625E-4E7F-8F4C-FCE28BB59510}</Project>
-      <Name>Warewolf.Studio.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warewolf.Studio.ServerProxyLayer\Warewolf.Studio.ServerProxyLayer.csproj">
-      <Project>{c35c7c88-1eae-4421-ac03-cefa26461d6c}</Project>
-      <Name>Warewolf.Studio.ServerProxyLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warewolf.Studio.ViewModels\Warewolf.Studio.ViewModels.csproj">
-      <Project>{C870FE6D-5889-4DFC-90D9-68FA3E525BE2}</Project>
-      <Name>Warewolf.Studio.ViewModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Warewolf.Studio.Views\Warewolf.Studio.Views.csproj">
-      <Project>{81414783-9990-46EA-9668-DFA61E1AAD18}</Project>
-      <Name>Warewolf.Studio.Views</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -72,13 +72,6 @@ Scenario: Save resource names with special character expect validation
 	Then save button is "Disabled"
 	And validation message is "'Name' contains invalid characters."
 
-#FEATURES TO BE IMPLEMENTED
-@ignore
-Scenario: Opening saved workflow and saving
-    Given I have an "Saved" workflow open
-	When I press "Ctrl+s"
-	Then the "Saved" workflow is saved "True"
-
 @ignore
 Scenario: Opening New workflow and saving
     Given I have an New workflow "Unsaved1" is open

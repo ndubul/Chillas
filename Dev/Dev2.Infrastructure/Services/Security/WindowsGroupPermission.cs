@@ -21,6 +21,7 @@ namespace Dev2.Services.Security
         public WindowsGroupPermission()
         {
             EnableCellEditing = true;
+            CanChangeName = true;
         }
 
         public const string BuiltInAdministratorsText = "Warewolf Administrators";
@@ -41,6 +42,7 @@ namespace Dev2.Services.Security
         bool _isDeleted;
         RelayCommand _removeRow;
         bool _enableCellEditing;
+        bool _canChangeName;
 
         public bool IsServer
         {
@@ -70,6 +72,9 @@ namespace Dev2.Services.Security
             set
             {
                 OnPropertyChanged(ref _windowsGroup, value);
+                OnPropertyChanged("EnableCellEditing");
+                OnPropertyChanged("CanRemove");
+                OnPropertyChanged("CanChangeName");
                 RemoveRow.RaiseCanExecuteChanged();
             }
         }
@@ -83,6 +88,23 @@ namespace Dev2.Services.Security
             set
             {
                 OnPropertyChanged(ref _isDeleted, value);
+                OnPropertyChanged("CanChangeName");
+            }
+        }
+
+        public bool CanChangeName
+        {
+            get
+            {
+                if (IsBuiltInAdministrators || IsBuiltInGuests || IsDeleted)
+                {
+                    return false;
+                }
+                return _canChangeName;
+            }
+            set
+            {
+                _canChangeName = value;
             }
         }
 
@@ -90,10 +112,15 @@ namespace Dev2.Services.Security
         {
             get
             {
+                if (IsBuiltInAdministrators)
+                {
+                    return false;
+                }
                 return _enableCellEditing;
             }
             set
             {
+                
                 OnPropertyChanged(ref _enableCellEditing, value);
             }
         }
@@ -114,7 +141,7 @@ namespace Dev2.Services.Security
 
         public bool CanRemove
         {
-            get { return !string.IsNullOrEmpty(WindowsGroup) && !IsBuiltInGuests; }
+            get { return !string.IsNullOrEmpty(WindowsGroup) && !IsBuiltInGuests && !IsBuiltInAdministrators; }
         }
 
 
@@ -163,7 +190,7 @@ namespace Dev2.Services.Security
         {
             get
             {
-                return IsServer && WindowsGroup.Equals(BuiltInAdministratorsText, StringComparison.InvariantCultureIgnoreCase);
+                return WindowsGroup != null && (IsServer && WindowsGroup.Equals(BuiltInAdministratorsText, StringComparison.InvariantCultureIgnoreCase));
             }
         }
 
