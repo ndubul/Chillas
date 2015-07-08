@@ -41,7 +41,6 @@ namespace Warewolf.Studio.ViewModels
         bool _isHyperLinkEnabled;
         string _resourceName;
         CancellationTokenSource _token;
-        IList<string> _computerNames;
         readonly string _warewolfserverName;
         string _headerText;
         private bool _isDisposed;
@@ -605,29 +604,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-
-        // public bool IsActive { get; set; }
-
-        //public event EventHandler IsActiveChanged;
-
-        //        public string Header
-        //        {
-        //            get
-        //            {
-        //                return _header + ((_webServiceSource!= null )&&Haschanged || (_webServiceSource == null && !IsEmpty) ? " *" : "");
-        //            }
-        //            set
-        //            {
-        //                _header = value;
-        //                OnPropertyChanged(() => Header);
-        //            }
-        //        }
         public bool IsEmpty { get { return String.IsNullOrEmpty(HostName) && AuthenticationType == AuthenticationType.Anonymous && String.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Password); } }
-
-        //        public ResourceType? Image
-        //        {
-        //            get { return ResourceType.WebSource; }
-        //        }
 
         public void Dispose()
         {
