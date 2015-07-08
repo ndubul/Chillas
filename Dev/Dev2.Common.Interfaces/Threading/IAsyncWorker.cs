@@ -50,6 +50,20 @@ namespace Dev2.Common.Interfaces.Threading
         /// <param name="onError"></param>
         Task Start(Action backgroundAction, Action uiAction, Action<Exception> onError);
 
+
+        /// <summary>
+        /// Starts the specified background action and continues with the UI action 
+        /// on the thread this was invoked from (typically the UI thread).
+        /// </summary>
+        /// <param name="backgroundAction">The background action.</param>
+        /// <param name="uiAction">The UI action.</param>
+        /// <param name="cancellationTokenSource">Allows the task to be cancelled.</param>
+        /// <param name="onError"></param>
+        /// <returns></returns>
+        /// <author>Trevor.Williams-Ros</author>
+        /// <date>2013/08/08</date>
+        Task Start(Action backgroundAction, Action uiAction, CancellationTokenSource cancellationTokenSource, Action<Exception> onError);
+
         /// <summary>
         /// Starts the specified background action and continues with the UI action 
         /// on the thread this was invoked from (typically the UI thread).

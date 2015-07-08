@@ -1,14 +1,17 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 using Dev2.Common.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
+using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.Views
 {
     /// <summary>
     /// Interaction logic for ManageWebserviceSourceControl.xaml
     /// </summary>
-    public partial class ManageWebserviceSourceControl : IManageDatabaseSourceView, ICheckControlEnabledView
+    public partial class ManageWebserviceSourceControl : IView, ICheckControlEnabledView
     {
         public ManageWebserviceSourceControl()
         {
@@ -20,6 +23,11 @@ namespace Warewolf.Studio.Views
         {
             ServerTextBox.Text = serverName;
         }
+        
+        public void EnterDefaultQuery(string defaultQuery)
+        {
+            DefaultQueryTextBox.Text = defaultQuery;
+        }
 
         public bool GetControlEnabled(string controlName)
         {
@@ -29,6 +37,8 @@ namespace Warewolf.Studio.Views
                     return SaveButton.Command.CanExecute(null);
                 case "Test Connection":
                     return TestConnectionButton.Command.CanExecute(null);
+                case "TestQuery":
+                    return TestDefault.IsEnabled;
             }
             return false;
         }
@@ -87,6 +97,11 @@ namespace Warewolf.Studio.Views
 
         public string GetErrorMessage()
         {
+            BindingExpression be = ErrorTextBlock.GetBindingExpression(TextBlock.TextProperty);
+            if (be != null)
+            {
+                be.UpdateTarget();
+            }
             return ErrorTextBlock.Text;
         }
 
@@ -101,5 +116,40 @@ namespace Warewolf.Studio.Views
         }
 
         #endregion
+
+        public string GetAddress()
+        {
+            return ServerTextBox.Text;
+        }
+
+        public string GetDefaultQuery()
+        {
+            return DefaultQueryTextBox.Text;
+        }
+
+        public string GetUsername()
+        {
+            return UserNameTextBox.Text;
+        }
+
+        public string GetPassword()
+        {
+            return PasswordTextBox.Password;
+        }
+
+        public string GetTestDefault()
+        {
+            BindingExpression be = TestDefault.GetBindingExpression(Hyperlink.NavigateUriProperty);
+            if (be != null)
+            {
+                be.UpdateTarget();
+            }
+            return TestDefault.NavigateUri.ToString();
+        }
+
+        public void ClickHyperLink()
+        {
+            TestDefault.Command.Execute(null);
+        }
     }
 }
