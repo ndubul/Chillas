@@ -6,7 +6,7 @@ Feature: DB Service
 
 Scenario: Creating DB Service
 	Given I click New Data Base Service Connector
-	Then "New DB Service" tab is opened
+	Then "New Database Connector" tab is opened
 	And Data Source is focused
 	And "1 Data Source" is "Enabled"
 	And "2 Select Action" is "Disabled"
@@ -41,7 +41,7 @@ Scenario: Creating DB Service
 
 Scenario: Opening Saved DB Service
    Given I open "InsertDummyUser" service
-   And "Edit:InsertDummyUser" tab is opened
+   And "InsertDummyUser" tab is opened
    And Data Source is focused
    And "DemoDB" is selected as the data source
    And "dbo.InsertDummyUser" is selected as the action
@@ -67,7 +67,7 @@ Scenario: Opening Saved DB Service
 
  Scenario: Editing DB Service Mappings
    Given I open "InsertDummyUser" service
-   And "Edit:InsertDummyUser" tab is opened
+   And "InsertDummyUser" tab is opened
    And Data Source is focused
    And "DemoDB" is selected as the data source
    And "dbo.InsertDummyUser" is selected as the action
@@ -103,7 +103,7 @@ Scenario: Opening Saved DB Service
 
  Scenario: Editing DB Service and Test Execution is unsuccesful
    Given I open "InsertDummyUser" service
-   And "Edit:InsertDummyUser" tab is opened
+   And "InsertDummyUser" tab is opened
    And Data Source is focused
    And "DemoDB" is selected as the data source
    And "dbo.InsertDummyUser" is selected as the action
@@ -123,6 +123,93 @@ Scenario: Opening Saved DB Service
 	And output mappings are
 	| Output | Output Alias | Recordset Name      |
 	And "Save" is "Disabled"
+
+#--
+Scenario: Refresh in select Action
+	Given I click New Data Base Service Connector
+	Then "New Database Connector" tab is opened
+	And "1 Data Source" is "Enabled"
+	And "2 Select Action" is "Disabled"
+	And "3 Test Connector and Calculate Outputs" is "Disabled" 
+	And "4 Edit Default and Mapping Names" is "Disabled" 
+	And "Save" is "Disabled"
+	When I select "DemoDB" as data source
+	Then "2 Select Action" is "Enabled"
+	And  the "Refresh" button is "Enabled"
+	When I select "dbo.InsertDummyUser" as the action
+	Then "3 Test Connector and Calculate Outputs" is "Enabled"
+	And inputs are
+   | fname | lname  | username | password | lastAccessDate |
+   | Test  | Tester | wolf     | Dev      | 10/1/1990      |
+   And I select the "Refresh" button 
+   Then "3 Test Connector and Calculate Outputs" is reloaded
+   And  all inputs are cleared
+   And the "Test" is "Enabled"
+   And the "Save" is disabled
+   When I test the action
+	Then outputs are
+	| Recordset Name         | UserID |
+	| dbo.InsertDummyUser(1) | 15486  |
+	And "4 Edit Default and Mapping Names" is "Enabled" 
+    And "Save" is "Enabled"
+	When I save
+	Then Save Dialog is opened 
+
+Scenario: Changing Actions
+	Given I click new Database Connector
+	Then "new Database Connector" tab is opened
+	And "1 Data Source" is "Enabled"
+	And "2 Select Action" is "Disabled"
+	And "3 Test Connector and Calculate Outputs" is "Disabled" 
+	And "4 Edit Default and Mapping Names" is "Disabled" 
+	And "Save" is "Disabled"
+	And Data Source is focused
+	When I select "DemoDB" as data source
+	Then "2 Select Action" is "Enabled"
+	When I select "dbo.InsertDummyUser" as the action
+	Then "3 Test Connector and Calculate Outputs" is "Enabled" 
+	And inputs are
+	| fname | lname | username | password | lastAccessDate |
+	| Dummy | User  | Test     | password | 12/05/2001     |
+	When I change the action from "dbo.InsertDummyUser" to "dbo.ImportOrder"
+	Then "3 Test Connector and Calculate Outputs" is reloaded
+	And "Test" is "Enabled"
+	And input is now
+	| ProductId |
+	| 1         |
+	And "4 Edit Default and Mapping Names" is "Disabled" 
+	When I test the action
+	Then outputs are
+	| Recordset Name     | Result |
+	| dbo.ImportOrder(1) | 1      |
+	And "4 Edit Default and Mapping Names" is "Enabled" 
+    And "Save" is "Enabled"
+	And input mappings are
+	| Inputs    | Required Field | Empty is Null |
+	| charValue |                |               |
+	And output mappings are
+	| Output | Output Alias | Recordset Name  |
+	| result | result       | dbo.ImportOrder |
+	When I save
+	Then Save Dialog is opened 
+	
+	
+
+Scenario: Creating a new Data Source
+	Given I click New Data Base Service Connector
+	Then "New Database Connector" tab is opened
+	And Data Source is focused
+	And "New" is "Enabled"
+	And "2 Select Action" is "Disabled"
+	And "3 Test Connector and Calculate Outputs" is "Disabled" 
+	And "4 Edit Default and Mapping Names" is "Disabled" 
+	And "Save" is "Disabled"
+	When I select "New" as data source
+	Then New Data Source Dialog is opened
+
+
+
+	
 
    
 
