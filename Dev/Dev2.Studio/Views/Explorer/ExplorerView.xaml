@@ -81,9 +81,8 @@
             </navigationViews:NavigationView.ItemContainerStyle>
 
             <navigationViews:NavigationView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type explorer2:ExplorerItemModel}"
-                                          ItemsSource="{Binding Path=Children}">
-                    <Border IsHitTestVisible="True" Background="{StaticResource BrushNearTransparent}">
+                <HierarchicalDataTemplate DataType="{x:Type explorer2:ExplorerItemModel}" ItemsSource="{Binding Path=Children}">
+                    <Border IsHitTestVisible="True" Background="Transparent">
                         <Border.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform />
@@ -106,6 +105,7 @@
                             <ContextMenu AutomationProperties.AutomationId ="UI_ConnectContextMenu_AutoID">
                                 <ContextMenu.Resources>
                                     <Style TargetType="{x:Type MenuItem}" >
+                                        <Setter Property="Foreground" Value="Black"/>
                                         <Setter Property="HorizontalContentAlignment" Value="Left" />
                                         <Setter Property="VerticalContentAlignment" Value="Center" />
                                     </Style>
@@ -130,8 +130,7 @@
                                         </MultiBinding>
                                     </MenuItem.Visibility>
                                 </MenuItem>
-                                <MenuItem Header="Remove"
-                                          Command="{Binding RemoveCommand}"
+                                <MenuItem Header="Remove" Command="{Binding RemoveCommand}"
                                           AutomationProperties.AutomationId="UI_RemoveContextMenuItem_AutoID">
                                     <MenuItem.Visibility>
                                         <MultiBinding Converter="{StaticResource MultipleBoolToVisibilityValueConverter}">
@@ -252,8 +251,7 @@
                         </Border.ContextMenu>
 
                         <StackPanel Orientation="Vertical" AllowDrop="True">
-                            <StackPanel Orientation="Horizontal"
-                                        AllowDrop="True">
+                            <StackPanel Orientation="Horizontal" AllowDrop="True">
                                 <i:Interaction.Behaviors>
                                     <local:NavigationItemViewModelMouseDownBehavior SetActiveEnvironmentOnClick="True"
                                                                                     OpenOnDoubleClick="True"
@@ -288,10 +286,10 @@
                                         </i:Interaction.Triggers>
                                     </Image>
                                     <Button Visibility="{Binding IsVersion, Converter={StaticResource BoolToVisConverter}}"
-                                            Style="{StaticResource ButtonStyle}" />
+                                            Style="{StaticResource ButtonTransparentStyle}" />
                                     <Button Visibility="{Binding CanEdit, Converter={StaticResource BoolToVisConverter}}"
                                             ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipView}"
-                                            Style="{StaticResource ButtonStyle}"
+                                            Style="{StaticResource ButtonTransparentStyle}"
                                             AutomationProperties.AutomationId="UI_CanEdit_AutoID">
                                         <Button.InputBindings>
                                             <MouseBinding Gesture="LeftClick" Command="{Binding EditCommand}" />
@@ -300,7 +298,7 @@
                                     </Button>
                                     <Button Visibility="{Binding CanExecute, Converter={StaticResource BoolToVisConverter}}"
                                             ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipExecute}"
-                                            Style="{StaticResource ButtonStyle}"
+                                            Style="{StaticResource ButtonTransparentStyle}"
                                             AutomationProperties.AutomationId="UI_CanExecute_AutoID">
                                         <Image Style="{StaticResource AuthExecuteIconStyle}" />
                                         <Button.InputBindings>
@@ -314,8 +312,7 @@
                                 </StackPanel>
 
                                 <ContentControl Content="{Binding}" AllowDrop="True">
-                                    <ContentControl.Resources>
-                                    </ContentControl.Resources>
+                                    <ContentControl.Resources />
                                 </ContentControl>
 
                             </StackPanel>
