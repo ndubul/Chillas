@@ -72,7 +72,7 @@
                                 <VisualState x:Name="Selected">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{TemplateBinding BorderBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="1" Value="{TemplateBinding BorderBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -95,7 +95,6 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Panel.ZIndex" Value="100" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource WareWolfBlackBrush}"/>
-                            <Setter TargetName="Border" Property="Margin" Value="-2"></Setter>
                             <!--<Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemBorderBrush}" />-->
                             <!--<Setter TargetName="ContentSite" Property="Style" Value="{StaticResource TabBackgroundStyle}" />-->
                             <Setter Property="Opacity" >
