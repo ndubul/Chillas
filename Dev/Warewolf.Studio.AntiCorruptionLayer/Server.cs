@@ -117,13 +117,13 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //            return _tools ?? (_tools = ProxyLayer.QueryManagerProxy.FetchTools());
 //        }
 
-//        public IExplorerRepository ExplorerRepository
-//        {
-//            get
-//            {
-//                return ProxyLayer.UpdateManagerProxy;
-//            }
-//        }
+        public IExplorerRepository ExplorerRepository
+        {
+            get
+            {
+                return ProxyLayer;
+            }
+        }
 
         public IQueryManager QueryProxy
         {

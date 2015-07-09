@@ -7,7 +7,7 @@ using Warewolf.Studio.ServerProxyLayer;
 namespace Warewolf.Studio.AntiCorruptionLayer
 {
 
-    public class StudioServerProxy
+    public class StudioServerProxy : IExplorerRepository
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
@@ -35,33 +35,29 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         public ExplorerUpdateManagerProxy UpdateManagerProxy { get; set; }
 
 //        #region Implementation of IExplorerRepository
-//
-//        public bool Rename(IExplorerItemViewModel vm, string newName)
-//        {
-//            
-//                UpdateManagerProxy.Rename(vm.ResourceId, newName);
-//                return true;
-//               
-//            
-//        }
-//
-//        public bool Move(IExplorerItemViewModel explorerItemViewModel, IExplorerItemViewModel destination)
-//        {
-//                UpdateManagerProxy.MoveItem(explorerItemViewModel.ResourceId,destination.ResourceId);
-//                return true;
-//
-//        }
-//
-//        public bool Delete(IExplorerItemViewModel explorerItemViewModel)
-//        {
+
+        public bool Rename(IExplorerItemViewModel vm, string newName)
+        {
+            UpdateManagerProxy.Rename(vm.ResourceId, newName);
+            return true;            
+        }
+
+        public bool Move(IExplorerItemViewModel explorerItemViewModel, IExplorerItemViewModel destination)
+        {
+                UpdateManagerProxy.MoveItem(explorerItemViewModel.ResourceId,destination.ResourceId);
+                return true;
+        }
+
+        public bool Delete(IExplorerItemViewModel explorerItemViewModel)
+        {
 //            if (explorerItemViewModel.ResourceType == ResourceType.Version)
 //                VersionManager.DeleteVersion(explorerItemViewModel.ResourceId, explorerItemViewModel.VersionNumber);
 //            else
-//                UpdateManagerProxy.DeleteResource(explorerItemViewModel.ResourceId);
-//            return true;
-//        }
-//
-//
+                UpdateManagerProxy.DeleteResource(explorerItemViewModel.ResourceId);
+            return true;
+        }
+
+
 //
 //        public ICollection<IVersionInfo> GetVersions(Guid id)
 //        {
@@ -73,10 +69,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //           return  VersionManager.RollbackTo(resourceId,version);
 //        }
 //
-//        public void CreateFolder(Guid parentGuid, string name, Guid id)
-//        {
-//            UpdateManagerProxy.AddFolder(parentGuid,name,id);
-//        }
+        public void CreateFolder(Guid parentGuid, string name, Guid id)
+        {
+            UpdateManagerProxy.AddFolder(parentGuid,name,id);
+        }
 //
 //        #endregion
     }
