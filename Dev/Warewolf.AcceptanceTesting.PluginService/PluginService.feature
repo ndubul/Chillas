@@ -44,7 +44,7 @@ Scenario: Creating Plugin Service by selecting existing source
 	And "4 Provide Test Values" is "Enabled" 
 	And "Test" is "Enabled"
 	When "Test" is clicked
-	And the test connection is "successfull"
+	And the test connection is "successful"
 	Then "5 Edit Dfault and Mapping Names" is "Enabled" 
 	And Save is "Enabled"
 	And Inputs looks like
@@ -76,7 +76,7 @@ Scenario: Opening saved Plugin Service
 	And "Test" is "Enabled"
 	 | Name | value |
 	 |      |       |
-	When Test connection is selected
+	When Test connection is "Successful"
 	Then "5 Edit Dfault and Mapping Names" is "Enabled" 
 	Then Save is "Enabled"
 	And Inputs looks like
@@ -99,7 +99,7 @@ Scenario: Refreshing plugin source action step
 	And action is selected as "DummySent" as default
 	And "4 Provide Test Values" is "Enabled" 
 	And "Test" is "Enabled"
-	When test connection is selected
+	When test connection is "Successful"
 	And "5 Edit Dfault and Mapping Names" is "Enabled" 
 	Then Save is "Enabled"
 	And Inputs looks like
@@ -125,7 +125,7 @@ Scenario: Plugin service GetType test
 	And "4 Provide Test Values" is "Enabled" 
 	And "Test" is "Enabled"
 	When "Test" is selected
-	When test connection is "Unsuccessfull"
+	When test connection is "Unsuccessful"
 	Then the "Test Result" has validation error "True"
 	Then Save is "Disabled"
 	And "5 Edit Dfault and Mapping Names" is "Disabled" 

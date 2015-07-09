@@ -182,7 +182,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 46
  testRunner.When("\"Test\" is clicked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 47
- testRunner.And("the test connection is \"successfull\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the test connection is \"successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 48
  testRunner.Then("\"5 Edit Dfault and Mapping Names\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 49
@@ -266,7 +266,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 76
  testRunner.And("\"Test\" is \"Enabled\"", ((string)(null)), table5, "And ");
 #line 79
- testRunner.When("Test connection is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Test connection is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 80
  testRunner.Then("\"5 Edit Dfault and Mapping Names\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 81
@@ -329,7 +329,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 101
  testRunner.And("\"Test\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 102
- testRunner.When("test connection is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("test connection is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 103
  testRunner.And("\"5 Edit Dfault and Mapping Names\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 104
@@ -396,7 +396,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 127
  testRunner.When("\"Test\" is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 128
- testRunner.When("test connection is \"Unsuccessfull\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("test connection is \"Unsuccessful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 129
  testRunner.Then("the \"Test Result\" has validation error \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 130
