@@ -10,47 +10,47 @@ Scenario: Opening New Server Source
 	And selected protocol is "http" 
 	And server port is "3142" 
 	And Authentication Type as "Windows"
-	And "Test" is "Enabled"
+	And "Test" is "Disabled"
 	And "Save" is "Disabled"
-	Then validation message is "The server connection must be tested with a valid adderess before you can save"
+	Then validation message is ""
 
 Scenario: Creating New Source as windows
-   Given I have New Server Source opened
-   And I entered "SANDBOX-1" as address
-   And I select protocol as "http"
-   And I enter server port as "3142" 
-   And "Save" is "Disabled"
-   And Authentication Type as "Windows"
-   When I Test Connection to remote server
-   And Connecton to remote server is successful
-   Then Save is "Enabled"
-   When I save the server source
-   Then the save dialog is opened
+	Given I have New Server Source opened
+	And "Test" is "Disabled"
+	And I entered "SANDBOX-1" as address
+	And "Test" is "Enabled"
+	And I select protocol as "http"
+	And I enter server port as "3142" 
+	And "Save" is "Disabled"
+	And Authentication Type as "Windows"
+    Then server Username field is "Invisible"
+    And server Password field is "Invisible"
+   	When I Test Connection to remote server
+	And Connecton to remote server is successful
+	Then validation message is "Connection Successful"
+	Then Save is "Enabled"
+	When I save the server source
+	Then the save dialog is opened
 
 Scenario: Test connection is unsuccessfull
    Given I have New Server Source opened
    And I entered "ABSCD" as address
-   And I select protocol as "http"
-   And I enter server port as "3142" 
-   And "Save" is "Disabled"
-   And Authentication Type as "Windows"
    When I Test Connection to remote server
    Then Connecton to remote server is unsuccessful
    And the validation message is "Connection Error: An error occured while sending the request."
    And "Save" is "Disabled"
 
-Scenario: Creating New Source as User
+Scenario: Creating New Source as User And HTTPS
    Given I have New Server Source opened
    And I entered "SANDBOX-1" as address
-   And I select protocol as "http"
-   And I enter server port as "3142" 
+   And I select protocol as "https"
+   And I enter server port as "3143" 
    And "Save" is "Disabled"
    And Authentication Type as "User"
    Then server Username field is "Visible"
    And server Password field is "Visible"
-   And "Test" is "Enabled"
+   And "Test" is "Disabled"
    And "Save" is "Disabled"
-   And the message as "The server connection must be tested with a valid username and password before you can save" 
    When I enter Username as "IntegrationTester"
    And I enter Password as "I73573r0"
    When I Test Connection to remote server
@@ -60,17 +60,12 @@ Scenario: Creating New Source as User
    Then the save dialog is opened
 
 Scenario: Creating server source Authentication error
-Given I have New Server Source opened
+	Given I have New Server Source opened
    And I entered "SANDBOX-1" as address
    And I select protocol as "http"
    And I enter server port as "3142" 
    And "Save" is "Disabled"
    And Authentication Type as "User"
-   Then server Username field is "Visible"
-   And server Password field is "Visible"
-   And "Test" is "Enabled"
-   And "Save" is "Disabled"
-   And the message as "The server connection must be tested with a valid username and password before you can save" 
    When I enter Username as "#$##$"
    And I enter Password as "I73573r0"
     When I Test Connection to remote server
@@ -85,8 +80,8 @@ Scenario: Creating New Source as Public
    And I enter server port as "3142" 
    And "Save" is "Disabled"
    And Authentication Type as "Public"
-   Then server Username field is "InVisible"
-   And server Password field is "InVisible"
+   Then server Username field is "Invisible"
+   And server Password field is "Invisible"
    And "Test" is "Enabled"
    And "Save" is "Disabled"
    When I Test Connection to remote server
@@ -97,7 +92,7 @@ Scenario: Creating New Source as Public
   
 Scenario: Editing Saved Server Source Authentication 
    Given I Open server source "ServerSource"
-   And tab is opened with name as "Edit - ServerSource"
+   And tab is opened with name as "ServerSource"
    And remote server name is "SANDBOX-1"
    And selected protocol is "http"
    And server port is "3142" 
@@ -114,7 +109,7 @@ Scenario: Editing Saved Server Source Authentication
    And "Test" is "Enabled"
    When I Test Connection to remote server
    Then Connecton to remote server is successful
-   Then tab name is "*Edit - ServerSource"
+   Then tab name is "ServerSource *"
    And "Save" is "Enabled"
    When I save the server source
    Then Save Dialog is not opened

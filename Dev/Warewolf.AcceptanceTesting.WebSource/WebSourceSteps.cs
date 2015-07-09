@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TechTalk.SpecFlow;
 using Warewolf.AcceptanceTesting.Core;
+using Warewolf.Studio.Core.Infragistics_Prism_Region_Adapter;
 using Warewolf.Studio.ServerProxyLayer;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
@@ -42,13 +43,29 @@ namespace Warewolf.AcceptanceTesting.WebSource
         }
 
         [BeforeScenario("WebSource")]
-        public void SetupForDatabaseSource()
+        public void SetupForWebSource()
         {
             ScenarioContext.Current.Add(Utils.ViewNameKey, FeatureContext.Current.Get<ManageWebserviceSourceControl>(Utils.ViewNameKey));
             ScenarioContext.Current.Add("updateManager", FeatureContext.Current.Get<Mock<IManageWebServiceSourceModel>>("updateManager"));
             ScenarioContext.Current.Add("requestServiceNameViewModel", FeatureContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel"));
             ScenarioContext.Current.Add("externalProcessExecutor", FeatureContext.Current.Get<Mock<IExternalProcessExecutor>>("externalProcessExecutor"));
             ScenarioContext.Current.Add(Utils.ViewModelNameKey, FeatureContext.Current.Get<ManageWebserviceSourceViewModel>(Utils.ViewModelNameKey));
+        }
+
+        [Then(@"""(.*)"" tab is opened")]
+        public void ThenTabIsOpened(string headerText)
+        {
+            var viewModel = ScenarioContext.Current.Get<IDockAware>("viewModel");
+            Assert.AreEqual(headerText, viewModel.Header);
+        }
+
+        [Then(@"title is ""(.*)""")]
+        public void ThenTitleIs(string title)
+        {
+            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageWebserviceSourceControl>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<ManageWebserviceSourceViewModel>("viewModel");
+            Assert.AreEqual(title, viewModel.HeaderText);
+            Assert.AreEqual(title, manageWebserviceSourceControl.GetHeaderText());
         }
 
         [Given(@"I open New Web Source")]
@@ -59,13 +76,7 @@ namespace Warewolf.AcceptanceTesting.WebSource
             Assert.IsNotNull(manageWebserviceSourceControl.DataContext); 
         }
 
-        [Then(@"""(.*)"" tab is opened")]
-        public void ThenTabIsOpened(string headerText)
-        {
-            var viewModel = ScenarioContext.Current.Get<ManageWebserviceSourceViewModel>("viewModel");
-            Assert.AreEqual(headerText,viewModel.Header);
-        }
-
+       
         [Given(@"I type Address as ""(.*)""")]
         [When(@"I change Address to ""(.*)""")]
         [Then(@"I type Address as ""(.*)""")]
@@ -316,7 +327,17 @@ namespace Warewolf.AcceptanceTesting.WebSource
             var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
             mockRequestServiceNameViewModel.Verify();
         }
-        
+
+        [When(@"I save as ""(.*)""")]
+        public void WhenISaveAs(string resourceName)
+        {
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            mockRequestServiceNameViewModel.Setup(model => model.ResourceName).Returns(new ResourceName("", resourceName));
+            mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Returns(MessageBoxResult.OK);
+            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageWebserviceSourceControl>(Utils.ViewNameKey);
+            manageWebserviceSourceControl.PerformSave();
+            
+        }
 
 
         [Given(@"I Select Authentication Type as ""(.*)""")]
