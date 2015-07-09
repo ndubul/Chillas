@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
+using Dev2.Common.Interfaces.Threading;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Threading;
 using Microsoft.Practices.Prism.PubSubEvents;
@@ -16,7 +19,7 @@ using Warewolf.Studio.ServerProxyLayer;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
 
-namespace Warewolf.AcceptanceTesting.DatabaseService
+namespace Warewolf.AcceptanceTesting.DatabaseSource
 {
     [Binding]
     public class NewDatabaseSourceSteps
@@ -27,17 +30,24 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             Utils.SetupResourceDictionary();
             var databaseSourceControlView = new ManageDatabaseSourceControl();
             var mockStudioUpdateManager = new Mock<IManageDatabaseSourceModel>();
-            mockStudioUpdateManager.Setup(model => model.GetComputerNames()).Returns(new List<string> { "TEST", "RSAKLFSVRGENDEV", "RSAKLFSVROTHER" });
+            mockStudioUpdateManager.Setup(model => model.GetComputerNames()).Returns(new List<string> { "TEST", "RSAKLFSVRGENDEV","RSAKLFSVRSBSPDC","RSAKLFSVRTFSBLD","RSAKLFSVRWRWBLD" });
             var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
             mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Returns(MessageBoxResult.OK);
             var mockEventAggregator = new Mock<IEventAggregator>();
             var manageDatabaseSourceControlViewModel = new ManageDatabaseSourceViewModel(mockStudioUpdateManager.Object,mockRequestServiceNameViewModel.Object, mockEventAggregator.Object,new SynchronousAsyncWorker());
+            manageDatabaseSourceControlViewModel.AsyncWorker = new SynchronousAsyncWorker();
             databaseSourceControlView.DataContext = manageDatabaseSourceControlViewModel;
             Utils.ShowTheViewForTesting(databaseSourceControlView);
             FeatureContext.Current.Add(Utils.ViewNameKey, databaseSourceControlView);
             FeatureContext.Current.Add(Utils.ViewModelNameKey, manageDatabaseSourceControlViewModel);
             FeatureContext.Current.Add("updateManager", mockStudioUpdateManager);
+            mockStudioUpdateManager.Setup(a => a.ServerName).Returns("localhost");
             FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
+        }
+        [Given(@"the server is Unreachable")]
+        public void GivenTheServerIsUnreachable()
+        {
+            ScenarioContext.Current.Pending();
         }
 
         [BeforeScenario("CreatingNewDBSource")]
@@ -57,13 +67,202 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             Assert.IsNotNull(manageDatabaseSourceControl.DataContext); 
         }
 
+        [When(@"I open ""(.*)""")]
+        public void WhenIOpen(string p0)
+        {
+            
+        }
+
+
+
+        [Given(@"I open ""(.*)""")]
+        public void GivenIOpen(string name)
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+
+            var upd = FeatureContext.Current.Get< Mock<IManageDatabaseSourceModel>>("updateManager").Object;
+           var dbsrc = new DbSourceDefinition();
+           dbsrc.Name = name;
+           dbsrc.Id = Guid.NewGuid();
+           dbsrc.ServerName = "RSAKLFSVRGENDEV";
+            dbsrc.AuthenticationType = AuthenticationType.Windows;
+           FeatureContext.Current.Add("dbsrc", dbsrc);
+           manageDatabaseSourceControl.DataContext = new ManageDatabaseSourceViewModel(upd,new Mock<IEventAggregator>().Object, dbsrc,new SynchronousAsyncWorker());
+
+        }
+
+        [Given(@"Server as ""(.*)""")]
+        public void GivenServerAs(string server)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+            db.ServerName = server;
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.SelectServer("server");
+        }
+        [When(@"I Edit Server as ""(.*)""")]
+        public void WhenIEditServerAs(string server)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+            db.ServerName = server;
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.SelectServer("server");
+        }
+
+        [Given(@"Authentication Type is selected as ""(.*)""")]
+        public void GivenAuthenticationTypeIsSelectedAs(string authstr)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+            AuthenticationType auth;
+            var authp = Enum.Parse(typeof(AuthenticationType),authstr);
+            db.AuthenticationType = (AuthenticationType)authp;
+
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.SetAuthenticationType((AuthenticationType)authp);
+            // ReSharper disable PossibleNullReferenceException
+            (manageDatabaseSourceControl.DataContext as ManageDatabaseSourceViewModel).AuthenticationType = (AuthenticationType)authp;
+            // ReSharper restore PossibleNullReferenceException
+        }
+        [Then(@"underlying Authentication Type is selected as ""(.*)""")]
+        public void ThenUnderlyingAuthenticationTypeIsSelectedAs(string authstr)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+            AuthenticationType auth;
+            var authp = Enum.Parse(typeof(AuthenticationType), authstr);
+            Assert.AreEqual(     db.AuthenticationType, (AuthenticationType)authp);
+        }
+
+        [Then(@"underlying Username is ""(.*)""")]
+        public void ThenUnderlyingUsernameIs(string user)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+
+            Assert.AreEqual(db.UserName, user);
+        }
+
+        [Then(@"underlying Password  is ""(.*)""")]
+        public void ThenUnderlyingPasswordIs(string pass)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+
+            Assert.AreEqual(db.Password, pass);
+        }
+
+
+
+        [Then(@"Authentication Type is selected as ""(.*)""")]
+        public void ThenAuthenticationTypeIsSelectedAs(string authstr)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+            AuthenticationType auth;
+            var authp = Enum.Parse(typeof(AuthenticationType), authstr);
+            db.AuthenticationType = (AuthenticationType)authp;
+
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+
+           Assert.AreEqual( (manageDatabaseSourceControl.DataContext as ManageDatabaseSourceViewModel).AuthenticationType ,(AuthenticationType)authp);
+ 
+        }
+
+        [Given(@"Username field is ""(.*)""")]
+        public void GivenUsernameFieldIs(string user)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+            db.UserName = user;
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.EnterUserName(user);
+        }
+
+        [Given(@"Password field is ""(.*)""")]
+        public void GivenPasswordFieldIs(string pwd)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+            db.Password = pwd;
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.EnterPassword(pwd);
+        }
+
+        [Given(@"Database ""(.*)"" is selected")]
+        public void GivenDatabaseIsSelected(string dbName)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+            db.DbName = dbName;
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.SelectDatabase(dbName);
+        }
+
+        [Then(@"Database ""(.*)"" is selected")]
+        public void ThenDatabaseIsSelected(string dbName)
+        {
+            var db = FeatureContext.Current.Get<IDbSource>("dbsrc");
+            db.DbName = dbName;
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.SelectDatabase(dbName);
+        }
+
+
+        [When(@"I type Server as ""(.*)""")]
+        public void WhenITypeServerAs(string p0)
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.SelectServer(p0);
+ 
+        }
+
+        [Then(@"I type Select The Server as ""(.*)""")]
+        public void ThenITypeSelectTheServerAs(string p0)
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.SelectServer(p0);
+        }
+
+        [Then(@"the intellisense containts these options")]
+        public void ThenTheIntellisenseContaintsTheseOptions(Table table)
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+
+            var rows = table.Rows[0].Values;
+            foreach(var server in rows)
+            {
+                manageDatabaseSourceControl.VerifyServerExistsintComboBox(server);   
+            }
+        }
+
+        [Then(@"type options contains")]
+        public void ThenTypeOptionsContains(Table table)
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+
+            var rows = table.Rows[0].Values;
+            
+            Assert.IsTrue( manageDatabaseSourceControl.GetServerOptions().All(a=>rows.Contains(a)));
+            
+        }
+
+        [Then(@"type options has ""(.*)"" as the default")]
+        public void ThenTypeOptionsHasAsTheDefault(string defaultDbType)
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+
+            Assert.IsTrue(manageDatabaseSourceControl.GetSelectedDbOption() == defaultDbType);
+        }
+
+
+
+
         [Given(@"I type Server as ""(.*)""")]
         public void GivenITypeServerAs(string serverName)
         {
-            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
-            manageDatabaseSourceControl.EnterServerName(serverName);
-            var viewModel = ScenarioContext.Current.Get<ManageDatabaseSourceViewModel>("viewModel");
-            Assert.AreEqual(serverName,viewModel.ServerName.Name);
+            if (serverName == "Incorrect")
+            {
+
+            }
+            else
+            {
+                var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+                manageDatabaseSourceControl.EnterServerName(serverName);
+                var viewModel = ScenarioContext.Current.Get<ManageDatabaseSourceViewModel>("viewModel");
+                Assert.AreEqual(serverName, viewModel.ServerName.Name);
+            }
         }
 
         [Given(@"Database dropdown is ""(.*)""")]
@@ -85,6 +284,20 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         {
             Utils.CheckControlEnabled(controlName, enabledString, ScenarioContext.Current.Get<ICheckControlEnabledView>(Utils.ViewNameKey));
         }
+
+        [When(@"I Cancel the source")]
+        public void WhenICancelTheSource()
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.Cancel();
+        }
+
+        [Then(@"""(.*)""  is closed")]
+        public void ThenIsClosed(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
 
         [Given(@"I Select Authentication Type as ""(.*)""")]
         [When(@"I Select Authentication Type as ""(.*)""")]
@@ -108,7 +321,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         {
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
             manageDatabaseSourceControl.SelectDatabase(databaseName);
-            var viewModel = ScenarioContext.Current.Get<ManageDatabaseSourceViewModel>("viewModel");
+            var viewModel = (ManageDatabaseSourceViewModel) manageDatabaseSourceControl.DataContext;
             Assert.AreEqual(databaseName,viewModel.DatabaseName);
         }
 
@@ -130,6 +343,24 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
             var databaseDropDownVisibility = manageDatabaseSourceControl.GetUsernameVisibility();
             Assert.AreEqual(expectedVisibility, databaseDropDownVisibility);
+        }
+
+        [Then(@"Username is ""(.*)""")]
+        public void ThenUsernameIs(string userName)
+        {
+
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+
+            Assert.AreEqual(userName, manageDatabaseSourceControl.GetUsername());
+        }
+
+        [Then(@"Password  is ""(.*)""")]
+        public void ThenPasswordIs(string password)
+        {
+
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+
+            Assert.AreEqual(password, manageDatabaseSourceControl.GetPassword());
         }
 
         [Then(@"Password field is ""(.*)""")]
@@ -213,5 +444,14 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             FeatureContext.Current.Remove("viewModel");
             FeatureContext.Current.Add("viewModel", viewModel);
         }
+
+
+        [When(@"I click ""(.*)""")]
+        public void WhenIClick(string ConectTo)
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.Test();
+        }
+
     }
 }

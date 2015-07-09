@@ -185,5 +185,9 @@ namespace Warewolf.Studio.Views
         public void Connect(int connectionId, object target)
         {
         }
+
+        public static void Test()
+        {
+        }
     }
 }
