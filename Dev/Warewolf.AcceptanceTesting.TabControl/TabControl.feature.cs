@@ -18,8 +18,7 @@ namespace Warewolf.AcceptanceTesting.TabControl
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("TabControl")]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class TabControlFeature
     {
         
@@ -28,8 +27,8 @@ namespace Warewolf.AcceptanceTesting.TabControl
 #line 1 "TabControl.feature"
 #line hidden
         
-        [NUnit.Framework.TestFixtureSetUpAttribute()]
-        public virtual void FeatureSetup()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "TabControl", "In order to have a familiar working environment\nAs a Warewolf User\nI want Tabs th" +
@@ -37,19 +36,24 @@ namespace Warewolf.AcceptanceTesting.TabControl
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.TestFixtureTearDownAttribute()]
-        public virtual void FeatureTearDown()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
         public virtual void TestInitialize()
         {
+            if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
+                        && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "TabControl")))
+            {
+                Warewolf.AcceptanceTesting.TabControl.TabControlFeature.FeatureSetup(null);
+            }
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -65,9 +69,10 @@ namespace Warewolf.AcceptanceTesting.TabControl
             testRunner.CollectScenarioErrors();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("1 Change Workflow And Close dialog Options")]
-        [NUnit.Framework.CategoryAttribute("TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("1 Change Workflow And Close dialog Options")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("TabControl")]
         public virtual void _1ChangeWorkflowAndCloseDialogOptions()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Change Workflow And Close dialog Options", new string[] {
@@ -132,18 +137,6 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Change Tab And Save")]
-        [NUnit.Framework.TestCaseAttribute("New Plugin Connector", null)]
-        [NUnit.Framework.TestCaseAttribute("New Plugin Source", null)]
-        [NUnit.Framework.TestCaseAttribute("New Database Connector", null)]
-        [NUnit.Framework.TestCaseAttribute("New Database Source", null)]
-        [NUnit.Framework.TestCaseAttribute("New Web Service Connector", null)]
-        [NUnit.Framework.TestCaseAttribute("New Web Service Source", null)]
-        [NUnit.Framework.TestCaseAttribute("New Email Source", null)]
-        [NUnit.Framework.TestCaseAttribute("New Server Source", null)]
-        [NUnit.Framework.TestCaseAttribute("Settings", null)]
-        [NUnit.Framework.TestCaseAttribute("Scheduler", null)]
         public virtual void ChangeTabAndSave(string item, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Change Tab And Save", exampleTags);
@@ -167,8 +160,109 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("3 Change Multiple And Bulk Close")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Plugin Connector")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Plugin Connector")]
+        public virtual void ChangeTabAndSave_NewPluginConnector()
+        {
+            this.ChangeTabAndSave("New Plugin Connector", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Plugin Source")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Plugin Source")]
+        public virtual void ChangeTabAndSave_NewPluginSource()
+        {
+            this.ChangeTabAndSave("New Plugin Source", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Database Connector")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Database Connector")]
+        public virtual void ChangeTabAndSave_NewDatabaseConnector()
+        {
+            this.ChangeTabAndSave("New Database Connector", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Database Source")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Database Source")]
+        public virtual void ChangeTabAndSave_NewDatabaseSource()
+        {
+            this.ChangeTabAndSave("New Database Source", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Web Service Connector")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Web Service Connector")]
+        public virtual void ChangeTabAndSave_NewWebServiceConnector()
+        {
+            this.ChangeTabAndSave("New Web Service Connector", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Web Service Source")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Web Service Source")]
+        public virtual void ChangeTabAndSave_NewWebServiceSource()
+        {
+            this.ChangeTabAndSave("New Web Service Source", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Email Source")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Email Source")]
+        public virtual void ChangeTabAndSave_NewEmailSource()
+        {
+            this.ChangeTabAndSave("New Email Source", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Server Source")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Server Source")]
+        public virtual void ChangeTabAndSave_NewServerSource()
+        {
+            this.ChangeTabAndSave("New Server Source", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Settings")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "Settings")]
+        public virtual void ChangeTabAndSave_Settings()
+        {
+            this.ChangeTabAndSave("Settings", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Scheduler")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "Scheduler")]
+        public virtual void ChangeTabAndSave_Scheduler()
+        {
+            this.ChangeTabAndSave("Scheduler", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("3 Change Multiple And Bulk Close")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
         public virtual void _3ChangeMultipleAndBulkClose()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3 Change Multiple And Bulk Close", ((string[])(null)));
@@ -216,8 +310,9 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("4 Change Multiple And Bulk Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("4 Change Multiple And Bulk Save")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
         public virtual void _4ChangeMultipleAndBulkSave()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("4 Change Multiple And Bulk Save", ((string[])(null)));
