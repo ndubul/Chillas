@@ -6,7 +6,10 @@
              xmlns:behaviors="clr-namespace:Dev2.Studio.AppResources.Behaviors"
              xmlns:aprop="clr-namespace:Dev2.Studio.AppResources.AttachedProperties"            
              xmlns:customControls2="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
+             xmlns:customControls="clr-namespace:Warewolf.Studio.CustomControls;assembly=Warewolf.Studio.CustomControls"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              LostKeyboardFocus="UserControlLostKeyboardFocus"
+             x:Name="DataListViewControl"
              AutomationProperties.AutomationId="UI_DataListView_AutoID">
     <i:Interaction.Behaviors>
         <behaviors:UserControlFocusNextAndPreviousBehaviour />
@@ -14,7 +17,6 @@
     <Grid LostKeyboardFocus="UIElement_OnLostKeyboardFocus" Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="2" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Margin="0">
@@ -23,48 +25,47 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <customControls2:FilterTextBox Grid.Column="0"
-                                           SearchText="{Binding Path=SearchText,Mode=TwoWay}"
-                                           Margin="0,-2,-2,-2"
-                                           HorizontalContentAlignment="Stretch"
-                                           VerticalAlignment="Stretch" />
+            <customControls:SearchTextBox Grid.Row="0" 
+                                              Margin="{StaticResource ControlBorderTopRight}"
+                                              Grid.Column="0"
+                                              x:Name="SearchTextBox" 
+                                              Style="{StaticResource SearchTextboxStyle}"
+                                              ClearSearchCommand="{Binding Path=ClearSearchTextCommand}"
+                                              LabelText="Filter"
+                                              HorizontalAlignment="Stretch"
+                                              Text="{Binding Path=SearchText, Delay=300, UpdateSourceTrigger=PropertyChanged}" >
+            </customControls:SearchTextBox>
             <Button Grid.Column="1"
                     AutomationProperties.AutomationId="UI_AddRemovebtn_AutoID"
-                    Margin="0,0,2,0"
+                    Margin="{StaticResource ControlBorderTopRight}"
                     Command="{Binding FindUnusedAndMissingCommand}"
                     ToolTip="Removes all unused variables from the variable list">
-                <Image Source="{StaticResource RemoveUnusedVariable-32}" Height="15" Width="15" />
+                <fa:FontAwesome Icon="Trash" FontSize="15"></fa:FontAwesome>
             </Button>
             <Button Grid.Column="2"
                     AutomationProperties.AutomationId="UI_Sortbtn_AutoID"
-                    Margin="0,0,2,0"
+                    Margin="{StaticResource ControlBorderTop}"
                     Command="{Binding SortCommand}"
                     ToolTip="Sorts the items alphabeticaly">
-                <Image Source="{StaticResource ServiceSortRecords-32}"
-                       Height="15"
-                       Width="15" />
+                <fa:FontAwesome Icon="Sort" FontSize="15"></fa:FontAwesome>
             </Button>
         </Grid>
 
-        <Rectangle Grid.Row="1" Height="1" StrokeThickness="0" />
-
-        <TreeView Grid.Row="2"
-                  AllowDrop="True"
+        <TreeView Grid.Row="1"
                   KeyboardNavigation.TabNavigation="Cycle"
-                  IsTabStop="False"
                   ItemsSource="{Binding Path=BaseCollection,Mode=TwoWay}"
                   HorizontalAlignment="Stretch"
                   Width="Auto"
-                  Margin="0"
+                  Margin="{StaticResource ElementBorderTop}"
                   x:Name="ScalarExplorer"
                   BorderThickness="0"
                   HorizontalContentAlignment="Stretch"
-                  ItemContainerStyle="{StaticResource TreeViewItemExpandedStyle}"
+                  Style="{StaticResource VariablesTreeViewStyle}"
                   Grid.IsSharedSizeScope="True"
                   AutomationProperties.AutomationId="UI_VariableTreeView_AutoID">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type Models:DataListItemModel}" ItemsSource="{Binding Path=Children}">
-                    <Grid HorizontalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch" Visibility="{Binding IsVisable,Converter={StaticResource BoolToVisibilityConverterPositive}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="38" SharedSizeGroup="B" />
@@ -72,37 +73,22 @@
                             <ColumnDefinition Width="Auto" SharedSizeGroup="A" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBox x:Name="NameTxt"
-                                 Grid.Column="0"
-                                 LostFocus="NametxtFocusLost"
-                                 Background="{StaticResource TransparentBrush}"
-                                 TextChanged="NametxtTextChanged"
-                                 HorizontalAlignment="Stretch"
-                                 MinWidth="75"
-                                 aprop:FocusAttachedProperty.IsFocused="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.IsSelected,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 ToolTip="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.ErrorMessage, UpdateSourceTrigger=PropertyChanged}"
-                                 Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.DisplayName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 IsEnabled="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.IsEditable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 AutomationProperties.AutomationId="UI_NameTextBox_AutoID">
-                            <TextBox.Style>
-                                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-                                    <Setter Property="Width" Value="Auto" />
-                                    <Setter Property="Height" Value="20" />
-                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                                    <Style.Triggers>
-                                        <Trigger Property="Text" Value="">
-                                            <Setter Property="Background" Value="{StaticResource DataListItemName}" />
-                                        </Trigger>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.HasError, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                            <Setter Property="BorderBrush" Value="{StaticResource ValidationErrorElement}" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
-                            <i:Interaction.Behaviors>
-                                <behaviors:TextboxSelectAllOnFocusBehavior />
-                            </i:Interaction.Behaviors>
-                        </TextBox>
+                        <customControls:VariableTextBox Grid.Column="0"
+                                                        LostFocus="NametxtFocusLost"
+                                                        Background="{StaticResource WareWolfWhiteBrush}"
+                                                        TextChanged="NametxtTextChanged"
+                                                        HorizontalAlignment="Stretch"
+                                                        MinWidth="75"
+                                                        Height="22"
+                                                        DeleteCommand="{Binding DataContext.DeleteCommand,ElementName=DataListViewControl}"
+                                                        Style="{StaticResource VariableTextboxStyle}"
+                                                        aprop:FocusAttachedProperty.IsFocused="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.IsSelected,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        ToolTip="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.ErrorMessage, UpdateSourceTrigger=PropertyChanged}"
+                                                        Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.DisplayName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        IsEnabled="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.IsEditable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        AutomationProperties.AutomationId="UI_NameTextBox_AutoID">
+                            
+                        </customControls:VariableTextBox>
                         
                         <CheckBox IsTabStop="False"
                                   Grid.Column="1"
@@ -125,45 +111,10 @@
                                   Unchecked="Outputcbx_OnChecked"
                                   Visibility="{Binding IsUsed,Converter={StaticResource BoolToVisibilityConverterPositive}}"
                                   AutomationProperties.AutomationId="UI_IsOutputCheckbox_AutoID" />
-
-                        <Button Grid.Column="1"
-                                Grid.ColumnSpan="2"
-                                Click="ButtonBase_OnClick"
-                                HorizontalAlignment="Center"
-                                MaxHeight="10"
-                                Margin="0,-2,0,-2"
-                                Visibility="{Binding IsUsed,Converter={StaticResource BoolToVisibilityConverterNegative}}"
-                                Focusable="False">
-                            <Image Source="{StaticResource RemoveUnusedVariable-32}" Width="11" Height="11" />
-                            <Button.ToolTip>
-                                <ToolTip ContentStringFormat="Remove [[{0}]] from the variable list">
-                                    <Binding Path="DisplayName" />
-                                </ToolTip>
-                            </Button.ToolTip>
-                        </Button>
-
-                        <!--<TextBox x:Name="DescriptionTxt"
-                                 IsTabStop="False"
-                                 MinWidth="75"
-                                 Grid.Column="3"
-                                 Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 IsEnabled="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.IsEditable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 AutomationProperties.AutomationId="UI_DescriptionTextBox_AutoID">
-                            <TextBox.Style>
-                                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-                                    <Setter Property="Height" Value="20" />
-                                    <Style.Triggers>
-                                        <Trigger Property="Text" Value="">
-                                            <Setter Property="Background" Value="{StaticResource DataListItemDescription}" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>-->
                     </Grid>
                 </HierarchicalDataTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type Models:DataListHeaderItemModel}" ItemsSource="{Binding Path=Children}">
-                    <StackPanel Background="{StaticResource BrushMouseOver}">
+                    <StackPanel>
                         <Grid Height="24" Margin="{StaticResource ControlBorderRight}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
