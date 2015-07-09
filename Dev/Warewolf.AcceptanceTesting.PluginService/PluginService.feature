@@ -86,7 +86,7 @@ Scenario: Opening saved Plugin Service
 	| Output | Output Alias |
 	| Name   | Name         |
 	When Save is clicked
-	The the Save Dialog is opened	
+	Then the Save Dialog is opened	
 
 
 Scenario: Refreshing plugin source action step 

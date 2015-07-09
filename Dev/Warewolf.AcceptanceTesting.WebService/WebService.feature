@@ -53,18 +53,6 @@ Scenario: Opening Web Service
 	And "Test" is "Disabled"
 	And "Save" is "Disabled"
 	
-	
-Scenario: Create Web Service Source
-	Given I click New Web Service Connector
-	Then "New Web Service" tab is opened	
-	And Select Request Method & Source is focused
-	And "New" is "Enabled"
-	When I select "Get" as Method
-	And the "New" button is clicked
-	Then the "New Web Services Source" tab is opened
-	And the focus is changed to the "New Web Services Source" tab
-	
-	
 
 Scenario Outline: Create Web Service with different methods
 	Given I click "New Web Service Connector"
@@ -93,7 +81,6 @@ Scenario Outline: Create Web Service with different methods
 	When the Web Service Connector is saved successful 
 	Then the save dialog is closed
 	And the tab header changes to the name of the Web Service Connectors name
-
 	Examples:
 	| Method  |
 	| Get     |

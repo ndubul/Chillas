@@ -22,15 +22,16 @@ Scenario: New Plugin Source File
 	| MS Fakes                                 |
 	| Microsoft QualityTools.Testing.Fakes.dll |
 	Then "Save" is "Enabled"
-	When Assembly is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dl"
+	And Assembly is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
+	When I change Assembly to "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dl"
 	Then "Save" is "Disabled"
-	Then Assembly is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
+	When I change Assembly to "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
 	Then "Save" is "Enabled"
 	When I save Plugin source
 	Then Save Dialog is opened
 	When I save as "Testing Resource Save"
-	And title is "Testing Resource Save"
-	Then "Save" is "Disabled"
+	Then title is "Testing Resource Save"
+	And "Save" is "Disabled"
 	And "Cancel" is "Disabled"
 	
 
@@ -42,7 +43,7 @@ Scenario: New Plugin Source GAC
 	And "Save" is "Disabled"
 	When I Filter for "AuditPolicyGPMan"
 	And I click "AuditPolicyGPManagedStubs.Interop, Version=6.1.0.0"
-	Then Assembly is "GAC:CppCodeProvider, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+	Then Assembly is "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 	And "Save" is "Enabled"
 	When I save Plugin source
 	Then Save Dialog is opened
@@ -50,7 +51,7 @@ Scenario: New Plugin Source GAC
 #I cant get to these paths so am leaving them as per Murali as I cant get to this edit page either.
 #Assembly will need to change.
 Scenario: Editing Plugin Source
-	Given I open "Edit Plugin Source - Test" plugin source
+	Given I open "Test" plugin source
 	Then title is "Edit Plugin Source - Test"
 	And file is selected
 	And "C:\" is "visible"
@@ -63,7 +64,7 @@ Scenario: Editing Plugin Source
 	Then Save Dialog is opened
 
 Scenario: Change Plugin Source Assembly Input
-	Given I open "Edit Plugin Source - Test" plugin source
+	Given I open "Test" plugin source
 	Then title is "Edit Plugin Source - Test"
 	And file is selected
 	And "C:\" is "visible"
@@ -80,7 +81,7 @@ Scenario: Refresh New Plugin Source File
 	When I click 
 	| Clicks                                   |
 	| File                                     |
-	| c:\                                      |
+	| C:\                                      |
 	| Development                              |
 	| Dev                                      |
 	| Binaries                                 |
@@ -102,7 +103,7 @@ Scenario: Refresh New Plugin Source GAC
 	When I click "GAC"
 	When I filter for "playback"
 	Then the progress bar indicates loading of resources
-	And "Microsoft.MediaCenter.Playback,..." is "visible"
+	And "Microsoft.MediaCenter.Playback" is "visible"
 	And GAC only has one option in the tree
 	When I refresh the filter
 	And GAC only has one option in the tree
