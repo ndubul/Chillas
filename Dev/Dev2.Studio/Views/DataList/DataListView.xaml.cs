@@ -110,8 +110,11 @@ namespace Dev2.Studio.Views.DataList
             {
                 return;
             }
-
-            WriteToResourceModel();
+            IDataListViewModel vm = DataContext as IDataListViewModel;
+            if (!vm.IsSorting)
+            {
+                WriteToResourceModel();
+            }
         }
 
         private void Outputcbx_OnChecked(object sender, RoutedEventArgs e)
@@ -122,7 +125,11 @@ namespace Dev2.Studio.Views.DataList
                 return;
             }
 
-            WriteToResourceModel();
+            IDataListViewModel vm = DataContext as IDataListViewModel;
+            if (!vm.IsSorting)
+            {
+                WriteToResourceModel();
+            }
         }
 
         #endregion Events
