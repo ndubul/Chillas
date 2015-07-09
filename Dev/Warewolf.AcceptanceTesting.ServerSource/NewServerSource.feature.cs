@@ -82,20 +82,21 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.And("Address is focused", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.Then("\"New Server Source\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 10
- testRunner.And("selected protocol is \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Address is focused", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
- testRunner.And("server port is \"3142\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("selected protocol is \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
- testRunner.And("Authentication Type as \"Windows\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("server port is \"3142\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
- testRunner.And("\"Test\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Authentication Type as \"Windows\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
- testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"Test\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 15
- testRunner.Then("validation message is \"The server connection must be tested with a valid adderess" +
-                    " before you can save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 16
+ testRunner.Then("validation message is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -107,30 +108,40 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void CreatingNewSourceAsWindows()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating New Source as windows", ((string[])(null)));
-#line 17
-this.ScenarioSetup(scenarioInfo);
 #line 18
-   testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 19
-   testRunner.And("I entered \"SANDBOX-1\" as address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 20
-   testRunner.And("I select protocol as \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"Test\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
-   testRunner.And("I enter server port as \"3142\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I entered \"SANDBOX-1\" as address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
-   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"Test\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
-   testRunner.And("Authentication Type as \"Windows\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I select protocol as \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 24
-   testRunner.When("I Test Connection to remote server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I enter server port as \"3142\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 25
-   testRunner.And("Connecton to remote server is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 26
-   testRunner.Then("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("Authentication Type as \"Windows\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27
-   testRunner.When("I save the server source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.Then("server Username field is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 28
-   testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.And("server Password field is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 29
+    testRunner.When("I Test Connection to remote server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 30
+ testRunner.And("Connecton to remote server is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+ testRunner.Then("validation message is \"Connection Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 32
+ testRunner.Then("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 33
+ testRunner.When("I save the server source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 34
+ testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -142,78 +153,67 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TestConnectionIsUnsuccessfull()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test connection is unsuccessfull", ((string[])(null)));
-#line 30
-this.ScenarioSetup(scenarioInfo);
-#line 31
-   testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 32
-   testRunner.And("I entered \"ABSCD\" as address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
-   testRunner.And("I select protocol as \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
-   testRunner.And("I enter server port as \"3142\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 35
-   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
-   testRunner.And("Authentication Type as \"Windows\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 37
-   testRunner.When("I Test Connection to remote server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 38
-   testRunner.Then("Connecton to remote server is unsuccessful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.And("I entered \"ABSCD\" as address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 39
+   testRunner.When("I Test Connection to remote server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 40
+   testRunner.Then("Connecton to remote server is unsuccessful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 41
    testRunner.And("the validation message is \"Connection Error: An error occured while sending the r" +
                     "equest.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
+#line 42
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Creating New Source as User")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Creating New Source as User And HTTPS")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "NewServerSource")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("NewServerSource")]
-        public virtual void CreatingNewSourceAsUser()
+        public virtual void CreatingNewSourceAsUserAndHTTPS()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating New Source as User", ((string[])(null)));
-#line 42
-this.ScenarioSetup(scenarioInfo);
-#line 43
-   testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating New Source as User And HTTPS", ((string[])(null)));
 #line 44
-   testRunner.And("I entered \"SANDBOX-1\" as address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 45
-   testRunner.And("I select protocol as \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 46
-   testRunner.And("I enter server port as \"3142\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I entered \"SANDBOX-1\" as address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 47
-   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I select protocol as \"https\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 48
-   testRunner.And("Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I enter server port as \"3143\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 49
-   testRunner.Then("server Username field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 50
-   testRunner.And("server Password field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 51
-   testRunner.And("\"Test\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 50
+   testRunner.And("Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 51
+   testRunner.Then("server Username field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 52
+   testRunner.And("server Password field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 53
-   testRunner.And("the message as \"The server connection must be tested with a valid username and pa" +
-                    "ssword before you can save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("\"Test\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 54
-   testRunner.When("I enter Username as \"IntegrationTester\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 55
-   testRunner.And("I enter Password as \"I73573r0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.When("I enter Username as \"IntegrationTester\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 56
-   testRunner.When("I Test Connection to remote server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.And("I enter Password as \"I73573r0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 57
-   testRunner.Then("Connecton to remote server is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.When("I Test Connection to remote server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 58
-   testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.Then("Connecton to remote server is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 59
-   testRunner.When("I save the server source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 60
+   testRunner.When("I save the server source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 61
    testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -226,42 +226,31 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void CreatingServerSourceAuthenticationError()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating server source Authentication error", ((string[])(null)));
-#line 62
-this.ScenarioSetup(scenarioInfo);
 #line 63
-testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 64
-   testRunner.And("I entered \"SANDBOX-1\" as address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 65
-   testRunner.And("I select protocol as \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I entered \"SANDBOX-1\" as address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 66
-   testRunner.And("I enter server port as \"3142\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I select protocol as \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 67
-   testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I enter server port as \"3142\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 68
-   testRunner.And("Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
-   testRunner.Then("server Username field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 70
-   testRunner.And("server Password field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
-   testRunner.And("\"Test\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 72
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 73
-   testRunner.And("the message as \"The server connection must be tested with a valid username and pa" +
-                    "ssword before you can save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
+#line 69
+   testRunner.And("Authentication Type as \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 70
    testRunner.When("I enter Username as \"#$##$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 75
+#line 71
    testRunner.And("I enter Password as \"I73573r0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
+#line 72
     testRunner.When("I Test Connection to remote server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 77
+#line 73
    testRunner.Then("Connecton to remote server is unsuccessful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 78
+#line 74
    testRunner.And("validation message is \"Connection Error: Unauthorized\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
+#line 75
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -274,37 +263,37 @@ testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk
         public virtual void CreatingNewSourceAsPublic()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating New Source as Public", ((string[])(null)));
-#line 81
+#line 77
 this.ScenarioSetup(scenarioInfo);
-#line 82
+#line 78
    testRunner.Given("I have New Server Source opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 83
+#line 79
    testRunner.And("I entered \"SANDBOX-1\" as address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
+#line 80
    testRunner.And("I select protocol as \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 85
+#line 81
    testRunner.And("I enter server port as \"3142\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 86
+#line 82
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 87
+#line 83
    testRunner.And("Authentication Type as \"Public\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 88
-   testRunner.Then("server Username field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 89
-   testRunner.And("server Password field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 90
+#line 84
+   testRunner.Then("server Username field is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 85
+   testRunner.And("server Password field is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 86
    testRunner.And("\"Test\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 91
+#line 87
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
+#line 88
    testRunner.When("I Test Connection to remote server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 93
+#line 89
    testRunner.Then("Connecton to remote server is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 94
+#line 90
    testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
+#line 91
    testRunner.When("I save the server source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 96
+#line 92
    testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -317,53 +306,53 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EditingSavedServerSourceAuthentication()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editing Saved Server Source Authentication", ((string[])(null)));
-#line 98
+#line 94
 this.ScenarioSetup(scenarioInfo);
-#line 99
+#line 95
    testRunner.Given("I Open server source \"ServerSource\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 100
-   testRunner.And("tab is opened with name as \"Edit - ServerSource\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 101
+#line 96
+   testRunner.Then("\"ServerSource\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 97
    testRunner.And("remote server name is \"SANDBOX-1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 102
+#line 98
    testRunner.And("selected protocol is \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 103
+#line 99
    testRunner.And("server port is \"3142\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 104
+#line 100
    testRunner.And("Authentication Type selected is \"User\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 105
+#line 101
    testRunner.Then("server Username field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 106
+#line 102
    testRunner.And("server Password field is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 107
+#line 103
    testRunner.And("server Username is \"Integrationtester\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 108
+#line 104
    testRunner.And("server Password is is \"I73573r0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 109
+#line 105
    testRunner.And("\"Test\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 110
+#line 106
    testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 111
+#line 107
    testRunner.And("Authentication Type as \"Public\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 112
+#line 108
    testRunner.Then("server Username field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 113
+#line 109
    testRunner.And("server Password field is \"InVisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 114
+#line 110
    testRunner.And("\"Test\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 115
+#line 111
    testRunner.When("I Test Connection to remote server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 116
+#line 112
    testRunner.Then("Connecton to remote server is successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 117
-   testRunner.Then("tab name is \"*Edit - ServerSource\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 118
+#line 113
+   testRunner.Then("tab name is \"ServerSource *\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 114
    testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 119
+#line 115
    testRunner.When("I save the server source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 120
-   testRunner.Then("Save Dialog is not opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 121
+#line 116
+   testRunner.Then("Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 117
    testRunner.And("server source \"ServerSource\" is saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

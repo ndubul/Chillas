@@ -840,7 +840,7 @@ namespace Dev2.Studio.ViewModels
         {
 
             var server = CustomContainer.Get<IServer>();
-            var dbSourceViewModel = new ManageWebserviceSourceViewModel(new ManageWebServiceSourceModel(server.UpdateRepository,  ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource);
+            var dbSourceViewModel = new ManageWebserviceSourceViewModel(new ManageWebServiceSourceModel(server.UpdateRepository,  ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource,_asyncWorker,new ExternalProcessExecutor());
             var vm = new NewWebSourceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), vm);
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
@@ -944,7 +944,7 @@ namespace Dev2.Studio.ViewModels
         void AddNewWebSourceSurface()
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), new NewWebSourceViewModel(EventPublisher, new ManageWebserviceSourceViewModel(new ManageWebServiceSourceModel(server.UpdateRepository, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid()), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator()), PopupProvider));
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), new NewWebSourceViewModel(EventPublisher, new ManageWebserviceSourceViewModel(new ManageWebServiceSourceModel(server.UpdateRepository, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid()), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker, new ExternalProcessExecutor()), PopupProvider));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 

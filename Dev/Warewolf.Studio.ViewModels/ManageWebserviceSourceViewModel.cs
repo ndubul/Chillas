@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -13,6 +10,7 @@ using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
+using Dev2.Common.Interfaces.Threading;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
@@ -23,6 +21,8 @@ namespace Warewolf.Studio.ViewModels
 {
     public class ManageWebserviceSourceViewModel : SourceBaseImpl<IWebServiceSource>, IManageWebserviceSourceViewModel, IDisposable
     {
+        public IAsyncWorker AsyncWorker { get; set; }
+        public IExternalProcessExecutor Executor { get; set; }
         private AuthenticationType _authenticationType;
         private string _hostName;
         private string _userName;
@@ -40,16 +40,19 @@ namespace Warewolf.Studio.ViewModels
         bool _isHyperLinkEnabled;
         string _resourceName;
         CancellationTokenSource _token;
-        IList<string> _computerNames;
         readonly string _warewolfserverName;
         string _headerText;
         private bool _isDisposed;
 
-        public ManageWebserviceSourceViewModel(IManageWebServiceSourceModel updateManager, IEventAggregator aggregator)
+        public ManageWebserviceSourceViewModel(IManageWebServiceSourceModel updateManager, IEventAggregator aggregator,IAsyncWorker asyncWorker,IExternalProcessExecutor executor)
             : base(ResourceType.WebSource)
         {
+            VerifyArgument.IsNotNull("executor", executor);
+            VerifyArgument.IsNotNull("asyncWorker", asyncWorker);
             VerifyArgument.IsNotNull("updateManager", updateManager);
             VerifyArgument.IsNotNull("aggregator", aggregator);
+            AsyncWorker = asyncWorker;
+            Executor = executor;
             _updateManager = updateManager;
             _aggregator = aggregator;
             _warewolfserverName = updateManager.ServerName;
@@ -70,29 +73,39 @@ namespace Warewolf.Studio.ViewModels
 
         void ViewInBrowser()
         {
-            Process.Start(TestDefault);
+            Executor.OpenInBrowser(new Uri(TestDefault));
         }
 
-        public ManageWebserviceSourceViewModel(IManageWebServiceSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator)
-            : this(updateManager, aggregator)
+        public ManageWebserviceSourceViewModel(IManageWebServiceSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
+            : this(updateManager, aggregator, asyncWorker,executor)
         {
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
             RequestServiceNameViewModel = requestServiceNameViewModel;
 
         }
-        public ManageWebserviceSourceViewModel(IManageWebServiceSourceModel updateManager, IEventAggregator aggregator, IWebServiceSource webServiceSource)
-            : this(updateManager, aggregator)
+        public ManageWebserviceSourceViewModel(IManageWebServiceSourceModel updateManager, IEventAggregator aggregator, IWebServiceSource webServiceSource, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
+            : this(updateManager, aggregator, asyncWorker, executor)
         {
             VerifyArgument.IsNotNull("webServiceSource", webServiceSource);
             _webServiceSource = webServiceSource;
+            _warewolfserverName = updateManager.ServerName;
             SetupHeaderTextFromExisting();
             FromSource(webServiceSource);
         }
 
         void SetupHeaderTextFromExisting()
         {
-            HeaderText = Resources.Languages.Core.WebserviceEditHeaderLabel + _warewolfserverName.Trim() + "\\" + (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim();
-            Header = ((_webServiceSource == null ? ResourceName : _webServiceSource.Name));
+            var serverName = _warewolfserverName;
+            if(serverName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
+            {
+                HeaderText = string.Format("{0} {1}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim());
+                Header = string.Format("{0}", ((_webServiceSource == null ? ResourceName : _webServiceSource.Name)));
+            }
+            else
+            {
+                HeaderText = string.Format("{0} {1} on {2}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim(), serverName);
+                Header = string.Format("{0} - {1}", ((_webServiceSource == null ? ResourceName : _webServiceSource.Name)),serverName);
+            }
         }
 
         bool CanSave()
@@ -174,18 +187,6 @@ namespace Warewolf.Studio.ViewModels
         {
             get { return AuthenticationType == AuthenticationType.User; }
         }
-        public IList<string> ComputerNames
-        {
-            get
-            {
-                return _computerNames;
-            }
-            set
-            {
-                _computerNames = value;
-                OnPropertyChanged(() => ComputerNames);
-            }
-        }
 
         void SaveConnection()
         {
@@ -224,35 +225,21 @@ namespace Warewolf.Studio.ViewModels
 
         void TestConnection()
         {
-
             _token = new CancellationTokenSource();
-            var t = new Task(
-                SetupProgressSpinner, _token.Token);
-
-            t.ContinueWith(a => Dispatcher.CurrentDispatcher.Invoke(() =>
+            AsyncWorker.Start(SetupProgressSpinner, () =>
             {
-                if (!_token.IsCancellationRequested)
-                    switch (t.Status)
-                    {
-                        case TaskStatus.Faulted:
-                            {
-                                TestFailed = true;
-                                TestPassed = false;
-                                Testing = false;
-                                TestMessage = t.Exception != null ? t.Exception.Message : "Failed";
-                                break;
-                            }
-                        case TaskStatus.RanToCompletion:
-                            {
-                                TestMessage = "Passed";
-                                TestFailed = false;
-                                TestPassed = true;
-                                Testing = false;
-                                break;
-                            }
-                    }
-            }));
-            t.Start();
+                TestMessage = "Passed";
+                TestFailed = false;
+                TestPassed = true;
+                Testing = false;
+            },
+            _token, exception =>
+            {
+                TestFailed = true;
+                TestPassed = false;
+                Testing = false;
+                TestMessage = exception != null ? exception.Message : "Failed";
+            });
 
 
         }
@@ -616,29 +603,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-
-        // public bool IsActive { get; set; }
-
-        //public event EventHandler IsActiveChanged;
-
-        //        public string Header
-        //        {
-        //            get
-        //            {
-        //                return _header + ((_webServiceSource!= null )&&Haschanged || (_webServiceSource == null && !IsEmpty) ? " *" : "");
-        //            }
-        //            set
-        //            {
-        //                _header = value;
-        //                OnPropertyChanged(() => Header);
-        //            }
-        //        }
         public bool IsEmpty { get { return String.IsNullOrEmpty(HostName) && AuthenticationType == AuthenticationType.Anonymous && String.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Password); } }
-
-        //        public ResourceType? Image
-        //        {
-        //            get { return ResourceType.WebSource; }
-        //        }
 
         public void Dispose()
         {

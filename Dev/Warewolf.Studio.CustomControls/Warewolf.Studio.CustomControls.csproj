@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="PasswordBoxAssistant.cs" />
     <Compile Include="SearchTextBox.cs" />
+    <Compile Include="VariableTextBox.cs" />
     <Compile Include="WatermarkAdorner.cs" />
     <Compile Include="WatermarkPasswordBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -55,6 +55,7 @@ namespace Dev2.Studio.Core.Models.DataList
             LastIndexedName = Name;
             IsUsed = true;
             ColumnIODirection = dev2ColumnArgumentDirection;
+            
         }
 
         #endregion Ctor
@@ -254,6 +255,7 @@ namespace Dev2.Studio.Core.Models.DataList
                 return Parent != null;
             }
         }
+       
 
         #endregion Properties
 

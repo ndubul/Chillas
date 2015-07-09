@@ -260,14 +260,14 @@ namespace Dev2.Settings
         {
             get
             {
-                return SecurityViewModel != null && SecurityViewModel.IsDirty ? "Security *" : "Security";
+                return SecurityViewModel != null && SecurityViewModel.IsDirty ? "SECURITY *" : "SECURITY";
             }
         }
         public string LogHeader
         {
             get
             {
-                return LogSettingsViewModel != null && LogSettingsViewModel.IsDirty ? "Logging *" : "Logging";
+                return LogSettingsViewModel != null && LogSettingsViewModel.IsDirty ? "LOGGING *" : "LOGGING";
             }
         }
         public bool HasLogSettings

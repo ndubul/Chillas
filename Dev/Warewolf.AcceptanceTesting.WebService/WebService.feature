@@ -7,30 +7,31 @@ Feature: WebService
 ## @ New Web Service Requirements
 ##* Ensure New Web Service tab is opened when click on 'New Webservice' button.
 ##* Ensure Step 1 is visible when 'New Webservice' tab opened.
-##* Ensure Step 2,3,4,5,6,7 is Disabled when 'New Webservice' tab opened.
+##* Ensure Step 2,3,4,5 is Disabled when 'New Webservice' tab opened.
 ##* Ensure user is able to select method for the source
 ##* Ensure user is able to selects "GET" as 'Request Method' in 'New Webservice' tab
 ##* Ensure user is able to selects "POST" as 'Request Method' in 'New Webservice' tab
 ##* Ensure user is able to selects "PUT" as 'Request Method' in 'New Webservice' tab
 ##* Ensure user is able to selects "DELETE" as 'Request Method' in 'New Webservice' tab
 ##* Ensure user is able to selects "TRACE" as 'Request Method' in 'New Webservice' tab
-##* Ensure when user selcts "GET" as 'Request Method' then Step 4 is disabled
+##* Ensure when user selects "GET" as 'Request Method' then Step 2 is disabled
 ##* Ensure when user selcts "POST" as 'Request Method' then Step 4 is Enabled
 ##* Ensure when user selcts "PUT" as 'Request Method' then Step 4 is Enabled
 ##* Ensure when user selcts "DELETE" as 'Request Method' then Step 4 is Enabled
 ##* Ensure when user selcts "TRACE" as 'Request Method' then Step 4 is Enabled
 ##* Ensure user is able to 'Select Source' in 'New Webservice' tab.
-##* Ensure Step 2,3,3,5,6 is enabled when user selects source in 'New Web Service' tab
-##* Ensure Step 7 is disabled when user selects source in 'New Web Service' tab
+##* Ensure Step 2,3 is enabled when user selects source in 'New Web Service' tab
+##* Ensure Step 4,5 is disabled when user selects source in 'New Web Service' tab
 ##* Ensure user is able to create New Source by clcking on 'New' button.
 ##* Ensure Edit button is Disabled when source is not selected.
 ##* Ensure Edit button is Enabled when source is selected.
 ##* Ensure Step 2 is enabled when Source is selected in step 1
 ##* Ensure 'Test' button is enabled when user selects source in Step 1
 ##* Ensure service is testing when user clicks on test button
-##* Ensure Step 7 is enabled when response loaded after click on test
-##* Ensure Step 7 is enabled when user edit the response in response dialog
+##* Ensure Step 5 is enabled when response loaded after click on test
+##* Ensure Step 5 is enabled when user edit the response in response dialog
 ##* Ensure user save button is Enabled when the user click on test
+
 ## Ensure adding parameters to Step 2 adds them as inputs in Step 5
 ## Ensure changing parameters to Step 2 changes them in Step 5
 ## Ensure adding parameters to Step 3 adds them as inputs in Step 5
@@ -40,8 +41,8 @@ Feature: WebService
 ## Ensure changing Source in Step 1 changes Request URL in Step 3
 
 Scenario: Opening Web Service
-	Given I click New Web Service Connector
-	Then "New Web Service" tab is opened
+	Given I click "New Web Service Connector"
+	Then "New Web Service Connector" tab is opened
 	And Select Request Method & Source is focused
 	And "New" is "Enabled"
 	And "1 Select Request Method & Source" is "Enabled"
@@ -53,29 +54,18 @@ Scenario: Opening Web Service
 	And "Test" is "Disabled"
 	And "Save" is "Disabled"
 	
-	
-Scenario: Create Web Service Source
-	Given I click New Web Service Connector
-	Then "New Web Service" tab is opened	
-	And Select Request Method & Source is focused
-	And "New" is "Enabled"
-	When I select "Get" as Method
-	And the "New" button is clicked
-	Then the "New Web Services Source" tab is opened
-	And the focus is changed to the "New Web Services Source" tab
-	
-	
 
 Scenario Outline: Create Web Service with different methods
 	Given I click "New Web Service Connector"
-	Then "New Web Service" tab is opened	
+	Then "New Web Service Connector" tab is opened
 	And Select Request Method & Source is focused
 	When I select "<Method>" as Method
 	And I select "Dev2CountriesWebService" as data source
 	Then "2 Request" is "Enabled"
+	And "2 Request Body" is "<Body>"
 	And "3 Variables" is "Enabled" 
 	And "Test" is "Enabled"
-	When "Test" is selected
+	When Test Connection is "Successful"
 	Then "4 Response" is "Enabled" 
 	And the response is loaded
 	And "5 Defaults and Mapping" is "Enabled" 
@@ -88,25 +78,24 @@ Scenario Outline: Create Web Service with different methods
 	| Output      | Output Alias |
 	| CountryID   | CountryID    |
 	| Description | Description  |
-	When I save the webservice
+	When I click "Save" 
 	Then Save Dialog is opened
-	When the Web Service Connector is saved successful 
-	Then the save dialog is closed
-	And the tab header changes to the name of the Web Service Connectors name
-
+	And I save as "Testing Web Service Connector Save"
+	Then title is "Testing Web Service Connector Save"
+	And "Testing Web Service Connector Save" tab is opened
 	Examples:
-	| Method  |
-	| Get     |
-	| Post    |
-	| Head    |
-	| Put     |
-	| Delete  |
-	| Trace   |
-	| Options |
+	| Method  | Body     |
+	| Get     | Disabled |
+	| Post    | Enabled  |
+	| Head    | Enabled  |
+	| Put     | Enabled  |
+	| Delete  | Enabled  |
+	| Trace   | Enabled  |
+	| Options | Enabled  |
 	
 
  Scenario: Editing Web Service
-	Given I open "Dev2GetCountriesWebService" 
+	Given I click "Dev2GetCountriesWebService" 
 	Then "Edit Web Service - Dev2GetCountriesWebService" tab is opened	
 	And method is selected as "GET"
 	And "Dev2CountriesWebService" selected as data source
@@ -116,7 +105,7 @@ Scenario Outline: Create Web Service with different methods
 	And "3 Variables" is "Enabled" 
 	And "4 Response" is "Enabled" 
 	And "5 Default and Mapping" is "Enabled"
-	When I Test Connection
+	When Test Connection is "Successful"
 	Then response is loaded
 	And "Save" is "Disabled"
 	When Test Connecton is "Successful"
@@ -133,19 +122,21 @@ Scenario Outline: Create Web Service with different methods
 
  
 Scenario: Adding parameters in request headers is updating variables 
-	Given I click "New Web Service Connector" webservice
-	Then "New Web Service Connector" tab is opened	
+	Given I click "New Web Service Connector"
+	Then "New Web Service Connector" tab is opened
 	When I select "GET" as Method
 	And I select "Dev2CountriesWebService" as data source
 	And "New" is "Enabled"
-	And "Edit" is "Enabled"
 	Then "2 Request headers" is "Enabled"
+	And input mappings are
+         | name  | Value |
+         | [[a]] | T     |
 	And "3 Variables" is "Enabled" 
 	And "Test" is "Enabled"
-	When "Test" is selected
+	When Test Connection is "Successful"
 	Then "4 Response" is "Enabled" 
 	And "Paste" tool is "Enabled" 
-	When "Paste" is selected
+	When Paste is "Successful"
 	Then the "Paste" Dialog is opened
 	And "5 Defaults and Mapping" is "Enable"
 	And "Save" is "Enabled"
@@ -153,13 +144,14 @@ Scenario: Adding parameters in request headers is updating variables
 	| Input     | Default Value | Required Field | Empty is Null |
 	| extension | json          |                |               |
 	| prefix    | a             |                |               |
-	| test      |               |                |               |
-	
+	| [[a]]     | T             |                |               |
+	When I save the webservice
+	Then Save Dialog is opened
  
  
  Scenario: Adding parameters in request URL 
 	Given I click "New Web Service Connector"
-	Then "New Web Service Connector" tab is opened	
+	Then "New Web Service Connector" tab is opened
 	When I select "GET" as Method
 	And I select "Dev2CountriesWebService" as data source
 	And "New" is "Enabled"
@@ -173,8 +165,8 @@ Scenario: Adding parameters in request headers is updating variables
 	|                 |
 	| [[variable1]] = |
 	| [[variable2]] = |   
-	And "Test" is selected
-	And "4 Response" is "Enabled" 
+	When Test Connection is "Successful"
+	Then "4 Response" is "Enabled" 
 	And the response is loaded
 	And "5 Default and Mapping" is "Enabled" 
     Then input mappings are
@@ -185,16 +177,16 @@ Scenario: Adding parameters in request headers is updating variables
 	
  Scenario: Adding variables at request body
 	Given I click "New Web Service Connector"
-	Then "New Web Service Connector" tab is opened		
+	Then "New Web Service Connector" tab is opened	
 	When I select "DELETE" as Method
 	And I select "Dev2CountriesWebService" as data source
 	And "New" is "Enabled"
 	And "Edit" is "Enabled"
 	Then "2 Request" is "Enabled"
 	When I type "Request" as
-	|       |
-	| [[a]] |
-	| [[b]] |
+	| Name  | Value |
+	| [[a]] |       |
+	| [[b]] |       |
 	And "3 Variables" is "Enabled" 
 	And "3 Variables" are
 	|                  |
@@ -203,7 +195,7 @@ Scenario: Adding parameters in request headers is updating variables
 	| [[a]]            |
 	| [[b]]            |
 	And "Test" is "Enabled"
-	When "Test" is selected
+	When Test Connection is "Successful"
 	Then "4 Response" is "Enabled" 
 	And the response is loaded
 	And "5 Default and Mapping" is "Enabled" 

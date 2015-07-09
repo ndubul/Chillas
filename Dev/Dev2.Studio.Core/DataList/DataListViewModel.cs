@@ -195,11 +195,19 @@ namespace Dev2.Studio.ViewModels.DataList
         public DataListViewModel(IEventAggregator eventPublisher)
             : base(eventPublisher)
         {
+            DeleteCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand<IDataListItemModel>(item =>
+            {
+                RemoveDataListItem(item);
+                WriteToResourceModel();
+            });
+            ClearSearchTextCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(() => SearchText = "");
         }
 
         #endregion
 
         #region Commands
+
+        public ICommand ClearSearchTextCommand { get; private set; }
 
         public ICommand AddRecordsetCommand
         {
@@ -228,6 +236,8 @@ namespace Dev2.Studio.ViewModels.DataList
                        new RelayCommand(method => RemoveUnusedDataListItems(), o => HasAnyUnusedItems()));
             }
         }
+
+        public ICommand DeleteCommand { get; set; }
 
         #endregion Commands
 
@@ -345,7 +355,7 @@ namespace Dev2.Studio.ViewModels.DataList
                     if(ScalarCollection.FirstOrDefault(c => c.Name == part.Field) == null)
                     {
                         IDataListItemModel scalar = DataListItemModelFactory.CreateDataListModel(part.Field,part.Description,enDev2ColumnArgumentDirection.None);
-                        if(ScalarCollection.Count > ScalarCollection.Count - 1)
+                        if(ScalarCollection.Count > ScalarCollection.Count - 1 && ScalarCollection.Count > 0)
                         {
                             ScalarCollection.Insert(ScalarCollection.Count - 1, scalar);
                         }
@@ -451,7 +461,7 @@ namespace Dev2.Studio.ViewModels.DataList
 
             foreach(var item in ScalarCollection)
             {
-                item.IsVisable = item.Name.Contains(SearchText);
+                item.IsVisable = item.Name.ToUpper().Contains(SearchText.ToUpper());
             }
 
             foreach(var item in RecsetCollection)
@@ -470,7 +480,7 @@ namespace Dev2.Studio.ViewModels.DataList
                     }
                 }
 
-                item.IsVisable = parentVis || item.Name.Contains(SearchText);
+                item.IsVisable = parentVis || item.Name.ToUpper().Contains(SearchText.ToUpper());
             }
         }
 
@@ -835,10 +845,19 @@ namespace Dev2.Studio.ViewModels.DataList
         /// </summary>
         private void SortItems()
         {
-            SortScalars(_toggleSortOrder);
-            SortRecset(_toggleSortOrder);
-            _toggleSortOrder = !_toggleSortOrder;
+            try
+            {
+                IsSorting = true;
+                SortScalars(_toggleSortOrder);
+                SortRecset(_toggleSortOrder);
+                _toggleSortOrder = !_toggleSortOrder;
+            }
+            finally { IsSorting = false; }
+
+        
         }
+
+        public bool IsSorting  { get; set; }
 
         /// <summary>
         ///     Sorts the scalars.
@@ -856,12 +875,13 @@ namespace Dev2.Studio.ViewModels.DataList
                 newScalarCollection = ScalarCollection.OrderByDescending(c => c.DisplayName)
                                                                                 .Where(c => !c.IsBlank).ToList();
             }
-            ScalarCollection.Clear();
-            foreach(var item in newScalarCollection)
+            //ScalarCollection.Clear();
+            for(int index = 0; index < newScalarCollection.Count; index++)
             {
-                ScalarCollection.Add(item);
+                var item = newScalarCollection[index];
+                ScalarCollection[index] = (item);
             }
-            ScalarCollection.Add(DataListItemModelFactory.CreateDataListModel(string.Empty));
+           // ScalarCollection.Add(DataListItemModelFactory.CreateDataListModel(string.Empty));
         }
 
         /// <summary>

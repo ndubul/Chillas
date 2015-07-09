@@ -84,6 +84,36 @@ namespace Dev2.Threading
         /// on the thread this was invoked from (typically the UI thread).
         /// </summary>
         /// <param name="backgroundAction">The background action.</param>
+        /// <param name="uiAction">The UI action.</param>
+        /// <param name="cancellationTokenSource">Allows the task to be cancelled.</param>
+        /// <param name="onError"></param>
+        /// <returns></returns>
+        /// <author>Trevor.Williams-Ros</author>
+        /// <date>2013/08/08</date>
+        public Task Start(Action backgroundAction, Action uiAction, CancellationTokenSource cancellationTokenSource, Action<Exception> onError)
+        {
+            var scheduler = GetTaskScheduler();
+            return Task.Factory.StartNew(backgroundAction, cancellationTokenSource.Token).ContinueWith(_ =>
+            {
+                if (!cancellationTokenSource.IsCancellationRequested)
+                {
+                    if (_.Exception != null)
+                    {
+                        onError(_.Exception.Flatten());
+                    }
+                    else
+                    {
+                        uiAction();
+                    }
+                }
+            }, scheduler);
+        }
+
+        /// <summary>
+        /// Starts the specified background action and continues with the UI action 
+        /// on the thread this was invoked from (typically the UI thread).
+        /// </summary>
+        /// <param name="backgroundAction">The background action.</param>
         /// <returns></returns>
         /// <author>Trevor.Williams-Ros</author>
         /// <date>2013/08/08</date>
