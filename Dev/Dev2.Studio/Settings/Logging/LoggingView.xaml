@@ -57,9 +57,9 @@
                         <TextBlock>MB</TextBlock>
                     </StackPanel>
                     <TextBlock Grid.Row="9" >
-                        <Hyperlink Command="{Binding Path=GetServerLogFileCommand}">
+                        <Hyperlink Command="{Binding Path=GetServerLogFileCommand}" Style="{StaticResource HyperLinkStyle}">
                             <fa:FontAwesome Icon="Eye" FontSize="16"></fa:FontAwesome>
-                            <Run Text="Server Log File" />
+                            <TextBlock Text="Server Log File" Style="{StaticResource HoverUnderlineStyle}"></TextBlock>
                 </Hyperlink></TextBlock>
                 </Grid>
             </StackPanel>
@@ -104,9 +104,9 @@
                         <TextBlock>MB</TextBlock>
                     </StackPanel>
                     <TextBlock Grid.Row="9" Margin="{StaticResource ControlBorderTop}">
-                        <Hyperlink Command="{Binding Path=GetStudioLogFileCommand}" Style="{StaticResource {x:Type Hyperlink}}">
+                        <Hyperlink Command="{Binding Path=GetStudioLogFileCommand}" Style="{StaticResource HyperLinkStyle}">
                             <fa:FontAwesome Icon="Eye" FontSize="16"></fa:FontAwesome>
-                            <Run Text="Studio Log File" />
+                            <TextBlock Text="Studio Log File" Style="{StaticResource HoverUnderlineStyle}"></TextBlock>
                 </Hyperlink></TextBlock>
                 </Grid>
             </StackPanel>

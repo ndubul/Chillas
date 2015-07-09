@@ -74,35 +74,37 @@
                                             AutomationProperties.AutomationId="UI_SettingsProgress_Indicator" />
 
         <Border Grid.Row="1" BorderThickness="0,0,0,0" Margin="{StaticResource ElementBorderTop}">
-
-            <StackPanel Orientation="Horizontal"
+            <Grid>
+                <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource WareWolfBlackBrush}">
+                    <StackPanel Orientation="Horizontal"
                         Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverterNegative}}">
-                <ToggleButton IsChecked="{Binding ShowSecurity, Mode=TwoWay}"
+                        <ToggleButton IsChecked="{Binding ShowSecurity, Mode=TwoWay}" Margin="0,0,0,-1"
                               Style="{StaticResource ToggleButtonStyle}"
                               AutomationProperties.AutomationId="UI_SecuritySettings_AutoID">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:FontAwesome Icon="Lock" FontSize="16" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
-                        <TextBlock Text="{Binding SecurityHeader}"/>
-                    </StackPanel>
-                    
-                </ToggleButton>
-                <ToggleButton Visibility="{Binding HasLogSettings, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverterPositive}}"
-                              IsChecked="{Binding ShowLogging, Mode=TwoWay}"
-                              Style="{StaticResource ToggleButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <fa:FontAwesome Icon="Table" FontSize="16" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
-                        <TextBlock Text="{Binding LogHeader}"/>
-                    </StackPanel>
-                </ToggleButton>
-            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <fa:FontAwesome Icon="Lock" FontSize="17" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
+                                <TextBlock FontSize="15" Text="{Binding SecurityHeader}"/>
+                            </StackPanel>
 
+                        </ToggleButton>
+                        <ToggleButton Visibility="{Binding HasLogSettings, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverterPositive}}"
+                              IsChecked="{Binding ShowLogging, Mode=TwoWay}" Margin="0,0,0,-1"
+                              Style="{StaticResource ToggleButtonStyle}" >
+                            <StackPanel Orientation="Horizontal">
+                                <fa:FontAwesome Icon="Table" FontSize="17" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
+                                <TextBlock FontSize="15" Text="{Binding LogHeader}"/>
+                            </StackPanel>
+                        </ToggleButton>
+                    </StackPanel>
+                </Border>
+            </Grid>
         </Border>
-        <Grid  Grid.Row="2" >
+        <Grid Grid.Row="2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ContentControl Grid.Row="0" Style="{StaticResource ContentViewStyle}" Margin="0,-1,0,0" />
+            <ContentControl Grid.Row="0" Style="{StaticResource ContentViewStyle}" Margin="0,5,0,0" />
 
             <StackPanel Grid.Row="1" Orientation="Horizontal"
                         VerticalAlignment="Bottom"
