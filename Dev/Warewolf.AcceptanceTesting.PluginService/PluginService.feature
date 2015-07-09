@@ -121,7 +121,7 @@ Scenario: Refreshing plugin source action step
 	When Save is clicked
 	When I save as "Testing IntegrationTestPluginNull Save"
     Then the save dialog is opened
-    Then title is "Edit IntegrationTestPluginNull Resource Save"
+    Then the tab is "Edit IntegrationTestPluginNull Resource Save"
 	And "Testing IntegrationTestPluginNull Save" tab is opened
 	
 	

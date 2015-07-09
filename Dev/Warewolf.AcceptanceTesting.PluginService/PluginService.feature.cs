@@ -383,7 +383,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 123
     testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 124
-    testRunner.Then("title is \"Edit IntegrationTestPluginNull Resource Save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("the tab is \"Edit IntegrationTestPluginNull Resource Save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 125
  testRunner.And("\"Testing IntegrationTestPluginNull Save\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
