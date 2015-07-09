@@ -11,6 +11,7 @@
 #3 Make many changes and bulk close
 #4 Make many changes and bulk save with saved and unsaved and new and edited
 #5 Persist open tabs after shut down and restart
+#6 Short cut Keys
 
 @TabControl
 Scenario: 1 Change Workflow And Close dialog Options
@@ -51,17 +52,17 @@ Scenario Outline: Change Tab And Save
 	Then "SavedItem" tab is open
 	And "<item> *" tab is closed
 	Examples: 
-	| item                      |
-	| New Plugin Connector      |
-	| New Plugin Source         |
-	| New Database Connector    |
-	| New Database Source       |
-	| New Web Service Connector |
-	| New Web Service Source    |
-	| New Email Source          |
-	| New Server Source         |
-	| Settings                  |
-	| Scheduler                 |
+	| item                        |
+	| New Plugin Connector 1      |
+	| New Plugin Source 1         |
+	| New Database Connector 1    |
+	| New Database Source 1       |
+	| New Web Service Connector 1 |
+	| New Web Service Source 1    |
+	| New Email Source 1          |
+	| New Server Source 1         |
+	| Settings                    |
+	| Scheduler                   |
 
 Scenario: 3 Change Multiple And Bulk Close
 	Given I have a "New Plugin Connector" open
@@ -97,7 +98,7 @@ Scenario: 4 Change Multiple And Bulk Save
 	And I have "SavedWorkflow" open
 	Then "Settings *" tab is "Visible"
 	Then "SavedWebService *" tab is "Visible"
-	And I Press "CTRL+SHIFT+S"
+	And I press "CTRL+SHIFT+S"
 	Then the save dialog is opened
 	And I save "New Plugin Connector" as "SavedPluginConnector"
 	Then the save dialog is opened
@@ -129,3 +130,42 @@ Scenario: 5 Persiste Menu state and tabs through shutdown
 	And I "shut down" the studio
 	And I "start" the studio
 	Then the main menu is "Unlocked"
+
+Scenario: 6 Short Cut Keys Are Working
+	Given I "start" the studio
+	And "SavedWorkflow" tab is opened
+	When I make changes to "SavedWorkflow"
+	Then "SavedWorkflow *" tab is "Visible"
+	And I press "CTRL+S"
+	Then "SavedWorkflow" tab is "Visible"
+	And I press "CTRL+R"
+	Then the debug input window is "Visible"
+	And I press "ESC"
+	Then the debug input window is "Invisible"
+	And I press "CTRL+T"
+	Then "SavedWorkflow" executes in "Debug" mode
+	And I press "CTRL+Y"
+	Then "SavedWorkflow" executes in "Browser" mode	
+	And I press "CTRL+W"
+	Then "New Workflow 1" tab is "Visible"
+	And I press "CTRL+SHIFT+W"
+	Then "New Web Service Connector 1" tab is "Visible"
+	And I press "CTRL+SHIFT+D"
+	Then "New Database Connector 1" tab is "Visible"
+	And I press "CTRL+SHIFT+P"
+	Then "New Plugin Connector 1" tab is "Visible"
+	And I press "CTRL+W"
+	Then "New Workflow 2" tab is "Visible"
+	And I press "CTRL+SHIFT+W"
+	Then "New Web Service Connector 2" tab is "Visible"
+	And I press "CTRL+SHIFT+D"
+	Then "New Database Connector 2" tab is "Visible"
+	And I press "CTRL+SHIFT+P"
+	Then "New Plugin Connector 2" tab is "Visible"
+	And I press "CTRL+SHIFT+N"
+	Then "New .Net Connector" tab is "Visible"
+	And I press "CTRL+D"
+	Then "Deploy" tab is "Visible"
+
+
+		
