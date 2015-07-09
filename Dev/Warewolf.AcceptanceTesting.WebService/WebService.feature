@@ -41,8 +41,8 @@ Feature: WebService
 ## Ensure changing Source in Step 1 changes Request URL in Step 3
 
 Scenario: Opening Web Service
-	Given I click New Web Service Connector
-	Then "New Web Service" tab is opened
+	Given I click "New Web Service Connector"
+	Then "New Web Service Connector" tab is opened
 	And Select Request Method & Source is focused
 	And "New" is "Enabled"
 	And "1 Select Request Method & Source" is "Enabled"
@@ -57,7 +57,7 @@ Scenario: Opening Web Service
 
 Scenario Outline: Create Web Service with different methods
 	Given I click "New Web Service Connector"
-	Then "New Web Service" tab is opened	
+	Then "New Web Service Connector" tab is opened
 	And Select Request Method & Source is focused
 	When I select "<Method>" as Method
 	And I select "Dev2CountriesWebService" as data source
@@ -78,11 +78,11 @@ Scenario Outline: Create Web Service with different methods
 	| Output      | Output Alias |
 	| CountryID   | CountryID    |
 	| Description | Description  |
-	When I save the webservice
+	When I click "Save" 
 	Then Save Dialog is opened
-	When I save as "Testing Web Service Connector Save"
+	And I save as "Testing Web Service Connector Save"
 	Then title is "Testing Web Service Connector Save"
-	And the tab header changes to the name of the Web Service Connectors name
+	And "Testing Web Service Connector Save" tab is opened
 	Examples:
 	| Method  | Body     |
 	| Get     | Disabled |
@@ -95,7 +95,7 @@ Scenario Outline: Create Web Service with different methods
 	
 
  Scenario: Editing Web Service
-	Given I open "Dev2GetCountriesWebService" 
+	Given I click "Dev2GetCountriesWebService" 
 	Then "Edit Web Service - Dev2GetCountriesWebService" tab is opened	
 	And method is selected as "GET"
 	And "Dev2CountriesWebService" selected as data source
@@ -122,13 +122,15 @@ Scenario Outline: Create Web Service with different methods
 
  
 Scenario: Adding parameters in request headers is updating variables 
-	Given I click "New Web Service Connector" webservice
-	Then "New Web Service Connector" tab is opened	
+	Given I click "New Web Service Connector"
+	Then "New Web Service Connector" tab is opened
 	When I select "GET" as Method
 	And I select "Dev2CountriesWebService" as data source
 	And "New" is "Enabled"
-	And "Edit" is "Enabled"
 	Then "2 Request headers" is "Enabled"
+	And input mappings are
+         | name  | Value |
+         | [[a]] | T     |
 	And "3 Variables" is "Enabled" 
 	And "Test" is "Enabled"
 	When Test Connection is "Successful"
@@ -142,13 +144,14 @@ Scenario: Adding parameters in request headers is updating variables
 	| Input     | Default Value | Required Field | Empty is Null |
 	| extension | json          |                |               |
 	| prefix    | a             |                |               |
-	| test      |               |                |               |
-	
+	| [[a]]     | T             |                |               |
+	When I save the webservice
+	Then Save Dialog is opened
  
  
  Scenario: Adding parameters in request URL 
 	Given I click "New Web Service Connector"
-	Then "New Web Service Connector" tab is opened	
+	Then "New Web Service Connector" tab is opened
 	When I select "GET" as Method
 	And I select "Dev2CountriesWebService" as data source
 	And "New" is "Enabled"
@@ -174,7 +177,7 @@ Scenario: Adding parameters in request headers is updating variables
 	
  Scenario: Adding variables at request body
 	Given I click "New Web Service Connector"
-	Then "New Web Service Connector" tab is opened		
+	Then "New Web Service Connector" tab is opened	
 	When I select "DELETE" as Method
 	And I select "Dev2CountriesWebService" as data source
 	And "New" is "Enabled"

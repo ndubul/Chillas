@@ -116,12 +116,25 @@ namespace Dev2.Settings.Logging
             var logFile = Path.Combine(localAppDataFolder, "Warewolf", "Studio Logs", "Warewolf Studio.log");
             if(File.Exists(logFile))
             {
+                var dialog = new ProgressDialog();
+                _progressDialogViewModel = new ProgressDialogViewModel(() => { dialog.Close(); }, delegate
+                {
+                    dialog.Show();
+                }, delegate
+                {
+                    dialog.Close();
+                });
+                _progressDialogViewModel.StatusChanged("Studio Log File", 0, 0);
+                _progressDialogViewModel.SubLabel = "Preparing to download Warewolf Studio log file.";
+                dialog.DataContext = _progressDialogViewModel;
+                _progressDialogViewModel.Show();
                 Process.Start(logFile);
             }
             else
             {
                 CustomContainer.Get<IPopupController>().Show("Studio Log file does not exist.", "Error", MessageBoxButton.OK, MessageBoxImage.Error, "");
             }
+            _progressDialogViewModel.Close();
         }
 
         public bool CanEditLogSettings

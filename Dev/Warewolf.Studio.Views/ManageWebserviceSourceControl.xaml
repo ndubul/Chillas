@@ -200,7 +200,7 @@
             <TextBlock Text="{Binding TestDefaultLabel}"/>
             <TextBlock >
                 <Hyperlink x:Name="TestDefault" Command="{Binding ViewInBrowserCommand}" 
-                           IsEnabled="{Binding IsHyperLinkEnabled}" 
+                           IsEnabled="{Binding IsHyperLinkEnabled}" Style="{StaticResource HyperLinkStyle}"
                            NavigateUri="{Binding TestDefault,UpdateSourceTrigger=PropertyChanged}" >
                     <TextBlock Text="{Binding TestDefault,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource HoverUnderlineStyle}"></TextBlock>
                 </Hyperlink>
