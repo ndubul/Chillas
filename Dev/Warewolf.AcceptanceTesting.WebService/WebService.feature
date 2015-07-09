@@ -80,9 +80,9 @@ Scenario Outline: Create Web Service with different methods
 	| Description | Description  |
 	When I click "Save" 
 	Then Save Dialog is opened
-	When I save as "Testing Web Service Connector Save"
+	And I save as "Testing Web Service Connector Save"
 	Then title is "Testing Web Service Connector Save"
-	And the tab header changes to the name of the Web Service Connectors name
+	And "Testing Web Service Connector Save" tab is opened
 	Examples:
 	| Method  | Body     |
 	| Get     | Disabled |

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
 using Dev2;
@@ -47,9 +46,9 @@ namespace Warewolf.Studio.ViewModels
         {
             RollbackCommand = new DelegateCommand(() =>
             {
-                var output = _explorerRepository.Rollback(ResourceId, VersionNumber);
-                parent.AreVersionsVisible = true;
-                parent.ResourceName = output.DisplayName;
+//                var output = _explorerRepository.Rollback(ResourceId, VersionNumber);
+//                parent.AreVersionsVisible = true;
+//                parent.ResourceName = output.DisplayName;
             });
             _canShowVersions = true;
             Parent = parent;
@@ -74,7 +73,7 @@ namespace Warewolf.Studio.ViewModels
             CanCreateEmailSource = true;
             CanCreateWebSource = true;
             CanCreateWebService = true;
-            //_explorerRepository = server.ExplorerRepository;
+            _explorerRepository = server.ExplorerRepository;
             //Server.PermissionsChanged += UpdatePermissions;
             ShowVersionHistory = new DelegateCommand((() => AreVersionsVisible = (!AreVersionsVisible)));
             DeleteCommand = new DelegateCommand(Delete);
@@ -347,7 +346,7 @@ namespace Warewolf.Studio.ViewModels
                 }
                 else
                 {
-                    if (IsRenaming && _explorerRepository.Rename(this, value))
+                    if (_explorerRepository != null && (IsRenaming && _explorerRepository.Rename(this, value)))
                     {
                         _resourceName = value;
                     }
@@ -586,22 +585,22 @@ namespace Warewolf.Studio.ViewModels
                 VersionHeader = !value ? "Show Version History" : "Hide Version History";
                 if (value)
                 {
-					_children = new ObservableCollection<IExplorerItemViewModel>(_explorerRepository.GetVersions(ResourceId).Select(a => new ExplorerItemViewModel(Server, this)
-                    {
-						ResourceName = "v." + a.VersionNumber + " " + a.DateTimeStamp.ToString(CultureInfo.InvariantCulture) + " " + a.Reason.Replace(".xml",""),
-                        VersionNumber = a.VersionNumber,
-						ResourceId = ResourceId,
-                         IsVersion = true,
-                         CanCreatePluginSource = false,
-                         CanCreateEmailSource = false,
-						CanCreateWebService = false,
-                         CanCreateDbService = false,
-                         CanCreateDbSource = false,
-                         CanCreatePluginService = false,
-                         CanCreateWebSource = false,
-						ResourceType = ResourceType.Version
-                    }
-                    ));
+//					_children = new ObservableCollection<IExplorerItemViewModel>(_explorerRepository.GetVersions(ResourceId).Select(a => new ExplorerItemViewModel(Server, this)
+//                    {
+//						ResourceName = "v." + a.VersionNumber + " " + a.DateTimeStamp.ToString(CultureInfo.InvariantCulture) + " " + a.Reason.Replace(".xml",""),
+//                        VersionNumber = a.VersionNumber,
+//						ResourceId = ResourceId,
+//                         IsVersion = true,
+//                         CanCreatePluginSource = false,
+//                         CanCreateEmailSource = false,
+//						CanCreateWebService = false,
+//                         CanCreateDbService = false,
+//                         CanCreateDbSource = false,
+//                         CanCreatePluginService = false,
+//                         CanCreateWebSource = false,
+//						ResourceType = ResourceType.Version
+//                    }
+//                    ));
                     OnPropertyChanged(() => Children);
                     if (Children.Count > 0) IsExpanded = true;
                 }
