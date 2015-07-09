@@ -111,9 +111,6 @@
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center"
                             Visibility="{Binding IsSavedSuccessVisible, Converter={StaticResource BoolToVisibilityConverterPositive}}">
-                    <TextBlock Text="Settings saved successfully"
-                               VerticalAlignment="Center" 
-                               AutomationProperties.AutomationId="UI_SettingsSaveMessageStackPanel_AutoID"/>
                     <fa:ImageAwesome Width="14" 
                              Height="14" 
                              Margin="{StaticResource ControlBorderLeft}" 

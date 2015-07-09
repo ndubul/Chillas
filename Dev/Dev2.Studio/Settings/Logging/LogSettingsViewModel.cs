@@ -116,12 +116,41 @@ namespace Dev2.Settings.Logging
             var logFile = Path.Combine(localAppDataFolder, "Warewolf", "Studio Logs", "Warewolf Studio.log");
             if(File.Exists(logFile))
             {
+                BackgroundWorker backgroundWorker = new BackgroundWorker();
+                var dialog = new ProgressDialog();
+                _progressDialogViewModel = new ProgressDialogViewModel(() => { dialog.Close(); }, delegate
+                {
+                    dialog.Show();
+                }, delegate
+                {
+                    dialog.Close();
+                });
+                _progressDialogViewModel.StatusChanged("Studio Log File", 0, 0);
+                _progressDialogViewModel.SubLabel = "Preparing to download Warewolf Studio log file.";
+                dialog.DataContext = _progressDialogViewModel;
+                _progressDialogViewModel.Show();
                 Process.Start(logFile);
+
+                backgroundWorker.RunWorkerAsync();
+                backgroundWorker.ProgressChanged += BackgroundWorkerOnProgressChanged;
+                backgroundWorker.DoWork += BackgroundWorkerOnDoWork;
             }
             else
             {
                 CustomContainer.Get<IPopupController>().Show("Studio Log file does not exist.", "Error", MessageBoxButton.OK, MessageBoxImage.Error, "");
             }
+        }
+
+        void BackgroundWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
+        {
+            _progressDialogViewModel.SubLabel = "";
+            _progressDialogViewModel.StatusChanged("Server Log File", progressChangedEventArgs.ProgressPercentage, progressChangedEventArgs.ProgressPercentage);
+        }
+
+        void BackgroundWorkerOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            _progressDialogViewModel.Close();
+            //Process.Start(logFile);
         }
 
         public bool CanEditLogSettings

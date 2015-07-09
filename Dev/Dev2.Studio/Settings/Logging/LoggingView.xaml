@@ -104,7 +104,7 @@
                         <TextBlock>MB</TextBlock>
                     </StackPanel>
                     <TextBlock Grid.Row="9" Margin="{StaticResource ControlBorderTop}">
-                        <Hyperlink Command="{Binding Path=GetStudioLogFileCommand}">
+                        <Hyperlink Command="{Binding Path=GetStudioLogFileCommand}" Style="{StaticResource {x:Type Hyperlink}}">
                             <fa:FontAwesome Icon="Eye" FontSize="16"></fa:FontAwesome>
                             <Run Text="Studio Log File" />
                 </Hyperlink></TextBlock>
