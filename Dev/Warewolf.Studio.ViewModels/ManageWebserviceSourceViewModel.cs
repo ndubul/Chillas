@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Windows;
@@ -99,12 +98,12 @@ namespace Warewolf.Studio.ViewModels
             var serverName = _warewolfserverName;
             if(serverName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
             {
-                serverName = "";
+                HeaderText = string.Format("{0} {1}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim());
+                Header = string.Format("{0}", ((_webServiceSource == null ? ResourceName : _webServiceSource.Name)));
             }
-            HeaderText = string.Format("{0} {1} on {2}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim(), serverName);
-            Header = string.Format("{0}", ((_webServiceSource == null ? ResourceName : _webServiceSource.Name)));
-            if(!string.IsNullOrEmpty(serverName))
+            else
             {
+                HeaderText = string.Format("{0} {1} on {2}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim(), serverName);
                 Header = string.Format("{0} - {1}", ((_webServiceSource == null ? ResourceName : _webServiceSource.Name)),serverName);
             }
         }

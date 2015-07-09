@@ -107,7 +107,7 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        public virtual void CreateWebServiceWithDifferentMethods(string method, string[] exampleTags)
+        public virtual void CreateWebServiceWithDifferentMethods(string method, string canChange, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create Web Service with different methods", exampleTags);
 #line 57
@@ -123,7 +123,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 62
  testRunner.And("I select \"Dev2CountriesWebService\" as data source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 63
- testRunner.Then("\"2 Request\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("\"2 Request\" is \"{0}\"", canChange), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 64
  testRunner.And("\"3 Variables\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 65
@@ -188,9 +188,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WebService")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Get")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Method", "Get")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:CanChange", "Disabled")]
         public virtual void CreateWebServiceWithDifferentMethods_Get()
         {
-            this.CreateWebServiceWithDifferentMethods("Get", ((string[])(null)));
+            this.CreateWebServiceWithDifferentMethods("Get", "Disabled", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -199,9 +200,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WebService")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Post")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Method", "Post")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:CanChange", "Enabled")]
         public virtual void CreateWebServiceWithDifferentMethods_Post()
         {
-            this.CreateWebServiceWithDifferentMethods("Post", ((string[])(null)));
+            this.CreateWebServiceWithDifferentMethods("Post", "Enabled", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -210,9 +212,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WebService")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Head")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Method", "Head")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:CanChange", "Enabled")]
         public virtual void CreateWebServiceWithDifferentMethods_Head()
         {
-            this.CreateWebServiceWithDifferentMethods("Head", ((string[])(null)));
+            this.CreateWebServiceWithDifferentMethods("Head", "Enabled", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -221,9 +224,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WebService")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Put")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Method", "Put")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:CanChange", "Enabled")]
         public virtual void CreateWebServiceWithDifferentMethods_Put()
         {
-            this.CreateWebServiceWithDifferentMethods("Put", ((string[])(null)));
+            this.CreateWebServiceWithDifferentMethods("Put", "Enabled", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -232,9 +236,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WebService")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Delete")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Method", "Delete")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:CanChange", "Enabled")]
         public virtual void CreateWebServiceWithDifferentMethods_Delete()
         {
-            this.CreateWebServiceWithDifferentMethods("Delete", ((string[])(null)));
+            this.CreateWebServiceWithDifferentMethods("Delete", "Enabled", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -243,9 +248,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WebService")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Trace")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Method", "Trace")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:CanChange", "Enabled")]
         public virtual void CreateWebServiceWithDifferentMethods_Trace()
         {
-            this.CreateWebServiceWithDifferentMethods("Trace", ((string[])(null)));
+            this.CreateWebServiceWithDifferentMethods("Trace", "Enabled", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -254,9 +260,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WebService")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Options")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Method", "Options")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:CanChange", "Enabled")]
         public virtual void CreateWebServiceWithDifferentMethods_Options()
         {
-            this.CreateWebServiceWithDifferentMethods("Options", ((string[])(null)));
+            this.CreateWebServiceWithDifferentMethods("Options", "Enabled", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]

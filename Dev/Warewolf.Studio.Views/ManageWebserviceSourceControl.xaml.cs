@@ -151,5 +151,15 @@ namespace Warewolf.Studio.Views
         {
             TestDefault.Command.Execute(null);
         }
+
+        public string GetHeaderText()
+        {
+            BindingExpression be = HeaderTextBlock.GetBindingExpression(TextBlock.TextProperty);
+            if (be != null)
+            {
+                be.UpdateTarget();
+            }
+            return HeaderTextBlock.Text;
+        }
     }
 }

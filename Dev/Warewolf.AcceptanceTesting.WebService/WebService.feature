@@ -60,7 +60,7 @@ Scenario Outline: Create Web Service with different methods
 	And Select Request Method & Source is focused
 	When I select "<Method>" as Method
 	And I select "Dev2CountriesWebService" as data source
-	Then "2 Request" is "Enabled"
+	Then "2 Request" is "<CanChange>"
 	And "3 Variables" is "Enabled" 
 	And "Test" is "Enabled"
 	When "Test" is selected
@@ -82,14 +82,14 @@ Scenario Outline: Create Web Service with different methods
 	Then the save dialog is closed
 	And the tab header changes to the name of the Web Service Connectors name
 	Examples:
-	| Method  |
-	| Get     |
-	| Post    |
-	| Head    |
-	| Put     |
-	| Delete  |
-	| Trace   |
-	| Options |
+	| Method  | CanChange |
+	| Get     | Disabled  |
+	| Post    | Enabled   |
+	| Head    | Enabled   |
+	| Put     | Enabled   |
+	| Delete  | Enabled   |
+	| Trace   | Enabled   |
+	| Options | Enabled   |
 	
 
  Scenario: Editing Web Service

@@ -8,6 +8,7 @@ Feature: Web Source
 Scenario: Creating New Web Source 
    Given I open New Web Source 
    Then "New Web Service Source" tab is opened
+   And title is "New Web Service Source"
    And I type Address as "http://RSAKLFSVRTFSBLD/IntegrationTestSite"
    And I type Default Query as "/GetCountries.ashx?extension=json&prefix=a"
    Then "TestQuery" is "Visible"
@@ -20,8 +21,10 @@ Scenario: Creating New Web Source
    And Password field is "InVisible"
    When Test Connecton is "Successful"
    And "Save" is "Enabled"
-   When I save the source
+   When I save as "Testing Resource Save"
    Then the save dialog is opened
+   Then title is "Edit Testing Resource Save"
+   And "Testing Resource Save" tab is opened
    When I click TestQuery
    Then the browser window opens with "http://RSAKLFSVRTFSBLD/IntegrationTestSite/GetCountries.ashx?extension=json&prefix=a"
 	
@@ -98,6 +101,7 @@ Scenario: Testing Auth type as Anonymous and swaping it resets the test connecti
 Scenario: Editing saved Web Source 
    Given I open "Test" web source
    Then "Test" tab is opened
+   And title is "Edit Test"
    And Address is "http://RSAKLFSVRTFSBLD/IntegrationTestSite"
    And Default Query is "/GetCountries.ashx?extension=json&prefix=a"
    And "Save" is "Disabled"
