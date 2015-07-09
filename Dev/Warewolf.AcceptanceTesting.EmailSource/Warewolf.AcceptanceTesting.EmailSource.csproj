@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2406B584-C85C-4676-8186-5523618EEB5B}</ProjectGuid>
+    <ProjectGuid>{F99EC086-EBEF-468F-82D7-52E911649DA8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Warewolf.AcceptanceTesting.DatabaseSource</RootNamespace>
-    <AssemblyName>Warewolf.AcceptanceTesting.DatabaseSource</AssemblyName>
+    <RootNamespace>Warewolf.AcceptanceTesting.EmailSource</RootNamespace>
+    <AssemblyName>Warewolf.AcceptanceTesting.EmailSource</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,19 +55,19 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="New Database Source.feature.cs">
-      <DependentUpon>New Database Source.feature</DependentUpon>
+    <Compile Include="Email Source.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Email Source.feature</DependentUpon>
     </Compile>
-    <Compile Include="NewDatabaseSourceSteps.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="New Database Source.feature">
+    <None Include="Email Source.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>New Database Source.feature.cs</LastGenOutput>
+      <LastGenOutput>Email Source.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

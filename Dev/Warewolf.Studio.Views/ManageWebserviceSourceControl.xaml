@@ -35,7 +35,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Background="{StaticResource WareWolfMenuBrush}" HorizontalAlignment="Stretch" Orientation="Horizontal">
-            <TextBlock Margin="5" Text="{Binding HeaderText}" Style="{StaticResource SourceHeader}" />
+            <TextBlock x:Name="HeaderTextBlock" Margin="5" Text="{Binding HeaderText}" Style="{StaticResource SourceHeader}" />
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -187,12 +187,6 @@
                     <core:HelpSetter Text="{x:Static languages:Core.DatabaseSourceTestConnectionHelp}" DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </Button>
-            <!--<Button Width="Auto" 
-                    Height="30" 
-                    Margin="{StaticResource ControlBorderRight}" 
-                    Command="{Binding ViewInBrowserCommand}" 
-                    Visibility="{Binding Path=TestPassed,Converter={StaticResource BoolToVisibilityConverter}}"
-                    Content="{Binding ViewInBrowserLabel}"></Button>-->
             <Button Width="120" 
                     Height="30" 
                     Command="{Binding CancelTestCommand}" 
@@ -204,8 +198,8 @@
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Center">
             <TextBlock Text="{Binding TestDefaultLabel}"/>
-            <TextBlock x:Name="TestDefault">
-                <Hyperlink Command="{Binding ViewInBrowserCommand}" 
+            <TextBlock >
+                <Hyperlink x:Name="TestDefault" Command="{Binding ViewInBrowserCommand}" 
                            IsEnabled="{Binding IsHyperLinkEnabled}" 
                            NavigateUri="{Binding TestDefault,UpdateSourceTrigger=PropertyChanged}" >
                     <TextBlock Text="{Binding TestDefault,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource HoverUnderlineStyle}"></TextBlock>
