@@ -26,6 +26,8 @@ namespace Warewolf.Studio.ViewModels
         bool _panelLockedOpen;
         readonly IMainViewModel _viewModel;
         bool _isOverLock;
+        ICommand _saveCommand;
+        ICommand _executeServiceCommand;
 
         public MenuViewModel(IMainViewModel mainViewModel)
         {
@@ -71,10 +73,32 @@ namespace Warewolf.Studio.ViewModels
 
         public ICommand DeployCommand { get; set; }
         public ICommand NewCommand { get; set; }
-        public ICommand SaveCommand { get; set; }
+        public ICommand SaveCommand
+        {
+            get
+            {
+                return _saveCommand;
+            }
+            set
+            {
+                _saveCommand = value;
+                OnPropertyChanged(() => SaveCommand);
+            }
+        }
         public ICommand OpenSettingsCommand { get; set; }
         public ICommand OpenSchedulerCommand { get; set; }
-        public ICommand ExecuteServiceCommand { get; set; }
+        public ICommand ExecuteServiceCommand
+        {
+            get
+            {
+                return _executeServiceCommand;
+            }
+            set
+            {
+                _executeServiceCommand = value;
+                OnPropertyChanged(() => ExecuteServiceCommand);
+            }
+        }
         public ICommand LockCommand { get; set; }
         public ICommand SlideOpenCommand { get; set; }
         public ICommand SlideClosedCommand { get; set; }
