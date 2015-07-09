@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Explorer;
@@ -104,21 +105,21 @@ namespace Warewolf.Studio.ViewModels
 
         void CreateFolder()
         {
-//                IsExpanded = true;
-//                var id = Guid.NewGuid();
-//                var name = GetChildNameFromChildren();
-//			Server.ExplorerRepository.CreateFolder(GlobalConstants.ServerWorkspaceID, name, id);
-//                var child = new ExplorerItemViewModel(Server,null)
-//               {
-//                   ResourceName = name,
-//                   ResourceId = id,
-//                   ResourceType = ResourceType.Folder,
-//               };
-//               _children.Add(child);
-//               OnPropertyChanged(() => Children);
-//               child.IsSelected = true;
-//               child.IsRenaming = true;
-//             
+                IsExpanded = true;
+                var id = Guid.NewGuid();
+                var name = GetChildNameFromChildren();
+			Server.ExplorerRepository.CreateFolder(GlobalConstants.ServerWorkspaceID, name, id);
+                var child = new ExplorerItemViewModel(Server,null)
+               {
+                   ResourceName = name,
+                   ResourceId = id,
+                   ResourceType = ResourceType.Folder,
+               };
+               _children.Add(child);
+               OnPropertyChanged(() => Children);
+               child.IsSelected = true;
+               child.IsRenaming = true;
+             
             
         }
 

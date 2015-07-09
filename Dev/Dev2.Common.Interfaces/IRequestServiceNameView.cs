@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Practices.Prism.Mvvm;
 
 namespace Dev2.Common.Interfaces
@@ -6,13 +7,17 @@ namespace Dev2.Common.Interfaces
     {
         void ShowView();
         void RequestClose();
-//        bool HasServer(string serverName);
-//        void CreateNewFolder(string newFolderName, string rootPath);
-//        IExplorerView GetExplorerView();
-//        void OpenFolder(string folderName);
-//        void EnterName(string serviceName);
-//        bool IsSaveButtonEnabled();
-//        string GetValidationMessage();
-//        List<IExplorerItemViewModel> GetFoldersVisible();
+        bool HasServer(string serverName);
+        void CreateNewFolder(string newFolderName, string rootPath);
+        IExplorerView GetExplorerView();
+        void OpenFolder(string folderName);
+        void EnterName(string serviceName);
+        bool IsSaveButtonEnabled();
+        string GetValidationMessage();
+        List<IExplorerTreeItem> GetFoldersVisible();
+
+        void Filter(string filter);
+
+        void Cancel();
     }
 }

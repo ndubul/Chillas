@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -74,30 +75,30 @@ namespace Warewolf.Studio.Views
             RemoveBlackOutEffect();
             _window.Close();
         }
-//
-//        public bool HasServer(string serverName)
-//        {
-//            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
-//            var environmentViewModel = viewTestClass.OpenEnvironmentNode(serverName);
-//            return environmentViewModel != null;
-//        }
-//
-//        public void CreateNewFolder(string newFolderName, string rootPath)
-//        {
-//            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
-//            viewTestClass.PerformFolderAdd(newFolderName,rootPath);
-//        }
-//
-//        public IExplorerView GetExplorerView()
-//        {
-//            return ExplorerView;
-//        }
-//
-//        public void OpenFolder(string folderName)
-//        {
-//            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
-//            viewTestClass.OpenFolderNode(folderName);
-//        }
+
+        public bool HasServer(string serverName)
+        {
+            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
+            var environmentViewModel = viewTestClass.OpenEnvironmentNode(serverName);
+            return environmentViewModel != null;
+        }
+
+        public void CreateNewFolder(string newFolderName, string rootPath)
+        {
+            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
+            viewTestClass.PerformFolderAdd(newFolderName,rootPath);
+        }
+
+        public IExplorerView GetExplorerView()
+        {
+            return ExplorerView;
+        }
+
+        public void OpenFolder(string folderName)
+        {
+            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
+            viewTestClass.OpenFolderNode(folderName);
+        }
 
         public void EnterName(string serviceName)
         {
@@ -119,11 +120,23 @@ namespace Warewolf.Studio.Views
             return ErrorMessageTextBlock.Text;
         }
 
-//        public List<IExplorerItemViewModel> GetFoldersVisible()
-//        {
-//            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
-//            return viewTestClass.GetFoldersVisible();
-//        }
+        public List<IExplorerTreeItem> GetFoldersVisible()
+        {
+            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
+            return viewTestClass.GetFoldersVisible();
+        }
+
+        public void Filter(string filter)
+        {
+            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
+            viewTestClass.PerformSearch(filter);
+        }
+
+        public void Cancel()
+        {
+            CancelButton.Command.Execute(null);
+        }
+
         /// <summary>
         /// Attaches events and names to compiled content. 
         /// </summary>

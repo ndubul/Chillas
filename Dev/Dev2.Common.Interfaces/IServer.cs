@@ -15,8 +15,8 @@ namespace Dev2.Common.Interfaces
         Task<IExplorerItem> LoadExplorer();
        // IList<IServer> GetServerConnections();
         //IList<IToolDescriptor> LoadTools();
-//        [JsonIgnore]
-//        IExplorerRepository ExplorerRepository { get; }
+        [JsonIgnore]
+        IExplorerRepository ExplorerRepository { get; }
         [JsonIgnore]
         IStudioUpdateManager UpdateRepository { get; }
         [JsonIgnore]

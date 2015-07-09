@@ -1,7 +1,6 @@
 ﻿using System;
-using Dev2.Common.Interfaces.Explorer;
 
-namespace Dev2.Common.Interfaces.ServerProxyLayer
+namespace Dev2.Common.Interfaces
 {
     /// <summary>
     /// Explorer update manager
