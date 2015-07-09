@@ -189,7 +189,7 @@
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="ResourceSource"
                                           AutomationProperties.AutomationId ="UI_NewPluginSourceContextMenuItem_AutoID" />
-                                <MenuItem Header="New Web Source"
+                                <MenuItem Header="New Web Service Source"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="WebSource"
