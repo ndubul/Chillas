@@ -5,7 +5,7 @@ Feature: PluginService
 	I want to be able to create plugin services
 
 Scenario: Opening Plugin Service Connector tab
-	Given I click New Plugin Service Connector
+	Given I click "New Plugin Service Connector"
 	And "New Plugin Service" tab is opened
 	And Select a source is focused
 	And "1 Select a source" is "Enabled"
@@ -24,8 +24,8 @@ Scenario: Opening Plugin Service Connector tab
 
 
 Scenario: Create new Plugin Source
-	Given I have clicked New Plugin Service Connector
-	And the "Plugin Service" tab is opened
+	Given I click "New Plugin Service Connector"
+	And "New Plugin Service" tab is opened
 	And Select a source is focused
 	And all other steps are "Disabled"
 	And the "New" button is clicked
@@ -34,7 +34,8 @@ Scenario: Create new Plugin Source
 
 
 Scenario: Creating Plugin Service by selecting existing source
-    Given I have "New Plugin Service" tab opened
+	Given I click "New Plugin Service Connector"
+	And "New Plugin Service" tab is opened
 	When I select "testingPluginSrc" as source
 	And "2 Select a namespace" is "Enabled"
 	And "3 Select an action" is "Disabled" 
@@ -45,7 +46,7 @@ Scenario: Creating Plugin Service by selecting existing source
 	And "Test" is "Enabled"
 	When "Test" is clicked
 	And the test connection is "successful"
-	Then "5 Edit Dfault and Mapping Names" is "Enabled" 
+	Then "5 Edit Default and Mapping Names" is "Enabled" 
 	And Save is "Enabled"
 	And Inputs looks like
 	| Input   | Default Value | Required Field | Empty Null |
@@ -55,20 +56,26 @@ Scenario: Creating Plugin Service by selecting existing source
 	| Name   | Name         |
 	When Save is clicked
 	Then the Save Dialog is opened
-	And "Ok" is "Disabled"
-	And "cancel" is "Enabled"
+	And "Save" is "Disabled"
+	And "Cancel" is "Enabled"
 	When a name is entered
-	Then "Ok" is "Enabled"
+	Then "Save" is "Enabled"
 	
 
 Scenario: Opening saved Plugin Service 
-	Given I have "Edit Plugin Service - IntegrationTestPluginNull" tab opened
+	Given I click "Edit Plugin Service - IntegrationTestPluginNull" 
+	And "Edit Plugin Service - IntegrationTestPluginNull" tab is opened
 	And "testingPluginSrc" is selected as source
-	And all steps are enabled 
+	And "2 Select a namespace" is "Enabled"
+	And "3 Select an action" is "Enabled"
+	And "4 Provide Test Values" is "Enabled"
+	And "5 Edit Default and Mapping Names" is "Enabled"   
 	And I change the source from "testingPluginSrc" to "PrimitivePlugintestSrc"
-	Then all other steps become "Disabled"
+	Then "2 Select a namespace" is "Enabled"
+	And "3 Select an action" is "Disabled"
+	And "4 Provide Test Values" is "Disabled"
+	And "5 Edit Default and Mapping Names" is "Enabled" 
 	And "Save" is "Disabled"
-	But "2 Select a namespace" becomes "Enabled"
     When I seleced "Dev2.PrimitiveTestDLL.TestClass" as namespace
 	Then "3 Select an action" is "Enabled" 
 	And "FetchStringvalue" is selected as action
@@ -77,30 +84,33 @@ Scenario: Opening saved Plugin Service
 	 | Name | value |
 	 |      |       |
 	When Test connection is "Successful"
-	Then "5 Edit Dfault and Mapping Names" is "Enabled" 
+	Then "5 Default and Mapping" is "Enabled" 
 	Then Save is "Enabled"
 	And Inputs looks like
 	| Input | Default Value | Required Field | Empty Null |
-	| data  |               | Selected       | Selected   |
+	| data  |               |                |            |
 	Then  Outputs looks like
 	| Output | Output Alias |
 	| Name   | Name         |
-	When Save is clicked
-	Then the Save Dialog is opened	
+	When I save as "IntegrationTestPluginNull Save"
+    Then the save dialog is opened
+    Then title is "IntegrationTestPluginNull Save"
 
 
 Scenario: Refreshing plugin source action step 
-	Given I have "Edit Plugin Service - IntegrationTestPluginNull" tab opened
-	And "testingPluginSrc" is selected as source
-	And "Edit" button is "Enabled"
-	And all steps are "Enabled"
-	When "Refresh" is seleced
-	Then "Select an action" is "loaded"
-	And action is selected as "DummySent" as default
+	Given I click "Edit Plugin Service - IntegrationTestPluginNull"
+	And "Edit Plugin Service - IntegrationTestPluginNull" tab is opened
+	And "2 Select a namespace" is "Enabled"
+	And "3 Select an action" is "Enabled"
+	And "4 Provide Test Values" is "Enabled"
+	And "5 Edit Default and Mapping Names" is "Enabled"   
+	When I click "Refresh" 
+	Then "3 Select an action" is "Enabled" 
+	And "FetchStringvalue" is selected as action
 	And "4 Provide Test Values" is "Enabled" 
 	And "Test" is "Enabled"
 	When test connection is "Successful"
-	And "5 Edit Dfault and Mapping Names" is "Enabled" 
+	And "5 Edit Default and Mapping Names" is "Enabled" 
 	Then Save is "Enabled"
 	And Inputs looks like
 	| Input | Default Value | Required Field | Empty Null |
@@ -109,14 +119,15 @@ Scenario: Refreshing plugin source action step
 	| Output | Output Alias |
 	| Name   | Name         |
 	When Save is clicked
-	Then the Save Dialog is opened	
-	When the Plugin is saved the save window is closed
-	And the tab header changes to the name of the Plugin Connectors name
+	When I save as "Testing IntegrationTestPluginNull Save"
+    Then the save dialog is opened
+    Then title is "Edit IntegrationTestPluginNull Resource Save"
+	And "Testing IntegrationTestPluginNull Save" tab is opened
 	
 	
 
 Scenario: Plugin service GetType test
-    Given I have "New Plugin Service Connector" tab opened
+	Given I click "New Plugin Service Connector"
 	When I select "Email Plugin" as source
 	And "2 Select a namespace" is "Enabled"
 	When I selecet "Unlimited.Framework.Plugins.EmailPlugin" as namespace
@@ -124,11 +135,11 @@ Scenario: Plugin service GetType test
 	When I select "GetType" as action
 	And "4 Provide Test Values" is "Enabled" 
 	And "Test" is "Enabled"
-	When "Test" is selected
-	When test connection is "Unsuccessful"
-	Then the "Test Result" has validation error "True"
+	When I click "Test"
+	Then test connection is "Unsuccessful"
+	And the "Test Result" has validation error "True"
 	Then Save is "Disabled"
-	And "5 Edit Dfault and Mapping Names" is "Disabled" 
+	And "5 Edit Default and Mapping Names" is "Disabled" 
 	
 	
 	
