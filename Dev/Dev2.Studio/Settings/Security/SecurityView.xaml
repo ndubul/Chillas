@@ -55,7 +55,7 @@
         </Style>
 
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorderTop}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>

@@ -21,35 +21,13 @@
                              AutomationProperties.AutomationId="LogSettingsViewContent" DataContext="{Binding LogSettingsViewModel, Mode=OneWay}"/>
         <security:SecurityView x:Key="SecurityView"
                                AutomationProperties.AutomationId="SecurityViewContent" DataContext="{Binding SecurityViewModel, Mode=OneWay}" />
-
-        <Style x:Key="ContentViewStyle" TargetType="{x:Type ContentControl}">
-            <Setter Property="Margin" Value="10,0,0,0"/>
-            <Style.Triggers>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding Path=IsLoading, Mode=OneWay}" Value="False" />
-                        <Condition Binding="{Binding Path=ShowSecurity, Mode=TwoWay}" Value="True" />
-                        <Condition Binding="{Binding Path=ShowLogging, Mode=TwoWay}" Value="False" />
-                    </MultiDataTrigger.Conditions>
-                    <Setter Property="Content" Value="{StaticResource SecurityView}" />
-                </MultiDataTrigger>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding Path=IsLoading, Mode=OneWay}" Value="False" />
-                        <Condition Binding="{Binding Path=ShowSecurity, Mode=TwoWay}" Value="False" />
-                        <Condition Binding="{Binding Path=ShowLogging, Mode=TwoWay}" Value="True" />
-                    </MultiDataTrigger.Conditions>
-                    <Setter Property="Content" Value="{StaticResource LogSettingsView}" />
-                </MultiDataTrigger>
-            </Style.Triggers>
-        </Style>
     </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -75,38 +53,34 @@
 
         <Border Grid.Row="1" BorderThickness="0,0,0,0" Margin="{StaticResource ElementBorderTop}">
             <Grid>
-                <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource WareWolfBlackBrush}">
-                    <StackPanel Orientation="Horizontal"
-                        Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverterNegative}}">
-                        <ToggleButton IsChecked="{Binding ShowSecurity, Mode=TwoWay}" Margin="0,0,0,-1"
-                              Style="{StaticResource ToggleButtonStyle}"
-                              AutomationProperties.AutomationId="UI_SecuritySettings_AutoID">
+                <TabControl Style="{StaticResource TabControlStyle}">
+                    <TabItem Style="{StaticResource TabItemStyle}">
+                        <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <fa:FontAwesome Icon="Lock" FontSize="17" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
                                 <TextBlock FontSize="15" Text="{Binding SecurityHeader}"/>
                             </StackPanel>
-
-                        </ToggleButton>
-                        <ToggleButton Visibility="{Binding HasLogSettings, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverterPositive}}"
-                              IsChecked="{Binding ShowLogging, Mode=TwoWay}" Margin="0,0,0,-1"
-                              Style="{StaticResource ToggleButtonStyle}" >
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <StaticResource ResourceKey="SecurityView" />
+                        </TabItem.Content>
+                    </TabItem>
+                    <TabItem Style="{StaticResource TabItemStyle}">
+                        <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <fa:FontAwesome Icon="Table" FontSize="17" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
                                 <TextBlock FontSize="15" Text="{Binding LogHeader}"/>
                             </StackPanel>
-                        </ToggleButton>
-                    </StackPanel>
-                </Border>
+                        </TabItem.Header>
+                        <TabItem.Content>
+                            <StaticResource ResourceKey="LogSettingsView" />
+                        </TabItem.Content>
+                    </TabItem>
+                </TabControl>
             </Grid>
         </Border>
         <Grid Grid.Row="2" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <ContentControl Grid.Row="0" Style="{StaticResource ContentViewStyle}" Margin="0,5,0,0" />
-
-            <StackPanel Grid.Row="1" Orientation="Horizontal"
+            <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Right">
 
@@ -134,7 +108,6 @@
                         Height="28" 
                         AutomationProperties.AutomationId="UI_SaveSettingsbtn_AutoID"/>
             </StackPanel>
-
         </Grid>
     </Grid>
 </UserControl>

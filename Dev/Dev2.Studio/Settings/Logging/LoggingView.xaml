@@ -10,7 +10,7 @@
              d:DesignWidth="300"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance logging:ILogSettings}">
-    <Grid IsEnabled="{Binding CanEditLogSettings, Mode=OneWay}">
+    <Grid IsEnabled="{Binding CanEditLogSettings, Mode=OneWay}" Margin="{StaticResource ElementBorderTop}">
         <Grid.Resources>
             <converters:SimpleEnumToBoolConverter x:Key="EnumBooleanConverter" />
         </Grid.Resources>
