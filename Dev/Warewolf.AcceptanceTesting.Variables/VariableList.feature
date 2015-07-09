@@ -16,6 +16,8 @@ Feature: VariableList
 #Ensure user is able to select variables as input.
 #Ensure user is able to select variables as output.
 #Ensure delete button in the textbox is deleting variable in the variable textbox.
+#Ensure removal from design surface updates list and list updates change list correctly
+#Ensure bad variable names are in an error state
 
 Scenario: Variables adding in variable list and removing unused
 	Given I have variables as
@@ -149,4 +151,51 @@ Scenario: Variable Errors
 	 | rec().1a | YES         | Recordset fields must begin with alphabetical characters |
 	 | rec().b  | YES         | Duplicate Variable                                       |
 	 | rec().b  | YES         | Duplicate Variable                                       |
+	
+Scenario: Variables removed from design surface and list
+	Given I have variables as
+    | Variable    | 
+    | [[rec().a]] | 
+    | [[rec().b]] | 
+    | [[mr()]]    | 
+    | [[Var]]     | 
+    | [[a]]       | 
+    | [[lr().a]]  | 
+	And the Variable Names are
+	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
+	| Var           |                |                  | YES      |        |
+	| a             | YES            |                  |       |        |
+	And the Recordset Names are
+	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
+	| rec()          |                |                  |       |        |
+	| rec().a        |                | YES              |       | YES    |
+	| rec().b        | YES            |                  |       |        |
+	| mr()           |             |                  |       |        |
+	| lr()           | YES            |                  |       |        |
+	| lr().a         | YES            |                  |       |        |
+	And I remove variable "[[Var]]"
+	And I remove variable "[[mr()]]
+	And the Variable Names are
+	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
+	| a             | YES            |                  |       |        |
+	And the Recordset Names are
+	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
+	| rec()          |                |                  |       |        |
+	| rec().a        |                | YES              |       | YES    |
+	| rec().b        | YES            |                  |       |        |
+	| lr()           | YES            |                  |       |        |
+	| lr().a         | YES            |                  |       |        |
+	And I change variable Name from "a" to ""
+	And I change Recordset Name from "rec()" to "this"
+	And the Variable Names are
+	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
+	And the Recordset Names are
+	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
+	| this()         | YES            |                  |       |        |
+	| this().a       | YES            | YES              |       | YES    |
+	| this().b       | YES            |                  |       |        |
+	| lr()           | YES            |                  |       |        |
+	| lr().a         | YES            |                  |       |        |
+	| rec()          |                |                  |       |        |
+	| rec().a        |                | YES              |       | YES    |
 	
