@@ -10,6 +10,7 @@
 #2 Making changes on tabs, makes * and saving removes *
 #3 Make many changes and bulk close
 #4 Make many changes and bulk save with saved and unsaved and new and edited
+#5 Persist open tabs after shut down and restart
 
 @TabControl
 Scenario: 1 Change Workflow And Close dialog Options
@@ -106,5 +107,25 @@ Scenario: 4 Change Multiple And Bulk Save
 	Then "SavedWebService" tab is "Visible"
 	Then "New Plugin Source " tab is "Visible"
 	Then "SavedServerSource" tab is "Visible"
-	Then "SavedWorkflow" tab is "visible"
+	Then "SavedWorkflow" tab is "Visible"
 
+Scenario: 5 Persiste Menu state and tabs through shutdown
+	Given I "start" the studio
+	And "New Workflow 1" tab is opened
+	And "New Workflow 2" tab is opened
+	When I make changes to "New Workflow 2"
+	And "New Workflow 3" tab is opened
+	And "SavedWorkflow" tab is opened
+	When I make changes to "New Workflow 3"
+	Then I "Lock" the Main Menu "Open"
+	And I "shut" down the studio
+	And I "start" the studio
+	Then "New Workflow 1" tab is "Visible"
+	Then "New Workflow 2 *" tab is "Visible"
+	Then "New Workflow 3 *" tab is "Visible"
+	Then "SavedWorkflow" tab is "Visible"
+	And the main menu is "Locked Open"
+	And I "Unlock" the main menu
+	And I "shut down" the studio
+	And I "start" the studio
+	Then the main menu is "Unlocked"
