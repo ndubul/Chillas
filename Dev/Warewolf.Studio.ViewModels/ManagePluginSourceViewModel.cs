@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -21,6 +20,7 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
+using Dev2.Common.Interfaces.Threading;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warewolf.Core;
@@ -45,14 +45,15 @@ namespace Warewolf.Studio.ViewModels
         private IDllListingModel _gacItem;
 
         /// <exception cref="Exception">A delegate callback throws an exception.</exception>
-        public ManagePluginSourceViewModel(IManagePluginSourceModel updateManager, IEventAggregator aggregator)
+        public ManagePluginSourceViewModel(IManagePluginSourceModel updateManager, IEventAggregator aggregator,IAsyncWorker asyncWorker)
             : base(ResourceType.PluginSource)
         {
+            VerifyArgument.IsNotNull("asyncWorker", asyncWorker);
             VerifyArgument.IsNotNull("updateManager", updateManager);
             VerifyArgument.IsNotNull("aggregator", aggregator);
             _updateManager = updateManager;
             _aggregator = aggregator;
-
+            AsyncWorker = asyncWorker;
             HeaderText = Resources.Languages.Core.PluginSourceNewHeaderLabel;
             Header = Resources.Languages.Core.PluginSourceNewHeaderLabel;
             OkCommand = new DelegateCommand(Save, CanSave);
@@ -65,6 +66,8 @@ namespace Warewolf.Studio.ViewModels
             _warewolfserverName = updateManager.ServerName;
             ResourceName = HeaderText;
         }
+
+        public IAsyncWorker AsyncWorker { get; set; }
 
         public ICommand RefreshCommand { get; set; }
 
@@ -80,7 +83,7 @@ namespace Warewolf.Studio.ViewModels
 
         void PerformLoadAll()
         {
-            new Task(() =>
+            AsyncWorker.Start(() =>
             {
                 IsLoading = true;
                 var names = _updateManager.GetDllListings(null).Select(input => new DllListingModel(_updateManager, input)).ToList();
@@ -93,7 +96,7 @@ namespace Warewolf.Studio.ViewModels
                         GacItem = DllListings[1];
                     }
                 });
-            }).Start();
+            });            
         }
 
         public ICommand ClearSearchTextCommand { get; set; }
@@ -156,8 +159,8 @@ namespace Warewolf.Studio.ViewModels
         }
 
         /// <exception cref="Exception">A delegate callback throws an exception.</exception>
-        public ManagePluginSourceViewModel(IManagePluginSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator)
-            : this(updateManager, aggregator)
+        public ManagePluginSourceViewModel(IManagePluginSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator,IAsyncWorker asyncWorker)
+            : this(updateManager, aggregator, asyncWorker)
         {
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
 
@@ -166,8 +169,8 @@ namespace Warewolf.Studio.ViewModels
         }
 
         /// <exception cref="Exception">A delegate callback throws an exception.</exception>
-        public ManagePluginSourceViewModel(IManagePluginSourceModel updateManager, IEventAggregator aggregator, IPluginSource pluginSource)
-            : this(updateManager, aggregator)
+        public ManagePluginSourceViewModel(IManagePluginSourceModel updateManager, IEventAggregator aggregator, IPluginSource pluginSource,IAsyncWorker asyncWorker)
+            : this(updateManager, aggregator,asyncWorker)
         {
             VerifyArgument.IsNotNull("pluginSource", pluginSource);
             _pluginSource = pluginSource;
@@ -261,20 +264,25 @@ namespace Warewolf.Studio.ViewModels
 
         public override IPluginSource ToModel()
         {
-            if (_pluginSource == null)
-                return new PluginSourceDefinition
-                {
-                    Name = ResourceName,
-                    SelectedDll = _selectedDll,
-                    Id = _pluginSource == null ? Guid.NewGuid() : _pluginSource.Id
-                };
-            // ReSharper disable once RedundantIfElseBlock
-            else
+            if (Item == null)
             {
-                _pluginSource.SelectedDll = _selectedDll;
-                return _pluginSource;
-
+                if(_pluginSource == null)
+                {
+                    Item = new PluginSourceDefinition
+                    {
+                        Name = ResourceName,
+                        SelectedDll = _selectedDll,
+                        Id = _pluginSource == null ? Guid.NewGuid() : _pluginSource.Id
+                    };
+                }
+                else
+                {
+                    _pluginSource.SelectedDll = _selectedDll;
+                    Item = _pluginSource;
+                }
+                return Item;
             }
+            return Item;
         }
         IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
 
