@@ -33,10 +33,15 @@
                                   KeyboardNavigation.TabIndex="1" />
                         <Border x:Name="Border"
                                 Grid.Row="1"
-                                BorderThickness="1"
+                                BorderThickness="0,1,0,0"
+                                BorderBrush="{StaticResource WareWolfBlackBrush}"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabIndex="2"
                                 KeyboardNavigation.TabNavigation="Local">
+
+                            <Border.Background>
+                                <SolidColorBrush Color="White"/>
+                            </Border.Background>
                             <ContentPresenter x:Name="PART_SelectedContentHost"
                                               Margin="0"
                                               ContentSource="SelectedContent" />
@@ -67,7 +72,7 @@
                                 <VisualState x:Name="Selected">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{TemplateBinding BorderBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="1" Value="{TemplateBinding BorderBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -78,12 +83,6 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Border x:Name="Border" BorderThickness="1,1,1,0">
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="{StaticResource WarewolfPanelGrey}" />
-                            </Border.BorderBrush>
-                            <Border.Background>
-                                <SolidColorBrush Color="{StaticResource WarewolfPanelGrey}" />
-                            </Border.Background>
                             <ContentPresenter x:Name="ContentSite"
                                               Margin="12,2,12,2"
                                               HorizontalAlignment="Center"
@@ -95,10 +94,19 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Panel.ZIndex" Value="100" />
-                            <!--<Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemSelectedBackgroundBrush}" />
-                            <Setter TargetName="ContentSite" Property="Style" Value="{StaticResource SidebarTabForegroundStyle}" />-->
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemBorderBrush}" />
-                            <Setter TargetName="ContentSite" Property="Style" Value="{StaticResource TabBackgroundStyle}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource WareWolfBlackBrush}"/>
+                            <!--<Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemBorderBrush}" />-->
+                            <!--<Setter TargetName="ContentSite" Property="Style" Value="{StaticResource TabBackgroundStyle}" />-->
+                            <Setter Property="Opacity" >
+                                <Setter.Value>1</Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <!--<Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemBorderBrush}" />-->
+                            <!--<Setter TargetName="ContentSite" Property="Style" Value="{StaticResource TabBackgroundStyle}" />-->
+                            <Setter Property="Opacity" >
+                                <Setter.Value>0.5</Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

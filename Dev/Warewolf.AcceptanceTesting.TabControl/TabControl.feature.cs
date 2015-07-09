@@ -77,61 +77,61 @@ namespace Warewolf.AcceptanceTesting.TabControl
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Change Workflow And Close dialog Options", new string[] {
                         "TabControl"});
-#line 16
-this.ScenarioSetup(scenarioInfo);
 #line 17
- testRunner.Given("I have a New Workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 18
- testRunner.Then("\"New Workflow 1\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("I have a New Workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
- testRunner.When("\"New Workflow 1\" tab is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("\"New Workflow 1\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 20
- testRunner.Then("do you want to close dialog is not opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 21
- testRunner.Then("save dialog is not opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 22
- testRunner.Then("I have a New Workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 23
- testRunner.And("tab is \"New Workflow 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 24
- testRunner.And("I make changes to \"New Workflow 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
- testRunner.Then("tab is \"New Workflow 1 *\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 26
- testRunner.When("\"New Workflow 1 *\" tab is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 27
- testRunner.Then("do you want to close \"New Workflow 1\" dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 28
- testRunner.When("I say \"Cancel\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 29
- testRunner.Then("do you want to close dialog is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 30
- testRunner.And("tab is \"New Workflow 1 *\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
  testRunner.When("\"New Workflow 1\" tab is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 32
- testRunner.Then("do you want to close dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 33
- testRunner.When("I say \"No\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 34
- testRunner.Then("do you want to close dialog is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 35
- testRunner.And("\"New Workflow 1\" tab is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 36
+#line 21
  testRunner.Then("do you want to close dialog is not opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 37
+#line 22
+ testRunner.Then("save dialog is not opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 23
  testRunner.Then("I have a New Workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 38
+#line 24
  testRunner.And("tab is \"New Workflow 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
+#line 25
  testRunner.And("I make changes to \"New Workflow 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
+#line 26
+ testRunner.Then("tab is \"New Workflow 1 *\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 27
  testRunner.When("\"New Workflow 1 *\" tab is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 41
+#line 28
  testRunner.Then("do you want to close \"New Workflow 1\" dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 29
+ testRunner.When("I say \"Cancel\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 30
+ testRunner.Then("do you want to close dialog is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 31
+ testRunner.And("tab is \"New Workflow 1 *\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 32
+ testRunner.When("\"New Workflow 1\" tab is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 33
+ testRunner.Then("do you want to close dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 34
+ testRunner.When("I say \"No\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 35
+ testRunner.Then("do you want to close dialog is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 36
+ testRunner.And("\"New Workflow 1\" tab is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 37
+ testRunner.Then("do you want to close dialog is not opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 38
+ testRunner.Then("I have a New Workflow open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 39
+ testRunner.And("tab is \"New Workflow 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 40
+ testRunner.And("I make changes to \"New Workflow 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+ testRunner.When("\"New Workflow 1 *\" tab is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 42
- testRunner.When("I say \"Yes\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("do you want to close \"New Workflow 1\" dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 43
+ testRunner.When("I say \"Yes\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 44
  testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -140,21 +140,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ChangeTabAndSave(string item, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Change Tab And Save", exampleTags);
-#line 45
-this.ScenarioSetup(scenarioInfo);
 #line 46
- testRunner.Given(string.Format("I have a {0} open", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 47
- testRunner.Then(string.Format("\"{0}\" tab is opened", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given(string.Format("I have a {0} open", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 48
- testRunner.When(string.Format("I make changes to \"{0}\"", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then(string.Format("\"{0}\" tab is opened", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 49
- testRunner.Then(string.Format("\"{0} *\" tab is opened", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When(string.Format("I make changes to \"{0}\"", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 50
- testRunner.When(string.Format("I save \"{0} *\" tab as \"SavedItem\"", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then(string.Format("\"{0} *\" tab is opened", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 51
- testRunner.Then("\"SavedItem\" tab is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When(string.Format("I save \"{0} *\" tab as \"SavedItem\"", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 52
+ testRunner.Then("\"SavedItem\" tab is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 53
  testRunner.And(string.Format("\"{0} *\" tab is closed", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -163,81 +163,81 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Plugin Connector")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Plugin Connector")]
-        public virtual void ChangeTabAndSave_NewPluginConnector()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Plugin Connector 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Plugin Connector 1")]
+        public virtual void ChangeTabAndSave_NewPluginConnector1()
         {
-            this.ChangeTabAndSave("New Plugin Connector", ((string[])(null)));
+            this.ChangeTabAndSave("New Plugin Connector 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Plugin Source")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Plugin Source")]
-        public virtual void ChangeTabAndSave_NewPluginSource()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Plugin Source 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Plugin Source 1")]
+        public virtual void ChangeTabAndSave_NewPluginSource1()
         {
-            this.ChangeTabAndSave("New Plugin Source", ((string[])(null)));
+            this.ChangeTabAndSave("New Plugin Source 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Database Connector")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Database Connector")]
-        public virtual void ChangeTabAndSave_NewDatabaseConnector()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Database Connector 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Database Connector 1")]
+        public virtual void ChangeTabAndSave_NewDatabaseConnector1()
         {
-            this.ChangeTabAndSave("New Database Connector", ((string[])(null)));
+            this.ChangeTabAndSave("New Database Connector 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Database Source")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Database Source")]
-        public virtual void ChangeTabAndSave_NewDatabaseSource()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Database Source 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Database Source 1")]
+        public virtual void ChangeTabAndSave_NewDatabaseSource1()
         {
-            this.ChangeTabAndSave("New Database Source", ((string[])(null)));
+            this.ChangeTabAndSave("New Database Source 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Web Service Connector")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Web Service Connector")]
-        public virtual void ChangeTabAndSave_NewWebServiceConnector()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Web Service Connector 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Web Service Connector 1")]
+        public virtual void ChangeTabAndSave_NewWebServiceConnector1()
         {
-            this.ChangeTabAndSave("New Web Service Connector", ((string[])(null)));
+            this.ChangeTabAndSave("New Web Service Connector 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Web Service Source")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Web Service Source")]
-        public virtual void ChangeTabAndSave_NewWebServiceSource()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Web Service Source 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Web Service Source 1")]
+        public virtual void ChangeTabAndSave_NewWebServiceSource1()
         {
-            this.ChangeTabAndSave("New Web Service Source", ((string[])(null)));
+            this.ChangeTabAndSave("New Web Service Source 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Email Source")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Email Source")]
-        public virtual void ChangeTabAndSave_NewEmailSource()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Email Source 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Email Source 1")]
+        public virtual void ChangeTabAndSave_NewEmailSource1()
         {
-            this.ChangeTabAndSave("New Email Source", ((string[])(null)));
+            this.ChangeTabAndSave("New Email Source 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Change Tab And Save")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Server Source")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Server Source")]
-        public virtual void ChangeTabAndSave_NewServerSource()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Server Source 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:item", "New Server Source 1")]
+        public virtual void ChangeTabAndSave_NewServerSource1()
         {
-            this.ChangeTabAndSave("New Server Source", ((string[])(null)));
+            this.ChangeTabAndSave("New Server Source 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -266,45 +266,45 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void _3ChangeMultipleAndBulkClose()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3 Change Multiple And Bulk Close", ((string[])(null)));
-#line 66
-this.ScenarioSetup(scenarioInfo);
 #line 67
- testRunner.Given("I have a \"New Plugin Connector\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 68
- testRunner.When("I make changes to \"New Plugin Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I have a \"New Plugin Connector\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 69
- testRunner.And("I have a \"New Database Connector\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I make changes to \"New Plugin Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 70
- testRunner.When("I make changes to \"New Database Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I have a \"New Database Connector\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 71
- testRunner.And("I have a \"New Web Service Connector\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I make changes to \"New Database Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 72
- testRunner.When("I make changes to \"New Web Service Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I have a \"New Web Service Connector\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
- testRunner.And("I have a \"New Plugin Source\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I make changes to \"New Web Service Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 74
- testRunner.When("I make changes to \"New Plugin Source\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I have a \"New Plugin Source\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 75
- testRunner.And("I close all but this \"New Plugin Source *\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I make changes to \"New Plugin Source\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 76
- testRunner.Then("do you want to close \"New Database Connector\" dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I close all but this \"New Plugin Source *\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 77
- testRunner.When("I say \"Yes\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("do you want to close \"New Database Connector\" dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 78
- testRunner.And("I save \"New Database Connector\" as \"SavedItem\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I say \"Yes\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 79
- testRunner.Then("do you want to close \"New Web Service Connector\" dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I save \"New Database Connector\" as \"SavedItem\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 80
- testRunner.When("I say \"No\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("do you want to close \"New Web Service Connector\" dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 81
- testRunner.And("\"New Web Service Connector *\" tab is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I say \"No\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 82
- testRunner.Then("do you want to close \"New Plugin Source\" dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("\"New Web Service Connector *\" tab is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 83
- testRunner.When("I say \"Cancel\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("do you want to close \"New Plugin Source\" dialog is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 84
- testRunner.Then("\"New Plugin Connector *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I say \"Cancel\" on close dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 85
+ testRunner.Then("\"New Plugin Connector *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 86
  testRunner.Then("\"New Plugin Source * *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -316,53 +316,53 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void _4ChangeMultipleAndBulkSave()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("4 Change Multiple And Bulk Save", ((string[])(null)));
-#line 87
-this.ScenarioSetup(scenarioInfo);
 #line 88
- testRunner.Given("I have a \"New Plugin Connector\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 89
- testRunner.When("I make changes to \"New Plugin Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I have a \"New Plugin Connector\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 90
- testRunner.And("I have a \"Settings\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I make changes to \"New Plugin Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 91
- testRunner.When("I make changes to \"Settings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I have a \"Settings\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 92
- testRunner.And("I have a \"SavedWebService\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I make changes to \"Settings\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 93
- testRunner.When("I make changes to \"SavedWebService\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I have a \"SavedWebService\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 94
- testRunner.And("I have a \"New Plugin Source\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I make changes to \"SavedWebService\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 95
- testRunner.When("I make changes to \"New Plugin Source\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I have a \"New Plugin Source\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 96
- testRunner.And("I have \"SavedServerSource\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I make changes to \"New Plugin Source\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 97
- testRunner.And("I have \"SavedWorkflow\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I have \"SavedServerSource\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 98
- testRunner.Then("\"Settings *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I have \"SavedWorkflow\" open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 99
- testRunner.Then("\"SavedWebService *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"Settings *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 100
- testRunner.And("I Press \"CTRL+SHIFT+S\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("\"SavedWebService *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 101
- testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I press \"CTRL+SHIFT+S\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 102
- testRunner.And("I save \"New Plugin Connector\" as \"SavedPluginConnector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 103
  testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 103
+ testRunner.And("I save \"New Plugin Connector\" as \"SavedPluginConnector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 104
- testRunner.And("I say \"Cancel\" on save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 105
- testRunner.Then("\"SavedPluginConnector\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I say \"Cancel\" on save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 106
- testRunner.Then("\"Settings\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"SavedPluginConnector\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 107
- testRunner.Then("\"SavedWebService\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"Settings\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 108
- testRunner.Then("\"New Plugin Source \" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"SavedWebService\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 109
- testRunner.Then("\"SavedServerSource\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"New Plugin Source \" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 110
+ testRunner.Then("\"SavedServerSource\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 111
  testRunner.Then("\"SavedWorkflow\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -374,46 +374,126 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void _5PersisteMenuStateAndTabsThroughShutdown()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("5 Persiste Menu state and tabs through shutdown", ((string[])(null)));
-#line 112
-this.ScenarioSetup(scenarioInfo);
 #line 113
- testRunner.Given("I \"start\" the studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 114
- testRunner.And("\"New Workflow 1\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I \"start\" the studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 115
- testRunner.And("\"New Workflow 2\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"New Workflow 1\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 116
- testRunner.When("I make changes to \"New Workflow 2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("\"New Workflow 2\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 117
- testRunner.And("\"New Workflow 3\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I make changes to \"New Workflow 2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 118
- testRunner.And("\"SavedWorkflow\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"New Workflow 3\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 119
- testRunner.When("I make changes to \"New Workflow 3\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("\"SavedWorkflow\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 120
- testRunner.Then("I \"Lock\" the Main Menu \"Open\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I make changes to \"New Workflow 3\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 121
- testRunner.And("I \"shut\" down the studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I \"Lock\" the Main Menu \"Open\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 122
- testRunner.And("I \"start\" the studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I \"shut\" down the studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 123
- testRunner.Then("\"New Workflow 1\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 124
- testRunner.Then("\"New Workflow 2 *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 125
- testRunner.Then("\"New Workflow 3 *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 126
- testRunner.Then("\"SavedWorkflow\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 127
- testRunner.And("the main menu is \"Locked Open\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 128
- testRunner.And("I \"Unlock\" the main menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 129
- testRunner.And("I \"shut down\" the studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 130
  testRunner.And("I \"start\" the studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 124
+ testRunner.Then("\"New Workflow 1\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 125
+ testRunner.Then("\"New Workflow 2 *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 126
+ testRunner.Then("\"New Workflow 3 *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 127
+ testRunner.Then("\"SavedWorkflow\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 128
+ testRunner.And("the main menu is \"Locked Open\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 129
+ testRunner.And("I \"Unlock\" the main menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 130
+ testRunner.And("I \"shut down\" the studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 131
+ testRunner.And("I \"start\" the studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 132
  testRunner.Then("the main menu is \"Unlocked\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("6 Short Cut Keys Are Working")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "TabControl")]
+        public virtual void _6ShortCutKeysAreWorking()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("6 Short Cut Keys Are Working", ((string[])(null)));
+#line 134
+this.ScenarioSetup(scenarioInfo);
+#line 135
+ testRunner.Given("I \"start\" the studio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 136
+ testRunner.And("\"SavedWorkflow\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 137
+ testRunner.When("I make changes to \"SavedWorkflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 138
+ testRunner.Then("\"SavedWorkflow *\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 139
+ testRunner.And("I press \"CTRL+S\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 140
+ testRunner.Then("\"SavedWorkflow\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 141
+ testRunner.And("I press \"CTRL+R\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 142
+ testRunner.Then("the debug input window is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 143
+ testRunner.And("I press \"ESC\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 144
+ testRunner.Then("the debug input window is \"Invisible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 145
+ testRunner.And("I press \"CTRL+T\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 146
+ testRunner.Then("\"SavedWorkflow\" executes in \"Debug\" mode", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 147
+ testRunner.And("I press \"CTRL+Y\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 148
+ testRunner.Then("\"SavedWorkflow\" executes in \"Browser\" mode", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 149
+ testRunner.And("I press \"CTRL+W\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 150
+ testRunner.Then("\"New Workflow 1\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 151
+ testRunner.And("I press \"CTRL+SHIFT+W\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 152
+ testRunner.Then("\"New Web Service Connector 1\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 153
+ testRunner.And("I press \"CTRL+SHIFT+D\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 154
+ testRunner.Then("\"New Database Connector 1\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 155
+ testRunner.And("I press \"CTRL+SHIFT+P\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 156
+ testRunner.Then("\"New Plugin Connector 1\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 157
+ testRunner.And("I press \"CTRL+W\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 158
+ testRunner.Then("\"New Workflow 2\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 159
+ testRunner.And("I press \"CTRL+SHIFT+W\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 160
+ testRunner.Then("\"New Web Service Connector 2\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 161
+ testRunner.And("I press \"CTRL+SHIFT+D\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 162
+ testRunner.Then("\"New Database Connector 2\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 163
+ testRunner.And("I press \"CTRL+SHIFT+P\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 164
+ testRunner.Then("\"New Plugin Connector 2\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 165
+ testRunner.And("I press \"CTRL+SHIFT+N\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 166
+ testRunner.Then("\"New .Net Connector\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 167
+ testRunner.And("I press \"CTRL+D\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 168
+ testRunner.Then("\"Deploy\" tab is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

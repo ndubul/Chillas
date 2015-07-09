@@ -109,6 +109,7 @@
     <Compile Include="ExplorerView.xaml.cs">
       <DependentUpon>ExplorerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExplorerViewTestClass.cs" />
     <Compile Include="FocusExtension.cs" />
     <Compile Include="ManageDatabaseServiceControl.xaml.cs">
       <DependentUpon>ManageDatabaseServiceControl.xaml</DependentUpon>

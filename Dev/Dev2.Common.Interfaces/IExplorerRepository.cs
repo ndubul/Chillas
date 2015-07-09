@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Dev2.Common.Interfaces.Versioning;
 
 namespace Dev2.Common.Interfaces
 {
@@ -12,9 +10,9 @@ namespace Dev2.Common.Interfaces
 
         bool Delete(IExplorerItemViewModel explorerItemViewModel);
 
-        ICollection<IVersionInfo> GetVersions(Guid id);
-
-        IRollbackResult Rollback(Guid resourceId, string version);
+//        ICollection<IVersionInfo> GetVersions(Guid id);
+//
+//        IRollbackResult Rollback(Guid resourceId, string version);
 
         void CreateFolder(Guid parentGuid, string name, Guid id);
     }

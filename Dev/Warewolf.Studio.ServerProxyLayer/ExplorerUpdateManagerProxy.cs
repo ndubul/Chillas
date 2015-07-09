@@ -1,8 +1,8 @@
 ﻿using System;
 using Dev2.Common;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Hosting;
 using Dev2.Common.Interfaces.Infrastructure;
-using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Controller;
 
 namespace Warewolf.Studio.ServerProxyLayer
