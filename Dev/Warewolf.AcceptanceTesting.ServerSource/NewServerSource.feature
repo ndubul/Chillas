@@ -6,6 +6,7 @@ Feature: NewServerSource
 
 Scenario: Opening New Server Source
 	Given I have New Server Source opened
+	 Then "New Server Source" tab is opened
 	And Address is focused 
 	And selected protocol is "http" 
 	And server port is "3142" 
@@ -92,7 +93,7 @@ Scenario: Creating New Source as Public
   
 Scenario: Editing Saved Server Source Authentication 
    Given I Open server source "ServerSource"
-   And tab is opened with name as "ServerSource"
+   Then "ServerSource" tab is opened
    And remote server name is "SANDBOX-1"
    And selected protocol is "http"
    And server port is "3142" 
@@ -112,7 +113,7 @@ Scenario: Editing Saved Server Source Authentication
    Then tab name is "ServerSource *"
    And "Save" is "Enabled"
    When I save the server source
-   Then Save Dialog is not opened
+   Then Save Dialog is opened
    And server source "ServerSource" is saved
 
 
