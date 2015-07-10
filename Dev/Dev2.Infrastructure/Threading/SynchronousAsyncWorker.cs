@@ -207,19 +207,15 @@ namespace Dev2.Threading
             {
                 try
                 {
-                if (!cancellationTokenSource.IsCancellationRequested)
-                {
-                  
-                    try
+                    if (!cancellationTokenSource.IsCancellationRequested)
                     {
-                    var result = backgroundFunc.Invoke();
-                    uiAction.Invoke(result);
-                }
-                    catch(Exception err)
-                    {
-
-                        onError(err);
+                        var result = backgroundFunc.Invoke();
+                        uiAction.Invoke(result);
                     }
+                }
+                catch (Exception e)
+                {
+                    onError(e);
                 }
             }, cancellationTokenSource.Token);
             task.RunSynchronously();
