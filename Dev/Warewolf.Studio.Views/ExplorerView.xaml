@@ -120,7 +120,7 @@
                         NodeLineVisibility="Hidden" >
 
                 <ig:DragDropManager.DragSource>
-                    <ig:DragSource  IsDraggable="True" DragChannels="ExplorerChannel" >
+                    <ig:DragSource IsDraggable="True" DragChannels="ExplorerChannel" >
                     </ig:DragSource>
                 </ig:DragDropManager.DragSource>
                 <ig:XamDataTree.EditingSettings>

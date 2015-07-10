@@ -6,7 +6,6 @@ using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.WorkSurface;
 using Microsoft.Practices.Prism.Mvvm;
 using Warewolf.Studio.ViewModels;
-using Warewolf.Studio.Views;
 
 namespace Dev2.ViewModels
 {
@@ -51,7 +50,7 @@ namespace Dev2.ViewModels
 
         protected override void OnViewLoaded(object view)
         {
-            var loadedView = view as ManagePluginSourceControl;
+            var loadedView = view as IView;
             if (loadedView != null)
             {
                 loadedView.DataContext = ViewModel;
