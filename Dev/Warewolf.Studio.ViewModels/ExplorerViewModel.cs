@@ -122,7 +122,11 @@ namespace Warewolf.Studio.ViewModels
 			{
 				if (model.IsConnected)
 				{
-				    model.Load();				   
+				    model.Load();
+                    if (!string.IsNullOrEmpty(SearchText))
+                    {
+                        Filter(SearchText);
+                    }
 				}
 			});
 			IsRefreshing = false;
@@ -244,6 +248,10 @@ namespace Warewolf.Studio.ViewModels
                 if (model.IsConnected)
                 {
                     model.LoadDialog(_selectedId);
+                    if(!string.IsNullOrEmpty(SearchText))
+                    {
+                        Filter(SearchText);
+                    }
                 }
             });
             IsRefreshing = false;

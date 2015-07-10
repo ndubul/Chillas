@@ -11,19 +11,6 @@ Scenario: Creating Folder from Save Dialog under localhost
 	When I create "New Folder" in "localhost"
 	Then I should see "6" folders
 
-#CODED UI
-#Scenario: Right click Items on folder
-#    Given the Save Dialog is opened 
-#	And the "localhost" server is visible in save dialog
-#	And I should see "5" folders in "localhost" save dialog
-#	When I right click on "folder 1"
-#	Then I should see "Rename"
-#	And I should see "Delete"
-#	And I should see "New Folder"
-#	And I shouldn't see "New workflow service"
-#	And I shouldn't see "New Plugin service"
-
-
 Scenario: Saving a Workflow in localhost
 	Given the Save Dialog is opened
 	And the "localhost" server is visible in save dialog
