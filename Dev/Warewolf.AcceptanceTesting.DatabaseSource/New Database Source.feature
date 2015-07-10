@@ -36,10 +36,10 @@ Scenario: Creating New DB Source General Testing
    | RSAKLFSVRWRWBLD |
    And type options contains
    | Options       |
-   | Microsoft SQL |
+   | Microsoft SQL Server |
    | MySQL         |
    And I type Select The Server as "RSAKLFSVRGENDEV"
-   And type options has "SqlDatabase" as the default
+   And type options has "Microsoft SQL Server" as the default
    And Database dropdown is "Invisible"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
