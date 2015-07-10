@@ -27,13 +27,14 @@ using Dev2.Common.Interfaces.Threading;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Warewolf.Core;
 
 namespace Warewolf.Studio.ViewModels
 {
     public class ManageDatabaseSourceViewModel : SourceBaseImpl<IDbSource>, IManageDatabaseSourceViewModel, IDisposable
     {
         public IAsyncWorker AsyncWorker { get; set; }
-        private enSourceType _serverType;
+        private NameValue _serverType;
         private AuthenticationType _authenticationType;
         private IComputerName _serverName;
         private string _databaseName;
@@ -68,8 +69,8 @@ namespace Warewolf.Studio.ViewModels
             OkCommand = new DelegateCommand(SaveConnection, CanSave);
             CancelTestCommand = new DelegateCommand(CancelTest, CanCancelTest);
             Testing = false;
-            Types = new List<enSourceType> { enSourceType.SqlDatabase };
-            ServerType = enSourceType.SqlDatabase;
+            Types = new List<NameValue> { new NameValue { Name = "Microsoft SQL Server", Value = enSourceType.SqlDatabase.ToString() }, new NameValue() { Name = "MySql Database", Value = enSourceType.SqlDatabase.ToString() } };
+            ServerType = Types[0];
             _testPassed = false;
             _testFailed = false;
             DatabaseNames = new List<string>();
@@ -130,7 +131,7 @@ namespace Warewolf.Studio.ViewModels
         {
             VerifyArgument.IsNotNull("dbSource", dbSource);
             PerformInitialise(updateManager, aggregator);
-            _warewolfserverName = updateManager.ServerName;
+            _warewolfserverName = updateManager.ServerName??"";
             _dbSource = dbSource;
             GetLoadComputerNamesTask(() =>
             {
@@ -142,7 +143,13 @@ namespace Warewolf.Studio.ViewModels
 
         void SetupHeaderTextFromExisting()
         {
-            HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel + _warewolfserverName.Trim() + "\\" + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
+            var server = "";
+            if (_warewolfserverName != null)
+            {
+                server = _warewolfserverName;
+            }
+            HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel + server.Trim() + "\\" + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
+           
             Header = ((_dbSource == null ? ResourceName : _dbSource.Name));
         }
 
@@ -220,12 +227,13 @@ namespace Warewolf.Studio.ViewModels
 
                 if (res == MessageBoxResult.OK)
                 {
-                    ResourceName = RequestServiceNameViewModel.ResourceName.Name;
+                    _resourceName = RequestServiceNameViewModel.ResourceName.Name;
                     var src = ToDbSource();
                     src.Path = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
                     Save(src);
                     _dbSource = src;
                     SetupHeaderTextFromExisting();
+                 //   ResourceName = RequestServiceNameViewModel.ResourceName.Name;
                 }
             }
             else
@@ -285,7 +293,7 @@ namespace Warewolf.Studio.ViewModels
                 ServerName = GetServerName(),
                 Password = Password,
                 UserName = UserName,
-                Type = ServerType,
+                Type = (enSourceType)Enum.Parse(typeof( enSourceType), ServerType.Value),
                 Name = ResourceName,
                 DbName = DatabaseName,
                 Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
@@ -311,7 +319,7 @@ namespace Warewolf.Studio.ViewModels
                     ServerName = GetServerName(),
                     Password = Password,
                     UserName = UserName,
-                    Type = ServerType,
+                    Type = (enSourceType)Enum.Parse(typeof( enSourceType), ServerType.Value),
                     Name = ResourceName,
                     DbName = DatabaseName,
                     Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
@@ -351,9 +359,9 @@ namespace Warewolf.Studio.ViewModels
         }
         IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
 
-        public IList<enSourceType> Types { get; set; }
+        public IList<NameValue> Types { get; set; }
 
-        public enSourceType ServerType
+        public NameValue ServerType
         {
             get { return _serverType; }
             set
@@ -630,12 +638,12 @@ namespace Warewolf.Studio.ViewModels
         }
 
         public override void UpdateHelpDescriptor(string helpText)
-        {
+            {
         }
 
         public bool IsEmpty { get { return ServerName != null && (String.IsNullOrEmpty(ServerName.Name) && AuthenticationType == AuthenticationType.Windows && String.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Password)); } }
 
-      
+
         public void Dispose()
         {
             Dispose(true);
