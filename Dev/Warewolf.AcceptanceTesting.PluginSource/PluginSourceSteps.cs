@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.SaveDialog;
@@ -25,6 +26,7 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             var sourceControl = new ManagePluginSourceControl();
             var mockStudioUpdateManager = new Mock<IManagePluginSourceModel>();
             mockStudioUpdateManager.Setup(model => model.ServerName).Returns("localhost");
+            mockStudioUpdateManager.Setup(model => model.GetDllListings(null)).Returns(BuildBaseListing());
             var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
             var mockEventAggregator = new Mock<IEventAggregator>();
             var mockExecutor = new Mock<IExternalProcessExecutor>();
@@ -37,6 +39,56 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             FeatureContext.Current.Add("updateManager", mockStudioUpdateManager);
             FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
             FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+        }
+
+        static IList<IDllListing> BuildBaseListing()
+        {
+            var listing = new List<IDllListing>();
+            var fileSystemListing = new DllListing{FullName = "",IsDirectory = true,Name = "File System"};
+            var gacListing = new DllListing{FullName = "",IsDirectory = true,Name = "GAC"};
+            var cDrive = new DllListing
+            {
+                FullName = "C:\\", IsDirectory = true, Name = "C:\\",
+                Children = new List<IDllListing>
+                {
+                    new DllListing { 
+                        FullName = "C:\\Development", IsDirectory = true, Name = "Development" ,
+                        Children = new List<IDllListing>
+                        {
+                            new DllListing
+                            {
+                                FullName = "C:\\Development\\Dev", IsDirectory = true, Name = "Dev",
+                                Children = new List<IDllListing>
+                                {
+                                    new DllListing
+                                    {
+                                        FullName = "C:\\Development\\Dev\\Binaries", IsDirectory = true, Name = "Binaries",
+                                        Children = new List<IDllListing>
+                                        {
+                                            new DllListing
+                                            {
+                                                FullName = "C:\\Development\\Dev\\Binaries\\MS Fakes", IsDirectory = true, Name = "MS Fakes",
+                                                Children = new List<IDllListing>
+                                                {
+                                                    new DllListing
+                                                    {
+                                                        FullName = "C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools.Testing.Fakes.dll", IsDirectory = false, Name = "Microsoft.QualityTools.Testing.Fakes.dll"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            var dDrive = new DllListing{FullName = "D:\\",IsDirectory = true,Name = "D:\\"};
+            fileSystemListing.Children = new List<IDllListing>{cDrive,dDrive};
+            listing.Add(fileSystemListing);
+            listing.Add(gacListing);
+            return listing;
         }
 
         [BeforeScenario("PluginSource")]
@@ -88,6 +140,7 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             Assert.IsNotNull(dllListingModel);
             var viewModel = ScenarioContext.Current.Get<ManagePluginSourceViewModel>("viewModel");
             Assert.AreEqual(dllListingModel,viewModel.SelectedDll);
+            Assert.IsTrue(viewModel.SelectedDll.IsExpanded);
         }
 
         [Then(@"local drive ""(.*)"" is visible")]
@@ -109,6 +162,8 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             }
         }
 
+        [Given(@"Assembly value is ""(.*)""")]
+        [When(@"Assembly value is ""(.*)""")]
         [Then(@"Assembly value is ""(.*)""")]
         public void ThenAssemblyValueIs(string assemblyName)
         {
@@ -128,7 +183,7 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             var sourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
             sourceControl.SetAssemblyName(assemblyName);
             var viewModel = ScenarioContext.Current.Get<ManagePluginSourceViewModel>("viewModel");
-            var assemblyNameOnViewModel = viewModel.SelectedDll.FullName;
+            var assemblyNameOnViewModel = viewModel.AssemblyName;
             var isSameAsViewModel = assemblyName.Equals(assemblyNameOnViewModel, StringComparison.OrdinalIgnoreCase);
             Assert.IsTrue(isSameAsViewModel);
         }
@@ -211,9 +266,10 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         }
 
         [When(@"I open ""(.*)""")]
-        public void WhenIOpenInFileWindow(string p0)
+        public void WhenIOpen(string itemNameToOpen)
         {
-            ScenarioContext.Current.Pending();
+            var sourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            sourceControl.OpenItem(itemNameToOpen);
         }
 
         [When(@"GAC is not selected")]

@@ -164,7 +164,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Assembly"></TextBlock>
-                    <TextBox x:Name="AssemblyNameTextBox" Grid.Column="1" Text="{Binding SelectedDll.FullName}">
+                    <TextBox x:Name="AssemblyNameTextBox" Grid.Column="1" Text="{Binding AssemblyName, UpdateSourceTrigger=PropertyChanged}">
                         <i:Interaction.Behaviors>
                             <core:HelpSetter Text="{x:Static languages:Core.PluginSourceDllFullNameHelp}"
                                                          DataContext="{Binding}" />

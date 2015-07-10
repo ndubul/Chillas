@@ -43,6 +43,7 @@ namespace Warewolf.Studio.ViewModels
         bool _isLoading;
         string _searchTerm;
         private IDllListingModel _gacItem;
+        string _assemblyName;
 
         /// <exception cref="Exception">A delegate callback throws an exception.</exception>
         public ManagePluginSourceViewModel(IManagePluginSourceModel updateManager, IEventAggregator aggregator,IAsyncWorker asyncWorker)
@@ -60,11 +61,8 @@ namespace Warewolf.Studio.ViewModels
             CancelCommand = new DelegateCommand(() => CloseAction.Invoke());
             ClearSearchTextCommand = new DelegateCommand(() => SearchTerm = "");
             RefreshCommand = new DelegateCommand(PerformLoadAll);
-            // ReSharper disable MaximumChainedReferences
             PerformLoadAll();
-            // ReSharper restore MaximumChainedReferences
             _warewolfserverName = updateManager.ServerName;
-            ResourceName = HeaderText;
         }
 
         public IAsyncWorker AsyncWorker { get; set; }
@@ -193,19 +191,42 @@ namespace Warewolf.Studio.ViewModels
             {
                 _selectedDll = value;
                 OnPropertyChanged(() => SelectedDll);
+                AssemblyName = SelectedDll.FullName;
+                SelectedDll.IsExpanded = true;
                 ViewModelUtils.RaiseCanExecuteChanged(OkCommand);
+            }
+        }
+
+        public string AssemblyName
+        {
+            get
+            {
+                return _assemblyName;
+            }
+            set
+            {
+                _assemblyName = value;
+                OnPropertyChanged(()=>AssemblyName);
             }
         }
 
         void SetupHeaderTextFromExisting()
         {
-            HeaderText = (_pluginSource == null ? Resources.Languages.Core.PluginSourceNewHeaderLabel +" " : Resources.Languages.Core.PluginSourceEditHeaderLabel )+ _warewolfserverName.Trim() + "\\" + (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
-            Header = ((_pluginSource == null ? ResourceName : _pluginSource.Name));
+            var serverName = _warewolfserverName;
+            if (serverName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
+            {
+                HeaderText = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim());
+                Header = string.Format("{0}", ((_pluginSource == null ? ResourceName : _pluginSource.Name)));
+            }
+            else
+            {
+                HeaderText = string.Format("{0} {1} on {2}", Resources.Languages.Core.PluginSourceEditHeaderLabel, (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim(), serverName);
+                Header = string.Format("{0} - {1}", ((_pluginSource == null ? ResourceName : _pluginSource.Name)), serverName);
+            }
         }
-
         bool CanSave()
         {
-            return _selectedDll != null && !string.IsNullOrEmpty(_selectedDll.FullName) && _selectedDll.FullName.EndsWith(".dll");
+            return _selectedDll != null && !string.IsNullOrEmpty(AssemblyName) && AssemblyName.EndsWith(".dll");
         }
 
         public override void UpdateHelpDescriptor(string helpText)
@@ -264,26 +285,24 @@ namespace Warewolf.Studio.ViewModels
 
         public override IPluginSource ToModel()
         {
-            if (Item == null)
+
+            if(_pluginSource == null)
             {
-                if(_pluginSource == null)
+                Item = new PluginSourceDefinition
                 {
-                    Item = new PluginSourceDefinition
-                    {
-                        Name = ResourceName,
-                        SelectedDll = _selectedDll,
-                        Id = _pluginSource == null ? Guid.NewGuid() : _pluginSource.Id
-                    };
-                }
-                else
-                {
-                    _pluginSource.SelectedDll = _selectedDll;
-                    Item = _pluginSource;
-                }
-                return Item;
+                    Name = ResourceName,
+                    SelectedDll = _selectedDll,
+                    Id = _pluginSource == null ? Guid.NewGuid() : _pluginSource.Id
+                };
+            }
+            else
+            {
+                _pluginSource.SelectedDll = _selectedDll;
+                Item = _pluginSource;
             }
             return Item;
         }
+
         IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
 
         public ICommand OkCommand { get; set; }

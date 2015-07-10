@@ -10,18 +10,17 @@ Scenario: New Plugin Source File
 	And title is "New Plugin Source"
 	And I click "File System"
 	Then local drive "C:\" is visible
+	Then local drive "D:\" is visible
 	When I open "C:\"
-	Then GAC is not selected
-	And Assembly is ""
+	And Assembly value is ""
 	And "Save" is "Disabled"
-	And "Cancel" is "Disabled"
 	When I click 
 	| Clicks                                   |
 	| Development                              |
 	| Dev                                      |
 	| Binaries                                 |
 	| MS Fakes                                 |
-	| Microsoft QualityTools.Testing.Fakes.dll |
+	| Microsoft.QualityTools.Testing.Fakes.dll |
 	Then "Save" is "Enabled"
 	And Assembly value is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
 	When I change Assembly to "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dl"

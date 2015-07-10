@@ -1648,7 +1648,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Plugin Source - .
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string PluginSourceEditHeaderLabel {
             get {

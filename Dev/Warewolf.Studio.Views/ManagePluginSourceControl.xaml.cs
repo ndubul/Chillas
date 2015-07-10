@@ -11,7 +11,7 @@ namespace Warewolf.Studio.Views
     /// <summary>
     /// Interaction logic for ManagePluginSourceControl.xaml
     /// </summary>
-    public partial class ManagePluginSourceControl : IView
+    public partial class ManagePluginSourceControl : IView, ICheckControlEnabledView
     {
         public ManagePluginSourceControl()
         {
@@ -55,45 +55,65 @@ namespace Warewolf.Studio.Views
 
         public IDllListingModel SelectItem(string itemName)
         {
-            var xamDataTreeNode = ExplorerTree.Nodes.FirstOrDefault(node =>
+            XamDataTreeNode xamDataTreeNode;
+            if(ExplorerTree.ActiveNode != null)
             {
-                var item = node.Data as IDllListingModel;
-                if (item != null)
+                xamDataTreeNode = GetItem(itemName);
+            }
+            else
+            {
+                xamDataTreeNode = ExplorerTree.Nodes.FirstOrDefault(node =>
                 {
-                    if (item.Name.ToLowerInvariant().Contains(itemName.ToLowerInvariant()))
+                    var item = node.Data as IDllListingModel;
+                    if(item != null)
                     {
-                        return true;
+                        if(item.Name.ToLowerInvariant().Contains(itemName.ToLowerInvariant()))
+                        {
+                            return true;
+                        }
                     }
-                }
-                return false;
-            });
+                    return false;
+                });
+            }
             if (xamDataTreeNode != null)
             {
-                xamDataTreeNode.IsExpanded = true;
+                xamDataTreeNode.IsSelected = true;
+                ExplorerTree.ActiveNode = xamDataTreeNode;                
             }
             return xamDataTreeNode == null ? null : xamDataTreeNode.Data as IDllListingModel;
         }
 
         public bool IsItemVisible(string itemName)
         {
-            var xamDataTreeNode = ExplorerTree.ActiveNode.Manager.Nodes.FirstOrDefault(node =>
+            var xamDataTreeNode = GetItem(itemName);
+            return xamDataTreeNode != null;
+        }
+
+        XamDataTreeNode GetItem(string itemName)
+        {
+            var theExpandedItem = ExplorerTree.ActiveNode.Nodes.FirstOrDefault(node => node.IsExpanded);
+            if(theExpandedItem != null)
+            {
+                ExplorerTree.ActiveNode = theExpandedItem;
+            }
+            var xamDataTreeNode = ExplorerTree.ActiveNode.Nodes.FirstOrDefault(node =>
             {
                 var item = node.Data as IDllListingModel;
-                if (item != null)
+                if(item != null)
                 {
-                    if (item.Name.ToLowerInvariant().Contains(itemName.ToLowerInvariant()))
+                    if(item.Name.ToLowerInvariant().Contains(itemName.ToLowerInvariant()))
                     {
                         return true;
                     }
                 }
                 return false;
             });
-            return xamDataTreeNode != null;
+            return xamDataTreeNode;
         }
 
         public string GetAssemblyName()
         {
-            BindingExpression be = AssemblyNameTextBox.GetBindingExpression(TextBlock.TextProperty);
+            BindingExpression be = AssemblyNameTextBox.GetBindingExpression(TextBox.TextProperty);
             if (be != null)
             {
                 be.UpdateTarget();
@@ -114,6 +134,26 @@ namespace Warewolf.Studio.Views
             {
                 be.UpdateSource();
             }
+        }
+
+        public IDllListingModel OpenItem(string itemNameToOpen)
+        {
+            var xamDataTreeNode = GetItem(itemNameToOpen);
+            if (xamDataTreeNode != null)
+            {
+                xamDataTreeNode.IsExpanded = true;
+            }
+            return xamDataTreeNode == null ? null : xamDataTreeNode.Data as IDllListingModel;
+        }
+
+        public bool GetControlEnabled(string controlName)
+        {
+            switch(controlName)
+            {
+                case "Save":
+                    return SaveButton.Command.CanExecute(null);
+            }
+            return false;
         }
     }
 }
