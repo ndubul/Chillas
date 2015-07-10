@@ -27,6 +27,8 @@ Feature: New Database Source
 
 Scenario: Creating New DB Source General Testing
    Given I open New Database Source
+   Then "New Database Source" tab is opened
+   And title is "New Database Source"
    When I type Server as "RSAKLFSVR"
    Then the intellisense containts these options
    | Options         |
@@ -35,9 +37,9 @@ Scenario: Creating New DB Source General Testing
    | RSAKLFSVRTFSBLD |
    | RSAKLFSVRWRWBLD |
    And type options contains
-   | Options       |
+   | Options              |
    | Microsoft SQL Server |
-   | MySQL         |
+   | MySQL                |
    And I type Select The Server as "RSAKLFSVRGENDEV"
    And type options has "Microsoft SQL Server" as the default
    And Database dropdown is "Invisible"
@@ -56,7 +58,14 @@ Scenario: Creating New DB Source General Testing
    And "Save" is "Enabled"   
    When I save the source
    Then the save dialog is opened
-	
+   And I save the source as "SavedDBSource"
+   Then "SavedDBSource" tab is opened
+   And title is "Edit SavedDBSource"
+   When I type Server as "RSA"
+   Then "SavedDBSource *" tab is opened
+   And title is "Edit SavedDBSource"
+   
+
 	
 Scenario: Creating New DB Source as User Auth
     Given I open New Database Source
@@ -228,3 +237,17 @@ Scenario: Editing saved DB Source and canceling without saving
     Then underlying Username is "testuser"
     And underlying Password  is "******"
 	Then "Test Connection" is "Enabled" 
+
+Scenario: Cancel Test
+   Given I open New Database Source
+   When I type Server as "RSAKLFSVRGENDEV"
+   Then the intellisense containts these options
+   And Authentication Type is selected as "User"
+   And Username field is "testuser"
+   And Password field is "******"
+   When I click "Test Connection"
+   And I click "Cancel Test"
+   Then validation message is "Test Cancelled"
+   And "Test Connection" is "Enabled"
+    And "Save" is "Disabled"
+     
