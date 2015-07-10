@@ -68,17 +68,9 @@ namespace Dev2.Runtime.ESB.Management.Services
 
 
                 };
-                IPluginService src = serializer.Deserialize<IPluginService>(resourceDefinition);
-
-
-
-                // ReSharper disable MaximumChainedReferences
-                // ReSharper restore MaximumChainedReferences
-                var pluginsrc = ResourceCatalog.Instance.GetResource<PluginSource>(GlobalConstants.ServerWorkspaceID, src.Source.Id);
-
 
                 ResourceCatalog.Instance.SaveResource(GlobalConstants.ServerWorkspaceID, res);
-                //var explorerItem = ServerExplorerRepo.UpdateItem(res);
+                ServerExplorerRepo.UpdateItem(res);
 
                 msg.HasError = false;
             }
