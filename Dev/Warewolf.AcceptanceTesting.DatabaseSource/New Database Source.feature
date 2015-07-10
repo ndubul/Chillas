@@ -56,9 +56,8 @@ Scenario: Creating New DB Source General Testing
    Then Database dropdown is "Visible"
    Then I select "Dev2TestingDB" as Database
    And "Save" is "Enabled"   
-   When I save the source
+   When I save the source as "SavedDBSource"
    Then the save dialog is opened
-   And I save the source as "SavedDBSource"
    Then "SavedDBSource" tab is opened
    And title is "Edit SavedDBSource"
    When I type Server as "RSA"
@@ -241,13 +240,12 @@ Scenario: Editing saved DB Source and canceling without saving
 Scenario: Cancel Test
    Given I open New Database Source
    When I type Server as "RSAKLFSVRGENDEV"
-   Then the intellisense containts these options
-   And Authentication Type is selected as "User"
-   And Username field is "testuser"
-   And Password field is "******"
+   And I Select Authentication Type as "User"
+   When I type Username as "testuser"
+   And I type Password as "test123"
    When I click "Test Connection"
-   And I click "Cancel Test"
-   Then validation message is "Test Cancelled"
+   And I click Cancel Test
+   And the validation message as "Test Cancelled" 
    And "Test Connection" is "Enabled"
     And "Save" is "Disabled"
      

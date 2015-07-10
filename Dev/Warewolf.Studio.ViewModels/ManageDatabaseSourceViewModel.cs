@@ -147,7 +147,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 server = _warewolfserverName;
             }
-            HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel + server.Trim() + "\\" + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
+            HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel  + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
            
             Header = ((_dbSource == null ? ResourceName : _dbSource.Name));
         }
@@ -173,7 +173,7 @@ namespace Warewolf.Studio.ViewModels
         }
 
 
-        void FromDbSource(IDbSource dbSource)
+        public void FromDbSource(IDbSource dbSource)
         {
             ResourceName = dbSource.Name;
             AuthenticationType = dbSource.AuthenticationType;

@@ -44,6 +44,12 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
             mockStudioUpdateManager.Setup(a => a.ServerName).Returns("localhost");
             FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
         }
+        public static void ReSetupForSystem()
+        {
+    
+
+        }
+
         [Given(@"the server is Unreachable")]
         public void GivenTheServerIsUnreachable()
         {
@@ -58,6 +64,20 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
             ScenarioContext.Current.Add("requestServiceNameViewModel", FeatureContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel"));
             ScenarioContext.Current.Add(Utils.ViewModelNameKey, FeatureContext.Current.Get<ManageDatabaseSourceViewModel>(Utils.ViewModelNameKey));
         }
+
+        [Then(@"""(.*)"" tab is opened")]
+        public void ThenTabIsOpened(string p0)
+        {
+            //var name =FeatureContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            //name.Verify(a=>a.ShowView());
+        }
+        [Then(@"title is ""(.*)""")]
+        public void ThenTitleIs(string p0)
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+           Assert.AreEqual( manageDatabaseSourceControl.GetHeader(),p0);
+        }
+
 
         [Given(@"I open New Database Source")]
         public void GivenIOpenNewDatabaseSource()
@@ -78,17 +98,24 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
         [Given(@"I open ""(.*)""")]
         public void GivenIOpen(string name)
         {
+
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
 
-            var upd = FeatureContext.Current.Get< Mock<IManageDatabaseSourceModel>>("updateManager").Object;
-           var dbsrc = new DbSourceDefinition();
-           dbsrc.Name = name;
-           dbsrc.Id = Guid.NewGuid();
-           dbsrc.ServerName = "RSAKLFSVRGENDEV";
+            var upd = FeatureContext.Current.Get<Mock<IManageDatabaseSourceModel>>("updateManager").Object;
+            var dbsrc = new DbSourceDefinition();
+            dbsrc.Name = name;
+            dbsrc.Id = Guid.NewGuid();
+            dbsrc.ServerName = "RSAKLFSVRGENDEV";
             dbsrc.AuthenticationType = AuthenticationType.Windows;
-           FeatureContext.Current.Add("dbsrc", dbsrc);
-           manageDatabaseSourceControl.DataContext = new ManageDatabaseSourceViewModel(upd,new Mock<IEventAggregator>().Object, dbsrc,new SynchronousAsyncWorker());
+            FeatureContext.Current["dbsrc"] = dbsrc;
+            try
+            {
+               ( manageDatabaseSourceControl.DataContext as ManageDatabaseSourceViewModel).FromDbSource(dbsrc);
 
+
+            }
+            catch (Exception)
+            { }
         }
 
         [Given(@"Server as ""(.*)""")]
@@ -335,6 +362,17 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
 
         }
 
+        [When(@"I save the source as ""(.*)""")]
+        public void WhenISaveTheSourceAs(string name)
+        {
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Returns(MessageBoxResult.OK).Verifiable();
+            mockRequestServiceNameViewModel.Setup(a => a.ResourceName).Returns(new ResourceName("", name));
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.PerformSave();
+        }
+
+
         [Then(@"Username field is ""(.*)""")]
         public void ThenUsernameFieldIs(string visibility)
         {
@@ -417,6 +455,18 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
             Thread.Sleep(1000);
         }
 
+        [Then(@"I save the source as ""(.*)""")]
+        public void ThenISaveTheSourceAs(string successString)
+        {
+            var mockUpdateManager = ScenarioContext.Current.Get<Mock<IManageDatabaseSourceModel>>("updateManager");
+         
+            mockUpdateManager.Setup(manager => manager.Save(It.IsAny<IDbSource>()));
+
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.PerformSave();
+        }
+
+
         [When(@"the validation message as ""(.*)""")]
         public void WhenTheValidationMessageAs(string validationMessage)
         {
@@ -451,6 +501,12 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
         {
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
             manageDatabaseSourceControl.Test();
+        }
+        [When(@"I click Cancel Test")]
+        public void WhenIClickCancelTest()
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.CancelTest();
         }
 
     }

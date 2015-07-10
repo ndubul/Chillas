@@ -704,7 +704,7 @@ You need Administrator permission.</value>
     <value>Edit Plugin Connector - </value>
   </data>
   <data name="DatabaseSourceServerEditHeaderLabel" xml:space="preserve">
-    <value>Edit Database Source - </value>
+    <value>Edit </value>
   </data>
   <data name="DatabaseWebserviceLabel" xml:space="preserve">
     <value>Address:</value>
