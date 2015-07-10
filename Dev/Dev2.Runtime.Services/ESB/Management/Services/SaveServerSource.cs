@@ -5,6 +5,7 @@ using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Core.DynamicServices;
+using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Communication;
 using Dev2.Data.ServiceModel;
 using Dev2.DynamicServices;
@@ -20,6 +21,8 @@ namespace Dev2.Runtime.ESB.Management.Services
     /// </summary>
     public class SaveServerSource : IEsbManagementEndpoint
     {
+        IExplorerServerResourceRepository _serverExplorerRepository;
+
         public StringBuilder Execute(Dictionary<string, StringBuilder> values, IWorkspace theWorkspace)
         {
             ExecuteMessage msg = new ExecuteMessage();
@@ -45,6 +48,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                 var res = tester.CanConnectToServer(con);
                 if(res.IsValid)
                 ResourceCatalog.Instance.SaveResource(GlobalConstants.ServerWorkspaceID,con);
+                ServerExplorerRepo.UpdateItem(con);
                 msg.HasError = false;
                 msg.Message = new StringBuilder(res.IsValid ? "" : res.ErrorMessage);
 
@@ -60,7 +64,11 @@ namespace Dev2.Runtime.ESB.Management.Services
 
             return serializer.SerializeToBuilder(msg);
         }
-
+        public IExplorerServerResourceRepository ServerExplorerRepo
+        {
+            get { return _serverExplorerRepository ?? ServerExplorerRepository.Instance; }
+            set { _serverExplorerRepository = value; }
+        }
         public DynamicService CreateServiceEntry()
         {
             DynamicService newDs = new DynamicService { Name = HandlesType(), DataListSpecification = new StringBuilder("<DataList><Roles ColumnIODirection=\"Input\"/><ServerSource ColumnIODirection=\"Input\"/><WorkspaceID ColumnIODirection=\"Input\"/><Dev2System.ManagmentServicePayload ColumnIODirection=\"Both\"></Dev2System.ManagmentServicePayload></DataList>") };

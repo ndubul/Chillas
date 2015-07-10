@@ -51,7 +51,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                 if (result.IsValid)
                 {
                     ResourceCatalog.Instance.SaveResource(GlobalConstants.ServerWorkspaceID, res);
-                    //ServerExplorerRepo.UpdateItem(res);
+                    ServerExplorerRepo.UpdateItem(res);
 
                     msg.HasError = false;
                 }
