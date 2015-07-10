@@ -37,7 +37,7 @@
                             Background="{StaticResource WareWolfMenuBrush}" 
                             HorizontalAlignment="Stretch" 
                             Orientation="Horizontal">
-                    <TextBlock Margin="5" Text="{Binding HeaderText}" Style="{StaticResource SourceHeader}" />
+                    <TextBlock x:Name="HeaderTextBlock" Margin="5" Text="{Binding HeaderText}" Style="{StaticResource SourceHeader}" />
                 </StackPanel>
                 <Grid  Grid.Row="1"
                        Width="{Binding ElementName=GridContainer, Path=ActualWidth}"
@@ -164,7 +164,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Assembly"></TextBlock>
-                    <TextBox Grid.Column="1" Text="{Binding SelectedDll.FullName}">
+                    <TextBox x:Name="AssemblyNameTextBox" Grid.Column="1" Text="{Binding AssemblyName, UpdateSourceTrigger=PropertyChanged}">
                         <i:Interaction.Behaviors>
                             <core:HelpSetter Text="{x:Static languages:Core.PluginSourceDllFullNameHelp}"
                                                          DataContext="{Binding}" />

@@ -830,7 +830,7 @@ namespace Dev2.Studio.ViewModels
         {
 
             var server = CustomContainer.Get<IServer>();
-            var dbSourceViewModel = new ManagePluginSourceViewModel(new ManagePluginSourceModel(server.UpdateRepository, server.QueryProxy, "") ,new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource);
+            var dbSourceViewModel = new ManagePluginSourceViewModel(new ManagePluginSourceModel(server.UpdateRepository, server.QueryProxy, "") ,new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource,_asyncWorker);
             var vm = new NewPluginSourceViewModel(EventPublisher, dbSourceViewModel, PopupProvider);
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginSource), vm);
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
@@ -958,7 +958,7 @@ namespace Dev2.Studio.ViewModels
         void AddNewPluginSourceSurface()
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginSource), new NewPluginSourceViewModel(EventPublisher, new ManagePluginSourceViewModel(new ManagePluginSourceModel(server.UpdateRepository,server.QueryProxy, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid()), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator()), PopupProvider));
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginSource), new NewPluginSourceViewModel(EventPublisher, new ManagePluginSourceViewModel(new ManagePluginSourceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid()), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker), PopupProvider));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
@@ -1327,8 +1327,9 @@ namespace Dev2.Studio.ViewModels
                 NotifyOfPropertyChange(() => ViewInBrowserCommand);
                 if (MenuViewModel != null)
                 {
-                    NotifyOfPropertyChange(() => MenuViewModel.ExecuteServiceCommand);
-                    NotifyOfPropertyChange(() => MenuViewModel.SaveCommand);
+                    MenuViewModel.SaveCommand = SaveCommand;
+                    MenuViewModel.ExecuteServiceCommand = DebugCommand;
+                    
                 }
             }
             base.OnActivationProcessed(item, success);

@@ -1,4 +1,4 @@
-﻿@Plugin
+﻿@PluginSource
 Feature: PluginSource
 	In order to create plugins
 	As a Warewolf User
@@ -6,33 +6,31 @@ Feature: PluginSource
 
 Scenario: New Plugin Source File
 	Given I open New Plugin Source
+	Then "New Plugin Source" tab is opened
 	And title is "New Plugin Source"
 	And I click "File System"
-	Then local drive "C:\" is visible in File window
-	When I open "C:\" in File window
-	Then GAC is not selected
-	And Assembly is ""
+	Then local drive "C:\" is visible
+	Then local drive "D:\" is visible
+	When I open "C:\"
+	And Assembly value is ""
 	And "Save" is "Disabled"
-	And "Cancel" is "Disabled"
 	When I click 
 	| Clicks                                   |
 	| Development                              |
 	| Dev                                      |
 	| Binaries                                 |
 	| MS Fakes                                 |
-	| Microsoft QualityTools.Testing.Fakes.dll |
+	| Microsoft.QualityTools.Testing.Fakes.dll |
 	Then "Save" is "Enabled"
-	And Assembly is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
+	And Assembly value is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
 	When I change Assembly to "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dl"
 	Then "Save" is "Disabled"
 	When I change Assembly to "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
 	Then "Save" is "Enabled"
-	When I save Plugin source
-	Then Save Dialog is opened
 	When I save as "Testing Resource Save"
-	Then title is "Testing Resource Save"
-	And "Save" is "Disabled"
-	And "Cancel" is "Disabled"
+    Then the save dialog is opened
+	Then title is "Edit Testing Resource Save"
+	And "Testing Resource Save" tab is opened
 	
 
 Scenario: New Plugin Source GAC
@@ -48,12 +46,9 @@ Scenario: New Plugin Source GAC
 	When I save Plugin source
 	Then Save Dialog is opened
 	 
-#I cant get to these paths so am leaving them as per Murali as I cant get to this edit page either.
-#Assembly will need to change.
 Scenario: Editing Plugin Source
 	Given I open "Test" plugin source
 	Then title is "Edit Plugin Source - Test"
-	And file is selected
 	And "C:\" is "visible"
 	And Assembly is "Plugins/Unlimited.Email.Plugin.dll"
 	And "Save" is "Disabled"

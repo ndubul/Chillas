@@ -27,6 +27,7 @@ namespace Warewolf.Studio.Core
         private string _name;
         private bool _progressVisibility;
         private int _currentProgress;
+        bool _isSelected;
 
         public DllListingModel(IManagePluginSourceModel updateManager, IDllListing dllListing)
         {
@@ -162,13 +163,20 @@ namespace Warewolf.Studio.Core
 
         public string FullName { get; set; }
 
-        ICollection<IDllListing> IDllListing.Children
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
+        ICollection<IDllListing> IDllListing.Children { get; set; }
 
-        public bool IsSelected { get; set; }
+        public bool IsSelected
+        {
+            get
+            {
+                return _isSelected;
+            }
+            set
+            {
+                _isSelected = value;
+                _isExpanded = true;
+            }
+        }
 
         public bool IsExpanded
         {
