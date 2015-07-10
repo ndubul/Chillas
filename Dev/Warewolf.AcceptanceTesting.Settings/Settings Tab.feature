@@ -143,11 +143,13 @@ Scenario: Studio Log File hyper link is opening log file
 	Then "Warewolf Studio.log - Notepad" is opened	
 	
 	
-Scenario: Server and studio default file size 
-	Given I have settings tab opened	
+Scenario: Server and studio defaults file size 
+	Given I have settings tab opened for the first time	
 	And Logging is selected
 	Then Server System Logs is "Visible"
 	And Studio Logs is "Visible"	
+	And Server System Logs selected 'Warning'
+	And Studio System Logs selected 'Warning'
 	And Max Log file Size for Server default is "200" MB
 	And Max Log file Size for Studio default is "200" MB
 
@@ -165,3 +167,18 @@ Scenario: Server and studio log file size only accepts numbers
 	When I edit Max Log file Size for Server "100" MB
 	Then Max Log file Size for Server default is "100" MB 
 	And "Save" is "Enabled"
+
+Scenario: Load remote Server log file
+	Given I have settings tab opened
+	And Logging is selected
+	And I connect to "RemoteServer"
+	And remote server has
+	| ServerLog | ServerSize |
+	| None      | 1          |
+	Then Max Log file Size for Server is "1" MB
+	And Server System Logs selected 'None'
+	And Studio System Logs is "Disabled"
+	And Max Log file Size for Studio is "Disabled"
+	And Studio Log File Link is "Disabled"
+	When Studio System Logs selected 'Info'
+	Then "Save" is "Enabled"
