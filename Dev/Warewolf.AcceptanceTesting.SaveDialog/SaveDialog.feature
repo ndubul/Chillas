@@ -79,4 +79,4 @@ Scenario: Cancel Saving a Workflow in localhost folder
 Scenario: Save with Filter
 	Given the Save Dialog is opened
 	When I refresh the filter
-	Then "Folder 1" is "Visible"
+	Then "Folder 1" is visible in "localhost"

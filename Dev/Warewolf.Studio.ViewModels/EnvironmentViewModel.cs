@@ -508,6 +508,10 @@ namespace Warewolf.Studio.ViewModels
         {
             if (explorerItems == null) return new ObservableCollection<IExplorerItemViewModel>();
             var explorerItemModels = new ObservableCollection<IExplorerItemViewModel>();
+            if(parent != null)
+            {
+                parent.Children = new ObservableCollection<IExplorerItemViewModel>();
+            }
             // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (var explorerItem in explorerItems)
             {
