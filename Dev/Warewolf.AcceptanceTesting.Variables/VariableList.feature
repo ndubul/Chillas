@@ -24,7 +24,7 @@ Scenario: Variables adding in variable list and removing unused
     | Variable    | Note              | Input | Output | Not Used |
     | [[rec().a]] | This is recordset |       | YES    |          |
     | [[rec().b]] |                   |       |        | YES      |
-    | [[mr()]]    |                   |       |        |       |
+    | [[mr()]]    |                   |       |        |          |
     | [[Var]]     |                   | YES   |        |          |
     | [[a]]       |                   |       |        | YES      |
     | [[lr().a]]  |                   |       |        | YES      |
@@ -35,14 +35,14 @@ Scenario: Variables adding in variable list and removing unused
 	And "Sort Variables" is "Enabled" 
 	And the Variable Names are
 	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
-	| Var           |                |                  | YES      |        |
+	| Var           |                |                  | YES   |        |
 	| a             | YES            |                  |       |        |
 	And the Recordset Names are
 	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
 	| rec()          |                |                  |       |        |
 	| rec().a        |                | YES              |       | YES    |
 	| rec().b        | YES            |                  |       |        |
-	| mr()           |             |                  |       |        |
+	| mr()           |                |                  |       |        |
 	| lr()           | YES            |                  |       |        |
 	| lr().a         | YES            |                  |       |        |
 	When I click "Delete Variables"
@@ -61,7 +61,7 @@ Scenario: Searching Variables in Variable list
     | Variable    | Note              | Input | Output | Not Used |
     | [[rec().a]] | This is recordset |       | YES    |          |
     | [[rec().b]] |                   |       |        | YES      |
-    | [[mr()]]    |                   |       |        |       |
+    | [[mr()]]    |                   |       |        |          |
     | [[Var]]     |                   | YES   |        |          |
     | [[a]]       |                   |       |        | YES      |
     | [[lr().a]]  |                   |       |        | YES      |
@@ -74,9 +74,9 @@ Scenario: Searching Variables in Variable list
 	Then the Variable Names are
 	| Variable Name | Delete Visible | Note Visible | Note Highlighted | Input       | Output      |
 	And the Recordset Names are 
-	| Recordset Name | Delete Visible | Note Visible | Note Highlighted | Input       | Output      |
-	| lr()           | YES            |           |                |             |             |
-	| lr().a         | YES            |           |                |             |             |
+	| Recordset Name | Delete Visible | Note Visible | Note Highlighted | Input | Output |
+	| lr()           | YES            |              |                  |       |        |
+	| lr().a         | YES            |              |                  |       |        |
 	And I click delete for "lr().a"
 	Then the Variable Names are
 	| Variable Name | Delete Visible | Note Visible | Note Highlighted | Input       | Output      |
@@ -90,7 +90,7 @@ Scenario: Searching Variables in Variable list
 	When I press the clear filter button
 	And the Variable Names are
 	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
-	| Var           |                |                  | YES      |        |
+	| Var           |                |                  | YES   |        |
 	| a             | YES            |                  |       |        |
 	And the Recordset Names are
 	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
@@ -163,14 +163,14 @@ Scenario: Variables removed from design surface and list
     | [[lr().a]]  | 
 	And the Variable Names are
 	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
-	| Var           |                |                  | YES      |        |
+	| Var           |                |                  | YES   |        |
 	| a             | YES            |                  |       |        |
 	And the Recordset Names are
 	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
 	| rec()          |                |                  |       |        |
 	| rec().a        |                | YES              |       | YES    |
 	| rec().b        | YES            |                  |       |        |
-	| mr()           |             |                  |       |        |
+	| mr()           |                |                  |       |        |
 	| lr()           | YES            |                  |       |        |
 	| lr().a         | YES            |                  |       |        |
 	And I remove variable "[[Var]]"
