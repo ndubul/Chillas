@@ -54,7 +54,7 @@
         <Border Grid.Row="1" BorderThickness="0,0,0,0" Margin="{StaticResource ElementBorderTop}">
             <Grid>
                 <TabControl Style="{StaticResource TabControlStyle}">
-                    <TabItem Style="{StaticResource TabItemStyle}">
+                    <TabItem Style="{StaticResource TabItemStyle}" BorderThickness="0">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <fa:FontAwesome Icon="Lock" FontSize="17" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
