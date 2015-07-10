@@ -1,32 +1,39 @@
 using System.Windows;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Core.Help;
-using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.WorkSurface;
+using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
 
 namespace Dev2.ViewModels
 {
-    public class NewPluginSourceViewModel : BaseWorkSurfaceViewModel, IHelpSource, IStudioTab
+    public class SourceViewModel<T> : BaseWorkSurfaceViewModel, IHelpSource, IStudioTab
     {
         string _helpText;
-        IManagePluginSourceViewModel _vm;
+        SourceBaseImpl<T> _vm;
         readonly IPopupController _popupController;
-        string _displayName;
 
-        public NewPluginSourceViewModel(IEventAggregator eventPublisher, IManagePluginSourceViewModel vm, IPopupController popupController)
+        public SourceViewModel(IEventAggregator eventPublisher, SourceBaseImpl<T> vm, IPopupController popupController,IView view)
             : base(eventPublisher)
         {
             ViewModel = vm;
-            _popupController = popupController;            
+            View = view;
+            _popupController = popupController;
+            ViewModel.PropertyChanged += (sender, args) =>
+            {
+                if(args.PropertyName == "Header")
+                {
+                    OnPropertyChanged("DisplayName");
+                }
+            };
         }
 
         public override object GetView(object context = null)
         {
-            var view = new ManagePluginSourceControl();           
-            return view;
+            return View;
         }
 
         protected override void OnViewAttached(object view, object context)
@@ -38,12 +45,8 @@ namespace Dev2.ViewModels
         {
             get
             {
-                return ViewModel.ResourceName;
-            }
-            set
-            {
-                _displayName = value;
-            }
+                return ViewModel.Header;
+            }            
         }
 
         protected override void OnViewLoaded(object view)
@@ -70,7 +73,7 @@ namespace Dev2.ViewModels
                 _helpText = value;
             }
         }
-        public IManagePluginSourceViewModel ViewModel
+        public SourceBaseImpl<T> ViewModel
         {
             get
             {
@@ -81,6 +84,7 @@ namespace Dev2.ViewModels
                 _vm = value;
             }
         }
+        public IView View { get; set; }
 
         #endregion
 
@@ -115,5 +119,10 @@ namespace Dev2.ViewModels
         }
 
         #endregion
+
+        public SourceViewModel(IEventAggregator eventPublisher)
+            : base(eventPublisher)
+        {
+        }
     }
 }

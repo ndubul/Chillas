@@ -38,7 +38,8 @@ Scenario: Creating New DB Source General Testing
    | Options       |
    | Microsoft SQL |
    | MySQL         |
-   And type options has "Microsoft SQL" as the default
+   And I type Select The Server as "RSAKLFSVRGENDEV"
+   And type options has "SqlDatabase" as the default
    And Database dropdown is "Invisible"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
@@ -61,7 +62,7 @@ Scenario: Creating New DB Source as User Auth
     Given I open New Database Source
     And I type Server as "RSAKLFSVRGENDEV"
     And I Select Authentication Type as "User"
-    Then "User Name" field is "Visible"
+    Then Username field is "Visible"
     And Password field is "Visible"
     And "Test Connection" is "Disbled"
     And "Save" is "Disabled"
@@ -82,7 +83,7 @@ Scenario: Creating New DB Source as User Auth
 Scenario: Incorrect Server Address Doesnt Allow Save Windows Auth
       Given I open New Database Source
 	  And "Save" is "Disabled"
-      And I type Server as "Incorrect"
+      And I type Server as "RSAKLFSVRTFSBLD"
       And Database dropdown is "Invisible"
       And "Save" is "Disabled"
       And I Select Authentication Type as "Windows"
@@ -91,14 +92,14 @@ Scenario: Incorrect Server Address Doesnt Allow Save Windows Auth
       Then Database dropdown is "InVisible"
       And "Test Connection" is "Enabled"
       When Test Connecton is "Unsuccessful"
-      And the validation message as "Cannot find \\Invisible. Make sure the computer name or address is correct."
+      And the validation message as "Server not found"
       Then Database dropdown is "InVisible"
       And "Save" is "Disabled"
 
   
 Scenario: Incorrect Server Address Doesnt Allow Save User Auth
       Given I open New Database Source
-      And I type Server as "Incorrect"
+      And I type Server as "RSAKLFSVRTFSBLD"
       And Database dropdown is "Invisible"
       And "Save" is "Disabled"
       And I Select Authentication Type as "User"
@@ -109,7 +110,8 @@ Scenario: Incorrect Server Address Doesnt Allow Save User Auth
       Then Database dropdown is "InVisible"
       And "Test Connection" is "Enabled"
       When Test Connecton is "Unsuccessful"
-      And the validation message as "Cannot find \\Invisible. Make sure the computer name or address is correct."
+      And the validation message as "Server not found" 
+	  # above message comes from mocked network layer and cannot be tested here
       Then Database dropdown is "InVisible"
       And "Save" is "Disabled"
 
@@ -118,7 +120,7 @@ Scenario: Incorrect Server Address Doesnt Allow Save User Auth
 Scenario: Testing as Windows and swaping it resets the test connection 
       Given I open New Database Source
       And "Save" is "Disabled"
-      And I type Server as "RSAKLFSVRGENDEV"
+      And I type Server as "RSAKLFSVRTFSBLD"
       And Database dropdown is "Invisible"
       And "Save" is "Disabled"
       And "Test Connection" is "Enabled"
@@ -158,7 +160,6 @@ Scenario: Editing saved DB Source Remembers Previouse Auth Selection
     And Authentication Type is selected as "User"
     And Username field is "testuser"
     And Password field is "******"
-    And "Test Connection" is "Enabled"
 	And Database "Dev2TestingDB" is selected 
     And "Save" is "Disabled"
 	When I Select Authentication Type as "Windows"
@@ -167,16 +168,16 @@ Scenario: Editing saved DB Source Remembers Previouse Auth Selection
     And Database dropdown is "InVisible"
     And "Test Connection" is "Enabled"
     And Test Connecton is "Successful"
-    And "Save" is "Disabled"
+    And "Save" is "Enabled"
     And Database dropdown is "Visible"
-    And I select "Dev2TestingDB" as Database
+    And I select "Dev2TestingDB2" as Database
     And "Save" is "Enabled" 
     When I Select Authentication Type as "User"
     Then "Test Connection" is "Enabled" 
-    And "Save" is "Enabled"
+    And "Save" is "Disabled"
 	And Database "Dev2TestingDB" is selected 
     And "Test Connection" is "Enabled"
-    And "Save" is "Enabled"
+    And "Save" is "Disabled"
 	
 
 Scenario: Editing saved DB Source Remembers credentials
@@ -185,15 +186,15 @@ Scenario: Editing saved DB Source Remembers credentials
     And "Save" is "Disabled"
     And "Test Connection" is "Enabled"
     And Authentication Type is selected as "User"
-    Then Username field is "testuser"
+    And Username field is "testuser"
     And Password field is "******"
     And "Test Connection" is "Enabled"
 	And Database "Dev2TestingDB" is selected 
     And "Save" is "Disabled"
-	When I Edit Server as "RSAKLFSVRV"
+	When I Edit Server as "RSAKLFSVRWRWBLD"
 	Then Authentication Type is selected as "User"
-    Then Username field is "testuser"
-    And Password field is "******"
+    Then Username is "testuser"
+    And Password  is "******"
     Then "Test Connection" is "Enabled" 
     And "Save" is "Disabled"
     Then Database dropdown is "InVisible"
@@ -209,25 +210,21 @@ Scenario: Editing saved DB Source and canceling without saving
     And Authentication Type is selected as "User"
     And Username field is "testuser"
     And Password field is "******"
-    And "Test Connection" is "Enabled"
 	And Database "Dev2TestingDB" is selected 
     And "Save" is "Disabled"
-	When I edit Authentication Type is selected as "Windows"
+	When I Select Authentication Type as "Windows"
     Then "Test Connection" is "Enabled" 
     And "Save" is "Disabled"
     And Database dropdown is "InVisible"
     And "Test Connection" is "Enabled"
     And Test Connecton is "Successful"
-    And "Save" is "Disabled"
+    And "Save" is "Enabled"
     And Database dropdown is "Visible"
     And I select "Dev2TestingDB" as Database
     And "Save" is "Enabled" 
     When I Cancel the source
-    Then "Edit Database Source - Test"  is closed
 	And I open "Edit Database Source - Test" 
-	And Authentication Type is selected as "User"
-	And Username field is "testuser"
-	And Password field is "******"
+	Then underlying Authentication Type is selected as "User"
+    Then underlying Username is "testuser"
+    And underlying Password  is "******"
 	Then "Test Connection" is "Enabled" 
-    And "Save" is "Disabled"
-	And Database "Dev2TestingDB" is selected 
