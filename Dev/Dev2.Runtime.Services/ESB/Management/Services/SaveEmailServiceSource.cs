@@ -38,12 +38,8 @@ namespace Dev2.Runtime.ESB.Management.Services
                 con.EnableSsl = src.EnableSsl;
                 con.Timeout = src.Timeout;
 
-                // ReSharper disable MaximumChainedReferences
-                // ReSharper restore MaximumChainedReferences
-                var emailsrc = ResourceCatalog.Instance.GetResource<EmailSource>(GlobalConstants.ServerWorkspaceID, src.Id);
-
                 ResourceCatalog.Instance.SaveResource(GlobalConstants.ServerWorkspaceID, con);
-                var explorerItem = ServerExplorerRepo.UpdateItem(con);
+                ServerExplorerRepo.UpdateItem(con);
 
                 msg.HasError = false;
             }

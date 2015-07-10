@@ -423,6 +423,7 @@ namespace Warewolf.Studio.ViewModels
                 var explorerItems = await Server.LoadExplorer();
 				var explorerItemViewModels = CreateExplorerItems(explorerItems.Children, Server, this, selectedId != null);
                 Children = explorerItemViewModels;
+                
                 IsLoaded = true;
                 IsConnecting = false;
                 IsExpanded = true;
