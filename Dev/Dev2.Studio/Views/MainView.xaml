@@ -41,7 +41,7 @@
         </Storyboard>
         <Storyboard x:Key="AnimateExitFullScreenPanelClose" TargetName="ExitFullScreenPanel">
             <ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="Margin">
-                <SplineThicknessKeyFrame KeyTime="0:0:0.5" Value="0,-90,0,0" />
+                <SplineThicknessKeyFrame KeyTime="0:0:0.5" Value="0,-20,0,0" />
             </ThicknessAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
                 <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
@@ -398,6 +398,7 @@
                     Width="250"
                     Height="60"
                     Margin="0,-90,0,0"
+                    ZIndex="0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Background="White"
@@ -423,7 +424,7 @@
                    MouseEnter="ShowFullScreenPanel_OnMouseEnter" />
         <Rectangle x:Name="HideFullScreenPanel"
                    Height="20"
-                   Margin="0,45,0,0"
+                   Margin="0,25,0,0"
                    VerticalAlignment="Top"
                    Fill="#00000000"
                    IsHitTestVisible="True"

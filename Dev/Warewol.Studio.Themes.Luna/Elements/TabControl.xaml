@@ -33,7 +33,7 @@
                                   KeyboardNavigation.TabIndex="1" />
                         <Border x:Name="Border"
                                 Grid.Row="1"
-                                BorderThickness="0,1,0,0"
+                                BorderThickness="0,0,0,0"
                                 BorderBrush="{StaticResource WareWolfBlackBrush}"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabIndex="2"
