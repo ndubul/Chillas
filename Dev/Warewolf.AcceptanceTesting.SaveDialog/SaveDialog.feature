@@ -69,3 +69,36 @@ Scenario: Save with Filter
 	Given the Save Dialog is opened
 	When I refresh the filter
 	Then "Folder 1" is visible in "localhost"
+
+Scenario: Context Menu Folder actions
+	Given the Save Dialog is opened
+	When I context menu "Create New Folder" on "localhost"
+	Then I add folder "Testing"
+	Then "Localhost\Testing" is "Visible
+	And "Localhost\Testing" is "Selected"
+	When I press "CTRL+SHIFT+F"
+	Then I add folder "Nested"
+	Then "Localhost\Testing\Nested" is "Visible
+	And "Localhost\Testing\Nested" is "Selected"
+	When I context menu "Rename" on "Localhost\Testing"
+	Then I type "Old Testing !@#"
+	Then Validation message is "Cannot create folder with invalid characters"
+	Then I type "Old Testing"
+	Then "Localhost\Old Testing\Nested" is "Visible
+	And "Localhost\Old Testing" is "Selected"
+	When I press "F2"
+	Then I type "Very Old Testing"
+	Then "Localhost\Very Old Testing\Nested" is "Visible
+	And "Localhost\Very Old Testing" is "Selected"
+	When I context menu "Delete" on "Localhost\Very Old Testing"
+	Then I "Cancel" on confirm dialog
+	Then "Localhost\Very Old Testing\Nested" is "Visible
+	When I context menu "Delete" on "Localhost\Very Old Testing"
+	Then I "Yes" on confirm dialog
+	Then "Localhost\Very Old Testing\Nested" is "Invisible
+	And "Localhost\Very Old Testing" is "Invisible
+	When I context menu "Delete" on "Localhost\SavedWorkflow"
+	Then I "Yes" on confirm dialog
+	Then "Localhost\SavedWorkflow" is "Invisible
+	
+	
