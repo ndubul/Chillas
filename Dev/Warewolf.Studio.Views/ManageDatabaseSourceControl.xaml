@@ -63,6 +63,7 @@
                        Text="{Binding ServerTypeLabel}"/>
             <ComboBox Grid.Column="1" 
                       Grid.Row="0" 
+                      x:Name="ServerTypeComboBox"
                       ItemsSource="{Binding Types}" 
                       SelectedValue="{Binding ServerType}">
                 <i:Interaction.Behaviors>

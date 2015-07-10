@@ -75,3 +75,8 @@ Scenario: Cancel Saving a Workflow in localhost folder
 	Then save button is "enabled"
 	When I cancel
 	Then "NewWorkflow" is not visible in "Folder 1"
+
+Scenario: Save with Filter
+	Given the Save Dialog is opened
+	When I refresh the filter
+	Then "Folder 1" is "Visible"

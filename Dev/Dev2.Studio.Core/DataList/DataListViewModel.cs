@@ -459,6 +459,7 @@ namespace Dev2.Studio.ViewModels.DataList
         {
             if(SearchText == null) return;
 
+         ;
             foreach(var item in ScalarCollection)
             {
                 item.IsVisable = item.Name.ToUpper().Contains(SearchText.ToUpper());
@@ -875,13 +876,13 @@ namespace Dev2.Studio.ViewModels.DataList
                 newScalarCollection = ScalarCollection.OrderByDescending(c => c.DisplayName)
                                                                                 .Where(c => !c.IsBlank).ToList();
             }
-            //ScalarCollection.Clear();
-            for(int index = 0; index < newScalarCollection.Count; index++)
+            ScalarCollection.Clear();
+            foreach (var item in newScalarCollection)
             {
-                var item = newScalarCollection[index];
-                ScalarCollection[index] = (item);
+                ScalarCollection.Add(item);
             }
-           // ScalarCollection.Add(DataListItemModelFactory.CreateDataListModel(string.Empty));
+            ScalarCollection.Add(DataListItemModelFactory.CreateDataListModel(string.Empty));
+
         }
 
         /// <summary>

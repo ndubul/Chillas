@@ -32,7 +32,7 @@ namespace Warewolf.Studio.ViewModels
 {
     public class ManageDatabaseSourceViewModel : SourceBaseImpl<IDbSource>, IManageDatabaseSourceViewModel, IDisposable
     {
-        IAsyncWorker AsyncWorker { get; set; }
+        public IAsyncWorker AsyncWorker { get; set; }
         private enSourceType _serverType;
         private AuthenticationType _authenticationType;
         private IComputerName _serverName;
@@ -372,6 +372,10 @@ namespace Warewolf.Studio.ViewModels
                 if (_authenticationType != value)
                 {
                     _authenticationType = value;
+                    if (_dbSource != null && _authenticationType == AuthenticationType.User && _authenticationType == _dbSource.AuthenticationType)
+                    {    Password = _dbSource.Password;
+                         UserName = _dbSource.UserName;
+                    }
                     OnPropertyChanged(() => AuthenticationType);
                     OnPropertyChanged(() => Header);
                     OnPropertyChanged(() => UserAuthenticationSelected);
