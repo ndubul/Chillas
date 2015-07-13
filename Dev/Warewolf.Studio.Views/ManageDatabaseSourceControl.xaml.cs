@@ -194,7 +194,7 @@ namespace Warewolf.Studio.Views
 
         public string GetSelectedDbOption()
         {
-            return ServerTypeComboBox.SelectedItem.ToString();
+            return ServerTypeComboBox.SelectedValue.ToString();
         }
 
         public void Test()
@@ -215,6 +215,16 @@ namespace Warewolf.Studio.Views
         public void Cancel()
         {
             
+        }
+
+        public string GetHeader()
+        {
+            return (DataContext as ManageDatabaseSourceViewModel).HeaderText;
+        }
+
+        public void CancelTest()
+        {
+            CancelTestButton.Command.Execute(null);
         }
     }
 

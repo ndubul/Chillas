@@ -47,7 +47,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Background="{StaticResource WareWolfMenuBrush}" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
-            <TextBlock Margin="5" Text="{Binding HeaderText}" Style="{StaticResource SourceHeader}" />
+            <TextBlock Margin="5" Text="{Binding HeaderText}" Style="{StaticResource SourceHeader}" x:Name="HeaderTextBlock" />
         </StackPanel>
         <Grid Grid.Row="1" Margin="{StaticResource ElementBorderTop}" >
             <Grid.ColumnDefinitions>
@@ -242,7 +242,7 @@
             <Button Width="120" 
                     Height="30" 
                     Command="{Binding CancelTestCommand}" 
-                    Content="{Binding CancelTestLabel}">
+                    Content="{Binding CancelTestLabel}" x:Name="CancelTestButton">
                 <i:Interaction.Behaviors>
                     <core:HelpSetter Text="{x:Static languages:Core.DatabaseSourceCancelHelp}"
                                  DataContext="{Binding}" />

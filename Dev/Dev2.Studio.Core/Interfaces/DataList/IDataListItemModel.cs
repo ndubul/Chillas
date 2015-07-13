@@ -55,11 +55,14 @@ namespace Dev2.Studio.Core.Interfaces.DataList
         bool IsField { get; }
 
         bool IsExpanded { get; set; }
+        string FilterText { get; set; }
 
         void SetError(string errorMessage);
 
         void RemoveError();
 
         #endregion Properties
+
+        void Filter(string searchText);
     }
 }
