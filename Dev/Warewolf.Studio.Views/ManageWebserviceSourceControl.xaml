@@ -187,7 +187,7 @@
                     <core:HelpSetter Text="{x:Static languages:Core.DatabaseSourceTestConnectionHelp}" DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </Button>
-            <Button Width="120" 
+            <Button x:Name="CancelButton" Width="120" 
                     Height="30" 
                     Command="{Binding CancelTestCommand}" 
                     Content="{Binding CancelTestLabel}"></Button>

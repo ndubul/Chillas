@@ -7,11 +7,11 @@ Feature: Web Source
 @WebSource
 Scenario: Creating New Web Source 
    Given I open New Web Source 
-   Then "New Web Service Source 1" tab is opened
-   And title is "New Web Service Source 1"
+   Then "New Web Service Source" tab is opened
+   And title is "New Web Service Source"
    And I type Address as "http://RSAKLFSVRTFSBLD/IntegrationTestSite"
    And I type Default Query as "/GetCountries.ashx?extension=json&prefix=a"
-   Then "New Web Service Source 1 *" tab is opened
+   Then "New Web Service Source *" tab is opened
    Then "TestQuery" is "Visible"
    And TestQuery is "http://RSAKLFSVRTFSBLD/IntegrationTestSite/GetCountries.ashx?extension=json&prefix=a"
    And "Save" is "Disabled"
@@ -144,10 +144,11 @@ Scenario: Editing saved Web Source
 @WebSource
 Scenario: Cancel Test
    Given I open New Web Source 
-   Then "New Web Service Source 1" tab is opened
-   And title is "New Web Service Source 1"
+   Then "New Web Service Source" tab is opened
+   And title is "New Web Service Source"
    And I type Address as "http://test-warewolf.cloudapp.net:3142/public/Hello%20World?Name=Me"
-   And I click "Test Connection"
-   And I click "Cancel Test"
+   When Test Connecton is "Long Running"
+   And I Cancel the Test
    Then "Cancel Test" is "Disabled"
+   And Validation message is thrown
    And Validation message is "Test Cancelled"
