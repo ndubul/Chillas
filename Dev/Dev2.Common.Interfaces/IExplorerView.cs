@@ -20,5 +20,7 @@ namespace Dev2.Common.Interfaces
         int GetResourcesVisible (string path);
 
         void VerifyItemDoesNotExist(string path);
+
+        void Refresh();
     }
 }

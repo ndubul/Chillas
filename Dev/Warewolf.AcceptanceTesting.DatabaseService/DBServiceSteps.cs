@@ -110,6 +110,15 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             Assert.IsNotNull(view.DataContext);
             Assert.IsInstanceOfType(view.DataContext,typeof(ManageDatabaseServiceViewModel));
         }
+        [Given(@"I click ""(.*)""")]
+        public void GivenIClick(string p0)
+        {
+            var view = Utils.GetView<ManageDatabaseServiceControl>();
+            Assert.IsNotNull(view);
+            Assert.IsNotNull(view.DataContext);
+            Assert.IsInstanceOfType(view.DataContext, typeof(ManageDatabaseServiceViewModel));
+        }
+
 
         [When(@"I select ""(.*)"" as data source")]
         public void WhenISelectAsDataSource(string dbSourceName)
@@ -170,6 +179,27 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             var view = Utils.GetView<ManageDatabaseServiceControl>();
             var isDataSourceFocused = view.IsDataSourceFocused();
             Assert.IsTrue(isDataSourceFocused);
+        }
+        [Then(@"""(.*)"" is ""(.*)""")]
+        public void ThenIs(string name, string state)
+        {
+            var view = Utils.GetView<ManageDatabaseServiceControl>();
+            switch(name)
+            {
+                case "1 Data Source " :
+                    Utils.CheckControlEnabled("name",state,view);
+                    break;
+                case "2 Select Action":
+                    Utils.CheckControlEnabled("name", state, view);
+                    break;
+                case "3 Test Connector and Calculate Outputs":
+                    Utils.CheckControlEnabled("name", state, view);
+                    break;
+                case "4 Edit Default and Mapping Names":
+                    Utils.CheckControlEnabled("name", state, view);
+                    break;
+
+            }
         }
 
         [Given(@"inputs are")]

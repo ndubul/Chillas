@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using Dev2.Common.Interfaces;
 using Infragistics.Controls.Menus;
 
@@ -96,6 +94,11 @@ namespace Warewolf.Studio.Views
 	    public void VerifyItemDoesNotExist(string path)
 	    {
             ExplorerViewTestClass.VerifyItemDoesNotExist(path);
+	    }
+
+	    public void Refresh()
+	    {
+	        ExplorerViewTestClass.Reset();
 	    }
 
 	    public void Blur()

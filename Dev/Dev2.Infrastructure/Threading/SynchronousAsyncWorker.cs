@@ -67,8 +67,8 @@ namespace Dev2.Threading
             {
                 try
                 {
-                    backgroundAction.Invoke();
-                    uiAction.Invoke();
+                backgroundAction.Invoke();
+                uiAction.Invoke();
                 }
                 catch(Exception e)
                 {
@@ -178,8 +178,8 @@ namespace Dev2.Threading
             {
                 try
                 {
-                    var result = backgroundFunc.Invoke();
-                    uiAction.Invoke(result);
+                var result = backgroundFunc.Invoke();
+                uiAction.Invoke(result);
                 }
                 catch(Exception e)
                 {
@@ -213,7 +213,7 @@ namespace Dev2.Threading
                         uiAction.Invoke(result);
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     onError(e);
                 }

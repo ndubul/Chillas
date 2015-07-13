@@ -41,7 +41,7 @@ namespace Warewolf.Studio.ViewModels
            
 			OkCommand = new DelegateCommand(SetServiceName, () => String.IsNullOrEmpty(ErrorMessage));
             CancelCommand = new DelegateCommand(CloseView);
-            SingleEnvironmentExplorerViewModel = new SingleEnvironmentExplorerViewModel(environmentViewModel);
+            SingleEnvironmentExplorerViewModel = new SingleEnvironmentExplorerViewModel(environmentViewModel,_selectedGuid);            
             _view.DataContext = this;
             Name = "";
 			environmentViewModel.CanShowServerVersion = false;

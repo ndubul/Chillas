@@ -24,7 +24,7 @@ namespace Dev2.Common.Interfaces
         /// The Database Server Type
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        enSourceType ServerType { get; set; }
+        NameValue ServerType { get; set; }
         /// <summary>
         ///  Windows or user or publlic
         /// </summary>
@@ -147,7 +147,7 @@ namespace Dev2.Common.Interfaces
         /// <summary>
         /// Database Types avaialable 
         /// </summary>
-        IList<enSourceType> Types { get; set; }
+        IList<NameValue> Types { get; set; }
         /// <summary>
         /// The name of the resource
         /// </summary>

@@ -1,5 +1,9 @@
-﻿using System.Windows.Controls;
+﻿using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Data;
+using Dev2.Common.Interfaces;
 using Infragistics.Controls.Menus;
+using Microsoft.Practices.Prism.Mvvm;
 using Warewolf.Studio.Core;
 
 namespace Warewolf.Studio.Views
@@ -7,11 +11,21 @@ namespace Warewolf.Studio.Views
     /// <summary>
     /// Interaction logic for ManagePluginSourceControl.xaml
     /// </summary>
-    public partial class ManagePluginSourceControl : UserControl
+    public partial class ManagePluginSourceControl : IView, ICheckControlEnabledView
     {
         public ManagePluginSourceControl()
         {
             InitializeComponent();
+        }
+
+        public string GetHeaderText()
+        {
+            BindingExpression be = HeaderTextBlock.GetBindingExpression(TextBlock.TextProperty);
+            if (be != null)
+            {
+                be.UpdateTarget();
+            }
+            return HeaderTextBlock.Text;
         }
 
         private void ExplorerTree_OnNodeExpansionChanging(object sender, CancellableNodeExpansionChangedEventArgs e)
@@ -38,5 +52,108 @@ namespace Warewolf.Studio.Views
         }
 
         #endregion
+
+        public IDllListingModel SelectItem(string itemName)
+        {
+            XamDataTreeNode xamDataTreeNode;
+            if(ExplorerTree.ActiveNode != null)
+            {
+                xamDataTreeNode = GetItem(itemName);
+            }
+            else
+            {
+                xamDataTreeNode = ExplorerTree.Nodes.FirstOrDefault(node =>
+                {
+                    var item = node.Data as IDllListingModel;
+                    if(item != null)
+                    {
+                        if(item.Name.ToLowerInvariant().Contains(itemName.ToLowerInvariant()))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+            }
+            if (xamDataTreeNode != null)
+            {
+                xamDataTreeNode.IsSelected = true;
+                ExplorerTree.ActiveNode = xamDataTreeNode;                
+            }
+            return xamDataTreeNode == null ? null : xamDataTreeNode.Data as IDllListingModel;
+        }
+
+        public bool IsItemVisible(string itemName)
+        {
+            var xamDataTreeNode = GetItem(itemName);
+            return xamDataTreeNode != null;
+        }
+
+        XamDataTreeNode GetItem(string itemName)
+        {
+            var theExpandedItem = ExplorerTree.ActiveNode.Nodes.FirstOrDefault(node => node.IsExpanded);
+            if(theExpandedItem != null)
+            {
+                ExplorerTree.ActiveNode = theExpandedItem;
+            }
+            var xamDataTreeNode = ExplorerTree.ActiveNode.Nodes.FirstOrDefault(node =>
+            {
+                var item = node.Data as IDllListingModel;
+                if(item != null)
+                {
+                    if(item.Name.ToLowerInvariant().Contains(itemName.ToLowerInvariant()))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            });
+            return xamDataTreeNode;
+        }
+
+        public string GetAssemblyName()
+        {
+            BindingExpression be = AssemblyNameTextBox.GetBindingExpression(TextBox.TextProperty);
+            if (be != null)
+            {
+                be.UpdateTarget();
+            }
+            return AssemblyNameTextBox.Text;
+        }
+
+        public void PerformSave()
+        {
+            SaveButton.Command.Execute(null);
+        }
+
+        public void SetAssemblyName(string assemblyName)
+        {
+            AssemblyNameTextBox.Text = assemblyName;
+            BindingExpression be = AssemblyNameTextBox.GetBindingExpression(TextBlock.TextProperty);
+            if (be != null)
+            {
+                be.UpdateSource();
+            }
+        }
+
+        public IDllListingModel OpenItem(string itemNameToOpen)
+        {
+            var xamDataTreeNode = GetItem(itemNameToOpen);
+            if (xamDataTreeNode != null)
+            {
+                xamDataTreeNode.IsExpanded = true;
+            }
+            return xamDataTreeNode == null ? null : xamDataTreeNode.Data as IDllListingModel;
+        }
+
+        public bool GetControlEnabled(string controlName)
+        {
+            switch(controlName)
+            {
+                case "Save":
+                    return SaveButton.Command.CanExecute(null);
+            }
+            return false;
+        }
     }
 }

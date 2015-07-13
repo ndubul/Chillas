@@ -193,6 +193,17 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
             explorer.VerifyItemDoesNotExist(folderName + "/" + resourceName);
         }
 
+        [When(@"I refresh the filter")]
+        public void WhenIRefreshTheFilter()
+        {
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            var explorer = saveView.GetExplorerView();
+            explorer.Refresh();
+        }
+
+
         [AfterScenario("SaveDialog")]
         public void CleanupForSave()
         {

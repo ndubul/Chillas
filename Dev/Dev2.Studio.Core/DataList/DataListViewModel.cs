@@ -182,6 +182,8 @@ namespace Dev2.Studio.ViewModels.DataList
         }
 
         bool _toggleSortOrder = true;
+        ObservableCollection<IDataListItemModel> _backupScalars;
+        ObservableCollection<IDataListItemModel> _backupRecsets;
 
         #endregion Properties
 
@@ -457,31 +459,59 @@ namespace Dev2.Studio.ViewModels.DataList
 
         void FilterItems()
         {
-            if(SearchText == null) return;
-
-            foreach(var item in ScalarCollection)
+            //ConvertDataListStringToCollections(Resource.DataList);
+            if (_backupScalars != null)
             {
-                item.IsVisable = item.Name.ToUpper().Contains(SearchText.ToUpper());
-            }
-
-            foreach(var item in RecsetCollection)
-            {
-                bool parentVis = false;
-                foreach(var child in item.Children)
+                ScalarCollection.Clear();
+                foreach (var dataListItemModel in _backupScalars)
                 {
-                    if(child.Name.Contains(SearchText))
-                    {
-                        child.IsVisable = true;
-                        parentVis = true;
-                    }
-                    else
-                    {
-                        child.IsVisable = false;
-                    }
+                    ScalarCollection.Add(dataListItemModel);
                 }
-
-                item.IsVisable = parentVis || item.Name.ToUpper().Contains(SearchText.ToUpper());
             }
+            if (_backupRecsets != null)
+            {
+                RecsetCollection.Clear();
+                foreach (var dataListItemModel in _backupRecsets)
+                {
+                    RecsetCollection.Add(dataListItemModel);
+                }
+            }
+
+
+            if (SearchText == null)
+            {
+
+                return;
+            }
+            _backupScalars = new ObservableCollection<IDataListItemModel>();
+            _backupRecsets = new ObservableCollection<IDataListItemModel>();
+            foreach (var dataListItemModel in ScalarCollection)
+            {
+                _backupScalars.Add(dataListItemModel);
+            }
+            foreach (var dataListItemModel in RecsetCollection)
+            {
+                _backupRecsets.Add(dataListItemModel);
+            }
+            
+            for(int index = 0; index < ScalarCollection.Count; index++)
+            {
+                var item = ScalarCollection[index];
+                if (!item.Name.ToUpper().Contains(SearchText.ToUpper()))
+                    ScalarCollection.Remove(item);
+                
+            }
+
+            for (int index = 0; index < RecsetCollection.Count; index++)
+            {
+                var item = RecsetCollection[index];
+                item.Filter(SearchText);
+                if (!item.FilterText.ToUpper().Contains(SearchText.ToUpper()))
+                    RecsetCollection.Remove(item);
+               
+            }
+
+         
         }
 
         public void AddBlankRow(IDataListItemModel item)
@@ -875,13 +905,13 @@ namespace Dev2.Studio.ViewModels.DataList
                 newScalarCollection = ScalarCollection.OrderByDescending(c => c.DisplayName)
                                                                                 .Where(c => !c.IsBlank).ToList();
             }
-            //ScalarCollection.Clear();
-            for(int index = 0; index < newScalarCollection.Count; index++)
+            ScalarCollection.Clear();
+            foreach (var item in newScalarCollection)
             {
-                var item = newScalarCollection[index];
-                ScalarCollection[index] = (item);
+                ScalarCollection.Add(item);
             }
-           // ScalarCollection.Add(DataListItemModelFactory.CreateDataListModel(string.Empty));
+            ScalarCollection.Add(DataListItemModelFactory.CreateDataListModel(string.Empty));
+
         }
 
         /// <summary>
@@ -997,13 +1027,23 @@ namespace Dev2.Studio.ViewModels.DataList
             {
                 var scalar = DataListItemModelFactory.CreateDataListModel(c.Name, ParseDescription(c.Attributes[Description]), ParseColumnIODirection(c.Attributes[GlobalConstants.DataListIoColDirection]));
                 scalar.IsEditable = ParseIsEditable(c.Attributes[IsEditable]);
+                if(String.IsNullOrEmpty(_searchText))
                 ScalarCollection.Add(scalar);
+                else if(scalar.Name.ToUpper().StartsWith(_searchText.ToUpper()))
+                {
+                    ScalarCollection.Add(scalar);
+                }
             }
             else
             {
                 var scalar = DataListItemModelFactory.CreateDataListModel(c.Name, ParseDescription(null), ParseColumnIODirection(null));
                 scalar.IsEditable = ParseIsEditable(null);
-                ScalarCollection.Add(scalar);
+                if (String.IsNullOrEmpty(_searchText))
+                    ScalarCollection.Add(scalar);
+                else if (scalar.Name.ToUpper().StartsWith(_searchText.ToUpper()))
+                {
+                    ScalarCollection.Add(scalar);
+                }
             }
         }
 

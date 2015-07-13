@@ -115,14 +115,18 @@ namespace Warewolf.Studio.ViewModels
 			}
 		}
 
-		private void Refresh()
+		protected virtual void Refresh()
 		{
 			IsRefreshing = true;
 			Environments.ForEach(model =>
 			{
 				if (model.IsConnected)
 				{
-					model.Load();
+				    model.Load();
+                    if (!string.IsNullOrEmpty(SearchText))
+                    {
+                        Filter(SearchText);
+                    }
 				}
 			});
 			IsRefreshing = false;
@@ -221,15 +225,36 @@ namespace Warewolf.Studio.ViewModels
 
 	public class SingleEnvironmentExplorerViewModel : ExplorerViewModelBase
 	{
-		public SingleEnvironmentExplorerViewModel(IEnvironmentViewModel environmentViewModel)
+	    readonly Guid _selectedId;
+
+	    public SingleEnvironmentExplorerViewModel(IEnvironmentViewModel environmentViewModel,Guid selectedId)
 		{
-			environmentViewModel.SetPropertiesForDialog();
+	        _selectedId = selectedId;
+	        environmentViewModel.SetPropertiesForDialog();
 			Environments = new ObservableCollection<IEnvironmentViewModel>
 			{
 				environmentViewModel
 			};
             IsRefreshing = false;
 			ShowConnectControl = false;
+            SelectItem(_selectedId);
 		}
+
+        protected override void Refresh()
+        {
+            IsRefreshing = true;
+            Environments.ForEach(model =>
+            {
+                if (model.IsConnected)
+                {
+                    model.LoadDialog(_selectedId);
+                    if(!string.IsNullOrEmpty(SearchText))
+                    {
+                        Filter(SearchText);
+                    }
+                }
+            });
+            IsRefreshing = false;
+        }
 	}
 }

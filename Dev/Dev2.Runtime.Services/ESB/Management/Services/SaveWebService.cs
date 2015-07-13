@@ -72,7 +72,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                     Headers = src.Headers
                 };
                 ResourceCatalog.Instance.SaveResource(GlobalConstants.ServerWorkspaceID, res);
-                //ServerExplorerRepo.UpdateItem(res);
+                ServerExplorerRepo.UpdateItem(res);
 
                 msg.HasError = false;
             }

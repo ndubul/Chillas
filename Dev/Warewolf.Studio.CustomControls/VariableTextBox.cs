@@ -57,7 +57,7 @@ namespace Warewolf.Studio.CustomControls
             HasText = Text.Length != 0;
             if (!HasText)
             {
-                Focus();
+               // Focus();
             }
         }
 

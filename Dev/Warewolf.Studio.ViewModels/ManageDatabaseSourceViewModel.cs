@@ -26,17 +26,14 @@ using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Threading;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warewolf.Core;
-using Warewolf.Studio.Models.Help;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class ManageDatabaseSourceViewModel : BindableBase, IManageDatabaseSourceViewModel, IDockViewModel, IDisposable
+    public class ManageDatabaseSourceViewModel : SourceBaseImpl<IDbSource>, IManageDatabaseSourceViewModel, IDisposable
     {
-        IAsyncWorker AsyncWorker { get; set; }
-        private enSourceType _serverType;
+        public IAsyncWorker AsyncWorker { get; set; }
+        private NameValue _serverType;
         private AuthenticationType _authenticationType;
         private IComputerName _serverName;
         private string _databaseName;
@@ -44,7 +41,6 @@ namespace Warewolf.Studio.ViewModels
         private string _password;
         private string _testMessage;
         private IList<string> _databaseNames;
-        private string _header;
         IManageDatabaseSourceModel _updateManager;
         IEventAggregator _aggregator;
         IDbSource _dbSource;
@@ -67,14 +63,13 @@ namespace Warewolf.Studio.ViewModels
             _aggregator = aggregator;
 
             HeaderText = Resources.Languages.Core.DatabaseSourceServerNewHeaderLabel;
-            // "New Database Connector Source Server DatabaseSourceServerHeaderLabel";
             Header = Resources.Languages.Core.DatabaseSourceServerNewHeaderLabel;
             TestCommand = new DelegateCommand(TestConnection, CanTest);
             OkCommand = new DelegateCommand(SaveConnection, CanSave);
             CancelTestCommand = new DelegateCommand(CancelTest, CanCancelTest);
             Testing = false;
-            Types = new List<enSourceType> { enSourceType.SqlDatabase };
-            ServerType = enSourceType.SqlDatabase;
+            Types = new List<NameValue> { new NameValue { Name = "Microsoft SQL Server", Value = enSourceType.SqlDatabase.ToString() }, new NameValue() { Name = "MySql Database", Value = enSourceType.SqlDatabase.ToString() } };
+            ServerType = Types[0];
             _testPassed = false;
             _testFailed = false;
             DatabaseNames = new List<string>();
@@ -117,7 +112,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public ManageDatabaseSourceViewModel(IAsyncWorker asyncWorker)
+        public ManageDatabaseSourceViewModel(IAsyncWorker asyncWorker):base(ResourceType.DbSource)
         {
             AsyncWorker = asyncWorker;
         }
@@ -135,7 +130,7 @@ namespace Warewolf.Studio.ViewModels
         {
             VerifyArgument.IsNotNull("dbSource", dbSource);
             PerformInitialise(updateManager, aggregator);
-            _warewolfserverName = updateManager.ServerName;
+            _warewolfserverName = updateManager.ServerName??"";
             _dbSource = dbSource;
             GetLoadComputerNamesTask(() =>
             {
@@ -147,7 +142,13 @@ namespace Warewolf.Studio.ViewModels
 
         void SetupHeaderTextFromExisting()
         {
-            HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel + _warewolfserverName.Trim() + "\\" + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
+            var server = "";
+            if (_warewolfserverName != null)
+            {
+                server = _warewolfserverName;
+            }
+            HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel  + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
+           
             Header = ((_dbSource == null ? ResourceName : _dbSource.Name));
         }
 
@@ -171,15 +172,8 @@ namespace Warewolf.Studio.ViewModels
             return true;
         }
 
-        public void UpdateHelpDescriptor(string helpText)
-        {
-            var helpDescriptor = new HelpDescriptor("", helpText, null);
-            VerifyArgument.IsNotNull("helpDescriptor", helpDescriptor);
-           // _aggregator.GetEvent<HelpChangedEvent>().Publish(helpDescriptor);
 
-        }
-
-        void FromDbSource(IDbSource dbSource)
+        public void FromDbSource(IDbSource dbSource)
         {
             ResourceName = dbSource.Name;
             AuthenticationType = dbSource.AuthenticationType;
@@ -232,12 +226,13 @@ namespace Warewolf.Studio.ViewModels
 
                 if (res == MessageBoxResult.OK)
                 {
-                    ResourceName = RequestServiceNameViewModel.ResourceName.Name;
+                    _resourceName = RequestServiceNameViewModel.ResourceName.Name;
                     var src = ToDbSource();
                     src.Path = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
                     Save(src);
                     _dbSource = src;
                     SetupHeaderTextFromExisting();
+                 //   ResourceName = RequestServiceNameViewModel.ResourceName.Name;
                 }
             }
             else
@@ -297,7 +292,7 @@ namespace Warewolf.Studio.ViewModels
                 ServerName = GetServerName(),
                 Password = Password,
                 UserName = UserName,
-                Type = ServerType,
+                Type = (enSourceType)Enum.Parse(typeof( enSourceType), ServerType.Value),
                 Name = ResourceName,
                 DbName = DatabaseName,
                 Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
@@ -323,7 +318,7 @@ namespace Warewolf.Studio.ViewModels
                     ServerName = GetServerName(),
                     Password = Password,
                     UserName = UserName,
-                    Type = ServerType,
+                    Type = (enSourceType)Enum.Parse(typeof( enSourceType), ServerType.Value),
                     Name = ResourceName,
                     DbName = DatabaseName,
                     Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
@@ -340,15 +335,32 @@ namespace Warewolf.Studio.ViewModels
 
             }
         }
-        IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
-        bool Haschanged
+        public override IDbSource ToModel()
         {
-            get { return !ToNewDbSource().Equals(_dbSource); }
+            if (Item == null)
+            {
+                Item = ToDbSource();
+                return Item;
+            }
+
+            return new DbSourceDefinition
+            {
+                AuthenticationType = AuthenticationType,
+                ServerName = GetServerName(),
+                Password = Password,
+                UserName = UserName,
+                Type = (enSourceType)Enum.Parse(typeof( enSourceType), ServerType.Value),
+                Name = ResourceName,
+                DbName = DatabaseName,
+                Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
+            };
+
         }
+        IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
 
-        public IList<enSourceType> Types { get; set; }
+        public IList<NameValue> Types { get; set; }
 
-        public enSourceType ServerType
+        public NameValue ServerType
         {
             get { return _serverType; }
             set
@@ -367,6 +379,10 @@ namespace Warewolf.Studio.ViewModels
                 if (_authenticationType != value)
                 {
                     _authenticationType = value;
+                    if (_dbSource != null && _authenticationType == AuthenticationType.User && _authenticationType == _dbSource.AuthenticationType)
+                    {    Password = _dbSource.Password;
+                         UserName = _dbSource.UserName;
+                    }
                     OnPropertyChanged(() => AuthenticationType);
                     OnPropertyChanged(() => Header);
                     OnPropertyChanged(() => UserAuthenticationSelected);
@@ -620,28 +636,12 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public bool IsActive { get; set; }
-
-        public event EventHandler IsActiveChanged;
-
-        public string Header
-        {
-            get
+        public override void UpdateHelpDescriptor(string helpText)
             {
-                return _header + ((_dbSource != null) && Haschanged || (_dbSource == null && !IsEmpty) ? " *" : "");
-            }
-            set
-            {
-                _header = value;
-                OnPropertyChanged(() => Header);
-            }
         }
+
         public bool IsEmpty { get { return ServerName != null && (String.IsNullOrEmpty(ServerName.Name) && AuthenticationType == AuthenticationType.Windows && String.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Password)); } }
 
-        public ResourceType? Image
-        {
-            get { return ResourceType.DbSource; }
-        }
 
         public void Dispose()
         {

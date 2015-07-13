@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -21,7 +22,7 @@ namespace Warewolf.Studio.Views
             InitializeComponent();
         }
 
-        public void EnterServerName(string serverName)
+        public void EnterServerName(string serverName,bool add=false)
         {
             var comboEditorItem = ServerTextBox.Items.FirstOrDefault(item =>
             {
@@ -32,6 +33,11 @@ namespace Warewolf.Studio.Views
                 }
                 return false;
             });
+            if(comboEditorItem==null&& add)
+            {
+                (ServerTextBox.ItemsSource as ICollection<IComputerName>).Add(new ComputerName(){Name= serverName});
+                EnterServerName(serverName, false);
+            }
             if(comboEditorItem != null)
             {
                 try
@@ -91,6 +97,18 @@ namespace Warewolf.Studio.Views
             }
         }
 
+        public void SelectServer(string serverName)
+        {
+            try
+            {
+                EnterServerName(serverName);
+            }
+            catch (Exception)
+            {
+                //Stupid exception when running from tests
+            }
+        }
+
         public Visibility GetUsernameVisibility()
         {
             BindingExpression be = UserNamePasswordContainer.GetBindingExpression(VisibilityProperty);
@@ -133,8 +151,10 @@ namespace Warewolf.Studio.Views
 
         public string GetErrorMessage()
         {
-            return ErrorTextBlock.Text;
+            return (DataContext as ManageDatabaseSourceViewModel).TestMessage;
         }
+
+
         // ReSharper disable once InconsistentNaming
         private void XamComboEditor_Loaded(object sender, RoutedEventArgs e)
         {
@@ -160,6 +180,52 @@ namespace Warewolf.Studio.Views
         }
 
         #endregion
+
+        public void VerifyServerExistsintComboBox(string serverName)
+        {
+           
+        }
+
+        public  IEnumerable<string> GetServerOptions()
+        {
+           
+          return new List<string>();
+        }
+
+        public string GetSelectedDbOption()
+        {
+            return ServerTypeComboBox.SelectedValue.ToString();
+        }
+
+        public void Test()
+        {
+            TestConnectionButton.Command.Execute(null);
+        }
+
+        public string GetUsername()
+        {
+            return UserNameTextBox.Text;
+        }
+
+        public object GetPassword()
+        {
+            return PasswordTextBox.Password;
+        }
+
+        public void Cancel()
+        {
+            
+        }
+
+        public string GetHeader()
+        {
+            return (DataContext as ManageDatabaseSourceViewModel).HeaderText;
+        }
+
+        public void CancelTest()
+        {
+            CancelTestButton.Command.Execute(null);
+        }
     }
 
     public class NullToVisibilityConverter : IValueConverter
