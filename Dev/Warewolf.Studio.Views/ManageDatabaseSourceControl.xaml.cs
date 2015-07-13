@@ -49,6 +49,10 @@ namespace Warewolf.Studio.Views
                     //Ignore exception running from test
                 }
             }
+            else
+            {
+                (DataContext as IManageDatabaseSourceViewModel).ServerName = new ComputerName(){Name= serverName};
+            }
         }
 
         public Visibility GetDatabaseDropDownVisibility()
