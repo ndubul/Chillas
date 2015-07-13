@@ -77,6 +77,12 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
            Assert.AreEqual( manageDatabaseSourceControl.GetHeader(),p0);
         }
+        [Then(@"""(.*)"" is the tab Header")]
+        public void ThenIsTheTabHeader(string p0)
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            Assert.AreEqual(manageDatabaseSourceControl.GetTabHeader(), p0);
+        }
 
 
         [Given(@"I open New Database Source")]

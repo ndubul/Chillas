@@ -221,7 +221,10 @@ namespace Warewolf.Studio.Views
         {
             return (DataContext as ManageDatabaseSourceViewModel).HeaderText;
         }
-
+        public string  GetTabHeader()
+        {
+            return (DataContext as ManageDatabaseSourceViewModel).Header;
+        }
         public void CancelTest()
         {
             CancelTestButton.Command.Execute(null);
