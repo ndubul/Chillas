@@ -84,15 +84,15 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
    testRunner.Given("I open New Web Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 10
-   testRunner.Then("\"New Web Service Source 1\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.Then("\"New Web Service Source\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 11
-   testRunner.And("title is \"New Web Service Source 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("title is \"New Web Service Source\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
    testRunner.And("I type Address as \"http://RSAKLFSVRTFSBLD/IntegrationTestSite\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
    testRunner.And("I type Default Query as \"/GetCountries.ashx?extension=json&prefix=a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
-   testRunner.Then("\"New Web Service Source 1 *\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.Then("\"New Web Service Source *\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 15
    testRunner.Then("\"TestQuery\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 16
@@ -423,19 +423,21 @@ this.ScenarioSetup(scenarioInfo);
 #line 146
    testRunner.Given("I open New Web Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 147
-   testRunner.Then("\"New Web Service Source 1\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.Then("\"New Web Service Source\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 148
-   testRunner.And("title is \"New Web Service Source 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("title is \"New Web Service Source\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 149
    testRunner.And("I type Address as \"http://test-warewolf.cloudapp.net:3142/public/Hello%20World?Na" +
                     "me=Me\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 150
-   testRunner.And("I click \"Test Connection\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.When("Test Connecton is \"Long Running\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 151
-   testRunner.And("I click \"Cancel Test\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I Cancel the Test", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 152
    testRunner.Then("\"Cancel Test\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 153
+   testRunner.And("Validation message is thrown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 154
    testRunner.And("Validation message is \"Test Cancelled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

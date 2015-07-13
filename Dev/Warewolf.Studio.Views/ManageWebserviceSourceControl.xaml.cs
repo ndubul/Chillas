@@ -161,5 +161,10 @@ namespace Warewolf.Studio.Views
             }
             return HeaderTextBlock.Text;
         }
+
+        public void CancelTest()
+        {
+            CancelButton.Command.Execute(null);
+        }
     }
 }

@@ -73,12 +73,11 @@
                        Style="{StaticResource ErrorTextBlockStyle}"
                        Text="{Binding Path=ErrorMessage}"
                        TextAlignment="Right" />
-            <!--Margin="{StaticResource ElementBorderRight}"-->
             <Button x:Name="OkButton"
                     Width="60"
                     Command="{Binding Path=OkCommand}"
                     Margin="{StaticResource ControlBorderBottomRight}"
-                    Content="Ok"
+                    Content="Save"
                     Style="{StaticResource ButtonStyle}" />
             <Button x:Name="CancelButton"
                     Width="60"

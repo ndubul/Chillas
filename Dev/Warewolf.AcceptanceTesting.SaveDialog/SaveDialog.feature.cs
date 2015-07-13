@@ -280,61 +280,33 @@ this.ScenarioSetup(scenarioInfo);
 #line 74
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 75
- testRunner.When("I context menu \"Create New Folder\" on \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I context menu \"Create New Folder\" \"Testing\" on \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 76
- testRunner.Then("I add folder \"Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"Testing\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 77
- testRunner.Then("\"Localhost\\Testing\" is \"Visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 78
- testRunner.And("\"Localhost\\Testing\" is \"Selected\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
- testRunner.When("I press \"CTRL+SHIFT+F\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 80
- testRunner.Then("I add folder \"Nested\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 81
- testRunner.Then("\"Localhost\\Testing\\Nested\" is \"Visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I open \"Testing\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 82
- testRunner.And("\"Localhost\\Testing\\Nested\" is \"Selected\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I context menu \"Rename\" \"localhost/Testing\" to \"Old Testing !@#\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 83
- testRunner.When("I context menu \"Rename\" on \"Localhost\\Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("validation message is \"\'Name\' contains invalid characters.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 84
- testRunner.Then("I type \"Old Testing !@#\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I context menu \"Rename\" \"localhost/Testing\" to \"Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 85
- testRunner.Then("Validation message is \"Cannot create folder with invalid characters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 86
- testRunner.Then("I type \"Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 87
- testRunner.Then("\"Localhost\\Old Testing\\Nested\" is \"Visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 88
- testRunner.And("\"Localhost\\Old Testing\" is \"Selected\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I open \"Old Testing\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 89
- testRunner.When("I press \"F2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I open \"Very Old Testing\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 90
- testRunner.Then("I type \"Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I context menu \"Delete\" folder \"localhost/Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 91
- testRunner.Then("\"Localhost\\Very Old Testing\\Nested\" is \"Visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I Cancel the delete confirmation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 92
- testRunner.And("\"Localhost\\Very Old Testing\" is \"Selected\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("\"Very Old Testing\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 93
- testRunner.When("I context menu \"Delete\" on \"Localhost\\Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I context menu \"Delete\" folder \"localhost/Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 94
- testRunner.Then("I \"Cancel\" on confirm dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I confirm the deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 95
- testRunner.Then("\"Localhost\\Very Old Testing\\Nested\" is \"Visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 96
- testRunner.When("I context menu \"Delete\" on \"Localhost\\Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 97
- testRunner.Then("I \"Yes\" on confirm dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 98
- testRunner.Then("\"Localhost\\Very Old Testing\\Nested\" is \"Invisible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 99
- testRunner.And("\"Localhost\\Very Old Testing\" is \"Invisible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 100
- testRunner.When("I context menu \"Delete\" on \"Localhost\\SavedWorkflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 101
- testRunner.Then("I \"Yes\" on confirm dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 102
- testRunner.Then("\"Localhost\\SavedWorkflow\" is \"Invisible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"Very Old Testing\" is not visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

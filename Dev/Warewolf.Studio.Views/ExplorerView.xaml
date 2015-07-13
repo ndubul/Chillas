@@ -27,6 +27,9 @@
         <core:ResourceTypeToIconVisibility x:Key="ResourceTypeToVisibilityConverter" />
         <views:NotConverter x:Key="NotConverter" />
     </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding RenameCommand}" Key="F2" />
+    </UserControl.InputBindings>
     <Grid>
         <Grid x:Name="Overlay" Panel.ZIndex="1000" Visibility="Collapsed">
             <Grid.Background>
@@ -463,7 +466,7 @@
                                                     <ig:XamMenuItem Name="NewService"
                                                                 InputGestureText="[Ctrl+W]"
                                                                 Command="{Binding Path=Data.NewCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.WorkflowService}"
+                                                                CommandParameter="{x:Static data:ResourceType.WorkflowService}"                                                                
                                                                 Header="New Workflow Service"
                                                                 Visibility="{Binding Path=Data.CanCreateWorkflowService,
                                                                                      Converter={StaticResource BoolToVisibilityConverter}}">
@@ -472,6 +475,9 @@
                                                                Height="12"
                                                                Source="{StaticResource Explorer-WorkflowService}" />
                                                         </ig:XamMenuItem.Icon>
+                                                        <ig:XamMenuItem.InputBindings>
+                                                            <KeyBinding Key="W" Modifiers="Control" Command="{Binding Path=Data.NewCommand}"/>
+                                                        </ig:XamMenuItem.InputBindings>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuItem Name="NewServerSource"
                                                                 Command="{Binding Path=Data.NewCommand}"
@@ -585,8 +591,11 @@
                                                                 Command="{Binding Path=Data.CreateFolderCommand}"
                                                                 CommandParameter="{x:Static data:ResourceType.PluginService}"
                                                                 Header="New Folder"
-                                                                Visibility="{Binding Path=Data.CanCreateFolder,
+                                                                Visibility="{Binding Path=Data.CanCreateFolder,                                                        
                                                                                      Converter={StaticResource BoolToVisibilityConverter}}">
+                                                        <ig:XamMenuItem.InputBindings>
+                                                            <KeyBinding Key="F" Modifiers="Control+Shift" Command="{Binding Path=Data.NewCommand}"/>
+                                                        </ig:XamMenuItem.InputBindings>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuItem Name="Rename"
 																InputGestureText="[F2]"

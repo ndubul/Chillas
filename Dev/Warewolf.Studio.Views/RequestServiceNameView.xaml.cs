@@ -137,6 +137,12 @@ namespace Warewolf.Studio.Views
             CancelButton.Command.Execute(null);
         }
 
+        public void PerformActionOnContextMenu(string menuAction, string itemName, string path)
+        {
+            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
+            viewTestClass.PerformActionOnContextMenu(menuAction, itemName,path);
+        }
+
         /// <summary>
         /// Attaches events and names to compiled content. 
         /// </summary>

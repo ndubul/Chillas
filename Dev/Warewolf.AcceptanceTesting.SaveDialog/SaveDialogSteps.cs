@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Threading;
+using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.SaveDialog;
+using Dev2.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TechTalk.SpecFlow;
@@ -164,6 +166,8 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
             Assert.AreEqual(enabled,isSaveButtonEnabled);
         }
 
+        [Given(@"validation message is ""(.*)""")]
+        [When(@"validation message is ""(.*)""")]
         [Then(@"validation message is ""(.*)""")]
         public void ThenValidationMessageIs(string expectedValidationMessage)
         {
@@ -201,6 +205,55 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
             Assert.IsNotNull(saveView);
             var explorer = saveView.GetExplorerView();
             explorer.Refresh();
+        }
+
+        [When(@"I context menu ""(.*)"" ""(.*)"" on ""(.*)""")]
+        public void WhenIContextMenuOn(string menuAction,string itemName, string path)
+        {
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            saveView.PerformActionOnContextMenu(menuAction, itemName,path);
+        }
+
+        [When(@"I context menu ""(.*)"" folder ""(.*)""")]
+        public void WhenIContextMenuFolder(string p0, string p1)
+        {
+            ScenarioContext.Current.Remove("deletePath");
+            ScenarioContext.Current.Add("deletePath",p1);
+        }
+
+        [When(@"I Cancel the delete confirmation")]
+        public void WhenICancelTheDeleteConfirmation()
+        {
+            CustomContainer.DeRegister<IMainViewModel>();
+            var mockMainViewModel = new Mock<IMainViewModel>();
+            mockMainViewModel.Setup(model => model.ShowDeleteDialogForFolder(It.IsAny<string>())).Returns(false);
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            saveView.PerformActionOnContextMenu("Delete", "", ScenarioContext.Current.Get<string>("deletePath"));
+        }
+
+        [Then(@"I confirm the deletion")]
+        public void ThenIConfirmTheDeletion()
+        {
+            CustomContainer.DeRegister<IMainViewModel>();
+            var mockMainViewModel = new Mock<IMainViewModel>();
+            mockMainViewModel.Setup(model => model.ShowDeleteDialogForFolder(It.IsAny<string>())).Returns(true);
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            saveView.PerformActionOnContextMenu("Delete", "", ScenarioContext.Current.Get<string>("deletePath"));
+        }
+
+        [When(@"I context menu ""(.*)"" ""(.*)"" to ""(.*)""")]
+        public void WhenIContextMenuTo(string menuAction, string path, string itemName)
+        {
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            saveView.PerformActionOnContextMenu(menuAction, itemName, path);
         }
 
 
