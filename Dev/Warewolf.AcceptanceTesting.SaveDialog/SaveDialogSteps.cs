@@ -164,6 +164,8 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
             Assert.AreEqual(enabled,isSaveButtonEnabled);
         }
 
+        [Given(@"validation message is ""(.*)""")]
+        [When(@"validation message is ""(.*)""")]
         [Then(@"validation message is ""(.*)""")]
         public void ThenValidationMessageIs(string expectedValidationMessage)
         {
@@ -201,6 +203,24 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
             Assert.IsNotNull(saveView);
             var explorer = saveView.GetExplorerView();
             explorer.Refresh();
+        }
+
+        [When(@"I context menu ""(.*)"" ""(.*)"" on ""(.*)""")]
+        public void WhenIContextMenuOn(string menuAction,string itemName, string path)
+        {
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            saveView.PerformActionOnContextMenu(menuAction, itemName,path);
+        }
+
+        [When(@"I context menu ""(.*)"" ""(.*)"" to ""(.*)""")]
+        public void WhenIContextMenuTo(string menuAction, string path, string itemName)
+        {
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            saveView.PerformActionOnContextMenu(menuAction, itemName, path);
         }
 
 

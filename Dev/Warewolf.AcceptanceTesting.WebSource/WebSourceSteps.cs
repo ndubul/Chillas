@@ -181,6 +181,14 @@ namespace Warewolf.AcceptanceTesting.WebSource
             manageWebserviceSourceControl.ClickHyperLink();
         }
 
+        [When(@"I Cancel the Test")]
+        public void WhenICancelTheTest()
+        {
+            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageWebserviceSourceControl>(Utils.ViewNameKey);
+            manageWebserviceSourceControl.CancelTest();
+        }
+
+
         [Then(@"the browser window opens with ""(.*)""")]
         public void ThenTheBrowserWindowOpensWith(string expectedUriCalled)
         {
@@ -192,7 +200,9 @@ namespace Warewolf.AcceptanceTesting.WebSource
 
         }
 
+        [Given(@"Validation message is thrown")]
         [When(@"Validation message is thrown")]
+        [Then(@"Validation message is thrown")]
         public void WhenValidationMessageIsThrown()
         {
             var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageWebserviceSourceControl>(Utils.ViewNameKey);
@@ -201,6 +211,19 @@ namespace Warewolf.AcceptanceTesting.WebSource
             var errorMessageOnViewModel = viewModel.TestMessage;
             Assert.IsFalse(string.IsNullOrEmpty(errorMessageFromControl));
             var isErrorMessage = !errorMessageOnViewModel.Contains("Passed");
+            Assert.IsTrue(isErrorMessage);
+        }
+
+        [Then(@"Validation message is ""(.*)""")]
+        public void ThenValidationMessageIs(string msg)
+        {
+            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageWebserviceSourceControl>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<ManageWebserviceSourceViewModel>("viewModel");
+            var errorMessageFromControl = manageWebserviceSourceControl.GetErrorMessage();
+            var errorMessageOnViewModel = viewModel.TestMessage;
+            var isErrorMessageOnControl = errorMessageFromControl.Equals(msg, StringComparison.OrdinalIgnoreCase);
+            Assert.IsTrue(isErrorMessageOnControl);
+            var isErrorMessage = errorMessageOnViewModel.Equals(msg,StringComparison.OrdinalIgnoreCase);
             Assert.IsTrue(isErrorMessage);
         }
 
@@ -297,9 +320,16 @@ namespace Warewolf.AcceptanceTesting.WebSource
         {
             var mockUpdateManager = ScenarioContext.Current.Get<Mock<IManageWebServiceSourceModel>>("updateManager");
             var isSuccess = String.Equals(successString, "Successful", StringComparison.InvariantCultureIgnoreCase);
+            var isLongRunning = String.Equals(successString, "Long Running", StringComparison.InvariantCultureIgnoreCase);
             if (isSuccess)
             {
                 mockUpdateManager.Setup(manager => manager.TestConnection(It.IsAny<IWebServiceSource>()));
+            }
+            else if(isLongRunning)
+            {
+                var viewModel = ScenarioContext.Current.Get<ManageWebserviceSourceViewModel>("viewModel");
+                mockUpdateManager.Setup(manager => manager.TestConnection(It.IsAny<IWebServiceSource>()));
+                viewModel.AsyncWorker = new AsyncWorker();
             }
             else
             {
@@ -371,6 +401,9 @@ namespace Warewolf.AcceptanceTesting.WebSource
             manageWebserviceSourceControl.DataContext = viewModel;
             FeatureContext.Current.Remove("viewModel");
             FeatureContext.Current.Add("viewModel", viewModel);
+            FeatureContext.Current.Remove("externalProcessExecutor");
+            FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+
         }
     }
 }
