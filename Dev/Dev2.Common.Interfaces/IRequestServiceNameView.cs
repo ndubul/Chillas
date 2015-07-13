@@ -19,5 +19,7 @@ namespace Dev2.Common.Interfaces
         void Filter(string filter);
 
         void Cancel();
+
+        void PerformActionOnContextMenu(string menuAction, string itemName, string path);
     }
 }
