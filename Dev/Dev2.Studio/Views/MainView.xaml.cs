@@ -18,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using Dev2.Studio.ViewModels;
 using Dev2.Studio.ViewModels.Workflow;
+using Dev2.Views;
 using FontAwesome.WPF;
 using Infragistics.Windows.DockManager;
 using Infragistics.Windows.DockManager.Events;
@@ -131,7 +132,8 @@ namespace Dev2.Studio.Views
         {
             if (e.Key == Key.Home && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                
+                var imageWindow = new ImageWindow();
+                imageWindow.Show();
             }
             if (e.Key == Key.G && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {

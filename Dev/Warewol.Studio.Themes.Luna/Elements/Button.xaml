@@ -670,6 +670,7 @@
                                    Visibility="Collapsed" />
                         <Rectangle x:Name="DisabledVisualElement"
                                    Fill="{StaticResource DisabledSideMenuVisualElement}"
+                                   Opacity="0.4"
                                    Visibility="Collapsed" />
                     </Grid>
                     <ControlTemplate.Triggers>

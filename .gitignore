@@ -299,6 +299,20 @@
 /Dev/Warewolf.Studio.ServerProxyLayer/obj
 /Dev/Warewolf.AcceptanceTesting.WebSource/bin
 /Dev/Warewolf.AcceptanceTesting.WebSource/obj
+/Dev/Warewolf.AcceptanceTesting.DatabaseSource/bin
+/Dev/Warewolf.AcceptanceTesting.DatabaseSource/obj
+/Dev/Warewolf.AcceptanceTesting.DesignSurface/bin
+/Dev/Warewolf.AcceptanceTesting.DesignSurface/obj
+/Dev/Warewolf.AcceptanceTesting.EmailSource/bin
+/Dev/Warewolf.AcceptanceTesting.EmailSource/obj
+/Dev/Warewolf.AcceptanceTesting.PluginService/bin
+/Dev/Warewolf.AcceptanceTesting.PluginService/obj
+/Dev/Warewolf.AcceptanceTesting.PluginSource/bin
+/Dev/Warewolf.AcceptanceTesting.PluginSource/obj
+/Dev/Warewolf.AcceptanceTesting.Settings/bin
+/Dev/Warewolf.AcceptanceTesting.Settings/obj
+/Dev/Warewolf.AcceptanceTesting.TabControl/bin
+/Dev/Warewolf.AcceptanceTesting.TabControl/obj
 
 
 ####################################################################################
