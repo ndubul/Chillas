@@ -42,5 +42,7 @@ namespace Dev2.Interfaces
         void DisplayDialogForNewVersion();
 
         Task<bool> CheckForNewVersion();
+
+        bool ShowDeleteDialogForFolder(string folderBeingDeleted);
     }
 }

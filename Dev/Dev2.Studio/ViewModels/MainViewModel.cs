@@ -1419,12 +1419,17 @@ namespace Dev2.Studio.ViewModels
             return false;
         }
 
-        static bool ShowDeleteDialogForFolder(string folderBeingDeleted, IPopupController result)
+        bool ShowDeleteDialogForFolder(string folderBeingDeleted, IPopupController result)
         {
             var deletePrompt = String.Format(StringResources.DialogBody_ConfirmFolderDelete, folderBeingDeleted);
             var deleteAnswer = result.Show(deletePrompt, StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, MessageBoxImage.Warning, null);
             var confirmDelete = deleteAnswer == MessageBoxResult.Yes;
             return confirmDelete;
+        }
+
+        public bool ShowDeleteDialogForFolder(string folderBeingDeleted)
+        {
+            return ShowDeleteDialogForFolder(folderBeingDeleted,PopupProvider);
         }
 
         private void DeleteResources(ICollection<IContextualResourceModel> models, string folderName, bool showConfirm = true, System.Action actionToDoOnDelete = null)

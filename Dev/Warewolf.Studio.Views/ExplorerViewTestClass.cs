@@ -374,6 +374,21 @@ namespace Warewolf.Studio.Views
                 }
             }
         }
+        
+        public void PerformFolderDelete(string path)
+        {
+            var node = VerifyItemExists(path.Substring(0, path.LastIndexOf("/", StringComparison.Ordinal)));
+            var explorerItemViewModel = node.Data as IExplorerItemViewModel;
+            if(explorerItemViewModel != null)
+            {
+                var child= explorerItemViewModel.Children.FirstOrDefault(a => a.ResourceName.Contains(path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal))));
+
+                if (child != null)
+                {
+                    child.DeleteCommand.Execute(null);
+                }
+            }
+        }
 
         public void VerifyContextMenu(string option, string visibility, string path)
         {
@@ -428,6 +443,9 @@ namespace Warewolf.Studio.Views
                         break;
                     case "Rename":
                         PerformFolderRename(path,itemName);
+                        break;
+                    case "Delete":
+                        PerformFolderDelete(path);
                         break;
                 }
             }
