@@ -4,6 +4,19 @@ Feature: SaveDialog
 	As a Warewolf user
 	I want a save dialog
 
+## Ensure system can create Folder from Save Dialog under localhost
+## Ensure system can save a Workflow in localhost
+## Ensure system can save a Workflow in localhost folder
+## Ensure system can save button is Enabled when I enter new name for resource and filter
+## Ensure system can save with duplicate name and expect validation
+## Ensure system can save resource names with special character expect validation
+## Ensure system can cancel Saving a Workflow in localhost folder
+## Ensure system can save with Filter
+## Context Menu Folder actions
+## Ensure system can save a Workflow in localhost with the correct Permission
+
+
+
 Scenario: Creating Folder from Save Dialog under localhost
 	Given the Save Dialog is opened
 	And the "localhost" server is visible in save dialog
@@ -93,5 +106,17 @@ Scenario: Context Menu Folder actions
 	When I context menu "Delete" folder "localhost/Very Old Testing"
 	Then I confirm the deletion
 	Then "Very Old Testing" is not visible in "localhost"
+
+Scenario: Saving a Workflow in localhost with the correct Permission
+	Given the Save Dialog is opened
+	And the "localhost" server is visible in save dialog
+	When I save "localhost/NewWebSource"
+	Then "NewWebSource" is visible in "localhost"
+	And Resource 'NewWebSource' has rights 'Contribute, View, Execute' for 'Users'
+    When connected as user part of 'Users'
+    Then 'NewWebSource' should have 'Contribute, View, Execute'
+
+
+ 
 		
 	
