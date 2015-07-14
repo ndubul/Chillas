@@ -87,10 +87,11 @@ Scenario: Context Menu Folder actions
 	#Then I type "Very Old Testing" this is will need to happen from the CodedUI
 	#Then "Nested" is visible in "localhost/Very Old Testing" this is will need to happen from the CodedUI
 	And I open "Very Old Testing" in save dialog
-	When I context menu "Delete" on "localhost/Very Old Testing"
-	Then I "Cancel" on confirm dialog
-	When I context menu "Delete" on "localhost/Very Old Testing"
-	Then I "Yes" on confirm dialog
+	When I context menu "Delete" folder "localhost/Very Old Testing"
+	And I Cancel the delete confirmation
+	Then "Very Old Testing" is visible in "localhost"
+	When I context menu "Delete" folder "localhost/Very Old Testing"
+	Then I confirm the deletion
 	Then "Very Old Testing" is not visible in "localhost"
 		
 	

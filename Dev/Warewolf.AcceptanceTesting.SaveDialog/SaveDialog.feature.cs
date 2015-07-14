@@ -296,14 +296,16 @@ this.ScenarioSetup(scenarioInfo);
 #line 89
  testRunner.And("I open \"Very Old Testing\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 90
- testRunner.When("I context menu \"Delete\" on \"localhost/Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I context menu \"Delete\" folder \"localhost/Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 91
- testRunner.Then("I \"Cancel\" on confirm dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I Cancel the delete confirmation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 92
- testRunner.When("I context menu \"Delete\" on \"localhost/Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("\"Very Old Testing\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 93
- testRunner.Then("I \"Yes\" on confirm dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I context menu \"Delete\" folder \"localhost/Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 94
+ testRunner.Then("I confirm the deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 95
  testRunner.Then("\"Very Old Testing\" is not visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

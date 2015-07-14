@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Threading;
+using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.SaveDialog;
+using Dev2.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TechTalk.SpecFlow;
@@ -212,6 +214,37 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
             ScenarioContext.Current.TryGetValue("saveView", out saveView);
             Assert.IsNotNull(saveView);
             saveView.PerformActionOnContextMenu(menuAction, itemName,path);
+        }
+
+        [When(@"I context menu ""(.*)"" folder ""(.*)""")]
+        public void WhenIContextMenuFolder(string p0, string p1)
+        {
+            ScenarioContext.Current.Remove("deletePath");
+            ScenarioContext.Current.Add("deletePath",p1);
+        }
+
+        [When(@"I Cancel the delete confirmation")]
+        public void WhenICancelTheDeleteConfirmation()
+        {
+            CustomContainer.DeRegister<IMainViewModel>();
+            var mockMainViewModel = new Mock<IMainViewModel>();
+            mockMainViewModel.Setup(model => model.ShowDeleteDialogForFolder(It.IsAny<string>())).Returns(false);
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            saveView.PerformActionOnContextMenu("Delete", "", ScenarioContext.Current.Get<string>("deletePath"));
+        }
+
+        [Then(@"I confirm the deletion")]
+        public void ThenIConfirmTheDeletion()
+        {
+            CustomContainer.DeRegister<IMainViewModel>();
+            var mockMainViewModel = new Mock<IMainViewModel>();
+            mockMainViewModel.Setup(model => model.ShowDeleteDialogForFolder(It.IsAny<string>())).Returns(true);
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            saveView.PerformActionOnContextMenu("Delete", "", ScenarioContext.Current.Get<string>("deletePath"));
         }
 
         [When(@"I context menu ""(.*)"" ""(.*)"" to ""(.*)""")]

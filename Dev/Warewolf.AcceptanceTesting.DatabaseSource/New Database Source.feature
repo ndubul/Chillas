@@ -61,7 +61,7 @@ Scenario: Creating New DB Source General Testing
    Then "SavedDBSource" tab is opened
    And title is "Edit SavedDBSource"
    When I type Server as "RSA"
-   Then "SavedDBSource *" tab is opened
+   Then "SavedDBSource *" is the tab Header
    And title is "Edit SavedDBSource"
    
 

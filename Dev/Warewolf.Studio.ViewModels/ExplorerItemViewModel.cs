@@ -7,6 +7,7 @@ using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Infrastructure;
+using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Warewolf.Core;
@@ -224,18 +225,19 @@ namespace Warewolf.Studio.ViewModels
 
         void Delete()
         {
-//            if (ShellViewModel.ShowPopup(PopupMessages.GetDeleteConfirmation(ResourceName)))
-//            {
-//                _explorerRepository.Delete(this);
-//                if (Parent != null)
-//                {
-//                    Parent.RemoveChild(this);
-//                }
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel.ShowDeleteDialogForFolder(ResourceName))
+            {
+                _explorerRepository.Delete(this);
+                if (Parent != null)
+                {
+                    Parent.RemoveChild(this);
+                }
 //                else
 //                {
 //                    ShellViewModel.RemoveServiceFromExplorer(this);
 //                }
-//            }
+            }
         }
 
 //        public void UpdatePermissions(PermissionsChangedArgs args)

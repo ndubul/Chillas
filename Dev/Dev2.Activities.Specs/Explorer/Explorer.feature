@@ -72,6 +72,17 @@ Scenario Outline: Filtering on string
 	| 9  | Records\Recordset\Recor              | Re     | Records,Recordset,Recor |
 
 
+Scenario: Update Tree view by saving a Workflow
+	Given I have a path '<path>'	
+	And the folder '<folderName>' exists on the server '<exists>'
+	When I add a workflow with a name  '<WorkFlowName>'	
+	Then the folder path will be '<resultPath>'
+	And the Explorer is updated
+	Examples:
+	| No | path     | folderName | WorkFlowName    | exists | resultPath                         | 
+	| 1  | SpecFlow | SqlServer  | WebSeriveConnec | true   | SpecFlow\SqlServer\WebSeriveConnec | 
+
+
 
 
 
