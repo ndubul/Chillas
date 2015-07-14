@@ -213,7 +213,12 @@ Scenario: Adding parameters in request headers is updating variables
 	When I save the webservice
 	Then Save Dialog is opened
 	
- 
+Scenario: Edit Web source
+	Given I click "New Web Service Connector"
+	And I select "Dev2CountriesWebService" as data source
+	And "Edit" is "Enabled"
+	And I click "Edit"
+	Then the "Edit - Web Source" tab is opened 
  
  
  

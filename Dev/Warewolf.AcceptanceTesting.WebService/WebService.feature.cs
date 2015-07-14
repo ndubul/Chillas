@@ -599,6 +599,29 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Edit Web source")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebService")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WebService")]
+        public virtual void EditWebSource()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Edit Web source", ((string[])(null)));
+#line 216
+this.ScenarioSetup(scenarioInfo);
+#line 217
+ testRunner.Given("I click \"New Web Service Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 218
+ testRunner.And("I select \"Dev2CountriesWebService\" as data source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 219
+ testRunner.And("\"Edit\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 220
+ testRunner.And("I click \"Edit\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 221
+ testRunner.Then("the \"Edit - Web Source\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

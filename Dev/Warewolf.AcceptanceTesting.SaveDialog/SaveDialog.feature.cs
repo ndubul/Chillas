@@ -76,17 +76,17 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
         public virtual void CreatingFolderFromSaveDialogUnderLocalhost()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating Folder from Save Dialog under localhost", ((string[])(null)));
-#line 7
+#line 20
 this.ScenarioSetup(scenarioInfo);
-#line 8
+#line 21
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 9
+#line 22
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
+#line 23
  testRunner.And("I should see \"5\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
+#line 24
  testRunner.When("I create \"New Folder\" in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
+#line 25
  testRunner.Then("I should see \"6\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -99,15 +99,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SavingAWorkflowInLocalhost()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving a Workflow in localhost", ((string[])(null)));
-#line 14
+#line 27
 this.ScenarioSetup(scenarioInfo);
-#line 15
+#line 28
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 16
+#line 29
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
+#line 30
  testRunner.When("I save \"localhost/Newworkflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 18
+#line 31
  testRunner.Then("\"Newworkflow\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -120,17 +120,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SavingAWorkflowInLocalhostFolder()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving a Workflow in localhost folder", ((string[])(null)));
-#line 21
+#line 34
 this.ScenarioSetup(scenarioInfo);
-#line 22
+#line 35
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 23
+#line 36
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 24
+#line 37
  testRunner.And("I open \"Folder 1\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
+#line 38
  testRunner.When("I save \"Newworkflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 26
+#line 39
  testRunner.Then("\"Newworkflow\" is visible in \"localhost/Folder 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -143,29 +143,29 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SaveButtonIsEnabledWhenIEnterNewNameForResourceAndFilter()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save button is Enabled when I enter new name for resource and filter", ((string[])(null)));
-#line 29
+#line 42
 this.ScenarioSetup(scenarioInfo);
-#line 30
+#line 43
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 31
+#line 44
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
+#line 45
  testRunner.Then("save button is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 33
+#line 46
  testRunner.And("Filter is \"Folder 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
+#line 47
  testRunner.Then("I should see \"1\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 35
+#line 48
  testRunner.When("I refresh the filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 36
+#line 49
  testRunner.Then("I should see \"1\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 37
+#line 50
  testRunner.And("I open \"Folder 1\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
+#line 51
  testRunner.When("I enter name \"Savewf\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 39
+#line 52
  testRunner.Then("save button is \"enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 40
+#line 53
  testRunner.And("validation message is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -178,19 +178,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SaveWithDuplicateNameAndExpectValidation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save with duplicate name and expect validation", ((string[])(null)));
-#line 42
+#line 55
 this.ScenarioSetup(scenarioInfo);
-#line 43
+#line 56
     testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 44
+#line 57
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
+#line 58
  testRunner.When("I open \"Folder 2\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 46
+#line 59
  testRunner.When("I enter name \"Folder 2 Child 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 47
+#line 60
  testRunner.Then("save button is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 48
+#line 61
  testRunner.And("validation message is \"An item with name \'Folder 2 Child 1\' already exists in thi" +
                     "s folder.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -204,19 +204,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SaveResourceNamesWithSpecialCharacterExpectValidation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save resource names with special character expect validation", ((string[])(null)));
-#line 50
+#line 63
 this.ScenarioSetup(scenarioInfo);
-#line 51
+#line 64
     testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 52
+#line 65
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 66
  testRunner.When("I open \"Folder 1\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 54
+#line 67
  testRunner.When("I enter name \"Save@#$\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 55
+#line 68
  testRunner.Then("save button is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 56
+#line 69
  testRunner.And("validation message is \"\'Name\' contains invalid characters.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -229,21 +229,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void CancelSavingAWorkflowInLocalhostFolder()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cancel Saving a Workflow in localhost folder", ((string[])(null)));
-#line 59
+#line 72
 this.ScenarioSetup(scenarioInfo);
-#line 60
+#line 73
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 74
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
+#line 75
  testRunner.And("I open \"Folder 1\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 76
  testRunner.When("I enter name \"NewWorkflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 64
+#line 77
  testRunner.Then("save button is \"enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 65
+#line 78
  testRunner.When("I cancel", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 66
+#line 79
  testRunner.Then("\"NewWorkflow\" is not visible in \"Folder 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -256,13 +256,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SaveWithFilter()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save with Filter", ((string[])(null)));
-#line 68
+#line 81
 this.ScenarioSetup(scenarioInfo);
-#line 69
+#line 82
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 70
+#line 83
  testRunner.When("I refresh the filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 71
+#line 84
  testRunner.Then("\"Folder 1\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -275,38 +275,65 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ContextMenuFolderActions()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Context Menu Folder actions", ((string[])(null)));
-#line 73
+#line 86
 this.ScenarioSetup(scenarioInfo);
-#line 74
+#line 87
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 75
+#line 88
  testRunner.When("I context menu \"Create New Folder\" \"Testing\" on \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 76
- testRunner.Then("\"Testing\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 77
- testRunner.And("I open \"Testing\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
- testRunner.When("I context menu \"Rename\" \"localhost/Testing\" to \"Old Testing !@#\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 83
- testRunner.And("validation message is \"\'Name\' contains invalid characters.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
- testRunner.When("I context menu \"Rename\" \"localhost/Testing\" to \"Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 85
- testRunner.And("I open \"Old Testing\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 89
- testRunner.And("I open \"Very Old Testing\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("\"Testing\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 90
- testRunner.When("I context menu \"Delete\" folder \"localhost/Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 91
- testRunner.And("I Cancel the delete confirmation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 92
- testRunner.Then("\"Very Old Testing\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 93
- testRunner.When("I context menu \"Delete\" folder \"localhost/Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 94
- testRunner.Then("I confirm the deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I open \"Testing\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 95
+ testRunner.When("I context menu \"Rename\" \"localhost/Testing\" to \"Old Testing !@#\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 96
+ testRunner.And("validation message is \"\'Name\' contains invalid characters.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 97
+ testRunner.When("I context menu \"Rename\" \"localhost/Testing\" to \"Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 98
+ testRunner.And("I open \"Old Testing\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 102
+ testRunner.And("I open \"Very Old Testing\" in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 103
+ testRunner.When("I context menu \"Delete\" folder \"localhost/Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 104
+ testRunner.And("I Cancel the delete confirmation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 105
+ testRunner.Then("\"Very Old Testing\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 106
+ testRunner.When("I context menu \"Delete\" folder \"localhost/Very Old Testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 107
+ testRunner.Then("I confirm the deletion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 108
  testRunner.Then("\"Very Old Testing\" is not visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Saving a Workflow in localhost with the correct Permission")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
+        public virtual void SavingAWorkflowInLocalhostWithTheCorrectPermission()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving a Workflow in localhost with the correct Permission", ((string[])(null)));
+#line 110
+this.ScenarioSetup(scenarioInfo);
+#line 111
+ testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 112
+ testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 113
+ testRunner.When("I save \"localhost/NewWebSource\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 114
+ testRunner.Then("\"NewWebSource\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 115
+ testRunner.And("Resource \'NewWebSource\' has rights \'Contribute, View, Execute\' for \'Users\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 116
+    testRunner.When("connected as user part of \'Users\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 117
+    testRunner.Then("\'NewWebSource\' should have \'Contribute, View, Execute\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

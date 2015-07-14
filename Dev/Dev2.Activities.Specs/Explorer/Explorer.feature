@@ -5,6 +5,16 @@ Feature: Explorer
 	I want an explorer that represents a tree of items on my disk
 
 #ONLY FOLDERS
+
+## Ensure the system can add folders to explorer
+## Ensure the system can rename resources on explorer
+## Ensure the system can delete a folder
+## Ensure the system can filter on string
+## Ensure the system can update Tree view by saving a Workflow
+## Ensure the system allows the user to edit a source from Explorer
+
+
+
 Scenario Outline: Add folders to explorer
 	Given I have a path '<path>'	
 	And the folder '<folderName>' exists on the server '<exists>'
@@ -77,10 +87,22 @@ Scenario: Update Tree view by saving a Workflow
 	And the folder '<folderName>' exists on the server '<exists>'
 	When I add a workflow with a name  '<WorkFlowName>'	
 	Then the folder path will be '<resultPath>'
-	And the Explorer is updated
+	And the Explorer is updated with the '<WorkFlowName>'
 	Examples:
-	| No | path     | folderName | WorkFlowName    | exists | resultPath                         | 
-	| 1  | SpecFlow | SqlServer  | WebSeriveConnec | true   | SpecFlow\SqlServer\WebSeriveConnec | 
+	| No | path     | folderName | WorkFlowName    | exists | resultPath                         |
+	| 1  | SpecFlow | SqlServer  | WebSeriveConnec | true   | SpecFlow\SqlServer\WebSeriveConnec |
+	| 2  | SpecFlow | SqlServer  | 1588574         | true   | SpecFlow\SqlServer\1588574         | 
+
+
+Scenario: Edit Source from Explorer
+	Given I have a path '<path>'	
+	And the resource '<resource>' exists on the server '<exists>'
+	When I open '<resource>'
+	Then '<resource>' tab is opened
+	Examples:
+	| No | path     | resource               | exists |
+	| 1  | SpecFlow | Edit - WebSeriveConnec | true   |
+
 
 
 
