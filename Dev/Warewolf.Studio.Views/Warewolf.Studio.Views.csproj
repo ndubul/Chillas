@@ -153,6 +153,7 @@
     <Compile Include="SplashPage.xaml.cs">
       <DependentUpon>SplashPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TreeUtils.cs" />
     <Compile Include="WidthConverter.cs" />
     <Compile Include="WindowBorderLess.xaml.cs">
       <DependentUpon>WindowBorderLess.xaml</DependentUpon>

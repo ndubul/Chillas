@@ -2,7 +2,7 @@
 
 namespace Dev2.Common.Interfaces
 {
-    public interface IPluginSource
+    public interface IPluginSource:IEquatable<IPluginSource>    
     {
         string Name { get; set; }
         Guid Id { get; set; }

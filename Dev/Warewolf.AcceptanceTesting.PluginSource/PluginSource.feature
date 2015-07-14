@@ -36,40 +36,38 @@ Scenario: New Plugin Source File
 Scenario: New Plugin Source GAC
 	Given I open New Plugin Source
 	When I click "GAC"
-	Then the progress bar indicates loading of resources
 	And Assembly is ""
 	And "Save" is "Disabled"
-	When I Filter for "AuditPolicyGPMan"
+	When I Search for "AuditPolicyGPMan"
 	And I click "AuditPolicyGPManagedStubs.Interop, Version=6.1.0.0"
-	Then Assembly is "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+	Then Assembly value is "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll"
 	And "Save" is "Enabled"
 	When I save Plugin source
-	Then Save Dialog is opened
+	Then the save dialog is opened
 	 
 Scenario: Editing Plugin Source
 	Given I open "Test" plugin source
-	Then title is "Edit Plugin Source - Test"
-	And "C:\" is "visible"
-	And Assembly is "Plugins/Unlimited.Email.Plugin.dll"
+	Then title is "Edit Test"
+	And "GAC" is "visible"
+	And Assembly value is "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll"
 	And "Save" is "Disabled"
-	When I select "PrimativesTestDLL - Copy.dll"
-	Then Assembly is "Z:\Plugins\PrimativesTestDLL - Copy.dll"
+	When I click "BDATunePIA, Version=6.1.0.0"
+	Then Assembly value is "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll"
 	And "Save" is "Enabled"
 	When I save Plugin source
-	Then Save Dialog is opened
 
 Scenario: Change Plugin Source Assembly Input
 	Given I open "Test" plugin source
-	Then title is "Edit Plugin Source - Test"
+	Then title is "Edit Test"
 	And file is selected
 	And "C:\" is "visible"
-	And Assembly is "Plugins/Unlimited.Email.Plugin.dll"
+	And Assembly value is "C:\AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll"
 	And "Save" is "Disabled"
-	When I select "PrimativesTestDLL - Copy.dll"
-	Then Assembly is "Z:\Plugins\PrimativesTestDLL - Copy.dll"
+	When I click "BDATunePIA, Version=6.1.0.0"
+	Then Assembly value is "C:\BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll"
 	And "Save" is "Enabled"
 	When I save Plugin source
-	Then Save Dialog is opened
+	Then the save dialog is opened
 
 Scenario: Refresh New Plugin Source File
 	Given I open New Plugin Source

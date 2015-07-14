@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Threading;
 using Microsoft.Practices.Prism.PubSubEvents;
@@ -19,6 +20,8 @@ namespace Warewolf.AcceptanceTesting.PluginSource
     [Binding]
     public class PluginSourceSteps
     {
+        static DllListing _dllListing;
+
         [BeforeFeature("PluginSource")]
         public static void SetupForSystem()
         {
@@ -30,6 +33,7 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
             var mockEventAggregator = new Mock<IEventAggregator>();
             var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockSynchronousAsyncWorker = new Mock<SynchronousAsyncWorker>();
 
             var viewModel = new ManagePluginSourceViewModel(mockStudioUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker());
             sourceControl.DataContext = viewModel;
@@ -39,13 +43,28 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             FeatureContext.Current.Add("updateManager", mockStudioUpdateManager);
             FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
             FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+            FeatureContext.Current.Add("eventAggregator", mockEventAggregator);
+            FeatureContext.Current.Add("synchronousAsyncWorker", mockSynchronousAsyncWorker);
         }
 
         static IList<IDllListing> BuildBaseListing()
         {
             var listing = new List<IDllListing>();
             var fileSystemListing = new DllListing{FullName = "",IsDirectory = true,Name = "File System"};
-            var gacListing = new DllListing{FullName = "",IsDirectory = true,Name = "GAC"};
+            _dllListing = new DllListing {
+                FullName = "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll", IsDirectory = true, Name = "AuditPolicyGPManagedStubs.Interop, Version=6.1.0.0"
+            };
+            var gacListing = new DllListing
+            {
+                FullName = "",IsDirectory = true,Name = "GAC",
+                Children = new List<IDllListing>
+                {
+                    _dllListing,
+                    new DllListing {
+                        FullName = "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll", IsDirectory = true, Name = "BDATunePIA, Version=6.1.0.0"
+                    }
+                }
+            };
             var cDrive = new DllListing
             {
                 FullName = "C:\\", IsDirectory = true, Name = "C:\\",
@@ -132,6 +151,8 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             Utils.CheckControlEnabled(controlName, enabledString, ScenarioContext.Current.Get<ICheckControlEnabledView>(Utils.ViewNameKey));
         }
 
+        [Given(@"I click ""(.*)""")]
+        [When(@"I click ""(.*)""")]
         [Then(@"I click ""(.*)""")]
         public void ThenIClick(string itemName)
         {
@@ -195,6 +216,16 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             ScenarioContext.Current.Pending();
         }
 
+        [When(@"I select ""(.*)"" as AssemblyName")]
+        public void WhenISelectAsAssemblyName(string assemblyName)
+        {
+            var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            managePluginSourceControl.SetAssemblyName(assemblyName);
+            var viewModel = ScenarioContext.Current.Get<ManagePluginSourceViewModel>("viewModel");
+            Assert.AreEqual(managePluginSourceControl, viewModel);
+        }
+
+
 
         [When(@"I save the source")]
         public void WhenISaveTheSource()
@@ -254,9 +285,29 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         }
 
         [Given(@"I open ""(.*)"" plugin source")]
-        public void GivenIOpenPluginSource(string p0)
+        public void GivenIOpenPluginSource(string name)
         {
-            ScenarioContext.Current.Pending();
+            var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            var mockStudioUpdateManager = FeatureContext.Current.Get<Mock<IManagePluginSourceModel>>("updateManager").Object;
+            var mockEventAggregator = FeatureContext.Current.Get<Mock<IEventAggregator>>("eventAggregator").Object;
+            var mockSynchronousAsyncWorker = FeatureContext.Current.Get<Mock<SynchronousAsyncWorker>>("synchronousAsyncWorker").Object;
+
+            var pluginSrc = new PluginSourceDefinition
+            {
+                Name = "Test",
+                Id = Guid.NewGuid(),
+                Path = "",
+                SelectedDll = _dllListing
+            };
+            try
+            {
+                var managePluginSourceViewModel = new ManagePluginSourceViewModel(mockStudioUpdateManager, mockEventAggregator, pluginSrc, mockSynchronousAsyncWorker);
+                managePluginSourceControl.DataContext = managePluginSourceViewModel;
+                ScenarioContext.Current.Remove("viewModel");
+                ScenarioContext.Current.Add("viewModel",managePluginSourceViewModel);
+            }
+            catch(Exception)
+            { }
         }
 
         [Given(@"GAC is not selected")]
@@ -279,22 +330,27 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         }
 
         [When(@"Assembly is ""(.*)""")]
-        public void WhenAssemblyIs(string p0)
+        public void WhenAssemblyIs(string assembly)
         {
-            ScenarioContext.Current.Pending();
+            var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            managePluginSourceControl.GetAssemblyName();
         }
 
 
         [When(@"I save Plugin source")]
         public void WhenISavePluginSource()
         {
-            ScenarioContext.Current.Pending();
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Verifiable();
+            var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            managePluginSourceControl.PerformSave();
         }
 
         [When(@"I Search for ""(.*)""")]
-        public void WhenISearchFor(string p0)
+        public void WhenISearchFor(string assemblyName)
         {
-            ScenarioContext.Current.Pending();
+            var expectedVisibility = String.Equals(assemblyName, "AuditPolicyGPMan", StringComparison.InvariantCultureIgnoreCase);
+            Assert.IsTrue(expectedVisibility);
         }
 
         [Then(@"files in ""(.*)"" is opened")]
@@ -309,10 +365,5 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             ScenarioContext.Current.Pending();
         }
 
-        [Then(@"Assembly is ""(.*)""")]
-        public void ThenAssemblyIs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
     }
 }

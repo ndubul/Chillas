@@ -63,6 +63,7 @@ namespace Warewolf.Studio.ViewModels
             RefreshCommand = new DelegateCommand(PerformLoadAll);
             PerformLoadAll();
             _warewolfserverName = updateManager.ServerName;
+            
         }
 
         public IAsyncWorker AsyncWorker { get; set; }
@@ -163,7 +164,7 @@ namespace Warewolf.Studio.ViewModels
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
 
             RequestServiceNameViewModel = requestServiceNameViewModel;
-
+            Item = ToModel();
         }
 
         /// <exception cref="Exception">A delegate callback throws an exception.</exception>
@@ -174,11 +175,66 @@ namespace Warewolf.Studio.ViewModels
             _pluginSource = pluginSource;
             SetupHeaderTextFromExisting();
             FromSource(pluginSource);
+            ToItem();
         }
 
         void FromSource(IPluginSource pluginSource)
         {
+//            var selectedDll = pluginSource.SelectedDll;
+//            if (selectedDll != null)
+//            {
+//                if (selectedDll.FullName.StartsWith("GAC:"))
+//                {
+//                    var dllListingModel = DllListings.Find(model => model.Name == "GAC");
+//                    dllListingModel.IsExpanded = true;
+//                    var itemToSelect = dllListingModel.Children.FirstOrDefault(model => model.FullName == selectedDll.FullName);
+//                    if (itemToSelect != null)
+//                    {
+//                        SelectedDll = itemToSelect;
+//                        itemToSelect.IsSelected = true;
+//                    }
+//                }
+//                else
+//                {
+//                    var fileSystem = selectedDll.FullName.Split('\\');
+//
+//                    foreach(var dir in fileSystem)
+//                    {
+//                        foreach (var item in DllListings)
+//                        {
+//                            if (item.Children != null && item.Name == dir)
+//                            {
+//                                DllListings.Find(model => model.Name == dir).IsExpanded = true;
+//                            }
+//                            else
+//                            {
+//                                if(item.Children != null)
+//                                {
+//                                    foreach(var child in item.Children)
+//                                    {
+//                                        if (child.Name.Contains('\\'))
+//                                        {
+//                                            child.Name = child.Name.Replace("\\", "");
+//                                        }
+//                                        DllListings.Find(model => child.Name == dir).IsExpanded = true;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            
+            //Selected DLL Full Name - Split it by \
+            //Selected DLL Full Name - Path.GetParts
+            // FullName will Start with GAC then look in GAC
+            // DllListings.Find(Name=="GAC").IsExpanded = true
+            // Find the File System DllListings
+            // Expand that item
+            // Find the Drive expand it
+            // In drive children find folder expand rinse and repeat till at file name
             SelectedDll = new DllListingModel(_updateManager, pluginSource.SelectedDll);
+//            SelectedDll.IsSelected = true;
         }
 
         public IDllListingModel SelectedDll
@@ -189,10 +245,14 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
+                if (value == null) return;
                 _selectedDll = value;
                 OnPropertyChanged(() => SelectedDll);
-                AssemblyName = SelectedDll.FullName;
-                SelectedDll.IsExpanded = true;
+                if(SelectedDll != null)
+                {
+                    AssemblyName = SelectedDll.FullName;
+                    SelectedDll.IsExpanded = true;
+                }
                 ViewModelUtils.RaiseCanExecuteChanged(OkCommand);
             }
         }
@@ -226,7 +286,7 @@ namespace Warewolf.Studio.ViewModels
         }
         bool CanSave()
         {
-            return _selectedDll != null && !string.IsNullOrEmpty(AssemblyName) && AssemblyName.EndsWith(".dll");
+            return _selectedDll != null && !string.IsNullOrEmpty(AssemblyName) && HasChanged &&(AssemblyName.EndsWith(".dll") || AssemblyName.StartsWith("GAC:"));
         }
 
         public override void UpdateHelpDescriptor(string helpText)
@@ -265,9 +325,11 @@ namespace Warewolf.Studio.ViewModels
                 {
                     ResourceName = RequestServiceNameViewModel.ResourceName.Name;
                     var src = ToModel();
+                    src.Id = Guid.NewGuid();
                     src.Path = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
                     Save(src);
                     _pluginSource = src;
+                    ToItem();
                     SetupHeaderTextFromExisting();
                 }
             }
@@ -277,30 +339,29 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
+        void ToItem()
+        {
+            Item = new PluginSourceDefinition { Id = _pluginSource.Id, Name = _pluginSource.Name, Path = _pluginSource.Path, SelectedDll = _pluginSource.SelectedDll };
+        }
+
         void Save(IPluginSource source)
         {
             _updateManager.Save(source);
         }
 
 
-        public override IPluginSource ToModel()
+        public override sealed IPluginSource ToModel()
         {
-
             if(_pluginSource == null)
             {
-                Item = new PluginSourceDefinition
+                return new PluginSourceDefinition
                 {
                     Name = ResourceName,
                     SelectedDll = _selectedDll,
-                    Id = _pluginSource == null ? Guid.NewGuid() : _pluginSource.Id
                 };
             }
-            else
-            {
-                _pluginSource.SelectedDll = _selectedDll;
-                Item = _pluginSource;
-            }
-            return Item;
+            _pluginSource.SelectedDll = _selectedDll;
+            return _pluginSource;
         }
 
         IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
@@ -352,5 +413,7 @@ namespace Warewolf.Studio.ViewModels
                 _isDisposed = true;
             }
         }
+
+      
     }
 }

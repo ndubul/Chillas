@@ -68,8 +68,8 @@ namespace Dev2.Runtime.ESB.Management.Services
                 {
                     try
                     {
-                        var name = Path.Combine(GAC.GetGACPath(), GAC.GetName(assemblyName) + ".dll");
                         var displayName = GAC.GetDisplayName(assemblyName, ASM_DISPLAY_FLAGS.VERSION | ASM_DISPLAY_FLAGS.CULTURE | ASM_DISPLAY_FLAGS.PUBLIC_KEY_TOKEN);
+                        var name = GlobalConstants.GACPrefix+displayName;
                         gacList.Add(new DllListing { Name = displayName, FullName = name, IsDirectory = false });
                     }
                     catch (Exception e)
@@ -84,6 +84,7 @@ namespace Dev2.Runtime.ESB.Management.Services
             }
             else
             {
+                if(src.IsDirectory)
                 completeList = GetChildrenForDllListing(new DirectoryInfo(src.FullName));
             }
             return completeList;

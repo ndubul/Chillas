@@ -109,6 +109,8 @@
                                         ItemsSource="{Binding DllListings}"
                                         IsSelectedMemberPath="IsSelected"
                                         DisplayMemberPath="Name"
+                                        IsExpandedMemberPath="IsExpanded"
+                                        EnsureNodeExpansion="True"
                                         NodeExpansionChanging="ExplorerTree_OnNodeExpansionChanging"
                                         NodeLineVisibility="Hidden" >
                             <ig:XamDataTree.EditingSettings>

@@ -18,6 +18,7 @@ namespace Warewolf.Studio.Views
             InitializeComponent();
         }
 
+        
         public string GetHeaderText()
         {
             BindingExpression be = HeaderTextBlock.GetBindingExpression(TextBlock.TextProperty);
@@ -55,26 +56,8 @@ namespace Warewolf.Studio.Views
 
         public IDllListingModel SelectItem(string itemName)
         {
-            XamDataTreeNode xamDataTreeNode;
-            if(ExplorerTree.ActiveNode != null)
-            {
-                xamDataTreeNode = GetItem(itemName);
-            }
-            else
-            {
-                xamDataTreeNode = ExplorerTree.Nodes.FirstOrDefault(node =>
-                {
-                    var item = node.Data as IDllListingModel;
-                    if(item != null)
-                    {
-                        if(item.Name.ToLowerInvariant().Contains(itemName.ToLowerInvariant()))
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                });
-            }
+            
+            var xamDataTreeNode = GetItem(itemName);
             if (xamDataTreeNode != null)
             {
                 xamDataTreeNode.IsSelected = true;
@@ -91,24 +74,19 @@ namespace Warewolf.Studio.Views
 
         XamDataTreeNode GetItem(string itemName)
         {
-            var theExpandedItem = ExplorerTree.ActiveNode.Nodes.FirstOrDefault(node => node.IsExpanded);
-            if(theExpandedItem != null)
-            {
-                ExplorerTree.ActiveNode = theExpandedItem;
-            }
-            var xamDataTreeNode = ExplorerTree.ActiveNode.Nodes.FirstOrDefault(node =>
+            var xamDataTreeNodes = TreeUtils.Descendants(ExplorerTree.Nodes.ToArray());
+            return xamDataTreeNodes.FirstOrDefault(node =>
             {
                 var item = node.Data as IDllListingModel;
-                if(item != null)
+                if (item != null)
                 {
-                    if(item.Name.ToLowerInvariant().Contains(itemName.ToLowerInvariant()))
+                    if (item.Name.ToLowerInvariant().Contains(itemName.ToLowerInvariant()))
                     {
                         return true;
                     }
                 }
                 return false;
             });
-            return xamDataTreeNode;
         }
 
         public string GetAssemblyName()

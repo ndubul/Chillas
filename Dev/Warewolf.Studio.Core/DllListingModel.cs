@@ -55,28 +55,31 @@ namespace Warewolf.Studio.Core
             {
                 if (Children != null)
                 {
-                    ProgressVisibility = true;
                     var gacChildren = _children.ToList();
-                    Children = new AsyncObservableCollection<IDllListingModel>(gacChildren.Take(5));
-                    var allChildrenCount = gacChildren.Count;
-                    TotalChildrenCount = allChildrenCount;
-                    Task.Factory.StartNew(() =>
+                    if (gacChildren.Count>5)
                     {
-                        while (ChildrenCount < allChildrenCount)
+                        ProgressVisibility = true;
+                        Children = new AsyncObservableCollection<IDllListingModel>(gacChildren.Take(5));
+                        var allChildrenCount = gacChildren.Count;
+                        TotalChildrenCount = allChildrenCount;
+                        Task.Factory.StartNew(() =>
                         {
-                            var items = gacChildren.Skip(ChildrenCount).Take(25);
-                            var col = Children as AsyncObservableCollection<IDllListingModel>;
-                            if (col != null)
+                            while (ChildrenCount < allChildrenCount)
                             {
-                                col.AddRange(items.ToList());
+                                var items = gacChildren.Skip(ChildrenCount).Take(25);
+                                var col = Children as AsyncObservableCollection<IDllListingModel>;
+                                if (col != null)
+                                {
+                                    col.AddRange(items.ToList());
+                                }
+                                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.ContextIdle, new Action(() =>
+                                {
+                                    CurrentProgress = (int)Math.Round((double)(100 * ChildrenCount) / TotalChildrenCount);
+                                    OnPropertyChanged(() => ChildrenCount);
+                                }));
                             }
-                            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.ContextIdle, new Action(() =>
-                            {
-                                CurrentProgress = (int)Math.Round((double)(100 * ChildrenCount) / TotalChildrenCount);
-                                OnPropertyChanged(() => ChildrenCount);
-                            }));
-                        }
-                    });
+                        });
+                    }
                 }
             }
         }
@@ -174,7 +177,8 @@ namespace Warewolf.Studio.Core
             set
             {
                 _isSelected = value;
-                _isExpanded = true;
+                IsExpanded = true;
+                Expanding();
             }
         }
 
@@ -187,13 +191,17 @@ namespace Warewolf.Studio.Core
 
                 if (_isExpanded && _updateManager != null && (Children == null || Children.Count == 0))
                 {
-                    Children =
-                        new AsyncObservableCollection<IDllListingModel>(
-                            _updateManager.GetDllListings(_dllListing)
-                                .Select(input => new DllListingModel(_updateManager, input))
-                                .ToList());
+                    var dllListings = _updateManager.GetDllListings(_dllListing);
+                    if(dllListings != null)
+                    {
+                        Children =
+                            new AsyncObservableCollection<IDllListingModel>(
+                                dllListings.Select(input => new DllListingModel(_updateManager, input))
+                                    .ToList());
+                    }
                     IsExpanderVisible = Children != null && Children.Count > 0;
                 }
+                OnPropertyChanged(() => IsExpanded);
             }
         }
 

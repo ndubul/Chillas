@@ -17,7 +17,7 @@ namespace Warewolf.Studio.ViewModels
         #region Implementation of ISourceBase<T>
 
         public T Item { get; set; }
-        public bool HasChanged { get { return Item != null && Item.Equals(ToModel()); } }
+        public bool HasChanged { get { return Item != null && !Item.Equals(ToModel()); } }
 
         abstract  public T ToModel();
 
@@ -29,7 +29,7 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                if (!ToModel().Equals(Item))
+                if (HasChanged)
                 {
                     return _header + " *";
                 }

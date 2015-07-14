@@ -98,7 +98,7 @@ namespace Warewolf.Studio.Views
 
         private XamDataTreeNode GetFolderXamDataTreeNode(string folderName)
         {
-            var flattenTree = Descendants(_explorerView.ExplorerTree.Nodes[0]);
+            var flattenTree = TreeUtils.Descendants(_explorerView.ExplorerTree.Nodes[0]);
             var foundFolder = flattenTree.FirstOrDefault(node =>
             {
                 var explorerItem = node.Data as IExplorerTreeItem;
@@ -113,26 +113,6 @@ namespace Warewolf.Studio.Views
                 return false;
             });
             return foundFolder;
-        }
-
-        private IEnumerable<XamDataTreeNode> Descendants(XamDataTreeNode root)
-        {
-            var nodes = new Stack<XamDataTreeNode>(new[] { root });
-            while (nodes.Any())
-            {
-                XamDataTreeNode node = nodes.Pop();
-                yield return node;
-                if(node != null)
-                {
-                    foreach (var n in node.Nodes)
-                    {
-                        if (n != null)
-                        {
-                            nodes.Push(n);
-                        }
-                    }
-                }
-            }
         }
 
         public void PerformFolderAdd(string folder, string server)
