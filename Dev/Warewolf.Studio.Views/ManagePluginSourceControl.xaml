@@ -102,12 +102,8 @@
                 </Grid>
 
                 <Grid Grid.Row="3" 
-                      Margin="{StaticResource ControlBorderTop}"
-                      Width="{Binding RelativeSource={RelativeSource FindAncestor,
-                            AncestorType={x:Type Grid}},Path=ColumnDefinitions[0].ActualWidth}"
-                      MaxHeight="{Binding RelativeSource={RelativeSource FindAncestor,
-                                                         AncestorType={x:Type Grid}},Path=RowDefinitions[3].ActualHeight}">
-                    <Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=ActualWidth}">
+                      Margin="{StaticResource ControlBorderTop}">
+                    <Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=ActualWidth}">
                         <ig:XamDataTree x:Name="ExplorerTree" 
                                         ActiveDataItem="{Binding SelectedDll, Mode=TwoWay}"
                                         ItemsSource="{Binding DllListings}"
