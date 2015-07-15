@@ -82,7 +82,7 @@ Scenario Outline: Filtering on string
 	| 9  | Records\Recordset\Recor              | Re     | Records,Recordset,Recor |
 
 
-Scenario: Update Tree view by saving a Workflow
+Scenario Outline: Update Tree view by saving a Workflow
 	Given I have a path '<path>'	
 	And the folder '<folderName>' exists on the server '<exists>'
 	When I add a workflow with a name  '<WorkFlowName>'	
@@ -94,7 +94,7 @@ Scenario: Update Tree view by saving a Workflow
 	| 2  | SpecFlow | SqlServer  | 1588574         | true   | SpecFlow\SqlServer\1588574         | 
 
 
-Scenario: Edit Source from Explorer
+Scenario Outline: Edit Source from Explorer
 	Given I have a path '<path>'	
 	And the resource '<resource>' exists on the server '<exists>'
 	When I open '<resource>'

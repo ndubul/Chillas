@@ -265,6 +265,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _assemblyName = value;
+                OnPropertyChanged(() => Header);
                 OnPropertyChanged(()=>AssemblyName);
             }
         }
@@ -345,6 +346,7 @@ namespace Warewolf.Studio.ViewModels
 
         void Save(IPluginSource source)
         {
+            source.SelectedDll = new DllListing(_selectedDll);
             _updateManager.Save(source);
         }
 

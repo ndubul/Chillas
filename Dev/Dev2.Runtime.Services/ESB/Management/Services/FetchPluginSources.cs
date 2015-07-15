@@ -37,7 +37,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                         Id = res.ResourceID,
                         Name = res.ResourceName,
                         Path = res.ResourcePath,
-                        SelectedDll = new DllListing()
+                        SelectedDll = new DllListing
                         {
                             Name = res.AssemblyName,
                             FullName = res.AssemblyLocation,

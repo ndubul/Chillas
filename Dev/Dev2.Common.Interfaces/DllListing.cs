@@ -4,11 +4,21 @@ namespace Dev2.Common.Interfaces
 {
     public class DllListing : IDllListing
     {
+        public DllListing(IDllListing selectedDll)
+        {
+            Name = selectedDll.Name;
+            FullName = selectedDll.FullName;
+            IsDirectory = selectedDll.IsDirectory;
+        }
+
+        public DllListing()
+        {            
+        }
         #region Equality members
 
         public bool Equals(IDllListing other)
         {
-            return string.Equals(Name, other.Name) && Equals(Children, other.Children) && string.Equals(FullName, other.FullName) && IsDirectory == other.IsDirectory;
+            return string.Equals(Name, other.Name) && string.Equals(FullName, other.FullName) && IsDirectory == other.IsDirectory;
         }
 
         /// <summary>
