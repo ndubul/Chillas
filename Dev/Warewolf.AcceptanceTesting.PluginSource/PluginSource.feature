@@ -57,46 +57,40 @@ Scenario: Editing Plugin Source
 	When I save Plugin source
 
 Scenario: Change Plugin Source Assembly Input
-	Given I open "Test" plugin source
-	Then title is "Edit Test"
-	And file is selected
+	Given I open "Test File" plugin source
+	Then title is "Edit Test File"
+	And "File System" is "visible"
 	And "C:\" is "visible"
-	And Assembly value is "C:\AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll"
+	And Assembly value is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
 	And "Save" is "Disabled"
-	When I click "BDATunePIA, Version=6.1.0.0"
-	Then Assembly value is "C:\BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll"
+	When I click "Dev2.Common.dll"
+	Then Assembly value is "C:\Development\Dev\Binaries\MS Fakes\Dev2.Common.dll"
 	And "Save" is "Enabled"
 	When I save Plugin source
-	Then the save dialog is opened
 
 Scenario: Refresh New Plugin Source File
 	Given I open New Plugin Source
 	When I click 
 	| Clicks                                   |
-	| File                                     |
+	| File System                              |
 	| C:\                                      |
 	| Development                              |
 	| Dev                                      |
 	| Binaries                                 |
 	| MS Fakes                                 |
-	| Microsoft QualityTools.Testing.Fakes.dll |
+	| Microsoft.QualityTools.Testing.Fakes.dll |
 	Then "Save" is "Enabled"
 	When I refresh the filter
-	Then File is reloaded
-	And Assembly is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
-	And "MS Fakes" is "Visible"
-	And "Microsoft QualityTools.Testing.Fakes.dll" is selected
+	And Assembly value is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
+	And "Microsoft.QualityTools.Testing.Fakes.dll" is selected
 
 Scenario: Refresh New Plugin Source GAC
 	Given I open New Plugin Source
 	When I click "GAC"
 	And I click "GAC"
-	Then GAC is not loading
-	And GAC tree is collapsed
-	When I click "GAC"
-	When I filter for "playback"
-	Then the progress bar indicates loading of resources
-	And "Microsoft.MediaCenter.Playback" is "visible"
+	#And GAC tree is collapsed
+	When I filter for "BDATunePIA"
+	And "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll" is "visible"
 	And GAC only has one option in the tree
 	When I refresh the filter
 	And GAC only has one option in the tree

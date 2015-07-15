@@ -15,7 +15,7 @@ using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.Core
 {
-    public class DllListingModel : BindableBase, IDllListingModel
+    public class DllListingModel : BindableBase, IDllListingModel,IEquatable<DllListingModel>
     {
         private readonly IManagePluginSourceModel _updateManager;
         private bool _isExpanded;
@@ -28,6 +28,7 @@ namespace Warewolf.Studio.Core
         private bool _progressVisibility;
         private int _currentProgress;
         bool _isSelected;
+        bool _isExpanderVisible;
 
         public DllListingModel(IManagePluginSourceModel updateManager, IDllListing dllListing)
         {
@@ -43,6 +44,7 @@ namespace Warewolf.Studio.Core
                             dllListing.Children.Select(input => new DllListingModel(_updateManager, input)));
                 }
                 IsDirectory = dllListing.IsDirectory;
+                IsExpanderVisible = IsDirectory;
                 IsVisible = true;
                 _dllListing = dllListing;
                 ExpandingCommand = new DelegateCommand(Expanding);
@@ -177,8 +179,13 @@ namespace Warewolf.Studio.Core
             set
             {
                 _isSelected = value;
-                IsExpanded = true;
-                Expanding();
+                if (_isSelected)
+                {
+                    IsExpanded = true;
+                    Expanding();
+                }
+                
+                OnPropertyChanged(() => IsSelected);
             }
         }
 
@@ -209,10 +216,10 @@ namespace Warewolf.Studio.Core
 
         public bool IsExpanderVisible
         {
-            get { return IsDirectory; }
+            get { return _isExpanderVisible; }
             set
             {
-                IsDirectory = value;
+                _isExpanderVisible = value;
                 OnPropertyChanged(() => IsExpanderVisible);
             }
         }
@@ -251,6 +258,67 @@ namespace Warewolf.Studio.Core
                 OnPropertyChanged(() => IsVisible);
             }
         }
+
+        #region Equality members
+
+        public bool Equals(DllListingModel other)
+        {
+            return string.Equals(Name, other.Name) && string.Equals(FullName, other.FullName) && IsDirectory == other.IsDirectory;
+        }
+
+
+        /// <summary>
+        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// true if the specified object  is equal to the current object; otherwise, false.
+        /// </returns>
+        /// <param name="obj">The object to compare with the current object. </param>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+            return Equals((DllListingModel)obj);
+        }
+
+        /// <summary>
+        /// Serves as a hash function for a particular type. 
+        /// </summary>
+        /// <returns>
+        /// A hash code for the current <see cref="T:System.Object"/>.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FullName != null ? FullName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ IsDirectory.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(DllListingModel left, DllListingModel right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(DllListingModel left, DllListingModel right)
+        {
+            return !Equals(left, right);
+        }
+
+        #endregion
     }
 
     public class AsyncObservableCollection<T> : ObservableCollection<T>

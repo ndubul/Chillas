@@ -63,7 +63,7 @@
                                                          DataContext="{Binding}" />
                         </i:Interaction.Behaviors>
                     </customControls:SearchTextBox>
-                    <Button Grid.Row="0"
+                    <Button x:Name="RefreshButton" Grid.Row="0"
                             Grid.Column="1"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"

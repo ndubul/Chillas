@@ -234,7 +234,6 @@ namespace Warewolf.Studio.ViewModels
             // Find the Drive expand it
             // In drive children find folder expand rinse and repeat till at file name
             SelectedDll = new DllListingModel(_updateManager, pluginSource.SelectedDll);
-//            SelectedDll.IsSelected = true;
         }
 
         public IDllListingModel SelectedDll
@@ -341,7 +340,7 @@ namespace Warewolf.Studio.ViewModels
 
         void ToItem()
         {
-            Item = new PluginSourceDefinition { Id = _pluginSource.Id, Name = _pluginSource.Name, Path = _pluginSource.Path, SelectedDll = _pluginSource.SelectedDll };
+            Item = new PluginSourceDefinition { Id = _pluginSource.Id, Name = _pluginSource.Name, Path = _pluginSource.Path, SelectedDll = SelectedDll };
         }
 
         void Save(IPluginSource source)

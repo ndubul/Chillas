@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Dev2.Common.Interfaces;
@@ -16,9 +17,26 @@ namespace Warewolf.Studio.Views
         public ManagePluginSourceControl()
         {
             InitializeComponent();
+           // ExplorerTree.SelectedNodesCollectionChanged+=ExplorerTreeOnSelectedNodesCollectionChanged;
         }
 
-        
+//        void ExplorerTreeOnSelectedNodesCollectionChanged(object sender, NodeSelectionEventArgs nodeSelectionEventArgs)
+//        {
+//            if (nodeSelectionEventArgs.CurrentSelectedNodes.Count > 0)
+//            {
+//                var currentNodeSelection = nodeSelectionEventArgs.CurrentSelectedNodes[0];
+//                if (currentNodeSelection!=null)
+//                {
+//                    var item = currentNodeSelection.Data as IDllListingModel;
+//                    if (item!=null && item.IsSelected)
+//                    {
+//                        item.IsSelected = false;
+//                    }
+//                }
+//            }
+//
+//        }
+
         public string GetHeaderText()
         {
             BindingExpression be = HeaderTextBlock.GetBindingExpression(TextBlock.TextProperty);
@@ -61,7 +79,7 @@ namespace Warewolf.Studio.Views
             if (xamDataTreeNode != null)
             {
                 xamDataTreeNode.IsSelected = true;
-                ExplorerTree.ActiveNode = xamDataTreeNode;                
+                ExplorerTree.ActiveNode = xamDataTreeNode;
             }
             return xamDataTreeNode == null ? null : xamDataTreeNode.Data as IDllListingModel;
         }
@@ -132,6 +150,16 @@ namespace Warewolf.Studio.Views
                     return SaveButton.Command.CanExecute(null);
             }
             return false;
+        }
+
+        public void ExecuteRefresh()
+        {
+            RefreshButton.Command.Execute(null);
+        }
+
+        public void FilterItems()
+        {
+            var count = ExplorerTree.Nodes.Count;
         }
     }
 }

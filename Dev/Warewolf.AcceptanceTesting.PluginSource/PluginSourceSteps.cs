@@ -20,7 +20,8 @@ namespace Warewolf.AcceptanceTesting.PluginSource
     [Binding]
     public class PluginSourceSteps
     {
-        static DllListing _dllListing;
+        static DllListing _dllListingForGac;
+        static DllListing _dllListingForFile;
 
         [BeforeFeature("PluginSource")]
         public static void SetupForSystem()
@@ -51,19 +52,23 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         {
             var listing = new List<IDllListing>();
             var fileSystemListing = new DllListing{FullName = "",IsDirectory = true,Name = "File System"};
-            _dllListing = new DllListing {
-                FullName = "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll", IsDirectory = true, Name = "AuditPolicyGPManagedStubs.Interop, Version=6.1.0.0"
+            _dllListingForGac = new DllListing {
+                FullName = "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll", IsDirectory = false, Name = "AuditPolicyGPManagedStubs.Interop, Version=6.1.0.0"
             };
             var gacListing = new DllListing
             {
                 FullName = "",IsDirectory = true,Name = "GAC",
                 Children = new List<IDllListing>
                 {
-                    _dllListing,
+                    _dllListingForGac,
                     new DllListing {
-                        FullName = "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll", IsDirectory = true, Name = "BDATunePIA, Version=6.1.0.0"
+                        FullName = "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll", IsDirectory = false, Name = "BDATunePIA, Version=6.1.0.0"
                     }
                 }
+            };
+            _dllListingForFile = new DllListing
+            {
+                FullName = "C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools.Testing.Fakes.dll", IsDirectory = false, Name = "Microsoft.QualityTools.Testing.Fakes.dll"
             };
             var cDrive = new DllListing
             {
@@ -89,9 +94,10 @@ namespace Warewolf.AcceptanceTesting.PluginSource
                                                 FullName = "C:\\Development\\Dev\\Binaries\\MS Fakes", IsDirectory = true, Name = "MS Fakes",
                                                 Children = new List<IDllListing>
                                                 {
+                                                    _dllListingForFile,
                                                     new DllListing
                                                     {
-                                                        FullName = "C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools.Testing.Fakes.dll", IsDirectory = false, Name = "Microsoft.QualityTools.Testing.Fakes.dll"
+                                                        FullName = "C:\\Development\\Dev\\Binaries\\MS Fakes\\Dev2.Common.dll", IsDirectory = false, Name = "Dev2.Common.dll"
                                                     }
                                                 }
                                             }
@@ -225,7 +231,23 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             Assert.AreEqual(managePluginSourceControl, viewModel);
         }
 
+        [When(@"I refresh the filter")]
+        public void WhenIRefreshTheFilter()
+        {
+            var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            managePluginSourceControl.ExecuteRefresh();
+        }
 
+        [When(@"""(.*)"" is selected")]
+        public void WhenIsSelected(string assemblyName)
+        {
+            var sourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            var dllListingModel = sourceControl.SelectItem(assemblyName);
+            Assert.IsNotNull(dllListingModel);
+            var viewModel = ScenarioContext.Current.Get<ManagePluginSourceViewModel>("viewModel");
+            Assert.AreEqual(dllListingModel, viewModel.SelectedDll);
+            Assert.IsTrue(viewModel.SelectedDll.IsExpanded);
+        }
 
         [When(@"I save the source")]
         public void WhenISaveTheSource()
@@ -287,27 +309,30 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         [Given(@"I open ""(.*)"" plugin source")]
         public void GivenIOpenPluginSource(string name)
         {
+            var pluginSrc = new PluginSourceDefinition
+            {
+                Name = name,
+                Id = Guid.NewGuid(),
+                Path = "",
+            };
+            pluginSrc.SelectedDll = name.Equals("Test", StringComparison.OrdinalIgnoreCase) ? _dllListingForGac : _dllListingForFile;
+            
             var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
             var mockStudioUpdateManager = FeatureContext.Current.Get<Mock<IManagePluginSourceModel>>("updateManager").Object;
             var mockEventAggregator = FeatureContext.Current.Get<Mock<IEventAggregator>>("eventAggregator").Object;
             var mockSynchronousAsyncWorker = FeatureContext.Current.Get<Mock<SynchronousAsyncWorker>>("synchronousAsyncWorker").Object;
-
-            var pluginSrc = new PluginSourceDefinition
-            {
-                Name = "Test",
-                Id = Guid.NewGuid(),
-                Path = "",
-                SelectedDll = _dllListing
-            };
+            
             try
             {
                 var managePluginSourceViewModel = new ManagePluginSourceViewModel(mockStudioUpdateManager, mockEventAggregator, pluginSrc, mockSynchronousAsyncWorker);
                 managePluginSourceControl.DataContext = managePluginSourceViewModel;
                 ScenarioContext.Current.Remove("viewModel");
-                ScenarioContext.Current.Add("viewModel",managePluginSourceViewModel);
+                ScenarioContext.Current.Add("viewModel", managePluginSourceViewModel);
             }
             catch(Exception)
-            { }
+            {
+                // ignored
+            }
         }
 
         [Given(@"GAC is not selected")]
@@ -329,6 +354,21 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             ScenarioContext.Current.Pending();
         }
 
+        [When(@"GAC tree is collapsed")]
+        public void WhenGACTreeIsCollapsed()
+        {
+            var viewModel = ScenarioContext.Current.Get<ManagePluginSourceViewModel>("viewModel");
+            var isExpanded = viewModel.SelectedDll.IsExpanded;
+            Assert.IsFalse(isExpanded);
+        }
+
+        [When(@"GAC only has one option in the tree")]
+        public void WhenGACOnlyHasOneOptionInTheTree()
+        {
+            var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            managePluginSourceControl.FilterItems();
+        }
+
         [When(@"Assembly is ""(.*)""")]
         public void WhenAssemblyIs(string assembly)
         {
@@ -336,6 +376,12 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             managePluginSourceControl.GetAssemblyName();
         }
 
+        [When(@"I filter for ""(.*)""")]
+        public void WhenIFilterFor(string assemblyName)
+        {
+            var expectedVisibility = String.Equals(assemblyName, "BDATunePIA", StringComparison.InvariantCultureIgnoreCase);
+            Assert.IsTrue(expectedVisibility);
+        }
 
         [When(@"I save Plugin source")]
         public void WhenISavePluginSource()
