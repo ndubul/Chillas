@@ -29,31 +29,31 @@ Scenario: Variables adding in variable list and removing unused
     | [[a]]       |                   |       |        | YES      |
     | [[lr().a]]  |                   |       |        | YES      |
 	Then "Variables" is "Enabled"
-	And variables filter box is "Visible"
-	And "Filter Clear" is "Disabled"
+	#And variables filter box is "Visible"
+	#And "Filter Clear" is "Disabled"
 	And "Delete Variables" is "Enabled"
 	And "Sort Variables" is "Enabled" 
 	And the Variable Names are
-	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
-	| Var           |                |                  | YES   |        |
-	| a             | YES            |                  |       |        |
+	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| Var           |                  |                  | YES   |        |
+	| a             | YES              |                  |       |        |
 	And the Recordset Names are
-	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
-	| rec()          |                |                  |       |        |
-	| rec().a        |                | YES              |       | YES    |
-	| rec().b        | YES            |                  |       |        |
-	| mr()           |                |                  |       |        |
-	| lr()           | YES            |                  |       |        |
-	| lr().a         | YES            |                  |       |        |
+	| Recordset Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| rec()          |                  |                  |       |        |
+	| rec().a        |                  | YES              |       | YES    |
+	| rec().b        | YES              |                  |       |        |
+	| mr()           |                  |                  |       |        |
+	| lr()           | YES              |                  |       |        |
+	| lr().a         | YES              |                  |       |        |
 	When I click "Delete Variables"
 	And the Variable Names are
-	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
-	| Var           |                |                  | YES   |        |
+	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| Var           |                  |                  | YES   |        |
 	And the Recordset Names are
-	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
-	| mr()           |                |                  |       |        |
-	| rec()          |                |                  |       |        |
-	| rec().a        |                | YES              |       | YES    |
+	| Recordset Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| mr()           |                  |                  |       |        |
+	| rec()          |                  |                  |       |        |
+	| rec().a        |                  | YES              |       | YES    |
 								
 
 Scenario: Searching Variables in Variable list
@@ -66,38 +66,38 @@ Scenario: Searching Variables in Variable list
     | [[a]]       |                   |       |        | YES      |
     | [[lr().a]]  |                   |       |        | YES      |
 	Then "Variables" is "Enabled"
-	And variables filter box is "Visible"
-	And "Filter Clear" is "Disabled"
+	#And variables filter box is "Visible"
+	#And "Filter Clear" is "Disabled"
 	And "Delete Variables" is "Enabled"
 	And "Sort Variables" is "Enabled" 
 	When I search for variable "[[lr().a]]"
 	Then the Variable Names are
-	| Variable Name | Delete Visible | Note Visible | Note Highlighted | Input       | Output      |
+	| Variable Name | Delete IsEnabled | Note Visible | Note Highlighted | Input       | Output      |
 	And the Recordset Names are 
-	| Recordset Name | Delete Visible | Note Visible | Note Highlighted | Input | Output |
-	| lr()           | YES            |              |                  |       |        |
-	| lr().a         | YES            |              |                  |       |        |
+	| Recordset Name | Delete IsEnabled | Note Visible | Note Highlighted | Input | Output |
+	| lr()           | YES              |              |                  |       |        |
+	| lr().a         | YES              |              |                  |       |        |
 	And I click delete for "lr().a"
 	Then the Variable Names are
-	| Variable Name | Delete Visible | Note Visible | Note Highlighted | Input       | Output      |
+	| Variable Name | Delete IsEnabled | Note Visible | Note Highlighted | Input       | Output      |
 	And the Recordset Names are 
-	| Recordset Name | Delete Visible | Note Visible | Note Highlighted | Input       | Output      |
-	And I Clcik "Delete Variables"
+	| Recordset Name | Delete IsEnabled | Note Visible | Note Highlighted | Input       | Output      |
+	And I click "Delete Variables"
 	Then the Variable Names are
-	| Variable Name | Delete Visible | Note Visible | Note Highlighted | Input       | Output      |
+	| Variable Name | Delete IsEnabled | Note Visible | Note Highlighted | Input       | Output      |
 	And the Recordset Names are 
-	| Recordset Name | Delete Visible | Note Visible | Note Highlighted | Input       | Output      |
-	When I press the clear filter button
+	| Recordset Name | Delete IsEnabled | Note Visible | Note Highlighted | Input       | Output      |
+	#When I press the clear filter button
 	And the Variable Names are
-	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
-	| Var           |                |                  | YES   |        |
-	| a             | YES            |                  |       |        |
+	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| Var           |                  |                  | YES   |        |
+	| a             | YES              |                  |       |        |
 	And the Recordset Names are
-	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
-	| rec()          |                |                  |       |        |
-	| rec().a        |                | YES              |       | YES    |
-	| rec().b        | YES            |                  |       |        |
-	| mr()           | YES            |                  |       |        |
+	| Recordset Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| rec()          |                  |                  |       |        |
+	| rec().a        |                  | YES              |       | YES    |
+	| rec().b        | YES              |                  |       |        |
+	| mr()           | YES              |                  |       |        |
 
 Scenario: Sorting Variables in Variable list
 	Given I have variables as
@@ -108,32 +108,32 @@ Scenario: Sorting Variables in Variable list
 	 | [[Var]]     |                   | YES    |         |          |
 	 | [[a]]       |                   |        |         | YES      |
 	 | [[lr().a]]  |                   |        |         | YES      |
-	When I Click "Sort"
+	When I Sort the variables
 	And the Variable Names are
-	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
-	| a             | YES            |                  |       |        |
-	| Var           |                |                  | YES   |        |
+	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| a             | YES              |                  |       |        |
+	| Var           |                  |                  | YES   |        |
 	And the Recordset Names are
-	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
-	| lr()           | YES            |                  |       |        |
-	| lr().a         | YES            |                  |       |        |
-	| mr()           |                |                  |       |        |
-	| rec()          |                |                  |       |        |
-	| rec().a        |                | YES              |       | YES    |
-	| rec().b        | YES            |                  |       |        |
-	When I Click "Sort"
+	| Recordset Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| lr()           | YES              |                  |       |        |
+	| lr().a         | YES              |                  |       |        |
+	| mr()           |                  |                  |       |        |
+	| rec()          |                  |                  |       |        |
+	| rec().a        |                  | YES              |       | YES    |
+	| rec().b        | YES              |                  |       |        |
+	When I Sort the variables
 	And the Variable Names are
-	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
-	| Var           |                |                  | YES   |        |
-	| a             | YES            |                  |       |        |
+	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| Var           |                  |                  | YES   |        |
+	| a             | YES              |                  |       |        |
 	And the Recordset Names are
-	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
-	| rec()          |                |                  |       |        |
-	| rec().b        | YES            |                  |       |        |
-	| rec().a        |                | YES              |       | YES    |
-	| mr()           |                |                  |       |        |
-	| lr()           | YES            |                  |       |        |
-	| lr().a         | YES            |                  |       |        |
+	| Recordset Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| rec()          |                  |                  |       |        |
+	| rec().b        | YES              |                  |       |        |
+	| rec().a        |                  | YES              |       | YES    |
+	| mr()           |                  |                  |       |        |
+	| lr()           | YES              |                  |       |        |
+	| lr().a         | YES              |                  |       |        |
 
 Scenario: Variable Errors
 	Given the Variable Names are
@@ -162,40 +162,40 @@ Scenario: Variables removed from design surface and list
     | [[a]]       | 
     | [[lr().a]]  | 
 	And the Variable Names are
-	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
-	| Var           |                |                  | YES   |        |
-	| a             | YES            |                  |       |        |
+	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| Var           |                  |                  | YES   |        |
+	| a             | YES              |                  |       |        |
 	And the Recordset Names are
-	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
-	| rec()          |                |                  |       |        |
-	| rec().a        |                | YES              |       | YES    |
-	| rec().b        | YES            |                  |       |        |
-	| mr()           |                |                  |       |        |
-	| lr()           | YES            |                  |       |        |
-	| lr().a         | YES            |                  |       |        |
+	| Recordset Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| rec()          |                  |                  |       |        |
+	| rec().a        |                  | YES              |       | YES    |
+	| rec().b        | YES              |                  |       |        |
+	| mr()           |                  |                  |       |        |
+	| lr()           | YES              |                  |       |        |
+	| lr().a         | YES              |                  |       |        |
 	And I remove variable "[[Var]]"
-	And I remove variable "[[mr()]]
+	And I remove variable "[[mr()]]"
 	And the Variable Names are
-	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
-	| a             | YES            |                  |       |        |
+	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| a             | YES              |                  |       |        |
 	And the Recordset Names are
-	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
-	| rec()          |                |                  |       |        |
-	| rec().a        |                | YES              |       | YES    |
-	| rec().b        | YES            |                  |       |        |
-	| lr()           | YES            |                  |       |        |
-	| lr().a         | YES            |                  |       |        |
+	| Recordset Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| rec()          |                  |                  |       |        |
+	| rec().a        |                  | YES              |       | YES    |
+	| rec().b        | YES              |                  |       |        |
+	| lr()           | YES              |                  |       |        |
+	| lr().a         | YES              |                  |       |        |
 	And I change variable Name from "a" to ""
 	And I change Recordset Name from "rec()" to "this"
 	And the Variable Names are
-	| Variable Name | Delete Visible | Note Highlighted | Input | Output |
+	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
 	And the Recordset Names are
-	| Recordset Name | Delete Visible | Note Highlighted | Input | Output |
-	| this()         | YES            |                  |       |        |
-	| this().a       | YES            | YES              |       | YES    |
-	| this().b       | YES            |                  |       |        |
-	| lr()           | YES            |                  |       |        |
-	| lr().a         | YES            |                  |       |        |
-	| rec()          |                |                  |       |        |
-	| rec().a        |                | YES              |       | YES    |
+	| Recordset Name | Delete IsEnabled | Note Highlighted | Input | Output |
+	| this()         | YES              |                  |       |        |
+	| this().a       | YES              | YES              |       | YES    |
+	| this().b       | YES              |                  |       |        |
+	| lr()           | YES              |                  |       |        |
+	| lr().a         | YES              |                  |       |        |
+	| rec()          |                  |                  |       |        |
+	| rec().a        |                  | YES              |       | YES    |
 	

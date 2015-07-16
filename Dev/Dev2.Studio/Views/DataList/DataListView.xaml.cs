@@ -13,10 +13,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Caliburn.Micro;
+using Dev2.Common.Interfaces;
 using Dev2.Services.Events;
 using Dev2.Studio.Core.Interfaces.DataList;
 using Dev2.Studio.Core.Messages;
 using Dev2.Studio.ViewModels.WorkSurface;
+using Infragistics.Controls.Grids;
+using Microsoft.Practices.Prism.Mvvm;
 
 // ReSharper disable once CheckNamespace
 namespace Dev2.Studio.Views.DataList
@@ -24,7 +27,7 @@ namespace Dev2.Studio.Views.DataList
     /// <summary>
     /// Interaction logic for DataListView.xaml
     /// </summary>
-    public partial class DataListView
+    public partial class DataListView : IView,ICheckControlEnabledView
     {
         readonly IEventAggregator _eventPublisher;
 
@@ -111,7 +114,7 @@ namespace Dev2.Studio.Views.DataList
                 return;
             }
             IDataListViewModel vm = DataContext as IDataListViewModel;
-            if (!vm.IsSorting)
+            if (vm != null && !vm.IsSorting)
             {
                 WriteToResourceModel();
             }
@@ -126,7 +129,7 @@ namespace Dev2.Studio.Views.DataList
             }
 
             IDataListViewModel vm = DataContext as IDataListViewModel;
-            if (!vm.IsSorting)
+            if (vm != null && !vm.IsSorting)
             {
                 WriteToResourceModel();
             }
@@ -178,5 +181,18 @@ namespace Dev2.Studio.Views.DataList
             }
         }
 
+        #region Implementation of ICheckControlEnabledView
+
+        public bool GetControlEnabled(string controlName)
+        {
+            //switch (controlName)
+            //{
+            //    case "Variables":
+            //        return DeleteCommand.CanExecute(null);
+            //}
+            return false;
+        }
+
+        #endregion
     }
 }

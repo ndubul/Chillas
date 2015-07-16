@@ -126,10 +126,6 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Given("I have variables as", ((string)(null)), table1, "Given ");
 #line 31
  testRunner.Then("\"Variables\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 32
- testRunner.And("variables filter box is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
- testRunner.And("\"Filter Clear\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 34
  testRunner.And("\"Delete Variables\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
@@ -137,7 +133,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -158,7 +154,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -205,7 +201,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -220,7 +216,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -304,10 +300,6 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Given("I have variables as", ((string)(null)), table6, "Given ");
 #line 68
  testRunner.Then("\"Variables\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 69
- testRunner.And("variables filter box is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
- testRunner.And("\"Filter Clear\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 71
  testRunner.And("\"Delete Variables\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 72
@@ -317,7 +309,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Visible",
                         "Note Highlighted",
                         "Input",
@@ -327,7 +319,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Visible",
                         "Note Highlighted",
                         "Input",
@@ -353,7 +345,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Visible",
                         "Note Highlighted",
                         "Input",
@@ -363,7 +355,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Visible",
                         "Note Highlighted",
                         "Input",
@@ -371,11 +363,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 83
  testRunner.And("the Recordset Names are", ((string)(null)), table10, "And ");
 #line 85
- testRunner.And("I Clcik \"Delete Variables\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click \"Delete Variables\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Visible",
                         "Note Highlighted",
                         "Input",
@@ -385,19 +377,17 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Visible",
                         "Note Highlighted",
                         "Input",
                         "Output"});
 #line 88
  testRunner.And("the Recordset Names are", ((string)(null)), table12, "And ");
-#line 90
- testRunner.When("I press the clear filter button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -418,7 +408,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -507,11 +497,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 103
  testRunner.Given("I have variables as", ((string)(null)), table15, "Given ");
 #line 111
- testRunner.When("I Click \"Sort\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I Sort the variables", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -532,7 +522,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -575,11 +565,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 116
  testRunner.And("the Recordset Names are", ((string)(null)), table17, "And ");
 #line 124
- testRunner.When("I Click \"Sort\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I Sort the variables", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -600,7 +590,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -746,7 +736,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -767,7 +757,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -812,11 +802,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 176
  testRunner.And("I remove variable \"[[Var]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 177
- testRunner.And("I remove variable \"[[mr()]]", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I remove variable \"[[mr()]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -831,7 +821,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -874,7 +864,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});
@@ -883,7 +873,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                         "Recordset Name",
-                        "Delete Visible",
+                        "Delete IsEnabled",
                         "Note Highlighted",
                         "Input",
                         "Output"});

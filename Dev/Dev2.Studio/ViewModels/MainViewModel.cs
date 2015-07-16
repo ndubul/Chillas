@@ -130,7 +130,7 @@ namespace Dev2.Studio.ViewModels
         bool _canDebug = true;
         double _menuPanelWidth;
         bool _menuExpanded;
-
+        
         #endregion
 
         #region Properties
@@ -192,6 +192,7 @@ namespace Dev2.Studio.ViewModels
         }
 
         public IBrowserPopupController BrowserPopupController { get; private set; }
+
 
         #endregion
 
@@ -717,14 +718,14 @@ namespace Dev2.Studio.ViewModels
                 case "WebSource":
                     EditWebSource(resourceModel);
                     break;
-                case "Plugin":
+                case "PluginSource":
                     EditPluginSource(resourceModel);
                     break;
                 case "DbService":
                     EditDbService(resourceModel);
                 break;
             }
-            WebController.DisplayDialogue(resourceModel, isedit);
+            //WebController.DisplayDialogue(resourceModel, isedit);
         }
 
         void EditDbSource(IContextualResourceModel resourceModel)
@@ -1330,7 +1331,6 @@ namespace Dev2.Studio.ViewModels
                 {
                     MenuViewModel.SaveCommand = SaveCommand;
                     MenuViewModel.ExecuteServiceCommand = DebugCommand;
-                    
                 }
             }
             base.OnActivationProcessed(item, success);

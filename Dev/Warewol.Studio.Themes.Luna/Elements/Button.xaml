@@ -82,7 +82,7 @@
                                    Visibility="Collapsed" />
                         <Rectangle x:Name="DisabledVisualElement"
                                    Fill="{StaticResource ButtonBackgroundBrush}"
-                                   Opacity="0.4"
+                                   Opacity="0.7"
                                    Visibility="Collapsed" />
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -670,7 +670,7 @@
                                    Visibility="Collapsed" />
                         <Rectangle x:Name="DisabledVisualElement"
                                    Fill="{StaticResource DisabledSideMenuVisualElement}"
-                                   Opacity="0.4"
+                                   Opacity="0.7"
                                    Visibility="Collapsed" />
                     </Grid>
                     <ControlTemplate.Triggers>

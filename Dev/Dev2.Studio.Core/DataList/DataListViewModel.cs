@@ -50,6 +50,7 @@ namespace Dev2.Studio.ViewModels.DataList
         private ObservableCollection<IDataListItemModel> _scalarCollection;
         private string _searchText;
         private RelayCommand _sortCommand;
+        private bool _viewSortDelete;
 
         #endregion Fields
 
@@ -81,6 +82,16 @@ namespace Dev2.Studio.ViewModels.DataList
                 _searchText = value;
                 FilterItems();
                 NotifyOfPropertyChange(() => SearchText);
+            }
+        }
+
+        public bool ViewSortDelete
+        {
+            get { return _viewSortDelete; }
+            set
+            {
+                _viewSortDelete = value;
+                NotifyOfPropertyChange(() => ViewSortDelete);
             }
         }
 
@@ -203,6 +214,7 @@ namespace Dev2.Studio.ViewModels.DataList
                 WriteToResourceModel();
             });
             ClearSearchTextCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(() => SearchText = "");
+            ViewSortDelete = true;
         }
 
         #endregion
