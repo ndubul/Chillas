@@ -212,9 +212,16 @@ namespace Dev2.Studio.ViewModels.DataList
             {
                 RemoveDataListItem(item);
                 WriteToResourceModel();
-            });
+            }, CanDelete);
             ClearSearchTextCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(() => SearchText = "");
             ViewSortDelete = true;
+        }
+
+        bool CanDelete(Object itemx)
+        {
+
+           var item =itemx as IDataListItemModel;
+            return item != null && !item.IsUsed;
         }
 
         #endregion
@@ -251,7 +258,7 @@ namespace Dev2.Studio.ViewModels.DataList
             }
         }
 
-        public ICommand DeleteCommand { get; set; }
+        public Microsoft.Practices.Prism.Commands.DelegateCommand<IDataListItemModel> DeleteCommand { get; set; }
 
         #endregion Commands
 
@@ -834,6 +841,7 @@ namespace Dev2.Studio.ViewModels.DataList
                 hasUnused = ScalarCollection.Any(sc => !sc.IsUsed);
                 if(hasUnused)
                 {
+                    DeleteCommand.RaiseCanExecuteChanged();
                     return true;
                 }
             }
@@ -843,6 +851,7 @@ namespace Dev2.Studio.ViewModels.DataList
                 hasUnused = RecsetCollection.Any(sc => !sc.IsUsed);
                 if(hasUnused)
                 {
+                    DeleteCommand.RaiseCanExecuteChanged();
                     return true;
                 }
 

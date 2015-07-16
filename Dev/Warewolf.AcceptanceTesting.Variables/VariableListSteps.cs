@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
 using Dev2.Common.Interfaces;
+using Dev2.Data.Binary_Objects;
 using Dev2.Data.Util;
 using Dev2.Studio.Core.Factories;
 using Dev2.Studio.Core.Interfaces;
-using Dev2.Studio.Core.Interfaces.DataList;
-using Dev2.Studio.Core.Models.DataList;
 using Dev2.Studio.ViewModels.DataList;
 using Dev2.Studio.Views.DataList;
-using Microsoft.Practices.Prism;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -53,6 +50,24 @@ namespace Warewolf.AcceptanceTesting.Variables
             foreach (var tableRow in rows)
             {
                 var variableName = tableRow["Variable"];
+                var isUsedStringValue = tableRow["IsUsed"];
+                //var errorState = !string.IsNullOrEmpty(tableRow["Error State"]) && tableRow["Error State"].Equals("YES", StringComparison.OrdinalIgnoreCase);
+                var isInput = !string.IsNullOrEmpty(tableRow["Input"]) && tableRow["Input"].Equals("YES", StringComparison.OrdinalIgnoreCase);
+                var isOutput = !string.IsNullOrEmpty(tableRow["Output"]) && tableRow["Output"].Equals("YES", StringComparison.OrdinalIgnoreCase);
+                var ioDirection = enDev2ColumnArgumentDirection.None;
+                if (isInput && isOutput)
+                {
+                    ioDirection = enDev2ColumnArgumentDirection.Both;
+                }
+                else if (isInput)
+                {
+                    ioDirection = enDev2ColumnArgumentDirection.Input;
+                }
+                else if (isOutput)
+                {
+                    ioDirection = enDev2ColumnArgumentDirection.Output;
+                }
+                var isUsed = isUsedStringValue != null && (!string.IsNullOrEmpty(isUsedStringValue) || isUsedStringValue.Equals("YES", StringComparison.OrdinalIgnoreCase));
                 if (DataListUtil.IsValueRecordset(variableName))
                 {
                     var recSetName = DataListUtil.ExtractRecordsetNameFromValue(variableName);
@@ -62,16 +77,28 @@ namespace Warewolf.AcceptanceTesting.Variables
                     if (existingRecordSet == null)
                     {
                         existingRecordSet = DataListItemModelFactory.CreateDataListModel(recSetName);
+                        existingRecordSet.Name = recSetName;
                         variableListViewModel.RecsetCollection.Add(existingRecordSet);
                     }
                     if (!string.IsNullOrEmpty(columnName))
                     {
-                        existingRecordSet.Children.Add(DataListItemModelFactory.CreateDataListModel(columnName, "", existingRecordSet));
+                        var item = DataListItemModelFactory.CreateDataListModel(columnName, "", existingRecordSet);
+                        item.Name = variableName;
+                        item.IsUsed = isUsed;
+                        //item.HasError = errorState;
+                        item.ColumnIODirection = ioDirection;
+                        existingRecordSet.Children.Add(item);
                     }
                 }
                 else
                 {
-                    variableListViewModel.ScalarCollection.Add(DataListItemModelFactory.CreateDataListModel(variableName));
+                    var displayName = DataListUtil.RemoveLanguageBrackets(variableName);
+                    var item = DataListItemModelFactory.CreateDataListModel(displayName);
+                    item.Name = variableName;
+                    item.IsUsed = isUsed;
+                    //item.HasError = errorState;
+                    item.ColumnIODirection = ioDirection;
+                    variableListViewModel.ScalarCollection.Add(item);
                 }
             }
             
@@ -83,12 +110,11 @@ namespace Warewolf.AcceptanceTesting.Variables
             Utils.CheckControlEnabled(controlName, enabledString, ScenarioContext.Current.Get<ICheckControlEnabledView>(Utils.ViewNameKey));
         }
 
-
         [When(@"I delete unassigned variables")]
         public void WhenIDeleteUnassignedVariables()
         {
-            var variableListViewModel = Utils.GetView<DataListViewModel>();
-            variableListViewModel.RemoveUnusedDataListItems();
+            var sourceControl = ScenarioContext.Current.Get<DataListViewModel>(Utils.ViewModelNameKey);
+            sourceControl.RemoveUnusedDataListItems();
         }
 
         [When(@"I search for variable ""(.*)""")]
@@ -99,10 +125,39 @@ namespace Warewolf.AcceptanceTesting.Variables
         }
 
         [Then(@"I click delete for ""(.*)""")]
+        [Given(@"I click delete for ""(.*)""")]
         public void ThenIClickDeleteFor(string variableName)
         {
-            var variableListViewModel = Utils.GetView<DataListViewModel>();
-            Assert.IsTrue(variableListViewModel.DeleteCommand.CanExecute(variableName));
+            var sourceControl = ScenarioContext.Current.Get<DataListViewModel>(Utils.ViewModelNameKey);
+            string varName;
+            if (DataListUtil.IsValueRecordset(variableName))
+            {
+                if (variableName.Contains("."))
+                {
+                    varName = variableName.Substring(variableName.IndexOf(".", StringComparison.Ordinal) + 1);
+                    var variableListViewRecsetCollection = sourceControl.RecsetCollection.SelectMany(a => a.Children).FirstOrDefault(model => model.Name == varName);
+                    Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableListViewRecsetCollection));
+                }
+                else
+                {
+                    var variableListViewRecsetCollection = sourceControl.RecsetCollection.FirstOrDefault(model => model.Name + "()" == variableName);
+                    Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableListViewRecsetCollection));
+                }
+            }
+            else
+            {
+                if (variableName.Contains("."))
+                {
+                    varName = variableName.Substring(variableName.IndexOf(".", StringComparison.Ordinal) + 1);
+                    var variableListViewScalarCollection = sourceControl.ScalarCollection.SelectMany(a => a.Children).FirstOrDefault(model => model.Name == varName);
+                    Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableListViewScalarCollection));
+                }
+                else
+                {
+                    var variableListViewScalarCollection = sourceControl.ScalarCollection.FirstOrDefault(model => model.Name == variableName);
+                    Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableListViewScalarCollection));
+                }
+            }
         }
 
 
@@ -115,19 +170,40 @@ namespace Warewolf.AcceptanceTesting.Variables
 
         [When(@"I click ""(.*)""")]
         [Then(@"I click ""(.*)""")]
-        public void WhenIClick(string variableName)
+        public void WhenIClick(string command)
         {
-            var variableListViewModel = Utils.GetView<DataListViewModel>();
-            variableListViewModel.ClearCollections();
-            Assert.IsTrue(variableListViewModel.DeleteCommand.CanExecute(variableName));
+            var sourceControl = ScenarioContext.Current.Get<DataListView>(Utils.ViewNameKey);
+            sourceControl.ExecuteCommand(command);
+//            
+//            if (DataListUtil.IsValueRecordset(command))
+//            {
+//                var recSetName = DataListUtil.ExtractRecordsetNameFromValue(command);
+//                var columnName = DataListUtil.ExtractFieldNameOnlyFromValue(command);
+//
+//                var existingRecordSet = sourceControl.RecsetCollection.FirstOrDefault(model => model.Name.Equals(recSetName, StringComparison.OrdinalIgnoreCase));
+//                if (existingRecordSet != null)
+//                {
+//                    if (!string.IsNullOrEmpty(columnName))
+//                    {
+//                        existingRecordSet.Children.Remove(DataListItemModelFactory.CreateDataListModel(columnName, "", existingRecordSet));
+//                        Assert.AreNotSame(existingRecordSet, sourceControl);
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                var variableListViewScalarCollection = sourceControl.ScalarCollection;
+//                sourceControl.ScalarCollection.Remove(DataListItemModelFactory.CreateDataListModel(command));
+//                Assert.AreNotSame(variableListViewScalarCollection, sourceControl);
+//            }
         }
 
 
         [When(@"I Sort the variables")]
         public void WhenISortTheVariables()
         {
-            var variableListViewModel = Utils.GetView<DataListViewModel>();
-            Assert.IsTrue(variableListViewModel.SortCommand.CanExecute(variableListViewModel.CanSortItems));
+            var sourceControl = ScenarioContext.Current.Get<DataListViewModel>(Utils.ViewModelNameKey);
+            Assert.IsTrue(sourceControl.SortCommand.CanExecute(sourceControl.CanSortItems));
         }
 
         [Then(@"variables filter box is ""(.*)""")]
@@ -143,14 +219,29 @@ namespace Warewolf.AcceptanceTesting.Variables
         [Given(@"the Variable Names are")]
         public void ThenTheVariableNamesAre(Table table)
         {
-            var variableListViewModel = Utils.GetView<DataListViewModel>();
-            var variableListViewScalarCollection = variableListViewModel.ScalarCollection;
+            var sourceControl = ScenarioContext.Current.Get<DataListViewModel>(Utils.ViewModelNameKey);
+            var variableListViewScalarCollection = sourceControl.ScalarCollection;
             var rows = table.Rows;
             var i = 0;
             foreach (var tableRow in rows)
             {
                 var scalarViewModel = variableListViewScalarCollection[i];
-                Assert.AreEqual(tableRow["Variable Name"], scalarViewModel.Name);
+                if (table.ContainsColumn("Error Tooltip") && table.ContainsColumn("Error State"))
+                {
+                    if (!string.IsNullOrEmpty(tableRow["Error Tooltip"]) && tableRow["Error State"].Equals("YES"))
+                    {
+                        Assert.IsTrue(!string.IsNullOrEmpty(tableRow["Error Tooltip"]));
+                    }
+                }
+                if (string.IsNullOrEmpty(scalarViewModel.DisplayName))
+                {
+                    continue;
+                }
+                if (tableRow["Delete IsEnabled"].Equals("YES"))
+                {
+                    continue;
+                }
+                Assert.AreEqual(tableRow["Variable Name"], scalarViewModel.DisplayName);
                 i++;
             }
         }
@@ -160,23 +251,60 @@ namespace Warewolf.AcceptanceTesting.Variables
         [Given(@"the Recordset Names are")]
         public void ThenTheRecordsetNamesAre(Table table)
         {
-            var recordSetListViewModel = Utils.GetView<DataListViewModel>();
-            var variableListViewRecsetCollection = recordSetListViewModel.RecsetCollection;
+            var sourceControl = ScenarioContext.Current.Get<DataListViewModel>(Utils.ViewModelNameKey);
+            var variableListViewRecsetCollection = sourceControl.RecsetCollection;
+            variableListViewRecsetCollection.RemoveAt(0);
             var rows = table.Rows;
             var i = 0;
-            foreach (var tableRow in rows)
+
+            if (variableListViewRecsetCollection.Count > 0)
             {
-                var recordSetViewModel = variableListViewRecsetCollection[i];
-                Assert.AreEqual(tableRow["Variable Name"], recordSetViewModel.Name);
-                i++;
+                foreach (var tableRow in rows)
+                {
+                    if (tableRow["Recordset Name"].Contains("."))
+                    {
+                        continue;
+                    }
+                    if (table.ContainsColumn("Error Tooltip") && table.ContainsColumn("Error State"))
+                    {
+                        if (!string.IsNullOrEmpty(tableRow["Error Tooltip"]) && tableRow["Error State"].Equals("YES"))
+                        {
+                            Assert.IsTrue(!string.IsNullOrEmpty(tableRow["Error Tooltip"]));
+                        }
+                    }
+                    var recordSetViewModel = variableListViewRecsetCollection[i];
+                    string recordSetName;
+                    if (string.IsNullOrEmpty(recordSetViewModel.DisplayName))
+                    {
+                        continue;
+                    }
+                    if (!recordSetViewModel.Name.Contains("()"))
+                    {
+                        recordSetName = recordSetViewModel.Name + "()";
+                    }
+                    else
+                    {
+                        recordSetName = recordSetViewModel.Name;
+                    }
+                    if (tableRow["Delete IsEnabled"].Equals("YES"))
+                    {
+                        continue;
+                    }
+                    if (recordSetName != tableRow["Recordset Name"])
+                    {
+                        continue;
+                    }
+                    Assert.AreEqual(tableRow["Recordset Name"], recordSetName);
+                    i++;
+                }
             }
         }
 
         [Given(@"I remove variable ""(.*)""")]
         public void GivenIRemoveVariable(string variableName)
         {
-            var variableListViewModel = Utils.GetView<DataListViewModel>();
-            Assert.IsTrue(variableListViewModel.DeleteCommand.CanExecute(variableName));
+            var sourceControl = ScenarioContext.Current.Get<DataListViewModel>(Utils.ViewModelNameKey);
+            Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableName));
         }
 
         [Given(@"I change variable Name from ""(.*)"" to ""(.*)""")]

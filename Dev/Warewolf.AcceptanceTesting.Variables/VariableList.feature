@@ -21,13 +21,13 @@ Feature: VariableList
 
 Scenario: Variables adding in variable list and removing unused
 	Given I have variables as
-    | Variable    | Note              | Input | Output | Not Used |
-    | [[rec().a]] | This is recordset |       | YES    |          |
-    | [[rec().b]] |                   |       |        | YES      |
-    | [[mr()]]    |                   |       |        |          |
-    | [[Var]]     |                   | YES   |        |          |
-    | [[a]]       |                   |       |        | YES      |
-    | [[lr().a]]  |                   |       |        | YES      |
+    | Variable    | Note              | Input | Output | IsUsed |
+    | [[rec().a]] | This is recordset |       | YES    | YES    |
+    | [[rec().b]] |                   |       |        |        |
+    | [[mr()]]    |                   |       |        | YES    |
+    | [[Var]]     |                   | YES   |        | YES    |
+    | [[a]]       |                   |       |        |        |
+    | [[lr().a]]  |                   |       |        |        |
 	Then "Variables" is "Enabled"
 	#And variables filter box is "Visible"
 	#And "Filter Clear" is "Disabled"
@@ -58,13 +58,13 @@ Scenario: Variables adding in variable list and removing unused
 
 Scenario: Searching Variables in Variable list
 	Given I have variables as
-    | Variable    | Note              | Input | Output | Not Used |
-    | [[rec().a]] | This is recordset |       | YES    |          |
-    | [[rec().b]] |                   |       |        | YES      |
-    | [[mr()]]    |                   |       |        |          |
-    | [[Var]]     |                   | YES   |        |          |
-    | [[a]]       |                   |       |        | YES      |
-    | [[lr().a]]  |                   |       |        | YES      |
+    | Variable    | Note              | Input | Output | IsUsed |
+    | [[rec().a]] | This is recordset |       | YES    | YES    |
+    | [[rec().b]] |                   |       |        |        |
+    | [[mr()]]    |                   |       |        | YES    |
+    | [[Var]]     |                   | YES   |        | YES    |
+    | [[a]]       |                   |       |        |        |
+    | [[lr().a]]  |                   |       |        |        |
 	Then "Variables" is "Enabled"
 	#And variables filter box is "Visible"
 	#And "Filter Clear" is "Disabled"
@@ -101,13 +101,13 @@ Scenario: Searching Variables in Variable list
 
 Scenario: Sorting Variables in Variable list
 	Given I have variables as
-	 | Variable    | Note              | Inputs | Outputs | Not Used |
-	 | [[rec().a]] | This is recordset |        | YES     |          |
-	 | [[rec().b]] |                   |        |         | YES      |
-	 | [[mr()]]    |                   |        |         |          |
-	 | [[Var]]     |                   | YES    |         |          |
-	 | [[a]]       |                   |        |         | YES      |
-	 | [[lr().a]]  |                   |        |         | YES      |
+	 | Variable    | Note              | Input | Output | IsUsed |
+	 | [[rec().a]] | This is recordset |        | YES     | YES    |
+	 | [[rec().b]] |                   |        |         |        |
+	 | [[mr()]]    |                   |        |         | YES    |
+	 | [[Var]]     |                   | YES    |         | YES    |
+	 | [[a]]       |                   |        |         |        |
+	 | [[lr().a]]  |                   |        |         |        |
 	When I Sort the variables
 	And the Variable Names are
 	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
@@ -154,13 +154,13 @@ Scenario: Variable Errors
 	
 Scenario: Variables removed from design surface and list
 	Given I have variables as
-    | Variable    | 
-    | [[rec().a]] | 
-    | [[rec().b]] | 
-    | [[mr()]]    | 
-    | [[Var]]     | 
-    | [[a]]       | 
-    | [[lr().a]]  | 
+    | Variable    | Note              | Input | Output | IsUsed |
+    | [[rec().a]] | This is recordset |       | YES    | YES    |
+    | [[rec().b]] |                   |       |        |        |
+    | [[mr()]]    |                   |       |        | YES    |
+    | [[Var]]     |                   | YES   |        | YES    |
+    | [[a]]       |                   |       |        |        |
+    | [[lr().a]]  |                   |       |        |        |
 	And the Variable Names are
 	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
 	| Var           |                  |                  | YES   |        |
@@ -173,8 +173,8 @@ Scenario: Variables removed from design surface and list
 	| mr()           |                  |                  |       |        |
 	| lr()           | YES              |                  |       |        |
 	| lr().a         | YES              |                  |       |        |
-	And I remove variable "[[Var]]"
-	And I remove variable "[[mr()]]"
+	And I click delete for "[[Var]]"
+	And I click delete for "mr()"
 	And the Variable Names are
 	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |
 	| a             | YES              |                  |       |        |

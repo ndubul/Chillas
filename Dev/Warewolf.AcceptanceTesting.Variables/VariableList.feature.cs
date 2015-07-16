@@ -85,43 +85,43 @@ this.ScenarioSetup(scenarioInfo);
                         "Note",
                         "Input",
                         "Output",
-                        "Not Used"});
+                        "IsUsed"});
             table1.AddRow(new string[] {
                         "[[rec().a]]",
                         "This is recordset",
                         "",
                         "YES",
-                        ""});
+                        "YES"});
             table1.AddRow(new string[] {
                         "[[rec().b]]",
                         "",
                         "",
                         "",
-                        "YES"});
+                        ""});
             table1.AddRow(new string[] {
                         "[[mr()]]",
                         "",
                         "",
                         "",
-                        ""});
+                        "YES"});
             table1.AddRow(new string[] {
                         "[[Var]]",
                         "",
                         "YES",
                         "",
-                        ""});
+                        "YES"});
             table1.AddRow(new string[] {
                         "[[a]]",
                         "",
                         "",
                         "",
-                        "YES"});
+                        ""});
             table1.AddRow(new string[] {
                         "[[lr().a]]",
                         "",
                         "",
                         "",
-                        "YES"});
+                        ""});
 #line 23
  testRunner.Given("I have variables as", ((string)(null)), table1, "Given ");
 #line 31
@@ -259,43 +259,43 @@ this.ScenarioSetup(scenarioInfo);
                         "Note",
                         "Input",
                         "Output",
-                        "Not Used"});
+                        "IsUsed"});
             table6.AddRow(new string[] {
                         "[[rec().a]]",
                         "This is recordset",
                         "",
                         "YES",
-                        ""});
+                        "YES"});
             table6.AddRow(new string[] {
                         "[[rec().b]]",
                         "",
                         "",
                         "",
-                        "YES"});
+                        ""});
             table6.AddRow(new string[] {
                         "[[mr()]]",
                         "",
                         "",
                         "",
-                        ""});
+                        "YES"});
             table6.AddRow(new string[] {
                         "[[Var]]",
                         "",
                         "YES",
                         "",
-                        ""});
+                        "YES"});
             table6.AddRow(new string[] {
                         "[[a]]",
                         "",
                         "",
                         "",
-                        "YES"});
+                        ""});
             table6.AddRow(new string[] {
                         "[[lr().a]]",
                         "",
                         "",
                         "",
-                        "YES"});
+                        ""});
 #line 60
  testRunner.Given("I have variables as", ((string)(null)), table6, "Given ");
 #line 68
@@ -455,45 +455,45 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable",
                         "Note",
-                        "Inputs",
-                        "Outputs",
-                        "Not Used"});
+                        "Input",
+                        "Output",
+                        "IsUsed"});
             table15.AddRow(new string[] {
                         "[[rec().a]]",
                         "This is recordset",
                         "",
                         "YES",
-                        ""});
+                        "YES"});
             table15.AddRow(new string[] {
                         "[[rec().b]]",
                         "",
                         "",
                         "",
-                        "YES"});
+                        ""});
             table15.AddRow(new string[] {
                         "[[mr()]]",
                         "",
                         "",
                         "",
-                        ""});
+                        "YES"});
             table15.AddRow(new string[] {
                         "[[Var]]",
                         "",
                         "YES",
                         "",
-                        ""});
+                        "YES"});
             table15.AddRow(new string[] {
                         "[[a]]",
                         "",
                         "",
                         "",
-                        "YES"});
+                        ""});
             table15.AddRow(new string[] {
                         "[[lr().a]]",
                         "",
                         "",
                         "",
-                        "YES"});
+                        ""});
 #line 103
  testRunner.Given("I have variables as", ((string)(null)), table15, "Given ");
 #line 111
@@ -718,19 +718,47 @@ this.ScenarioSetup(scenarioInfo);
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Variable"});
+                        "Variable",
+                        "Note",
+                        "Input",
+                        "Output",
+                        "IsUsed"});
             table22.AddRow(new string[] {
-                        "[[rec().a]]"});
+                        "[[rec().a]]",
+                        "This is recordset",
+                        "",
+                        "YES",
+                        "YES"});
             table22.AddRow(new string[] {
-                        "[[rec().b]]"});
+                        "[[rec().b]]",
+                        "",
+                        "",
+                        "",
+                        ""});
             table22.AddRow(new string[] {
-                        "[[mr()]]"});
+                        "[[mr()]]",
+                        "",
+                        "",
+                        "",
+                        "YES"});
             table22.AddRow(new string[] {
-                        "[[Var]]"});
+                        "[[Var]]",
+                        "",
+                        "YES",
+                        "",
+                        "YES"});
             table22.AddRow(new string[] {
-                        "[[a]]"});
+                        "[[a]]",
+                        "",
+                        "",
+                        "",
+                        ""});
             table22.AddRow(new string[] {
-                        "[[lr().a]]"});
+                        "[[lr().a]]",
+                        "",
+                        "",
+                        "",
+                        ""});
 #line 156
  testRunner.Given("I have variables as", ((string)(null)), table22, "Given ");
 #line hidden
@@ -800,9 +828,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 168
  testRunner.And("the Recordset Names are", ((string)(null)), table24, "And ");
 #line 176
- testRunner.And("I remove variable \"[[Var]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click delete for \"[[Var]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 177
- testRunner.And("I remove variable \"[[mr()]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click delete for \"mr()\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                         "Variable Name",

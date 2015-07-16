@@ -706,7 +706,7 @@
                     <Grid x:Name="RootElement" SnapsToDevicePixels="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
@@ -858,7 +858,7 @@
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right" 
                                 Margin="0,0,0,0" 
-                                Padding="0,1,0,0">
+                                Padding="3,1,0,0">
                             <Grid>
                                 <!-- DO NOT REMOVE THIS, IT WILL BE USED WHEN WE ADD IN THE ADD NOTE -->
                                 <!-- Margin="-28,0,0,0" -->
@@ -867,8 +867,8 @@
                                                  Visibility="Visible" 
                                                  Icon="Trash" 
                                                  Margin="-5,0,0,0"
-                                                 Width="10" 
-                                                 Height="10" 
+                                                 Width="14" 
+                                                 Height="14" 
                                                  VerticalAlignment="Center"/>
                                 <!-- DO NOT REMOVE THIS, IT WILL BE USED WHEN WE ADD IN THE ADD NOTE -->
                                 <!--Margin="-12,0,0,0"-->
@@ -876,7 +876,7 @@
                                        Path=DeleteCommand}"
                                         CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent},Path=DataContext}"
                                         x:Name="DeleteButton"
-                                        Margin="0,0,-12,0"
+                                        Margin="0,0,-8,0"
                                         VerticalAlignment="Center"
                                         Visibility="Hidden">
                                     <Button.Template>
@@ -885,7 +885,7 @@
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="*"/>
                                                 </Grid.RowDefinitions>
-                                                <fa:ImageAwesome x:Name="DeleteVar" Visibility="Visible"  Icon="Trash" Width="10" Height="10"  HorizontalAlignment="Left"/>
+                                                <fa:ImageAwesome x:Name="DeleteVar" Visibility="Visible"  Icon="Trash" Width="14" Height="14"  HorizontalAlignment="Left"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="False">
@@ -945,7 +945,7 @@
                             <Setter Property="Background" Value="{StaticResource TextBoxBackgroundBrush}"/>
                             <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
                         </Trigger>
-                        <Trigger Property="HasText" Value="True">
+                        <Trigger Property="IsUsed" Value="False">
                             <Setter Property="Visibility" TargetName="LabelText" Value="Hidden" />
                             <Setter Property="Visibility" TargetName="DeleteDisabled" Value="Hidden" />
                             <!--<Setter Property="Visibility" TargetName="AddNoteDisabled" Value="Hidden" />-->
@@ -958,7 +958,7 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsFocused" Value="False"/>
-                                <Condition Property="HasText" Value="False"/>
+                                <Condition Property="IsUsed" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Visibility" TargetName="LabelText" Value="Visible" />
                             <Setter Property="Visibility" TargetName="DeleteDisabled" Value="Visible" />

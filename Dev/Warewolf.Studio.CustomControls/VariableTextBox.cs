@@ -31,13 +31,19 @@ namespace Warewolf.Studio.CustomControls
                 typeof(ICommand),
                 typeof(VariableTextBox));
 
-        private static DependencyPropertyKey HasTextPropertyKey =
+        private static readonly DependencyPropertyKey HasTextPropertyKey =
             DependencyProperty.RegisterReadOnly(
                 "HasText",
                 typeof(bool),
                 typeof(VariableTextBox),
                 new PropertyMetadata());
         public static DependencyProperty HasTextProperty = HasTextPropertyKey.DependencyProperty;
+
+        public static DependencyProperty IsUsedProperty =
+            DependencyProperty.Register(
+                "IsUsed",
+                typeof(bool),
+                typeof(VariableTextBox));
 
         static VariableTextBox() {
             DefaultStyleKeyProperty.OverrideMetadata(
@@ -88,13 +94,22 @@ namespace Warewolf.Studio.CustomControls
             get { return (ICommand)GetValue(DeleteCommandProperty); }
             set
             {
-                SetValue(DeleteCommandProperty, value);
+                if (IsUsed)
+                {
+                    SetValue(DeleteCommandProperty, value);
+                }
             }
         }
 
         public bool HasText {
             get { return (bool)GetValue(HasTextProperty); }
             private set { SetValue(HasTextPropertyKey, value); }
+        }
+
+        public bool IsUsed
+        {
+            get { return (bool)GetValue(IsUsedProperty); }
+            set { SetValue(IsUsedProperty, value); }
         }
     }
 }

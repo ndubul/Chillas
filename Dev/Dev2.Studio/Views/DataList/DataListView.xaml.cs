@@ -9,6 +9,7 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -185,14 +186,26 @@ namespace Dev2.Studio.Views.DataList
 
         public bool GetControlEnabled(string controlName)
         {
-            //switch (controlName)
-            //{
-            //    case "Variables":
-            //        return DeleteCommand.CanExecute(null);
-            //}
+            switch (controlName)
+            {
+                case "Delete Variables":
+                    return DeleteButton.Command.CanExecute(null);
+                case "Sort Variables":
+                    return SortButton.Command.CanExecute(null);
+                case "Variables":
+                    return ScalarExplorer.IsEnabled;
+            }
             return false;
         }
 
         #endregion
+
+        public void ExecuteCommand(string command)
+        {
+            if (command.Equals("Delete Variables", StringComparison.OrdinalIgnoreCase))
+            {
+                DeleteButton.Command.Execute(null);
+            }
+        }
     }
 }

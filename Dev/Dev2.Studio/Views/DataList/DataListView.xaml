@@ -17,7 +17,7 @@
     <i:Interaction.Behaviors>
         <behaviors:UserControlFocusNextAndPreviousBehaviour />
     </i:Interaction.Behaviors>
-    <Grid LostKeyboardFocus="UIElement_OnLostKeyboardFocus" Margin="{StaticResource ElementBorder}">
+    <Grid x:Name="MainGrid" LostKeyboardFocus="UIElement_OnLostKeyboardFocus" Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
@@ -41,6 +41,7 @@
             </customControls:SearchTextBox>-->
             <TextBlock Grid.Column="0" Text="Delete changes"></TextBlock>
             <Button Grid.Column="1"
+                    x:Name="DeleteButton"
                     AutomationProperties.AutomationId="UI_AddRemovebtn_AutoID"
                     Margin="{StaticResource ControlBorderTopRight}"
                     Command="{Binding FindUnusedAndMissingCommand}"
@@ -49,6 +50,7 @@
             </Button>
             <TextBlock Grid.Column="2" Text="Sort list"></TextBlock>
             <Button Grid.Column="3"
+                    x:Name="SortButton"
                     AutomationProperties.AutomationId="UI_Sortbtn_AutoID"
                     Margin="{StaticResource ControlBorderTop}"
                     Command="{Binding SortCommand}"
@@ -57,11 +59,11 @@
             </Button>
         </Grid>
 
-        <TreeView Grid.Row="1"
+        <Grid Grid.Row="1">
+            <TreeView
                   KeyboardNavigation.TabNavigation="Cycle"
                   ItemsSource="{Binding Path=BaseCollection,Mode=TwoWay}"
                   HorizontalAlignment="Stretch"
-                  Width="Auto"
                   Margin="{StaticResource ElementBorderTop}"
                   x:Name="ScalarExplorer"
                   BorderThickness="0"
@@ -69,17 +71,17 @@
                   Style="{StaticResource VariablesTreeViewStyle}"
                   Grid.IsSharedSizeScope="True"
                   AutomationProperties.AutomationId="UI_VariableTreeView_AutoID">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type Models:DataListItemModel}" ItemsSource="{Binding Path=Children}">
-                    <Grid HorizontalAlignment="Stretch" Visibility="{Binding IsVisable,Converter={StaticResource BoolToVisibilityConverter}}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="38" SharedSizeGroup="B" />
-                            <ColumnDefinition Width="38" SharedSizeGroup="C" />
-                            <ColumnDefinition Width="Auto" SharedSizeGroup="A" />
-                        </Grid.ColumnDefinitions>
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type Models:DataListItemModel}" ItemsSource="{Binding Path=Children}">
+                        <Grid HorizontalAlignment="Stretch" Visibility="{Binding IsVisable,Converter={StaticResource BoolToVisibilityConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="38" SharedSizeGroup="B" />
+                                <ColumnDefinition Width="38" SharedSizeGroup="C" />
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="A" />
+                            </Grid.ColumnDefinitions>
 
-                        <customControls:VariableTextBox Grid.Column="0"
+                            <customControls:VariableTextBox Grid.Column="0"
                                                         LostFocus="NametxtFocusLost"
                                                         Background="{StaticResource WareWolfWhiteBrush}"
                                                         TextChanged="NametxtTextChanged"
@@ -92,11 +94,12 @@
                                                         ToolTip="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.ErrorMessage, UpdateSourceTrigger=PropertyChanged}"
                                                         Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.DisplayName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         IsEnabled="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.IsEditable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        IsUsed="{Binding IsUsed}"
                                                         AutomationProperties.AutomationId="UI_NameTextBox_AutoID">
-                            
-                        </customControls:VariableTextBox>
-                        
-                        <CheckBox IsTabStop="False"
+
+                            </customControls:VariableTextBox>
+
+                            <CheckBox IsTabStop="False"
                                   Grid.Column="1"
                                   HorizontalAlignment="Center"
                                   Margin="0,-1,0,-1"
@@ -105,8 +108,8 @@
                                   Checked="Inputcbx_OnChecked"
                                   Unchecked="Inputcbx_OnChecked"
                                   AutomationProperties.AutomationId="UI_IsInputCheckbox_AutoID" />
-                        
-                        <CheckBox IsTabStop="False"
+
+                            <CheckBox IsTabStop="False"
                                   Grid.Column="2"
                                   HorizontalAlignment="Center"
                                   IsChecked="{Binding Output}"
@@ -115,40 +118,42 @@
                                   Checked="Outputcbx_OnChecked"
                                   Unchecked="Outputcbx_OnChecked"
                                   AutomationProperties.AutomationId="UI_IsOutputCheckbox_AutoID" />
-                    </Grid>
-                </HierarchicalDataTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type Models:DataListHeaderItemModel}" ItemsSource="{Binding Path=Children}">
-                    <StackPanel>
-                        <Grid Height="24" Margin="{StaticResource ControlBorderRight}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition SharedSizeGroup="B" />
-                                <ColumnDefinition SharedSizeGroup="C" />
-                                <ColumnDefinition SharedSizeGroup="A" />
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding DisplayName}"
+                        </Grid>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type Models:DataListHeaderItemModel}" ItemsSource="{Binding Path=Children}">
+                        <StackPanel>
+                            <Grid Height="24" Margin="{StaticResource ControlBorderRight}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition SharedSizeGroup="B" />
+                                    <ColumnDefinition SharedSizeGroup="C" />
+                                    <ColumnDefinition SharedSizeGroup="A" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding DisplayName}"
                                            FontWeight="SemiBold"
                                            Foreground="Black" />
-                                <TextBlock Grid.Column="0"
+                                    <TextBlock Grid.Column="0"
                                            Text="Name"
                                            FontWeight="SemiBold"
                                            Foreground="Black" />
-                            </StackPanel>
-                            <TextBlock Grid.Column="1"
+                                </StackPanel>
+                                <TextBlock Grid.Column="1"
                                        Text="Input"
                                        HorizontalAlignment="Center"
                                        FontWeight="SemiBold"
                                        Foreground="Black" />
-                            <TextBlock Grid.Column="2"
+                                <TextBlock Grid.Column="2"
                                        Text="Output"
                                        HorizontalAlignment="Center"
                                        FontWeight="SemiBold"
                                        Foreground="Black" />
-                        </Grid>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.Resources>
-        </TreeView>
+                            </Grid>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+        </Grid>
+        
     </Grid>
 </UserControl>
