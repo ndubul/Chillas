@@ -51,7 +51,6 @@ namespace Warewolf.AcceptanceTesting.Variables
             {
                 var variableName = tableRow["Variable"];
                 var isUsedStringValue = tableRow["IsUsed"];
-                //var errorState = !string.IsNullOrEmpty(tableRow["Error State"]) && tableRow["Error State"].Equals("YES", StringComparison.OrdinalIgnoreCase);
                 var isInput = !string.IsNullOrEmpty(tableRow["Input"]) && tableRow["Input"].Equals("YES", StringComparison.OrdinalIgnoreCase);
                 var isOutput = !string.IsNullOrEmpty(tableRow["Output"]) && tableRow["Output"].Equals("YES", StringComparison.OrdinalIgnoreCase);
                 var ioDirection = enDev2ColumnArgumentDirection.None;
@@ -85,7 +84,6 @@ namespace Warewolf.AcceptanceTesting.Variables
                         var item = DataListItemModelFactory.CreateDataListModel(columnName, "", existingRecordSet);
                         item.Name = variableName;
                         item.IsUsed = isUsed;
-                        //item.HasError = errorState;
                         item.ColumnIODirection = ioDirection;
                         existingRecordSet.Children.Add(item);
                     }
@@ -96,7 +94,6 @@ namespace Warewolf.AcceptanceTesting.Variables
                     var item = DataListItemModelFactory.CreateDataListModel(displayName);
                     item.Name = variableName;
                     item.IsUsed = isUsed;
-                    //item.HasError = errorState;
                     item.ColumnIODirection = ioDirection;
                     variableListViewModel.ScalarCollection.Add(item);
                 }
@@ -174,28 +171,6 @@ namespace Warewolf.AcceptanceTesting.Variables
         {
             var sourceControl = ScenarioContext.Current.Get<DataListView>(Utils.ViewNameKey);
             sourceControl.ExecuteCommand(command);
-//            
-//            if (DataListUtil.IsValueRecordset(command))
-//            {
-//                var recSetName = DataListUtil.ExtractRecordsetNameFromValue(command);
-//                var columnName = DataListUtil.ExtractFieldNameOnlyFromValue(command);
-//
-//                var existingRecordSet = sourceControl.RecsetCollection.FirstOrDefault(model => model.Name.Equals(recSetName, StringComparison.OrdinalIgnoreCase));
-//                if (existingRecordSet != null)
-//                {
-//                    if (!string.IsNullOrEmpty(columnName))
-//                    {
-//                        existingRecordSet.Children.Remove(DataListItemModelFactory.CreateDataListModel(columnName, "", existingRecordSet));
-//                        Assert.AreNotSame(existingRecordSet, sourceControl);
-//                    }
-//                }
-//            }
-//            else
-//            {
-//                var variableListViewScalarCollection = sourceControl.ScalarCollection;
-//                sourceControl.ScalarCollection.Remove(DataListItemModelFactory.CreateDataListModel(command));
-//                Assert.AreNotSame(variableListViewScalarCollection, sourceControl);
-//            }
         }
 
 
@@ -304,7 +279,8 @@ namespace Warewolf.AcceptanceTesting.Variables
         public void GivenIRemoveVariable(string variableName)
         {
             var sourceControl = ScenarioContext.Current.Get<DataListViewModel>(Utils.ViewModelNameKey);
-            Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableName));
+            var variableListViewScalarCollection = sourceControl.ScalarCollection.FirstOrDefault(model => model.Name == variableName);
+            Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableListViewScalarCollection));
         }
 
         [Given(@"I change variable Name from ""(.*)"" to ""(.*)""")]
