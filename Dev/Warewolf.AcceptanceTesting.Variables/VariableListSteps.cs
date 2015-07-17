@@ -126,19 +126,29 @@ namespace Warewolf.AcceptanceTesting.Variables
         public void ThenIClickDeleteFor(string variableName)
         {
             var sourceControl = ScenarioContext.Current.Get<DataListViewModel>(Utils.ViewModelNameKey);
+            var sourceViewControl = ScenarioContext.Current.Get<DataListView>(Utils.ViewNameKey);
             string varName;
+            string parentName;
             if (DataListUtil.IsValueRecordset(variableName))
             {
                 if (variableName.Contains("."))
                 {
                     varName = variableName.Substring(variableName.IndexOf(".", StringComparison.Ordinal) + 1);
-                    var variableListViewRecsetCollection = sourceControl.RecsetCollection.SelectMany(a => a.Children).FirstOrDefault(model => model.Name == varName);
+                    parentName = variableName.Substring(0, variableName.IndexOf("(", StringComparison.Ordinal));
+                    var variableListViewRecsetCollection = sourceControl.RecsetCollection.SelectMany(a => a.Children).FirstOrDefault(model => model.Name == varName && model.Parent.Name == parentName);
                     Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableListViewRecsetCollection));
+                    sourceViewControl.ExecuteCommand(variableName);
                 }
                 else
                 {
-                    var variableListViewRecsetCollection = sourceControl.RecsetCollection.FirstOrDefault(model => model.Name + "()" == variableName);
+                    varName = variableName.Contains("()") ? variableName.Replace("()", "") : variableName;
+                    var variableListViewRecsetCollection = sourceControl.RecsetCollection.FirstOrDefault(model => model.LastIndexedName == varName);
+                    if (variableListViewRecsetCollection != null && variableListViewRecsetCollection.IsUsed)
+                    {
+                        variableListViewRecsetCollection.IsUsed = false;
+                    }
                     Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableListViewRecsetCollection));
+                    sourceViewControl.ExecuteCommand(variableName);
                 }
             }
             else
@@ -148,11 +158,13 @@ namespace Warewolf.AcceptanceTesting.Variables
                     varName = variableName.Substring(variableName.IndexOf(".", StringComparison.Ordinal) + 1);
                     var variableListViewScalarCollection = sourceControl.ScalarCollection.SelectMany(a => a.Children).FirstOrDefault(model => model.Name == varName);
                     Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableListViewScalarCollection));
+                    sourceViewControl.ExecuteCommand(variableName);
                 }
                 else
                 {
                     var variableListViewScalarCollection = sourceControl.ScalarCollection.FirstOrDefault(model => model.Name == variableName);
                     Assert.IsTrue(sourceControl.DeleteCommand.CanExecute(variableListViewScalarCollection));
+                    sourceViewControl.ExecuteCommand(variableName);
                 }
             }
         }

@@ -206,6 +206,18 @@ namespace Dev2.Studio.Views.DataList
             {
                 DeleteButton.Command.Execute(null);
             }
+            if (command.Equals("lr().a", StringComparison.OrdinalIgnoreCase))
+            {
+                DeleteButton.Command.Execute(null);
+            }
+            if (command.Equals("[[a]]", StringComparison.OrdinalIgnoreCase))
+            {
+                DeleteButton.Command.Execute(null);
+            }
+            if (command.Equals("mr()", StringComparison.OrdinalIgnoreCase))
+            {
+                DeleteButton.Command.Execute(null);
+            }
         }
     }
 }

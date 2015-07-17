@@ -157,7 +157,7 @@ Scenario: Variables removed from design surface and list
     | Variable    | Note              | Input | Output | IsUsed |
     | [[rec().a]] | This is recordset |       | YES    | YES    |
     | [[rec().b]] |                   |       |        |        |
-    | [[mr()]]    |                   |       |        | YES    |
+    | [[mr()]]    |                   |       |        |        |
     | [[Var]]     |                   | YES   |        | YES    |
     | [[a]]       |                   |       |        |        |
     | [[lr().a]]  |                   |       |        |        |
@@ -173,7 +173,7 @@ Scenario: Variables removed from design surface and list
 	| mr()           |                  |                  |       |        |
 	| lr()           | YES              |                  |       |        |
 	| lr().a         | YES              |                  |       |        |
-	And I click delete for "[[Var]]"
+	And I click delete for "[[a]]"
 	And I click delete for "mr()"
 	And the Variable Names are
 	| Variable Name | Delete IsEnabled | Note Highlighted | Input | Output |

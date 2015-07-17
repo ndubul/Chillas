@@ -740,7 +740,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         "",
-                        "YES"});
+                        ""});
             table22.AddRow(new string[] {
                         "[[Var]]",
                         "",
@@ -828,7 +828,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 168
  testRunner.And("the Recordset Names are", ((string)(null)), table24, "And ");
 #line 176
- testRunner.And("I click delete for \"[[Var]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click delete for \"[[a]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 177
  testRunner.And("I click delete for \"mr()\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
