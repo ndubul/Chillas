@@ -34,6 +34,7 @@ using Dev2.Studio.Core.Interfaces.DataList;
 using Dev2.Studio.Core.Messages;
 using Dev2.Studio.Core.Models.DataList;
 using Dev2.Studio.Core.ViewModels.Base;
+using Microsoft.Practices.Prism.Commands;
 using ServiceStack.Common.Extensions;
 
 // ReSharper disable CheckNamespace
@@ -43,13 +44,13 @@ namespace Dev2.Studio.ViewModels.DataList
     {
         #region Fields
 
-        private DelegateCommand _addRecordsetCommand;
+        private Runtime.Configuration.ViewModels.Base.DelegateCommand _addRecordsetCommand;
         private ObservableCollection<DataListHeaderItemModel> _baseCollection;
         private RelayCommand _findUnusedAndMissingDataListItems;
         private ObservableCollection<IDataListItemModel> _recsetCollection;
         private ObservableCollection<IDataListItemModel> _scalarCollection;
         private string _searchText;
-        private RelayCommand _sortCommand;
+        private DelegateCommand<IDataListItemModel> _sortCommand;
         private bool _viewSortDelete;
 
         #endregion Fields
@@ -208,7 +209,7 @@ namespace Dev2.Studio.ViewModels.DataList
         public DataListViewModel(IEventAggregator eventPublisher)
             : base(eventPublisher)
         {
-            DeleteCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand<IDataListItemModel>(item =>
+            DeleteCommand = new DelegateCommand<IDataListItemModel>(item =>
             {
                 RemoveDataListItem(item);
                 WriteToResourceModel();
@@ -235,16 +236,16 @@ namespace Dev2.Studio.ViewModels.DataList
             get
             {
                 return _addRecordsetCommand ??
-                       (_addRecordsetCommand = new DelegateCommand(method => AddRecordSet()));
+                       (_addRecordsetCommand = new Runtime.Configuration.ViewModels.Base.DelegateCommand(method => AddRecordSet()));
             }
         }
 
-        public RelayCommand SortCommand
+        public DelegateCommand<IDataListItemModel> SortCommand
         {
             get
             {
                 return _sortCommand ??
-                       (_sortCommand = new RelayCommand(method => SortItems(), p => CanSortItems));
+                       (_sortCommand = new DelegateCommand<IDataListItemModel>(method => SortItems(), p => CanSortItems));
             }
         }
 
@@ -258,7 +259,7 @@ namespace Dev2.Studio.ViewModels.DataList
             }
         }
 
-        public Microsoft.Practices.Prism.Commands.DelegateCommand<IDataListItemModel> DeleteCommand { get; set; }
+        public DelegateCommand<IDataListItemModel> DeleteCommand { get; set; }
 
         #endregion Commands
 
@@ -918,13 +919,11 @@ namespace Dev2.Studio.ViewModels.DataList
             IList<IDataListItemModel> newScalarCollection;
             if(ascending)
             {
-                newScalarCollection = ScalarCollection.OrderBy(c => c.DisplayName)
-                                                                                .Where(c => !c.IsBlank).ToList();
+                newScalarCollection = ScalarCollection.OrderBy(c => c.DisplayName).Where(c => !c.IsBlank).ToList();
             }
             else
             {
-                newScalarCollection = ScalarCollection.OrderByDescending(c => c.DisplayName)
-                                                                                .Where(c => !c.IsBlank).ToList();
+                newScalarCollection = ScalarCollection.OrderByDescending(c => c.DisplayName).Where(c => !c.IsBlank).ToList();
             }
             ScalarCollection.Clear();
             foreach (var item in newScalarCollection)
