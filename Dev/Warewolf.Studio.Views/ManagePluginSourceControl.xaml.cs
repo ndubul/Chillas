@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Dev2.Common.Interfaces;
@@ -17,6 +19,7 @@ namespace Warewolf.Studio.Views
         public ManagePluginSourceControl()
         {
             InitializeComponent();
+
            // ExplorerTree.SelectedNodesCollectionChanged+=ExplorerTreeOnSelectedNodesCollectionChanged;
         }
 
@@ -160,6 +163,20 @@ namespace Warewolf.Studio.Views
         public void FilterItems()
         {
             var count = ExplorerTree.Nodes.Count;
+        }
+
+        void ExplorerTree_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var menuTree = sender as XamDataTree;
+            if(menuTree != null)
+            {
+                var items = menuTree.ItemsSource;
+            }
+            selectNode(ExplorerTree.Nodes, "KEYTOSELECT");
+        }
+        void selectNode(XamDataTreeNodesCollection nodes, string nodeKey)
+        {
+            
         }
     }
 }

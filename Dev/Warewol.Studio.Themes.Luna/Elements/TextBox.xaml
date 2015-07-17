@@ -677,10 +677,7 @@
                             <Setter Property="Visibility" TargetName="ClearSearchButton" Value="Hidden" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
-
                 </ControlTemplate>
-
-
             </Setter.Value>
         </Setter>
     </Style>
@@ -969,6 +966,15 @@
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Visibility" TargetName="LabelText" Value="Hidden" />
                             <Setter Property="BorderBrush" TargetName="PART_DeleteIconBorder" Value="{StaticResource TextBoxFocusedBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelectionActive" Value="True">
+                            <Setter Property="BorderBrush" TargetName="PART_DeleteIconBorder" Value="{StaticResource TextBoxFocusedBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelectionActive" Value="False">
+                            <Setter Property="BorderBrush" TargetName="PART_DeleteIconBorder" Value="{StaticResource TextBoxBorderBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="False">
+                            <Setter Property="BorderBrush" TargetName="PART_DeleteIconBorder" Value="{StaticResource TextBoxBorderBrush}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

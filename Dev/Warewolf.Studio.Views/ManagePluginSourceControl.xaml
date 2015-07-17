@@ -111,6 +111,7 @@
                                         DisplayMemberPath="Name"
                                         IsExpandedMemberPath="IsExpanded"
                                         EnsureNodeExpansion="True"
+                                        Loaded="ExplorerTree_OnLoaded"
                                         NodeExpansionChanging="ExplorerTree_OnNodeExpansionChanging"
                                         NodeLineVisibility="Hidden" >
                             <ig:XamDataTree.EditingSettings>
