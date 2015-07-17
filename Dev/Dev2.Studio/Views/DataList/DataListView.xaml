@@ -42,6 +42,8 @@
             <TextBlock Grid.Column="0" Text="Delete changes"></TextBlock>
             <Button Grid.Column="1"
                     x:Name="DeleteButton"
+                    Focusable="False"
+                    FocusManager.FocusedElement="{Binding ElementName=VariableInput}"
                     AutomationProperties.AutomationId="UI_AddRemovebtn_AutoID"
                     Margin="{StaticResource ControlBorderTopRight}"
                     Command="{Binding FindUnusedAndMissingCommand}"
@@ -51,6 +53,7 @@
             <TextBlock Grid.Column="2" Text="Sort list"></TextBlock>
             <Button Grid.Column="3"
                     x:Name="SortButton"
+                    Focusable="False"
                     AutomationProperties.AutomationId="UI_Sortbtn_AutoID"
                     Margin="{StaticResource ControlBorderTop}"
                     Command="{Binding SortCommand}"
@@ -59,7 +62,7 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Focusable="True">
             <TreeView KeyboardNavigation.TabNavigation="Cycle"
                   ItemsSource="{Binding Path=BaseCollection,Mode=TwoWay}"
                   HorizontalAlignment="Stretch"
@@ -86,7 +89,9 @@
                                                                 HorizontalAlignment="Stretch"
                                                                 MinWidth="75"
                                                                 Height="22"
+                                                                x:Name="VariableInput"
                                                                 AcceptsReturn="True"
+                                                                Focusable="True"
                                                                 MaxWidth="{Binding ElementName=varsScrolBar,Path=ActualWidth}"
                                                                 DeleteCommand="{Binding DataContext.DeleteCommand,ElementName=DataListViewControl}"
                                                                 Style="{StaticResource VariableTextboxStyle}"

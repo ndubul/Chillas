@@ -34,7 +34,6 @@ using Dev2.Studio.Core.Interfaces.DataList;
 using Dev2.Studio.Core.Messages;
 using Dev2.Studio.Core.Models.DataList;
 using Dev2.Studio.Core.ViewModels.Base;
-using Microsoft.Practices.Prism.Commands;
 using ServiceStack.Common.Extensions;
 
 // ReSharper disable CheckNamespace
@@ -44,13 +43,13 @@ namespace Dev2.Studio.ViewModels.DataList
     {
         #region Fields
 
-        private Runtime.Configuration.ViewModels.Base.DelegateCommand _addRecordsetCommand;
+        private DelegateCommand _addRecordsetCommand;
         private ObservableCollection<DataListHeaderItemModel> _baseCollection;
         private RelayCommand _findUnusedAndMissingDataListItems;
         private ObservableCollection<IDataListItemModel> _recsetCollection;
         private ObservableCollection<IDataListItemModel> _scalarCollection;
         private string _searchText;
-        private DelegateCommand<IDataListItemModel> _sortCommand;
+        private RelayCommand _sortCommand;
         private bool _viewSortDelete;
 
         #endregion Fields
@@ -209,9 +208,9 @@ namespace Dev2.Studio.ViewModels.DataList
         public DataListViewModel(IEventAggregator eventPublisher)
             : base(eventPublisher)
         {
-            DeleteCommand = new DelegateCommand<IDataListItemModel>(item =>
+            DeleteCommand = new RelayCommand(item =>
             {
-                RemoveDataListItem(item);
+                RemoveDataListItem(item as IDataListItemModel);
                 WriteToResourceModel();
             }, CanDelete);
             ClearSearchTextCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(() => SearchText = "");
@@ -236,16 +235,16 @@ namespace Dev2.Studio.ViewModels.DataList
             get
             {
                 return _addRecordsetCommand ??
-                       (_addRecordsetCommand = new Runtime.Configuration.ViewModels.Base.DelegateCommand(method => AddRecordSet()));
+                       (_addRecordsetCommand = new DelegateCommand(method => AddRecordSet()));
             }
         }
 
-        public DelegateCommand<IDataListItemModel> SortCommand
+        public RelayCommand SortCommand
         {
             get
             {
                 return _sortCommand ??
-                       (_sortCommand = new DelegateCommand<IDataListItemModel>(method => SortItems(), p => CanSortItems));
+                       (_sortCommand = new RelayCommand(method => SortItems(), p => CanSortItems));
             }
         }
 
@@ -259,7 +258,7 @@ namespace Dev2.Studio.ViewModels.DataList
             }
         }
 
-        public DelegateCommand<IDataListItemModel> DeleteCommand { get; set; }
+        public RelayCommand DeleteCommand { get; set; }
 
         #endregion Commands
 

@@ -972,7 +972,7 @@
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsFocused" Value="False"/>
+                                <Condition Property="IsFocused" Value="True"/>
                                 <Condition Property="IsUsed" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Visibility" TargetName="LabelText" Value="Visible" />
