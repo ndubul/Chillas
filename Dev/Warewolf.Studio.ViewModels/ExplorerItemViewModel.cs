@@ -150,7 +150,7 @@ namespace Warewolf.Studio.ViewModels
                IsExpanded = true;
                 var id = Guid.NewGuid();
                 var name = GetChildNameFromChildren();
-				_explorerRepository.CreateFolder(ResourceId, name, id);
+				_explorerRepository.CreateFolder(ResourcePath, name, id);
                 var child = new ExplorerItemViewModel(Server,this)
                {
                    ResourceName = name,
@@ -170,7 +170,7 @@ namespace Warewolf.Studio.ViewModels
                    CanCreateWorkflowService = CanCreateWorkflowService 
                   
                };
-				child.SetFromServer(Server.Permissions.FirstOrDefault(a => a.IsServer));
+				//child.SetFromServer(Server.Permissions.FirstOrDefault(a => a.IsServer));
                
                AddChild(child);
                 child.IsSelected = true;
@@ -786,7 +786,8 @@ namespace Warewolf.Studio.ViewModels
                 return Resources.Languages.Core.ExplorerItemEditToolTip;
             }
         }
-//        public IShellViewModel ShellViewModel
+	    public string ResourcePath { get; set; }
+	    //        public IShellViewModel ShellViewModel
 //        {
 //            get
 //            {

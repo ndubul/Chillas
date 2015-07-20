@@ -1,9 +1,12 @@
 ﻿using System;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Hosting;
 using Dev2.Common.Interfaces.Infrastructure;
+using Dev2.Communication;
 using Dev2.Controller;
+using Dev2.Explorer;
 
 namespace Warewolf.Studio.ServerProxyLayer
 {
@@ -22,15 +25,21 @@ namespace Warewolf.Studio.ServerProxyLayer
         /// <summary>
         /// Add a folder to a warewolf server
         /// </summary>
-        /// <param name="parentGuid"></param>
+        /// <param name="path"></param>
         /// <param name="name"></param>
         /// <param name="id"></param>
-        public void AddFolder(Guid parentGuid, string name, Guid id)
+        public void AddFolder(string path, string name, Guid id)
         {
             var controller = CommunicationControllerFactory.CreateController("AddFolderService");
-            controller.AddPayloadArgument("name", name);
-            controller.AddPayloadArgument("parentGuid", parentGuid.ToString());
-            controller.AddPayloadArgument("id", id.ToString());
+            string resourcePath = String.IsNullOrEmpty(path) ? name : string.Format("{0}\\{1}", path, name);
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            ServerExplorerItem explorerItemModel = new ServerExplorerItem
+            {
+                DisplayName = name,
+                ResourceType = ResourceType.Folder,
+                ResourcePath = resourcePath
+            };
+            controller.AddPayloadArgument("itemToAdd", serialiser.SerializeToBuilder(explorerItemModel));
             var result = controller.ExecuteCommand<IExplorerRepositoryResult>(Connection, GlobalConstants.ServerWorkspaceID);
             if(result.Status != ExecStatus.Success)
             {

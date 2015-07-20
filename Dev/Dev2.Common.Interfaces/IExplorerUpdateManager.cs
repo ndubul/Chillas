@@ -10,10 +10,10 @@ namespace Dev2.Common.Interfaces
         /// <summary>
         /// Add a folder to a warewolf server
         /// </summary>
-        /// <param name="parentGuid"></param>
+        /// <param name="path"></param>
         /// <param name="name"></param>
         /// <param name="id"></param>
-        void AddFolder(Guid parentGuid, string name, Guid id);
+        void AddFolder(string path, string name, Guid id);
         /// <summary>
         /// delete a folder from a warewolf server
         /// </summary>

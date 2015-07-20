@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Explorer;
@@ -108,7 +107,7 @@ namespace Warewolf.Studio.ViewModels
                 IsExpanded = true;
                 var id = Guid.NewGuid();
                 var name = GetChildNameFromChildren();
-			Server.ExplorerRepository.CreateFolder(GlobalConstants.ServerWorkspaceID, name, id);
+                Server.ExplorerRepository.CreateFolder("root", name, id);
                 var child = new ExplorerItemViewModel(Server,null)
                {
                    ResourceName = name,
@@ -521,6 +520,7 @@ namespace Warewolf.Studio.ViewModels
                     ResourceName = explorerItem.DisplayName,
                     ResourceId = explorerItem.ResourceId,
                     ResourceType = explorerItem.ResourceType,
+                    ResourcePath = explorerItem.ResourcePath
                     //Inputs = explorerItem.Inputs,
                     //Outputs = explorerItem.Outputs
                 };

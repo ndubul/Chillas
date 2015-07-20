@@ -14,6 +14,6 @@ namespace Dev2.Common.Interfaces
 //
 //        IRollbackResult Rollback(Guid resourceId, string version);
 
-        void CreateFolder(Guid parentGuid, string name, Guid id);
+        void CreateFolder(string parentPath, string name, Guid id);
     }
 }
