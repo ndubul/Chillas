@@ -108,7 +108,7 @@
                                                     <Setter Property="Background" Value="{StaticResource DataListItemName}" />
                                                 </Trigger>
                                                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}, Path=DataContext.HasError, UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                                    <Setter Property="BorderBrush" Value="{StaticResource ValidationErrorElement}" />
+                                                    <Setter Property="Foreground" Value="{StaticResource ValidationErrorElement}" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -116,16 +116,6 @@
                                     <i:Interaction.Behaviors>
                                         <behaviors:TextboxSelectAllOnFocusBehavior />
                                     </i:Interaction.Behaviors>
-                                    <Validation.ErrorTemplate>
-                                        <ControlTemplate>
-                                            <DockPanel>
-                                                <Border BorderBrush="Red" BorderThickness="1">
-                                                    <AdornedElementPlaceholder x:Name="controlWithError"/>
-                                                </Border>
-                                                <TextBlock Foreground="Red" FontSize="20" FontFamily="Segoe UI" Margin="3,0,0,0" >!</TextBlock>
-                                            </DockPanel>
-                                        </ControlTemplate>
-                                    </Validation.ErrorTemplate>
                                 </customControls:VariableTextBox>
                             </ScrollViewer>
 
