@@ -69,9 +69,9 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //           return  VersionManager.RollbackTo(resourceId,version);
 //        }
 //
-        public void CreateFolder(Guid parentGuid, string name, Guid id)
+        public void CreateFolder(string parentPath, string name, Guid id)
         {
-            UpdateManagerProxy.AddFolder(parentGuid,name,id);
+            UpdateManagerProxy.AddFolder(parentPath, name, id);
         }
 //
 //        #endregion
