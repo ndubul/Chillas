@@ -9,7 +9,6 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
-
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -115,6 +114,11 @@ namespace Dev2.Runtime.WebServer.Handlers
                             dataObject.ServiceName = serviceName;
                         }
 
+                        if(typeOf.Equals("api", StringComparison.OrdinalIgnoreCase))
+                        {
+                            dataObject.ReturnType = EmitionTypes.SWAGGER;
+                        }
+
                     }
                 }
                 else
@@ -197,6 +201,10 @@ namespace Dev2.Runtime.WebServer.Handlers
                             else if (dataObject.ReturnType == EmitionTypes.XML)
                             {
                                 executePayload = ExecutionEnvironmentUtils.GetXmlOutputFromEnvironment(dataObject, resource.DataList.ToString());
+                            }else if(dataObject.ReturnType == EmitionTypes.SWAGGER)
+                            {
+                                formatter = DataListFormat.CreateFormat("SWAGGER", EmitionTypes.SWAGGER, "application/json");
+                                executePayload = ExecutionEnvironmentUtils.GetSwaggerOutputForService(resource, resource.DataList.ToString());
                             }
                             dataObject.Environment.AddError(allErrors.MakeDataListReady());
                         }

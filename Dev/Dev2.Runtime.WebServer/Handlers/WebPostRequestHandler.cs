@@ -9,7 +9,6 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
-
 using System;
 using System.Threading;
 using Dev2.Runtime.WebServer.TransferObjects;
@@ -50,7 +49,7 @@ namespace Dev2.Runtime.WebServer.Handlers
             }
             // Execute in its own thread to give proper context ;)
             Thread.CurrentPrincipal = ctx.Request.User;
-            requestTO.Variables.Add(ctx.Request.BoundVariables);
+           // requestTO.Variables.Add(ctx.Request.BoundVariables);
             var responseWriter = CreateForm(requestTO, serviceName, workspaceID, ctx.FetchHeaders(), ctx.Request.User);
             ctx.Send(responseWriter);
 

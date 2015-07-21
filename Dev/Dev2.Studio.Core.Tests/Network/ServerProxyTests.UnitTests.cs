@@ -9,6 +9,13 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Security;
 using Dev2.Communication;
@@ -20,13 +27,6 @@ using Dev2.SignalR.Wrappers;
 using Dev2.SignalR.Wrappers.New;
 using Microsoft.AspNet.SignalR.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 // ReSharper disable InconsistentNaming
 namespace Dev2.Core.Tests.Network
@@ -153,7 +153,7 @@ namespace Dev2.Core.Tests.Network
             Dev2JsonSerializer dev = new Dev2JsonSerializer();
             var output = dev.SerializeToBuilder(item);
             PrivateObject p = new PrivateObject(serverProxy);
-            p.Invoke("OnItemAddedMessageReceived", new object[] { output.ToString() });
+            p.Invoke("OnItemAddedMessageReceived", output.ToString());
             Assert.AreEqual(ItemGuid,serverGuid);
             //------------Assert Results-------------------------
             var subscription = serverProxy.EsbProxy.Subscribe("SendDebugState");

@@ -79,7 +79,7 @@ namespace Dev2.Common.Interfaces.Diagnostics.Debug
         /// <summary>
         ///     Gets or sets the server.
         /// </summary>
-        string Server { get; set; }
+        string Server { get;  set; }
 
         /// <summary>
         ///     Gets or sets the server ID.
@@ -155,5 +155,7 @@ namespace Dev2.Common.Interfaces.Diagnostics.Debug
         bool IsFinalStep();
 
         bool IsFirstStep();
+
+        bool IsDurationVisible { get; set; }
     }
 }

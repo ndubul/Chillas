@@ -10,12 +10,12 @@
 //  </auto-generated>
 // ------------------------------------------------------------------------------
 #region Designer generated code
+
+using TechTalk.SpecFlow;
+
 #pragma warning disable
 namespace Dev2.Activities.Specs.Toolbox.Utility.Email
 {
-    using TechTalk.SpecFlow;
-    
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
@@ -49,7 +49,7 @@ namespace Dev2.Activities.Specs.Toolbox.Utility.Email
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "Email")))
             {
-                Dev2.Activities.Specs.Toolbox.Utility.Email.EmailFeature.FeatureSetup(null);
+                FeatureSetup(null);
             }
         }
         
@@ -560,6 +560,11 @@ this.ScenarioSetup(scenarioInfo);
                         "To",
                         "Subject",
                         "Body"});
+            table21.AddRow(new string[] {
+                        "[[me(-1).from]] =",
+                        "me@freemail.com",
+                        "Just testing",
+                        "testing email from the cool specflow"});
 #line 164
  testRunner.And("the debug inputs as", ((string)(null)), table21, "And ");
 #line hidden

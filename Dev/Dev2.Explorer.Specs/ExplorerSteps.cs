@@ -9,11 +9,11 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Hosting;
 using Dev2.Common.Interfaces.Security;
@@ -83,7 +83,7 @@ namespace Dev2.Explorer.Specs
                 var childName = tableRow["Child"];
                 var type = tableRow["Type"];
 
-                Common.Interfaces.Data.ResourceType resourceType;
+                ResourceType resourceType;
                 Enum.TryParse(type, out resourceType);
                 var eim = new ExplorerItemModel
                 {
@@ -122,7 +122,7 @@ namespace Dev2.Explorer.Specs
                 var childName = tableRow["Child"];
                 var type = tableRow["Type"];
 
-                Common.Interfaces.Data.ResourceType resourceType;
+                ResourceType resourceType;
                 Enum.TryParse(type, out resourceType);
                 var eim = new ExplorerItemModel
                 {
@@ -232,7 +232,7 @@ namespace Dev2.Explorer.Specs
             ScenarioContext.Current.TryGetValue("folderName", out folderName);
             var folder = item.Children.FirstOrDefault(a => a.DisplayName == folderName);
             Assert.IsNotNull(folder);
-            Assert.AreEqual(folder.ResourceType, Common.Interfaces.Data.ResourceType.Folder);
+            Assert.AreEqual(folder.ResourceType, ResourceType.Folder);
             Assert.AreEqual(folder.Children.Count, 0);
 
         }
@@ -274,10 +274,13 @@ namespace Dev2.Explorer.Specs
             var item = repository.Load(Guid.Empty)
                                 .Children.First(a => a.DisplayName == "ExplorerSpecsRenameItem")
                       .Children.FirstOrDefault(a => a.DisplayName == itemToRename);
+            if(item != null)
+            {
             item.DisplayName = p1;
 
             var result = repository.RenameItem(item, p1, Guid.Empty);
             Assert.AreEqual(result.Status, ExecStatus.Success);
+            }
             var explorerItemModel = repository.Load(Guid.Empty);
             ScenarioContext.Current.Add("localhost", explorerItemModel);
             ScenarioContext.Current.Add("newName", explorerItemModel);

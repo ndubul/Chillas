@@ -38,7 +38,6 @@ namespace Dev2.DynamicServices
         #region Class Members
 
         private readonly XNamespace _dSfDataObjectNs = XNamespace.Get("http://dev2.co.za/");
-        private ErrorResultTO _errors;
         private string _parentServiceName = string.Empty;
         private string _parentWorkflowInstanceId = string.Empty;
         private readonly Stack<IExecutionEnvironment> _environments; 
@@ -95,6 +94,7 @@ namespace Dev2.DynamicServices
                     if (Guid.TryParse(ExtractValue(xe, "EnvironmentID"), out environmentId))
                     {
                         EnvironmentID = environmentId;
+                        DebugEnvironmentId = environmentId;
                     }
 
                     bool isOnDemandSimulation = false;
@@ -160,22 +160,23 @@ namespace Dev2.DynamicServices
                     // finally set raw payload
                     RawPayload = new StringBuilder(xmldata);
                 }
-            }
-            else
-            {
-                // ReSharper disable ConditionIsAlwaysTrueOrFalse
-                if (xmldata == null)
-                    // ReSharper restore ConditionIsAlwaysTrueOrFalse
-                {
-                    xmldata = "NULL";
-                }
-
-                Errors.AddError("Failed to parse XML INPUT [ " + xmldata + " ]");
-            }
+            }            
 
             if (!IsDebug && !string.IsNullOrEmpty(rawPayload))
             {
                 RawPayload = new StringBuilder(rawPayload);
+            }
+        }
+
+        public Guid DebugEnvironmentId
+        {
+            get
+            {
+                return _debugEnvironmentId;
+            }
+            set
+            {
+                _debugEnvironmentId = value;
             }
         }
 
@@ -192,6 +193,7 @@ namespace Dev2.DynamicServices
         #region Properties
 
         private StringBuilder _rawPayload;
+        Guid _debugEnvironmentId;
         public ServiceAction ExecuteAction { get; set; }
         public string ParentWorkflowXmlData { get; set; }
         public Guid DebugSessionID { get; set; }
@@ -232,6 +234,7 @@ namespace Dev2.DynamicServices
         }
 
         public IEsbChannel EsbChannel { get; set; }
+        public DateTime StartTime { get; set; }
 
         public int ForEachNestingLevel { get; set; }
 
@@ -251,11 +254,11 @@ namespace Dev2.DynamicServices
         public Guid ServerID { get; set; }
         public Guid ResourceID { get; set; }
 
-        public ErrorResultTO Errors
-        {
-            get { return _errors ?? (_errors = new ErrorResultTO()); }
-            set { _errors = value; }
-        }
+        //public ErrorResultTO Errors
+        //{
+        //    get { return _errors ?? (_errors = new ErrorResultTO()); }
+        //    set { _errors = value; }
+        //}
 
         public int NumberOfSteps { get; set; }
         public IPrincipal ExecutingUser { get; set; }
@@ -339,7 +342,7 @@ namespace Dev2.DynamicServices
             result.DatalistInMergeID = DatalistInMergeID;
             result.DatalistInMergeType = DatalistInMergeType;
             result.EnvironmentID = EnvironmentID;
-            result.Errors = Errors;
+            result.DebugEnvironmentId = DebugEnvironmentId;
             result.ExecutionCallbackID = ExecutionCallbackID;
             result.ExecutionOrigin = ExecutionOrigin;
             result.ExecutionOriginDescription = ExecutionOriginDescription;
@@ -377,6 +380,7 @@ namespace Dev2.DynamicServices
             result.Environment = Environment;
             result.EsbChannel = EsbChannel;
             result.ExecutionToken = ExecutionToken;
+          
             return result;
         }
 

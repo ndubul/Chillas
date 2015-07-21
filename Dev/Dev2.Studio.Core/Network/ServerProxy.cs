@@ -15,6 +15,7 @@ using System.Net;
 using System.Network;
 using System.Security.Principal;
 using System.Text;
+using System.Threading.Tasks;
 using Dev2.Common;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Infrastructure.Events;
@@ -25,13 +26,11 @@ using Dev2.Services.Security;
 using Dev2.SignalR.Wrappers;
 using Dev2.Studio.Core.Interfaces;
 
-
 namespace Dev2.Network
 {
     public class ServerProxy :  IEnvironmentConnection
     {
         IEnvironmentConnection _wrappedConnection;
-        IEnvironmentConnection _fallbackConnection;
 
 
         
@@ -40,7 +39,7 @@ namespace Dev2.Network
         {
            _wrappedConnection = new ServerProxyWithoutChunking(serverUri);
 
-            _fallbackConnection = new ServerProxyWithChunking(serverUri);
+            
             SetupPassthroughEvents();
         }
 
@@ -48,18 +47,15 @@ namespace Dev2.Network
         {
             _wrappedConnection.PermissionsChanged += (sender, args) => RaisePermissionsChanged();
             _wrappedConnection.PermissionsModified += (sender, list) => RaisePermissionsModified(list);
-            _wrappedConnection.NetworkStateChanged += (sender, args) => OnNetworkStateChanged(args);
-            _fallbackConnection.PermissionsChanged += (sender, args) => RaisePermissionsChanged();
-            _fallbackConnection.PermissionsModified += (sender, list) => RaisePermissionsModified(list);
-            _fallbackConnection.NetworkStateChanged += (sender, args) => OnNetworkStateChanged(args);
+            _wrappedConnection.NetworkStateChanged += (sender, args) => OnNetworkStateChanged(args);           
         }
 
+        // ReSharper disable MemberCanBeProtected.Global
         public ServerProxy(string serverUri, ICredentials credentials, IAsyncWorker worker)
+            // ReSharper restore MemberCanBeProtected.Global
         {
 
             _wrappedConnection = new ServerProxyWithoutChunking(serverUri,credentials,worker);
-
-            _fallbackConnection = new ServerProxyWithChunking(serverUri, credentials, worker);
             SetupPassthroughEvents();
 
         }
@@ -71,7 +67,6 @@ namespace Dev2.Network
         public ServerProxy(string webAddress, string userName, string password)
         {
             _wrappedConnection = new ServerProxyWithoutChunking(webAddress, userName, password);
-            _fallbackConnection = new ServerProxyWithChunking(webAddress, userName, password);
             SetupPassthroughEvents();
         }
 
@@ -85,7 +80,6 @@ namespace Dev2.Network
         public void Dispose()
         {
             _wrappedConnection.Dispose();
-            _fallbackConnection.Dispose();
         }
 
         #endregion
@@ -172,6 +166,10 @@ namespace Dev2.Network
             return _wrappedConnection.ExecuteCommand(xmlRequest,workspaceId,dataListId);
         }
 
+        public async Task<StringBuilder> ExecuteCommandAsync(StringBuilder xmlRequest, Guid workspaceId, Guid dataListId)
+        {
+            return await _wrappedConnection.ExecuteCommandAsync(xmlRequest, workspaceId, dataListId);
+        }
         public IHubProxyWrapper EsbProxy
         {
             get
@@ -214,12 +212,17 @@ namespace Dev2.Network
             try
             {
                 _wrappedConnection.Connect(_wrappedConnection.ID);
+           
             }
              catch( FallbackException)
             {
-                Dev2Logger.Log.Info("Falling Back to previos signal r client");
-                _wrappedConnection = _fallbackConnection;
+                Dev2Logger.Log.Info("Falling Back to previous signal r client");
+                var name = _wrappedConnection.DisplayName;
+                _wrappedConnection = new ServerProxyWithChunking(_wrappedConnection.WebServerUri){DisplayName = name};
+
+                SetupPassthroughEvents();
                 _wrappedConnection.Connect(_wrappedConnection.ID);
+                _wrappedConnection.DisplayName = name;
             }
             catch (Exception err)
             {
@@ -318,7 +321,9 @@ namespace Dev2.Network
             }
         }
 
+        // ReSharper disable UnusedMember.Local
         void UpdateIsAuthorized(bool isAuthorized)
+            // ReSharper restore UnusedMember.Local
         {
             if (IsAuthorized != isAuthorized)
             {
@@ -327,7 +332,9 @@ namespace Dev2.Network
             }
         }
 
+        // ReSharper disable VirtualMemberNeverOverriden.Global
         protected virtual void OnNetworkStateChanged(NetworkStateEventArgs e)
+            // ReSharper restore VirtualMemberNeverOverriden.Global
         {
             var handler = NetworkStateChanged;
             if (handler != null)

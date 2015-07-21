@@ -26,6 +26,7 @@ using Dev2.Services.Events;
 using Dev2.Studio.Core.AppResources.ExtensionMethods;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
+using Dev2.Utilities;
 using Dev2.Webs;
 using Dev2.Webs.Callbacks;
 using Newtonsoft.Json;
@@ -96,28 +97,28 @@ namespace Dev2.Studio.Controller
             _callBackHandler = StartDecisionWizard(condition);
 
             if(_callBackHandler != null)
-            {
-                try
                 {
+            try
+            {
 
                     string tmp = WebHelper.CleanModelData(_callBackHandler.ModelData);
-                    var dds = JsonConvert.DeserializeObject<Dev2DecisionStack>(tmp);
+                var dds = JsonConvert.DeserializeObject<Dev2DecisionStack>(tmp);
 
-                    if(dds == null)
-                    {
-                        return;
-                    }
-
-                    Utilities.ActivityHelper.SetArmTextDefaults(dds);
-                    Utilities.ActivityHelper.InjectExpression(dds, expression);
-                    Utilities.ActivityHelper.SetArmText(args.ModelItem, dds);
-                    Utilities.ActivityHelper.SetDisplayName(args.ModelItem, dds); // PBI 9220 - 2013.04.29 - TWR
-                }
-                catch
+                if(dds == null)
                 {
-                    //
+                    return;
                 }
+
+                ActivityHelper.SetArmTextDefaults(dds);
+                ActivityHelper.InjectExpression(dds, expression);
+                ActivityHelper.SetArmText(args.ModelItem, dds);
+                ActivityHelper.SetDisplayName(args.ModelItem, dds); // PBI 9220 - 2013.04.29 - TWR
             }
+            catch
+            {
+                    //
+            }
+        }
         }
 
         public void ConfigureSwitchExpression(ConfigureSwitchExpressionMessage args)
@@ -131,19 +132,19 @@ namespace Dev2.Studio.Controller
             _callBackHandler = StartSwitchDropWizard(expression);
             if(_callBackHandler != null)
             {
-                try
-                {
-                    var resultSwitch = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
+            try
+            {
+                var resultSwitch = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
                     Utilities.ActivityHelper.InjectExpression(resultSwitch, expressionText);
                     Utilities.ActivityHelper.SetDisplayName(args.ModelItem, resultSwitch); // MUST use args.ModelItem otherwise it won't be visible!
-                }
-                catch
-                {
-                    _popupController.Show(GlobalConstants.SwitchWizardErrorString,
-                        GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
-                        MessageBoxImage.Error, null);
-                }
             }
+            catch
+            {
+                _popupController.Show(GlobalConstants.SwitchWizardErrorString,
+                                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
+                                      MessageBoxImage.Error, null);
+            }
+        }
         }
 
         Dev2DecisionCallbackHandler StartSwitchDropWizard(ModelItem modelItem)
@@ -160,7 +161,7 @@ namespace Dev2.Studio.Controller
 
             var showDialog = window.ShowDialog();
             if (showDialog.HasValue && showDialog.Value)
-            {
+                    {
                 var callBack = new Dev2DecisionCallbackHandler { ModelData = JsonConvert.SerializeObject(dataContext.Switch) };
                 return callBack;
             }
@@ -172,17 +173,17 @@ namespace Dev2.Studio.Controller
             _callBackHandler = ShowSwitchDragDialog(args.ModelItem,args.ExpressionText);
             if(_callBackHandler != null)
             {
-                try
-                {
-                    var ds = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
+            try
+            {
+                var ds = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
                     Utilities.ActivityHelper.SetSwitchKeyProperty(ds, args.ModelItem);
-                }
-                catch
-                {
-                    _popupController.Show(GlobalConstants.SwitchWizardErrorString,
-                        GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
-                        MessageBoxImage.Error, null);
-                }
+            }
+            catch
+            {
+                _popupController.Show(GlobalConstants.SwitchWizardErrorString,
+                                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
+                                      MessageBoxImage.Error, null);
+            }
             }
         }
 
@@ -216,25 +217,25 @@ namespace Dev2.Studio.Controller
             _callBackHandler = ShowSwitchDragDialog(args.ModelItem, variable);
             if(_callBackHandler != null)
             {
-                try
-                {
-                    var ds = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
+            try
+            {
+                var ds = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
 
-                    if(ds != null)
+                if(ds != null)
+                {
+                    if(switchCaseValue != null)
                     {
-                        if(switchCaseValue != null)
-                        {
                             switchCaseValue.SetValue(ds.SwitchExpression);
-                        }
                     }
                 }
-                catch
-                {
-                    _popupController.Show(GlobalConstants.SwitchWizardErrorString,
-                        GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
-                        MessageBoxImage.Error, null);
-                }
             }
+            catch
+            {
+                _popupController.Show(GlobalConstants.SwitchWizardErrorString,
+                                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
+                                      MessageBoxImage.Error, null);
+            }
+        }
         }
 
         static string SwitchExpressionValue(ModelProperty activityExpression)
