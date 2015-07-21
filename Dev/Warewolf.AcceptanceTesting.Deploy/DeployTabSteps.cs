@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System.Collections.Generic;
+using Caliburn.Micro;
 using Dev2.AppResources.Repositories;
 using Dev2.Common.Interfaces.Threading;
 using Dev2.ConnectionHelpers;
@@ -27,6 +28,12 @@ namespace Warewolf.AcceptanceTesting.Deploy
             var mockEventAggregator = new Mock<IEventAggregator>();
             var asyncWorker = new Mock<IAsyncWorker>();
             var envProvider = new Mock<IEnvironmentModelProvider>();
+            var servers = new List<IEnvironmentModel>();
+            var local = new Mock<IEnvironmentModel>();
+            var remote = new Mock<IEnvironmentModel>();
+            servers.Add(local.Object);
+            servers.Add(remote.Object);
+            envProvider.Setup(a => a.Load()).Returns(servers);
             var envRepo = new Mock<IEnvironmentRepository>();
             var resRepo = new Mock<IStudioResourceRepository>();
             IView deployView = new DeployView();
@@ -52,14 +59,15 @@ namespace Warewolf.AcceptanceTesting.Deploy
         [Given(@"I have deploy tab opened")]
         public void GivenIHaveDeployTabOpened()
         {
-            var view = ScenarioContext.Current.Get<DeployView>("deployView");
+            var view = FeatureContext.Current.Get<DeployView>("deployView");
             Assert.IsNotNull(view);
         }
 
         [Given(@"selected Source Server is ""(.*)""")]
         public void GivenSelectedSourceServerIs(string server)
         {
-            ScenarioContext.Current.Pending();
+            var view = FeatureContext.Current.Get<DeployView>("deployView");
+            view.SetSelectedSourceServer(server);
         }
 
         [When(@"selected Destination Server is ""(.*)""")]

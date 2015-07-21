@@ -53,7 +53,8 @@
                                      Margin="{StaticResource ControlBorderTop}"
                                      ConnectButtonAutomationID="UI_SourceConnectServerbtn_AutoID"
                                      EditButtonAutomationID="UI_SourceServerEditbtn_AutoID"
-                                     ServerComboBoxAutomationID="UI_SourceServercbx_AutoID" />
+                                     ServerComboBoxAutomationID="UI_SourceServercbx_AutoID" 
+                                     x:Name="SourceConnectControl"       />
 
                 <nv:NavigationView Grid.Row="2" 
                                    DataContext="{Binding Source}" 
@@ -152,7 +153,8 @@
                                             Margin="{StaticResource ControlBorderTop}"
                                             ConnectButtonAutomationID="UI_DestinationServerConnectbtn_AutoID"
                                             EditButtonAutomationID="UI_DestinationServerEditbtn_AutoID"
-                                            ServerComboBoxAutomationID="UI_DestinationServercbx_AutoID" />
+                                            ServerComboBoxAutomationID="UI_DestinationServercbx_AutoID" 
+                                            x:Name="DestinationConnectControl" />
 
                 <nv:NavigationView Grid.Row="2" 
                                    DataContext="{Binding Target}" 

@@ -44,5 +44,10 @@ namespace Dev2.Studio.Views.Deploy
                 }
             }
         }
+
+        public void SetSelectedSourceServer(string server)
+        {
+            SourceConnectControl.SelectServer(server);
+        }
     }
 }
