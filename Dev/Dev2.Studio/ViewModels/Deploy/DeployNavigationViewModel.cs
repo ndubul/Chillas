@@ -55,6 +55,8 @@ namespace Dev2.ViewModels.Deploy
         {
             _target = target;
             ConnectControlSingleton = connectControlSingleton;
+            CircularProgressBarVisibility = Visibility.Hidden;
+            RefreshButtonVisibility = Visibility.Visible;
         }
 
         public IEnvironmentModel Environment

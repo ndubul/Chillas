@@ -643,10 +643,10 @@
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="disabled" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="disabled" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
-                                                    <Visibility>Visible</Visibility>
+                                                    <system:Boolean>True</system:Boolean>
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
@@ -782,8 +782,8 @@
                             <Setter TargetName="DropDownBorder" Property="Height" Value="95" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
-                            <Setter Property="Background" Value="{StaticResource ComboBoxBackgroundBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}" />
+                            <Setter Property="Background" Value="{StaticResource ComboBoxReadOnlyBorderBrush}" />
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
