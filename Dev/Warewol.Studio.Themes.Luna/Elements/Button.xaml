@@ -264,6 +264,10 @@
                         <Trigger Property="IsPressed" Value="False">
                             <Setter TargetName="Bd" Property="Stroke" Value="{StaticResource ButtonPressedTransparentBrush}" />
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Stroke"  Value="{StaticResource ButtonBackgroundBrush}"></Setter>
+                            <Setter TargetName="Bd" Property="Fill"  Value="{StaticResource ButtonBackgroundBrush}"></Setter>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
