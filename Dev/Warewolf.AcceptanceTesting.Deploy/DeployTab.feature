@@ -33,6 +33,7 @@ Feature: DeployTab
 #Ensure user is able to see Deploy summary in deploy tab
 #Ensure user is able to see how many new resources are selected and how many resources are overriding.
 #Ensure Save button us disabled when Deploy ta is active.
+#Deploying a connector with a source
 
 Scenario: Deploy Tab
      Given I have deploy tab opened
@@ -97,6 +98,19 @@ Scenario: Select all Dependecies is selecting dependecies
 	 And "Select All Dependencies" is "Enabled"
 	 When I Select All Dependecies
 	 Then "My Category\Double Roll" from Source Server is "Selected"
+
+
+Scenario: Deploying a connector with a source
+     Given I have deploy tab opened
+	 And selected Source Server is "localhost"
+     And selected Destination Server is "Remote"
+	 When I select "Double Roll Example\Roll Dice for Players" from Source Server
+	 Then "Deploy" is "Enabled" 
+	 And "Select All Dependencies" is "Enabled"
+	 When I Select All Dependecies
+	 Then "sqlServers\DemoDB" from Source Server is "Selected"
+	 
+
 
 #coded ui
 @ignore
