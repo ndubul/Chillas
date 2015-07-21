@@ -230,7 +230,7 @@
                            Grid.Row="0"
                            Foreground="White"
                            Margin="{StaticResource ElementBorder}"
-                           FontSize="{StaticResource FontSize-Large}"
+                           FontSize="{StaticResource FontSize-Larger}"
                            FontWeight="Bold">Selected for Deploy</TextBlock>
 
                     <ItemsControl Grid.Column="0"
@@ -244,12 +244,16 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Foreground="White" HorizontalAlignment="Left">
+                                    <TextBlock Grid.Column="0" 
+                                               Foreground="White" 
+                                               FontSize="{StaticResource FontSize-Medium}"
+                                               HorizontalAlignment="Left">
                                     <Run Text="{Binding Name}" />
                                     </TextBlock>
                                     <TextBlock Grid.Column="1"
                                                Margin="0,-2,0,0"
                                                Foreground="White"
+                                               FontSize="{StaticResource FontSize-Medium}"
                                                Text="{Binding Description}"
                                                HorizontalAlignment="Left" />
                                 </Grid>
@@ -263,6 +267,7 @@
                         <Button AutomationProperties.AutomationId="UI_SelectDepbtn_AutoID"
                                 Content="Select All Dependencies"
                                 Width="Auto"
+                                Style="{StaticResource ButtonOrangeStyle}"
                                 Margin="{StaticResource ElementBorder}"
                                 Command="{Binding SelectAllDependanciesCommand}" />
                     </StackPanel>
@@ -279,7 +284,7 @@
                             HorizontalAlignment="Right">
                     <TextBlock Foreground="White"
                                Margin="{StaticResource ElementBorder}"
-                               FontSize="{StaticResource FontSize-Large}"
+                               FontSize="{StaticResource FontSize-Larger}"
                                FontWeight="Bold">Deploy Summary</TextBlock>
                     </StackPanel>
 
@@ -295,10 +300,11 @@
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Foreground="White" 
                                                    Margin="5,0,0,0"
+                                                   FontSize="{StaticResource FontSize-Medium}"
                                                    Text="{Binding Name}"/>
                                         <TextBlock Foreground="White"
                                                    Text="{Binding Description}"
-                                                   FontSize="25"
+                                                   FontSize="28"
                                                    Margin="5,0,0,0"
                                                    HorizontalAlignment="Center" />
                                     </StackPanel>
@@ -351,6 +357,7 @@
                                 Content="Deploy"
                                 Command="{Binding DeployCommand}"
                                 IsEnabled="{Binding CanDeploy}"
+                                Style="{StaticResource ButtonOrangeStyle}"
                                 MaxWidth="50"
                                 MinWidth="50" />
                     </StackPanel>

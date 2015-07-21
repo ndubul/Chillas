@@ -11,7 +11,7 @@ namespace Dev2.Common.Interfaces.SaveDialog
         string ErrorMessage { get; set; }
         ICommand OkCommand { get; set; }
         ICommand CancelCommand { get; }
-       // IExplorerViewModel SingleEnvironmentExplorerViewModel { get; }
+        IExplorerViewModel SingleEnvironmentExplorerViewModel { get; }
     }
 
     public class ResourceName
