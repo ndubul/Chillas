@@ -38,8 +38,7 @@ namespace Warewolf.AcceptanceTesting.Core
             ResourceDictionary themeDictionary = new ResourceDictionary();
 //            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Themes/DockManagerGeneric.xaml");
 //            app.Resources.MergedDictionaries.Add(themeDictionary);
-//            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Resources/Converters.xaml");
-//            app.Resources.MergedDictionaries.Add(themeDictionary);
+
 //            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Themes/DataTemplates.xaml");
 //            app.Resources.MergedDictionaries.Add(themeDictionary);
 //            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Resources/ResourceDictionary.xaml");
@@ -63,6 +62,11 @@ namespace Warewolf.AcceptanceTesting.Core
             themeDictionary.Source = new Uri("pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Images.xaml", UriKind.RelativeOrAbsolute);
             app.Resources.MergedDictionaries.Add(themeDictionary);
             themeDictionary.Source = new Uri("pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Common/Styles.xaml", UriKind.RelativeOrAbsolute);
+            app.Resources.MergedDictionaries.Add(themeDictionary);
+
+            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Resources/ResourceDictionary.xaml");
+            app.Resources.MergedDictionaries.Add(themeDictionary);
+            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Resources/Converters.xaml");
             app.Resources.MergedDictionaries.Add(themeDictionary);
         }
 

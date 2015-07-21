@@ -63,5 +63,13 @@ namespace Dev2.CustomControls.Connections
                 new PropertyMetadata("UI_ConnectServerBtn_AutoID"));
 
         #endregion
+
+        public void SelectServer(string server)
+        {
+            foreach(var item in TheServerComboBox.Items)
+            {
+                TheServerComboBox.SelectedItem = "";
+            };
+        }
     }
 }

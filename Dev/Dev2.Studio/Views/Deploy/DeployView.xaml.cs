@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Windows;
 using Dev2.Models;
 using Dev2.Studio.ViewModels.Deploy;
+using Microsoft.Practices.Prism.Mvvm;
 
 // ReSharper disable once CheckNamespace
 namespace Dev2.Studio.Views.Deploy
@@ -20,7 +21,7 @@ namespace Dev2.Studio.Views.Deploy
     /// <summary>
     /// Interaction logic for DeployView.xaml
     /// </summary>
-    public partial class DeployView
+    public partial class DeployView:IView
     {
         public DeployView()
         {
@@ -42,6 +43,11 @@ namespace Dev2.Studio.Views.Deploy
                     }
                 }
             }
+        }
+
+        public void SetSelectedSourceServer(string server)
+        {
+            SourceConnectControl.SelectServer(server);
         }
     }
 }

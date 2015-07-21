@@ -1,30 +1,251 @@
-﻿//using System.Linq;
-//using System.Windows;
-//using Dev2.Common.Interfaces;
-//using Dev2.Common.Interfaces.Deploy;
-//using Dev2.Common.Interfaces.PopupController;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using Moq;
-//using TechTalk.SpecFlow;
-//using Warewolf.AcceptanceTesting.Core;
-//
-//namespace Warewolf.AcceptanceTesting.Deploy
-//{
-//    [Binding]
-//    public class DeployTabSteps
-//    {
-//        [BeforeFeature("Deploy")]
-//        public static void SetupForFeature()
-//        {
-////            var bootStrapper = new UnityBootstrapperForDatabaseSourceConnectorTesting();
-////            bootStrapper.Run();
-//            var view = new Mock<IDeployViewControl>();
-//            var viewModel = new Mock<IDeployViewModel>();
-//            view.Object.DataContext = viewModel;
-//            Utils.ShowTheViewForTesting(view.Object);
-//            FeatureContext.Current.Add(Utils.ViewNameKey, view.Object);
-//            FeatureContext.Current.Add(Utils.ViewModelNameKey, viewModel.Object);
-//        }
+﻿using System.Collections.Generic;
+using Caliburn.Micro;
+using Dev2.AppResources.Repositories;
+using Dev2.Common.Interfaces.Threading;
+using Dev2.ConnectionHelpers;
+using Dev2.CustomControls.Connections;
+using Dev2.Studio.Core.Interfaces;
+using Dev2.Studio.Deploy;
+using Dev2.Studio.ViewModels.Deploy;
+using Dev2.Studio.Views.Deploy;
+using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using TechTalk.SpecFlow;
+using Warewolf.AcceptanceTesting.Core;
+
+namespace Warewolf.AcceptanceTesting.Deploy
+{
+    [Binding]
+    public class DeployTabSteps
+    {
+        [BeforeFeature("Deploy")]
+        public static void SetupForFeature()
+        {
+      
+            Utils.SetupResourceDictionary();
+            
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            var asyncWorker = new Mock<IAsyncWorker>();
+            var envProvider = new Mock<IEnvironmentModelProvider>();
+            var servers = new List<IEnvironmentModel>();
+            var local = new Mock<IEnvironmentModel>();
+            var remote = new Mock<IEnvironmentModel>();
+            servers.Add(local.Object);
+            servers.Add(remote.Object);
+            envProvider.Setup(a => a.Load()).Returns(servers);
+            var envRepo = new Mock<IEnvironmentRepository>();
+            var resRepo = new Mock<IStudioResourceRepository>();
+            IView deployView = new DeployView();
+            var connectControlLeft = new Mock<IConnectControlViewModel>();
+            var connectColtrolRight = new Mock<IConnectControlViewModel>();
+            var mainConnectControl = new Mock<IConnectControlSingleton>();
+            var calc = new Mock<IDeployStatsCalculator>();
+            //IAsyncWorker asyncWorker, IEnvironmentModelProvider serverProvider, IEnvironmentRepository environmentRepository, IEventAggregator eventAggregator, IStudioResourceRepository studioResourceRepository, 
+            //IConnectControlViewModel sourceConnectControlVm, IConnectControlViewModel destinationConnectControlVm, IDeployStatsCalculator deployStatsCalculator = null, Guid? resourceID = null, Guid? environmentID = null,IConnectControlSingleton connectControlSingleton = null)
+            var viewModel = new DeployViewModel(asyncWorker.Object, envProvider.Object, envRepo.Object,mockEventAggregator.Object,resRepo.Object,connectColtrolRight.Object,connectControlLeft.Object,calc.Object,null,null,mainConnectControl.Object);
+            deployView.DataContext = viewModel;
+            FeatureContext.Current.Add("eventAggregator",mockEventAggregator);
+            FeatureContext.Current.Add("asyncWorker", asyncWorker);
+            FeatureContext.Current.Add("envProvider", envProvider);
+            FeatureContext.Current.Add("envRepo", envRepo);
+            FeatureContext.Current.Add("resRepo", resRepo);
+            FeatureContext.Current.Add("deployView", deployView);
+            FeatureContext.Current.Add("viewModel", viewModel);
+            FeatureContext.Current.Add("calc", calc);
+            Utils.ShowTheViewForTesting(deployView);
+        }
+
+        [Given(@"I have deploy tab opened")]
+        public void GivenIHaveDeployTabOpened()
+        {
+            var view = FeatureContext.Current.Get<DeployView>("deployView");
+            Assert.IsNotNull(view);
+        }
+
+        [Given(@"selected Source Server is ""(.*)""")]
+        public void GivenSelectedSourceServerIs(string server)
+        {
+            var view = FeatureContext.Current.Get<DeployView>("deployView");
+            view.SetSelectedSourceServer(server);
+        }
+
+        [When(@"selected Destination Server is ""(.*)""")]
+        public void WhenSelectedDestinationServerIs(string server)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"the validation message is ""(.*)""")]
+        public void ThenTheValidationMessageIs(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"""(.*)"" is ""(.*)""")]
+        public void ThenIs(string p0, string p1)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Given(@"selected Destination Server is ""(.*)""")]
+        public void GivenSelectedDestinationServerIs(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I select ""(.*)"" from Source Server")]
+        public void WhenISelectFromSourceServer(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Given(@"I select ""(.*)"" from Source Server")]
+        public void GivenISelectFromSourceServer(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I deploy")]
+        public void WhenIDeploy()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"deploy is successfull")]
+        public void ThenDeployIsSuccessfull()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"""(.*)"" is visible on Destination Server")]
+        public void ThenIsVisibleOnDestinationServer(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Given(@"I deploy")]
+        public void GivenIDeploy()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"Resource exists in the destination server popup is shown")]
+        public void ThenResourceExistsInTheDestinationServerPopupIsShown(Table table)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I click OK on Resource exists in the destination server popup")]
+        public void WhenIClickOKOnResourceExistsInTheDestinationServerPopup()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I click Cancel on Resource exists in the destination server popup")]
+        public void WhenIClickCancelOnResourceExistsInTheDestinationServerPopup()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"deploy is not successfull")]
+        public void ThenDeployIsNotSuccessfull()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I Select All Dependecies")]
+        public void WhenISelectAllDependecies()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"""(.*)"" from Source Server is ""(.*)""")]
+        public void ThenFromSourceServerIs(string p0, string p1)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I type ""(.*)"" in Source Server filter")]
+        public void WhenITypeInSourceServerFilter(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I clear filter on Source Server")]
+        public void WhenIClearFilterOnSourceServer()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I type ""(.*)"" in Destination Server filter")]
+        public void WhenITypeInDestinationServerFilter(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"I select ""(.*)"" from Source Server")]
+        public void ThenISelectFromSourceServer(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"""(.*)"" from Destination Server is ""(.*)""")]
+        public void ThenFromDestinationServerIs(string p0, string p1)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"Data Connectors is ""(.*)""")]
+        public void ThenDataConnectorsIs(int p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"Services is ""(.*)""")]
+        public void ThenServicesIs(int p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"Sources is ""(.*)""")]
+        public void ThenSourcesIs(int p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"New Resource is ""(.*)""")]
+        public void ThenNewResourceIs(int p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"Override is ""(.*)""")]
+        public void ThenOverrideIs(int p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I Unselect ""(.*)"" from Source Server")]
+        public void WhenIUnselectFromSourceServer(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"Override is ""(.*)""")]
+        public void WhenOverrideIs(int p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"""(.*)"" popup is shown")]
+        public void ThenPopupIsShown(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+
+
 //
 //        [BeforeScenario("Deploy")]
 //        public void SetupForScenerio()
@@ -275,5 +496,5 @@
 //            ScenarioContext.Current.Pending();
 //        }
 //
-//    }
-//}
+    }
+}
