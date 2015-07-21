@@ -9,6 +9,7 @@
              xmlns:deploy="clr-namespace:Dev2.Studio.ViewModels.Deploy"
              xmlns:models="clr-namespace:Dev2.Models;assembly=Dev2.Studio.Core"
              xmlns:connections="clr-namespace:Dev2.CustomControls.Connections"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              Name="DeployUserControl"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance deploy:DeployViewModel}">
@@ -325,11 +326,12 @@
                         <StackPanel Orientation="Horizontal"
                                 Margin="{StaticResource ControlBorderRight}"
                                 Visibility="{Binding DeploySuccessfull, Converter={StaticResource BoolToVisibilityConverterPositive}}">
-                            <Image Style="{StaticResource ImageTickStyle}" />
-                            <TextBlock Foreground="White"
-                                   Text="Items deployed successfully"
-                                   AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
-                                   VerticalAlignment="Center" />
+                            <fa:ImageAwesome Width="14" 
+                                             Height="14" 
+                                             Foreground="{StaticResource WareWolfOrangeBrush}" 
+                                             Margin="{StaticResource ControlBorderRight}" 
+                                             Icon="Check" 
+                                             HorizontalAlignment="Right" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                 Margin="{StaticResource ControlBorderRight}"

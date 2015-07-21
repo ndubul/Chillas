@@ -369,7 +369,7 @@
                         <ig:NodeLayout.EditorTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <TextBox MaxWidth="200" Height="25"
+                                    <TextBox MaxWidth="200" Height="20"
                                          Text="{Binding Data.ResourceName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></TextBox>
                                 </Grid>
                             </DataTemplate>
