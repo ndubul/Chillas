@@ -474,8 +474,8 @@ namespace Dev2.Studio.ViewModels.Deploy
                     _selectedSourceServer.IsConnectedChanged += SourceEnvironmentConnectedChanged;
 
                 }
-                LoadSourceEnvironment();
                 Source.Environment = _selectedSourceServer;
+                LoadSourceEnvironment();
                 NotifyOfPropertyChange(() => SelectedSourceServer);
                 NotifyOfPropertyChange(() => SourceItemsSelected);
                 NotifyOfPropertyChange(() => CanDeploy);
@@ -484,6 +484,7 @@ namespace Dev2.Studio.ViewModels.Deploy
             }
 
         }
+
 
         /// <summary>
         /// Message for disconnect
@@ -1011,6 +1012,23 @@ namespace Dev2.Studio.ViewModels.Deploy
         }
 
         #endregion Private Methods
+
+
+        #region Overrides of Screen
+
+        protected override void OnDeactivate(bool close)
+        {
+            if (close)
+            {
+                if (_selectedSourceServer != null)
+                {
+                    Source.Environment = null;
+                }
+            }
+            base.OnDeactivate(close);
+        }
+
+        #endregion
 
         #region Dispose Handling
 

@@ -28,7 +28,8 @@
         <views:NotConverter x:Key="NotConverter" />
     </UserControl.Resources>
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding RenameCommand}" Key="F2" />
+        <KeyBinding Command="{Binding Path=Data.CreateFolderCommand}" Key="F2" />
+        <KeyBinding Command="{Binding Path=Data.CreateFolderCommand}" Key="F"  Modifiers="Control+Shift" />
     </UserControl.InputBindings>
     <Grid>
         <Grid x:Name="Overlay" Panel.ZIndex="1000" Visibility="Collapsed">
@@ -319,11 +320,13 @@
                                                     <ig:XamMenuItem Name="NewFolder"
                                                                 InputGestureText="[Ctrl+Shift+F]"
                                                                 Command="{Binding Path=Data.CreateFolderCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.PluginService}"
+                                                                CommandParameter="{x:Static data:ResourceType.Folder}"
                                                                 Header="New Folder"
                                                                 Visibility="{Binding Path=Data.CanCreateFolder,
                                                                                      Converter={StaticResource BoolToVisibilityConverter}}">
-
+                                                        <ig:XamMenuItem.InputBindings>
+                                                            <KeyBinding Key="F" Modifiers="Control+Shift" Command="{Binding Path=Data.CreateFolderCommand}"/>
+                                                        </ig:XamMenuItem.InputBindings>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuSeparator  Visibility="{Binding Path=Data.CanDeploy,
                                                                                      Converter={StaticResource BoolToVisibilityConverter}}"/>
@@ -589,7 +592,7 @@
                                                     <ig:XamMenuItem Name="NewFolderFromItem"
                                                                 InputGestureText="[Ctrl+Shift+F]"
                                                                 Command="{Binding Path=Data.CreateFolderCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.PluginService}"
+                                                                CommandParameter="{x:Static data:ResourceType.Folder}"
                                                                 Header="New Folder"
                                                                 Visibility="{Binding Path=Data.CanCreateFolder,                                                        
                                                                                      Converter={StaticResource BoolToVisibilityConverter}}">

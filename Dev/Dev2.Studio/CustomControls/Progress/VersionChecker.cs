@@ -191,7 +191,7 @@ namespace Dev2.Studio.Core.Helpers
 
         public static bool InstallerTesting
         {
-            get { return bool.Parse(ConfigurationManager.AppSettings["InstallerTesting"]); }
+            get { return ConfigurationManager.AppSettings["InstallerTesting"] == null || bool.Parse(ConfigurationManager.AppSettings["InstallerTesting"]); }
         }
 
 

@@ -213,7 +213,6 @@
         <KeyBinding Command="{Binding DebugCommand}" Key="F5" />
         <KeyBinding Command="{Binding QuickDebugCommand}" Key="F6" />
         <KeyBinding Command="{Binding QuickViewInBrowserCommand}" Key="F7" />
-        <KeyBinding Command="{Binding DeployAllCommand}" Key="D" Modifiers="Ctrl+Shift" />
         <KeyBinding Command="{Binding DeployCommand}" Key="D" Modifiers="Ctrl" />
         <KeyBinding Command="{Binding NewResourceCommand}"  CommandParameter="DatabaseService" Key="D" Modifiers="Ctrl+Shift" />
         <KeyBinding Command="{Binding NewResourceCommand}"  CommandParameter="ResourceService" Key="P" Modifiers="Ctrl+Shift" />

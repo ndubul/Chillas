@@ -408,7 +408,7 @@
                        Margin="0,5,0,5"
                        Style="{StaticResource MenuSeparator}" />
 
-            <!-- SUPPORT -->
+            <!-- HELP -->
             <Button Grid.Row="16"
                     Grid.Column="1"
                     Width="{Binding ButtonWidth}"

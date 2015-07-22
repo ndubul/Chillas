@@ -9,10 +9,19 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 using Caliburn.Micro;
 using CubicOrange.Windows.Forms.ActiveDirectory;
 using Dev2.Common.Interfaces.Scheduler.Interfaces;
 using Dev2.Common.Interfaces.Studio.Controller;
+using Dev2.Common.Interfaces.Threading;
 using Dev2.Communication;
 using Dev2.Core.Tests.Utils;
 using Dev2.CustomControls.Connections;
@@ -31,15 +40,6 @@ using Dev2.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Win32.TaskScheduler;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using Dev2.Common.Interfaces.Threading;
 
 // ReSharper disable InconsistentNaming
 namespace Dev2.Core.Tests.Settings

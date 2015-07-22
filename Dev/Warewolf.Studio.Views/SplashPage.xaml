@@ -34,9 +34,10 @@
 
             <!-- WAREWOL LOGO -->
             <Grid Margin="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <ContentControl Style="{StaticResource WarewolfVectorStyle}" 
-                                HorizontalAlignment="Left"
-                                Height="140" Width="300" />
+                <Image Source="{StaticResource WarewolfWhiteLogo}" 
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Height="140" Width="360" />
             </Grid>
 
             <!-- WAREWOLF VERSIONS -->
@@ -50,10 +51,10 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Studio" Style="{StaticResource SourceHeaderWhite}"></TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Studio" FontSize="28" Style="{StaticResource SourceHeaderWhite}"></TextBlock>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding StudioVersion}" Style="{StaticResource TextBlockWhiteStyle}"></TextBlock>
 
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Server" Style="{StaticResource SourceHeaderWhite}"></TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Server" FontSize="28" Style="{StaticResource SourceHeaderWhite}"></TextBlock>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ServerVersion}" Style="{StaticResource TextBlockWhiteStyle}"></TextBlock>
             </Grid>
 

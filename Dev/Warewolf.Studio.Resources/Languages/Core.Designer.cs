@@ -1252,7 +1252,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Support.
+        ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string MenuDialogSupportLabel {
             get {

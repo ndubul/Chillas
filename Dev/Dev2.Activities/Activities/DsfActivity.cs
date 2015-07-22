@@ -484,7 +484,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                 dataObject.RunWorkflowAsync = RunWorkflowAsync;
                 if (dataObject.IsDebugMode() || (dataObject.RunWorkflowAsync && !dataObject.IsFromWebServer))
                 {
-                    DispatchDebugState(dataObject, StateType.Before);
+                    DispatchDebugStateAndUpdateRemoteServer(dataObject, StateType.Before);
                 }
 
                 Guid resourceId = dataObject.ResourceID;
@@ -560,7 +560,9 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
 
                 if (dataObject.IsDebugMode() || (dataObject.RunWorkflowAsync && !dataObject.IsFromWebServer))
                 {
-                    DispatchDebugState(dataObject, StateType.After);
+                    var dt = DateTime.Now;
+                    DispatchDebugState(dataObject, StateType.After, dt);
+                    DispatchDebugState(dataObject, StateType.Duration, dt);
                 }
 
                 dataObject.ParentInstanceID = _previousInstanceId;
@@ -574,6 +576,8 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
             }
 
         }
+
+
 
         #endregion
 

@@ -59,6 +59,8 @@ namespace Dev2.ViewModels.Deploy
             RefreshButtonVisibility = Visibility.Visible;
         }
 
+
+
         public IEnvironmentModel Environment
         {
             get
@@ -67,6 +69,7 @@ namespace Dev2.ViewModels.Deploy
             }
             set
             {
+                bool shouldClearSelections = _environment == null || !_environment.Equals(value);
                 _environment = value;
                 if(value != null)
                 {
@@ -74,7 +77,7 @@ namespace Dev2.ViewModels.Deploy
                 }
                 if(_environment != null)
                 {
-                    FilterEnvironments(_environment);
+                    FilterEnvironments(_environment, shouldClearSelections);
                     _environment.AuthorizationServiceSet += (sender, args) =>
                     {
                         AuthorizationService = _environment.AuthorizationService;
@@ -244,6 +247,8 @@ namespace Dev2.ViewModels.Deploy
                 {
                     Iterate(model => model.IsChecked = false);
                     Iterate(model => model.IsOverwrite = false);
+                    Iterate(model => model.IsDeploySourceExpanded = false);
+                    Iterate(model => model.IsDeployTargetExpanded = false);
                 }
 
             }

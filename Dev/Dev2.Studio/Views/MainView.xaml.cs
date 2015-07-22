@@ -62,7 +62,7 @@ namespace Dev2.Studio.Views
         }
 
         private static IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
+            {
             switch (msg)
             {
                 case 0x0024:/* WM_GETMINMAXINFO */
@@ -70,9 +70,9 @@ namespace Dev2.Studio.Views
                     {
                         WmGetMinMaxInfo(hwnd, lParam);
                         handled = true;
-                    }
-                    break;
             }
+                    break;
+        }
 
             return (IntPtr)0;
         }
@@ -97,7 +97,7 @@ namespace Dev2.Studio.Views
         [StructLayout(LayoutKind.Sequential)]
         // ReSharper disable InconsistentNaming
         public struct MINMAXINFO
-        {
+            {
             public POINT ptReserved;
             public POINT ptMaxSize;
             public POINT ptMaxPosition;
@@ -290,11 +290,11 @@ namespace Dev2.Studio.Views
         }
 
         private void EnterSuperMaximisedMode()
-        {
+                {
             _isSuperMaximising = true;
             var dependencyObject = GetTemplateChild("PART_TITLEBAR");
             if (dependencyObject != null)
-            {
+                    {
                 dependencyObject.SetValue(VisibilityProperty, Visibility.Collapsed);
                 WindowState = WindowState.Normal;
                 WindowState = WindowState.Maximized;
@@ -302,17 +302,17 @@ namespace Dev2.Studio.Views
         }
 
         private void CloseSuperMaximised(object sender, RoutedEventArgs e)
-        {
+                        {
             ExitSuperMaximisedMode();
         }
 
         private void ExitSuperMaximisedMode()
-        {
+                            {
             DoCloseExitFullScreenPanelAnimation();
             _isSuperMaximising = false;
             var dependencyObject = GetTemplateChild("PART_TITLEBAR");
             if (dependencyObject != null)
-            {
+                                {
                 dependencyObject.SetValue(VisibilityProperty, Visibility.Visible);
                 WindowState = WindowState.Normal;
                 WindowState = WindowState.Maximized;
@@ -339,10 +339,10 @@ namespace Dev2.Studio.Views
                 }
             }
             if (!_isLocked)
-            {
+                                    {
                 DoAnimateOpenTitleBar();
-            }
-        }
+                                    }
+                                }
 
         private void DoAnimateOpenTitleBar()
         {
@@ -353,19 +353,19 @@ namespace Dev2.Studio.Views
                 storyboard.SetValue(Storyboard.TargetProperty, titleBar);
                 storyboard.Begin();
             }
-        }
+                            }
 
         private void HideFullScreenPanel_OnMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (_isSuperMaximising)
             {
                 DoCloseExitFullScreenPanelAnimation();
-            }
+                        }
             if (!_isLocked)
             {
                 DoAnimateCloseTitle();
-            }
-        }
+                    }
+                }
 
         private void DoAnimateCloseTitle()
         {
@@ -479,7 +479,7 @@ namespace Dev2.Studio.Views
                     DoAnimateCloseTitle();
                 }
                 else
-                {
+        {
                     fontAwesome.Icon = FontAwesomeIcon.Lock;
                 }
                 dependencyObject.SetValue(ContentProperty, fontAwesome);

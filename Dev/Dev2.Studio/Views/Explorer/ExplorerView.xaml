@@ -19,6 +19,11 @@
              d:DataContext="{d:DesignInstance explorer:ExplorerViewModel}"
              Name="Explorer">
 
+    <UserControl.Resources>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="20" />
+        </Style>
+    </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding NavigationViewModel.RenameCommand}" Key="F2" />
     </UserControl.InputBindings>

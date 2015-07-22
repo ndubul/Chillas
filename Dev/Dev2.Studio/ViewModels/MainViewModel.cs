@@ -1034,7 +1034,7 @@ namespace Dev2.Studio.ViewModels
             set { _showSaveDialog = value; }
         }
         
-        public System.Action<IContextualResourceModel, IEnvironmentModel, string, string,string,AuthenticationType> ShowSharepointSourceServerSaveDialog
+        public Action<IContextualResourceModel, IEnvironmentModel, string, string,string,AuthenticationType> ShowSharepointSourceServerSaveDialog
         {
             get { return _showSharepointServerSourceSaveDialog ?? RootWebSite.ShowNewSharepointServerSourceSaveDialog; }
             set { _showSharepointServerSourceSaveDialog = value; }

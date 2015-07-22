@@ -13,6 +13,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -130,7 +131,7 @@ namespace Dev2.Models
             }
         }
 
-        void ChildrenCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        void ChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnChildrenChanged();
         }
@@ -1566,13 +1567,16 @@ namespace Dev2.Models
 
         void UpdateChildren(bool updateChildren)
         {
-            if(!updateChildren || !_isChecked.HasValue)
+            if (!updateChildren || !_isChecked.HasValue)
             {
                 return;
             }
-            foreach(var c in Children)
+            if (Children != null && Children.Count > 0)
             {
-                c.SetIsChecked(_isChecked, true, false,false);
+                foreach (var c in Children)
+                {
+                    c.SetIsChecked(_isChecked, true, false, false);
+                }
             }
         }
 
