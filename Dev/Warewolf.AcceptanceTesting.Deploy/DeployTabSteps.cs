@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 using Caliburn.Micro;
 using Dev2.AppResources.Repositories;
 using Dev2.Common.Interfaces.Threading;
 using Dev2.ConnectionHelpers;
 using Dev2.CustomControls.Connections;
+using Dev2.Models;
+using Dev2.Services.Security;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Deploy;
 using Dev2.Studio.ViewModels.Deploy;
@@ -30,21 +35,51 @@ namespace Warewolf.AcceptanceTesting.Deploy
             var envProvider = new Mock<IEnvironmentModelProvider>();
             var servers = new List<IEnvironmentModel>();
             var local = new Mock<IEnvironmentModel>();
+            var connLeft = new Mock<IEnvironmentConnection>();
+            connLeft.Setup(a => a.AppServerUri).Returns(new Uri("http://localhost:3142"));
+            var connRight = new Mock<IEnvironmentConnection>();
+            connRight.Setup(a => a.AppServerUri).Returns(new Uri("http://remote:3142"));
+            local.Setup(a => a.Name).Returns("localhost");
+            local.Setup(a => a.DisplayName).Returns("localhost");
+            local.Setup(a => a.Connection).Returns(connLeft.Object);
+            Guid localHostId = Guid.NewGuid();
+            local.Setup(a => a.ID).Returns(localHostId);
             var remote = new Mock<IEnvironmentModel>();
+            remote.Setup(a => a.Name).Returns("Remote");
+            remote.Setup(a => a.Name).Returns("Remote");
+            remote.Setup(a => a.Connection).Returns(connRight.Object);
+            Guid remoteId = Guid.NewGuid();
+            remote.Setup(a => a.ID).Returns(remoteId);
+            IConnectControlEnvironment envLocal = new ConnectControlEnvironment() { AllowEdit = true, ConnectedText = "connected", DisplayName = "localhost", EnvironmentModel = local.Object, IsConnected = true };
+            IConnectControlEnvironment envRemote = new ConnectControlEnvironment() { AllowEdit = true, ConnectedText = "connected", DisplayName = "localhost", EnvironmentModel = remote.Object, IsConnected = true };
+
+            var svcLocal = new Mock<IAuthorizationService>();
+            svcLocal.Setup(a => a.IsAuthorized(It.IsAny<AuthorizationContext>(), It.IsAny<string>())).Returns(true);
+            local.Setup(a => a.AuthorizationService).Returns(svcLocal.Object);
+            var svcRem = new Mock<IAuthorizationService>();
+            
+            var conServers = new ObservableCollection<IConnectControlEnvironment>{envLocal,envRemote};
             servers.Add(local.Object);
             servers.Add(remote.Object);
             envProvider.Setup(a => a.Load()).Returns(servers);
             var envRepo = new Mock<IEnvironmentRepository>();
+            envRepo.Setup(a => a.FindSingle(It.IsAny<Expression<Func<IEnvironmentModel, bool>>>())).Returns(local.Object);
             var resRepo = new Mock<IStudioResourceRepository>();
+       
             IView deployView = new DeployView();
             var connectControlLeft = new Mock<IConnectControlViewModel>();
+           
             var connectColtrolRight = new Mock<IConnectControlViewModel>();
             var mainConnectControl = new Mock<IConnectControlSingleton>();
+            mainConnectControl.Setup(a => a.Servers).Returns(conServers);
+            connectControlLeft.Setup(a => a.Servers).Returns(conServers);
+            connectColtrolRight.Setup(a => a.Servers).Returns(conServers);
             var calc = new Mock<IDeployStatsCalculator>();
-            //IAsyncWorker asyncWorker, IEnvironmentModelProvider serverProvider, IEnvironmentRepository environmentRepository, IEventAggregator eventAggregator, IStudioResourceRepository studioResourceRepository, 
-            //IConnectControlViewModel sourceConnectControlVm, IConnectControlViewModel destinationConnectControlVm, IDeployStatsCalculator deployStatsCalculator = null, Guid? resourceID = null, Guid? environmentID = null,IConnectControlSingleton connectControlSingleton = null)
-            var viewModel = new DeployViewModel(asyncWorker.Object, envProvider.Object, envRepo.Object,mockEventAggregator.Object,resRepo.Object,connectColtrolRight.Object,connectControlLeft.Object,calc.Object,null,null,mainConnectControl.Object);
+            SetupSourceItems(resRepo, mainConnectControl.Object);
+
+            var viewModel = new DeployViewModel(asyncWorker.Object, envProvider.Object, envRepo.Object,mockEventAggregator.Object,resRepo.Object,connectColtrolRight.Object,connectControlLeft.Object,calc.Object,null,localHostId,mainConnectControl.Object);
             deployView.DataContext = viewModel;
+            viewModel.SelectedSourceServer = local.Object;
             FeatureContext.Current.Add("eventAggregator",mockEventAggregator);
             FeatureContext.Current.Add("asyncWorker", asyncWorker);
             FeatureContext.Current.Add("envProvider", envProvider);
@@ -54,6 +89,28 @@ namespace Warewolf.AcceptanceTesting.Deploy
             FeatureContext.Current.Add("viewModel", viewModel);
             FeatureContext.Current.Add("calc", calc);
             Utils.ShowTheViewForTesting(deployView);
+        }
+
+        private static void SetupSourceItems(Mock<IStudioResourceRepository> resRepo,IConnectControlSingleton conn )
+        {
+       
+            resRepo.Setup(a => a.Filter(It.IsAny<Func<IExplorerItemModel, bool>>())).Returns(() =>
+                {
+                    var gChild = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "Examples", ResourcePath = "Examples\\Utility - Date and Time" };
+                    var child = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "Examples", ResourcePath = "Examples", Children = new ObservableCollection<IExplorerItemModel>() { gChild } };
+                    var root = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "root", ResourcePath = "", Children = new ObservableCollection<IExplorerItemModel>() { child } };
+
+                    return new ObservableCollection<IExplorerItemModel>() { root }; }
+                );
+            resRepo.Setup(a => a.FindItem(It.IsAny<Func<IExplorerItemModel, bool>>())).Returns(() =>
+            {
+                var gChild = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "Examples", ResourcePath = "Examples\\Utility - Date and Time" };
+                var child = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "Examples", ResourcePath = "Examples", Children = new ObservableCollection<IExplorerItemModel>() { gChild } };
+                var root = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "root", ResourcePath = "", Children = new ObservableCollection<IExplorerItemModel>() { child } };
+
+                return root;
+            }
+                );
         }
 
         [Given(@"I have deploy tab opened")]
@@ -73,20 +130,36 @@ namespace Warewolf.AcceptanceTesting.Deploy
         [When(@"selected Destination Server is ""(.*)""")]
         public void WhenSelectedDestinationServerIs(string server)
         {
-            ScenarioContext.Current.Pending();
+            var view = FeatureContext.Current.Get<DeployView>("deployView");
+            view.SetSelectedDestinationServer(server);
         }
 
         [Then(@"the validation message is ""(.*)""")]
-        public void ThenTheValidationMessageIs(string p0)
+        public void ThenTheValidationMessageIs(string message)
         {
-            ScenarioContext.Current.Pending();
+            var view = FeatureContext.Current.Get<DeployView>("deployView");
+            var validationMessage = view.GetValidationMessage();
+            Assert.AreEqual(message, validationMessage);
         }
 
         [Then(@"""(.*)"" is ""(.*)""")]
-        public void ThenIs(string p0, string p1)
+        public void ThenIs(string button, string state)
         {
-            ScenarioContext.Current.Pending();
+            var view = FeatureContext.Current.Get<DeployView>("deployView");
+            var validationMessage = view.GetDeployState();
+            bool enabled = state == "Enabled";
+            Assert.AreEqual(enabled,validationMessage);
         }
+        [Then(@"Select All Dependencies is ""(.*)""")]
+        public void ThenSelectAllDependenciesIs(string state)
+        {
+            var view = FeatureContext.Current.Get<DeployView>("deployView");
+            var validationMessage = view.GetSelectDependenciesState();
+            bool enabled = state == "Enabled";
+            Assert.AreEqual(enabled, validationMessage);
+        }
+
+
 
         [Given(@"selected Destination Server is ""(.*)""")]
         public void GivenSelectedDestinationServerIs(string p0)
@@ -95,9 +168,10 @@ namespace Warewolf.AcceptanceTesting.Deploy
         }
 
         [When(@"I select ""(.*)"" from Source Server")]
-        public void WhenISelectFromSourceServer(string p0)
+        public void WhenISelectFromSourceServer(string resource)
         {
-            ScenarioContext.Current.Pending();
+            var view = FeatureContext.Current.Get<DeployView>("deployView");
+            view.SelectItemToDeploy(resource);    
         }
 
         [Given(@"I select ""(.*)"" from Source Server")]

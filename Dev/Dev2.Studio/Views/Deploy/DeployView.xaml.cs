@@ -49,5 +49,38 @@ namespace Dev2.Studio.Views.Deploy
         {
             SourceConnectControl.SelectServer(server);
         }
+
+        public void SetSelectedDestinationServer(string server)
+        {
+            var servername = DestinationConnectControl.SelectServer(server);
+            var deployViewModel = DataContext as DeployViewModel;
+            if(deployViewModel != null)
+            {
+                deployViewModel.SelectedDestinationServer = servername.EnvironmentModel;
+                deployViewModel.CalculateStats();
+            }
+        }
+
+        public string GetValidationMessage()
+        {
+            var deployViewModel = DataContext as DeployViewModel;
+            var s = deployViewModel != null && deployViewModel.ServersAreNotTheSame ? ServersNotSame.Text:"";
+            return s;
+        }
+
+        public bool GetDeployState()
+        {
+            return Deploy.IsEnabled;
+        }
+
+        public bool GetSelectDependenciesState()
+        {
+            return Dependencies.IsEnabled;
+        }
+
+        public void SelectItemToDeploy(string resource)
+        {
+            SourceNavigationView.SelectItem(resource);
+        }
     }
 }
