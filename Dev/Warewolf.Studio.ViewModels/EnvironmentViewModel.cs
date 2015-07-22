@@ -49,6 +49,7 @@ namespace Warewolf.Studio.ViewModels
                 }
            
             });
+	        server.Connect();
             //ShowServerVersionCommand = new DelegateCommand(ShowServerVersionAbout);
             CanCreateFolder = Server.UserPermissions == Permissions.Administrator || server.UserPermissions == Permissions.Contribute;
             CreateFolderCommand = new DelegateCommand(CreateFolder);
@@ -140,6 +141,21 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
+        public void SelectItem(string path, Action<IExplorerItemViewModel> foundAction)
+        {
+            foreach (var explorerItemViewModel in Children)
+            {
+                explorerItemViewModel.Apply(a =>
+                {
+                    if (a.ResourcePath == path) 
+                    {
+                        a.IsExpanded = true;
+                        foundAction(a);
+                    }
+                });
+            }
+        }
+
         public void SetPropertiesForDialog()
         {
             CanCreateDbService = false;
@@ -158,7 +174,10 @@ namespace Warewolf.Studio.ViewModels
             CanShowVersions = false;
             CanCreateWorkflowService = false;
         }
-//
+
+
+
+	    //
 //        void Server_NetworkStateChanged(INetworkStateChangedEventArgs args)
 //        {
 //            switch (args.State)

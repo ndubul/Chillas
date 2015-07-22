@@ -11,8 +11,10 @@
 
 using System;
 using System.Web;
+using System.Windows;
 using Dev2.Common;
 using Dev2.Common.Common;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Events;
@@ -20,6 +22,10 @@ using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
 using Dev2.Webs.Callbacks;
+using Newtonsoft.Json;
+using Warewolf.Studio.AntiCorruptionLayer;
+using Warewolf.Studio.ViewModels;
+using Warewolf.Studio.Views;
 
 namespace Dev2.Webs
 {
@@ -371,35 +377,36 @@ namespace Dev2.Webs
 
             EnvironmentRepository.Instance.ActiveEnvironment = environment;
 
-            const string PageName = "dialogs/savedialog";
-            const double Width = 604;
-            const double Height = 450;
-            var workspaceId = GlobalConstants.ServerWorkspaceID;
-            const string LeftTitle = "Save";
-            string rightTitle = environment.Name + " (" + environment.Connection.AppServerUri + ")";
-            var envirDisplayName = FullyEncodeServerDetails(environment.Connection);
+            var requestView = new RequestServiceNameView();
+            IServer server;
+            var authenticationType = environment.Connection.AuthenticationType;
+            if(authenticationType == AuthenticationType.Windows || authenticationType == AuthenticationType.Anonymous)
+            {
+                server = new Server(environment.Connection.WebServerUri);
+            }
+            else
+            {
+                server = new Server(environment.Connection.WebServerUri.ToString(), "\\", "");
+            }
+            
             if (resourceModel.Category == null)
             {
                 resourceModel.Category = "";
             }
             var selectedPath = resourceModel.Category.Contains("Unassigned") || string.IsNullOrEmpty(resourceModel.Category) ? "" : resourceModel.Category;
             var lastIndexOf = selectedPath.LastIndexOf("\\", StringComparison.Ordinal);
-            if(lastIndexOf != -1)
+            if (lastIndexOf != -1)
             {
                 selectedPath = selectedPath.Substring(0, lastIndexOf);
             }
             selectedPath = selectedPath.Replace("\\", "\\\\");
-            var relativeUriString = string.Format("{0}?wid={1}&rid={2}&type={3}&title={4}&envir={5}&category={6}", PageName, workspaceId, resourceId, type, title, envirDisplayName, selectedPath);
-            if(!IsTestMode)
+            var requestViewModel = new RequestServiceNameViewModel(new EnvironmentViewModel(server), requestView, selectedPath);
+            var messageBoxResult = requestViewModel.ShowSaveDialog();
+            if(messageBoxResult == MessageBoxResult.OK)
             {
-                // this must be a property ;)
-                environment.ShowWebPageDialog(SiteName, relativeUriString, callbackHandler, Width, Height, LeftTitle, rightTitle);
-            }
-            else
-            {
-                // TODO : return the relativeUriString generated ;)
-                CallBackHandler = callbackHandler;
-                TestModeRelativeUri = relativeUriString;
+                var value = new { resourceName = requestViewModel.ResourceName.Name, resourcePath=requestViewModel.ResourceName.Path};
+                var serializeObject = JsonConvert.SerializeObject(value);
+                callbackHandler.Save(serializeObject, environment);
             }
         }
 
