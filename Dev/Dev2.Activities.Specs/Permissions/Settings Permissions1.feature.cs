@@ -10,12 +10,12 @@
 //  </auto-generated>
 // ------------------------------------------------------------------------------
 #region Designer generated code
-
-using TechTalk.SpecFlow;
-
 #pragma warning disable
 namespace Dev2.Activities.Specs.Permissions
 {
+    using TechTalk.SpecFlow;
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
@@ -50,7 +50,7 @@ namespace Dev2.Activities.Specs.Permissions
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "Settings Permissions")))
             {
-                FeatureSetup(null);
+                Dev2.Activities.Specs.Permissions.SettingsPermissionsFeature.FeatureSetup(null);
             }
         }
         
@@ -79,15 +79,15 @@ namespace Dev2.Activities.Specs.Permissions
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Server Permissions", @__tags);
-#line 8
+#line 14
 this.ScenarioSetup(scenarioInfo);
-#line 9
+#line 15
         testRunner.Given("I have a server \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
+#line 16
         testRunner.And(string.Format("it has \'{0}\' with \'{1}\'", group, givenRights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
+#line 17
         testRunner.When(string.Format("connected as user part of \'{0}\'", userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
+#line 18
         testRunner.Then(string.Format("resources should have \'{0}\'", rights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -374,19 +374,19 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting Selected Resource Permissions for users", @__tags);
-#line 33
-this.ScenarioSetup(scenarioInfo);
-#line 34
-        testRunner.Given("I have a server \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 35
-        testRunner.And(string.Format("it has \'{0}\' with \'{1}\'", group, givenRights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 36
-        testRunner.And(string.Format("Resource \'{0}\' has rights \'{1}\' for \'{2}\'", resourceName, resourceRights, userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
-        testRunner.When(string.Format("connected as user part of \'{0}\'", userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 38
-        testRunner.Then(string.Format("\'{0}\' should have \'{1}\'", resource, permissions), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 39
+this.ScenarioSetup(scenarioInfo);
+#line 40
+        testRunner.Given("I have a server \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 41
+        testRunner.And(string.Format("it has \'{0}\' with \'{1}\'", group, givenRights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
+        testRunner.And(string.Format("Resource \'{0}\' has rights \'{1}\' for \'{2}\'", resourceName, resourceRights, userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 43
+        testRunner.When(string.Format("connected as user part of \'{0}\'", userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 44
+        testRunner.Then(string.Format("\'{0}\' should have \'{1}\'", resource, permissions), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 45
   testRunner.And(string.Format("resources should not have \'{0}\'", rights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -731,19 +731,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SettingSelectedResourcePermissionsForUsersOverlappingGroups(string no, string group, string givenRights, string resourceName, string resourceRights, string userGroup, string resources, string rights, string resource, string permissions, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting Selected Resource Permissions for users overlapping groups", exampleTags);
-#line 60
-this.ScenarioSetup(scenarioInfo);
-#line 61
-        testRunner.Given("I have a server \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 62
-        testRunner.And(string.Format("it has \'{0}\' with \'{1}\'", group, givenRights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
-        testRunner.And(string.Format("Resource \'{0}\' has rights \'{1}\' for \'{2}\'", resourceName, resourceRights, userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 64
-        testRunner.When(string.Format("connected as user part of \'{0}\'", userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 65
-        testRunner.Then(string.Format("\'{0}\' should have \'{1}\'", resource, permissions), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 66
+this.ScenarioSetup(scenarioInfo);
+#line 67
+        testRunner.Given("I have a server \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 68
+        testRunner.And(string.Format("it has \'{0}\' with \'{1}\'", group, givenRights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 69
+        testRunner.And(string.Format("Resource \'{0}\' has rights \'{1}\' for \'{2}\'", resourceName, resourceRights, userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 70
+        testRunner.When(string.Format("connected as user part of \'{0}\'", userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 71
+        testRunner.Then(string.Format("\'{0}\' should have \'{1}\'", resource, permissions), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 72
   testRunner.And(string.Format("resources should have \'{0}\'", rights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1278,19 +1278,19 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting Selected Resource Permissions for users conflicting permissions", @__tags);
-#line 97
-this.ScenarioSetup(scenarioInfo);
-#line 98
-        testRunner.Given("I have a server \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 99
-        testRunner.And(string.Format("it has \'{0}\' with \'{1}\'", group, givenRights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 100
-        testRunner.And(string.Format("Resource \'{0}\' has rights \'{1}\' for \'{2}\'", resourceName, resourceRights, userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 101
-        testRunner.When(string.Format("connected as user part of \'{0}\'", userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 102
-        testRunner.Then(string.Format("\'{0}\' should have \'{1}\'", resource, permissions), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 103
+this.ScenarioSetup(scenarioInfo);
+#line 104
+        testRunner.Given("I have a server \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 105
+        testRunner.And(string.Format("it has \'{0}\' with \'{1}\'", group, givenRights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 106
+        testRunner.And(string.Format("Resource \'{0}\' has rights \'{1}\' for \'{2}\'", resourceName, resourceRights, userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 107
+        testRunner.When(string.Format("connected as user part of \'{0}\'", userGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 108
+        testRunner.Then(string.Format("\'{0}\' should have \'{1}\'", resource, permissions), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 109
   testRunner.And(string.Format("resources should have \'{0}\'", rights), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

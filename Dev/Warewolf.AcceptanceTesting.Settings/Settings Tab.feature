@@ -3,6 +3,20 @@
 	As a Warewolf User
 	I want to be shown and allowed to edit the server settings
 
+##Default Security Settings
+##Selecting Admin rights for public
+##Selecting Resource Permissions
+##Duplicate server permissions cannot be saved
+##Duplicate resource permissions cannot be saved
+##Save enables when I change server logs
+##Save enables when I change studio logs
+##Log File hyper link is opening log file
+##Studio Log File hyper link is opening log file
+##Server and studio defaults file size 
+##Server and studio log file size only accepts numbers
+##Load remote Server log file
+
+
 @Settings
 Scenario: Default Security Settings
 	Given I have settings tab opened
