@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -94,13 +95,14 @@ namespace Warewolf.Studio.ViewModels
                     {
                         GacItem = DllListings[1];
                     }
+                    if (actionToPerform != null)
+                    {
+                        actionToPerform();
+                    }
                 });
             }, () =>
             {
-                if(actionToPerform != null)
-                {
-                    actionToPerform();
-                }
+                
             });            
         }
 
@@ -204,35 +206,40 @@ namespace Warewolf.Studio.ViewModels
                 }
                 else
                 {
+                    var dllListingModel = DllListings.Find(model => model.Name == "File System");
+                    dllListingModel.IsExpanded = true;
                     var fileSystem = selectedDll.FullName.Split('\\');
-
+                    var dllListingModels = dllListingModel.Children;
+                    IDllListingModel itemToSelect = null;
                     foreach(var dir in fileSystem)
                     {
-                        foreach (var item in DllListings)
+                        var foundChild = ExpandChild(dir, dllListingModels);
+                        if(foundChild != null)
                         {
-                            if (item.Children != null && item.Name == dir)
-                            {
-                                DllListings.Find(model => model.Name == dir).IsExpanded = true;
-                            }
-                            else
-                            {
-                                if(item.Children != null)
-                                {
-                                    foreach(var child in item.Children)
-                                    {
-                                        if (child.Name.Contains('\\'))
-                                        {
-                                            child.Name = child.Name.Replace("\\", "");
-                                        }
-                                        DllListings.Find(model => child.Name == dir).IsExpanded = true;
-                                    }
-                                }
-                            }
+                            dllListingModels = foundChild.Children;
+                            itemToSelect = foundChild;
                         }
                     }
+                    if(itemToSelect != null)
+                    {
+                        SelectedDll = itemToSelect;
+                        SelectedDll.IsSelected = true;
+                    }
+                    
                 }
             }
             
+        }
+
+        // ReSharper disable once ParameterTypeCanBeEnumerable.Local
+        IDllListingModel ExpandChild(string dir, ObservableCollection<IDllListingModel> children)
+        {
+            var dllListingModel = children.FirstOrDefault(model => model.Name.StartsWith(dir));
+            if(dllListingModel != null)
+            {
+                dllListingModel.IsExpanded = true;
+            }
+            return dllListingModel;
         }
 
         public IDllListingModel SelectedDll
