@@ -104,6 +104,14 @@ Scenario Outline: Edit Source from Explorer
 	| 1  | SpecFlow | Edit - WebSeriveConnec | true   |
 
 
+Scenario: Connection name in tab header
+	Given I selected "Remote Connection Integration" as server
+	And I click "New"
+	Then "Remote Connection Integration"  is included in the tab name
+	But then I change the connection to "Local"
+	And I click "New"
+	Then "Remote Connection Integration" is not in tab name
+
 
 
 
