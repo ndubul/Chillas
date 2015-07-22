@@ -28,8 +28,7 @@
         <views:NotConverter x:Key="NotConverter" />
     </UserControl.Resources>
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding Path=Data.CreateFolderCommand}" Key="F2" />
-        <KeyBinding Command="{Binding Path=Data.CreateFolderCommand}" Key="F"  Modifiers="Control+Shift" />
+        <KeyBinding Command="{Binding Path=CreateFolderCommand}" Key="F"  Modifiers="Control+Shift" />
     </UserControl.InputBindings>
     <Grid>
         <Grid x:Name="Overlay" Panel.ZIndex="1000" Visibility="Collapsed">
@@ -118,11 +117,11 @@
                         DisplayMemberPath="DisplayName"
                         IsDraggable="True"
                         IsDropTarget="True"
+                        InitializeNode="ExplorerTree_OnInitializeNode"
                         SelectedDataItems="{Binding SelectedDataItems}"
                         ItemsSource="{Binding Environments}"
-                        NodeDragDrop="ExplorerTree_OnNodeDragDrop"
-                        NodeLineVisibility="Hidden" >
-
+                        NodeDragDrop="ExplorerTree_OnNodeDragDrop"                            
+                        NodeLineVisibility="Hidden" >                
                 <ig:DragDropManager.DragSource>
                     <ig:DragSource IsDraggable="True" DragChannels="ExplorerChannel" >
                     </ig:DragSource>
@@ -324,9 +323,6 @@
                                                                 Header="New Folder"
                                                                 Visibility="{Binding Path=Data.CanCreateFolder,
                                                                                      Converter={StaticResource BoolToVisibilityConverter}}">
-                                                        <ig:XamMenuItem.InputBindings>
-                                                            <KeyBinding Key="F" Modifiers="Control+Shift" Command="{Binding Path=Data.CreateFolderCommand}"/>
-                                                        </ig:XamMenuItem.InputBindings>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuSeparator  Visibility="{Binding Path=Data.CanDeploy,
                                                                                      Converter={StaticResource BoolToVisibilityConverter}}"/>
@@ -368,7 +364,6 @@
                                    TargetTypeName="IExplorerItemViewModel" 
                                    Visibility="{Binding Path=Data.IsVisible,                               
                                                     Converter={StaticResource BoolToVisibilityConverter}}">
-
                         <ig:NodeLayout.EditorTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -596,9 +591,6 @@
                                                                 Header="New Folder"
                                                                 Visibility="{Binding Path=Data.CanCreateFolder,                                                        
                                                                                      Converter={StaticResource BoolToVisibilityConverter}}">
-                                                        <ig:XamMenuItem.InputBindings>
-                                                            <KeyBinding Key="F" Modifiers="Control+Shift" Command="{Binding Path=Data.NewCommand}"/>
-                                                        </ig:XamMenuItem.InputBindings>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuItem Name="Rename"
 																InputGestureText="[F2]"

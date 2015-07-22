@@ -167,14 +167,15 @@ namespace Warewolf.Studio.ViewModels
                    CanCreateServerSource = CanCreateServerSource,
                    CanCreateWebService = CanCreateWebService,
                    CanCreateWebSource = CanCreateWebSource,
+                   ResourcePath = ResourcePath+"\\"+name,
                    CanCreateWorkflowService = CanCreateWorkflowService 
                   
                };
 				//child.SetFromServer(Server.Permissions.FirstOrDefault(a => a.IsServer));
-               
-               AddChild(child);
                 child.IsSelected = true;
-               child.IsRenaming = true;
+                child.IsRenaming = true;
+               AddChild(child);
+               
             }
 
         }
@@ -348,7 +349,7 @@ namespace Warewolf.Studio.ViewModels
                 }
                 else
                 {
-                    if (_explorerRepository != null && (IsRenaming && _explorerRepository.Rename(this, value)))
+                    if (_explorerRepository != null && (IsRenaming && _explorerRepository.Rename(this, NewName(value))))
                     {
                         _resourceName = value;
                     }
@@ -361,7 +362,15 @@ namespace Warewolf.Studio.ViewModels
             }
         }
         }
-        public ICollection<IExplorerItemViewModel> Children
+
+	    string NewName(string value)
+	    {
+            if (!ResourcePath.Contains("\\"))
+                return value;
+            return ResourcePath.Substring(0, 1 + ResourcePath.LastIndexOf('\\')) + value;
+	    }
+
+	    public ICollection<IExplorerItemViewModel> Children
         {
             get
             {

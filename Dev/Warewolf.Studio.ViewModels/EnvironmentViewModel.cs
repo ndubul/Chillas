@@ -113,12 +113,13 @@ namespace Warewolf.Studio.ViewModels
                    ResourceName = name,
                    ResourceId = id,
                    ResourceType = ResourceType.Folder,
+                   ResourcePath = name
                };
+                child.IsSelected = true;
+                child.IsRenaming = true;
                _children.Add(child);
                OnPropertyChanged(() => Children);
-               child.IsSelected = true;
-               child.IsRenaming = true;
-             
+               
             
         }
 
