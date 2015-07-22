@@ -9,8 +9,10 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
+using Dev2.ConnectionHelpers;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.CustomControls.Connections
@@ -68,8 +70,19 @@ namespace Dev2.CustomControls.Connections
         {
             foreach(var item in TheServerComboBox.Items)
             {
-                TheServerComboBox.SelectedItem = "";
-            };
+                var env = item as IConnectControlEnvironment;
+                if (env != null && env.DisplayName == server)
+                    try
+                    {
+                        TheServerComboBox.SelectedItem = env;
+                    }
+                    catch(Exception)
+                    {
+                        
+                       
+                    }
+                  
+            }
         }
     }
 }

@@ -958,7 +958,7 @@ namespace Dev2.Studio.ViewModels.Deploy
         private void SelectSourceServerFromInitialValue()
         {
             IEnvironmentModel environment = null;
-            if(_initialItemResourceID != Guid.Empty)
+            if (_initialItemEnvironmentID != Guid.Empty)
             {
                 environment = EnvironmentRepository.FindSingle(model => model.ID == _initialItemEnvironmentID);
             }

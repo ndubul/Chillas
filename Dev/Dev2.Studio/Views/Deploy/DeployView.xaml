@@ -268,6 +268,7 @@
                                 HorizontalAlignment="Left"
                                 Orientation="Horizontal">
                         <Button AutomationProperties.AutomationId="UI_SelectDepbtn_AutoID"
+                                x:Name="Dependencies"
                                 Content="Select All Dependencies"
                                 Width="Auto"
                                 Style="{StaticResource ButtonOrangeStyle}"
@@ -338,7 +339,7 @@
                         <StackPanel Orientation="Horizontal"
                                 Margin="{StaticResource ControlBorderRight}"
                                 Visibility="{Binding ServersAreNotTheSame, Converter={StaticResource BoolToVisibilityConverterNegative}}">
-                            <TextBlock Foreground="{StaticResource ValidationErrorElement}"
+                            <TextBlock x:Name="ServersNotSame" Foreground="{StaticResource ValidationErrorElement}"
                                    Text="Source and Destination cannot be the same."
                                    AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
                                    VerticalAlignment="Center" />
@@ -349,7 +350,8 @@
                             <TextBlock Foreground="{StaticResource ValidationErrorElement}"
                                    Text="{Binding ServerDisconnectedMessage}"
                                    AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
-                                   VerticalAlignment="Center" />
+                                   VerticalAlignment="Center"
+                                   x:Name="ErrorMessage"    />
                         </StackPanel>
 
                         <customControls2:CircularProgressBar Height="15"
@@ -363,7 +365,8 @@
                                 IsEnabled="{Binding CanDeploy}"
                                 Style="{StaticResource ButtonOrangeStyle}"
                                 MaxWidth="50"
-                                MinWidth="50" />
+                                MinWidth="50" 
+                                x:Name="Deploy"/>
                     </StackPanel>
                 </Grid>
             </Grid>
