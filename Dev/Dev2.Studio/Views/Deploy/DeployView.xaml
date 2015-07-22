@@ -13,6 +13,11 @@
              Name="DeployUserControl"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance deploy:DeployViewModel}">
+    <UserControl.Resources>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="20" />
+        </Style>
+    </UserControl.Resources>
     <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -76,6 +81,10 @@
                                     <Setter Property="Background" Value="#F3700D" />
                                     <Setter Property="Foreground" Value="White" />
                                 </DataTrigger>
+                                <DataTrigger Binding="{Binding IsChecked}" Value="true">
+                                    <Setter Property="Background" Value="#F3700D" />
+                                    <Setter Property="Foreground" Value="White" />
+                                </DataTrigger>
                                 <DataTrigger Binding="{Binding IsConnected}" Value="False">
                                     <Setter Property="ContentControl.Foreground" Value="{StaticResource DisabledForegroundBrush}" />
                                 </DataTrigger>
@@ -129,7 +138,7 @@
                 </nv:NavigationView>
             </Grid>
 
-            <GridSplitter Grid.Row="0" Grid.Column="1" Width="2" Margin="3,0,3,0" />
+            <GridSplitter Grid.Row="0" Grid.Column="1" Width="2" Margin="3,0,3,0" FlowDirection="LeftToRight" />
 
             <Grid Grid.Row="0" Grid.Column="2">
                 <Grid.RowDefinitions>

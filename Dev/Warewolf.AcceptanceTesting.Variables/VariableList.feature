@@ -18,6 +18,8 @@ Feature: VariableList
 #Ensure delete button in the textbox is deleting variable in the variable textbox.
 #Ensure removal from design surface updates list and list updates change list correctly
 #Ensure bad variable names are in an error state
+#Ensure unused variables do not appear in Debug Input window
+#Ensure shorcut keys work
 
 Scenario: Variables adding in variable list and removing unused
 	Given I have variables as
@@ -198,4 +200,34 @@ Scenario: Variables removed from design surface and list
 	| lr().a         | YES              |                  |       |        |
 	| rec()          |                  |                  |       |        |
 	| rec().a        |                  | YES              |       | YES    |
+
+
+
+Scenario: Ensure unused variables do not appear in Debug Input window
+	Given I have variables as
+    | Variable    | Note              | Input | Output | IsUsed |
+    | [[rec().a]] | This is recordset |       | YES    | YES    |
+    | [[rec().b]] |                   |       |        |        |
+    | [[mr()]]    |                   |       |        | YES    |
+    | [[Var]]     |                   | YES   |        | YES    |
+    | [[a]]       |                   |       |        |        |
+    | [[lr().a]]  |                   |       |        |        |
+	When I press "F5"
+	And the Debug Input window is opened
+	Then the variables appear as
+	 | Variable | Note | Input | Output | IsUsed |
+	 | [[mr()]] |      |       |        | YES    |
+	 | [[Var]]  |      | YES   |        | YES    |
+
+
+Scenario Outline: Ensure shorcut keys work
+	Given I have variables as
+    | Variable | Note | Input | Output | IsUsed |
+    | [[var]]  |      |       | YES    | YES    |
+	And I press '<Keys>'
+	Then cursor focus is '<Focus>'
+Examples:
+	| Keys  | Focus          |
+	| Enter | New blank line |
+	| Tab   | Input Checkbox |
 	
