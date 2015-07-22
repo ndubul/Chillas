@@ -60,8 +60,8 @@ namespace Warewolf.Studio.ViewModels
             OkCommand = new DelegateCommand(Save, CanSave);
             CancelCommand = new DelegateCommand(() => CloseAction.Invoke());
             ClearSearchTextCommand = new DelegateCommand(() => SearchTerm = "");
-            RefreshCommand = new DelegateCommand(PerformLoadAll);
-            PerformLoadAll();
+            RefreshCommand = new DelegateCommand(() => PerformLoadAll());
+            
             _warewolfserverName = updateManager.ServerName;
             
         }
@@ -80,7 +80,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        void PerformLoadAll()
+        void PerformLoadAll(Action actionToPerform=null)
         {
             AsyncWorker.Start(() =>
             {
@@ -95,6 +95,12 @@ namespace Warewolf.Studio.ViewModels
                         GacItem = DllListings[1];
                     }
                 });
+            }, () =>
+            {
+                if(actionToPerform != null)
+                {
+                    actionToPerform();
+                }
             });            
         }
 
@@ -162,7 +168,7 @@ namespace Warewolf.Studio.ViewModels
             : this(updateManager, aggregator, asyncWorker)
         {
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
-
+            PerformLoadAll();
             RequestServiceNameViewModel = requestServiceNameViewModel;
             Item = ToModel();
         }
@@ -173,67 +179,60 @@ namespace Warewolf.Studio.ViewModels
         {
             VerifyArgument.IsNotNull("pluginSource", pluginSource);
             _pluginSource = pluginSource;
+            var fromDll = pluginSource.SelectedDll;
             SetupHeaderTextFromExisting();
-            FromSource(pluginSource);
+            PerformLoadAll(() => FromSource(fromDll));
+            
             ToItem();
         }
 
-        void FromSource(IPluginSource pluginSource)
+        void FromSource(IDllListing pluginSource)
         {
-//            var selectedDll = pluginSource.SelectedDll;
-//            if (selectedDll != null)
-//            {
-//                if (selectedDll.FullName.StartsWith("GAC:"))
-//                {
-//                    var dllListingModel = DllListings.Find(model => model.Name == "GAC");
-//                    dllListingModel.IsExpanded = true;
-//                    var itemToSelect = dllListingModel.Children.FirstOrDefault(model => model.FullName == selectedDll.FullName);
-//                    if (itemToSelect != null)
-//                    {
-//                        SelectedDll = itemToSelect;
-//                        itemToSelect.IsSelected = true;
-//                    }
-//                }
-//                else
-//                {
-//                    var fileSystem = selectedDll.FullName.Split('\\');
-//
-//                    foreach(var dir in fileSystem)
-//                    {
-//                        foreach (var item in DllListings)
-//                        {
-//                            if (item.Children != null && item.Name == dir)
-//                            {
-//                                DllListings.Find(model => model.Name == dir).IsExpanded = true;
-//                            }
-//                            else
-//                            {
-//                                if(item.Children != null)
-//                                {
-//                                    foreach(var child in item.Children)
-//                                    {
-//                                        if (child.Name.Contains('\\'))
-//                                        {
-//                                            child.Name = child.Name.Replace("\\", "");
-//                                        }
-//                                        DllListings.Find(model => child.Name == dir).IsExpanded = true;
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            
-            //Selected DLL Full Name - Split it by \
-            //Selected DLL Full Name - Path.GetParts
-            // FullName will Start with GAC then look in GAC
-            // DllListings.Find(Name=="GAC").IsExpanded = true
-            // Find the File System DllListings
-            // Expand that item
-            // Find the Drive expand it
-            // In drive children find folder expand rinse and repeat till at file name
-            SelectedDll = new DllListingModel(_updateManager, pluginSource.SelectedDll);
+            var selectedDll = pluginSource;
+            if (selectedDll != null)
+            {
+                if (selectedDll.FullName.StartsWith("GAC:"))
+                {
+                    var dllListingModel = DllListings.Find(model => model.Name == "GAC");
+                    dllListingModel.IsExpanded = true;
+                    var itemToSelect = dllListingModel.Children.FirstOrDefault(model => model.FullName == selectedDll.FullName);
+                    if (itemToSelect != null)
+                    {
+                        SelectedDll = itemToSelect;
+                        itemToSelect.IsSelected = true;
+                    }
+                }
+                else
+                {
+                    var fileSystem = selectedDll.FullName.Split('\\');
+
+                    foreach(var dir in fileSystem)
+                    {
+                        foreach (var item in DllListings)
+                        {
+                            if (item.Children != null && item.Name == dir)
+                            {
+                                DllListings.Find(model => model.Name == dir).IsExpanded = true;
+                            }
+                            else
+                            {
+                                if(item.Children != null)
+                                {
+                                    foreach(var child in item.Children)
+                                    {
+                                        if (child.Name.Contains('\\'))
+                                        {
+                                            child.Name = child.Name.Replace("\\", "");
+                                        }
+                                        DllListings.Find(model => child.Name == dir).IsExpanded = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
         }
 
         public IDllListingModel SelectedDll
@@ -339,7 +338,8 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        void ToItem()
+        void 
+            ToItem()
         {
             Item = new PluginSourceDefinition { Id = _pluginSource.Id, Name = _pluginSource.Name, Path = _pluginSource.Path, SelectedDll = SelectedDll };
         }
