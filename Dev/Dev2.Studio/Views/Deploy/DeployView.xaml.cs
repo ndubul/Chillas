@@ -52,7 +52,13 @@ namespace Dev2.Studio.Views.Deploy
 
         public void SetSelectedDestinationServer(string server)
         {
-            DestinationConnectControl.SelectServer(server);
+            var servername = DestinationConnectControl.SelectServer(server);
+            var deployViewModel = DataContext as DeployViewModel;
+            if(deployViewModel != null)
+            {
+                deployViewModel.SelectedDestinationServer = servername.EnvironmentModel;
+                deployViewModel.CalculateStats();
+            }
         }
 
         public string GetValidationMessage()

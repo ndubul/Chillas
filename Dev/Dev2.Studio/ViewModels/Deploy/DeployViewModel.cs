@@ -631,7 +631,7 @@ namespace Dev2.Studio.ViewModels.Deploy
         /// <summary>
         /// Recalculates
         /// </summary>
-        private void CalculateStats(bool updateSuccess = true)
+        public void CalculateStats(bool updateSuccess = true)
         {
             if (updateSuccess)
             DeploySuccessfull = false;

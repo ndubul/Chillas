@@ -8,6 +8,7 @@ using Dev2.Common.Interfaces.Threading;
 using Dev2.ConnectionHelpers;
 using Dev2.CustomControls.Connections;
 using Dev2.Models;
+using Dev2.Services.Security;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Deploy;
 using Dev2.Studio.ViewModels.Deploy;
@@ -51,6 +52,12 @@ namespace Warewolf.AcceptanceTesting.Deploy
             remote.Setup(a => a.ID).Returns(remoteId);
             IConnectControlEnvironment envLocal = new ConnectControlEnvironment() { AllowEdit = true, ConnectedText = "connected", DisplayName = "localhost", EnvironmentModel = local.Object, IsConnected = true };
             IConnectControlEnvironment envRemote = new ConnectControlEnvironment() { AllowEdit = true, ConnectedText = "connected", DisplayName = "localhost", EnvironmentModel = remote.Object, IsConnected = true };
+
+            var svcLocal = new Mock<IAuthorizationService>();
+            svcLocal.Setup(a => a.IsAuthorized(It.IsAny<AuthorizationContext>(), It.IsAny<string>())).Returns(true);
+            local.Setup(a => a.AuthorizationService).Returns(svcLocal.Object);
+            var svcRem = new Mock<IAuthorizationService>();
+            
             var conServers = new ObservableCollection<IConnectControlEnvironment>{envLocal,envRemote};
             servers.Add(local.Object);
             servers.Add(remote.Object);
@@ -86,14 +93,24 @@ namespace Warewolf.AcceptanceTesting.Deploy
 
         private static void SetupSourceItems(Mock<IStudioResourceRepository> resRepo,IConnectControlSingleton conn )
         {
-           
-            var gChild = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "Examples", ResourcePath = "Examples\\Utility - Date and Time" };
-            var child = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "Examples", ResourcePath = "Examples", Children = new ObservableCollection<IExplorerItemModel>() { gChild } };
-            var root = new ExplorerItemModel(conn,resRepo.Object){DisplayName = "root",ResourcePath = "", Children = new ObservableCollection<IExplorerItemModel>(){child}};
-           
-            
+       
+            resRepo.Setup(a => a.Filter(It.IsAny<Func<IExplorerItemModel, bool>>())).Returns(() =>
+                {
+                    var gChild = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "Examples", ResourcePath = "Examples\\Utility - Date and Time" };
+                    var child = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "Examples", ResourcePath = "Examples", Children = new ObservableCollection<IExplorerItemModel>() { gChild } };
+                    var root = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "root", ResourcePath = "", Children = new ObservableCollection<IExplorerItemModel>() { child } };
 
-            resRepo.Setup(a => a.Filter(It.IsAny<Func<IExplorerItemModel, bool>>())).Returns(()=>new ObservableCollection<IExplorerItemModel>(){root});
+                    return new ObservableCollection<IExplorerItemModel>() { root }; }
+                );
+            resRepo.Setup(a => a.FindItem(It.IsAny<Func<IExplorerItemModel, bool>>())).Returns(() =>
+            {
+                var gChild = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "Examples", ResourcePath = "Examples\\Utility - Date and Time" };
+                var child = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "Examples", ResourcePath = "Examples", Children = new ObservableCollection<IExplorerItemModel>() { gChild } };
+                var root = new ExplorerItemModel(conn, resRepo.Object) { DisplayName = "root", ResourcePath = "", Children = new ObservableCollection<IExplorerItemModel>() { child } };
+
+                return root;
+            }
+                );
         }
 
         [Given(@"I have deploy tab opened")]

@@ -66,7 +66,7 @@ namespace Dev2.CustomControls.Connections
 
         #endregion
 
-        public void SelectServer(string server)
+        public IConnectControlEnvironment SelectServer(string server)
         {
             foreach(var item in TheServerComboBox.Items)
             {
@@ -75,14 +75,16 @@ namespace Dev2.CustomControls.Connections
                     try
                     {
                         TheServerComboBox.SelectedItem = env;
+                        return env;
                     }
                     catch(Exception)
                     {
-                        
+                        return env;
                        
                     }
                   
             }
+            return null;
         }
     }
 }

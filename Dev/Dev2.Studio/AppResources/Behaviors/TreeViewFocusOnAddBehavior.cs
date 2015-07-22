@@ -91,7 +91,7 @@ namespace Dev2.Studio.AppResources.Behaviors
             nodes = collectionView.SourceCollection as ObservableCollection<IExplorerItemModel>;
             if(nodes != null)
             {
-                nodes.ToList().ForEach(c => AttachSourceCollectionChangedHandler(c.Children));
+                nodes.ToList().ForEach(c => { if(c!=null) AttachSourceCollectionChangedHandler(c.Children); });
             }
         }
 

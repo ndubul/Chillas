@@ -125,8 +125,7 @@
                                 <Border Style="{StaticResource UnauthorizedTreeViewBorderStyle}"
                                         Visibility="{Binding IsAuthorizedDeployFrom, Converter={StaticResource BoolToVisibilityConverterNegative}}">
                                     <StackPanel Style="{StaticResource UnauthorizedTreeViewStackPanelStyle}">
-                                        <Image Style="{StaticResource AuthNoneIconRibbonStyle}"
-                                                   AutomationProperties.AutomationId="UI_Unautherized_DeployFromImage_AutoID" />
+                                        <fa:FontAwesome Icon="Ban" Height="14" Width="14"></fa:FontAwesome>
                                         <TextBlock Style="{StaticResource UnauthorizedTreeViewTextBlockStyle}"
                                                    Text="{x:Static help:HelpTextResources.DeploySecurityFromUnauthorized}"
                                                    AutomationProperties.AutomationId="UI_Unautherized_DeployFrom_AutoID" />

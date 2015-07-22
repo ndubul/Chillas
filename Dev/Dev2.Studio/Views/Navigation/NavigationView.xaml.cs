@@ -70,7 +70,12 @@ namespace Dev2.Studio.Views.Navigation
         {
             var vm = DataContext as DeployNavigationViewModel;
             var explorerItems = vm.ExplorerItemModels.First();
-            explorerItems.AllChildren().Where(a => a.ResourcePath == resource).Apply(a=>a.SetIsChecked(true,false,false,false));
+            var children = explorerItems.AllChildren().Where(a => a.ResourcePath == resource);
+            foreach(var a in children)
+            {
+               a.SetIsChecked(true, false, false, true); 
+            }
+            
            
         }
     }
@@ -81,11 +86,13 @@ namespace Dev2.Studio.Views.Navigation
         {
             if( item.Children==null || !item.Children.Any())
             {
-                return item.Children;
+                return new List<IExplorerItemModel>(){ item};
             }
             else
             {
-                return item.Children.SelectMany(AllChildren);
+                var currList = new List<IExplorerItemModel>() { item };
+                currList.AddRange( item.Children.SelectMany(AllChildren));
+                return currList;
             }
         }
     }
