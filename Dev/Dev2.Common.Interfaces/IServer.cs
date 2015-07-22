@@ -33,7 +33,7 @@ namespace Dev2.Common.Interfaces
        
         string GetServerVersion();
 
-       
+        void Connect();
     }
 
     //public delegate void PermissionsChanged(PermissionsChangedArgs args);

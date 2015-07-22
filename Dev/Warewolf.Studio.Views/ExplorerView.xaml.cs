@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Explorer;
 using Infragistics.Controls.Menus;
 
 namespace Warewolf.Studio.Views
@@ -152,6 +154,40 @@ namespace Warewolf.Studio.Views
 	    /// <param name="connectionId">An identifier token to distinguish calls.</param><param name="target">The target to connect events and names to.</param>
 	    public void Connect(int connectionId, object target)
 	    {
+	    }
+
+	    void NodePropertyChanged(object sender, PropertyChangedEventArgs e)
+	    {
+            if (e.PropertyName == "IsRenaming")
+	        {
+	            var item = sender as IExplorerItemViewModel;
+	            if(item != null && item.IsRenaming)
+	            {
+	                
+	            }
+
+	        }
+	    }
+
+	    void ExplorerTree_OnInitializeNode(object sender, InitializeNodeEventArgs e)
+	    {
+	        if(e.Node == null)
+	        {
+	            return;
+	        }
+	        var dataItem = e.Node.Data as IExplorerItemViewModel;
+	        if(dataItem == null)
+	        {
+	            return;
+	        }
+	        if(!dataItem.IsRenaming)
+	        {
+	            return;
+	        }
+	        if(dataItem.ResourceName.StartsWith("New Folder"))
+	        {
+	            ExplorerTree.EnterEditMode(e.Node);
+	        }
 	    }
 	}
 }

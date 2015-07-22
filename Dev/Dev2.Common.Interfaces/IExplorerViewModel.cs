@@ -23,6 +23,8 @@ namespace Dev2.Common.Interfaces
 	    IExplorerTreeItem SelectedItem { get; set; }
 	    object[] SelectedDataItems { get; set; }
 	    ICommand ClearSearchTextCommand { get; }
+	    ICommand CreateFolderCommand { get; }
+
 	    void SelectItem(Guid id);
 	    IList<IExplorerItemViewModel> FindItems(Func<IExplorerItemViewModel, bool> filterFunc);
 	}

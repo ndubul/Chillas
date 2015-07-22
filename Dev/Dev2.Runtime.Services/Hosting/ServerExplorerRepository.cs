@@ -217,12 +217,6 @@ namespace Dev2.Runtime.Hosting
             _sync = sync;
         }
 
-
-
-
-
-    
-
         public IExplorerRepositoryResult DeleteItem(IExplorerItem itemToDelete, Guid workSpaceId)
         {
             if (itemToDelete == null)
@@ -295,6 +289,7 @@ namespace Dev2.Runtime.Hosting
                                 return new ExplorerRepositoryResult(ExecStatus.Fail, "Requested folder already exists on server.");
                             }
                             Directory.CreateIfNotExists(dir);
+                            AddItemToCollection(itemToAdd);
                             _sync.AddItemMessage(itemToAdd);
                             return new ExplorerRepositoryResult(ExecStatus.Success, "");
                         }
