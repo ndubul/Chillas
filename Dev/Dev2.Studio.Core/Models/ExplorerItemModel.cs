@@ -1567,13 +1567,16 @@ namespace Dev2.Models
 
         void UpdateChildren(bool updateChildren)
         {
-            if(!updateChildren || !_isChecked.HasValue)
+            if (!updateChildren || !_isChecked.HasValue)
             {
                 return;
             }
-            foreach(var c in Children)
+            if (Children != null && Children.Count > 0)
             {
-                c.SetIsChecked(_isChecked, true, false,false);
+                foreach (var c in Children)
+                {
+                    c.SetIsChecked(_isChecked, true, false, false);
+                }
             }
         }
 
