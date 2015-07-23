@@ -110,7 +110,7 @@ namespace Dev2.Studio
                 Environment.Exit(Environment.ExitCode);
             }
 
-            Browser.Startup();
+         
 
             
             InitializeShell(e);
@@ -195,7 +195,6 @@ namespace Dev2.Studio
             ProgressFileDownloader.PerformCleanup(new DirectoryWrapper(), GlobalConstants.VersionDownloadPath, new FileWrapper());
             HasShutdownStarted = true;
             DebugDispatcher.Instance.Shutdown();
-            Browser.Shutdown();
             try
             {
                 base.OnExit(e);

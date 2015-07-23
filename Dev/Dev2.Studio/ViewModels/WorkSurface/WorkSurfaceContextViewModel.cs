@@ -177,7 +177,7 @@ namespace Dev2.Studio.ViewModels.WorkSurface
         #region ctors
 
         public WorkSurfaceContextViewModel(WorkSurfaceKey workSurfaceKey, IWorkSurfaceViewModel workSurfaceViewModel)
-            : this(EventPublishers.Aggregator, workSurfaceKey, workSurfaceViewModel, new PopupController(), (a, b) => RootWebSite.ShowNewWorkflowSaveDialog(a, null, b))
+            : this(EventPublishers.Aggregator, workSurfaceKey, workSurfaceViewModel, new PopupController(), (a, b) => SaveDialogHelper.ShowNewWorkflowSaveDialog(a, null, b))
         {
         }
 
@@ -609,7 +609,7 @@ namespace Dev2.Studio.ViewModels.WorkSurface
 
         public void ShowSaveDialog(IContextualResourceModel resourceModel, bool addToTabManager)
         {
-            RootWebSite.ShowNewWorkflowSaveDialog(resourceModel, null, addToTabManager);
+            SaveDialogHelper.ShowNewWorkflowSaveDialog(resourceModel, null, addToTabManager);
         }
 
         public void Save(bool isLocalSave = false, bool isStudioShutdown = false)

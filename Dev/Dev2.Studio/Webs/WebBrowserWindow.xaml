@@ -11,7 +11,7 @@
         Style="{StaticResource WindowBorderlessStyle}"
         ShowInTaskbar="True"
         WindowStartupLocation="CenterOwner">
-
+    <!--
     <Window.Resources>
         <Style TargetType="StackPanel"
                x:Key="StackPanelTopBorder">
@@ -83,11 +83,7 @@
             </StackPanel>
         </Grid>
 
-        <cs:WebView x:Name="Browser"
-                    Grid.Row="1"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Margin="-1,0,0,0" />
-    </Grid>
+
+    </Grid>-->
 
 </Window>

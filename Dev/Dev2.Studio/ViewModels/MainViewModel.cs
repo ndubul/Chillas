@@ -420,7 +420,7 @@ namespace Dev2.Studio.ViewModels
             StudioResourceRepository = studioResourceRepository ?? Dev2.AppResources.Repositories.StudioResourceRepository.Instance;
             PopupProvider = popupController ?? new PopupController();
             WindowManager = windowManager ?? new WindowManager();
-            WebController = webController ?? new WebController();
+ 
             EnvironmentRepository = environmentRepository;
             FlowController = new FlowController(PopupProvider);
             _menuPanelWidth = 60;
@@ -1030,13 +1030,13 @@ namespace Dev2.Studio.ViewModels
 
         public Action<IContextualResourceModel, IEnvironmentModel, string, string> ShowSaveDialog
         {
-            get { return _showSaveDialog ?? RootWebSite.ShowNewOAuthsourceSaveDialog; }
+            get { return _showSaveDialog ?? SaveDialogHelper.ShowNewOAuthsourceSaveDialog; }
             set { _showSaveDialog = value; }
         }
         
         public Action<IContextualResourceModel, IEnvironmentModel, string, string,string,AuthenticationType> ShowSharepointSourceServerSaveDialog
         {
-            get { return _showSharepointServerSourceSaveDialog ?? RootWebSite.ShowNewSharepointServerSourceSaveDialog; }
+            get { return _showSharepointServerSourceSaveDialog ?? SaveDialogHelper.ShowNewSharepointServerSourceSaveDialog; }
             set { _showSharepointServerSourceSaveDialog = value; }
         }
         public Func<DropBoxViewWindow, DropBoxSourceViewModel, bool?> ShowDropboxAction
@@ -1963,10 +1963,10 @@ namespace Dev2.Studio.ViewModels
 
         #endregion
 
-        public void Handle(FileChooserMessage message)
-        {
-            RootWebSite.ShowFileChooser(ActiveEnvironment, message);
-        }
+        //public void Handle(FileChooserMessage message)
+        //{
+        //    RootWebSite.ShowFileChooser(ActiveEnvironment, message);
+        //}
 
         public Func<bool> IsBusyDownloadingInstaller;
         public Func<DropBoxViewWindow, DropBoxSourceViewModel, bool?> _showDropAction;
@@ -2030,5 +2030,13 @@ namespace Dev2.Studio.ViewModels
                 return _menuViewModel;
             }
         }
+
+        #region Implementation of IHandle<FileChooserMessage>
+
+        public void Handle(FileChooserMessage message)
+        {
+        }
+
+        #endregion
     }
 }

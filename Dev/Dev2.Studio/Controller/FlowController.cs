@@ -24,7 +24,6 @@ using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Data.SystemTemplates.Models;
 using Dev2.Services.Events;
 using Dev2.Studio.Core.AppResources.ExtensionMethods;
-using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
 using Dev2.Utilities;
 using Dev2.Webs;
@@ -135,8 +134,8 @@ namespace Dev2.Studio.Controller
             try
             {
                 var resultSwitch = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
-                    Utilities.ActivityHelper.InjectExpression(resultSwitch, expressionText);
-                    Utilities.ActivityHelper.SetDisplayName(args.ModelItem, resultSwitch); // MUST use args.ModelItem otherwise it won't be visible!
+                    ActivityHelper.InjectExpression(resultSwitch, expressionText);
+                    ActivityHelper.SetDisplayName(args.ModelItem, resultSwitch); // MUST use args.ModelItem otherwise it won't be visible!
             }
             catch
             {
@@ -176,7 +175,7 @@ namespace Dev2.Studio.Controller
             try
             {
                 var ds = JsonConvert.DeserializeObject<Dev2Switch>(_callBackHandler.ModelData);
-                    Utilities.ActivityHelper.SetSwitchKeyProperty(ds, args.ModelItem);
+                    ActivityHelper.SetSwitchKeyProperty(ds, args.ModelItem);
             }
             catch
             {
@@ -278,10 +277,10 @@ namespace Dev2.Studio.Controller
 
         #region Protected Methods
 
-        protected static Dev2DecisionCallbackHandler StartDecisionWizard(IEnvironmentModel environmentModel, string val)
-        {
-            return RootWebSite.ShowDecisionDialog(environmentModel, val);
-        }
+        //protected static Dev2DecisionCallbackHandler StartDecisionWizard(IEnvironmentModel environmentModel, string val)
+        //{
+        //    return RootWebSite.ShowDecisionDialog(environmentModel, val);
+        //}
 
         protected static Dev2DecisionCallbackHandler StartDecisionWizard(ModelItem mi)
         {
@@ -307,10 +306,10 @@ namespace Dev2.Studio.Controller
             return null;
         }
 
-        protected virtual Dev2DecisionCallbackHandler StartSwitchDropWizard(IEnvironmentModel environmentModel, string val)
-        {
-            return RootWebSite.ShowSwitchDropDialog(environmentModel, val);
-        }
+        //protected virtual Dev2DecisionCallbackHandler StartSwitchDropWizard(IEnvironmentModel environmentModel, string val)
+        //{
+        //    return RootWebSite.ShowSwitchDropDialog(environmentModel, val);
+        //}
 
         #endregion
 

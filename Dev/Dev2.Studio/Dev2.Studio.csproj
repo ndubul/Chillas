@@ -99,14 +99,6 @@
     <Reference Include="Caliburn.Micro">
       <HintPath>..\Binaries\Caliburn.Micro.dll</HintPath>
     </Reference>
-    <Reference Include="CefSharp, Version=0.12.4596.50, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Binaries\CefSharp\CefSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp.Wpf, Version=0.12.4596.54, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Binaries\CefSharp\CefSharp.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory, Version=2.0.5058.16094, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
@@ -521,21 +513,13 @@
     <Compile Include="Webs\Callbacks\SharepointServerSourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\ShowDependencyProvider.cs" />
     <Compile Include="Webs\Callbacks\WebSourceCallbackHandler.cs" />
-    <Compile Include="Webs\Callbacks\DbServiceCallbackHandler.cs" />
-    <Compile Include="Webs\Callbacks\DbSourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\SaveNewWorkflowCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\SourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\WebsiteCallbackHandler.cs" />
     <Compile Include="Webs\IWebController.cs" />
     <Compile Include="Webs\Callbacks\ServiceCallbackHandler.cs" />
     <Compile Include="Webs\RootWebSite.cs" />
-    <Compile Include="Webs\WebBrowserViewModel.cs" />
-    <Compile Include="Webs\WebBrowserWindow.xaml.cs">
-      <DependentUpon>WebBrowserWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Webs\WebController.cs" />
     <Compile Include="Webs\WebHelper.cs" />
-    <Compile Include="Webs\WebSites.cs" />
     <Compile Include="Webs\Callbacks\Dev2DecisionCallbackHandler.cs" />
     <Compile Include="AppResources\Comparers\DeployStatsTOComparer.cs" />
     <Compile Include="AppResources\DependencyVisualization\Arrows\ArrowEnds.cs" />
@@ -952,10 +936,6 @@
     <Page Include="Views\Workflow\WorkflowInputDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Webs\WebBrowserWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
