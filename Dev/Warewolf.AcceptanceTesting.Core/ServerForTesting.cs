@@ -32,9 +32,9 @@ namespace Warewolf.AcceptanceTesting.Core
         {
         }
 
-        public Task<bool> Connect()
+        public void Connect()
         {
-            return Task.FromResult(true);
+           // return Task.FromResult(true);
         }
 
         public List<IResource> Load()
