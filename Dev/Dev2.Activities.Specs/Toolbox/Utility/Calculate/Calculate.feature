@@ -3,6 +3,20 @@
 	As a Warewolf user
 	I want a tool that I can input a formula and will calculate and retun a result
 
+##Calculate using a given formula
+##Calculate using multiple scalars and recordset inputs
+##Calculate with new lines should concatenate values
+##Calculate using Recordset (*) input in an agregate function like SUM
+##Calculate using incorrect formula
+##Calculate using incorrect argument expression for formula 
+##Calculate using variable as full calculation
+##Calculate using a negative index recordset value
+##Calculate using isnumber and blank
+##Calculate Assign by evaluating a variable inside a variable
+##Calculate Assign by evaluating a variable inside a variable with function
+##Calculate Assign by evaluating variables with functions
+
+
 Scenario: Calculate using a given formula
 	Given I have the formula "mod(sqrt(49), 7)"	
 	When the calculate tool is executed
@@ -57,7 +71,7 @@ Scenario: Calculate using Recordset (*) input in an agregate function like SUM
 	| fx =                             |
 	| SUM([[var(*).int]]) = SUM(1,2,3) |	
 	And the debug output as 
-	|                 |
+	|                |
 	| [[result]] = 6 |
 
 Scenario: Calculate using incorrect formula
@@ -332,6 +346,21 @@ Scenario Outline: Calculate Assign by evaluating variables with functions
 	| 169 | TRUE                                                       | TRUE                      |
 
 
-
+Scenario: Calculate using Recordset () input in an agregate function like SUM
+	Given I have a calculate variable "[[var().int]]" equal to 
+	| var().int	|
+	| 1			|
+	| 2			|
+	| 3			|
+	And I have the formula "SUM([[var().int]])"
+	When the calculate tool is executed
+	Then the calculate result should be "3"
+	And the execution has "NO" error
+	And the debug inputs as  
+	| fx =                             |
+	| SUM([[var().int]]) = SUM(3) |	
+	And the debug output as 
+	|                 |
+	| [[result]] = 3 |
 
 

@@ -945,11 +945,6 @@ namespace Dev2.Core.Tests
             int HitCounter = 0;
             IContextualResourceModel payloadResourceModel = null;
             MockStudioResourceRepository.Setup(repository => repository.AddResouceItem(It.IsAny<IContextualResourceModel>()));
-            WebController.Setup(w => w.DisplayDialogue(It.IsAny<IContextualResourceModel>(), false)).Callback((IContextualResourceModel c, bool b1) =>
-                {
-                    HitCounter++;
-                    payloadResourceModel = c;
-                });
 
             Mock<IAuthorizationService> mockAuthService = new Mock<IAuthorizationService>();
             mockAuthService.Setup(c => c.GetResourcePermissions(It.IsAny<Guid>())).Returns(Permissions.Administrator);
@@ -975,11 +970,7 @@ namespace Dev2.Core.Tests
             int HitCounter = 0;
             IContextualResourceModel payloadResourceModel = null;
             MockStudioResourceRepository.Setup(repository => repository.AddResouceItem(It.IsAny<IContextualResourceModel>()));
-            WebController.Setup(w => w.DisplayDialogue(It.IsAny<IContextualResourceModel>(), false)).Callback((IContextualResourceModel c, bool b1) =>
-                {
-                    HitCounter++;
-                    payloadResourceModel = c;
-                });
+  
 
             Mock<IAuthorizationService> mockAuthService = new Mock<IAuthorizationService>();
             mockAuthService.Setup(c => c.GetResourcePermissions(It.IsAny<Guid>())).Returns(Permissions.Administrator);
@@ -1005,11 +996,7 @@ namespace Dev2.Core.Tests
             int HitCounter = 0;
             IContextualResourceModel payloadResourceModel = null;
             MockStudioResourceRepository.Setup(repository => repository.AddResouceItem(It.IsAny<IContextualResourceModel>()));
-            WebController.Setup(w => w.DisplayDialogue(It.IsAny<IContextualResourceModel>(), true)).Callback((IContextualResourceModel c, bool b1) =>
-                {
-                    HitCounter++;
-                    payloadResourceModel = c;
-                });
+
 
             Mock<IAuthorizationService> mockAuthService = new Mock<IAuthorizationService>();
             mockAuthService.Setup(c => c.GetResourcePermissions(It.IsAny<Guid>())).Returns(Permissions.Administrator);

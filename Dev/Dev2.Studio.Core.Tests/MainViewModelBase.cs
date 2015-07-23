@@ -62,7 +62,7 @@ namespace Dev2.Core.Tests
         protected Mock<IResourceRepository> ResourceRepo;
         protected Mock<IContextualResourceModel> SecondResource;
         protected const string ServiceDefinition = "<x/>";
-        protected Mock<IWebController> WebController;
+
         protected Mock<IWindowManager> WindowManager;
         protected Mock<IAuthorizationService> AuthorizationService;
         protected Mock<IEnvironmentModel> ActiveEnvironment;
@@ -86,7 +86,6 @@ namespace Dev2.Core.Tests
 
             EventAggregator = new Mock<IEventAggregator>();
             PopupController = new Mock<IPopupController>();
-            WebController = new Mock<IWebController>();
             WindowManager = new Mock<IWindowManager>();
             MockStudioResourceRepository = new Mock<IStudioResourceRepository>();
             Mock<IAsyncWorker> asyncWorker = AsyncWorkerTests.CreateSynchronousAsyncWorker();
@@ -106,7 +105,6 @@ namespace Dev2.Core.Tests
             EventAggregator = new Mock<IEventAggregator>();
             EventPublishers.Aggregator = EventAggregator.Object;
             PopupController = new Mock<IPopupController>();
-            WebController = new Mock<IWebController>();
             WindowManager = new Mock<IWindowManager>();
             CustomContainer.Register(WindowManager.Object);
             BrowserPopupController = new Mock<IBrowserPopupController>();

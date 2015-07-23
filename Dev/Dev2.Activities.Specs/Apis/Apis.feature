@@ -3,8 +3,16 @@
 	As a math idiot
 	I want to be told the sum of two numbers
 
-@Apis
+#Ensure all relevant information is displayed
+#Ensure all information is displayed per work flow for the Apis
+#Ensure that the .json and .api url contain workflow permissions
+#Ensure the baseUrl permissions are valid
+#Ensure that if permissions are not granted that the relevant information appears
+#Ensure Access will be denied if permissions changed
+#Ensure api returns correctly
 
+
+@Apis
 Scenario: Ensure all relevant information is displayed
 	Given I execute "http://localhost:3142/apis.json" 
 	When the request returns
@@ -34,7 +42,7 @@ Scenario: Ensure all information is displayed per work flow for the Apis
 	| Description         | null                                                                                            |
 	| Image               | null                                                                                            |
 	| humanUrl            | null                                                                                            |
-	| baseUrl             | "http://RSAKLFLEROY:3142/secure/Acceptance Testing Resources/InOut.json  "                      |
+	| baseUrl             | "http://RSAKLFLEROY:3142/secure/Acceptance Testing Resources/InOut.json"                        |
 	| version             | null                                                                                            |
 	| Tags                | null                                                                                            |
 	| properties          | type = swagger; value = "http://RSAKLFLEROY:3142/secure/Acceptance Testing Resources/InOut.api" |
@@ -93,9 +101,11 @@ Scenario: Ensure Access will be denied if permissions changed
 	| Output                                   |
 	| Access has been denied for this request. |
 
-Scenario: Ensure api returns correctly
-	Given I execute "http://rsaklfleroy:3142/public/Hello%20World.api"
-	And public permissions are "View,Execute,Contribute"
-	When the request returns
-	Then "http://rsaklfleroy:3142/public/Hello%20World.api" properties appear as
-	| 
+
+
+#Scenario: Ensure api returns correctly
+#	Given I execute "http://rsaklfleroy:3142/secure/Outter.api"
+#	And public permissions are "View,Execute,Contribute"
+#	When the request returns
+#	Then "http://rsaklfleroy:3142/secure/Outter.api" properties appear as
+#	| 
