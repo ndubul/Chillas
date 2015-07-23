@@ -397,7 +397,9 @@ namespace Dev2.CustomControls.Connections
             return true;
         }
 
+#pragma warning disable 649
         private readonly Action<IEnvironmentModel, ResourceType, string, string, string, string, string> _openWizard;
+#pragma warning restore 649
 
         public void OpenConnectionWizard(int selectedIndex)
         {
