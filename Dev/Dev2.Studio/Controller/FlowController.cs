@@ -100,7 +100,7 @@ namespace Dev2.Studio.Controller
             try
             {
 
-                    string tmp = WebHelper.CleanModelData(_callBackHandler.ModelData);
+                    string tmp = FlowNodeHelper.CleanModelData(_callBackHandler.ModelData);
                 var dds = JsonConvert.DeserializeObject<Dev2DecisionStack>(tmp);
 
                 if(dds == null)

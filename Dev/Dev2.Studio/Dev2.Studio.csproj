@@ -512,13 +512,11 @@
     <Compile Include="Webs\Callbacks\NetworkHelper.cs" />
     <Compile Include="Webs\Callbacks\SharepointServerSourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\ShowDependencyProvider.cs" />
-    <Compile Include="Webs\Callbacks\WebSourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\SaveNewWorkflowCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\SourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\WebsiteCallbackHandler.cs" />
-    <Compile Include="Webs\IWebController.cs" />
     <Compile Include="Webs\Callbacks\ServiceCallbackHandler.cs" />
-    <Compile Include="Webs\RootWebSite.cs" />
+    <Compile Include="Webs\SaveDialogHelper.cs" />
     <Compile Include="Webs\WebHelper.cs" />
     <Compile Include="Webs\Callbacks\Dev2DecisionCallbackHandler.cs" />
     <Compile Include="AppResources\Comparers\DeployStatsTOComparer.cs" />
@@ -1309,7 +1307,6 @@
   <ItemGroup>
     <Folder Include="AppResources\Exceptions\" />
     <Folder Include="Resources\NewFolder1\" />
-    <Folder Include="Wizards\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)'=='true'">
