@@ -11,12 +11,7 @@
                                  Style="{DynamicResource ContentViewStyle}">
 
     <sap:ActivityDesigner.Icon>
-        <DrawingBrush Stretch="Uniform">
-            <DrawingBrush.Drawing>
-                <ImageDrawing Rect="0, 0, 16, 16"
-                              ImageSource="{StaticResource SharepointLogo}" />
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
+        <Binding Source="{StaticResource SharepointLogo}"/>
     </sap:ActivityDesigner.Icon>
 
     <sap:ActivityDesigner.Resources>
