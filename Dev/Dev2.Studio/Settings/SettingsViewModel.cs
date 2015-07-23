@@ -378,27 +378,36 @@ namespace Dev2.Settings
         void AddPropertyChangedHandlers()
         {
             var isDirtyProperty = DependencyPropertyDescriptor.FromProperty(SettingsItemViewModel.IsDirtyProperty, typeof(SettingsItemViewModel));
-            isDirtyProperty.AddValueChanged(LogSettingsViewModel, OnIsDirtyPropertyChanged);
-            isDirtyProperty.AddValueChanged(SecurityViewModel, OnIsDirtyPropertyChanged);
-            SecurityViewModel.PropertyChanged += (sender, args) =>
+            if (LogSettingsViewModel != null)
             {
-                if (args.PropertyName == "IsDirty")
+                isDirtyProperty.AddValueChanged(LogSettingsViewModel, OnIsDirtyPropertyChanged);
+                LogSettingsViewModel.PropertyChanged += (sender, args) =>
                 {
-                    OnIsDirtyPropertyChanged(null, new EventArgs());
-                }
-            };
-            LogSettingsViewModel.PropertyChanged += (sender, args) =>
+                    if (args.PropertyName == "IsDirty")
+                    {
+                        OnIsDirtyPropertyChanged(null, new EventArgs());
+                    }
+                };
+            }
+            if (SecurityViewModel != null)
             {
-                if (args.PropertyName == "IsDirty")
+                isDirtyProperty.AddValueChanged(SecurityViewModel, OnIsDirtyPropertyChanged);
+                SecurityViewModel.PropertyChanged += (sender, args) =>
                 {
-                    OnIsDirtyPropertyChanged(null, new EventArgs());
-                }
-            };
+                    if (args.PropertyName == "IsDirty")
+                    {
+                        OnIsDirtyPropertyChanged(null, new EventArgs());
+                    }
+                };
+            }
         }
 
         void OnIsDirtyPropertyChanged(object sender, EventArgs eventArgs)
         {
-            IsDirty = SecurityViewModel.IsDirty || LogSettingsViewModel.IsDirty;
+            if (SecurityViewModel != null && LogSettingsViewModel != null)
+            {
+                IsDirty = SecurityViewModel.IsDirty || LogSettingsViewModel.IsDirty;
+            }
             NotifyOfPropertyChange(() => SecurityHeader);
             NotifyOfPropertyChange(() => LogHeader);
             ClearErrors();
