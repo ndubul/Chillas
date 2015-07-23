@@ -1305,6 +1305,10 @@
       <Project>{F9FE2CE9-625E-4E7F-8F4C-FCE28BB59510}</Project>
       <Name>Warewolf.Studio.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warewolf.Studio.Resources\Warewolf.Studio.Resources.csproj">
+      <Project>{CB565C94-8833-4911-B20F-0921EE3C286C}</Project>
+      <Name>Warewolf.Studio.Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warewolf.Studio.ServerProxyLayer\Warewolf.Studio.ServerProxyLayer.csproj">
       <Project>{C35C7C88-1EAE-4421-AC03-CEFA26461D6C}</Project>
       <Name>Warewolf.Studio.ServerProxyLayer</Name>

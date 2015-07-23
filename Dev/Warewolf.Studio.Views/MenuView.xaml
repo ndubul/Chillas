@@ -411,6 +411,7 @@
             <!-- HELP -->
             <Button Grid.Row="16"
                     Grid.Column="1"
+                    Command="{Binding SupportCommand}"
                     Width="{Binding ButtonWidth}"
                     HorizontalAlignment="Left"
                     Style="{StaticResource SideMenuButtonStyle}"

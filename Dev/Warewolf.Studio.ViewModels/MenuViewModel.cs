@@ -10,6 +10,7 @@
 */
 
 using System;
+using System.Diagnostics;
 using System.Windows.Input;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Studio;
@@ -28,6 +29,7 @@ namespace Warewolf.Studio.ViewModels
         bool _isOverLock;
         ICommand _saveCommand;
         ICommand _executeServiceCommand;
+        ICommand _supportCommand;
 
         public MenuViewModel(IMainViewModel mainViewModel)
         {
@@ -47,6 +49,10 @@ namespace Warewolf.Studio.ViewModels
             OnPropertyChanged(() => ExecuteServiceCommand);
             CheckForNewVersion(_viewModel);
             CheckForNewVersionCommand = new DelegateCommand(_viewModel.DisplayDialogForNewVersion);
+            SupportCommand = new DelegateCommand(() =>
+            {
+                Process.Start(Resources.Languages.Core.WarewolfHelpURL);
+            });
 
             LockCommand = new DelegateCommand(Lock);
             SlideOpenCommand = new DelegateCommand(() =>
@@ -71,6 +77,7 @@ namespace Warewolf.Studio.ViewModels
             IsPanelOpen = true;
         }
 
+        public ICommand SupportCommand { get; set; }
         public ICommand DeployCommand { get; set; }
         public ICommand NewCommand { get; set; }
         public ICommand SaveCommand

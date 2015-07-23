@@ -48,6 +48,7 @@ namespace Dev2.Common.Interfaces.Studio
         ICommand IsNotOverLockCommand { get; }
         string NewServiceToolTip { get; }
         string SaveToolTip { get; }
+        ICommand SupportCommand { get; }
 
         void Lock();
     }

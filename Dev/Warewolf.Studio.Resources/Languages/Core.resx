@@ -1042,4 +1042,7 @@ You need Administrator permission.</value>
   <data name="WarewolfCopyright" xml:space="preserve">
     <value>Copyright © 2015 Warewolf, All rights reserved.</value>
   </data>
+  <data name="WarewolfHelpURL" xml:space="preserve">
+    <value>http://warewolf.io/knowledge-base/</value>
+  </data>
 </root>

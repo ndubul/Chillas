@@ -2220,6 +2220,15 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://warewolf.io/knowledge-base/.
+        /// </summary>
+        public static string WarewolfHelpURL {
+            get {
+                return ResourceManager.GetString("WarewolfHelpURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://warewolf.io/.
         /// </summary>
         public static string WarewolfUrl {

@@ -335,14 +335,14 @@
                                                      WindowPositionMenuVisibility="Hidden" >
                                 <views:ToolboxUserControl x:Name="Toolboxcontrol" AutomationProperties.AutomationId="UI_ToolboxControl_AutoID" />
                             </igDock:ContentPane>
-                            <!--<igDock:ContentPane x:Name="Help"
+                            <igDock:ContentPane x:Name="Help"
                                                      AllowClose="False"
                                                      AllowInDocumentHost="False"
                                                      CloseButtonVisibility="Hidden"
                                                      Header="WHAT DOES THIS DO?"
                                                      IsPinned="True"
                                                      Style="{StaticResource DockmangerToolPaneStyle}"
-                                                     WindowPositionMenuVisibility="Hidden" />-->
+                                                     WindowPositionMenuVisibility="Hidden" />
                         </igDock:SplitPane>
                     </igDock:XamDockManager.Panes>
                     <!-- Document Content Host - For Tabbed workflow pane -->
