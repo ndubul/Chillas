@@ -126,6 +126,7 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         }
 
         [Given(@"I open New Plugin Source")]
+        [When(@"I open New Plugin Source")]
         public void GivenIOpenNewPluginSource()
         {
             var sourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);

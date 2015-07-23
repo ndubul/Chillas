@@ -225,6 +225,11 @@
     <Compile Include="..\Dev2.IntegrationTests\Services.Sql\SqlServerTestUtils.cs">
       <Link>Toolbox\Recordset\SqlBulkInsert\SqlServerTestUtilss.cs</Link>
     </Compile>
+    <Compile Include="Apis\Apis.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Apis.feature</DependentUpon>
+    </Compile>
     <Compile Include="BaseTypes\CommonSteps.cs" />
     <Compile Include="BaseTypes\FileToolsBase.cs" />
     <Compile Include="BaseTypes\RecordSetBase.cs" />
@@ -503,6 +508,10 @@
     <Compile Include="Toolbox\Utility\XPath\XPathSteps.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Apis\Apis.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Apis.feature.cs</LastGenOutput>
+    </None>
     <None Include="App.config" />
     <None Include="Composition\WorkflowExecution.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
