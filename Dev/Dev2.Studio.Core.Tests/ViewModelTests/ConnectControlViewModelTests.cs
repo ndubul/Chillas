@@ -666,7 +666,7 @@ namespace Dev2.Core.Tests.ViewModelTests
                 };
             environmentRepository.Setup(e => e.All()).Returns(environments);
             //------------Execution-------------------------------
-            var viewModel = new ConnectControlViewModel(mainViewModel.Object, environmentRepository.Object, e => { }, connectControlSingleton.Object, "TEST : ", true, (model, type, arg3, arg4, arg5, arg6, arg7) => { }) { SelectedServerIndex = 0 };
+            var viewModel = new ConnectControlViewModel(mainViewModel.Object, environmentRepository.Object, e => { }, connectControlSingleton.Object, "TEST : ", true) { SelectedServerIndex = 0 };
             //------------Assert------------------------------
             Assert.IsNotNull(viewModel);
             Assert.AreEqual(2, viewModel.SelectedServerIndex);
@@ -706,10 +706,7 @@ namespace Dev2.Core.Tests.ViewModelTests
             ICollection<IEnvironmentModel> environments = new Collection<IEnvironmentModel>();
             environmentRepository.Setup(e => e.All()).Returns(environments);
             var actualEnvironmentId = Guid.Empty.ToString();
-            var viewModel = new ConnectControlViewModel(mainViewModel.Object, environmentRepository.Object, e => { }, connectControlSingleton.Object, "TEST : ", true, (model, type, arg3, arg4, environmentId, arg6, arg7) =>
-                {
-                    actualEnvironmentId = environmentId;
-                });
+            var viewModel = new ConnectControlViewModel(mainViewModel.Object, environmentRepository.Object, e => { }, connectControlSingleton.Object, "TEST : ", true);
             //------------Execution-------------------------------
             viewModel.OpenConnectionWizard(-1);
             //------------Assert------------------------------
@@ -751,10 +748,7 @@ namespace Dev2.Core.Tests.ViewModelTests
             ICollection<IEnvironmentModel> environments = new Collection<IEnvironmentModel>();
             environmentRepository.Setup(e => e.All()).Returns(environments);
             var actualEnvironmentId = Guid.Empty.ToString();
-            var viewModel = new ConnectControlViewModel(mainViewModel.Object, environmentRepository.Object, e => { }, connectControlSingleton.Object, "TEST : ", true, (model, type, arg3, arg4, environmentId, arg6, arg7) =>
-            {
-                actualEnvironmentId = environmentId;
-            });
+            var viewModel = new ConnectControlViewModel(mainViewModel.Object, environmentRepository.Object, e => { }, connectControlSingleton.Object, "TEST : ", true);
             //------------Execution-------------------------------
             viewModel.OpenConnectionWizard(1);
             //------------Assert------------------------------

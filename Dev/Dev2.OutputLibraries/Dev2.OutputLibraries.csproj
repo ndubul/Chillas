@@ -94,56 +94,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Binaries\CefSharp\avcodec-54.dll">
-      <Link>avcodec-54.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Binaries\CefSharp\avformat-54.dll">
-      <Link>avformat-54.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Binaries\CefSharp\avutil-51.dll">
-      <Link>avutil-51.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Binaries\CefSharp\CefSharp.dll">
-      <Link>CefSharp.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Binaries\CefSharp\CefSharp.Wpf.dll">
-      <Link>CefSharp.Wpf.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Binaries\CefSharp\d3dcompiler_43.dll">
-      <Link>d3dcompiler_43.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Binaries\CefSharp\d3dx9_43.dll">
-      <Link>d3dx9_43.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Binaries\CefSharp\icudt.dll">
-      <Link>icudt.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Binaries\CefSharp\libcef.dll">
-      <Link>libcef.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Binaries\CefSharp\libEGL.dll">
-      <Link>libEGL.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Binaries\CefSharp\libGLESv2.dll">
-      <Link>libGLESv2.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Binaries\CefSharp\chrome.pak">
-      <Link>chrome.pak</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="..\Binaries\CefSharp\locales\am.pak">
       <Link>locales\am.pak</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

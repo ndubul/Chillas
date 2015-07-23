@@ -99,14 +99,6 @@
     <Reference Include="Caliburn.Micro">
       <HintPath>..\Binaries\Caliburn.Micro.dll</HintPath>
     </Reference>
-    <Reference Include="CefSharp, Version=0.12.4596.50, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Binaries\CefSharp\CefSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp.Wpf, Version=0.12.4596.54, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Binaries\CefSharp\CefSharp.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="CubicOrange.Windows.Forms.ActiveDirectory, Version=2.0.5058.16094, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\CubicOrange.Windows.Forms.ActiveDirectory.dll</HintPath>
@@ -326,7 +318,6 @@
     <Compile Include="AppResources\Behaviors\TreeviewScrollToEndOnNewContent.cs" />
     <Compile Include="AppResources\Behaviors\UserControlFocusNextAndPreviousBehaviour.cs" />
     <Compile Include="AppResources\Behaviors\WindowCloseBehviour.cs" />
-    <Compile Include="AppResources\Behaviors\WebControlTitleBehaviour.cs" />
     <Compile Include="AppResources\Behaviors\WorkflowDesignerLinkBehaviours.cs" />
     <Compile Include="AppResources\Behaviors\XamlDockManagerLayoutPersistenceBehavior.cs" />
     <Compile Include="AppResources\Converters\ExplorerItemModelToIconConverter.cs" />
@@ -520,22 +511,12 @@
     <Compile Include="Webs\Callbacks\NetworkHelper.cs" />
     <Compile Include="Webs\Callbacks\SharepointServerSourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\ShowDependencyProvider.cs" />
-    <Compile Include="Webs\Callbacks\WebSourceCallbackHandler.cs" />
-    <Compile Include="Webs\Callbacks\DbServiceCallbackHandler.cs" />
-    <Compile Include="Webs\Callbacks\DbSourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\SaveNewWorkflowCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\SourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\WebsiteCallbackHandler.cs" />
-    <Compile Include="Webs\IWebController.cs" />
     <Compile Include="Webs\Callbacks\ServiceCallbackHandler.cs" />
-    <Compile Include="Webs\RootWebSite.cs" />
-    <Compile Include="Webs\WebBrowserViewModel.cs" />
-    <Compile Include="Webs\WebBrowserWindow.xaml.cs">
-      <DependentUpon>WebBrowserWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Webs\WebController.cs" />
+    <Compile Include="Webs\SaveDialogHelper.cs" />
     <Compile Include="Webs\WebHelper.cs" />
-    <Compile Include="Webs\WebSites.cs" />
     <Compile Include="Webs\Callbacks\Dev2DecisionCallbackHandler.cs" />
     <Compile Include="AppResources\Comparers\DeployStatsTOComparer.cs" />
     <Compile Include="AppResources\DependencyVisualization\Arrows\ArrowEnds.cs" />
@@ -563,7 +544,6 @@
     <Compile Include="InterfaceImplementors\BlankIntellisenseProvider.cs" />
     <Compile Include="InterfaceImplementors\UserMessageProviderImpl.cs" />
     <Compile Include="InterfaceImplementors\WizardResourceKeys\ResourceKeys.cs" />
-    <Compile Include="InterfaceImplementors\WizardResourceKeys\StudioToWizardBridge.cs" />
     <Compile Include="Model\ExceptionUIModel.cs" />
     <Compile Include="StartupResources\SplashScreen.cs" />
     <Compile Include="Deploy\DeployStatsTO.cs" />
@@ -953,10 +933,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Webs\WebBrowserWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -1329,7 +1305,6 @@
   <ItemGroup>
     <Folder Include="AppResources\Exceptions\" />
     <Folder Include="Resources\NewFolder1\" />
-    <Folder Include="Wizards\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)'=='true'">

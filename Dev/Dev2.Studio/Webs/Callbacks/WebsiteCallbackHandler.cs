@@ -44,7 +44,7 @@ namespace Dev2.Webs.Callbacks
             ShowDependencyProvider = showDependencyProvider ?? new ShowDependencyProvider();
         }
 
-        public IShowDependencyProvider ShowDependencyProvider { get; set; }
+        IShowDependencyProvider ShowDependencyProvider { get; set; }
 
         #region Properties
 

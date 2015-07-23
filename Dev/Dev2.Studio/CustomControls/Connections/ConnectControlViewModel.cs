@@ -24,7 +24,6 @@ using Dev2.Interfaces;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
-using Dev2.Webs;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.CustomControls.Connections
@@ -80,7 +79,7 @@ namespace Dev2.CustomControls.Connections
                                         Action<IEnvironmentModel> callbackHandler,
                                         IConnectControlSingleton connectControlSingleton,
                                         string labelText,
-                                        bool bindToActiveEnvironment, Action<IEnvironmentModel, ResourceType, string, string, string, string, string> openWizard = null)
+                                        bool bindToActiveEnvironment)
         {
             VerifyArgument.IsNotNull("callbackHandler", callbackHandler);
             VerifyArgument.IsNotNull("connectControlSingleton", connectControlSingleton);
@@ -102,15 +101,6 @@ namespace Dev2.CustomControls.Connections
             _bindToActiveEnvironment = bindToActiveEnvironment;
             _connectControlSingleton.ConnectedStatusChanged += ConnectedStatusChanged;
             _connectControlSingleton.ConnectedServerChanged += ConnectedServerChanged;
-
-            if(openWizard == null)
-            {
-                _openWizard = (environmentModel, resourceType, resourcePath, category, resourceId, sourceId, resourceName) => RootWebSite.ShowDialog(environmentModel, resourceType, resourcePath, category, resourceId, sourceId, resourceName);
-            }
-            else
-            {
-                _openWizard = openWizard;
-            }
 
             SetSelectedEnvironment();
         }
@@ -407,7 +397,9 @@ namespace Dev2.CustomControls.Connections
             return true;
         }
 
+#pragma warning disable 649
         private readonly Action<IEnvironmentModel, ResourceType, string, string, string, string, string> _openWizard;
+#pragma warning restore 649
 
         public void OpenConnectionWizard(int selectedIndex)
         {
