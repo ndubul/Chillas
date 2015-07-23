@@ -56,6 +56,7 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
         }
 
         [Given(@"the Save Dialog is opened")]
+        [Then(@"the Save Dialog is opened")]
         public void GivenTheSaveDialogIsOpened()
         {
             IRequestServiceNameView saveView;

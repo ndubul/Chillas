@@ -31,13 +31,16 @@ Scenario: Saving a Workflow in localhost
 	Then "Newworkflow" is visible in "localhost"
 
 
-Scenario: Saving a Workflow in localhost folder
+Scenario: Saving a Workflow in localhost nested folder and shows correctly on reload
 	Given the Save Dialog is opened
 	And the "localhost" server is visible in save dialog
 	And I open "Folder 1" in save dialog 
+	When I create "This" in "localhost/Folder 1"
 	When I save "Newworkflow"
-	Then "Newworkflow" is visible in "localhost/Folder 1"	
-
+	Then "Newworkflow" is visible in "localhost/Folder 1/This"	
+	And the Save Dialog is opened
+	And I open "localhost/Folder 1/This" in save dialog 
+	Then "Newworkflow" is visible in "localhost/Folder 1/This"	
 	
 Scenario: Save button is Enabled when I enter new name for resource and filter
 	Given the Save Dialog is opened
