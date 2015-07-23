@@ -33,7 +33,7 @@
                                   KeyboardNavigation.TabIndex="1" />
                         <Border x:Name="Border"
                                 Grid.Row="1"
-                                BorderThickness="0,0,0,0"
+                                BorderThickness="0,1,0,0"
                                 BorderBrush="{StaticResource WareWolfBlackBrush}"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabIndex="2"
@@ -59,6 +59,15 @@
         <Setter Property="TextBlock.Background" Value="{StaticResource WareWolfWhiteBrush}" />
         <Setter Property="Border.BorderBrush" Value="{StaticResource TabItemSelectedBackgroundBrush}" />
     </Style>
+    <Thickness x:Key="TabItemBorderThicknessSelected">1,1,1,0</Thickness>
+    <LinearGradientBrush x:Key="TabItemBackgroundColorSelected" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="White" Offset="0" />
+        <GradientStop Color="White" Offset="0.2" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TabItemBorderColorSelected" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="{StaticResource WarewolfBlack}" Offset="0" />
+        <GradientStop Color="Black" Offset="0.2" />
+    </LinearGradientBrush>
 
     <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
         <Setter Property="BorderBrush" Value="{StaticResource TabItemBorderBrush}"></Setter>
@@ -94,16 +103,16 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Panel.ZIndex" Value="100" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource WareWolfBlackBrush}"/>
-                            <!--<Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemBorderBrush}" />-->
-                            <!--<Setter TargetName="ContentSite" Property="Style" Value="{StaticResource TabBackgroundStyle}" />-->
                             <Setter Property="Opacity" >
                                 <Setter.Value>1</Setter.Value>
                             </Setter>
+                            <Setter TargetName="Border" Property="BorderThickness" Value="{StaticResource TabItemBorderThicknessSelected}" />
+                            <Setter TargetName="Border" Property="Height" Value="35" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource TabItemBorderColorSelected}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemBackgroundColorSelected}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
-                            <!--<Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemBorderBrush}" />-->
-                            <!--<Setter TargetName="ContentSite" Property="Style" Value="{StaticResource TabBackgroundStyle}" />-->
+                            <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,1"/>
                             <Setter Property="Opacity" >
                                 <Setter.Value>0.5</Setter.Value>
                             </Setter>
