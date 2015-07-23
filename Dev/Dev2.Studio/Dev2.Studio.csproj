@@ -545,7 +545,6 @@
     <Compile Include="InterfaceImplementors\BlankIntellisenseProvider.cs" />
     <Compile Include="InterfaceImplementors\UserMessageProviderImpl.cs" />
     <Compile Include="InterfaceImplementors\WizardResourceKeys\ResourceKeys.cs" />
-    <Compile Include="InterfaceImplementors\WizardResourceKeys\StudioToWizardBridge.cs" />
     <Compile Include="Model\ExceptionUIModel.cs" />
     <Compile Include="StartupResources\SplashScreen.cs" />
     <Compile Include="Deploy\DeployStatsTO.cs" />
