@@ -49,6 +49,7 @@ namespace Warewolf.Studio.ViewModels
                 }
            
             });
+	        server.Connect();
             //ShowServerVersionCommand = new DelegateCommand(ShowServerVersionAbout);
             CanCreateFolder = Server.UserPermissions == Permissions.Administrator || server.UserPermissions == Permissions.Contribute;
             CreateFolderCommand = new DelegateCommand(CreateFolder);
@@ -113,12 +114,13 @@ namespace Warewolf.Studio.ViewModels
                    ResourceName = name,
                    ResourceId = id,
                    ResourceType = ResourceType.Folder,
+                   ResourcePath = name
                };
+                child.IsSelected = true;
+                child.IsRenaming = true;
                _children.Add(child);
                OnPropertyChanged(() => Children);
-               child.IsSelected = true;
-               child.IsRenaming = true;
-             
+               
             
         }
 
@@ -131,6 +133,21 @@ namespace Warewolf.Studio.ViewModels
                 explorerItemViewModel.Apply(a =>
                 {
                     if (a.ResourceId == id)
+                    {
+                        a.IsExpanded = true;
+                        foundAction(a);
+                    }
+                });
+            }
+        }
+
+        public void SelectItem(string path, Action<IExplorerItemViewModel> foundAction)
+        {
+            foreach (var explorerItemViewModel in Children)
+            {
+                explorerItemViewModel.Apply(a =>
+                {
+                    if (a.ResourcePath == path) 
                     {
                         a.IsExpanded = true;
                         foundAction(a);
@@ -157,7 +174,10 @@ namespace Warewolf.Studio.ViewModels
             CanShowVersions = false;
             CanCreateWorkflowService = false;
         }
-//
+
+
+
+	    //
 //        void Server_NetworkStateChanged(INetworkStateChangedEventArgs args)
 //        {
 //            switch (args.State)

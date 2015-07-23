@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Text;
 using Dev2.Common;
 using Dev2.Common.Interfaces.Core.DynamicServices;
+using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Hosting;
 using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Communication;
@@ -54,10 +55,9 @@ namespace Dev2.Runtime.ESB.Management.Services
                 {
                     throw new ArgumentException("newName value not supplied.");
                 }
-                
-                var itemToRename = serializer.Deserialize<ServerExplorerItem>(itemToBeRenamed);
-                Dev2Logger.Log.Info(String.Format("Rename Item. Path:{0} NewPath:{1}", itemToBeRenamed, newName));
-                item = ServerExplorerRepo.RenameItem(itemToRename, newName.ToString(), GlobalConstants.ServerWorkspaceID);
+                var explorerItem = ServerExplorerRepo.Find(Guid.Parse(itemToBeRenamed.ToString()));
+                Dev2Logger.Log.Info(String.Format("Rename Item. Path:{0} NewPath:{1}", explorerItem.ResourcePath, newName));
+                item = ServerExplorerRepo.RenameItem(explorerItem, newName.ToString(), GlobalConstants.ServerWorkspaceID);
             }
             catch(Exception e)
             {

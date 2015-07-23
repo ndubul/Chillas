@@ -748,9 +748,9 @@ namespace Dev2.Studio.ViewModels
         void EditPluginSource(IContextualResourceModel resourceModel)
         {
             var db = new PluginSource(resourceModel.WorkflowXaml.ToXElement());
-            var def = new PluginSourceDefinition()
+            var def = new PluginSourceDefinition
             {
-                 SelectedDll = new DllListing(){FullName = db.AssemblyName, Name = db.AssemblyName, Children = new Collection<IDllListing>(),IsDirectory = false},
+                 SelectedDll = new DllListing{FullName = db.AssemblyLocation, Name = db.AssemblyName, Children = new Collection<IDllListing>(),IsDirectory = false},
                  Id = db.ResourceID,
                  Name = db.ResourceName,
                  Path = db.ResourcePath

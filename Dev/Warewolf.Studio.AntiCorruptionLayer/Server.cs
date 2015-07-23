@@ -89,7 +89,16 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         }
 
         #region Implementation of IServer
-//
+
+        public void Connect()
+        {
+            if(!EnvironmentConnection.IsConnected)
+            {
+                EnvironmentConnection.Connect(_serverId);
+            }
+        }
+
+        //
 //        public async Task<bool> Connect()
 //        {
 //            return await EnvironmentConnection.ConnectAsync(_serverId);

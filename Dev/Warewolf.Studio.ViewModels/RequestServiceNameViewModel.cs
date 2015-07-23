@@ -7,7 +7,6 @@ using System.Windows.Input;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
-using Dev2.Common.Interfaces.Studio.ViewModels;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 
@@ -45,6 +44,29 @@ namespace Warewolf.Studio.ViewModels
             _view.DataContext = this;
             Name = "";
 			environmentViewModel.CanShowServerVersion = false;
+        }
+
+        public RequestServiceNameViewModel(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, string selectedPath)
+        {
+            if (environmentViewModel == null)
+            {
+                throw new ArgumentNullException("environmentViewModel");
+            }
+            if (view == null)
+            {
+                throw new ArgumentNullException("view");
+            }
+            environmentViewModel.Connect();
+            environmentViewModel.LoadDialog(Guid.Empty);
+            environmentViewModel.SelectItem(selectedPath,model => model.IsSelected=true);
+            _view = view;
+
+            OkCommand = new DelegateCommand(SetServiceName, () => String.IsNullOrEmpty(ErrorMessage));
+            CancelCommand = new DelegateCommand(CloseView);
+            SingleEnvironmentExplorerViewModel = new SingleEnvironmentExplorerViewModel(environmentViewModel, _selectedGuid);
+            _view.DataContext = this;
+            Name = "";
+            environmentViewModel.CanShowServerVersion = false;
         }
 
         private void CloseView()

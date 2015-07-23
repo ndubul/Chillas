@@ -37,7 +37,8 @@ namespace Warewolf.Studio.ServerProxyLayer
             {
                 DisplayName = name,
                 ResourceType = ResourceType.Folder,
-                ResourcePath = resourcePath
+                ResourcePath = resourcePath,
+                ResourceId = id
             };
             controller.AddPayloadArgument("itemToAdd", serialiser.SerializeToBuilder(explorerItemModel));
             var result = controller.ExecuteCommand<IExplorerRepositoryResult>(Connection, GlobalConstants.ServerWorkspaceID);
