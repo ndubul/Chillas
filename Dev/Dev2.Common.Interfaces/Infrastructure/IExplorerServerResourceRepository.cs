@@ -8,6 +8,7 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Explorer;
 
@@ -21,6 +22,6 @@ namespace Dev2.Common.Interfaces.Infrastructure
 
         IExplorerItem UpdateItem(IResource resource);
 
-
+        IExplorerItem Find(Guid id);
     }
 }

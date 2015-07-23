@@ -9,6 +9,8 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System.Collections.ObjectModel;
+using Dev2.ConnectionHelpers;
 using Dev2.Studio.Core.Interfaces;
 
 namespace Dev2.CustomControls.Connections
@@ -17,5 +19,7 @@ namespace Dev2.CustomControls.Connections
     {
         void SetTargetEnvironment();
         void UpdateActiveEnvironment(IEnvironmentModel environmentModel, bool isSetFromConnectControl);
+
+        ObservableCollection<IConnectControlEnvironment> Servers { get; }
     }
 }

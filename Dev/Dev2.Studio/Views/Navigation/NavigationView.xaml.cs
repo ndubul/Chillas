@@ -9,7 +9,13 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+using Caliburn.Micro;
+using Dev2.Common.Interfaces.Explorer;
+using Dev2.Models;
+using Dev2.ViewModels.Deploy;
 
 // ReSharper disable once CheckNamespace
 namespace Dev2.Studio.Views.Navigation
@@ -59,5 +65,35 @@ namespace Dev2.Studio.Views.Navigation
         #endregion ItemTemplate
 
         #endregion Dependency Properties
+
+        public void SelectItem(string resource)
+        {
+            var vm = DataContext as DeployNavigationViewModel;
+            var explorerItems = vm.ExplorerItemModels.First();
+            var children = explorerItems.AllChildren().Where(a => a.ResourcePath == resource);
+            foreach(var a in children)
+            {
+               a.SetIsChecked(true, false, false, true); 
+            }
+            
+           
+        }
+    }
+
+    public static class ExplorerItemChildren
+    {
+        public static IEnumerable<IExplorerItemModel> AllChildren(this IExplorerItemModel item)
+        {
+            if( item.Children==null || !item.Children.Any())
+            {
+                return new List<IExplorerItemModel>(){ item};
+            }
+            else
+            {
+                var currList = new List<IExplorerItemModel>() { item };
+                currList.AddRange( item.Children.SelectMany(AllChildren));
+                return currList;
+            }
+        }
     }
 }

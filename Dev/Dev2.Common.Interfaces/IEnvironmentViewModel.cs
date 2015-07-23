@@ -26,5 +26,7 @@ namespace Dev2.Common.Interfaces
 
         void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction);
         void SetPropertiesForDialog();
+
+        void SelectItem(string selectedPath, Action<IExplorerItemViewModel> foundAction);
     }
 }

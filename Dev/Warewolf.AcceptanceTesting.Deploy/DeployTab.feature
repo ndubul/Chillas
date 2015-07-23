@@ -39,14 +39,14 @@ Scenario: Deploy Tab
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
 	 When selected Destination Server is "localhost"
-	 Then the validation message is "Source and Destination cannot be the same"
+	 Then the validation message is "Source and Destination cannot be the same."
 	 And "Deploy" is "Disabled"
-	 And "Select All Dependencies" is "Disabled"	 
+	 And Select All Dependencies is "Disabled"	 
 	 
 Scenario: Deploy button is enabling when selecting resource in source side
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-     And selected Destination Server is "Remote"
+     When selected Destination Server is "Remote"
 	 When I select "Examples\Utility - Date and Time" from Source Server
 	 Then "Deploy" is "Enabled" 
 
@@ -202,7 +202,7 @@ Scenario: One server with different names in both sides not allow to deploy
 	 And selected Destination Server is "Duplicate"
 	 When I select "Examples\Utility - Date and Time" from Source Server
 	 Then "Deploy" is "Disabled" 
-	 And the validation message is "Source and Destination cannot be the same"
+	 And the validation message is "Source and Destination cannot be the same."
 
 
 Scenario: Deploy is enabled when I change server after validation thrown
@@ -211,7 +211,7 @@ Scenario: Deploy is enabled when I change server after validation thrown
 	 And selected Destination Server is "localhost"
 	 When I select "Examples\Utility - Date and Time" from Source Server
 	 Then "Deploy" is "Disabled" 
-	 And the validation message is "Source and Destination cannot be the same"
+	 And the validation message is "Source and Destination cannot be the same."
 	 When selected Destination Server is "Remote"
 	 Then "Deploy" is "Enabled" 
 	  And the validation message is ""

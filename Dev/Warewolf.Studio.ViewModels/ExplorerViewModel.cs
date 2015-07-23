@@ -23,10 +23,21 @@ namespace Warewolf.Studio.ViewModels
 
 			RefreshCommand = new DelegateCommand(Refresh);
 			ClearSearchTextCommand = new DelegateCommand(() => SearchText = "");
-
+            CreateFolderCommand = new DelegateCommand(CreateFolder);
 		}
 
-		public ICommand RefreshCommand { get; set; }
+	    void CreateFolder()
+	    {
+	        if(SelectedItem != null)
+	        {
+	            if(SelectedItem.CreateFolderCommand.CanExecute(null))
+	            {
+	                SelectedItem.CreateFolderCommand.Execute(null);
+	            }
+	        }
+	    }
+
+	    public ICommand RefreshCommand { get; set; }
 
 		public bool IsRefreshing
 		{
@@ -167,8 +178,9 @@ namespace Warewolf.Studio.ViewModels
 
 
 		public ICommand ClearSearchTextCommand { get; private set; }
+	    public ICommand CreateFolderCommand { get; private set; }
 
-		public void SelectItem(Guid id)
+	    public void SelectItem(Guid id)
 		{
 			foreach (var environmentViewModel in Environments)
 			{

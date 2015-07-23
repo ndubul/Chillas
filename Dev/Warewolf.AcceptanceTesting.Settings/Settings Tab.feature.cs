@@ -77,15 +77,15 @@ namespace Warewolf.AcceptanceTesting.Settings
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Default Security Settings", new string[] {
                         "Settings"});
-#line 7
+#line 21
 this.ScenarioSetup(scenarioInfo);
-#line 8
+#line 22
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 9
+#line 23
  testRunner.And("selected server is \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
+#line 24
  testRunner.And("Security is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
+#line 25
  testRunner.And("Logging is not selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -128,7 +128,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         ""});
-#line 12
+#line 26
  testRunner.And("Server Permissions are \"Visible\" as", ((string)(null)), table1, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -147,9 +147,9 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         ""});
-#line 17
+#line 31
  testRunner.And("Resource Permissions are \"Visible\" as", ((string)(null)), table2, "And ");
-#line 20
+#line 34
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -161,17 +161,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SelectingAdminRightsForPublic()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Selecting Admin rights for public", ((string[])(null)));
-#line 23
+#line 37
 this.ScenarioSetup(scenarioInfo);
-#line 24
+#line 38
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 25
+#line 39
  testRunner.And("selected server as \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
+#line 40
  testRunner.And("Security is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
+#line 41
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
+#line 42
  testRunner.When("I select \"Administrator\" permission for server permission \"Public\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -214,15 +214,15 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         ""});
-#line 29
+#line 43
  testRunner.Then("Server Permissions are \"Visible\" as", ((string)(null)), table3, "Then ");
-#line 34
+#line 48
  testRunner.Then("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 35
+#line 49
  testRunner.When("I save the settings", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 36
+#line 50
  testRunner.Then("settings saved successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 37
+#line 51
  testRunner.And("the validation message is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -234,17 +234,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SelectingResourcePermissions()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Selecting Resource Permissions", ((string[])(null)));
-#line 40
+#line 54
 this.ScenarioSetup(scenarioInfo);
-#line 41
+#line 55
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 42
+#line 56
  testRunner.And("selected server is \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
+#line 57
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
+#line 58
  testRunner.And("Security is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
+#line 59
  testRunner.And("Logging is not selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -259,7 +259,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Yes",
                         "Yes",
                         "Yes"});
-#line 46
+#line 60
  testRunner.When("I add resource permission", ((string)(null)), table4, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -286,15 +286,15 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         ""});
-#line 49
+#line 63
  testRunner.Then("Resource Permissions are \"Visible\" as", ((string)(null)), table5, "Then ");
-#line 53
+#line 67
     testRunner.Then("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 54
+#line 68
  testRunner.When("I save the settings", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 55
+#line 69
  testRunner.Then("settings saved successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 56
+#line 70
  testRunner.And("the validation message is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -306,17 +306,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DuplicateServerPermissionsCannotBeSaved()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Duplicate server permissions cannot be saved", ((string[])(null)));
-#line 59
+#line 73
 this.ScenarioSetup(scenarioInfo);
-#line 60
+#line 74
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 75
  testRunner.And("selected server is \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
+#line 76
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 77
  testRunner.And("Security is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 64
+#line 78
  testRunner.And("Logging is not selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -359,15 +359,15 @@ this.ScenarioSetup(scenarioInfo);
                         "Yes",
                         "Yes",
                         "Enabled"});
-#line 65
+#line 79
  testRunner.And("Server Permissions are \"Visible\" as", ((string)(null)), table6, "And ");
-#line 70
+#line 84
     testRunner.Then("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 71
+#line 85
  testRunner.When("I save the settings", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 72
+#line 86
  testRunner.Then("settings not successfully saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 73
+#line 87
  testRunner.And("the validation message is \"Duplicate server permission\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -379,17 +379,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void DuplicateResourcePermissionsCannotBeSaved()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Duplicate resource permissions cannot be saved", ((string[])(null)));
-#line 75
+#line 89
 this.ScenarioSetup(scenarioInfo);
-#line 76
+#line 90
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 77
+#line 91
  testRunner.And("selected server is \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
+#line 92
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 79
+#line 93
  testRunner.And("Security is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 80
+#line 94
  testRunner.And("Logging is not selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -416,15 +416,15 @@ this.ScenarioSetup(scenarioInfo);
                         "Yes",
                         "Yes",
                         "Yes"});
-#line 81
+#line 95
  testRunner.When("Resource Permissions are \"Visible\" as", ((string)(null)), table7, "When ");
-#line 85
+#line 99
     testRunner.Then("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 86
+#line 100
  testRunner.When("I save the settings", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 87
+#line 101
  testRunner.Then("settings not successfully saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 88
+#line 102
  testRunner.And("the validation message is \"Duplicate resource permission\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -433,19 +433,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SaveEnablesWhenIChangeServerLogs(string no, string serverlogs, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save enables when I change server logs", exampleTags);
-#line 90
+#line 104
 this.ScenarioSetup(scenarioInfo);
-#line 91
+#line 105
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 92
+#line 106
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 93
+#line 107
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 94
+#line 108
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 95
+#line 109
  testRunner.When(string.Format("Server System Logs setup as \'{0}\'", serverlogs), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 96
+#line 110
  testRunner.And("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -520,19 +520,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SaveEnablesWhenIChangeStudioLogs(string no, string studiologs, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save enables when I change studio logs", exampleTags);
-#line 107
+#line 121
 this.ScenarioSetup(scenarioInfo);
-#line 108
+#line 122
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 109
+#line 123
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 110
+#line 124
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 111
+#line 125
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 112
+#line 126
  testRunner.When(string.Format("Studio System Logs selected \'{0}\'", studiologs), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 113
+#line 127
  testRunner.And("Save is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -610,23 +610,23 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ServerLogFileHyperLinkIsOpeningLogFile()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Server Log File hyper link is opening log file", ((string[])(null)));
-#line 124
+#line 138
 this.ScenarioSetup(scenarioInfo);
-#line 125
+#line 139
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 126
+#line 140
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 127
+#line 141
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 128
+#line 142
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 129
+#line 143
  testRunner.And("Server Log File hyper link is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 130
+#line 144
  testRunner.And("Studio Log File hyper link is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 131
+#line 145
  testRunner.When("I click \"Server Log File\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 132
+#line 146
  testRunner.Then("\"Localhost server Log.txt - Notepad\" is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -638,23 +638,23 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void StudioLogFileHyperLinkIsOpeningLogFile()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Studio Log File hyper link is opening log file", ((string[])(null)));
-#line 135
+#line 149
 this.ScenarioSetup(scenarioInfo);
-#line 136
+#line 150
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 137
+#line 151
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 138
+#line 152
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 139
+#line 153
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 140
+#line 154
  testRunner.And("Server Log File hyper link is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 141
+#line 155
  testRunner.And("Studio Log File hyper link is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 142
+#line 156
  testRunner.When("I click \"Studio Log File\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 143
+#line 157
  testRunner.Then("\"Warewolf Studio.log - Notepad\" is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -666,23 +666,23 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ServerAndStudioDefaultsFileSize()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Server and studio defaults file size", ((string[])(null)));
-#line 146
+#line 160
 this.ScenarioSetup(scenarioInfo);
-#line 147
+#line 161
  testRunner.Given("I have settings tab opened for the first time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 148
+#line 162
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 149
+#line 163
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 150
+#line 164
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 151
+#line 165
  testRunner.And("Server System Logs selected \'Warning\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 152
+#line 166
  testRunner.And("Studio System Logs selected \'Warning\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 153
+#line 167
  testRunner.And("Max Log file Size for Server default is \"200\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 154
+#line 168
  testRunner.And("Max Log file Size for Studio default is \"200\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -694,31 +694,31 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ServerAndStudioLogFileSizeOnlyAcceptsNumbers()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Server and studio log file size only accepts numbers", ((string[])(null)));
-#line 157
+#line 171
 this.ScenarioSetup(scenarioInfo);
-#line 158
+#line 172
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 159
+#line 173
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 160
+#line 174
  testRunner.Then("Server System Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 161
+#line 175
  testRunner.And("Studio Logs is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 162
+#line 176
  testRunner.When("I edit Max Log file Size for Server \"abc\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 163
+#line 177
  testRunner.Then("Max Log file Size for Server default is \"200\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 164
+#line 178
  testRunner.When("I edit Max Log file Size for Studio \"abc\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 165
+#line 179
  testRunner.Then("Max Log file Size for Studio default is \"200\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 166
+#line 180
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 167
+#line 181
  testRunner.When("I edit Max Log file Size for Server \"100\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 168
+#line 182
  testRunner.Then("Max Log file Size for Server default is \"100\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 169
+#line 183
  testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -730,13 +730,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void LoadRemoteServerLogFile()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Load remote Server log file", ((string[])(null)));
-#line 171
+#line 185
 this.ScenarioSetup(scenarioInfo);
-#line 172
+#line 186
  testRunner.Given("I have settings tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 173
+#line 187
  testRunner.And("Logging is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 174
+#line 188
  testRunner.And("I connect to \"RemoteServer\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -745,21 +745,21 @@ this.ScenarioSetup(scenarioInfo);
             table8.AddRow(new string[] {
                         "None",
                         "1"});
-#line 175
+#line 189
  testRunner.And("remote server has", ((string)(null)), table8, "And ");
-#line 178
+#line 192
  testRunner.Then("Max Log file Size for Server is \"1\" MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 179
+#line 193
  testRunner.And("Server System Logs selected \'None\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 180
+#line 194
  testRunner.And("Studio System Logs is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 181
+#line 195
  testRunner.And("Max Log file Size for Studio is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 182
+#line 196
  testRunner.And("Studio Log File Link is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 183
+#line 197
  testRunner.When("Studio System Logs selected \'Info\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 184
+#line 198
  testRunner.Then("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
