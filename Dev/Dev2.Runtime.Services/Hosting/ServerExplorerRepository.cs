@@ -178,7 +178,7 @@ namespace Dev2.Runtime.Hosting
             {
                 var exp = new ServerExplorerItem(resource.ResourceName, resource.ResourceID, resource.ResourceType, null, ServerAuthorizationService.Instance.GetResourcePermissions(Guid.Empty), resource.ResourcePath, "", "");
                 var succ = AddItemToCollection(exp);
-                _sync.AddItemMessage(exp);
+               // _sync.AddItemMessage(exp);
                 return succ;
             }
             return Find(resource.ResourceID);

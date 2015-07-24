@@ -444,6 +444,7 @@ namespace Dev2.Network
             serverExplorerItem.ServerId = ID;
             if (ItemAddedMessageAction != null)
             {
+        
                 ItemAddedMessageAction(serverExplorerItem);
             }
         }

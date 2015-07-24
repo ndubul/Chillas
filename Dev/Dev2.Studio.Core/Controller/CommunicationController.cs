@@ -112,9 +112,9 @@ namespace Dev2.Controller
         /// <param name="connection">The connection.</param>
         /// <param name="workspaceId">The workspace unique identifier.</param>
         /// <returns></returns>
-        public Task<T> ExecuteCommandAsync<T>(IEnvironmentConnection connection, Guid workspaceId)
+        public async Task<T> ExecuteCommandAsync<T>(IEnvironmentConnection connection, Guid workspaceId)
         {
-            return Task.FromResult(ExecuteCommand<T>(connection, workspaceId));
+            return await ExecuteCommandAsync<T>(connection, workspaceId,Guid.Empty);
         }
 
         /// <summary>
