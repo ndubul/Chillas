@@ -2497,11 +2497,11 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Calculate using Recordset () input in an agregate function like SUM")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Calculate using Recordset () input in an agregate function like SUM2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Calculate")]
-        public virtual void CalculateUsingRecordsetInputInAnAgregateFunctionLikeSUM()
+        public virtual void CalculateUsingRecordsetInputInAnAgregateFunctionLikeSUM2()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate using Recordset () input in an agregate function like SUM", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate using Recordset () input in an agregate function like SUM2", ((string[])(null)));
 #line 349
 this.ScenarioSetup(scenarioInfo);
 #line hidden

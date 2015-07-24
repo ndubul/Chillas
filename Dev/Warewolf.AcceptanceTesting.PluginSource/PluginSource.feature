@@ -51,7 +51,7 @@ Scenario: New Plugin Source GAC
 	Then Assembly value is "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll"
 	And "Save" is "Enabled"
 	When I save Plugin source
-	Then the save dialog is opened
+
 	 
 Scenario: Editing Plugin Source
 	Given I open "Test" plugin source
@@ -63,7 +63,7 @@ Scenario: Editing Plugin Source
 	Then Assembly value is "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll"
 	And "Save" is "Enabled"
 	When I save Plugin source
-	Then the save dialog is opened
+
 
 Scenario: Change Plugin Source Assembly Input
 	Given I open "Test File" plugin source
@@ -76,7 +76,6 @@ Scenario: Change Plugin Source Assembly Input
 	Then Assembly value is "C:\Development\Dev\Binaries\MS Fakes\Dev2.Common.dll"
 	And "Save" is "Enabled"
 	When I save Plugin source
-	Then the save dialog is opened
 
 Scenario: Refresh New Plugin Source File
 	Given I open New Plugin Source

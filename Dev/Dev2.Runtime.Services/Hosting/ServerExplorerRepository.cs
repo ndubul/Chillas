@@ -176,7 +176,10 @@ namespace Dev2.Runtime.Hosting
         {
             if (Find(resource.ResourceID) == null)
             {
-                return AddItemToCollection(new ServerExplorerItem(resource.ResourceName, resource.ResourceID, resource.ResourceType, null, resource.UserPermissions, resource.ResourcePath,"",""));
+                var exp = new ServerExplorerItem(resource.ResourceName, resource.ResourceID, resource.ResourceType, null, ServerAuthorizationService.Instance.GetResourcePermissions(Guid.Empty), resource.ResourcePath, "", "");
+                var succ = AddItemToCollection(exp);
+                _sync.AddItemMessage(exp);
+                return succ;
             }
             return Find(resource.ResourceID);
         }
@@ -304,6 +307,7 @@ namespace Dev2.Runtime.Hosting
                 case ResourceType.WebSource:
                 case ResourceType.ServerSource:
                 case ResourceType.PluginService:
+                case ResourceType.PluginSource:
                 case ResourceType.WebService:
                 case ResourceType.DbService:
                 case ResourceType.WorkflowService:

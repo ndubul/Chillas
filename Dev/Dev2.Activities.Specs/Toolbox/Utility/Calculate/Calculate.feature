@@ -346,7 +346,7 @@ Scenario Outline: Calculate Assign by evaluating variables with functions
 	| 169 | TRUE                                                       | TRUE                      |
 
 
-Scenario: Calculate using Recordset () input in an agregate function like SUM
+Scenario: Calculate using Recordset () input in an agregate function like SUM2
 	Given I have a calculate variable "[[var().int]]" equal to 
 	| var().int	|
 	| 1			|
