@@ -3,6 +3,17 @@
 	As a Warewolf user
 	I want a tool I can use to search and replace for words
 
+#Replace placeholders in a sentence with names
+#Replace when the in field(s) is blank
+#Replace when text to find is blank 
+#Replace when the replace with is blank
+#Replace using lower case to find uppercase value
+#Replace when text to find is negative recordset index
+#Replace when the replace with is negative recordset index
+#Replace when negative recordset index is input
+#Ensuring recordsets work as a Result
+
+
 
 Scenario: Replace placeholders in a sentence with names
 	Given I have a replace variable "[[sentence]]" equal to "Dear Mr XXXX, We welcome you as a customer"
@@ -14,7 +25,7 @@ Scenario: Replace placeholders in a sentence with names
 	And "[[sentence]]" should be "Dear Mr Warewolf user, We welcome you as a customer"
 	And the execution has "NO" error
 	And the debug inputs as 
-	| In Field(s)                                               | Find | Replace With |
+	| In Field(s)                                               | Find | Replace With  |
 	| [[sentence]] = Dear Mr XXXX, We welcome you as a customer | XXXX | Warewolf user |
 	And the debug output as 
 	|                                                                    |                |
@@ -79,7 +90,7 @@ Scenario: Replace using lower case to find uppercase value
 	And "[[sentence]]" should be "Dear Mr Case, We welcome you as a customer"
 	And the execution has "NO" error
 	And the debug inputs as 
-	| In Field(s)                                               | Find | Replace With |
+	| In Field(s)                                               | Find            | Replace With |
 	| [[sentence]] = Dear Mr AAAA, We welcome you as a customer | [[find]] = AAAA | Case         |
 	And the debug output as 
 	|                                                           |                |
@@ -109,26 +120,24 @@ Scenario: Replace when negative recordset index is input
 	When the replace tool is executed
 	Then the execution has "AN" error
 
-Scenario Outline:  Ensure8ing recordsets work as a Result
+Scenario Outline:  Ensuring recordsets work as a Result
 	Given I have a replace variable "[[sentence]]" equal to "Dear Mr XXXX, We welcome you as a customer"
 	And I have a sentence "[[sentence]]"
 	And I want to find the characters "XXXX"
-	And I want to replace them with "[[text]]" equal to "West"
+	And I want to replace them with '<value>' equal to '<replace>'
 	When the replace tool is executed
 	Then the execution has "NO" error
 	And the result variable '<resultVar>' will be '<result>'
 Examples: 
-|resultVar|result|
-#Scenario: Replace when undifined recordset index is input
-#	Given I have a sentence "[[L]]"
-#	And I want to find the characters "XXXX"
-#	And I want to replace them with "Parker"
-#	When the replace tool is executed
-#	Then the execution has "AN" error
-#	And the debug inputs as 
-#	| In Field(s) | Find | Replace With | Error                                                 |
-#	| [[L]]       | XXXX | Parker       | The given variable is not represent in the dictionary |
-#
+| value         | replace | resultVar               | result                 | output                                                    |
+| [[text]]      | West    | [[rec().string]]        | [[result]] = 1         | [[sentence]] = Dear Mr West, We welcome you as a customer |
+| [[rs(*).val]] | Wii     | [[rec().string]]        | [[result]] = 1         | [[sentence]] = Dear Mr Wii, We welcome you as a customer  |
+| [[text]]      | West    | [[rec(1).string]]       | [[rec(1).string]]  = 1 | [[sentence]] = Dear Mr West, We welcome you as a customer |
+| [[text]]      | West    | [[rec([[var]]).string]] | [[rec(2).string]]  = 1 | [[sentence]] = Dear Mr West, We welcome you as a customer |
+| [[text]]      | West    | [[rec(*).string]]       | [[rec(1).string]]  = 1 | [[sentence]] = Dear Mr West, We welcome you as a customer |
+| [[text]]      | 12      | [[var]]                 | [[rec(1).string]]  = 1 | [[sentence]] = Dear Mr 12, We welcome you as a customer   |
+
+
 #Scenario Outline: Replace when the recordset is numeric
 #	Given I have a replace variable "<var>" equal to "<value>"
 #	And I have a sentence "<var>"
