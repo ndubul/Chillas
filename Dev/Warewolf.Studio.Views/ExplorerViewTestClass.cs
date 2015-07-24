@@ -117,42 +117,63 @@ namespace Warewolf.Studio.Views
 
         public void PerformFolderAdd(string folder, string server)
         {
-            var node = _explorerView.ExplorerTree.Nodes.FirstOrDefault(a => ((IExplorerTreeItem)a.Data).ResourceName.Contains(server));
-
-            if (node != null)
+            if (!server.Contains("/"))
             {
-                var env = (node.Data as IExplorerTreeItem);
-                if (env != null)
+                var childnode = _explorerView.ExplorerTree.Nodes.FirstOrDefault(a => ((IExplorerTreeItem)a.Data).ResourceName.Contains(server));
+
+                if (childnode != null)
                 {
-                    env.CreateFolderCommand.Execute(null);
-                    var explorerItemViewModel = env.Children.FirstOrDefault(a => a.IsRenaming);
-                    if (explorerItemViewModel != null)
+                    var env = (childnode.Data as IExplorerTreeItem);
+                    if (env != null)
                     {
-                        explorerItemViewModel.ResourceName = folder;
-                        explorerItemViewModel.IsRenaming = false;
-
+                        env.CreateFolderCommand.Execute(null);
+                        var explorerItemViewModel = env.Children.FirstOrDefault(a => a.IsRenaming);
+                        if (explorerItemViewModel != null)
+                        {
+                            explorerItemViewModel.ResourceName = folder;
+                            explorerItemViewModel.IsRenaming = false;
+                        }
+                        else
+                            throw new Exception("Folder was not found after adding");
                     }
-                    else
-                        throw new Exception("Folder was not found after adding");
-
                 }
-
+                else
+                    throw new Exception("Server Not found in explorer");
             }
             else
-                throw new Exception("Server Not found in explorer");
+            {
+                var toSearch = server.Substring(0, server.IndexOf("/", StringComparison.Ordinal));
+                var childnode = _explorerView.ExplorerTree.Nodes.FirstOrDefault(a => ((IExplorerTreeItem)a.Data).ResourceName.Contains(toSearch));
+                if (childnode != null)
+                {
+                    var env = (childnode.Data as IExplorerTreeItem);
+                    if (env != null)
+                    {
+                        env.CreateFolderCommand.Execute(null);
+                        var explorerItemViewModel = env.Children.FirstOrDefault(a => a.IsRenaming);
+                        if (explorerItemViewModel != null)
+                        {
+                            explorerItemViewModel.ResourceName = folder;
+                            explorerItemViewModel.IsRenaming = false;
+                        }
+                        else
+                            throw new Exception("Folder was not found after adding");
+                    }
+                }
+                else
+                    throw new Exception("Server Not found in explorer");
+            }
         }
 
         public XamDataTreeNode VerifyItemExists(string path)
         {
-            if(!path.Contains("/"))
+            if (!path.Contains("/"))
             {
-
                 var childnode = _explorerView.ExplorerTree.Nodes.FirstOrDefault(a => ((IExplorerTreeItem)a.Data).ResourceName.Contains(path));
-            
+
                 if (childnode == null)
-                    throw new Exception("Folder or environment not found. Name" + path);
+                    throw new Exception("Folder or environment not found. Name: " + path);
                 return childnode;
-   
             }
             else
             {
@@ -160,7 +181,7 @@ namespace Warewolf.Studio.Views
                 var childnode = _explorerView.ExplorerTree.Nodes.FirstOrDefault(a => ((IExplorerTreeItem)a.Data).ResourceName.Contains(toSearch));
                 if (path.Length > 1 + path.IndexOf("/", StringComparison.Ordinal))
                 {
-                   return VerifyItemExists(path.Substring(1 + path.IndexOf("/", StringComparison.Ordinal)),  childnode);
+                    return VerifyItemExists(path.Substring(1 + path.IndexOf("/", StringComparison.Ordinal)), childnode);
                 }
                 throw new Exception("Invalid path");
             }
@@ -168,28 +189,25 @@ namespace Warewolf.Studio.Views
 
         XamDataTreeNode VerifyItemExists(string path, XamDataTreeNode node)
         {
-            if(!path.Contains("/"))
+            if (!path.Contains("/"))
             {
-
-                  return GetNodeWithName(path,node);
-                   
-                
+                return GetNodeWithName(path, node);
             }
             var toSearch = path.Substring(0, path.IndexOf("/", StringComparison.Ordinal));
-            var childnode = GetNodeWithName(toSearch,node);
-            if(path.Length > 1 + path.IndexOf("/", StringComparison.Ordinal))
+            var childnode = GetNodeWithName(toSearch, node);
+            if (path.Length > 1 + path.IndexOf("/", StringComparison.Ordinal))
             {
-                return  VerifyItemExists(path.Substring(1 + path.IndexOf("/", StringComparison.Ordinal)), childnode);
+                return VerifyItemExists(path.Substring(1 + path.IndexOf("/", StringComparison.Ordinal)), childnode);
             }
-            throw  new Exception("Invalid path");
+            throw new Exception("Invalid path");
         }
 
-        XamDataTreeNode GetNodeWithName(string path,XamDataTreeNode node)
+        XamDataTreeNode GetNodeWithName(string path, XamDataTreeNode node)
         {
             var found = node.Nodes.FirstOrDefault(a => ((IExplorerTreeItem)a.Data).ResourceName.Equals(path));
             if (found == null)
             {
-                throw new Exception("Folder or environment not found. Name" + path);
+                throw new Exception("Folder or environment not found. Name: " + path);
             }
             return found;
         }
@@ -197,7 +215,7 @@ namespace Warewolf.Studio.Views
         public void DeletePath(string path)
         {
             var node = VerifyItemExists(path);
-            if(node!= null)
+            if (node != null)
             {
                 ((IExplorerTreeItem)node.Data).DeleteCommand.Execute(null);
             }
@@ -205,24 +223,21 @@ namespace Warewolf.Studio.Views
 
         internal void PerformFolderAdd(string path)
         {
-            if(path.Contains("/"))
+            if (path.Contains("/"))
             {
                 var node = VerifyItemExists(path.Substring(0, path.LastIndexOf("/", StringComparison.Ordinal)));
                 var env = node.Data as IExplorerTreeItem;
                 if (env != null)
                 {
-                   
                     env.CreateFolderCommand.Execute(null);
                     var explorerItemViewModel = env.Children.FirstOrDefault(a => a.IsRenaming);
                     if (explorerItemViewModel != null)
                     {
-                        explorerItemViewModel.ResourceName = path.Substring(1+ path.LastIndexOf("/", StringComparison.Ordinal));
+                        explorerItemViewModel.ResourceName = path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal));
                         explorerItemViewModel.IsRenaming = false;
-
                     }
                     else
                         throw new Exception("Folder was not found after adding");
-
                 }
                 else
                 {
@@ -233,14 +248,14 @@ namespace Warewolf.Studio.Views
 
         public void PerformItemAdd(string path)
         {
-            if(path.Contains("/"))
+            if (path.Contains("/"))
             {
                 var node = VerifyItemExists(path.Substring(0, path.LastIndexOf("/", StringComparison.Ordinal)));
-                if(node == null)
+                if (node == null)
                     throw new Exception("Invalid path");
 
                 var item = (node.Data as IExplorerTreeItem);
-                if(item != null)
+                if (item != null)
                 {
                     item.AddChild(new ExplorerItemViewModel(item.Server, item) { ResourceName = path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal)) });
                 }
@@ -251,25 +266,22 @@ namespace Warewolf.Studio.Views
                 if (explorerViewModelBase != null)
                 {
                     var item = explorerViewModelBase.SelectedItem;
-                    item.AddChild(new ExplorerItemViewModel(item.Server, item) { ResourceName = path});
+                    item.AddChild(new ExplorerItemViewModel(item.Server, item) { ResourceName = path });
                 }
             }
-             
         }
 
-
-
-        public void AddChildren(int resourceNumber, string path, string type,string name="Resource ")
+        public void AddChildren(int resourceNumber, string path, string type, string name = "Resource ")
         {
             var resourceType = (ResourceType)Enum.Parse(typeof(ResourceType), type);
             if (path.Contains("/"))
             {
                 var node = VerifyItemExists(path);
                 var item = (node.Data as IExplorerTreeItem);
-              
-                for(int i = 0; i < resourceNumber; i++)
+
+                for (int i = 0; i < resourceNumber; i++)
                 {
-                    if(item != null)
+                    if (item != null)
                     {
                         item.AddChild(new ExplorerItemViewModel(item.Server, item) { ResourceName = name + i, ResourceType = resourceType });
                     }
@@ -282,7 +294,7 @@ namespace Warewolf.Studio.Views
 
                 for (int i = 0; i < resourceNumber; i++)
                 {
-                    if(item != null)
+                    if (item != null)
                     {
                         item.AddChild(new ExplorerItemViewModel(item.Server, null) { ResourceName = name + i, ResourceType = resourceType });
                     }
@@ -300,7 +312,7 @@ namespace Warewolf.Studio.Views
         {
             var node = VerifyItemExists(path);
             var explorerItemViewModel = node.Data as IExplorerTreeItem;
-            if(explorerItemViewModel != null)
+            if (explorerItemViewModel != null)
             {
                 explorerItemViewModel.ShowVersionHistory.Execute(null);
             }
@@ -308,32 +320,29 @@ namespace Warewolf.Studio.Views
 
         public ICollection<IExplorerTreeItem> CreateChildNodes(int count, string path)
         {
-
-      
-                var node = VerifyItemExists(path);
-                var item = (node.Data as IExplorerTreeItem);
-                var items = new List<IExplorerTreeItem>();
-                const string Name = "Resource ";
-                for (int i = 0; i < count; i++)
+            var node = VerifyItemExists(path);
+            var item = (node.Data as IExplorerTreeItem);
+            var items = new List<IExplorerTreeItem>();
+            const string Name = "Resource ";
+            for (int i = 0; i < count; i++)
+            {
+                if (item != null)
                 {
-                    if (item != null)
-                    {
-                        items.Add(new ExplorerItemViewModel(item.Server, item) { ResourceName = Name + i, ResourceType = ResourceType.Version });
-                    }
+                    items.Add(new ExplorerItemViewModel(item.Server, item) { ResourceName = Name + i, ResourceType = ResourceType.Version });
                 }
-                return items;
-          
+            }
+            return items;
         }
 
         public void PerformVersionRollback(string versionPath)
         {
-            var node = VerifyItemExists(versionPath.Substring(0,versionPath.LastIndexOf("/", StringComparison.Ordinal)));
+            var node = VerifyItemExists(versionPath.Substring(0, versionPath.LastIndexOf("/", StringComparison.Ordinal)));
 
             var explorerItemViewModel = node.Data as IExplorerTreeItem;
-            if(explorerItemViewModel != null)
+            if (explorerItemViewModel != null)
             {
-                var child = explorerItemViewModel.Children.FirstOrDefault(a => a.ResourceName.Contains(versionPath.Substring(1+versionPath.LastIndexOf("/", StringComparison.Ordinal))));
-                if(child != null)
+                var child = explorerItemViewModel.Children.FirstOrDefault(a => a.ResourceName.Contains(versionPath.Substring(1 + versionPath.LastIndexOf("/", StringComparison.Ordinal))));
+                if (child != null)
                 {
                     child.RollbackCommand.Execute(null);
                 }
@@ -344,9 +353,9 @@ namespace Warewolf.Studio.Views
         {
             var node = VerifyItemExists(versionPath.Substring(0, versionPath.LastIndexOf("/", StringComparison.Ordinal)));
             var explorerItemViewModel = node.Data as IExplorerItemViewModel;
-            if(explorerItemViewModel != null)
+            if (explorerItemViewModel != null)
             {
-                explorerItemViewModel= explorerItemViewModel.Children.FirstOrDefault(a => a.ResourceName.Contains(versionPath.Substring(1 + versionPath.LastIndexOf("/", StringComparison.Ordinal))));
+                explorerItemViewModel = explorerItemViewModel.Children.FirstOrDefault(a => a.ResourceName.Contains(versionPath.Substring(1 + versionPath.LastIndexOf("/", StringComparison.Ordinal))));
 
                 if (explorerItemViewModel != null)
                 {
@@ -354,14 +363,14 @@ namespace Warewolf.Studio.Views
                 }
             }
         }
-        
+
         public void PerformFolderDelete(string path)
         {
             var node = VerifyItemExists(path.Substring(0, path.LastIndexOf("/", StringComparison.Ordinal)));
             var explorerItemViewModel = node.Data as IExplorerItemViewModel;
-            if(explorerItemViewModel != null)
+            if (explorerItemViewModel != null)
             {
-                var child= explorerItemViewModel.Children.FirstOrDefault(a => a.ResourceName.Contains(path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal))));
+                var child = explorerItemViewModel.Children.FirstOrDefault(a => a.ResourceName.Contains(path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal))));
 
                 if (child != null)
                 {
@@ -378,7 +387,7 @@ namespace Warewolf.Studio.Views
         public void Reset()
         {
             var item = (_explorerView.DataContext as IExplorerViewModel);
-            if(item != null)
+            if (item != null)
             {
                 item.RefreshCommand.Execute(null);
             }
@@ -404,25 +413,24 @@ namespace Warewolf.Studio.Views
                     throw new Exception("Item found when should not exist");
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //Item not found might throw and exception
             }
-            
         }
 
-        public void PerformActionOnContextMenu(string menuAction, string itemName,string path)
+        public void PerformActionOnContextMenu(string menuAction, string itemName, string path)
         {
             var item = VerifyItemExists(itemName);
-            if(item != null)
+            if (item != null)
             {
-                switch(menuAction)
+                switch (menuAction)
                 {
                     case "Create Folder":
-                        PerformFolderAdd(path+"/"+itemName);
+                        PerformFolderAdd(path + "/" + itemName);
                         break;
                     case "Rename":
-                        PerformFolderRename(path,itemName);
+                        PerformFolderRename(path, itemName);
                         break;
                     case "Delete":
                         PerformFolderDelete(path);
