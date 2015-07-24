@@ -10,12 +10,12 @@
 //  </auto-generated>
 // ------------------------------------------------------------------------------
 #region Designer generated code
-
-using TechTalk.SpecFlow;
-
 #pragma warning disable
 namespace Dev2.Activities.Specs.Toolbox.Data.Replace
 {
+    using TechTalk.SpecFlow;
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
@@ -49,7 +49,7 @@ namespace Dev2.Activities.Specs.Toolbox.Data.Replace
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "Replace")))
             {
-                FeatureSetup(null);
+                Dev2.Activities.Specs.Toolbox.Data.Replace.ReplaceFeature.FeatureSetup(null);
             }
         }
         
@@ -381,6 +381,30 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("the replace tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 110
  testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        public virtual void Ensure8IngRecordsetsWorkAsAResult(string resultVar, string result, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure8ing recordsets work as a Result", exampleTags);
+#line 112
+this.ScenarioSetup(scenarioInfo);
+#line 113
+ testRunner.Given("I have a replace variable \"[[sentence]]\" equal to \"Dear Mr XXXX, We welcome you a" +
+                    "s a customer\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 114
+ testRunner.And("I have a sentence \"[[sentence]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 115
+ testRunner.And("I want to find the characters \"XXXX\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 116
+ testRunner.And("I want to replace them with \"[[text]]\" equal to \"West\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 117
+ testRunner.When("the replace tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 118
+ testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 119
+ testRunner.And(string.Format("the result variable \'{0}\' will be \'{1}\'", resultVar, result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

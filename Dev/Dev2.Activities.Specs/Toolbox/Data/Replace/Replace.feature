@@ -109,6 +109,16 @@ Scenario: Replace when negative recordset index is input
 	When the replace tool is executed
 	Then the execution has "AN" error
 
+Scenario Outline:  Ensure8ing recordsets work as a Result
+	Given I have a replace variable "[[sentence]]" equal to "Dear Mr XXXX, We welcome you as a customer"
+	And I have a sentence "[[sentence]]"
+	And I want to find the characters "XXXX"
+	And I want to replace them with "[[text]]" equal to "West"
+	When the replace tool is executed
+	Then the execution has "NO" error
+	And the result variable '<resultVar>' will be '<result>'
+Examples: 
+|resultVar|result|
 #Scenario: Replace when undifined recordset index is input
 #	Given I have a sentence "[[L]]"
 #	And I want to find the characters "XXXX"

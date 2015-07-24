@@ -2497,11 +2497,11 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Calculate using Recordset () input in an agregate function like SUM")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Calculate using Recordset ([[val]]) input in an agregate function like SUM")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Calculate")]
-        public virtual void CalculateUsingRecordsetInputInAnAgregateFunctionLikeSUM()
+        public virtual void CalculateUsingRecordsetValInputInAnAgregateFunctionLikeSUM()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate using Recordset () input in an agregate function like SUM", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate using Recordset ([[val]]) input in an agregate function like SUM", ((string[])(null)));
 #line 349
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -2514,28 +2514,30 @@ this.ScenarioSetup(scenarioInfo);
             table23.AddRow(new string[] {
                         "3"});
 #line 350
- testRunner.Given("I have a calculate variable \"[[var().int]]\" equal to", ((string)(null)), table23, "Given ");
+ testRunner.Given("I have a calculate variable \"[[var([[val]]).int]]\" equal to", ((string)(null)), table23, "Given ");
 #line 355
- testRunner.And("I have the formula \"SUM([[var().int]])\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I have a calculate variable \"[[val]]\" equal to \"2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 356
- testRunner.When("the calculate tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I have the formula \"SUM([[var([[val]]).int]])\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 357
- testRunner.Then("the calculate result should be \"3\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("the calculate tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 358
+ testRunner.Then("the calculate result should be \"2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 359
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         "fx ="});
             table24.AddRow(new string[] {
-                        "SUM([[var().int]]) = SUM(3)"});
-#line 359
+                        "SUM([[var([[val]]).int]]) = SUM(2)"});
+#line 360
  testRunner.And("the debug inputs as", ((string)(null)), table24, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table25.AddRow(new string[] {
-                        "[[result]] = 3"});
-#line 362
+                        "[[result]] = 2"});
+#line 363
  testRunner.And("the debug output as", ((string)(null)), table25, "And ");
 #line hidden
             this.ScenarioCleanup();
