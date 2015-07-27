@@ -21,5 +21,9 @@ namespace Dev2.Common.Interfaces
         void Cancel();
 
         void PerformActionOnContextMenu(string menuAction, string itemName, string path);
+
+        IExplorerTreeItem GetCurrentItem();
+
+        void CreateNewFolderInFolder(string newFolderName, string currentFolder);
     }
 }

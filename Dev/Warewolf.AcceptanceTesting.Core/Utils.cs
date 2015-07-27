@@ -6,10 +6,11 @@ using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechTalk.SpecFlow;
 using Warewolf.Studio.Themes.Luna;
+// ReSharper disable ObjectCreationAsStatement
 
 namespace Warewolf.AcceptanceTesting.Core
 {
-    public class Utils
+    public static class Utils
     {
         public const string ViewNameKey = "view";
         public const string ViewModelNameKey = "viewModel";
@@ -35,17 +36,16 @@ namespace Warewolf.AcceptanceTesting.Core
         {
             new LunaTheme();
             Application app = Application.Current ?? new Application();
-            ResourceDictionary themeDictionary = new ResourceDictionary();
-//            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Themes/DockManagerGeneric.xaml");
-//            app.Resources.MergedDictionaries.Add(themeDictionary);
+            ResourceDictionary themeDictionary = new ResourceDictionary { Source = new Uri("pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Theme.xaml", UriKind.RelativeOrAbsolute) };
+            //            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Themes/DockManagerGeneric.xaml");
+            //            app.Resources.MergedDictionaries.Add(themeDictionary);
 
-//            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Themes/DataTemplates.xaml");
-//            app.Resources.MergedDictionaries.Add(themeDictionary);
-//            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Resources/ResourceDictionary.xaml");
-//            app.Resources.MergedDictionaries.Add(themeDictionary);
-//            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Themes/ActivityStyles.xaml");
-//            app.Resources.MergedDictionaries.Add(themeDictionary);
-            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Theme.xaml",UriKind.RelativeOrAbsolute);
+            //            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Themes/DataTemplates.xaml");
+            //            app.Resources.MergedDictionaries.Add(themeDictionary);
+            //            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Resources/ResourceDictionary.xaml");
+            //            app.Resources.MergedDictionaries.Add(themeDictionary);
+            //            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Themes/ActivityStyles.xaml");
+            //            app.Resources.MergedDictionaries.Add(themeDictionary);
             foreach(var resourceDictionary in themeDictionary.MergedDictionaries)
             {
                 app.Resources.MergedDictionaries.Add(resourceDictionary);
