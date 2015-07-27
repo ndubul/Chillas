@@ -513,7 +513,7 @@ namespace Dev2.AppResources.Repositories
             // ReSharper disable ImplicitlyCapturedClosure
             var resourceModel = resourceRepository.FindSingle(model => model.ID == item.ResourceId);
             // ReSharper restore ImplicitlyCapturedClosure
-            if(resourceModel == null && item.ResourceType != ResourceType.Folder)
+            if(item.ResourceType != ResourceType.Folder)
             {
                 if(item.ResourceType == ResourceType.ServerSource)
                 {

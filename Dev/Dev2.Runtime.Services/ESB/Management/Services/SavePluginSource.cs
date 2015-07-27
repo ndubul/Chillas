@@ -42,7 +42,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                     ResourcePath = src.Path
                 };
                 ResourceCatalog.Instance.SaveResource(GlobalConstants.ServerWorkspaceID, res);
-                //ServerExplorerRepo.UpdateItem(res);
+                ServerExplorerRepo.UpdateItem(res);
                 msg.HasError = false;
 
             }
