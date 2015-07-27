@@ -54,7 +54,7 @@ namespace Dev2.AppResources.Repositories
             try
             {
       
-                _invoke = new Lazy<Action<System.Action, DispatcherPriority>>(()=> Dispatcher.CurrentDispatcher.Invoke);
+                _invoke = new Lazy<Action<System.Action, DispatcherPriority>>(()=> Application.Current.Dispatcher.Invoke);
             }
             catch(Exception)
             {
