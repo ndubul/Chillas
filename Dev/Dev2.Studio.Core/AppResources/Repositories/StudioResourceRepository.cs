@@ -39,8 +39,8 @@ namespace Dev2.AppResources.Repositories
 {
     public class StudioResourceRepository : IStudioResourceRepository
     {
-        private readonly Dispatcher _currentDispatcher;
-        private readonly Action<System.Action, DispatcherPriority> _invoke;
+
+        private readonly Lazy<Action<System.Action, DispatcherPriority>> _invoke;
 
         static StudioResourceRepository()
         {
@@ -53,13 +53,13 @@ namespace Dev2.AppResources.Repositories
             ExplorerItemModelClone = a => a.Clone();
             try
             {
-                _currentDispatcher = Dispatcher.CurrentDispatcher;
-                _invoke = _currentDispatcher.Invoke;
+      
+                _invoke = new Lazy<Action<System.Action, DispatcherPriority>>(()=> Dispatcher.CurrentDispatcher.Invoke);
             }
             catch(Exception)
             {
                 //This is primarily for the testing as the server runs as a service and no window handle i.e. Ui dispatcher can be gotten.
-                _invoke = (action, priority) => { };
+                _invoke =new Lazy<Action<System.Action, DispatcherPriority>>(()=> (action, priority) => { });
             }
         }
 
@@ -67,7 +67,7 @@ namespace Dev2.AppResources.Repositories
         {
             ExplorerItemModelClone = a => a.Clone();
             ExplorerItemModels = new ObservableCollection<IExplorerItemModel>();
-            _invoke = invoke;
+            _invoke = new Lazy<Action<System.Action, DispatcherPriority>>(()=> invoke);
 
             if(explorerItem != null)
             {
@@ -83,7 +83,7 @@ namespace Dev2.AppResources.Repositories
         {
             ExplorerItemModelClone = a => a.Clone();
             ExplorerItemModels = new ObservableCollection<IExplorerItemModel>();
-            _invoke = invoke;
+            _invoke = new Lazy<Action<System.Action, DispatcherPriority>>( ()=>invoke);
             if(explorerItem != null)
             {
                 LoadItemsToTree(explorerItem.EnvironmentId, explorerItem);
@@ -543,12 +543,7 @@ namespace Dev2.AppResources.Repositories
                     {
                         parent.Children = new ObservableCollection<IExplorerItemModel>();
                     }
-                    if(_currentDispatcher == null)
-                    {
-                        AddChildItem(parent, explorerItem);
-                    }
-                    else
-                    {
+ {
                         PerformUpdateOnDispatcher(() => AddChildItem(parent, explorerItem));
 
                     }
@@ -558,7 +553,7 @@ namespace Dev2.AppResources.Repositories
 
         public void PerformUpdateOnDispatcher(System.Action action)
         {
-            _invoke(action, DispatcherPriority.Send);
+            _invoke.Value(action, DispatcherPriority.Send);
         }
 
         static void AddChildItem(IExplorerItemModel parent, IExplorerItemModel explorerItem)
