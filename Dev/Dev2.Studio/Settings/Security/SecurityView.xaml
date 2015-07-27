@@ -83,6 +83,7 @@
             <ig:XamGrid Grid.Row="1"
                         x:Name="ServerPermissionsDataGrid"
                         AutoGenerateColumns="False"
+                        ColumnSorting="ServerPermissionsDataGrid_OnColumnSorting"
                         ItemsSource="{Binding ServerPermissions}">
                 
                 <ig:XamGrid.Columns>

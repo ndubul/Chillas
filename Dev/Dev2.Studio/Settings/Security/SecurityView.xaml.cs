@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Dev2.Services.Security;
+using Infragistics.Controls.Grids;
 
 namespace Dev2.Settings.Security
 {
@@ -22,9 +23,12 @@ namespace Dev2.Settings.Security
     /// </summary>
     public partial class SecurityView
     {
+        ListSortDirection? _previousDirection;
+
         public SecurityView()
         {
             InitializeComponent();
+            
         }
 
         void OnDataGridSorting(object sender, DataGridSortingEventArgs e)
@@ -50,6 +54,27 @@ namespace Dev2.Settings.Security
         private void DataGrid_LoadingRow(Object sender, DataGridRowEventArgs e)
         {
             e.Row.Tag = e.Row.GetIndex();
+        }
+
+        void ServerPermissionsDataGrid_OnColumnSorting(object sender, SortingCancellableEventArgs e)
+        {
+            var dataGrid = (XamGrid)sender;
+            var column = e.Column;
+
+            if (_previousDirection == null)
+            {
+                _previousDirection = ListSortDirection.Ascending;
+            }
+
+            var direction = _previousDirection != ListSortDirection.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending;
+            _previousDirection = direction;
+            var collectionView = CollectionViewSource.GetDefaultView(dataGrid.ItemsSource);
+            var lcv = (ListCollectionView)collectionView;
+
+            var windowsGroupPermissionComparer = new WindowsGroupPermissionComparer(direction, column.Key);
+            lcv.CustomSort = windowsGroupPermissionComparer;
+            dataGrid.ItemsSource = lcv;
+            e.Cancel = true;
         }
     }
 }
