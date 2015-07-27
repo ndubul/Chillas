@@ -23,7 +23,8 @@ namespace Dev2.Settings.Security
     /// </summary>
     public partial class SecurityView
     {
-        ListSortDirection? _previousDirection;
+        ListSortDirection? _previousServerDirection;
+        ListSortDirection? _previousResourceDirection;
 
         public SecurityView()
         {
@@ -56,18 +57,32 @@ namespace Dev2.Settings.Security
             e.Row.Tag = e.Row.GetIndex();
         }
 
-        void ServerPermissionsDataGrid_OnColumnSorting(object sender, SortingCancellableEventArgs e)
+        void ServerColumnSorting(object sender, SortingCancellableEventArgs e)
+        {
+            if (_previousServerDirection == null)
+            {
+                _previousServerDirection = ListSortDirection.Ascending;
+            }
+
+            Sort(sender, e);
+        }
+        
+        void ResourceColumnSorting(object sender, SortingCancellableEventArgs e)
+        {
+            if (_previousResourceDirection == null)
+            {
+                _previousResourceDirection = ListSortDirection.Ascending;
+            }
+
+            Sort(sender, e);
+        }
+
+        void Sort(object sender, SortingCancellableEventArgs e)
         {
             var dataGrid = (XamGrid)sender;
             var column = e.Column;
-
-            if (_previousDirection == null)
-            {
-                _previousDirection = ListSortDirection.Ascending;
-            }
-
-            var direction = _previousDirection != ListSortDirection.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending;
-            _previousDirection = direction;
+            var direction = _previousServerDirection != ListSortDirection.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending;
+            _previousServerDirection = direction;
             var collectionView = CollectionViewSource.GetDefaultView(dataGrid.ItemsSource);
             var lcv = (ListCollectionView)collectionView;
 

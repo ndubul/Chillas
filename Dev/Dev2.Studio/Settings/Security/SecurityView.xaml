@@ -83,7 +83,7 @@
             <ig:XamGrid Grid.Row="1"
                         x:Name="ServerPermissionsDataGrid"
                         AutoGenerateColumns="False"
-                        ColumnSorting="ServerPermissionsDataGrid_OnColumnSorting"
+                        ColumnSorting="ServerColumnSorting"
                         ItemsSource="{Binding ServerPermissions}">
                 
                 <ig:XamGrid.Columns>
@@ -344,6 +344,7 @@
             <ig:XamGrid Grid.Row="1"
                         x:Name="ResourcePermissionsDataGrid"
                         AutoGenerateColumns="False"
+                        ColumnSorting="ResourceColumnSorting"
                         ItemsSource="{Binding ResourcePermissions}">
                 <ig:XamGrid.Columns>
                     <ig:TemplateColumn x:Name="ResourceNameColumn" Key="ResourceName" HeaderText="Resources" Width="*" MinimumWidth="100" HorizontalContentAlignment="Stretch">
