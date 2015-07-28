@@ -142,7 +142,24 @@ namespace Warewolf.Studio.ViewModels
 			OnPropertyChanged(() => Children);
         }
 
-
+        public void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction)
+        {
+            foreach (var a in Children)
+            {
+                
+                    if (a.ResourceId == id)
+                    {
+                        a.IsExpanded = true;
+                        a.IsSelected = true;
+                        foundAction(a);
+                    }
+                    else
+                    {
+                        a.SelectItem(id, foundAction);
+                    }
+             
+            }
+        }
 
         public void CreateNewFolder()
         {

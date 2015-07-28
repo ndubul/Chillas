@@ -27,6 +27,7 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Core.DynamicServices;
 using Dev2.Common.Interfaces.DB;
+using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
@@ -866,7 +867,7 @@ namespace Dev2.Studio.ViewModels
             }
             else if (resourceType == "EmailSource")
             {
-                AddEmailWorkSurface();
+                AddEmailWorkSurface(resourcePath);
             }
             else if(resourceType=="DropboxSource")
             {
@@ -874,31 +875,31 @@ namespace Dev2.Studio.ViewModels
             }
             else if(resourceType == "Server")
             {
-                AddNewServerSourceSurface();
+                AddNewServerSourceSurface(resourcePath);
             }
             else if (resourceType == "DbSource")
             {
-                AddNewDbSourceSurface();
+                AddNewDbSourceSurface(resourcePath);
             }
             else if (resourceType == "DatabaseService")
             {
-                AddNewDbServiceSurface();
+                AddNewDbServiceSurface(resourcePath);
             }
             else if (resourceType == "WebSource")
             {
-                AddNewWebSourceSurface();
+                AddNewWebSourceSurface(resourcePath);
             }
             else if (resourceType == "WebService")
             {
-                AddNewWebServiceSurface();
+                AddNewWebServiceSurface(resourcePath);
             }
             else if (resourceType == "ResourceSource")
             {
-                AddNewPluginSourceSurface();
+                AddNewPluginSourceSurface(resourcePath);
             }
             else if (resourceType == "ResourceService")
             {
-                AddNewPluginServiceSurface();
+                AddNewPluginServiceSurface(resourcePath);
             }
             else if (resourceType == "SharepointServerSource")
             {
@@ -913,52 +914,65 @@ namespace Dev2.Studio.ViewModels
             }
         }
 
-        void AddNewServerSourceSurface()
+        private async Task<IRequestServiceNameViewModel> GetSaveViewModel(IServer server, string resourcePath)
+        {
+            var item = StudioResourceRepository.FindItem(model => model.ResourcePath.Equals(resourcePath,StringComparison.OrdinalIgnoreCase));
+            return await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server), new RequestServiceNameView(), item.ResourceId);
+        }
+
+        async void AddNewServerSourceSurface(string resourcePath)
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource), new SourceViewModel<IServerSource>(EventPublisher, new ManageNewServerViewModel(new ServerSource(), server.UpdateRepository, new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.Empty), "", Guid.NewGuid()), PopupProvider,new ManageServerControl()));
+            var saveViewModel = await GetSaveViewModel(server, resourcePath);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource), new SourceViewModel<IServerSource>(EventPublisher, new ManageNewServerViewModel(new ServerSource(), server.UpdateRepository, saveViewModel, "", Guid.NewGuid()), PopupProvider, new ManageServerControl()));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
-        void AddNewDbSourceSurface()
+        async void AddNewDbSourceSurface(string resourcePath)
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbSource), new SourceViewModel<IDbSource>(EventPublisher, new ManageDatabaseSourceViewModel(new ManageDatabaseSourceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid()), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker), PopupProvider,new ManageDatabaseSourceControl()));
+            var saveViewModel = await GetSaveViewModel(server,resourcePath);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbSource), new SourceViewModel<IDbSource>(EventPublisher, new ManageDatabaseSourceViewModel(new ManageDatabaseSourceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), saveViewModel, new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker), PopupProvider,new ManageDatabaseSourceControl()));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
-        void AddNewDbServiceSurface()
+        async void AddNewDbServiceSurface(string resourcePath)
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbService), new SourceViewModel<IDatabaseService>(EventPublisher, new ManageDatabaseServiceViewModel(new ManageDbServiceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid())), PopupProvider,new ManageDatabaseServiceControl()));
+            var saveViewModel = await GetSaveViewModel(server, resourcePath);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbService), new SourceViewModel<IDatabaseService>(EventPublisher, new ManageDatabaseServiceViewModel(new ManageDbServiceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), saveViewModel), PopupProvider,new ManageDatabaseServiceControl()));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
-        void AddNewWebSourceSurface()
+        async void AddNewWebSourceSurface(string resourcePath)
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), new SourceViewModel<IWebServiceSource>(EventPublisher, new ManageWebserviceSourceViewModel(new ManageWebServiceSourceModel(server.UpdateRepository, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid()), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker, new ExternalProcessExecutor()), PopupProvider,new ManageWebserviceSourceControl()));
+            var saveViewModel = await GetSaveViewModel(server, resourcePath);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), new SourceViewModel<IWebServiceSource>(EventPublisher, new ManageWebserviceSourceViewModel(new ManageWebServiceSourceModel(server.UpdateRepository, ActiveEnvironment.Name), saveViewModel, new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker, new ExternalProcessExecutor()), PopupProvider,new ManageWebserviceSourceControl()));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
-        void AddNewWebServiceSurface()
+        async void AddNewWebServiceSurface(string resourcePath)
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebService), new SourceViewModel<IWebService>(EventPublisher, new ManageWebServiceViewModel(new ManageWebServiceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid())), PopupProvider,new ManageWebserviceControl()));
+            var saveViewModel = await GetSaveViewModel(server, resourcePath);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebService), new SourceViewModel<IWebService>(EventPublisher, new ManageWebServiceViewModel(new ManageWebServiceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), saveViewModel), PopupProvider,new ManageWebserviceControl()));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
-        void AddNewPluginSourceSurface()
+        async void AddNewPluginSourceSurface(string resourcePath)
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginSource), new SourceViewModel<IPluginSource>(EventPublisher, new ManagePluginSourceViewModel(new ManagePluginSourceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid()), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker), PopupProvider,new ManagePluginSourceControl()));
+            var saveViewModel = await GetSaveViewModel(server, resourcePath);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginSource), new SourceViewModel<IPluginSource>(EventPublisher, new ManagePluginSourceViewModel(new ManagePluginSourceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), saveViewModel, new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker), PopupProvider,new ManagePluginSourceControl()));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
-        void AddNewPluginServiceSurface()
+        async void AddNewPluginServiceSurface(string resourcePath)
         {
             var server = CustomContainer.Get<IServer>();
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginService), new SourceViewModel<IPluginService>(EventPublisher, new ManagePluginServiceViewModel(new ManagePluginServiceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), new RequestServiceNameViewModel(new EnvironmentViewModel(server), new RequestServiceNameView(), Guid.NewGuid())), PopupProvider,new ManagePluginServiceControl()));
+            var saveViewModel = await GetSaveViewModel(server, resourcePath);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.PluginService), new SourceViewModel<IPluginService>(EventPublisher, new ManagePluginServiceViewModel(new ManagePluginServiceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), saveViewModel), PopupProvider,new ManagePluginServiceControl()));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
@@ -1153,7 +1167,7 @@ namespace Dev2.Studio.ViewModels
         }
 
         [ExcludeFromCodeCoverage] //Excluded due to needing a parent window
-        void AddEmailWorkSurface()
+        void AddEmailWorkSurface(string resourcePath)
         {
             ActivateOrCreateUniqueWorkSurface<EmailSourceViewModel>(WorkSurfaceContext.EmailSource);
         }

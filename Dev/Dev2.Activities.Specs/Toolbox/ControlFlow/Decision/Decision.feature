@@ -3,6 +3,89 @@
 	As Warewolf user
 	I want tool that be makes a true or false (yes/no) decision based on the data
 
+##Decide if variable [[A]] is alphanumeric (True)
+##decide if variable [[A]] is alphanumeric (False)
+##decide if variable [[A]] is Base64 (True)
+##decide if variable [[A]] is Base64 (False)
+##decide if variable [[A]] is Binary (True)
+##decide if variable [[A]] is Binary (False)
+##decide if variable [[A]] is a Date (True)
+##decide if variable [[A]] is a Date (False)
+##decide if variable [[A]] is an Email (True)
+##decide if variable [[A]] is an Email (False)
+##decide if variable [[A]] is Hex (True)
+##decide if variable [[A]] is Hex (False)
+##decide if variable [[A]] is Numeric (True)
+##decide if variable [[A]] is Numeric (False)
+##decide if variable [[A]] is Regex (True)
+##decide if variable [[A]] is Regex (False)
+##decide if variable [[A]] is Text (True)
+##decide if variable [[A]] is Text (False)
+##decide if variable [[A]] Is XML (True)
+##decide if variable [[A]] Is XML (False)
+##decide if variable [[A]] Not Alphanumeric (True)
+##decide if variable [[A]] Not Alphanumeric (False)
+##decide if variable [[A]] Not Base64 (True)
+##decide if variable [[A]] Not Base64 (False)
+##decide if variable [[A]] Not Binary (True)
+##decide if variable [[A]] Not Binary (False)
+##decide if variable [[A]] Not Date (True)
+##decide if variable [[A]] Not Date (False)
+##decide if variable [[A]] Not Email (True)
+##decide if variable [[A]] Not Email (False)
+##decide if variable [[A]] Not Hex (True)
+##decide if variable [[A]] Not Hex (False)
+##decide if variable [[A]] Not Numeric (True)
+##decide if variable [[A]] Not Numeric (False)
+##decide if variable [[A]] Not Regex (True)
+##decide if variable [[A]] Not Regex (False)
+##decide if variable [[A]] Not Text (True)
+##decide if variable [[A]] Not Text (False)
+##decide if variable [[A]] Not XML (True)
+##decide if variable [[A]] Not XML (False)
+##decide if variable [[A]] Is Between variable [[B]] and [[C]] (True)
+##decide if variable [[A]] Is Not Between variable [[B]] and [[C]] (True)
+##decide if variable [[A]] Is Between variable [[B]] and [[C]] (False)
+##decide if variable [[A]] Is Not Between variable [[B]] and [[C]] (False)
+##decide if variable [[A]] equals variable [[B]] and [[B]] equals [[C]] Mode is AND
+##decide if variable [[A]] equals variable [[B]] and [[B]] equals [[C]] Mode is OR
+##decide if variable [[A]] equals variable [[B]] (True)
+##decide if variable [[A]] equals variable [[B]] (False)
+##decide if variable [[A]] greater than variable [[B]] (True)
+##decide if variable [[A]] greater than variable [[B]] (False)
+##decide if variable [[A]] less than variable [[B]] (True)
+##decide if variable [[A]] less than variable [[B]] (False)
+##decide if variable [[A]] not equals variable [[B]] (True)
+##decide if variable [[A]] not equals variable [[B]] (False)
+##decide if variable [[A]] equal or greater than variable [[B]] (True)
+##decide if variable [[A]] equal or greater than variable [[B]] (False)
+##decide if variable [[A]] equal or less than variable [[B]] (True)
+##decide if variable [[A]] equal or less than variable [[B]] (False)
+##decide if variable [[A]] Starts With variable [[B]] (True)
+##decide if variable [[A]] Starts With variable [[B]] (False)
+##decide if variable [[A]] Ends With variable [[B]] (True)
+##decide if variable [[A]] Ends With variable [[B]] (False)
+##decide if variable [[A]] Contains variable [[B]] (True)
+##decide if variable [[A]] Contains variable [[B]] (False)
+##decide if variable [[A]] Doesn't Starts With variable [[B]] (True)
+##ecide if variable [[A]] Doesn't Starts With variable [[B]] (False)
+##decide if variable [[A]] Doesn't Ends With variable [[B]] (True)
+##decide if variable [[A]] Doesn't Ends With variable [[B]] (False)
+##decide if variable [[A]] Doesn't Contains variable [[B]] (True)
+##decide if variable [[A]] Doesn't Contains variable [[B]] (False)
+##decide if There Is An Error (True)	
+##decide if There Is An Error (False)
+##decide if There Is No Error (True)
+##decide if There Is No Error (False)
+##decide if text with space is equal to same text with extra space (False)
+##Decision using recordset append notation
+##Executing Decision with malformed variables
+##Executing Decision with malformed recordset
+##Executing Decision with recordset contains spcl character as index
+##Runtime invalid recordset variable negative test
+##Runtime invalid recordset variable positve test
+
+
 @Tool-Decision
 Scenario: Decide if variable [[A]] is alphanumeric (True)
 	Given a decision variable "[[A]]" value "30"	
@@ -1167,3 +1250,31 @@ Scenario: Runtime invalid recordset variable positve test
        And the debug output as 
        |     |
        | YES |
+
+
+@ignore
+Scenario Outline: decide if variable [[A]] Is Between variable [[B]] and [[C]] (True)
+	Given a decision variable '<variable1>' value '<Var1>'	
+	And a decision variable '<variable2>' value '<Var2>'
+	And a decision variable '<variable3>' value '<Var3>'	
+	And check if '<variable1>' "IsBetween" '<variable2>' and '<variable3>'
+	When the decision tool is executed
+	Then the decision result should be "True"
+	Then the execution has "NO" error
+	Then the debug inputs as  
+	|            | Statement | Require All decisions to be True |
+	| [[A]] = 30 |           |                                  |
+	| [[B]] = 20 |           |                                  |
+	| [[C]] = 40 |           |                                  |
+	|            | String    | YES                              |
+	And the debug output as 
+	|         |
+	| YES    |
+
+	Examples: 
+	| variable1 | Var1 | variable2    | Var2 | variable3      | Var3 |
+	|           |      |              |      |                |      |
+	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
+	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
+	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
+	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
