@@ -64,7 +64,13 @@ namespace Warewolf.Studio.ViewModels
             RefreshCommand = new DelegateCommand(() => PerformLoadAll());
             
             _warewolfserverName = updateManager.ServerName;
-            
+            if(Application.Current != null)
+            {
+                if(Application.Current.Dispatcher != null)
+                {
+                    DispatcherAction = Application.Current.Dispatcher.Invoke;
+                }
+            }
         }
 
         public IAsyncWorker AsyncWorker { get; set; }
@@ -81,13 +87,17 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
+        public Action<Action> DispatcherAction { get; set; } 
+      
         void PerformLoadAll(Action actionToPerform=null)
         {
+        
             AsyncWorker.Start(() =>
             {
                 IsLoading = true;
                 var names = _updateManager.GetDllListings(null).Select(input => new DllListingModel(_updateManager, input)).ToList();
-                Application.Current.Dispatcher.Invoke( () =>
+
+                DispatcherAction.Invoke(() =>
                 {
                     DllListings = new List<IDllListingModel>(names);
                     IsLoading = false;
@@ -185,6 +195,19 @@ namespace Warewolf.Studio.ViewModels
             SetupHeaderTextFromExisting();
             PerformLoadAll(() => FromSource(fromDll));
             
+            ToItem();
+        }
+
+        public ManagePluginSourceViewModel(IManagePluginSourceModel updateManager, IEventAggregator aggregator, IPluginSource pluginSource, IAsyncWorker asyncWorker, Action<Action> dispatcherAction)
+            : this(updateManager, aggregator, asyncWorker)
+        {
+            DispatcherAction = dispatcherAction;
+            VerifyArgument.IsNotNull("pluginSource", pluginSource);
+            _pluginSource = pluginSource;
+            var fromDll = pluginSource.SelectedDll;
+            SetupHeaderTextFromExisting();
+            PerformLoadAll(() => FromSource(fromDll));
+
             ToItem();
         }
 
