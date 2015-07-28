@@ -202,6 +202,7 @@
     <Compile Include="ESB\Management\Services\GetSharepointListFields.cs" />
     <Compile Include="ESB\Management\Services\GetServerVersion.cs" />
     <Compile Include="ESB\Management\Services\GetSharepointListService.cs" />
+    <Compile Include="ESB\Management\Services\FetchToolsService.cs" />
     <Compile Include="ESB\Management\Services\GetVersion.cs" />
     <Compile Include="ESB\Management\Services\GetVersions.cs" />
     <Compile Include="ESB\Management\Services\LoggingSettingsRead.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="Hosting\ResourceUpgrade.cs" />
     <Compile Include="Hosting\ResourceUpgrader.cs" />
     <Compile Include="Hosting\ResourceUpgraderFactory.cs" />
+    <Compile Include="Hosting\ServerToolRepository.cs" />
     <Compile Include="Hosting\ServerVersionRepository.cs" />
     <Compile Include="Hosting\UpgradePath.cs" />
     <Compile Include="Hosting\VersionStrategy.cs" />

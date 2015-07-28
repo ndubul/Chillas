@@ -8,6 +8,7 @@ using Dev2.AppResources.Repositories;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Infrastructure;
+using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Controller;
 using Dev2.Network;
 using Dev2.Runtime.ServiceModel.Data;
@@ -21,6 +22,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         readonly ServerProxy _environmentConnection;
         readonly Guid _serverId;
         readonly StudioServerProxy _proxyLayer;
+        IList<IToolDescriptor> _tools;
         //IList<IToolDescriptor> _tools;
 
         /// <summary>
@@ -122,10 +124,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //            return null;
 //        }
 //
-//        public IList<IToolDescriptor> LoadTools()
-//        {
-//            return _tools ?? (_tools = ProxyLayer.QueryManagerProxy.FetchTools());
-//        }
+        public IList<IToolDescriptor> LoadTools()
+        {
+            return _tools ?? (_tools = ProxyLayer.QueryManagerProxy.FetchTools());
+        }
 
         public IExplorerRepository ExplorerRepository
         {
@@ -143,14 +145,14 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             }
         }
         
-//        public bool IsConnected()
-//        {
-//            return EnvironmentConnection.IsConnected;
-//        }
-//
-//        public void ReloadTools()
-//        {
-//        }
+        public bool IsConnected()
+        {
+            return EnvironmentConnection.IsConnected;
+        }
+
+        public void ReloadTools()
+        {
+        }
 //
 //        public void Disconnect()
 //        {

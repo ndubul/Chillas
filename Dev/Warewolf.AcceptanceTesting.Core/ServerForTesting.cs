@@ -6,6 +6,7 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Infrastructure;
+using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Security;
 using Moq;
@@ -50,6 +51,11 @@ namespace Warewolf.AcceptanceTesting.Core
         public Task<IExplorerItem> LoadExplorer()
         {
             return Task.FromResult(CreateExplorerItems());
+        }
+
+        public IList<IToolDescriptor> LoadTools()
+        {
+            return null;
         }
 
         private IExplorerItem CreateExplorerItems()

@@ -261,6 +261,7 @@
     <Compile Include="ISplashView.cs" />
     <Compile Include="ISplashViewModel.cs" />
     <Compile Include="IStudioUpdateManager.cs" />
+    <Compile Include="IToolboxView.cs" />
     <Compile Include="IUpdatesHelp.cs" />
     <Compile Include="ISharepointListTo.cs" />
     <Compile Include="ISharepointReadListTo.cs" />
@@ -299,6 +300,7 @@
     <Compile Include="Scripting\IScriptingContext.cs" />
     <Compile Include="Security\Permissions.cs" />
     <Compile Include="ServerProxyLayer\IDbSource.cs" />
+    <Compile Include="ServerProxyLayer\IPluginProxy.cs" />
     <Compile Include="ServerProxyLayer\IUpdateManager.cs" />
     <Compile Include="ServerProxyLayer\IWebServiceSource.cs" />
     <Compile Include="ServerStats.cs" />
@@ -315,6 +317,12 @@
     <Compile Include="Studio\IdialogViewModelFactory.cs" />
     <Compile Include="Studio\IMenuViewModel.cs" />
     <Compile Include="Threading\IAsyncWorker.cs" />
+    <Compile Include="Toolbox\IToolboxCatergoryViewModel.cs" />
+    <Compile Include="Toolbox\IToolboxModel.cs" />
+    <Compile Include="Toolbox\IToolboxViewModel.cs" />
+    <Compile Include="Toolbox\IToolDescriptor.cs" />
+    <Compile Include="Toolbox\IToolDescriptorViewModel.cs" />
+    <Compile Include="Toolbox\IToolManager.cs" />
     <Compile Include="UndoFramework\IAction.cs" />
     <Compile Include="UndoFramework\IActionHistory.cs" />
     <Compile Include="UndoFramework\IMultiAction.cs" />
