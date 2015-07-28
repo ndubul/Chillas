@@ -3,6 +3,22 @@
 	As Warewolf user
 	I want tool that I can use to send emails
 
+##Send email to multiple receipients
+##Send email with multiple from accounts
+##Send email with badly formed multiple To Accounts
+##Send email with no To Accounts
+##Send email with Subject as both text and variable as xml 
+##Send email with no body
+##Send email with Body as both text and variable 
+##Send email with variable as Body that is xml
+##Send email with everything blank
+##Send email with a blank from account
+##Send email with a negative index recordset for From Accounts
+##Send email with a negative index recordset for Recipients
+##Send email with a negative index recordset for Subject
+##Send email with a negative index recordset for Body
+
+
 Scenario: Send email to multiple receipients
 	Given I have an email variable "[[firstMail]]" equal to "test1@freemail.com"
 	And I have an email variable "[[secondMail]]" equal to "test2@freemail.com"	
