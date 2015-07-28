@@ -325,7 +325,15 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             
             try
             {
-                var managePluginSourceViewModel = new ManagePluginSourceViewModel(mockStudioUpdateManager, mockEventAggregator, pluginSrc, mockSynchronousAsyncWorker);
+                var managePluginSourceViewModel = new ManagePluginSourceViewModel(mockStudioUpdateManager, mockEventAggregator, pluginSrc, new SynchronousAsyncWorker(),a => { 
+                    try
+                    {
+                        a.Invoke(); 
+                        
+                    }
+                    catch{} 
+                });
+
                 managePluginSourceControl.DataContext = managePluginSourceViewModel;
                 ScenarioContext.Current.Remove("viewModel");
                 ScenarioContext.Current.Add("viewModel", managePluginSourceViewModel);
