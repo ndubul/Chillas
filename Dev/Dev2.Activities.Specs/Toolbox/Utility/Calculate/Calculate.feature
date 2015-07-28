@@ -15,6 +15,8 @@
 ##Calculate Assign by evaluating a variable inside a variable
 ##Calculate Assign by evaluating a variable inside a variable with function
 ##Calculate Assign by evaluating variables with functions
+##Variable that does not exist
+##Calculate using Recordset ([[val]]) input in an agregate function like SUM
 
 
 Scenario: Calculate using a given formula
@@ -346,21 +348,28 @@ Scenario Outline: Calculate Assign by evaluating variables with functions
 	| 169 | TRUE                                                       | TRUE                      |
 
 
-Scenario: Calculate using Recordset () input in an agregate function like SUM2
-	Given I have a calculate variable "[[var().int]]" equal to 
+Scenario: Calculate using Recordset ([[val]]) input in an agregate function like SUM
+	Given I have a calculate variable "[[var([[val]]).int]]" equal to 
 	| var().int	|
 	| 1			|
 	| 2			|
 	| 3			|
-	And I have the formula "SUM([[var().int]])"
+	And I have a calculate variable "[[val]]" equal to "2"
+	And I have the formula "SUM([[var([[val]]).int]])"
 	When the calculate tool is executed
-	Then the calculate result should be "3"
+	Then the calculate result should be "2"
 	And the execution has "NO" error
 	And the debug inputs as  
 	| fx =                             |
-	| SUM([[var().int]]) = SUM(3) |	
+	| SUM([[var([[val]]).int]]) = SUM(2) |	
 	And the debug output as 
-	|                 |
-	| [[result]] = 3 |
+	|                |
+	| [[result]] = 2 |
 
-
+Scenario: Variable that does not exist
+	Given I have a calculate variable "[[a]]" equal to "1"
+	And I have a calculate variable "[[b]]" equal to "20"
+	And I have the formula "Sum([[a]],[[b]],[[c]])"
+	When the calculate tool is executed
+	Then the execution has "AN" error
+	
