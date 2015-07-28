@@ -87,7 +87,12 @@ namespace Warewolf.Studio.ServerProxyLayer
             var result = controller.ExecuteCommand<IExplorerRepositoryResult>(Connection, GlobalConstants.ServerWorkspaceID);
             if (result.Status == ExecStatus.Success)
             {
-                StudioResourceRepository.Instance.UpdateItem(id, model => model.RefreshName((newName.Substring(0, newName.LastIndexOf("\\", StringComparison.Ordinal)))), Connection.ID);
+                var renameValue = newName;
+                if (newName.LastIndexOf("\\", StringComparison.Ordinal) > 0)
+                {
+                    renameValue = newName.Substring(newName.LastIndexOf("\\", StringComparison.Ordinal));
+                }
+                StudioResourceRepository.Instance.UpdateItem(id, model => model.RefreshName(renameValue), Connection.ID);
             }
         }
 

@@ -66,17 +66,7 @@ namespace Dev2.Webs
             EnvironmentRepository.Instance.ActiveEnvironment = environment;
 
             var requestView = new RequestServiceNameView();
-            IServer server;
-            var authenticationType = environment.Connection.AuthenticationType;
-            if(authenticationType == AuthenticationType.Windows || authenticationType == AuthenticationType.Anonymous)
-            {
-                server = new Server(environment.Connection.WebServerUri);
-            }
-            else
-            {
-                server = new Server(environment.Connection.WebServerUri.ToString(), "\\", "");
-            }
-            
+            IServer server = new Server(environment.Connection);
             if (resourceModel.Category == null)
             {
                 resourceModel.Category = "";

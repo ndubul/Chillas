@@ -368,7 +368,7 @@
                             <DataTemplate>
                                 <Grid>
                                     <TextBox MaxWidth="200" Height="20"
-                                         Text="{Binding Data.ResourceName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></TextBox>
+                                         Text="{Binding Data.ResourceName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" GotKeyboardFocus="UIElement_OnGotKeyboardFocus"></TextBox>
                                 </Grid>
                             </DataTemplate>
                         </ig:NodeLayout.EditorTemplate>
