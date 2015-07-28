@@ -229,38 +229,38 @@ Scenario: Send email with a negative index recordset for Body
 	| [[result]] =  |
 
 
-	#wolf - 991
-Scenario: Send Email with an attachment
-	Given the from account is "warewolf@dev2.co.za"
-	And to address is "test1@freemail.com" 	
-	And I  want to attach an item
-	When I expand the Email tool
-	And I click "Attachments"
-	Then the webs file chooser dialog opens 
-
-
-@ignore
-	# Audit
-Scenario Outline: Sending an email 
-	Given the from account is '<from>'
-	And to address is '<To>'
-	And the subject is '<subject>'
-	And Password is '<password>' 
-	And the Bcc is '<Bcc>'
-	And the Cc is '<Cc>'
-	And body is '<body>'
-	And the attachment is '<attachments>'
-	And Result is '<result>'
-	Examples: 
-	| from                                        | To                                          | subject                           | password                 | Bcc                                       | Cc                                    | body                         | attachments | result |
-	| 22                                          | [[va]]                                      | [[rec([[int]]).a]] = Numeric Test | 3                        | 100                                       | 50                                    | [[rs().a]] = hello           | [[a]]       |        |
-	| [[va]]                                      | 11                                          | [[rs().set]] = T                  | [[var]] = test123        | [[a]] = warewolf@dev2.co.za               | info@dev2.co.za                       | 45                           |             |        |
-	| [[rec(1).set]] = warewolf@dev2.co.za        | [[rs(1).a]] =  info@dev2.co.za              | [[va]]                            | [[q]]                    | info@dev2.co.za                           | [[var]] = info@dev2.co.za             | [[b]]                        |             |        |
-	| [[email().rs]] = warewolf@dev2.co.za        | [[email([[int]]).rs]] = warewolf@dev2.co.za | [[rs(*).a]] = Test                | [[rs(1).a]] = test123    | [[e]]                                     | [[rec(1).set]] = info@dev2.co.za      | [[email([[int]]).rs]] = Test |             |        |
-	| [[email(*).rs]] =                           | [[email().rs]] = warewolf@dev2.co.za        | New Email Test                    | [[rs().b]] = test123     | [[rec(1).set]] = warewolf@dev2.co.za      | [[e]]                                 | [[rs(*).a]] =                |             |        |
-	| [[email([[int]]).rs]] = warewolf@dev2.co.za | [[email(*).rs]] =                           | New Email Test                    | [[rs(*).a]] = Test       | [[rec().set]] = warewolf@dev2.co.za       | [[rs(*).a]] =                         | This is a test               |             |        |
-	| warewolf@dev2.co.za                         | info@dev2.co.za                             | New Email Test                    | [[rs([[int]]).a]] = Test | [[rs(*).a]] =                             | [[rec().set]] = warewolf@dev2.co.za   | This is a test               |             |        |
-	| warewolf@dev2.co.za                         | info@dev2.co.za                             | New Email Test                    | Test123                  | [[rs([[int]]).a]] =   warewolf@dev2.co.za | [[rs([[int]]).a]] =   info@dev2.co.za | This is a test               |             |        |
-
-
-
+##	#wolf - 991
+##Scenario: Send Email with an attachment
+##	Given the from account is "warewolf@dev2.co.za"
+##	And to address is "test1@freemail.com" 	
+##	And I  want to attach an item
+##	When I expand the Email tool
+##	And I click "Attachments"
+##	Then the webs file chooser dialog opens 
+##
+##
+##@ignore
+##	#Audit
+##Scenario Outline: Sending an email 
+##	Given the from account is '<from>'
+##	And to address is '<To>'
+##	And the subject is '<subject>'
+##	And Password is '<password>' 
+##	And the Bcc is '<Bcc>'
+##	And the Cc is '<Cc>'
+##	And body is '<body>'
+##	And the attachment is '<attachments>'
+##	And Result is '<result>'
+##	Examples: 
+##	| from                                        | To                                          | subject                           | password                 | Bcc                                       | Cc                                    | body                         | attachments | result |
+##	| 22                                          | [[va]]                                      | [[rec([[int]]).a]] = Numeric Test | 3                        | 100                                       | 50                                    | [[rs().a]] = hello           | [[a]]       |        |
+##	| [[va]]                                      | 11                                          | [[rs().set]] = T                  | [[var]] = test123        | [[a]] = warewolf@dev2.co.za               | info@dev2.co.za                       | 45                           |             |        |
+##	| [[rec(1).set]] = warewolf@dev2.co.za        | [[rs(1).a]] =  info@dev2.co.za              | [[va]]                            | [[q]]                    | info@dev2.co.za                           | [[var]] = info@dev2.co.za             | [[b]]                        |             |        |
+##	| [[email().rs]] = warewolf@dev2.co.za        | [[email([[int]]).rs]] = warewolf@dev2.co.za | [[rs(*).a]] = Test                | [[rs(1).a]] = test123    | [[e]]                                     | [[rec(1).set]] = info@dev2.co.za      | [[email([[int]]).rs]] = Test |             |        |
+##	| [[email(*).rs]] =                           | [[email().rs]] = warewolf@dev2.co.za        | New Email Test                    | [[rs().b]] = test123     | [[rec(1).set]] = warewolf@dev2.co.za      | [[e]]                                 | [[rs(*).a]] =                |             |        |
+##	| [[email([[int]]).rs]] = warewolf@dev2.co.za | [[email(*).rs]] =                           | New Email Test                    | [[rs(*).a]] = Test       | [[rec().set]] = warewolf@dev2.co.za       | [[rs(*).a]] =                         | This is a test               |             |        |
+##	| warewolf@dev2.co.za                         | info@dev2.co.za                             | New Email Test                    | [[rs([[int]]).a]] = Test | [[rs(*).a]] =                             | [[rec().set]] = warewolf@dev2.co.za   | This is a test               |             |        |
+##	| warewolf@dev2.co.za                         | info@dev2.co.za                             | New Email Test                    | Test123                  | [[rs([[int]]).a]] =   warewolf@dev2.co.za | [[rs([[int]]).a]] =   info@dev2.co.za | This is a test               |             |        |
+##
+##
+##
