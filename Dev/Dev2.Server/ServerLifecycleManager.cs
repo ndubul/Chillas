@@ -1608,6 +1608,7 @@ namespace Dev2
         {
             CustomContainer.Register<IActivityParser>(new ActivityParser());
             MigrateOldResources();
+            ValidatResourceFolder();
             Write("Loading resource catalog...  ");
             // First call initializes instance
 #pragma warning disable 168
@@ -1638,6 +1639,13 @@ namespace Dev2
                 MigrateResources(oldSourcesFolder);
                 WriteLine("done.");
             }
+        }
+
+        static void ValidatResourceFolder()
+        {
+            var folder = Path.Combine(EnvironmentVariables.ApplicationPath, "Resources");
+            if(!Directory.Exists(folder))
+            Directory.CreateDirectory(folder);
         }
 
         static void MigrateResources(string oldResourceFolder)
