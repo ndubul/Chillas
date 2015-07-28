@@ -143,6 +143,18 @@ namespace Warewolf.Studio.Views
             viewTestClass.PerformActionOnContextMenu(menuAction, itemName,path);
         }
 
+        public IExplorerTreeItem GetCurrentItem()
+        {
+            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
+            return viewTestClass.GetCurrentItem();
+        }
+
+        public void CreateNewFolderInFolder(string newFolderName, string currentFolder)
+        {
+            ExplorerViewTestClass viewTestClass = new ExplorerViewTestClass(ExplorerView);
+            viewTestClass.PerformFolderAdd(currentFolder + "/" + newFolderName);
+        }
+
         /// <summary>
         /// Attaches events and names to compiled content. 
         /// </summary>

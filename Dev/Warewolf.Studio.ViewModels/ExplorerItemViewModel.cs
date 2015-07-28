@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Dev2;
 using Dev2.Common.Interfaces;
@@ -349,20 +350,25 @@ namespace Warewolf.Studio.ViewModels
                 }
                 else
                 {
-                    if (_explorerRepository != null && (IsRenaming && _explorerRepository.Rename(this, NewName(value))))
+                    var newName = RemoveInvalidCharacters(value);
+                    if (_explorerRepository != null && (IsRenaming && _explorerRepository.Rename(this, NewName(newName))))
                     {
-                        _resourceName = value;
+                        _resourceName = newName;
                     }
                     if (!IsRenaming)
                     {
-                        _resourceName = value;
+                        _resourceName = newName;
                     }
                     IsRenaming = false;
+                    
                     OnPropertyChanged(() => ResourceName);
             }
         }
         }
-
+        private string RemoveInvalidCharacters(string name)
+        {
+            return Regex.Replace(name, @"[^a-zA-Z0-9._\s-]", "");
+        }
 	    string NewName(string value)
 	    {
             if (!ResourcePath.Contains("\\"))

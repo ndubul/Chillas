@@ -1982,6 +1982,9 @@ namespace Dev2.Studio.ViewModels
 
         public void Handle(FileChooserMessage message)
         {
+            var emailAttachmentView = new ManageEmailAttachmentView();
+            emailAttachmentView.ShowView(message.SelectedFiles);
+            
         }
 
         #endregion

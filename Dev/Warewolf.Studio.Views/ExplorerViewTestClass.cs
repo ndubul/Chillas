@@ -421,22 +421,24 @@ namespace Warewolf.Studio.Views
 
         public void PerformActionOnContextMenu(string menuAction, string itemName, string path)
         {
-            var item = VerifyItemExists(itemName);
-            if (item != null)
+            switch (menuAction)
             {
-                switch (menuAction)
-                {
-                    case "Create Folder":
-                        PerformFolderAdd(path + "/" + itemName);
-                        break;
-                    case "Rename":
-                        PerformFolderRename(path, itemName);
-                        break;
-                    case "Delete":
-                        PerformFolderDelete(path);
-                        break;
-                }
+                case "Create New Folder":
+                    PerformFolderAdd(path + "/" + itemName);
+                    break;
+                case "Rename":
+                    PerformFolderRename(path, itemName);
+                    break;
+                case "Delete":
+                    PerformFolderDelete(path);
+                    break;
             }
+        }
+
+        public IExplorerTreeItem GetCurrentItem()
+        {
+            var item = _explorerView.ExplorerTree.ActiveNode.Data as IExplorerTreeItem;
+            return item;
         }
     }
 }

@@ -22,7 +22,7 @@
                     Height="450"
                     d:DesignHeight="450" d:DesignWidth="600">
 
-    <Grid Margin="{Binding ElementBorder}">
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
