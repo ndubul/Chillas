@@ -6,6 +6,7 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.ServerProxyLayer;
+using Dev2.Common.Interfaces.Toolbox;
 
 namespace Dev2.Common.Interfaces
 {
@@ -60,7 +61,7 @@ namespace Dev2.Common.Interfaces
         /// <returns></returns>
         Task<IExplorerItem> Load();
 
-        //IList<IToolDescriptor> FetchTools();
+        IList<IToolDescriptor> FetchTools();
 
 
         IList<string> GetComputerNames();

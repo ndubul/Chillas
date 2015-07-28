@@ -129,6 +129,7 @@
     <Compile Include="ResourceTypeToIconConverter.cs" />
     <Compile Include="ResourceTypeToIconVisibility.cs" />
     <Compile Include="WarewolfWebClient.cs" />
+    <Compile Include="WidthConvertForWrapPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dev2.Common.Interfaces\Dev2.Common.Interfaces.csproj">
