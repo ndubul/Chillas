@@ -1,4 +1,5 @@
 ﻿using System;
+using Dev2.AppResources.Repositories;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
@@ -83,8 +84,11 @@ namespace Warewolf.Studio.ServerProxyLayer
             var controller = CommunicationControllerFactory.CreateController("RenameItemService");
             controller.AddPayloadArgument("itemToRename", id.ToString());
             controller.AddPayloadArgument("newName", newName);
-            controller.ExecuteCommand<IExplorerRepositoryResult>(Connection, GlobalConstants.ServerWorkspaceID);
-
+            var result = controller.ExecuteCommand<IExplorerRepositoryResult>(Connection, GlobalConstants.ServerWorkspaceID);
+            if (result.Status == ExecStatus.Success)
+            {
+                StudioResourceRepository.Instance.UpdateItem(id, model => model.RefreshName((newName.Substring(0, newName.LastIndexOf("\\", StringComparison.Ordinal)))), Connection.ID);
+            }
         }
 
         /// <summary>

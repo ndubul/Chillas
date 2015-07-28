@@ -130,14 +130,17 @@ namespace Warewolf.Studio.ViewModels
         {
             foreach (var explorerItemViewModel in Children)
             {
-                explorerItemViewModel.Apply(a =>
+                if (explorerItemViewModel.ResourceId == id)
                 {
-                    if (a.ResourceId == id)
-                    {
-                        a.IsExpanded = true;
-                        foundAction(a);
-                    }
-                });
+                    explorerItemViewModel.IsExpanded = true;
+                    explorerItemViewModel.IsSelected = true;
+                    foundAction(explorerItemViewModel);
+                }
+                else
+                {
+                    explorerItemViewModel.SelectItem(id, foundAction);
+                }
+
             }
         }
 

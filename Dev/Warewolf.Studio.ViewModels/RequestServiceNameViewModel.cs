@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Dev2.Common.Interfaces;
@@ -17,13 +18,17 @@ namespace Warewolf.Studio.ViewModels
         private string _name;
         private string _errorMessage;
         private ResourceName _resourceName;
-		private readonly IRequestServiceNameView _view;
-        readonly Guid _selectedGuid;
-        public MessageBoxResult ViewResult { get; private set; }
+		private IRequestServiceNameView _view;
+        Guid _selectedGuid;
+        MessageBoxResult ViewResult { get; set; }
 
+        private RequestServiceNameViewModel()
+        {
+            
+        }
         /// <exception cref="ArgumentNullException"><paramref name="environmentViewModel"/> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="view"/> is <see langword="null" />.</exception>
-        public RequestServiceNameViewModel(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, Guid selectedGuid)
+        private async Task<IRequestServiceNameViewModel> InitializeAsync(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, Guid selectedGuid)
         {
             if (environmentViewModel == null)
             {
@@ -33,9 +38,9 @@ namespace Warewolf.Studio.ViewModels
             {
                 throw new ArgumentNullException("view");
             }
-            environmentViewModel.Connect();
+            await environmentViewModel.Connect();
             _selectedGuid = selectedGuid;
-            environmentViewModel.LoadDialog(_selectedGuid);
+            await environmentViewModel.LoadDialog(_selectedGuid);
             _view = view;
            
 			OkCommand = new DelegateCommand(SetServiceName, () => String.IsNullOrEmpty(ErrorMessage));
@@ -44,7 +49,14 @@ namespace Warewolf.Studio.ViewModels
             _view.DataContext = this;
             Name = "";
 			environmentViewModel.CanShowServerVersion = false;
+            return this;
         }
+
+        public static Task<IRequestServiceNameViewModel> CreateAsync(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, Guid selectedGuid)
+        {
+            var ret = new RequestServiceNameViewModel();
+            return ret.InitializeAsync(environmentViewModel, view, selectedGuid);
+        }   
 
         public RequestServiceNameViewModel(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, string selectedPath)
         {

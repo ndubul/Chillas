@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Dev2.Common.Interfaces.Data;
@@ -41,6 +42,6 @@ namespace Dev2.Common.Interfaces
         bool AreVersionsVisible { get; set; }
         void AddChild(IExplorerItemViewModel child);
         void RemoveChild(IExplorerItemViewModel child);
-
+        void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction);
     }
 }
