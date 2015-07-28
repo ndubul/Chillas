@@ -13,8 +13,9 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
+using System.Windows.Media;
 using Dev2.Common.Interfaces.Data;
+using Warewolf.Studio.Core;
 
 namespace Dev2.AppResources.Converters
 {
@@ -31,57 +32,44 @@ namespace Dev2.AppResources.Converters
         /// <param name="values">The array of values that the source bindings in the <see cref="T:System.Windows.Data.MultiBinding"/> produces. The value <see cref="F:System.Windows.DependencyProperty.UnsetValue"/> indicates that the source binding has no value to provide for conversion.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
+            const string pathname = "/Warewolf.Studio.Themes.Luna;component/Images.xaml";
+            ResourceDictionary dict = Application.LoadComponent(new Uri(pathname, UriKind.Relative)) as ResourceDictionary;
             ResourceType resourceType = values[0] is ResourceType ? (ResourceType)values[0] : ResourceType.Unknown;
             bool isExpanded = values[1] is bool && (bool)values[1];
             Uri uri;
             switch(resourceType)
             {
                 case ResourceType.WorkflowService:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/Workflow-32.png");
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.WorkflowService] as DrawingImage;
                 case ResourceType.DbService:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/DatabaseService-32.png");
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.DbService] as DrawingImage;
                 case ResourceType.PluginService:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/PluginService-32.png");
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.PluginService] as DrawingImage;
                 case ResourceType.WebService:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/WebService-32.png");
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.WebService] as DrawingImage;
                 case ResourceType.DbSource:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/DatabaseSource-32.png");
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.DbSource] as DrawingImage;
                 case ResourceType.PluginSource:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/PluginSource-32.png");
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.PluginSource] as DrawingImage;
                 case ResourceType.WebSource:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/WebSource-32.png");
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.WebSource] as DrawingImage;
                 case ResourceType.EmailSource:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/EmailSource-32.png");
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.EmailSource] as DrawingImage;
                 case ResourceType.ServerSource:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/ExplorerWarewolfConnection-32.png");
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.ServerSource] as DrawingImage;
                 case ResourceType.Server:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/ExplorerWarewolfConnection-32.png");
-                    return new BitmapImage(uri);
+                    return Application.Current.Resources["System-Logo"];
                 case ResourceType.Version:
                 case ResourceType.Message:
                     return null;
                 case ResourceType.Folder:
-                    uri = isExpanded ? new Uri("pack://application:,,,/Warewolf Studio;component/Images/ExplorerFolderOpen-32.png") :
-                                       new Uri("pack://application:,,,/Warewolf Studio;component/Images/ExplorerFolder-32.png");
-
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.Folder] as DrawingImage;
                 case ResourceType.OauthSource :
-                     uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/dropbox-windows.png");
-                    return new BitmapImage(uri);
+                    return Application.Current.Resources["DropBoxLogoIcon"];
                 case ResourceType.SharepointServerSource:
                     return Application.Current.Resources["AddSharepointLogo"];
                 default:
-                    uri = new Uri("pack://application:,,,/Warewolf Studio;component/Images/Workflow-32.png");
-                    return new BitmapImage(uri);
+                    return dict[CustomMenuIcons.WorkflowService] as DrawingImage;
             }
         }
 

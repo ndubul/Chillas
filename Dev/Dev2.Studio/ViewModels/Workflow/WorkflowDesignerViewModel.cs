@@ -651,6 +651,18 @@ namespace Dev2.Studio.ViewModels.Workflow
             DataObject = null;
         }
 
+        public ResourceType ResourceType
+        {
+            get
+            {
+                if (ResourceModel != null)
+                {
+                    return ResourceModel.ResourceType;
+                }
+                return ResourceType.Unknown;
+            }
+        }
+
         void InitialiseWithoutServiceName(ModelProperty modelProperty1, DsfActivity droppedActivity)
         {
             DsfActivity activity = droppedActivity;
@@ -1205,7 +1217,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             if (!liteInit)
             {
                 //For Changing the icon of the flowchart.
-                WorkflowDesignerIcons.Activities.Flowchart = new DrawingBrush(new ImageDrawing(new BitmapImage(new Uri(@"pack://application:,,,/Warewolf Studio;component/Images/Workflow-32.png")), new Rect(0, 0, 16, 16)));
+                WorkflowDesignerIcons.Activities.Flowchart = Application.Current.TryFindResource("Explorer-WorkflowService-Icon") as DrawingBrush;
                 WorkflowDesignerIcons.Activities.StartNode = new DrawingBrush(new ImageDrawing(new BitmapImage(new Uri(@"pack://application:,,,/Warewolf Studio;component/Images/StartNode.png")), new Rect(0, 0, 32, 32)));
                 SubscribeToDebugSelectionChanged();
             }

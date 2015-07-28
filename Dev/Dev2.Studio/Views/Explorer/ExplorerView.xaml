@@ -14,12 +14,15 @@
              xmlns:explorer="clr-namespace:Dev2.Studio.ViewModels.Explorer"
              xmlns:explorer2="clr-namespace:Dev2.Models;assembly=Dev2.Studio.Core"
              xmlns:connections="clr-namespace:Dev2.CustomControls.Connections"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:core="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
              AllowDrop="True"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance explorer:ExplorerViewModel}"
              Name="Explorer">
 
     <UserControl.Resources>
+        <core:ResourceTypeToIconConverter x:Key="ResourceTypeToIconConverter" />
         <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Height" Value="20" />
         </Style>
@@ -47,6 +50,7 @@
         <navigationViews:NavigationView x:Name="TheNavigationView"
                                         DataContext="{Binding DataContext.NavigationViewModel, ElementName=Explorer}"
                                         Grid.Row="1"
+                                        Grid.Column="0"
                                         Grid.ColumnSpan="2"
                                         AutomationProperties.AutomationId="UI_NavigationViewUserControl_AutoID">
             
@@ -87,6 +91,60 @@
 
             <navigationViews:NavigationView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type explorer2:ExplorerItemModel}" ItemsSource="{Binding Path=Children}">
+                    <!--<HierarchicalDataTemplate.Triggers>
+                        <EventTrigger RoutedEvent="StackPanel.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Duration="0"
+                                                                           Storyboard.TargetName="EditPermissionImageEnabled"
+                                                                           Storyboard.TargetProperty="Source">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Permission-Enabled}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Duration="0"
+                                                                           Storyboard.TargetName="EditPermissionImageDisabled"
+                                                                           Storyboard.TargetProperty="Source">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Permission-Disabled}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Duration="0"
+                                                                           Storyboard.TargetName="ExecutePermissionImageEnabled"
+                                                                           Storyboard.TargetProperty="Source">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Run-Enabled}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Duration="0"
+                                                                           Storyboard.TargetName="ExecutePermissionImageDisabled"
+                                                                           Storyboard.TargetProperty="Source">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Run-Disabled}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="StackPanel.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Duration="0"
+                                                                           Storyboard.TargetName="EditPermissionImageEnabled"
+                                                                           Storyboard.TargetProperty="Source">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Duration="0"
+                                                                           Storyboard.TargetName="EditPermissionImageDisabled"
+                                                                           Storyboard.TargetProperty="Source">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Duration="0"
+                                                                           Storyboard.TargetName="ExecutePermissionImageEnabled"
+                                                                           Storyboard.TargetProperty="Source">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Duration="0"
+                                                                           Storyboard.TargetName="ExecutePermissionImageDisabled"
+                                                                           Storyboard.TargetProperty="Source">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </HierarchicalDataTemplate.Triggers>-->
                     <Border IsHitTestVisible="True" Background="Transparent">
                         <Border.RenderTransform>
                             <TransformGroup>
@@ -153,62 +211,110 @@
                                           Command="{Binding EditCommand}"
                                           Visibility="{Binding CanEdit, Converter={StaticResource BoolToVisConverter}}"
                                           AutomationProperties.AutomationId ="UI_OpenContextMenuItem_AutoID" />
+                                
                                 <Separator Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}" />
+                                
                                 <MenuItem Header="New Folder"
                                           Visibility="{Binding CanCreateNewFolder, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewFolderCommand}"
                                           AutomationProperties.AutomationId ="UI_NewFolderContextMenuItem_AutoID"/>
-                                <MenuItem Header="New Service   (Ctrl+W)"
+                                <MenuItem Header="New Service"
+                                          InputGestureText="[Ctrl+W]"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="Workflow"
-                                          AutomationProperties.AutomationId ="UI_NewWorkflowContextMenuItem_AutoID"/>
-                                <MenuItem Header="New Database Connector   (Ctrl+Shift+D)"
+                                          AutomationProperties.AutomationId ="UI_NewWorkflowContextMenuItem_AutoID">
+                                    <MenuItem.Icon>
+                                        <Image Width="12" Height="12" Source="{StaticResource Explorer-WorkflowService}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="New Database Connector"
+                                          InputGestureText="[Ctrl+Shift+D]"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="DatabaseService"
-                                          AutomationProperties.AutomationId ="UI_NewDatabaseServiceContextMenuItem_AutoID" />
-                                <MenuItem Header="New Plugin Connector   (Ctrl+Shift+P)"
+                                          AutomationProperties.AutomationId ="UI_NewDatabaseServiceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <Image  Width="12" Height="12" Source="{StaticResource Explorer-DB}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="New Plugin Connector"
+                                          InputGestureText="[Ctrl+Shift+P]"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="ResourceService"
-                                          AutomationProperties.AutomationId ="UI_NewPluginServiceContextMenuItem_AutoID" />
-                                <MenuItem Header="New Web Service Connector   (Ctrl+Shift+W)"
+                                          AutomationProperties.AutomationId ="UI_NewPluginServiceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <Image Width="12" Height="12" Source="{StaticResource Explorer-DLL}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="New Web Service Connector"
+                                          InputGestureText="[Ctrl+Shift+W]"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="WebService"
-                                          AutomationProperties.AutomationId ="UI_NewWebServiceContextMenuItem_AutoID" />
+                                          AutomationProperties.AutomationId ="UI_NewWebServiceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <Image Width="12" Height="12" Source="{StaticResource Explorer-WebService}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                
                                 <Separator Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}" />
+                                
                                 <MenuItem Header="New Remote Warewolf Source"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="Server"
-                                          AutomationProperties.AutomationId ="UI_NewServerServiceContextMenuItem_AutoID" />
+                                          AutomationProperties.AutomationId ="UI_NewServerServiceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <fa:FontAwesome FontSize="14" FontWeight="Light" Icon="Plus" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
                                 <MenuItem Header="New Database Source"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="DbSource"
-                                          AutomationProperties.AutomationId ="UI_NewDbSourceContextMenuItem_AutoID" />
+                                          AutomationProperties.AutomationId ="UI_NewDbSourceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <Image Width="12" Height="12" Source="{StaticResource Explorer-DB-Create}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
                                 <MenuItem Header="New Plugin Source"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="ResourceSource"
-                                          AutomationProperties.AutomationId ="UI_NewPluginSourceContextMenuItem_AutoID" />
+                                          AutomationProperties.AutomationId ="UI_NewPluginSourceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <Image Width="12" Height="12" Source="{StaticResource Explorer-DLL-Create}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
                                 <MenuItem Header="New Web Service Source"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="WebSource"
-                                          AutomationProperties.AutomationId ="UI_NewWebSourceContextMenuItem_AutoID" />
+                                          AutomationProperties.AutomationId ="UI_NewWebSourceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <Image Width="12" Height="12" Source="{StaticResource Explorer-WebService-Create}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
                                 <MenuItem Header="New Email Source"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="EmailSource"
-                                          AutomationProperties.AutomationId ="UI_NewEmailSourceContextMenuItem_AutoID" />
+                                          AutomationProperties.AutomationId ="UI_NewEmailSourceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <Image Width="12" Height="12" Source="{StaticResource Utility-SendMail}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
                                 <MenuItem Header="New Dropbox Source"
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="DropboxSource"
-                                          AutomationProperties.AutomationId ="UI_NewEmailSourceContextMenuItem_AutoID" />
+                                          AutomationProperties.AutomationId ="UI_NewEmailSourceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <Image Width="12" Height="12" Source="{StaticResource DropBoxLogoIcon}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
 
 
                                 <Separator Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}" />
@@ -218,8 +324,13 @@
                                 <MenuItem Header="{Binding DeployTitle}"
                                           Command="{Binding DeployCommand}"
                                           Visibility="{Binding CanDeploy, Converter={StaticResource BoolToVisConverter}}"
-                                          AutomationProperties.AutomationId ="UI_NewDeployContextMenuItem_AutoID" />
-                                <MenuItem Header="Rename   (F2)"
+                                          AutomationProperties.AutomationId ="UI_NewDeployContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <fa:FontAwesome FontSize="14" FontWeight="Light" Icon="PaperPlane" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Rename"
+                                          InputGestureText="[F2]"
                                           Command="{Binding RenameCommand}"
                                           Visibility="{Binding CanRename, Converter={StaticResource BoolToVisConverter}}"
                                           AutomationProperties.AutomationId ="UI_RenameContextMenuItem_AutoID" />
@@ -235,7 +346,9 @@
                                           Command="{Binding DebugCommand}"
                                           Visibility="{Binding CanDebug, Converter={StaticResource BoolToVisConverter}}"
                                           AutomationProperties.AutomationId ="UI_DebugContextMenuItem_AutoID" />
+                                
                                 <Separator Visibility="{Binding CanShowHistory, Converter={StaticResource BoolToVisConverter}}"/>
+                                
                                 <MenuItem Header="{Binding ToggleVersionHistoryHeader}"
                                           Command="{Binding ToggleVersionHistoryCommand}"
                                           Visibility="{Binding CanShowHistory, Converter={StaticResource BoolToVisConverter}}"
@@ -275,9 +388,9 @@
 
                                 <StackPanel Orientation="Horizontal" 
                                             AllowDrop="True"
-                                            Margin="3,1,0,1"
+                                            Margin="0,1,0,1"
                                             Visibility="{Binding IsRefreshing, Converter={StaticResource BoolToVisibilityConverterNegative}}">
-                                    <Image Width="17" Height="17" AllowDrop="True">
+                                    <Image Margin="-25,0,0,0" Width="15" Height="15" AllowDrop="True">
                                         <Image.Source>
                                             <MultiBinding Converter="{StaticResource ExplorerItemModelToIconConverter}">
                                                 <Binding Path="ResourceType"/>
@@ -292,33 +405,115 @@
                                     </Image>
                                     <Button Visibility="{Binding IsVersion, Converter={StaticResource BoolToVisConverter}}"
                                             Style="{StaticResource ButtonTransparentStyle}" />
-                                    <Button Visibility="{Binding CanEdit, Converter={StaticResource BoolToVisConverter}}"
-                                            ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipView}"
-                                            Style="{StaticResource ButtonTransparentStyle}"
-                                            AutomationProperties.AutomationId="UI_CanEdit_AutoID">
-                                        <Button.InputBindings>
-                                            <MouseBinding Gesture="LeftClick" Command="{Binding EditCommand}" />
-                                        </Button.InputBindings>
-                                        <Image Style="{StaticResource AuthViewIconStyle}" />
-                                    </Button>
-                                    <Button Visibility="{Binding CanExecute, Converter={StaticResource BoolToVisConverter}}"
-                                            ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipExecute}"
-                                            Style="{StaticResource ButtonTransparentStyle}"
-                                            AutomationProperties.AutomationId="UI_CanExecute_AutoID">
-                                        <Image Style="{StaticResource AuthExecuteIconStyle}" />
-                                        <Button.InputBindings>
-                                            <MouseBinding Gesture="LeftClick" Command="{Binding DebugCommand}" />
-                                        </Button.InputBindings>
-                                    </Button>
+                                    
                                     <Image Style="{StaticResource AuthNoneIconStyle}"
                                            Visibility="{Binding Permissions, Converter={StaticResource NavigationViewModelPermissionVisibilityConverter}, ConverterParameter=None}"
                                            ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipNone}"
                                            AutomationProperties.AutomationId="UI_NotAutherized_AutoID" />
                                 </StackPanel>
 
-                                <ContentControl Content="{Binding}" AllowDrop="True">
+                                <ContentControl Content="{Binding}" Margin="-5,0,0,0" Height="20" AllowDrop="True">
                                     <ContentControl.Resources />
                                 </ContentControl>
+
+                                <Button Visibility="{Binding CanEdit, Converter={StaticResource BoolToVisConverter}}"
+                                            ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipView}"
+                                            Style="{StaticResource ButtonTransparentStyle}"
+                                            AutomationProperties.AutomationId="UI_CanEdit_AutoID">
+                                    <Button.InputBindings>
+                                        <MouseBinding Gesture="LeftClick" Command="{Binding EditCommand}" />
+                                    </Button.InputBindings>
+                                    <Button.Content>
+                                        <StackPanel>
+                                            <!-- CHANGE TOP MARGIN TO ALIGN EDIT IMAGE WITH TEXTBLOCK -->
+                                            <Image Width="14"
+                                                   Height="15"
+                                                   Margin="0,-1,0,0"
+                                                   Stretch="Uniform"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Source="{StaticResource System-Spacer}" >
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Value="True">
+                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                            <Image Width="14"
+                                                   Height="15"
+                                                   Margin="0,-1,0,0"
+                                                   Stretch="Uniform"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Source="{StaticResource Explorer-Permission-Enabled}" >
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button Visibility="{Binding CanExecute, Converter={StaticResource BoolToVisConverter}}"
+                                            ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipExecute}"
+                                            Style="{StaticResource ButtonTransparentStyle}"
+                                            AutomationProperties.AutomationId="UI_CanExecute_AutoID">
+                                    <Button.InputBindings>
+                                        <MouseBinding Gesture="LeftClick" Command="{Binding DebugCommand}" />
+                                    </Button.InputBindings>
+                                    <Button.Content>
+                                        <StackPanel>
+                                            <!-- CHANGE TOP MARGIN TO ALIGN EDIT IMAGE WITH TEXTBLOCK -->
+                                            <Image Height="11"
+                                                   Margin="0,-2,0,0"
+                                                   Stretch="Uniform"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Source="{StaticResource System-Spacer}" >
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Value="True">
+                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                            <Image Height="11"
+                                                   Margin="0,-2,0,0"
+                                                   Stretch="Uniform"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Source="{StaticResource Explorer-Run-Enabled}" >
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
 
                             </StackPanel>
 

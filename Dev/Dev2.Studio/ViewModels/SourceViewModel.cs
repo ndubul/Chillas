@@ -1,6 +1,7 @@
 using System.Windows;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Core.Help;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.WorkSurface;
@@ -55,6 +56,21 @@ namespace Dev2.ViewModels
             {
                 loadedView.DataContext = ViewModel;
                 base.OnViewLoaded(loadedView);
+            }
+        }
+
+        public ResourceType ResourceType
+        {
+            get
+            {
+                if (ViewModel != null)
+                {
+                    if(ViewModel.Image != null)
+                    {
+                        return ViewModel.Image.Value;
+                    }
+                }
+                return ResourceType.Unknown;
             }
         }
 

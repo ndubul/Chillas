@@ -16,6 +16,7 @@
         xmlns:help="clr-namespace:Dev2.Help"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:views1="clr-namespace:Warewolf.Studio.Views;assembly=Warewolf.Studio.Views"
+        xmlns:core="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
         Background="{StaticResource WareWolfBackGroundBrush}"
         FontFamily="{StaticResource DefaultFontFamily}"
         ShowInTaskbar="True"
@@ -363,7 +364,7 @@
                                                     <Setter.Value>
                                                         <DataTemplate>
                                                             <StackPanel Orientation="Horizontal" >
-                                                                <Image Source="{Binding IconPath}" Height="16" Width="16"
+                                                                <Image Source="{Binding ResourceType, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ResourceTypeToIconConverter}}" Height="16" Width="16"
                                                                    AutomationProperties.AutomationId="{Binding DisplayName}" Margin="4,4,4,2" />
                                                                 <TextBlock Text="{Binding DisplayName}" VerticalAlignment="Center" />
                                                                 <Image Style="{StaticResource AuthNoneIconStyle}"
