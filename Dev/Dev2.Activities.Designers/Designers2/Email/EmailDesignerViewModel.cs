@@ -28,6 +28,7 @@ using Dev2.Data.Enums;
 using Dev2.Data.Util;
 using Dev2.Providers.Errors;
 using Dev2.Providers.Validation.Rules;
+using Dev2.Runtime.Configuration.ComponentModel;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Runtime.Diagnostics;
 using Dev2.Runtime.ServiceModel.Data;
@@ -371,6 +372,7 @@ namespace Dev2.Activities.Designers2.Email
         {
             const string Separator = ";";
             var message = new FileChooserMessage();
+            message.SelectedFiles = Attachments.Split(Separator.ToCharArray());
             message.PropertyChanged += (sender, args) =>
             {
                 if(args.PropertyName == "SelectedFiles")

@@ -218,7 +218,10 @@ namespace Dev2.Network
             {
                 Dev2Logger.Log.Info("Falling Back to previous signal r client");
                 var name = _wrappedConnection.DisplayName;
+                var addedAction = _wrappedConnection.ItemAddedMessageAction;
+                 
                 _wrappedConnection = new ServerProxyWithChunking(_wrappedConnection.WebServerUri){DisplayName = name};
+                _wrappedConnection.ItemAddedMessageAction = addedAction;
 
                 SetupPassthroughEvents();
                 _wrappedConnection.Connect(_wrappedConnection.ID);

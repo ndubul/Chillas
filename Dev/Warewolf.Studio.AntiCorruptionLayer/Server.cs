@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Dev2;
+using Dev2.AppResources.Repositories;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Infrastructure;
@@ -41,7 +42,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         {
             VerifyArgument.IsNotNull("uri",uri);
             VerifyArgument.IsNotNull("credentials", credentials);
-            _environmentConnection = new ServerProxy(uri,credentials,new AsyncWorker()) { ItemAddedMessageAction = ItemAdded };
+            _environmentConnection = new ServerProxy(uri,credentials,new AsyncWorker()) { ItemAddedMessageAction = StudioResourceRepository.Instance.ItemAddedMessageHandler  };
             _serverId = Guid.NewGuid();
             _proxyLayer = new StudioServerProxy(new CommunicationControllerFactory(), EnvironmentConnection);
             UpdateRepository = new StudioResourceUpdateManager(new CommunicationControllerFactory(), EnvironmentConnection);

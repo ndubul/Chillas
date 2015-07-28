@@ -106,6 +106,14 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
             saveView.CreateNewFolder(newFolderName, rootPath);
         }
 
+        [When(@"I create folder ""(.*)"" in ""(.*)""")]
+        public void WhenICreateFolderIn(string newFolderName, string currentFolder)
+        {
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            saveView.CreateNewFolderInFolder(newFolderName, currentFolder);
+        }
 
         [When(@"I enter name ""(.*)""")]
         public void WhenIEnterName(string serviceName)
@@ -257,6 +265,15 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
             saveView.PerformActionOnContextMenu(menuAction, itemName, path);
         }
 
+        [Then(@"the item name is ""(.*)""")]
+        public void ThenTheItemNameIs(string itemName)
+        {
+            IRequestServiceNameView saveView;
+            ScenarioContext.Current.TryGetValue("saveView", out saveView);
+            Assert.IsNotNull(saveView);
+            var explorerTreeItem = saveView.GetCurrentItem();
+            Assert.AreEqual(itemName,explorerTreeItem.ResourceName);
+        }
 
         [AfterScenario("SaveDialog")]
         public void CleanupForSave()

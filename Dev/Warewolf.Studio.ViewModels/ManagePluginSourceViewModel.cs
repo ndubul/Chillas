@@ -87,7 +87,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 IsLoading = true;
                 var names = _updateManager.GetDllListings(null).Select(input => new DllListingModel(_updateManager, input)).ToList();
-                Dispatcher.CurrentDispatcher.Invoke(() =>
+                Application.Current.Dispatcher.Invoke( () =>
                 {
                     DllListings = new List<IDllListingModel>(names);
                     IsLoading = false;

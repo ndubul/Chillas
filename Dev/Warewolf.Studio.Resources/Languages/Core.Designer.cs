@@ -720,6 +720,24 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailAttachmentCancelCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        /// </summary>
+        public static string EmailAttachmentCancelCommandHelp {
+            get {
+                return ResourceManager.GetString("EmailAttachmentCancelCommandHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailAttachmentSaveCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        /// </summary>
+        public static string EmailAttachmentSaveCommandHelp {
+            get {
+                return ResourceManager.GetString("EmailAttachmentSaveCommandHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailSourceCancelHelp&lt;/p&gt;&lt;/body&gt;.
         /// </summary>
         public static string EmailSourceCancelHelp {
