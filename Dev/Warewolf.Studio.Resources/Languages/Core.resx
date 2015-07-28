@@ -1045,4 +1045,10 @@ You need Administrator permission.</value>
   <data name="WarewolfHelpURL" xml:space="preserve">
     <value>http://warewolf.io/knowledge-base/</value>
   </data>
+  <data name="EmailAttachmentCancelCommandHelp" xml:space="preserve">
+    <value>&lt;body&gt;&lt;p&gt;EmailAttachmentCancelCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+  </data>
+  <data name="EmailAttachmentSaveCommandHelp" xml:space="preserve">
+    <value>&lt;body&gt;&lt;p&gt;EmailAttachmentSaveCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+  </data>
 </root>
