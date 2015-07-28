@@ -3,6 +3,22 @@
 	As Warewolf user
 	I want tool that I can use to send emails
 
+##Send email to multiple receipients
+##Send email with multiple from accounts
+##Send email with badly formed multiple To Accounts
+##Send email with no To Accounts
+##Send email with Subject as both text and variable as xml 
+##Send email with no body
+##Send email with Body as both text and variable 
+##Send email with variable as Body that is xml
+##Send email with everything blank
+##Send email with a blank from account
+##Send email with a negative index recordset for From Accounts
+##Send email with a negative index recordset for Recipients
+##Send email with a negative index recordset for Subject
+##Send email with a negative index recordset for Body
+
+
 Scenario: Send email to multiple receipients
 	Given I have an email variable "[[firstMail]]" equal to "test1@freemail.com"
 	And I have an email variable "[[secondMail]]" equal to "test2@freemail.com"	
@@ -211,4 +227,40 @@ Scenario: Send email with a negative index recordset for Body
 	And the debug output as 
 	|                       |
 	| [[result]] =  |
+
+
+	#wolf - 991
+Scenario: Send Email with an attachment
+	Given the from account is "warewolf@dev2.co.za"
+	And to address is "test1@freemail.com" 	
+	And I  want to attach an item
+	When I expand the Email tool
+	And I click "Attachments"
+	Then the webs file chooser dialog opens 
+
+
+@ignore
+	# Audit
+Scenario Outline: Sending an email 
+	Given the from account is '<from>'
+	And to address is '<To>'
+	And the subject is '<subject>'
+	And Password is '<password>' 
+	And the Bcc is '<Bcc>'
+	And the Cc is '<Cc>'
+	And body is '<body>'
+	And the attachment is '<attachments>'
+	And Result is '<result>'
+	Examples: 
+	| from                                        | To                                          | subject                           | password                 | Bcc                                       | Cc                                    | body                         | attachments | result |
+	| 22                                          | [[va]]                                      | [[rec([[int]]).a]] = Numeric Test | 3                        | 100                                       | 50                                    | [[rs().a]] = hello           | [[a]]       |        |
+	| [[va]]                                      | 11                                          | [[rs().set]] = T                  | [[var]] = test123        | [[a]] = warewolf@dev2.co.za               | info@dev2.co.za                       | 45                           |             |        |
+	| [[rec(1).set]] = warewolf@dev2.co.za        | [[rs(1).a]] =  info@dev2.co.za              | [[va]]                            | [[q]]                    | info@dev2.co.za                           | [[var]] = info@dev2.co.za             | [[b]]                        |             |        |
+	| [[email().rs]] = warewolf@dev2.co.za        | [[email([[int]]).rs]] = warewolf@dev2.co.za | [[rs(*).a]] = Test                | [[rs(1).a]] = test123    | [[e]]                                     | [[rec(1).set]] = info@dev2.co.za      | [[email([[int]]).rs]] = Test |             |        |
+	| [[email(*).rs]] =                           | [[email().rs]] = warewolf@dev2.co.za        | New Email Test                    | [[rs().b]] = test123     | [[rec(1).set]] = warewolf@dev2.co.za      | [[e]]                                 | [[rs(*).a]] =                |             |        |
+	| [[email([[int]]).rs]] = warewolf@dev2.co.za | [[email(*).rs]] =                           | New Email Test                    | [[rs(*).a]] = Test       | [[rec().set]] = warewolf@dev2.co.za       | [[rs(*).a]] =                         | This is a test               |             |        |
+	| warewolf@dev2.co.za                         | info@dev2.co.za                             | New Email Test                    | [[rs([[int]]).a]] = Test | [[rs(*).a]] =                             | [[rec().set]] = warewolf@dev2.co.za   | This is a test               |             |        |
+	| warewolf@dev2.co.za                         | info@dev2.co.za                             | New Email Test                    | Test123                  | [[rs([[int]]).a]] =   warewolf@dev2.co.za | [[rs([[int]]).a]] =   info@dev2.co.za | This is a test               |             |        |
+
+
 
