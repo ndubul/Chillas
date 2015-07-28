@@ -35,8 +35,8 @@ Scenario: Saving a Workflow in localhost nested folder and shows correctly on re
 	Given the Save Dialog is opened
 	And the "localhost" server is visible in save dialog
 	And I open "Folder 1" in save dialog 
-	When I create "This" in "localhost/Folder 1"
-	When I save "Newworkflow"
+	When I create folder "This" in "localhost/Folder 1"
+	When I save "localhost/Folder 1/This/Newworkflow"
 	Then "Newworkflow" is visible in "localhost/Folder 1/This"	
 	And the Save Dialog is opened
 	And I open "localhost/Folder 1/This" in save dialog 
@@ -95,29 +95,18 @@ Scenario: Context Menu Folder actions
 	#Then I add folder "Nested" this is will need to happen from the CodedUI
 	#Then "Nested" is visible in "localhost/Testing"	
 	#When I open "localhost/Testing/Nested" in save dialog 
-	When I context menu "Rename" "localhost/Testing" to "Old Testing !@#"
-	And validation message is "'Name' contains invalid characters."
-	When I context menu "Rename" "localhost/Testing" to "Old Testing"
+	When I context menu "Rename" "localhost/Testing" to "Old Testing!@#"
+	Then the item name is "Old Testing"
 	And I open "Old Testing" in save dialog
 	#When I press "F2" this is will need to happen from the CodedUI
 	#Then I type "Very Old Testing" this is will need to happen from the CodedUI
 	#Then "Nested" is visible in "localhost/Very Old Testing" this is will need to happen from the CodedUI
-	And I open "Very Old Testing" in save dialog
-	When I context menu "Delete" folder "localhost/Very Old Testing"
+	When I context menu "Delete" folder "localhost/Old Testing"
 	And I Cancel the delete confirmation
-	Then "Very Old Testing" is visible in "localhost"
-	When I context menu "Delete" folder "localhost/Very Old Testing"
+	Then "Old Testing" is visible in "localhost"
+	When I context menu "Delete" folder "localhost/Old Testing"
 	Then I confirm the deletion
-	Then "Very Old Testing" is not visible in "localhost"
-
-Scenario: Saving a Workflow in localhost with the correct Permission
-	Given the Save Dialog is opened
-	And the "localhost" server is visible in save dialog
-	When I save "localhost/NewWebSource"
-	Then "NewWebSource" is visible in "localhost"
-	And Resource 'NewWebSource' has rights 'Contribute, View, Execute' for 'Users'
-    When connected as user part of 'Users'
-    Then 'NewWebSource' should have 'Contribute, View, Execute'
+	Then "Old Testing" is not visible in "localhost"
 
 
  
