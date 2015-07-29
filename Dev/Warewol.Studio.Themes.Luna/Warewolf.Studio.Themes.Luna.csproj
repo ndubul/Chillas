@@ -291,6 +291,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Images\FontAwesomeIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Images\PluginLogo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -784,7 +788,6 @@
     <Resource Include="Images\newmoon.jpg" />
     <Resource Include="Images\StartNode.png" />
     <Resource Include="Images\Warewolf-logo-transparent.png" />
-    <Resource Include="Images\Workflow-32.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dev2.CustomControls\Dev2.CustomControls.csproj">

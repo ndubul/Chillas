@@ -46,6 +46,8 @@ namespace Warewolf.Studio.Core
                         return dict[CustomMenuIcons.WebSource] as DrawingImage;
                     case ResourceType.ServerSource:
                         return dict[CustomMenuIcons.ServerSource] as DrawingImage;
+                    case ResourceType.StartPage:
+                        return dict[CustomMenuIcons.StartPage];
                     default:
                         return dict[CustomMenuIcons.Folder] as DrawingImage;
                 }
