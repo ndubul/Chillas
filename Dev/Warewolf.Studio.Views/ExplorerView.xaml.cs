@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using Dev2.Common.Interfaces;
-using Dev2.Common.Interfaces.Explorer;
 using Infragistics.Controls.Menus;
 
 namespace Warewolf.Studio.Views
@@ -18,10 +18,7 @@ namespace Warewolf.Studio.Views
 	    {
 	        InitializeComponent();
 	        _explorerViewTestClass = new ExplorerViewTestClass(this);
-
 	    }
-
-
 
 	    public ExplorerViewTestClass ExplorerViewTestClass
 	    {
@@ -105,15 +102,12 @@ namespace Warewolf.Studio.Views
 
 	    public void Blur()
 	    {
-        
-
             if (Content != null)
             {
                 //Effect = new BlurEffect(){Radius = 10};
                 //Background = new SolidColorBrush(Colors.Black);
                 Overlay.Visibility = Visibility.Visible;
                 Overlay.Opacity = 0.75;
-          
             }
 	    }
 
@@ -142,7 +136,6 @@ namespace Warewolf.Studio.Views
                         }
                     }
                 }
-
             }
             e.Handled = true;
             
@@ -156,18 +149,6 @@ namespace Warewolf.Studio.Views
 	    {
 	    }
 
-	    void NodePropertyChanged(object sender, PropertyChangedEventArgs e)
-	    {
-            if (e.PropertyName == "IsRenaming")
-	        {
-	            var item = sender as IExplorerItemViewModel;
-	            if(item != null && item.IsRenaming)
-	            {
-	                
-	            }
-
-	        }
-	    }
 
 	    void ExplorerTree_OnInitializeNode(object sender, InitializeNodeEventArgs e)
 	    {
@@ -187,7 +168,17 @@ namespace Warewolf.Studio.Views
 	        if(dataItem.ResourceName.StartsWith("New Folder"))
 	        {
 	            ExplorerTree.EnterEditMode(e.Node);
+                ExplorerTree.ScrollNodeIntoView(e.Node);
 	        }
+	    }
+
+	    void UIElement_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+	    {
+            var textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                textBox.SelectAll();
+            }
 	    }
 	}
 }
