@@ -743,7 +743,7 @@ namespace Dev2.Studio.ViewModels
             var db = new PluginSource(resourceModel.WorkflowXaml.ToXElement());
             var def = new PluginSourceDefinition
             {
-                 SelectedDll = new DllListing{FullName = db.AssemblyLocation, Name = db.AssemblyName, Children = new Collection<IDllListing>(),IsDirectory = false},
+                 SelectedDll = new DllListing{FullName = db.AssemblyLocation, Name = db.AssemblyName, Children = new Collection<IFileListing>(),IsDirectory = false},
                  Id = db.ResourceID,
                  Name = db.ResourceName,
                  Path = db.ResourcePath
@@ -1997,7 +1997,9 @@ namespace Dev2.Studio.ViewModels
         public void Handle(FileChooserMessage message)
         {
             var emailAttachmentView = new ManageEmailAttachmentView();
-            emailAttachmentView.ShowView(message.SelectedFiles);
+
+            emailAttachmentView.ShowView(message.SelectedFiles.ToList());
+            message.SelectedFiles = (emailAttachmentView.DataContext as EmailAttachmentVm).GetAttachments();
             
         }
 

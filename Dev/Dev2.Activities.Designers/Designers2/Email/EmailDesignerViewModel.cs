@@ -28,7 +28,6 @@ using Dev2.Data.Enums;
 using Dev2.Data.Util;
 using Dev2.Providers.Errors;
 using Dev2.Providers.Validation.Rules;
-using Dev2.Runtime.Configuration.ComponentModel;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Runtime.Diagnostics;
 using Dev2.Runtime.ServiceModel.Data;
@@ -265,9 +264,11 @@ namespace Dev2.Activities.Designers2.Email
             }
             if(hasVariable)
             {
-                var validationResult = new ValidationResult();
-                validationResult.ErrorMessage = postResult;
-                validationResult.IsValid = false;
+                var validationResult = new ValidationResult
+                {
+                    ErrorMessage = postResult,
+                    IsValid = false
+                };
                 OnTestCompleted(new Dev2JsonSerializer().Serialize(validationResult));
                 return true;
             }
@@ -370,14 +371,15 @@ namespace Dev2.Activities.Designers2.Email
 
         void ChooseAttachments()
         {
+
             const string Separator = ";";
             var message = new FileChooserMessage();
             message.SelectedFiles = Attachments.Split(Separator.ToCharArray());
             message.PropertyChanged += (sender, args) =>
             {
-                if(args.PropertyName == "SelectedFiles")
+                if (args.PropertyName == "SelectedFiles")
                 {
-                    if(message.SelectedFiles != null)
+                    if (message.SelectedFiles != null)
                     {
                         Attachments = string.Join(Separator, Attachments, string.Join(Separator, message.SelectedFiles));
                     }

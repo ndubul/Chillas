@@ -20,17 +20,15 @@ namespace Warewolf.Studio.Core
         private readonly IManagePluginSourceModel _updateManager;
         private bool _isExpanded;
         private bool _isVisible;
-        private readonly IDllListing _dllListing;
+        private readonly IFileListing _dllListing;
         private ObservableCollection<IDllListingModel> _children;
         private string _filter;
-        private int _loadingChildrenCount;
-        private string _name;
         private bool _progressVisibility;
         private int _currentProgress;
         bool _isSelected;
         bool _isExpanderVisible;
 
-        public DllListingModel(IManagePluginSourceModel updateManager, IDllListing dllListing)
+        public DllListingModel(IManagePluginSourceModel updateManager, IFileListing dllListing)
         {
             _updateManager = updateManager;
             if (dllListing != null)
@@ -88,19 +86,7 @@ namespace Warewolf.Studio.Core
 
         public int TotalChildrenCount { get; set; }
 
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                //                if (Name.Contains("GAC"))
-                //                {
-                //                    _name += "(" + LoadingChildrenCount + ")";
-                //                }
-                //                OnPropertyChanged(() => Name);
-            }
-        }
+        public string Name { get; set; }
 
         public ObservableCollection<IDllListingModel> Children
         {
@@ -168,7 +154,7 @@ namespace Warewolf.Studio.Core
 
         public string FullName { get; set; }
 
-        ICollection<IDllListing> IDllListing.Children { get; set; }
+        ICollection<IFileListing> IFileListing.Children { get; set; }
 
         public bool IsSelected
         {
@@ -323,7 +309,7 @@ namespace Warewolf.Studio.Core
 
     public class AsyncObservableCollection<T> : ObservableCollection<T>
     {
-        private SynchronizationContext _synchronizationContext = SynchronizationContext.Current;
+        private readonly SynchronizationContext _synchronizationContext = SynchronizationContext.Current;
 
         public AsyncObservableCollection()
         {

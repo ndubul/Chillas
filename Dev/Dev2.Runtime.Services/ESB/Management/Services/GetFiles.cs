@@ -6,7 +6,6 @@ using System.Text;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core.DynamicServices;
-using Dev2.Common.Reflection;
 using Dev2.Communication;
 using Dev2.DynamicServices;
 using Dev2.DynamicServices.Objects;
@@ -14,23 +13,23 @@ using Dev2.Workspaces;
 
 namespace Dev2.Runtime.ESB.Management.Services
 {
-    public class GetDllListings : IEsbManagementEndpoint
+    public class GetFiles : IEsbManagementEndpoint
     {
         public StringBuilder Execute(Dictionary<string, StringBuilder> values, IWorkspace theWorkspace)
         {
             ExecuteMessage msg = new ExecuteMessage();
             Dev2JsonSerializer serializer = new Dev2JsonSerializer();
-            Dev2Logger.Log.Info("Get Dll Listings");
-            StringBuilder dllListing;
+            Dev2Logger.Log.Info("Get Files");
+            StringBuilder currentFolder;
 
-            values.TryGetValue("currentDllListing", out dllListing);
-            if (dllListing != null)
+            values.TryGetValue("CurrentFolder", out currentFolder);
+            if (currentFolder != null)
             {
-                var src = serializer.Deserialize(dllListing.ToString(), typeof(IFileListing)) as IFileListing;
+                var src = serializer.Deserialize(currentFolder.ToString(), typeof(IFileListing)) as IFileListing;
                 try
                 {
                     msg.HasError = false;
-                    msg.Message = serializer.SerializeToBuilder(GetDllListing(src));
+                    msg.Message = serializer.SerializeToBuilder(GetFilesAndFolders(src));
                 }
                 catch (Exception ex)
                 {
@@ -43,60 +42,41 @@ namespace Dev2.Runtime.ESB.Management.Services
             return serializer.SerializeToBuilder(msg);
         }
 
-        static List<IFileListing> GetDllListing(IFileListing src)
+        static List<IFileListing> GetFilesAndFolders(IFileListing src)
         {
             var completeList = new List<IFileListing>();
-            var fileSystemParent = new DllListing { Name = "File System", IsDirectory = true };
-            var gacItem = new DllListing { Name = "GAC", IsDirectory = true };
+            var fileSystemParent = new FileListing { Name = "Computer", IsDirectory = true };
+   
 
             if (src == null)
             {
                 var drives = DriveInfo.GetDrives();
                 try
                 {
-                    var listing = drives.Select(BuildDllListing);
+                    var listing = drives.Select(BuildFileListing);
                     fileSystemParent.Children = listing.ToList();
                 }
                 catch (Exception e)
                 {
                     Dev2Logger.Log.Error(e.Message);
                 }
-                IAssemblyName assemblyName;
-                IAssemblyEnum assemblyEnum = GAC.CreateGACEnum();
-                var gacList = new List<IFileListing>();
-                while (GAC.GetNextAssembly(assemblyEnum, out assemblyName) == 0)
-                {
-                    try
-                    {
-                        var displayName = GAC.GetDisplayName(assemblyName, ASM_DISPLAY_FLAGS.VERSION | ASM_DISPLAY_FLAGS.CULTURE | ASM_DISPLAY_FLAGS.PUBLIC_KEY_TOKEN);
-                        var name = GlobalConstants.GACPrefix+displayName;
-                        gacList.Add(new DllListing { Name = displayName, FullName = name, IsDirectory = false });
-                    }
-                    catch (Exception e)
-                    {
-                        Dev2Logger.Log.Error(e.Message);
-                    }
-                }
-                gacItem.Children = gacList;
 
-                completeList.Add(fileSystemParent);
-                completeList.Add(gacItem);
             }
             else
             {
                 if(src.IsDirectory)
-                completeList = GetChildrenForDllListing(new DirectoryInfo(src.FullName));
+                    completeList = GetChildren(new DirectoryInfo(src.FullName));
             }
             return completeList;
         }
 
-        static IFileListing BuildDllListing(DriveInfo info)
+        static IFileListing BuildFileListing(DriveInfo info)
         {
 
             try
             {
                 var directory = info.RootDirectory;
-                var dllListing = BuildDllListing(directory);
+                var dllListing = BuildFileListing(directory);
                 dllListing.IsDirectory = true;
                 return dllListing;
             }
@@ -107,12 +87,12 @@ namespace Dev2.Runtime.ESB.Management.Services
             return null;
         }
 
-        static DllListing BuildDllListing(DirectoryInfo directory)
+        static FileListing BuildFileListing(DirectoryInfo directory)
         {
-            var dllListing = BuildDllListing(directory as FileSystemInfo);
+            var dllListing = BuildFileListing(directory as FileSystemInfo);
             try
             {
-                dllListing.Children = GetChildrenForDllListing(directory);
+                dllListing.Children = GetChildren(directory);
 
             }
             catch (Exception e)
@@ -122,29 +102,29 @@ namespace Dev2.Runtime.ESB.Management.Services
             return dllListing;
         }
 
-        static List<IFileListing> GetChildrenForDllListing(DirectoryInfo directory)
+        static List<IFileListing> GetChildren(DirectoryInfo directory)
         {
             var directories = directory.EnumerateDirectories();
             var childList = new List<IFileListing>();
             foreach (var directoryInfo in directories)
             {
-                var directoryItem = BuildDllListing((FileSystemInfo)directoryInfo);
+                var directoryItem = BuildFileListing((FileSystemInfo)directoryInfo);
                 directoryItem.IsDirectory = true;
                 childList.Add(directoryItem);
             }
-            var files = directory.EnumerateFiles("*.dll");
+            var files = directory.EnumerateFiles();
             foreach (var fileInfo in files)
             {
-                var fileItem = BuildDllListing(fileInfo);
+                var fileItem = BuildFileListing(fileInfo);
                 fileItem.IsDirectory = false;
                 childList.Add(fileItem);
             }
             return childList;
         }
 
-        static DllListing BuildDllListing(FileSystemInfo fileInfo)
+        static FileListing BuildFileListing(FileSystemInfo fileInfo)
         {
-            var dllListing = new DllListing { Name = fileInfo.Name, FullName = fileInfo.FullName };
+            var dllListing = new FileListing { Name = fileInfo.Name, FullName = fileInfo.FullName };
             return dllListing;
         }
 
@@ -170,7 +150,7 @@ namespace Dev2.Runtime.ESB.Management.Services
 
         public string HandlesType()
         {
-            return "GetDllListingsService";
+            return "GetFiles";
         }
     }
 }

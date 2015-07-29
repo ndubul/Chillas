@@ -193,6 +193,7 @@
     <Compile Include="Enums\enScriptType.cs" />
     <Compile Include="Enums\PopulateOptions.cs" />
     <Compile Include="Explorer\IExplorerItem.cs" />
+    <Compile Include="FileListing.cs" />
     <Compile Include="Help\IHelpDescriptor.cs" />
     <Compile Include="Help\IHelpDescriptorViewModel.cs" />
     <Compile Include="Help\IHelpWindowModel.cs" />
@@ -202,7 +203,9 @@
     <Compile Include="IAssignValue.cs" />
     <Compile Include="ICheckControlEnabledView.cs" />
     <Compile Include="IDllListing.cs" />
+    <Compile Include="IEmailAttachmentModel.cs" />
     <Compile Include="IEmailAttachmentView.cs" />
+    <Compile Include="IEmailAttachmentVm.cs" />
     <Compile Include="IEmailServiceSource.cs" />
     <Compile Include="IEnvironment.cs" />
     <Compile Include="IEnvironmentViewModel.cs" />

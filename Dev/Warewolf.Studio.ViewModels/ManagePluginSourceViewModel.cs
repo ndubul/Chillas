@@ -211,7 +211,7 @@ namespace Warewolf.Studio.ViewModels
             ToItem();
         }
 
-        void FromSource(IDllListing pluginSource)
+        void FromSource(IFileListing pluginSource)
         {
             var selectedDll = pluginSource;
             if (selectedDll != null)

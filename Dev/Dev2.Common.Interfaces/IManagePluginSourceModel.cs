@@ -5,7 +5,7 @@ namespace Dev2.Common.Interfaces
     public interface IManagePluginSourceModel
     {
         string ServerName { get; }
-        IList<IDllListing> GetDllListings(IDllListing listing);
+        IList<IFileListing> GetDllListings(IFileListing listing);
         void Save(IPluginSource toDbSource);
     }
 }

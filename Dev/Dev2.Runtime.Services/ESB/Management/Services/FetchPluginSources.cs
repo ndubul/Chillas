@@ -41,7 +41,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                         {
                             Name = res.AssemblyName,
                             FullName = res.AssemblyLocation,
-                            Children = new IDllListing[0],
+                            Children = new IFileListing[0],
                         }
                     };
                 }
