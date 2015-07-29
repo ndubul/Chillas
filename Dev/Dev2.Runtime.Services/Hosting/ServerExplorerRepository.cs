@@ -74,9 +74,10 @@ namespace Dev2.Runtime.Hosting
         {
             return _root ?? (_root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId));
         }
-        private void Reload(Guid workSpaceId)
+        public IExplorerItem Reload(Guid workSpaceId)
         {
             _root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId);
+            return _root;
         }
         public IExplorerItem Load(ResourceType type, Guid workSpaceId)
         {
