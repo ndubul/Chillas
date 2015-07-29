@@ -316,6 +316,7 @@ namespace Dev2.Runtime.Hosting
                         try
                         {
                             _sync.AddItemMessage(itemToAdd);
+                            AddItemToCollection(itemToAdd);
                             return new ExplorerRepositoryResult(ExecStatus.Success, "");
                         }
                         catch (Exception err)
