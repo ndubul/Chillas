@@ -31,6 +31,7 @@ namespace Warewolf.Studio.ViewModels
         {
             _closeAction = closeAction;
             _attachments = new List<string>();
+            _model = model;
             _drives = model.FetchDrives().Select(a => new FileListingModel(model, a)).ToList();
         }
 

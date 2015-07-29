@@ -130,7 +130,13 @@ Scenario: Shortcut key to Open New Design Surface
 
 
 
-
+   #wolf -1006
+   
+Scenario: Ensure the decision tool cannot be added without a trigger
+	Given I open new "localhost\Unsaved 1" design surface
+	And design surface "localhost\Unsaved 1" is opened
+	And I insert a "Decision"
+	Then a warning message appears with the value "Decision cannot be added"  
 
 
 
