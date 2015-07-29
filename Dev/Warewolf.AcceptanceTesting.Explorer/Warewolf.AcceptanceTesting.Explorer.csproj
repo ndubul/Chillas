@@ -455,7 +455,7 @@
       <Name>Warewolf.Studio.CustomControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warewolf.Studio.Models\Warewolf.Studio.Models.csproj">
-      <Project>{3d7eb0d0-41a4-4a83-93df-45a40e2cbb31}</Project>
+      <Project>{a62da168-5bf3-4c14-b880-4ad83478e3a7}</Project>
       <Name>Warewolf.Studio.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warewolf.Studio.Themes.Luna\Warewolf.Studio.Themes.Luna.csproj">

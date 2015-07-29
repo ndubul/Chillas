@@ -36,7 +36,6 @@ namespace Dev2.AppResources.Converters
             ResourceDictionary dict = Application.LoadComponent(new Uri(pathname, UriKind.Relative)) as ResourceDictionary;
             ResourceType resourceType = values[0] is ResourceType ? (ResourceType)values[0] : ResourceType.Unknown;
             bool isExpanded = values[1] is bool && (bool)values[1];
-            Uri uri;
             switch(resourceType)
             {
                 case ResourceType.WorkflowService:

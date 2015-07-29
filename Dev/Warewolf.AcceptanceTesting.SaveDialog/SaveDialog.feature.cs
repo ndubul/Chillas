@@ -345,16 +345,25 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure server name is visible")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Saving a Workflow in localhost with an existing name")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
-        public virtual void EnsureServerNameIsVisible()
+        public virtual void SavingAWorkflowInLocalhostWithAnExistingName()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure server name is visible", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Saving a Workflow in localhost with an existing name", ((string[])(null)));
 #line 123
 this.ScenarioSetup(scenarioInfo);
 #line 124
  testRunner.Given("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 125
+ testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 126
+ testRunner.And("\"localhost/Hello World\" is visible in the explorer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 127
+ testRunner.When("I attempt to save a workflow as \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 128
+ testRunner.Then("an error message appear with the value \"An item with name \'Hello World\' already e" +
+                    "xists in this folder.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -120,5 +120,9 @@ Scenario: Ensure new folder can be created in root
 	Then "TestFolder" is visible in "localhost"
 
 
-Scenario: Ensure server name is visible
+Scenario: Saving a Workflow in localhost with an existing name
 	Given the Save Dialog is opened
+	And the "localhost" server is visible in save dialog
+	And "localhost/Hello World" is visible in the explorer
+	When I attempt to save a workflow as "Hello World"
+	Then an error message appear with the value "An item with name 'Hello World' already exists in this folder."
