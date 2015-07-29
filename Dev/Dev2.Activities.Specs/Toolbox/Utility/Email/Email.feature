@@ -17,7 +17,8 @@
 ##Send email with a negative index recordset for Recipients
 ##Send email with a negative index recordset for Subject
 ##Send email with a negative index recordset for Body
-
+##Send Email with an attachment
+##Sending an email 
 
 Scenario: Send email to multiple receipients
 	Given I have an email variable "[[firstMail]]" equal to "test1@freemail.com"
@@ -240,7 +241,7 @@ Scenario: Send Email with an attachment
 
 
 @ignore
-	# Audit
+	#Audit
 Scenario Outline: Sending an email 
 	Given the from account is '<from>'
 	And to address is '<To>'

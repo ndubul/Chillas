@@ -10,6 +10,8 @@ Feature: PluginSource
 ## Change Plugin Source Assembly Input
 ## Refresh New Plugin Source File
 ## Refresh New Plugin Source GAC
+## load all dependancies after filter cleared 
+## Search while GAC tree view is loading
 
 
 Scenario: New Plugin Source File
@@ -104,7 +106,11 @@ Scenario: Refresh New Plugin Source GAC
 	When I refresh the filter
 	And GAC only has one option in the tree
 
-	#Wolf-1001
+
+@ignore
+
+#Wolf-1001
+
 Scenario: load all dependancies after filter cleared 
 	Given I open New Plugin Source
 	When I click "GAC"

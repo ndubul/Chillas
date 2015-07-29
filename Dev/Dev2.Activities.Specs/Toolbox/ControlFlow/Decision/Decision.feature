@@ -627,23 +627,23 @@ Scenario: decide if variable [[A]] Not XML (False)
 	|         |
 	| NO     |
 
-Scenario: decide if variable [[A]] Is Between variable [[B]] and [[C]] (True)
-	Given a decision variable "[[A]]" value "30"	
-	And a decision variable "[[B]]" value "20"
-	And a decision variable "[[C]]" value "40"	
-	And check if "[[A]]" "IsBetween" "[[B]]" and "[[C]]"
-	When the decision tool is executed
-	Then the decision result should be "True"
-	Then the execution has "NO" error
-	Then the debug inputs as  
-	|            | Statement | Require All decisions to be True |
-	| [[A]] = 30 |           |                                  |
-	| [[B]] = 20 |           |                                  |
-	| [[C]] = 40 |           |                                  |
-	|            | String    | YES                              |
-	And the debug output as 
-	|         |
-	| YES    |
+#Scenario: decide if variable [[A]] Is Between variable [[B]] and [[C]] (True)
+#	Given a decision variable "[[A]]" value "30"	
+#	And a decision variable "[[B]]" value "20"
+#	And a decision variable "[[C]]" value "40"	
+#	And check if "[[A]]" "IsBetween" "[[B]]" and "[[C]]"
+#	When the decision tool is executed
+#	Then the decision result should be "True"
+#	Then the execution has "NO" error
+#	Then the debug inputs as  
+#	|            | Statement | Require All decisions to be True |
+#	| [[A]] = 30 |           |                                  |
+#	| [[B]] = 20 |           |                                  |
+#	| [[C]] = 40 |           |                                  |
+#	|            | String    | YES                              |
+#	And the debug output as 
+#	|         |
+#	| YES    |
 
 Scenario: decide if variable [[A]] Is Not Between variable [[B]] and [[C]] (True)
 	Given a decision variable "[[A]]" value "20"	
@@ -1253,28 +1253,29 @@ Scenario: Runtime invalid recordset variable positve test
 
 
 @ignore
-Scenario Outline: decide if variable [[A]] Is Between variable [[B]] and [[C]] (True)
-	Given a decision variable '<variable1>' value '<Var1>'	
-	And a decision variable '<variable2>' value '<Var2>'
-	And a decision variable '<variable3>' value '<Var3>'	
-	And check if '<variable1>' "IsBetween" '<variable2>' and '<variable3>'
-	When the decision tool is executed
-	Then the decision result should be "True"
-	Then the execution has "NO" error
-	Then the debug inputs as  
-	|            | Statement | Require All decisions to be True |
-	| [[A]] = 30 |           |                                  |
-	| [[B]] = 20 |           |                                  |
-	| [[C]] = 40 |           |                                  |
-	|            | String    | YES                              |
-	And the debug output as 
-	|         |
-	| YES    |
-
-	Examples: 
-	| variable1 | Var1 | variable2    | Var2 | variable3      | Var3 |
-	|           |      |              |      |                |      |
-	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
-	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
-	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
-	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
+#Audit
+#Scenario Outline: Ensuring all inputs work as expected
+#	Given a decision variable '<variable1>' value '<Var1>'	
+#	And a decision variable '<variable2>' value '<Var2>'
+#	And a decision variable '<variable3>' value '<Var3>'	
+#	And check if '<variable1>' "IsBetween" '<variable2>' and '<variable3>'
+#	When the decision tool is executed
+#	Then the decision result should be "True"
+#	Then the execution has "NO" error
+#	Then the debug inputs as  
+#	|            | Statement | Require All decisions to be True |
+#	| [[A]] = 30 |           |                                  |
+#	| [[B]] = 20 |           |                                  |
+#	| [[C]] = 40 |           |                                  |
+#	|            | String    | YES                              |
+#	And the debug output as 
+#	|         |
+#	| YES    |
+#
+#	Examples: 
+#	| variable1 | Var1 | variable2    | Var2 | variable3      | Var3 |
+#	|           |      |              |      |                |      |
+#	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
+#	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
+#	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
+#	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |

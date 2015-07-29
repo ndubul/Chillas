@@ -18,13 +18,13 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
     public class SaveDialogSteps
     {
         [BeforeFeature("SaveDialog")]
-        public static void SetupSaveDialogDependencies()
+        public static async void SetupSaveDialogDependencies()
         {
             Utils.SetupResourceDictionary();
             var explorerRepository = new Mock<IExplorerRepository>();
             explorerRepository.Setup(repository => repository.Rename(It.IsAny<IExplorerItemViewModel>(), It.IsAny<string>())).Returns(true);
             var view = new RequestServiceNameView();
-            var viewModel = new RequestServiceNameViewModel(new EnvironmentViewModel(new ServerForTesting(explorerRepository)), view,Guid.Empty);
+            var viewModel = await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(new ServerForTesting(explorerRepository)), view, Guid.Empty);
             view.DataContext = viewModel;
             var window = new Window {Content = view};
             var app = Application.Current;
@@ -276,12 +276,12 @@ namespace Warewolf.AcceptanceTesting.SaveDialog
         }
 
         [AfterScenario("SaveDialog")]
-        public void CleanupForSave()
+        public async void CleanupForSave()
         {
             var view = ScenarioContext.Current.Get<IRequestServiceNameView>("saveView");
             var explorerRepository = new Mock<IExplorerRepository>();
             explorerRepository.Setup(repository => repository.Rename(It.IsAny<IExplorerItemViewModel>(), It.IsAny<string>())).Returns(true);
-            var viewModel = new RequestServiceNameViewModel(new EnvironmentViewModel(new ServerForTesting(explorerRepository)), view, Guid.Empty);
+            var viewModel = await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(new ServerForTesting(explorerRepository)), view, Guid.Empty);
             view.DataContext = viewModel;
             FeatureContext.Current.Remove("viewModel");
             FeatureContext.Current.Add("viewModel", viewModel);

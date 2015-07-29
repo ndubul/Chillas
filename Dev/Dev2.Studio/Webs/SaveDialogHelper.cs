@@ -10,8 +10,11 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Windows;
+using Dev2.AppResources.Repositories;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Events;
 using Dev2.Studio.Core;
@@ -49,7 +52,7 @@ namespace Dev2.Webs
             ShowSaveDialog(resourceModel, new SharepointServerSourceCallbackHandler(EnvironmentRepository.Instance,server,userName,password,authenticationType));
         }
 
-        static void ShowSaveDialog(IContextualResourceModel resourceModel, WebsiteCallbackHandler callbackHandler)
+        static async void ShowSaveDialog(IContextualResourceModel resourceModel, WebsiteCallbackHandler callbackHandler)
         {
             if(resourceModel == null)
             {
@@ -66,17 +69,12 @@ namespace Dev2.Webs
             EnvironmentRepository.Instance.ActiveEnvironment = environment;
 
             var requestView = new RequestServiceNameView();
-            IServer server;
-            var authenticationType = environment.Connection.AuthenticationType;
-            if(authenticationType == AuthenticationType.Windows || authenticationType == AuthenticationType.Anonymous)
+            IServer server = new Server(environment.Connection);
+            if(server.Permissions == null)
             {
-                server = new Server(environment.Connection.WebServerUri);
+                server.Permissions = new List<IWindowsGroupPermission>();
+                server.Permissions.AddRange(environment.AuthorizationService.SecurityService.Permissions);
             }
-            else
-            {
-                server = new Server(environment.Connection.WebServerUri.ToString(), "\\", "");
-            }
-            
             if (resourceModel.Category == null)
             {
                 resourceModel.Category = "";
@@ -88,7 +86,9 @@ namespace Dev2.Webs
                 selectedPath = selectedPath.Substring(0, lastIndexOf);
             }
             selectedPath = selectedPath.Replace("\\", "\\\\");
-            var requestViewModel = new RequestServiceNameViewModel(new EnvironmentViewModel(server), requestView, selectedPath);
+
+            var item = StudioResourceRepository.Instance.FindItem(model => model.ResourcePath.Equals(selectedPath, StringComparison.OrdinalIgnoreCase));
+            var requestViewModel = await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server), new RequestServiceNameView(), item.ResourceId);
             var messageBoxResult = requestViewModel.ShowSaveDialog();
             if(messageBoxResult == MessageBoxResult.OK)
             {

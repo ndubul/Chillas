@@ -31,7 +31,8 @@ namespace Dev2.Common.Interfaces.Data
         Folder = 2048,
         Server = 4096,
         ReservedService = 8192,
-        Message = 3069
+        Message = 3069,
+        StartPage = 16384
         
     }
 }

@@ -7,6 +7,7 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.ServerProxyLayer;
+using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Communication;
 using Dev2.Controller;
 using Dev2.Studio.Core.Interfaces;
@@ -142,14 +143,14 @@ namespace Warewolf.Studio.ServerProxyLayer
         }
         #endregion
 
-        //public IList<IToolDescriptor> FetchTools()
-        //{
-        //    var comsController = CommunicationControllerFactory.CreateController("FetchToolsService");
+        public IList<IToolDescriptor> FetchTools()
+        {
+            var comsController = CommunicationControllerFactory.CreateController("FetchToolsService");
 
-        //    var workspaceId = Connection.WorkspaceID;
-        //    var result =  comsController.ExecuteCommand<IList<IToolDescriptor>>(Connection, workspaceId);
-        //    return result;
-        //}
+            var workspaceId = Connection.WorkspaceID;
+            var result =  comsController.ExecuteCommand<IList<IToolDescriptor>>(Connection, workspaceId);
+            return result;
+        }
 
         public IList<string> GetComputerNames()
         {

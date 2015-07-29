@@ -8,6 +8,7 @@ using Dev2.AppResources.Repositories;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Infrastructure;
+using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Controller;
 using Dev2.Network;
 using Dev2.Runtime.ServiceModel.Data;
@@ -18,9 +19,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 {
     public class Server : Resource,IServer
     {
-        readonly ServerProxy _environmentConnection;
+        Dev2.Studio.Core.Interfaces.IEnvironmentConnection _environmentConnection;
         readonly Guid _serverId;
         readonly StudioServerProxy _proxyLayer;
+        IList<IToolDescriptor> _tools;
         //IList<IToolDescriptor> _tools;
 
         /// <summary>
@@ -49,6 +51,18 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             EnvironmentConnection.PermissionsModified += RaisePermissionsModifiedEvent;
            // EnvironmentConnection.NetworkStateChanged += RaiseNetworkStateChangeEvent;
         }
+
+        public Server(Dev2.Studio.Core.Interfaces.IEnvironmentConnection environmentConnection)
+        {
+            EnvironmentConnection = environmentConnection;
+            _serverId = EnvironmentConnection.ServerID;
+            _proxyLayer = new StudioServerProxy(new CommunicationControllerFactory(), EnvironmentConnection);
+            UpdateRepository = new StudioResourceUpdateManager(new CommunicationControllerFactory(), EnvironmentConnection);
+            EnvironmentConnection.PermissionsModified += RaisePermissionsModifiedEvent;
+            ResourceName = EnvironmentConnection.DisplayName;
+            
+        }
+
 
         void ItemAdded(IExplorerItem obj)
         {
@@ -122,10 +136,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //            return null;
 //        }
 //
-//        public IList<IToolDescriptor> LoadTools()
-//        {
-//            return _tools ?? (_tools = ProxyLayer.QueryManagerProxy.FetchTools());
-//        }
+        public IList<IToolDescriptor> LoadTools()
+        {
+            return _tools ?? (_tools = ProxyLayer.QueryManagerProxy.FetchTools());
+        }
 
         public IExplorerRepository ExplorerRepository
         {
@@ -143,14 +157,14 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             }
         }
         
-//        public bool IsConnected()
-//        {
-//            return EnvironmentConnection.IsConnected;
-//        }
-//
-//        public void ReloadTools()
-//        {
-//        }
+        public bool IsConnected()
+        {
+            return EnvironmentConnection.IsConnected;
+        }
+
+        public void ReloadTools()
+        {
+        }
 //
 //        public void Disconnect()
 //        {
@@ -161,7 +175,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //        {
 //        }
 
-        public List<IWindowsGroupPermission> Permissions { get; private set; }
+        public List<IWindowsGroupPermission> Permissions { get; set; }
 
        // public event PermissionsChanged PermissionsChanged;
        // public event NetworkStateChanged NetworkStateChanged;
@@ -176,11 +190,15 @@ namespace Warewolf.Studio.AntiCorruptionLayer
                 return _proxyLayer;
             }
         }
-        public ServerProxy EnvironmentConnection
+        public Dev2.Studio.Core.Interfaces.IEnvironmentConnection EnvironmentConnection
         {
             get
             {
                 return _environmentConnection;
+            }
+            private set
+            {
+                _environmentConnection = value;
             }
         }
 

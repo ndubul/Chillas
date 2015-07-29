@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev2.Studio", "Dev2.Studio\Dev2.Studio.csproj", "{62247A80-2266-4295-A8F6-A05507E2796E}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -151,6 +151,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev2.SignalR.Wrappers.Old", "Dev2.SignalR.Wrappers.Old\Dev2.SignalR.Wrappers.Old.csproj", "{CA1EC490-5138-4714-8188-15D4BF6334DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warewolf.Studio.ViewModels.Tests", "Warewolf.Studio.ViewModels.Tests\Warewolf.Studio.ViewModels.Tests.csproj", "{CD5E517A-1DC1-48DE-A697-C614F8A18929}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warewolf.Studio.Models", "Warewolf.Studio.Models\Warewolf.Studio.Models.csproj", "{A62DA168-5BF3-4C14-B880-4AD83478E3A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -820,6 +822,18 @@ Global
 		{CA1EC490-5138-4714-8188-15D4BF6334DA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CA1EC490-5138-4714-8188-15D4BF6334DA}.Release|x64.ActiveCfg = Release|Any CPU
 		{CA1EC490-5138-4714-8188-15D4BF6334DA}.Release|x86.ActiveCfg = Release|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Release|x64.ActiveCfg = Release|Any CPU
+		{A62DA168-5BF3-4C14-B880-4AD83478E3A7}.Release|x86.ActiveCfg = Release|Any CPU
 		{CD5E517A-1DC1-48DE-A697-C614F8A18929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD5E517A-1DC1-48DE-A697-C614F8A18929}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD5E517A-1DC1-48DE-A697-C614F8A18929}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

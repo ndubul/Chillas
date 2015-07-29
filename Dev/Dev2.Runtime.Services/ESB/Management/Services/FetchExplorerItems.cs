@@ -44,7 +44,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                 {
                     throw new ArgumentNullException("values");
                 }
-                var item = ServerExplorerRepo.Load(GlobalConstants.ServerWorkspaceID);
+                var item = ServerExplorerRepo.Reload(GlobalConstants.ServerWorkspaceID);
                 return serializer.SerializeToBuilder(item);
             }
             catch(Exception e)

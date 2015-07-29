@@ -81,6 +81,9 @@
     <Reference Include="Caliburn.Micro">
       <HintPath>..\Binaries\Caliburn.Micro.dll</HintPath>
     </Reference>
+    <Reference Include="FontAwesome.WPF">
+      <HintPath>..\packages\FontAwesome.WPF.4.3.0.3\lib\FontAwesome.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="InfragisticsWPF4.DockManager.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.DockManager.v14.2.dll</HintPath>
     </Reference>
@@ -629,6 +632,10 @@
     <ProjectReference Include="..\Dev2.Util\Dev2.Util.csproj">
       <Project>{1990550D-EA6F-4DAC-9B5E-8571E86923ED}</Project>
       <Name>Dev2.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warewolf.Studio.Core\Warewolf.Studio.Core.csproj">
+      <Project>{F9FE2CE9-625E-4E7F-8F4C-FCE28BB59510}</Project>
+      <Name>Warewolf.Studio.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
