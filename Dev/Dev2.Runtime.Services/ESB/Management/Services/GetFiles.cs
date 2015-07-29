@@ -59,7 +59,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                 {
                     var listing = drives.Select(BuildFileListing);
             
-                    return new List<IFileListing>(listing.Select(a=>new FileListing()));
+                    return new List<IFileListing>(listing);
                 }
                 catch (Exception e)
                 {
