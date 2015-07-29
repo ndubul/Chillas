@@ -1,54 +1,79 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
+using Dev2.Common.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.Core;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class EmailAttachmentVm : BindableBase
+    public class EmailAttachmentVm : BindableBase, IEmailAttachmentVm
     {
-        IEnumerable<string> _attachments;
-        readonly Action _action;
+        IList<string> _attachments;
+        readonly Action _closeAction;
         DelegateCommand _saveCommand;
         DelegateCommand _cancelCommand;
-        Listing _selectedDrive;
+
         string _driveName;
         bool _isChecked;
+        IEmailAttachmentModel _model;
+        readonly IList<FileListingModel> _drives;
 
-        public EmailAttachmentVm(IEnumerable<string> attachments, Action action)
+        public EmailAttachmentVm(IList<string> attachments, IEmailAttachmentModel model, Action closeAction) : this(model, closeAction)
         {
             _attachments = attachments;
-            _action = action;
-            SaveCommand = new DelegateCommand(Save);
-            CancelCommand = new DelegateCommand(Cancel);
-            Drives = new ObservableCollection<Drive>();
-
-            Drive drive = new Drive();
-            drive.Children = new ObservableCollection<Listing>();
-
-            drive.Title = "C:";
-            Listing listing = new Listing();
-            listing.Name = "AppData";
-            drive.Children.Add(listing);
-
-            //drive.Title = "D:";
-            //listing.Name = "Projects";
-            //drive.Children.Add(listing);
-
-            Drives.Add(drive);
+            Expand(attachments);
+            _model = model;
+           
+        }
+        public EmailAttachmentVm(IEmailAttachmentModel model, Action closeAction)
+        {
+            _closeAction = closeAction;
+            _attachments = new List<string>();
+            _drives = model.FetchDrives().Select(a => new FileListingModel(model, a)).ToList();
         }
 
-        public ObservableCollection<Drive> Drives { get; set; }
 
-        void Cancel()
+        void Expand(IEnumerable<string> attachments)
         {
-            _action();
+
+            foreach(var attachment in attachments)
+            {
+                SelectAttachment(attachment,_drives);
+            }
+            
         }
 
-        void Save()
+        public void SelectAttachment(string name, IEnumerable<FileListingModel> model )
         {
-            _action();
+            if (name.Contains("\\"))
+            {
+                string node = name.Substring(0, name.IndexOf("\\", StringComparison.Ordinal) );
+                var toExpand = model.FirstOrDefault(a => a.Name == node);
+                if(toExpand != null)
+                {
+                    toExpand.IsExpanded = true;
+                }
+            }
+            else
+            {
+                var toExpand = model.FirstOrDefault(a => a.Name == name);
+                if (toExpand != null)
+                {
+                    toExpand.IsSelected = true;
+                }
+            }
+        }
+
+        public void Cancel()
+        {
+            _closeAction();
+        }
+
+        public void Save()
+        {
+            _closeAction();
         }
 
         public DelegateCommand CancelCommand
@@ -75,7 +100,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public IEnumerable<string> Attachments
+        public IList<string> Attachments
         {
             get
             {
@@ -87,23 +112,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public Listing SelectedDrive
-        {
-            get
-            {
-                return _selectedDrive;
-            }
-            set
-            {
-                if (value == null) return;
-                _selectedDrive = value;
-                OnPropertyChanged(() => SelectedDrive);
-                if (SelectedDrive != null)
-                {
-                    DriveName = SelectedDrive.Name + "; ";
-                }
-            }
-        }
+       
 
         public string DriveName
         {
@@ -131,6 +140,11 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
+        public List<string> GetAttachments()
+        {
+            return _drives.SelectMany(a=>a.FilterSelected(new List<string>())).ToList();
+        }
+
         void SetIsChecked(bool value)
         {
             if (value)
@@ -140,14 +154,4 @@ namespace Warewolf.Studio.ViewModels
         }
     }
 
-    public class Drive
-    {
-        public string Title { get; set; }
-        public ObservableCollection<Listing> Children { get; set; }
-    }
-
-    public class Listing
-    {
-        public string Name { get; set; }
-    }
 }

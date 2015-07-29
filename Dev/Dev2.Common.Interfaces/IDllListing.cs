@@ -24,4 +24,20 @@ namespace Dev2.Common.Interfaces
         int ChildrenCount { get; }
         int CurrentProgress { get; set; }
     }
+
+    public interface IFileListingModel : IFileListing
+    {
+        void Filter(string searchTerm);
+        ObservableCollection<IFileListingModel> Children { get; set; }
+        bool IsExpanded { get; set; }
+        bool IsExpanderVisible { get; }
+        bool IsVisible { get; set; }
+        bool IsSelected { get; set; }
+        int TotalChildrenCount { get; set; }
+        bool ProgressVisibility { get; set; }
+        int ChildrenCount { get; }
+        int CurrentProgress { get; set; }
+
+        List<string> FilterSelected(List<string> acc);
+    }
 }

@@ -23,8 +23,6 @@ namespace Warewolf.Studio.Core
         private readonly IFileListing _dllListing;
         private ObservableCollection<IDllListingModel> _children;
         private string _filter;
-        private int _loadingChildrenCount;
-        private string _name;
         private bool _progressVisibility;
         private int _currentProgress;
         bool _isSelected;
@@ -88,19 +86,7 @@ namespace Warewolf.Studio.Core
 
         public int TotalChildrenCount { get; set; }
 
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                //                if (Name.Contains("GAC"))
-                //                {
-                //                    _name += "(" + LoadingChildrenCount + ")";
-                //                }
-                //                OnPropertyChanged(() => Name);
-            }
-        }
+        public string Name { get; set; }
 
         public ObservableCollection<IDllListingModel> Children
         {
@@ -323,7 +309,7 @@ namespace Warewolf.Studio.Core
 
     public class AsyncObservableCollection<T> : ObservableCollection<T>
     {
-        private SynchronizationContext _synchronizationContext = SynchronizationContext.Current;
+        private readonly SynchronizationContext _synchronizationContext = SynchronizationContext.Current;
 
         public AsyncObservableCollection()
         {

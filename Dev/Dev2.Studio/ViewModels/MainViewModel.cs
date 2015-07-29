@@ -1997,7 +1997,9 @@ namespace Dev2.Studio.ViewModels
         public void Handle(FileChooserMessage message)
         {
             var emailAttachmentView = new ManageEmailAttachmentView();
-            emailAttachmentView.ShowView(message.SelectedFiles);
+
+            emailAttachmentView.ShowView(message.SelectedFiles.ToList());
+            message.SelectedFiles = (emailAttachmentView.DataContext as EmailAttachmentVm).GetAttachments();
             
         }
 

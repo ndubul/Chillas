@@ -4,6 +4,6 @@ namespace Dev2.Common.Interfaces
 {
     public interface IEmailAttachmentView
     {
-        void ShowView(IEnumerable<string> current);
+        void ShowView(IList<string> current);
     }
 }

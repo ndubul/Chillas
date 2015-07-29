@@ -15,6 +15,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using Dev2;
 using Dev2.Common.Interfaces;
 using Warewolf.Studio.ViewModels;
 
@@ -33,7 +34,7 @@ namespace Warewolf.Studio.Views
             InitializeComponent();
         }
 
-        public void ShowView(IEnumerable<string> attachments)
+        public void ShowView(IList<string> attachments)
         {
             IsModal = true;
             var effect = new BlurEffect { Radius = 10, KernelType = KernelType.Gaussian, RenderingBias = RenderingBias.Quality };
@@ -46,7 +47,9 @@ namespace Warewolf.Studio.Views
             Application.Current.MainWindow.Effect = effect;
 
             _window = new Window { WindowStyle = WindowStyle.None, AllowsTransparency = true, Background = Brushes.Transparent, SizeToContent = SizeToContent.Manual, MinWidth = 640, MinHeight = 480, ResizeMode = ResizeMode.CanResize, WindowStartupLocation = WindowStartupLocation.CenterScreen, Content = this };
-            var vm = new EmailAttachmentVm(attachments, RequestClose);
+            
+            var server = CustomContainer.Get<IServer>();
+            var vm = new EmailAttachmentVm(attachments, new EmailAttachmentModel(server.QueryProxy), RequestClose);
             _window.DataContext = vm;
             _window.ShowDialog();
         }
