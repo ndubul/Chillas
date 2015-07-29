@@ -21,10 +21,13 @@ using System.Windows.Threading;
 using Dev2.Common;
 using Dev2.Common.Common;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Common.Wrappers;
 using Dev2.CustomControls.Progress;
 using Dev2.Diagnostics.Debug;
 using Dev2.Instrumentation;
+using Warewolf.Studio.Models.Toolbox;
+using Warewolf.Studio.ViewModels.ToolBox;
 // ReSharper disable RedundantUsingDirective
 using Dev2.Interfaces;
 using Dev2.Utils;
@@ -144,6 +147,7 @@ namespace Dev2.Studio
             _mainViewModel = MainWindow.DataContext as MainViewModel;
             if(_mainViewModel != null)
             {
+               
                 _splashView.CloseSplash();
                 var settingsConfigFile = HelperUtils.GetStudioLogSettingsConfigFile();
                 if (!File.Exists(settingsConfigFile))
@@ -164,7 +168,10 @@ namespace Dev2.Studio
 
             var server = new Warewolf.Studio.AntiCorruptionLayer.Server(new Uri(AppSettings.LocalHost));
             server.ResourceName = "localhost";
+            server.Connect();
             CustomContainer.Register<IServer>(server);
+            var toolBoxViewModel = new ToolboxViewModel(new ToolboxModel(server, server, null), new ToolboxModel(server, server, null));
+            CustomContainer.Register<IToolboxViewModel>(toolBoxViewModel);
             var splashViewModel = new SplashViewModel(server, new ExternalProcessExecutor());
 
             SplashPage splashPage = new SplashPage();

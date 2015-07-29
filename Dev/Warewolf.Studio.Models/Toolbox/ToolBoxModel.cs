@@ -13,7 +13,7 @@ namespace Warewolf.Studio.Models.Toolbox
         readonly IPluginProxy _pluginProxy;
         public ToolboxModel(IServer server, IServer localServer, IPluginProxy pluginProxy)
         {
-            VerifyArgument.AreNotNull(new Dictionary<string, object>{{"server",server},{"localServer",localServer},{"pluginProxy",pluginProxy}});
+            VerifyArgument.AreNotNull(new Dictionary<string, object>{{"server",server},{"localServer",localServer}});
             _localServer = localServer;
             _pluginProxy = pluginProxy;
             Server = server;
@@ -54,7 +54,10 @@ namespace Warewolf.Studio.Models.Toolbox
         {
             VerifyArgument.IsNotNull("tool",tool);
             VerifyArgument.IsNotNull("dllBytes", dllBytes);
-            _pluginProxy.LoadTool(tool, dllBytes);
+            if(_pluginProxy != null)
+            {
+                _pluginProxy.LoadTool(tool, dllBytes);
+            }
             Server.ReloadTools();
          }
 
@@ -65,7 +68,10 @@ namespace Warewolf.Studio.Models.Toolbox
         public void DeleteTool(IToolDescriptor tool)
         {
             VerifyArgument.IsNotNull("tool",tool);
-            _pluginProxy.DeleteTool(tool);
+            if(_pluginProxy != null)
+            {
+                _pluginProxy.DeleteTool(tool);
+            }
             Server.ReloadTools();
         }
 

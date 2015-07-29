@@ -334,7 +334,7 @@
                                                      IsPinned="True"
                                                      Style="{StaticResource DockmangerToolPaneStyle}"
                                                      WindowPositionMenuVisibility="Hidden" >
-                                <views:ToolboxUserControl x:Name="Toolboxcontrol" AutomationProperties.AutomationId="UI_ToolboxControl_AutoID" />
+                                <views1:ToolboxView DataContext="{Binding ToolboxViewModel}" x:Name="Toolboxcontrol" AutomationProperties.AutomationId="UI_ToolboxControl_AutoID" />
                             </igDock:ContentPane>
                             <igDock:ContentPane x:Name="Help"
                                                      AllowClose="False"
