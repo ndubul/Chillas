@@ -107,8 +107,3 @@ Scenario: Context Menu Folder actions
 	When I context menu "Delete" folder "localhost/Old Testing"
 	Then I confirm the deletion
 	Then "Old Testing" is not visible in "localhost"
-
-
- 
-		
-	
