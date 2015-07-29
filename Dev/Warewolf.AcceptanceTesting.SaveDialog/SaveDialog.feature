@@ -107,18 +107,3 @@ Scenario: Context Menu Folder actions
 	When I context menu "Delete" folder "localhost/Old Testing"
 	Then I confirm the deletion
 	Then "Old Testing" is not visible in "localhost"
-
-	@Ignore
-#Wolf-981
-Scenario: Ensure new folder can be created in root
-	Given the Save Dialog is opened
-	And the "Localhost" server is visible in save dialog
-	When I "Crtl+Shft+F" 
-	Then "New Folder" is created
-	And "New Folder" name is the focus
-	When I rename "New Folder" to "TestFolder"
-	Then "TestFolder" is visible in "localhost"
-
-
-Scenario: Ensure server name is visible
-	Given the Save Dialog is opened
