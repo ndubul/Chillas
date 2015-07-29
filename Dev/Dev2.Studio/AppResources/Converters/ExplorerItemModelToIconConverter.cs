@@ -35,7 +35,6 @@ namespace Dev2.AppResources.Converters
             const string pathname = "/Warewolf.Studio.Themes.Luna;component/Images.xaml";
             ResourceDictionary dict = Application.LoadComponent(new Uri(pathname, UriKind.Relative)) as ResourceDictionary;
             ResourceType resourceType = values[0] is ResourceType ? (ResourceType)values[0] : ResourceType.Unknown;
-            bool isExpanded = values[1] is bool && (bool)values[1];
             switch(resourceType)
             {
                 case ResourceType.WorkflowService:

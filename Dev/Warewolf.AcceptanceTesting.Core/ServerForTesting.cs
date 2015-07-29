@@ -181,6 +181,10 @@ namespace Warewolf.AcceptanceTesting.Core
                 
                 }};
             }
+            set
+            {
+                
+            }
         }
         
 //        public event PermissionsChanged PermissionsChanged;
