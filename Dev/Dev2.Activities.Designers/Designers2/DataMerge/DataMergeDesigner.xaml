@@ -13,11 +13,7 @@
                        Style="{DynamicResource ContentViewStyle}">
     
     <sap:ActivityDesigner.Icon>
-        <DrawingBrush Stretch="Uniform">
-            <DrawingBrush.Drawing>
-                <ImageDrawing Rect="0, 0, 16, 16" ImageSource="{StaticResource ToolDataMerge-32}"/>
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
+        <Binding Source="{StaticResource Data-DataMerge-Icon}"/>
     </sap:ActivityDesigner.Icon>
    
     <sap:ActivityDesigner.Resources>
