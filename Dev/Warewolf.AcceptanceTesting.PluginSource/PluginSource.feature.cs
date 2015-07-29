@@ -77,25 +77,25 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         public virtual void NewPluginSourceFile()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("New Plugin Source File", ((string[])(null)));
-#line 15
-this.ScenarioSetup(scenarioInfo);
-#line 16
- testRunner.Given("I open New Plugin Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 17
- testRunner.Then("\"New Plugin Source\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
 #line 18
- testRunner.And("title is \"New Plugin Source\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I open New Plugin Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
- testRunner.And("I click \"File System\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("\"New Plugin Source\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 20
- testRunner.Then("local drive \"C:\\\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("title is \"New Plugin Source\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
- testRunner.Then("local drive \"D:\\\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I click \"File System\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
- testRunner.When("I open \"C:\\\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("local drive \"C:\\\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 23
- testRunner.And("Assembly value is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("local drive \"D:\\\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 24
+ testRunner.When("I open \"C:\\\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 25
+ testRunner.And("Assembly value is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 26
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -110,30 +110,30 @@ this.ScenarioSetup(scenarioInfo);
                         "MS Fakes"});
             table1.AddRow(new string[] {
                         "Microsoft.QualityTools.Testing.Fakes.dll"});
-#line 25
+#line 27
  testRunner.When("I click", ((string)(null)), table1, "When ");
-#line 32
+#line 34
  testRunner.Then("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 33
+#line 35
  testRunner.And("Assembly value is \"C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools.Te" +
                     "sting.Fakes.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
- testRunner.When("I change Assembly to \"C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools" +
-                    ".Testing.Fakes.dl\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 35
- testRunner.Then("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 36
  testRunner.When("I change Assembly to \"C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools" +
-                    ".Testing.Fakes.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                    ".Testing.Fakes.dl\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 37
- testRunner.Then("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 38
- testRunner.When("I save as \"Testing Resource Save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I change Assembly to \"C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools" +
+                    ".Testing.Fakes.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 39
-    testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 40
- testRunner.Then("title is \"Edit Testing Resource Save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I save as \"Testing Resource Save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 41
+    testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 42
+ testRunner.Then("title is \"Edit Testing Resource Save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 43
  testRunner.And("\"Testing Resource Save\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -146,26 +146,26 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void NewPluginSourceGAC()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("New Plugin Source GAC", ((string[])(null)));
-#line 44
-this.ScenarioSetup(scenarioInfo);
-#line 45
- testRunner.Given("I open New Plugin Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 46
- testRunner.When("I click \"GAC\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 47
- testRunner.And("Assembly is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I open New Plugin Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 48
- testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I click \"GAC\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 49
- testRunner.When("I Search for \"AuditPolicyGPMan\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("Assembly is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 50
- testRunner.And("I click \"AuditPolicyGPManagedStubs.Interop, Version=6.1.0.0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
+ testRunner.When("I Search for \"AuditPolicyGPMan\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 52
+ testRunner.And("I click \"AuditPolicyGPManagedStubs.Interop, Version=6.1.0.0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 53
  testRunner.Then("Assembly value is \"GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutra" +
                     "l, PublicKeyToken=b03f5f7f11d50a3a.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 52
+#line 54
  testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 55
  testRunner.When("I save Plugin source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
@@ -178,27 +178,27 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EditingPluginSource()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editing Plugin Source", ((string[])(null)));
-#line 56
-this.ScenarioSetup(scenarioInfo);
-#line 57
- testRunner.Given("I open \"Test\" plugin source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 58
- testRunner.Then("title is \"Edit Test\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
 #line 59
- testRunner.And("\"GAC\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I open \"Test\" plugin source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 60
+ testRunner.Then("title is \"Edit Test\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 61
+ testRunner.And("\"GAC\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 62
  testRunner.And("Assembly value is \"GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutra" +
                     "l, PublicKeyToken=b03f5f7f11d50a3a.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 61
- testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
- testRunner.When("I click \"BDATunePIA, Version=6.1.0.0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 63
+ testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 64
+ testRunner.When("I click \"BDATunePIA, Version=6.1.0.0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 65
  testRunner.Then("Assembly value is \"GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyTok" +
                     "en=31bf3856ad364e35.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 64
+#line 66
  testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
+#line 67
  testRunner.When("I save Plugin source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
@@ -211,28 +211,28 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ChangePluginSourceAssemblyInput()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Change Plugin Source Assembly Input", ((string[])(null)));
-#line 68
-this.ScenarioSetup(scenarioInfo);
-#line 69
- testRunner.Given("I open \"Test File\" plugin source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 70
- testRunner.Then("title is \"Edit Test File\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+this.ScenarioSetup(scenarioInfo);
 #line 71
- testRunner.And("\"File System\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I open \"Test File\" plugin source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 72
- testRunner.And("\"C:\\\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("title is \"Edit Test File\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 73
+ testRunner.And("\"File System\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 74
+ testRunner.And("\"C:\\\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 75
  testRunner.And("Assembly value is \"C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools.Te" +
                     "sting.Fakes.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
- testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
- testRunner.When("I click \"Dev2.Common.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 76
- testRunner.Then("Assembly value is \"C:\\Development\\Dev\\Binaries\\MS Fakes\\Dev2.Common.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 77
- testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I click \"Dev2.Common.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 78
+ testRunner.Then("Assembly value is \"C:\\Development\\Dev\\Binaries\\MS Fakes\\Dev2.Common.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 79
+ testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 80
  testRunner.When("I save Plugin source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
@@ -245,9 +245,9 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void RefreshNewPluginSourceFile()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Refresh New Plugin Source File", ((string[])(null)));
-#line 80
+#line 82
 this.ScenarioSetup(scenarioInfo);
-#line 81
+#line 83
  testRunner.Given("I open New Plugin Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -266,16 +266,16 @@ this.ScenarioSetup(scenarioInfo);
                         "MS Fakes"});
             table2.AddRow(new string[] {
                         "Microsoft.QualityTools.Testing.Fakes.dll"});
-#line 82
+#line 84
  testRunner.When("I click", ((string)(null)), table2, "When ");
-#line 91
- testRunner.Then("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 92
- testRunner.When("I refresh the filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 93
+ testRunner.Then("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 94
+ testRunner.When("I refresh the filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 95
  testRunner.And("Assembly value is \"C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools.Te" +
                     "sting.Fakes.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 94
+#line 96
  testRunner.And("\"Microsoft.QualityTools.Testing.Fakes.dll\" is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -288,25 +288,90 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void RefreshNewPluginSourceGAC()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Refresh New Plugin Source GAC", ((string[])(null)));
-#line 96
-this.ScenarioSetup(scenarioInfo);
-#line 97
- testRunner.Given("I open New Plugin Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 98
- testRunner.When("I click \"GAC\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 99
- testRunner.And("I click \"GAC\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I open New Plugin Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 100
+ testRunner.When("I click \"GAC\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 101
+ testRunner.And("I click \"GAC\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 103
  testRunner.When("I filter for \"BDATunePIA\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 102
+#line 104
  testRunner.And("\"GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e3" +
                     "5.dll\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 103
- testRunner.And("GAC only has one option in the tree", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 104
- testRunner.When("I refresh the filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 105
  testRunner.And("GAC only has one option in the tree", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 106
+ testRunner.When("I refresh the filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 107
+ testRunner.And("GAC only has one option in the tree", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("load all dependancies after filter cleared")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "PluginSource")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PluginSource")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        public virtual void LoadAllDependanciesAfterFilterCleared()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("load all dependancies after filter cleared", new string[] {
+                        "ignore"});
+#line 114
+this.ScenarioSetup(scenarioInfo);
+#line 115
+ testRunner.Given("I open New Plugin Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 116
+ testRunner.When("I click \"GAC\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 117
+ testRunner.And("GAC tree is loading", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 118
+ testRunner.And("I filter for \"BDATunePIA\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 119
+ testRunner.And("\"GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e3" +
+                    "5.dll\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 120
+ testRunner.And("GAC only has one option in the tree", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 121
+ testRunner.When("I clear the filter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 122
+ testRunner.Then("GAC has all option in the tree \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Search while GAC tree view is loading")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "PluginSource")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PluginSource")]
+        public virtual void SearchWhileGACTreeViewIsLoading()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search while GAC tree view is loading", ((string[])(null)));
+#line 125
+this.ScenarioSetup(scenarioInfo);
+#line 126
+ testRunner.Given("I open New Plugin Source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 127
+ testRunner.When("I click \"GAC\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 128
+ testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 129
+ testRunner.When("I Search for \"vjslib\" before the tree view is completely loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 130
+ testRunner.And("I click \"vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+                    "a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 131
+ testRunner.Then("Assembly value is \"GAC:vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b" +
+                    "03f5f7f11d50a3a\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 132
+ testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 133
+ testRunner.When("I save Plugin source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 134
+ testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
