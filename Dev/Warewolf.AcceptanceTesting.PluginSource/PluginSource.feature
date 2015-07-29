@@ -10,6 +10,8 @@ Feature: PluginSource
 ## Change Plugin Source Assembly Input
 ## Refresh New Plugin Source File
 ## Refresh New Plugin Source GAC
+## load all dependancies after filter cleared 
+## Search while GAC tree view is loading
 
 
 Scenario: New Plugin Source File
@@ -106,25 +108,27 @@ Scenario: Refresh New Plugin Source GAC
 
 
 @ignore
+
 #Wolf-1001
-#Scenario: load all dependancies after filter cleared 
-#	Given I open New Plugin Source
-#	When I click "GAC"
-#	And GAC tree is loading
-#	And I filter for "BDATunePIA"
-#	And "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll" is "visible"
-#	And GAC only has one option in the tree
-#	When I clear the filter
-#	Then GAC has all option in the tree "visible"
-#
-#
-#Scenario: Search while GAC tree view is loading
-#	Given I open New Plugin Source
-#	When I click "GAC"
-#	And "Save" is "Disabled"
-#	When I Search for "vjslib" before the tree view is completely loaded
-#	And I click "vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-#	Then Assembly value is "GAC:vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-#	And "Save" is "Enabled"
-#	When I save Plugin source
-#	Then the save dialog is opened
+
+Scenario: load all dependancies after filter cleared 
+	Given I open New Plugin Source
+	When I click "GAC"
+	And GAC tree is loading
+	And I filter for "BDATunePIA"
+	And "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll" is "visible"
+	And GAC only has one option in the tree
+	When I clear the filter
+	Then GAC has all option in the tree "visible"
+
+
+Scenario: Search while GAC tree view is loading
+	Given I open New Plugin Source
+	When I click "GAC"
+	And "Save" is "Disabled"
+	When I Search for "vjslib" before the tree view is completely loaded
+	And I click "vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+	Then Assembly value is "GAC:vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+	And "Save" is "Enabled"
+	When I save Plugin source
+	Then the save dialog is opened

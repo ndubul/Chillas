@@ -42,7 +42,6 @@ namespace Dev2.Studio.Core.AppResources.Enums
         [Description("Deploy")]
         DeployResources,
 
-        [IconLocation("Pack_Uri_Application_Image_Home", typeof(StringResources))]
         [Description("Start Page")]
         StartPage,
         [IconLocation("pack://application:,,,/images/DependencyGraph-16.png")]

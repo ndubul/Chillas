@@ -24,7 +24,8 @@ namespace Warewolf.Studio.Core
             Message = 3069,
             Spacer = 99,
             Execute = 98,
-            View = 97
+            View = 97,
+            StartPage = 16384
 
 
         }
@@ -45,7 +46,7 @@ namespace Warewolf.Studio.Core
             {MenuIcons.EmailSource, "Utility-SendMail"},
             {MenuIcons.DbSource, "Explorer-DB-Create"},
             {MenuIcons.ServerSource, "System-Logo-Create"},
-
+            {MenuIcons.StartPage, "Fa-Home"}
         };
 
         public static string ServerSource
@@ -149,6 +150,14 @@ namespace Warewolf.Studio.Core
             get
             {
                 return MenuIconsDictionary[MenuIcons.WebSource];
+            }
+        }
+
+        public static string StartPage
+        {
+            get
+            {
+                return MenuIconsDictionary[MenuIcons.StartPage];
             }
         }
 
