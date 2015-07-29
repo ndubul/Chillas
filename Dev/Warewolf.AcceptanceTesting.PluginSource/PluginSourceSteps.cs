@@ -48,9 +48,9 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             FeatureContext.Current.Add("synchronousAsyncWorker", mockSynchronousAsyncWorker);
         }
 
-        static IList<IDllListing> BuildBaseListing()
+        static IList<IFileListing> BuildBaseListing()
         {
-            var listing = new List<IDllListing>();
+            var listing = new List<IFileListing>();
             var fileSystemListing = new DllListing{FullName = "",IsDirectory = true,Name = "File System"};
             _dllListingForGac = new DllListing {
                 FullName = "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll", IsDirectory = false, Name = "AuditPolicyGPManagedStubs.Interop, Version=6.1.0.0"
@@ -58,7 +58,7 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             var gacListing = new DllListing
             {
                 FullName = "",IsDirectory = true,Name = "GAC",
-                Children = new List<IDllListing>
+                Children = new List<IFileListing>
                 {
                     _dllListingForGac,
                     new DllListing {
@@ -73,26 +73,26 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             var cDrive = new DllListing
             {
                 FullName = "C:\\", IsDirectory = true, Name = "C:\\",
-                Children = new List<IDllListing>
+                Children = new List<IFileListing>
                 {
                     new DllListing { 
                         FullName = "C:\\Development", IsDirectory = true, Name = "Development" ,
-                        Children = new List<IDllListing>
+                        Children = new List<IFileListing>
                         {
                             new DllListing
                             {
                                 FullName = "C:\\Development\\Dev", IsDirectory = true, Name = "Dev",
-                                Children = new List<IDllListing>
+                                Children = new List<IFileListing>
                                 {
                                     new DllListing
                                     {
                                         FullName = "C:\\Development\\Dev\\Binaries", IsDirectory = true, Name = "Binaries",
-                                        Children = new List<IDllListing>
+                                        Children = new List<IFileListing>
                                         {
                                             new DllListing
                                             {
                                                 FullName = "C:\\Development\\Dev\\Binaries\\MS Fakes", IsDirectory = true, Name = "MS Fakes",
-                                                Children = new List<IDllListing>
+                                                Children = new List<IFileListing>
                                                 {
                                                     _dllListingForFile,
                                                     new DllListing
@@ -110,7 +110,7 @@ namespace Warewolf.AcceptanceTesting.PluginSource
                 }
             };
             var dDrive = new DllListing{FullName = "D:\\",IsDirectory = true,Name = "D:\\"};
-            fileSystemListing.Children = new List<IDllListing>{cDrive,dDrive};
+            fileSystemListing.Children = new List<IFileListing>{cDrive,dDrive};
             listing.Add(fileSystemListing);
             listing.Add(gacListing);
             return listing;

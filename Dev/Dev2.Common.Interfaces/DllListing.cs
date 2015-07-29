@@ -2,9 +2,9 @@
 
 namespace Dev2.Common.Interfaces
 {
-    public class DllListing : IDllListing
+    public class DllListing : IFileListing
     {
-        public DllListing(IDllListing selectedDll)
+        public DllListing(IFileListing selectedDll)
         {
             Name = selectedDll.Name;
             FullName = selectedDll.FullName;
@@ -16,7 +16,7 @@ namespace Dev2.Common.Interfaces
         }
         #region Equality members
 
-        public bool Equals(IDllListing other)
+        public bool Equals(IFileListing other)
         {
             return string.Equals(Name, other.Name) && string.Equals(FullName, other.FullName) && IsDirectory == other.IsDirectory;
         }
@@ -76,7 +76,7 @@ namespace Dev2.Common.Interfaces
         #endregion
 
         public string Name { get; set; }
-        public ICollection<IDllListing> Children { get; set; }
+        public ICollection<IFileListing> Children { get; set; }
         public string FullName { get; set; }
         public bool IsDirectory { get; set; }
     }

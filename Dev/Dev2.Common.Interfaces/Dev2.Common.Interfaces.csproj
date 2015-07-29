@@ -193,6 +193,7 @@
     <Compile Include="Enums\enScriptType.cs" />
     <Compile Include="Enums\PopulateOptions.cs" />
     <Compile Include="Explorer\IExplorerItem.cs" />
+    <Compile Include="FileListing.cs" />
     <Compile Include="Help\IHelpDescriptor.cs" />
     <Compile Include="Help\IHelpDescriptorViewModel.cs" />
     <Compile Include="Help\IHelpWindowModel.cs" />

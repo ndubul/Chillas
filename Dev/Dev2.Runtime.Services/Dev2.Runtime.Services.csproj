@@ -199,6 +199,7 @@
     <Compile Include="ESB\Management\Services\GetDirectoriesRelativeToServer.cs" />
     <Compile Include="ESB\Management\Services\FetchExplorerItems.cs" />
     <Compile Include="ESB\Management\Services\GetDllListings.cs" />
+    <Compile Include="ESB\Management\Services\GetFiles.cs" />
     <Compile Include="ESB\Management\Services\GetSharepointListFields.cs" />
     <Compile Include="ESB\Management\Services\GetServerVersion.cs" />
     <Compile Include="ESB\Management\Services\GetSharepointListService.cs" />

@@ -3,15 +3,15 @@ using System.Collections.ObjectModel;
 
 namespace Dev2.Common.Interfaces
 {
-    public interface IDllListing
+    public interface IFileListing
     {
         string Name { get; set; }
         string FullName { get; set; }
-        ICollection<IDllListing> Children { get; set; }
+        ICollection<IFileListing> Children { get; set; }
         bool IsDirectory { get; set; }
     }
 
-    public interface IDllListingModel : IDllListing
+    public interface IDllListingModel : IFileListing
     {
         void Filter(string searchTerm);
         ObservableCollection<IDllListingModel> Children { get; set; }

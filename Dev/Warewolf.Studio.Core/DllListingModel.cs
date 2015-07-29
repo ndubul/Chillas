@@ -20,7 +20,7 @@ namespace Warewolf.Studio.Core
         private readonly IManagePluginSourceModel _updateManager;
         private bool _isExpanded;
         private bool _isVisible;
-        private readonly IDllListing _dllListing;
+        private readonly IFileListing _dllListing;
         private ObservableCollection<IDllListingModel> _children;
         private string _filter;
         private int _loadingChildrenCount;
@@ -30,7 +30,7 @@ namespace Warewolf.Studio.Core
         bool _isSelected;
         bool _isExpanderVisible;
 
-        public DllListingModel(IManagePluginSourceModel updateManager, IDllListing dllListing)
+        public DllListingModel(IManagePluginSourceModel updateManager, IFileListing dllListing)
         {
             _updateManager = updateManager;
             if (dllListing != null)
@@ -168,7 +168,7 @@ namespace Warewolf.Studio.Core
 
         public string FullName { get; set; }
 
-        ICollection<IDllListing> IDllListing.Children { get; set; }
+        ICollection<IFileListing> IFileListing.Children { get; set; }
 
         public bool IsSelected
         {

@@ -208,7 +208,7 @@ namespace Warewolf.Studio.ServerProxyLayer
 
         //public ObservableCollection<IWebServiceSource> WebSources { get; set; }
 
-        public List<IDllListing> GetDllListings(IDllListing listing)
+        public List<IFileListing> GetDllListings(IFileListing listing)
         {
             Dev2JsonSerializer serializer = new Dev2JsonSerializer();
             var comsController = CommunicationControllerFactory.CreateController("GetDllListingsService");
@@ -219,7 +219,7 @@ namespace Warewolf.Studio.ServerProxyLayer
             {
                 throw new WarewolfSupportServiceException(result.Message.ToString(), null);
             }
-            var dllListings = serializer.Deserialize<List<IDllListing>>(result.Message.ToString());
+            var dllListings = serializer.Deserialize<List<IFileListing>>(result.Message.ToString());
             return dllListings;
         }
 

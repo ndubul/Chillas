@@ -14,13 +14,13 @@ using Dev2.Workspaces;
 
 namespace Dev2.Runtime.ESB.Management.Services
 {
-    public class GetDllListings : IEsbManagementEndpoint
+    public class GetFiles : IEsbManagementEndpoint
     {
         public StringBuilder Execute(Dictionary<string, StringBuilder> values, IWorkspace theWorkspace)
         {
             ExecuteMessage msg = new ExecuteMessage();
             Dev2JsonSerializer serializer = new Dev2JsonSerializer();
-            Dev2Logger.Log.Info("Get Dll Listings");
+            Dev2Logger.Log.Info("Get Files");
             StringBuilder dllListing;
 
             values.TryGetValue("currentDllListing", out dllListing);
@@ -46,8 +46,8 @@ namespace Dev2.Runtime.ESB.Management.Services
         static List<IFileListing> GetDllListing(IFileListing src)
         {
             var completeList = new List<IFileListing>();
-            var fileSystemParent = new DllListing { Name = "File System", IsDirectory = true };
-            var gacItem = new DllListing { Name = "GAC", IsDirectory = true };
+            var fileSystemParent = new FileListing { Name = "Computer", IsDirectory = true };
+   
 
             if (src == null)
             {
@@ -61,31 +61,12 @@ namespace Dev2.Runtime.ESB.Management.Services
                 {
                     Dev2Logger.Log.Error(e.Message);
                 }
-                IAssemblyName assemblyName;
-                IAssemblyEnum assemblyEnum = GAC.CreateGACEnum();
-                var gacList = new List<IFileListing>();
-                while (GAC.GetNextAssembly(assemblyEnum, out assemblyName) == 0)
-                {
-                    try
-                    {
-                        var displayName = GAC.GetDisplayName(assemblyName, ASM_DISPLAY_FLAGS.VERSION | ASM_DISPLAY_FLAGS.CULTURE | ASM_DISPLAY_FLAGS.PUBLIC_KEY_TOKEN);
-                        var name = GlobalConstants.GACPrefix+displayName;
-                        gacList.Add(new DllListing { Name = displayName, FullName = name, IsDirectory = false });
-                    }
-                    catch (Exception e)
-                    {
-                        Dev2Logger.Log.Error(e.Message);
-                    }
-                }
-                gacItem.Children = gacList;
 
-                completeList.Add(fileSystemParent);
-                completeList.Add(gacItem);
             }
             else
             {
                 if(src.IsDirectory)
-                completeList = GetChildrenForDllListing(new DirectoryInfo(src.FullName));
+                    completeList = GetChildrenForDllListing(new DirectoryInfo(src.FullName));
             }
             return completeList;
         }
@@ -132,7 +113,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                 directoryItem.IsDirectory = true;
                 childList.Add(directoryItem);
             }
-            var files = directory.EnumerateFiles("*.dll");
+            var files = directory.EnumerateFiles();
             foreach (var fileInfo in files)
             {
                 var fileItem = BuildDllListing(fileInfo);

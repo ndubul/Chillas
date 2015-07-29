@@ -6,7 +6,7 @@ namespace Dev2.Common.Interfaces
     {
         string Name { get; set; }
         Guid Id { get; set; }
-        IDllListing SelectedDll { get; set; }
+        IFileListing SelectedDll { get; set; }
         string Path { get; set; }
     }
 }
