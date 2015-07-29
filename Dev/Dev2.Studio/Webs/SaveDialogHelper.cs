@@ -10,8 +10,10 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Events;
 using Dev2.Studio.Core;
@@ -67,6 +69,11 @@ namespace Dev2.Webs
 
             var requestView = new RequestServiceNameView();
             IServer server = new Server(environment.Connection);
+            if(server.Permissions == null)
+            {
+                server.Permissions = new List<IWindowsGroupPermission>();
+                server.Permissions.AddRange(environment.AuthorizationService.SecurityService.Permissions);
+            }
             if (resourceModel.Category == null)
             {
                 resourceModel.Category = "";

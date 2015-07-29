@@ -129,7 +129,7 @@ namespace Warewolf.Studio.ViewModels
         public void AddChild(IExplorerItemViewModel child)
         {
             var tempChildren = new ObservableCollection<IExplorerItemViewModel>(_children);
-            tempChildren.Add(child);
+            tempChildren.Insert(0,child);
             _children = tempChildren;
 			OnPropertyChanged(() => Children);
         }
@@ -384,7 +384,12 @@ namespace Warewolf.Studio.ViewModels
         }
         private string RemoveInvalidCharacters(string name)
         {
-            return Regex.Replace(name, @"[^a-zA-Z0-9._\s-]", "");
+            var nameToFix = name.TrimStart(' ').TrimEnd(' ');
+            if (string.IsNullOrEmpty(nameToFix))
+            {
+                nameToFix = GetChildNameFromChildren();
+            }
+            return Regex.Replace(nameToFix, @"[^a-zA-Z0-9._\s-]", "");
         }
 	    string NewName(string value)
 	    {

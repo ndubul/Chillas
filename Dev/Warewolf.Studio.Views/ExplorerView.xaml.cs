@@ -17,7 +17,7 @@ namespace Warewolf.Studio.Views
 	    public ExplorerView()
 	    {
 	        InitializeComponent();
-	        _explorerViewTestClass = new ExplorerViewTestClass(this);
+	        _explorerViewTestClass = new ExplorerViewTestClass(this);            
 	    }
 
 	    public ExplorerViewTestClass ExplorerViewTestClass
@@ -152,11 +152,12 @@ namespace Warewolf.Studio.Views
 
 	    void ExplorerTree_OnInitializeNode(object sender, InitializeNodeEventArgs e)
 	    {
-	        if(e.Node == null)
+	        var xamDataTreeNode = e.Node;
+	        if(xamDataTreeNode == null)
 	        {
 	            return;
 	        }
-	        var dataItem = e.Node.Data as IExplorerItemViewModel;
+	        var dataItem = xamDataTreeNode.Data as IExplorerItemViewModel;
 	        if(dataItem == null)
 	        {
 	            return;
@@ -167,8 +168,7 @@ namespace Warewolf.Studio.Views
 	        }
 	        if(dataItem.ResourceName.StartsWith("New Folder"))
 	        {
-	            ExplorerTree.EnterEditMode(e.Node);
-                ExplorerTree.ScrollNodeIntoView(e.Node);
+                ExplorerTree.EnterEditMode(xamDataTreeNode);	            
 	        }
 	    }
 

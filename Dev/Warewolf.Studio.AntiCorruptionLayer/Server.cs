@@ -60,7 +60,9 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             UpdateRepository = new StudioResourceUpdateManager(new CommunicationControllerFactory(), EnvironmentConnection);
             EnvironmentConnection.PermissionsModified += RaisePermissionsModifiedEvent;
             ResourceName = EnvironmentConnection.DisplayName;
+            
         }
+
 
         void ItemAdded(IExplorerItem obj)
         {
@@ -173,7 +175,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 //        {
 //        }
 
-        public List<IWindowsGroupPermission> Permissions { get; private set; }
+        public List<IWindowsGroupPermission> Permissions { get; set; }
 
        // public event PermissionsChanged PermissionsChanged;
        // public event NetworkStateChanged NetworkStateChanged;
