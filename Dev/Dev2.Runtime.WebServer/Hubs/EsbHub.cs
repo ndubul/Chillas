@@ -86,6 +86,10 @@ namespace Dev2.Runtime.WebServer.Hubs
         {
             var factory = new ExplorerItemFactory(ResourceCatalog.Instance, new DirectoryWrapper(), ServerAuthorizationService.Instance);
             var resourceItem = factory.CreateResourceItem(resource);
+            if (ServerExplorerRepository.Instance != null)
+            {
+                ServerExplorerRepository.Instance.AddItem(resourceItem, GlobalConstants.ServerWorkspaceID);
+            }
             AddItemMessage(resourceItem);
         }
 

@@ -68,7 +68,6 @@ namespace Dev2.Webs
 
             EnvironmentRepository.Instance.ActiveEnvironment = environment;
 
-            var requestView = new RequestServiceNameView();
             IServer server = new Server(environment.Connection);
             if(server.Permissions == null)
             {
