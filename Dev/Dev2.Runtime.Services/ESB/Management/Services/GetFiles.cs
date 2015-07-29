@@ -38,6 +38,11 @@ namespace Dev2.Runtime.ESB.Management.Services
                     msg.SetMessage(ex.Message);
                 }
             }
+            else
+            {
+                msg.HasError = false;
+                msg.Message = serializer.SerializeToBuilder(GetFilesAndFolders(null));
+            }
 
             return serializer.SerializeToBuilder(msg);
         }
@@ -45,8 +50,7 @@ namespace Dev2.Runtime.ESB.Management.Services
         static List<IFileListing> GetFilesAndFolders(IFileListing src)
         {
             var completeList = new List<IFileListing>();
-            var fileSystemParent = new FileListing { Name = "Computer", IsDirectory = true };
-   
+      
 
             if (src == null)
             {
@@ -54,7 +58,8 @@ namespace Dev2.Runtime.ESB.Management.Services
                 try
                 {
                     var listing = drives.Select(BuildFileListing);
-                    fileSystemParent.Children = listing.ToList();
+            
+                    return new List<IFileListing>(listing.Select(a=>new FileListing()));
                 }
                 catch (Exception e)
                 {
