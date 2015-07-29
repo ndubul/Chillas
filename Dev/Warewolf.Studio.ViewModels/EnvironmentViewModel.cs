@@ -304,7 +304,7 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-				return Server.Permissions.Any(a => (a.Contribute || a.Administrator) && a.IsServer);
+				return Server.Permissions != null && Server.Permissions.Any(a => (a.Contribute || a.Administrator) && a.IsServer);
             }
             set
             {

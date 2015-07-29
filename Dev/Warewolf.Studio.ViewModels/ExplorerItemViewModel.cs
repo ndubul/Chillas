@@ -129,7 +129,7 @@ namespace Warewolf.Studio.ViewModels
         public void AddChild(IExplorerItemViewModel child)
         {
             var tempChildren = new ObservableCollection<IExplorerItemViewModel>(_children);
-            tempChildren.Add(child);
+            tempChildren.Insert(0,child);
             _children = tempChildren;
 			OnPropertyChanged(() => Children);
         }
