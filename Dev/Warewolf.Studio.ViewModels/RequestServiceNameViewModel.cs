@@ -56,29 +56,6 @@ namespace Warewolf.Studio.ViewModels
         {
             var ret = new RequestServiceNameViewModel();
             return ret.InitializeAsync(environmentViewModel, view, selectedGuid);
-        }   
-
-        public RequestServiceNameViewModel(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, string selectedPath)
-        {
-            if (environmentViewModel == null)
-            {
-                throw new ArgumentNullException("environmentViewModel");
-            }
-            if (view == null)
-            {
-                throw new ArgumentNullException("view");
-            }
-            environmentViewModel.Connect();
-            environmentViewModel.LoadDialog(Guid.Empty);
-            environmentViewModel.SelectItem(selectedPath,model => model.IsSelected=true);
-            _view = view;
-
-            OkCommand = new DelegateCommand(SetServiceName, () => String.IsNullOrEmpty(ErrorMessage));
-            CancelCommand = new DelegateCommand(CloseView);
-            SingleEnvironmentExplorerViewModel = new SingleEnvironmentExplorerViewModel(environmentViewModel, _selectedGuid);
-            _view.DataContext = this;
-            Name = "";
-            environmentViewModel.CanShowServerVersion = false;
         }
 
         private void CloseView()
