@@ -23,5 +23,7 @@ namespace Dev2.Common.Interfaces.Infrastructure
         IExplorerItem UpdateItem(IResource resource);
 
         IExplorerItem Find(Guid id);
+
+        IExplorerItem Reload(Guid workSpaceId);
     }
 }
