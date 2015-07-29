@@ -203,6 +203,7 @@
     <Compile Include="IAssignValue.cs" />
     <Compile Include="ICheckControlEnabledView.cs" />
     <Compile Include="IDllListing.cs" />
+    <Compile Include="IEmailAttachmentModel.cs" />
     <Compile Include="IEmailAttachmentView.cs" />
     <Compile Include="IEmailServiceSource.cs" />
     <Compile Include="IEnvironment.cs" />

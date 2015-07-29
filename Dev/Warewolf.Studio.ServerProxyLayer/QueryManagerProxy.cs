@@ -235,6 +235,38 @@ namespace Warewolf.Studio.ServerProxyLayer
             return serializer.Deserialize<List<INamespaceItem>>(payload.Message);
         }
 
+        public IList<IFileListing> FetchFiles()
+        {
+            Dev2JsonSerializer serializer = new Dev2JsonSerializer();
+            var comsController = CommunicationControllerFactory.CreateController("GetFiles");
+
+            var workspaceId = Connection.WorkspaceID;
+            var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
+            if (result.HasError)
+            {
+                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+            }
+            var fileListings = serializer.Deserialize<List<IFileListing>>(result.Message.ToString());
+            return fileListings;
+        }
+
+
+        public IList<IFileListing> FetchFiles(IFileListing root)
+        {
+            Dev2JsonSerializer serializer = new Dev2JsonSerializer();
+            var comsController = CommunicationControllerFactory.CreateController("GetFiles");
+            comsController.AddPayloadArgument("fileListing", serializer.Serialize(root));
+            var workspaceId = Connection.WorkspaceID;
+            var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
+            if (result.HasError)
+            {
+                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+            }
+            var fileListings = serializer.Deserialize<List<IFileListing>>(result.Message.ToString());
+            return fileListings;
+        }
+
+
         public IList<IPluginSource> FetchPluginSources()
         {
             var comsController = CommunicationControllerFactory.CreateController("FetchPluginSources");

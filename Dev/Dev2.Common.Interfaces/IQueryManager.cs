@@ -81,5 +81,9 @@ namespace Dev2.Common.Interfaces
         List<IFileListing> GetDllListings(IFileListing listing);
 
         ICollection<INamespaceItem> FetchNamespaces(IPluginSource source);
+
+        IList<IFileListing> FetchFiles();
+
+        IList<IFileListing> FetchFiles(IFileListing file);
     }
 }
