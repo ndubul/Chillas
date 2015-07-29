@@ -69,6 +69,8 @@
         <GradientStop Color="Black" Offset="0.2" />
     </LinearGradientBrush>
 
+    <Thickness x:Key="TabItemLeftBorderThicknessSelected">1,1,0,1</Thickness>
+
     <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
         <Setter Property="BorderBrush" Value="{StaticResource TabItemBorderBrush}"></Setter>
         <Setter Property="Template">
@@ -125,4 +127,102 @@
 
     <!--  *********************************  Implicit Styles  *********************************  -->
     <Style BasedOn="{StaticResource TabControlStyle}" TargetType="{x:Type TabControl}" />
+
+
+    <Style x:Key="TabControlLeftStyle" TargetType="{x:Type TabControl}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Grid KeyboardNavigation.TabNavigation="Local">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates" />
+                        </VisualStateManager.VisualStateGroups>
+                        <TabPanel x:Name="HeaderPanel"
+                                  Grid.Column="0"
+                                  Margin="0,0,-1,0"
+                                  Panel.ZIndex="1"
+                                  Background="Transparent"
+                                  IsItemsHost="True"
+                                  KeyboardNavigation.TabIndex="1" />
+                        <Border x:Name="Border"
+                                Grid.Column="1"
+                                BorderThickness="1,1,0,0"
+                                BorderBrush="{StaticResource WareWolfBlackBrush}"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                KeyboardNavigation.TabIndex="2"
+                                KeyboardNavigation.TabNavigation="Local">
+
+                            <Border.Background>
+                                <SolidColorBrush Color="White"/>
+                            </Border.Background>
+                            <ContentPresenter x:Name="PART_SelectedContentHost"
+                                              Margin="0"
+                                              ContentSource="SelectedContent" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TabItemLeftStyle" TargetType="{x:Type TabItem}">
+        <Setter Property="BorderBrush" Value="{StaticResource TabItemBorderBrush}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid x:Name="Root">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected" />
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="1" Value="{TemplateBinding BorderBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="Border" BorderThickness="1,1,0,1">
+                            <ContentPresenter x:Name="ContentSite"
+                                              Margin="2,2,2,2"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              ContentSource="Header"
+                                              RecognizesAccessKey="True" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Panel.ZIndex" Value="100" />
+                            <Setter Property="Opacity" >
+                                <Setter.Value>1</Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Border" Property="BorderThickness" Value="{StaticResource TabItemLeftBorderThicknessSelected}" />
+                            <Setter TargetName="Border" Property="Height" Value="35" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource TabItemBorderColorSelected}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TabItemBackgroundColorSelected}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Border" Property="BorderThickness" Value="0,0,1,0"/>
+                            <Setter Property="Opacity" >
+                                <Setter.Value>0.5</Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

@@ -91,8 +91,8 @@
 
             <navigationViews:NavigationView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type explorer2:ExplorerItemModel}" ItemsSource="{Binding Path=Children}">
-                    <!--<HierarchicalDataTemplate.Triggers>
-                        <EventTrigger RoutedEvent="StackPanel.MouseEnter">
+                    <HierarchicalDataTemplate.Triggers>
+                        <!--<EventTrigger RoutedEvent="StackPanel.MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <ObjectAnimationUsingKeyFrames Duration="0"
@@ -143,8 +143,8 @@
                                     </ObjectAnimationUsingKeyFrames>
                                 </Storyboard>
                             </BeginStoryboard>
-                        </EventTrigger>
-                    </HierarchicalDataTemplate.Triggers>-->
+                        </EventTrigger>-->
+                    </HierarchicalDataTemplate.Triggers>
                     <Border IsHitTestVisible="True" Background="Transparent">
                         <Border.RenderTransform>
                             <TransformGroup>
@@ -164,7 +164,6 @@
                         </i:Interaction.Behaviors>
 
                         <Border.ContextMenu>
-                            <!--Visibility="{Binding HasExecutableCommands, Converter={StaticResource BoolToVisConverter}}"-->
                             <ContextMenu AutomationProperties.AutomationId ="UI_ConnectContextMenu_AutoID">
                                 <ContextMenu.Resources>
                                     <Style TargetType="{x:Type MenuItem}" >
@@ -203,10 +202,6 @@
                                         </MultiBinding>
                                     </MenuItem.Visibility>
                                 </MenuItem>
-                                <!--<MenuItem Header="Refresh"
-                                          Command="{Binding RefreshCommand}"
-                                          Visibility="{Binding CanRefresh, Converter={StaticResource BoolToVisConverter}}"
-                                          AutomationProperties.AutomationId="UI_ExplorerContextMenuRefreshItem_AutoID" />-->
                                 <MenuItem Header="Open"
                                           Command="{Binding EditCommand}"
                                           Visibility="{Binding CanEdit, Converter={StaticResource BoolToVisConverter}}"
@@ -316,11 +311,8 @@
                                     </MenuItem.Icon>
                                 </MenuItem>
 
-
                                 <Separator Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}" />
-                                <!--<MenuItem Header="Build"
-                                          Command="{Binding BuildCommand}"
-                                          Visibility="{Binding CanBuild, Converter={StaticResource BoolToVisConverter}}" />-->
+
                                 <MenuItem Header="{Binding DeployTitle}"
                                           Command="{Binding DeployCommand}"
                                           Visibility="{Binding CanDeploy, Converter={StaticResource BoolToVisConverter}}"
@@ -462,7 +454,6 @@
                                                     </Style>
                                                 </Image.Style>
                                             </Image>
-
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
@@ -510,11 +501,9 @@
                                                     </Style>
                                                 </Image.Style>
                                             </Image>
-
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
-
                             </StackPanel>
 
                             <Border Style="{StaticResource UnauthorizedTreeViewBorderStyle}"
