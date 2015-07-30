@@ -6,15 +6,13 @@
 	xmlns:customControls="clr-namespace:Warewolf.Studio.CustomControls;assembly=Warewolf.Studio.CustomControls"
 	xmlns:fa="http://schemas.fontawesome.io/icons/"
 	xmlns:toolBox="clr-namespace:Warewolf.Studio.ViewModels.ToolBox;assembly=Warewolf.Studio.ViewModels"
-	xmlns:itoolbox="clr-namespace:Dev2.Common.Interfaces.Toolbox;assembly=Dev2.Common.Interfaces"
-	xmlns:views="clr-namespace:Warewolf.Studio.Views"
 	xmlns:core="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
-	xmlns:ig="http://schemas.infragistics.com/xaml"
 	mc:Ignorable="d"
 	x:Class="Warewolf.Studio.Views.ToolboxView"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480"
     d:DataContext="{d:DesignInstance Type={x:Type toolBox:ToolboxViewModel}}">
+
     <UserControl.Resources>
         <CollectionViewSource x:Key="ToolViewSource" Source="{Binding Tools}">
             <!-- Grouping -->
@@ -22,75 +20,63 @@
                 <PropertyGroupDescription PropertyName="Tool.Category" />
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
-        <Cursor x:Key="Grab"  > Grab.cur</Cursor>
+        <Cursor x:Key="Grab"  >Grab.cur</Cursor>
         <Cursor x:Key="Grabbing"  >Grabbing.cur</Cursor>
         <DataTemplate x:Key="ToolDataTemplate" DataType="toolBox:ToolDescriptorViewModel">
             <Grid MouseMove="UIElement_OnMouseMove">
-<!--                <ig:DragDropManager.DragSource>-->
-<!--                    <ig:DragSource IsDraggable="True" DragChannels="Tool"-->
-<!--                                  DragStart="DragSource_OnDragStart" -->
-<!--                                   Drop="DragSource_OnDrop" -->
-<!--                                   DataObject="{Binding Path=ActivityType}">-->
-<!--                        <ig:DragSource.DropNotAllowedCursorTemplate>-->
-<!--                            <DataTemplate>-->
-<!--                                <fa:ImageAwesome TextOptions.TextFormattingMode="Display" Width="12" Height="12"  Icon="Ban" Foreground="{StaticResource ValidationErrorElement}" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
-<!--                            </DataTemplate>-->
-<!--                        </ig:DragSource.DropNotAllowedCursorTemplate>-->
-<!--                        <ig:DragSource.DragTemplate>-->
-<!--                            -->
-<!--                            <DataTemplate>-->
-<!--                                <Border BorderThickness="1" BorderBrush="{StaticResource WareWolfOrangeBrush}">-->
-<!--                                    <ContentControl Content="{Binding Path=DragImage}"/>-->
-<!--                                </Border>-->
-<!--                            </DataTemplate>-->
-<!--                        </ig:DragSource.DragTemplate>-->
-<!--                        -->
-<!--                    </ig:DragSource>-->
-<!--                </ig:DragDropManager.DragSource>-->
+                <!--                <ig:DragDropManager.DragSource>-->
+                <!--                    <ig:DragSource IsDraggable="True" DragChannels="Tool"-->
+                <!--                                  DragStart="DragSource_OnDragStart" -->
+                <!--                                   Drop="DragSource_OnDrop" -->
+                <!--                                   DataObject="{Binding Path=ActivityType}">-->
+                <!--                        <ig:DragSource.DropNotAllowedCursorTemplate>-->
+                <!--                            <DataTemplate>-->
+                <!--                                <fa:ImageAwesome TextOptions.TextFormattingMode="Display" Width="12" Height="12"  Icon="Ban" Foreground="{StaticResource ValidationErrorElement}" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
+                <!--                            </DataTemplate>-->
+                <!--                        </ig:DragSource.DropNotAllowedCursorTemplate>-->
+                <!--                        <ig:DragSource.DragTemplate>-->
+                <!--                            -->
+                <!--                            <DataTemplate>-->
+                <!--                                <Border BorderThickness="1" BorderBrush="{StaticResource WareWolfOrangeBrush}">-->
+                <!--                                    <ContentControl Content="{Binding Path=DragImage}"/>-->
+                <!--                                </Border>-->
+                <!--                            </DataTemplate>-->
+                <!--                        </ig:DragSource.DragTemplate>-->
+                <!--                        -->
+                <!--                    </ig:DragSource>-->
+                <!--                </ig:DragDropManager.DragSource>-->
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="4.8" />
                     <RowDefinition Height="24" />
-                    <RowDefinition Height="27.6" />
-                    <RowDefinition Height="4.8" />
-
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3" />
-                    <ColumnDefinition Width="10.8" />
-                    <ColumnDefinition Width="24" />
-                    <ColumnDefinition Width="10.8" />
-                    <ColumnDefinition Width="3" />
+                    <ColumnDefinition Width="55" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Row="1"
-                           Grid.Column="2"
-                           Width="24"
-                           Height="24"
-                           HorizontalAlignment="Stretch"
-                           VerticalAlignment="Stretch"
-                           Source="{Binding Icon}" />
-                <TextBlock Grid.Row="2"
-                               Grid.Column="1"
-                               Grid.ColumnSpan="3"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Bottom"
-                               FontFamily="{StaticResource DefaultFontFamily}"
-                               FontSize="{StaticResource FontSize-Smaller}"
-                               Text="{Binding Name}"
-                               TextAlignment="Center"
-                               TextWrapping="WrapWithOverflow" TextTrimming="None" 
-                               Margin="0,3,0,0"/>
-     
+                <Image Grid.Row="0"
+                       Width="Auto"
+                       Height="Auto"
+                       Margin="0,6,0,0"
+                       VerticalAlignment="Center"
+                       Source="{Binding Icon}" />
+                <TextBlock Grid.Row="1"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="{Binding Name}"
+                           TextAlignment="Center"
+                           TextWrapping="WrapWithOverflow" 
+                           Style="{StaticResource TextBlockNoPaddingStyle}"
+                           TextTrimming="None" 
+                           Margin="0,3,0,-3"/>
+
             </Grid>
-            
+
         </DataTemplate>
         <core:WidthConvertForWrapPanel x:Key="ListBoxWidthToItemsPanelWidthConverter" />
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" Margin="{StaticResource ContainerBorder}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="10" />
-            <RowDefinition Height="29"/>
-            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -99,7 +85,7 @@
         </Grid.ColumnDefinitions>
 
         <!--  TOOL SEARCH BOX  -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="29"/>
             </Grid.RowDefinitions>
@@ -124,11 +110,16 @@
             </Button>
         </Grid>
 
-        <ListBox Name="ToolListBox" ItemTemplate="{StaticResource ToolDataTemplate}"  Style="{StaticResource ListBoxToolboxStyle}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Source={StaticResource ToolViewSource}}">
+        <ListBox Name="ToolListBox" 
+                 ItemTemplate="{StaticResource ToolDataTemplate}"  
+                 Style="{StaticResource ListBoxToolboxStyle}" 
+                 Grid.Row="1" 
+                 Margin="{StaticResource ControlBorderTop}"
+                 Grid.Column="0" 
+                 ItemsSource="{Binding Source={StaticResource ToolViewSource}}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate >
-                    <WrapPanel Orientation="Horizontal" MaxWidth="{Binding Converter={StaticResource ListBoxWidthToItemsPanelWidthConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}"
-                     />
+                    <WrapPanel Orientation="Horizontal" MaxWidth="{Binding Converter={StaticResource ListBoxWidthToItemsPanelWidthConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.GroupStyle>
@@ -138,12 +129,12 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type GroupItem}">
-                                        <Expander Margin="0"
-                  HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch"
-                  Header="{Binding Name}"
-                  IsExpanded="True"
-                  Style="{DynamicResource ExpanderStyleWithHiddenExpandButton}">
+                                        <Expander Margin="0,1,0,0"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch"
+                                                  Header="{Binding Name}"
+                                                  IsExpanded="True"
+                                                  Style="{DynamicResource ExpanderStyleWithHiddenExpandButton}">
                                             <ItemsPresenter />
                                         </Expander>
                                     </ControlTemplate>

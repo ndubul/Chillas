@@ -15,6 +15,7 @@
     <SolidColorBrush x:Key="WarewolfHeaderGreyBrush" Color="{StaticResource WarewolfHeaderGrey}" />
     <SolidColorBrush x:Key="WarewolfHeaderWatermarkGreyBrush" Color="{StaticResource WarewolfWatermark}" />
     <SolidColorBrush x:Key="WarewolfSubHeaderGreyBrush" Color="{StaticResource WarewolfSubHeaderGrey}" />
+    <SolidColorBrush x:Key="WarewolfLineGreyBrush" Color="{StaticResource WarewolfLineGrey}" />
     <SolidColorBrush x:Key="WareWolfLighkGreyBrush" Color="{StaticResource WarewolfButtonGrey}" />
     <SolidColorBrush x:Key="WareWolfButtonBrush" Color="{StaticResource WarewolfButtonGrey}" />
     <SolidColorBrush x:Key="WareWolfHeaderButtonBrush" Color="{StaticResource WarewolfHeaderButtonGrey}" />
