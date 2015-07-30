@@ -108,7 +108,7 @@ namespace Dev2.Settings.Scheduler
 
             VerifyArgument.IsNotNull("asyncWorker", asyncWorker);
             _asyncWorker = asyncWorker;
-
+            Errors = new ErrorResultTO();
             IsLoading = false;
             directoryObjectPicker1.AllowedObjectTypes = ObjectTypes.Users;
             directoryObjectPicker1.DefaultObjectTypes = ObjectTypes.Users;
@@ -252,7 +252,7 @@ namespace Dev2.Settings.Scheduler
             }
             set
             {
-                if(SelectedTask != null)
+                if(SelectedTask != null && !SelectedTask.IsNewItem )
                 {
                     if(string.IsNullOrEmpty(value))
                     {
@@ -372,7 +372,7 @@ namespace Dev2.Settings.Scheduler
         {
             get
             {
-                if(ScheduledResourceModel != null && SelectedTask != null && IsHistoryTab && _history == null)
+                if(ScheduledResourceModel != null && SelectedTask != null && _history == null && !SelectedTask.IsNewItem)
                 {
                     _asyncWorker.Start(
                    () =>
@@ -455,7 +455,6 @@ namespace Dev2.Settings.Scheduler
                 {
                     return;
                 }
-
                 _selectedTask = value;
 
                 NotifyOfPropertyChange(() => SelectedTask);
@@ -475,10 +474,8 @@ namespace Dev2.Settings.Scheduler
                     NotifyOfPropertyChange(() => Error);
                     NotifyOfPropertyChange(() => SelectedHistory);
                     SelectedHistory = null;
-                    if(IsHistoryTab)
-                    {
-                        NotifyOfPropertyChange(() => History);
-                    }
+                    NotifyOfPropertyChange(() => History);
+                    
                 }
             }
         }
@@ -815,10 +812,10 @@ You need Administrator permission.");
             var scheduleTrigger = _schedulerFactory.CreateTrigger(TaskState.Ready, dev2DailyTrigger);
             ScheduledResource scheduledResource = new ScheduledResource(NewTaskName + _newTaskCounter, SchedulerStatus.Enabled, scheduleTrigger.Trigger.Instance.StartBoundary, scheduleTrigger, string.Empty) { IsDirty = true };
             scheduledResource.OldName = scheduledResource.Name;
-            ScheduledResourceModel.ScheduledResources.Add(scheduledResource);
+            ScheduledResourceModel.ScheduledResources.Insert(ScheduledResourceModel.ScheduledResources.Count-1, scheduledResource);
             _newTaskCounter++;
             NotifyOfPropertyChange(() => TaskList);
-            SelectedTask = ScheduledResourceModel.ScheduledResources.Last();
+            SelectedTask = ScheduledResourceModel.ScheduledResources[ScheduledResourceModel.ScheduledResources.Count - 1];
             WorkflowName = string.Empty;
             SelectedTask.IsNew = true;
         }
@@ -935,7 +932,11 @@ You need Administrator permission.");
                     IsLoading = true;
                     _asyncWorker.Start(
                         () =>
-                        ScheduledResourceModel.ScheduledResources = ScheduledResourceModel.GetScheduledResources(), () =>
+                            {
+                                var resources = ScheduledResourceModel.GetScheduledResources();
+                                resources.Add(new DummyResource(this){Name = "Schedule a new task."});
+                                ScheduledResourceModel.ScheduledResources = resources;
+                            }, () =>
                     {
                         foreach(var scheduledResource in ScheduledResourceModel.ScheduledResources)
                         {

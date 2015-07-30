@@ -191,6 +191,8 @@ namespace Dev2.Core.Tests.Settings
 
     internal class ScheduledResourceForTest : IScheduledResource
     {
+        bool _isNewItem;
+
         #region Implementation of IScheduledResource
 
         public ScheduledResourceForTest()
@@ -245,6 +247,17 @@ namespace Dev2.Core.Tests.Settings
         public string Password { get; set; }
         public IErrorResultTO Errors { get; set; }
         public bool IsNew { get; set; }
+        public bool IsNewItem
+        {
+            get
+            {
+                return _isNewItem;
+            }
+            set
+            {
+                _isNewItem = value;
+            }
+        }
 
         #endregion
     }

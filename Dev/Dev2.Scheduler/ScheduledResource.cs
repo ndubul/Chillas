@@ -209,6 +209,7 @@ namespace Dev2.Scheduler
             }
         }
         public bool IsNew { get; set; }
+        public bool IsNewItem { get; set; }
 
         #region INotifyPropertyChanged
 

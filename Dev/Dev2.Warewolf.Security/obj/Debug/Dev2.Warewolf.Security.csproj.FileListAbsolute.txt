@@ -1,3 +1,6 @@
 E:\git\rep1\warewolf-esb\Dev\Dev2.Warewolf.Security\obj\Debug\Dev2.Warewolf.Security.csprojResolveAssemblyReference.cache
 E:\git\rep1\warewolf-esb\Dev\Dev2.Warewolf.Security\obj\Debug\Dev2.Warewolf.Security.dll
 E:\git\rep1\warewolf-esb\Dev\Dev2.Warewolf.Security\obj\Debug\Dev2.Warewolf.Security.pdb
+D:\Git Repositories\Warewolf-ESB\Dev\Dev2.Warewolf.Security\obj\Debug\Dev2.Warewolf.Security.csprojResolveAssemblyReference.cache
+D:\Git Repositories\Warewolf-ESB\Dev\Dev2.Warewolf.Security\obj\Debug\Dev2.Warewolf.Security.dll
+D:\Git Repositories\Warewolf-ESB\Dev\Dev2.Warewolf.Security\obj\Debug\Dev2.Warewolf.Security.pdb
