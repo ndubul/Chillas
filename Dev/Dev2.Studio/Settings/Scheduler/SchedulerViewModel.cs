@@ -451,7 +451,14 @@ namespace Dev2.Settings.Scheduler
             }
             set
             {
-                if(Equals(_selectedTask, value))
+
+                if (value == null)
+                {
+                    _selectedTask = null;
+                    NotifyOfPropertyChange(() => SelectedTask);
+                    return;
+                }
+                if(  Equals(_selectedTask, value) || value.IsNewItem)
                 {
                     return;
                 }
@@ -815,7 +822,7 @@ You need Administrator permission.");
             ScheduledResourceModel.ScheduledResources.Insert(ScheduledResourceModel.ScheduledResources.Count-1, scheduledResource);
             _newTaskCounter++;
             NotifyOfPropertyChange(() => TaskList);
-            SelectedTask = ScheduledResourceModel.ScheduledResources[ScheduledResourceModel.ScheduledResources.Count - 1];
+            SelectedTask = ScheduledResourceModel.ScheduledResources[ScheduledResourceModel.ScheduledResources.Count - 2];
             WorkflowName = string.Empty;
             SelectedTask.IsNew = true;
         }
@@ -938,7 +945,7 @@ You need Administrator permission.");
                                 ScheduledResourceModel.ScheduledResources = resources;
                             }, () =>
                     {
-                        foreach(var scheduledResource in ScheduledResourceModel.ScheduledResources)
+                        foreach(var scheduledResource in ScheduledResourceModel.ScheduledResources.Where(a=>!a.IsNewItem))
                         {
                             scheduledResource.NextRunDate = scheduledResource.Trigger.Trigger.StartBoundary;
                             scheduledResource.OldName = scheduledResource.Name;

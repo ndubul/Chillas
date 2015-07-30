@@ -116,7 +116,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <ContentControl Grid.Column="1">
+                <ContentControl Grid.Column="1" Visibility="{Binding SelectedTask, Converter={StaticResource NullToVisibilityConverterNullIsCollapsed}}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50*" />
