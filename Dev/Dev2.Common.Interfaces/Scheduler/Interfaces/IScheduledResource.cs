@@ -9,7 +9,9 @@
 */
 
 using System;
+using System.Windows.Input;
 using Dev2.Common.Interfaces.Data.TO;
+using Microsoft.Practices.Prism.Commands;
 
 namespace Dev2.Common.Interfaces.Scheduler.Interfaces
 {
@@ -83,5 +85,15 @@ namespace Dev2.Common.Interfaces.Scheduler.Interfaces
         IErrorResultTO Errors { get; set; }
 
         bool IsNew { get; set; }
+
+        bool IsNewItem { get; set; }
+
     }
+
+    public interface INewScheduledResource
+    {
+        ICommand NewCommand { get; set; }
+    }
+
+   
 }
