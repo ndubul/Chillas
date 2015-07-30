@@ -455,11 +455,11 @@
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontStretch" Value="Normal" />
-        <Setter Property="FontSize" Value="{StaticResource FontSize-Larger}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="MinWidth" Value="0" />
-        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="Height" Value="20" />
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -481,7 +481,7 @@
                                 <ContentPresenter.Resources>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="FontStyle" Value="Normal" />
-                                        <Setter Property="FontSize" Value="{StaticResource FontSize-Larger}" />
+                                        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
                                         <Setter Property="FontWeight" Value="SemiBold" />
                                     </Style>
                                 </ContentPresenter.Resources>
@@ -513,9 +513,12 @@
                         <DockPanel>
                             <ToggleButton x:Name="HeaderSite"
                                           Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                           Style="{StaticResource ExpanderHeaderStyle}" />
-                            <!--  IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" This is use to re-enable expansion on the header  -->
                             <ContentPresenter x:Name="ExpandSite"
+                                              Visibility="Collapsed"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               DockPanel.Dock="Bottom"
