@@ -13,7 +13,7 @@ using Warewolf.Core;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public sealed class ManageNewServerViewModel : SourceBaseImpl<IServerSource>, IManageNewServerViewModel, IDockViewModel
+    public sealed class ManageNewServerViewModel : SourceBaseImpl<IServerSource>, IManageNewServerViewModel
     {
         string _userName;
         string _password;
@@ -30,11 +30,8 @@ namespace Warewolf.Studio.ViewModels
 
         string _headerText;
         IServerSource _serverSource;
-        string[] _protocols;
         string _protocol;
-        ObservableCollection<string> _ports;
-        string _selectedPort; 
-        private bool _isActive;
+        string _selectedPort;
         // ReSharper disable TooManyDependencies
         public ManageNewServerViewModel(IServerSource newServerSource,
             IStudioUpdateManager updateManager, IRequestServiceNameViewModel requestServiceNameViewModel,
@@ -53,7 +50,7 @@ namespace Warewolf.Studio.ViewModels
             OriginationSource = originationSource;
 
             ServerSource = newServerSource;
-            _headerText = String.IsNullOrEmpty(newServerSource.Name) ? "New Server Source" : SetToEdit(newServerSource);
+            Header = String.IsNullOrEmpty(newServerSource.Name) ? "New Server Source" : SetToEdit(newServerSource);
 
             IsValid = false;
             Address = newServerSource.Address;
@@ -475,28 +472,8 @@ namespace Warewolf.Studio.ViewModels
                 }
             }
         }
-        public string[] Protocols
-        {
-            get
-            {
-                return _protocols;
-            }
-            set
-            {
-                _protocols = value;
-            }
-        }
-        public ObservableCollection<string> Ports
-        {
-            get
-            {
-                return _ports;
-            }
-            set
-            {
-                _ports = value;
-            }
-        }
+        public string[] Protocols { get; set; }
+        public ObservableCollection<string> Ports { get; set; }
         public string SelectedPort
         {
             get
@@ -514,29 +491,6 @@ namespace Warewolf.Studio.ViewModels
                 }
                
             }
-        }
-
-        public bool IsActive
-        {
-            get { return _isActive; }
-            set { _isActive = value; }
-        }
-
-        public event EventHandler IsActiveChanged;
-
-        public string Header
-        {
-            get { return HeaderText; }
-            set
-            {
-                HeaderText = value;
-                OnPropertyChanged(()=>Header);
-            }
-        }
-
-        public ResourceType? Image
-        {
-            get { return ResourceType.ServerSource; }
         }
 
         public string AddressToolTip

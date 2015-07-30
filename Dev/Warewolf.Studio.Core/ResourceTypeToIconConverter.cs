@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using Dev2.Common.Interfaces.Data;
+using FontAwesome.WPF;
 
 namespace Warewolf.Studio.Core
 {
@@ -45,9 +46,10 @@ namespace Warewolf.Studio.Core
                     case ResourceType.WebSource:
                         return dict[CustomMenuIcons.WebSource] as DrawingImage;
                     case ResourceType.ServerSource:
+                    case ResourceType.Server:
                         return dict[CustomMenuIcons.ServerSource] as DrawingImage;
                     case ResourceType.StartPage:
-                        return dict[CustomMenuIcons.StartPage];
+                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.Home, Brushes.Transparent);
                     default:
                         return dict[CustomMenuIcons.Folder] as DrawingImage;
                 }

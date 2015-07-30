@@ -158,5 +158,13 @@ namespace Dev2.Studio.ViewModels.Help
             HelpViewWrapper.WebBrowser.Dispose();
             HelpViewDisposed = true;
         }
+
+        public Common.Interfaces.Data.ResourceType ResourceType
+        {
+            get
+            {
+                return Common.Interfaces.Data.ResourceType.StartPage;
+            }
+        }
     }
 }

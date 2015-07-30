@@ -33,7 +33,7 @@
                     VerticalAlignment="Top"
                     Command="{Binding ShowHelpToggleCommand}"
                     ToolTip="Close Help"
-                    Style="{StaticResource ButtonStyle}"
+                    Style="{StaticResource CloseButtonStyle}"
                     AutomationProperties.AutomationId="UI_CloseHelp_AutoID" />
             <TextBlock Grid.Row="1"
                        Margin="0,5,0,0"

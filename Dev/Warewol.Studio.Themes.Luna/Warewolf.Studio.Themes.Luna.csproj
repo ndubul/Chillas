@@ -790,6 +790,10 @@
     <Resource Include="Images\Warewolf-logo-transparent.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dev2.Activities.Designers\Dev2.Activities.Designers.csproj">
+      <Project>{b95b724a-b052-4e18-98a4-88072c8df2c2}</Project>
+      <Name>Dev2.Activities.Designers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dev2.CustomControls\Dev2.CustomControls.csproj">
       <Project>{F5162BDB-D3DB-480E-92E4-FD732904A247}</Project>
       <Name>Dev2.CustomControls</Name>

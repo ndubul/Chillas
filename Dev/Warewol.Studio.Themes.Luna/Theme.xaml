@@ -47,6 +47,8 @@
         <ResourceDictionary Source="Elements/xamComboEditor.xaml"/>
         <ResourceDictionary Source="Elements/xamDialogWindow.xaml"/>
         <ResourceDictionary Source="Elements/DockManager/MainDockManager.xaml"/>
-        
+        <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityDesignerStyles.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityStyles.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

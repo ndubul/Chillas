@@ -193,6 +193,13 @@ namespace Dev2.Runtime.Hosting
             return serverExplorerItem;
         }
 
+        public void RemoveItemFromCollection(IExplorerItem serverExplorerItem)
+        {
+            IExplorerItem parent = FindParent(serverExplorerItem.ResourcePath, _root);
+            parent.Children.Remove(serverExplorerItem);
+
+        }
+
         IExplorerItem FindParent(string resourcePath, IExplorerItem rooItem)
         {
             if (resourcePath.Contains("\\"))
@@ -231,7 +238,12 @@ namespace Dev2.Runtime.Hosting
             {
                 case ResourceType.Folder:
                     {
-                        return DeleteFolder(itemToDelete.ResourcePath, true, workSpaceId);
+                        var deleteResult = DeleteFolder(itemToDelete.ResourcePath, true, workSpaceId);
+                        if (deleteResult.Status == ExecStatus.Success)
+                        {
+                            RemoveItemFromCollection(itemToDelete);
+                        }
+                        return deleteResult;
                     }
                 default:
                     ResourceCatalogResult result = ResourceCatalogue.DeleteResource(workSpaceId, itemToDelete.DisplayName, itemToDelete.ResourceType.ToString());
@@ -265,6 +277,7 @@ namespace Dev2.Runtime.Hosting
                 }
 
                 Directory.Delete(DirectoryStructureFromPath(path), true);
+
                 return new ExplorerRepositoryResult(ExecStatus.Success, "");
             }
             catch (Exception err)
