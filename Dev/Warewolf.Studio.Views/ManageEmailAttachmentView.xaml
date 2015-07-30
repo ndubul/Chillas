@@ -25,7 +25,8 @@
         
         <Grid>
             <ig:XamDataTree ItemsSource="{Binding Drives}"
-                            DisplayMemberPath="Title"
+                            DisplayMemberPath="Name"
+                            IsExpandedMemberPath="IsExpanded"
                             ActiveDataItem="{Binding SelectedDrive, Mode=TwoWay}">
                 <ig:XamDataTree.GlobalNodeLayouts>
                     <ig:NodeLayout Key="Children"
@@ -40,7 +41,8 @@
                                     </Grid.ColumnDefinitions>
                                     <!-- ADD TEXT TRIMMING TO DISPLAY ECLIPSE ON VIEW WIDTH SETTING -->
                                     <CheckBox Content="{Binding Path=Data.Name}" 
-                                              IsChecked="{Binding IsChecked,Mode=TwoWay}" 
+                                              IsChecked="{Binding Path=Data.IsChecked,Mode=TwoWay}" 
+                                              Visibility="{Binding Path=Data.IsDirectory, Converter={StaticResource BoolToVisibilityConverterNegative}}"
                                               Style="{StaticResource CheckBoxXamGridStyle}">
                                         <AutomationProperties.AutomationId>
                                             <MultiBinding StringFormat="UI_CheckBox{0}_AutoID">
@@ -48,6 +50,7 @@
                                             </MultiBinding>
                                         </AutomationProperties.AutomationId>
                                     </CheckBox>
+                                    <TextBlock Text="{Binding Path=Data.Name}" Visibility="{Binding Path=Data.IsDirectory, Converter={StaticResource BoolToVisibilityConverterPositive}}"></TextBlock>
                                 </Grid>
                             </DataTemplate>
                         </ig:NodeLayout.ItemTemplate>
@@ -77,7 +80,7 @@
             </Button>
             <Button Content="Cancel"
                     Width="Auto"
-                    Command="{Binding Path=CancelCommand}" >
+                    Command="{Binding CancelCommand}" >
                 <i:Interaction.Behaviors>
                     <core:HelpSetter Text="{x:Static languages:Core.EmailAttachmentCancelCommandHelp}"
                                                          DataContext="{Binding}" />

@@ -2009,7 +2009,7 @@ namespace Dev2.Studio.ViewModels
 
             emailAttachmentView.ShowView(message.SelectedFiles.ToList());
             var emailAttachmentVm = emailAttachmentView.DataContext as EmailAttachmentVm;
-            if(emailAttachmentVm != null)
+            if(emailAttachmentVm != null && emailAttachmentVm.Result == MessageBoxResult.OK)
             {
                 message.SelectedFiles = emailAttachmentVm.GetAttachments();
             }
