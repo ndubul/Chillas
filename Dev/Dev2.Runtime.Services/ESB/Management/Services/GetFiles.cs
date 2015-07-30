@@ -22,7 +22,7 @@ namespace Dev2.Runtime.ESB.Management.Services
             Dev2Logger.Log.Info("Get Files");
             StringBuilder currentFolder;
 
-            values.TryGetValue("CurrentFolder", out currentFolder);
+            values.TryGetValue("fileListing", out currentFolder);
             if (currentFolder != null)
             {
                 var src = serializer.Deserialize(currentFolder.ToString(), typeof(IFileListing)) as IFileListing;
@@ -113,9 +113,12 @@ namespace Dev2.Runtime.ESB.Management.Services
             var childList = new List<IFileListing>();
             foreach (var directoryInfo in directories)
             {
-                var directoryItem = BuildFileListing((FileSystemInfo)directoryInfo);
-                directoryItem.IsDirectory = true;
-                childList.Add(directoryItem);
+                if (directoryInfo.Attributes != (FileAttributes.Hidden | FileAttributes.System | FileAttributes.Directory))
+                {
+                    var directoryItem = BuildFileListing((FileSystemInfo)directoryInfo);
+                    directoryItem.IsDirectory = true;
+                    childList.Add(directoryItem);
+                }
             }
             var files = directory.EnumerateFiles();
             foreach (var fileInfo in files)

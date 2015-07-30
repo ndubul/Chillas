@@ -31,6 +31,8 @@
                 <ig:XamDataTree.GlobalNodeLayouts>
                     <ig:NodeLayout Key="Children"
                                    DisplayMemberPath="Name"
+                                   IsExpandedMemberPath="IsExpanded"
+                                   IsSelectedMemberPath="IsSelected"
                                    TargetTypeName="Listing" >
                         <ig:NodeLayout.ItemTemplate>
                             <DataTemplate>
