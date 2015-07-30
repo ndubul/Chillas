@@ -956,7 +956,7 @@ You need Administrator permission.", schedulerViewModel.Errors.FetchErrors().Fir
             Assert.IsTrue(_runasapChange);
             Assert.IsTrue(_numRecordsChange);
             Assert.IsTrue(_triggerTextChange);
-            Assert.IsFalse(_historyMustChange);
+            Assert.IsTrue(_historyMustChange);
             Assert.IsTrue(_accountNameChange);
             Assert.IsTrue(_passwordChange);
             Assert.IsTrue(_errorsChange);
@@ -1366,22 +1366,22 @@ You need Administrator permission.", schedulerViewModel.Errors.FetchErrors().Fir
 
             schedulerViewModel.NewCommand.Execute(null);
             Assert.AreEqual(3, schedulerViewModel.TaskList.Count);
-            Assert.AreEqual("New Task1", schedulerViewModel.TaskList[2].Name);
-            Assert.AreEqual("New Task1", schedulerViewModel.TaskList[2].OldName);
-            Assert.IsTrue(schedulerViewModel.TaskList[2].IsDirty);
-            Assert.AreEqual(SchedulerStatus.Enabled, schedulerViewModel.TaskList[2].Status);
-            Assert.AreEqual(string.Empty, schedulerViewModel.TaskList[2].WorkflowName);
-            Assert.AreEqual(schedulerViewModel.SelectedTask, schedulerViewModel.TaskList[2]);
+            Assert.AreEqual("New Task1", schedulerViewModel.TaskList[1].Name);
+            Assert.AreEqual("New Task1", schedulerViewModel.TaskList[1].OldName);
+            Assert.IsTrue(schedulerViewModel.TaskList[1].IsDirty);
+            Assert.AreEqual(SchedulerStatus.Enabled, schedulerViewModel.TaskList[1].Status);
+            Assert.AreEqual(string.Empty, schedulerViewModel.TaskList[1].WorkflowName);
+            Assert.AreEqual(schedulerViewModel.SelectedTask, schedulerViewModel.TaskList[1]);
 
             schedulerViewModel.NewCommand.Execute(null);
             //------------Assert Results-------------------------
             Assert.AreEqual(4, schedulerViewModel.TaskList.Count);
-            Assert.AreEqual("New Task2", schedulerViewModel.TaskList[3].Name);
-            Assert.AreEqual("New Task2", schedulerViewModel.TaskList[3].OldName);
-            Assert.IsTrue(schedulerViewModel.TaskList[3].IsDirty);
-            Assert.AreEqual(SchedulerStatus.Enabled, schedulerViewModel.TaskList[3].Status);
-            Assert.AreEqual(string.Empty, schedulerViewModel.TaskList[3].WorkflowName);
-            Assert.AreEqual(schedulerViewModel.SelectedTask, schedulerViewModel.TaskList[3]);
+            Assert.AreEqual("New Task2", schedulerViewModel.TaskList[2].Name);
+            Assert.AreEqual("New Task2", schedulerViewModel.TaskList[2].OldName);
+            Assert.IsTrue(schedulerViewModel.TaskList[2].IsDirty);
+            Assert.AreEqual(SchedulerStatus.Enabled, schedulerViewModel.TaskList[2].Status);
+            Assert.AreEqual(string.Empty, schedulerViewModel.TaskList[2].WorkflowName);
+            Assert.AreEqual(schedulerViewModel.SelectedTask, schedulerViewModel.TaskList[2]);
         }
 
         [TestMethod]
