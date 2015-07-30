@@ -10,7 +10,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityStyles.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Theme.xaml"/>
+
     </ResourceDictionary.MergedDictionaries>
 
     <customControlsConverters:EmptyStringToBoolConverter x:Key="EmptyStringToBoolConverter" />
