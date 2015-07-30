@@ -69,7 +69,7 @@ Scenario: Execute cmd with negative recordset index
 
 @ignore
 #Audit
-Scenario: Execute commands 
+Scenario: Execute commands produce correct result
 	Given I have a command variable "[[drive]]" equal to "C:\"
 	Given I have these command scripts to execute in a single execution run
 	| script                        |

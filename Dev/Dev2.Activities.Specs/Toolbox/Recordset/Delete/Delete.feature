@@ -229,7 +229,7 @@ Scenario: Delete two specific recordset data.
 
 	@ignore
 	# Audit
-Scenario Outline: Delete a scalar insted of a recordset
+Scenario Outline: Ensure delete variables of different types produce desired results
 	Given I have a delete variable "<variable>" equal to "<value>"
 	And I delete a record "<variable>"
 	When the delete tool is executed

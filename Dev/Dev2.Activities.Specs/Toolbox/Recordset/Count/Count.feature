@@ -183,7 +183,7 @@ Scenario: Executing Count with two variables in result field
 
 @Ignore
 #Audit
-Scenario Outline: 
+Scenario Outline: Ensure variables of different types produce desired results
 	Given I have a recordset with this shape
 	| [[rs]]   |   |
 	| rs().row | 1 |
@@ -204,7 +204,7 @@ Examples:
 | [[rs([[int]])]], [[int]] = 1 | 1    | No    | [[result]] = 3            |
 
 
-Scenario Outline: Count a number of records in a recordset with 3 rows
+Scenario Outline: Ensure recordset result are correct
 	Given I have a recordset with this shape
 	| [[rs]]   |   |
 	| rs().row | 1 |

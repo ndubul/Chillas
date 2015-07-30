@@ -2392,7 +2392,7 @@ Scenario: Search using a negative index recordset criteria
 #--
 @ignore
 #Audit
-Scenario: Find an index of data in a recordset with Is Between numeric
+Scenario: Find an index
 	Given I have the following recordset to search for multiple criteria
 	| rs         | value |
 	| rs().field | 1     |
