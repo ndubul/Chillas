@@ -99,13 +99,12 @@
                 Grid.Row="0"  
                 LabelText="Filter"
                 x:Name="SearchTextBox"
+                ClearSearchCommand="{Binding ClearFilterCommand}"
                 Style="{StaticResource SearchTextboxStyle}"
                 Text="{Binding SearchTerm,
                                     Delay=300,
                                     UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Width="25" Grid.Column="1" Grid.Row="0"
-                    Height="25"
-                    >
+            <Button Width="25" Grid.Column="1" Grid.Row="0" Height="25" >
                 <fa:FontAwesome TextOptions.TextFormattingMode="Display" FontSize="16" Icon="Refresh" VerticalAlignment="Top" HorizontalAlignment="Center"/>
             </Button>
         </Grid>
