@@ -63,7 +63,7 @@ namespace Dev2.AppResources.Converters
                 case ResourceType.Folder:
                     return dict[CustomMenuIcons.Folder] as DrawingImage;
                 case ResourceType.OauthSource :
-                    return Application.Current.Resources["DropBoxLogoIcon"];
+                    return Application.Current.Resources["DropBoxLogo"];
                 case ResourceType.SharepointServerSource:
                     return Application.Current.Resources["AddSharepointLogo"];
                 default:

@@ -7,6 +7,7 @@ using Dev2.Activities.Debug;
 using Dev2.Common;
 using Dev2.Common.Common;
 using Dev2.Common.Interfaces.Diagnostics.Debug;
+using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Data.ServiceModel;
 using Dev2.Data.Util;
 using Dev2.DataList.Contract;
@@ -15,11 +16,15 @@ using Dev2.Runtime.Hosting;
 using Dev2.TO;
 using Microsoft.SharePoint.Client;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
+using Warewolf.Core;
 using Warewolf.Storage;
 using WarewolfParserInterop;
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace Dev2.Activities.Sharepoint
 {
+    [ToolDescriptorInfo("SharepointLogo", "Read List Item(s)", ToolType.Native, "8999E59A-38A3-43BB-A98F-6090C5C9EA1E", "Dev2.Acitivities", "1.0.0.0", "Legacy", "Sharepoint", "/Warewolf.Studio.Themes.Luna;component/Images.xaml")]
     public class SharepointReadListActivity : DsfActivityAbstract<string>
     {
 
@@ -29,7 +34,7 @@ namespace Dev2.Activities.Sharepoint
             ReadListItems = new List<SharepointReadListTo>();
             FilterCriteria = new List<SharepointSearchTo>();
             RequireAllCriteriaToMatch = true;
-            _sharepointUtils = new SharepointUtils();
+            SharepointUtils = new SharepointUtils();
         }
 
         public IList<SharepointReadListTo> ReadListItems { get; set; }
@@ -37,13 +42,7 @@ namespace Dev2.Activities.Sharepoint
         public string SharepointList { get; set; }
         public List<SharepointSearchTo> FilterCriteria { get; set; }
         public bool RequireAllCriteriaToMatch { get; set; }
-        public SharepointUtils SharepointUtils
-        {
-            get
-            {
-                return _sharepointUtils;
-            }
-        }
+        public SharepointUtils SharepointUtils { get; set; }
 
         /// <summary>
         /// When overridden runs the activity's execution logic 
@@ -79,7 +78,6 @@ namespace Dev2.Activities.Sharepoint
         }
 
         int _indexCounter = 1;
-        readonly SharepointUtils _sharepointUtils;
 
         protected override void ExecuteTool(IDSFDataObject dataObject)
         {
@@ -89,7 +87,7 @@ namespace Dev2.Activities.Sharepoint
             ErrorResultTO allErrors = new ErrorResultTO();
             try
             {
-                var sharepointReadListTos = _sharepointUtils.GetValidReadListItems(ReadListItems).ToList();
+                var sharepointReadListTos = SharepointUtils.GetValidReadListItems(ReadListItems).ToList();
                 if (sharepointReadListTos.Any())
                 {
                     var sharepointSource = ResourceCatalog.Instance.GetResource<SharepointSource>(dataObject.WorkspaceID, SharepointServerResourceId);
@@ -107,7 +105,7 @@ namespace Dev2.Activities.Sharepoint
                     var fields = sharepointHelper.LoadFieldsForList(SharepointList, false);
                     using (var ctx = sharepointHelper.GetContext())
                     {
-                        var camlQuery = _sharepointUtils.BuildCamlQuery(env, FilterCriteria, fields);
+                        var camlQuery = SharepointUtils.BuildCamlQuery(env, FilterCriteria, fields);
                         List list = ctx.Web.Lists.GetByTitle(SharepointList);
                         var listItems = list.GetItems(camlQuery);
                         ctx.Load(listItems);
@@ -238,7 +236,7 @@ namespace Dev2.Activities.Sharepoint
             if (dataObject.IsDebugMode())
             {
                 var outputIndex = 1;
-                var validItems = _sharepointUtils.GetValidReadListItems(ReadListItems).ToList();
+                var validItems = SharepointUtils.GetValidReadListItems(ReadListItems).ToList();
                 foreach (var varDebug in validItems)
                 {
                     var debugItem = new DebugItem();
@@ -253,7 +251,7 @@ namespace Dev2.Activities.Sharepoint
 
         void AddInputDebug(IExecutionEnvironment env)
         {
-            var validItems = _sharepointUtils.GetValidReadListItems(ReadListItems).ToList();
+            var validItems = SharepointUtils.GetValidReadListItems(ReadListItems).ToList();
             foreach (var varDebug in validItems)
             {
                 DebugItem debugItem = new DebugItem();

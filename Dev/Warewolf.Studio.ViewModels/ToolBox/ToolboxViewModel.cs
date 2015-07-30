@@ -7,7 +7,6 @@ using Dev2;
 using Dev2.Common.Interfaces.Toolbox;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
-using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace Warewolf.Studio.ViewModels.ToolBox
 {
@@ -15,18 +14,16 @@ namespace Warewolf.Studio.ViewModels.ToolBox
     {
         readonly IToolboxModel _localModel;
         readonly IToolboxModel _remoteModel;
-        readonly IEventAggregator _aggregator;
         ICollection<IToolDescriptorViewModel> _tools;
         bool _isDesignerFocused;
         IToolDescriptorViewModel _selectedTool;
         private string _searchTerm;
 
-        public ToolboxViewModel( IToolboxModel localModel,IToolboxModel remoteModel,IEventAggregator aggregator)
+        public ToolboxViewModel( IToolboxModel localModel,IToolboxModel remoteModel)
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object>{{"localModel",localModel},{"remoteModel",remoteModel}});
             _localModel = localModel;
             _remoteModel = remoteModel;
-            _aggregator = aggregator;
             _localModel.OnserverDisconnected += _localModel_OnserverDisconnected;
             _remoteModel.OnserverDisconnected += _remoteModel_OnserverDisconnected;
             ClearFilter();
@@ -47,7 +44,7 @@ namespace Warewolf.Studio.ViewModels.ToolBox
 
                 return _tools;
             }
-            protected set
+            private set
             {
                 _tools = value;
                 OnPropertyChanged("Tools");
@@ -128,22 +125,17 @@ namespace Warewolf.Studio.ViewModels.ToolBox
         /// <param name="searchString"></param>
         public void Filter(string searchString)
         {
-            // not sure about this warning ofr pure methods.
-            // ReSharper disable MaximumChainedReferences
             if(searchString == "")
                 ClearFilter();
-            Tools = new ObservableCollection<IToolDescriptorViewModel>( _remoteModel.GetTools()
+            Tools = new ObservableCollection<IToolDescriptorViewModel>(_remoteModel.GetTools()
                 .Where(a => a.Name.ToLower().Contains(searchString.ToLower()))
                 .Select(a => new ToolDescriptorViewModel(a, _localModel.GetTools().Contains(a))));
-            // ReSharper restore MaximumChainedReferences
         }
 
         public void ClearFilter()
         {
-            // not sure about this warning ofr pure methods.
-            // ReSharper disable MaximumChainedReferences
             Tools = new ObservableCollection<IToolDescriptorViewModel>(_remoteModel.GetTools().Select(a => new ToolDescriptorViewModel(a, _localModel.GetTools().Contains(a))));
-            // ReSharper restore MaximumChainedReferences
+            SearchTerm = "";
         }
 
         void _remoteModel_OnserverDisconnected(object sender)

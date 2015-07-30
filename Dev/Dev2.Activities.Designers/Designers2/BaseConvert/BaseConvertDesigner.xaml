@@ -14,16 +14,7 @@
    
     
     <sap:ActivityDesigner.Icon>
-        <DrawingBrush  Stretch="Uniform">
-            <DrawingBrush.Drawing>
-                <ImageDrawing ImageSource="{StaticResource ToolBaseConversion-32}">
-                    <ImageDrawing.Rect>
-                        <Rect Location="0,0"
-                              Size="16,16" />
-                    </ImageDrawing.Rect>
-                </ImageDrawing>
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
+        <Binding Source="{StaticResource Data-BaseConversion-Icon}"/>
     </sap:ActivityDesigner.Icon>
 
     <sap:ActivityDesigner.Resources>

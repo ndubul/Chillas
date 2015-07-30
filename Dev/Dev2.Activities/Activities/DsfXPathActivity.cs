@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Dev2.Activities.Debug;
 using Dev2.Common.Interfaces.Diagnostics.Debug;
+using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Data;
 using Dev2.Data.Parsers;
 using Dev2.Data.Util;
@@ -25,10 +26,12 @@ using Dev2.DataList.Contract;
 using Dev2.Diagnostics;
 using Dev2.Interfaces;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
+using Warewolf.Core;
 using Warewolf.Storage;
 
 namespace Dev2.Activities
 {
+    [ToolDescriptorInfo("Utility-Path", "XPath", ToolType.Native, "8999E59A-38A3-43BB-A98F-6090C5C9EA1E", "Dev2.Acitivities", "1.0.0.0", "Legacy", "Utility", "/Warewolf.Studio.Themes.Luna;component/Images.xaml")]
     public class DsfXPathActivity : DsfActivityAbstract<string>, ICollectionActivity
     {
         #region Fields

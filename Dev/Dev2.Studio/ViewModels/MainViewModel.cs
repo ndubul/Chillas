@@ -32,6 +32,7 @@ using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Common.Interfaces.Threading;
+using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Common.Interfaces.WebServices;
 using Dev2.ConnectionHelpers;
 using Dev2.CustomControls.Connections;
@@ -1991,6 +1992,14 @@ namespace Dev2.Studio.ViewModels
                 return _menuViewModel ?? (_menuViewModel = new MenuViewModel(this));
             }
         }
+        public IToolboxViewModel ToolboxViewModel
+        {
+            get
+            {
+                var toolboxViewModel = CustomContainer.Get<IToolboxViewModel>();
+                return toolboxViewModel;
+            }
+        }
 
         #region Implementation of IHandle<FileChooserMessage>
 
@@ -1999,8 +2008,11 @@ namespace Dev2.Studio.ViewModels
             var emailAttachmentView = new ManageEmailAttachmentView();
 
             emailAttachmentView.ShowView(message.SelectedFiles.ToList());
-            message.SelectedFiles = (emailAttachmentView.DataContext as EmailAttachmentVm).GetAttachments();
-            
+            var emailAttachmentVm = emailAttachmentView.DataContext as EmailAttachmentVm;
+            if(emailAttachmentVm != null && emailAttachmentVm.Result == MessageBoxResult.OK)
+            {
+                message.SelectedFiles = emailAttachmentVm.GetAttachments();
+            }
         }
 
         #endregion

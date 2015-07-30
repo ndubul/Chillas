@@ -1282,6 +1282,10 @@
       <Project>{F9FE2CE9-625E-4E7F-8F4C-FCE28BB59510}</Project>
       <Name>Warewolf.Studio.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warewolf.Studio.Models\Warewolf.Studio.Models.csproj">
+      <Project>{A62DA168-5BF3-4C14-B880-4AD83478E3A7}</Project>
+      <Name>Warewolf.Studio.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warewolf.Studio.Resources\Warewolf.Studio.Resources.csproj">
       <Project>{CB565C94-8833-4911-B20F-0921EE3C286C}</Project>
       <Name>Warewolf.Studio.Resources</Name>

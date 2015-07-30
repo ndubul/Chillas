@@ -11,10 +11,13 @@
 
 using System;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Dev2.AppResources.Converters;
 using Dev2.Common.Interfaces.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Warewolf.Studio.Core;
+using Warewolf.Studio.Themes.Luna;
 
 namespace Dev2.Core.Tests.AppResources.Converters
 {
@@ -28,6 +31,8 @@ namespace Dev2.Core.Tests.AppResources.Converters
                 // ReSharper disable ObjectCreationAsStatement
                 new Application();
             // ReSharper restore ObjectCreationAsStatement
+
+            SetupResourceDictionary();
         }
 
         [TestMethod]
@@ -55,6 +60,31 @@ namespace Dev2.Core.Tests.AppResources.Converters
             }
         }
 
+        public void SetupResourceDictionary()
+        {
+            new LunaTheme();
+            Application app = Application.Current ?? new Application();
+            ResourceDictionary themeDictionary = new ResourceDictionary { Source = new Uri("pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Theme.xaml", UriKind.RelativeOrAbsolute) };
+            foreach (var resourceDictionary in themeDictionary.MergedDictionaries)
+            {
+                app.Resources.MergedDictionaries.Add(resourceDictionary);
+                var resourceDictionaries = resourceDictionary.MergedDictionaries;
+                if (resourceDictionaries.Count > 0)
+                {
+                    foreach (var innerResourceDictionary in resourceDictionaries)
+                    {
+                        app.Resources.MergedDictionaries.Add(innerResourceDictionary);
+                    }
+                }
+            }
+
+            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Images.xaml", UriKind.RelativeOrAbsolute);
+            app.Resources.MergedDictionaries.Add(themeDictionary);
+            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Common/Styles.xaml", UriKind.RelativeOrAbsolute);
+            app.Resources.MergedDictionaries.Add(themeDictionary);
+
+        }
+
         [TestMethod]
         [Owner("Massimo Guerrera")]
         [TestCategory("ExplorerItemModelToIconConverter_Convert")]
@@ -62,21 +92,25 @@ namespace Dev2.Core.Tests.AppResources.Converters
         public void ExplorerItemModelToIconConverter_Convert_WithResourceTypeOfDbService_CorrectBitmapImage()
         // ReSharper restore InconsistentNaming
         {
-            Uri expected = new Uri("pack://application:,,,/Warewolf Studio;component/Images/DatabaseService-32.png");
+            const string pathname = "/Warewolf.Studio.Themes.Luna;component/Images.xaml";
+            ResourceDictionary dict = Application.LoadComponent(new Uri(pathname, System.UriKind.Relative)) as ResourceDictionary;
+
+            var drawingImage = dict[CustomMenuIcons.DbService] as DrawingImage;
+
             //------------Setup for test--------------------------
             var explorerItemModelToIconConverter = new ExplorerItemModelToIconConverter();
 
             //------------Execute Test---------------------------
             object convert = explorerItemModelToIconConverter.Convert(new object[] { ResourceType.DbService, false }, null, null, null);
-            BitmapImage bitmapImage = convert as BitmapImage;
+            DrawingImage bitmapImage = convert as DrawingImage;
             //------------Assert Results-------------------------
             if(bitmapImage != null)
             {
-                Assert.AreEqual(expected, bitmapImage.UriSource);
+                Assert.AreEqual(drawingImage, bitmapImage);
             }
             else
             {
-                Assert.Fail("No BitmapImage was returned.");
+                Assert.Fail("No Image was returned.");
             }
         }
 

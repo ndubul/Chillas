@@ -589,7 +589,7 @@
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="MinHeight" Value="30" />
         <Setter Property="Padding" Value="6,2" />
-        <Setter Property="Margin" Value="0" />
+        <Setter Property="Margin" Value="0,1,1,0" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderThickness" Value="1" />
@@ -662,9 +662,8 @@
                                 <VisualState x:Name="Unfocused" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle x:Name="Bd" Fill="{StaticResource WarewolfSubHeaderGreyBrush}" />
+                        <Rectangle x:Name="Bd" Stroke="{StaticResource WareWolfButtonBrush}" Fill="{StaticResource WarewolfLineGreyBrush}" />
                         <Rectangle x:Name="BgSelected"
-                                   Fill="{StaticResource WareWolfOrangeBrush}"
                                    Stroke="{StaticResource WareWolfOrangeBrush}"
                                    Visibility="Collapsed" />
                         <ContentControl x:Name="ContentControl"

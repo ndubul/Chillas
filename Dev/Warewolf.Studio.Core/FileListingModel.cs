@@ -20,10 +20,13 @@ namespace Warewolf.Studio.Core
         private int _currentProgress;
         bool _isSelected;
         bool _isExpanderVisible;
+        bool _isChecked;
+        Action _selectedAction;
 
-        public FileListingModel(IEmailAttachmentModel model, IFileListing file)
+        public FileListingModel(IEmailAttachmentModel model, IFileListing file,Action selected)
         {
             _model = model;
+            _selectedAction = selected;
             if (file != null)
             {
                 Name = file.Name;
@@ -32,7 +35,7 @@ namespace Warewolf.Studio.Core
                 {
                     Children =
                         new AsyncObservableCollection<IFileListingModel>(
-                            file.Children.Select(input => new FileListingModel(_model, input)));
+                            file.Children.Select(input => new FileListingModel(_model, input,selected)));
                 }
                 IsDirectory = file.IsDirectory;
                 IsExpanderVisible = IsDirectory;
@@ -149,7 +152,7 @@ namespace Warewolf.Studio.Core
                     {
                         Children =
                             new AsyncObservableCollection<IFileListingModel>(
-                                dllListings.Select(input => new FileListingModel(_model, input))
+                                dllListings.Select(input => new FileListingModel(_model, input,_selectedAction))
                                     .ToList());
                     }
                     IsExpanderVisible = Children != null && Children.Count > 0;
@@ -247,7 +250,7 @@ namespace Warewolf.Studio.Core
         #endregion
 
         public List<string> FilterSelected(List<string> acc)
-        {   if(IsSelected)
+        {   if(IsChecked)
                     acc.Add(this.FullName);
             if(Children!=null)
             {
@@ -258,6 +261,18 @@ namespace Warewolf.Studio.Core
                 }
             }
             return acc;
+        }
+
+        public bool IsChecked { get
+        {
+            return _isChecked;
+        }
+            set
+            {
+                _isChecked = value;
+                OnPropertyChanged(()=>IsChecked);
+                _selectedAction();
+            }
         }
     }
 }
