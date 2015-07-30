@@ -74,14 +74,15 @@
                 </Grid.ColumnDefinitions>
 
                 <ListBox Grid.Column="0" Style="{StaticResource ListBoxStyle}" BorderThickness="1,0,1,1"
-                         ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}">
+                         ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" Name="schedules">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding IsNewItem,Converter={StaticResource BoolToVisibilityConverterNegative}}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="15*"/>
-                                        <ColumnDefinition Width="85*"/>
+                                        <ColumnDefinition Width="70*"/>
+                                        <ColumnDefinition Width="15*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -90,6 +91,7 @@
                                     <CheckBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center" Style="{StaticResource CheckBoxRoundedStyle}" IsChecked="{Binding Status, Converter={StaticResource SchedulerStatusToCheckedConverter}}"></CheckBox>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontSize="12" Margin="0,0,0,-4" FontWeight="Bold" ></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding NextRunDate}" FontSize="11" Margin="0,-4,0,0" ></TextBlock>
+                                    <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Stretch"  Content="Delete" Command="{Binding ElementName=schedules, Path=DataContext.DeleteCommand }" ></Button>
                                 </Grid>
                                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding IsNewItem,Converter={StaticResource BoolToVisibilityConverterPositive}}" >
                                     <Button Style="{StaticResource ButtonTransparentStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding NewCommand}">
