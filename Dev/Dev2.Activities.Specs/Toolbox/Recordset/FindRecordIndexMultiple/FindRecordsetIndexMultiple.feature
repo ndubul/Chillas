@@ -2390,7 +2390,29 @@ Scenario: Search using a negative index recordset criteria
 	|             | [[rs(2).row]] = User     | 1 | Not XML | [[my(-1).set]] = |  |     | NO                          | NO                             |
 
 #--
-
+@ignore
+#Audit
+Scenario: Find an index of data in a recordset with Is Between numeric
+	Given I have the following recordset to search for multiple criteria
+	| rs         | value |
+	| rs().field | 1     |
+	| rs().field | 15    |
+	| rs().field | 20    |
+	| rs().field | 34    |
+	And field to search is "[[rs().field]]"	
+	And  is between search the recordset with type "Is Between" and criteria is "16" and "33"
+	When the find records index multiple tool is executed
+	Then the find records index multiple result should be 3
+	And the execution has "NO" error
+	And the debug inputs as
+	| #           |                      | # |            |  |    | And | Require All Fields To Match | Require All Matches To Be True |
+	| In Field(s) | [[rs(1).field]] = 1  |   |            |  |    |     |                             |                                |
+	|             | [[rs(2).field]] = 15 |   |            |  |    |     |                             |                                |
+	|             | [[rs(3).field]] = 20 |   |            |  |    |     |                             |                                |
+	|             | [[rs(4).field]] = 34 | 1 | Is Between |  | 16 | 33  | NO                          | NO                             |
+	And the debug output as
+	|                 |
+	| [[result]] = 3 |
 
 
 

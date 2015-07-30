@@ -227,3 +227,23 @@ Scenario: Delete two specific recordset data.
 	| [[result]] = Failure  |
 
 
+	@ignore
+	# Audit
+Scenario Outline: Delete a scalar insted of a recordset
+	Given I have a delete variable "<variable>" equal to "<value>"
+	And I delete a record "<variable>"
+	When the delete tool is executed
+	Then the delete result should be "<Message>"
+	And the execution has "<Error>" error
+	Examples: 
+	| variable | value | Error | Message                        |
+	| ""       | ""    | An    | Only recordsets can be deleted |
+	| 99       | 99    | An    | Only recordsets can be deleted |
+	| [[q]]    |       | An    | Only recordsets can be deleted |
+	| Test     | Test  | An    | Only recordsets can be deleted |
+
+	And the debug inputs as  	
+	| Records |	
+	And the debug output as  
+	|                      |
+	| [[result]] = Failure |

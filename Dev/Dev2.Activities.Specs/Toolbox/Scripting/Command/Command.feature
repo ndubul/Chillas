@@ -67,4 +67,21 @@ Scenario: Execute cmd with negative recordset index
 	|               |
 	| [[result]] = |
 
-
+@ignore
+#Audit
+Scenario: Execute commands 
+	Given I have a command variable "[[drive]]" equal to "C:\"
+	Given I have these command scripts to execute in a single execution run
+	| script                        |
+	| @echo off                     |
+	| REM Testing multiple commands |
+	| dir [[drive]]                   |
+	When the command tool is executed
+	Then the result of the command tool will be "Volume in drive C has no label"
+	And the execution has "NO" error
+	And the debug inputs as  
+	| Command         |
+	| String = String |  
+	And the debug output as 
+	|                      |
+	| [[result]] = String |
