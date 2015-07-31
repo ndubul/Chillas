@@ -1326,24 +1326,25 @@ namespace Dev2.Studio.ViewModels
 
         void SaveAll(object obj)
         {
-            foreach(var workSurfaceContextViewModel in Items)
+            for(int index = Items.Count-1; index >= 0; index--)
             {
-               ActivateItem(workSurfaceContextViewModel);
+                var workSurfaceContextViewModel = Items[index];
+                ActivateItem(workSurfaceContextViewModel);
                 var workSurfaceContext = workSurfaceContextViewModel.WorkSurfaceKey.WorkSurfaceContext;
-                if (workSurfaceContext == WorkSurfaceContext.Workflow)
+                if(workSurfaceContext == WorkSurfaceContext.Workflow)
                 {
-                    if (workSurfaceContextViewModel.CanSave())
+                    if(workSurfaceContextViewModel.CanSave())
                     {
-                        workSurfaceContextViewModel.SaveCommand.Execute(null);
+                        workSurfaceContextViewModel.Save();                        
                     }
                 }
                 else
                 {
                     var vm = workSurfaceContextViewModel.WorkSurfaceViewModel;
                     var viewModel = vm as IStudioTab;
-                    if (viewModel != null)
+                    if(viewModel != null)
                     {
-                        viewModel.DoDeactivate();
+                        viewModel.DoDeactivate();                        
                     }
                 }
             }
