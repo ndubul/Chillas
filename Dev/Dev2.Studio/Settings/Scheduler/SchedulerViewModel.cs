@@ -697,8 +697,10 @@ namespace Dev2.Settings.Scheduler
                 return _deleteCommand ??
                        (_deleteCommand = new DelegateCommand(param =>
                        {
-                           if (param != null)
+                           var taskToBeDeleted = param as IScheduledResource;
+                           if (taskToBeDeleted != null)
                            {
+                               SelectedTask = taskToBeDeleted;
                                DeleteTask();
                            }
                           
@@ -819,10 +821,7 @@ You need Administrator permission.");
 
         public void CreateNewTask()
         {
-            if(CurrentEnvironment != null)
-            {
-                Dev2Logger.Log.Info(String.Format("Delete Schedule Environment: {0} ",CurrentEnvironment.Name));
-            }
+
             var dev2DailyTrigger = new Dev2DailyTrigger(new TaskServiceConvertorFactory(), new DailyTrigger());
             var scheduleTrigger = _schedulerFactory.CreateTrigger(TaskState.Ready, dev2DailyTrigger);
             ScheduledResource scheduledResource = new ScheduledResource(NewTaskName + _newTaskCounter, SchedulerStatus.Enabled, scheduleTrigger.Trigger.Instance.StartBoundary, scheduleTrigger, string.Empty) { IsDirty = true };
@@ -1037,7 +1036,11 @@ You need Administrator permission.";
         {
             get
             {
-                return SelectedTask != null && SelectedTask.IsDirty;
+                if (TaskList == null || TaskList.Count == 0)
+                {
+                    return false;
+                }
+                return TaskList.Any(resource => resource.IsDirty);
             }
         }
         #region Public Methods
