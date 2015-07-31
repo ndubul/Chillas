@@ -16,7 +16,7 @@ namespace Warewolf.Studio.ViewModels
 	public class EnvironmentViewModel : BindableBase, IEnvironmentViewModel
     {
         //readonly IShellViewModel _shellViewModel;
-        ICollection<IExplorerItemViewModel> _children;
+        ObservableCollection<IExplorerItemViewModel> _children;
         bool _isConnecting;
         bool _isConnected;
         bool _isServerIconVisible;
@@ -118,7 +118,7 @@ namespace Warewolf.Studio.ViewModels
                };
                 child.IsSelected = true;
                 child.IsRenaming = true;
-               _children.Add(child);
+               _children.Insert(0,child);
                OnPropertyChanged(() => Children);
                
             
@@ -236,7 +236,7 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _children = value;
+                _children = new ObservableCollection<IExplorerItemViewModel>( value);
                 OnPropertyChanged(() => Children);
             }
         }

@@ -373,7 +373,17 @@ namespace Warewolf.Studio.ViewModels
                     {
                         if (_explorerRepository.Rename(this, NewName(newName)))
                         {
+                            if(!ResourcePath.Contains("\\"))
+                            {
+                                ResourcePath = ResourcePath.Replace(_resourceName, newName);
+                            }
+                            else
+                            {
+                                ResourcePath = ResourcePath.Substring(0, ResourcePath.LastIndexOf("\\") + 1)+newName;
+                            }
+                            
                             _resourceName = newName;
+                           
                         }
                     }
                     if (!IsRenaming)

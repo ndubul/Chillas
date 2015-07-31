@@ -115,15 +115,15 @@
                         ActiveDataItem="{Binding SelectedItem, Mode=TwoWay}"
                         IsSelectedMemberPath="IsSelected"
                         DisplayMemberPath="DisplayName"
-                        IsDraggable="True"
-                        IsDropTarget="True"
+                        IsDraggable="False"
+                        IsDropTarget="False"
                         InitializeNode="ExplorerTree_OnInitializeNode"
                         SelectedDataItems="{Binding SelectedDataItems}"
                         ItemsSource="{Binding Environments}"
                         NodeDragDrop="ExplorerTree_OnNodeDragDrop"                            
                         NodeLineVisibility="Hidden" >                
                 <ig:DragDropManager.DragSource>
-                    <ig:DragSource IsDraggable="True" DragChannels="ExplorerChannel" >
+                    <ig:DragSource IsDraggable="False" DragChannels="ExplorerChannel" >
                     </ig:DragSource>
                 </ig:DragDropManager.DragSource>
                 <ig:XamDataTree.EditingSettings>
@@ -359,6 +359,7 @@
                     </ig:NodeLayout>
 
                     <ig:NodeLayout Key="Children"
+                                   
                                    DisplayMemberPath="ResourceName"
                                    IsExpandedMemberPath="IsExpanded"
                                    TargetTypeName="IExplorerItemViewModel" 

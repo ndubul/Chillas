@@ -33,6 +33,19 @@ namespace Dev2.Runtime.Hosting
         readonly IFile _file;
         public static IExplorerServerResourceRepository Instance { get; private set; }
         private IExplorerItem _root;
+        bool _isDirty;
+        public bool IsDirty
+        {
+            get
+            {
+                return _isDirty;
+            }
+            private set
+            {
+                _isDirty = value;
+            }
+        }
+
         static ServerExplorerRepository()
         {
             Instance = new ServerExplorerRepository
@@ -43,6 +56,7 @@ namespace Dev2.Runtime.Hosting
                     VersionRepository = new ServerVersionRepository(new VersionStrategy(), ResourceCatalog.Instance, new DirectoryWrapper(), EnvironmentVariables.GetWorkspacePath(GlobalConstants.ServerWorkspaceID), new FileWrapper())
                     
                 };
+
         }
 
 
@@ -62,6 +76,8 @@ namespace Dev2.Runtime.Hosting
             ResourceCatalogue = resourceCatalog;
             ExplorerItemFactory = explorerItemFactory;
             Directory = directory;
+
+            IsDirty = false;
         }
 
         protected IExplorerItemFactory ExplorerItemFactory { get; private set; }
@@ -72,7 +88,10 @@ namespace Dev2.Runtime.Hosting
 
         public IExplorerItem Load(Guid workSpaceId)
         {
-            return _root ?? (_root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId));
+            if(!IsDirty)
+                return _root ?? (_root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId));
+            _root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId);
+            return _root;
         }
         public IExplorerItem Reload(Guid workSpaceId)
         {
@@ -142,6 +161,7 @@ namespace Dev2.Runtime.Hosting
                 {
                     Directory.Move(DirectoryStructureFromPath(path), DirectoryStructureFromPath(newPath));
                     MoveVersionFolder(path, newPath);
+                    UpdateFolderName(path, newPath);
                     //Reload(workSpaceId);
                     return new ExplorerRepositoryResult(ExecStatus.Success, "");
                 }
@@ -152,6 +172,26 @@ namespace Dev2.Runtime.Hosting
             {
                 return new ExplorerRepositoryResult(ExecStatus.AccessViolation, err.Message);
             }
+        }
+
+        void UpdateFolderName(string path, string newPath)
+        {
+            var parent = FindParent(path, _root);
+            var toRename = parent.Children.FirstOrDefault(a => a.DisplayName == GetNameFromPath(path));
+            if(toRename!= null)
+            {
+                toRename.DisplayName = GetNameFromPath(newPath);
+                toRename.ResourcePath = newPath;
+            }
+            else
+                IsDirty = true;
+        }
+
+        string GetNameFromPath(string path)
+        {
+            if (path.Contains("\\"))
+                return path.Substring(path.LastIndexOf("\\", StringComparison.Ordinal) + 1);
+            return path;
         }
 
         void MoveVersionFolder(string path, string newPath)
