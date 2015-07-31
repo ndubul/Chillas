@@ -127,8 +127,8 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50*" />
-                            <RowDefinition Height="50*" />
                             <RowDefinition Height="30" />
+                            <RowDefinition Height="50*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -314,10 +314,10 @@
                             </Grid>
 
                             <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="{StaticResource ControlBorderTop}">
-                                <TextBlock Text="Run as the following user account " FontSize="16" />
+                                <TextBlock Text="Run as the following user account " FontWeight="Bold"/>
                             </StackPanel>
 
-                            <Grid Grid.Row="7" Margin="{StaticResource ControlBorderTop}">
+                            <Grid Grid.Row="7">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -386,7 +386,10 @@
 
                         </Grid>
 
-                        <Grid Grid.Row="1" Grid.Column="0" Margin="{StaticResource ElementBorderLeft}">
+                        <Button Grid.Row="1" Width="80" HorizontalAlignment="Right" Content="Save" Command="{Binding SaveCommand}"
+                                Margin="{StaticResource ControlBorderBottom}"></Button>
+                        
+                        <Grid Grid.Row="2" Grid.Column="0" Margin="{StaticResource ElementBorderLeft}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
@@ -519,7 +522,6 @@
                             </DataGrid>
                         </Grid>
                         
-                        <Button Grid.Row="2" Width="80" HorizontalAlignment="Right" Content="Save" Command="{Binding SaveCommand}"></Button>
                     </Grid>
                 </ContentControl>
             </Grid>
