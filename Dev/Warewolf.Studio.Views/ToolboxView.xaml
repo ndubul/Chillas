@@ -23,7 +23,11 @@
         <Cursor x:Key="Grab"  >Grab.cur</Cursor>
         <Cursor x:Key="Grabbing"  >Grabbing.cur</Cursor>
         <DataTemplate x:Key="ToolDataTemplate" DataType="toolBox:ToolDescriptorViewModel">
-            <Grid MouseMove="UIElement_OnMouseMove">
+            <Grid MouseMove="UIElement_OnMouseMove" 
+                  Cursor="Hand" 
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch"
+                  Background="Transparent" AllowDrop="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="24" />
                     <RowDefinition Height="30" />
