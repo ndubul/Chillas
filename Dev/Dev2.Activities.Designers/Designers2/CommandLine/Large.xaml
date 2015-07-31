@@ -23,11 +23,6 @@
                                d:DesignWidth="230"
                                d:DataContext="{d:DesignInstance local:CommandLineDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-    
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -36,12 +31,12 @@
                                      IsClosedAfter="True"
                                      Style="{StaticResource ActivityDesignerButtonStyle}" />
     </core:ActivityDesignerTemplate.RightButtons>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
-       </Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -49,10 +44,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="File or Folder" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="File or Folder" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="0"
                                 Grid.Row="0" 
@@ -61,9 +53,9 @@
                                 VerticalAlignment="Stretch"
                                 VerticalContentAlignment="Top"
                                 AllowMultilinePaste="True"
-                                                AcceptsReturn="True"
-                                                AllowUserInsertLine="True"
-                                                MaxHeight="152"
+                                AcceptsReturn="True"
+                                AllowUserInsertLine="True"
+                                MaxHeight="152"
                                 TextWrapping="Wrap"
                                 MinHeight="53"
                                 FilterType="All" 
@@ -75,11 +67,11 @@
                                 attachedProperties2:WizardEngineAttachedProperties.DontOpenWizard="True"
                                 attachedProperties:FocusSetter.IsFocused="{Binding IsCommandFileNameFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ui:IntellisenseTextBox.IntellisenseProvider>
-                    <interfaceImplementors:CompositeIntellisenseProvider>
-                        <interfaceImplementors:DefaultIntellisenseProvider />
-                        <provider:FileSystemIntellisenseProvider />
-                    </interfaceImplementors:CompositeIntellisenseProvider>
-                </ui:IntellisenseTextBox.IntellisenseProvider>
+                <interfaceImplementors:CompositeIntellisenseProvider>
+                    <interfaceImplementors:DefaultIntellisenseProvider />
+                    <provider:FileSystemIntellisenseProvider />
+                </interfaceImplementors:CompositeIntellisenseProvider>
+            </ui:IntellisenseTextBox.IntellisenseProvider>
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.CMDLineHelpCMD}"
                                  DataContext="{Binding}" />
@@ -90,10 +82,7 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Priority" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Priority" Margin="{StaticResource ControlBorderTop}" />
         <ComboBox Grid.Column="1"
                   Grid.Row="1" 
                   Style="{StaticResource ActivityMapppingComboBoxStyle}"
@@ -101,6 +90,7 @@
                   ItemsSource="{Binding CommandPriorities}" 
                   DisplayMemberPath="Value"
                   SelectedValuePath="Key"
+                  Margin="{StaticResource ControlBorderTop}"
                   SelectedValue="{Binding Path=ModelItem.CommandPriority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"            
                   ToolTip="{x:Static help:HelpTextResources.CMDLineToolTipPrioritytype}"
                   AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_CmdPriority_AutoID}">
@@ -110,10 +100,7 @@
             </i:Interaction.Behaviors>
         </ComboBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Result" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="2"
                                 DefaultText="[[Result]]" 
@@ -121,6 +108,7 @@
                                 Text="{Binding Path=ModelItem.CommandResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                 ToolTip="{x:Static help:HelpTextResources.CMDLineToolTipResult}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
+                                Margin="{StaticResource ControlBorderTop}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Resulttxt_AutoID}">
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.CMDLineHelpResult}"
@@ -131,8 +119,7 @@
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
-        
-        
+
         <errors:OnError Grid.Column="0"
                         Grid.Row="3"
                         Grid.ColumnSpan="2"/>

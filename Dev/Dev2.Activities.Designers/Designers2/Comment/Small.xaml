@@ -17,25 +17,21 @@
                                d:DesignWidth="250"
                                d:DataContext="{d:DesignInstance local:CommentDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
     <ui:IntellisenseTextBox x:Name="InitialFocusElement"
-             Text="{Binding Path=ModelItem.Text, UpdateSourceTrigger=PropertyChanged}"
-             ScrollViewer.VerticalScrollBarVisibility="Auto"
+                            Text="{Binding Path=ModelItem.Text, UpdateSourceTrigger=PropertyChanged}"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"
                             AllowMultilinePaste="True"
-                                                AcceptsReturn="True"
-                                                AllowUserInsertLine="True"
-             MaxWidth="500px"
-             MinHeight="30px"
-             MinWidth="18px"
-             Height="Auto"
-             Margin="3"
-             TextWrapping="Wrap"
-             VerticalContentAlignment="Stretch"
-             ToolTip="{x:Static help:HelpTextResources.CommentToolTipComment}"
-             attachedProperties2:WizardEngineAttachedProperties.DontOpenWizard="True">
+                            AcceptsReturn="True"
+                            AllowUserInsertLine="True"
+                            MaxWidth="500px"
+                            MinHeight="30px"
+                            MinWidth="18px"
+                            MaxHeight="60"
+                            Height="Auto"
+                            TextWrapping="Wrap"
+                            VerticalContentAlignment="Stretch"
+                            ToolTip="{x:Static help:HelpTextResources.CommentToolTipComment}"
+                            attachedProperties2:WizardEngineAttachedProperties.DontOpenWizard="True">
         <i:Interaction.Behaviors>
             <help:HelpSetter Text="{x:Static help:HelpTextResources.CommentHelpComment}"
                              DataContext="{Binding}" />

@@ -19,11 +19,6 @@
                                d:DesignWidth="230"
                                d:DataContext="{d:DesignInstance local:CommandLineDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -34,10 +29,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="File or Folder" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="File or Folder" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="0"
                                 Grid.Row="0" 
@@ -46,9 +38,9 @@
                                 VerticalContentAlignment="Top"
                                 VerticalAlignment="Stretch"
                                 AllowMultilinePaste="True"
-                                                AcceptsReturn="True"
-                                                AllowUserInsertLine="True"
-                                                MaxHeight="53"
+                                AcceptsReturn="True"
+                                AllowUserInsertLine="True"
+                                MaxHeight="53"
                                 TextWrapping="Wrap"
                                 Height="53"
                                 MinHeight="53"
@@ -59,11 +51,11 @@
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Cmdtxt_AutoID}"
                                 attachedProperties2:WizardEngineAttachedProperties.DontOpenWizard="True">
             <ui:IntellisenseTextBox.IntellisenseProvider>
-                    <interfaceImplementors:CompositeIntellisenseProvider>
-                        <interfaceImplementors:DefaultIntellisenseProvider />
-                        <provider:FileSystemIntellisenseProvider />
-                    </interfaceImplementors:CompositeIntellisenseProvider>
-                </ui:IntellisenseTextBox.IntellisenseProvider>
+                <interfaceImplementors:CompositeIntellisenseProvider>
+                    <interfaceImplementors:DefaultIntellisenseProvider />
+                    <provider:FileSystemIntellisenseProvider />
+                </interfaceImplementors:CompositeIntellisenseProvider>
+            </ui:IntellisenseTextBox.IntellisenseProvider>
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.CMDLineHelpCMD}"
                                  DataContext="{Binding}" />
@@ -74,14 +66,12 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Result" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="1"
                                 DefaultText="[[Result]]" 
                                 WrapInBrackets="True" 
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding Path=ModelItem.CommandResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                 ToolTip="{x:Static help:HelpTextResources.CMDLineToolTipResult}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"

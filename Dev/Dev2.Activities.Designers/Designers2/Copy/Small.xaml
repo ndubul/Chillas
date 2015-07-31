@@ -18,11 +18,6 @@
                                d:DesignWidth="200"
                                d:DataContext="{d:DesignInstance local:CopyDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -34,10 +29,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="{Binding InputPathLabel, Mode=OneWay}" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding InputPathLabel, Mode=OneWay}" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="1"
                                 Grid.Row="0"
@@ -51,7 +43,7 @@
             <ui:IntellisenseTextBox.IntellisenseProvider>
                 <interfaceImplementors:CompositeIntellisenseProvider>
                     <interfaceImplementors:DefaultIntellisenseProvider />
-                     <provider:FileSystemIntellisenseProvider />
+                    <provider:FileSystemIntellisenseProvider />
                 </interfaceImplementors:CompositeIntellisenseProvider>
             </ui:IntellisenseTextBox.IntellisenseProvider>
             <i:Interaction.Behaviors>
@@ -64,23 +56,21 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="{Binding OutputPathLabel, Mode=OneWay}" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding OutputPathLabel, Mode=OneWay}" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox  Grid.Column="1"
                                  Grid.Row="1"
                                  DefaultText="[[CopyToPath]]"
                                  FilterType="All" 
                                  WrapInBrackets="False" 
+                                 Margin="{StaticResource ControlBorderTop}"
                                  Text="{Binding Path=ModelItem.OutputPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  ToolTip="{x:Static help:HelpTextResources.CopyToolTipDestination}"
                                  Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                  AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Destinationtxt_AutoID}">
-             <ui:IntellisenseTextBox.IntellisenseProvider>
+            <ui:IntellisenseTextBox.IntellisenseProvider>
                 <interfaceImplementors:CompositeIntellisenseProvider>
                     <interfaceImplementors:DefaultIntellisenseProvider />
-                     <provider:FileSystemIntellisenseProvider />
+                    <provider:FileSystemIntellisenseProvider />
                 </interfaceImplementors:CompositeIntellisenseProvider>
             </ui:IntellisenseTextBox.IntellisenseProvider>
             <i:Interaction.Behaviors>
@@ -92,16 +82,14 @@
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
-        
-        <Label Grid.Column="0"
-               Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Result" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="2"
                                 DefaultText="[[Success]]"
                                 FilterType="All" 
                                 WrapInBrackets="True" 
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Resulttxt_AutoID}">

@@ -21,12 +21,7 @@
                                d:DesignHeight="230"
                                d:DesignWidth="230"
                                d:DataContext="{d:DesignInstance local:CreateJsonDesignerViewModel}">
-
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-<Grid>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -34,108 +29,100 @@
         <controls:Dev2DataGrid x:Name="SmallDataGrid"
                                Grid.Row="0"
                                Grid.Column="0"
-                           ItemsSource="{Binding ModelItem.JsonMappings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                           
-                           Style="{StaticResource SpacedActivityDataGridStyle}"
-                           MinHeight="56"
-                           RowStyle="{StaticResource ActivityGridRowStyle}"
-                           LoadingRow="DataGrid_LoadingRow">
-        
-        <!-- DO NOT override ItemsPanel - doing so causes column sizing issues on first drop -->
-        
-                
-        <DataGrid.Columns>
-            <DataGridTemplateColumn Width="27"                                    
-                                    IsReadOnly="True">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Label Content="{Binding ModelItem, 
+                               ItemsSource="{Binding ModelItem.JsonMappings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                           
+                               Style="{StaticResource SpacedActivityDataGridStyle}"
+                               MinHeight="56"
+                               RowStyle="{StaticResource ActivityGridRowStyle}"
+                               LoadingRow="DataGrid_LoadingRow">
+
+            <!-- DO NOT override ItemsPanel - doing so causes column sizing issues on first drop -->
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="27" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ModelItem, 
                                               NotifyOnTargetUpdated=True, 
                                               Converter={converters:RowToIndexConverter}}"/>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-            <DataGridTemplateColumn Width="*"
-                                    d:DataContext="{d:DesignInstance Type=to:JsonMappingTo}">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <ui:IntellisenseTextBox DefaultText="Key Name"
+                <DataGridTemplateColumn Width="*" d:DataContext="{d:DesignInstance Type=to:JsonMappingTo}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ui:IntellisenseTextBox DefaultText="Key Name"
                                                 Padding="3"
                                                 IsTabStop="False"
+                                                Margin="0,0,1,1"
                                                 Text="{Binding DestinationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
                                                 ToolTip="{x:Static help:HelpTextResources.CreateJSONToolTipName}">
-                            <i:Interaction.Behaviors>
-                                <help:HelpSetter Text="{x:Static help:HelpTextResources.CreateJSONHelpName}"
+                                <i:Interaction.Behaviors>
+                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.CreateJSONHelpName}"
                                                  DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
-                                <errors:ErrorsSetter Source="{Binding}"
+                                    <errors:ErrorsSetter Source="{Binding}"
                                                      SourcePropertyName="DestinationName"
                                                      SourcePropertyValue="{Binding DestinationName, UpdateSourceTrigger=PropertyChanged}"
                                                      Target="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
-                            </i:Interaction.Behaviors>
+                                </i:Interaction.Behaviors>
                                 <ui:IntellisenseTextBox.IntellisenseProvider>
                                     <interfaceImplementors:CompositeIntellisenseProvider>
                                         <provider:BlankIntellisenseProvider />
                                     </interfaceImplementors:CompositeIntellisenseProvider>
                                 </ui:IntellisenseTextBox.IntellisenseProvider>
                                 <AutomationProperties.AutomationId>
-                                <MultiBinding StringFormat="UI_{0}_Row{1}_DestinationName_AutoID">
-                                    <Binding Path="DataContext.ModelItem.AutomationID"
+                                    <MultiBinding StringFormat="UI_{0}_Row{1}_DestinationName_AutoID">
+                                        <Binding Path="DataContext.ModelItem.AutomationID"
                                              RelativeSource="{RelativeSource AncestorType=core:ActivityDesignerTemplate}" />
-                                    <Binding Path="IndexNumber" />
-                                </MultiBinding>
-                            </AutomationProperties.AutomationId>
-                        </ui:IntellisenseTextBox>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn Width="*"
-                                    d:DataContext="{d:DesignInstance Type=to:JsonMappingTo}">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                            <ui:IntellisenseTextBox 
-                                                DefaultText="[[Input]]"
-                                                AcceptsReturn="False"
-                                                AllowUserCalculateMode="False"
-                                                ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                                VerticalScrollBarVisibility="Auto"
-                                                MaxHeight="52"
-                                                Padding="3"
-                                                Text="{Binding SourceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ModelTextConverter}, ConverterParameter=True}"                                                
-                                                Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
-                                                ToolTip="{x:Static help:HelpTextResources.CreateJSONToolTipInput}">
-                            <i:Interaction.Behaviors>
-                                <help:HelpSetter Text="{x:Static help:HelpTextResources.CreateJSONHelpInput}"
+                                        <Binding Path="IndexNumber" />
+                                    </MultiBinding>
+                                </AutomationProperties.AutomationId>
+                            </ui:IntellisenseTextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="*" d:DataContext="{d:DesignInstance Type=to:JsonMappingTo}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ui:IntellisenseTextBox DefaultText="[[Input]]"
+                                                    AcceptsReturn="False"
+                                                    AllowUserCalculateMode="False"
+                                                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                    VerticalScrollBarVisibility="Auto"
+                                                    MaxHeight="52"
+                                                    Padding="3"
+                                                    Margin="0,0,1,1"
+                                                    Text="{Binding SourceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ModelTextConverter}, ConverterParameter=True}"                                                
+                                                    Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
+                                                    ToolTip="{x:Static help:HelpTextResources.CreateJSONToolTipInput}">
+                                <i:Interaction.Behaviors>
+                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.CreateJSONHelpInput}"
                                                  DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
-                                <errors:ErrorsSetter Source="{Binding}"
+                                    <errors:ErrorsSetter Source="{Binding}"
                                                      SourcePropertyName="SourceName"
                                                      SourcePropertyValue="{Binding SourceName, UpdateSourceTrigger=PropertyChanged}"
                                                      Target="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
-                            </i:Interaction.Behaviors>
-                            <AutomationProperties.AutomationId>
-                                <MultiBinding StringFormat="UI_{0}_Row{1}_SourceName_AutoID">
-                                    <Binding Path="DataContext.ModelItem.AutomationID"
+                                </i:Interaction.Behaviors>
+                                <AutomationProperties.AutomationId>
+                                    <MultiBinding StringFormat="UI_{0}_Row{1}_SourceName_AutoID">
+                                        <Binding Path="DataContext.ModelItem.AutomationID"
                                              RelativeSource="{RelativeSource AncestorType=core:ActivityDesignerTemplate}" />
-                                    <Binding Path="IndexNumber" />
-                                </MultiBinding>
-                            </AutomationProperties.AutomationId>
-                        </ui:IntellisenseTextBox>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-        </DataGrid.Columns>
-    </controls:Dev2DataGrid>
-        <Grid Grid.Row="1">
+                                        <Binding Path="IndexNumber" />
+                                    </MultiBinding>
+                                </AutomationProperties.AutomationId>
+                            </ui:IntellisenseTextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </controls:Dev2DataGrid>
+        <Grid Grid.Row="1" Margin="{StaticResource ControlBorderTop}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="125" />
             </Grid.ColumnDefinitions>
 
-            <Label  Content="Result"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Style="{StaticResource ActivityLabelStyle}" />
-
+            <TextBlock Text="Result" Grid.Row="0" Grid.Column="0" />
             <ui:IntellisenseTextBox Grid.Column="1"
                                     Grid.Row="0"
                                     WrapInBrackets="True"
@@ -158,6 +145,6 @@
                     </MultiBinding>
                 </AutomationProperties.AutomationId>
             </ui:IntellisenseTextBox>
-        </Grid>        
+        </Grid>
     </Grid>
 </core:ActivityDesignerTemplate>

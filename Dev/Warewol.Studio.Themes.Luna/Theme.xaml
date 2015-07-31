@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
     <ResourceDictionary.MergedDictionaries>
 
-        <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml"/>
+        <!--<ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityDesignerStyles.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityStyles.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityStyles.xaml"/>-->
         <!--  IMAGES  -->
         <ResourceDictionary Source="Images.xaml" />
 
@@ -50,9 +50,9 @@
         <ResourceDictionary Source="Elements/xamDialogWindow.xaml"/>
         <ResourceDictionary Source="Elements/DockManager/MainDockManager.xaml"/>
 
-        <!--<ResourceDictionary Source="ActivityStyles/ActivityResources.xaml"/>
+        <ResourceDictionary Source="ActivityStyles/ActivityResources.xaml"/>
         <ResourceDictionary Source="ActivityStyles/ActivityDesignerStyles.xaml"/>
-        <ResourceDictionary Source="ActivityStyles/ActivityStyles.xaml"/>-->
+        <ResourceDictionary Source="ActivityStyles/ActivityStyles.xaml"/>
 
 
     </ResourceDictionary.MergedDictionaries>
