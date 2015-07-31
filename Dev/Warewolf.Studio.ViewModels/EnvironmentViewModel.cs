@@ -41,6 +41,7 @@ namespace Warewolf.Studio.ViewModels
             DisplayName = server.ResourceName;
             RefreshCommand = new DelegateCommand(async () => await Load());
             IsServerIconVisible = true;
+            SelectAction = new Action<IExplorerItemViewModel>(a=>{});
             Expand = new DelegateCommand<int?>(clickCount =>
             {
                 if (clickCount != null && clickCount == 2)
@@ -109,10 +110,10 @@ namespace Warewolf.Studio.ViewModels
                 var id = Guid.NewGuid();
                 var name = GetChildNameFromChildren();
                 Server.ExplorerRepository.CreateFolder("root", name, id);
-                var child = new ExplorerItemViewModel(Server,null)
+                var child = new ExplorerItemViewModel(Server, null, a => { SelectAction(a); })
                {
                    ResourceName = name,
-                   ResourceId = id,
+                   ResourceId = id, 
                    ResourceType = ResourceType.Folder,
                    ResourcePath = name
                };
@@ -126,13 +127,18 @@ namespace Warewolf.Studio.ViewModels
 
         public ICommand ShowServerVersionCommand { get; set; }
 
-        public void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction)
+	    public Action<IExplorerItemViewModel> SelectAction { get;  set; }
+
+	    public void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction)
         {
             foreach (var explorerItemViewModel in Children)
             {
                 if (explorerItemViewModel.ResourceId == id)
                 {
-                    explorerItemViewModel.IsExpanded = true;
+                    if (!explorerItemViewModel.IsExpanded)
+                    {
+                        explorerItemViewModel.IsExpanded = true;
+                    }
                     explorerItemViewModel.IsSelected = true;
                     foundAction(explorerItemViewModel);
                 }
@@ -538,7 +544,7 @@ namespace Warewolf.Studio.ViewModels
             // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (var explorerItem in explorerItems)
             {
-				var itemCreated = new ExplorerItemViewModel(server,parent)
+                var itemCreated = new ExplorerItemViewModel(server, parent, a => { SelectAction(a); })
                 {
                     ResourceName = explorerItem.DisplayName,
                     ResourceId = explorerItem.ResourceId,

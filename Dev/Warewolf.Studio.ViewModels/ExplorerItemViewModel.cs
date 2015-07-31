@@ -17,7 +17,8 @@ namespace Warewolf.Studio.ViewModels
 {
 	public class ExplorerItemViewModel : BindableBase, IExplorerItemViewModel
     {
-        //readonly IShellViewModel _shellViewModel;
+	    readonly Action<IExplorerItemViewModel> _selectAction;
+	    //readonly IShellViewModel _shellViewModel;
         string _resourceName;
         private bool _isVisible;
         bool _allowEditing;
@@ -43,9 +44,10 @@ namespace Warewolf.Studio.ViewModels
         bool _canShowVersions;
 
         // ReSharper disable TooManyDependencies
-        public ExplorerItemViewModel( IServer server, IExplorerTreeItem parent)
+        public ExplorerItemViewModel( IServer server, IExplorerTreeItem parent,Action<IExplorerItemViewModel> selectAction)
             // ReSharper restore TooManyDependencies
         {
+            _selectAction = selectAction;
             RollbackCommand = new DelegateCommand(() =>
             {
 //                var output = _explorerRepository.Rollback(ResourceId, VersionNumber);
@@ -169,7 +171,7 @@ namespace Warewolf.Studio.ViewModels
                 var id = Guid.NewGuid();
                 var name = GetChildNameFromChildren();
 				_explorerRepository.CreateFolder(ResourcePath, name, id);
-                var child = new ExplorerItemViewModel(Server,this)
+                var child = new ExplorerItemViewModel(Server,this,_selectAction)
                {
                    ResourceName = name,
                    ResourceId = id,
@@ -482,12 +484,16 @@ namespace Warewolf.Studio.ViewModels
             get { return _isSelected; }
             set
             {
-                _isSelected = value;
-                OnPropertyChanged(() => IsSelected);
-                if (_isSelected)
+                if (_isSelected != value)
                 {
-                    var helpDescriptor = new HelpDescriptor("", string.Format("<body><H1>{0}</H1><a href=\"http://warewolf.io\">Warewolf</a><p>Inputs: {1}</p><p>Outputs: {2}</p></body>", ResourceName, Inputs, Outputs), null);
-                    //_shellViewModel.UpdateHelpDescriptor(helpDescriptor);
+                    _isSelected = value;
+        
+                    OnPropertyChanged(() => IsSelected);
+                    if (_isSelected)
+                    {
+                        var helpDescriptor = new HelpDescriptor("", string.Format("<body><H1>{0}</H1><a href=\"http://warewolf.io\">Warewolf</a><p>Inputs: {1}</p><p>Outputs: {2}</p></body>", ResourceName, Inputs, Outputs), null);
+                        //_shellViewModel.UpdateHelpDescriptor(helpDescriptor);
+                    }
                 }
             }
         }
@@ -794,8 +800,13 @@ namespace Warewolf.Studio.ViewModels
                 return _isExpanded;
             }
             set
-            {				
+            {
+                var prev = _isExpanded;
                 _isExpanded = value;
+                if (value && !prev)
+                {
+                    _selectAction(this);
+                }
 				OnPropertyChanged(() => IsExpanded);
             }
         }

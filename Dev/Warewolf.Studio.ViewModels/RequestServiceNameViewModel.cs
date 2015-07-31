@@ -45,11 +45,20 @@ namespace Warewolf.Studio.ViewModels
            
 			OkCommand = new DelegateCommand(SetServiceName, () => String.IsNullOrEmpty(ErrorMessage));
             CancelCommand = new DelegateCommand(CloseView);
-            SingleEnvironmentExplorerViewModel = new SingleEnvironmentExplorerViewModel(environmentViewModel,_selectedGuid);            
+            SingleEnvironmentExplorerViewModel = new SingleEnvironmentExplorerViewModel(environmentViewModel,_selectedGuid);
+            SingleEnvironmentExplorerViewModel.PropertyChanged += SingleEnvironmentExplorerViewModel_PropertyChanged;
             _view.DataContext = this;
             Name = "";
 			environmentViewModel.CanShowServerVersion = false;
             return this;
+        }
+
+        void SingleEnvironmentExplorerViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "SelectedItem")
+            {
+                ValidateName();
+            }
         }
 
         public static Task<IRequestServiceNameViewModel> CreateAsync(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, Guid selectedGuid)
@@ -136,26 +145,31 @@ namespace Warewolf.Studio.ViewModels
             {
                 _name = value;
                 OnPropertyChanged(() => Name);
-                if (String.IsNullOrEmpty(Name))
-                {
-                    ErrorMessage = "'Name' cannot be empty.";
-                }
-                else if (NameHasInvalidCharacters(Name))
-                {
-                    ErrorMessage = "'Name' contains invalid characters.";
-                }
-                else if (Name.Trim() != Name)
-                {
-                    ErrorMessage = "'Name' contains leading or trailing whitespace characters.";
-                }
-                else if (HasDuplicateName(Name))
-                {
-                    ErrorMessage = string.Format("An item with name '{0}' already exists in this folder.", Name);
-                }
-                else
-                {
-                    ErrorMessage = "";
-                }
+                ValidateName();
+            }
+        }
+
+        void ValidateName()
+        {
+            if(String.IsNullOrEmpty(Name))
+            {
+                ErrorMessage = "'Name' cannot be empty.";
+            }
+            else if(NameHasInvalidCharacters(Name))
+            {
+                ErrorMessage = "'Name' contains invalid characters.";
+            }
+            else if(Name.Trim() != Name)
+            {
+                ErrorMessage = "'Name' contains leading or trailing whitespace characters.";
+            }
+            else if(HasDuplicateName(Name))
+            {
+                ErrorMessage = string.Format("An item with name '{0}' already exists in this folder.", Name);
+            }
+            else
+            {
+                ErrorMessage = "";
             }
         }
 

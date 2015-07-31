@@ -60,6 +60,7 @@ namespace Warewolf.Studio.ViewModels
 			set
 			{
 				_selectedItem = value;
+          
 				OnPropertyChanged(() => SelectedItem);
 
 			}
@@ -185,6 +186,7 @@ namespace Warewolf.Studio.ViewModels
 			foreach (var environmentViewModel in Environments)
 			{
 				environmentViewModel.SelectItem(id, (a => SelectedItem = a));
+                environmentViewModel.SelectAction = a=>SelectedItem =a;
 			}
 		}
 

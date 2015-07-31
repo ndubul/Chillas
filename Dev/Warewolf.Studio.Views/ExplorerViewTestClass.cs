@@ -257,7 +257,7 @@ namespace Warewolf.Studio.Views
                 var item = (node.Data as IExplorerTreeItem);
                 if (item != null)
                 {
-                    item.AddChild(new ExplorerItemViewModel(item.Server, item) { ResourceName = path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal)) });
+                    item.AddChild(new ExplorerItemViewModel(item.Server, item ,a=>{} ) { ResourceName = path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal)) });
                 }
             }
             else
@@ -266,7 +266,7 @@ namespace Warewolf.Studio.Views
                 if (explorerViewModelBase != null)
                 {
                     var item = explorerViewModelBase.SelectedItem;
-                    item.AddChild(new ExplorerItemViewModel(item.Server, item) { ResourceName = path });
+                    item.AddChild(new ExplorerItemViewModel(item.Server, item,a => { }) { ResourceName = path });
                 }
             }
         }
@@ -283,7 +283,7 @@ namespace Warewolf.Studio.Views
                 {
                     if (item != null)
                     {
-                        item.AddChild(new ExplorerItemViewModel(item.Server, item) { ResourceName = name + i, ResourceType = resourceType });
+                        item.AddChild(new ExplorerItemViewModel(item.Server, item, a => { }) { ResourceName = name + i, ResourceType = resourceType });
                     }
                 }
             }
@@ -296,7 +296,7 @@ namespace Warewolf.Studio.Views
                 {
                     if (item != null)
                     {
-                        item.AddChild(new ExplorerItemViewModel(item.Server, null) { ResourceName = name + i, ResourceType = resourceType });
+                        item.AddChild(new ExplorerItemViewModel(item.Server, null, a => { }) { ResourceName = name + i, ResourceType = resourceType });
                     }
                 }
             }
@@ -328,7 +328,7 @@ namespace Warewolf.Studio.Views
             {
                 if (item != null)
                 {
-                    items.Add(new ExplorerItemViewModel(item.Server, item) { ResourceName = Name + i, ResourceType = ResourceType.Version });
+                    items.Add(new ExplorerItemViewModel(item.Server, item, a => { }) { ResourceName = Name + i, ResourceType = ResourceType.Version });
                 }
             }
             return items;
