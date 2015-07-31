@@ -695,7 +695,14 @@ namespace Dev2.Settings.Scheduler
             get
             {
                 return _deleteCommand ??
-                       (_deleteCommand = new DelegateCommand(param => DeleteTask()));
+                       (_deleteCommand = new DelegateCommand(param =>
+                       {
+                           if (param != null)
+                           {
+                               DeleteTask();
+                           }
+                          
+                       }));
             }
         }
 
@@ -1030,7 +1037,7 @@ You need Administrator permission.";
         {
             get
             {
-                return SelectedTask.IsDirty;
+                return SelectedTask != null && SelectedTask.IsDirty;
             }
         }
         #region Public Methods
