@@ -612,13 +612,14 @@ namespace Dev2.Studio.ViewModels.WorkSurface
             SaveDialogHelper.ShowNewWorkflowSaveDialog(resourceModel, null, addToTabManager);
         }
 
-        public void Save(bool isLocalSave = false, bool isStudioShutdown = false)
+        public bool Save(bool isLocalSave = false, bool isStudioShutdown = false)
         {
-            Save(ContextualResourceModel, isLocalSave, isStudioShutdown: isStudioShutdown);
+            var saveResult = Save(ContextualResourceModel, isLocalSave, isStudioShutdown: isStudioShutdown);
             if(WorkSurfaceViewModel != null)
             {
                 WorkSurfaceViewModel.NotifyOfPropertyChange("DisplayName");
             }
+            return saveResult;
         }
 
         public bool IsEnvironmentConnected()
@@ -660,7 +661,6 @@ namespace Dev2.Studio.ViewModels.WorkSurface
             if(resource.IsNewWorkflow && !isLocalSave)
             {
                 _saveDialogAction(resource, addToTabManager);
-                // ShowSaveDialog(resource, addToTabManager);
                 return true;
             }
 

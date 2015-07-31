@@ -407,7 +407,6 @@
     <Compile Include="Help\IHelpAdorner.cs" />
     <Compile Include="Settings\Logging\LogSettingsViewModel.cs" />
     <Compile Include="Settings\Scheduler\DummyResource.cs" />
-    <Compile Include="ViewModels\EmailSourceViewModel.cs" />
     <Compile Include="Settings\Scheduler\SchedulerView.xaml.cs">
       <DependentUpon>SchedulerView.xaml</DependentUpon>
     </Compile>

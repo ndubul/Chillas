@@ -41,5 +41,7 @@ namespace Dev2.Common.Interfaces.Studio.Controller
         MessageBoxResult ShowRollbackVersionMessage(string displayName);
 
         void ShowInvalidCharacterMessage(string invalidText);
+
+        MessageBoxResult ShowItemCloseCloseConfirmation(string nameOfItem);
     }
 }

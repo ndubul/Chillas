@@ -222,6 +222,14 @@ namespace Dev2.Studio.ViewModels
                 {
                     return new AuthorizeCommand(AuthorizationContext.None, p => { }, param => false);
                 }
+                if (ActiveItem.WorkSurfaceKey.WorkSurfaceContext != WorkSurfaceContext.Workflow)
+                {
+                    var vm = ActiveItem.WorkSurfaceViewModel as IStudioTab;
+                    if (vm != null)
+                    {
+                        return new AuthorizeCommand(AuthorizationContext.Any, o => vm.DoDeactivate(), o => vm.IsDirty);
+                    }
+                }                
                 return ActiveItem.SaveCommand;
             }
         }
@@ -1314,6 +1322,40 @@ namespace Dev2.Studio.ViewModels
                 }
             }
             base.OnActivationProcessed(item, success);
+        }
+
+        public ICommand SaveAllCommand
+        {
+            get
+            {
+                return new DelegateCommand(SaveAll);
+            }
+        }
+
+        void SaveAll(object obj)
+        {
+            for(int index = Items.Count-1; index >= 0; index--)
+            {
+                var workSurfaceContextViewModel = Items[index];
+                ActivateItem(workSurfaceContextViewModel);
+                var workSurfaceContext = workSurfaceContextViewModel.WorkSurfaceKey.WorkSurfaceContext;
+                if(workSurfaceContext == WorkSurfaceContext.Workflow)
+                {
+                    if(workSurfaceContextViewModel.CanSave())
+                    {
+                        workSurfaceContextViewModel.Save();                        
+                    }
+                }
+                else
+                {
+                    var vm = workSurfaceContextViewModel.WorkSurfaceViewModel;
+                    var viewModel = vm as IStudioTab;
+                    if(viewModel != null)
+                    {
+                        viewModel.DoDeactivate();                        
+                    }
+                }
+            }
         }
 
         public override void ActivateItem(WorkSurfaceContextViewModel item)

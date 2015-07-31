@@ -25,6 +25,7 @@ using Dev2.Activities.Designers2.Core;
 using Dev2.Activities.Designers2.Core.Help;
 using Dev2.Common;
 using Dev2.Common.ExtMethods;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Data.TO;
 using Dev2.Common.Interfaces.Diagnostics.Debug;
 using Dev2.Common.Interfaces.Scheduler.Interfaces;
@@ -1025,7 +1026,13 @@ You need Administrator permission.";
         }
 
         #endregion
-
+        public bool IsDirty
+        {
+            get
+            {
+                return SelectedTask.IsDirty;
+            }
+        }
         #region Public Methods
 
         public virtual bool DoDeactivate()
@@ -1046,6 +1053,7 @@ You need Administrator permission.";
             return true;
         }
 
+       
         public virtual void ShowSaveErrorDialog(string error)
         {
             _popupController.ShowSaveErrorDialog(error);
@@ -1106,6 +1114,14 @@ You need Administrator permission.";
         }
 
         #endregion
+
+        public ResourceType ResourceType
+        {
+            get
+            {
+                return ResourceType.Scheduler;
+            }
+        }
     }
 }
 
