@@ -32,6 +32,7 @@ namespace Dev2.Scheduler
         public DummyResource(SchedulerViewModel model)
         {
             _model = model;
+            NameForDisplay = "'";
             _isNewItem = true;
             _newCommand = new DelegateCommand(() => model.CreateNewTask());
         }
@@ -250,6 +251,7 @@ namespace Dev2.Scheduler
 
             }
         }
+        public string NameForDisplay { get; private set; }
 
         #endregion
 

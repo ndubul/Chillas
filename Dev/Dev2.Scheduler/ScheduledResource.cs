@@ -88,7 +88,20 @@ namespace Dev2.Scheduler
             {
                 _name = value;
                 OnPropertyChanged("Name");
+                OnPropertyChanged("NameForDisplay");
             }
+        }
+        
+        public string NameForDisplay
+        {
+            get
+            {
+                if (IsDirty)
+                {
+                    return Name + " *";
+                }
+                return Name;
+            }            
         }
 
         public SchedulerStatus Status
