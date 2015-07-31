@@ -368,9 +368,13 @@ namespace Warewolf.Studio.ViewModels
                 else
                 {
                     var newName = RemoveInvalidCharacters(value);
-                    if (_explorerRepository != null && (IsRenaming && _explorerRepository.Rename(this, NewName(newName))))
+                    
+                    if (_explorerRepository != null && IsRenaming )
                     {
-                        _resourceName = newName;
+                        if (_explorerRepository.Rename(this, NewName(newName)))
+                        {
+                            _resourceName = newName;
+                        }
                     }
                     if (!IsRenaming)
                     {
@@ -385,11 +389,17 @@ namespace Warewolf.Studio.ViewModels
         private string RemoveInvalidCharacters(string name)
         {
             var nameToFix = name.TrimStart(' ').TrimEnd(' ');
-            if (string.IsNullOrEmpty(nameToFix))
+            if (string.IsNullOrEmpty(nameToFix) || IsDuplicateName(name))
             {
                 nameToFix = GetChildNameFromChildren();
             }
             return Regex.Replace(nameToFix, @"[^a-zA-Z0-9._\s-]", "");
+        }
+
+        private bool IsDuplicateName(string requestedServiceName)
+        {
+            var hasDuplicate  = Children.Any(model => model.ResourceName.ToLower() == requestedServiceName.ToLower() && model.ResourceType == ResourceType.Folder);
+            return hasDuplicate;
         }
 	    string NewName(string value)
 	    {

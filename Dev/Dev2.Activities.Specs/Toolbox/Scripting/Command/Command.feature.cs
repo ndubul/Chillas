@@ -10,12 +10,12 @@
 //  </auto-generated>
 // ------------------------------------------------------------------------------
 #region Designer generated code
-
-using TechTalk.SpecFlow;
-
 #pragma warning disable
 namespace Dev2.Activities.Specs.Toolbox.Scripting.Command
 {
+    using TechTalk.SpecFlow;
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
@@ -49,7 +49,7 @@ namespace Dev2.Activities.Specs.Toolbox.Scripting.Command
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "Command")))
             {
-                FeatureSetup(null);
+                Dev2.Activities.Specs.Toolbox.Scripting.Command.CommandFeature.FeatureSetup(null);
             }
         }
         
@@ -244,6 +244,53 @@ this.ScenarioSetup(scenarioInfo);
                         "[[result]] ="});
 #line 66
  testRunner.And("the debug output as", ((string)(null)), table11, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Execute commands produce correct result")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Command")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        public virtual void ExecuteCommandsProduceCorrectResult()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Execute commands produce correct result", new string[] {
+                        "ignore"});
+#line 72
+this.ScenarioSetup(scenarioInfo);
+#line 73
+ testRunner.Given("I have a command variable \"[[drive]]\" equal to \"C:\\\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "script"});
+            table12.AddRow(new string[] {
+                        "@echo off"});
+            table12.AddRow(new string[] {
+                        "REM Testing multiple commands"});
+            table12.AddRow(new string[] {
+                        "dir [[drive]]"});
+#line 74
+ testRunner.Given("I have these command scripts to execute in a single execution run", ((string)(null)), table12, "Given ");
+#line 79
+ testRunner.When("the command tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 80
+ testRunner.Then("the result of the command tool will be \"Volume in drive C has no label\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 81
+ testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Command"});
+            table13.AddRow(new string[] {
+                        "String = String"});
+#line 82
+ testRunner.And("the debug inputs as", ((string)(null)), table13, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table14.AddRow(new string[] {
+                        "[[result]] = String"});
+#line 85
+ testRunner.And("the debug output as", ((string)(null)), table14, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
