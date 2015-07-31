@@ -11,7 +11,6 @@
 using System;
 using System.Windows.Input;
 using Dev2.Common.Interfaces.Data.TO;
-using Microsoft.Practices.Prism.Commands;
 
 namespace Dev2.Common.Interfaces.Scheduler.Interfaces
 {
