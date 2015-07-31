@@ -24,11 +24,6 @@
                                d:DesignWidth="300"
                                d:DataContext="{d:DesignInstance core:ActivityCollectionDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -80,7 +75,7 @@
                                         Header="#">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding ModelItem, 
+                            <TextBlock Text="{Binding ModelItem, 
                                               NotifyOnTargetUpdated=True, 
                                               Converter={local:RowToIndexConverter}}" />
                         </DataTemplate>
@@ -95,6 +90,7 @@
                             <ui:IntellisenseTextBox VerticalAlignment="Center"
                                                     DefaultText="{Binding WatermarkTextVariable}"
                                                     WrapInBrackets="True"
+                                                    Margin="0,0,0,1"
                                                     attachedProperties:FocusSetter.IsFocused="{Binding IsFieldNameFocused, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                     Text="{Binding FieldName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                     IntellisenseProvider="{StaticResource CalculateCompositeIntellisenseProvider}"
@@ -125,7 +121,7 @@
                                         Header="=">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="="
+                            <TextBlock Text="="
                                    VerticalAlignment="Center" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -143,7 +139,7 @@
                                                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                                                     VerticalScrollBarVisibility="Auto"
                                                     TextWrapping="Wrap"
-                                                    Margin="0,0,1,0"
+                                                    Margin="0,0,1,1"
                                                     AcceptsReturn="True"
                                                     MaxHeight="80"
                                                     Text="{Binding FieldValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
@@ -178,13 +174,13 @@
                     Margin="0,10,0,0"
                     Orientation="Vertical"
                     Grid.Row="1">
-            <Label HorizontalAlignment="Center"
+            <TextBlock HorizontalAlignment="Center"
                    Foreground="{StaticResource BrushDisabledForeground}"
-                   Content="Type in the empty rows to add new rows." />
-            <Label HorizontalAlignment="Center"
+                   Text="Type in the empty rows to add new rows." />
+            <TextBlock HorizontalAlignment="Center"
                    Margin="0,-5,0,0"
                    Foreground="{StaticResource BrushDisabledForeground}"
-                   Content="Right click to insert or delete rows." />
+                   Text="Right click to insert or delete rows." />
         </StackPanel>
     </Grid>
 </core:ActivityDesignerTemplate>

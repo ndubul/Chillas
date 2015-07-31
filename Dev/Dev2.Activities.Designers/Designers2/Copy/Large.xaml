@@ -22,11 +22,6 @@
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance local:CopyDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -53,10 +48,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="{Binding InputPathLabel, Mode=OneWay}" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding InputPathLabel, Mode=OneWay}" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="1"
                                 Grid.Row="0"
@@ -84,11 +76,7 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Margin="20,2,2,2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Username" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Margin="20,2,2,2" Text="Username" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="1"
                                 Margin="20,2,1,2"
@@ -109,11 +97,7 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="2"
-               Margin="20,2,2,2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Password" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Margin="20,2,2,2" Text="Password" />
         <PasswordBox Grid.Column="1"
                      Grid.Row="2"
                      Margin="20,2,1,2"
@@ -132,10 +116,7 @@
             </i:Interaction.Behaviors>
         </PasswordBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="3"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="{Binding OutputPathLabel, Mode=OneWay}" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding OutputPathLabel, Mode=OneWay}" />
         <ui:IntellisenseTextBox Grid.Row="3"
                                 Grid.Column="1"
                                 FilterType="All"
@@ -162,11 +143,7 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="4"
-               Margin="20,2,2,2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Username" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Margin="20,2,2,2" Text="Username" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="4"
                                 Margin="20,2,1,2"
@@ -187,11 +164,7 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="5"
-               Margin="20,2,2,2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Password" />
+        <TextBlock Grid.Column="0" Grid.Row="5" Margin="20,2,2,2" Text="Password" />
         <PasswordBox Grid.Column="1"
                      Grid.Row="5"
                      Margin="20,2,1,2"
@@ -210,10 +183,7 @@
             </i:Interaction.Behaviors>
         </PasswordBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="6"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="If it exists" />
+        <TextBlock Grid.Column="0" Grid.Row="6" Text="If it exists" />
         <CheckBox Grid.Column="1"
                   Grid.Row="6"
                   Margin="-4,0,0,0"
@@ -230,10 +200,7 @@
             </i:Interaction.Behaviors>
         </CheckBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="7"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+        <TextBlock Grid.Column="0" Grid.Row="7" Text="Result" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="7"
                                 DefaultText="[[Success]]"

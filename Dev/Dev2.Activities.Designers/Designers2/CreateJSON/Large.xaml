@@ -25,11 +25,6 @@
                                d:DesignWidth="300"
                                d:DataContext="{d:DesignInstance createJson:CreateJsonDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -55,33 +50,27 @@
                                LoadingRow="DataGrid_LoadingRow">
 
             <!-- DO NOT override ItemsPanel - doing so causes column sizing issues on first drop -->
-
-
             <DataGrid.Columns>
-
-                <DataGridTemplateColumn Width="27"
-                                        IsReadOnly="True"
-                                        Header="#">
+                <DataGridTemplateColumn Width="27" IsReadOnly="True" Header="#">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding ModelItem, 
+                            <TextBlock Text="{Binding ModelItem, 
                                               NotifyOnTargetUpdated=True, 
                                               Converter={local:RowToIndexConverter}}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="*"
-                                        Header="Name"
-                                        d:DataContext="{d:DesignInstance Type=to:JsonMappingTo}">
+                <DataGridTemplateColumn Width="*" Header="Name" d:DataContext="{d:DesignInstance Type=to:JsonMappingTo}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ui:IntellisenseTextBox VerticalAlignment="Center"
                                                     DefaultText="Key Name"
                                                     WrapInBrackets="False"
-                                                    IsTabStop="False"                                                     
+                                                    IsTabStop="False"
+                                                    Margin="0,0,1,1"
                                                     attachedProperties:FocusSetter.IsFocused="{Binding IsDestinationNameFocused, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                                   Text="{Binding DestinationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Text="{Binding DestinationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
                                                     ToolTip="{x:Static help:HelpTextResources.CreateJSONToolTipName}">
                                 <i:Interaction.Behaviors>
@@ -109,16 +98,14 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="*"
-                                        Header="Data"
-                                        d:DataContext="{d:DesignInstance Type=to:JsonMappingTo}">
+                <DataGridTemplateColumn Width="*" Header="Data" d:DataContext="{d:DesignInstance Type=to:JsonMappingTo}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ui:IntellisenseTextBox DefaultText="[[Input]]"
                                                     AllowUserCalculateMode="False"
                                                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                                                     VerticalScrollBarVisibility="Auto"
-                                                    Margin="0,0,1,0"
+                                                    Margin="0,0,1,1"
                                                     AcceptsReturn="True"
                                                     MaxHeight="80"
                                                     Text="{Binding SourceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
@@ -148,17 +135,13 @@
             </DataGrid.Columns>
         </controls:Dev2DataGrid>
         
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="{StaticResource ControlBorderTop}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Label  Content="Result"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Style="{StaticResource ActivityLabelStyle}" />
-
+            <TextBlock Text="Result" Grid.Row="0" Grid.Column="0" />
             <ui:IntellisenseTextBox Grid.Column="1"
                                     Grid.Row="0"
                                     WrapInBrackets="True"
@@ -179,7 +162,6 @@
         </Grid>
 
         <errors:OnError Grid.Column="0"
-                        Grid.Row="2"
-                        Grid.ColumnSpan="3" />
+                        Grid.Row="2"/>
     </Grid>
 </core:ActivityDesignerTemplate>

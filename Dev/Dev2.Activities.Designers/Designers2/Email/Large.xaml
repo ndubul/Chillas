@@ -20,11 +20,6 @@
                                d:DesignWidth="250"
                                d:DataContext="{d:DesignInstance local:EmailDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-   
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -33,7 +28,7 @@
                                      IsClosedAfter="True"
                                      Style="{StaticResource ActivityDesignerButtonStyle}" />
     </core:ActivityDesignerTemplate.RightButtons>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -52,12 +47,11 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-       </Grid.RowDefinitions>
+        </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Mail Source" />
+               Text="Mail Source" />
         <Grid Grid.Column="1"
               Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -70,6 +64,7 @@
                       ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
                       SelectedItem="{Binding SelectedEmailSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding EmailSources}"
+                      Margin="{StaticResource ControlBorderRight}"
                       ToolTip="{x:Static help:HelpTextResources.EmailToolTipMailSource}"
                       DisplayMemberPath="ResourceName"
                       attachedProperties:FocusSetter.IsFocused="{Binding IsEmailSourceFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -89,17 +84,15 @@
                     Style="{StaticResource ActivityEditButtonStyle}"
                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_EditEmailSourceBtn_AutoID}"/>
         </Grid>
-        
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="From Address" />
+
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="From Address" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="1"                                
                                 DefaultText="Account or email address"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipFromAddress}"
                                 Text="{Binding ModelItem.FromAccount,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
+                                Margin="{StaticResource ControlBorderTop}"
                                 attachedProperties:FocusSetter.IsFocused="{Binding IsFromAccountFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_fromAcctxt_AutoID}">
             <i:Interaction.Behaviors>
@@ -112,11 +105,8 @@
             </i:Interaction.Behaviors>
 
         </ui:IntellisenseTextBox>
-        
-        <Label Grid.Column="0"
-               Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Password" />
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Password" Margin="{StaticResource ControlBorderTop}" />
         <Grid Grid.Column="1"
               Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -127,6 +117,7 @@
                          x:Name="ThePasswordBox"
                          ToolTip="{x:Static help:HelpTextResources.EmailToolTipPassword}"
                          PasswordChanged="OnPasswordChanged"
+                         Margin="{StaticResource ControlBorderTopRight}"
                          attachedProperties:FocusSetter.IsFocused="{Binding IsPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Password_AutoID}">
                 <i:Interaction.Behaviors>
@@ -141,21 +132,19 @@
             <Button Grid.Column="1"
                     Width="40"
                     Content="Test"
+                    Margin="{StaticResource ControlBorderTop}"
                     Command="{Binding TestEmailAccountCommand}"
-                    ToolTip="Test Password"
-                    Style="{StaticResource ActivityEditButtonStyle}"/>
+                    ToolTip="Test Password"/>
         </Grid>
 
-        <Label Grid.Column="0"
-               Grid.Row="3"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="To" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="To" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="3"
                                 DefaultText="Account or email address"
                                 Text="{Binding ModelItem.To, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipTo}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
+                                Margin="{StaticResource ControlBorderTop}"
                                 attachedProperties:FocusSetter.IsFocused="{Binding IsToFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_tostxt_AutoID}">
             <i:Interaction.Behaviors>
@@ -167,17 +156,15 @@
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
-             
-        <Label Grid.Column="0"
-               Grid.Row="4"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Cc" />
+
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Cc" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="4"
                                 DefaultText="Account or email address"
                                 Text="{Binding ModelItem.Cc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipCc}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
+                                Margin="{StaticResource ControlBorderTop}"
                                 attachedProperties:FocusSetter.IsFocused="{Binding IsCcFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Cctxt_AutoID}">
             <i:Interaction.Behaviors>
@@ -189,17 +176,15 @@
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
-           
-        <Label Grid.Column="0"
-               Grid.Row="5"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Bcc" />
+
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Bcc" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="5"
                                 DefaultText="Account or email address"
                                 Text="{Binding ModelItem.Bcc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipBcc}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
+                                Margin="{StaticResource ControlBorderTop}"
                                 attachedProperties:FocusSetter.IsFocused="{Binding IsBccFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Bcctxt_AutoID}">
             <i:Interaction.Behaviors>
@@ -212,16 +197,16 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="6"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Priority" />
+               Text="Priority" Margin="{StaticResource ControlBorderTop}" />
         <ComboBox Grid.Column="1"
                   Grid.Row="6"
                   SelectedValue="{Binding ModelItem.Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Priorities}"
                   Style="{StaticResource ActivityComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
+                  Margin="{StaticResource ControlBorderTop}"
                   ToolTip="{x:Static help:HelpTextResources.EmailToolTipPriorityType}">
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpPriorityType}"
@@ -233,16 +218,16 @@
             </i:Interaction.Behaviors>
         </ComboBox>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="7"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Subject" />
+               Text="Subject" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="7"
                                 DefaultText="Message Subject"
                                 Text="{Binding ModelItem.Subject,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipSubject}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
+                                Margin="{StaticResource ControlBorderTop}"
                                 attachedProperties:FocusSetter.IsFocused="{Binding IsSubjectFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_subjecttxt_AutoID}">
             <i:Interaction.Behaviors>
@@ -255,12 +240,11 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="8"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Attachments" />
+               Text="Attachments" Margin="{StaticResource ControlBorderTop}"/>
         <Grid Grid.Column="1"
-              Grid.Row="8">
+              Grid.Row="8" Margin="{StaticResource ControlBorderTop}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -269,6 +253,7 @@
                                     DefaultText="Attachments"
                                     Text="{Binding ModelItem.Attachments,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
+                                    Margin="{StaticResource ControlBorderRight}"
                                     attachedProperties:FocusSetter.IsFocused="{Binding IsAttachmentsFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_AttachmentsTxt_AutoID}"
                                     ToolTip="{x:Static help:HelpTextResources.EmailToolTipAttachments}">
@@ -285,29 +270,28 @@
                     Content="..."
                     Command="{Binding ChooseAttachmentsCommand}"
                     ToolTip="Choose Attachments"
-                    Style="{StaticResource ActivityEditButtonStyle}"
                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_ChooseAttachmentsBtn_AutoID}"/>
         </Grid>
 
-        <Label Grid.Column="0"
-               Grid.Row="9"
-               VerticalAlignment="Top"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Body"/>
+        <TextBlock Grid.Column="0" Grid.Row="9" VerticalAlignment="Top" Text="Body" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="9"
                                 DefaultText="Email Content"
-                                VerticalAlignment="Stretch"
+                                VerticalAlignment="Top"
                                 AllowMultilinePaste="True"
-                                                AcceptsReturn="True"
-                                                AllowUserInsertLine="True"
+                                AcceptsReturn="True"
+                                AllowUserInsertLine="True"
                                 TextWrapping="Wrap"
+                                Height="75"
+                                MaxHeight="100"
                                 AcceptsTab="True"
+                                VerticalContentAlignment="Top"
                                 VerticalScrollBarVisibility="Auto"
                                 HorizontalScrollBarVisibility="Auto"
                                 Text="{Binding ModelItem.Body,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipBody}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
+                                Margin="{StaticResource ControlBorderTop}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_bodytxt_AutoID}">
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpBody}"
@@ -319,11 +303,8 @@
             </i:Interaction.Behaviors>
 
         </ui:IntellisenseTextBox>
-        
-        <Label Grid.Column="0"
-               Grid.Row="10"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+
+        <TextBlock Grid.Column="0" Grid.Row="10" Text="Result" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="10"                               
                                 DefaultText="[[EmailSuccess]]"
@@ -331,6 +312,7 @@
                                 Text="{Binding ModelItem.Result,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipResult}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
+                                Margin="{StaticResource ControlBorderTop}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Resultstxt_AutoID}">
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpResult}"
@@ -341,8 +323,8 @@
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
-        
-                  
+
+
         <errors:OnError Grid.Row="11"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"/>

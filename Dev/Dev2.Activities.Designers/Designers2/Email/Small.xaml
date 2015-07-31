@@ -16,10 +16,10 @@
                                d:DesignWidth="250"
                                d:DataContext="{d:DesignInstance local:EmailDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
+    <!--<core:ActivityDesignerTemplate.Resources>
         <ResourceDictionary x:Name="TheResources"
                             Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
+    </core:ActivityDesignerTemplate.Resources>-->
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -34,13 +34,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Mail Source" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Mail Source" />
 
-        <Grid Grid.Column="1"
-              Grid.Row="0">
+        <Grid Grid.Column="1" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -51,6 +47,7 @@
                       ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                       SelectedItem="{Binding SelectedEmailSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding EmailSources}"
+                      Margin="{StaticResource ControlBorderRight}"
                       ToolTip="{x:Static help:HelpTextResources.EmailToolTipMailSource}"
                       DisplayMemberPath="ResourceName">
                 <i:Interaction.Behaviors>
@@ -66,15 +63,13 @@
                     Content="..."
                     Command="{Binding EditEmailSourceCommand}"
                     ToolTip="Edit Email Source"
-                    Style="{StaticResource ActivityEditButtonStyle}" />
+                    Style="{StaticResource ButtonStyle}" />
         </Grid>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="To" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="To" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="1"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 DefaultText="Account or email address"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipTo}"
@@ -90,13 +85,11 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Subject" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Subject" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="2"
                                 DefaultText="Message Subject"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding ModelItem.Subject,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipSubject}"
@@ -111,26 +104,21 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="3"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Body"/>
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Body" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="3"
                                 DefaultText="Email Content"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipBody}"
                                 Text="{Binding ModelItem.Body,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                               AllowMultilinePaste="True"
-                                                AcceptsReturn="True"
-                                                AllowUserInsertLine="True"
-                                                MaxHeight="52"
+                                AllowMultilinePaste="True"
+                                Margin="{StaticResource ControlBorderTop}"
+                                AcceptsReturn="True"
+                                AllowUserInsertLine="True"
+                                MaxHeight="52"
                                 TextWrapping="Wrap"
                                 AcceptsTab="True"
-                                Margin="0,2"
                                 VerticalContentAlignment="Top"
                                 MinLines="2"
-                                Height="32"
-                                MinHeight="32"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_bodytxt_AutoID}">
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpBody}"
@@ -142,14 +130,12 @@
             </i:Interaction.Behaviors>
 
         </ui:IntellisenseTextBox>
-        
-        <Label Grid.Column="0"
-               Grid.Row="4"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Result" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="4"                               
                                 DefaultText="[[EmailSuccess]]"
+                                Margin="{StaticResource ControlBorderTop}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipResult}"
                                 Text="{Binding ModelItem.Result,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 WrapInBrackets="True"
