@@ -49,7 +49,12 @@ namespace Warewolf.Studio.Core
                     case ResourceType.Server:
                         return dict[CustomMenuIcons.ServerSource] as DrawingImage;
                     case ResourceType.StartPage:
-                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.Home, Brushes.Transparent);
+                        var imageSource = ImageAwesome.CreateImageSource(FontAwesomeIcon.Home, Brushes.Black);
+                        return imageSource;
+                    case ResourceType.Scheduler:
+                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.History, Brushes.Black);
+                    case ResourceType.Settings:
+                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.Cogs, Brushes.Black);
                     default:
                         return dict[CustomMenuIcons.Folder] as DrawingImage;
                 }

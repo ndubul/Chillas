@@ -1316,6 +1316,39 @@ namespace Dev2.Studio.ViewModels
             base.OnActivationProcessed(item, success);
         }
 
+        public ICommand SaveAllCommand
+        {
+            get
+            {
+                return new DelegateCommand(SaveAll);
+            }
+        }
+
+        void SaveAll(object obj)
+        {
+            foreach(var workSurfaceContextViewModel in Items)
+            {
+               ActivateItem(workSurfaceContextViewModel);
+                var workSurfaceContext = workSurfaceContextViewModel.WorkSurfaceKey.WorkSurfaceContext;
+                if (workSurfaceContext == WorkSurfaceContext.Workflow)
+                {
+                    if (workSurfaceContextViewModel.CanSave())
+                    {
+                        workSurfaceContextViewModel.SaveCommand.Execute(null);
+                    }
+                }
+                else
+                {
+                    var vm = workSurfaceContextViewModel.WorkSurfaceViewModel;
+                    var viewModel = vm as IStudioTab;
+                    if (viewModel != null)
+                    {
+                        viewModel.DoDeactivate();
+                    }
+                }
+            }
+        }
+
         public override void ActivateItem(WorkSurfaceContextViewModel item)
         {
             _previousActive = ActiveItem;

@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using Caliburn.Micro;
 using Dev2.Common;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Common.Interfaces.Threading;
 using Dev2.CustomControls.Connections;
@@ -561,6 +562,14 @@ namespace Dev2.Settings
         {
             HasErrors = true;
             Errors = description;
+        }
+
+        public ResourceType ResourceType
+        {
+            get
+            {
+                return ResourceType.Settings;
+            }
         }
     }
 }
