@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Dev2.Common.Interfaces.Studio.ViewModels.Dialogues;
 
 namespace Dev2.Common.Interfaces.PopupController
 {

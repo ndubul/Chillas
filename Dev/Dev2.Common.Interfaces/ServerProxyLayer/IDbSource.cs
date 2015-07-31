@@ -14,7 +14,7 @@ using Dev2.Runtime.ServiceModel.Data;
 
 namespace Dev2.Common.Interfaces.ServerProxyLayer
 {
-    public interface IDbSource
+    public interface IDbSource:IEquatable<IDbSource>
     {
         string ServerName { get; set; }
         enSourceType Type { get; set; }

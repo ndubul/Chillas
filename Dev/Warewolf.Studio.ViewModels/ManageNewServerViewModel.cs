@@ -39,10 +39,10 @@ namespace Warewolf.Studio.ViewModels
         // ReSharper restore TooManyDependencies
         {
             //VerifyArgument.AreNotNull(new Dictionary<string, object> { { "newServerSource", newServerSource }, { "updateManager", updateManager }, { "requestServiceNameViewModel", requestServiceNameViewModel } ,{"connectedServer",connectedServer}});
-            Protocols = new[] { "http", "https" };
+            Protocols = new[] { "https", "http" };
             Protocol = Protocols[0];
          
-            Ports = new ObservableCollection<string> { "3142", "3143" };
+            Ports = new ObservableCollection<string> { "3143", "3142" };
             SelectedPort = Ports[0];
             _updateManager = updateManager;
             _requestServiceNameViewModel = requestServiceNameViewModel;
@@ -98,15 +98,23 @@ namespace Warewolf.Studio.ViewModels
 
         public override IServerSource ToModel()
         {
+            if (Item == null)
+            {
+                Item = ToSource();
+            }
+            return ToSource();            
+        }
+
+        IServerSource ToSource()
+        {
             return new ServerSource
             {
-                Address = Protocol+"://"+Address+":"+SelectedPort,
+                Address = Protocol + "://" + Address + ":" + SelectedPort,
                 AuthenticationType = AuthenticationType,
                 ID = ServerSource.ID == Guid.Empty ? Guid.NewGuid() : ServerSource.ID,
-                Name = String.IsNullOrEmpty(ServerSource.Name) ? RequestServiceNameViewModel.ResourceName.Name : ServerSource.Name,
-                Password = Password,
-                ResourcePath = RequestServiceNameViewModel.ResourceName.Path
-            };
+                Name = ServerSource.Name,
+                Password = Password
+            };    
         }
 
         string SetToEdit(IServerSource source)

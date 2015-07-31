@@ -18,7 +18,7 @@ using Dev2.Common.Interfaces.WebServices;
 
 namespace Warewolf.Core
 {
-    public class WebServiceDefinition : IWebService, IEquatable<WebServiceDefinition>
+    public class WebServiceDefinition : IWebService, IEquatable<IWebService>
     // ReSharper restore UnusedMember.Global
     {
         /// <summary>
@@ -77,6 +77,18 @@ namespace Warewolf.Core
                 return true;
             }
             return string.Equals(Name, other.Name) && string.Equals(Path, other.Path) && Equals(Source, other.Source) && Equals(OutputMappings, other.OutputMappings) && string.Equals(QueryString, other.QueryString) && Equals(Headers, other.Headers) && string.Equals(PostData, other.PostData);
+        }
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+        /// </returns>
+        /// <param name="other">An object to compare with this object.</param>
+        public bool Equals(IWebService other)
+        {
+            return Equals(other as WebServiceDefinition);
         }
 
         /// <summary>

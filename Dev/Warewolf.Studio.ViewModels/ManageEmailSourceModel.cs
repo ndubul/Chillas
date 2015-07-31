@@ -1,7 +1,4 @@
 ﻿using Dev2.Common.Interfaces;
-using Dev2.Common.Interfaces.Email;
-
-using Dev2.Common.Interfaces.Studio.ViewModels.Dialogues;
 
 namespace Warewolf.Studio.ViewModels
 {

@@ -4,7 +4,7 @@ using Dev2.Runtime.ServiceModel.Data;
 
 namespace Dev2.Common.Interfaces
 {
-    public interface IServerSource
+    public interface IServerSource:IEquatable<IServerSource>
     {
         /// <summary>
         /// The server address that we are trying to connect to

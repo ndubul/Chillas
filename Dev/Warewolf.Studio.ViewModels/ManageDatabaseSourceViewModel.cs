@@ -340,22 +340,10 @@ namespace Warewolf.Studio.ViewModels
             if (Item == null)
             {
                 Item = ToDbSource();
-                return Item;
             }
-
-            return new DbSourceDefinition
-            {
-                AuthenticationType = AuthenticationType,
-                ServerName = GetServerName(),
-                Password = Password,
-                UserName = UserName,
-                Type = (enSourceType)Enum.Parse(typeof( enSourceType), ServerType.Value),
-                Name = ResourceName,
-                DbName = DatabaseName,
-                Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
-            };
-
+            return ToDbSource();
         }
+
         IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
 
         public IList<NameValue> Types { get; set; }

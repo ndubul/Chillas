@@ -1,5 +1,4 @@
 ﻿using System;
-using Dev2.Common.Interfaces.Email;
 
 namespace Dev2.Common.Interfaces.Core
 {
@@ -26,6 +25,18 @@ namespace Dev2.Common.Interfaces.Core
             }
             return string.Equals(HostName, other.HostName) && string.Equals(UserName, other.UserName) && string.Equals(Password, other.Password) 
                 && EnableSsl == other.EnableSsl && string.Equals(Port, other.Port) && string.Equals(Timeout, other.Timeout);
+        }
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+        /// </returns>
+        /// <param name="other">An object to compare with this object.</param>
+        public bool Equals(IEmailServiceSource other)
+        {
+            return Equals(other as EmailServiceSourceDefinition);
         }
 
         /// <summary>
