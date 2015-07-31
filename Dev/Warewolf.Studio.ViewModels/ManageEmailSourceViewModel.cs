@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
@@ -464,8 +463,8 @@ namespace Warewolf.Studio.ViewModels
                 TestPassed = false;
             });
 
-            string s = _updateManager.TestConnection(ToNewSource());
-            if (s.Length > 0) ;
+            _updateManager.TestConnection(ToNewSource());
+            
         }
         IEmailServiceSource ToNewSource()
         {

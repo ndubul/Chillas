@@ -27,6 +27,7 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Core.DynamicServices;
 using Dev2.Common.Interfaces.DB;
+using Dev2.Common.Interfaces.Email;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Studio;
@@ -1168,9 +1169,13 @@ namespace Dev2.Studio.ViewModels
         }
 
         [ExcludeFromCodeCoverage] //Excluded due to needing a parent window
-        void AddEmailWorkSurface(string resourcePath)
+        async void AddEmailWorkSurface(string resourcePath)
         {
-            ActivateOrCreateUniqueWorkSurface<EmailSourceViewModel>(WorkSurfaceContext.EmailSource);
+            var server = CustomContainer.Get<IServer>();
+            var saveViewModel = await GetSaveViewModel(server, resourcePath);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.EmailSource), new SourceViewModel<IEmailServiceSource>(EventPublisher, new ManageEmailSourceViewModel(new ManageEmailSourceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), saveViewModel, new Microsoft.Practices.Prism.PubSubEvents.EventAggregator()), PopupProvider, new ManageEmailSourceControl()));
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+
         }
 
         async void AddHelpTabWorkSurface(string uriToDisplay)
@@ -1695,7 +1700,7 @@ namespace Dev2.Studio.ViewModels
             AddWorkSurfaceContextImpl(resourceModel, false);
         }
 
-        private void AddWorkSurfaceContextImpl(IContextualResourceModel resourceModel, bool isLoadingWorkspace)
+        private async void AddWorkSurfaceContextImpl(IContextualResourceModel resourceModel, bool isLoadingWorkspace)
         {
             if(resourceModel == null)
             {
@@ -1723,7 +1728,7 @@ namespace Dev2.Studio.ViewModels
             IWorkspaceItem workspaceItem = _getWorkspaceItemRepository().WorkspaceItems.FirstOrDefault(c => c.ID == resourceModel.ID);
             if(workspaceItem == null)
             {
-                resourceModel.Environment.ResourceRepository.ReloadResource(resourceModel.ID, resourceModel.ResourceType, ResourceModelEqualityComparer.Current, true);
+                await resourceModel.Environment.ResourceRepository.ReloadResourceAsync(resourceModel.ID, resourceModel.ResourceType, ResourceModelEqualityComparer.Current, true);
             }
 
             // NOTE: only if from server ;)
