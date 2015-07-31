@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Dev2.Common.Interfaces.Email
+namespace Dev2.Common.Interfaces
 {
-    public interface IEmailServiceSource
+    public interface IEmailServiceSource:IEquatable<IEmailServiceSource>
     {
         string HostName { get; set; }
         string UserName { get; set; }

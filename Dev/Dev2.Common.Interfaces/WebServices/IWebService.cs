@@ -13,13 +13,10 @@ using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dev2.Common.Interfaces.WebServices
 {
-    public interface IWebService
+    public interface IWebService:IEquatable<IWebService>
     {
         string Name { get; set; }
         string Path { get; set; }

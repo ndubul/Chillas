@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Core.Help;
@@ -12,6 +13,7 @@ using Warewolf.Studio.ViewModels;
 namespace Dev2.ViewModels
 {
     public class SourceViewModel<T> : BaseWorkSurfaceViewModel, IHelpSource, IStudioTab
+        where T : IEquatable<T>
     {
         readonly IPopupController _popupController;
 
