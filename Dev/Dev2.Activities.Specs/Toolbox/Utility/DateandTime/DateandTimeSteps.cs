@@ -101,6 +101,7 @@ namespace Dev2.Activities.Specs.Toolbox.Utility.DateandTime
         }
 
         [When(@"the datetime tool is executed")]
+        [Then(@"the datetime tool is executed")]
         public void WhenTheDatetimeToolIsExecuted()
         {
             BuildDataList();
