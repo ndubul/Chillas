@@ -313,7 +313,8 @@ namespace Warewolf.Studio.ViewModels
                 Header = string.Format("{0} - {1}", ((_pluginSource == null ? ResourceName : _pluginSource.Name)), serverName);
             }
         }
-        bool CanSave()
+
+        public override bool CanSave()
         {
             return _selectedDll != null && !string.IsNullOrEmpty(AssemblyName) && HasChanged &&(AssemblyName.EndsWith(".dll") || AssemblyName.StartsWith("GAC:"));
         }

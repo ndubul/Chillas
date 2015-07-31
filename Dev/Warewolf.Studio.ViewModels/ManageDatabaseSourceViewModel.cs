@@ -142,17 +142,15 @@ namespace Warewolf.Studio.ViewModels
 
         void SetupHeaderTextFromExisting()
         {
-            var server = "";
             if (_warewolfserverName != null)
             {
-                server = _warewolfserverName;
             }
             HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel  + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
            
             Header = ((_dbSource == null ? ResourceName : _dbSource.Name));
         }
 
-        bool CanSave()
+        public override bool CanSave()
         {
             return TestPassed && !String.IsNullOrEmpty(DatabaseName);
         }

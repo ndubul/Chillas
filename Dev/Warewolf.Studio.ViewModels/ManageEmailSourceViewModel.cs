@@ -97,7 +97,7 @@ namespace Warewolf.Studio.ViewModels
             Header = ((_emailServiceSource.HostName ?? ResourceName));
         }
 
-        bool CanSave()
+        public override bool CanSave()
         {
             return TestPassed;
         }

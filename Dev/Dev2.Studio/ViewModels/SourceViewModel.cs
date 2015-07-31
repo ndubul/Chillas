@@ -89,7 +89,7 @@ namespace Dev2.ViewModels
         {
             get
             {
-                return ViewModel.HasChanged;
+                return ViewModel.HasChanged && ViewModel.CanSave();
             }
         }
 

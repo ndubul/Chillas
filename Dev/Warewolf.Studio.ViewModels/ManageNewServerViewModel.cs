@@ -65,6 +65,11 @@ namespace Warewolf.Studio.ViewModels
             CancelCommand = new DelegateCommand(() => CloseAction.Invoke());
         }
 
+        public override bool CanSave()
+        {
+            return TestPassed;
+        }
+
         void Save()
         {
             var res = MessageBoxResult.OK;

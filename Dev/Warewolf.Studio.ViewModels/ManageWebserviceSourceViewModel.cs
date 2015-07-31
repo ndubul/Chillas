@@ -108,7 +108,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        bool CanSave()
+        public override bool CanSave()
         {
             return TestPassed;
         }
