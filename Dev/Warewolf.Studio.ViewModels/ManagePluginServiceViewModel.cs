@@ -94,7 +94,7 @@ namespace Warewolf.Studio.ViewModels
             HeaderText = Resources.Languages.Core.PluginServiceNewHeaderLabel;
             ResourceName = HeaderText;
             TestPluginCommand = new DelegateCommand(() => Test(_model));
-            SaveCommand = new DelegateCommand(() => Save(ToModel()), () => CanSave);
+            SaveCommand = new DelegateCommand(() => Save(ToModel()), CanSave);
             CreateNewSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
             EditSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource));
         }
@@ -252,7 +252,7 @@ namespace Warewolf.Studio.ViewModels
                 UpdateMappingsFromResponse();
                 ErrorText = "";
                 CanEditMappings = true;
-                CanSave = true;
+                _canSave = true;
                 IsTesting = false;
 
             }
@@ -688,16 +688,9 @@ namespace Warewolf.Studio.ViewModels
         #endregion
 
         public RecordsetList Response { get; set; }
-        public bool CanSave
+        public override bool CanSave()
         {
-            get
-            {
-                return _canSave;
-            }
-            set
-            {
-                _canSave = value;
-            }
+            return _canSave;
         }
         public ICollection<INamespaceItem> NameSpaces
         {

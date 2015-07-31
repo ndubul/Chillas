@@ -223,7 +223,7 @@ namespace Warewolf.Studio.ViewModels
             return SelectedAction != null;
         }
 
-        bool CanSave()
+        public override bool CanSave()
         {
             return TestSuccessful;
         }

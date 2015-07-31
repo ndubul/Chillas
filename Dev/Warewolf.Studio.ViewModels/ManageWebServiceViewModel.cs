@@ -257,7 +257,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public bool CanSave()
+        public override bool CanSave()
         {
             return !String.IsNullOrEmpty(Response);
         }

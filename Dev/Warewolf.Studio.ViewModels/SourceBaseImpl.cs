@@ -46,6 +46,7 @@ namespace Warewolf.Studio.ViewModels
         #endregion
 
         public bool IsActive { get; set; }
+        public abstract bool CanSave();
 
         public event EventHandler IsActiveChanged;
         public abstract void UpdateHelpDescriptor(string helpText);
