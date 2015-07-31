@@ -222,6 +222,14 @@ namespace Dev2.Studio.ViewModels
                 {
                     return new AuthorizeCommand(AuthorizationContext.None, p => { }, param => false);
                 }
+                if (ActiveItem.WorkSurfaceKey.WorkSurfaceContext != WorkSurfaceContext.Workflow)
+                {
+                    var vm = ActiveItem.WorkSurfaceViewModel as IStudioTab;
+                    if (vm != null)
+                    {
+                        return new AuthorizeCommand(AuthorizationContext.Any, o => vm.DoDeactivate(), o => vm.IsDirty);
+                    }
+                }                
                 return ActiveItem.SaveCommand;
             }
         }

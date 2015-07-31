@@ -1026,7 +1026,13 @@ You need Administrator permission.";
         }
 
         #endregion
-
+        public bool IsDirty
+        {
+            get
+            {
+                return SelectedTask.IsDirty;
+            }
+        }
         #region Public Methods
 
         public virtual bool DoDeactivate()
@@ -1047,6 +1053,7 @@ You need Administrator permission.";
             return true;
         }
 
+       
         public virtual void ShowSaveErrorDialog(string error)
         {
             _popupController.ShowSaveErrorDialog(error);

@@ -85,6 +85,14 @@ namespace Dev2.ViewModels
 
         #region Implementation of IStudioTab
 
+        public bool IsDirty
+        {
+            get
+            {
+                return ViewModel.HasChanged;
+            }
+        }
+
         public bool DoDeactivate()
         {
             if (ViewModel.HasChanged)

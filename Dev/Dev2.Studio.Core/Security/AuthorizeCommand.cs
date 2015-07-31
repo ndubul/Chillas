@@ -114,6 +114,10 @@ namespace Dev2.Security
 
         bool IsAuthorized()
         {
+            if (AuthorizationService == null)
+            {
+                return true;
+            }
             return !IsVersionResource && AuthorizationService != null && AuthorizationService.IsAuthorized(AuthorizationContext, ResourceId);
         }
 
