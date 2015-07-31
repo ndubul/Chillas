@@ -241,3 +241,26 @@ Scenario Outline: Sort 2 columns backwards
 	| [[rs(*).a]],[[rec(*).a]] | Forward   | You can only sort on one field at a time |
 	| [[rs(*)]]                | Backwards | Please provide a field to sort on        |
 	| [[rs(*)]]                | Forward   | Please provide a field to sort on        |
+	| [[va]] = tree            | Forward   | Only recordsets can be sorted            |
+	| ""                       | Forward   | No recordset given                       |
+	| asdas                    | Forward   | Only recordsets can be sorted            |
+	| 99                       | Forward   | Only recordsets can be sorted            |
+	| [[a]]                    | Forward   | Only recordsets can be sorted            |
+
+#Audit
+@ignore
+Scenario Outline: Sort recordset
+	Given I have the following recordset to sort
+	| rs       | value     |
+	| rs(1).a  | Zambia    |
+	| rec(1).a | Mangolia  |
+	| rs(2).a  | America   |
+	| rec(2).a | Australia |
+	And I sort a record "<input>"
+	And my sort order is "<direction>"
+	When the sort records tool is executed
+	Then the execution has "No" error
+	Examples: 
+	| input                          | direction | result             |
+	| [[rs(1).a]]                    | Forward   | Mongolia,Zambia    |
+	| [[rs([[int]]).a]], [[int]] = 2 | Forward   | America, Australia |

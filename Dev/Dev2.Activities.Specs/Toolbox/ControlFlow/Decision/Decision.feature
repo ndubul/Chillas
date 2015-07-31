@@ -1254,28 +1254,25 @@ Scenario: Runtime invalid recordset variable positve test
 
 @ignore
 #Audit
-#Scenario Outline: Ensuring all inputs work as expected
-#	Given a decision variable '<variable1>' value '<Var1>'	
-#	And a decision variable '<variable2>' value '<Var2>'
-#	And a decision variable '<variable3>' value '<Var3>'	
-#	And check if '<variable1>' "IsBetween" '<variable2>' and '<variable3>'
-#	When the decision tool is executed
-#	Then the decision result should be "True"
-#	Then the execution has "NO" error
-#	Then the debug inputs as  
-#	|            | Statement | Require All decisions to be True |
-#	| [[A]] = 30 |           |                                  |
-#	| [[B]] = 20 |           |                                  |
-#	| [[C]] = 40 |           |                                  |
-#	|            | String    | YES                              |
-#	And the debug output as 
-#	|         |
-#	| YES    |
-#
-#	Examples: 
-#	| variable1 | Var1 | variable2    | Var2 | variable3      | Var3 |
-#	|           |      |              |      |                |      |
-#	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
-#	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
-#	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
-#	| [[q]]     |      | [[rec(1).a]] | 2    | [[rec(1).set]] | 5    |
+Scenario Outline: Ensuring all inputs work as expected
+	Given a decision variable '<variable1>' value '<Var1>'	
+	And a decision variable '<variable2>' value '<Var2>'
+	And a decision variable '<variable3>' value '<Var3>'	
+	And check if '<variable1>' "IsBetween" '<variable2>' and '<variable3>'
+	When the decision tool is executed
+	Then the decision result should be "<decision>"
+	Then the execution has "NO" error
+	Examples: 
+	| variable1          | Var1 | variable2        | Var2           | variable3           | Var3 | decision |
+	|                    |      |                  |                |                     |      |          |
+	| [[q]]              |      | [[rec(1).a]]     | " "            | [[rs(1).set]]       | 5    |          |
+	| [[rec().a]]        | 27   | 22               | 22             | 33                  | 33   |          |
+	| [[rec(*).a]]       | T    | "South Africa"   | "South Africa" | H                   | H    |          |
+	| [[rec([[int]]).a]] | 2    | [[p]]            |                | [[q]]               |      |          |
+	| [[a]]              | 10   | " "              | " "            | " "                 | " "  |          |
+	| [[a]]              | 27   | [[rec().a]]      | 22             | [[rs(*).set]]       | 33   |          |
+	| [[a]]              | T    | [[rec([[int]].a) | "South Africa" | [[rs().set]]        | H    |          |
+	| [[a]]              | 2    | [[rec(*).a]]     | 5              | [[rs([[int]]).set]] | 7    |          |
+	
+	#failing
+	#[[rec(*).a]]

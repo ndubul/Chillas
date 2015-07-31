@@ -179,3 +179,50 @@ Scenario: Executing Count with two variables in result field
 	| [[rs().r]] = 4 |
 	| [[a]] = 4      |
 
+
+
+@Ignore
+#Audit
+Scenario Outline: Ensure variables of different types produce desired results
+	Given I have a recordset with this shape
+	| [[rs]]   |   |
+	| rs().row | 1 |
+	| rs().row | 2 |
+	| rs().row | 3 |
+	And count on record "<count>"	
+	When the count tool is executed
+	Then the result count should be "<val>"
+	And the execution has "<error>" error
+	And the debug outputs as "<Message>"
+Examples: 
+| Count                        | val  | error | Message                   |
+|                              |      | An    | Recordset not given       |
+| [[var]]                      | 1    | An    | Scalar not allowed        |
+| [[q]]                        |      | An    | Value must be a recordset |
+| Test                         | Test | An    | Value must be a recordset |
+| 99                           | 99   | An    | Value must be a recordset |
+| [[rs([[int]])]], [[int]] = 1 | 1    | No    | [[result]] = 3            |
+
+
+Scenario Outline: Ensure recordset result are correct
+	Given I have a recordset with this shape
+	| [[rs]]   |   |
+	| rs().row | 1 |
+	| rs().row | 2 |
+	| rs().row | 3 |
+	And count on record "[[rs()]]"	
+	When the count tool is executed
+	Then the result count should be 3
+	And the execution has "NO" error
+	And the debug inputs as 
+	| Recordset         |
+	| [[rs(1).row]] = 1 |
+	| [[rs(2).row]] = 2 |
+	| [[rs(3).row]] = 3 |
+	And the debug output as "<Debug>" with "<Output>"
+Examples: 
+| Debug              | Output                             |
+| [[rec().a]]        | [[rec(1).a]] = 3                   |
+| [[rec(*).a]]       | [[rec(1).a]] = 3 ,[[rec(2).a]] = 3 |
+| [[rec([[int]]).a]] | [[rec(1).a]] = 3                   |
+| [[rec(1).a]]       | [[rec(1).a]] = 3                   |

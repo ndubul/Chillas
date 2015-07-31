@@ -50,6 +50,10 @@
         <ResourceDictionary Source="Elements/xamDialogWindow.xaml"/>
         <ResourceDictionary Source="Elements/DockManager/MainDockManager.xaml"/>
 
+        <!--<ResourceDictionary Source="ActivityStyles/ActivityResources.xaml"/>
+        <ResourceDictionary Source="ActivityStyles/ActivityDesignerStyles.xaml"/>
+        <ResourceDictionary Source="ActivityStyles/ActivityStyles.xaml"/>-->
+
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
