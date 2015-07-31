@@ -3,10 +3,7 @@
                     xmlns:ui="clr-namespace:Dev2.UI;assembly=Dev2.Intellisense"                    
                     >
 
-<!--    <ResourceDictionary.MergedDictionaries>-->
-<!--        <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityDesignerStyles.xaml" />-->
-<!--        <ResourceDictionary Source="pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Theme.xaml"/>-->
-<!--    </ResourceDictionary.MergedDictionaries>-->
+
 
     <Style x:Key="HelpAdornerBorderStyle" TargetType="Border">
         <Setter Property="Width" Value="300" />

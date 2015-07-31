@@ -21,7 +21,15 @@ namespace Dev2.AppResources.Converters
 {
     public class ExplorerItemModelToIconConverter : IMultiValueConverter
     {
+        ResourceDictionary _dict;
+
         #region Implementation of IMultiValueConverter
+
+        public ExplorerItemModelToIconConverter()
+        {
+            const string pathname = "/Warewolf.Studio.Themes.Luna;component/Images.xaml";
+             _dict = Application.LoadComponent(new Uri(pathname, UriKind.Relative)) as ResourceDictionary;
+        }
 
         /// <summary>
         /// Converts source values to a value for the binding target. The data binding engine calls this method when it propagates the values from source bindings to the binding target.
@@ -32,42 +40,41 @@ namespace Dev2.AppResources.Converters
         /// <param name="values">The array of values that the source bindings in the <see cref="T:System.Windows.Data.MultiBinding"/> produces. The value <see cref="F:System.Windows.DependencyProperty.UnsetValue"/> indicates that the source binding has no value to provide for conversion.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            const string pathname = "/Warewolf.Studio.Themes.Luna;component/Images.xaml";
-            ResourceDictionary dict = Application.LoadComponent(new Uri(pathname, UriKind.Relative)) as ResourceDictionary;
+
             ResourceType resourceType = values[0] is ResourceType ? (ResourceType)values[0] : ResourceType.Unknown;
             switch(resourceType)
             {
                 case ResourceType.WorkflowService:
-                    return dict[CustomMenuIcons.WorkflowService] as DrawingImage;
+                    return _dict[CustomMenuIcons.WorkflowService] as DrawingImage;
                 case ResourceType.DbService:
-                    return dict[CustomMenuIcons.DbService] as DrawingImage;
+                    return _dict[CustomMenuIcons.DbService] as DrawingImage;
                 case ResourceType.PluginService:
-                    return dict[CustomMenuIcons.PluginService] as DrawingImage;
+                    return _dict[CustomMenuIcons.PluginService] as DrawingImage;
                 case ResourceType.WebService:
-                    return dict[CustomMenuIcons.WebService] as DrawingImage;
+                    return _dict[CustomMenuIcons.WebService] as DrawingImage;
                 case ResourceType.DbSource:
-                    return dict[CustomMenuIcons.DbSource] as DrawingImage;
+                    return _dict[CustomMenuIcons.DbSource] as DrawingImage;
                 case ResourceType.PluginSource:
-                    return dict[CustomMenuIcons.PluginSource] as DrawingImage;
+                    return _dict[CustomMenuIcons.PluginSource] as DrawingImage;
                 case ResourceType.WebSource:
-                    return dict[CustomMenuIcons.WebSource] as DrawingImage;
+                    return _dict[CustomMenuIcons.WebSource] as DrawingImage;
                 case ResourceType.EmailSource:
-                    return dict[CustomMenuIcons.EmailSource] as DrawingImage;
+                    return _dict[CustomMenuIcons.EmailSource] as DrawingImage;
                 case ResourceType.ServerSource:
-                    return dict[CustomMenuIcons.ServerSource] as DrawingImage;
+                    return _dict[CustomMenuIcons.ServerSource] as DrawingImage;
                 case ResourceType.Server:
                     return Application.Current.Resources["System-Logo"];
                 case ResourceType.Version:
                 case ResourceType.Message:
                     return null;
                 case ResourceType.Folder:
-                    return dict[CustomMenuIcons.Folder] as DrawingImage;
+                    return _dict[CustomMenuIcons.Folder] as DrawingImage;
                 case ResourceType.OauthSource :
-                    return Application.Current.Resources["DropBoxLogoIcon"];
+                    return Application.Current.Resources["DropBoxLogo"];
                 case ResourceType.SharepointServerSource:
                     return Application.Current.Resources["AddSharepointLogo"];
                 default:
-                    return dict[CustomMenuIcons.WorkflowService] as DrawingImage;
+                    return _dict[CustomMenuIcons.WorkflowService] as DrawingImage;
             }
         }
 

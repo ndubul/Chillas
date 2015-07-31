@@ -13,7 +13,7 @@
                                  Style="{DynamicResource ContentViewStyle}">
 
     <sap:ActivityDesigner.Icon>
-        <Binding Source="{StaticResource SharepointLogo}"/>
+        <Binding Source="{StaticResource SharepointLogoIcon}"/>
     </sap:ActivityDesigner.Icon>
 
     <sap:ActivityDesigner.Resources>

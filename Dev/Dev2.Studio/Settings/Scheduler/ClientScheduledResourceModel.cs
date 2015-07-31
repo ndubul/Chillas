@@ -37,7 +37,10 @@ namespace Dev2.Settings.Scheduler
         {
             get
             {
-                return _scheduledResources ?? (_scheduledResources = GetScheduledResources());
+                return _scheduledResources ?? (
+                    _scheduledResources = GetScheduledResources()
+                    
+                    );
             }
             set
             {
@@ -48,7 +51,9 @@ namespace Dev2.Settings.Scheduler
         public ObservableCollection<IScheduledResource> GetScheduledResources()
         {
             var controller = new CommunicationController { ServiceName = "GetScheduledResources" };
-            return controller.ExecuteCommand<ObservableCollection<IScheduledResource>>(_model.Connection, _model.Connection.WorkspaceID);
+            var resources =controller.ExecuteCommand<ObservableCollection<IScheduledResource>>(_model.Connection, _model.Connection.WorkspaceID);
+      
+            return resources;
         }
 
         public void DeleteSchedule(IScheduledResource resource)

@@ -381,7 +381,7 @@ namespace Dev2.Activities.Designers2.Email
                 {
                     if (message.SelectedFiles != null)
                     {
-                        Attachments = string.Join(Separator, Attachments, string.Join(Separator, message.SelectedFiles));
+                        Attachments = string.Join(Separator, message.SelectedFiles);
                     }
                 }
             };

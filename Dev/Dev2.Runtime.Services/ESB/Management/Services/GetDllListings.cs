@@ -128,9 +128,12 @@ namespace Dev2.Runtime.ESB.Management.Services
             var childList = new List<IFileListing>();
             foreach (var directoryInfo in directories)
             {
-                var directoryItem = BuildDllListing((FileSystemInfo)directoryInfo);
-                directoryItem.IsDirectory = true;
-                childList.Add(directoryItem);
+                if (directoryInfo.Attributes != (FileAttributes.Hidden | FileAttributes.System | FileAttributes.Directory))
+                {
+                    var directoryItem = BuildDllListing((FileSystemInfo)directoryInfo);
+                    directoryItem.IsDirectory = true;
+                    childList.Add(directoryItem);
+                }
             }
             var files = directory.EnumerateFiles("*.dll");
             foreach (var fileInfo in files)

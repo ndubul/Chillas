@@ -8,10 +8,10 @@
                     xmlns:converters="clr-namespace:Dev2.AppResources.Converters;assembly=Dev2.Studio.Core"
     x:Class="ArbitraryNameToEliminateBogusGenericsErrorDsfActivityResources">
 
-<!--    <ResourceDictionary.MergedDictionaries>-->
-<!--        <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityStyles.xaml" />-->
-<!--        <ResourceDictionary Source="pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Theme.xaml"/>-->
-<!--    </ResourceDictionary.MergedDictionaries>-->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityStyles.xaml" />
+
+    </ResourceDictionary.MergedDictionaries>
 
     <customControlsConverters:EmptyStringToBoolConverter x:Key="EmptyStringToBoolConverter" />
     <customControlsConverters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>

@@ -16,7 +16,7 @@ using Warewolf.Core;
 namespace Dev2.Activities
 {
 
-    [ToolDescriptorInfo("DropBoxLogoIcon", "Drop Box", ToolType.Native, "8999E59A-38A3-43BB-A98F-6090C5C9EA1E", "Dev2.Acitivities", "1.0.0.0", "Legacy", "Connectors", "/Warewolf.Studio.Themes.Luna;component/Images.xaml")]
+    [ToolDescriptorInfo("DropBoxLogo", "Drop Box", ToolType.Native, "8999E59A-38A3-43BB-A98F-6090C5C9EA1E", "Dev2.Acitivities", "1.0.0.0", "Legacy", "Connectors", "/Warewolf.Studio.Themes.Luna;component/Images.xaml")]
     public class DsfDropBoxFileActivity : DsfBaseActivity
     {
         IDropNetClient _dropnetClient;

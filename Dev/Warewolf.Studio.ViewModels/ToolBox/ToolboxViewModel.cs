@@ -135,6 +135,7 @@ namespace Warewolf.Studio.ViewModels.ToolBox
         public void ClearFilter()
         {
             Tools = new ObservableCollection<IToolDescriptorViewModel>(_remoteModel.GetTools().Select(a => new ToolDescriptorViewModel(a, _localModel.GetTools().Contains(a))));
+            SearchTerm = "";
         }
 
         void _remoteModel_OnserverDisconnected(object sender)

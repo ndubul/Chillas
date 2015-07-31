@@ -12,12 +12,7 @@
                        Style="{DynamicResource ContentViewStyle}">
 
     <sap:ActivityDesigner.Icon>
-        <DrawingBrush Stretch="Uniform">
-            <DrawingBrush.Drawing>
-                <!--<ImageDrawing Rect="0, 0, 16, 16" ImageSource="{StaticResource ToolGetWebRequest-32}"/>-->
-                <ImageDrawing Rect="0, 0, 16, 16" ImageSource="pack://application:,,,/Dev2.Activities.Designers;component/Images/ToolGetWebRequest-32.png" />
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
+        <Binding Source="{StaticResource Utility-GetWebRequest-Icon}"/>
     </sap:ActivityDesigner.Icon>
    
     <sap:ActivityDesigner.Resources>

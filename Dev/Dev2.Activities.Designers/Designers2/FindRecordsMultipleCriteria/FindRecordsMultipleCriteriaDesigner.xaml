@@ -12,12 +12,7 @@
                                  Style="{DynamicResource ContentViewStyle}">
 
     <sap:ActivityDesigner.Icon>
-        <DrawingBrush Stretch="Uniform">
-            <DrawingBrush.Drawing>
-                <ImageDrawing Rect="0, 0, 16, 16"
-                              ImageSource="{StaticResource ToolFindRecords-32}" />
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
+        <Binding Source="{StaticResource RecordSet-FindRecords-Icon}"/>
     </sap:ActivityDesigner.Icon>
 
     <sap:ActivityDesigner.Resources>

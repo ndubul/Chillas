@@ -307,7 +307,7 @@
                                           CommandParameter="DropboxSource"
                                           AutomationProperties.AutomationId ="UI_NewEmailSourceContextMenuItem_AutoID" >
                                     <MenuItem.Icon>
-                                        <Image Width="14" Height="14" Source="{StaticResource DropBoxLogoIcon}" />
+                                        <Image Width="14" Height="14" Source="{StaticResource DropBoxLogo}" />
                                     </MenuItem.Icon>
                                 </MenuItem>
 

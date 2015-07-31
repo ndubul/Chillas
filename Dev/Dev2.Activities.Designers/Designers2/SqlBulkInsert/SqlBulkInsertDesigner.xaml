@@ -13,12 +13,7 @@
                        Style="{DynamicResource ContentViewStyle}">
 
     <sap:ActivityDesigner.Icon>
-        <DrawingBrush Stretch="Uniform">
-            <DrawingBrush.Drawing>
-                <!--<ImageDrawing Rect="0, 0, 16, 16" ImageSource="{StaticResource ToolSqlBulkInsert-32}"/>-->
-                <ImageDrawing Rect="0, 0, 16, 16" ImageSource="pack://application:,,,/Dev2.Activities.Designers;component/Images/ToolSqlBulkInsert-32.png"/>
-            </DrawingBrush.Drawing>
-        </DrawingBrush>
+        <Binding Source="{StaticResource RecordSet-SQLBulkInsert-Icon}"/>
     </sap:ActivityDesigner.Icon>
    
     <sap:ActivityDesigner.Resources>

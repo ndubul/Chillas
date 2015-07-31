@@ -37,6 +37,7 @@ namespace Dev2.Common.Interfaces
         bool ProgressVisibility { get; set; }
         int ChildrenCount { get; }
         int CurrentProgress { get; set; }
+        bool IsChecked { get; set; }
 
         List<string> FilterSelected(List<string> acc);
     }
