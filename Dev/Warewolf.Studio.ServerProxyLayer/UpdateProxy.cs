@@ -6,7 +6,6 @@ using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
-using Dev2.Common.Interfaces.Email;
 using Dev2.Common.Interfaces.ErrorHandling;
 using Dev2.Common.Interfaces.Infrastructure.Communication;
 using Dev2.Common.Interfaces.ServerProxyLayer;

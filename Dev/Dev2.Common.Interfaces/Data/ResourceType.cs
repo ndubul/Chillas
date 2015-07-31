@@ -32,7 +32,8 @@ namespace Dev2.Common.Interfaces.Data
         Server = 4096,
         ReservedService = 8192,
         Message = 3069,
-        StartPage = 16384
-        
+        StartPage = 16384,
+        Scheduler = 32768,
+        Settings = 65536
     }
 }

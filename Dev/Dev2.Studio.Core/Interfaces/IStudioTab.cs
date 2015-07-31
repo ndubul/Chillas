@@ -16,5 +16,7 @@ namespace Dev2.Interfaces
     public interface IStudioTab
     {
         bool DoDeactivate();
+
+        bool IsDirty { get; }
     }
 }

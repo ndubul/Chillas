@@ -89,14 +89,15 @@
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <CheckBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" 
-                                              HorizontalAlignment="Center" Style="{StaticResource CheckBoxRoundedStyle}" 
+                                              HorizontalAlignment="Left" Style="{StaticResource CheckBoxRoundedStyle}" 
+                                              Margin="-2,0,0,0"
                                               IsChecked="{Binding Status, Converter={StaticResource SchedulerStatusToCheckedConverter},ConverterParameter=true}"></CheckBox>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontSize="12" Margin="0,0,0,-4" FontWeight="Bold" ></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding NextRunDate}" FontSize="11" Margin="0,-4,0,0" ></TextBlock>
-                                    <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Stretch" 
-                                            Command="{Binding ElementName=schedules, Path=DataContext.DeleteCommand }" >
+                                    <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Right" 
+                                            Command="{Binding ElementName=schedules, Path=DataContext.DeleteCommand }" Style="{StaticResource ButtonSchedulerDeleteTransparentStyle}" >
                                         <Button.Content>
-                                            <fa:FontAwesome Icon="Trash" Height="14" Width="14"></fa:FontAwesome>
+                                            <fa:FontAwesome Icon="Trash" FontSize="18"></fa:FontAwesome>
                                         </Button.Content>
                                     </Button>
                                 </Grid>
@@ -128,7 +129,6 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50*" />
                             <RowDefinition Height="50*" />
-                            <RowDefinition Height="30" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -314,10 +314,10 @@
                             </Grid>
 
                             <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="{StaticResource ControlBorderTop}">
-                                <TextBlock Text="Run as the following user account " FontSize="16" />
+                                <TextBlock Text="Run as the following user account " FontWeight="Bold"/>
                             </StackPanel>
 
-                            <Grid Grid.Row="7" Margin="{StaticResource ControlBorderTop}">
+                            <Grid Grid.Row="7">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -385,7 +385,7 @@
                             </StackPanel>
 
                         </Grid>
-
+                        
                         <Grid Grid.Row="1" Grid.Column="0" Margin="{StaticResource ElementBorderLeft}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -519,7 +519,6 @@
                             </DataGrid>
                         </Grid>
                         
-                        <Button Grid.Row="2" Width="80" HorizontalAlignment="Right" Content="Save" Command="{Binding SaveCommand}"></Button>
                     </Grid>
                 </ContentControl>
             </Grid>

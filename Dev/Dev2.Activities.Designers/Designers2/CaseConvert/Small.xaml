@@ -20,11 +20,6 @@
                                mc:Ignorable="d"
                                d:DesignWidth="230"
                                d:DataContext="{d:DesignInstance local:CaseConvertDesignerViewModel}">
-    
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
 
     <controls:Dev2DataGrid x:Name="SmallDataGrid"
                            ItemsSource="{Binding ModelItem.ConvertCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -49,7 +44,7 @@
                                     IsReadOnly="True">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Label Content="{Binding ModelItem, 
+                        <TextBlock Text="{Binding ModelItem, 
                                               NotifyOnTargetUpdated=True, 
                                               Converter={converters:RowToIndexConverter}}"/>
                     </DataTemplate>
@@ -66,6 +61,7 @@
                                                 MaxHeight="52"
                                                 TextWrapping="Wrap"
                                                 Padding="3"
+                                                Margin="0,0,1,1"
                                                 DefaultText="{Binding WatermarkTextVariable}"
                                                 WrapInBrackets="False"
                                                 Text="{Binding StringToConvert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -97,7 +93,7 @@
                     <DataTemplate>
                         <ComboBox Style="{StaticResource ActivityComboBoxStyle}"
                                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
-                                  Margin="0"
+                                  Margin="0,0,1,1"
                                   ItemsSource="{Binding DataContext.ItemsList, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                   SelectedValue="{Binding Path=ConvertType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                                   ToolTip="{x:Static help:HelpTextResources.CaseConversionToolTipConvertToCasetype}">

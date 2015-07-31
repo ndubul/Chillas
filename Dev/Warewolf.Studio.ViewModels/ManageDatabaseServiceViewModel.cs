@@ -55,6 +55,7 @@ namespace Warewolf.Studio.ViewModels
         private bool _showRecordSet;
         string _headerText;
         string _resourceName;
+        IDatabaseService _dbService;
 
         /// <exception cref="ArgumentNullException"><paramref name="model"/> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="saveDialog"/> is <see langword="null" />.</exception>
@@ -101,6 +102,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 throw new ArgumentNullException("service");
             }
+            _dbService = service;
             FromService(service);
         }
 
@@ -223,7 +225,7 @@ namespace Warewolf.Studio.ViewModels
             return SelectedAction != null;
         }
 
-        bool CanSave()
+        public override bool CanSave()
         {
             return TestSuccessful;
         }
@@ -633,23 +635,19 @@ namespace Warewolf.Studio.ViewModels
 
         #region Implementation of ISourceBase<IDatabaseService>
 
-
-
+       
         public override IDatabaseService ToModel()
         {
-            if (Item != null)
+            if (Item == null)
             {
-                return new DatabaseService
-                {
-                    Name = Item.Name,
-                    Action = SelectedAction,
-                    Inputs = Inputs == null ? new List<IServiceInput>() : Inputs.ToList(),
-                    OutputMappings = OutputMapping,
-                    Source = SelectedSource,
-                    Path = Item.Path,
-                    Id = Id
-                };
+                Item = ToService();
             }
+            return ToService();
+            
+        }
+
+        IDatabaseService ToService()
+        {
             return new DatabaseService
             {
                 Action = SelectedAction,

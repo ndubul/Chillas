@@ -3,7 +3,7 @@ using Dev2.Runtime.ServiceModel.Data;
 
 namespace Dev2.Common.Interfaces.ServerProxyLayer
 {
-    public interface IWebServiceSource
+    public interface IWebServiceSource:IEquatable<IWebServiceSource>
     {
         string HostName { get; set; }
         string UserName { get; set; }

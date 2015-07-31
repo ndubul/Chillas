@@ -50,7 +50,19 @@ namespace Warewolf.Core
             {
                 return true;
             }
-            return Equals(Source, other.Source) && Equals(Action, other.Action) && Equals(Inputs, other.Inputs) && Equals(OutputMappings, other.OutputMappings);
+            return Equals(Source, other.Source) && Equals(Action, other.Action);
+        }
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+        /// </returns>
+        /// <param name="other">An object to compare with this object.</param>
+        public bool Equals(IDatabaseService other)
+        {
+            return Equals(other as DatabaseService);
         }
 
         /// <summary>
@@ -91,8 +103,6 @@ namespace Warewolf.Core
                 hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Path != null ? Path.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Action != null ? Action.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Inputs != null ? Inputs.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (OutputMappings != null ? OutputMappings.GetHashCode() : 0);
                 return hashCode;
             }
         }

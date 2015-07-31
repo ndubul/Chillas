@@ -109,6 +109,11 @@ namespace Dev2.Core.Tests.ProperMoqs
         {
         }
 
+        public MessageBoxResult ShowItemCloseCloseConfirmation(string nameOfItem)
+        {
+            return MessageBoxResult.None;
+        }
+
         public MessageBoxResult ShowDeleteVersionMessage(string displayName)
         {
             return MessageBoxResult.None;

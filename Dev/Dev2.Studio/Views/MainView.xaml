@@ -9,14 +9,12 @@
         xmlns:customControls="clr-namespace:Dev2.Studio.Core.CustomControls;assembly=Dev2.Studio.Core"
         xmlns:explorer="clr-namespace:Dev2.Studio.Views.Explorer"
         xmlns:dataList="clr-namespace:Dev2.Studio.Views.DataList"
-        xmlns:views="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Views"
         xmlns:dock="clr-namespace:Dev2.Studio.Dock"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:behaviors="clr-namespace:Dev2.Studio.AppResources.Behaviors"
         xmlns:help="clr-namespace:Dev2.Help"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:views1="clr-namespace:Warewolf.Studio.Views;assembly=Warewolf.Studio.Views"
-        xmlns:core="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
         Background="{StaticResource WareWolfBackGroundBrush}"
         FontFamily="{StaticResource DefaultFontFamily}"
         ShowInTaskbar="True"
@@ -209,6 +207,7 @@
         <KeyBinding Command="{Binding ExitCommand}" Key="F4" Modifiers="Alt" />
         <KeyBinding Command="{Binding SettingsCommand}" Key="T" Modifiers="Alt" />
         <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Ctrl" />
+        <KeyBinding Command="{Binding SaveAllCommand}" Key="S" Modifiers="Ctrl+Shift" />
         <KeyBinding Command="{Binding ActiveItem.RunCommand}" Key="R" Modifiers="Ctrl" />
         <KeyBinding Command="{Binding DebugCommand}" Key="T" Modifiers="Ctrl" />
         <KeyBinding Command="{Binding DebugCommand}" Key="F5" />

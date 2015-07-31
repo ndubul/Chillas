@@ -142,17 +142,15 @@ namespace Warewolf.Studio.ViewModels
 
         void SetupHeaderTextFromExisting()
         {
-            var server = "";
             if (_warewolfserverName != null)
             {
-                server = _warewolfserverName;
             }
             HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel  + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
            
             Header = ((_dbSource == null ? ResourceName : _dbSource.Name));
         }
 
-        bool CanSave()
+        public override bool CanSave()
         {
             return TestPassed && !String.IsNullOrEmpty(DatabaseName);
         }
@@ -342,22 +340,10 @@ namespace Warewolf.Studio.ViewModels
             if (Item == null)
             {
                 Item = ToDbSource();
-                return Item;
             }
-
-            return new DbSourceDefinition
-            {
-                AuthenticationType = AuthenticationType,
-                ServerName = GetServerName(),
-                Password = Password,
-                UserName = UserName,
-                Type = (enSourceType)Enum.Parse(typeof( enSourceType), ServerType.Value),
-                Name = ResourceName,
-                DbName = DatabaseName,
-                Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
-            };
-
+            return ToDbSource();
         }
+
         IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
 
         public IList<NameValue> Types { get; set; }

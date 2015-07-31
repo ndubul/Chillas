@@ -1,4 +1,5 @@
-﻿namespace Dev2.Common.Interfaces.DB
+﻿
+namespace Dev2.Common.Interfaces.DB
 {
     public interface ISourceBase<T>
     {

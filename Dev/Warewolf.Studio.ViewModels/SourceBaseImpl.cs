@@ -6,18 +6,37 @@ using Microsoft.Practices.Prism.Mvvm;
 namespace Warewolf.Studio.ViewModels
 {
     public abstract class SourceBaseImpl<T> : BindableBase, ISourceBase<T>, IDockViewModel
+        where T:IEquatable<T>
     {
         string _header;
 
         protected SourceBaseImpl(ResourceType? image)
         {
             Image = image;
+            PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName != "Header")
+                {
+                    OnPropertyChanged(() => Header);
+                }
+            };
         }
+
 
         #region Implementation of ISourceBase<T>
 
         public T Item { get; set; }
-        public bool HasChanged { get { return Item != null && !Item.Equals(ToModel()); } }
+        public bool HasChanged
+        {
+            get
+            {
+                if (Item == null)
+                {
+                    ToModel();
+                }
+                return Item != null && !Item.Equals(ToModel());
+            }
+        }
 
         abstract  public T ToModel();
 
@@ -46,8 +65,11 @@ namespace Warewolf.Studio.ViewModels
         #endregion
 
         public bool IsActive { get; set; }
+        public abstract bool CanSave();
 
         public event EventHandler IsActiveChanged;
         public abstract void UpdateHelpDescriptor(string helpText);
+
+
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Core.Help;
@@ -7,13 +8,13 @@ using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.WorkSurface;
 using Microsoft.Practices.Prism.Mvvm;
 using Warewolf.Studio.ViewModels;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace Dev2.ViewModels
 {
     public class SourceViewModel<T> : BaseWorkSurfaceViewModel, IHelpSource, IStudioTab
+        where T : IEquatable<T>
     {
-        string _helpText;
-        SourceBaseImpl<T> _vm;
         readonly IPopupController _popupController;
 
         public SourceViewModel(IEventAggregator eventPublisher, SourceBaseImpl<T> vm, IPopupController popupController,IView view)
@@ -59,6 +60,7 @@ namespace Dev2.ViewModels
             }
         }
 
+        // ReSharper disable once UnusedMember.Global
         public ResourceType ResourceType
         {
             get
@@ -77,67 +79,39 @@ namespace Dev2.ViewModels
 
         #region Implementation of IHelpSource
 
-        public string HelpText
-        {
-            get
-            {
-                return _helpText;
-            }
-            set
-            {
-                _helpText = value;
-            }
-        }
-        public SourceBaseImpl<T> ViewModel
-        {
-            get
-            {
-                return _vm;
-            }
-            set
-            {
-                _vm = value;
-            }
-        }
+        public string HelpText { get; set; }
+        public SourceBaseImpl<T> ViewModel { get; set; }
         public IView View { get; set; }
 
         #endregion
 
         #region Implementation of IStudioTab
 
+        public bool IsDirty
+        {
+            get
+            {
+                return ViewModel.HasChanged && ViewModel.CanSave();
+            }
+        }
+
         public bool DoDeactivate()
         {
-            MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowSchedulerCloseConfirmation();
-            if (showSchedulerCloseConfirmation == MessageBoxResult.Cancel || showSchedulerCloseConfirmation == MessageBoxResult.None)
+            if (ViewModel.HasChanged)
             {
-                return false;
+                MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowItemCloseCloseConfirmation(DisplayName);
+                if(showSchedulerCloseConfirmation == MessageBoxResult.Cancel || showSchedulerCloseConfirmation == MessageBoxResult.None)
+                {
+                    return false;
+                }
+                if(showSchedulerCloseConfirmation == MessageBoxResult.No)
+                {
+                    return true;
+                }
             }
-            if (showSchedulerCloseConfirmation == MessageBoxResult.No)
-            {
-                return true;
-            }
-            //if (ViewModel.IsOkEnabled )
-            //{
-            //    MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowSchedulerCloseConfirmation();
-            //    if(showSchedulerCloseConfirmation == MessageBoxResult.Cancel || showSchedulerCloseConfirmation == MessageBoxResult.None)
-            //    {
-            //        return false;
-            //    }
-            //    if(showSchedulerCloseConfirmation == MessageBoxResult.No)
-            //    {
-            //        return true;
-            //    }
-
-            //}
-
             return true;
         }
 
         #endregion
-
-        public SourceViewModel(IEventAggregator eventPublisher)
-            : base(eventPublisher)
-        {
-        }
     }
 }

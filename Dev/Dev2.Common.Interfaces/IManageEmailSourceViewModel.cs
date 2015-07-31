@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
-using Dev2.Common.Interfaces.Email;
 
-namespace Dev2.Common.Interfaces.Studio.ViewModels.Dialogues
+namespace Dev2.Common.Interfaces
 {
     public interface IManageEmailSourceViewModel
     {

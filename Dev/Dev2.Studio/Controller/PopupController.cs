@@ -111,6 +111,21 @@ namespace Dev2.Studio.Controller
             ImageType = MessageBoxImage.Information;
             return Show();
         }
+        
+        public MessageBoxResult ShowItemCloseCloseConfirmation(string nameOfItem)
+        {
+            Header = string.Format("{0} Changes not saved", nameOfItem);
+            var description = nameOfItem+" has not been saved." + Environment.NewLine
+                              + "Would you like to save the Task? " + Environment.NewLine +
+                              "-------------------------------------------------------------------" +
+                              "Yes - Save "+ nameOfItem +"." + Environment.NewLine +
+                              "No - Discard your changes." + Environment.NewLine +
+                              "Cancel - Returns you to "+nameOfItem+".";
+            Description = description;
+            Buttons = MessageBoxButton.YesNoCancel;
+            ImageType = MessageBoxImage.Information;
+            return Show();
+        }
 
         public MessageBoxResult ShowNoInputsSelectedWhenClickLink()
         {

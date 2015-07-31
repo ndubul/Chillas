@@ -15,7 +15,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
@@ -313,7 +312,8 @@ namespace Warewolf.Studio.ViewModels
                 Header = string.Format("{0} - {1}", ((_pluginSource == null ? ResourceName : _pluginSource.Name)), serverName);
             }
         }
-        bool CanSave()
+
+        public override bool CanSave()
         {
             return _selectedDll != null && !string.IsNullOrEmpty(AssemblyName) && HasChanged &&(AssemblyName.EndsWith(".dll") || AssemblyName.StartsWith("GAC:"));
         }
@@ -368,8 +368,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        void 
-            ToItem()
+        void ToItem()
         {
             Item = new PluginSourceDefinition { Id = _pluginSource.Id, Name = _pluginSource.Name, Path = _pluginSource.Path, SelectedDll = SelectedDll };
         }

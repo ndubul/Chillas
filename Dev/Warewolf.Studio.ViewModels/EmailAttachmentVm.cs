@@ -17,32 +17,28 @@ using Dev2.Common.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Warewolf.Studio.Core;
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable ValueParameterNotUsed
 
 namespace Warewolf.Studio.ViewModels
 {
     public class EmailAttachmentVm : BindableBase, IEmailAttachmentVm
     {
-        IList<string> _attachments;
         readonly Action _closeAction;
-        DelegateCommand _saveCommand;
-        DelegateCommand _cancelCommand;
 
-        string _driveName;
-        IEmailAttachmentModel _model;
         public MessageBoxResult Result { get; private set; }
 
         public EmailAttachmentVm(IList<string> attachments, IEmailAttachmentModel model, Action closeAction)
             : this(model, closeAction)
         {
-            _attachments = attachments;
+            Attachments = attachments;
             Expand(attachments);
-            _model = model;
         }
-        public EmailAttachmentVm(IEmailAttachmentModel model, Action closeAction)
+
+        EmailAttachmentVm(IEmailAttachmentModel model, Action closeAction)
         {
             _closeAction = closeAction;
-            _attachments = new List<string>();
-            _model = model;
+            Attachments = new List<string>();
             Drives = model.FetchDrives().Select(a => new FileListingModel(model, a, () => OnPropertyChanged("DriveName"))).ToList();
             CancelCommand = new DelegateCommand(Cancel);
             SaveCommand = new DelegateCommand(Save);
@@ -92,52 +88,20 @@ namespace Warewolf.Studio.ViewModels
             _closeAction();
         }
 
-        public DelegateCommand CancelCommand
-        {
-            get
-            {
-                return _cancelCommand;
-            }
-            set
-            {
-                _cancelCommand = value;
-            }
-        }
+        public DelegateCommand CancelCommand { get; set; }
 
-        public DelegateCommand SaveCommand
-        {
-            get
-            {
-                return _saveCommand;
-            }
-            set
-            {
-                _saveCommand = value;
-            }
-        }
+        public DelegateCommand SaveCommand { get; set; }
 
-        public IList<string> Attachments
-        {
-            get
-            {
-                return _attachments;
-            }
-            set
-            {
-                _attachments = value;
-            }
-        }
+        public IList<string> Attachments { get; set; }
 
         public string DriveName
         {
             get
             {
                 return String.Join(";", Drives.SelectMany(a => a.FilterSelected(new List<string>())).ToList());
-                // return _driveName;
             }
             set
             {
-                _driveName = value;
                 OnPropertyChanged(() => DriveName);
             }
         }
@@ -145,14 +109,6 @@ namespace Warewolf.Studio.ViewModels
         public List<string> GetAttachments()
         {
             return Drives.SelectMany(a => a.FilterSelected(new List<string>())).ToList();
-        }
-
-        void SetIsChecked(bool value)
-        {
-            if (value)
-            {
-
-            }
         }
     }
 
