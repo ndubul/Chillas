@@ -16,16 +16,13 @@
                                xmlns:system="clr-namespace:System;assembly=mscorlib"
                                xmlns:to="clr-namespace:Dev2.TO;assembly=Dev2.Activities"
                                xmlns:converters="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.CustomControls"
+                               xmlns:fa="http://schemas.fontawesome.io/icons/"
                                Width="290"
                                MaxWidth="290"
                                Padding="7"
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance sharepointListDelete:SharepointListDeleteDesignerViewModel}"
                                d:DesignWidth="230">
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,10 +36,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="0"
-               Content="Server"
-               Style="{StaticResource ActivityMapppingLabelStyle}" />
+               Text="Server" />
         <ComboBox Grid.Column="1"
                   Grid.Row="0"
                   x:Name="InitialFocusElement"
@@ -50,6 +46,7 @@
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding SharepointServers}"
                   DisplayMemberPath="ResourceName"
+                  Margin="{StaticResource ControlBorderRight}"
                   IsEnabled="{Binding IsRefreshing,Converter={StaticResource InverseBooleanConverter}}"
                   SelectedItem="{Binding SelectedSharepointServer, Mode=TwoWay}"
                   ToolTip="{x:Static help:HelpTextResources.SharepointToolTipServer}"
@@ -68,15 +65,16 @@
                 ToolTip="Edit Sharepoint Server Source"
                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_EditDatabaseCommand_AutoID}" />
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="1"
-               Content="List"
-               Style="{StaticResource ActivityMapppingLabelStyle}" />
+               Text="List"
+               Margin="{StaticResource ControlBorderTop}" />
         <ComboBox Grid.Column="1"
                   Grid.Row="1"
                   Style="{StaticResource ActivityMapppingComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding Lists}"
+                  Margin="{StaticResource ControlBorderTopRight}"
                   DisplayMemberPath="FullName"
                   IsEnabled="{Binding IsRefreshing,Converter={StaticResource InverseBooleanConverter}}"
                   SelectedItem="{Binding SelectedList, Mode=TwoWay}"
@@ -90,19 +88,24 @@
         </ComboBox>
         <Button Grid.Column="2"
                 Grid.Row="1"
+                Margin="{StaticResource ControlBorderTop}"
                 Command="{Binding RefreshListsCommand}"
-                Style="{StaticResource ActivityRefreshButtonStyle}"
                 ToolTip="Refresh Lists"
-                AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RefreshTablesCommand_AutoID}" />
-        <Label Grid.Row="2"
+                AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RefreshTablesCommand_AutoID}" >
+            <Button.Content>
+                <fa:FontAwesome Icon="Refresh"></fa:FontAwesome>
+            </Button.Content>
+        </Button>
+        <TextBlock Grid.Row="2"
                Grid.Column="0"
-               Content="Result"
-               Style="{StaticResource ActivityMapppingLabelStyle}" />
+               Text="Result"
+               Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Row="2"
                                 Grid.Column="1"
                                 Grid.ColumnSpan="2"
                                 DefaultText="[[DeleteCount]]"
                                 WrapInBrackets="True"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding ModelItem.DeleteCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource ActivityMapppingIntellisenseTextBoxStyle}"
                                 ToolTip="{x:Static help:HelpTextResources.SharepointDelteToolTipResult}"

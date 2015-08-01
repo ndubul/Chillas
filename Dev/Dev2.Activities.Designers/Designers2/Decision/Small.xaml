@@ -6,28 +6,41 @@
                          xmlns:sadv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
                          xmlns:local="clr-namespace:System.Activities.Core.Presentation"
                          x:Name="controlRoot" x:Uid="sad:WorkflowViewElement_1">
-    
-    <Grid x:Name="rootGrid" x:Uid="Grid_1" MaxWidth="160"
-        Background="{DynamicResource DesignerViewBackground}">
+
+    <Grid x:Name="rootGrid" 
+          x:Uid="Grid_1" 
+          MaxWidth="160"
+          Background="{DynamicResource DesignerViewBackground}">
         <Grid.RowDefinitions>
             <RowDefinition x:Uid="RowDefinition_1" MinHeight="0"/>
             <RowDefinition x:Uid="RowDefinition_2"/>
         </Grid.RowDefinitions>
         <Grid x:Uid="Grid_2" Row="1" Height="87" MinWidth="70">
-            <Rectangle x:Uid="Rectangle_2" HorizontalAlignment="Center" Width="40" Height="40" Margin="0,5,0,20"
-                 Fill="{x:Static sad:WorkflowDesignerIcons+Activities.FlowDecisionNode}"/>
-            <TextBox x:Name="displayNameTextBox" x:Uid="TextBlock_1" HorizontalAlignment="Center"
-               VerticalAlignment="Bottom" BorderThickness="0"
-               AutomationProperties.AutomationId="DisplayNameTextBox"
-               Foreground="{DynamicResource WorkflowViewElementCaptionBrush}"
-               Text="{Binding Path=ModelItem.DisplayName, Mode=TwoWay}" ContextMenu="{x:Null}"/>
+            <Rectangle x:Uid="Rectangle_2" 
+                       HorizontalAlignment="Center" 
+                       Width="40" 
+                       Height="40" 
+                       Margin="0,5,0,20"
+                       Fill="{x:Static sad:WorkflowDesignerIcons+Activities.FlowDecisionNode}"/>
+            <TextBox x:Name="displayNameTextBox" 
+                     x:Uid="TextBlock_1" 
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Bottom" BorderThickness="0"
+                     AutomationProperties.AutomationId="DisplayNameTextBox"
+                     Foreground="{DynamicResource WorkflowViewElementCaptionBrush}"
+                     Text="{Binding Path=ModelItem.DisplayName, Mode=TwoWay}" ContextMenu="{x:Null}"/>
             <StackPanel x:Uid="StackPanel_1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-<!--                <Button Click="OnExpressionButtonClicked" x:Uid="Button_1" Width="8" Height="8"-->
-<!--                Template="{DynamicResource FlowchartExpressionButtonTemplate}" Margin="3"-->
-<!--                HorizontalAlignment="Right" VerticalAlignment="Top"-->
-<!--                Visibility="{Binding ExpressionButtonVisibility}" Background="{Binding ExpressionButtonColor}"/>-->
-                <Button x:Name="defaultAnnotationIndicator" x:Uid="Button_2" Width="16" Height="16" Margin="3"
-                HorizontalAlignment="Right" VerticalAlignment="Top">
+                <!--                <Button Click="OnExpressionButtonClicked" x:Uid="Button_1" Width="8" Height="8"-->
+                <!--                Template="{DynamicResource FlowchartExpressionButtonTemplate}" Margin="3"-->
+                <!--                HorizontalAlignment="Right" VerticalAlignment="Top"-->
+                <!--                Visibility="{Binding ExpressionButtonVisibility}" Background="{Binding ExpressionButtonColor}"/>-->
+                <Button x:Name="defaultAnnotationIndicator" 
+                        x:Uid="Button_2" 
+                        Width="16" 
+                        Height="16" 
+                        Margin="3"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top">
                     <FrameworkElement.Style>
                         <Style x:Uid="Style_35">
                             <Style.Triggers>
@@ -45,8 +58,10 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <Border x:Uid="Border_1" Grid.RowSpan="2" BorderThickness="1"
-            BorderBrush="{DynamicResource WorkflowViewElementBorderBrush}" CornerRadius="4"/>
+        <Border x:Uid="Border_1" 
+                Grid.RowSpan="2" 
+                BorderThickness="1"
+                BorderBrush="{DynamicResource WorkflowViewElementBorderBrush}" CornerRadius="4"/>
         <Rectangle x:Uid="Rectangle_1" Grid.RowSpan="2">
             <FrameworkElement.Style>
                 <Style x:Uid="Style_1">

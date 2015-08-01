@@ -53,9 +53,9 @@
                             <ui:IntellisenseTextBox DefaultText="Key Name"
                                                 Padding="3"
                                                 IsTabStop="False"
-                                                Margin="0,0,1,1"
                                                 Text="{Binding DestinationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
+                                                    Margin="0,0,1,1"
                                                 ToolTip="{x:Static help:HelpTextResources.CreateJSONToolTipName}">
                                 <i:Interaction.Behaviors>
                                     <help:HelpSetter Text="{x:Static help:HelpTextResources.CreateJSONHelpName}"
@@ -91,9 +91,9 @@
                                                     VerticalScrollBarVisibility="Auto"
                                                     MaxHeight="52"
                                                     Padding="3"
-                                                    Margin="0,0,1,1"
                                                     Text="{Binding SourceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ModelTextConverter}, ConverterParameter=True}"                                                
                                                     Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
+                                                    Margin="0,0,1,1"
                                                     ToolTip="{x:Static help:HelpTextResources.CreateJSONToolTipInput}">
                                 <i:Interaction.Behaviors>
                                     <help:HelpSetter Text="{x:Static help:HelpTextResources.CreateJSONHelpInput}"

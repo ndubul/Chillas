@@ -18,11 +18,6 @@
                                d:DesignWidth="200"
                                d:DataContext="{d:DesignInstance local:ZipDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -34,10 +29,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="File or Folder" />
+               Text="File or Folder" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="1"
                                 Grid.Row="0"
@@ -65,13 +59,14 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Destination" />
+               Margin="{StaticResource ControlBorderTop}"
+               Text="Destination" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="1"
                                 AllowUserInsertLine="False" 
+                                Margin="{StaticResource ControlBorderTop}"
                                 FilterType="All"
                                 DefaultText="[[ZipFileName]]"
                                 WrapInBrackets="False"
@@ -95,15 +90,16 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
         
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+               Margin="{StaticResource ControlBorderTop}"
+               Text="Result" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="2"
                                 AllowUserInsertLine="False"
                                 FilterType="All"
                                 DefaultText="[[Success]]"
+                                Margin="{StaticResource ControlBorderTop}"
                                 WrapInBrackets="True"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"

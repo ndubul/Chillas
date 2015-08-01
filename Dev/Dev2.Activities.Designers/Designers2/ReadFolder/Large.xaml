@@ -22,11 +22,6 @@
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance local:ReadFolderDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -50,10 +45,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="{Binding InputPathLabel, Mode=OneWay}" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding InputPathLabel, Mode=OneWay}" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="1"
                                 Grid.Row="0"
@@ -68,7 +60,7 @@
             <ui:IntellisenseTextBox.IntellisenseProvider>
                 <interfaceImplementors:CompositeIntellisenseProvider>
                     <interfaceImplementors:DefaultIntellisenseProvider />
-                     <provider:FileSystemIntellisenseProvider />
+                    <provider:FileSystemIntellisenseProvider />
                 </interfaceImplementors:CompositeIntellisenseProvider>
             </ui:IntellisenseTextBox.IntellisenseProvider>
             <i:Interaction.Behaviors>
@@ -81,19 +73,17 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Read" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Read" Margin="{StaticResource ControlBorderTop}"/>
         <StackPanel Grid.Column="1"
                     Orientation="Horizontal"
+                    Margin="{StaticResource ControlBorderTop}"
                     Grid.Row="1"
                     ToolTip="{x:Static help:HelpTextResources.ReadFolderToolTipRead}">
-            <RadioButton Margin="2,0"
+            <RadioButton Margin="{StaticResource ControlBorderRight}"
                          IsChecked="{Binding Path=ModelItem.IsFilesSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Files</RadioButton>
-            <RadioButton Margin="2,0"
+            <RadioButton Margin="{StaticResource ControlBorderRight}"
                          IsChecked="{Binding Path=ModelItem.IsFoldersSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Folders</RadioButton>
-            <RadioButton Margin="2,0"
+            <RadioButton Margin="{StaticResource ControlBorderRight}"
                          IsChecked="{Binding Path=ModelItem.IsFilesAndFoldersSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Files &amp; Folders</RadioButton>
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.ReadFolderHelpRead}"
@@ -101,14 +91,12 @@
             </i:Interaction.Behaviors>
         </StackPanel>
 
-        <Label Grid.Column="0"
-               Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Username" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Username" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="2"
                                 DefaultText="[[UserName]]"
                                 WrapInBrackets="False"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding Path=ModelItem.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.ReadFolderToolTipUsername}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
@@ -124,12 +112,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="3"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Password" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Password" Margin="{StaticResource ControlBorderTop}"/>
         <PasswordBox Grid.Column="1"
-                                Grid.Row="3"                                                               
+                                Grid.Row="3"
+                     Margin="{StaticResource ControlBorderTop}"
                                 ToolTip="{x:Static help:HelpTextResources.ReadFolderToolTipPassword}"                                
                                 attachedProperties:FocusSetter.IsFocused="{Binding IsPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 attachedProperties:PasswordBoxAssistant.BindPassword="true"
@@ -145,14 +131,12 @@
             </i:Interaction.Behaviors>
         </PasswordBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="4"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Result" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="4"
                                 DefaultText="[[Recordset().Field]]"
                                 FilterType="All"
+                                Margin="{StaticResource ControlBorderTop}"
                                 WrapInBrackets="True"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.ReadFolderToolTipResult}"

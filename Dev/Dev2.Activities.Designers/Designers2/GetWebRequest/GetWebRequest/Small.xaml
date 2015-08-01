@@ -16,10 +16,6 @@
                                d:DesignWidth="250"
                                d:DataContext="{d:DesignInstance local:GetWebRequestDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -30,11 +26,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Content="URL"
-               Style="{StaticResource ActivityLabelStyle}"
-               VerticalAlignment="Bottom" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="URL" VerticalAlignment="Bottom" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="0"
                                 Name="InitialFocusElement"
@@ -51,18 +43,14 @@
                                      SourcePropertyValue="{Binding ModelItem.Url, UpdateSourceTrigger=PropertyChanged}"
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
-
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result"
-               VerticalAlignment="Bottom" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Result" VerticalAlignment="Bottom" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="1"
                                 DefaultText="[[HTML]]"
                                 WrapInBrackets="True"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_InputFormattxt_AutoID}"

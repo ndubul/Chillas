@@ -18,11 +18,6 @@
                                d:DataContext="{d:DesignInstance local:SequenceDesignerViewModel}"
                                ToolTip="{x:Static help:HelpTextResources.SequenceTooltipSequence}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -42,17 +37,14 @@
                   SelectionMode="Single"
                   Height="Auto">
             <DataGrid.Columns>
-                <DataGridTemplateColumn IsReadOnly="True"
-                                        d:DataContext="{d:DesignInstance Type=activities:Activity}">
+                <DataGridTemplateColumn IsReadOnly="True" d:DataContext="{d:DesignInstance Type=activities:Activity}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label VerticalAlignment="Top"
+                            <TextBlock VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
-                                   HorizontalContentAlignment="Left"
-                                   VerticalContentAlignment="Top"
                                    Margin="0"
                                    Padding="0"
-                                   Content="{Binding DisplayName}" />
+                                   Text="{Binding DisplayName}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

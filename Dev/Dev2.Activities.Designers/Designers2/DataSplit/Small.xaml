@@ -22,11 +22,6 @@
                                d:DesignWidth="280"
                                d:DataContext="{d:DesignInstance local:DataSplitDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -38,13 +33,13 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0"
-                   Grid.Column="0"
-                   Content="String To Split"
-                   VerticalAlignment="Top"
-                   Margin="0,5,5,0"
-                   Style="{StaticResource ActivityMapppingLabelStyle}" />
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       Text="String To Split"
+                       VerticalAlignment="Top" />
             <ui:IntellisenseTextBox x:Name="InitialFocusElement"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2" 
                                     Grid.Row="0"
                                     AllowMultilinePaste="True"
                                     AcceptsReturn="True"
@@ -60,8 +55,6 @@
                                     ToolTip="{x:Static help:HelpTextResources.DataSplitToolTipString}"
                                     Style="{StaticResource ActivityMapppingIntellisenseTextBoxStyle}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_SourceStringtxt_AutoID}"
-                                    Grid.ColumnSpan="2"
-                                    Margin="0,2"
                                     HorizontalAlignment="Right">
                 <i:Interaction.Behaviors>
                     <help:HelpSetter Text="{x:Static help:HelpTextResources.DataSplitHelpString}"
@@ -80,6 +73,7 @@
         <controls:Dev2DataGrid x:Name="SmallDataGrid"
                                Grid.Row="1"
                                Grid.Column="0"
+                               Margin="{StaticResource ControlBorderTop}"
                                ItemsSource="{Binding ModelItem.ResultsCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource SpacedActivityDataGridStyle}"
                                MinHeight="56">
@@ -101,20 +95,20 @@
                                         IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding ModelItem, 
+                            <TextBlock Text="{Binding ModelItem, 
                                               NotifyOnTargetUpdated=True, 
                                               Converter={converters:RowToIndexConverter}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="*"
-                                        d:DataContext="{d:DesignInstance Type=activities:DataSplitDTO}">
+                <DataGridTemplateColumn Width="*" d:DataContext="{d:DesignInstance Type=activities:DataSplitDTO}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ui:IntellisenseTextBox AllowUserInsertLine="False"
                                                     MaxHeight="52"
                                                     Padding="3"
+                                                    Margin="0,0,1,1"
                                                     DefaultText="{Binding WatermarkTextVariable}"
                                                     WrapInBrackets="True"
                                                     Text="{Binding OutputVariable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -146,7 +140,7 @@
                         <DataTemplate>
                             <ComboBox Style="{StaticResource ActivityComboBoxStyle}"
                                       ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
-                                      Margin="0"
+                                      Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.ItemsList, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                       SelectedValue="{Binding Path=SplitType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                                       ToolTip="{x:Static help:HelpTextResources.DataSplitToolTipWithtype}">
@@ -176,14 +170,13 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="25"
-                                        d:DataContext="{d:DesignInstance Type=activities:DataSplitDTO}">
+                <DataGridTemplateColumn Width="25" d:DataContext="{d:DesignInstance Type=activities:DataSplitDTO}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ui:IntellisenseTextBox AllowUserInsertLine="False"
                                                     MaxHeight="52"
                                                     Padding="3"
-                                                    Margin="0"
+                                                    Margin="0,0,1,1"
                                                     WrapInBrackets="False"
                                                     IsEnabled="{Binding EnableAt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                     Text="{Binding At, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

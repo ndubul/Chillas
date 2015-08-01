@@ -26,11 +26,6 @@
                                d:DesignWidth="280"
                                d:DataContext="{d:DesignInstance findRecordsMultipleCriteria:FindRecordsMultipleCriteriaDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -62,9 +57,7 @@
                 <ColumnDefinition Width="60" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0"
-                   Content="In Field(s)"
-                   Style="{StaticResource ActivityMapppingLabelStyle}" />
+            <TextBlock Grid.Column="0" Text="In Field(s)" />
             <ui:IntellisenseTextBox Grid.Column="1"
                                     x:Name="InitialFocusElement"
                                     AllowMultilinePaste="True"
@@ -118,7 +111,7 @@
                                         d:DataContext="{d:DesignInstance Type=activities:FindRecordsTO}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding ModelItem, 
+                            <TextBlock Text="{Binding ModelItem, 
                                               NotifyOnTargetUpdated=True, 
                                               Converter={converters:RowToIndexConverter}}" />
                         </DataTemplate>
@@ -133,7 +126,7 @@
                         <DataTemplate>
                             <ComboBox Style="{StaticResource ActivityComboBoxStyle}"
                                       ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
-                                      Margin="0,0,2,0"
+                                      Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.WhereOptions, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                       SelectedValue="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                                       ToolTip="{x:Static help:HelpTextResources.FindToolTipLookForMatchType}">
@@ -187,6 +180,7 @@
                                                         AllowUserInsertLine="True"
                                                         MaxHeight="52"
                                                         Padding="3"
+                                                        Margin="0,0,1,1"
                                                         attachedProperties:FocusSetter.IsFocused="{Binding IsSearchCriteriaFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Text="{Binding SearchCriteria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         IsEnabled="{Binding IsSearchCriteriaEnabled, UpdateSourceTrigger=PropertyChanged}"
@@ -220,6 +214,7 @@
                                                         AcceptsReturn="False"
                                                         MaxHeight="52"
                                                         Padding="3"
+                                                        Margin="0,0,1,1"
                                                         attachedProperties:FocusSetter.IsFocused="{Binding IsFromFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Text="{Binding From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Visibility="{Binding IsSearchCriteriaVisible,Converter={StaticResource BoolToVisibilityConverterInverse},UpdateSourceTrigger=PropertyChanged}"
@@ -250,7 +245,7 @@
                                                         TextWrapping="NoWrap"
                                                         AcceptsReturn="False"
                                                         MaxHeight="52"
-                                                        Margin="2,0,0,0"
+                                                        Margin="0,0,1,1"
                                                         Padding="3"
                                                         attachedProperties:FocusSetter.IsFocused="{Binding IsToFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Text="{Binding To, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -284,6 +279,7 @@
         <CheckBox Grid.Row="2"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
+                  Margin="{StaticResource ControlBorderTop}"
                   Content="Require All Matches To Be True"
                   IsChecked="{Binding ModelItem.RequireAllTrue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ToolTip="{x:Static help:HelpTextResources.FindToolTipRequireAllMatchesToBeTrue}"
@@ -297,6 +293,7 @@
         <CheckBox Grid.Row="3"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
+                  Margin="{StaticResource ControlBorderTop}"
                   Content="Requires All Fields To Match"
                   IsChecked="{Binding ModelItem.RequireAllFieldsToMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ToolTip="{x:Static help:HelpTextResources.FindToolTipRequireAllFieldsToMatch}"
@@ -309,17 +306,15 @@
 
         <Grid Grid.Row="4"
               Grid.Column="0"
+              Margin="{StaticResource ControlBorderTop}"
               Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0"
-                   Style="{StaticResource ActivityLabelStyle}"
-                   Content="Result" />
+            <TextBlock Grid.Column="0" Text="Result" />
 
             <ui:IntellisenseTextBox Grid.Column="1"
-                                    Margin="0,2,0,2"
                                     DefaultText="[[RowWithResult]]"
                                     WrapInBrackets="True"
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}"

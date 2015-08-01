@@ -22,11 +22,6 @@
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance local:WriteFileDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -51,10 +46,10 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="{Binding OutputPathLabel, Mode=OneWay}" />
+               Margin="{StaticResource ControlBorderTop}"
+               Text="{Binding OutputPathLabel, Mode=OneWay}" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="1"
                                 Grid.Row="0"
@@ -82,26 +77,27 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Method" />
+               Margin="{StaticResource ControlBorderTop}"
+               Text="Method" />
         <StackPanel Grid.Column="1"
                     Grid.Row="1"
+                    Margin="{StaticResource ControlBorderTop}"
                     ToolTip="{x:Static help:HelpTextResources.WriteFileHelpMethod}">
-            <RadioButton Margin="2,0" IsChecked="{Binding Path=ModelItem.Overwrite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Overwrite</RadioButton>
-            <RadioButton Margin="2,0" IsChecked="{Binding Path=ModelItem.AppendTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Append Top</RadioButton>
-            <RadioButton Margin="2,0" IsChecked="{Binding Path=ModelItem.AppendBottom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Append Bottom</RadioButton>
+            <RadioButton Margin="{StaticResource ControlBorderRight}" IsChecked="{Binding Path=ModelItem.Overwrite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Overwrite</RadioButton>
+            <RadioButton Margin="{StaticResource ControlBorderRight}" IsChecked="{Binding Path=ModelItem.AppendTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Append Top</RadioButton>
+            <RadioButton Margin="{StaticResource ControlBorderRight}" IsChecked="{Binding Path=ModelItem.AppendBottom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Append Bottom</RadioButton>
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.WriteFileHelpMethod}"
                                  DataContext="{Binding}" />
             </i:Interaction.Behaviors>
         </StackPanel>
         
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Contents" />
+               Margin="{StaticResource ControlBorderTop}"
+               Text="Contents" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="2"
                                 DefaultText="[[logtext]]"
@@ -109,6 +105,7 @@
                                                 AcceptsReturn="True"
                                                 AllowUserInsertLine="True"
                                                 MaxHeight="80"
+                                Margin="{StaticResource ControlBorderTop}"
                                 TextWrapping="Wrap"
                                 WrapInBrackets="False"
                                 Text="{Binding Path=ModelItem.FileContents, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -126,14 +123,15 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
         
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="3"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Username" />
+               Margin="{StaticResource ControlBorderTop}"
+               Text="Username" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="3"
                                 DefaultText="[[UserName]]"
                                 WrapInBrackets="False"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding Path=ModelItem.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.WriteFileToolTipUsername}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
@@ -149,12 +147,13 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="4"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Password" />
+               Margin="{StaticResource ControlBorderTop}"
+               Text="Password" />
         <PasswordBox Grid.Column="1"
-                                Grid.Row="4"                                                               
+                                Grid.Row="4"           
+                     Margin="{StaticResource ControlBorderTop}"
                                 ToolTip="{x:Static help:HelpTextResources.WriteFileToolTipPassword}"                                
                                 attachedProperties:FocusSetter.IsFocused="{Binding IsPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 attachedProperties:PasswordBoxAssistant.BindPassword="true"
@@ -170,13 +169,14 @@
             </i:Interaction.Behaviors>
         </PasswordBox>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="5"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+               Margin="{StaticResource ControlBorderTop}"
+               Text="Result" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="5"
                                 FilterType="All"
+                                Margin="{StaticResource ControlBorderTop}"
                                 DefaultText="[[WriteResults]]"
                                 WrapInBrackets="True"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 

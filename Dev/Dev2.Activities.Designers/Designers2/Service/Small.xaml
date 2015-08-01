@@ -11,11 +11,6 @@
                                d:DesignWidth="250"
                                d:DataContext="{d:DesignInstance local:ServiceDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -32,11 +27,11 @@
                             <ColumnDefinition SharedSizeGroup="A" />
                             <ColumnDefinition SharedSizeGroup="B" />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0"
+                        <TextBlock Grid.Column="0"
                                Margin="0,0,-2,0"
-                               Content="{Binding Path=Key, UpdateSourceTrigger=PropertyChanged}" />
-                        <Label Grid.Column="1"
-                               Content="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                               Text="{Binding Path=Key, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Grid.Column="1"
+                               Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
