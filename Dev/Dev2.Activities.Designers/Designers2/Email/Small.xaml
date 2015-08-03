@@ -37,7 +37,7 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox x:Name="InitialFocusElement"
-                      ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                      ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                       SelectedItem="{Binding SelectedEmailSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding EmailSources}"
                       Margin="{StaticResource ControlBorderRight}"
@@ -100,7 +100,6 @@
         <TextBlock Grid.Column="0" Grid.Row="3" Text="Body" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="3"
-                                DefaultText="Email Content"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipBody}"
                                 Text="{Binding ModelItem.Body,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AllowMultilinePaste="True"
@@ -108,11 +107,16 @@
                                 AcceptsReturn="True"
                                 AllowUserInsertLine="True"
                                 MaxHeight="52"
+                                Height="25"
+                                Padding="2,5,2,2"
                                 TextWrapping="Wrap"
                                 AcceptsTab="True"
                                 VerticalContentAlignment="Top"
                                 MinLines="2"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_bodytxt_AutoID}">
+            <ui:IntellisenseTextBox.DefaultText>
+                <TextBlock Text="Email Content" VerticalAlignment="Top" Margin="0,-3,0,0"></TextBlock>
+            </ui:IntellisenseTextBox.DefaultText>
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpBody}"
                                  DataContext="{Binding}" />

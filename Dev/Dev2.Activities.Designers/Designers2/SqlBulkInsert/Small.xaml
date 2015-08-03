@@ -39,7 +39,7 @@
         <ComboBox Grid.Column="1"
                   Grid.Row="0"
                   x:Name="InitialFocusElement"
-                  ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                   ItemsSource="{Binding Databases}"
                   Margin="{StaticResource ControlBorderRight}"
                   DisplayMemberPath="ResourceName"
@@ -65,7 +65,7 @@
                Margin="{StaticResource ControlBorderTop}" />
         <ComboBox Grid.Column="1"
                   Grid.Row="1"
-                  ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                   ItemsSource="{Binding Tables}"
                   DisplayMemberPath="FullName"
                   Margin="{StaticResource ControlBorderTopRight}"

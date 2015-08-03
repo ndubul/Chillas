@@ -59,7 +59,7 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox x:Name="InitialFocusElement"
-                      ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
+                      ItemContainerStyle="{StaticResource ComboBoxItemStyle}" 
                       SelectedItem="{Binding SelectedEmailSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding EmailSources}"
                       Margin="{StaticResource ControlBorderRight}"
@@ -201,7 +201,7 @@
                   Grid.Row="6"
                   SelectedValue="{Binding ModelItem.Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Priorities}"
-                  ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
+                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}" 
                   Margin="{StaticResource ControlBorderTop}"
                   ToolTip="{x:Static help:HelpTextResources.EmailToolTipPriorityType}">
             <i:Interaction.Behaviors>
@@ -272,15 +272,15 @@
         <TextBlock Grid.Column="0" Grid.Row="9" VerticalAlignment="Top" Text="Body" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="9"
-                                DefaultText="Email Content"
                                 VerticalAlignment="Top"
                                 AllowMultilinePaste="True"
                                 AcceptsReturn="True"
                                 AllowUserInsertLine="True"
                                 TextWrapping="Wrap"
-                                Height="75"
+                                MinHeight="100"
                                 MaxHeight="100"
                                 AcceptsTab="True"
+                                Padding="2,5,2,2"
                                 VerticalContentAlignment="Top"
                                 VerticalScrollBarVisibility="Auto"
                                 HorizontalScrollBarVisibility="Auto"
@@ -289,6 +289,9 @@
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 Margin="{StaticResource ControlBorderTop}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_bodytxt_AutoID}">
+            <ui:IntellisenseTextBox.DefaultText>
+                <TextBlock Text="Email Content" VerticalAlignment="Top" Margin="0,-3,0,0"></TextBlock>
+            </ui:IntellisenseTextBox.DefaultText>
             <i:Interaction.Behaviors>
                 <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpBody}"
                                  DataContext="{Binding}" />

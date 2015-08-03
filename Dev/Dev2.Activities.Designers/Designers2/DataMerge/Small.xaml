@@ -94,7 +94,7 @@
                 <DataGridTemplateColumn Width="*" d:DataContext="{d:DesignInstance Type=activities:DataMergeDTO}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
+                            <ComboBox ItemContainerStyle="{StaticResource ComboBoxItemStyle}" 
                                       Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.ItemsList, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                       SelectedValue="{Binding Path=MergeType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"

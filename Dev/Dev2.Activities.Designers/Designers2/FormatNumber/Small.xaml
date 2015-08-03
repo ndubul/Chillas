@@ -57,7 +57,7 @@
         <ComboBox  Grid.Column="1"
                    Grid.Row="1"
                    Margin="{StaticResource ControlBorderTopRight}"
-                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                   ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                    ItemsSource="{Binding RoundingTypes}"
                    Width="Auto"
                    attachedProperties2:WizardEngineAttachedProperties.DontOpenWizard="True"

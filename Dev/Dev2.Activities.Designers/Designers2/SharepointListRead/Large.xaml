@@ -59,7 +59,7 @@
             <ComboBox Grid.Column="1"
                   Grid.Row="0"
                   x:Name="InitialFocusElement"
-                  ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                   ItemsSource="{Binding SharepointServers}"
                   DisplayMemberPath="ResourceName"
                       Margin="{StaticResource ControlBorderRight}"
@@ -86,7 +86,7 @@
                Margin="{StaticResource ControlBorderTop}" />
             <ComboBox Grid.Column="1"
                   Grid.Row="1"
-                  ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                   ItemsSource="{Binding Lists}"
                   DisplayMemberPath="FullName"
                       Margin="{StaticResource ControlBorderTopRight}"
@@ -235,7 +235,7 @@
                                         d:DataContext="{d:DesignInstance Type=to:SharepointSearchTo}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                                <ComboBox ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                                       Margin="0,0,1,1"
                                       DisplayMemberPath="FieldName"
                                       SelectedValuePath="InternalName"
@@ -268,7 +268,7 @@
                                         d:DataContext="{d:DesignInstance Type=to:SharepointSearchTo}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                                <ComboBox ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                                       Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.WhereOptions, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                       SelectedValue="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"

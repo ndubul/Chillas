@@ -32,7 +32,7 @@
             <ComboBox x:Name="InitialFocusElement"
                   Grid.Column="0" 
                   Width="125"
-                  ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                   IsEditable="False"
                       Margin="{StaticResource ControlBorderRight}"
                   SelectedValue="{Binding SelectedForeachType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
