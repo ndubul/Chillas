@@ -272,13 +272,14 @@ Scenario Outline: Ensure Date and Time Input and outputs accept variables and re
        Given I have a date '<Date>'  with '<DateVal>'
        And the input format as '<Input>' with '<value>'
        And the output format as '<Output>' with '<val>'
-	   And I selected Add time as "Years" with a value of 0
+	   And I selected Add time as "Years" with a value of '<years>'
        When the datetime tool is executed
        Then the execution has "NO" error
 	   And the result variable '<res>' will be '<result>'
 Examples: 
-	| Date                      | Dateval    | Input                     | value      | Output                    | val       | res                       | result |
-	| [[rec(1).a]]              | 31/07/2015 | [[rs([[a]]).st]], [[a]]=1 | dd/mm/yyyy | [[rs().st]]               | mm-dd-yyy | [[rec(3).a]]              |        |
-	| [[rec().a]]               | 31/07/2015 | [[rs(1).st]]              | dd/mm/yyyy | [[rs([[b]]).st]], [[b]]=2 | mm-dd-yyy | [[rec([[f]]).a]], [[f]]=3 |        |
-	| [[rec(*).a]]              | 31/07/2015 | [[rs().st]]               | dd/mm/yyyy | [[j]]                     |           |                           |        |
-	| [[rec([[a]]).a]], [[a]]=1 | 31/07/2015 | [[rs(*).st]]              | dd/mm/yyyy | [[rs(*).s]]               | mm-dd-yyy |                           |        |
+	| Date                      | Dateval    | Input                     | years       | value      | Output                    | val       | res                                 | result     |
+	| [[rec(1).a]]              | 31/07/2015 | [[rs([[a]]).st]], [[a]]=1 | 0           | dd/mm/yyyy | [[rs().st]]               | mm-dd-yyy | [[rec(3).a]]                        | 31-07-2015 |
+	| [[rec().a]]               | 31/07/2015 | [[rs(1).st]]              | 0           | dd/mm/yyyy | [[rs([[b]]).st]], [[b]]=2 | mm-dd-yyy | [[rec([[f]]).a]], [[f]]=3           | 31-07-2015 |
+	| [[rec(*).a]]              | 31/07/2015 | [[rs().st]]               | 0           | dd/mm/yyyy | [[j]]                     |           | [[rj(1).a]],[[rj(2).a]],[[rj(3).a]] | 31-07-2015 |
+	| [[rec([[a]]).a]], [[a]]=1 | 31/07/2015 | [[rs(*).st]]              | 0           | dd/mm/yyyy | [[rs(*).s]]               | mm-dd-yyy | [[rj(*)]]                           | 31-07-2015 |
+	| [[b]]                     | 31/07/2015 | [[a]]                     | [[rd(*).b]] | dd/mm/yyyy | [[b]]                     | mm-dd-yyy | [[b]]                               | 31-07-2015 |
