@@ -41,7 +41,6 @@
             <ComboBox x:Name="InitialComboBox"
                       Grid.Row="0"
                       Grid.Column="0"
-                      Style="{StaticResource ActivityComboBoxStyle}"
                       Margin="{StaticResource ControlBorderRight}"
                       ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                       SelectedItem="{Binding SelectedSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -60,15 +59,13 @@
             <Button Grid.Column="1"
                     Content="..."
                     Command="{Binding EditDropboxSourceCommand}"
-                    ToolTip="Edit Email Source"
-                    Style="{StaticResource ActivityEditButtonStyle}" />
+                    ToolTip="Edit Email Source" />
         </Grid>
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Operation" FontWeight="Normal" VerticalAlignment="Top" Margin="{StaticResource ControlBorderTop}"/>
         <ComboBox x:Name="Operation"
                   Grid.Row="1"
                   Grid.Column="1"
                   Margin="{StaticResource ControlBorderTop}"
-                  Style="{StaticResource ActivityComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   SelectedItem="{Binding Operation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Operations}"

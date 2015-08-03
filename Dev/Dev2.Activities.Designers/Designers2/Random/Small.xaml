@@ -31,7 +31,6 @@
         <ComboBox x:Name="InitialFocusElement"
                   Grid.Column="1" 
                   Grid.Row="0"
-                  Style="{StaticResource ActivityComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   SelectedValue="{Binding Path=SelectedRandomType,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding RandomTypes}"

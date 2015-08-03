@@ -56,7 +56,6 @@
         <ComboBox Grid.Column="1"
                   Grid.Row="0"
                   x:Name="InitialFocusElement"
-                  Style="{StaticResource ActivityMapppingComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding Databases}"
                   Margin="{StaticResource ControlBorderRight}"
@@ -74,7 +73,6 @@
                 Grid.Row="0"
                 Content="..."
                 Command="{Binding EditDatabaseCommand}"
-                Style="{StaticResource ActivityEditButtonStyle}"
                 ToolTip="Edit Database Source"
                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_EditDatabaseCommand_AutoID}" />
 
@@ -85,7 +83,6 @@
         <ComboBox Grid.Column="1"
                   Grid.Row="1"
                   Margin="{StaticResource ControlBorderTopRight}"
-                  Style="{StaticResource ActivityMapppingComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding Tables}"
                   DisplayMemberPath="FullName"

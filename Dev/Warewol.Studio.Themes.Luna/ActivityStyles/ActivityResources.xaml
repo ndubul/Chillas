@@ -113,19 +113,4 @@
         <Setter Property="Width" Value="Auto"/>
     </Style>
 
-    <Style x:Key="ActivityMapppingComboBoxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ActivityComboBoxStyle}">
-        <Setter Property="Margin" Value="0,3"/>
-    </Style>
-
-    <Style x:Key="ActivityMapppingLabelStyle" TargetType="{x:Type Label}">
-        <Setter Property="Margin" Value="0,0,5,0"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-
-    <Style x:Key="ActivityEditButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}">
-        <Setter Property="Height" Value="25" />
-        <Setter Property="Width" Value="25" />
-    </Style>
-
 </ResourceDictionary>

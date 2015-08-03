@@ -33,7 +33,6 @@
          <ComboBox x:Name="InitialFocusElement"
                    Grid.Column="1"
                    Grid.Row="0"
-                   Style="{StaticResource ActivityComboBoxStyle}"
                    ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                    SelectedValue="{Binding SelectedScriptType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                    ItemsSource="{Binding ScriptTypes}"

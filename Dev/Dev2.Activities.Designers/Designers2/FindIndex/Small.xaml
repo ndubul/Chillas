@@ -54,7 +54,6 @@
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Index" Margin="{StaticResource ControlBorderTop}" />
         <ComboBox Grid.Column="1"
                   Grid.Row="1"
-                  Style="{StaticResource ActivityComboBoxStyle}"
                   Margin="{StaticResource ControlBorderTop}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding Path=IndexList}"
@@ -100,7 +99,6 @@
         <ComboBox Grid.Column="1"
                   Grid.Row="3"
                   Margin="{StaticResource ControlBorderTop}"
-                  Style="{StaticResource ActivityComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding Path=DirectionList}"
                   SelectedValue="{Binding Path=SelectedDirection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

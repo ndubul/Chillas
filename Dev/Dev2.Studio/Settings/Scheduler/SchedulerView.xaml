@@ -343,6 +343,7 @@
                                          ToolTip="Schedule should execute as this user"
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Left"
+                                         customControls:WatermarkTextBox.Watermark="domain\username"
                                          Text="{Binding AccountName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                                     <i:Interaction.Behaviors>
                                         <help:HelpSetter Text="{x:Static help:HelpTextResources.SchedulerSettingsHelpTextUsername}"

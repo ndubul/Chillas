@@ -116,7 +116,6 @@
         <ComboBox Grid.Column="1"
                   Grid.Row="3"
                   Margin="{StaticResource ControlBorderTop}"
-                  Style="{StaticResource ActivityComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   SelectedValue="{Binding SelectedOutputType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding OutputTypes}"

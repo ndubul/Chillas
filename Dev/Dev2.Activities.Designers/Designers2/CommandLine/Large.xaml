@@ -85,7 +85,6 @@
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Priority" Margin="{StaticResource ControlBorderTop}" />
         <ComboBox Grid.Column="1"
                   Grid.Row="1" 
-                  Style="{StaticResource ActivityMapppingComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
                   ItemsSource="{Binding CommandPriorities}" 
                   DisplayMemberPath="Value"

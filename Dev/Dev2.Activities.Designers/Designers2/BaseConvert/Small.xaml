@@ -92,8 +92,7 @@
                                         d:DataContext="{d:DesignInstance Type=dev2:BaseConvertTO}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox Style="{StaticResource ActivityComboBoxStyle}"
-                                      ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                            <ComboBox ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                                       Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.ConvertTypes, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                       SelectedValue="{Binding FromType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
@@ -124,7 +123,6 @@
                         <DataTemplate>
                             <ComboBox Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.ConvertTypes, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
-                                      Style="{StaticResource ComboBoxStyle}"
                                       ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                                       SelectedValue="{Binding Path=ToType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                       ToolTip="{x:Static help:HelpTextResources.BaseConversionToolTipTotype}">

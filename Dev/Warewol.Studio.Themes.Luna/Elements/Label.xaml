@@ -61,11 +61,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="ActivityLabelStyle" TargetType="{x:Type Label}" >
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0,2,2,2"/>
-    </Style>
     <!--  *********************************  Implicit Styles  *********************************  -->
     <Style BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}" />
 </ResourceDictionary>

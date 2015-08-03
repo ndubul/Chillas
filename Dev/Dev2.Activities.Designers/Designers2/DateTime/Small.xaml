@@ -88,7 +88,6 @@
         <ComboBox Grid.Column="1"
                   Grid.Row="2"
                   Margin="{StaticResource ControlBorderTop}"
-                  Style="{StaticResource ActivityComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   SelectedValue="{Binding SelectedTimeModifierType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding TimeModifierTypes}"

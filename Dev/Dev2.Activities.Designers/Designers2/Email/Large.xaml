@@ -60,7 +60,6 @@
             </Grid.ColumnDefinitions>
 
             <ComboBox x:Name="InitialFocusElement"
-                      Style="{StaticResource ActivityComboBoxStyle}"
                       ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
                       SelectedItem="{Binding SelectedEmailSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding EmailSources}"
@@ -81,7 +80,6 @@
                     Content="..."
                     Command="{Binding EditEmailSourceCommand}"
                     ToolTip="Edit Email Source"
-                    Style="{StaticResource ActivityEditButtonStyle}"
                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_EditEmailSourceBtn_AutoID}"/>
         </Grid>
 
@@ -204,7 +202,6 @@
                   Grid.Row="6"
                   SelectedValue="{Binding ModelItem.Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Priorities}"
-                  Style="{StaticResource ActivityComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
                   Margin="{StaticResource ControlBorderTop}"
                   ToolTip="{x:Static help:HelpTextResources.EmailToolTipPriorityType}">

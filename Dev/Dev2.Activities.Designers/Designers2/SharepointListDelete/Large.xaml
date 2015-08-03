@@ -61,7 +61,6 @@
             <ComboBox Grid.Column="1"
                   Grid.Row="0"
                   x:Name="InitialFocusElement"
-                  Style="{StaticResource ActivityMapppingComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding SharepointServers}"
                   DisplayMemberPath="ResourceName"
@@ -80,7 +79,6 @@
                 Grid.Row="0"
                 Content="..."
                 Command="{Binding EditSharepointServerCommand}"
-                Style="{StaticResource ActivityEditButtonStyle}"
                 ToolTip="Edit Sharepoint Server Source"
                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_EditDatabaseCommand_AutoID}" />
 
@@ -90,7 +88,6 @@
                Margin="{StaticResource ControlBorderTop}" />
             <ComboBox Grid.Column="1"
                   Grid.Row="1"
-                  Style="{StaticResource ActivityMapppingComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding Lists}"
                   DisplayMemberPath="FullName"
@@ -152,8 +149,7 @@
                                         d:DataContext="{d:DesignInstance Type=to:SharepointSearchTo}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox Style="{StaticResource ActivityComboBoxStyle}"
-                                      ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                                <ComboBox ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                                       Margin="0,0,1,1"
                                       DisplayMemberPath="FieldName"
                                       SelectedValuePath="InternalName"
@@ -186,8 +182,7 @@
                                         d:DataContext="{d:DesignInstance Type=to:SharepointSearchTo}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox Style="{StaticResource ActivityComboBoxStyle}"
-                                      ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                                <ComboBox ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                                       Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.WhereOptions, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                       SelectedValue="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"

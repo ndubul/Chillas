@@ -253,7 +253,6 @@
                Text="Compression" />
         <ComboBox Grid.Column="1"
                   Grid.Row="8"
-                  Style="{StaticResource ActivityComboBoxStyle}"
                   Margin="{StaticResource ControlBorderTop}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding CompressionRatioList}"
