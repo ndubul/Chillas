@@ -23,7 +23,6 @@
                                Height="450"
                                MaxWidth="Infinity"
                                MaxHeight="Infinity"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance sharepointListUpdate:SharepointListUpdateDesignerViewModel}"
                                d:DesignWidth="280">
@@ -36,7 +35,7 @@
                                      IsClosedAfter="True"
                                      Style="{StaticResource ActivityDesignerButtonStyle}" />
     </core:ActivityDesignerTemplate.RightButtons>
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>

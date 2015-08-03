@@ -8,6 +8,7 @@
                          x:Name="controlRoot" x:Uid="sad:WorkflowViewElement_1">
 
     <Grid x:Name="rootGrid" 
+          Margin="{StaticResource ElementBorder}"
           x:Uid="Grid_1" 
           MaxWidth="160"
           Background="{DynamicResource DesignerViewBackground}">

@@ -12,12 +12,12 @@
                                xmlns:attachedProperties2="clr-namespace:Dev2.Studio.AppResources.AttachedProperties"
                                Width="250"
                                MaxWidth="250"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignWidth="250"
                                d:DataContext="{d:DesignInstance local:CommentDesignerViewModel}">
 
-    <ui:IntellisenseTextBox x:Name="InitialFocusElement"
+    <Grid Margin="{StaticResource ElementBorder}">
+        <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                             Text="{Binding Path=ModelItem.Text, UpdateSourceTrigger=PropertyChanged}"
                             ScrollViewer.VerticalScrollBarVisibility="Auto"
                             AllowMultilinePaste="True"
@@ -32,13 +32,14 @@
                             VerticalContentAlignment="Stretch"
                             ToolTip="{x:Static help:HelpTextResources.CommentToolTipComment}"
                             attachedProperties2:WizardEngineAttachedProperties.DontOpenWizard="True">
-        <i:Interaction.Behaviors>
-            <help:HelpSetter Text="{x:Static help:HelpTextResources.CommentHelpComment}"
+            <i:Interaction.Behaviors>
+                <help:HelpSetter Text="{x:Static help:HelpTextResources.CommentHelpComment}"
                              DataContext="{Binding}" />
-            <errors:ErrorsSetter Source="{Binding}"
+                <errors:ErrorsSetter Source="{Binding}"
                                  SourcePropertyName="Path=ModelItem.Text"
                                  SourcePropertyValue="{Binding  Path=ModelItem.Text, UpdateSourceTrigger=PropertyChanged}"
                                  Target="{Binding}" />
-        </i:Interaction.Behaviors>
-    </ui:IntellisenseTextBox>
+            </i:Interaction.Behaviors>
+        </ui:IntellisenseTextBox>
+    </Grid>
 </core:ActivityDesignerTemplate>

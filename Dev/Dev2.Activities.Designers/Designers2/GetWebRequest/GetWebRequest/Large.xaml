@@ -16,7 +16,6 @@
                                Width="255"
                                MaxWidth="600"
                                MaxHeight="500"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance local:GetWebRequestDesignerViewModel}">
 
@@ -29,7 +28,7 @@
                                      Style="{StaticResource ActivityDesignerButtonStyle}" />
     </core:ActivityDesignerTemplate.RightButtons>
 
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" MinHeight="50" />

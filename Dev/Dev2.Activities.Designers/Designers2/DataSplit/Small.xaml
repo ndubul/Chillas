@@ -17,20 +17,19 @@
                                xmlns:converters="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.CustomControls"
                                Width="280"
                                MaxWidth="280"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignWidth="280"
                                d:DataContext="{d:DesignInstance local:DataSplitDesignerViewModel}">
 
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0"
@@ -38,15 +37,13 @@
                        Text="String To Split"
                        VerticalAlignment="Top" />
             <ui:IntellisenseTextBox x:Name="InitialFocusElement"
-                                    Grid.Column="0"
-                                    Grid.ColumnSpan="2" 
+                                    Grid.Column="1"
                                     Grid.Row="0"
                                     AllowMultilinePaste="True"
                                     AcceptsReturn="True"
                                     AllowUserInsertLine="True"
                                     MaxHeight="52"
                                     TextWrapping="Wrap"
-                                    Width="142"
                                     VerticalAlignment="Stretch"
                                     VerticalContentAlignment="Top"
                                     VerticalScrollBarVisibility="Auto"
@@ -55,7 +52,7 @@
                                     ToolTip="{x:Static help:HelpTextResources.DataSplitToolTipString}"
                                     Style="{StaticResource ActivityMapppingIntellisenseTextBoxStyle}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_SourceStringtxt_AutoID}"
-                                    HorizontalAlignment="Right">
+                                    HorizontalAlignment="Stretch">
                 <i:Interaction.Behaviors>
                     <help:HelpSetter Text="{x:Static help:HelpTextResources.DataSplitHelpString}"
                                      DataContext="{Binding}" />

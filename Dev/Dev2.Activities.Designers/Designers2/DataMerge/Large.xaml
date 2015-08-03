@@ -19,7 +19,6 @@
                                Width="353"
                                MinHeight="250"
                                Height="250"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignWidth="280"
                                d:DataContext="{d:DesignInstance local:DataMergeDesignerViewModel}">
@@ -33,7 +32,7 @@
                                      Style="{StaticResource ActivityDesignerButtonStyle}" />
     </core:ActivityDesignerTemplate.RightButtons>
 
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />

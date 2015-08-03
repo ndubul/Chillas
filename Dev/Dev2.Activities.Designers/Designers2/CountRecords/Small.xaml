@@ -11,12 +11,11 @@
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
                                Width="200"
                                MaxWidth="200"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignWidth="200"
                                d:DataContext="{d:DesignInstance local:CountRecordsDesignerViewModel}">
 
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />

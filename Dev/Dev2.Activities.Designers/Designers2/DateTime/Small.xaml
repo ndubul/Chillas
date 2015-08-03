@@ -11,12 +11,11 @@
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
                                Width="270"
                                MaxWidth="270"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignWidth="270"
                                d:DataContext="{d:DesignInstance local:DateTimeDesignerViewModel}">
 
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition MinWidth="80" />

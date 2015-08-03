@@ -160,6 +160,7 @@
 
                 <ContentPresenter x:Name="PART_ContentPresenter"
                                   Grid.Row="1"
+                                  Margin="1,0,1,1"
                                   Content="{Binding Path=Content, RelativeSource={RelativeSource AncestorType={x:Type sap:WorkflowViewElement}}}" />
 
                 <!-- Button Bar -->

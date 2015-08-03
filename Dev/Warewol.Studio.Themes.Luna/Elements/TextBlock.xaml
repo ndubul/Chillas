@@ -198,8 +198,8 @@
     <Style x:Key="Dev2HeadingTextBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontStretch" Value="Medium" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+        <Setter Property="FontSize" Value="{StaticResource ExplorerFontSize}" />
+        <Setter Property="Foreground" Value="{StaticResource WareWolfButtonBrush}" />
     </Style>
     <Style x:Key="ErrorTextBlockStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />

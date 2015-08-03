@@ -1548,9 +1548,6 @@ namespace Dev2.UI
                 }
             }
 
-            double lineHeight = FontSize * FontFamily.LineSpacing;
-            Height += lineHeight;
-
             UpdateErrorState();
             EnsureErrorStatus();
         }

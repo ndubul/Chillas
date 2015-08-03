@@ -12,12 +12,11 @@
                                xmlns:getWebRequestWithTimeout="clr-namespace:Dev2.Activities.Designers2.GetWebRequest.GetWebRequestWithTimeout"
                                Width="250"
                                MaxWidth="250"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignWidth="250"
                                d:DataContext="{d:DesignInstance getWebRequestWithTimeout:GetWebRequestWithTimeoutDesignerViewModel}">
 
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

@@ -16,15 +16,15 @@
                                xmlns:provider="clr-namespace:Dev2.Intellisense.Provider;assembly=Dev2.Intellisense"
                                Width="230"
                                MaxWidth="230"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignHeight="230"
                                d:DesignWidth="230"
                                d:DataContext="{d:DesignInstance local:CreateJsonDesignerViewModel}">
-    <Grid>
+    
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <controls:Dev2DataGrid x:Name="SmallDataGrid"
                                Grid.Row="0"
@@ -118,8 +118,8 @@
         </controls:Dev2DataGrid>
         <Grid Grid.Row="1" Margin="{StaticResource ControlBorderTop}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="125" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Result" Grid.Row="0" Grid.Column="0" />

@@ -13,12 +13,11 @@
                                xmlns:provider="clr-namespace:Dev2.Intellisense.Provider;assembly=Dev2.Intellisense"
                                MaxWidth="200"
                                Width="200"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignWidth="200"
                                d:DataContext="{d:DesignInstance local:ReadFolderDesignerViewModel}">
 
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />

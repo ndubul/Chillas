@@ -32,9 +32,8 @@
                     Key="Escape" />      
     </core:ActivityDesignerTemplate.InputBindings>
 
-    <Grid x:Name="ParentContext">
-        <Grid Margin="7,0,10,15"
-              DataContext="{Binding QuickVariableInputViewModel, Mode=TwoWay}">
+    <Grid x:Name="ParentContext" Margin="{StaticResource ElementBorder}">
+        <Grid DataContext="{Binding QuickVariableInputViewModel, Mode=TwoWay}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -57,7 +56,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0"
                        Text="Quick Variable Input"
-                       Style="{StaticResource Dev2HeadingTextBlockStyle}" Margin="{StaticResource ControlBorderTop}" />
+                       Style="{StaticResource Dev2HeadingTextBlockStyle}" />
                 <Rectangle Grid.Row="1"
                            Fill="LightGray"
                            Margin="1"

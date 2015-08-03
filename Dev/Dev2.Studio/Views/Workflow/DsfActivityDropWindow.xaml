@@ -16,6 +16,7 @@
         Height="400"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
+        Style="{StaticResource WindowBorderlessStyle}"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance workflow:DsfActivityDropViewModel}"
         AutomationProperties.AutomationId="UI_SelectServiceWindow_AutoID">    
@@ -27,7 +28,7 @@
     <i:Interaction.Behaviors>
         <local:WindowCloseBehviour CloseIndicator="{Binding CloseRequested}" />
     </i:Interaction.Behaviors>
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
@@ -109,7 +110,6 @@
                     HorizontalAlignment="Left">
             <Button Content="Cancel"
                     Command="{Binding CancelCommand}"
-                    Margin="5"
                     Width="110"
                     MaxHeight="30"
                     AutomationProperties.AutomationId="UI_SelectServiceCancelButton_AutoID"/>
@@ -120,7 +120,6 @@
             <Button Content="OK"
                     Command="{Binding OkCommand}"
                     Width="110"
-                    Margin="5"
                     MaxHeight="30"
                     AutomationProperties.AutomationId="UI_SelectServiceOKButton_AutoID"/>
         </StackPanel>

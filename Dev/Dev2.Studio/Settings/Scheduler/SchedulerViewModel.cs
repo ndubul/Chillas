@@ -833,14 +833,11 @@ namespace Dev2.Settings.Scheduler
             var scheduleTrigger = _schedulerFactory.CreateTrigger(TaskState.Ready, dev2DailyTrigger);
             ScheduledResource scheduledResource = new ScheduledResource(NewTaskName + _newTaskCounter, SchedulerStatus.Enabled, scheduleTrigger.Trigger.Instance.StartBoundary, scheduleTrigger, string.Empty) { IsDirty = true };
             scheduledResource.OldName = scheduledResource.Name;
-            if (ScheduledResourceModel.ScheduledResources.Count > 0)
-            {
-                ScheduledResourceModel.ScheduledResources.Insert(ScheduledResourceModel.ScheduledResources.Count - 1, scheduledResource);
-                _newTaskCounter++;
+            ScheduledResourceModel.ScheduledResources.Insert(ScheduledResourceModel.ScheduledResources.Count - 1, scheduledResource);
+            _newTaskCounter++;
 
-                NotifyOfPropertyChange(() => TaskList);
-                SelectedTask = ScheduledResourceModel.ScheduledResources[ScheduledResourceModel.ScheduledResources.Count - 2];
-            }
+            NotifyOfPropertyChange(() => TaskList);
+            SelectedTask = ScheduledResourceModel.ScheduledResources[ScheduledResourceModel.ScheduledResources.Count - 2];
             WorkflowName = string.Empty;
             SelectedTask.IsNew = true;
             ViewModelUtils.RaiseCanExecuteChanged(NewCommand);
