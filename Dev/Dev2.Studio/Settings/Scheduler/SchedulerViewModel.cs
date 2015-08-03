@@ -801,15 +801,16 @@ namespace Dev2.Settings.Scheduler
                         SelectedTask.Errors.ClearErrors();
                         NotifyOfPropertyChange(() => Error);
                         NotifyOfPropertyChange(() => Errors);
+                        SelectedTask.IsDirty = false;
                         SelectedTask.OldName = SelectedTask.Name;
                         SelectedTask.IsNew = false;
+                        
                     }
                     NotifyOfPropertyChange(() => TaskList);
                 }
                 else
                 {
-                    ShowError(@"Error while saving: You don't have permission to schedule on this server.
-You need Administrator permission.");
+                    ShowError(@"Error while saving: You don't have permission to schedule on this server. You need Administrator permission.");
                     return false;
                 }
                 return true;
@@ -832,10 +833,14 @@ You need Administrator permission.");
             var scheduleTrigger = _schedulerFactory.CreateTrigger(TaskState.Ready, dev2DailyTrigger);
             ScheduledResource scheduledResource = new ScheduledResource(NewTaskName + _newTaskCounter, SchedulerStatus.Enabled, scheduleTrigger.Trigger.Instance.StartBoundary, scheduleTrigger, string.Empty) { IsDirty = true };
             scheduledResource.OldName = scheduledResource.Name;
-            ScheduledResourceModel.ScheduledResources.Insert(ScheduledResourceModel.ScheduledResources.Count-1, scheduledResource);
-            _newTaskCounter++;
-            NotifyOfPropertyChange(() => TaskList);
-            SelectedTask = ScheduledResourceModel.ScheduledResources[ScheduledResourceModel.ScheduledResources.Count - 2];
+            if (ScheduledResourceModel.ScheduledResources.Count > 0)
+            {
+                ScheduledResourceModel.ScheduledResources.Insert(ScheduledResourceModel.ScheduledResources.Count - 1, scheduledResource);
+                _newTaskCounter++;
+
+                NotifyOfPropertyChange(() => TaskList);
+                SelectedTask = ScheduledResourceModel.ScheduledResources[ScheduledResourceModel.ScheduledResources.Count - 2];
+            }
             WorkflowName = string.Empty;
             SelectedTask.IsNew = true;
             ViewModelUtils.RaiseCanExecuteChanged(NewCommand);
@@ -875,8 +880,7 @@ You need Administrator permission.");
                     }
                     else
                     {
-                        ShowError(@"Error while saving: You don't have permission to schedule on this server.
-You need Administrator permission.");
+                        ShowError(@"Error while saving: You don't have permission to schedule on this server. You need Administrator permission.");
                     }
                 }
                 else
@@ -988,8 +992,7 @@ You need Administrator permission.");
 
         void SetConnectionError()
         {
-            ConnectionError = @"You don't have permission to schedule on this server.
-You need Administrator permission.";
+            ConnectionError = @"You don't have permission to schedule on this server. You need Administrator permission.";
             HasConnectionError = true;
         }
 

@@ -75,6 +75,10 @@ namespace Dev2.Scheduler
             {
                 _oldName = value;
                 OnPropertyChanged("OldName");
+                if (!IsDirty)
+                {
+                    OnPropertyChanged("NameForDisplay");
+                }
             }
         }
 
