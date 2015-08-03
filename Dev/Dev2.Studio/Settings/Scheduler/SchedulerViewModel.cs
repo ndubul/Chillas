@@ -47,6 +47,7 @@ using Dev2.Studio.ViewModels.WorkSurface;
 using Dev2.TaskScheduler.Wrappers;
 using Dev2.Threading;
 using Microsoft.Win32.TaskScheduler;
+using Warewolf.Studio.ViewModels;
 
 namespace Dev2.Settings.Scheduler
 {
@@ -676,7 +677,7 @@ namespace Dev2.Settings.Scheduler
             get
             {
                 return _closeCommand ??
-                    (_closeCommand = new DelegateCommand(o => CloseHelp()));
+                    (_closeCommand = new DelegateCommand(param=>CloseHelp()));
             }
 
         }
@@ -713,7 +714,7 @@ namespace Dev2.Settings.Scheduler
             get
             {
                 return _editTriggerCommand ??
-                       (_editTriggerCommand = new DelegateCommand(param => EditTrigger()));
+                       (_editTriggerCommand = new DelegateCommand(param=>EditTrigger()));
             }
         }
 
@@ -722,7 +723,7 @@ namespace Dev2.Settings.Scheduler
             get
             {
                 return _addWorkflowCommand ??
-                       (_addWorkflowCommand = new DelegateCommand(param => AddWorkflow()));
+                       (_addWorkflowCommand = new DelegateCommand(param=>AddWorkflow()));
             }
         }
 
@@ -821,6 +822,11 @@ You need Administrator permission.");
 
         public void CreateNewTask()
         {
+            if (IsDirty)
+            {
+                _popupController.Show("Please save currently edited Task(s) before creating a new one.", "Save before continuing", MessageBoxButton.OK, MessageBoxImage.Error, null);
+                return;
+            }
 
             var dev2DailyTrigger = new Dev2DailyTrigger(new TaskServiceConvertorFactory(), new DailyTrigger());
             var scheduleTrigger = _schedulerFactory.CreateTrigger(TaskState.Ready, dev2DailyTrigger);
@@ -832,6 +838,7 @@ You need Administrator permission.");
             SelectedTask = ScheduledResourceModel.ScheduledResources[ScheduledResourceModel.ScheduledResources.Count - 2];
             WorkflowName = string.Empty;
             SelectedTask.IsNew = true;
+            ViewModelUtils.RaiseCanExecuteChanged(NewCommand);
         }
 
         void DeleteTask()
@@ -1040,7 +1047,8 @@ You need Administrator permission.";
                 {
                     return false;
                 }
-                return TaskList.Any(resource => resource.IsDirty);
+                var isDirty = TaskList.Any(resource => resource.IsDirty);               
+                return isDirty;
             }
         }
         #region Public Methods
