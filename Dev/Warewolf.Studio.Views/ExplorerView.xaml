@@ -117,6 +117,7 @@
                         IsDraggable="False"
                         IsDropTarget="False"
                         InitializeNode="ExplorerTree_OnInitializeNode"
+                        NodeExitedEditMode="ExplorerTree_OnNodeExitedEditMode"
                         SelectedDataItems="{Binding SelectedDataItems}"
                         ItemsSource="{Binding Environments}"
                         NodeDragDrop="ExplorerTree_OnNodeDragDrop"                            
