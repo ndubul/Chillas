@@ -110,11 +110,6 @@ namespace Dev2.Core.Tests.ProperMoqs
         {
         }
 
-        public MessageBoxResult ShowItemCloseCloseConfirmation(string nameOfItem)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public MessageBoxResult ShowDeleteVersionMessage(string displayName)
         {
             return MessageBoxResult.None;
