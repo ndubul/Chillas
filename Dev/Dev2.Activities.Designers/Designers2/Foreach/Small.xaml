@@ -18,44 +18,40 @@
                                d:DesignWidth="250"
                                d:DataContext="{d:DesignInstance local:ForeachDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <StackPanel>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        
-        <ComboBox x:Name="InitialFocusElement"
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ComboBox x:Name="InitialFocusElement"
                   Grid.Column="0" 
                   Width="125"
                   Style="{StaticResource ActivityComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   IsEditable="False"
+                      Margin="{StaticResource ControlBorderRight}"
                   SelectedValue="{Binding SelectedForeachType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding ForeachTypes}"
                   AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_ForEachType_AutoID}"
                   ToolTip="{x:Static help:HelpTextResources.ForEachToolTipForEachType}">
-            <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.ForEachHelpForEachType}"
+                <i:Interaction.Behaviors>
+                    <help:HelpSetter Text="{x:Static help:HelpTextResources.ForEachHelpForEachType}"
                                  DataContext="{Binding}" />
-                <errors:ErrorsSetter Source="{Binding}"
+                    <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.ForEachType"
                                      SourcePropertyValue="{Binding ModelItem.ForEachType, UpdateSourceTrigger=PropertyChanged}"
                                      Target="{Binding}" />
-            </i:Interaction.Behaviors>
-        </ComboBox>
-        
-        <ui:IntellisenseTextBox Grid.Column="1"
+                </i:Interaction.Behaviors>
+            </ComboBox>
+
+            <ui:IntellisenseTextBox Grid.Column="1"
                                 Visibility="{Binding FromVisibility}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 DefaultText="From" 
@@ -64,19 +60,18 @@
                                 Text="{Binding Path=ModelItem.From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_ForEachFromTextbox_AutoID}"
                                 ToolTip="{x:Static help:HelpTextResources.ForEachToolTipForEachType}">
-            <i:Interaction.Behaviors>
+                <i:Interaction.Behaviors>
                     <help:HelpSetter Text="{x:Static help:HelpTextResources.ForEachHelpForEachType}"
                                  DataContext="{Binding}" />
-                <errors:ErrorsSetter Source="{Binding}"
+                    <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.From"
                                      SourcePropertyValue="{Binding ModelItem.From, UpdateSourceTrigger=PropertyChanged}"
                                      Target="{Binding}" />
-            </i:Interaction.Behaviors>
-        </ui:IntellisenseTextBox>
-        
-        <Label Grid.Column="2"
-               Content="-" />
-        <ui:IntellisenseTextBox Grid.Column="3"
+                </i:Interaction.Behaviors>
+            </ui:IntellisenseTextBox>
+
+            <TextBlock Grid.Column="2" Text="-" />
+            <ui:IntellisenseTextBox Grid.Column="3"
                                     DefaultText="To" 
                                     WrapInBrackets="False" 
                                     Text="{Binding Path=ModelItem.To, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -94,7 +89,7 @@
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>
 
-        <ui:IntellisenseTextBox  DefaultText="CSV Indexes" 
+            <ui:IntellisenseTextBox  DefaultText="CSV Indexes" 
                                   WrapInBrackets="False" 
                                   Grid.Column="1" 
                                   Grid.ColumnSpan="3"
@@ -112,9 +107,9 @@
                                          SourcePropertyValue="{Binding ModelItem.CsvIndexes, UpdateSourceTrigger=PropertyChanged}"
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
-           </ui:IntellisenseTextBox>
-        
-        <ui:IntellisenseTextBox  DefaultText="Number" 
+            </ui:IntellisenseTextBox>
+
+            <ui:IntellisenseTextBox  DefaultText="Number" 
                                  WrapInBrackets="False" 
                                  Grid.Column="1" 
                                  Grid.ColumnSpan="3"
@@ -132,15 +127,14 @@
                                          SourcePropertyValue="{Binding ModelItem.NumOfExections, UpdateSourceTrigger=PropertyChanged}"
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
-           </ui:IntellisenseTextBox>
-        
-        <ui:IntellisenseTextBox DefaultText="Recordset" 
+            </ui:IntellisenseTextBox>
+
+            <ui:IntellisenseTextBox DefaultText="Recordset" 
                                 WrapInBrackets="False" 
                                 Grid.Column="1" 
                                 Grid.ColumnSpan="3"
                                 Visibility="{Binding RecordsetVisibility}"
-                                Text="{Binding Path=ModelItem.Recordset, Mode=TwoWay, 
-                                          UpdateSourceTrigger=PropertyChanged}" 
+                                Text="{Binding Path=ModelItem.Recordset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 MinWidth="106"
                                 FilterType="RecordsetsOnly"
@@ -155,10 +149,9 @@
                                          SourcePropertyValue="{Binding ModelItem.Recordset, UpdateSourceTrigger=PropertyChanged}"
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
-           </ui:IntellisenseTextBox>
-    </Grid>
-        <Border BorderBrush="Black"
-                BorderThickness="1,1,1,1" Margin="0,2">
+            </ui:IntellisenseTextBox>
+        </Grid>
+        <Border BorderBrush="Black" BorderThickness="1,1,1,1" Margin="{StaticResource ControlBorderTop}">
             <sap:WorkflowItemPresenter x:Name="DropPoint"
                                        AllowDrop="False"
                                        HintText="Drop Activity Here"

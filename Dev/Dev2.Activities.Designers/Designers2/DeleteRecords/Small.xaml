@@ -16,11 +16,6 @@
                                d:DesignWidth="200"
                                d:DataContext="{d:DesignInstance local:DeleteRecordsDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -31,12 +26,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Recordset" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Recordset" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
-                                Grid.ColumnSpan="2"
                                 Grid.Column="1"
                                 Grid.Row="0"
                                 DefaultText="[[Recordset(*)]]"
@@ -57,15 +48,13 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Result" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Row="1"
                                 Grid.Column="1"
                                 DefaultText="[[Success]]"
                                 ToolTip="{x:Static help:HelpTextResources.DeleteToolTipResult}"
                                 WrapInBrackets="True"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AllowUserInsertLine="False" 

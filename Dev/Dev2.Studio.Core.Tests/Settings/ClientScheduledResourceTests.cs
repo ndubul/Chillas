@@ -258,6 +258,7 @@ namespace Dev2.Core.Tests.Settings
                 _isNewItem = value;
             }
         }
+        public string NameForDisplay { get; private set; }
 
         #endregion
     }

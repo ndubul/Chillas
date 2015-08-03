@@ -12,16 +12,13 @@
                                xmlns:ui="clr-namespace:Dev2.UI;assembly=Dev2.Intellisense"
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
                                xmlns:sharepointListUpdate="clr-namespace:Dev2.Activities.Designers2.SharepointListUpdate"
+                               xmlns:fa="http://schemas.fontawesome.io/icons/"
                                Width="290"
                                MaxWidth="290"
                                Padding="7"
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance sharepointListUpdate:SharepointListUpdateDesignerViewModel}"
                                d:DesignWidth="230">
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -36,10 +33,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="0"
-               Content="Server"
-               Style="{StaticResource ActivityMapppingLabelStyle}" />
+               Text="Server" />
         <ComboBox Grid.Column="1"
                   Grid.Row="0"
                   x:Name="InitialFocusElement"
@@ -47,6 +43,7 @@
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding SharepointServers}"
                   DisplayMemberPath="ResourceName"
+                  Margin="{StaticResource ControlBorderRight}"
                   IsEnabled="{Binding IsRefreshing,Converter={StaticResource InverseBooleanConverter}}"
                   SelectedItem="{Binding SelectedSharepointServer, Mode=TwoWay}"
                   ToolTip="{x:Static help:HelpTextResources.SharepointToolTipServer}"
@@ -65,15 +62,16 @@
                 ToolTip="Edit Sharepoint Server Source"
                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_EditDatabaseCommand_AutoID}" />
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="1"
-               Content="List"
-               Style="{StaticResource ActivityMapppingLabelStyle}" />
+               Text="List"
+               Margin="{StaticResource ControlBorderTop}" />
         <ComboBox Grid.Column="1"
                   Grid.Row="1"
                   Style="{StaticResource ActivityMapppingComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding Lists}"
+                  Margin="{StaticResource ControlBorderTopRight}"
                   DisplayMemberPath="FullName"
                   IsEnabled="{Binding IsRefreshing,Converter={StaticResource InverseBooleanConverter}}"
                   SelectedItem="{Binding SelectedList, Mode=TwoWay}"
@@ -87,13 +85,18 @@
         </ComboBox>
         <Button Grid.Column="2"
                 Grid.Row="1"
+                Margin="{StaticResource ControlBorderTop}"
                 Command="{Binding RefreshListsCommand}"
-                Style="{StaticResource ActivityRefreshButtonStyle}"
                 ToolTip="Refresh Lists"
-                AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RefreshTablesCommand_AutoID}" />
+                AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RefreshTablesCommand_AutoID}" >
+            <Button.Content>
+                <fa:FontAwesome Icon="Refresh"></fa:FontAwesome>
+            </Button.Content>
+        </Button>
         <controls:Dev2DataGrid Grid.Row="2"
                                Grid.Column="0"
                                Grid.ColumnSpan="3"
+                               Margin="{StaticResource ControlBorderTop}"
                                x:Name="SmallDataGrid"
                                HeadersVisibility="None"
                                Height="78"
@@ -113,6 +116,7 @@
                                                     AcceptsReturn="True"
                                                     AllowUserInsertLine="True"
                                                     MaxHeight="52"
+                                                    Margin="0,0,1,1"
                                                     TextWrapping="Wrap"
                                                     WrapInBrackets="False"
                                                     ToolTip="{x:Static help:HelpTextResources.SharepointToolTipToVariable}"
@@ -165,14 +169,15 @@
             </DataGrid.Columns>
         </controls:Dev2DataGrid>
 
-        <Label Grid.Row="3"
+        <TextBlock Grid.Row="3"
                Grid.Column="0"
-               Content="Result"
-               Style="{StaticResource ActivityMapppingLabelStyle}" />
+               Text="Result"
+               Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.Row="3"
                                 Grid.Column="1"
                                 Grid.ColumnSpan="2"
                                 DefaultText="[[UpdateSuccess]]"
+                                Margin="{StaticResource ControlBorderTop}"
                                 WrapInBrackets="True"
                                 Text="{Binding ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource ActivityMapppingIntellisenseTextBoxStyle}"

@@ -27,11 +27,6 @@
                                d:DesignWidth="300"
                                d:DataContext="{d:DesignInstance xPath:XPathDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -54,12 +49,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label  Content="XML"
+            <TextBlock  Text="XML"
                     Grid.Row="0"
-                    Grid.Column="0"
-                    VerticalAlignment="Top"
-                    Margin="0,5,5,0"
-                    Style="{StaticResource ActivityLabelStyle}" />
+                    Grid.Column="0" />
             <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                     Grid.Column="1"
                                     Grid.Row="0"
@@ -89,6 +81,7 @@
 
         <controls:Dev2DataGrid x:Name="LargeDataGrid"
                                Grid.Row="1"      
+                               Margin="{StaticResource ControlBorderTop}"
                                ItemsSource="{Binding ModelItem.ResultsCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                              
                                Style="{StaticResource ActivityMapppingDataGridStyle}"
                                CanUserResizeRows="True">
@@ -113,7 +106,7 @@
                                         Header="#">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding ModelItem, 
+                            <TextBlock Text="{Binding ModelItem, 
                                               NotifyOnTargetUpdated=True, 
                                               Converter={local:RowToIndexConverter}}" />
                         </DataTemplate>
@@ -128,6 +121,7 @@
                             <ui:IntellisenseTextBox AllowUserInsertLine="False"
                                                     MaxHeight="52"
                                                     Padding="3"
+                                                    Margin="0,0,1,1"
                                                     DefaultText="{Binding WatermarkTextVariable}"
                                                     WrapInBrackets="True"
                                                     Text="{Binding OutputVariable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -161,7 +155,7 @@
                     <DataTemplate>
                             <ui:IntellisenseTextBox MaxHeight="52"
                                                     Padding="3"
-                                                    Margin="0"
+                                                    Margin="0,0,1,1"
                                                     WrapInBrackets="False"
                                                     DefaultText="Xpath" 
                                                     Text="{Binding XPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

@@ -17,11 +17,6 @@
                                d:DesignWidth="200"
                                d:DataContext="{d:DesignInstance local:FormatNumberDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -35,10 +30,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Number" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Number" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="1"
                                 Grid.Row="0"
@@ -62,12 +54,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Content="Rounding"
-               Style="{StaticResource ActivityLabelStyle}"
-               Grid.Column="0"
-               Grid.Row="1" />
+        <TextBlock Text="Rounding" Grid.Column="0" Grid.Row="1" Margin="{StaticResource ControlBorderTop}"/>
         <ComboBox  Grid.Column="1"
                    Grid.Row="1"
+                   Margin="{StaticResource ControlBorderTopRight}"
                    Style="{StaticResource ActivityComboBoxStyle}"
                    ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                    ItemsSource="{Binding RoundingTypes}"
@@ -88,7 +78,7 @@
         <ui:IntellisenseTextBox AllowUserInsertLine="False"
                                 Grid.Column="2"
                                 Grid.Row="1"
-                                Grid.ColumnSpan="2"
+                                Margin="{StaticResource ControlBorderTop}"
                                 FilterType="All"
                                 WrapInBrackets="False"
                                 Text="{Binding Path=ModelItem.RoundingDecimalPlaces, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -108,14 +98,11 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Content="Decimals to show"
-               Grid.Column="0"
-               Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Grid.ColumnSpan="2" />
+        <TextBlock Text="Decimals to show" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="2"
                                 Grid.Row="2"
                                 FilterType="All"
+                                Margin="{StaticResource ControlBorderTop}"
                                 ToolTip="{x:Static help:HelpTextResources.FormatNumberToolTipDecimalsToShow}"
                                 WrapInBrackets="False"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
@@ -132,13 +119,11 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label  Grid.Column="0"
-                Grid.Row="3"
-                Style="{StaticResource ActivityLabelStyle}"
-                Content="Result" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Result" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="3"
                                 Grid.ColumnSpan="2"
+                                Margin="{StaticResource ControlBorderTop}"
                                 DefaultText="[[Result]]"
                                 FilterType="All"
                                 ToolTip="{x:Static help:HelpTextResources.FormatNumberToolTipResult}"

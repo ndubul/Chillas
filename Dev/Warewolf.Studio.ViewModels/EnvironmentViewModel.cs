@@ -16,7 +16,7 @@ namespace Warewolf.Studio.ViewModels
 	public class EnvironmentViewModel : BindableBase, IEnvironmentViewModel
     {
         //readonly IShellViewModel _shellViewModel;
-        ICollection<IExplorerItemViewModel> _children;
+        ObservableCollection<IExplorerItemViewModel> _children;
         bool _isConnecting;
         bool _isConnected;
         bool _isServerIconVisible;
@@ -41,6 +41,7 @@ namespace Warewolf.Studio.ViewModels
             DisplayName = server.ResourceName;
             RefreshCommand = new DelegateCommand(async () => await Load());
             IsServerIconVisible = true;
+            SelectAction = new Action<IExplorerItemViewModel>(a=>{});
             Expand = new DelegateCommand<int?>(clickCount =>
             {
                 if (clickCount != null && clickCount == 2)
@@ -109,16 +110,16 @@ namespace Warewolf.Studio.ViewModels
                 var id = Guid.NewGuid();
                 var name = GetChildNameFromChildren();
                 Server.ExplorerRepository.CreateFolder("root", name, id);
-                var child = new ExplorerItemViewModel(Server,null)
+                var child = new ExplorerItemViewModel(Server, null, a => { SelectAction(a); })
                {
                    ResourceName = name,
-                   ResourceId = id,
+                   ResourceId = id, 
                    ResourceType = ResourceType.Folder,
                    ResourcePath = name
                };
                 child.IsSelected = true;
                 child.IsRenaming = true;
-               _children.Add(child);
+               _children.Insert(0,child);
                OnPropertyChanged(() => Children);
                
             
@@ -126,13 +127,18 @@ namespace Warewolf.Studio.ViewModels
 
         public ICommand ShowServerVersionCommand { get; set; }
 
-        public void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction)
+	    public Action<IExplorerItemViewModel> SelectAction { get;  set; }
+
+	    public void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction)
         {
             foreach (var explorerItemViewModel in Children)
             {
                 if (explorerItemViewModel.ResourceId == id)
                 {
-                    explorerItemViewModel.IsExpanded = true;
+                    if (!explorerItemViewModel.IsExpanded)
+                    {
+                        explorerItemViewModel.IsExpanded = true;
+                    }
                     explorerItemViewModel.IsSelected = true;
                     foundAction(explorerItemViewModel);
                 }
@@ -236,7 +242,7 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _children = value;
+                _children = new ObservableCollection<IExplorerItemViewModel>( value);
                 OnPropertyChanged(() => Children);
             }
         }
@@ -538,7 +544,7 @@ namespace Warewolf.Studio.ViewModels
             // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (var explorerItem in explorerItems)
             {
-				var itemCreated = new ExplorerItemViewModel(server,parent)
+                var itemCreated = new ExplorerItemViewModel(server, parent, a => { SelectAction(a); })
                 {
                     ResourceName = explorerItem.DisplayName,
                     ResourceId = explorerItem.ResourceId,

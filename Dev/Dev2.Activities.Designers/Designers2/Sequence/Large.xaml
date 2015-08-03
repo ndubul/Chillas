@@ -19,10 +19,7 @@
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance local:SequenceDesignerViewModel}"
                                ToolTip="{x:Static help:HelpTextResources.SequenceTooltipSequence}">
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

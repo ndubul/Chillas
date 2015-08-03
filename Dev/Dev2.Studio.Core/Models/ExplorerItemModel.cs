@@ -237,7 +237,16 @@ namespace Dev2.Models
 
         public void SetDisplay(string display)
         {
+            if (!ResourcePath.Contains("\\"))
+            {
+                ResourcePath = ResourcePath.Replace(_displayName, display);
+            }
+            else
+            {
+                ResourcePath = ResourcePath.Substring(0, ResourcePath.LastIndexOf("\\") + 1) + display;
+            }
             _displayName = display;
+            
             // ReSharper disable ExplicitCallerInfoArgument
             OnPropertyChanged("DisplayName");
             // ReSharper restore ExplicitCallerInfoArgument
@@ -1030,7 +1039,8 @@ namespace Dev2.Models
                     Parent = this,
                     EnvironmentId = EnvironmentId,
                     Permissions = Permissions,
-                    ResourcePath = resourcePath
+                    ResourcePath = resourcePath,
+                    ResourceId =  Guid.NewGuid()
                 };
             _studioResourceRepository.AddItem(explorerItemModel);
 

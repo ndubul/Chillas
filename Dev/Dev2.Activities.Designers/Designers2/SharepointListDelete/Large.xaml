@@ -16,6 +16,7 @@
                                xmlns:to="clr-namespace:Dev2.TO;assembly=Dev2.Activities"
                                xmlns:converters="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.CustomControls"
                                xmlns:sharepointListDelete="clr-namespace:Dev2.Activities.Designers2.SharepointListDelete"
+                               xmlns:fa="http://schemas.fontawesome.io/icons/"
                                Width="350"
                                MinWidth="350"
                                MinHeight="380"
@@ -26,11 +27,6 @@
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance sharepointListDelete:SharepointListDeleteDesignerViewModel}"
                                d:DesignWidth="280">
-
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
 
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
@@ -59,10 +55,9 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Grid.Column="0"
+            <TextBlock Grid.Column="0"
                Grid.Row="0"
-               Content="Server"
-               Style="{StaticResource ActivityMapppingLabelStyle}" />
+               Text="Server" />
             <ComboBox Grid.Column="1"
                   Grid.Row="0"
                   x:Name="InitialFocusElement"
@@ -70,6 +65,7 @@
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding SharepointServers}"
                   DisplayMemberPath="ResourceName"
+                      Margin="{StaticResource ControlBorderRight}"
                       IsEnabled="{Binding IsRefreshing,Converter={StaticResource InverseBooleanConverter}}"
                   SelectedItem="{Binding SelectedSharepointServer, Mode=TwoWay}"
                   ToolTip="{x:Static help:HelpTextResources.SharepointToolTipServer}"
@@ -88,16 +84,17 @@
                 ToolTip="Edit Sharepoint Server Source"
                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_EditDatabaseCommand_AutoID}" />
 
-            <Label Grid.Column="0"
+            <TextBlock Grid.Column="0"
                Grid.Row="1"
-               Content="List"
-               Style="{StaticResource ActivityMapppingLabelStyle}" />
+               Text="List"
+               Margin="{StaticResource ControlBorderTop}" />
             <ComboBox Grid.Column="1"
                   Grid.Row="1"
                   Style="{StaticResource ActivityMapppingComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding Lists}"
                   DisplayMemberPath="FullName"
+                      Margin="{StaticResource ControlBorderTopRight}"
                       IsEnabled="{Binding IsRefreshing,Converter={StaticResource InverseBooleanConverter}}"
                   SelectedItem="{Binding SelectedList, Mode=TwoWay}"
                   ToolTip="{x:Static help:HelpTextResources.SharepointToolTipList}"
@@ -110,10 +107,14 @@
             </ComboBox>
             <Button Grid.Column="2"
                 Grid.Row="1"
+                    Margin="{StaticResource ControlBorderTop}"
                 Command="{Binding RefreshListsCommand}"
-                Style="{StaticResource ActivityRefreshButtonStyle}"
                 ToolTip="Refresh Lists"
-                AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RefreshTablesCommand_AutoID}" />
+                AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RefreshTablesCommand_AutoID}" >
+                <Button.Content>
+                    <fa:FontAwesome Icon="Refresh"></fa:FontAwesome>
+                </Button.Content>
+            </Button>
             <controls:Dev2DataGrid Grid.Row="2"
                                Grid.Column="0"
                                Grid.ColumnSpan="3"
@@ -139,7 +140,7 @@
                                         d:DataContext="{d:DesignInstance Type=to:SharepointSearchTo}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Label Content="{Binding ModelItem, 
+                                <TextBlock Text="{Binding ModelItem, 
                                               NotifyOnTargetUpdated=True, 
                                               Converter={converters:RowToIndexConverter}}" />
                             </DataTemplate>
@@ -153,7 +154,7 @@
                             <DataTemplate>
                                 <ComboBox Style="{StaticResource ActivityComboBoxStyle}"
                                       ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
-                                      Margin="0,0,2,0"
+                                      Margin="0,0,1,1"
                                       DisplayMemberPath="FieldName"
                                       SelectedValuePath="InternalName"
                                       ItemsSource="{Binding DataContext.ListItems, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"                                          
@@ -187,7 +188,7 @@
                             <DataTemplate>
                                 <ComboBox Style="{StaticResource ActivityComboBoxStyle}"
                                       ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
-                                      Margin="0,0,2,0"
+                                      Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.WhereOptions, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                       SelectedValue="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                                       ToolTip="{x:Static help:HelpTextResources.FindToolTipLookForMatchType}">
@@ -234,6 +235,7 @@
                                                         AllowUserInsertLine="True"
                                                         MaxHeight="52"
                                                         Padding="3"
+                                                            Margin="0,0,1,1"
                                                         attachedProperties:FocusSetter.IsFocused="{Binding IsSearchCriteriaFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Text="{Binding ValueToMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
@@ -262,6 +264,7 @@
             </controls:Dev2DataGrid>
             <CheckBox Grid.Row="3"
                   Grid.Column="0"
+                      Margin="{StaticResource ControlBorderTop}"
                   Grid.ColumnSpan="2"
                   Content="Require All Matches To Be True"
                   IsChecked="{Binding ModelItem.RequireAllCriteriaToMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -272,15 +275,16 @@
                                  DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </CheckBox>
-            <Label Grid.Row="4"
+            <TextBlock Grid.Row="4"
                Grid.Column="0"
-               Content="Result"
-               Style="{StaticResource ActivityMapppingLabelStyle}" />
+               Text="Result"
+               Margin="{StaticResource ControlBorderTop}" />
             <ui:IntellisenseTextBox Grid.Row="4"
                                 Grid.Column="1"
                                 Grid.ColumnSpan="2"
                                 DefaultText="[[DeleteCount]]"
                                 WrapInBrackets="True"
+                                    Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding ModelItem.DeleteCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource ActivityMapppingIntellisenseTextBoxStyle}"
                                 ToolTip="{x:Static help:HelpTextResources.SharepointDelteToolTipResult}"
