@@ -24,7 +24,6 @@
                                Height="450"
                                MaxWidth="Infinity"
                                MaxHeight="Infinity"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignWidth="280"
                                d:DataContext="{d:DesignInstance sharepointListRead:SharepointListReadDesignerViewModel}">
@@ -37,7 +36,7 @@
                                      IsClosedAfter="True"
                                      Style="{StaticResource ActivityDesignerButtonStyle}" />
     </core:ActivityDesignerTemplate.RightButtons>
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
@@ -205,8 +204,7 @@
                                Grid.ColumnSpan="2"
                                x:Name="LargeDataGrid"
                                ItemsSource="{Binding ModelItem.FilterCriteria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                               Style="{StaticResource ActivityMapppingDataGridStyle}"
-                               Margin="0,3">
+                               Style="{StaticResource ActivityMapppingDataGridStyle}">
                 <i:Interaction.Behaviors>
                     <behaviors2:DataGridWatermarkModifier WatermarkPropertyName="WatermarkTextVariable">
                         <behaviors2:DataGridWatermarkModifier.WatermarkText>

@@ -13,13 +13,12 @@
                                xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
                                MinWidth="260"
                                MaxWidth="260"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignWidth="250"
                                d:DataContext="{d:DesignInstance local:ForeachDesignerViewModel}">
 
     <StackPanel>
-        <Grid>
+        <Grid Margin="{StaticResource ElementBorder}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -150,7 +149,7 @@
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>
         </Grid>
-        <Border BorderBrush="Black" BorderThickness="1,1,1,1" Margin="{StaticResource ControlBorderTop}">
+        <Border BorderBrush="Black" BorderThickness="1,1,1,1" Margin="5,0,5,5">
             <sap:WorkflowItemPresenter x:Name="DropPoint"
                                        AllowDrop="False"
                                        HintText="Drop Activity Here"

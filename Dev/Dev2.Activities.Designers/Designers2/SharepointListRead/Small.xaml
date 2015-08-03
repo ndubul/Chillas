@@ -17,12 +17,11 @@
                                xmlns:fa="http://schemas.fontawesome.io/icons/"
                                Width="290"
                                MaxWidth="290"
-                               Padding="7"
                                mc:Ignorable="d"
                                d:DesignWidth="230"
                                d:DataContext="{d:DesignInstance local:SharepointListReadDesignerViewModel}">
 
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />

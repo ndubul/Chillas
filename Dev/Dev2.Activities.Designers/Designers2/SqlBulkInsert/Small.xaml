@@ -15,13 +15,12 @@
                                xmlns:fa="http://schemas.fontawesome.io/icons/"
                                Width="260"
                                MaxWidth="260"
-                               Padding="10,7,10,10"
                                mc:Ignorable="d"
                                d:DesignHeight="260"
                                d:DesignWidth="260"
                                d:DataContext="{d:DesignInstance local:SqlBulkInsertDesignerViewModel}">
 
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />

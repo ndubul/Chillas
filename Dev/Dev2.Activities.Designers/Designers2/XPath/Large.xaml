@@ -20,8 +20,7 @@
                                MinHeight="350"
                                Height="350"
                                MaxWidth="Infinity"
-                               MaxHeight="Infinity"                               
-                               Padding="10,7,10,10"
+                               MaxHeight="Infinity"
                                mc:Ignorable="d"
                                d:DesignHeight="300"
                                d:DesignWidth="300"
@@ -36,7 +35,7 @@
                                      Style="{StaticResource ActivityDesignerButtonStyle}" />
     </core:ActivityDesignerTemplate.RightButtons>
 
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
