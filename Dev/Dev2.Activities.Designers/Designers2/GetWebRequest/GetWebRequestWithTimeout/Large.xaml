@@ -21,11 +21,6 @@
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance getWebRequestWithTimeout:GetWebRequestWithTimeoutDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -38,10 +33,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"
-                           MinHeight="50" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
-
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -51,11 +44,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Content="URL"
-               Style="{StaticResource ActivityLabelStyle}"
-               VerticalAlignment="Bottom" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="URL" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="1"
                                 Grid.Row="0"
@@ -76,18 +65,15 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Header"
-               VerticalAlignment="Top" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Header" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="1"
                                 DefaultText="Host etc."
                                 AllowMultilinePaste="True"
-                                                AcceptsReturn="True"
-                                                AllowUserInsertLine="True"
-                                                MaxHeight="52"
+                                AcceptsReturn="True"
+                                AllowUserInsertLine="True"
+                                MaxHeight="52"
+                                Margin="{StaticResource ControlBorderTop}"
                                 TextWrapping="Wrap"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 Text="{Binding Path=ModelItem.Headers, Mode=TwoWay,  NotifyOnTargetUpdated=True}"
@@ -103,12 +89,8 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Time Out Seconds"
-               VerticalAlignment="Top" />
-        <ui:IntellisenseTextBox
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Time Out Seconds" VerticalAlignment="Top" Margin="{StaticResource ControlBorderTop}"/>
+        <ui:IntellisenseTextBox Margin="{StaticResource ControlBorderTop}"
                                 Grid.Column="1"
                                 Grid.Row="2"
                                 DefaultText="100"
@@ -117,14 +99,12 @@
                                 Text="{Binding Path=ModelItem.TimeOutText, Mode=TwoWay,  NotifyOnTargetUpdated=True, Converter={StaticResource ModelTextConverter}, ConverterParameter=True}"
                                 ToolTip="{x:Static help:HelpTextResources.WebRequestToolTipTimeOut}">
         </ui:IntellisenseTextBox>
-        <Label Grid.Column="0"
-               Grid.Row="3"
-            Style="{StaticResource ActivityLabelStyle}"
-               Content="Result"
-               VerticalAlignment="Bottom" />
+        
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Result" VerticalAlignment="Bottom" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="3"
-            DefaultText="[[HTML]]"
+                                DefaultText="[[HTML]]"
+                                Margin="{StaticResource ControlBorderTop}"
                                 WrapInBrackets="True"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}"
@@ -142,13 +122,13 @@
 
         <preview:PreviewView Grid.Column="0"
                              Grid.Row="4"
-            Grid.ColumnSpan="2"
-                             Margin="0"
+                             Grid.ColumnSpan="2"
+                             Margin="{StaticResource ControlBorderTop}"
                              DataContext="{Binding PreviewViewModel}" />
 
         <errors:OnError Grid.Column="0"
                         Grid.Row="5"
-            Grid.ColumnSpan="2"
+                        Grid.ColumnSpan="2"
                         Margin="2" />
 
     </Grid>

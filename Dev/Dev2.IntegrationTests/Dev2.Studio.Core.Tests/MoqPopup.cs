@@ -126,5 +126,11 @@ namespace Dev2.Core.Tests.ProperMoqs
         }
 
         public string DontShowAgainKey { get; set; }
+
+
+        public MessageBoxResult ShowItemCloseCloseConfirmation(string nameOfItem)
+        {
+            return MessageBoxResult.None;
+        }
     }
 }

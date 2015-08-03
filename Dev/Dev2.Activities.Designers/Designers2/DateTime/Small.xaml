@@ -16,11 +16,6 @@
                                d:DesignWidth="270"
                                d:DataContext="{d:DesignInstance local:DateTimeDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -36,10 +31,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Input" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Input" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.ColumnSpan="2"
                                 Grid.Column="1"
@@ -66,13 +58,11 @@
 
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Input Format" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Input Format" Margin="{StaticResource ControlBorderTop}" />
         <ui:IntellisenseTextBox Grid.ColumnSpan="2"
                                 Grid.Column="1"
                                 Grid.Row="1"
+                                Margin="{StaticResource ControlBorderTop}"
                                 AllowMultilinePaste="True"
                                 AcceptsReturn="True"
                                 AllowUserInsertLine="True"
@@ -92,15 +82,12 @@
                                      SourcePropertyValue="{Binding ModelItem.InputFormat, UpdateSourceTrigger=PropertyChanged}"
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
-
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Add Time" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Add Time" Margin="{StaticResource ControlBorderTop}"/>
         <ComboBox Grid.Column="1"
                   Grid.Row="2"
+                  Margin="{StaticResource ControlBorderTop}"
                   Style="{StaticResource ActivityComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   SelectedValue="{Binding SelectedTimeModifierType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -115,11 +102,11 @@
                                      SourcePropertyValue="{Binding SelectedTimeModifierType, UpdateSourceTrigger=PropertyChanged}"
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
-
         </ComboBox>
 
         <ui:IntellisenseTextBox Grid.Column="2"
                                 Grid.Row="2"
+                                Margin="{StaticResource ControlBorderTopLeft}"
                                 DefaultText="+/- time"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 IsEnabled="{Binding SelectedTimeModifierType, Converter={StaticResource EmptyStringToBoolConverter}}"
@@ -134,16 +121,13 @@
                                      SourcePropertyValue="{Binding ModelItem.TimeModifierAmountDisplay, UpdateSourceTrigger=PropertyChanged}"
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
-
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="3"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Output Format" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Output Format" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.ColumnSpan="2"
                                 Grid.Column="1"
                                 Grid.Row="3"
+                                Margin="{StaticResource ControlBorderTop}"
                                 AllowMultilinePaste="True"
                                 AcceptsReturn="True"
                                 AllowUserInsertLine="True"
@@ -163,16 +147,13 @@
                                      SourcePropertyValue="{Binding ModelItem.OutputFormat, UpdateSourceTrigger=PropertyChanged}"
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
-
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="4"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Result" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.ColumnSpan="2"
                                 Grid.Column="1"
                                 Grid.Row="4"
+                                Margin="{StaticResource ControlBorderTop}"
                                 DefaultText="[[NewDateTime]]"
                                 WrapInBrackets="True"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
@@ -187,7 +168,6 @@
                                      SourcePropertyValue="{Binding ModelItem.Result, UpdateSourceTrigger=PropertyChanged}"
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
-
         </ui:IntellisenseTextBox>
 
     </Grid>

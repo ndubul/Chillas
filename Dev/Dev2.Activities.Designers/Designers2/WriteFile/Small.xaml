@@ -18,11 +18,6 @@
                                d:DesignWidth="200"
                                d:DataContext="{d:DesignInstance local:WriteFileDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -34,10 +29,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="File Name" />
+               Text="File Name" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="1"
                                 Grid.Row="0"
@@ -64,8 +58,8 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Content="Contents"
-               Style="{StaticResource ActivityLabelStyle}"
+        <TextBlock Text="Contents"
+               Margin="{StaticResource ControlBorderTop}"
                Grid.Column="0"
                Grid.Row="1" />
         <ui:IntellisenseTextBox  Grid.Column="1"
@@ -75,6 +69,7 @@
                                                 AcceptsReturn="True"
                                                 AllowUserInsertLine="True"
                                                 MaxHeight="52"
+                                 Margin="{StaticResource ControlBorderTop}"
                                  TextWrapping="Wrap"
                                  FilterType="All"
                                  WrapInBrackets="False"
@@ -92,15 +87,16 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
         
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+               Margin="{StaticResource ControlBorderTop}"
+               Text="Result" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="2"
                                 FilterType="All"
                                 DefaultText="[[Success]]"
                                 WrapInBrackets="True"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Resulttxt_AutoID}"

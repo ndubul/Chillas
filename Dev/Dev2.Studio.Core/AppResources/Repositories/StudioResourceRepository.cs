@@ -499,11 +499,12 @@ namespace Dev2.AppResources.Repositories
             var explorerItem = MapData(item, GetEnvironmentRepository(), environmentId);
             var resourcePath = item.ResourcePath.Replace("\\\\", "\\");
 
-            if(!String.IsNullOrEmpty(resourcePath))
+            if(!String.IsNullOrEmpty(resourcePath) )
             {
                 resourcePath = resourcePath.Equals(item.DisplayName) ? "" : resourcePath.Substring(0, resourcePath.LastIndexOf("\\" + item.DisplayName, StringComparison.Ordinal));
             }
-
+            if (!item.ResourcePath.Contains("\\"))
+                resourcePath = "";
             // ReSharper disable ImplicitlyCapturedClosure
             var parent = FindItem(model => model.ResourcePath != null && model.ResourcePath.Equals(resourcePath) && model.EnvironmentId == environmentId);
             var alreadyAdded = FindItem(model =>  model.ResourcePath == item.ResourcePath && model.EnvironmentId == environmentId) != null;

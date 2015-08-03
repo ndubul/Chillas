@@ -16,11 +16,7 @@
                                MaxWidth="200"
                                d:DesignWidth="280"
                                d:DataContext="{d:DesignInstance local:FindIndexDesignerViewModel}">
-
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -34,10 +30,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="In Field" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="In Field" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="1" 
                                 Grid.Row="0" 
@@ -56,16 +49,13 @@
                                      SourcePropertyValue="{Binding ModelItem.InField, UpdateSourceTrigger=PropertyChanged}"
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
-
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Index"  />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Index" Margin="{StaticResource ControlBorderTop}" />
         <ComboBox Grid.Column="1"
                   Grid.Row="1"
                   Style="{StaticResource ActivityComboBoxStyle}"
+                  Margin="{StaticResource ControlBorderTop}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding Path=IndexList}"
                   SelectedValue="{Binding Path=SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -80,17 +70,15 @@
                                      Target="{Binding}" />
             </i:Interaction.Behaviors>
         </ComboBox>
-        
-        <Label Grid.Column="0"
-               Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Characters" />
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Characters" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1" 
                                 Grid.Row="2"
                                 AllowMultilinePaste="True"
-                                                AcceptsReturn="True"
-                                                AllowUserInsertLine="True"
-                                                MaxHeight="52"
+                                AcceptsReturn="True"
+                                AllowUserInsertLine="True"
+                                MaxHeight="52"
+                                Margin="{StaticResource ControlBorderTop}"
                                 TextWrapping="Wrap"
                                 DefaultText="Look for info" 
                                 Text="{Binding Path=ModelItem.Characters,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -108,12 +96,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="3"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Direction" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Direction" Margin="{StaticResource ControlBorderTop}"/>
         <ComboBox Grid.Column="1"
                   Grid.Row="3"
+                  Margin="{StaticResource ControlBorderTop}"
                   Style="{StaticResource ActivityComboBoxStyle}"
                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
                   ItemsSource="{Binding Path=DirectionList}"
@@ -130,12 +116,10 @@
             </i:Interaction.Behaviors>
         </ComboBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="4"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Result" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1" 
                                 Grid.Row="4" 
+                                Margin="{StaticResource ControlBorderTop}"
                                 DefaultText="[[Result]]" 
                                 FilterType="All"
                                 WrapInBrackets="True" 

@@ -22,11 +22,6 @@
                                mc:Ignorable="d"
                                d:DataContext="{d:DesignInstance local:MoveDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -53,10 +48,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0"
-               Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="{Binding InputPathLabel, Mode=OneWay}" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding InputPathLabel, Mode=OneWay}" />
         <ui:IntellisenseTextBox x:Name="InitialFocusElement"
                                 Grid.Column="1"
                                 Grid.Row="0"
@@ -84,14 +76,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               Margin="20,2,2,2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Username" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Username" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="1"
-                                Margin="20,2,1,2"
+                                Margin="{StaticResource ControlBorderTop}"
                                 DefaultText="[[Username]]"
                                 WrapInBrackets="False"
                                 Text="{Binding Path=ModelItem.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -109,14 +97,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="2"
-               Margin="20,2,2,2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Password" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Password" Margin="{StaticResource ControlBorderTop}"/>
         <PasswordBox Grid.Column="1"
                      Grid.Row="2"
-                     Margin="20,2,1,2"
+                     Margin="{StaticResource ControlBorderTop}"
                      ToolTip="{x:Static help:HelpTextResources.MoveToolTipPassword}"
                      attachedProperties:FocusSetter.IsFocused="{Binding IsPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      attachedProperties:PasswordBoxAssistant.BindPassword="true"
@@ -132,15 +116,13 @@
             </i:Interaction.Behaviors>
         </PasswordBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="3"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="{Binding OutputPathLabel, Mode=OneWay}" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding OutputPathLabel, Mode=OneWay}" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Row="3"
                                 Grid.Column="1"
                                 FilterType="All"
                                 DefaultText="[[MoveToPath]]"
                                 WrapInBrackets="False"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding Path=ModelItem.OutputPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.MoveToolTipDestination}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
@@ -162,14 +144,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="4"
-               Margin="20,2,2,2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Username" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Username" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="4"
-                                Margin="20,2,1,2"
+                                Margin="{StaticResource ControlBorderTop}"
                                 DefaultText="[[Username]]"
                                 WrapInBrackets="False"
                                 Text="{Binding Path=ModelItem.DestinationUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -187,14 +165,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="5"
-               Margin="20,2,2,2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Password" />
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Password" Margin="{StaticResource ControlBorderTop}"/>
         <PasswordBox Grid.Column="1"
                      Grid.Row="5"
-                     Margin="20,2,1,2"
+                     Margin="{StaticResource ControlBorderTop}"
                      ToolTip="{x:Static help:HelpTextResources.MoveToolTipPassword}"
                      attachedProperties:FocusSetter.IsFocused="{Binding IsDestinationPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      attachedProperties:PasswordBoxAssistant.BindPassword="true"
@@ -210,13 +184,10 @@
             </i:Interaction.Behaviors>
         </PasswordBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="6"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="If it exists" />
+        <TextBlock Grid.Column="0" Grid.Row="6" Text="If it exists" Margin="{StaticResource ControlBorderTop}"/>
         <CheckBox Grid.Column="1"
                   Grid.Row="6"
-                  Margin="-4,0,0,0"
+                  Margin="{StaticResource ControlBorderTop}"
                   Content="Overwrite"
                   IsChecked="{Binding Path=ModelItem.Overwrite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ToolTip="{x:Static help:HelpTextResources.MoveToolTipForceoverwrite}">
@@ -230,15 +201,13 @@
             </i:Interaction.Behaviors>
         </CheckBox>
 
-        <Label Grid.Column="0"
-               Grid.Row="7"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+        <TextBlock Grid.Column="0" Grid.Row="7" Text="Result" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="7"
                                 DefaultText="[[Success]]"
                                 FilterType="All"
                                 WrapInBrackets="True"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.MoveToolTipResult}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"

@@ -86,7 +86,7 @@ namespace Dev2.Common.Interfaces.Scheduler.Interfaces
         bool IsNew { get; set; }
 
         bool IsNewItem { get; set; }
-
+        string NameForDisplay { get; }
     }
 
     public interface INewScheduledResource

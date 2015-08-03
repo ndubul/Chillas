@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Dev2.Common.Interfaces
@@ -7,7 +8,7 @@ namespace Dev2.Common.Interfaces
 
     public delegate void SelectedExplorerEnvironmentChanged(object sender, IEnvironmentViewModel e);
 
-	public interface IExplorerViewModel
+	public interface IExplorerViewModel:INotifyPropertyChanged
 	{
 		ICollection<IEnvironmentViewModel> Environments {get;set;}
         void Filter(string filter);

@@ -16,11 +16,6 @@
                                d:DesignWidth="230"
                                d:DataContext="{d:DesignInstance local:ScriptDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -32,10 +27,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="0"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Langauge" />
+               Text="Langauge" />
          <ComboBox x:Name="InitialFocusElement"
                    Grid.Column="1"
                    Grid.Row="0"
@@ -70,7 +64,7 @@
                                  ToolTip="{x:Static help:HelpTextResources.ScriptingToolTipScript}"
                                  AllowUserCalculateMode="False"
                                  IsInCalculateMode="True"
-                                 Margin="0,2"
+                                 Margin="{StaticResource ControlBorderTop}"
                                  VerticalContentAlignment="Top"
                                  Text="{Binding Path=ModelItem.Script, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_txtScript_AutoID}">
@@ -84,15 +78,16 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
        
-        <Label Grid.Column="0"
+        <TextBlock Grid.Column="0"
                Grid.Row="2"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+               Margin="{StaticResource ControlBorderTop}"
+               Text="Result" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="2"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 WrapInBrackets="True"
                                 DefaultText="[[Result]]"
+                                Margin="{StaticResource ControlBorderTop}"
                                 FilterType="All"
                                 ToolTip="{x:Static help:HelpTextResources.ScriptingToolTipResult}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

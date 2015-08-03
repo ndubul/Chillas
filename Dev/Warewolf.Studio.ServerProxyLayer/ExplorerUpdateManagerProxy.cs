@@ -90,7 +90,7 @@ namespace Warewolf.Studio.ServerProxyLayer
                 var renameValue = newName;
                 if (newName.LastIndexOf("\\", StringComparison.Ordinal) > 0)
                 {
-                    renameValue = newName.Substring(newName.LastIndexOf("\\", StringComparison.Ordinal));
+                    renameValue = newName.Substring(newName.LastIndexOf("\\", StringComparison.Ordinal)+1);
                 }
                 StudioResourceRepository.Instance.UpdateItem(id, model => model.RefreshName(renameValue), Connection.ID);
             }

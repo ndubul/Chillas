@@ -76,10 +76,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="1" Margin="20,2,2,2" Text="Username" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Username" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="1"
-                                Margin="20,2,1,2"
+                                Margin="{StaticResource ControlBorderTop}"
                                 DefaultText="[[Username]]"
                                 WrapInBrackets="False"
                                 Text="{Binding Path=ModelItem.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -97,10 +97,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="2" Margin="20,2,2,2" Text="Password" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Margin="{StaticResource ControlBorderTop}" Text="Password" />
         <PasswordBox Grid.Column="1"
                      Grid.Row="2"
-                     Margin="20,2,1,2"
+                     Margin="{StaticResource ControlBorderTop}"
                      ToolTip="{x:Static help:HelpTextResources.CopyToolTipPassword}"
                      attachedProperties:FocusSetter.IsFocused="{Binding IsPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      attachedProperties:PasswordBoxAssistant.BindPassword="true"
@@ -116,12 +116,13 @@
             </i:Interaction.Behaviors>
         </PasswordBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding OutputPathLabel, Mode=OneWay}" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding OutputPathLabel, Mode=OneWay}" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Row="3"
                                 Grid.Column="1"
                                 FilterType="All"
                                 DefaultText="[[CopyToPath]]"
                                 WrapInBrackets="False"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding Path=ModelItem.OutputPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.CopyToolTipDestination}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
@@ -143,10 +144,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="4" Margin="20,2,2,2" Text="Username" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Margin="{StaticResource ControlBorderTop}" Text="Username" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="4"
-                                Margin="20,2,1,2"
+                                Margin="{StaticResource ControlBorderTop}"
                                 DefaultText="[[Username]]"
                                 WrapInBrackets="False"
                                 Text="{Binding Path=ModelItem.DestinationUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -164,10 +165,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="5" Margin="20,2,2,2" Text="Password" />
+        <TextBlock Grid.Column="0" Grid.Row="5" Margin="{StaticResource ControlBorderTop}" Text="Password" />
         <PasswordBox Grid.Column="1"
                      Grid.Row="5"
-                     Margin="20,2,1,2"
+                     Margin="{StaticResource ControlBorderTop}"
                      ToolTip="{x:Static help:HelpTextResources.CopyToolTipPassword}"
                      attachedProperties:FocusSetter.IsFocused="{Binding IsDestinationPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      attachedProperties:PasswordBoxAssistant.BindPassword="true"
@@ -183,10 +184,10 @@
             </i:Interaction.Behaviors>
         </PasswordBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="6" Text="If it exists" />
+        <TextBlock Grid.Column="0" Grid.Row="6" Text="If it exists" Margin="{StaticResource ControlBorderTop}"/>
         <CheckBox Grid.Column="1"
                   Grid.Row="6"
-                  Margin="-4,0,0,0"
+                  Margin="-6,3,0,0"
                   Content="Overwrite"
                   IsChecked="{Binding Path=ModelItem.Overwrite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ToolTip="{x:Static help:HelpTextResources.CopyToolTipForceoverwrite}">
@@ -200,12 +201,13 @@
             </i:Interaction.Behaviors>
         </CheckBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="7" Text="Result" />
+        <TextBlock Grid.Column="0" Grid.Row="7" Text="Result" Margin="{StaticResource ControlBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="7"
                                 DefaultText="[[Success]]"
                                 FilterType="All"
                                 WrapInBrackets="True"
+                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.CopyToolTipResult}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"

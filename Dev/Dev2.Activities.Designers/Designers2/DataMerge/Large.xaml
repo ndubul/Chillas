@@ -24,11 +24,6 @@
                                d:DesignWidth="280"
                                d:DataContext="{d:DesignInstance local:DataMergeDesignerViewModel}">
 
-    <core:ActivityDesignerTemplate.Resources>
-        <ResourceDictionary x:Name="TheResources"
-                            Source="pack://application:,,,/Dev2.Activities.Designers;component/Themes/ActivityResources.xaml" />
-    </core:ActivityDesignerTemplate.Resources>
-
     <core:ActivityDesignerTemplate.RightButtons>
         <core:ActivityDesignerButton x:Name="DoneButton"
                                      Content="Done"
@@ -69,7 +64,7 @@
                                         IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding ModelItem, 
+                            <TextBlock Text="{Binding ModelItem, 
                                               NotifyOnTargetUpdated=True, 
                                               Converter={converters:RowToIndexConverter}}"/>
                         </DataTemplate>
@@ -83,11 +78,12 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ui:IntellisenseTextBox AllowMultilinePaste="True"
-                                                AcceptsReturn="True"
-                                                AllowUserInsertLine="True"
-                                                MaxHeight="80"
+                                                    AcceptsReturn="True"
+                                                    AllowUserInsertLine="True"
+                                                    MaxHeight="80"
                                                     TextWrapping="Wrap"
                                                     Padding="3"
+                                                    Margin="0,0,1,1"
                                                     DefaultText="{Binding WatermarkTextVariable}"
                                                     WrapInBrackets="False"
                                                     Text="{Binding InputVariable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -122,7 +118,7 @@
                         <DataTemplate>
                             <ComboBox Style="{StaticResource ActivityComboBoxStyle}"
                                       ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
-                                      Margin="0"
+                                      Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.ItemsList, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                       SelectedValue="{Binding Path=MergeType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                                       ToolTip="{x:Static help:HelpTextResources.DataMergeToolTipWithtype}">
@@ -159,7 +155,7 @@
                                         d:DataContext="{d:DesignInstance Type=activities:DataMergeDTO}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ui:IntellisenseTextBox 
+                            <ui:IntellisenseTextBox Margin="0,0,1,1"
                                                     Padding="3"
                                                     WrapInBrackets="False"
                                                     IsEnabled="{Binding EnableAt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -194,7 +190,7 @@
                                         d:DataContext="{d:DesignInstance Type=activities:DataMergeDTO}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ui:IntellisenseTextBox 
+                            <ui:IntellisenseTextBox Margin="0,0,1,1"
                                                     Padding="3"
                                                     WrapInBrackets="False"
                                                     IsEnabled="{Binding EnablePadding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -230,7 +226,7 @@
                         <DataTemplate>
                             <ComboBox Style="{StaticResource ActivityComboBoxStyle}"
                                       ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
-                                      Margin="0"
+                                      Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.AlignmentTypes, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                       SelectedValue="{Binding Path=Alignment,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
                                       ToolTip="{x:Static help:HelpTextResources.DataMergeToolTipAlignType}">
@@ -256,16 +252,13 @@
             </DataGrid.Columns>
         </controls:Dev2DataGrid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="{StaticResource ControlBorderTop}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Label  Content="Result"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Style="{StaticResource ActivityLabelStyle}" />
+            <TextBlock Text="Result" Grid.Row="0" Grid.Column="0" />
 
             <ui:IntellisenseTextBox Grid.Column="1"
                                     Grid.Row="0"
@@ -286,8 +279,6 @@
             </ui:IntellisenseTextBox>
         </Grid>
 
-        <errors:OnError Grid.Column="0"
-                        Grid.Row="2"
-                        Grid.ColumnSpan="3" />
+        <errors:OnError Grid.Row="2" />
     </Grid>
 </core:ActivityDesignerTemplate>
