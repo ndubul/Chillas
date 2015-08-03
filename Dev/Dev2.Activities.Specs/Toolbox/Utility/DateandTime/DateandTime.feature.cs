@@ -945,7 +945,7 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        public virtual void EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets(string date, string dateval, string input, string value, string output, string val, string res, string result, string[] exampleTags)
+        public virtual void EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets(string date, string dateval, string input, string years, string value, string output, string val, string res, string result, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "ignore"};
@@ -963,7 +963,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 274
        testRunner.And(string.Format("the output format as \'{0}\' with \'{1}\'", output, val), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 275
-    testRunner.And("I selected Add time as \"Years\" with a value of 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And(string.Format("I selected Add time as \"Years\" with a value of \'{0}\'", years), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 276
        testRunner.When("the datetime tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 277
@@ -982,14 +982,15 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Date", "[[rec(1).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Dateval", "31/07/2015")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "[[rs([[a]]).st]], [[a]]=1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:years", "0")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "dd/mm/yyyy")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "[[rs().st]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "mm-dd-yyy")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rec(3).a]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "31-07-2015")]
         public virtual void EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets_Variant0()
         {
-            this.EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets("[[rec(1).a]]", "31/07/2015", "[[rs([[a]]).st]], [[a]]=1", "dd/mm/yyyy", "[[rs().st]]", "mm-dd-yyy", "[[rec(3).a]]", "", ((string[])(null)));
+            this.EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets("[[rec(1).a]]", "31/07/2015", "[[rs([[a]]).st]], [[a]]=1", "0", "dd/mm/yyyy", "[[rs().st]]", "mm-dd-yyy", "[[rec(3).a]]", "31-07-2015", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1000,14 +1001,15 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Date", "[[rec().a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Dateval", "31/07/2015")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "[[rs(1).st]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:years", "0")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "dd/mm/yyyy")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "[[rs([[b]]).st]], [[b]]=2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "mm-dd-yyy")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rec([[f]]).a]], [[f]]=3")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "31-07-2015")]
         public virtual void EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets_Variant1()
         {
-            this.EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets("[[rec().a]]", "31/07/2015", "[[rs(1).st]]", "dd/mm/yyyy", "[[rs([[b]]).st]], [[b]]=2", "mm-dd-yyy", "[[rec([[f]]).a]], [[f]]=3", "", ((string[])(null)));
+            this.EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets("[[rec().a]]", "31/07/2015", "[[rs(1).st]]", "0", "dd/mm/yyyy", "[[rs([[b]]).st]], [[b]]=2", "mm-dd-yyy", "[[rec([[f]]).a]], [[f]]=3", "31-07-2015", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1018,14 +1020,15 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Date", "[[rec(*).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Dateval", "31/07/2015")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "[[rs().st]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:years", "0")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "dd/mm/yyyy")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "[[j]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rj(1).a]],[[rj(2).a]],[[rj(3).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "31-07-2015")]
         public virtual void EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets_Variant2()
         {
-            this.EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets("[[rec(*).a]]", "31/07/2015", "[[rs().st]]", "dd/mm/yyyy", "[[j]]", "", "", "", ((string[])(null)));
+            this.EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets("[[rec(*).a]]", "31/07/2015", "[[rs().st]]", "0", "dd/mm/yyyy", "[[j]]", "", "[[rj(1).a]],[[rj(2).a]],[[rj(3).a]]", "31-07-2015", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1036,14 +1039,34 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Date", "[[rec([[a]]).a]], [[a]]=1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Dateval", "31/07/2015")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "[[rs(*).st]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:years", "0")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "dd/mm/yyyy")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "[[rs(*).s]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "mm-dd-yyy")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rj(*)]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "31-07-2015")]
         public virtual void EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets_Variant3()
         {
-            this.EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets("[[rec([[a]]).a]], [[a]]=1", "31/07/2015", "[[rs(*).st]]", "dd/mm/yyyy", "[[rs(*).s]]", "mm-dd-yyy", "", "", ((string[])(null)));
+            this.EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets("[[rec([[a]]).a]], [[a]]=1", "31/07/2015", "[[rs(*).st]]", "0", "dd/mm/yyyy", "[[rs(*).s]]", "mm-dd-yyy", "[[rj(*)]]", "31-07-2015", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Date and Time Input and outputs accept variables and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DateandTime")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Date", "[[b]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Dateval", "31/07/2015")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "[[a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:years", "[[rd(*).b]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "dd/mm/yyyy")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "[[b]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "mm-dd-yyy")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[b]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "31-07-2015")]
+        public virtual void EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets_Variant4()
+        {
+            this.EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets("[[b]]", "31/07/2015", "[[a]]", "[[rd(*).b]]", "dd/mm/yyyy", "[[b]]", "mm-dd-yyy", "[[b]]", "31-07-2015", ((string[])(null)));
         }
     }
 }
