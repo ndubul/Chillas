@@ -301,3 +301,20 @@ Scenario: Generate a Number between double min and double max with no decimals
 	And the debug output as 
 	|                     |
 	| [[result]] = Double |
+
+
+@ignore
+#Audit
+Scenario Outline: Generate numbers using variables and recordsets
+	Given I have a type as "Numbers"
+	And I have a range from '<From>' to '<To>' 
+	When the random tool is executed 
+	Then the result from the random tool should be of type "System.Int32" with a length of '<length>'
+	And the execution has "NO" error
+	And the result variable '<res>' will be '<result>'
+Examples: 
+	| From                                | To                                  | length              | res                           | result            |
+	| [[a]] = 1                           | [[b]] = 9                           | [[f]] =1            | [[rec().a]]                   | [[rec(1).a]] = 4  |
+	| [[rec(1).a]] = 10                   | [[rec([[int]]).b]] = 70, [[int]] =1 | [[rec([[f]]).b]] =2 | [[rec([[int]]).a]],[[int]]= 3 | [[rec(3).a]] = 35 |
+	| [[rec([[int]]).a]] = 10, [[int]] =1 | [[rec(1).b]] = 70                   | [[f]] =2            | [[rs(*).b]]                   | [[g]] = 35        |
+	

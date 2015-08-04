@@ -180,5 +180,20 @@ namespace Warewolf.Studio.Views
                 textBox.SelectAll();
             }
 	    }
+
+
+
+	    void ExplorerTree_OnNodeExitedEditMode(object sender, NodeEventArgs e)
+	    {
+            var dataItem = e.Node.Data as IExplorerItemViewModel;
+            if (dataItem == null)
+            {
+                return;
+            }
+            if (dataItem.IsRenaming && dataItem.ResourceName.StartsWith("New Folder"))
+            {
+                ExplorerTree.EnterEditMode(e.Node);
+            }
+	    }
 	}
 }
