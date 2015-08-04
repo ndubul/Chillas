@@ -20,7 +20,18 @@ namespace Dev2.Activities.Designers2.Comment
             : base(modelItem)
         {
             AddTitleBarHelpToggle();
+            AddTitleBarLargeToggle();
+            Expand();
         }
+
+        #region Overrides of ActivityDesignerViewModel
+
+        protected override void OnToggleCheckedChanged(string propertyName, bool isChecked)
+        {
+            //Do not change the view. Comment is always "Large"
+        }
+
+        #endregion
 
         public override void Validate()
         {

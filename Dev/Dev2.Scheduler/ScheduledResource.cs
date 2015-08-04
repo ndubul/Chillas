@@ -90,6 +90,10 @@ namespace Dev2.Scheduler
             }
             set
             {
+                if (NameForDisplay != value)
+                {
+                    IsDirty = true;
+                }
                 _name = value;
                 OnPropertyChanged("Name");
                 OnPropertyChanged("NameForDisplay");
