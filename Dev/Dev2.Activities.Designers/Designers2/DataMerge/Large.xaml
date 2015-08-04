@@ -251,8 +251,8 @@
 
         <Grid Grid.Row="1" Margin="{StaticResource ControlBorderTop}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Result" Grid.Row="0" Grid.Column="0" />
