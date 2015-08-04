@@ -153,3 +153,25 @@ Scenario: Enter a URL that is a negative index recordset
 	|              |
 	| [[result]] = |
 
+#Audit
+@ignore
+Scenario Outline: Enter a URL to download html with variables and recordsets
+	Given I have the url '<url>' with timeoutSeconds '<timeoutSeconds>'
+	And I have the Header '<Header>'
+	When the web request tool is executed 
+	Then the result should contain the string "<result>"
+	And the execution has "NO" error
+	And the debug inputs as  
+	| URL   | Header | Time Out Seconds |
+	| <url> |  <Header>      | <timeoutSeconds> |
+	And the debug output as 
+	|                     |
+	| [[result]] = String |
+	Examples:
+	| url                                                                                      | Header | timeoutSeconds                     | result          |
+	| [[rs().st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15                       |        | [[rec(1).set]] = 20                | Wait Successful |
+	| [[rs(*).st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=110                     |        | [[c]] = 120                        | Wait Successful |
+	| [[rs(1).st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=110                     |        | [[rec().set]] = 0                  | Wait Successful |
+	| [[rs([[int]]).st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15  , [[int]] = 3 |        | [[rec(*).set]] = 20                | Wait Successful |
+	| http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15                                     |        | [[rec([[int]]).set]] = 20, [[int]] | Wait Successful |
+	
