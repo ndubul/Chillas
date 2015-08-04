@@ -101,8 +101,20 @@ Scenario: Editing scheduled task is prompting to save
 
 
 
-
-
+@ignore
+#Wolf -619
+Scenario: Viewing number of records in history
+	Given I have Scheduler tab opened
+	And the saved tasks are
+	| Name                  | Status  | Next Execution |
+	| Dice Roll             | Enabled | Int            |
+	| Double Roll and Check | Enabled | Int            |
+	And "Dice Roll" task is selected 
+	And task settings are
+	| Name      | Status Selected | Workflow              | Edit    | Run Task as soon as | History            | Edit Trigger |
+	| Dice Roll | Enabled         | My Category\Dice Roll | Enabled | true                | 8/7/2015 - Present | Enabled      |
+	And Number of History records to load equals "0"
+	Then all records should display
 
 
 

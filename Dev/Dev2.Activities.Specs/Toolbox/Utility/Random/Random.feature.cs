@@ -947,12 +947,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[a]] = 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:From", "[[a]] = 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "[[b]] = 9")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:length", "[[f]] =1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:length", "[[f]] = 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rec().a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rec(1).a]] = 4")]
         public virtual void GenerateNumbersUsingVariablesAndRecordsets_A1()
         {
-            this.GenerateNumbersUsingVariablesAndRecordsets("[[a]] = 1", "[[b]] = 9", "[[f]] =1", "[[rec().a]]", "[[rec(1).a]] = 4", ((string[])(null)));
+            this.GenerateNumbersUsingVariablesAndRecordsets("[[a]] = 1", "[[b]] = 9", "[[f]] = 1", "[[rec().a]]", "[[rec(1).a]] = 4", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -962,12 +962,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec(1).a]] = 10")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:From", "[[rec(1).a]] = 10")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "[[rec([[int]]).b]] = 70, [[int]] =1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:length", "[[rec([[f]]).b]] =2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:length", "[[rec([[f]]).b]] = 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rec([[int]]).a]],[[int]]= 3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rec(3).a]] = 35")]
         public virtual void GenerateNumbersUsingVariablesAndRecordsets_Rec1_A10()
         {
-            this.GenerateNumbersUsingVariablesAndRecordsets("[[rec(1).a]] = 10", "[[rec([[int]]).b]] = 70, [[int]] =1", "[[rec([[f]]).b]] =2", "[[rec([[int]]).a]],[[int]]= 3", "[[rec(3).a]] = 35", ((string[])(null)));
+            this.GenerateNumbersUsingVariablesAndRecordsets("[[rec(1).a]] = 10", "[[rec([[int]]).b]] = 70, [[int]] =1", "[[rec([[f]]).b]] = 2", "[[rec([[int]]).a]],[[int]]= 3", "[[rec(3).a]] = 35", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -977,12 +977,42 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec([[int]]).a]] = 10, [[int]] =1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:From", "[[rec([[int]]).a]] = 10, [[int]] =1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "[[rec(1).b]] = 70")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:length", "[[f]] =2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:length", "[[rj(*).set]] = 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rs(*).b]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[g]] = 35")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs(1).b]] = 55")]
         public virtual void GenerateNumbersUsingVariablesAndRecordsets_RecInt_A10Int1()
         {
-            this.GenerateNumbersUsingVariablesAndRecordsets("[[rec([[int]]).a]] = 10, [[int]] =1", "[[rec(1).b]] = 70", "[[f]] =2", "[[rs(*).b]]", "[[g]] = 35", ((string[])(null)));
+            this.GenerateNumbersUsingVariablesAndRecordsets("[[rec([[int]]).a]] = 10, [[int]] =1", "[[rec(1).b]] = 70", "[[rj(*).set]] = 2", "[[rs(*).b]]", "[[rs(1).b]] = 55", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Generate numbers using variables and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Random")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec().a]] = 10")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:From", "[[rec().a]] = 10")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "[[rec().b]] = 100")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:length", "[[rj(1).set]] = 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[b]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[b]] = 55")]
+        public virtual void GenerateNumbersUsingVariablesAndRecordsets_Rec_A10()
+        {
+            this.GenerateNumbersUsingVariablesAndRecordsets("[[rec().a]] = 10", "[[rec().b]] = 100", "[[rj(1).set]] = 2", "[[b]]", "[[b]] = 55", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Generate numbers using variables and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Random")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec(*).a]] = 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:From", "[[rec(*).a]] = 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "[[rec(*).b]] = 700")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:length", "[[rj().set]] = 3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[b]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[b]] = 423")]
+        public virtual void GenerateNumbersUsingVariablesAndRecordsets_Rec_A1()
+        {
+            this.GenerateNumbersUsingVariablesAndRecordsets("[[rec(*).a]] = 1", "[[rec(*).b]] = 700", "[[rj().set]] = 3", "[[b]]", "[[b]] = 423", ((string[])(null)));
         }
     }
 }
