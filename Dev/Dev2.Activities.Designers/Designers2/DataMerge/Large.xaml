@@ -216,7 +216,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="50"
+                <DataGridTemplateColumn Width="75"
                                         Header="Align"
                                         HeaderStyle="{StaticResource ActivityMapppingDataGridHeaderStyle}"
                                         d:DataContext="{d:DesignInstance Type=activities:DataMergeDTO}">

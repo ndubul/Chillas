@@ -60,9 +60,7 @@
         </sap:WorkflowItemsPresenter>    
         </Border>
         
-        <errors:OnError Grid.Row="1"
-                        Width="{Binding ElementName=ActivitiesPresenter, Path=Width}"
-                        Margin="2" />
+        <errors:OnError Grid.Row="1" />
     </Grid>
      
 </core:ActivityDesignerTemplate>

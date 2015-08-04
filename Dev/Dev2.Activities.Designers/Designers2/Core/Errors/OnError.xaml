@@ -8,6 +8,7 @@
              xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
              xmlns:help="clr-namespace:Dev2.Activities.Designers2.Core.Help"
              mc:Ignorable="d" 
+             MinWidth="300"
              d:DesignHeight="300" d:DesignWidth="300">
     
     <GroupBox x:Name="OnErrorGroupBox"             
