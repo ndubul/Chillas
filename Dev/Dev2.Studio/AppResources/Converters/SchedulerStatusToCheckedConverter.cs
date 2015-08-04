@@ -24,17 +24,9 @@ namespace Dev2.AppResources.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string isEnabledRadioButton = parameter as string;
             SchedulerStatus schedulerStatus = (SchedulerStatus)value;
-            if(isEnabledRadioButton == "true")
-            {
-                if(schedulerStatus == SchedulerStatus.Enabled)
-                {
-                    return true;
-                }
-                return false;
-            }
-            if(schedulerStatus == SchedulerStatus.Disabled)
+
+            if (schedulerStatus == SchedulerStatus.Enabled)
             {
                 return true;
             }
@@ -43,8 +35,8 @@ namespace Dev2.AppResources.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string isEnabledRadioButton = parameter as string;
-            if((isEnabledRadioButton == "true" && (bool)value) || (isEnabledRadioButton == "false" && !(bool)value))
+            var isChecked = value is bool && (bool)value;
+            if (isChecked)
             {
                 return SchedulerStatus.Enabled;
             }

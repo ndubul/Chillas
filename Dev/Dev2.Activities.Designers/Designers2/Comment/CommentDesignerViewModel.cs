@@ -10,6 +10,7 @@
 */
 
 using System.Activities.Presentation.Model;
+using System.Windows;
 using Dev2.Activities.Designers2.Core;
 
 namespace Dev2.Activities.Designers2.Comment
@@ -20,7 +21,14 @@ namespace Dev2.Activities.Designers2.Comment
             : base(modelItem)
         {
             AddTitleBarHelpToggle();
+            ShowLarge = true;
+            ThumbVisibility = Visibility.Visible;
         }
+
+        #region Overrides of ActivityDesignerViewModel
+
+
+        #endregion
 
         public override void Validate()
         {

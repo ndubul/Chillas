@@ -11,12 +11,15 @@
              xmlns:connections="clr-namespace:Dev2.CustomControls.Connections"
              xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces.Scheduler.Interfaces;assembly=Dev2.Common.Interfaces"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:converters="clr-namespace:Dev2.AppResources.Converters;assembly=Dev2.Studio.Core"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance scheduler:SchedulerViewModel}"
              AutomationProperties.AutomationId="UI_SchedulerView_AutoID">
-
+<UserControl.Resources>
+        <converters:SimpleEnumToBoolConverter x:Key="EnumToBoolConverter"/>
+    </UserControl.Resources>
     <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -91,8 +94,8 @@
                                     <CheckBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" 
                                               HorizontalAlignment="Left" Style="{StaticResource CheckBoxRoundedStyle}" 
                                               Margin="-2,0,0,0"
-                                              IsChecked="{Binding Status, Converter={StaticResource SchedulerStatusToCheckedConverter},ConverterParameter=true}"></CheckBox>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding NameForDisplay}" FontSize="12" Margin="0,0,0,-4" FontWeight="Bold" ></TextBlock>
+                                              IsChecked="{Binding Status, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource SchedulerStatusToCheckedConverter}}"></CheckBox>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding NameForDisplay}" TextTrimming="CharacterEllipsis" MaxWidth="200" FontSize="12" Margin="0,0,0,-4" FontWeight="Bold" ></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding NextRunDate}" FontSize="11" Margin="0,-4,0,0" ></TextBlock>
                                     <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Right" 
                                             Command="{Binding ElementName=schedules, Path=DataContext.DeleteCommand }" CommandParameter="{Binding .}" Style="{StaticResource ButtonSchedulerDeleteTransparentStyle}" >
@@ -127,8 +130,8 @@
                 <ContentControl Grid.Column="1" Visibility="{Binding SelectedTask, Converter={StaticResource NullToVisibilityConverterNullIsCollapsed}}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50*" />
-                            <RowDefinition Height="50*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -219,7 +222,7 @@
                                          HorizontalAlignment="Left"
                                          VerticalAlignment="Center"
                                          GroupName="Status"
-                                         IsChecked="{Binding Status,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource SchedulerStatusToCheckedConverter},ConverterParameter=true}">
+                                         IsChecked="{Binding SelectedTask.Status,Mode=TwoWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource EnumToBoolConverter},ConverterParameter={x:Static interfaces:SchedulerStatus.Enabled}}">
                                         <i:Interaction.Behaviors>
                                             <help:HelpSetter Text="{x:Static help:HelpTextResources.SchedulerSettingsHelpTextStatus}"
                                                      DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}" />
@@ -231,7 +234,7 @@
                                              HorizontalAlignment="Left"
                                              VerticalAlignment="Center"
                                              GroupName="Status"
-                                             IsChecked="{Binding Status,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource SchedulerStatusToCheckedConverter},ConverterParameter=false}">
+                                             IsChecked="{Binding SelectedTask.Status,Mode=TwoWay,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource EnumToBoolConverter},ConverterParameter={x:Static interfaces:SchedulerStatus.Disabled}}">
                                         <i:Interaction.Behaviors>
                                             <help:HelpSetter Text="{x:Static help:HelpTextResources.SchedulerSettingsHelpTextStatus}"
                                                      DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}" />
@@ -403,6 +406,8 @@
                               EnableRowVirtualization="False"
                               SelectedItem="{Binding SelectedHistory,Mode=TwoWay}"                              
                               Style="{StaticResource SchedulerDataGridStyle}"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Auto"
                               RowHeight="22">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Width="27"

@@ -3,97 +3,107 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:attachedProperties="clr-namespace:Dev2.Activities.AttachedProperties;assembly=Dev2.Activities.Designers"
         xmlns:customControls="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
-        Icon="pack://application:,,,/Warewolf Studio;component/Warewolf.ico"
-        Title="SharePoint Server Source" MinHeight="250" MaxHeight="250" ResizeMode="CanResize" 
-        MinWidth="490" Width="490" MaxWidth="550" WindowStyle="SingleBorderWindow"  WindowStartupLocation="CenterScreen">
+        Style="{StaticResource WindowBorderlessStyle}"
+        MinHeight="250" MaxHeight="250" 
+        MinWidth="490" Width="490" MaxWidth="550" WindowStartupLocation="CenterScreen"
+        Closed="SharepointServerSource_OnClosed">
     
-    <Grid Margin="{StaticResource ElementBorder}">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0">
+        <StackPanel Background="{StaticResource WareWolfMenuBrush}" HorizontalAlignment="Stretch">
+            <TextBlock Margin="3" Text="SharePoint Server Source" Style="{StaticResource SourceHeader}" x:Name="HeaderTextBlock" />
+        </StackPanel>
+        <Grid Margin="{StaticResource ElementBorder}" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{Binding ActualWidth, ElementName=Authentication, UpdateSourceTrigger=PropertyChanged}"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock VerticalAlignment="Center" >Server Name:</TextBlock>
-            <TextBox x:Name="ServerName"
+            <Grid Grid.Row="1" Grid.Column="0" Margin="{StaticResource ElementBorderTop}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding ActualWidth, ElementName=Authentication, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" >Server Name:</TextBlock>
+                <TextBox x:Name="ServerName"
                      Margin="{StaticResource ControlBorderLeft}" 
                      VerticalAlignment="Center" 
                      Grid.Row="0" Grid.Column="1" 
                      Text="{Binding ServerName}" customControls:WatermarkTextBox.Watermark="http://YourSharePointServer"></TextBox>
-            <TextBlock x:Name="Authentication" 
+                <TextBlock x:Name="Authentication" 
                                VerticalAlignment="Center" 
                                Grid.Row="1" 
                                Grid.Column="0">Authentication Type:</TextBlock>
-            <StackPanel Margin="{StaticResource ControlBorderLeft}" 
+                <StackPanel Margin="{StaticResource ControlBorderLeft}" 
                                 Orientation="Horizontal" 
                                 VerticalAlignment="Center" 
                                 Grid.Row="1" Grid.Column="1" 
                                 HorizontalAlignment="Stretch">
-                <RadioButton GroupName="AuthenticationType" IsChecked="{Binding IsWindows}" Margin="{StaticResource ControlBorderRight}" >Windows</RadioButton>
-                <RadioButton GroupName="AuthenticationType" IsChecked="{Binding IsUser}">User</RadioButton>
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Row="2" 
+                    <RadioButton GroupName="AuthenticationType" IsChecked="{Binding IsWindows}" Margin="{StaticResource ControlBorderRight}" >Windows</RadioButton>
+                    <RadioButton GroupName="AuthenticationType" IsChecked="{Binding IsUser}">User</RadioButton>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="2" 
               Grid.Column="0" 
               Margin="0,0,0,0"
               Visibility="{Binding IsUser,Converter={StaticResource BoolToVisConverter}}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{Binding ActualWidth, ElementName=Authentication, UpdateSourceTrigger=PropertyChanged}"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock VerticalAlignment="Center" 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding ActualWidth, ElementName=Authentication, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" 
                        Grid.Row="0" 
                        Grid.Column="0">User Name:</TextBlock>
-            <TextBox VerticalAlignment="Center" 
+                <TextBox VerticalAlignment="Center" 
                      Margin="{StaticResource ControlBorderLeft}" 
                      Grid.Row="0" 
                      Grid.Column="1" 
                      Text="{Binding UserName}"></TextBox>
-            <TextBlock VerticalAlignment="Center" 
+                <TextBlock VerticalAlignment="Center" 
                        Margin="{StaticResource ControlBorderTop}"
                        Grid.Row="1" 
                        Grid.Column="0">Password:</TextBlock>
-            <PasswordBox VerticalAlignment="Center" 
+                <PasswordBox VerticalAlignment="Center" 
                          Grid.Row="1" 
                          Grid.Column="1"
                          Margin="{StaticResource ControlBorderTopLeft}"
                          attachedProperties:PasswordBoxAssistant.BindPassword="true"
                          attachedProperties:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></PasswordBox>
-        </Grid>
-        <StackPanel Orientation="Horizontal" 
+            </Grid>
+            <StackPanel Orientation="Horizontal" 
                         Margin="0,1,-2,-2"
                         Grid.Row="3" 
                         Grid.Column="0" 
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Right">
-            <TextBlock Margin="{StaticResource ControlBorderRight}" 
+                <TextBlock Margin="{StaticResource ControlBorderRight}" 
                        Text="{Binding TestResult}"></TextBlock>
-            <customControls:CircularProgressBar Height="14"
+                <customControls:CircularProgressBar Height="14"
                                                 Width="14"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center"
                                                 Margin="{StaticResource ControlBorderRight}"
                                                 Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverterPositive},Mode=OneWay}"
                                                 AutomationProperties.AutomationId="UI_SettingsProgress_Indicator" />
-            <Button Width="50" Command="{Binding TestCommand}" Margin="{StaticResource ControlBorderRight}">Test</Button>
-            <Button Width="50" Command="{Binding SaveCommand}" Margin="{StaticResource ControlBorderRight}">Save</Button>
-            <Button Width="50" Command="{Binding CancelCommand}">Cancel</Button>
-        </StackPanel>
+                <Button Width="50" Command="{Binding TestCommand}" Margin="{StaticResource ControlBorderRight}">Test</Button>
+                <Button Width="50" Command="{Binding SaveCommand}" Margin="{StaticResource ControlBorderRight}">Save</Button>
+                <Button Width="50" Command="{Binding CancelCommand}">Cancel</Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
