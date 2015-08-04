@@ -313,8 +313,9 @@ Scenario Outline: Generate numbers using variables and recordsets
 	And the execution has "NO" error
 	And the result variable '<res>' will be '<result>'
 Examples: 
-	| From                                | To                                  | length              | res                           | result            |
-	| [[a]] = 1                           | [[b]] = 9                           | [[f]] =1            | [[rec().a]]                   | [[rec(1).a]] = 4  |
-	| [[rec(1).a]] = 10                   | [[rec([[int]]).b]] = 70, [[int]] =1 | [[rec([[f]]).b]] =2 | [[rec([[int]]).a]],[[int]]= 3 | [[rec(3).a]] = 35 |
-	| [[rec([[int]]).a]] = 10, [[int]] =1 | [[rec(1).b]] = 70                   | [[f]] =2            | [[rs(*).b]]                   | [[g]] = 35        |
-	
+	| From                                | To                                  | length               | res                           | result            |
+	| [[a]] = 1                           | [[b]] = 9                           | [[f]] = 1            | [[rec().a]]                   | [[rec(1).a]] = 4  |
+	| [[rec(1).a]] = 10                   | [[rec([[int]]).b]] = 70, [[int]] =1 | [[rec([[f]]).b]] = 2 | [[rec([[int]]).a]],[[int]]= 3 | [[rec(3).a]] = 35 |
+	| [[rec([[int]]).a]] = 10, [[int]] =1 | [[rec(1).b]] = 70                   | [[rj(*).set]] = 2    | [[rs(*).b]]                   | [[rs(1).b]] = 55  |
+	| [[rec().a]] = 10                    | [[rec().b]] = 100                   | [[rj(1).set]] = 2    | [[b]]                         | [[b]] = 55        |
+	| [[rec(*).a]] = 1                    | [[rec(*).b]] = 700                  | [[rj().set]] = 3     | [[b]]                         | [[b]] = 423       |	
