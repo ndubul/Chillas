@@ -39,6 +39,8 @@
                                     WrapInBrackets="True"
                                     Text="{Binding ModelItem.OnErrorVariable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource ActivityMapppingIntellisenseTextBoxStyle}"
+                                    AcceptsReturn="False"
+                                    MaxHeight="25"
                                     ToolTip="{x:Static help:HelpTextResources.NativeActivityToolTipPuterrorinthisvariable}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Variable_AutoID}">
                 <i:Interaction.Behaviors>
@@ -54,11 +56,13 @@
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Call this web service" Margin="{StaticResource ControlBorderTop}" />
             <ui:IntellisenseTextBox Grid.Row="1"
                                     Grid.Column="1"
-                                     Margin="{StaticResource ControlBorderTop}"
+                                    Margin="{StaticResource ControlBorderTop}"
                                     DefaultText="http://lcl:3142/services/err"
                                     WrapInBrackets="False"
                                     Text="{Binding ModelItem.OnErrorWorkflow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource ActivityMapppingIntellisenseTextBoxStyle}"
+                                    AcceptsReturn="False"
+                                    MaxHeight="25"
                                     ToolTip="{x:Static help:HelpTextResources.NativeActivityToolTipCallthiswebservice}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Workflow_AutoID}">
                 <i:Interaction.Behaviors>

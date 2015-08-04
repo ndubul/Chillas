@@ -41,7 +41,7 @@
                       Grid.Row="0"
                       Grid.Column="0"
                       Margin="{StaticResource ControlBorderRight}"
-                      ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                      ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                       SelectedItem="{Binding SelectedSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Sources}"
                       ToolTip="{x:Static help:HelpTextResources.DropboxSourceToolTip}"
@@ -65,7 +65,7 @@
                   Grid.Row="1"
                   Grid.Column="1"
                   Margin="{StaticResource ControlBorderTop}"
-                  ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                   SelectedItem="{Binding Operation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Operations}"
                   ToolTip="{x:Static help:HelpTextResources.DropboxOperationToolTip}">

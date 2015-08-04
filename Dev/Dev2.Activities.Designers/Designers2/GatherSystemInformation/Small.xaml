@@ -93,7 +93,7 @@
                 <DataGridTemplateColumn Width="1.5*" d:DataContext="{d:DesignInstance Type=dev2:GatherSystemInformationTO}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                            <ComboBox ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                                       Margin="0,0,1,1"
                                       ItemsSource="{Binding DataContext.ItemsList, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
                                       Text="{Binding EnTypeOfSystemInformation,Converter={StaticResource EnumDiscriptionToStringConverter},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

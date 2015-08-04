@@ -94,7 +94,7 @@
                 <ComboBox Grid.Column="0"
                           IsTabStop="False"
                           Margin="{StaticResource ControlBorderRight}"
-                          ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}" 
+                          ItemContainerStyle="{StaticResource ComboBoxItemStyle}" 
                           ItemsSource="{Binding SplitTypeList}"
                           SelectedValue="{Binding SplitType}"
                           AutomationProperties.AutomationId="QviSplitOnCombobox"

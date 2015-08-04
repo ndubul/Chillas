@@ -32,7 +32,7 @@
          <ComboBox x:Name="InitialFocusElement"
                    Grid.Column="1"
                    Grid.Row="0"
-                   ItemContainerStyle="{StaticResource ActivityComboBoxItemStyle}"
+                   ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
                    SelectedValue="{Binding SelectedScriptType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                    ItemsSource="{Binding ScriptTypes}"
                    AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_ScriptTypecbx_AutoID}"
