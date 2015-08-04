@@ -10,6 +10,7 @@
 */
 
 using System.Activities.Presentation.Model;
+using System.Windows;
 using Dev2.Activities.Designers2.Core;
 
 namespace Dev2.Activities.Designers2.Comment
@@ -20,16 +21,12 @@ namespace Dev2.Activities.Designers2.Comment
             : base(modelItem)
         {
             AddTitleBarHelpToggle();
-            AddTitleBarLargeToggle();
-            Expand();
+            ShowLarge = true;
+            ThumbVisibility = Visibility.Visible;
         }
 
         #region Overrides of ActivityDesignerViewModel
 
-        protected override void OnToggleCheckedChanged(string propertyName, bool isChecked)
-        {
-            //Do not change the view. Comment is always "Large"
-        }
 
         #endregion
 

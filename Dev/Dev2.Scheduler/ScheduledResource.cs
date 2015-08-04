@@ -38,7 +38,7 @@ namespace Dev2.Scheduler
         public ScheduledResource(string name, SchedulerStatus status, DateTime nextRunDate, IScheduleTrigger trigger, string workflowName)
         {
 
-            var history = name.Split(new[] { '~' });
+            var history = name.Split('~');
 
             WorkflowName = workflowName;
             Trigger = trigger;
@@ -62,6 +62,7 @@ namespace Dev2.Scheduler
             {
                 _isDirty = value;
                 OnPropertyChanged("IsDirty");
+                OnPropertyChanged("NameForDisplay");
             }
         }
 
@@ -120,6 +121,10 @@ namespace Dev2.Scheduler
             }
             set
             {
+                if (Status != value)
+                {
+                    IsDirty = true;
+                }
                 _status = value;
                 OnPropertyChanged("Status");
             }
