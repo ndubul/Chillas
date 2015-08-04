@@ -155,11 +155,30 @@ Scenario: Enter a URL that is a negative index recordset
 
 #Audit
 @ignore
+Scenario Outline: Enter a number or variable that does not exist as URL
+	Given I have the url '<url>' with timeoutSeconds '<timeoutSeconds>'
+	When the web request tool is executed	
+	Then the result should contain the string '<Error>'
+	And the execution has "AN" error
+	And the debug inputs as  
+	| URL   | Header | Time Out Seconds |
+	| <url> |        | <timeoutSeconds> |
+	And the debug output as 
+	|              | 
+	| [[result]] = | 
+Examples: 
+	| url                                                  | timeoutSeconds | Error                                                                            |
+	| 88                                                   |                | Unable to connect to the remote server                                           |
+	| [[y]]                                                |                | Invalid URI: The hostname could not be parsed                                    |
+	| http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15 | [[y]]          | Value [[y]] for TimeoutSeconds Text could not be interpreted as a numeric value. |
+	| http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15 | " "            | Value    for TimeoutSeconds Text could not be interpreted as a numeric value.    |
+	| http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15 | sdf            | Value sdf for TimeoutSeconds Text could not be interpreted as a numeric value.   |
+
 Scenario Outline: Enter a URL to download html with variables and recordsets
 	Given I have the url '<url>' with timeoutSeconds '<timeoutSeconds>'
 	And I have the Header '<Header>'
 	When the web request tool is executed 
-	Then the result should contain the string "<result>"
+	Then the result should contain the string '<result>' equals '<output>'
 	And the execution has "NO" error
 	And the debug inputs as  
 	| URL   | Header | Time Out Seconds |
@@ -168,10 +187,11 @@ Scenario Outline: Enter a URL to download html with variables and recordsets
 	|                     |
 	| [[result]] = String |
 	Examples:
-	| url                                                                                      | Header | timeoutSeconds                     | result          |
-	| [[rs().st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15                       |        | [[rec(1).set]] = 20                | Wait Successful |
-	| [[rs(*).st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=110                     |        | [[c]] = 120                        | Wait Successful |
-	| [[rs(1).st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=110                     |        | [[rec().set]] = 0                  | Wait Successful |
-	| [[rs([[int]]).st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15  , [[int]] = 3 |        | [[rec(*).set]] = 20                | Wait Successful |
-	| http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15                                     |        | [[rec([[int]]).set]] = 20, [[int]] | Wait Successful |
+	| url                                                                                      | Header | timeoutSeconds                     | result                           | output                                                                |
+	| [[rs().st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15                       |        | [[rec(1).set]] = 20                | [[rs(1).set]]                    | [[rs(1).set]] = <DataList><Result>Wait Successful</Result></DataList> |
+	| [[rs(*).st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=110                     |        | [[c]] = 120                        | [[rs().set]]                     | [[rs(1).set]]= <DataList><Result>Wait Successful</Result></DataList>  |
+	| [[rs(1).st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=110                     |        | [[rec().set]] = 0                  | [[rs([[int]]).set]], [[int]] = 3 | [[rs(3).set]] = <DataList><Result>Wait Successful</Result></DataList> |
+	| [[rs([[int]]).st]] = http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15  , [[int]] = 3 |        | [[rec(*).set]] = 20                | [[rs().set]]                     | [[rs(1).set]] = <DataList><Result>Wait Successful</Result></DataList> |
+	| http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15                                     |        | [[rec([[int]]).set]] = 20, [[int]] | [[rs(*).set]]                    | [[rs(1).set]]= <DataList><Result>Wait Successful</Result></DataList>  |
+	| http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15                                     |        | [[rec([[int]]).set]] = 20, [[int]] | [[rs(1).set]]                    | [[rs(1).set]]= <DataList><Result>Wait Successful</Result></DataList>  |
 	
