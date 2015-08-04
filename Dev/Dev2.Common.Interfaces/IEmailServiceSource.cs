@@ -14,5 +14,6 @@ namespace Dev2.Common.Interfaces
         string EmailTo { get; set; }
         string Path { get; set; }
         Guid Id { get; set; }
+        string ResourceName { get; set; }
     }
 }

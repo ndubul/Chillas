@@ -1276,7 +1276,10 @@ namespace Dev2.Runtime.Hosting
                             Message = string.Format("Compilation Error: There is a {0} with the same name.", conflicting.ResourceType)
                         };
                     }
-
+                    if (resource.ResourcePath.EndsWith("\\"))
+                    {
+                        resource.ResourcePath = resource.ResourcePath.TrimEnd('\\');
+                    }
                     var workspacePath = EnvironmentVariables.GetWorkspacePath(workspaceID);
                     var originalRes = resource.ResourcePath ?? "";
                     int indexOfName = originalRes.LastIndexOf(resource.ResourceName, StringComparison.Ordinal);

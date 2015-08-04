@@ -46,37 +46,43 @@ namespace Warewolf.Studio.ViewModels
 
         private bool _isDisposed;
 
-        public ManageEmailSourceViewModel(IManageEmailSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator):base(ResourceType.EmailSource)
+        public ManageEmailSourceViewModel(IManageEmailSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator)
+            : this(updateManager,aggregator)
         {
-            VerifyArgument.IsNotNull("updateManager", updateManager);
-            VerifyArgument.IsNotNull("aggregator", aggregator);
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
             _updateManager = updateManager;
             _aggregator = aggregator;
             RequestServiceNameViewModel = requestServiceNameViewModel;
             HeaderText = Resources.Languages.Core.EmailSourceNewHeaderLabel;
             Header = Resources.Languages.Core.EmailSourceNewHeaderLabel;
-            SendCommand = new DelegateCommand(TestConnection, CanTest);
-            OkCommand = new DelegateCommand(SaveConnection, CanSave);
-            Testing = false;
-            _testPassed = false;
-            _testFailed = false;
             EnableSend = false;
             EnableSslNo = true;
             Port = 25;
             Timeout = 100;
-            // ReSharper restore MaximumChainedReferences
-            _warewolfserverName = updateManager.ServerName;
         }
 
-        public ManageEmailSourceViewModel(IManageEmailSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator, IEmailServiceSource emailServiceSource)
-            : this(updateManager, requestServiceNameViewModel, aggregator)
+        public ManageEmailSourceViewModel(IManageEmailSourceModel updateManager, IEventAggregator aggregator, IEmailServiceSource emailServiceSource)
+            : this(updateManager, aggregator)
         {
             VerifyArgument.IsNotNull("emailServiceSource", emailServiceSource);
             _emailServiceSource = emailServiceSource;
             FromSource(emailServiceSource);
             SetupHeaderTextFromExisting();
-            
+        }
+
+        ManageEmailSourceViewModel(IManageEmailSourceModel updateManager, IEventAggregator aggregator)
+            : base(ResourceType.EmailSource)
+        {
+            VerifyArgument.IsNotNull("updateManager", updateManager);
+            VerifyArgument.IsNotNull("aggregator", aggregator);
+            _updateManager = updateManager;
+            _aggregator = aggregator;
+            _warewolfserverName = updateManager.ServerName;
+            SendCommand = new DelegateCommand(TestConnection, CanTest);
+            OkCommand = new DelegateCommand(SaveConnection, CanSave);
+            Testing = false;
+            _testPassed = false;
+            _testFailed = false;
         }
 
         void FromSource(IEmailServiceSource emailServiceSource)
@@ -85,15 +91,27 @@ namespace Warewolf.Studio.ViewModels
             UserName = emailServiceSource.UserName;
             Password = emailServiceSource.Password;
             EnableSsl = emailServiceSource.EnableSsl;
+            if (EnableSsl)
+            {
+                EnableSslYes = EnableSsl;
+            }
+            else
+            {
+                EnableSslNo = true;
+            }
             Port = emailServiceSource.Port;
             Timeout = emailServiceSource.Timeout;
             EmailFrom = emailServiceSource.EmailFrom;
             EmailTo = emailServiceSource.EmailTo;
+            ResourceName = emailServiceSource.ResourceName;
         }
         void SetupHeaderTextFromExisting()
         {
-            HeaderText = Resources.Languages.Core.EmailSourceEditHeaderLabel + _warewolfserverName.Trim() + "\\" + (_emailServiceSource.HostName ?? ResourceName).Trim();
-            Header = ((_emailServiceSource.HostName ?? ResourceName));
+            if(_emailServiceSource != null)
+            {
+                HeaderText = Resources.Languages.Core.EmailSourceEditHeaderLabel + _warewolfserverName.Trim() + "\\" + (_emailServiceSource.ResourceName ?? ResourceName).Trim();
+                Header = ((_emailServiceSource.ResourceName ?? ResourceName));
+            }
         }
 
         public override bool CanSave()
@@ -145,11 +163,13 @@ namespace Warewolf.Studio.ViewModels
 
                 if (res == MessageBoxResult.OK)
                 {
-                    ResourceName = RequestServiceNameViewModel.ResourceName.Name;
+                    
                     var src = ToSource();
+                    src.ResourceName = RequestServiceNameViewModel.ResourceName.Name;
                     src.Path = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
                     Save(src);
                     _emailServiceSource = src;
+                    ResourceName = _emailServiceSource.ResourceName;
                     SetupHeaderTextFromExisting();
                 }
             }

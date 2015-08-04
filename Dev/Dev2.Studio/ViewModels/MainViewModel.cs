@@ -726,6 +726,9 @@ namespace Dev2.Studio.ViewModels
                 case "DbService":
                     EditDbService(resourceModel);
                 break;
+                case "EmailSource":
+                    EditEmailSource(resourceModel);
+                    break;
             }
             //WebController.DisplayDialogue(resourceModel, isedit);
         }
@@ -819,6 +822,25 @@ namespace Dev2.Studio.ViewModels
          
         }
 
+        void EditEmailSource(IContextualResourceModel resourceModel)
+        {
+            var db = new EmailSource(resourceModel.WorkflowXaml.ToXElement());
+
+            var def = new EmailServiceSourceDefinition()
+            {
+                Id = db.ResourceID,
+                HostName = db.Host,
+                Password = db.Password,
+                UserName = db.UserName,
+                Port = db.Port,
+                Timeout = db.Timeout,
+                ResourceName = db.ResourceName,
+                EnableSsl = db.EnableSsl
+            };
+            EditResource(def);
+
+        }
+
         void EditResource(IDbSource selectedSource)
         {
 
@@ -857,7 +879,16 @@ namespace Dev2.Studio.ViewModels
             var vm = new SourceViewModel<IDatabaseService>(EventPublisher, dbSourceViewModel, PopupProvider,new ManageDatabaseServiceControl());
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DbService), vm);
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
-        } 
+        }
+
+        void EditResource(IEmailServiceSource selectedSource)
+        {
+            var server = CustomContainer.Get<IServer>();
+            var emailSourceViewModel = new ManageEmailSourceViewModel(new ManageEmailSourceModel(server.UpdateRepository, server.QueryProxy, ""),  new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource);
+            var vm = new SourceViewModel<IEmailServiceSource>(EventPublisher, emailSourceViewModel, PopupProvider, new ManageEmailSourceControl());
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource), vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
 
         private void ShowNewResourceWizard(string resourceType)
         {

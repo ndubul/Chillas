@@ -102,5 +102,6 @@ namespace Dev2.Common.Interfaces.Core
         public string EmailTo { get; set; }
         public string Path { get; set; }
         public Guid Id { get; set; }
+        public string ResourceName { get; set; }
     }
 }

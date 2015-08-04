@@ -37,6 +37,8 @@ namespace Dev2.Runtime.ESB.Management.Services
                 con.Port = src.Port;
                 con.EnableSsl = src.EnableSsl;
                 con.Timeout = src.Timeout;
+                con.ResourceName = src.ResourceName;
+                con.ResourcePath = src.Path;
 
                 ResourceCatalog.Instance.SaveResource(GlobalConstants.ServerWorkspaceID, con);
                 ServerExplorerRepo.UpdateItem(con);
@@ -80,7 +82,7 @@ namespace Dev2.Runtime.ESB.Management.Services
 
         public string HandlesType()
         {
-            return "EmailServiceSource";
+            return "SaveEmailServiceSource";
         }
     }
 }
