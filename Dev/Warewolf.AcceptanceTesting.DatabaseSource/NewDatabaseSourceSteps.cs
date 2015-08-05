@@ -116,12 +116,16 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
             FeatureContext.Current["dbsrc"] = dbsrc;
             try
             {
-               ( manageDatabaseSourceControl.DataContext as ManageDatabaseSourceViewModel).FromDbSource(dbsrc);
-
-
+                var manageDatabaseSourceViewModel = manageDatabaseSourceControl.DataContext as ManageDatabaseSourceViewModel;
+                if(manageDatabaseSourceViewModel != null)
+                {
+                    manageDatabaseSourceViewModel.FromDbSource();
+                }
             }
-            catch (Exception)
-            { }
+            catch(Exception)
+            {
+                // ignored
+            }
         }
 
         [Given(@"Server as ""(.*)""")]
@@ -192,8 +196,11 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
 
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
 
-           Assert.AreEqual( (manageDatabaseSourceControl.DataContext as ManageDatabaseSourceViewModel).AuthenticationType ,(AuthenticationType)authp);
- 
+            var manageDatabaseSourceViewModel = manageDatabaseSourceControl.DataContext as ManageDatabaseSourceViewModel;
+            if(manageDatabaseSourceViewModel != null)
+            {
+                Assert.AreEqual( manageDatabaseSourceViewModel.AuthenticationType ,(AuthenticationType)authp);
+            }
         }
 
         [Given(@"Username field is ""(.*)""")]

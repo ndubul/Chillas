@@ -454,7 +454,8 @@
                             HorizontalAlignment="Right" 
                             VerticalAlignment="Bottom" 
                             Command="{Binding SaveCommand}" 
-                            Width="100">OK
+                            Content="Save"
+                            Width="100">
                         <i:Interaction.Behaviors>
                             <core:HelpSetter Text="{x:Static languages:Core.PluginServiceSaveCommandHelp}"
                                                          DataContext="{Binding}" />

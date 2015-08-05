@@ -308,8 +308,8 @@ namespace Warewolf.Studio.ViewModels
             }
             else
             {
-                HeaderText = string.Format("{0} {1} on {2}", Resources.Languages.Core.PluginSourceEditHeaderLabel, (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim(), serverName);
-                Header = string.Format("{0} - {1}", ((_pluginSource == null ? ResourceName : _pluginSource.Name)), serverName);
+                HeaderText = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim());
+                Header = string.Format("{0}", ((_pluginSource == null ? ResourceName : _pluginSource.Name)));
             }
         }
 

@@ -99,6 +99,13 @@ namespace Warewolf.Studio.ViewModels
             EditSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource));
         }
 
+        public ManagePluginServiceViewModel(IPluginServiceModel model, IRequestServiceNameViewModel saveDialog, IPluginService selectedSource)
+            : this(model, saveDialog)
+        {
+            VerifyArgument.AreNotNull(new Dictionary<string, object> { { "model", model } });
+            _model = model;
+        }
+
         void Save(IPluginService toModel)
         {
             if (Item == null)

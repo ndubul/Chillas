@@ -12,6 +12,7 @@
 using System.Collections.Generic;
 using Dev2;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
 using Warewolf.Core;
 
@@ -21,23 +22,23 @@ namespace Warewolf.Studio.ViewModels
     {
         readonly IStudioUpdateManager _updateRepository;
         readonly IQueryManager _queryProxy;
-        //readonly IShellViewModel _shell;
+        readonly IShellViewModel _shell;
         readonly string _serverName;
 
         #region Implementation of IDbServiceModel
 
-        public ManagePluginServiceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy, string serverName)
+        public ManagePluginServiceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy, IShellViewModel shell, string serverName)
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object>
             {
                 { "updateRepository", updateRepository }, 
                 { "queryProxy", queryProxy }, 
-                //{ "shell", shell } ,
+                { "shell", shell } ,
                 {"serverName",serverName}
             });
             _updateRepository = updateRepository;
             _queryProxy = queryProxy;
-            //_shell = shell;
+            _shell = shell;
             _serverName = serverName;
 
         }
@@ -61,12 +62,12 @@ namespace Warewolf.Studio.ViewModels
 
         public void CreateNewSource()
         {
-            //_shell.NewResource(ResourceType.PluginSource, Guid.NewGuid());
+            _shell.NewResource(ResourceType.PluginSource.ToString());
         }
 
         public void EditSource(IPluginSource selectedSource)
         {
-            //_shell.EditResource(selectedSource);
+            _shell.EditResource(selectedSource);
 
         }
 

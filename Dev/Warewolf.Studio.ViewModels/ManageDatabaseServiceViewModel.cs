@@ -350,7 +350,7 @@ namespace Warewolf.Studio.ViewModels
             {
 
 
-                if (Item == null)
+                if (Item == null || Item.Id.Equals(Guid.Empty))
                 {
                     var saveOutPut = _saveDialog.ShowSaveDialog();
                     if (saveOutPut == MessageBoxResult.OK || saveOutPut == MessageBoxResult.Yes)
@@ -638,7 +638,7 @@ namespace Warewolf.Studio.ViewModels
        
         public override IDatabaseService ToModel()
         {
-            if (Item == null)
+            if (Item == null || Item.Id.Equals(Guid.Empty))
             {
                 Item = ToService();
             }

@@ -82,7 +82,7 @@ namespace Warewolf.Studio.ViewModels
             AsyncWorker.Start(() => _updateManager.GetComputerNames().Select(name => new ComputerName { Name = name } as IComputerName).ToList(), names =>
             {
                 ComputerNames = names;
-                if(additionalUiAction != null)
+                if (additionalUiAction != null)
                 {
                     additionalUiAction();
                 }
@@ -134,7 +134,7 @@ namespace Warewolf.Studio.ViewModels
             _dbSource = dbSource;
             GetLoadComputerNamesTask(() =>
             {
-                FromDbSource(dbSource);
+                FromDbSource();
                 SetupHeaderTextFromExisting();
             });
             
@@ -171,15 +171,15 @@ namespace Warewolf.Studio.ViewModels
         }
 
 
-        public void FromDbSource(IDbSource dbSource)
+        public void FromDbSource()
         {
-            ResourceName = dbSource.Name;
-            AuthenticationType = dbSource.AuthenticationType;
-            UserName = dbSource.UserName;
-            ServerName = ComputerNames.FirstOrDefault(name => dbSource.ServerName == name.Name);
-            Password = dbSource.Password;
+            ResourceName = _dbSource.Name;
+            AuthenticationType = _dbSource.AuthenticationType;
+            UserName = _dbSource.UserName;
+            ServerName = ComputerNames.FirstOrDefault(name => _dbSource.ServerName == name.Name);
+            Password = _dbSource.Password;
             TestConnection();
-            DatabaseName = dbSource.DbName;
+            DatabaseName = _dbSource.DbName;
         }
 
         public string ResourceName

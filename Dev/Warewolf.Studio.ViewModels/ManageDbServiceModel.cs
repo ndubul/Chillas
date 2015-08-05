@@ -1,6 +1,18 @@
-﻿using System.Collections.Generic;
+﻿
+/*
+*  Warewolf - The Easy Service Bus
+*  Copyright 2015 by Warewolf Ltd <alpha@warewolf.io>
+*  Licensed under GNU Affero General Public License 3.0 or later. 
+*  Some rights reserved.
+*  Visit our website for more information <http://warewolf.io/>
+*  AUTHORS <http://warewolf.io/authors.php> , CONTRIBUTORS <http://warewolf.io/contributors.php>
+*  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
+*/
+
+using System.Collections.Generic;
 using System.Data;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Warewolf.Core;
@@ -11,16 +23,16 @@ namespace Warewolf.Studio.ViewModels
     {
         readonly IStudioUpdateManager _updateRepository;
         readonly IQueryManager _queryProxy;
-        //readonly IShellViewModel _shell;
+        readonly IShellViewModel _shell;
         readonly string _serverName;
 
         #region Implementation of IDbServiceModel
 
-        public ManageDbServiceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy, string serverName)
+        public ManageDbServiceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy,IShellViewModel shell, string serverName)
         {
             _updateRepository = updateRepository;
             _queryProxy = queryProxy;
-            //_shell = shell;
+            _shell = shell;
             _serverName = serverName;
 
         }
@@ -39,12 +51,12 @@ namespace Warewolf.Studio.ViewModels
 
         public void CreateNewSource()
         {
-            //_shell.NewResource(ResourceType.DbSource, Guid.NewGuid());
+            _shell.NewResource(ResourceType.DbSource.ToString());
         }
 
         public void EditSource(IDbSource selectedSource)
         {
-            //_shell.EditResource(selectedSource);
+            _shell.EditResource(selectedSource);
 
         }
 

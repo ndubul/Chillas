@@ -1,7 +1,19 @@
-﻿using System.Collections.Generic;
+﻿
+/*
+*  Warewolf - The Easy Service Bus
+*  Copyright 2015 by Warewolf Ltd <alpha@warewolf.io>
+*  Licensed under GNU Affero General Public License 3.0 or later. 
+*  Some rights reserved.
+*  Visit our website for more information <http://warewolf.io/>
+*  AUTHORS <http://warewolf.io/authors.php> , CONTRIBUTORS <http://warewolf.io/contributors.php>
+*  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
+*/
+
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.WebService;
 using Dev2.Common.Interfaces.WebServices;
@@ -30,16 +42,16 @@ namespace Warewolf.Studio.ViewModels
             return "";
         }
 
-        //readonly IShellViewModel _shell;
+        readonly IShellViewModel _shell;
         readonly string _serverName;
         ObservableCollection<IWebServiceSource> _sources;
 
-        public ManageWebServiceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy, string serverName)
+        public ManageWebServiceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy, IShellViewModel shell, string serverName)
         {
             UpdateRepository = updateRepository;
             QueryProxy = queryProxy;
             _serverName = serverName;
-            //_shell = shell;
+            _shell = shell;
             updateRepository.WebServiceSourceSaved += UpdateSourcesCollection;
         }
 
@@ -65,12 +77,12 @@ namespace Warewolf.Studio.ViewModels
 
         public void CreateNewSource()
         {
-            //_shell.NewResource(ResourceType.WebSource, Guid.NewGuid());
+            _shell.NewResource(ResourceType.WebSource.ToString());
         }
 
         public void EditSource(IWebServiceSource selectedSource)
         {
-            //_shell.EditResource(selectedSource);
+            _shell.EditResource(selectedSource);
         }
 
         public string TestService(IWebService inputValues)
