@@ -29,30 +29,46 @@
                   VerticalAlignment="Stretch"
                   Background="Transparent" AllowDrop="True">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="24" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition x:Name="ToolImageRow" Height="24" />
+                    <RowDefinition x:Name="ToolNameRow" Height="30" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="55" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Row="0"
-                       Width="Auto"
-                       Height="Auto"
-                       Margin="0,6,0,0"
-                       VerticalAlignment="Center"
-                       Source="{Binding Icon}" />
+                <Label x:Name="ToolButtonImage" Grid.Row="0" Padding="1" Style="{StaticResource ToolboxLabelStyle}">
+                    <Label.Content>
+                        <Image Width="Auto"
+                               Height="Auto"
+                               Margin="0,6,0,0"
+                               VerticalAlignment="Center"
+                               Source="{Binding Icon}" />
+                    </Label.Content>
+                </Label>
+                
                 <TextBlock Grid.Row="1"
+                           x:Name="ToolName"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Text="{Binding Name}"
                            TextAlignment="Center"
                            TextWrapping="WrapWithOverflow" 
                            Style="{StaticResource TextBlockNoPaddingStyle}"
+                           Padding="1,0,1,0"
                            TextTrimming="None" 
                            Margin="0,3,0,-3"/>
 
             </Grid>
-
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+                    Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsMouseOver}" Value="True">
+                    <Setter TargetName="ToolButtonImage" Property="Opacity" Value="1"/>
+                    <Setter TargetName="ToolButtonImage" Property="Padding" Value="0"/>
+                    
+                    <Setter TargetName="ToolName" Property="Opacity" Value="1"/>
+                    <Setter TargetName="ToolName" Property="FontWeight" Value="Bold"/>
+                    <Setter TargetName="ToolName" Property="Padding" Value="0"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
         </DataTemplate>
         <core:WidthConvertForWrapPanel x:Key="ListBoxWidthToItemsPanelWidthConverter" />
     </UserControl.Resources>

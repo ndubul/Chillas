@@ -843,14 +843,21 @@ namespace Dev2.Studio.ViewModels
         void EditWebService(IContextualResourceModel resourceModel)
         {
             var escapedXaml = resourceModel.ToServiceDefinition();
-            var db = new WebService(escapedXaml.ToXElement());
-            var def = new WebServiceDefinition
+            var dbsvc = new WebService(escapedXaml.ToXElement());
+
+            var db = dbsvc.Source as WebSource;
+
+            if(db != null)
             {
-                Id = db.ResourceID,
-                Name = db.ResourceName,
-                Path = db.ResourcePath
-            };
-            EditResource(def);
+                var def = new WebServiceDefinition
+                {
+                    Id = db.ResourceID,
+                    Name = db.ResourceName,
+                    Path = db.ResourcePath,
+                    QueryString = db.Address + "" + db.DefaultQuery
+                };
+                EditResource(def);
+            }
         }
 
         void EditEmailSource(IContextualResourceModel resourceModel)

@@ -237,21 +237,24 @@ namespace Dev2.Activities.Designers2.Core
             // DO NOT invoke Renumber() from here - this method is called MANY times when invoking AddToCollection()!!
             //
             var dto = CreateDto(indexNumber, initializeWith);
-            AttachEvents(dto);
+            if(dto != null)
+            {
+                AttachEvents(dto);
 
-            var idx = indexNumber - 1;
-            if(idx >= Collection.Count)
-            {
-                if(Collection != null)
+                var idx = indexNumber - 1;
+                if(idx >= Collection.Count)
                 {
-                    Collection.Add(dto);
+                    if(Collection != null)
+                    {
+                        Collection.Add(dto);
+                    }
                 }
-            }
-            else
-            {
-                if(Collection != null)
+                else
                 {
-                    Collection.Insert(idx, dto);
+                    if(Collection != null)
+                    {
+                        Collection.Insert(idx, dto);
+                    }
                 }
             }
         }

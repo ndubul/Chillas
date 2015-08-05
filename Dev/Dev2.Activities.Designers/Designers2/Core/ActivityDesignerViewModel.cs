@@ -288,7 +288,7 @@ namespace Dev2.Activities.Designers2.Core
 
         protected void AddTitleBarHelpToggle()
         {
-            var toggle = ActivityDesignerToggle.Create("pack://application:,,,/Dev2.Activities.Designers;component/Images/ServiceHelp-32.png", "Close Help", "pack://application:,,,/Dev2.Activities.Designers;component/Images/ServiceHelp-32.png", "Open Help", "HelpToggle", this, ShowHelpProperty
+            var toggle = ActivityDesignerToggle.Create("Question", "Close Help", "Question", "Open Help", "HelpToggle", this, ShowHelpProperty
                 );
             TitleBarToggles.Add(toggle);
         }

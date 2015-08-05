@@ -55,6 +55,7 @@ using Dev2.Activities.Designers2.SharepointListRead;
 using Dev2.Activities.Designers2.SharepointListUpdate;
 using Dev2.Activities.Designers2.SortRecords;
 using Dev2.Activities.Designers2.SqlBulkInsert;
+using Dev2.Activities.Designers2.Switch;
 using Dev2.Activities.Designers2.UniqueRecords;
 using Dev2.Activities.Designers2.Unzip;
 using Dev2.Activities.Designers2.WriteFile;
@@ -123,8 +124,9 @@ namespace Dev2.Studio.ActivityDesigners
                 { typeof(SharepointReadListActivity), typeof(SharepointListReadDesigner) },
                 { typeof(SharepointCreateListItemActivity), typeof(SharepointListCreateDesigner) },
                 { typeof(SharepointDeleteListItemActivity), typeof(SharepointListDeleteDesigner) },
-                { typeof(SharepointUpdateListItemActivity), typeof(SharepointListUpdateDesigner) }
-               // { typeof(DsfFlowDecisionActivity), typeof(DecisionDesigner) },
+                { typeof(SharepointUpdateListItemActivity), typeof(SharepointListUpdateDesigner) },
+                //{ typeof(DsfFlowDecisionActivity), typeof(DecisionDesigner) },
+                //{ typeof(DsfSwitch), typeof(ConfigureSwitch) }
 
                 // Travis.Frisinger : 25.09.2012 - Removed Http Activity as it is out of sync with the current release 1 plans
             };

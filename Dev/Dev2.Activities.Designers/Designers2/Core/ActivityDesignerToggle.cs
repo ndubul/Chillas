@@ -13,8 +13,10 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using FontAwesome.WPF;
 
 namespace Dev2.Activities.Designers2.Core
 {
@@ -138,7 +140,25 @@ namespace Dev2.Activities.Designers2.Core
 
         static Image CreateImage(string sourceUri)
         {
-            return new Image { Source = new BitmapImage(new Uri(sourceUri)) };
+            Image image = new Image();
+            image.Height = 14;
+            image.Width = 14;
+
+            Brush brush = Application.Current.TryFindResource("WareWolfButtonBrush") as SolidColorBrush;
+
+            switch (sourceUri)
+            {
+                case "Question":
+                    image.Source = ImageAwesome.CreateImageSource(FontAwesomeIcon.Question, brush);
+                    break;
+                case "ServiceQuickVariableInput":
+                    image.Source = ImageAwesome.CreateImageSource(FontAwesomeIcon.ListAlt, brush);
+                    break;
+                default:
+                    image.Source = new BitmapImage(new Uri(sourceUri));
+                    break;
+            }
+            return image;
         }
     }
 }

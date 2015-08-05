@@ -84,9 +84,9 @@
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="Fill">
+                                        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="Fill">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPressedBackgroundBrush}" />
-                                        </ObjectAnimationUsingKeyFrames>                                                                                
+                                        </ObjectAnimationUsingKeyFrames>-->                                                                                
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
@@ -116,7 +116,7 @@
                                 <VisualState x:Name="Unfocused" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle x:Name="Bd" Fill="Transparent" StrokeThickness="1" />
+                        <Rectangle x:Name="Bd" StrokeThickness="1" />
                         <ContentControl x:Name="ContentControl" Foreground="{TemplateBinding Foreground}" IsTabStop="False"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                         Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -126,6 +126,14 @@
                                    Visibility="Collapsed" StrokeThickness="1" />
                         <Rectangle x:Name="DisabledVisualElement" Fill="{StaticResource DisabledVisualElement}" Visibility="Collapsed" />
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Bd" Property="Stroke" Value="{StaticResource ButtonHoverBackgroundBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="False">
+                            <Setter TargetName="Bd" Property="Stroke" Value="{StaticResource ButtonPressedTransparentBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

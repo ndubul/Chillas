@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Activities.Presentation;
+using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
@@ -35,8 +36,28 @@ namespace Warewolf.Studio.ViewModels.ToolBox
                     if (exportedType.FullName == tool.Activity.FullyQualifiedName)
                     {
                         if (exportedType.AssemblyQualifiedName != null)
-                            _activityType = new DataObject(DragDropHelper.WorkflowItemTypeNameFormat,
-                                exportedType.AssemblyQualifiedName);
+                        {
+                            if (exportedType.FullName.Contains("DsfFlowDecisionActivity"))
+                            {
+                                var decisionType = typeof(FlowDecision);
+                                if (decisionType.AssemblyQualifiedName != null)
+                                {
+                                    _activityType = new DataObject(DragDropHelper.WorkflowItemTypeNameFormat, decisionType.AssemblyQualifiedName);
+                                }
+                            }
+                            else if (exportedType.FullName.Contains("DsfFlowSwitchActivity"))
+                            {
+                                var switchType = typeof(FlowSwitch<string>);
+                                if (switchType.AssemblyQualifiedName != null)
+                                {
+                                    _activityType = new DataObject(DragDropHelper.WorkflowItemTypeNameFormat, switchType.AssemblyQualifiedName);
+                                }
+                            }
+                            else
+                            {
+                                _activityType = new DataObject(DragDropHelper.WorkflowItemTypeNameFormat, exportedType.AssemblyQualifiedName);
+                            }
+                        }
                         return;
                     }
                 }
