@@ -15,9 +15,11 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Linq;
 using Caliburn.Micro;
 using Dev2.AppResources.Repositories;
 using Dev2.Common;
@@ -840,8 +842,9 @@ namespace Dev2.Studio.ViewModels
         }
         void EditWebService(IContextualResourceModel resourceModel)
         {
-            var db = new WebService(resourceModel.WorkflowXaml.ToXElement());
-            var def = new WebServiceDefinition()
+            var escapedXaml = resourceModel.ToServiceDefinition();
+            var db = new WebService(escapedXaml.ToXElement());
+            var def = new WebServiceDefinition
             {
                 Id = db.ResourceID,
                 Name = db.ResourceName,
