@@ -651,8 +651,7 @@ Warewolf leverages Windows Task Scheduler and the schedules can be viewed there 
             //------------Assert Results-------------------------
             auth.Verify(a => a.IsAuthorized(AuthorizationContext.Administrator, null));
             Assert.AreEqual(schedulerViewModel.Errors.FetchErrors().Count, 1);
-            Assert.AreEqual(@"Error while saving: You don't have permission to schedule on this server.
-You need Administrator permission.", schedulerViewModel.Errors.FetchErrors().FirstOrDefault());
+            Assert.AreEqual(@"Error while saving: You don't have permission to schedule on this server. You need Administrator permission.", schedulerViewModel.Errors.FetchErrors().FirstOrDefault());
         }
 
         [TestMethod]
@@ -1351,10 +1350,11 @@ You need Administrator permission.", schedulerViewModel.Errors.FetchErrors().Fir
         [TestMethod]
         [Owner("Massimo Guerrera")]
         [TestCategory("SchedulerViewModel_CreateNewTask")]
-        public void SchedulerViewModel_CreateNewTask_ShouldAddTaskToListWithDefaultSettings()
+        public void SchedulerViewModel_CreateNewTask_ShouldAddTaskToListWithDefaultSettings_OnlyAllowOneDirtyTask()
         {
             //------------Setup for test--------------------------
-            var schedulerViewModel = new SchedulerViewModel(new Mock<IEventAggregator>().Object, new Mock<DirectoryObjectPickerDialog>().Object, new Mock<IPopupController>().Object, new SynchronousAsyncWorker(), new Mock<IConnectControlViewModel>().Object);
+            var popupController = new Mock<IPopupController>();
+            var schedulerViewModel = new SchedulerViewModel(new Mock<IEventAggregator>().Object, new Mock<DirectoryObjectPickerDialog>().Object, popupController.Object, new SynchronousAsyncWorker(), new Mock<IConnectControlViewModel>().Object);
             var resources = new ObservableCollection<IScheduledResource> { new ScheduledResource("bob", SchedulerStatus.Enabled, DateTime.MaxValue, new Mock<IScheduleTrigger>().Object, "c") { NumberOfHistoryToKeep = 1 }, new ScheduledResource("dave", SchedulerStatus.Enabled, DateTime.MaxValue, new Mock<IScheduleTrigger>().Object, "c") };
 
             var resourceModel = new Mock<IScheduledResourceModel>();
@@ -1375,13 +1375,8 @@ You need Administrator permission.", schedulerViewModel.Errors.FetchErrors().Fir
 
             schedulerViewModel.NewCommand.Execute(null);
             //------------Assert Results-------------------------
-            Assert.AreEqual(4, schedulerViewModel.TaskList.Count);
-            Assert.AreEqual("New Task2", schedulerViewModel.TaskList[2].Name);
-            Assert.AreEqual("New Task2", schedulerViewModel.TaskList[2].OldName);
-            Assert.IsTrue(schedulerViewModel.TaskList[2].IsDirty);
-            Assert.AreEqual(SchedulerStatus.Enabled, schedulerViewModel.TaskList[2].Status);
-            Assert.AreEqual(string.Empty, schedulerViewModel.TaskList[2].WorkflowName);
-            Assert.AreEqual(schedulerViewModel.SelectedTask, schedulerViewModel.TaskList[2]);
+            Assert.AreEqual(3, schedulerViewModel.TaskList.Count);
+            popupController.Verify(a => a.Show("Please save currently edited Task(s) before creating a new one.", "Save before continuing", MessageBoxButton.OK, MessageBoxImage.Error, null));
         }
 
         [TestMethod]
@@ -1426,7 +1421,7 @@ You need Administrator permission.", schedulerViewModel.Errors.FetchErrors().Fir
               }
           };
 
-            schedulerViewModel.DeleteCommand.Execute(null);
+            schedulerViewModel.DeleteCommand.Execute(resources[1]);
             //------------Assert Results-------------------------
             Assert.IsTrue(_taskListChange);
             Assert.IsTrue(_historyChange);
@@ -1463,7 +1458,7 @@ You need Administrator permission.", schedulerViewModel.Errors.FetchErrors().Fir
             Assert.AreEqual(2, schedulerViewModel.TaskList.Count);
             schedulerViewModel.SelectedTask = schedulerViewModel.TaskList[0];
 
-            schedulerViewModel.DeleteCommand.Execute(null);
+            schedulerViewModel.DeleteCommand.Execute(resources[0]);
             //------------Assert Results-------------------------
             Assert.AreEqual(1, schedulerViewModel.TaskList.Count);
             Assert.AreEqual(schedulerViewModel.SelectedTask, schedulerViewModel.TaskList[0]);
@@ -1498,10 +1493,9 @@ You need Administrator permission.", schedulerViewModel.Errors.FetchErrors().Fir
             Assert.AreEqual(2, schedulerViewModel.TaskList.Count);
             schedulerViewModel.SelectedTask = schedulerViewModel.TaskList[0];
 
-            schedulerViewModel.DeleteCommand.Execute(null);
+            schedulerViewModel.DeleteCommand.Execute(resources[0]);
             //------------Assert Results-------------------------
-            Assert.AreEqual(@"Error while saving: You don't have permission to schedule on this server.
-You need Administrator permission.", schedulerViewModel.Error);
+            Assert.AreEqual(@"Error while saving: You don't have permission to schedule on this server. You need Administrator permission.", schedulerViewModel.Error);
         }
 
         [TestMethod]
@@ -1530,7 +1524,7 @@ You need Administrator permission.", schedulerViewModel.Error);
             Assert.AreEqual(2, schedulerViewModel.TaskList.Count);
             schedulerViewModel.SelectedTask = schedulerViewModel.TaskList[0];
 
-            schedulerViewModel.DeleteCommand.Execute(null);
+            schedulerViewModel.DeleteCommand.Execute(resources[0]);
             //------------Assert Results-------------------------
             Assert.AreEqual("Error while saving: Server unreachable.", schedulerViewModel.Error);
         }
@@ -1790,8 +1784,7 @@ You need Administrator permission.", schedulerViewModel.Error);
             schedulerViewModel.DoDeactivate();
             //------------Assert Results-------------------------
             auth.Verify(a => a.IsAuthorized(AuthorizationContext.Administrator, null));
-            Assert.AreEqual(@"Error while saving: You don't have permission to schedule on this server.
-You need Administrator permission.", schedulerViewModel.Error);
+            Assert.AreEqual(@"Error while saving: You don't have permission to schedule on this server. You need Administrator permission.", schedulerViewModel.Error);
 
 
 
