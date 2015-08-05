@@ -148,6 +148,10 @@ namespace Dev2.TO
                     _searchType = FindRecordsDisplayUtil.ConvertForDisplay(value);
                     OnPropertyChanged();
                     RaiseCanAddRemoveChanged();
+                    if (!string.IsNullOrEmpty(_searchType))
+                    {
+                        IsSearchCriteriaEnabled = true;
+                    }
                 }
             }
         }
