@@ -194,6 +194,14 @@
         <Thickness.Right>0</Thickness.Right>
         <Thickness.Top>3</Thickness.Top>
     </Thickness>
+    
+    <!-- ACTIVITY THICKNESS -->
+    <Thickness x:Key="ActivityBorderTop">
+        <Thickness.Bottom>0</Thickness.Bottom>
+        <Thickness.Left>0</Thickness.Left>
+        <Thickness.Right>0</Thickness.Right>
+        <Thickness.Top>2</Thickness.Top>
+    </Thickness>
 
     <!-- COMBOBOX ITEM PADDING -->
     <Thickness x:Key="ComboBoxItemPadding">

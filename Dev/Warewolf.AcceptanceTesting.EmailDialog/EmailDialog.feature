@@ -7,8 +7,7 @@
 # Send Email with an attachment
 # Selecting multiple attachments
 @ignore
-
-	#wolf - 991
+#wolf - 991
 Scenario: Send Email with an attachment
 	Given the "from" account is "warewolf@dev2.co.za"
 	And to address is "test1@freemail.com" 	
@@ -32,5 +31,5 @@ Scenario: Ensure that dialog tree view is populated correctly
 	And I expand "C:\"
 	Then all the folders in "C:\" are visible
 
-#Find out about file types not allowed to be attached
+
 

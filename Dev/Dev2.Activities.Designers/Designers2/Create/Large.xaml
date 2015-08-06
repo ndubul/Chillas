@@ -72,10 +72,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="If it exists" Margin="{StaticResource ControlBorderTop}"/>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="If it exists" />
         <CheckBox Grid.Column="1"
                   Grid.Row="1"
-                  Margin="-4,0,0,0"
+                  Margin="-6,-2,0,0"
                   Content="Overwrite"
                   IsChecked="{Binding Path=ModelItem.Overwrite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ToolTip="{x:Static help:HelpTextResources.CreateToolTipForceOverWrite}">
@@ -89,12 +89,12 @@
             </i:Interaction.Behaviors>
         </CheckBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Username" Margin="{StaticResource ControlBorderTop}"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Username" Margin="0,-1,0,0"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="2"
                                 DefaultText="[[UserName]]"
                                 WrapInBrackets="False"
-                                Margin="{StaticResource ControlBorderTop}"
+                                Margin="0,-1,0,0"
                                 Text="{Binding Path=ModelItem.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.CreateToolTipUsername}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
@@ -110,10 +110,10 @@
             </i:Interaction.Behaviors>
         </ui:IntellisenseTextBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="Password" Margin="{StaticResource ControlBorderTop}"/>
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Password" Margin="{StaticResource ActivityBorderTop}"/>
         <PasswordBox Grid.Column="1"
                                 Grid.Row="3"
-                     Margin="{StaticResource ControlBorderTop}"
+                     Margin="{StaticResource ActivityBorderTop}"
                                 ToolTip="{x:Static help:HelpTextResources.CreateToolTipPassword}"                                
                                 attachedProperties:FocusSetter.IsFocused="{Binding IsPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 attachedProperties:PasswordBoxAssistant.BindPassword="true"
@@ -129,13 +129,13 @@
             </i:Interaction.Behaviors>
         </PasswordBox>
 
-        <TextBlock Grid.Column="0" Grid.Row="4" Text="Result" Margin="{StaticResource ControlBorderTop}"/>
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Result" Margin="{StaticResource ActivityBorderTop}"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="4"
                                 DefaultText="[[Success]]"
                                 FilterType="All"
                                 WrapInBrackets="True"
-                                Margin="{StaticResource ControlBorderTop}"
+                                Margin="{StaticResource ActivityBorderTop}"
                                 ToolTip="{x:Static help:HelpTextResources.CreateToolTipResult}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
@@ -152,8 +152,7 @@
 
         <errors:OnError Grid.Column="0"
                         Grid.Row="5"
-                        Grid.ColumnSpan="2"
-                        Margin="2" />
+                        Grid.ColumnSpan="2" />
 
     </Grid>
 </core:ActivityDesignerTemplate>

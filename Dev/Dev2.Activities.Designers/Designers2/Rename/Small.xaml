@@ -95,6 +95,7 @@
                                 FilterType="All" 
                                 DefaultText="[[Success]]"
                                 WrapInBrackets="True"
+                                Margin="{StaticResource ControlBorderTop}"
                                 ToolTip="{x:Static help:HelpTextResources.RenameToolTipResult}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"

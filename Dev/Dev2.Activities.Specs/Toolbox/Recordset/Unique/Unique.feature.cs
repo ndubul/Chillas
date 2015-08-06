@@ -10,12 +10,12 @@
 //  </auto-generated>
 // ------------------------------------------------------------------------------
 #region Designer generated code
-
-using TechTalk.SpecFlow;
-
 #pragma warning disable
 namespace Dev2.Activities.Specs.Toolbox.Recordset.Unique
 {
+    using TechTalk.SpecFlow;
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
@@ -49,7 +49,7 @@ namespace Dev2.Activities.Specs.Toolbox.Recordset.Unique
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "Unique")))
             {
-                FeatureSetup(null);
+                Dev2.Activities.Specs.Toolbox.Recordset.Unique.UniqueFeature.FeatureSetup(null);
             }
         }
         
@@ -829,6 +829,279 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.And("the debug output as", ((string)(null)), table42, "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        public virtual void InvalidExpressions(string inField, string @return, string result, string value, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid expressions", @__tags);
+#line 247
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
+                        "rs",
+                        "val"});
+            table43.AddRow(new string[] {
+                        "rs().row",
+                        "10"});
+            table43.AddRow(new string[] {
+                        "rs().row",
+                        "20"});
+            table43.AddRow(new string[] {
+                        "rs().row",
+                        "20"});
+            table43.AddRow(new string[] {
+                        "rs().row",
+                        "30"});
+#line 248
+testRunner.Given("I have the following duplicated recordset", ((string)(null)), table43, "Given ");
+#line 254
+ testRunner.And(string.Format("I want to find unique in field \'{0}\' with the return field \'{1}\'", inField, @return), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 255
+ testRunner.And(string.Format("The result variable is \'{0}\' equals \'{1}\'", result, value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 256
+ testRunner.When("the unique tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
+                        "rec",
+                        "unique"});
+#line 257
+ testRunner.Then("the unique result will be", ((string)(null)), table44, "Then ");
+#line 259
+ testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
+                        "#",
+                        "InField",
+                        "Return",
+                        "Result",
+                        "Value"});
+            table45.AddRow(new string[] {
+                        "1",
+                        string.Format("{0}", inField),
+                        string.Format("{0}", @return),
+                        string.Format("{0}", result),
+                        string.Format("{0}", value)});
+#line 260
+ testRunner.And("the debug inputs as", ((string)(null)), table45, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Invalid expressions")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Unique")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InField", "asda")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Return", "[[rs().row]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[var]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Error : scalar in unique")]
+        public virtual void InvalidExpressions_Variant0()
+        {
+            this.InvalidExpressions("asda", "[[rs().row]]", "[[var]]", "Error : scalar in unique", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Invalid expressions")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Unique")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InField", "[[c]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Return", "[[rs().row]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[var]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Error : scalar in unique")]
+        public virtual void InvalidExpressions_Variant1()
+        {
+            this.InvalidExpressions("[[c]]", "[[rs().row]]", "[[var]]", "Error : scalar in unique", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Invalid expressions")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Unique")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InField", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Return", "[[rs().row]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[var]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Error : Invalid in Fields")]
+        public virtual void InvalidExpressions_Variant2()
+        {
+            this.InvalidExpressions("", "[[rs().row]]", "[[var]]", "Error : Invalid in Fields", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Invalid expressions")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Unique")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InField", "99")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Return", "[[rs().row]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rec(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Error : scalar in unique")]
+        public virtual void InvalidExpressions_Variant3()
+        {
+            this.InvalidExpressions("99", "[[rs().row]]", "[[rec(1).a]]", "Error : scalar in unique", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Invalid expressions")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Unique")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InField", "[[v]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Return", "[[rs().row]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rec([[int]]).a]], [[int]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Error : scalar in unique")]
+        public virtual void InvalidExpressions_Variant4()
+        {
+            this.InvalidExpressions("[[v]]", "[[rs().row]]", "[[rec([[int]]).a]], [[int]]", "Error : scalar in unique", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Invalid expressions")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Unique")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InField", "[[rs().row]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Return", "[[v]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rec(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Error : scalar in unique")]
+        public virtual void InvalidExpressions_Variant5()
+        {
+            this.InvalidExpressions("[[rs().row]]", "[[v]]", "[[rec(1).a]]", "Error : scalar in unique", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Invalid expressions")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Unique")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 6")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InField", "[[rs().row]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Return", "51")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rec(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Error : scalar in unique")]
+        public virtual void InvalidExpressions_Variant6()
+        {
+            this.InvalidExpressions("[[rs().row]]", "51", "[[rec(1).a]]", "Error : scalar in unique", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Invalid expressions")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Unique")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InField", "[[rs().row]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Return", "adas")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rec(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Error : scalar in unique")]
+        public virtual void InvalidExpressions_Variant7()
+        {
+            this.InvalidExpressions("[[rs().row]]", "adas", "[[rec(1).a]]", "Error : scalar in unique", ((string[])(null)));
+        }
+        
+        public virtual void EnsureRecordsetsWithScalarValuesWork(string inField, string @return, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure recordsets with scalar values work", exampleTags);
+#line 275
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
+                        "rs",
+                        "val",
+                        "rec",
+                        "value"});
+            table46.AddRow(new string[] {
+                        "rs().row",
+                        "10",
+                        "[[rec().set]]",
+                        "This"});
+            table46.AddRow(new string[] {
+                        "rs().row",
+                        "20",
+                        "[[rec().set]]",
+                        "Test"});
+            table46.AddRow(new string[] {
+                        "rs().row",
+                        "20",
+                        "[[rec().set]]",
+                        "Warehouse"});
+            table46.AddRow(new string[] {
+                        "rs().row",
+                        "30",
+                        "[[rec().set]]",
+                        "Tuesday"});
+#line 276
+ testRunner.Given("I have the following duplicated recordset", ((string)(null)), table46, "Given ");
+#line 282
+ testRunner.And(string.Format("I want to find unique in field \'{0}\' with the return field \'{1}\'", inField, @return), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 283
+ testRunner.And("The result variable is \"[[a]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 284
+ testRunner.When("the unique tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
+                        "rs",
+                        "val",
+                        "rec",
+                        "value"});
+            table47.AddRow(new string[] {
+                        "rs().row",
+                        "10",
+                        "[[rec().set]]",
+                        "This"});
+            table47.AddRow(new string[] {
+                        "rs().row",
+                        "20",
+                        "[[rec().set]]",
+                        "Test"});
+            table47.AddRow(new string[] {
+                        "rs().row",
+                        "30",
+                        "[[rec().set]]",
+                        "Tuesday"});
+#line 285
+ testRunner.Then("the unique result will be", ((string)(null)), table47, "Then ");
+#line 290
+ testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
+                        "#",
+                        "In Field(s)",
+                        "Return Fields"});
+            table48.AddRow(new string[] {
+                        "1",
+                        "InField",
+                        "Return"});
+#line 291
+ testRunner.And("the debug inputs as", ((string)(null)), table48, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
+                        "#",
+                        ""});
+            table49.AddRow(new string[] {
+                        "1",
+                        "[[a]] = This,Test,Tuesday"});
+#line 294
+ testRunner.And("the debug output as", ((string)(null)), table49, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure recordsets with scalar values work")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Unique")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec([[int]].set),[[int]] = 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InField", "[[rec([[int]].set),[[int]] = 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Return", "[[rs([[int]]).row]],[[int]] = 2")]
+        public virtual void EnsureRecordsetsWithScalarValuesWork_RecInt_SetInt4()
+        {
+            this.EnsureRecordsetsWithScalarValuesWork("[[rec([[int]].set),[[int]] = 4", "[[rs([[int]]).row]],[[int]] = 2", ((string[])(null)));
         }
     }
 }
