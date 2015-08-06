@@ -66,10 +66,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 throw new ArgumentNullException("model");
             }
-            if (saveDialog == null)
-            {
-                throw new ArgumentNullException("saveDialog");
-            }
+
             _model = model;
             _saveDialog = saveDialog;
             CanEditSource = false;
@@ -98,6 +95,10 @@ namespace Warewolf.Studio.ViewModels
         public ManageDatabaseServiceViewModel(IDbServiceModel model, IRequestServiceNameViewModel saveDialog, IDatabaseService service)
             : this(model, saveDialog)
         {
+            if (saveDialog == null&& model==null)
+            {
+                throw new ArgumentNullException("saveDialog");
+            }
             if (service == null)
             {
                 throw new ArgumentNullException("service");
