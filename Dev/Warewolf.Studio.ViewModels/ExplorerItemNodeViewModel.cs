@@ -8,7 +8,7 @@ namespace Warewolf.Studio.ViewModels
 {
     public class ExplorerItemNodeViewModel : ExplorerItemViewModel, IExplorerItemNodeViewModel
     {
-        Visibility _textVisibility;
+        bool _textVisibility;
         Visibility _isMainNode;
         // ReSharper disable TooManyDependencies
         public ExplorerItemNodeViewModel(IServer server, IExplorerItemViewModel parent)
@@ -59,7 +59,7 @@ namespace Warewolf.Studio.ViewModels
 
         #endregion
 
-        public Visibility TextVisibility
+        public bool TextVisibility
         {
             private get
             {

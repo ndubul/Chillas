@@ -73,6 +73,7 @@ using Dev2.Studio.ViewModels.Help;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Studio.ViewModels.WorkSurface;
 using Dev2.Studio.Views;
+using Dev2.Studio.Views.DependencyVisualization;
 using Dev2.Studio.Views.ResourceManagement;
 using Dev2.Threading;
 using Dev2.Utils;
@@ -519,19 +520,26 @@ namespace Dev2.Studio.ViewModels
         {
             Dev2Logger.Log.Info(message.GetType().Name);
             var model = message.ResourceModel;
-            if(model == null)
-            {
-                return;
-            }
+            //if(model == null)
+            //{
+            //    return;
+            //}
 
-            if(message.ShowDependentOnMe)
-            {
-                AddReverseDependencyVisualizerWorkSurface(model);
-            }
-            else
-            {
-                AddDependencyVisualizerWorkSurface(model);
-            }
+            //if(message.ShowDependentOnMe)
+            //{
+            //    AddReverseDependencyVisualizerWorkSurface(model);
+            //}
+            //else
+            //{
+            //    AddDependencyVisualizerWorkSurface(model);
+            //}
+
+            var server = CustomContainer.Get<IServer>();
+            var vm = new DependencyVisualiserViewModel(new DependencyVisualiserView());
+            vm.ResourceModel = model;
+         
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DependencyVisualiser), vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
         public void Handle(ShowEditResourceWizardMessage message)
