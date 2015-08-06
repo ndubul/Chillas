@@ -45,6 +45,7 @@ Scenario: Creating Folder in localhost
    When I add "MyNewFolder" in "localhost"
    Then I should see the path "localhost/MyNewFolder" 
 
+
 @Explorer  
 Scenario: Creating And Deleting Folder and Popup says cancel in localhost
   Given the explorer is visible
@@ -86,6 +87,79 @@ Scenario: Deleting Resource in localhost Server
    When I delete "localhost/Folder 1/Resource 1"
    Then I should not see the path "localhost/Folder 1/Resource 1"
 
+@Explorer
+Scenario: Renaming Folder And Workflow Service
+	Given the explorer is visible
+	And I open "localhost" server
+	When I rename "localhost/Folder 2" to "Folder New"
+	Then I should see "18" children for "Folder New"
+	When I open "Folder New"
+	And I create the "localhost/Folder New/Resource 1" of type "WorkflowService" 
+	And I create the "localhost/Folder New/Resource 2" of type "WorkflowService" 
+	Then I should see the path "localhost/Folder New"
+	Then I should see the path "localhost/Folder New/Resource 1"
+	And I should not see "Folder 2"
+	And I should not see the path "localhost/Folder 2"
+	When I rename "localhost/Folder New/Resource 1" to "WorkFlow1"	
+	Then I should see the path "localhost/Folder New/WorkFlow1"
+	When I rename "localhost/Folder New/Resource 2" to "WorkFlow1"	
+	Then Conflict error message is occurs
+
+@Explorer
+Scenario: Searching resources by using filter
+  Given the explorer is visible
+  And I open "localhost" server
+  When I open "Folder 1"
+  And I create the "localhost/Folder 1/Resource 1" of type "WorkflowService" 
+  Then I should see the path "localhost/Folder 1/Resource 1"
+  When I search for "Folder 1" in explorer
+  Then I should see the path "localhost/Folder 1"
+  Then I should not see the path "localhost/Folder 1/Resource 1"
+  Then I should not see the path "localhost/Folder 2"
+  When I search for "Resource 1" in explorer
+  When I open "Folder 1"
+  Then I should see the path "localhost/Folder 1/Resource 1"
+
+
+Scenario: Checking versions 
+  Given the explorer is visible
+  When I open "localhost" server
+  And I create the "localhost/Folder 1/Resource 1" of type "WorkflowService" 
+  Then I should see "5" folders
+  And I Setup  "3" Versions to be returned for "localhost/Folder 1/Resource 1"
+  When I Show Version History for "localhost/Folder 1/Resource 1"
+  Then I should see "3" versions with "View" Icons in "localhost/Folder 1/Resource 1"
+  When I search for "Resource 1" in explorer
+  Then I should see the path "localhost/Folder 1/Resource 1"
+  Then I should see "3" versions with "View" Icons in "localhost/Folder 1/Resource 1"
+
+
+Scenario: Clear filter
+  Given the explorer is visible
+  And I open "localhost" server
+  When I open "Folder 1"
+  And I create the "localhost/Folder 1/Resource 1" of type "WorkflowService" 
+  Then I should see the path "localhost/Folder 1/Resource 1"
+  When I search for "Folder 1" in explorer
+  Then I should see the path "localhost/Folder 1"
+  Then I should not see the path "localhost/Folder 1/Resource 1"
+  Then I should not see the path "localhost/Folder 2"
+  When I search for "Resource 1" in explorer
+  When I open "Folder 1"
+  Then I should see the path "localhost/Folder 1/Resource 1"
+  When I clear "Explorer" Filter
+  Then I should see the path "localhost/Folder 2"
+  Then I should see the path "localhost/Folder 2"
+  Then I should see the path "localhost/Folder 2"
+  Then I should see the path "localhost/Folder 2"
+
+#WOLF-1025
+Scenario: Creating Folder in remote host
+   Given the explorer is visible
+   When I open "Remote Connection Integration" server
+   Then I should see "66" folders
+   When I add "MyNewFolder" in "Remote Connection Integration"
+   Then I should see the path "Remote Connection Integration/MyNewFolder" 
 
 #@Explorer
 #Scenario: Opening Versions in Explorer
@@ -203,23 +277,6 @@ Scenario: Deleting Resource in localhost Server
 #
 #
 
-@Explorer
-Scenario: Renaming Folder And Workflow Service
-	Given the explorer is visible
-	And I open "localhost" server
-	When I rename "localhost/Folder 2" to "Folder New"
-	Then I should see "18" children for "Folder New"
-	When I open "Folder New"
-	And I create the "localhost/Folder New/Resource 1" of type "WorkflowService" 
-	And I create the "localhost/Folder New/Resource 2" of type "WorkflowService" 
-	Then I should see the path "localhost/Folder New"
-	Then I should see the path "localhost/Folder New/Resource 1"
-	And I should not see "Folder 2"
-	And I should not see the path "localhost/Folder 2"
-	When I rename "localhost/Folder New/Resource 1" to "WorkFlow1"	
-	Then I should see the path "localhost/Folder New/WorkFlow1"
-	When I rename "localhost/Folder New/Resource 2" to "WorkFlow1"	
-	Then Conflict error message is occurs
 
 
 #
@@ -266,51 +323,3 @@ Scenario: Renaming Folder And Workflow Service
 #	
 #
 
-@Explorer
-Scenario: Searching resources by using filter
-  Given the explorer is visible
-  And I open "localhost" server
-  When I open "Folder 1"
-  And I create the "localhost/Folder 1/Resource 1" of type "WorkflowService" 
-  Then I should see the path "localhost/Folder 1/Resource 1"
-  When I search for "Folder 1" in explorer
-  Then I should see the path "localhost/Folder 1"
-  Then I should not see the path "localhost/Folder 1/Resource 1"
-  Then I should not see the path "localhost/Folder 2"
-  When I search for "Resource 1" in explorer
-  When I open "Folder 1"
-  Then I should see the path "localhost/Folder 1/Resource 1"
-
-
-
-Scenario: Checking versions 
-  Given the explorer is visible
-  When I open "localhost" server
-  And I create the "localhost/Folder 1/Resource 1" of type "WorkflowService" 
-  Then I should see "5" folders
-  And I Setup  "3" Versions to be returned for "localhost/Folder 1/Resource 1"
-  When I Show Version History for "localhost/Folder 1/Resource 1"
-  Then I should see "3" versions with "View" Icons in "localhost/Folder 1/Resource 1"
-  When I search for "Resource 1" in explorer
-  Then I should see the path "localhost/Folder 1/Resource 1"
-  Then I should see "3" versions with "View" Icons in "localhost/Folder 1/Resource 1"
-
-
-Scenario: Clear filter
-  Given the explorer is visible
-  And I open "localhost" server
-  When I open "Folder 1"
-  And I create the "localhost/Folder 1/Resource 1" of type "WorkflowService" 
-  Then I should see the path "localhost/Folder 1/Resource 1"
-  When I search for "Folder 1" in explorer
-  Then I should see the path "localhost/Folder 1"
-  Then I should not see the path "localhost/Folder 1/Resource 1"
-  Then I should not see the path "localhost/Folder 2"
-  When I search for "Resource 1" in explorer
-  When I open "Folder 1"
-  Then I should see the path "localhost/Folder 1/Resource 1"
-  When I clear "Explorer" Filter
-  Then I should see the path "localhost/Folder 2"
-  Then I should see the path "localhost/Folder 2"
-  Then I should see the path "localhost/Folder 2"
-  Then I should see the path "localhost/Folder 2"

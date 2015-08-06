@@ -10,12 +10,12 @@
 //  </auto-generated>
 // ------------------------------------------------------------------------------
 #region Designer generated code
-
-using TechTalk.SpecFlow;
-
 #pragma warning disable
 namespace Dev2.Activities.Specs.Toolbox.Utility.GatherSystemInformation
 {
+    using TechTalk.SpecFlow;
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
@@ -49,7 +49,7 @@ namespace Dev2.Activities.Specs.Toolbox.Utility.GatherSystemInformation
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "GatherSystemInformation")))
             {
-                FeatureSetup(null);
+                Dev2.Activities.Specs.Toolbox.Utility.GatherSystemInformation.GatherSystemInformationFeature.FeatureSetup(null);
             }
         }
         
@@ -767,6 +767,81 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void WxecutingWithIncorrectRecordsets_RecRecIsNotAValidVariable()
         {
             this.WxecutingWithIncorrectRecordsets("[[rec&^]][[rec&^]] is not a valid variable", "", ((string[])(null)));
+        }
+        
+        public virtual void AssignADateTimeIntoARecordset(string variable, string type, string output, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Assign a DateTime into a recordset", @__tags);
+#line 227
+this.ScenarioSetup(scenarioInfo);
+#line 228
+ testRunner.Given(string.Format("I have a variable \'{0}\' and I selected \'{1}\'", variable, type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 229
+ testRunner.When("the gather system infomartion tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 230
+ testRunner.Then(string.Format("the value of the variable \'{0}\' is a valid \"DateTime\"", variable), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 231
+ testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                        "#",
+                        "Variable",
+                        "Type",
+                        "results"});
+            table23.AddRow(new string[] {
+                        "1",
+                        string.Format("{0}", variable),
+                        string.Format("{0}", type),
+                        string.Format("{0}", output)});
+#line 232
+ testRunner.And("the debug output as", ((string)(null)), table23, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Assign a DateTime into a recordset")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GatherSystemInformation")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "DateTime")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "2015/08/05 11:40:36.975 AM")]
+        public virtual void AssignADateTimeIntoARecordset_Variant0()
+        {
+            this.AssignADateTimeIntoARecordset("[[rec().a]]", "DateTime", "2015/08/05 11:40:36.975 AM", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Assign a DateTime into a recordset")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GatherSystemInformation")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[rec(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "DateTime")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "2015/08/05 11:41:40.775 AM")]
+        public virtual void AssignADateTimeIntoARecordset_Variant1()
+        {
+            this.AssignADateTimeIntoARecordset("[[rec(*).a]]", "DateTime", "2015/08/05 11:41:40.775 AM", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Assign a DateTime into a recordset")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GatherSystemInformation")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[rec([[int]]).a]],[[int]] =2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "DateTime")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "2015/08/05 11:42:36.934 AM")]
+        public virtual void AssignADateTimeIntoARecordset_Variant2()
+        {
+            this.AssignADateTimeIntoARecordset("[[rec([[int]]).a]],[[int]] =2", "DateTime", "2015/08/05 11:42:36.934 AM", ((string[])(null)));
         }
     }
 }

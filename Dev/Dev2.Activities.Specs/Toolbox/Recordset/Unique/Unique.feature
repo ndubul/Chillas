@@ -240,3 +240,60 @@ Scenario: Find unique records and assigning result in two variables
 	| # |                  |
 	| 1 | [[a]] = 10,20,30 |
 	| 2 | [[b]] = 10,20,30 |
+
+
+#Audit
+@ignore
+Scenario Outline: Invalid expressions
+Given I have the following duplicated recordset
+	| rs       | val |
+	| rs().row | 10  |
+	| rs().row | 20  |
+	| rs().row | 20  |
+	| rs().row | 30  |
+	And I want to find unique in field '<InField>' with the return field '<Return>'
+	And The result variable is '<Result>' equals '<value>'
+	When the unique tool is executed	
+	Then the unique result will be
+	| rec       | unique |
+	And the execution has "AN" error	
+	And the debug inputs as  
+	| # | InField   | Return   | Result   | Value   |
+	| 1 | <InField> | <Return> | <Result> | <value> |
+	Examples: 
+	| InField      | Return       | Result                      | value                     |
+	| asda         | [[rs().row]] | [[var]]                     | Error : scalar in unique  |
+	| [[c]]        | [[rs().row]] | [[var]]                     | Error : scalar in unique  |
+	|              | [[rs().row]] | [[var]]                     | Error : Invalid in Fields |
+	| 99           | [[rs().row]] | [[rec(1).a]]                | Error : scalar in unique  |
+	| [[v]]        | [[rs().row]] | [[rec([[int]]).a]], [[int]] | Error : scalar in unique  |
+	| [[rs().row]] | [[v]]        | [[rec(1).a]]                | Error : scalar in unique  |
+	| [[rs().row]] | 51           | [[rec(1).a]]                | Error : scalar in unique  |
+	| [[rs().row]] | adas         | [[rec(1).a]]                | Error : scalar in unique  |
+
+
+Scenario Outline: Ensure recordsets with scalar values work
+	Given I have the following duplicated recordset
+	| rs       | val | rec           | value     |
+	| rs().row | 10  | [[rec().set]] | This      |
+	| rs().row | 20  | [[rec().set]] | Test      |
+	| rs().row | 20  | [[rec().set]] | Warehouse |
+	| rs().row | 30  | [[rec().set]] | Tuesday   |
+	And I want to find unique in field '<InField>' with the return field '<Return>'
+	And The result variable is "[[a]]"
+	When the unique tool is executed	
+	Then the unique result will be
+	| rs       | val | rec           | value     |
+	| rs().row | 10  | [[rec().set]] | This      |
+	| rs().row | 20  | [[rec().set]] | Test      |
+	| rs().row | 30  | [[rec().set]] | Tuesday   |
+	And the execution has "NO" error
+	And the debug inputs as  
+	| # | In Field(s) | Return Fields |
+	| 1 | InField     | Return        |	
+	And the debug output as 
+	| # |                           |
+	| 1 | [[a]] = This,Test,Tuesday |
+	Examples: 
+	| InField                        | Return                          |
+	| [[rec([[int]].set),[[int]] = 4 | [[rs([[int]]).row]],[[int]] = 2 |
