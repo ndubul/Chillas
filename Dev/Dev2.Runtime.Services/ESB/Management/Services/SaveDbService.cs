@@ -45,21 +45,21 @@ namespace Dev2.Runtime.ESB.Management.Services
 
                 values.TryGetValue("DbService", out resourceDefinition);
 
-                IDatabaseService src = serializer.Deserialize<DatabaseService>(resourceDefinition);
+                IDatabaseService service = serializer.Deserialize<DatabaseService>(resourceDefinition);
                 // ReSharper disable MaximumChainedReferences
-                var parameters = src.Inputs == null ? new List<MethodParameter>() : src.Inputs.Select(a => new MethodParameter() { EmptyToNull = a.EmptyIsNull, IsRequired = a.RequiredField, Name = a.Name, Value = a.Value }).ToList();
+                var parameters = service.Inputs == null ? new List<MethodParameter>() : service.Inputs.Select(a => new MethodParameter() { EmptyToNull = a.EmptyIsNull, IsRequired = a.RequiredField, Name = a.Name, Value = a.Value }).ToList();
                 // ReSharper restore MaximumChainedReferences
-                var source = ResourceCatalog.Instance.GetResource<DbSource>(GlobalConstants.ServerWorkspaceID, src.Source.Id);
-                var output = new List<MethodOutput>(src.OutputMappings.Select(a => new MethodOutput(a.Name, a.OutputName, "", false, a.RecordSetName, false, "", false, "", false)));
+                var source = ResourceCatalog.Instance.GetResource<DbSource>(GlobalConstants.ServerWorkspaceID, service.Source.Id);
+                var output = new List<MethodOutput>(service.OutputMappings.Select(a => new MethodOutput(a.Name, a.OutputName, "", false, a.RecordSetName, false, "", false, "", false)));
                 var recset = new Recordset();
-                recset.Fields.AddRange(new List<RecordsetField>(src.OutputMappings.Select(a => new RecordsetField { Name = a.Name, Alias = a.OutputName, RecordsetAlias = a.RecordSetName, Path = new DataTablePath(a.RecordSetName, a.Name) })));
-                recset.Name = "bob";
+                recset.Fields.AddRange(new List<RecordsetField>(service.OutputMappings.Select(a => new RecordsetField { Name = a.Name, Alias = a.OutputName, RecordsetAlias = a.RecordSetName, Path = new DataTablePath(a.RecordSetName, a.Name) })));
+                recset.Name = service.Name;
                 var res = new DbService
                 {
-                    Method = new ServiceMethod(src.Name, src.Name, parameters, null, output, src.Action.Name),
-                    ResourceName = src.Name,
-                    ResourcePath = src.Path,
-                    ResourceID = src.Id
+                    Method = new ServiceMethod(service.Action.Name, service.Name, parameters, null, output, service.Action.Name),
+                    ResourceName = service.Name,
+                    ResourcePath = service.Path,
+                    ResourceID = service.Id
                    ,
                     Source = source
                     ,

@@ -7,6 +7,8 @@ namespace Dev2.Common.Interfaces.Core
 {
     public class DbSourceDefinition : IDbSource, IEquatable<DbSourceDefinition>
     {
+        AuthenticationType _authenticationType;
+
         #region Implementation of IDbSource
 
         #region Equality members
@@ -103,7 +105,17 @@ namespace Dev2.Common.Interfaces.Core
         public enSourceType Type { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public AuthenticationType AuthenticationType { get; set; }
+        public AuthenticationType AuthenticationType
+        {
+            get
+            {
+                return _authenticationType;
+            }
+            set
+            {
+                _authenticationType = value;
+            }
+        }
         public string DbName { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }

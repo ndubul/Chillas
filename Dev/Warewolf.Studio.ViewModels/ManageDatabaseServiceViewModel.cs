@@ -105,6 +105,8 @@ namespace Warewolf.Studio.ViewModels
             }
             _dbService = service;
             FromService(service);
+            PerformRefresh();
+            OnPropertyChanged(() => Header);
         }
 
         public ICommand RefreshCommand { get; set; }
@@ -153,7 +155,8 @@ namespace Warewolf.Studio.ViewModels
             Id = service.Id;
             Name = service.Name;
             Path = service.Path;
-            SelectedSource = service.Source;
+            SelectedSource = Sources.FirstOrDefault(a=>a.Id == service.Source.Id);
+            service.Source = SelectedSource;
             SelectedAction = service.Action;
             Inputs = service.Inputs;
             OutputMapping = service.OutputMappings;

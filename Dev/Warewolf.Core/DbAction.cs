@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Dev2.Common.Interfaces.DB;
 
 namespace Warewolf.Core
@@ -43,7 +44,23 @@ namespace Warewolf.Core
             {
                 return true;
             }
-            return Equals(Inputs, other.Inputs) && string.Equals(Name, other.Name);
+            if (GetHashCode() == other.GetHashCode())
+                return true;
+
+            bool inputseq;
+            if(Inputs != null&& other.Inputs != null)
+            {
+
+                inputseq = Inputs.Zip(other.Inputs, (a, b) => new Tuple<IServiceInput, IServiceInput>(a, b)).All(a => a.Item1.Equals(a.Item2));
+                    
+              
+            }
+            else
+            {
+                inputseq =Equals(Inputs, other.Inputs) ;
+            }
+            
+            return inputseq&& string.Equals(Name, other.Name);
         }
 
         /// <summary>

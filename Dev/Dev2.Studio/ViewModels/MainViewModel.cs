@@ -813,7 +813,7 @@ namespace Dev2.Studio.ViewModels
                 {
                     Action = new DbAction()
                     {
-                        Inputs = new List<IServiceInput>(dbsvc.Method.Parameters.Select(a => new ServiceInput(a.Name, a.Value)))
+                        Inputs = new List<IServiceInput>(dbsvc.Method.Parameters.Select(a => new ServiceInput(a.Name, a.Value??"")))
                         ,
                         Name = dbsvc.Method.Name
                     },
