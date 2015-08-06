@@ -54,6 +54,9 @@
     <Reference Include="InfragisticsWPF4.Controls.Interactions.XamDialogWindow.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Interactions.XamDialogWindow.v14.2.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF4.Controls.Maps.XamNetworkNode.v14.2">
+      <HintPath>..\Binaries\InfragisticsWPF4.Controls.Maps.XamNetworkNode.v14.2.dll</HintPath>
+    </Reference>
     <Reference Include="InfragisticsWPF4.Controls.Menus.XamDataTree.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Menus.XamDataTree.v14.2.dll</HintPath>
     </Reference>
@@ -63,6 +66,9 @@
     <Reference Include="InfragisticsWPF4.DataManager.v14.2, Version=14.2.20142.2024, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\InfragisticsWPF4.DataManager.v14.2.dll</HintPath>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.DataVisualization.v14.2">
+      <HintPath>..\Binaries\InfragisticsWPF4.DataVisualization.v14.2.dll</HintPath>
     </Reference>
     <Reference Include="InfragisticsWPF4.DockManager.v14.2">
       <HintPath>..\Binaries\InfragisticsWPF4.DockManager.v14.2.dll</HintPath>
@@ -298,6 +304,10 @@
     <Page Include="Elements\xamMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\xamNetworkNode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Images.xaml">
       <Generator>MSBuild:Compile</Generator>

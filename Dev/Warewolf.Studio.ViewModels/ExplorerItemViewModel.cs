@@ -362,7 +362,7 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-				if (Parent != null && Parent.Children.Any(a => a.ResourceName == value) && value!=_resourceName)
+				if (_resourceName != null && (Parent != null && Parent.Children.Any(a => a.ResourceName == value) && value!=_resourceName))
                 {
                     //_shellViewModel.ShowPopup(PopupMessages.GetDuplicateMessage(value));
 

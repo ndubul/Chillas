@@ -210,6 +210,8 @@
     <Compile Include="IEnvironment.cs" />
     <Compile Include="IEnvironmentViewModel.cs" />
     <Compile Include="IExecutionToken.cs" />
+    <Compile Include="IExplorerHelpDescriptorBuilder.cs" />
+    <Compile Include="IExplorerItemNodeViewModel.cs" />
     <Compile Include="IExplorerItemViewModel.cs" />
     <Compile Include="IExplorerRepository.cs" />
     <Compile Include="IExplorerTreeItem.cs" />
