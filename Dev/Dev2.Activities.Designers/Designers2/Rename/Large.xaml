@@ -79,11 +79,11 @@
 
         <TextBlock Grid.Column="0"
                Grid.Row="1"
-               Margin="{StaticResource ControlBorderTop}"
+               Margin="{StaticResource ActivityBorderTop}"
                Text="Username" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="1"
-                                Margin="{StaticResource ControlBorderTop}"
+                                Margin="{StaticResource ActivityBorderTop}"
                                 DefaultText="[[Username]]"
                                 WrapInBrackets="False"
                                 Text="{Binding Path=ModelItem.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -103,11 +103,11 @@
 
         <TextBlock Grid.Column="0"
                Grid.Row="2"
-               Margin="{StaticResource ControlBorderTop}"
+               Margin="{StaticResource ActivityBorderTop}"
                Text="Password" />
         <PasswordBox Grid.Column="1"
                      Grid.Row="2"
-                     Margin="{StaticResource ControlBorderTop}"
+                     Margin="{StaticResource ActivityBorderTop}"
                      ToolTip="{x:Static help:HelpTextResources.RenameToolTipPassword}"
                      attachedProperties:FocusSetter.IsFocused="{Binding IsPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      attachedProperties:PasswordBoxAssistant.BindPassword="true"
@@ -125,14 +125,14 @@
 
         <TextBlock Grid.Column="0"
                Grid.Row="3"
-               Margin="{StaticResource ControlBorderTop}"
+               Margin="{StaticResource ActivityBorderTop}"
                Text="{Binding OutputPathLabel, Mode=OneWay}" />
         <ui:IntellisenseTextBox Grid.Row="3"
                                 Grid.Column="1"
                                 FilterType="All"
                                 DefaultText="[[FileOrFolderName]]"
                                 WrapInBrackets="False"
-                                Margin="{StaticResource ControlBorderTop}"
+                                Margin="{StaticResource ActivityBorderTop}"
                                 Text="{Binding Path=ModelItem.OutputPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.RenameToolTipNewName}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
@@ -156,11 +156,11 @@
 
         <TextBlock Grid.Column="0"
                Grid.Row="4"
-               Margin="{StaticResource ControlBorderTop}"
+               Margin="{StaticResource ActivityBorderTop}"
                Text="Username" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="4"
-                                Margin="{StaticResource ControlBorderTop}"
+                                Margin="{StaticResource ActivityBorderTop}"
                                 DefaultText="[[Username]]"
                                 WrapInBrackets="False"
                                 Text="{Binding Path=ModelItem.DestinationUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -180,11 +180,11 @@
 
         <TextBlock Grid.Column="0"
                Grid.Row="5"
-               Margin="{StaticResource ControlBorderTop}"
+               Margin="{StaticResource ActivityBorderTop}"
                Text="Password" />
         <PasswordBox Grid.Column="1"
                      Grid.Row="5"
-                     Margin="{StaticResource ControlBorderTop}"
+                     Margin="{StaticResource ActivityBorderTop}"
                      ToolTip="{x:Static help:HelpTextResources.RenameToolTipPassword}"
                      attachedProperties:FocusSetter.IsFocused="{Binding IsDestinationPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      attachedProperties:PasswordBoxAssistant.BindPassword="true"
@@ -202,11 +202,11 @@
 
         <TextBlock Grid.Column="0"
                Grid.Row="6"
-               Margin="{StaticResource ControlBorderTop}"
                Text="If it exists" />
         <CheckBox Grid.Column="1"
                   Grid.Row="6"
-                  Margin="{StaticResource ControlBorderTop}"
+                  Margin="-6,-2,0,0"
+                  Style="{StaticResource CheckBoxStyle}"
                   Content="Overwrite"
                   IsChecked="{Binding Path=ModelItem.Overwrite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ToolTip="{x:Static help:HelpTextResources.RenameToolTipForceoverwrite}">
@@ -222,14 +222,14 @@
 
         <TextBlock Grid.Column="0"
                Grid.Row="7"
-               Margin="{StaticResource ControlBorderTop}"
+                   Margin="0,-1,0,0"
                Text="Result" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="7"
                                 DefaultText="[[Success]]"
                                 FilterType="All"
+                                Margin="0,-1,0,0"
                                 WrapInBrackets="True"
-                                Margin="{StaticResource ControlBorderTop}"
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.RenameToolTipResult}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
@@ -246,8 +246,7 @@
 
         <errors:OnError Grid.Column="0"
                         Grid.Row="8"
-                        Grid.ColumnSpan="2"
-                        Margin="2" />
+                        Grid.ColumnSpan="2" />
 
     </Grid>
 </core:ActivityDesignerTemplate>
