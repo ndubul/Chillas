@@ -9,28 +9,25 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
-using Dev2.AppResources.DependencyVisualization;
-using Dev2.Common.Interfaces;
-using Dev2.Common.Interfaces.Data;
 using Dev2.Services.Events;
-using Dev2.Studio.Core.Interfaces;
-using Dev2.Studio.ViewModels.DependencyVisualization;
-using Dev2.Utils;
-using Moq;
-using Warewolf.Studio.ViewModels;
+using Infragistics.Controls.Maps;
+using Microsoft.Practices.Prism.Mvvm;
 
 // ReSharper disable once CheckNamespace
 namespace Dev2.Studio.Views.DependencyVisualization
 {
-    public partial class DependencyVisualiserView
+    public partial class DependencyVisualiserView:IView
     {
+        //private Point _scrollStartOffset;
         readonly IEventAggregator _eventPublisher;
-        ExplorerItemNodeViewModel _root;
+        //ExplorerItemNodeViewModel _root;
+
+        private bool _isMoveInEffect; // is the movement in effect?
+        private NetworkNodeNodeControl _currentElement; // the element that we are 
+        private Point _currentPosition; // the current position of that element
 
         public DependencyVisualiserView()
             : this(EventPublishers.Aggregator)
@@ -42,158 +39,149 @@ namespace Dev2.Studio.Views.DependencyVisualization
             InitializeComponent();
             VerifyArgument.IsNotNull("eventPublisher", eventPublisher);
             _eventPublisher = eventPublisher;
-            SetupNodes(Visibility.Visible);
-        }
 
-        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+            Nodes.NodeControlAttachedEvent += (sender, e) =>
         {
-            //2012.10.01: massimo.guerrera - Added for the click through on the dependency viewer
-            if (e.ClickCount == 2)
+                e.NodeControl.MouseLeftButtonUp += ElementMouseLeftButtonUp;
+                e.NodeControl.MouseLeftButtonDown += ElementMouseLeftButtonDown;
+                e.NodeControl.MouseMove += ElementMouseMove;
+            };
+
+            Nodes.NodeControlDetachedEvent += (sender, e) =>
+                {
+                e.NodeControl.MouseLeftButtonUp -= ElementMouseLeftButtonUp;
+                e.NodeControl.MouseLeftButtonDown -= ElementMouseLeftButtonDown;
+                e.NodeControl.MouseMove -= ElementMouseMove;
+            };
+                }
+
+        private void ElementMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+                {
+            var element = (NetworkNodeNodeControl)sender;
+            _currentElement = element; // keep track of which node this is
+            element.CaptureMouse();
+            _isMoveInEffect = true; // initiate the movement effect
+            _currentPosition = e.GetPosition(element.Parent as UIElement); // keep track of position
+                }
+
+        private void ElementMouseMove(object sender, MouseEventArgs e)
+                {
+            var element = (NetworkNodeNodeControl)sender;
+            if (_currentElement == null || !Equals(element, _currentElement))
             {
-                ReleaseMouseCapture();
-                FrameworkElement fe = e.OriginalSource as FrameworkElement;
-                FrameworkContentElement fce = e.OriginalSource as FrameworkContentElement;
-                object dataContext = null;
-
-                if (fe != null)
-                {
-                    dataContext = fe.DataContext;
+                // this might happen if a node is released outside of the view area.
+                // terminate the movement effect.
+                _isMoveInEffect = false;
                 }
-                else if (fce != null)
+            else if (_isMoveInEffect) // is the movement effect active?
                 {
-                    dataContext = fce.DataContext;
-                }
-
-                string resourceName = dataContext as string;
-
-                if (string.IsNullOrEmpty(resourceName) && dataContext is Node)
-                {
-                    resourceName = (dataContext as Node).ID;
-                }
-
-                if (!string.IsNullOrEmpty(resourceName))
-                {
-                    var vm = DataContext as DependencyVisualiserViewModel;
-                    if (vm != null)
+                if (e.GetPosition(Nodes).X > Nodes.ActualWidth || e.GetPosition(Nodes).Y > Nodes.ActualHeight || e.GetPosition(Nodes).Y < 0.0)
                     {
-                        IResourceModel resource = vm.ResourceModel.Environment.ResourceRepository.FindSingle(c => c.ResourceName == resourceName);
-                        if (resource != null)
+                    // drag is outside of the allowable area, so release the element
+                    element.ReleaseMouseCapture();
+                    _isMoveInEffect = false;
+                }
+                else
                         {
-                            WorkflowDesignerUtils.EditResource(resource, _eventPublisher);
+                    // drag is within the allowable area, so update the element's position
+                    var currentPosition = e.GetPosition(element.Parent as UIElement);
+
+                    element.Node.Location = new Point(
+                        element.Node.Location.X + (currentPosition.X - this._currentPosition.X) / Nodes.ZoomLevel,
+                        element.Node.Location.Y + (currentPosition.Y - this._currentPosition.Y) / Nodes.ZoomLevel);
+
+                    _currentPosition = currentPosition;
                         }
                     }
                 }
+
+        private void ElementMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var element = (NetworkNodeNodeControl)sender;
+            element.ReleaseMouseCapture();
+            _isMoveInEffect = false; // terminate the movement effect
             }
 
-            e.GetPosition(this);
-            //_scrollStartOffset.X = myScrollViewer.HorizontalOffset;
-            //_scrollStartOffset.Y = myScrollViewer.VerticalOffset;
+        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            ////2012.10.01: massimo.guerrera - Added for the click through on the dependency viewer
+            //if (e.ClickCount == 2)
+            //{
+            //    ReleaseMouseCapture();
+            //    FrameworkElement fe = e.OriginalSource as FrameworkElement;
+            //    FrameworkContentElement fce = e.OriginalSource as FrameworkContentElement;
+            //    object dataContext = null;
 
-            // Update the cursor if scrolling is possible 
-            //Cursor = (myScrollViewer.ExtentWidth > myScrollViewer.ViewportWidth) ||
-            //    (myScrollViewer.ExtentHeight > myScrollViewer.ViewportHeight) ?
+            //    if (fe != null)
+            //    {
+            //        dataContext = fe.DataContext;
+            //    }
+            //    else if (fce != null)
+            //    {
+            //        dataContext = fce.DataContext;
+            //    }
+
+            //    string resourceName = dataContext as string;
+
+            //    if (string.IsNullOrEmpty(resourceName) && dataContext is Node)
+            //    {
+            //        resourceName = (dataContext as Node).ID;
+            //    }
+
+            //    if (!string.IsNullOrEmpty(resourceName))
+            //    {
+            //        var vm = DataContext as DependencyVisualiserViewModel;
+            //        if (vm != null)
+            //        {
+            //            IResourceModel resource = vm.ResourceModel.Environment.ResourceRepository.FindSingle(c => c.ResourceName == resourceName);
+            //            if (resource != null)
+            //            {
+            //                WorkflowDesignerUtils.EditResource(resource, _eventPublisher);
+            //            }
+            //        }
+            //    }
+            //}
+
+            //e.GetPosition(this);
+            //_scrollStartOffset.X = MyScrollViewer.HorizontalOffset;
+            //_scrollStartOffset.Y = MyScrollViewer.VerticalOffset;
+
+            //// Update the cursor if scrolling is possible 
+            //Cursor = (MyScrollViewer.ExtentWidth > MyScrollViewer.ViewportWidth) ||
+            //    (MyScrollViewer.ExtentHeight > MyScrollViewer.ViewportHeight) ?
             //    Cursors.ScrollAll : Cursors.Arrow;
-
-            CaptureMouse();
-            base.OnPreviewMouseDown(e);
-        }
+                    
+            //CaptureMouse();
+            //base.OnPreviewMouseDown(e);
+                                }   
 
         protected override void OnPreviewMouseMove(MouseEventArgs e)
-        {
-            if (IsMouseCaptured)
-            {
-                // Get the new mouse position. 
-                Point mouseDragCurrentPoint = e.GetPosition(this);
-
-                // Scroll to the new position. 
-                //myScrollViewer.ScrollToHorizontalOffset(mouseDragCurrentPoint.X);
-                //myScrollViewer.ScrollToVerticalOffset(mouseDragCurrentPoint.Y);
-            }
-            base.OnPreviewMouseMove(e);
-        }
-
+                                {
+            //if (IsMouseCaptured)
+            //{
+            //    // Get the new mouse position. 
+            //    Point mouseDragCurrentPoint = e.GetPosition(this);
+                    
+            //    // Scroll to the new position. 
+            //    MyScrollViewer.ScrollToHorizontalOffset(mouseDragCurrentPoint.X);
+            //    MyScrollViewer.ScrollToVerticalOffset(mouseDragCurrentPoint.Y);
+            //}
+            //base.OnPreviewMouseMove(e);
+                         }
+                    
         protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
-        {
-            if (IsMouseCaptured)
             {
-                Cursor = Cursors.Arrow;
-                ReleaseMouseCapture();
-            }
-            base.OnPreviewMouseUp(e);
-        }
-
-        void SetupNodes(Visibility visibility)
-        {
-            var server = new Mock<IServer>().Object;
-            var parent = new Mock<IExplorerItemViewModel>().Object;
-
-            _root = new ExplorerItemNodeViewModel(server, parent)
-            {
-                ResourceName = "bob",
-                TextVisibility = visibility,
-                ResourceType = ResourceType.WorkflowService,
-                IsMainNode = Visibility.Visible,
-                Children = new ObservableCollection<IExplorerItemViewModel>()
-                {
-                    new ExplorerItemNodeViewModel(server,parent)
-                    {
-                        ResourceName = "child 1",
-                         ResourceType = ResourceType.PluginService,
-                         TextVisibility = visibility,
-                        Children = new ObservableCollection<IExplorerItemViewModel>()
-                        {
-                          new ExplorerItemNodeViewModel(server,parent)
-                            {
-                                ResourceName = "granchild 1",
-                                ResourceType = ResourceType.WorkflowService,
-                                TextVisibility = visibility,
-                                Children = new ObservableCollection<IExplorerItemViewModel>()
-                                {
-                    
-                                }   
-                             },
-                           new ExplorerItemNodeViewModel(server,parent)
-                            {
-
-                                ResourceName = "granchild 2",
-                                ResourceType = ResourceType.WorkflowService,
-                                TextVisibility = visibility,
-                                Children = new ObservableCollection<IExplorerItemViewModel>()
-                                {
-                    
-                                }   
-                             }
-                         }
-                      },
-                    new ExplorerItemNodeViewModel(server,parent)
-                    {
-                        ResourceName = "child 2",
-                         ResourceType = ResourceType.DbService,
-                         TextVisibility = visibility,
-                        Children = new ObservableCollection<IExplorerItemViewModel>()
-                        {
-                          new ExplorerItemNodeViewModel(server,parent)
-                            {
-                                ResourceName = "granchild 1",
-                                TextVisibility = visibility,
-                                Children = new ObservableCollection<IExplorerItemViewModel>()
-                                {
-                    
-                                }   
-                             }
-                         }
-                      }
-                }
-            };
-            if (Nodes != null)
-            {
-                Nodes.ItemsSource = new ObservableCollection<ExplorerItemNodeViewModel>() { _root, _root.NodeChildren.First(), _root.NodeChildren.Last(), _root.NodeChildren.First().NodeChildren.First(), _root.NodeChildren.First().NodeChildren.Last() };
-            }
+            //if (IsMouseCaptured)
+            //{
+            //    Cursor = Cursors.Arrow;
+            //    ReleaseMouseCapture();
+            //}
+            //base.OnPreviewMouseUp(e);
         }
 
         void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
         {
-            SetupNodes(WfDependsOn.IsChecked == true ? Visibility.Visible : Visibility.Collapsed);
+            //SetupNodes(WfDependsOn.IsChecked == true);
         }
 
         void ButtonBase_OnClick(object sender, RoutedEventArgs e)

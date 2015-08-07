@@ -102,13 +102,13 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" />
                         <Border x:Name="overlayMain" 
                                 Background="{StaticResource WareWolfHeaderButtonBrush}" 
-                                Visibility="{Binding Path=IsMainNode}" 
+                                Visibility="{Binding Path=IsMainNode, Converter={StaticResource BoolToVisibilityConverter}}" 
                                 CornerRadius="{TemplateBinding CornerRadius}"
                                 BorderThickness="0" />
                         <Border x:Name="selectedMain" 
                                 Opacity="0" 
                                 Background="{StaticResource WareWolfHeaderButtonBrush}" 
-                                Visibility="{Binding Path=IsMainNode}" 
+                                Visibility="{Binding Path=IsMainNode, Converter={StaticResource BoolToVisibilityConverter}}" 
                                 CornerRadius="{TemplateBinding CornerRadius}"
                                 BorderThickness="0" />
                         <Border x:Name="over" 
@@ -127,7 +127,7 @@
 
                         <Border x:Name="selected" 
                                 Background="{StaticResource NodeBgBrushSelected}" 
-                                Visibility="{Binding Path=IsNotMainNode}" 
+                                Visibility="{Binding Path=IsNotMainNode, Converter={StaticResource BoolToVisibilityConverter}}" 
                                 CornerRadius="{TemplateBinding CornerRadius}"
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 Opacity="0" 

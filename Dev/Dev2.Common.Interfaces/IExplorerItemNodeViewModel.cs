@@ -8,7 +8,7 @@ namespace Dev2.Common.Interfaces
         IExplorerItemNodeViewModel Self { get; set; }
         int Weight { get; set; }
         ICollection<IExplorerItemNodeViewModel> AsList();
-        Visibility IsMainNode { get; set; }
-        Visibility IsNotMainNode { get; set; }
+        bool IsMainNode { get; set; }
+        bool IsNotMainNode { get; set; }
     }
 }
