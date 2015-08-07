@@ -840,10 +840,11 @@ namespace Dev2.Studio.ViewModels
                 Path = db.ResourcePath,
                 Action = new PluginAction()
                 {
-                    FullName = a.FullName,
+                    FullName = db.Namespace,
                     Inputs = a.Parameters.Select(x => new ServiceInput(x.Name, x.DefaultValue ?? "") { Name = x.Name, DefaultValue = x.DefaultValue, EmptyIsNull = x.EmptyToNull, RequiredField = x.IsRequired, TypeName = x.Type } as IServiceInput).ToList(),
-                    Method = a.Name,
+                    Method = a.ExecuteAction,
                     Variables = a.Parameters.Select(x => new NameValue() { Name = x.Name + " (" + x.TypeName + ")", Value = "" } as INameValue).ToList(),
+                    
                 },
                 Source = new PluginSourceDefinition()
                 {

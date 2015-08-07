@@ -127,8 +127,12 @@ namespace Warewolf.Studio.ViewModels
             Path = selectedConnector.Path;
             Inputs = selectedConnector.Inputs;
             OutputMapping = selectedConnector.OutputMappings;
-            SelectedAction = selectedConnector.Action;
+           
             SelectedNamespace = NameSpaces.FirstOrDefault(a=>a.FullName== selectedConnector.Action.FullName);
+            SelectedAction = AvalaibleActions.FirstOrDefault(a => a.Method == selectedConnector.Action.Method);
+            Item.Source = SelectedSource;
+            Item.Action = SelectedAction;
+            Header = selectedConnector.Name;
         }
 
         void Save()
@@ -150,6 +154,7 @@ namespace Warewolf.Studio.ViewModels
             else
             {
                 _model.SaveService(ToModel());
+                Item = ToModel();
             }
             ErrorText = "";
         }
