@@ -42,14 +42,15 @@ namespace Warewolf.Studio.ViewModels
         IPluginAction _selectedAction;
         IPluginAction _refreshSelectedAction;
         ICollection<IPluginAction> _avalaibleActions;
+#pragma warning disable 649
         string _pluginSourceHeader;
         string _pluginSourceActionHeader;
         bool _canEditSource;
-        bool _canEditNamespace;
         string _newButtonLabel;
         string _testHeader;
         string _inputsLabel;
         string _outputsLabel;
+#pragma warning restore 649
         bool _isRefreshing;
         bool _inputsRequired;
         string _testResults;
@@ -76,11 +77,20 @@ namespace Warewolf.Studio.ViewModels
         #region Implementation of IServiceMappings
 
         public ManagePluginServiceViewModel(IPluginServiceModel model, IRequestServiceNameViewModel saveDialog)
+            : this(model)
+        {
+
+            _saveDialog = saveDialog;
+
+
+        }
+
+        public ManagePluginServiceViewModel(IPluginServiceModel model)
             : base(ResourceType.PluginService)
         {
-            VerifyArgument.AreNotNull(new Dictionary<string, object> { { "model", model }, { "saveDialog", saveDialog } });
+            VerifyArgument.AreNotNull(new Dictionary<string, object> { { "model", model } });
             _model = model;
-            _saveDialog = saveDialog;
+          
             Inputs = new ObservableCollection<IServiceInput>();
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
             AvalaibleActions = new ObservableCollection<IPluginAction>();
@@ -94,19 +104,38 @@ namespace Warewolf.Studio.ViewModels
             HeaderText = Resources.Languages.Core.PluginServiceNewHeaderLabel;
             ResourceName = HeaderText;
             TestPluginCommand = new DelegateCommand(() => Test(_model));
-            SaveCommand = new DelegateCommand(() => Save(ToModel()), CanSave);
+            SaveCommand = new DelegateCommand(() => Save(), CanSave);
             CreateNewSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
             EditSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource));
         }
 
-        public ManagePluginServiceViewModel(IPluginServiceModel model, IRequestServiceNameViewModel saveDialog, IPluginService selectedSource)
-            : this(model, saveDialog)
+
+        public ManagePluginServiceViewModel(IPluginServiceModel model, IPluginService selectedSource)
+            : this(model)
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "model", model } });
             _model = model;
+            Item = selectedSource;
+            FromModel(selectedSource);
         }
 
-        void Save(IPluginService toModel)
+        void FromModel(IPluginService selectedConnector)
+        {
+            SelectedSource = Sources.FirstOrDefault(a => a.Id == selectedConnector.Source.Id);
+            Id = selectedConnector.Id;
+            Name = selectedConnector.Name;
+            Path = selectedConnector.Path;
+            Inputs = selectedConnector.Inputs;
+            OutputMapping = selectedConnector.OutputMappings;
+           
+            SelectedNamespace = NameSpaces.FirstOrDefault(a=>a.FullName== selectedConnector.Action.FullName);
+            SelectedAction = AvalaibleActions.FirstOrDefault(a => a.Method == selectedConnector.Action.Method);
+            Item.Source = SelectedSource;
+            Item.Action = SelectedAction;
+            Header = selectedConnector.Name;
+        }
+
+        void Save()
         {
             if (Item == null)
             {
@@ -125,6 +154,7 @@ namespace Warewolf.Studio.ViewModels
             else
             {
                 _model.SaveService(ToModel());
+                Item = ToModel();
             }
             ErrorText = "";
         }
@@ -260,6 +290,11 @@ namespace Warewolf.Studio.ViewModels
                 ErrorText = "";
                 CanEditMappings = true;
                 _canSave = true;
+                var delegateCommand = SaveCommand as DelegateCommand;
+                if(delegateCommand != null)
+                {
+                    delegateCommand.RaiseCanExecuteChanged();
+                }
                 IsTesting = false;
 
             }
@@ -279,15 +314,15 @@ namespace Warewolf.Studio.ViewModels
             {
                 Response = ResponseService;
                 // ReSharper disable MaximumChainedReferences
-                //var outputMapping = ResponseService.SelectMany(recordset => recordset.Fields, (recordset, recordsetField) =>
-                //{
-                //    RecordsetName = recordset.Name;
-                //    var serviceOutputMapping = new ServiceOutputMapping(recordsetField.Name, recordsetField.Alias) { RecordSetName = recordset.Name };
-                //    return serviceOutputMapping;
-                //}).Cast<IServiceOutputMapping>().ToList();
+                var outputMapping = ResponseService.SelectMany(recordset => recordset.Fields, (recordset, recordsetField) =>
+                {
+                    RecordsetName = recordset.Name;
+                    var serviceOutputMapping = new ServiceOutputMapping(recordsetField.Name, recordsetField.Alias) { RecordSetName = recordset.Name };
+                    return serviceOutputMapping;
+                }).Cast<IServiceOutputMapping>().ToList();
                 // ReSharper restore MaximumChainedReferences
 
-                OutputMapping = new IServiceOutputMapping[] { new ServiceOutputMapping("Name", "Name") { RecordSetName = "rec" } };
+                OutputMapping = outputMapping;
 
             }
         }
