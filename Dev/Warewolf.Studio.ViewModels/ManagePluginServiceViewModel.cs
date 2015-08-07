@@ -272,7 +272,7 @@ namespace Warewolf.Studio.ViewModels
                     CanEditMappings = false;
                     CanSelectMethod = false;
                     CanEditNamespace = true;
-                    NameSpaces = new ObservableCollection<INamespaceItem>(_model.GetNameSpaces(value));
+                    NameSpaces = new ObservableCollection<INamespaceItem>(_model.GetNameSpaces(value)).OrderBy(a => a.FullName).ToList();
                     OnPropertyChanged(() => SelectedSource);
                     ViewModelUtils.RaiseCanExecuteChanged(SaveCommand);
                 }
