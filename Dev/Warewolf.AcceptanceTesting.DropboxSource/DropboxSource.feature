@@ -3,7 +3,7 @@
 	As a math idiot
 	I want to be told the sum of two numbers
 
-@mytag
+@ignore
 Scenario: New Dropbox Source
 	Given I have open New Dropbox Source
 	Then "New Dropbox Source" tab is opened
