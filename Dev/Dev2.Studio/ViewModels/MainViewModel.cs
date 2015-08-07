@@ -832,11 +832,25 @@ namespace Dev2.Studio.ViewModels
         void EditPluginService(IContextualResourceModel resourceModel)
         {
             var db = new PluginService(resourceModel.WorkflowXaml.ToXElement());
+            var a = db.Method;
             var def = new PluginServiceDefinition
             {
                 Id = db.ResourceID,
                 Name = db.ResourceName,
-                Path = db.ResourcePath
+                Path = db.ResourcePath,
+                Action = new PluginAction()
+                {
+                    FullName = a.FullName,
+                    Inputs = a.Parameters.Select(x => new ServiceInput(x.Name, x.DefaultValue ?? "") { Name = x.Name, DefaultValue = x.DefaultValue, EmptyIsNull = x.EmptyToNull, RequiredField = x.IsRequired, TypeName = x.Type } as IServiceInput).ToList(),
+                    Method = a.Name,
+                    Variables = a.Parameters.Select(x => new NameValue() { Name = x.Name + " (" + x.TypeName + ")", Value = "" } as INameValue).ToList(),
+                },
+                Source = new PluginSourceDefinition()
+                {
+                    Id = db.Source.ResourceID,
+                    Name = db.Source.ResourceName
+                }
+    
             };
             EditResource(def);
         }
@@ -923,7 +937,7 @@ namespace Dev2.Studio.ViewModels
         {
 
             var server = CustomContainer.Get<IServer>();
-            var viewModel = new ManagePluginServiceViewModel(new ManagePluginServiceModel(server.UpdateRepository, server.QueryProxy,this, ""), null, selectedSource);
+            var viewModel = new ManagePluginServiceViewModel(new ManagePluginServiceModel(server.UpdateRepository, server.QueryProxy,this, ""),  selectedSource);
             var vm = new SourceViewModel<IPluginService>(EventPublisher, viewModel, PopupProvider, new ManagePluginServiceControl());
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), vm);
             AddAndActivateWorkSurface(workSurfaceContextViewModel);

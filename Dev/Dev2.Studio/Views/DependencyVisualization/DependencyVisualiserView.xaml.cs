@@ -29,7 +29,6 @@ namespace Dev2.Studio.Views.DependencyVisualization
 {
     public partial class DependencyVisualiserView
     {
-        private Point _scrollStartOffset;
         readonly IEventAggregator _eventPublisher;
         ExplorerItemNodeViewModel _root;
 
