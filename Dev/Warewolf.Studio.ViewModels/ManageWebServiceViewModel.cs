@@ -1045,24 +1045,7 @@ namespace Warewolf.Studio.ViewModels
 
         public override IWebService ToModel()
         {
-            if (Item != null)
-            {
-                return new WebServiceDefinition
-                {
-                    Name = Item.Name,
-                    Inputs = Inputs == null ? new List<IServiceInput>() : MapVariablesToInputs(),
-                    OutputMappings = OutputMapping,
-                    Source = SelectedSource,
-                    Path = Item.Path,
-                    Id = Item.Id,
-                    Headers = Headers.Where(a=>!String.IsNullOrEmpty(a.Name) && !String.IsNullOrEmpty(a.Value)).Select(value => new NameValue { Name = DataListUtil.RemoveLanguageBrackets(value.Name), Value = DataListUtil.RemoveLanguageBrackets(value.Value) }).ToList(),
-                    PostData = DataListUtil.RemoveLanguageBrackets(RequestBody),
-                    QueryString = RequestUrlQuery,
-                    SourceUrl = SourceUrl,
-                    RequestUrl = RequestUrlQuery
-                    
-                };
-            }
+
             return new WebServiceDefinition
             {
 

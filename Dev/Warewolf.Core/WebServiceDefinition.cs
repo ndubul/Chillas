@@ -130,7 +130,7 @@ namespace Warewolf.Core
                 eq = otherHeaders.EnumerableEquals(headers);
 
             }
-            return other != null && (string.Equals(Name, other.Name) && string.Equals(Path, other.Path) && Equals(Source, other.Source) && string.Equals(QueryString, other.QueryString) && eq && string.Equals(PostData, other.PostData));
+            return other != null && (string.Equals(Name, other.Name) && string.Equals(Path, other.Path) && Equals(Source, other.Source)  && eq && string.Equals(PostData, other.PostData));
         }
 
 
