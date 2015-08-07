@@ -859,7 +859,7 @@ namespace Dev2.Studio.ViewModels
         {
             var escapedXaml = resourceModel.ToServiceDefinition();
             var dbsvc = new WebService(escapedXaml.ToXElement());
-
+            
             var db = dbsvc.Source as WebSource;
 
             if(db != null)
@@ -869,7 +869,15 @@ namespace Dev2.Studio.ViewModels
                     Id = db.ResourceID,
                     Name = db.ResourceName,
                     Path = db.ResourcePath,
-                    QueryString = db.Address + "" + db.DefaultQuery
+                    QueryString = dbsvc.RequestUrl,
+                    Headers =  dbsvc.Headers,
+                    PostData =  dbsvc.RequestBody,
+                    
+                    Source = new WebServiceSourceDefinition() { Id = dbsvc.ResourceID},
+                    Inputs = new List<IServiceInput>() {},
+                    OutputMappings = new List<IServiceOutputMapping>() { },
+                    Method = (Common.Interfaces.WebRequestMethod)dbsvc.RequestMethod
+                    
                 };
                 EditResource(def);
             }

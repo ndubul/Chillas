@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
@@ -98,8 +99,36 @@ namespace Warewolf.Studio.ViewModels
             Inputs = service.Inputs;
             OutputMapping = service.OutputMappings;
             Item = service;
-
+            
             Init();
+            FromModel(service);
+        }
+
+        void FromModel(IWebService service)
+        {
+            Name = service.Name;
+            HeaderText = service.Name;
+            Id = service.Id;
+            Path = service.Path;
+            SelectedSource = Sources.FirstOrDefault(a => a.Id == service.Id);
+            Item.Source = SelectedSource;
+            if(service.Headers != null)
+            {
+                foreach(var nameValue in service.Headers)
+                {
+                    Headers.Add(nameValue);
+                }
+            }
+
+            if(SelectedSource != null)
+            {
+                RequestUrlQuery = service.QueryString.Replace(SelectedSource.HostName,"");
+                Item.RequestUrl = RequestUrlQuery;
+            }
+            else
+            {
+                RequestUrlQuery = "";
+            }
         }
 
         //public ManageWebServiceViewModel(IShellViewModel shell)
@@ -881,7 +910,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 _inputs = value;
                 IsInputsEmptyRows = true;
-                if (_inputs.Count >= 1)
+                if ( _inputs != null &&_inputs.Count >= 1)
                 {
                     IsInputsEmptyRows = false;
                 }
@@ -898,7 +927,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 _outputMapping = value;
                 IsOutputMappingEmptyRows = true;
-                if (_outputMapping.Count >= 1)
+                if (_outputMapping!= null && _outputMapping.Count >= 1)
                 {
                     IsOutputMappingEmptyRows = false;
                 }
@@ -1026,11 +1055,12 @@ namespace Warewolf.Studio.ViewModels
                     Source = SelectedSource,
                     Path = Item.Path,
                     Id = Item.Id,
-                    Headers = Headers.Select(value => new NameValue { Name = DataListUtil.RemoveLanguageBrackets(value.Name), Value = DataListUtil.RemoveLanguageBrackets(value.Value) }).ToList(),
+                    Headers = Headers.Where(a=>!String.IsNullOrEmpty(a.Name) && !String.IsNullOrEmpty(a.Value)).Select(value => new NameValue { Name = DataListUtil.RemoveLanguageBrackets(value.Name), Value = DataListUtil.RemoveLanguageBrackets(value.Value) }).ToList(),
                     PostData = DataListUtil.RemoveLanguageBrackets(RequestBody),
                     QueryString = RequestUrlQuery,
                     SourceUrl = SourceUrl,
                     RequestUrl = RequestUrlQuery
+                    
                 };
             }
             return new WebServiceDefinition

@@ -30,5 +30,6 @@ namespace Dev2.Common.Interfaces.WebServices
         string PostData { get; set; }
         string SourceUrl { get; set; }
         string Response { get; set; }
+        WebRequestMethod Method { get;set; }
     }
 }
