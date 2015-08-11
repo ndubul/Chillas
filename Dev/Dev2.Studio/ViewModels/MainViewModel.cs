@@ -875,7 +875,7 @@ namespace Dev2.Studio.ViewModels
                 var def = new WebServiceDefinition
                 {
                     Id = db.ResourceID,
-                    Name = db.ResourceName,
+                    Name = dbsvc.ResourceName,
                     Path = db.ResourcePath,
                     QueryString = dbsvc.RequestUrl,
                     Headers =  dbsvc.Headers,
