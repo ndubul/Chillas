@@ -35,6 +35,7 @@ namespace Dev2.Common.Interfaces.Data
         StartPage = 16384,
         Scheduler = 32768,
         Settings = 65536,
-        DependencyViewer = 131072
+        DependencyViewer = 131072,
+        DeployViewer = 262144
     }
 }

@@ -248,6 +248,8 @@ namespace Dev2.Studio.ViewModels.Deploy
             }
         }
 
+        public ResourceType ResourceType { get; set; }
+
         /// <summary>
         /// can select all. Enables butto.
         /// </summary>

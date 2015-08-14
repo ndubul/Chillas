@@ -586,11 +586,14 @@ namespace Dev2.Studio.ViewModels
             if(message.ViewModel != null)
             {
                 var environmentModel = EnvironmentRepository.FindSingle(model => model.ID == message.ViewModel.EnvironmentId);
+                message.ViewModel.ResourceType = Common.Interfaces.Data.ResourceType.DeployViewer;
                 if(environmentModel != null)
                 {
                     var resourceModel = environmentModel.ResourceRepository.FindSingle(model => model.ID == message.ViewModel.ResourceId);
+                    
                     if(resourceModel != null)
                     {
+                        resourceModel.ResourceType = (ResourceType)Common.Interfaces.Data.ResourceType.DeployViewer;
                         DeployResource = resourceModel as IContextualResourceModel;
                     }
                 }
