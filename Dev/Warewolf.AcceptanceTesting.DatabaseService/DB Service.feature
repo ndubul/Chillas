@@ -125,6 +125,7 @@ Scenario: Opening Saved DB Service
 	And "Save" is "Disabled"
 
 #--
+@ignore
 Scenario: Refresh in select Action
 	Given I click New Data Base Service Connector
 	Then "New Database Connector" tab is opened
@@ -194,7 +195,6 @@ Scenario: Changing Actions
 	Then Save Dialog is opened 
 	
 	
-
 Scenario: Creating a new Data Source
 	Given I click New Data Base Service Connector
 	Then "New Database Connector" tab is opened
@@ -207,10 +207,20 @@ Scenario: Creating a new Data Source
 	When I select "New" as data source
 	Then New Data Source Dialog is opened
 
-
-
-	
-
+#WOLF-860
+@ignore
+Scenario: Ensure recordset values can be saved to a variable
+	Given I have a new Workspace opened
+	And I have a saved Data Connector called "MyDataCon"
+	And "MyDataCon" returns [[dbo_GetCountries().CountryID]] and [[dbo_GetCountries().Description]]
+	When I drop "MyDataCon" on the design surface
+	And I open the Database Connector to a large view
+	When I change  [[dbo_GetCountries().CountryID]] to "[[variable]]"
+	And "MyDataCon" is executed
+	Then the workflow execution has "NO" error     
+	And the debug output is
+	|              |
+	| [[variable]] |Murali,Murali,india,india|
    
 
 

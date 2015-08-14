@@ -132,6 +132,18 @@ namespace Warewolf.Studio.ViewModels
             PerformInitialise(updateManager, aggregator);
             _warewolfserverName = updateManager.ServerName??"";
             _dbSource = dbSource;
+            Item = new DbSourceDefinition
+            {
+                AuthenticationType = _dbSource.AuthenticationType,
+                DbName = _dbSource.DbName,
+                Id = _dbSource.Id,
+                Name = _dbSource.Name,
+                Password = _dbSource.Password,
+                Path = _dbSource.Path,
+                ServerName = _dbSource.ServerName,
+                UserName = _dbSource.UserName,
+                Type = _dbSource.Type
+            };
             GetLoadComputerNamesTask(() =>
             {
                 FromDbSource();
@@ -301,7 +313,7 @@ namespace Warewolf.Studio.ViewModels
 
         private string GetServerName()
         {
-            var serverName = "";
+            string serverName =null ;
             if (ServerName != null)
             {
                 serverName = ServerName.Name;
@@ -326,21 +338,23 @@ namespace Warewolf.Studio.ViewModels
             // ReSharper disable once RedundantIfElseBlock
             else
             {
-                _dbSource.AuthenticationType = AuthenticationType;
-                _dbSource.DbName = DatabaseName;
-                _dbSource.Password = Password;
-                _dbSource.ServerName = GetServerName();
-                _dbSource.UserName = UserName;
-                return _dbSource;
+                return new DbSourceDefinition
+                {
+                    AuthenticationType = AuthenticationType,
+                    ServerName = GetServerName(),
+                    Password = Password,
+                    UserName = UserName,
+                    Type = (enSourceType)Enum.Parse(typeof(enSourceType), ServerType.Value),
+                    Name = ResourceName,
+                    DbName = DatabaseName,
+                    Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
+                };
 
             }
         }
         public override IDbSource ToModel()
         {
-            if (Item == null)
-            {
-                Item = ToDbSource();
-            }
+   
             return ToDbSource();
         }
 

@@ -59,7 +59,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                 throw new InvalidDataContractException("ResourceName is empty or null");
             }
             var resource= ResourceCatalog.Instance.GetResource(theWorkspace.ID, Guid.Parse(resourceId));
-            var resourceName = resource.ResourcePath;
+            var resourceName = resource.ResourceID;
             if(!string.IsNullOrEmpty(dependsOnMeString))
             {
                 if(!bool.TryParse(dependsOnMeString, out dependsOnMe))
@@ -98,8 +98,8 @@ namespace Dev2.Runtime.ESB.Management.Services
             {
                 throw new ArgumentNullException("res", @"Resource not found");
             }
-            var resourceName = res.ResourceName;
-            var resourceCat = res.ResourcePath;
+            var resourceName = res.ResourceID;
+      
             var resourceId = res.ResourceID;
             var dependants = ResourceCatalog.Instance.GetDependants(Guid.Empty, resourceId);
             dependants.AddRange(ResourceCatalog.Instance.GetDependants(workspaceId, resourceId));
@@ -112,13 +112,13 @@ namespace Dev2.Runtime.ESB.Management.Services
                 if(resource != null)
                 {
                     const string BrokenString = "false";
-                    sb.Append(string.Format("<node id=\"{0}\" x=\"\" y=\"\" broken=\"{1}\">", resource.ResourceName, BrokenString));
+                    sb.Append(string.Format("<node id=\"{0}\" x=\"\" y=\"\" broken=\"{1}\">", resource.ResourceID, BrokenString));
                     sb.Append(string.Format("<dependency id=\"{0}\" />", resourceName));
                     sb.Append("</node>");
                 }
             });
 
-            sb.Append(string.Format("<node id=\"{0}\" x=\"\" y=\"\" broken=\"false\">", resourceCat));
+            sb.Append(string.Format("<node id=\"{0}\" x=\"\" y=\"\" broken=\"false\">", resourceId));
             sb.Append("</node>");
             return sb;
         }
@@ -162,14 +162,14 @@ namespace Dev2.Runtime.ESB.Management.Services
                 var dependencies = resource.Dependencies;
                 if(dependencies != null)
                 {
-                    sb.Append(string.Format("<node id=\"{0}\" x=\"\" y=\"\" broken=\"false\">", resource.ResourceName));
+                    sb.Append(string.Format("<node id=\"{0}\" x=\"\" y=\"\" broken=\"false\">", resource.ResourceID));
 // ReSharper disable ImplicitlyCapturedClosure
-                    dependencies.ForEach(c => sb.Append(string.Format("<dependency id=\"{0}\" />", c.ResourceName)));
+                    dependencies.ForEach(c => sb.Append(string.Format("<dependency id=\"{0}\" />", c.ResourceID)));
 // ReSharper restore ImplicitlyCapturedClosure
                     sb.Append("</node>");
                     dependencies.ToList().ForEach(c => sb.Append(FindDependenciesRecursive(c.ResourceID, workspaceId)));
                 }
-                sb.Append(string.Format("<node id=\"{0}\" x=\"\" y=\"\" broken=\"{1}\">", resource.ResourcePath, BrokenString));
+                sb.Append(string.Format("<node id=\"{0}\" x=\"\" y=\"\" broken=\"{1}\">", resource.ResourceID, BrokenString));
                 sb.Append("</node>");
             }
             return sb;

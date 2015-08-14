@@ -72,18 +72,20 @@ namespace Dev2.Activities.Specs.Apis
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure all relevant information is displayed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Apis")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Apis")]
         public virtual void EnsureAllRelevantInformationIsDisplayed()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure all relevant information is displayed", new string[] {
-                        "Apis"});
-#line 16
-this.ScenarioSetup(scenarioInfo);
+                        "Apis",
+                        "ignore"});
 #line 17
- testRunner.Given("I execute \"http://localhost:3142/apis.json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 18
- testRunner.When("the request returns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I execute \"http://localhost:3142/apis.json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
+ testRunner.When("the request returns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
  testRunner.Then("the response will be valid apis.json format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -113,7 +115,7 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "SpecificationVersion",
                         "0.15"});
-#line 20
+#line 21
  testRunner.And("will have properties as", ((string)(null)), table1, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -125,13 +127,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureAllInformationIsDisplayedPerWorkFlowForTheApis()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure all information is displayed per work flow for the Apis", ((string[])(null)));
-#line 35
-this.ScenarioSetup(scenarioInfo);
 #line 36
- testRunner.Given("I execute \"http://localhost:3142/apis.json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 37
- testRunner.When("the request returns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I execute \"http://localhost:3142/apis.json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 38
+ testRunner.When("the request returns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 39
  testRunner.Then("the response will be valid apis.json format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -165,7 +167,7 @@ this.ScenarioSetup(scenarioInfo);
             table2.AddRow(new string[] {
                         "contact",
                         "null"});
-#line 39
+#line 40
  testRunner.And("will have Apis properties as", ((string)(null)), table2, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -177,15 +179,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureThatThe_JsonAnd_ApiUrlContainWorkflowPermissions()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure that the .json and .api url contain workflow permissions", ((string[])(null)));
-#line 53
-this.ScenarioSetup(scenarioInfo);
 #line 54
- testRunner.Given("I execute \"http://localhost:3142/apis.json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 55
- testRunner.When("the request returns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I execute \"http://localhost:3142/apis.json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 56
- testRunner.Then("the response will be valid apis.json format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("the request returns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 57
+ testRunner.Then("the response will be valid apis.json format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 58
  testRunner.And("the work flow \"Hello World\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -194,7 +196,7 @@ this.ScenarioSetup(scenarioInfo);
                         "public"});
             table3.AddRow(new string[] {
                         "secure"});
-#line 58
+#line 59
  testRunner.And("\"Hello World\" has the access permission as", ((string)(null)), table3, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -203,7 +205,7 @@ this.ScenarioSetup(scenarioInfo);
                         "\"http://RSAKLFLEROY:3142/secure/Hello World.json\""});
             table4.AddRow(new string[] {
                         "\"http://RSAKLFLEROY:3142/public/Hello World.json\""});
-#line 62
+#line 63
  testRunner.Then("the permissions appear independantly in the baseUrl property as", ((string)(null)), table4, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -212,7 +214,7 @@ this.ScenarioSetup(scenarioInfo);
                         "\"http://RSAKLFLEROY:3142/secure/Hello World.api\""});
             table5.AddRow(new string[] {
                         "\"http://RSAKLFLEROY:3142/public/Hello World.api\""});
-#line 66
+#line 67
  testRunner.And("the permissions appear independantly in the Properties value  as", ((string)(null)), table5, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -224,20 +226,20 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureTheBaseUrlPermissionsAreValid()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure the baseUrl permissions are valid", ((string[])(null)));
-#line 72
-this.ScenarioSetup(scenarioInfo);
 #line 73
- testRunner.Given("I execute \"http://rsaklfleroy:3142/public/Hello%20World.json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 74
- testRunner.And("public permissions are \"View,Execute,Contribute\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I execute \"http://rsaklfleroy:3142/public/Hello%20World.json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 75
+ testRunner.And("public permissions are \"View,Execute,Contribute\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 76
  testRunner.When("the request returns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Output"});
             table6.AddRow(new string[] {
                         "{\"rec\" : [{\"a\":\"name\"},{\"a\":\"dfsdfsdfsd\"}],\"Message\":\"Hello World.\"}"});
-#line 76
+#line 77
  testRunner.Then("\"http://rsaklfleroy:3142/public/Hello%20World.json\" output appear as", ((string)(null)), table6, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -246,20 +248,20 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureThatIfPermissionsAreNotGrantedThatTheRelevantInformationAppears(string execute, string permissions, string output, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure that if permissions are not granted that the relevant information appears", exampleTags);
-#line 81
-this.ScenarioSetup(scenarioInfo);
 #line 82
- testRunner.Given("I execute \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 83
- testRunner.And(string.Format("public permissions are \'{0}\'", permissions), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I execute \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 84
+ testRunner.And(string.Format("public permissions are \'{0}\'", permissions), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 85
  testRunner.When("the request returns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Output"});
             table7.AddRow(new string[] {
                         ""});
-#line 85
+#line 86
  testRunner.Then("\"http://rsaklfleroy:3142/public/Hello%20World.json\" output appear as", ((string)(null)), table7, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -307,24 +309,24 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureAccessWillBeDeniedIfPermissionsChanged()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure Access will be denied if permissions changed", ((string[])(null)));
-#line 95
-this.ScenarioSetup(scenarioInfo);
 #line 96
+this.ScenarioSetup(scenarioInfo);
+#line 97
  testRunner.Given("I have \"http://rsaklfleroy:3142/secure/Acceptance%20Tests/TestAssignWithRemote.js" +
                     "on\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 97
- testRunner.And("permissions are \"View,Execute,Contribute\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 98
+ testRunner.And("permissions are \"View,Execute,Contribute\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 99
  testRunner.And("I execute \"http://rsaklfleroy:3142/public/Acceptance%20Tests/TestAssignWithRemote" +
                     ".json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 99
+#line 100
  testRunner.When("the request returns", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Output"});
             table8.AddRow(new string[] {
                         "Access has been denied for this request."});
-#line 100
+#line 101
  testRunner.Then("\"http://rsaklfleroy:3142/public/Acceptance%20Tests/TestAssignWithRemote.json\" pro" +
                     "perties appear as", ((string)(null)), table8, "Then ");
 #line hidden

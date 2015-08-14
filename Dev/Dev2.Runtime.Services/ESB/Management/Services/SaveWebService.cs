@@ -19,6 +19,7 @@ using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Common.Interfaces.WebServices;
 using Dev2.Communication;
 using Dev2.Converters.Graph.DataTable;
+using Dev2.Data.ServiceModel;
 using Dev2.DynamicServices;
 using Dev2.DynamicServices.Objects;
 using Dev2.Runtime.Hosting;
@@ -69,7 +70,9 @@ namespace Dev2.Runtime.ESB.Management.Services
                     RequestBody = src.PostData,
                     Recordsets = recordsetList,
                     Source = source,
-                    Headers = src.Headers
+                    Headers = src.Headers,
+                    RequestMethod = (WebRequestMethod)src.Method
+                    
                 };
                 ResourceCatalog.Instance.SaveResource(GlobalConstants.ServerWorkspaceID, res);
                 ServerExplorerRepo.UpdateItem(res);

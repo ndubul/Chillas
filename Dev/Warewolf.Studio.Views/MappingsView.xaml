@@ -26,10 +26,10 @@
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0" 
                       HorizontalScrollBarVisibility="Auto" 
-                      VerticalScrollBarVisibility="Auto">
-            <StackPanel Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=ActualWidth}" 
-                        Margin="{StaticResource ElementBorderTop}"
-                        MaxHeight="180">
+                      VerticalScrollBarVisibility="Auto"
+                      Margin="{StaticResource ElementBorderTop}"
+                      MaxHeight="180">
+            <StackPanel Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=ActualWidth}" >
                 <ig:XamGrid x:Name="InputsMappingDataGrid" 
                             ItemsSource="{Binding Inputs}" 
                             IsAlternateRowsEnabled="False"
@@ -72,10 +72,10 @@
                    Visibility="{Binding IsInputsEmptyRows, Converter={StaticResource BoolToVisibility}}" />
         <ScrollViewer Grid.Row="2" 
                       HorizontalScrollBarVisibility="Auto" 
-                      VerticalScrollBarVisibility="Auto">
-            <StackPanel Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=ActualWidth}" 
-                        Margin="{StaticResource ElementBorderTop}"
-                        MaxHeight="180">
+                      VerticalScrollBarVisibility="Auto"
+                      Margin="{StaticResource ElementBorderTop}"
+                      MaxHeight="180">
+            <StackPanel Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=ActualWidth}" >
                 <ig:XamGrid x:Name="OutputsMappingDataGrid" 
                             ItemsSource="{Binding OutputMapping}" 
                             IsAlternateRowsEnabled="False"

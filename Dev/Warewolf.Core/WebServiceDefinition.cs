@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.ServerProxyLayer;
@@ -18,9 +19,11 @@ using Dev2.Common.Interfaces.WebServices;
 
 namespace Warewolf.Core
 {
-    public class WebServiceDefinition : IWebService, IEquatable<IWebService>
+    public class WebServiceDefinition : IWebService
     // ReSharper restore UnusedMember.Global
     {
+        WebRequestMethod _method;
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:System.Object" /> class.
         /// </summary>
@@ -56,6 +59,17 @@ namespace Warewolf.Core
         public string PostData { get; set; }
         public string SourceUrl { get; set; }
         public string Response { get; set; }
+        public WebRequestMethod Method
+        {
+            get
+            {
+                return _method;
+            }
+            set
+            {
+                _method = value;
+            }
+        }
 
         #region Equality members
 
@@ -68,15 +82,8 @@ namespace Warewolf.Core
         /// <param name="other">An object to compare with this object.</param>
         public bool Equals(WebServiceDefinition other)
         {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            return string.Equals(Name, other.Name) && string.Equals(Path, other.Path) && Equals(Source, other.Source) && Equals(OutputMappings, other.OutputMappings) && string.Equals(QueryString, other.QueryString) && Equals(Headers, other.Headers) && string.Equals(PostData, other.PostData);
+            return Equals((Object)other);
+           
         }
 
         /// <summary>
@@ -113,8 +120,20 @@ namespace Warewolf.Core
             {
                 return false;
             }
-            return Equals((WebServiceDefinition)obj);
+            bool eq = true;
+            var other = obj as WebServiceDefinition;
+            var headers = Headers;
+            if (other != null)
+            {
+                var otherHeaders = other.Headers;
+
+                eq = otherHeaders.EnumerableEquals(headers);
+
+            }
+            return other != null && (string.Equals(Name, other.Name) && string.Equals(Path, other.Path) && Equals(Source, other.Source)  && eq && string.Equals(PostData, other.PostData));
         }
+
+
 
         /// <summary>
         ///     Serves as a hash function for a particular type.
@@ -131,10 +150,18 @@ namespace Warewolf.Core
 
                 hashCode = (hashCode * 397) ^ (Path != null ? Path.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Source != null ? Source.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (OutputMappings != null ? OutputMappings.GetHashCode() : 0);
+               
+                if(OutputMappings!= null)
+                {
+                 hashCode=   OutputMappings.Aggregate(hashCode, (a, b) => a * 397 ^ (b != null ? b.GetHashCode() : 0));
+                }
                 hashCode = (hashCode * 397) ^ (QueryString != null ? QueryString.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Headers != null ? Headers.GetHashCode() : 0);
+                if(Headers != null)
+                {
+                    hashCode = Headers.Aggregate(hashCode, (current, nameValue) => (current * 397) ^ (nameValue != null ? nameValue.GetHashCode() : 0));
+                }
                 hashCode = (hashCode * 397) ^ (PostData != null ? PostData.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ ( Method.GetHashCode() );
                 return hashCode;
                 // ReSharper restore NonReadonlyFieldInGetHashCode
             }
@@ -151,5 +178,39 @@ namespace Warewolf.Core
         }
 
         #endregion
+    }
+
+    public static class EnumerableEquality
+    {
+
+        public static bool EnumerableEquals<T>(this IList<T> otherHeaders, IList<T> headers)
+        {
+            bool eq = true;
+            if (otherHeaders == null && headers == null)
+                return true;
+            if (otherHeaders != null && headers != null)
+            {
+                if (otherHeaders.Count == headers.Count)
+                {
+                    for (int i = 0; i < headers.Count; i++)
+                    {
+                        if (headers[i].Equals(otherHeaders[i]))
+                        {
+                            eq = false;
+                        }
+                    }
+                }
+                else
+                {
+                    eq = false;
+                }
+            }
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            else if ((otherHeaders == null && headers != null) )
+            {
+                return false;
+            }
+            return eq;
+        }
     }
 }

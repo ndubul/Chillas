@@ -483,7 +483,7 @@
                                         <Border x:Name="RootPopupElement"
                                                 Grid.Row="1"
                                                 Height="Auto"
-                                                MinHeight="30"
+                                                MinHeight="{TemplateBinding MinDropDownHeight}"
                                                 MaxWidth="{TemplateBinding MaxDropDownWidth}"
                                                 MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                                 HorizontalAlignment="Stretch"
@@ -501,6 +501,7 @@
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
                                                 <igPrim:ItemsPanel x:Name="ItemsPanel"
+                                                                   MinHeight="200"
                                                                    Margin="1,0"
                                                                    VerticalAlignment="Top" />
                                                 <ScrollBar x:Name="VerticalScrollBar"
@@ -563,6 +564,7 @@
                                 <ContentControl x:Name="contentControl"
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Center"
+                                                MinHeight="30"
                                                 Foreground="{TemplateBinding Foreground}">
                                     <Grid>
                                         <StackPanel x:Name="MultiSelectContentPanel"

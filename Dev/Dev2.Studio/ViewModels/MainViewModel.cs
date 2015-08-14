@@ -73,6 +73,7 @@ using Dev2.Studio.ViewModels.Help;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Studio.ViewModels.WorkSurface;
 using Dev2.Studio.Views;
+using Dev2.Studio.Views.DependencyVisualization;
 using Dev2.Studio.Views.ResourceManagement;
 using Dev2.Threading;
 using Dev2.Utils;
@@ -519,19 +520,26 @@ namespace Dev2.Studio.ViewModels
         {
             Dev2Logger.Log.Info(message.GetType().Name);
             var model = message.ResourceModel;
-            if(model == null)
-            {
-                return;
-            }
+            //if(model == null)
+            //{
+            //    return;
+            //}
 
-            if(message.ShowDependentOnMe)
-            {
-                AddReverseDependencyVisualizerWorkSurface(model);
-            }
-            else
-            {
-                AddDependencyVisualizerWorkSurface(model);
-            }
+            //if(message.ShowDependentOnMe)
+            //{
+            //    AddReverseDependencyVisualizerWorkSurface(model);
+            //}
+            //else
+            //{
+            //    AddDependencyVisualizerWorkSurface(model);
+            //}
+
+            var server = CustomContainer.Get<IServer>();
+            var vm = new DependencyVisualiserViewModel(new DependencyVisualiserView());
+            vm.ResourceModel = model;
+         
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DependencyVisualiser), vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
         public void Handle(ShowEditResourceWizardMessage message)
@@ -813,7 +821,7 @@ namespace Dev2.Studio.ViewModels
                 {
                     Action = new DbAction()
                     {
-                        Inputs = new List<IServiceInput>(dbsvc.Method.Parameters.Select(a => new ServiceInput(a.Name, a.Value)))
+                        Inputs = new List<IServiceInput>(dbsvc.Method.Parameters.Select(a => new ServiceInput(a.Name, a.Value??"")))
                         ,
                         Name = dbsvc.Method.Name
                     },
@@ -832,11 +840,26 @@ namespace Dev2.Studio.ViewModels
         void EditPluginService(IContextualResourceModel resourceModel)
         {
             var db = new PluginService(resourceModel.WorkflowXaml.ToXElement());
+            var a = db.Method;
             var def = new PluginServiceDefinition
             {
                 Id = db.ResourceID,
                 Name = db.ResourceName,
-                Path = db.ResourcePath
+                Path = db.ResourcePath,
+                Action = new PluginAction()
+                {
+                    FullName = db.Namespace,
+                    Inputs = a.Parameters.Select(x => new ServiceInput(x.Name, x.DefaultValue ?? "") { Name = x.Name, DefaultValue = x.DefaultValue, EmptyIsNull = x.EmptyToNull, RequiredField = x.IsRequired, TypeName = x.Type } as IServiceInput).ToList(),
+                    Method = a.ExecuteAction,
+                    Variables = a.Parameters.Select(x => new NameValue() { Name = x.Name + " (" + x.TypeName + ")", Value = "" } as INameValue).ToList(),
+                    
+                },
+                Source = new PluginSourceDefinition()
+                {
+                    Id = db.Source.ResourceID,
+                    Name = db.Source.ResourceName
+                }
+    
             };
             EditResource(def);
         }
@@ -844,7 +867,7 @@ namespace Dev2.Studio.ViewModels
         {
             var escapedXaml = resourceModel.ToServiceDefinition();
             var dbsvc = new WebService(escapedXaml.ToXElement());
-
+            
             var db = dbsvc.Source as WebSource;
 
             if(db != null)
@@ -854,7 +877,15 @@ namespace Dev2.Studio.ViewModels
                     Id = db.ResourceID,
                     Name = db.ResourceName,
                     Path = db.ResourcePath,
-                    QueryString = db.Address + "" + db.DefaultQuery
+                    QueryString = dbsvc.RequestUrl,
+                    Headers =  dbsvc.Headers,
+                    PostData =  dbsvc.RequestBody,
+                    
+                    Source = new WebServiceSourceDefinition() { Id = dbsvc.ResourceID},
+                    Inputs = new List<IServiceInput>() {},
+                    OutputMappings = new List<IServiceOutputMapping>() { },
+                    Method = (Common.Interfaces.WebRequestMethod)dbsvc.RequestMethod
+                    
                 };
                 EditResource(def);
             }
@@ -923,7 +954,7 @@ namespace Dev2.Studio.ViewModels
         {
 
             var server = CustomContainer.Get<IServer>();
-            var viewModel = new ManagePluginServiceViewModel(new ManagePluginServiceModel(server.UpdateRepository, server.QueryProxy,this, ""), null, selectedSource);
+            var viewModel = new ManagePluginServiceViewModel(new ManagePluginServiceModel(server.UpdateRepository, server.QueryProxy,this, ""),  selectedSource);
             var vm = new SourceViewModel<IPluginService>(EventPublisher, viewModel, PopupProvider, new ManagePluginServiceControl());
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), vm);
             AddAndActivateWorkSurface(workSurfaceContextViewModel);

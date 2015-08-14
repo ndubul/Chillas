@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using Dev2.Common.Interfaces;
 
 namespace Warewolf.Studio.ViewModels
 {
     public class ExplorerItemNodeViewModel : ExplorerItemViewModel, IExplorerItemNodeViewModel
     {
-        Visibility _textVisibility;
-        Visibility _isMainNode;
+        bool _textVisibility;
+        bool _isMainNode;
         // ReSharper disable TooManyDependencies
         public ExplorerItemNodeViewModel(IServer server, IExplorerItemViewModel parent)
             // ReSharper restore TooManyDependencies
@@ -17,8 +16,8 @@ namespace Warewolf.Studio.ViewModels
         {
             Self = this;
             Weight = 1;
-            IsMainNode = Visibility.Collapsed;
-            IsNotMainNode = Visibility.Visible;
+            IsMainNode = false;
+            IsNotMainNode = true;
         }
 
         #region Implementation of IExplorerItemNodeViewModel
@@ -40,7 +39,7 @@ namespace Warewolf.Studio.ViewModels
             return null;
         }
 
-        public Visibility IsMainNode
+        public bool IsMainNode
         {
             get
             {
@@ -49,17 +48,17 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _isMainNode = value;
-                if (value == Visibility.Visible)
+                if (value)
                 {
-                    IsNotMainNode = Visibility.Collapsed;
+                    IsNotMainNode = false;
                 }
             }
         }
-        public Visibility IsNotMainNode { get; set; }
+        public bool IsNotMainNode { get; set; }
 
         #endregion
 
-        public Visibility TextVisibility
+        public bool TextVisibility
         {
             private get
             {

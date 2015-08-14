@@ -487,3 +487,14 @@ Examples:
 	| [[rec([[int]]).a]], [[int]] =1 | 30/07/2015 | [[rs().a]]                     | 01/01/2016 | [[rj(*).a]]                | dd/mm/yyyy | [[rg(1).set]]                    | [[rg(1).set]] = 7 |
 	| [[r]]                          | 30/07/2015 | [[rs([[int]]).a]], [[int]] = 1 | 01/01/2016 | [[rj([[d]]).a]], [[d]] = 1 | dd/mm/yyyy | [[rg(*).set]]                    | [[rg(1).set]] = 7 |
 	
+Scenario: Variables that do not exist
+	Given I have a first date "[[a]]" equal to ""
+	And I have a second date "[[b]]" equals ""
+	And the date format as "[[v]]" equals ""
+	And I selected output in "years" 	
+	When the datetime difference tool is executed
+	Then the difference should be "7"
+	And the execution has "An" error
+	And the debug output as 
+	|            |                                            |
+	| [[result]] | The expression [[a]] has no value assigned |

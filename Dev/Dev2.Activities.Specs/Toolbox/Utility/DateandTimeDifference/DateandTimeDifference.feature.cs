@@ -1613,6 +1613,41 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.CalculateTheNumberOfMonthsBetweenTwoGivenDatesUsingVariablesAndRecordsets("[[r]]", "30/07/2015", "[[rs([[int]]).a]], [[int]] = 1", "01/01/2016", "[[rj([[d]]).a]], [[d]] = 1", "dd/mm/yyyy", "[[rg(*).set]]", "[[rg(1).set]] = 7", ((string[])(null)));
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Variables that do not exist")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DateandTimeDifference")]
+        public virtual void VariablesThatDoNotExist()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Variables that do not exist", ((string[])(null)));
+#line 490
+this.ScenarioSetup(scenarioInfo);
+#line 491
+ testRunner.Given("I have a first date \"[[a]]\" equal to \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 492
+ testRunner.And("I have a second date \"[[b]]\" equals \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 493
+ testRunner.And("the date format as \"[[v]]\" equals \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 494
+ testRunner.And("I selected output in \"years\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 495
+ testRunner.When("the datetime difference tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 496
+ testRunner.Then("the difference should be \"7\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 497
+ testRunner.And("the execution has \"An\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table62 = new TechTalk.SpecFlow.Table(new string[] {
+                        "",
+                        ""});
+            table62.AddRow(new string[] {
+                        "[[result]]",
+                        "The expression [[a]] has no value assigned"});
+#line 498
+ testRunner.And("the debug output as", ((string)(null)), table62, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

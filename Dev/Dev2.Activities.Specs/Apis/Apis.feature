@@ -13,6 +13,7 @@
 
 
 @Apis
+@ignore
 Scenario: Ensure all relevant information is displayed
 	Given I execute "http://localhost:3142/apis.json" 
 	When the request returns
