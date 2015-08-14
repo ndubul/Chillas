@@ -219,8 +219,8 @@ Scenario: Ensure recordset values can be saved to a variable
 	And "MyDataCon" is executed
 	Then the workflow execution has "NO" error     
 	And the debug output is
-	|              |
-	| [[variable]] |Murali,Murali,india,india|
+	|              |                           |
+	| [[variable]] | Murali,Murali,india,india |
    
 
 
