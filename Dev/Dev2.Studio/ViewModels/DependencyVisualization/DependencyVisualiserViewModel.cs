@@ -17,6 +17,7 @@ using Caliburn.Micro;
 using Dev2.AppResources.DependencyVisualization;
 using Dev2.AppResources.Repositories;
 using Dev2.Common;
+using Dev2.Common.ExtMethods;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Services.Events;
@@ -45,6 +46,8 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             : base(EventPublishers.Aggregator)
         {
             _view = view;
+            GetDependsOnMe = true;
+            NestingLevel = "0";
         }
 
         private double _availableWidth;
@@ -71,6 +74,8 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
         private double _availableHeight;
         ObservableCollection<ExplorerItemNodeViewModel> _allNodes;
         bool _getDependsOnMe;
+        bool _getDependsOnOther;
+        string _nestingLevel;
 
         public double AvailableHeight
         {
@@ -117,7 +122,42 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             {
                 _getDependsOnMe = value;
                 NotifyOfPropertyChange(() => GetDependsOnMe);
-                BuildGraphs();
+                if (ResourceModel != null)
+                {
+                    BuildGraphs();
+                }
+            }
+        }
+
+        public bool GetDependsOnOther
+        {
+            get
+            {
+                return _getDependsOnOther;
+            }
+            set
+            {
+                _getDependsOnOther = value;
+                NotifyOfPropertyChange(() => GetDependsOnOther);
+                if (_getDependsOnOther)
+                {
+                    GetDependsOnMe = false;
+                    NotifyOfPropertyChange(() => GetDependsOnMe);
+                }
+            }
+        }
+
+        public string NestingLevel
+        {
+            get { return _nestingLevel; }
+            set
+            {
+                _nestingLevel = value;
+                NotifyOfPropertyChange(() => NestingLevel);
+                if (ResourceModel != null && !string.IsNullOrEmpty(_nestingLevel) && NestingLevel.IsNumeric())
+                {
+                    BuildGraphs();
+                }
             }
         }
 
@@ -125,8 +165,7 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
         {
             get
             {
-                return string.Format(GetDependsOnMe ? "Dependency - {0}"
-                    : "{0}*Dependencies", ResourceModel.ResourceName);
+                return string.Format(GetDependsOnMe ? "Dependency - {0}" : "{0}*Dependencies", ResourceModel.ResourceName);
             }
         }
 
@@ -143,11 +182,30 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             }
 
             var graphGenerator = new DependencyGraphGenerator();
-
             var graph = graphGenerator.BuildGraph(graphData.Message, ResourceModel.ResourceName, AvailableWidth, AvailableHeight);
-            var acc = new List<ExplorerItemNodeViewModel>();
-            var x = new ObservableCollection<ExplorerItemNodeViewModel>(GetItems(new List<Node> { graph.Nodes.FirstOrDefault() }, StudioResourceRepository.Instance, null, acc, true));
-            AllNodes = new ObservableCollection<ExplorerItemNodeViewModel>(acc);
+
+            int nestingLevel = int.Parse(NestingLevel);
+            if(nestingLevel <= graph.Nodes.Count)
+            {
+                if(nestingLevel > 0 && graph.Nodes.Count > 1 && nestingLevel <= graph.Nodes.Count)
+                {
+                    for(int n = nestingLevel - 1; n >= 0; n--)
+                    {
+                        graph.Nodes.RemoveAt(n);
+                    }
+                }
+            }
+            else
+            {
+                graph.Nodes.Clear();
+            }
+
+            if (graph.Nodes.Count > 0)
+            {
+                var acc = new List<ExplorerItemNodeViewModel>();
+                var x = new ObservableCollection<ExplorerItemNodeViewModel>(GetItems(new List<Node> { graph.Nodes.FirstOrDefault() }, StudioResourceRepository.Instance, null, acc, true));
+                AllNodes = new ObservableCollection<ExplorerItemNodeViewModel>(acc);
+            }
         }
 
         public string FavoritesLabel
@@ -157,7 +215,7 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
 
         public string DependantsLabel
         {
-            get { return "Show what depends on " + ResourceModel.ResourceName + " Workflow"; }
+            get { return "Show what depends on " + ResourceModel.ResourceName; }
         }
 
 

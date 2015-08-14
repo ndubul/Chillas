@@ -39,14 +39,8 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!--<ListBox Style="{StaticResource RadioButtonList}" SelectedValuePath="GetDependsOnMe" SelectedValue="{Binding GetDependsOnMe, UpdateSourceTrigger=PropertyChanged}"
-                             Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
-                        <ListBoxItem Tag="True" Content="{Binding FavoritesLabel}" IsSelected="{Binding GetDependsOnMe, UpdateSourceTrigger=PropertyChanged, ConverterParameter=True}"></ListBoxItem>
-                        <ListBoxItem Tag="False" Content="{Binding DependantsLabel}" IsSelected="{Binding GetDependsOnMe, UpdateSourceTrigger=PropertyChanged, ConverterParameter=False}"></ListBoxItem>
-                    </ListBox>-->
-
                     <RadioButton Grid.Row="0" Grid.Column="0" 
-                                 IsChecked="{Binding GetDependsOnMe,Mode=TwoWay,NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ConverterParameter=True, FallbackValue=True}" 
+                                 IsChecked="{Binding GetDependsOnMe,Mode=TwoWay,NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
                                  x:Name="WfDependsOn"
                                  HorizontalAlignment="Left"
                                  Content="{Binding FavoritesLabel}"></RadioButton>
@@ -58,16 +52,15 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Nesting Levels" Margin="{StaticResource ControlBorderRight}"></TextBlock>
-                            <TextBox Grid.Column="1" Width="70" Text="1"></TextBox>
+                            <TextBox Grid.Column="1" Width="70" Text="{Binding NestingLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                         </Grid>
-
                     </StackPanel>
 
                     <RadioButton Grid.Row="1" Grid.Column="0" 
                                  x:Name="DependsOnWf"
                                  Margin="0,-2,0,0"
                                  HorizontalAlignment="Left"
-                                 IsChecked="{Binding GetDependsOnMe,Mode=TwoWay,NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ConverterParameter=False, FallbackValue=False}" 
+                                 IsChecked="{Binding GetDependsOnOther,Mode=TwoWay,NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" 
                                  Content="{Binding DependantsLabel}"></RadioButton>
 
                     <Button Grid.Column="1" Grid.Row="1"

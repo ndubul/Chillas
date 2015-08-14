@@ -536,6 +536,7 @@ namespace Dev2.Studio.ViewModels
 
             var server = CustomContainer.Get<IServer>();
             var vm = new DependencyVisualiserViewModel(new DependencyVisualiserView());
+            vm.ResourceType  = Common.Interfaces.Data.ResourceType.DependencyViewer;
             vm.ResourceModel = model;
          
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DependencyVisualiser), vm);
