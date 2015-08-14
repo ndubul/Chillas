@@ -584,7 +584,6 @@
     </None>
     <None Include="Toolbox\FileAndFolder\Delete\Delete.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Delete.feature.cs</LastGenOutput>
     </None>
     <None Include="Toolbox\FileAndFolder\Move\Move.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

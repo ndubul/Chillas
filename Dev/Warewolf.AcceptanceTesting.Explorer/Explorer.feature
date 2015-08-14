@@ -172,7 +172,7 @@ Scenario: Opening and Editing workflow from Explorer
 	Then "*" is visible in the tab header
 	When I save "*" is not visible
 	And debug out as 
-	|                                            |
+	|                                            |                                                         |
 	| "Worksapce Item updated 8/12/2015 9:58:01" | Updated WorkflowService 'Hello World'8/12/2015 9:58:01" |
 	When I refresh the explorer
 	And "Hello World" is visible with no duplicate
