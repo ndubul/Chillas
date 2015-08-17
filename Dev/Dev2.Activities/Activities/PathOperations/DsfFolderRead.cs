@@ -47,7 +47,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
             InputPath = string.Empty;
         }
 
-        protected override IList<OutputTO> ExecuteConcreteAction(IDSFDataObject dataObject, out ErrorResultTO allErrors)
+        protected override IList<OutputTO> ExecuteConcreteAction(IDSFDataObject dataObject, out ErrorResultTO allErrors, int update)
         {
             IsNotCertVerifiable = true;
 
@@ -57,20 +57,20 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
             var colItr = new WarewolfListIterator();
 
             //get all the possible paths for all the string variables
-            var inputItr = new WarewolfIterator(dataObject.Environment.Eval(InputPath));
+            var inputItr = new WarewolfIterator(dataObject.Environment.Eval(InputPath, update));
             colItr.AddVariableToIterateOn(inputItr);
 
-            var unameItr = new WarewolfIterator(dataObject.Environment.Eval(Username));
+            var unameItr = new WarewolfIterator(dataObject.Environment.Eval(Username, update));
             colItr.AddVariableToIterateOn(unameItr);
 
-            var passItr = new WarewolfIterator(dataObject.Environment.Eval(Password));
+            var passItr = new WarewolfIterator(dataObject.Environment.Eval(DecryptedPassword,update));
             colItr.AddVariableToIterateOn(passItr);
 
             if(dataObject.IsDebugMode())
             {
-                AddDebugInputItem(InputPath, "Input Path", dataObject.Environment);
+                AddDebugInputItem(InputPath, "Input Path", dataObject.Environment, update);
                 AddDebugInputItem(new DebugItemStaticDataParams(GetReadType().GetDescription(), "Read"));
-                AddDebugInputItemUserNamePassword(dataObject.Environment);
+                AddDebugInputItemUserNamePassword(dataObject.Environment, update);
             }
 
             while(colItr.HasMoreData())
@@ -141,11 +141,14 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
 
         #region Properties
 
+        // ReSharper disable MemberCanBePrivate.Global
+        // ReSharper disable UnusedAutoPropertyAccessor.Global
         /// <summary>
         /// Gets or sets the files option.
         /// </summary>
         [Inputs("Files")]
         [FindMissing]
+        
         public bool IsFilesSelected
         {
             get;
@@ -163,7 +166,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
             set;
         }
 
-
+        // ReSharper disable once UnusedMember.Global
         /// <summary>
         /// Gets or sets the files and folders option.
         /// </summary>

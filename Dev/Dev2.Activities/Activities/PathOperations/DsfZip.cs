@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Dev2.Activities;
 using Dev2.Activities.PathOperations;
@@ -18,10 +19,12 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Data;
 using Dev2.Data.PathOperations.Interfaces;
+using Dev2.Data.Util;
 using Dev2.PathOperations;
 using Dev2.Util;
 using Unlimited.Applications.BusinessDesignStudio.Activities.Utilities;
 using Warewolf.Core;
+using Warewolf.Security.Encryption;
 using Warewolf.Storage;
 
 // ReSharper disable CheckNamespace
@@ -51,6 +54,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
         IWarewolfIterator _archPassItr;
         IWarewolfIterator _compresItr;
         IWarewolfIterator _archNameItr;
+        string _archivePassword;
 
         #region Properties
         /// <summary>
@@ -58,7 +62,42 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
         /// </summary>      
         [Inputs("Archive Password")]
         [FindMissing]
-        public string ArchivePassword { get; set; }
+        public string ArchivePassword
+        {
+            get { return _archivePassword; }
+            set
+            {
+                if (DataListUtil.ShouldEncrypt(value))
+                {
+                    try
+                    {
+                        _archivePassword = DpapiWrapper.Encrypt(value);
+                    }
+                    catch (Exception)
+                    {
+                        _archivePassword = value;
+                    }
+                }
+                else
+                {
+                    _archivePassword = value;
+                }
+            }
+        }
+
+
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        // ReSharper disable once MemberCanBePrivate.Global
+        protected string DecryptedArchivePassword
+        {
+            get
+            {
+                return DataListUtil.NotEncrypted(ArchivePassword) ? ArchivePassword : DpapiWrapper.Decrypt(ArchivePassword);
+            }
+        }
+
+        
 
         /// <summary>
         /// Gets or sets the name of the archive.
@@ -78,20 +117,20 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
         }
         #endregion Properties
 
-        protected override void AddDebugInputItems(IExecutionEnvironment environment)
+        protected override void AddDebugInputItems(IExecutionEnvironment environment, int update)
         {
-            AddDebugInputItem(CompressionRatio, "Compression Ratio",environment);
+            AddDebugInputItem(CompressionRatio, "Compression Ratio",environment, update);
         }
 
-        protected override void AddItemsToIterator(IExecutionEnvironment environment)
+        protected override void AddItemsToIterator(IExecutionEnvironment environment, int update)
         {
-            _compresItr = new WarewolfIterator(environment.Eval(CompressionRatio));
+            _compresItr = new WarewolfIterator(environment.Eval(CompressionRatio, update));
             ColItr.AddVariableToIterateOn(_compresItr);
 
-            _archNameItr = new WarewolfIterator(environment.Eval(ArchiveName));
+            _archNameItr = new WarewolfIterator(environment.Eval(ArchiveName, update));
             ColItr.AddVariableToIterateOn(_archNameItr);
 
-            _archPassItr = new WarewolfIterator(environment.Eval(ArchivePassword));
+            _archPassItr = new WarewolfIterator(environment.Eval(DecryptedArchivePassword,update));
             ColItr.AddVariableToIterateOn(_archPassItr);
 
         }
