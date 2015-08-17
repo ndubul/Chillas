@@ -57,6 +57,8 @@ namespace Warewolf.Studio.Core
                         return ImageAwesome.CreateImageSource(FontAwesomeIcon.Cogs, Brushes.Black);
                     case ResourceType.DependencyViewer:
                         return ImageAwesome.CreateImageSource(FontAwesomeIcon.Sitemap, Brushes.Black);
+                    case ResourceType.DeployViewer:
+                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.PaperPlane, Brushes.Black);
                     default:
                         return dict[CustomMenuIcons.Folder] as DrawingImage;
                 }
