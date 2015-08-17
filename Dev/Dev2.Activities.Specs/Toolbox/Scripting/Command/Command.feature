@@ -69,19 +69,22 @@ Scenario: Execute cmd with negative recordset index
 
 @ignore
 #Audit
-Scenario: Execute commands produce correct result
-	Given I have a command variable "[[drive]]" equal to "C:\"
-	Given I have these command scripts to execute in a single execution run
-	| script                        |
-	| @echo off                     |
-	| REM Testing multiple commands |
-	| dir [[drive]]                   |
+Scenario Outline: Execute a command that requires user interaction like pause
+	Given I have this command script to execute '<variable>' with '<val>'
 	When the command tool is executed
-	Then the result of the command tool will be "Volume in drive C has no label"
-	And the execution has "NO" error
+	Then the '<resultVariable>' of the command tool will be '<Result>'
+	And the execution has '<Error>' error
 	And the debug inputs as  
-	| Command         |
-	| String = String |  
+	| variable   | Command |
+	| <variable> | <val>   |  
 	And the debug output as 
-	|                      |
-	| [[result]] = String |
+	|                             |
+	| <resultVariable> = <result> |
+	Examples: 
+	| Variable                          | Val                | resultVariable               | Result                                                                                    | Error |
+	| [[rec().set]]                     | Echo a message     | [[rj().a]]                   | a message                                                                                 | No    |
+	| [[rec(*).set]]                    | Echo Press any key | [[rj(1).a]]                  | Press any key                                                                             | No    |
+	| [[rec([[int]]).set]], [[int]] = 1 | Echo a message     | [[rj(*).a]]                  | a message                                                                                 | No    |
+	| [[rec(1).set]]                    | Echo a message     | [[rj([[int]]).a]],[[int]] =3 | a message                                                                                 | No    |
+	| [[var]]                           | 444                | [[rj([[int]]).a]],[[int]] =3 | '444' is not recognized as an internal or external command,operable program or batch file | An    |
+	| [[v]]                             |                    | [[int]]                      | Empty script to execute                                                                   | An    |
