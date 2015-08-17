@@ -18,6 +18,7 @@ using Dev2.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
+// ReSharper disable InconsistentNaming
 
 namespace Dev2.Tests.Activities.FindMissingStrategyTest
 {
@@ -83,7 +84,7 @@ namespace Dev2.Tests.Activities.FindMissingStrategyTest
             return null;
         }
 
-        protected override void ExecuteTool(IDSFDataObject dataObject)
+        protected override void ExecuteTool(IDSFDataObject dataObject, int update)
         {
         }
 

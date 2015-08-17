@@ -103,8 +103,8 @@ namespace Warewolf.Studio.ViewModels
             }
             else
             {
-                HeaderText = string.Format("{0} {1} on {2}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim(), serverName);
-                Header = string.Format("{0} - {1}", ((_webServiceSource == null ? ResourceName : _webServiceSource.Name)),serverName);
+                HeaderText = string.Format("{0} {1} ", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim());
+                Header = string.Format("{0} - {1}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name));
             }
         }
 

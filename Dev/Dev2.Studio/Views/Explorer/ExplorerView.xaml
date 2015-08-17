@@ -399,6 +399,7 @@
                                             Style="{StaticResource ButtonTransparentStyle}" />
                                     
                                     <Image Style="{StaticResource AuthNoneIconStyle}"
+                                           Margin="-3,0,6,0"
                                            Visibility="{Binding Permissions, Converter={StaticResource NavigationViewModelPermissionVisibilityConverter}, ConverterParameter=None}"
                                            ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipNone}"
                                            AutomationProperties.AutomationId="UI_NotAutherized_AutoID" />

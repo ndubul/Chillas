@@ -13,6 +13,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Dev2.Common;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
@@ -42,7 +43,10 @@ namespace Dev2.Runtime.WebServer
             GlobalHost.Configuration.KeepAlive = TimeSpan.FromSeconds(20);
 
             GlobalHost.Configuration.DefaultMessageBufferSize = 2000;
+            GlobalHost.Configuration.MaxIncomingWebSocketMessageSize = null;
+            
             var startOptions = new StartOptions();
+            
             foreach(var endpoint in endpoints)
             {
                 startOptions.Urls.Add(endpoint.Url);
@@ -69,6 +73,7 @@ namespace Dev2.Runtime.WebServer
 
             // Add web server routing...
             var config = new HttpConfiguration();
+            
             config.MapHttpAttributeRoutes();
             config.EnsureInitialized();
             app.UseWebApi(config);
@@ -76,6 +81,8 @@ namespace Dev2.Runtime.WebServer
 
         AuthenticationSchemes AuthenticationSchemeSelectorDelegate(HttpListenerRequest httpRequest)
         {
+            EnvironmentVariables.DnsName = httpRequest.Url.DnsSafeHost;
+            EnvironmentVariables.Port = httpRequest.Url.Port;
             if (httpRequest.RawUrl.StartsWith("/public/"))
             {
                 return AuthenticationSchemes.Anonymous;

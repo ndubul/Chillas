@@ -154,12 +154,80 @@ Scenario: Clear filter
   Then I should see the path "localhost/Folder 2"
 
 #WOLF-1025
+@ignore
 Scenario: Creating Folder in remote host
    Given the explorer is visible
    When I open "Remote Connection Integration" server
    Then I should see "66" folders
    When I add "MyNewFolder" in "Remote Connection Integration"
    Then I should see the path "Remote Connection Integration/MyNewFolder" 
+
+
+Scenario: Opening and Editing workflow from Explorer
+	Given the explorer is visible
+	And I open "localhost" server
+	When I open "Hello World"
+	And "Hello World" tab is opened 
+	And I create new variable [[v]] as output
+	Then "*" is visible in the tab header
+	When I save "*" is not visible
+	And debug out as 
+	|                                            |                                                         |
+	| "Worksapce Item updated 8/12/2015 9:58:01" | Updated WorkflowService 'Hello World'8/12/2015 9:58:01" |
+	When I refresh the explorer
+	And "Hello World" is visible with no duplicate
+
+Scenario: Renaming Folder And Workflow Service on a remote server
+	Given the explorer is visible
+	And I open "Remote Connection Integration" server
+	When I rename "Remote Connection Integration/Folder 2" to "Test Rename"
+	Then I should see "1" child for "Test Rename"
+	When I open "Test Rename"
+	And I create the "Remote Connection Integration/Test Rename/New Test 1" of type "WorkflowService" 
+	Then I should see the path "Remote Connection Integration/Test Rename/New Test 1"
+	And I should see "2" children for "Test Rename"
+	And I should not see the path "Remote Connection Integration/Folder 2" in explorer
+
+Scenario: Context menu
+	Given the explorer is visible
+	And I open "localhost" server
+	Then I should see "5" folders
+	When I right click on "LocalHost" a context menu is visible
+	And "New Folder" is visible
+	And "New Service" is visible
+	And "New Database Connector" is visible
+	And "New Plugin Connector" is visible
+	And "New Web Service Connector" is visible
+	And "New Remote Warewolf Source" is visible
+	And "New Database Source" is visible
+	And "New Plugin Source" is visible
+	And "New Web Service Source" is visible
+	And "New Email Source" is visible
+	And "New Dropbox Source" is visible
+	And "Server version"
+
+Scenario: Show dependencies
+	Given the explorer is visible
+	And I open "Remote Connection Integration"
+	And I right click on "Hello World" a context menu is visible
+	And I select "Show Dependencies"
+	Then the Show Dependencies tab is opened
+	And "Hello World" is visible with all dependencies
+
+Scenario: Open saved Server Sources
+	Given the explorer is visible
+	And I open "Remote Connection Integration"
+	Then path "Remote Connection Integration/Server" is visible
+	And I open "Remote Connection Integration/Server/Trav"
+	Then the "Trav" server tab is opened
+
+Scenario: Move Nested Folder up tree-view
+	Given the explorer is visible
+	And I open "LocalHost"
+	Then path "localhost/MyFolder/NewFolder" is visible
+	And I change path "localhost/MyFolder/NewFolder" to "localhost/NewFolder"
+	Then both "localhost/MyFolder" and "localhost/NewFolder" are visible in root
+
 
 #@Explorer
 #Scenario: Opening Versions in Explorer

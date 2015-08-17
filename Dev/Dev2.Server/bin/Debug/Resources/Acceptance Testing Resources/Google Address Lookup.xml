@@ -1,5 +1,5 @@
 
-<Source ID="a00626a4-ec09-46ad-8c97-ea6c44bbc582" Version="1.0" Name="Google Address Lookup" ResourceType="WebSource" IsValid="false" ConnectionString="Address=http://maps.googleapis.com;DefaultQuery=/maps/api/geocode/json?sensor=true&amp;address=[[address]];AuthenticationType=Anonymous" Type="WebSource" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.4.2.2">
+<Source ID="a00626a4-ec09-46ad-8c97-ea6c44bbc582" Version="1.0" Name="Google Address Lookup" ResourceType="WebSource" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAcJP3pxLHx0q8X0+OqW6qAwQAAAACAAAAAAADZgAAwAAAABAAAADqBRPGnaKAhHT4kRBFBoI3AAAAAASAAACgAAAAEAAAADcy/5iIkkQwLvZXaCHBWGUQAQAAO35EfKEPZGjjfyhWPy32423CXD3NzLBQ66UUfW4ByHSQO8Ui0vJYSimPWLImoQB68FxFYqugdzkh2Urc3PWt/KKLjT0ezeQyBT35IYzV69yhQWpOhBOEi4+RQKZh8Np+ZUctESK0JHyrZi/qG5janTtBXD50YXs2CbpIfh7dQRop/TSKUH3aOGLecAKzeD7kquuA7wvrnBJiBQ9/E0GdIQY0ebVOqprIXwWGqGbAvu+qLv1cPi7xsB3tV7xYaOu/2HSrmA6TvmpBoI8NohXjSwrDTucD4di2zByffQPTP8S5B2IdX0f5JiwggFXF1HK2zMHQHANmLO6g4TISWUY5KpRkc6otrRkmuGEvldJ4q+gUAAAAzIfR/RPwbyu3lbiyO/FNfIaVPts=" Type="WebSource" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.5.5707.22745">
   <DisplayName>Google Address Lookup</DisplayName>
   <Category>Acceptance Testing Resources\Google Address Lookup</Category>
   <AuthorRoles>
@@ -16,9 +16,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>npuZDIc2TeQrhCbDP5rpNDRn3h4=</DigestValue>
+        <DigestValue>4qTpujKj+fUkxe087RX5r5vT4TI=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>codbUUQF5/GvYKef9Pvbq7N6ojngOhxa5d0H4txAiSBOTYtvDmwEl9QGhaHLij8CNljqcr6c1gssELer1D/x9SUSNEW00s1iI3YeRGCYpfcvbLsik9hMI2cN7MTtDo0hXmWrEowmSglBipggA/jIXfsSGLifMU3OW+73QZ2aVY8=</SignatureValue>
+    <SignatureValue>CEEe+bQ+n2pXt2K/vKgD4jBuIzvOcV1AQmvQ4FLraQnkvnVdTByxY0mqFAb6XLg9+pjEIBD9x4DPiW+Dz9EF4LSdwwF8tqwp+3se0vq/Y9/YPLRr3QMcBRVV02hz0jI9LtTFd6bsOXuX9zck7SPVJ4DbALzGzRQl0HrwCTE8ggQ=</SignatureValue>
   </Signature>
 </Source>

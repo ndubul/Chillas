@@ -1,7 +1,7 @@
 ﻿Feature: Replace
 	In order to search and replace
 	As a Warewolf user
-	I want a tool I can use to search and replace for words
+	I want a tool I can use to search and replace for worsd
 
 #Replace placeholders in a sentence with names
 #Replace when the in field(s) is blank

@@ -483,7 +483,7 @@
                                         <Border x:Name="RootPopupElement"
                                                 Grid.Row="1"
                                                 Height="Auto"
-                                                MinHeight="100"
+                                                MinHeight="{TemplateBinding MinDropDownHeight}"
                                                 MaxWidth="{TemplateBinding MaxDropDownWidth}"
                                                 MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                                 HorizontalAlignment="Stretch"
