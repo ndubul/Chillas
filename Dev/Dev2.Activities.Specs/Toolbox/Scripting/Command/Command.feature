@@ -69,7 +69,7 @@ Scenario: Execute cmd with negative recordset index
 
 @ignore
 #Audit
-Scenario Outline: Execute a command that requires user interaction like pause
+Scenario Outline: Execute a command that requires recordsets
 	Given I have this command script to execute '<variable>' with '<val>'
 	When the command tool is executed
 	Then the '<resultVariable>' of the command tool will be '<Result>'
