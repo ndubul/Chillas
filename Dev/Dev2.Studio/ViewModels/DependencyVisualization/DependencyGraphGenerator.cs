@@ -33,7 +33,7 @@ namespace Dev2.ViewModels.DependencyVisualization
         /// <param name="width">The width.</param>
         /// <param name="height">The height.</param>
         /// <returns></returns>
-        public Graph BuildGraph(StringBuilder xmlData, string modelName, double width, double height)
+        public Graph BuildGraph(StringBuilder xmlData, string modelName, double width, double height, int nestingLevel)
         {
 
             if(xmlData == null || xmlData.Length == 0)
@@ -81,6 +81,18 @@ namespace Dev2.ViewModels.DependencyVisualization
                 }
 
                 // Associate each node with its dependencies.
+                int graphCount = graph.Nodes.Count - 1;
+                if (nestingLevel > 0)
+                {
+                    for (int i = 0; i <= nestingLevel; i++)
+                    {
+                        if (nestingLevel < graphCount)
+                        {
+                            graph.Nodes.RemoveAt(graphCount);
+                            graphCount = graph.Nodes.Count - 1;
+                        }
+                    }
+                }
                 foreach(Node node in graph.Nodes)
                 {
                     var nodeElem = nodeElems.First(elem => elem.Attribute("id").Value == node.ID);

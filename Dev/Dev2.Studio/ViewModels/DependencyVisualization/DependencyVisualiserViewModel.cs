@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using Caliburn.Micro;
 using Dev2.AppResources.DependencyVisualization;
 using Dev2.AppResources.Repositories;
@@ -36,6 +37,15 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
     {
         readonly DependencyVisualiserView _view;
         private IContextualResourceModel _resourceModel;
+        public ResourceType ResourceType { get; set; }
+        private double _availableWidth;
+        private double _availableHeight;
+        ObservableCollection<ExplorerItemNodeViewModel> _allNodes;
+        bool _getDependsOnMe;
+        bool _getDependsOnOther;
+        string _nestingLevel;
+        ICommand _editCommand;
+        public Guid EnvironmentId { get; set; }
 
         public DependencyVisualiserViewModel(IEventAggregator eventAggregator)
             : base(eventAggregator)
@@ -49,8 +59,7 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             GetDependsOnMe = true;
             NestingLevel = "0";
         }
-
-        private double _availableWidth;
+        
         public double AvailableWidth
         {
             get
@@ -69,13 +78,6 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
                 NotifyOfPropertyChange(() => AvailableWidth);
             }
         }
-
-        public ResourceType ResourceType { get; set; }
-        private double _availableHeight;
-        ObservableCollection<ExplorerItemNodeViewModel> _allNodes;
-        bool _getDependsOnMe;
-        bool _getDependsOnOther;
-        string _nestingLevel;
 
         public double AvailableHeight
         {
@@ -141,7 +143,7 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
                 NotifyOfPropertyChange(() => GetDependsOnOther);
                 if (_getDependsOnOther)
                 {
-                    GetDependsOnMe = false;
+                    GetDependsOnMe = true;
                     NotifyOfPropertyChange(() => GetDependsOnMe);
                 }
             }
@@ -181,41 +183,26 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
                 throw new Exception(string.Format(GlobalConstants.NetworkCommunicationErrorTextFormat, "GetDependenciesXml"));
             }
 
-            var graphGenerator = new DependencyGraphGenerator();
-            var graph = graphGenerator.BuildGraph(graphData.Message, ResourceModel.ResourceName, AvailableWidth, AvailableHeight);
-
             int nestingLevel = int.Parse(NestingLevel);
-            if(nestingLevel <= graph.Nodes.Count)
-            {
-                if(nestingLevel > 0 && graph.Nodes.Count > 1 && nestingLevel <= graph.Nodes.Count)
-                {
-                    for(int n = nestingLevel - 1; n >= 0; n--)
-                    {
-                        graph.Nodes.RemoveAt(n);
-                    }
-                }
-            }
-            else
-            {
-                graph.Nodes.Clear();
-            }
+            var graphGenerator = new DependencyGraphGenerator();
+            var graph = graphGenerator.BuildGraph(graphData.Message, ResourceModel.ResourceName, AvailableWidth, AvailableHeight, nestingLevel);
 
             if (graph.Nodes.Count > 0)
             {
                 var acc = new List<ExplorerItemNodeViewModel>();
-                var x = new ObservableCollection<ExplorerItemNodeViewModel>(GetItems(new List<Node> { graph.Nodes.FirstOrDefault() }, StudioResourceRepository.Instance, null, acc, true));
+                var x = new ObservableCollection<ExplorerItemNodeViewModel>(GetItems(new List<Node> { graph.Nodes.FirstOrDefault() }, StudioResourceRepository.Instance, null, acc));
                 AllNodes = new ObservableCollection<ExplorerItemNodeViewModel>(acc);
             }
         }
 
         public string FavoritesLabel
         {
-            get { return "Show what " + ResourceModel.ResourceName + " depends on"; }
+            get { return "Show what depends on " + ResourceModel.ResourceName; }
         }
 
         public string DependantsLabel
         {
-            get { return "Show what depends on " + ResourceModel.ResourceName; }
+            get { return "Show what " + ResourceModel.ResourceName + " depends on"; }
         }
 
 
@@ -232,7 +219,7 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             }
         }
 
-        public ICollection<ExplorerItemNodeViewModel> GetItems(List<Node> nodes, IStudioResourceRepository repo, IExplorerItemNodeViewModel parent, List<ExplorerItemNodeViewModel> acc, bool isMain)
+        public ICollection<ExplorerItemNodeViewModel> GetItems(List<Node> nodes, IStudioResourceRepository repo, IExplorerItemNodeViewModel parent, List<ExplorerItemNodeViewModel> acc)
         {
             var server = CustomContainer.Get<IServer>();
             List<ExplorerItemNodeViewModel> items = new List<ExplorerItemNodeViewModel>(nodes.Count);
@@ -244,11 +231,11 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
                     ResourceName = exploreritem.DisplayName,
                     TextVisibility = true,
                     ResourceType = exploreritem.ResourceType,
-                    IsMainNode = isMain
+                    IsMainNode = exploreritem.DisplayName.Equals(ResourceModel.ResourceName)
                 };
 
                 if (node.NodeDependencies != null && node.NodeDependencies.Count > 0)
-                    item.Children = new ObservableCollection<IExplorerItemViewModel>(GetItems(node.NodeDependencies, repo, item, acc, false).Select(a => a as IExplorerItemViewModel));
+                    item.Children = new ObservableCollection<IExplorerItemViewModel>(GetItems(node.NodeDependencies, repo, item, acc).Select(a => a as IExplorerItemViewModel));
                 else
                 {
                     item.Children = new ObservableCollection<IExplorerItemViewModel>();
@@ -270,7 +257,6 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             var loadedView = view as IView;
             if (loadedView != null)
             {
-                loadedView.DataContext = this;
                 base.OnViewLoaded(loadedView);
             }
         }

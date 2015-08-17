@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <converters:SimpleEnumToBoolConverter x:Key="EnumToBoolConverter"/>
-        
+
     </UserControl.Resources>
 
     <i:Interaction.Behaviors>
@@ -76,7 +76,7 @@
             <Rectangle Fill="Gray" Opacity="0.2" Grid.Row="1" ></Rectangle>
 
 
-            <ig:XamNetworkNode x:Name="Nodes" ItemsSource="{Binding AllNodes}" Grid.Row="2">
+            <ig:XamNetworkNode x:Name="Nodes" ItemsSource="{Binding AllNodes}" Grid.Row="2" NodeMouseDoubleClick="Nodes_OnNodeMouseDoubleClick">
                 <ig:XamNetworkNode.LineEndCap>
                     <ig:LineCap>Arrow</ig:LineCap>
                 </ig:XamNetworkNode.LineEndCap>
@@ -88,14 +88,14 @@
                 </ig:XamNetworkNode.NavigationSettings>
                 <ig:XamNetworkNode.GlobalNodeLayouts>
                     <ig:NetworkNodeNodeLayout TargetTypeName="ExplorerItemNodeViewModel"
-                                          DisplayMemberPath="ResourceName"
-                                          ConnectionsMemberPath="Children"
-                                          ConnectionTargetMemberPath="Self"
-                                          ConnectionWeightMemberPath="Weight"
-                                          NodeStyle="{StaticResource SpecialNodeStyle}">
+                                              DisplayMemberPath="ResourceName"
+                                              ConnectionsMemberPath="Children"
+                                              ConnectionTargetMemberPath="Self"
+                                              ConnectionWeightMemberPath="Weight" 
+                                              NodeStyle="{StaticResource SpecialNodeStyle}">
                         <ig:NetworkNodeNodeLayout.ItemTemplate>
                             <DataTemplate>
-                                <Grid ToolTip="{Binding Path=ResourceName}" Background="Transparent">
+                                <Grid ToolTip="{Binding Path=ResourceName}" Background="Transparent" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3*"></ColumnDefinition>
                                         <ColumnDefinition Width="9*"></ColumnDefinition>
@@ -105,7 +105,8 @@
                                     </Image>
                                     <TextBlock Grid.Column="1" FontSize="{StaticResource FontSize-Large}" 
                                            Visibility="{Binding Path=TextVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" 
-                                           Text="{Binding Path=ResourceName}"></TextBlock>
+                                           Text="{Binding Path=ResourceName}">
+                                    </TextBlock>
                                 </Grid>
                             </DataTemplate>
                         </ig:NetworkNodeNodeLayout.ItemTemplate>
