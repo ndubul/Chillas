@@ -45,6 +45,8 @@ namespace Warewolf.Studio.Core
                         return dict[CustomMenuIcons.PluginService] as DrawingImage;
                     case ResourceType.WebSource:
                         return dict[CustomMenuIcons.WebSource] as DrawingImage;
+                    case ResourceType.SharepointServerSource:
+                        return Application.Current.Resources["AddSharepointBlackLogo"];
                     case ResourceType.ServerSource:
                     case ResourceType.Server:
                         return dict[CustomMenuIcons.ServerSource] as DrawingImage;

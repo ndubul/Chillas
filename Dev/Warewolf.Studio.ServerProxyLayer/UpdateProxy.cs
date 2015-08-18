@@ -4,6 +4,7 @@ using System.Data;
 using System.Text;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.ErrorHandling;
@@ -12,6 +13,7 @@ using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.WebServices;
 using Dev2.Communication;
 using Dev2.Controller;
+using Dev2.Data.ServiceModel;
 using Dev2.Studio.Core.Interfaces;
 
 namespace Warewolf.Studio.ServerProxyLayer
@@ -198,6 +200,38 @@ namespace Warewolf.Studio.ServerProxyLayer
             var comsController = CommunicationControllerFactory.CreateController("TestWebserviceSource");
             Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
             comsController.AddPayloadArgument("WebserviceSource", serialiser.SerializeToBuilder(resource));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output == null)
+                throw new WarewolfTestException("Unable to contact Server", null);
+            if (output.HasError)
+                throw new WarewolfTestException(output.Message.ToString(), null);
+        }
+
+        public void SaveSharePointServiceSource(ISharepointServerSource resource, Guid serverWorkspaceID)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("SaveSharepointServerService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            comsController.AddPayloadArgument("SharepointServer", serialiser.SerializeToBuilder(resource));
+            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
+            if (output.HasError)
+                throw new WarewolfSaveException(output.Message.ToString(), null);
+        }
+
+        public void TestConnection(ISharepointServerSource resource)
+        {
+            var con = Connection;
+            var comsController = CommunicationControllerFactory.CreateController("TestSharepointServerService");
+            Dev2JsonSerializer serialiser = new Dev2JsonSerializer();
+            var sharepointSource = new SharepointSource();
+            sharepointSource.AuthenticationType = resource.AuthenticationType;
+            sharepointSource.Password = resource.Password;
+            sharepointSource.Server = resource.Server;
+            sharepointSource.UserName = resource.UserName;
+            sharepointSource.ResourcePath = resource.Path;
+            sharepointSource.ResourceName = resource.Name;
+            sharepointSource.ResourceID = resource.Id;
+            comsController.AddPayloadArgument("SharepointServer", serialiser.SerializeToBuilder(sharepointSource));
             var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
             if (output == null)
                 throw new WarewolfTestException("Unable to contact Server", null);

@@ -16,9 +16,11 @@ namespace Dev2.Common.Interfaces
         void Save(IDatabaseService toDbSource);
         void Save(IPluginSource source);
         void Save(IEmailServiceSource emailServiceSource);
+        void Save(ISharepointServerSource sharePointServiceSource);
 
         string TestConnection(IServerSource serverSource);
         void TestConnection(IWebServiceSource serverSource);
+        void TestConnection(ISharepointServerSource sharePointServiceSource);
         string TestConnection(IEmailServiceSource emailServiceSourceSource);
         IList<string> TestDbConnection(IDbSource serverSource);
         DataTable TestDbService(IDatabaseService inputValues);

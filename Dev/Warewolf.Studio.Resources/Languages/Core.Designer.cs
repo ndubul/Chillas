@@ -1878,6 +1878,15 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server Name:.
+        /// </summary>
+        public static string ServerNameLabel {
+            get {
+                return ResourceManager.GetString("ServerNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ServerProtocolHelp&lt;/p&gt;&lt;/body&gt;.
         /// </summary>
         public static string ServerProtocolHelp {
@@ -2072,6 +2081,24 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string SettingsChangedHeader {
             get {
                 return ResourceManager.GetString("SettingsChangedHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string SharePointServiceEditHeaderLabel {
+            get {
+                return ResourceManager.GetString("SharePointServiceEditHeaderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New SharePoint Service Source.
+        /// </summary>
+        public static string SharePointServiceNewHeaderLabel {
+            get {
+                return ResourceManager.GetString("SharePointServiceNewHeaderLabel", resourceCulture);
             }
         }
         

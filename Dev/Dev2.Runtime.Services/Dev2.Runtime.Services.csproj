@@ -247,6 +247,7 @@
     <Compile Include="ESB\Management\Services\GetDependanciesOnList.cs" />
     <Compile Include="ESB\Management\Services\RenameResource.cs" />
     <Compile Include="ESB\Management\Services\SaveServerSource.cs" />
+    <Compile Include="ESB\Management\Services\SaveSharePointServiceSource.cs" />
     <Compile Include="ESB\Management\Services\SaveWebService.cs" />
     <Compile Include="ESB\Management\Services\SaveWebserviceSource.cs" />
     <Compile Include="ESB\Management\Services\SecurityEncryption.cs" />

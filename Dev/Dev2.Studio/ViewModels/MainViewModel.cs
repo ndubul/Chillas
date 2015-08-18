@@ -15,11 +15,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
 using Caliburn.Micro;
 using Dev2.AppResources.Repositories;
 using Dev2.Common;
@@ -80,7 +78,6 @@ using Dev2.Utils;
 using Dev2.ViewModels;
 using Dev2.Views.Dialogs;
 using Dev2.Views.DropBox;
-using Dev2.Views.SharepointServerSource;
 using Dev2.Webs;
 using Dev2.Webs.Callbacks;
 using Dev2.Workspaces;
@@ -740,6 +737,9 @@ namespace Dev2.Studio.ViewModels
                 case "EmailSource":
                     EditEmailSource(resourceModel);
                     break;
+                case "SharepointServerSource":
+                    EditSharePointSource(resourceModel);
+                    break;
             }
             //WebController.DisplayDialogue(resourceModel, isedit);
         }
@@ -786,6 +786,21 @@ namespace Dev2.Studio.ViewModels
                 Path = db.ResourcePath,
                 HostName = db.Address,
                 
+                UserName = db.UserName
+            };
+            EditResource(def);
+        }
+        void EditSharePointSource(IContextualResourceModel resourceModel)
+        {
+            var db = new SharepointSource(resourceModel.WorkflowXaml.ToXElement());
+            var def = new SharePointServiceSourceDefinition
+            {
+                AuthenticationType = db.AuthenticationType,
+                Server = db.Server,
+                Id = db.ResourceID,
+                Name = db.ResourceName,
+                Password = db.Password,
+                Path = db.ResourcePath,
                 UserName = db.UserName
             };
             EditResource(def);
@@ -974,6 +989,15 @@ namespace Dev2.Studio.ViewModels
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
+        public void EditResource(ISharepointServerSource selectedSource)
+        {
+            var server = CustomContainer.Get<IServer>();
+            var viewModel = new SharepointServerSourceViewModel(new SharepointServerSourceModel(server.UpdateRepository, ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource, _asyncWorker, new ExternalProcessExecutor());
+            var vm = new SourceViewModel<ISharepointServerSource>(EventPublisher, viewModel, PopupProvider, new SharepointServerSource());
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource), vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
         public void NewResource(string resourceType)
         {
             NewResource(resourceType, "");
@@ -1027,7 +1051,7 @@ namespace Dev2.Studio.ViewModels
             }
             else if (resourceType == "SharepointServerSource")
             {
-                CreateSharepointServerSourceType(ActiveEnvironment, resourceType);
+                AddNewSharePointServerSource(resourcePath);
             }
             else
             {
@@ -1100,16 +1124,18 @@ namespace Dev2.Studio.ViewModels
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
+        async void AddNewSharePointServerSource(string resourcePath)
+        {
+            var server = CustomContainer.Get<IServer>();
+            var saveViewModel = await GetSaveViewModel(server, resourcePath);
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.SharepointServerSource), new SourceViewModel<ISharepointServerSource>(EventPublisher, new SharepointServerSourceViewModel(new SharepointServerSourceModel(server.UpdateRepository, ActiveEnvironment.Name), saveViewModel, new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker, new ExternalProcessExecutor()), PopupProvider, new SharepointServerSource()));
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
         public void CreateOAuthType(IEnvironmentModel activeEnvironment, string resourceType, string resourcePath, bool shouldAuthorise = true)
         {
             var resource = ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
             SaveDropBoxSource(activeEnvironment, resourceType, resourcePath, resource, shouldAuthorise);
-        }
-        
-        void CreateSharepointServerSourceType(IEnvironmentModel activeEnvironment, string resourceType)
-        {
-            var resource = ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
-            SaveSharepointSourceSource(activeEnvironment, resource);
         }
 
         public IDropboxFactory DropboxFactory
@@ -1137,25 +1163,6 @@ namespace Dev2.Studio.ViewModels
  
             }
         }
-        
-        void SaveSharepointSourceSource(IEnvironmentModel activeEnvironment, IContextualResourceModel resource)
-        {
-            var drop = new SharepointServerSource();
-            var vm = new SharepointServerSourceViewModel(drop, activeEnvironment) { Resource = resource };
-            drop.DataContext = vm;
-            var showDialog = ShowSharepoint(drop, vm);
-            if (showDialog != null && showDialog.Value && vm.Resource.ID == Guid.Empty)
-            {
-                ShowSharepointSourceServerSaveDialog(vm.Resource, activeEnvironment, vm.ServerName, vm.UserName, vm.Password, vm.AuthenticationType);
-            }
-            else if (showDialog != null && showDialog.Value && vm.Resource.ID != Guid.Empty)
-            {
-                // ReSharper disable once MaximumChainedReferences
-                var source = new SharepointSource { Server = vm.ServerName, UserName = vm.UserName, Password = vm.Password, AuthenticationType = vm.AuthenticationType, ResourceName = vm.Resource.ResourceName, ResourcePath = vm.Resource.Category, IsNewResource = true, ResourceID = vm.Resource.ID }.ToStringBuilder();
-                ActiveEnvironment.ResourceRepository.SaveResource(ActiveEnvironment, source, GlobalConstants.ServerWorkspaceID);
- 
-            }
-        }
 
         public Action<IContextualResourceModel, IEnvironmentModel, string, string> ShowSaveDialog
         {
@@ -1163,28 +1170,18 @@ namespace Dev2.Studio.ViewModels
             set { _showSaveDialog = value; }
         }
         
-        Action<IContextualResourceModel, IEnvironmentModel, string, string,string,AuthenticationType> ShowSharepointSourceServerSaveDialog
-        {
-            get { return _showSharepointServerSourceSaveDialog ?? SaveDialogHelper.ShowNewSharepointServerSourceSaveDialog; } }
         public Func<DropBoxViewWindow, DropBoxSourceViewModel, bool?> ShowDropboxAction
         {
             private get { return _showDropAction ?? ((drop,vm) => drop.ShowDialog()); }
             set{_showDropAction = value;}
        
         }
-        Func<SharepointServerSource, SharepointServerSourceViewModel, bool?> ShowSharepoint
-        {
-            get { return _showSharepointAction ?? ((drop, vm) => drop.ShowDialog()); } }
         private void ShowEditResourceWizard(object resourceModelToEdit)
         {
             var resourceModel = resourceModelToEdit as IContextualResourceModel;
             if (resourceModel != null && resourceModel.ServerResourceType.EqualsIgnoreCase("OauthSource"))
             {
                 SaveDropBoxSource(ActiveEnvironment, "DropboxSource", resourceModel.Category, resourceModel, true);
-            }
-            else if (resourceModel != null && resourceModel.ServerResourceType.EqualsIgnoreCase("SharepointServerSource"))
-            {
-                SaveSharepointSourceSource(ActiveEnvironment, resourceModel);
             }
             else
             DisplayResourceWizard(resourceModel, true);
@@ -2093,9 +2090,6 @@ namespace Dev2.Studio.ViewModels
 
         public Func<bool> IsBusyDownloadingInstaller;
         Func<DropBoxViewWindow, DropBoxSourceViewModel, bool?> _showDropAction;
-#pragma warning disable 649
-        Func<SharepointServerSource, SharepointServerSourceViewModel, bool?> _showSharepointAction;
-#pragma warning restore 649
         Action<IContextualResourceModel, IEnvironmentModel, string, string> _showSaveDialog;
 #pragma warning disable 649
         Action<IContextualResourceModel, IEnvironmentModel, string, string,string,AuthenticationType> _showSharepointServerSourceSaveDialog;

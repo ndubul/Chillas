@@ -176,6 +176,9 @@
     <Compile Include="RequestServiceNameView.xaml.cs">
       <DependentUpon>RequestServiceNameView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SharepointServerSource.xaml.cs">
+      <DependentUpon>SharepointServerSource.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SplashPage.xaml.cs">
       <DependentUpon>SplashPage.xaml</DependentUpon>
     </Compile>
@@ -252,6 +255,10 @@
     <Page Include="MappingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SharepointServerSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="SplashPage.xaml">
       <Generator>MSBuild:Compile</Generator>

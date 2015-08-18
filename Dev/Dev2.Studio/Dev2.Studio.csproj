@@ -503,10 +503,6 @@
     <Compile Include="Views\ResourceManagement\ResourceChangedDialog.xaml.cs">
       <DependentUpon>ResourceChangedDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SharepointServerSource\SharepointServerSource.xaml.cs">
-      <DependentUpon>SharepointServerSource.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SharepointServerSource\SharepointServerSourceViewModel.cs" />
     <Compile Include="Views\UserInterfaceBuilder\DataGridQuickVariableInputView.xaml.cs">
       <DependentUpon>DataGridQuickVariableInputView.xaml</DependentUpon>
     </Compile>
@@ -820,10 +816,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ResourceManagement\ResourceChangedDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SharepointServerSource\SharepointServerSource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1319,6 +1311,7 @@
   <ItemGroup>
     <Folder Include="AppResources\Exceptions\" />
     <Folder Include="Resources\NewFolder1\" />
+    <Folder Include="Views\SharepointServerSource\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)'=='true'">
