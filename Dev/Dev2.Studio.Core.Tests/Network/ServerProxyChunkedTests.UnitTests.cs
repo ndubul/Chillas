@@ -63,7 +63,7 @@ namespace Dev2.Core.Tests.Network
             //------------Setup for test--------------------------
             var serverProxy = new TestServerProxyWithChunking();
             //------------Execute Test---------------------------
-            serverProxy.ExecuteCommand(null, Guid.NewGuid(), Guid.NewGuid());
+            serverProxy.ExecuteCommand(null, Guid.NewGuid());
             //------------Assert Results-------------------------
         }
 
@@ -141,7 +141,7 @@ namespace Dev2.Core.Tests.Network
             Dev2JsonSerializer dev = new Dev2JsonSerializer();
             var output = dev.SerializeToBuilder(item);
             PrivateObject p = new PrivateObject(serverProxy);
-            p.Invoke("OnItemAddedMessageReceived", new object[] { output.ToString() });
+            p.Invoke("OnItemAddedMessageReceived", output.ToString());
             Assert.AreEqual(ItemGuid,serverGuid);
             //------------Assert Results-------------------------
             var subscription = serverProxy.EsbProxy.Subscribe("SendDebugState");

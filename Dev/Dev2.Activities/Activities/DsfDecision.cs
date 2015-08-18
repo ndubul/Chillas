@@ -59,33 +59,31 @@ namespace Dev2.Activities
             return null;
         }
 
-        private  Dev2Decision parseDecision(IExecutionEnvironment env , Dev2Decision decision)
+        private  Dev2Decision ParseDecision(IExecutionEnvironment env , Dev2Decision decision)
         {
-            var col1 =env.EvalAsList(decision.Col1);
-            var col2 = env.EvalAsList(decision.Col2);
-            var col3 = env.EvalAsList(decision.Col3);
+            var col1 =env.EvalAsList(decision.Col1, 0);
+            var col2 = env.EvalAsList(decision.Col2, 0);
+            var col3 = env.EvalAsList(decision.Col3, 0);
             return new Dev2Decision { Cols1 = col1, Cols2 = col2, Cols3 = col3, EvaluationFn = decision.EvaluationFn };
         }
 
         #region Overrides of DsfNativeActivity<string>
 
-        public override IDev2Activity Execute(IDSFDataObject dataObject)
+        public override IDev2Activity Execute(IDSFDataObject dataObject, int update)
         {
             ErrorResultTO allErrors = new ErrorResultTO();
             try
             {
-                _debugOutputs.Clear();
-                _debugInputs.Clear();
-                if (dataObject.IsDebugMode())
-                    _debugInputs = CreateDebugInputs(dataObject.Environment);
+                InitializeDebug(dataObject);
+                    
 
                 if (dataObject.IsDebugMode())
                 {
-
-                    DispatchDebugState(dataObject, StateType.Before);
+                    _debugInputs = CreateDebugInputs(dataObject.Environment);
+                    DispatchDebugState(dataObject, StateType.Before,0);
                 }
 
-                var stack = Conditions.TheStack.Select(a => parseDecision(dataObject.Environment, a));
+                var stack = Conditions.TheStack.Select(a => ParseDecision(dataObject.Environment, a));
 
 
                 var factory = Dev2DecisionFactory.Instance();
@@ -93,11 +91,11 @@ namespace Dev2.Activities
                 {
                     if (a.EvaluationFn == enDecisionType.IsError)
                     {
-                        return new[] { dataObject.Environment.Errors.Count > 0 };
+                        return new[] { dataObject.Environment.AllErrors.Count > 0 };
                     }
                     if (a.EvaluationFn == enDecisionType.IsNotError)
                     {
-                        return new[] { dataObject.Environment.Errors.Count == 0 };
+                        return new[] { dataObject.Environment.AllErrors.Count == 0 };
                     }
                     IList<bool> ret = new List<bool>();
                     var iter = new WarewolfListIterator();
@@ -117,19 +115,15 @@ namespace Dev2.Activities
                 var resultval = And ? res.Aggregate(true, (a, b) => a && b) : res.Any(a => a);
                 if (dataObject.IsDebugMode())
                     _debugOutputs = GetDebugOutputs(resultval.ToString());
-                if (dataObject.IsDebugMode())
-                {
 
-                    DispatchDebugState(dataObject, StateType.After);
-                }
                 if (resultval)
                 {
                     if (TrueArm != null)
                     {
                         var activity = TrueArm.FirstOrDefault();
                         return activity;
+                        }
                     }
-                }
                 else
                 {
                     if (FalseArm != null)
@@ -156,20 +150,26 @@ namespace Dev2.Activities
                 }
 
 
+                }
+            if (dataObject.IsDebugMode())
+            {
+                _debugOutputs = new List<DebugItem>();
+                _debugOutputs = new List<DebugItem>();
+                DispatchDebugState(dataObject, StateType.Duration, update);
             }
             return null;
-        }
+            }
 
         #endregion
 
-        protected override void ExecuteTool(IDSFDataObject dataObject)
+        protected override void ExecuteTool(IDSFDataObject dataObject, int update)
         {
            
         }
 
         #region Overrides of DsfNativeActivity<string>
 
-        public override List<DebugItem> GetDebugInputs(IExecutionEnvironment env)
+        public override List<DebugItem> GetDebugInputs(IExecutionEnvironment env, int update)
         {
             return _debugInputs;
         }
@@ -240,7 +240,7 @@ namespace Dev2.Activities
 
         #region Overrides of DsfNativeActivity<string>
 
-        public override List<DebugItem> GetDebugOutputs(IExecutionEnvironment env)
+        public override List<DebugItem> GetDebugOutputs(IExecutionEnvironment env, int update)
         {
             return _debugOutputs;
         }
@@ -298,7 +298,7 @@ namespace Dev2.Activities
                 }
                 else
                 {
-                    var expressiomToStringValue = ExecutionEnvironment.WarewolfEvalResultToString(env.Eval(expression));// EvaluateExpressiomToStringValue(expression, decisionMode, dataList);
+                    var expressiomToStringValue = ExecutionEnvironment.WarewolfEvalResultToString(env.Eval(expression, 0));// EvaluateExpressiomToStringValue(expression, decisionMode, dataList);
                     userModel = userModel.Replace(expression, expressiomToStringValue);
                     debugResult = new DebugItemWarewolfAtomResult(expressiomToStringValue, expression, "");
                 }

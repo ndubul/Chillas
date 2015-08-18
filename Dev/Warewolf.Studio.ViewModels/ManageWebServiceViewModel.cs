@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
@@ -108,6 +107,7 @@ namespace Warewolf.Studio.ViewModels
         {
             Name = service.Name;
             HeaderText = service.Name;
+            Header = service.Name;
             Id = service.Id;
             Path = service.Path;
             SelectedSource = Sources.FirstOrDefault(a => a.Id == service.Id);
@@ -302,7 +302,7 @@ namespace Warewolf.Studio.ViewModels
 
         void UpdateRequestVariables(string name)
         {
-            var exp = WarewolfDataEvaluationCommon.ParseLanguageExpression(name);
+            var exp = WarewolfDataEvaluationCommon.ParseLanguageExpression(name, 0);
             if (Variables.Any(a => a.Name == name))
             {
                 return;

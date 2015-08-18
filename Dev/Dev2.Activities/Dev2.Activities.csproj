@@ -438,6 +438,10 @@
       <Project>{1990550D-EA6F-4DAC-9B5E-8571E86923ED}</Project>
       <Name>Dev2.Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dev2.Warewolf.Security\Warewolf.Security.csproj">
+      <Project>{CA5E9373-46FE-41B9-AB2E-BD637F48B456}</Project>
+      <Name>Warewolf.Security</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warewolf.Core\Warewolf.Core.csproj">
       <Project>{8FD23CE0-02BB-48E1-A914-BA467938CE78}</Project>
       <Name>Warewolf.Core</Name>

@@ -100,10 +100,10 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
         protected override void OnExecute(NativeActivityContext context)
         {
             var dataObject = context.GetExtension<IDSFDataObject>();
-            ExecuteTool(dataObject);
+            ExecuteTool(dataObject, 0);
         }
 
-        protected override void ExecuteTool(IDSFDataObject dataObject)
+        protected override void ExecuteTool(IDSFDataObject dataObject, int update)
         {
 
 
@@ -116,7 +116,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                 List<int> results = new List<int>();
                 if(dataObject.IsDebugMode())
                 {
-                    AddDebugInputValues(dataObject, toSearch, ref allErrors);
+                    AddDebugInputValues(dataObject, toSearch, ref allErrors, update);
                 }
 
                 bool hasEvaled = false;
@@ -131,17 +131,17 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                             throw new Exception("From and to Must be populated");
                         }
                         ValidateRequiredFields(to, out errorsTo);
-                        var right = env.EvalAsList(to.SearchCriteria);
+                        var right = env.EvalAsList(to.SearchCriteria, update);
                         IEnumerable<DataASTMutable.WarewolfAtom> from = new List<DataASTMutable.WarewolfAtom>();
                         IEnumerable<DataASTMutable.WarewolfAtom> tovalue = new List<DataASTMutable.WarewolfAtom>();
 
                         if(!String.IsNullOrEmpty(to.From))
                         {
-                            @from = env.EvalAsList(to.From);
+                            @from = env.EvalAsList(to.From, update);
                         }
                         if(!String.IsNullOrEmpty(to.To))
                         {
-                            tovalue = env.EvalAsList(to.To);
+                            tovalue = env.EvalAsList(to.To, update);
                         }
                         if(func == null)
                         {
@@ -152,7 +152,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                             func = RequireAllTrue ? CombineFuncAnd(func, to.SearchType, right, @from, tovalue) : CombineFuncOr(func, to.SearchType, right, @from, tovalue);
                         }
                     }
-                    var output = env.EnvalWhere(dataObject.Environment.ToStar(searchvar), func);
+                    var output = env.EnvalWhere(dataObject.Environment.ToStar(searchvar), func, update);
 
                     if(RequireAllFieldsToMatch && hasEvaled)
                     {
@@ -169,10 +169,10 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                     results.Add(-1);
                 }
                 var res = String.Join(",", results.Distinct());
-                env.Assign(Result, res);
+                env.Assign(Result, res, update);
                 if(dataObject.IsDebugMode())
                 {
-                    AddDebugOutputItem(new DebugEvalResult(Result, "", dataObject.Environment));
+                    AddDebugOutputItem(new DebugEvalResult(Result, "", dataObject.Environment, update));
                 }
             }
             catch(Exception exception)
@@ -188,17 +188,17 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                     DisplayAndWriteError("DsfFindRecordsMultipleCriteriaActivity", allErrors);
                     var errorString = allErrors.MakeDisplayReady();
                     dataObject.Environment.AddError(errorString);
-                    dataObject.Environment.Assign(Result, "-1");
+                    dataObject.Environment.Assign(Result, "-1", update);
                     if(dataObject.IsDebugMode())
                     {
-                        AddDebugOutputItem(new DebugEvalResult(Result, "", dataObject.Environment));
+                        AddDebugOutputItem(new DebugEvalResult(Result, "", dataObject.Environment, update));
                     }
                 }
 
                 if(dataObject.IsDebugMode())
                 {
-                    DispatchDebugState(dataObject, StateType.Before);
-                    DispatchDebugState(dataObject, StateType.After);
+                    DispatchDebugState(dataObject, StateType.Before, update);
+                    DispatchDebugState(dataObject, StateType.After, update);
                 }
             }
         }
@@ -250,7 +250,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
             return enFindMissingType.MixedActivity;
         }
 
-        void AddDebugInputValues(IDSFDataObject dataObject, IEnumerable<string> toSearch, ref ErrorResultTO errorTos)
+        void AddDebugInputValues(IDSFDataObject dataObject, IEnumerable<string> toSearch, ref ErrorResultTO errorTos, int update)
         {
             if(dataObject.IsDebugMode())
             {
@@ -265,10 +265,10 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                         {
                             searchFields = searchFields.Replace("()", "(*)");
                         }
-                        AddDebugItem(new DebugEvalResult(searchFields, "",  dataObject.Environment), debugItem);
+                        AddDebugItem(new DebugEvalResult(searchFields, "",  dataObject.Environment, update), debugItem);
                     }
                     _debugInputs.Add(debugItem);
-                    AddResultDebugInputs(ResultsCollection, dataObject.Environment);
+                    AddResultDebugInputs(ResultsCollection, dataObject.Environment, update);
                     AddDebugInputItem(new DebugItemStaticDataParams(RequireAllFieldsToMatch ? "YES" : "NO", "Require All Fields To Match"));
                     AddDebugInputItem(new DebugItemStaticDataParams(RequireAllTrue ? "YES" : "NO", "Require All Matches To Be True"));
                 }
@@ -281,7 +281,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
 
         #region Overrides of DsfNativeActivity<string>
 
-        public override List<DebugItem> GetDebugOutputs(IExecutionEnvironment env)
+        public override List<DebugItem> GetDebugOutputs(IExecutionEnvironment env, int update)
         {
             return _debugOutputs;
         }
@@ -290,7 +290,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
 
         #region Private Methods
 
-        void AddResultDebugInputs(IEnumerable<FindRecordsTO> resultsCollection,IExecutionEnvironment environment)
+        void AddResultDebugInputs(IEnumerable<FindRecordsTO> resultsCollection,IExecutionEnvironment environment, int update)
         {
             var indexCount = 1;
             foreach(var findRecordsTo in resultsCollection)
@@ -303,14 +303,14 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
 
                     if(!string.IsNullOrEmpty(findRecordsTo.SearchCriteria))
                     {
-                        AddDebugItem(new DebugEvalResult(findRecordsTo.SearchCriteria, "", environment), debugItem);
+                        AddDebugItem(new DebugEvalResult(findRecordsTo.SearchCriteria, "", environment, update), debugItem);
                     }
 
                     if(findRecordsTo.SearchType == "Is Between" || findRecordsTo.SearchType == "Not Between")
                     {
-                        AddDebugItem(new DebugEvalResult(findRecordsTo.From, "", environment), debugItem);
+                        AddDebugItem(new DebugEvalResult(findRecordsTo.From, "", environment, update), debugItem);
 
-                        AddDebugItem(new DebugEvalResult(findRecordsTo.To, " And", environment), debugItem);
+                        AddDebugItem(new DebugEvalResult(findRecordsTo.To, " And", environment, update), debugItem);
                     }
 
                     _debugInputs.Add(debugItem);
@@ -408,7 +408,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
 
         #region Get Debug Inputs/Outputs
 
-        public override List<DebugItem> GetDebugInputs(IExecutionEnvironment dataList)
+        public override List<DebugItem> GetDebugInputs(IExecutionEnvironment dataList, int update)
         {
             foreach(IDebugItem debugInput in _debugInputs)
             {

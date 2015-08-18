@@ -51,7 +51,7 @@ namespace Dev2.Controller
         /// </summary>
         /// <param name="connection">The connection.</param>
         /// <param name="workspaceId">The workspace unique identifier.</param>
-        /// <param name="dataListId">The data list unique identifier.</param>
+        /// <param name="dataListId"></param>
         /// <returns></returns>
         T ExecuteCommand<T>(IEnvironmentConnection connection, Guid workspaceId, Guid dataListId);
 
@@ -107,17 +107,6 @@ namespace Dev2.Controller
         }
 
         /// <summary>
-        /// Executes the command async.
-        /// </summary>
-        /// <param name="connection">The connection.</param>
-        /// <param name="workspaceId">The workspace unique identifier.</param>
-        /// <returns></returns>
-        public async Task<T> ExecuteCommandAsync<T>(IEnvironmentConnection connection, Guid workspaceId)
-        {
-            return await ExecuteCommandAsync<T>(connection, workspaceId,Guid.Empty);
-        }
-
-        /// <summary>
         /// Executes the command.
         /// </summary>
         /// <param name="connection">The connection.</param>
@@ -152,7 +141,7 @@ namespace Dev2.Controller
 
                 ServicePayload.ServiceName = ServiceName;
                 StringBuilder toSend = serializer.SerializeToBuilder(ServicePayload);
-                var payload = connection.ExecuteCommand(toSend, workspaceId, dataListId);
+                var payload = connection.ExecuteCommand(toSend, workspaceId);
 
                 return serializer.Deserialize<T>(payload);
             }
@@ -164,9 +153,8 @@ namespace Dev2.Controller
         /// </summary>
         /// <param name="connection">The connection.</param>
         /// <param name="workspaceId">The workspace unique identifier.</param>
-        /// <param name="dataListId">The data list unique identifier.</param>
         /// <returns></returns>
-        public async Task<T> ExecuteCommandAsync<T>(IEnvironmentConnection connection, Guid workspaceId, Guid dataListId)
+        public async Task<T> ExecuteCommandAsync<T>(IEnvironmentConnection connection, Guid workspaceId)
         {
             // build the service request payload ;)
             var serializer = new Dev2JsonSerializer();
@@ -194,7 +182,7 @@ namespace Dev2.Controller
 
                 ServicePayload.ServiceName = ServiceName;
                 StringBuilder toSend = serializer.SerializeToBuilder(ServicePayload);
-                var payload = await connection.ExecuteCommandAsync(toSend, workspaceId, dataListId);
+                var payload = await connection.ExecuteCommandAsync(toSend, workspaceId);
 
                 return serializer.Deserialize<T>(payload);
             }

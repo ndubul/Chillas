@@ -251,7 +251,6 @@
     <Compile Include="Enums\Activities.cs" />
     <Compile Include="Enums\enViewModelType.cs" />
     <Compile Include="Enums\enViewTypes.cs" />
-    <Compile Include="Internal Services\SystemServicesTest.cs" />
     <Compile Include="Activities\UtilTest.cs" />
     <Compile Include="Dev2.Studio.Core.Tests\Models\EnvironmentConnectionTests.cs" />
     <Compile Include="Dev2.Studio.Core.Tests\WebCommunicationTest.cs" />
@@ -379,10 +378,6 @@
     <ProjectReference Include="..\Dev2.Infrastructure\Dev2.Infrastructure.csproj">
       <Project>{615eae6d-040c-4364-b708-63dc8755cd4f}</Project>
       <Name>Dev2.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dev2.Network\Dev2.Network.csproj">
-      <Project>{14f1e4aa-b9a8-45dd-af2a-059eff29201b}</Project>
-      <Name>Dev2.Network</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dev2.OuputConfigFiles\Dev2.OuputConfigFiles.csproj">
       <Project>{c8270a0a-7921-43f9-8f59-cad2861cf6f6}</Project>

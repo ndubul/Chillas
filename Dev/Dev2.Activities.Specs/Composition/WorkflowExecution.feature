@@ -8,6 +8,7 @@ Background: Setup for workflow execution
 			Given Debug events are reset
 			And All environments disconnected
 			And Debug states are cleared
+
 Scenario: Simple workflow executing against the server
 	 Given I have a workflow "WorkflowWithAssign"
 	 And "WorkflowWithAssign" contains an Assign "Rec To Convert" as
@@ -1251,7 +1252,7 @@ Scenario: Simple workflow with Assign DataMerge and DataSplit(Evaluating index r
 	 | 6 | [[index(2).a]] = 3      |  	
     And the 'Merge' in WorkFlow 'WorkflowWithAssignMergeandSplit' debug inputs as
 	 | # |                                      | With  | Using | Pad | Align |
-	 | 1 | [[rec([[index(1).a]]).a]] = warewolf | Index | "8"   | ""  | Left  |
+	 | 1 | [[rec(1).a]] = warewolf | Index | "8"   | ""  | Left  |
 	 | 2 | [[a]] = 1                            | Index | "4"   | ""  | Left  |
 	 And the 'Merge' in Workflow 'WorkflowWithAssignMergeandSplit' debug outputs as
 	 |                        |
@@ -3225,49 +3226,49 @@ Scenario: Example Executing Data - Case Conversion example workflow
 	  | # | Convert                                            | To    |
 	  | 1 | [[sometext]] = gET reaDy FoR sOme Text CONVersionS | UPPER | 
 	  And the 'Case Conversion1 (1)' in Workflow 'Data - Case Conversion' debug outputs as    
-	  | # |                                                    |
-	  | 1 | [[sometext]] = GET READY FOR SOME TEXT CONVERSIONS |
-	  And the 'Case Conversion2 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
+	   | # |                                                    |
+	   | 1 | [[sometext]] = GET READY FOR SOME TEXT CONVERSIONS |
+	   And the 'Case Conversion2 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
 	  | # | Convert                                            | To    |
 	  | 1 | [[sometext]] = GET READY FOR SOME TEXT CONVERSIONS | lower | 
 	  And the 'Case Conversion2 (1)' in Workflow 'Data - Case Conversion' debug outputs as    
-	  | # |                                                    |
-	  | 1 | [[sometext]] = get ready for some text conversions |
-	  And the 'Case Conversion3 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
+	   | # |                                                    |
+	   | 1 | [[sometext]] = get ready for some text conversions |
+	   And the 'Case Conversion3 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
 	  | # | Convert                                            | To       |
 	  | 1 | [[sometext]] = get ready for some text conversions | Sentence | 
 	  And the 'Case Conversion3 (1)' in Workflow 'Data - Case Conversion' debug outputs as    
-	  | # |                                                    |
-	  | 1 | [[sometext]] = Get ready for some text conversions |
-	  And the 'Case Conversion4 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
+	   | # |                                                    |
+	   | 1 | [[sometext]] = Get ready for some text conversions |
+	     And the 'Case Conversion4 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
 	  | # | Convert                                            | To         |
 	  | 1 | [[sometext]] = Get ready for some text conversions | Title Case | 
 	  And the 'Case Conversion4 (1)' in Workflow 'Data - Case Conversion' debug outputs as    
-	  | # |                                                    |
-	  | 1 | [[sometext]] = Get Ready For Some Text Conversions |
-	  And the 'Case Conversion5 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
+	   | # |                                                    |
+	   | 1 | [[sometext]] = Get Ready For Some Text Conversions |
+	     And the 'Case Conversion5 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
 	  | # | Convert                       | To    |
 	  | 1 | [[sometext]] = 1Mixed up 5om3 | UPPER | 
 	  And the 'Case Conversion5 (1)' in Workflow 'Data - Case Conversion' debug outputs as    
-	  | # |                               |
-	  | 1 | [[sometext]] = 1MIXED UP 5OM3 |
-	  And the 'Case Conversion6 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
+	   | # |                               |
+	   | 1 | [[sometext]] = 1MIXED UP 5OM3 |
+	     And the 'Case Conversion6 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
 	  | # | Convert                       | To       |
 	  | 1 | [[sometext]] = 1MIXED UP 5OM3 | lower | 
 	  And the 'Case Conversion6 (1)' in Workflow 'Data - Case Conversion' debug outputs as    
-	  | # |                                                    |
-	  | 1 | [[sometext]] = 1mixed up 5om3 |
-	  And the 'Case Conversion7 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
+	   | # |                                                    |
+	   | 1 | [[sometext]] = 1mixed up 5om3 |
+	     And the 'Case Conversion7 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
 	  | # | Convert                       | To       |
 	  | 1 | [[sometext]] = 1mixed up 5om3 | Sentence | 
 	  And the 'Case Conversion7 (1)' in Workflow 'Data - Case Conversion' debug outputs as    
-	  | # |                               |
-	  | 1 | [[sometext]] = 1mixed up 5om3 |
-	  And the 'Case Conversion8 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
+	   | # |                               |
+	   | 1 | [[sometext]] = 1mixed up 5om3 |
+	     And the 'Case Conversion8 (1)' in WorkFlow 'Data - Case Conversion' debug inputs as
 	  | # | Convert                       | To         |
 	  | 1 | [[sometext]] = 1mixed up 5om3 | Title Case | 
 	  And the 'Case Conversion8 (1)' in Workflow 'Data - Case Conversion' debug outputs as    
-	  | # |                               |
+	   | # |                               |
 	  | 1 | [[sometext]] = 1Mixed Up 5Om3 |
 
 
@@ -3279,8 +3280,8 @@ Scenario: Example Executing Data - Data Merge example workflow
 	  When "Data - Data Merge Test" is executed
 	  Then the workflow execution has "NO" error
 	  And the 'Data - Data Merge' in Workflow 'Data - Data Merge' debug outputs as    
-	  |                                                                |
-	  | [[FileContent]] = String |
+	    |                                                                |
+	    | [[FileContent]] = String |
 	   
 Scenario: Example Executing Data - Find Index example workflow
 	  Given I have a workflow "Utility - Find Index Test"
@@ -3710,7 +3711,6 @@ Scenario: Gather System tool throws error when debug with 2 variables in one row
 	  | 1 | [[a]] = b       |
 	  And the 'System info' in WorkFlow 'WorkflowW' debug inputs as
 	  | # |              |             |
-	  | 1 | [[a]][[b]] = | Date & Time |
 	 And the 'System info' in Workflow 'WorkflowW' debug outputs as    
 	  | # |              |
 	  | 1 | [[a]][[b]] = |
@@ -3736,7 +3736,6 @@ Scenario: Gather System tool throws error when debug with invalid variableb
 	  | 1 | [[a]] = b       |
 	  And the 'System info' in WorkFlow 'WorkflowW1' debug inputs as
 	  | # |                      |             |
-	  | 1 | [[a]][[rec().a]] = | Date & Time |
 	 And the 'System info' in Workflow 'WorkflowW1' debug outputs as    
 	  | # |                      |
 	  | 1 | [[a]][[rec().a]] = |
@@ -4110,10 +4109,10 @@ Examples:
 	  | [[Result]] = Pass |
 
 Scenario: Executing Asynchrounous testing workflow error
-	  Given I have a workflow "Testing - Async Test Master Testc"
+	  Given I have a workflow "Testing - Async Test Master Teste"
 	  And "Testing - Async Test Master Teste" contains "Async Must Not Bubble Up Error" from server "localhost" with mapping as
 	  | Input to Service | From Variable | Output from Service | To Variable      |
-	  When "Testing - Async Test Master Testc" is executed
+	  When "Testing - Async Test Master Teste" is executed
 	  Then the workflow execution has "NO" error	  
 	  And the 'Async Must Not Bubble Up Error' in Workflow 'Async Must Not Bubble Up Error' debug outputs as
 	  |                      |
@@ -4149,46 +4148,6 @@ Scenario: Executing Asynchrounous testing workflow error
 #     | 4 | 9999  | Pass   |
 #     | 5 | 10000 | Pass   |
 
-Scenario: Workflow with AsyncLogging and ForEach
-     Given I have a workflow "WFWithAsyncLoggingForEach"
-     And "WFWithAsyncLoggingForEach" contains a Foreach "ForEachTest" as "NumOfExecution" executions "3000"
-	 And "ForEachTest" contains an Assign "Rec To Convert" as
-	  | variable    | value |
-	  | [[Warewolf]] | bob   |
-	 When "WFWithAsyncLoggingForEach" is executed
-	 Then the workflow execution has "NO" error
-	 And I set logging to "Debug"
-	 When "WFWithAsyncLoggingForEach" is executed "first time"
-	 Then the workflow execution has "NO" error
-	 And I set logging to "OFF"
-	 	 When "WFWithAsyncLoggingForEach" is executed "second time"
-	 Then the workflow execution has "NO" error
-	 And the delta between "first time" and "second time" is less than "1200" milliseconds
-
-
-Scenario: ForEach using * in CSV executed as a sub execution should maintain data integrity
-	  Given I have a workflow "Spec - Test For Each Shared Memory"
-	  And "Spec - Test For Each Shared Memory" contains "Test For Each Shared Memory" from server "localhost" with mapping as
-	  | Input to Service | From Variable | Output from Service | To Variable |
-	  |                  |               | Result              | [[Result]]  |
-	  When "Spec - Test For Each Shared Memory" is executed
-	  Then the workflow execution has "NO" error	  
-	  And the 'Test For Each Shared Memory' in Workflow 'Spec - Test For Each Shared Memory' debug outputs as
-	  |                      |
-	  | [[Result]] = Pass |
-
-Scenario: Sharepoint Acceptance Tests
-	  Given I have a workflow "Sharepoint Acceptance Tests Outer"
-	  And "Sharepoint Acceptance Tests Outer" contains "Sharepoint Connectors Testing" from server "localhost" with mapping as
-	| Input to Service | From Variable | Output from Service | To Variable |
-	  |                  |               | Result              | [[Result]]  |
-	  When "Sharepoint Acceptance Tests Outer" is executed
-	Then the workflow execution has "NO" error
-	  And the 'Sharepoint Connectors Testing' in Workflow 'Sharepoint Acceptance Tests Outer' debug outputs as
-	  |                      |
-	  | [[Result]] = Pass |
-
-
 Scenario: workflow without StackOverflow exception check
          Given I have a workflow "Testing - LoopTest"
          And "Testing - LoopTest" contains "LoopTest" from server "localhost" with mapping as
@@ -4202,3 +4161,15 @@ Scenario: Executing WF on a remote server
          | Input to Service | From Variable | Output from Service | To Variable      |
          When "TestRemoteTools" is executed
          Then the workflow execution has "NO" error     
+
+		 
+Scenario: ForEach with NestedStarTest and Inner WF
+	  Given I have a workflow "ForEach Output2"
+	  And "ForEach Output2" contains "TestInnerWFForEachOutputs" from server "localhost" with mapping as
+	| Input to Service | From Variable | Output from Service | To Variable |
+	  |                  |               | Result              | [[Result]]  |
+	  When "ForEach Output2" is executed
+	Then the workflow execution has "NO" error
+	And the 'TestInnerWFForEachOutputs' in Workflow 'ForEach Output2' debug outputs as
+	  |                      |
+	  | [[Result]] = Pass |

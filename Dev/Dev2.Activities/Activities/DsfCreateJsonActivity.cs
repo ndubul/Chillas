@@ -72,10 +72,10 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
         protected override void OnExecute(NativeActivityContext context)
         {
             var dataObject = context.GetExtension<IDSFDataObject>();
-            ExecuteTool(dataObject);
+            ExecuteTool(dataObject,0);
         }
 
-        protected override void ExecuteTool(IDSFDataObject dataObject)
+        protected override void ExecuteTool(IDSFDataObject dataObject, int update)
         {
 
 
@@ -118,7 +118,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                     {
                         var debugItem = new DebugItem();
                         AddDebugItem(new DebugItemStaticDataParams(string.Empty, (++j).ToString(CultureInfo.InvariantCulture)), debugItem);
-                        AddDebugItem(new DebugEvalResult(a.SourceName, string.Empty, dataObject.Environment), debugItem);
+                        AddDebugItem(new DebugEvalResult(a.SourceName, string.Empty, dataObject.Environment,update), debugItem);
                         _debugInputs.Add(debugItem);
                     }
                 }
@@ -172,11 +172,11 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                       );
                     
 
-                    dataObject.Environment.Assign(JsonString, json.ToString(Formatting.None));
+                    dataObject.Environment.Assign(JsonString, json.ToString(Formatting.None),update);
 
                     if (dataObject.IsDebugMode())
                     {
-                        AddDebugOutputItem(new DebugEvalResult(JsonString, string.Empty, dataObject.Environment));
+                        AddDebugOutputItem(new DebugEvalResult(JsonString, string.Empty, dataObject.Environment,update));
                     }
 
                     /*
@@ -211,7 +211,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                 });
 
                 allErrors.AddError(e.Message);
-                dataObject.Environment.Assign(JsonString, string.Empty);
+                dataObject.Environment.Assign(JsonString, string.Empty,update);
                 AddDebugOutputItem(new DebugItemStaticDataParams(string.Empty, JsonString, "", "="));
             }
             finally
@@ -226,8 +226,8 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                 }
                 if (dataObject.IsDebugMode())
                 {
-                    DispatchDebugState(dataObject, StateType.Before);
-                    DispatchDebugState(dataObject, StateType.After);
+                    DispatchDebugState(dataObject, StateType.Before,update);
+                    DispatchDebugState(dataObject, StateType.After,update);
                 }
             }
         }
@@ -241,12 +241,12 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
 
         #region GetDebugInputs
 
-        public override List<DebugItem> GetDebugInputs(IExecutionEnvironment dataList)
+        public override List<DebugItem> GetDebugInputs(IExecutionEnvironment dataList, int update)
         {
             return _debugInputs;
         }
 
-        public override List<DebugItem> GetDebugOutputs(IExecutionEnvironment dataList)
+        public override List<DebugItem> GetDebugOutputs(IExecutionEnvironment dataList, int update)
         {
             foreach (IDebugItem debugOutput in _debugOutputs)
             {

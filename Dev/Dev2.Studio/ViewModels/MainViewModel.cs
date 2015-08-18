@@ -134,7 +134,7 @@ namespace Dev2.Studio.ViewModels
         bool _hasActiveConnection;
         bool _canDebug = true;
         bool _menuExpanded;
-        
+
         #endregion
 
         #region Properties
@@ -156,7 +156,7 @@ namespace Dev2.Studio.ViewModels
             get { return _explorerViewModel; }
             set
             {
-                if(_explorerViewModel == value) return;
+                if (_explorerViewModel == value) return;
                 _explorerViewModel = value;
                 NotifyOfPropertyChange(() => ExplorerViewModel);
             }
@@ -167,7 +167,7 @@ namespace Dev2.Studio.ViewModels
             get { return _activeEnvironment; }
             set
             {
-                if(!Equals(value, _activeEnvironment))
+                if (!Equals(value, _activeEnvironment))
                 {
                     _activeEnvironment = value;
                     OnActiveEnvironmentChanged();
@@ -182,7 +182,7 @@ namespace Dev2.Studio.ViewModels
         {
             get
             {
-                if(ActiveItem == null || ActiveItem.WorkSurfaceViewModel == null)
+                if (ActiveItem == null || ActiveItem.WorkSurfaceViewModel == null)
                     return null;
 
                 return ResourceHelper
@@ -208,7 +208,7 @@ namespace Dev2.Studio.ViewModels
         {
             get
             {
-                if(ActiveItem == null)
+                if (ActiveItem == null)
                 {
                     return new AuthorizeCommand(AuthorizationContext.None, p => { }, param => false);
                 }
@@ -220,7 +220,7 @@ namespace Dev2.Studio.ViewModels
         {
             get
             {
-                if(ActiveItem == null)
+                if (ActiveItem == null)
                 {
                     return new AuthorizeCommand(AuthorizationContext.None, p => { }, param => false);
                 }
@@ -240,7 +240,7 @@ namespace Dev2.Studio.ViewModels
         {
             get
             {
-                if(ActiveItem == null)
+                if (ActiveItem == null)
                 {
                     return new AuthorizeCommand(AuthorizationContext.None, p => { }, param => false);
                 }
@@ -252,7 +252,7 @@ namespace Dev2.Studio.ViewModels
         {
             get
             {
-                if(ActiveItem == null)
+                if (ActiveItem == null)
                 {
                     return new AuthorizeCommand(AuthorizationContext.None, p => { }, param => false);
                 }
@@ -264,7 +264,7 @@ namespace Dev2.Studio.ViewModels
         {
             get
             {
-                if(ActiveItem == null)
+                if (ActiveItem == null)
                 {
                     return new AuthorizeCommand(AuthorizationContext.None, p => { }, param => false);
                 }
@@ -275,7 +275,7 @@ namespace Dev2.Studio.ViewModels
         {
             get
             {
-                if(ActiveItem == null)
+                if (ActiveItem == null)
                 {
                     return new AuthorizeCommand(AuthorizationContext.None, p => { }, param => false);
                 }
@@ -406,12 +406,12 @@ namespace Dev2.Studio.ViewModels
             IPopupController popupController = null, IWindowManager windowManager = null, IStudioResourceRepository studioResourceRepository = null, IConnectControlSingleton connectControlSingleton = null, IConnectControlViewModel connectControlViewModel = null)
             : base(eventPublisher)
         {
-            if(environmentRepository == null)
+            if (environmentRepository == null)
             {
                 throw new ArgumentNullException("environmentRepository");
             }
 
-            if(versionChecker == null)
+            if (versionChecker == null)
             {
                 throw new ArgumentNullException("versionChecker");
             }
@@ -427,7 +427,7 @@ namespace Dev2.Studio.ViewModels
             WindowManager = windowManager ?? new WindowManager();
  
             EnvironmentRepository = environmentRepository;
-         
+
             MenuPanelWidth = 60;
             _menuExpanded = false;
 
@@ -453,7 +453,7 @@ namespace Dev2.Studio.ViewModels
         public void Handle(ShowReverseDependencyVisualizer message)
         {
             Dev2Logger.Log.Debug(message.GetType().Name);
-            if(message.Model != null)
+            if (message.Model != null)
             {
                 AddReverseDependencyVisualizerWorkSurface(message.Model);
             }
@@ -471,9 +471,9 @@ namespace Dev2.Studio.ViewModels
             Dev2Logger.Log.Info(message.GetType().Name);
             AddWorkSurface(message.WorkSurfaceObject);
 
-            if(message.ShowDebugWindowOnLoad)
+            if (message.ShowDebugWindowOnLoad)
             {
-                if(ActiveItem != null && _canDebug)
+                if (ActiveItem != null && _canDebug)
                 {
                     ActiveItem.DebugCommand.Execute(null);
                 }
@@ -490,10 +490,10 @@ namespace Dev2.Studio.ViewModels
         {
             Dev2Logger.Log.Info(message.GetType().Name);
             var result = PopupProvider;
-            if(ShowDeleteDialogForFolder(message.FolderName, result))
+            if (ShowDeleteDialogForFolder(message.FolderName, result))
             {
                 var actionToDoOnDelete = message.ActionToDoOnDelete;
-                if(actionToDoOnDelete != null)
+                if (actionToDoOnDelete != null)
                 {
                     actionToDoOnDelete();
                 }
@@ -541,7 +541,7 @@ namespace Dev2.Studio.ViewModels
          
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DependencyVisualiser), vm);
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
-        }
+            }
 
         public void Handle(ShowEditResourceWizardMessage message)
         {
@@ -558,13 +558,13 @@ namespace Dev2.Studio.ViewModels
         public void Handle(RemoveResourceAndCloseTabMessage message)
         {
             Dev2Logger.Log.Debug(message.GetType().Name);
-            if(message.ResourceToRemove == null)
+            if (message.ResourceToRemove == null)
             {
                 return;
             }
 
             var wfscvm = FindWorkSurfaceContextViewModel(message.ResourceToRemove);
-            if(message.RemoveFromWorkspace)
+            if (message.RemoveFromWorkspace)
             {
                 DeactivateItem(wfscvm, true);
             }
@@ -583,7 +583,7 @@ namespace Dev2.Studio.ViewModels
             var key = WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources);
 
             var exist = ActivateWorkSurfaceIfPresent(key);
-            if(message.ViewModel != null)
+            if (message.ViewModel != null)
             {
                 var environmentModel = EnvironmentRepository.FindSingle(model => model.ID == message.ViewModel.EnvironmentId);
                 message.ViewModel.ResourceType = Common.Interfaces.Data.ResourceType.DeployViewer;
@@ -597,7 +597,7 @@ namespace Dev2.Studio.ViewModels
                         DeployResource = resourceModel as IContextualResourceModel;
                     }
                 }
-                if(!exist)
+                if (!exist)
                 {
                     AddAndActivateWorkSurface(WorkSurfaceContextFactory.CreateDeployViewModel(message.ViewModel));
                 }
@@ -621,7 +621,7 @@ namespace Dev2.Studio.ViewModels
 
         public void RefreshActiveEnvironment()
         {
-            if(ActiveItem != null && ActiveItem.Environment != null)
+            if (ActiveItem != null && ActiveItem.Environment != null)
             {
                 Dev2Logger.Log.Debug("Publish message of type - " + typeof(SetActiveEnvironmentMessage));
                 EventPublisher.Publish(new SetActiveEnvironmentMessage(ActiveItem.Environment));
@@ -652,11 +652,11 @@ namespace Dev2.Studio.ViewModels
         {
             object payload = null;
 
-            if(CurrentResourceModel != null && CurrentResourceModel.Environment != null)
+            if (CurrentResourceModel != null && CurrentResourceModel.Environment != null)
             {
                 payload = CurrentResourceModel.Environment;
             }
-            else if(ActiveEnvironment != null)
+            else if (ActiveEnvironment != null)
             {
                 payload = ActiveEnvironment;
             }
@@ -676,7 +676,7 @@ namespace Dev2.Studio.ViewModels
             var result = PopupProvider.Show(string.Format(StringResources.DialogBody_NotSaved, workflowVm.ResourceModel.ResourceName), StringResources.DialogTitle_NotSaved,
                                             MessageBoxButton.YesNoCancel, MessageBoxImage.Question, null);
 
-            switch(result)
+            switch (result)
             {
                 case MessageBoxResult.Yes:
                     workflowVm.ResourceModel.Commit();
@@ -688,7 +688,7 @@ namespace Dev2.Studio.ViewModels
                     var model = workflowVm.ResourceModel;
                     try
                     {
-                        if(workflowVm.EnvironmentModel.ResourceRepository.DoesResourceExistInRepo(model) && workflowVm.ResourceModel.IsNewWorkflow)
+                        if (workflowVm.EnvironmentModel.ResourceRepository.DoesResourceExistInRepo(model) && workflowVm.ResourceModel.IsNewWorkflow)
                         {
                             DeleteResources(new List<IContextualResourceModel> { model }, "", false);
                         }
@@ -697,7 +697,7 @@ namespace Dev2.Studio.ViewModels
                             model.Rollback();
                         }
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         Dev2Logger.Log.Info("Some clever chicken threw this exception : " + e.Message);
                     }
@@ -711,18 +711,18 @@ namespace Dev2.Studio.ViewModels
 
         private void DisplayResourceWizard(IContextualResourceModel resourceModel, bool isedit)
         {
-            if(resourceModel == null)
+            if (resourceModel == null)
             {
                 return;
             }
 
-            if(isedit && resourceModel.ServerResourceType == ResourceType.WorkflowService.ToString())
+            if (isedit && resourceModel.ServerResourceType == ResourceType.WorkflowService.ToString())
             {
                 PersistTabs();
             }
 
             // we need to load it so we can extract the sourceID ;)
-            if(resourceModel.WorkflowXaml == null)
+            if (resourceModel.WorkflowXaml == null)
             {
                 resourceModel.Environment.ResourceRepository.ReloadResource(resourceModel.ID, resourceModel.ResourceType, ResourceModelEqualityComparer.Current, true);
             }
@@ -879,7 +879,7 @@ namespace Dev2.Studio.ViewModels
                 var def = new WebServiceDefinition
                 {
                     Id = db.ResourceID,
-                    Name = db.ResourceName,
+                    Name = dbsvc.ResourceName,
                     Path = db.ResourcePath,
                     QueryString = dbsvc.RequestUrl,
                     Headers =  dbsvc.Headers,
@@ -990,10 +990,10 @@ namespace Dev2.Studio.ViewModels
 
         private void NewResource(string resourceType, string resourcePath)
         {
-            if(resourceType == "Workflow")
+            if (resourceType == "Workflow")
             {
                 TempSave(ActiveEnvironment, resourceType, resourcePath);
-                if(View != null)
+                if (View != null)
                 {
                     View.ClearToolboxSearch();
                 }
@@ -1111,14 +1111,14 @@ namespace Dev2.Studio.ViewModels
 
         public void CreateOAuthType(IEnvironmentModel activeEnvironment, string resourceType, string resourcePath, bool shouldAuthorise = true)
         {
-            var resource =  ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
-            SaveDropBoxSource(activeEnvironment, resourceType, resourcePath, resource,shouldAuthorise);
+            var resource = ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
+            SaveDropBoxSource(activeEnvironment, resourceType, resourcePath, resource, shouldAuthorise);
         }
-
+        
         void CreateSharepointServerSourceType(IEnvironmentModel activeEnvironment, string resourceType)
         {
-            var resource =  ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
-            SaveSharepointSourceSource(activeEnvironment,  resource);
+            var resource = ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
+            SaveSharepointSourceSource(activeEnvironment, resource);
         }
 
         public IDropboxFactory DropboxFactory
@@ -1130,10 +1130,10 @@ namespace Dev2.Studio.ViewModels
         {
             DropBoxViewWindow drop = new DropBoxViewWindow();
             DropBoxHelper helper = new DropBoxHelper(drop, activeEnvironment, resourceType, resourcePath);
-            DropBoxSourceViewModel vm = new DropBoxSourceViewModel(new NetworkHelper(), helper, DropboxFactory,shouldAuthorise) { Resource = resource };
+            DropBoxSourceViewModel vm = new DropBoxSourceViewModel(new NetworkHelper(), helper, DropboxFactory, shouldAuthorise) { Resource = resource };
             drop.DataContext = vm;
-            var showDialog = ShowDropboxAction(drop,vm);
-            if(showDialog != null && showDialog.Value && vm.HasAuthenticated && vm.Resource.ID == Guid.Empty)
+            var showDialog = ShowDropboxAction(drop, vm);
+            if (showDialog != null && showDialog.Value && vm.HasAuthenticated && vm.Resource.ID == Guid.Empty)
             {
                 ShowSaveDialog(vm.Resource, activeEnvironment, vm.Key, vm.Secret);
             }
@@ -1150,17 +1150,17 @@ namespace Dev2.Studio.ViewModels
         void SaveSharepointSourceSource(IEnvironmentModel activeEnvironment, IContextualResourceModel resource)
         {
             var drop = new SharepointServerSource();
-            var vm = new SharepointServerSourceViewModel(drop,activeEnvironment) { Resource = resource };
+            var vm = new SharepointServerSourceViewModel(drop, activeEnvironment) { Resource = resource };
             drop.DataContext = vm;
             var showDialog = ShowSharepoint(drop, vm);
-            if(showDialog != null && showDialog.Value && vm.Resource.ID == Guid.Empty)
+            if (showDialog != null && showDialog.Value && vm.Resource.ID == Guid.Empty)
             {
-                ShowSharepointSourceServerSaveDialog(vm.Resource, activeEnvironment,vm.ServerName,vm.UserName,vm.Password,vm.AuthenticationType);
+                ShowSharepointSourceServerSaveDialog(vm.Resource, activeEnvironment, vm.ServerName, vm.UserName, vm.Password, vm.AuthenticationType);
             }
             else if (showDialog != null && showDialog.Value && vm.Resource.ID != Guid.Empty)
             {
                 // ReSharper disable once MaximumChainedReferences
-                var source = new SharepointSource { Server = vm.ServerName, UserName = vm.UserName,Password = vm.Password,AuthenticationType = vm.AuthenticationType, ResourceName = vm.Resource.ResourceName, ResourcePath = vm.Resource.Category, IsNewResource = true, ResourceID = vm.Resource.ID }.ToStringBuilder();
+                var source = new SharepointSource { Server = vm.ServerName, UserName = vm.UserName, Password = vm.Password, AuthenticationType = vm.AuthenticationType, ResourceName = vm.Resource.ResourceName, ResourcePath = vm.Resource.Category, IsNewResource = true, ResourceID = vm.Resource.ID }.ToStringBuilder();
                 ActiveEnvironment.ResourceRepository.SaveResource(ActiveEnvironment, source, GlobalConstants.ServerWorkspaceID);
  
             }
@@ -1171,7 +1171,7 @@ namespace Dev2.Studio.ViewModels
             private get { return _showSaveDialog ?? SaveDialogHelper.ShowNewOAuthsourceSaveDialog; }
             set { _showSaveDialog = value; }
         }
-
+        
         Action<IContextualResourceModel, IEnvironmentModel, string, string,string,AuthenticationType> ShowSharepointSourceServerSaveDialog
         {
             get { return _showSharepointServerSourceSaveDialog ?? SaveDialogHelper.ShowNewSharepointServerSourceSaveDialog; } }
@@ -1189,11 +1189,11 @@ namespace Dev2.Studio.ViewModels
             var resourceModel = resourceModelToEdit as IContextualResourceModel;
             if (resourceModel != null && resourceModel.ServerResourceType.EqualsIgnoreCase("OauthSource"))
             {
-                SaveDropBoxSource(ActiveEnvironment, "DropboxSource", resourceModel.Category, resourceModel,true);
+                SaveDropBoxSource(ActiveEnvironment, "DropboxSource", resourceModel.Category, resourceModel, true);
             }
             else if (resourceModel != null && resourceModel.ServerResourceType.EqualsIgnoreCase("SharepointServerSource"))
             {
-                SaveSharepointSourceSource(ActiveEnvironment,resourceModel);
+                SaveSharepointSourceSource(ActiveEnvironment, resourceModel);
             }
             else
             DisplayResourceWizard(resourceModel, true);
@@ -1209,7 +1209,7 @@ namespace Dev2.Studio.ViewModels
 
             ActivateOrCreateUniqueWorkSurface<HelpViewModel>(WorkSurfaceContext.StartPage);
             WorkSurfaceContextViewModel workSurfaceContextViewModel = Items.FirstOrDefault(c => c.WorkSurfaceViewModel.DisplayName == "Start Page" && c.WorkSurfaceViewModel.GetType() == typeof(HelpViewModel));
-            if(workSurfaceContextViewModel != null)
+            if (workSurfaceContextViewModel != null)
             {
                 await ((HelpViewModel)workSurfaceContextViewModel.WorkSurfaceViewModel).LoadBrowserUri(Version.CommunityPageUri);
             }
@@ -1224,7 +1224,7 @@ namespace Dev2.Studio.ViewModels
 
         protected override void OnViewAttached(object view, object context)
         {
-            if(View == null)
+            if (View == null)
             {
                 View = view as MainView;
             }
@@ -1238,12 +1238,12 @@ namespace Dev2.Studio.ViewModels
             // Workflow that has this resource open
             // 
 
-        }
+            }
 
         public void ClearToolboxSelection()
         {
             
-            if(View != null)
+            if (View != null)
             {
                 //View.ClearToolboxSelection();
             }
@@ -1253,7 +1253,7 @@ namespace Dev2.Studio.ViewModels
 
         public bool IsActiveEnvironmentConnected()
         {
-            if(ActiveEnvironment == null)
+            if (ActiveEnvironment == null)
             {
                 return false;
             }
@@ -1264,7 +1264,7 @@ namespace Dev2.Studio.ViewModels
 
         void AddDependencyVisualizerWorkSurface(IContextualResourceModel resource)
         {
-            if(resource == null)
+            if (resource == null)
                 return;
 
             ActivateOrCreateWorkSurface<DependencyVisualiserViewModel>
@@ -1275,7 +1275,7 @@ namespace Dev2.Studio.ViewModels
 
         void AddReverseDependencyVisualizerWorkSurface(IContextualResourceModel resource)
         {
-            if(resource == null)
+            if (resource == null)
                 return;
 
             ActivateOrCreateWorkSurface<DependencyVisualiserViewModel>
@@ -1311,12 +1311,12 @@ namespace Dev2.Studio.ViewModels
 
         async void AddHelpTabWorkSurface(string uriToDisplay)
         {
-            if(!string.IsNullOrWhiteSpace(uriToDisplay))
+            if (!string.IsNullOrWhiteSpace(uriToDisplay))
                 ActivateOrCreateUniqueWorkSurface<HelpViewModel>
                     (WorkSurfaceContext.Help,
                      new[] { new Tuple<string, object>("Uri", uriToDisplay) });
             WorkSurfaceContextViewModel workSurfaceContextViewModel = Items.FirstOrDefault(c => c.WorkSurfaceViewModel.DisplayName == "Help" && c.WorkSurfaceViewModel.GetType() == typeof(HelpViewModel));
-            if(workSurfaceContextViewModel != null)
+            if (workSurfaceContextViewModel != null)
             {
                 await ((HelpViewModel)workSurfaceContextViewModel.WorkSurfaceViewModel).LoadBrowserUri(uriToDisplay);
             }
@@ -1328,7 +1328,7 @@ namespace Dev2.Studio.ViewModels
             ActivateOrCreateUniqueWorkSurface<HelpViewModel>(WorkSurfaceContext.LanguageHelp
                                                              , new[] { new Tuple<string, object>("Uri", path) });
             WorkSurfaceContextViewModel workSurfaceContextViewModel = Items.FirstOrDefault(c => c.WorkSurfaceViewModel.DisplayName == "Language Help" && c.WorkSurfaceViewModel.GetType() == typeof(HelpViewModel));
-            if(workSurfaceContextViewModel != null)
+            if (workSurfaceContextViewModel != null)
             {
                 await ((HelpViewModel)workSurfaceContextViewModel.WorkSurfaceViewModel).LoadBrowserUri(path);
             }
@@ -1340,9 +1340,9 @@ namespace Dev2.Studio.ViewModels
 
         protected override void Dispose(bool disposing)
         {
-            if(!_disposed)
+            if (!_disposed)
             {
-                if(disposing)
+                if (disposing)
                 {
                     OnDeactivate(true);
                 }
@@ -1359,11 +1359,11 @@ namespace Dev2.Studio.ViewModels
 
         protected override void ChangeActiveItem(WorkSurfaceContextViewModel newItem, bool closePrevious)
         {
-            if(_previousActive != null)
+            if (_previousActive != null)
             {
-                if(newItem != null)
+                if (newItem != null)
                 {
-                    if(newItem.DataListViewModel != null)
+                    if (newItem.DataListViewModel != null)
                     {
                         string errors;
                         newItem.DataListViewModel.ClearCollections();
@@ -1380,20 +1380,20 @@ namespace Dev2.Studio.ViewModels
 
         public override void DeactivateItem(WorkSurfaceContextViewModel item, bool close)
         {
-            if(item == null)
+            if (item == null)
             {
                 return;
             }
 
             bool success = true;
-            if(close)
+            if (close)
             {
                 success = CloseWorkSurfaceContext(item, null);
             }
 
-            if(success)
+            if (success)
             {
-                if(_previousActive != item && Items.Contains(_previousActive))
+                if (_previousActive != item && Items.Contains(_previousActive))
                 {
                     ActivateItem(_previousActive);
                 }
@@ -1412,7 +1412,7 @@ namespace Dev2.Studio.ViewModels
         // Process saving tabs and such when exiting ;)
         protected override void OnDeactivate(bool close)
         {
-            if(close)
+            if (close)
             {
                 PersistTabs();
             }
@@ -1422,12 +1422,12 @@ namespace Dev2.Studio.ViewModels
 
         protected override void OnActivationProcessed(WorkSurfaceContextViewModel item, bool success)
         {
-            if(success)
+            if (success)
             {
-                if(item != null)
+                if (item != null)
                 {
                     var wfItem = item.WorkSurfaceViewModel as IWorkflowDesignerViewModel;
-                    if(wfItem != null)
+                    if (wfItem != null)
                     {
                         AddWorkspaceItem(wfItem.ResourceModel);
                     }
@@ -1442,7 +1442,7 @@ namespace Dev2.Studio.ViewModels
                 {
                     MenuViewModel.SaveCommand = SaveCommand;
                     MenuViewModel.ExecuteServiceCommand = DebugCommand;
-                }
+            }
             }
             base.OnActivationProcessed(item, success);
         }
@@ -1485,9 +1485,9 @@ namespace Dev2.Studio.ViewModels
         {
             _previousActive = ActiveItem;
             base.ActivateItem(item);
-            if(item == null || item.ContextualResourceModel == null) return;
+            if (item == null || item.ContextualResourceModel == null) return;
 
-            if(ExplorerViewModel != null)
+            if (ExplorerViewModel != null)
             {
                 ExplorerViewModel.BringItemIntoView(item);
             }
@@ -1499,23 +1499,23 @@ namespace Dev2.Studio.ViewModels
 
         private bool ConfirmDeleteAfterDependencies(ICollection<IContextualResourceModel> models)
         {
-            if(!models.Any(model => model.Environment.ResourceRepository.HasDependencies(model)))
+            if (!models.Any(model => model.Environment.ResourceRepository.HasDependencies(model)))
             {
                 return true;
             }
 
 
-            if(models.Count > 1)
+            if (models.Count > 1)
             {
                 new DeleteFolderDialog().ShowDialog();
                 return false;
             }
-            if(models.Count == 1)
+            if (models.Count == 1)
             {
                 var model = models.FirstOrDefault();
                 var dialog = new DeleteResourceDialog(model);
                 dialog.ShowDialog();
-                if(dialog.OpenDependencyGraph)
+                if (dialog.OpenDependencyGraph)
                 {
                     AddReverseDependencyVisualizerWorkSurface(model);
                 }
@@ -1527,26 +1527,26 @@ namespace Dev2.Studio.ViewModels
         private bool ConfirmDelete(ICollection<IContextualResourceModel> models, string folderName)
         {
             bool confirmDeleteAfterDependencies = ConfirmDeleteAfterDependencies(models);
-            if(confirmDeleteAfterDependencies)
+            if (confirmDeleteAfterDependencies)
             {
                 IPopupController result = new PopupController();
-                if(models.Count > 1)
+                if (models.Count > 1)
                 {
                     var contextualResourceModel = models.FirstOrDefault();
-                    if(contextualResourceModel != null)
+                    if (contextualResourceModel != null)
                     {
                         var folderBeingDeleted = folderName;
                         return ShowDeleteDialogForFolder(folderBeingDeleted, result);
                     }
                 }
-                if(models.Count == 1)
+                if (models.Count == 1)
                 {
                     var contextualResourceModel = models.FirstOrDefault();
-                    if(contextualResourceModel != null)
+                    if (contextualResourceModel != null)
                     {
                         var deletionName = folderName;
                         var description = "";
-                        if(string.IsNullOrEmpty(deletionName))
+                        if (string.IsNullOrEmpty(deletionName))
                         {
                             deletionName = contextualResourceModel.ResourceName;
                             description = contextualResourceModel.ResourceType.GetDescription();
@@ -1579,34 +1579,34 @@ namespace Dev2.Studio.ViewModels
 
         private void DeleteResources(ICollection<IContextualResourceModel> models, string folderName, bool showConfirm = true, System.Action actionToDoOnDelete = null)
         {
-            if(models == null || (showConfirm && !ConfirmDelete(models, folderName)))
+            if (models == null || (showConfirm && !ConfirmDelete(models, folderName)))
             {
                 return;
             }
 
-            foreach(var contextualModel in models)
+            foreach (var contextualModel in models)
             {
-                if(contextualModel == null)
+                if (contextualModel == null)
                 {
                     continue;
                 }
 
                 DeleteContext(contextualModel);
 
-                if(contextualModel.Environment.ResourceRepository.DeleteResource(contextualModel).HasError)
+                if (contextualModel.Environment.ResourceRepository.DeleteResource(contextualModel).HasError)
                 {
                     return;
                 }
                 //If its deleted from loalhost, and is a server, also delete from repository
-                if(contextualModel.Environment.IsLocalHost)
+                if (contextualModel.Environment.IsLocalHost)
                 {
-                    if(contextualModel.ResourceType == ResourceType.Source)
+                    if (contextualModel.ResourceType == ResourceType.Source)
                     {
-                        if(contextualModel.ServerResourceType == "Server")
+                        if (contextualModel.ServerResourceType == "Server")
                         {
                             var environment = EnvironmentRepository.Get(contextualModel.ID);
 
-                            if(environment != null)
+                            if (environment != null)
                             {
                                 Dev2Logger.Log.Debug("Publish message of type - " + typeof(EnvironmentDeletedMessage));
                                 EventPublisher.Publish(new EnvironmentDeletedMessage(environment));
@@ -1615,7 +1615,7 @@ namespace Dev2.Studio.ViewModels
                         }
                     }
                 }
-                if(actionToDoOnDelete != null)
+                if (actionToDoOnDelete != null)
                 {
                     actionToDoOnDelete();
                 }
@@ -1648,7 +1648,7 @@ namespace Dev2.Studio.ViewModels
 
         protected virtual void AddWorkspaceItems()
         {
-            if(EnvironmentRepository == null) return;
+            if (EnvironmentRepository == null) return;
 
             HashSet<IWorkspaceItem> workspaceItemsToRemove = new HashSet<IWorkspaceItem>();
             // ReSharper disable ForCanBeConvertedToForeach
@@ -1662,38 +1662,38 @@ namespace Dev2.Studio.ViewModels
                 Dev2Logger.Log.Info(string.Format("Start Proccessing WorkspaceItem: {0}", item.ServiceName));
                 IEnvironmentModel environment = EnvironmentRepository.All().Where(env => env.IsConnected).TakeWhile(env => env.Connection != null).FirstOrDefault(env => env.ID == item.EnvironmentID);
 
-                if(environment == null || environment.ResourceRepository == null)
+                if (environment == null || environment.ResourceRepository == null)
                 {
                     Dev2Logger.Log.Info("Environment Not Found");
-                    if(environment != null && item.EnvironmentID == environment.ID)
+                    if (environment != null && item.EnvironmentID == environment.ID)
                     {
                         workspaceItemsToRemove.Add(item);
                     }
                 }
-                if(environment != null)
+                if (environment != null)
                 {
                     Dev2Logger.Log.Info(string.Format("Proccessing WorkspaceItem: {0} for Environment: {1}", item.ServiceName, environment.DisplayName));
-                    if(environment.ResourceRepository != null)
+                    if (environment.ResourceRepository != null)
                     {
                         environment.ResourceRepository.LoadResourceFromWorkspace(item.ID, item.WorkspaceID);
                         var resource = environment.ResourceRepository.All().FirstOrDefault(rm =>
                         {
                             var sameEnv = true;
-                            if(item.EnvironmentID != Guid.Empty)
+                            if (item.EnvironmentID != Guid.Empty)
                             {
                                 sameEnv = item.EnvironmentID == environment.ID;
                             }
                             return rm.ID == item.ID && sameEnv;
                         }) as IContextualResourceModel;
 
-                        if(resource == null)
+                        if (resource == null)
                         {
                             workspaceItemsToRemove.Add(item);
                         }
                         else
                         {
                             Dev2Logger.Log.Info(string.Format("Got Resource Model: {0} ", resource.DisplayName));
-                            var fetchResourceDefinition = environment.ResourceRepository.FetchResourceDefinition(environment, item.WorkspaceID, resource.ID);
+                            var fetchResourceDefinition = environment.ResourceRepository.FetchResourceDefinition(environment, item.WorkspaceID, resource.ID, false);
                             resource.WorkflowXaml = fetchResourceDefinition.Message;
                             resource.IsWorkflowSaved = item.IsWorkflowSaved;
                             resource.OnResourceSaved += model => _getWorkspaceItemRepository().UpdateWorkspaceItemIsWorkflowSaved(model);
@@ -1707,7 +1707,7 @@ namespace Dev2.Studio.ViewModels
                 }
             }
 
-            foreach(IWorkspaceItem workspaceItem in workspaceItemsToRemove)
+            foreach (IWorkspaceItem workspaceItem in workspaceItemsToRemove)
             {
                 _getWorkspaceItemRepository().WorkspaceItems.Remove(workspaceItem);
             }
@@ -1722,9 +1722,9 @@ namespace Dev2.Studio.ViewModels
             WorkSurfaceKey key = WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources);
             bool exist = ActivateWorkSurfaceIfPresent(key);
             DeployResource = input as IContextualResourceModel;
-            if(exist)
+            if (exist)
             {
-                if(input is IContextualResourceModel)
+                if (input is IContextualResourceModel)
                 {
                     Dev2Logger.Log.Info("Publish message of type - " + typeof(SelectItemInDeployMessage));
                     EventPublisher.Publish(
@@ -1744,7 +1744,7 @@ namespace Dev2.Studio.ViewModels
         private void DeleteContext(IContextualResourceModel model)
         {
             var context = FindWorkSurfaceContextViewModel(model);
-            if(context == null)
+            if (context == null)
             {
                 return;
             }
@@ -1776,7 +1776,7 @@ namespace Dev2.Studio.ViewModels
             WorkSurfaceKey key = WorkSurfaceKeyFactory.CreateKey(context, resourceModel);
             bool exists = ActivateWorkSurfaceIfPresent(key, initParms);
 
-            if(!exists)
+            if (!exists)
             {
                 CreateAndActivateWorkSurface<T>(key, initParms);
             }
@@ -1789,9 +1789,9 @@ namespace Dev2.Studio.ViewModels
             WorkSurfaceKey key = WorkSurfaceKeyFactory.CreateKey(context);
             bool exists = ActivateWorkSurfaceIfPresent(key, initParms);
 
-            if(!exists)
+            if (!exists)
             {
-                if(typeof(T) == typeof(SettingsViewModel))
+                if (typeof(T) == typeof(SettingsViewModel))
                 {
                     Tracker.TrackEvent(TrackerEventGroup.Settings, TrackerEventName.Opened);
                 }
@@ -1811,9 +1811,9 @@ namespace Dev2.Studio.ViewModels
         {
             WorkSurfaceContextViewModel currentContext = FindWorkSurfaceContextViewModel(key);
 
-            if(currentContext != null)
+            if (currentContext != null)
             {
-                if(initParms != null)
+                if (initParms != null)
                     PropertyHelper.SetValues(
                         currentContext.WorkSurfaceViewModel, initParms);
 
@@ -1827,16 +1827,16 @@ namespace Dev2.Studio.ViewModels
         {
             return FindWorkSurfaceContextViewModel(resource) != null;
         }
-        public void UpdateWorkflowLink(IContextualResourceModel resource,string newPath,string oldPath)
+        public void UpdateWorkflowLink(IContextualResourceModel resource, string newPath, string oldPath)
         {
             var x = (FindWorkSurfaceContextViewModel(resource));
-            if(x != null)
+            if (x != null)
             {
              
             
             var path = oldPath.Replace('\\', '/');
             var b = x.WorkSurfaceViewModel as WorkflowDesignerViewModel;
-            if( b!= null )
+                if (b != null)
             {
                 b.UpdateWorkflowLink(b.DisplayWorkflowLink.Replace(path, newPath.Replace('\\', '/')));   
             }
@@ -1867,7 +1867,7 @@ namespace Dev2.Studio.ViewModels
 
         private async void AddWorkSurfaceContextImpl(IContextualResourceModel resourceModel, bool isLoadingWorkspace)
         {
-            if(resourceModel == null)
+            if (resourceModel == null)
             {
                 return;
             }
@@ -1877,14 +1877,14 @@ namespace Dev2.Studio.ViewModels
 
             var workSurfaceKey = WorkSurfaceKeyFactory.CreateKey(resourceModel);
 
-            if(exists)
+            if (exists)
             {
                 return;
             }
 
             _canDebug = false;
 
-            if(!isLoadingWorkspace)
+            if (!isLoadingWorkspace)
             {
                 OpeningWorkflowsHelper.AddWorkflow(workSurfaceKey);
             }
@@ -1897,7 +1897,7 @@ namespace Dev2.Studio.ViewModels
             }
 
             // NOTE: only if from server ;)
-            if(!isLoadingWorkspace)
+            if (!isLoadingWorkspace)
             {
                 resourceModel.IsWorkflowSaved = true;
             }
@@ -1924,7 +1924,7 @@ namespace Dev2.Studio.ViewModels
 
         private void AddAndActivateWorkSurface(WorkSurfaceContextViewModel context)
         {
-            if(context != null)
+            if (context != null)
             {
                 Items.Add(context);
                 ActivateItem(context);
@@ -1939,7 +1939,7 @@ namespace Dev2.Studio.ViewModels
         public void TryRemoveContext(IContextualResourceModel model)
         {
             WorkSurfaceContextViewModel context = FindWorkSurfaceContextViewModel(model);
-            if(context != null)
+            if (context != null)
             {
                 context.DeleteRequested = true;
                 DeactivateItem(context, true);
@@ -1955,11 +1955,11 @@ namespace Dev2.Studio.ViewModels
             for(var index = 0; index < Items.Count; index++)
             {
                 var ctx = Items[index];
-                if(ctx.IsEnvironmentConnected())
+                if (ctx.IsEnvironmentConnected())
                 {
                     ctx.Save(true, isStudioShutdown);
                 }
-                if(index == Items.Count - 1)
+                if (index == Items.Count - 1)
                 {
                 }
             }
@@ -1968,29 +1968,29 @@ namespace Dev2.Studio.ViewModels
         public bool CloseWorkSurfaceContext(WorkSurfaceContextViewModel context, PaneClosingEventArgs e)
         {
             bool remove = true;
-            if(context != null)
+            if (context != null)
             {
-                if(!context.DeleteRequested)
+                if (!context.DeleteRequested)
                 {
                     var vm = context.WorkSurfaceViewModel;
-                    if(vm != null && vm.WorkSurfaceContext == WorkSurfaceContext.Workflow)
+                    if (vm != null && vm.WorkSurfaceContext == WorkSurfaceContext.Workflow)
                     {
                         var workflowVm = vm as IWorkflowDesignerViewModel;
-                        if(workflowVm != null)
+                        if (workflowVm != null)
                         {
                             IContextualResourceModel resource = workflowVm.ResourceModel;
-                            if(resource != null)
+                            if (resource != null)
                             {
                                 remove = !resource.IsAuthorized(AuthorizationContext.Contribute) || resource.IsWorkflowSaved;
 
-                                if(!remove)
+                                if (!remove)
                                 {
                                     remove = ShowRemovePopup(workflowVm);
                                 }
 
-                                if(remove)
+                                if (remove)
                                 {
-                                    if(resource.IsNewWorkflow)
+                                    if (resource.IsNewWorkflow)
                                     {
                                         NewWorkflowNames.Instance.Remove(resource.ResourceName);
                                     }
@@ -2001,12 +2001,12 @@ namespace Dev2.Studio.ViewModels
                                         _previousActive = null;
                                     Dev2Logger.Log.Info("Publish message of type - " + typeof(TabClosedMessage));
                                     EventPublisher.Publish(new TabClosedMessage(context));
-                                    if(e != null)
+                                    if (e != null)
                                     {
                                         e.Cancel = true;
                                     }
                                 }
-                                else if(e != null)
+                                else if (e != null)
                                 {
                                     e.Handled = true;
                                     e.Cancel = false;
@@ -2014,25 +2014,25 @@ namespace Dev2.Studio.ViewModels
                             }
                         }
                     }
-                    else if(vm != null && vm.WorkSurfaceContext == WorkSurfaceContext.Settings)
+                    else if (vm != null && vm.WorkSurfaceContext == WorkSurfaceContext.Settings)
                     {
                         var settingsViewModel = vm as SettingsViewModel;
-                        if(settingsViewModel != null)
+                        if (settingsViewModel != null)
                         {
                             remove = settingsViewModel.DoDeactivate();
-                            if(remove)
+                            if (remove)
                             {
                                 settingsViewModel.Dispose();
                             }
                         }
                     }
-                    else if(vm != null && vm.WorkSurfaceContext == WorkSurfaceContext.Scheduler)
+                    else if (vm != null && vm.WorkSurfaceContext == WorkSurfaceContext.Scheduler)
                     {
                         var schedulerViewModel = vm as SchedulerViewModel;
-                        if(schedulerViewModel != null)
+                        if (schedulerViewModel != null)
                         {
                             remove = schedulerViewModel.DoDeactivate();
-                            if(remove)
+                            if (remove)
                             {
                                 schedulerViewModel.Dispose();
                             }
@@ -2047,32 +2047,32 @@ namespace Dev2.Studio.ViewModels
         public bool OnStudioClosing()
         {
             List<WorkSurfaceContextViewModel> workSurfaceContextViewModels = Items.ToList();
-            foreach(WorkSurfaceContextViewModel workSurfaceContextViewModel in workSurfaceContextViewModels)
+            foreach (WorkSurfaceContextViewModel workSurfaceContextViewModel in workSurfaceContextViewModels)
             {
                 var vm = workSurfaceContextViewModel.WorkSurfaceViewModel;
-                if(vm != null)
+                if (vm != null)
                 {
-                    if(vm.WorkSurfaceContext == WorkSurfaceContext.Settings)
+                    if (vm.WorkSurfaceContext == WorkSurfaceContext.Settings)
                     {
                         var settingsViewModel = vm as SettingsViewModel;
-                        if(settingsViewModel != null && settingsViewModel.IsDirty)
+                        if (settingsViewModel != null && settingsViewModel.IsDirty)
                         {
                             ActivateItem(workSurfaceContextViewModel);
                             bool remove = settingsViewModel.DoDeactivate();
-                            if(!remove)
+                            if (!remove)
                             {
                                 return false;
                             }
                         }
                     }
-                    else if(vm.WorkSurfaceContext == WorkSurfaceContext.Scheduler)
+                    else if (vm.WorkSurfaceContext == WorkSurfaceContext.Scheduler)
                     {
                         var schedulerViewModel = vm as SchedulerViewModel;
-                        if(schedulerViewModel != null && schedulerViewModel.SelectedTask != null && schedulerViewModel.SelectedTask.IsDirty)
+                        if (schedulerViewModel != null && schedulerViewModel.SelectedTask != null && schedulerViewModel.SelectedTask.IsDirty)
                         {
                             ActivateItem(workSurfaceContextViewModel);
                             bool remove = schedulerViewModel.DoDeactivate();
-                            if(!remove)
+                            if (!remove)
                             {
                                 return false;
                             }
@@ -2087,7 +2087,7 @@ namespace Dev2.Studio.ViewModels
         private void CloseRemoteConnections()
         {
             var connected = EnvironmentRepository.All().Where(a => a.IsConnected);
-            foreach(var environmentModel in connected)
+            foreach (var environmentModel in connected)
             {
                 environmentModel.Disconnect();
             }
