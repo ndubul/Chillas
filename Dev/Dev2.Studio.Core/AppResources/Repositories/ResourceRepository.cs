@@ -1044,15 +1044,10 @@ namespace Dev2.Studio.Core.AppResources.Repositories
 
             var msg = GetDependenciesXml(resourceModel, true);
             var xml = XElement.Parse(msg.Message.ToString());
-            var nodes = from node in xml.DescendantsAndSelf("node") // this is case-sensitive!
-                        select node.Attribute("id")
-                            into idAttr
-                            where idAttr != null
-                            select idAttr.Value;
 
-            var resources = from r in resourceModel.Environment.ResourceRepository.All()
-                            join n in nodes on r.ResourceName equals n
-                            select r;
+            var nodes = xml.DescendantsAndSelf("node").Select(node => node.Attribute("id")).Where(idAttr => idAttr != null).Select(idAttr => idAttr.Value);
+
+            var resources = resourceModel.Environment.ResourceRepository.All().Join(nodes, r => r.ID.ToString(), n => n, (r, n) => r);
 
             var returnList = resources.ToList().Distinct().ToList();
             return returnList;

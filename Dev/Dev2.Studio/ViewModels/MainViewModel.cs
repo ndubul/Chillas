@@ -520,28 +520,19 @@ namespace Dev2.Studio.ViewModels
         {
             Dev2Logger.Log.Info(message.GetType().Name);
             var model = message.ResourceModel;
-            //if(model == null)
-            //{
-            //    return;
-            //}
+            var dependsOnMe = message.ShowDependentOnMe;
+            ShowDependencies(dependsOnMe, model);
+        }
 
-            //if(message.ShowDependentOnMe)
-            //{
-            //    AddReverseDependencyVisualizerWorkSurface(model);
-            //}
-            //else
-            //{
-            //    AddDependencyVisualizerWorkSurface(model);
-            //}
-
-            var server = CustomContainer.Get<IServer>();
-            var vm = new DependencyVisualiserViewModel(new DependencyVisualiserView());
-            vm.ResourceType  = Common.Interfaces.Data.ResourceType.DependencyViewer;
+        void ShowDependencies(bool dependsOnMe, IContextualResourceModel model)
+        {
+            var vm = new DependencyVisualiserViewModel(new DependencyVisualiserView(), dependsOnMe);
+            vm.ResourceType = Common.Interfaces.Data.ResourceType.DependencyViewer;
             vm.ResourceModel = model;
-         
+
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DependencyVisualiser), vm);
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
-            }
+        }
 
         public void Handle(ShowEditResourceWizardMessage message)
         {
@@ -761,7 +752,7 @@ namespace Dev2.Studio.ViewModels
                 AuthenticationType = db.AuthenticationType,
                 DbName = db.DatabaseName,
                 Id = db.ResourceID,
-                Name = db.DatabaseName,
+                Name = db.ResourceName,
                 Password = db.Password,
                 Path = db.ResourcePath,
                 ServerName = db.Server,
@@ -813,7 +804,7 @@ namespace Dev2.Studio.ViewModels
                     AuthenticationType = db.AuthenticationType,
                     DbName = db.DatabaseName,
                     Id = db.ResourceID,
-                    Name = db.DatabaseName,
+                    Name = db.ResourceName,
                     Password = db.Password,
                     Path = db.ResourcePath,
                     ServerName = db.Server,
@@ -1517,7 +1508,7 @@ namespace Dev2.Studio.ViewModels
                 dialog.ShowDialog();
                 if (dialog.OpenDependencyGraph)
                 {
-                    AddReverseDependencyVisualizerWorkSurface(model);
+                    ShowDependencies(false,model);
                 }
                 return false;
             }

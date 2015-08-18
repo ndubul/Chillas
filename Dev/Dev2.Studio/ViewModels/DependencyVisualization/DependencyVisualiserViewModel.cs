@@ -50,11 +50,12 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
         {
         }
 
-        public DependencyVisualiserViewModel(DependencyVisualiserView view)
+        public DependencyVisualiserViewModel(DependencyVisualiserView view, bool getDependsOnMe=false)
             : base(EventPublishers.Aggregator)
         {
             _view = view;
-            GetDependsOnMe = true;
+            GetDependsOnMe = getDependsOnMe;
+            GetDependsOnOther = !GetDependsOnMe;
             NestingLevel = "0";
         }
         
@@ -141,7 +142,6 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
                 NotifyOfPropertyChange(() => GetDependsOnOther);
                 if (_getDependsOnOther)
                 {
-                    GetDependsOnMe = true;
                     NotifyOfPropertyChange(() => GetDependsOnMe);
                 }
             }
