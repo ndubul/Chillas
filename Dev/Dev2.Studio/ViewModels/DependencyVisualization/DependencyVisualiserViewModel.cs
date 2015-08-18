@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 using Caliburn.Micro;
 using Dev2.AppResources.DependencyVisualization;
 using Dev2.AppResources.Repositories;
@@ -44,8 +43,6 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
         bool _getDependsOnMe;
         bool _getDependsOnOther;
         string _nestingLevel;
-        ICommand _editCommand;
-        Guid _lastCheckedResourceID;
         public Guid EnvironmentId { get; set; }
 
         public DependencyVisualiserViewModel(IEventAggregator eventAggregator)
@@ -60,7 +57,7 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             GetDependsOnMe = true;
             NestingLevel = "0";
         }
-
+        
         public double AvailableWidth
         {
             get
@@ -229,27 +226,27 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             {
                 if (!seenResource.Contains(Guid.Parse(node.ID)))
                 {
-                    var exploreritem = repo.FindItemById(Guid.Parse(node.ID));
-                    ExplorerItemNodeViewModel item = new ExplorerItemNodeViewModel(server, parent)
-                    {
-                        ResourceName = exploreritem.DisplayName,
-                        TextVisibility = true,
-                        ResourceType = exploreritem.ResourceType,
-                        IsMainNode = exploreritem.DisplayName.Equals(ResourceModel.ResourceName)
-                    };
-                    if (node.NodeDependencies != null && node.NodeDependencies.Count > 0)
+                var exploreritem = repo.FindItemById(Guid.Parse(node.ID));
+                ExplorerItemNodeViewModel item = new ExplorerItemNodeViewModel(server, parent)
+                {
+                    ResourceName = exploreritem.DisplayName,
+                    TextVisibility = true,
+                    ResourceType = exploreritem.ResourceType,
+                    IsMainNode = exploreritem.DisplayName.Equals(ResourceModel.ResourceName)
+                };
+                if (node.NodeDependencies != null && node.NodeDependencies.Count > 0)
                     {
                         seenResource.Add(Guid.Parse(node.ID));
                         item.Children = new ObservableCollection<IExplorerItemViewModel>(GetItems(node.NodeDependencies, repo, item, acc, seenResource).Select(a => a as IExplorerItemViewModel));
                     }
-                    else
-                    {
+                else
+                {
                         seenResource.Add(Guid.Parse(node.ID));
-                        item.Children = new ObservableCollection<IExplorerItemViewModel>();
-                    }
-                    items.Add(item);
-                    acc.Add(item);
+                    item.Children = new ObservableCollection<IExplorerItemViewModel>();
                 }
+                items.Add(item);
+                acc.Add(item);
+            }
             }
             return items;
         }

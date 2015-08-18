@@ -107,6 +107,7 @@ namespace Warewolf.Studio.ViewModels
         {
             Name = service.Name;
             HeaderText = service.Name;
+            Header = service.Name;
             Id = service.Id;
             Path = service.Path;
             SelectedSource = Sources.FirstOrDefault(a => a.Id == service.Id);
