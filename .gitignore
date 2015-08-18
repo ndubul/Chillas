@@ -183,6 +183,10 @@
 /Dev/Dev2.SignalR.Wrappers.Old/obj
 /Dev/Dev2.Sql.Tests/bin
 /Dev/Dev2.Sql.Tests/obj
+/Dev/Dev2.Warewolf.Security/bin
+/Dev/Dev2.Warewolf.Security/obj
+/Dev/Dev2.Warewolf.Security.Tests/bin
+/Dev/Dev2.Warewolf.Security.Tests/obj
 /Dev/ConsoleApplicationToTestNetwork/bin
 /Dev/ConsoleApplicationToTestNetwork/obj
 /Dev/Dev2.SignalR.Wrappers/bin
@@ -309,6 +313,8 @@
 /Dev/Warewolf.AcceptanceTesting.DatabaseSource/obj
 /Dev/Warewolf.AcceptanceTesting.DesignSurface/bin
 /Dev/Warewolf.AcceptanceTesting.DesignSurface/obj
+/Dev/Warewolf.AcceptanceTesting.DropboxSource/bin
+/Dev/Warewolf.AcceptanceTesting.DropboxSource/obj
 /Dev/Warewolf.AcceptanceTesting.EmailDialog/bin
 /Dev/Warewolf.AcceptanceTesting.EmailDialog/obj
 /Dev/Warewolf.AcceptanceTesting.EmailSource/bin
@@ -393,5 +399,3 @@
 /Dev/Dev2.Server/bin/Debug/Resources/Examples/Utility - Web Request.xml
 /Dev/Dev2.Server/bin/Debug/Resources/Examples/Utility - XPath.xml
 /Dev/Dev2.Server/bin/Debug/Resources/Hello World.xml
-/Dev/Warewolf.AcceptanceTesting.DropboxSource/obj/Debug
-/Dev/Warewolf.AcceptanceTesting.DropboxSource/bin/Debug

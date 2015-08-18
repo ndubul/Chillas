@@ -216,3 +216,26 @@ Scenario: Use XPath to with a comment in it
 	| 1 | [[rec(1).id]] = 1        |
 	|   | [[rec(2).id]] = 2        |
 	|   | [[rec(3).id]] = 3        |	
+
+
+@ignore
+#Audit
+Scenario Outline: Use XPath to get data off XML using recordsets
+	Given I have this xml '<Xmlvalue>'
+	And The result variable is '<Xml>' 
+	And I have a variable '<First>' output with xpath '<path>'
+	When the xpath tool is executed
+	Then the variable '<First>' should have a value '<value>'
+	And the execution has "NO" error
+	And the debug inputs as  
+	| XML   | value | Variable | path   |
+	| <Xml> | 1     | <First>  | <path> |
+	And the debug output as 
+	| # |                    |
+	| 1 | [[firstNum]] = One |  
+Examples: 
+| Xml                            | Xmlvalue                                                                                         | First        | path                          | value |
+| [[rec().a]]                    | <root><number id="1">One</number><number id="2">Two</number><number id="3">Three</number></root> | [[firstNum]] | //root/number[@id='1']/text() | One   |
+| [[rec(1).a]]                   | <root><number id="1">One</number><number id="2">Two</number><number id="3">Three</number></root> | [[firstNum]] | //root/number[@id='1']/text() | One   |
+| [[rec(*).a]]                   | <root><number id="1">One</number><number id="2">Two</number><number id="3">Three</number></root> | [[firstNum]] | //root/number[@id='1']/text() | One   |
+#| [[rec([[int]]).a]], [[int]] =1 | <root><number id="1">One</number><number id="2">Two</number><number id="3">Three</number></root> | [[firstNum]] | //root/number[@id='1']/text() | One   |Parse Error
