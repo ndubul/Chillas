@@ -347,7 +347,7 @@ Scenario: Split text using Char and Escape character
 	And assign to variable "[[var]]" split type "Chars" at "," and Include "Unselected" and Escape '\'
 	When the data split tool is executed
 	Then the split recordset "[[var]]" will be
-	| rs         | value   |
+	| rs      | value   |
 	| [[var]] | 123\,45 |
 
 	And the execution has "NO" error
@@ -575,3 +575,21 @@ Examples:
 	 | 86 | [[rec()*.a]]                              |	 
 	 | 89 | [[rec(-1).a                               |
 	 | 90 | [[r(q).a]][[r()..]][[r"]][[r()]][[]][[1]] |
+
+
+@ignore
+#Audit
+Scenario Outline: Split data using scalars and recordsets
+	Given A string to split with value '<String>'	
+	And assign to variable '<Variable>' split type '<Type>' at '<Using>' and Include 'Selected' and Escape ''
+	When the data split tool is executed
+	Then the execution has '<ErrorOccured>' error
+	And the debug inputs as  
+	| String to Split | Process Direction | Skip blank rows | # |               | With  | Using | Include | Escape |
+	| Warewolf        | Forward           | No              | 1 | <Variable>  = | Index | 5     | Yes     |        |
+	And the debug output as
+	| # |          |
+Examples: 
+	 | No | String   | Variable | using | Escape  | ErrorOccured |
+	 | 1  | Warewold | ""       | 1     |         | No           |
+	 | 2  | Warewold | ""       | 1     | [[var]] | No           |

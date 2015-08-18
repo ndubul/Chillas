@@ -1510,95 +1510,115 @@ this.ScenarioSetup(scenarioInfo);
             this.MergeAVariableThatDoesNotExist("5", "Tab", ((string[])(null)));
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Merge a recordset table and free text using Tab 2")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataMerge")]
-        public virtual void MergeARecordsetTableAndFreeTextUsingTab2()
+        public virtual void MergingDataUsingRecordsets(string input, string inputValue, string input2, string inputValue2, string type, string @using, string usingvalue, string padding, string paddingvalue, string align, string result, string resultValue, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Merge a recordset table and free text using Tab 2", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Merging data using recordsets", exampleTags);
 #line 383
 this.ScenarioSetup(scenarioInfo);
-#line hidden
-            TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
-                        "rs",
-                        "val"});
-            table47.AddRow(new string[] {
-                        "rs().r",
-                        "10"});
-            table47.AddRow(new string[] {
-                        "rs().r",
-                        "20"});
-            table47.AddRow(new string[] {
-                        "rs().r",
-                        "30"});
 #line 384
- testRunner.Given("a merge recordset", ((string)(null)), table47, "Given ");
+ testRunner.Given(string.Format("a merge variable \'{0}\' equals \'<Inputvalue>\'", input), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 385
+ testRunner.And(string.Format("a merge variable \'{0}\' equals \'<Inputvalue2>\'", input2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 386
+ testRunner.And(string.Format("merge type \'{0}\'", type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 387
+ testRunner.And(string.Format("using \'{0}\' equals \'<UsingValue>\'", @using), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 388
+ testRunner.And(string.Format("padding \'{0}\' equals \'{1}\'", padding, paddingvalue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 389
- testRunner.And("an Input \"[[var]]\" and merge type \"Tab\" and string at as \"[[rs(1).r]]\" and Paddin" +
-                    "g \"[[rs(2).r]]\" and Alignment \"Left\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("Align \'{0}\'", align), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 390
- testRunner.And("an Input \"<-\" and merge type \"None\" and string at as \"[[rs(1).r]]\" and Padding \"[" +
-                    "[rs(3).r]]\" and Alignment \"Left\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 391
  testRunner.When("the data merge tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 391
+ testRunner.Then(string.Format("the merged result is \'{0}\' equals \'<Resultvalue>\'", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 392
- testRunner.Then("the merged result is \"1tab->\t<-2tab->\t<-3tab->\t<-\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 393
- testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
-                        "#",
-                        "",
-                        "With",
-                        "Using",
-                        "Pad",
-                        "Align"});
-            table48.AddRow(new string[] {
-                        "1",
-                        "[[rs(1).row]] = 10",
-                        "",
-                        "[[rs().r]] =",
-                        "[[rs().r]]",
-                        ""});
-            table48.AddRow(new string[] {
-                        "",
-                        "[[rs(2).row]] = 20",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table48.AddRow(new string[] {
-                        "",
-                        "[[rs(3).row]] = 30",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table48.AddRow(new string[] {
-                        "",
-                        "",
-                        "Tab",
-                        "\"\"",
-                        "\"\"",
-                        "Left"});
-            table48.AddRow(new string[] {
-                        "2",
-                        "<-",
-                        "None",
-                        "\"\"",
-                        "\"\"",
-                        "Left"});
-#line 394
- testRunner.And("the debug inputs as", ((string)(null)), table48, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
-                        ""});
-            table49.AddRow(new string[] {
-                        "[[result]] = 1tab->\t<-2tab->\t<-3tab->\t<-"});
-#line 401
- testRunner.And("the debug output as", ((string)(null)), table49, "And ");
+ testRunner.And("the execution has \"No\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Merging data using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataMerge")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InputValue", "This")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input2", "[[rs().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InputValue2", "is a Test")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Index")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Using", "[[rec(*).count]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Usingvalue", "4,4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Padding", "[[rj().padding]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Paddingvalue", "10")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Align", "Left")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rj().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ResultValue", "This10Test")]
+        public virtual void MergingDataUsingRecordsets_Variant0()
+        {
+            this.MergingDataUsingRecordsets("[[rec().a]]", "This", "[[rs().a]]", "is a Test", "Index", "[[rec(*).count]]", "4,4", "[[rj().padding]]", "10", "Left", "[[rj().a]]", "This10Test", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Merging data using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataMerge")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "[[rec(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InputValue", "This,Is,A")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input2", "[[rs(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InputValue2", "workflow")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Index")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Using", "[[rec(1).count]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Usingvalue", "4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Padding", "[[rj(1).padding]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Paddingvalue", "5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Align", "Left")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rj(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ResultValue", "ThisIsAWorkflow")]
+        public virtual void MergingDataUsingRecordsets_Variant1()
+        {
+            this.MergingDataUsingRecordsets("[[rec(*).a]]", "This,Is,A", "[[rs(1).a]]", "workflow", "Index", "[[rec(1).count]]", "4", "[[rj(1).padding]]", "5", "Left", "[[rj(1).a]]", "ThisIsAWorkflow", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Merging data using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataMerge")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InputValue", "This")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input2", "[[rs(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InputValue2", "workflow")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Index")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Using", "[[rec().count]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Usingvalue", "4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Padding", "[[rj(*).padding]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Paddingvalue", "5,10")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Align", "Left")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rj([[int]]).a]],[[int]] =1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ResultValue", "ThisWorkflowThisWorkflow")]
+        public virtual void MergingDataUsingRecordsets_Variant2()
+        {
+            this.MergingDataUsingRecordsets("[[rec().a]]", "This", "[[rs(1).a]]", "workflow", "Index", "[[rec().count]]", "4", "[[rj(*).padding]]", "5,10", "Left", "[[rj([[int]]).a]],[[int]] =1", "ThisWorkflowThisWorkflow", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Merging data using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataMerge")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InputValue", "This")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input2", "[[rs(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:InputValue2", "workflow")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Index")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Using", "[[rec([[int]]).count]],[[int]]=1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Usingvalue", "4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Padding", "[[rj([[int]]).padding]],[[int]]=1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Paddingvalue", "5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Align", "Left")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rj(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ResultValue", "ThisWorkflow")]
+        public virtual void MergingDataUsingRecordsets_Variant3()
+        {
+            this.MergingDataUsingRecordsets("[[rec().a]]", "This", "[[rs(1).a]]", "workflow", "Index", "[[rec([[int]]).count]],[[int]]=1", "4", "[[rj([[int]]).padding]],[[int]]=1", "5", "Left", "[[rj(*).a]]", "ThisWorkflow", ((string[])(null)));
         }
     }
 }
