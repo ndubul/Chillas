@@ -45,6 +45,7 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
         bool _getDependsOnOther;
         string _nestingLevel;
         ICommand _editCommand;
+        Guid _lastCheckedResourceID;
         public Guid EnvironmentId { get; set; }
 
         public DependencyVisualiserViewModel(IEventAggregator eventAggregator)
@@ -59,7 +60,7 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             GetDependsOnMe = true;
             NestingLevel = "0";
         }
-        
+
         public double AvailableWidth
         {
             get
@@ -189,8 +190,9 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
 
             if (graph.Nodes.Count > 0)
             {
+                List<Guid> seenResource = new List<Guid>();
                 var acc = new List<ExplorerItemNodeViewModel>();
-                var x = new ObservableCollection<ExplorerItemNodeViewModel>(GetItems(new List<Node> { graph.Nodes.FirstOrDefault() }, StudioResourceRepository.Instance, null, acc));
+                GetItems(new List<Node> { graph.Nodes.FirstOrDefault() }, StudioResourceRepository.Instance, null, acc, seenResource);
                 AllNodes = new ObservableCollection<ExplorerItemNodeViewModel>(acc);
             }
         }
@@ -219,29 +221,35 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             }
         }
 
-        public ICollection<ExplorerItemNodeViewModel> GetItems(List<Node> nodes, IStudioResourceRepository repo, IExplorerItemNodeViewModel parent, List<ExplorerItemNodeViewModel> acc)
+        public ICollection<ExplorerItemNodeViewModel> GetItems(List<Node> nodes, IStudioResourceRepository repo, IExplorerItemNodeViewModel parent, List<ExplorerItemNodeViewModel> acc, List<Guid> seenResource)
         {
             var server = CustomContainer.Get<IServer>();
             List<ExplorerItemNodeViewModel> items = new List<ExplorerItemNodeViewModel>(nodes.Count);
             foreach (var node in nodes)
             {
-                var exploreritem = repo.FindItemById(Guid.Parse(node.ID));
-                ExplorerItemNodeViewModel item = new ExplorerItemNodeViewModel(server, parent)
+                if (!seenResource.Contains(Guid.Parse(node.ID)))
                 {
-                    ResourceName = exploreritem.DisplayName,
-                    TextVisibility = true,
-                    ResourceType = exploreritem.ResourceType,
-                    IsMainNode = exploreritem.DisplayName.Equals(ResourceModel.ResourceName)
-                };
-
-                if (node.NodeDependencies != null && node.NodeDependencies.Count > 0)
-                    item.Children = new ObservableCollection<IExplorerItemViewModel>(GetItems(node.NodeDependencies, repo, item, acc).Select(a => a as IExplorerItemViewModel));
-                else
-                {
-                    item.Children = new ObservableCollection<IExplorerItemViewModel>();
+                    var exploreritem = repo.FindItemById(Guid.Parse(node.ID));
+                    ExplorerItemNodeViewModel item = new ExplorerItemNodeViewModel(server, parent)
+                    {
+                        ResourceName = exploreritem.DisplayName,
+                        TextVisibility = true,
+                        ResourceType = exploreritem.ResourceType,
+                        IsMainNode = exploreritem.DisplayName.Equals(ResourceModel.ResourceName)
+                    };
+                    if (node.NodeDependencies != null && node.NodeDependencies.Count > 0)
+                    {
+                        seenResource.Add(Guid.Parse(node.ID));
+                        item.Children = new ObservableCollection<IExplorerItemViewModel>(GetItems(node.NodeDependencies, repo, item, acc, seenResource).Select(a => a as IExplorerItemViewModel));
+                    }
+                    else
+                    {
+                        seenResource.Add(Guid.Parse(node.ID));
+                        item.Children = new ObservableCollection<IExplorerItemViewModel>();
+                    }
+                    items.Add(item);
+                    acc.Add(item);
                 }
-                items.Add(item);
-                acc.Add(item);
             }
             return items;
         }
