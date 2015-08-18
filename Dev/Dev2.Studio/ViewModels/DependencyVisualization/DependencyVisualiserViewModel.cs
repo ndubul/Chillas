@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 using Caliburn.Micro;
 using Dev2.AppResources.DependencyVisualization;
 using Dev2.AppResources.Repositories;
@@ -44,7 +43,6 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
         bool _getDependsOnMe;
         bool _getDependsOnOther;
         string _nestingLevel;
-        ICommand _editCommand;
         public Guid EnvironmentId { get; set; }
 
         public DependencyVisualiserViewModel(IEventAggregator eventAggregator)
