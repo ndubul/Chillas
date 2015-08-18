@@ -2923,7 +2923,7 @@ this.ScenarioSetup(scenarioInfo);
             this.DebugOutputValidationErrors("90", "[[r(q).a]][[r()..]][[r\"]][[r()]][[]][[1]]", ((string[])(null)));
         }
         
-        public virtual void SplitDataUsingScalarsAndRecordsets(string no, string @string, string variable, string @using, string escape, string errorOccured, string[] exampleTags)
+        public virtual void SplitDataUsingScalarsAndRecordsets(string no, string @string, string variable, string type, string @using, string escape, string errorOccured, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "ignore"};
@@ -2937,8 +2937,8 @@ this.ScenarioSetup(scenarioInfo);
 #line 583
  testRunner.Given(string.Format("A string to split with value \'{0}\'", @string), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 584
- testRunner.And(string.Format("assign to variable \'{0}\' split type \'<Type>\' at \'<Using>\' and Include \'Selected\' " +
-                        "and Escape \'\'", variable), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("assign to variable \'{0}\' split type \'{1}\' at \'<Using>\' and Include \'Selected\' and" +
+                        " Escape \'\'", variable, type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 585
  testRunner.When("the data split tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 586
@@ -2949,21 +2949,21 @@ this.ScenarioSetup(scenarioInfo);
                         "Process Direction",
                         "Skip blank rows",
                         "#",
-                        "",
+                        "Result",
                         "With",
                         "Using",
                         "Include",
                         "Escape"});
             table61.AddRow(new string[] {
-                        "Warewolf",
+                        string.Format("{0}", @string),
                         "Forward",
                         "No",
                         "1",
                         string.Format("{0}  =", variable),
                         "Index",
-                        "5",
+                        "<Using>",
                         "Yes",
-                        ""});
+                        string.Format("{0}", escape)});
 #line 587
  testRunner.And("the debug inputs as", ((string)(null)), table61, "And ");
 #line hidden
@@ -2982,14 +2982,15 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:String", "Warewold")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:String", "[[var]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "\"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Index")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:using", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Escape", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Escape", "[[rs([[int]]).a]] = ,[[int]] =1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ErrorOccured", "No")]
         public virtual void SplitDataUsingScalarsAndRecordsets_1()
         {
-            this.SplitDataUsingScalarsAndRecordsets("1", "Warewold", "\"\"", "1", "", "No", ((string[])(null)));
+            this.SplitDataUsingScalarsAndRecordsets("1", "[[var]]", "\"\"", "Index", "1", "[[rs([[int]]).a]] = ,[[int]] =1", "No", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -2998,14 +2999,117 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "2")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:String", "Warewold")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "\"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:String", "Warewolf")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "[[var]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:using", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Escape", "[[var]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ErrorOccured", "No")]
         public virtual void SplitDataUsingScalarsAndRecordsets_2()
         {
-            this.SplitDataUsingScalarsAndRecordsets("2", "Warewold", "\"\"", "1", "[[var]]", "No", ((string[])(null)));
+            this.SplitDataUsingScalarsAndRecordsets("2", "Warewolf", "[[var]]", "", "1", "[[var]]", "No", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Split data using scalars and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataSplit")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:String", "Warewolf")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "[[a]] = \"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:using", "1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Escape", "[[var]] = \"/\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ErrorOccured", "No")]
+        public virtual void SplitDataUsingScalarsAndRecordsets_3()
+        {
+            this.SplitDataUsingScalarsAndRecordsets("3", "Warewolf", "[[a]] = \"\"", "", "1", "[[var]] = \"/\"", "No", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Split data using scalars and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataSplit")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:String", "[[rc().string]] = Dave Chappel")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "[[rec().p]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Space")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:using", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Escape", "89")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ErrorOccured", "No")]
+        public virtual void SplitDataUsingScalarsAndRecordsets_4()
+        {
+            this.SplitDataUsingScalarsAndRecordsets("4", "[[rc().string]] = Dave Chappel", "[[rec().p]]", "Space", "", "89", "No", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Split data using scalars and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataSplit")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:String", "[[rc(*).string]] = Dave Chappel")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "[[rec().p]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Index")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:using", "[rec().n]]  =5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Escape", "[[rs(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ErrorOccured", "No")]
+        public virtual void SplitDataUsingScalarsAndRecordsets_5()
+        {
+            this.SplitDataUsingScalarsAndRecordsets("5", "[[rc(*).string]] = Dave Chappel", "[[rec().p]]", "Index", "[rec().n]]  =5", "[[rs(*).a]]", "No", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Split data using scalars and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataSplit")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "6")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "6")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:String", "[[rc([[int]]).string]] = Dave Chappel, [[int]] = 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "[[rec().p]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Index")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:using", "[rec(1).n]]      =5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Escape", "[[rs(1).a]] = t")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ErrorOccured", "No")]
+        public virtual void SplitDataUsingScalarsAndRecordsets_6()
+        {
+            this.SplitDataUsingScalarsAndRecordsets("6", "[[rc([[int]]).string]] = Dave Chappel, [[int]] = 1", "[[rec().p]]", "Index", "[rec(1).n]]      =5", "[[rs(1).a]] = t", "No", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Split data using scalars and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataSplit")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:String", "Dave Chappel")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "[[rec().p]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Index")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:using", "[rec([[int]]).n]] = 6, [[int]]=2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Escape", "[[rs().a]] = \"-\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ErrorOccured", "No")]
+        public virtual void SplitDataUsingScalarsAndRecordsets_7()
+        {
+            this.SplitDataUsingScalarsAndRecordsets("7", "Dave Chappel", "[[rec().p]]", "Index", "[rec([[int]]).n]] = 6, [[int]]=2", "[[rs().a]] = \"-\"", "No", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Split data using scalars and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DataSplit")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "8")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "8")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:String", "Dave Chappel")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "[[rec().p]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Index")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:using", "[rec(*).n]], [[rec(1).n]] = 2, [[rec(2).n]] = 3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Escape", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ErrorOccured", "No")]
+        public virtual void SplitDataUsingScalarsAndRecordsets_8()
+        {
+            this.SplitDataUsingScalarsAndRecordsets("8", "Dave Chappel", "[[rec().p]]", "Index", "[rec(*).n]], [[rec(1).n]] = 2, [[rec(2).n]] = 3", "", "No", ((string[])(null)));
         }
     }
 }

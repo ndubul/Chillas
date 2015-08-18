@@ -585,11 +585,17 @@ Scenario Outline: Split data using scalars and recordsets
 	When the data split tool is executed
 	Then the execution has '<ErrorOccured>' error
 	And the debug inputs as  
-	| String to Split | Process Direction | Skip blank rows | # |               | With  | Using | Include | Escape |
-	| Warewolf        | Forward           | No              | 1 | <Variable>  = | Index | 5     | Yes     |        |
+	| String to Split | Process Direction | Skip blank rows | # | Result        | With  | Using   | Include | Escape   |
+	| <String>        | Forward           | No              | 1 | <Variable>  = | Index | <Using> | Yes     | <Escape> |
 	And the debug output as
 	| # |          |
 Examples: 
-	 | No | String   | Variable | using | Escape  | ErrorOccured |
-	 | 1  | Warewold | ""       | 1     |         | No           |
-	 | 2  | Warewold | ""       | 1     | [[var]] | No           |
+	 | No | String                                             | Variable    | Type  | using                                               | Escape                          | ErrorOccured |
+	 | 1  | [[var]]                                            | ""          | Index | 1                                                   | [[rs([[int]]).a]] = ,[[int]] =1 | No           |
+	 | 2  | Warewolf                                           | [[var]]     |       | 1                                                   | [[var]]                         | No           |
+	 | 3  | Warewolf                                           | [[a]] = ""  |       | 1                                                   | [[var]] = "/"                   | No           |
+	 | 4  | [[rc().string]] = Dave Chappel                     | [[rec().p]] | Space |                                                     | 89                              | No           |
+	 | 5  | [[rc(*).string]] = Dave Chappel                    | [[rec().p]] | Index | [rec().n]]  =5                                      | [[rs(*).a]]                     | No           |
+	 | 6  | [[rc([[int]]).string]] = Dave Chappel, [[int]] = 1 | [[rec().p]] | Index | [rec(1).n]]      =5                                 | [[rs(1).a]] = t                 | No           |
+	 | 7  | Dave Chappel                                       | [[rec().p]] | Index | [rec([[int]]).n]] = 6, [[int]]=2                    | [[rs().a]] = "-"                | No           |
+	 | 8  | Dave Chappel                                       | [[rec().p]] | Index | [rec(*).n]], [[rec(1).n]] = 2, [[rec(2).n]] = 3 |                                 | No           |
