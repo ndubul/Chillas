@@ -57,6 +57,8 @@ namespace Warewolf.Studio.ViewModels
             _aggregator = aggregator;
             _warewolfserverName = updateManager.ServerName;
             _authenticationType = AuthenticationType.Anonymous;
+            _hostName = String.Empty;
+            _defaultQuery = String.Empty;
             HeaderText = Resources.Languages.Core.WebserviceNewHeaderLabel;
             Header = Resources.Languages.Core.WebserviceNewHeaderLabel;
             TestCommand = new DelegateCommand(TestConnection, CanTest);

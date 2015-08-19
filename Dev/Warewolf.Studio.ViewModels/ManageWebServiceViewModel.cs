@@ -84,8 +84,21 @@ namespace Warewolf.Studio.ViewModels
         {
             _model = model;
             _saveDialog = saveDialog;
+            Header = Resources.Languages.Core.WebserviceTabHeader;
+            HeaderText = Resources.Languages.Core.WebserviceTabHeader;
+            ResourceName = Resources.Languages.Core.WebserviceTabHeader;
+            WebRequestMethods = new ObservableCollection<WebRequestMethod>(Dev2EnumConverter.GetEnumsToList<WebRequestMethod>());
 
-            Init();
+            Sources = Model.Sources;
+            Inputs = new ObservableCollection<IServiceInput>();
+            OutputMapping = new ObservableCollection<IServiceOutputMapping>();
+            var variables = new ObservableCollection<NameValue>();
+            variables.CollectionChanged += VariablesOnCollectionChanged;
+            Variables = variables;
+            var headerCollection = new ObservableCollection<NameValue>();
+            headerCollection.CollectionChanged += HeaderCollectionOnCollectionChanged;
+            Headers = headerCollection;
+            RequestBody = "";
         }
 
         public ManageWebServiceViewModel(IWebServiceModel model, IRequestServiceNameViewModel saveDialog, IWebService service)
@@ -93,12 +106,13 @@ namespace Warewolf.Studio.ViewModels
         {
             _model = model;
             _saveDialog = saveDialog;
+            _webService = service;
             Variables = new ObservableCollection<NameValue>();
             RequestUrlQuery = service.QueryString;
             Inputs = service.Inputs;
             OutputMapping = service.OutputMappings;
             Item = service;
-            
+
             Init();
             FromModel(service);
         }
@@ -112,17 +126,17 @@ namespace Warewolf.Studio.ViewModels
             Path = service.Path;
             SelectedSource = Sources.FirstOrDefault(a => a.Id == service.Id);
             Item.Source = SelectedSource;
-            if(service.Headers != null)
+            if (service.Headers != null)
             {
-                foreach(var nameValue in service.Headers)
+                foreach (var nameValue in service.Headers)
                 {
                     Headers.Add(nameValue);
                 }
             }
 
-            if(SelectedSource != null)
+            if (SelectedSource != null)
             {
-                RequestUrlQuery = service.QueryString.Replace(SelectedSource.HostName,"");
+                RequestUrlQuery = service.QueryString.Replace(SelectedSource.HostName, "");
                 Item.RequestUrl = RequestUrlQuery;
             }
             else
@@ -131,23 +145,8 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        //public ManageWebServiceViewModel(IShellViewModel shell)
-        //    : base(ResourceType.WebService)
-        //{
-        //    var commController = new CommunicationControllerFactory();
-        //    var connection = new ServerProxy(new Uri("http://localhost:3142"));
-        //    connection.Connect(Guid.NewGuid());
-        //    IStudioUpdateManager updateRepository = new StudioResourceUpdateManager(commController, connection);
-        //    IQueryManager queryProxy = new QueryManagerProxy(commController, connection);
-
-        //    _model = new WebServiceModel(updateRepository, queryProxy, shell, "bob");
-
-        //    Init();
-        //}
-
         void Init()
         {
-            WebService = new WebServiceDefinition();
             Header = Resources.Languages.Core.WebserviceTabHeader;
             HeaderText = Resources.Languages.Core.WebserviceTabHeader;
             ResourceName = Resources.Languages.Core.WebserviceTabHeader;
@@ -640,18 +639,7 @@ namespace Warewolf.Studio.ViewModels
         /// <summary>
         /// The underlying Web service
         /// </summary>
-        public IWebService WebService
-        {
-            get
-            {
-                return _webService;
-            }
-            set
-            {
-                _webService = value;
-                OnPropertyChanged(() => WebService);
-            }
-        }
+        public IWebService WebService { get; set; }
 
         /// <summary>
         /// Label for selecteing a header
@@ -910,7 +898,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 _inputs = value;
                 IsInputsEmptyRows = true;
-                if ( _inputs != null &&_inputs.Count >= 1)
+                if (_inputs != null && _inputs.Count >= 1)
                 {
                     IsInputsEmptyRows = false;
                 }
@@ -927,7 +915,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 _outputMapping = value;
                 IsOutputMappingEmptyRows = true;
-                if (_outputMapping!= null && _outputMapping.Count >= 1)
+                if (_outputMapping != null && _outputMapping.Count >= 1)
                 {
                     IsOutputMappingEmptyRows = false;
                 }
@@ -1045,10 +1033,13 @@ namespace Warewolf.Studio.ViewModels
 
         public override IWebService ToModel()
         {
-
+            if (Item == null || Item.Id.Equals(Guid.Empty))
+            {
+                Item = ToService();
+                return Item;
+            }
             return new WebServiceDefinition
             {
-
                 Inputs = Inputs == null ? new List<IServiceInput>() : MapVariablesToInputs(),
                 OutputMappings = OutputMapping,
                 Source = SelectedSource,
@@ -1061,6 +1052,41 @@ namespace Warewolf.Studio.ViewModels
                 SourceUrl = SourceUrl,
                 RequestUrl = RequestUrlQuery
             };
+        }
+
+        IWebService ToService()
+        {
+            if (_webService == null)
+                return new WebServiceDefinition
+                {
+                    Inputs = Inputs == null ? new List<IServiceInput>() : MapVariablesToInputs(),
+                    OutputMappings = OutputMapping,
+                    Source = SelectedSource,
+                    Name = Name,
+                    Path = Path,
+                    Id = Guid.NewGuid(),
+                    PostData = DataListUtil.RemoveLanguageBrackets(RequestBody),
+                    Headers = Headers.Select(value => new NameValue { Name = DataListUtil.RemoveLanguageBrackets(value.Name), Value = DataListUtil.RemoveLanguageBrackets(value.Value) }).ToList(),
+                    QueryString = RequestUrlQuery,
+                    SourceUrl = SourceUrl,
+                    RequestUrl = RequestUrlQuery
+                };
+            // ReSharper disable once RedundantIfElseBlock
+            else
+            {
+                _webService.Inputs = Inputs == null ? new List<IServiceInput>() : MapVariablesToInputs();
+                _webService.OutputMappings = OutputMapping;
+                _webService.Source = SelectedSource;
+                _webService.Name = Name;
+                _webService.Path = Path;
+                _webService.Id = Guid.NewGuid();
+                _webService.PostData = DataListUtil.RemoveLanguageBrackets(RequestBody);
+                _webService.Headers = Headers.Select(value => new NameValue { Name = DataListUtil.RemoveLanguageBrackets(value.Name), Value = DataListUtil.RemoveLanguageBrackets(value.Value) }).ToList();
+                _webService.QueryString = RequestUrlQuery;
+                _webService.SourceUrl = SourceUrl;
+                _webService.RequestUrl = RequestUrlQuery;
+                return _webService;
+            }
         }
 
         #endregion
