@@ -2091,9 +2091,6 @@ namespace Dev2.Studio.ViewModels
         public Func<bool> IsBusyDownloadingInstaller;
         Func<DropBoxViewWindow, DropBoxSourceViewModel, bool?> _showDropAction;
         Action<IContextualResourceModel, IEnvironmentModel, string, string> _showSaveDialog;
-#pragma warning disable 649
-        Action<IContextualResourceModel, IEnvironmentModel, string, string,string,AuthenticationType> _showSharepointServerSourceSaveDialog;
-#pragma warning restore 649
         IDropboxFactory _dropboxFactory;
         IMenuViewModel _menuViewModel;
 

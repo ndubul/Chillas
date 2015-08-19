@@ -108,6 +108,13 @@
                 </Grid>
                 </Border>
             </TabItem>
+            <TabItem Style="{StaticResource TabItemStyle}" Header="JSON" AutomationProperties.AutomationId="UI_XMLTab_AutoID">
+                <Border BorderBrush="{StaticResource XamGridBorderBrush}" BorderThickness="1">
+                    <Grid Background="White">
+                        <ContentControl x:Name="JsonOutput" AllowDrop="False" />
+                    </Grid>
+                </Border>
+            </TabItem>
         </TabControl>
         <Grid Grid.Row="1" Name="grdWorkflowTransition">
             <Grid.ColumnDefinitions>
