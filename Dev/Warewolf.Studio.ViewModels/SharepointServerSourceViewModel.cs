@@ -124,7 +124,7 @@ namespace Warewolf.Studio.ViewModels
             _token = new CancellationTokenSource();
             AsyncWorker.Start(SetupProgressSpinner, () =>
             {
-                TestMessage = "Passed";
+                TestMessage = "";
                 TestFailed = false;
                 TestPassed = true;
                 Testing = false;
