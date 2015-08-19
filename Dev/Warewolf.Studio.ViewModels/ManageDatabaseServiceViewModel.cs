@@ -645,13 +645,8 @@ namespace Warewolf.Studio.ViewModels
             if (Item == null || Item.Id.Equals(Guid.Empty))
             {
                 Item = ToService();
+                return Item;
             }
-            return ToService();
-            
-        }
-
-        IDatabaseService ToService()
-        {
             return new DatabaseService
             {
                 Action = SelectedAction,
@@ -660,8 +655,37 @@ namespace Warewolf.Studio.ViewModels
                 Source = SelectedSource,
                 Name = Name,
                 Path = Path,
-                Id = Id
+                Id = _dbService == null ? Guid.NewGuid() : _dbService.Id
             };
+            
+        }
+
+        IDatabaseService ToService()
+        {
+            if (_dbService == null)
+                return new DatabaseService
+                {
+                    Action = SelectedAction,
+                    Inputs = Inputs == null ? new List<IServiceInput>() : Inputs.ToList(),
+                    OutputMappings = OutputMapping,
+                    Source = SelectedSource,
+                    Name = Name,
+                    Path = Path,
+                    Id = _dbService == null ? Guid.NewGuid() : _dbService.Id
+                }
+            ;
+            // ReSharper disable once RedundantIfElseBlock
+            else
+            {
+                _dbService.Action = SelectedAction;
+                _dbService.Inputs = Inputs == null ? new List<IServiceInput>() : Inputs.ToList();
+                _dbService.OutputMappings = OutputMapping;
+                _dbService.Source = SelectedSource;
+                _dbService.Name = Name;
+                _dbService.Path = Path;
+                _dbService.Id = _dbService == null ? Guid.NewGuid() : _dbService.Id;
+                return _dbService;
+            }
         }
 
         public override void UpdateHelpDescriptor(string helpText)

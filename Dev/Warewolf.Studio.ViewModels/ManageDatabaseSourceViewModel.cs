@@ -354,8 +354,23 @@ namespace Warewolf.Studio.ViewModels
         }
         public override IDbSource ToModel()
         {
-   
-            return ToDbSource();
+            if (Item == null)
+            {
+                Item = ToDbSource();
+                return Item;
+            }
+
+            return new DbSourceDefinition
+            {
+                AuthenticationType = AuthenticationType,
+                ServerName = GetServerName(),
+                Password = Password,
+                UserName = UserName,
+                Type = (enSourceType)Enum.Parse(typeof(enSourceType), ServerType.Value),
+                Name = ResourceName,
+                DbName = DatabaseName,
+                Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
+            };
         }
 
         IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }

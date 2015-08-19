@@ -293,8 +293,13 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _assemblyName = value;
+                if (string.IsNullOrEmpty(_assemblyName))
+                {
+                    SelectedDll = null;
+                }
                 OnPropertyChanged(() => Header);
                 OnPropertyChanged(()=>AssemblyName);
+                ViewModelUtils.RaiseCanExecuteChanged(OkCommand);
             }
         }
 
@@ -370,7 +375,13 @@ namespace Warewolf.Studio.ViewModels
 
         void ToItem()
         {
-            Item = new PluginSourceDefinition { Id = _pluginSource.Id, Name = _pluginSource.Name, Path = _pluginSource.Path, SelectedDll = SelectedDll };
+            Item = new PluginSourceDefinition
+            {
+                Id = _pluginSource.Id, 
+                Name = _pluginSource.Name, 
+                Path = _pluginSource.Path, 
+                SelectedDll = SelectedDll
+            };
         }
 
         void Save(IPluginSource source)
