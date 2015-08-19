@@ -61,6 +61,7 @@ namespace Warewolf.Studio.ViewModels
             Executor = executor;
             _updateManager = updateManager;
             _aggregator = aggregator;
+            IsWindows = true;
             _warewolfserverName = updateManager.ServerName;
             _authenticationType = AuthenticationType.Anonymous;
             HeaderText = Resources.Languages.Core.SharePointServiceNewHeaderLabel;
