@@ -18,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
+using System.Xml;
 using Dev2.Data.Interfaces;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.UI;
@@ -27,6 +28,7 @@ using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Indentation;
 using Infragistics.Controls.Grids;
 using Infragistics.Controls.Grids.Primitives;
+using Newtonsoft.Json;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.Views.Workflow
@@ -41,23 +43,29 @@ namespace Dev2.Studio.Views.Workflow
             InitializeComponent();
             SetUpTextEditor();
             AddBlackOutEffect();
+            _currentTab = InputTab.Grid;
         }
 
         private TextEditor _editor;
+        private TextEditor _jsonEditor;
         private AbstractFoldingStrategy _foldingStrategy;
         private FoldingManager _foldingManager;
         DispatcherTimer _foldingUpdateTimer;
         Grid _blackoutGrid;
+        InputTab _currentTab;
 
         private void SetUpTextEditor()
         {
             _editor = new TextEditor { SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("XML"), ShowLineNumbers = true, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
             _editor.SetValue(AutomationProperties.AutomationIdProperty, "UI_XMLEditor_AutoID");
 
+            _jsonEditor = new TextEditor { SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("JavaScript"), ShowLineNumbers = true, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
+            _jsonEditor.SetValue(AutomationProperties.AutomationIdProperty, "UI_JsonEditor_AutoID");
+
             _foldingStrategy = new XmlFoldingStrategy();
             _foldingManager = FoldingManager.Install(_editor.TextArea);
             _editor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
-
+            _jsonEditor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
             _foldingUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
             _foldingUpdateTimer.Tick += OnFoldingUpdateTimerOnTick;
             _foldingUpdateTimer.Start();
@@ -107,13 +115,69 @@ namespace Dev2.Studio.Views.Workflow
                 {
                     if(tabItem != null && tabItem.Header.ToString() == "XML")
                     {
-                        vm.SetXmlData();
-                        ShowDataInOutputWindow(vm.XmlData);
+                        switch(_currentTab)
+                        {
+                            case InputTab.Grid:
+                                vm.SetXmlData();
+                                ShowDataInOutputWindow(vm.XmlData);
+                                break;
+                            case InputTab.Json:
+                                var xmlDocument = JsonConvert.DeserializeXmlNode(_jsonEditor.Text, "DataList");
+                                vm.XmlData = xmlDocument.InnerXml;
+                                vm.SetWorkflowInputData();
+                                vm.SetXmlData();
+                                ShowDataInOutputWindow(vm.XmlData);
+                                break;
+                        }
+                        _currentTab = InputTab.Xml;
+                    }
+                    else if (tabItem != null && tabItem.Header.ToString() == "JSON")
+                    {
+                        
+                        var xml = new XmlDocument();
+                        switch(_currentTab)
+                        {
+                            case InputTab.Grid:
+                                vm.SetXmlData();
+                                if (vm.XmlData != null)
+                                {
+                                    xml.LoadXml(vm.XmlData);
+                                }
+                                break;
+                            case InputTab.Xml:
+                                if (!string.IsNullOrEmpty(_editor.Text))
+                                {
+                                    try
+                                    {
+                                        xml.LoadXml(_editor.Text);
+                                    }
+                                    catch
+                                    {
+                                        // ignored
+                                    }
+                                }
+                                break;
+                        }
+                        
+                        if(xml.FirstChild != null)
+                        {
+                            var json = JsonConvert.SerializeXmlNode(xml.FirstChild,Newtonsoft.Json.Formatting.Indented,true);
+                            _jsonEditor.Text = json;
+                        }
+                        JsonOutput.Content = _jsonEditor;
+                        _currentTab = InputTab.Json;
                     }
                     else
                     {
-                        vm.XmlData = _editor.Text;
+                        var xmlData = _editor.Text;
+                        if (_currentTab == InputTab.Json)
+                        {
+                            var xmlDocument = JsonConvert.DeserializeXmlNode(_jsonEditor.Text, "DataList");
+                            xmlData = xmlDocument.InnerXml;                           
+                        }
+                        vm.XmlData = xmlData;
                         vm.SetWorkflowInputData();
+                        _currentTab = InputTab.Grid;
                     }
                 }
             }
@@ -302,5 +366,12 @@ namespace Dev2.Studio.Views.Workflow
             }
             Application.Current.MainWindow.Effect = effect;
         }
+    }
+
+    public enum InputTab
+    {
+        Grid,
+        Xml,
+        Json
     }
 }
