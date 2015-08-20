@@ -197,7 +197,13 @@
                     VerticalAlignment="Center">
             <TextBlock Text="{Binding Path=TestMessage}" 
                        HorizontalAlignment="Right" 
+                       Margin="{StaticResource ControlBorderRight}"
                        VerticalAlignment="Center" ></TextBlock>
+            <TextBlock Style="{StaticResource ErrorTextBlockStyle}"  
+                       TextAlignment="Right" 
+                       Margin="{StaticResource ControlBorderRight}"
+                       VerticalAlignment="Center" 
+                       Text="{Binding Path=Validate}"></TextBlock>
             <fa:ImageAwesome Width="14"  
                              Height="14" 
                              Foreground="{StaticResource WareWolfOrangeBrush}" 
@@ -220,6 +226,7 @@
                     HorizontalAlignment="Right" 
                     Width="60" 
                     Height="30" 
+                    Margin="{StaticResource ControlBorderRight}"
                     Content="Test" 
                     Command="{Binding Path=TestCommand}">
                 <i:Interaction.Behaviors>
@@ -227,16 +234,6 @@
                                  DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </Button>
-        </StackPanel>
-        <StackPanel Grid.Row="5" 
-                    Margin="{StaticResource ControlBorderTop}"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Right" >
-            <TextBlock Style="{StaticResource ErrorTextBlockStyle}"  
-                       TextAlignment="Right" 
-                       Margin="{StaticResource ControlBorderRight}"
-                       VerticalAlignment="Center" 
-                       Text="{Binding Path=Validate}"></TextBlock>
             <Button Width="60" 
                     Height="30" 
                     Content="Save" 
