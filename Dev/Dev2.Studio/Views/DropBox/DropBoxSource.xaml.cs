@@ -13,7 +13,6 @@ namespace Dev2.Views.DropBox
     public partial class DropBoxViewWindow
     {
         Grid _blackoutGrid;
-        Window _window;
 
         public DropBoxViewWindow()
         {

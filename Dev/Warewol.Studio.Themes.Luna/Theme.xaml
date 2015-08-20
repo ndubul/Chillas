@@ -49,6 +49,7 @@
         <ResourceDictionary Source="Elements/xamComboEditor.xaml"/>
         <ResourceDictionary Source="Elements/xamDialogWindow.xaml"/>
         <ResourceDictionary Source="Elements/xamNetworkNode.xaml" />
+        <ResourceDictionary Source="Elements/xamRichTextEditor.xaml"/>
         <ResourceDictionary Source="Elements/DockManager/MainDockManager.xaml"/>
 
         <ResourceDictionary Source="ActivityStyles/ActivityResources.xaml"/>

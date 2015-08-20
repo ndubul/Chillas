@@ -11,6 +11,7 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
+using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warewolf.Core;
@@ -47,7 +48,7 @@ namespace Warewolf.Studio.ViewModels
         private bool _isDisposed;
 
         public ManageEmailSourceViewModel(IManageEmailSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator)
-            : this(updateManager,aggregator)
+            : this(updateManager, aggregator)
         {
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
             _updateManager = updateManager;
@@ -55,6 +56,9 @@ namespace Warewolf.Studio.ViewModels
             RequestServiceNameViewModel = requestServiceNameViewModel;
             HeaderText = Resources.Languages.Core.EmailSourceNewHeaderLabel;
             Header = Resources.Languages.Core.EmailSourceNewHeaderLabel;
+            HostName = String.Empty;
+            UserName = String.Empty;
+            Password = String.Empty;
             EnableSend = false;
             EnableSslNo = true;
             Port = 25;
@@ -107,7 +111,7 @@ namespace Warewolf.Studio.ViewModels
         }
         void SetupHeaderTextFromExisting()
         {
-            if(_emailServiceSource != null)
+            if (_emailServiceSource != null)
             {
                 HeaderText = Resources.Languages.Core.EmailSourceEditHeaderLabel + _warewolfserverName.Trim() + "\\" + (_emailServiceSource.ResourceName ?? ResourceName).Trim();
                 Header = ((_emailServiceSource.ResourceName ?? ResourceName));
@@ -132,9 +136,11 @@ namespace Warewolf.Studio.ViewModels
 
         public override void UpdateHelpDescriptor(string helpText)
         {
-            var helpDescriptor = new HelpDescriptor("", helpText, null);
-            VerifyArgument.IsNotNull("helpDescriptor", helpDescriptor);
-            _aggregator.GetEvent<HelpChangedEvent>().Publish(helpDescriptor);
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
 
         }
 
@@ -163,7 +169,7 @@ namespace Warewolf.Studio.ViewModels
 
                 if (res == MessageBoxResult.OK)
                 {
-                    
+
                     var src = ToSource();
                     src.ResourceName = RequestServiceNameViewModel.ResourceName.Name;
                     src.Path = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
@@ -483,7 +489,7 @@ namespace Warewolf.Studio.ViewModels
             });
 
             _updateManager.TestConnection(ToNewSource());
-            
+
         }
         IEmailServiceSource ToNewSource()
         {
@@ -528,6 +534,7 @@ namespace Warewolf.Studio.ViewModels
                 _emailServiceSource.EnableSsl = EnableSsl;
                 _emailServiceSource.EmailFrom = EmailFrom;
                 _emailServiceSource.EmailTo = EmailTo;
+                _emailServiceSource.Id = _emailServiceSource == null ? Guid.NewGuid() : _emailServiceSource.Id;
                 return _emailServiceSource;
 
             }
@@ -541,10 +548,17 @@ namespace Warewolf.Studio.ViewModels
                 return Item;
             }
             return new EmailServiceSourceDefinition
-            {
-                HostName = HostName,
-                Id = Item.Id
-            };
+                {
+                    HostName = HostName,
+                    Password = Password,
+                    UserName = UserName,
+                    Port = Port,
+                    Timeout = Timeout,
+                    EnableSsl = EnableSsl,
+                    EmailFrom = EmailFrom,
+                    EmailTo = EmailTo,
+                    Id = _emailServiceSource == null ? Guid.NewGuid() : _emailServiceSource.Id
+                };
         }
 
         public bool TestFailed

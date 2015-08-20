@@ -25,6 +25,8 @@ namespace Dev2.Common.Interfaces.Help
         /// <summary>
         /// Wpf component binds here
         /// </summary>
-        IHelpDescriptorViewModel CurrentHelpText{get;}
+        IHelpDescriptorViewModel CurrentHelpText { get; set; }
+
+        void UpdateHelpText(string helpText);
     }
 }

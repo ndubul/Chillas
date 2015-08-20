@@ -27,6 +27,7 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Core.DynamicServices;
 using Dev2.Common.Interfaces.DB;
+using Dev2.Common.Interfaces.Help;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Studio;
@@ -2150,6 +2151,14 @@ namespace Dev2.Studio.ViewModels
             {
                 var toolboxViewModel = CustomContainer.Get<IToolboxViewModel>();
                 return toolboxViewModel;
+            }
+        }
+        public IHelpWindowViewModel HelpViewModel
+        {
+            get
+            {
+                var helpViewModel = CustomContainer.Get<IHelpWindowViewModel>();
+                return helpViewModel;
             }
         }
 
