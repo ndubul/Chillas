@@ -56,6 +56,8 @@ namespace Warewolf.Studio.ViewModels
         string _headerText;
         string _resourceName;
         IDatabaseService _dbService;
+        string _name;
+        string _path;
 
         /// <exception cref="ArgumentNullException"><paramref name="model"/> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="saveDialog"/> is <see langword="null" />.</exception>
@@ -70,6 +72,7 @@ namespace Warewolf.Studio.ViewModels
             _model = model;
             _saveDialog = saveDialog;
             CanEditSource = false;
+            IsNew = true;
             CreateNewSourceCommand = new DelegateCommand(model.CreateNewSource);
             EditSourceCommand = new DelegateCommand(() => model.EditSource(SelectedSource));
             Sources = model.RetrieveSources();
@@ -103,6 +106,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 throw new ArgumentNullException("service");
             }
+            IsNew = false;
             _dbService = service;
             FromService(service);
             PerformRefresh();
@@ -352,9 +356,7 @@ namespace Warewolf.Studio.ViewModels
         {
             try
             {
-
-
-                if (Item == null || Item.Id.Equals(Guid.Empty))
+                if (IsNew)
                 {
                     var saveOutPut = _saveDialog.ShowSaveDialog();
                     if (saveOutPut == MessageBoxResult.OK || saveOutPut == MessageBoxResult.Yes)
@@ -365,27 +367,50 @@ namespace Warewolf.Studio.ViewModels
                         _model.SaveService(ToModel());
                         Item = ToModel();
                         Header = Path + Name;
-
                     }
                 }
                 else
                 {
                     _model.SaveService(ToModel());
+                    Item = ToModel();
                 }
                 ErrorText = "";
             }
             catch (Exception err)
             {
-
                 ErrorText = err.Message;
             }
         }
 
+        public bool IsNew { get; set; }
+
         public Guid Id { get; set; }
 
-        public string Path { get; set; }
+        public string Path
+        {
+            get
+            {
+                return _path;
+            }
+            set
+            {
+                _path = value;
+                OnPropertyChanged(() => Path);
+            }
+        }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged(() => Name);
+            }
+        }
 
         #region Implementation of IManageDbServiceViewModel
 

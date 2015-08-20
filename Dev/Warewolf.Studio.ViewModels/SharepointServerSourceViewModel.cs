@@ -49,6 +49,8 @@ namespace Warewolf.Studio.ViewModels
         string _headerText;
         string _testMessage;
         bool _testFailed;
+        string _path;
+        bool _isDisposed;
 
         public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
             : base(ResourceType.SharepointServerSource)
@@ -61,9 +63,10 @@ namespace Warewolf.Studio.ViewModels
             Executor = executor;
             _updateManager = updateManager;
             _aggregator = aggregator;
-            IsWindows = true;
+            ServerName = String.Empty;
             _warewolfserverName = updateManager.ServerName;
-            _authenticationType = AuthenticationType.Anonymous;
+            _authenticationType = AuthenticationType.Windows;
+            IsWindows = true;
             HeaderText = Resources.Languages.Core.SharePointServiceNewHeaderLabel;
             Header = Resources.Languages.Core.SharePointServiceNewHeaderLabel;
             TestCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(TestConnection, CanTest);
@@ -114,12 +117,6 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        SharepointSource CreateSharepointServerSource()
-        {
-            var source = new SharepointSource { Server = ServerName, UserName = UserName, Password = Password, AuthenticationType = AuthenticationType };
-            return source;
-        }
-
         void TestConnection()
         {
             _token = new CancellationTokenSource();
@@ -152,6 +149,10 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
+                if (_serverName != value)
+                {
+                    TestPassed = false;
+                }
                 _serverName = value;
                 OnPropertyChanged(() => ServerName);
                 ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
@@ -391,6 +392,19 @@ namespace Warewolf.Studio.ViewModels
             get { return AuthenticationType == AuthenticationType.User; }
         }
 
+        public string Path
+        {
+            get
+            {
+                return _path;
+            }
+            set
+            {
+                _path = value;
+                OnPropertyChanged(() => Path);
+            }
+        }
+
         ISharepointServerSource ToNewSource()
         {
             return new SharePointServiceSourceDefinition
@@ -596,11 +610,11 @@ namespace Warewolf.Studio.ViewModels
 
             return new SharePointServiceSourceDefinition
             {
-                Name = Item.Name,
+                Name = ResourceName,
                 Server = ServerName,
                 AuthenticationType = AuthenticationType,
                 Id = Item.Id,
-                Path = Item.Path
+                Path = Path
             };
         }
 
@@ -640,8 +654,40 @@ namespace Warewolf.Studio.ViewModels
         /// </summary>
         public void Dispose()
         {
+            Dispose(true);
+
+            // This object will be cleaned up by the Dispose method.
+            // Therefore, you should call GC.SupressFinalize to
+            // take this object off the finalization queue
+            // and prevent finalization code for this object
+            // from executing a second time.
+            GC.SuppressFinalize(this);
         }
 
+        // Dispose(bool disposing) executes in two distinct scenarios.
+        // If disposing equals true, the method has been called directly
+        // or indirectly by a user's code. Managed and unmanaged resources
+        // can be disposed.
+        // If disposing equals false, the method has been called by the
+        // runtime from inside the finalizer and you should not reference
+        // other objects. Only unmanaged resources can be disposed.
+        void Dispose(bool disposing)
+        {
+            // Check to see if Dispose has already been called.
+            if (!_isDisposed)
+            {
+                // If disposing equals true, dispose all managed
+                // and unmanaged resources.
+                if (disposing)
+                {
+                    // Dispose managed resources.
+                    _token.Dispose();
+                }
+
+                // Dispose unmanaged resources.
+                _isDisposed = true;
+            }
+        }
         #endregion
     }
 }

@@ -32,6 +32,7 @@ namespace Warewolf.Studio.ViewModels
         IServerSource _serverSource;
         string _protocol;
         string _selectedPort;
+        Guid _id;
         // ReSharper disable TooManyDependencies
         public ManageNewServerViewModel(IServerSource newServerSource,
             IStudioUpdateManager updateManager, IRequestServiceNameViewModel requestServiceNameViewModel,
@@ -51,7 +52,7 @@ namespace Warewolf.Studio.ViewModels
 
             ServerSource = newServerSource;
             Header = String.IsNullOrEmpty(newServerSource.Name) ? "New Server Source" : SetToEdit(newServerSource);
-
+            ID = Guid.NewGuid();
             IsValid = false;
             Address = newServerSource.Address;
             AuthenticationType = newServerSource.AuthenticationType;
@@ -102,11 +103,19 @@ namespace Warewolf.Studio.ViewModels
             {
                 Item = ToSource();
             }
-            return ToSource();            
+            return new ServerSource
+            {
+                Address = Protocol + "://" + Address + ":" + SelectedPort,
+                AuthenticationType = AuthenticationType,
+                ID = ServerSource.ID == Guid.Empty ? Guid.NewGuid() : Item.ID,
+                Name = ServerSource.Name,
+                Password = Password
+            };
         }
 
         IServerSource ToSource()
         {
+            if (_serverSource == null)
             return new ServerSource
             {
                 Address = Protocol + "://" + Address + ":" + SelectedPort,
@@ -114,7 +123,17 @@ namespace Warewolf.Studio.ViewModels
                 ID = ServerSource.ID == Guid.Empty ? Guid.NewGuid() : ServerSource.ID,
                 Name = ServerSource.Name,
                 Password = Password
-            };    
+            };
+            // ReSharper disable once RedundantIfElseBlock
+            else
+            {
+                _serverSource.Address = Protocol + "://" + Address + ":" + SelectedPort;
+                _serverSource.AuthenticationType = AuthenticationType;
+                _serverSource.ID = _serverSource.ID == Guid.Empty ? Guid.NewGuid() : _serverSource.ID;
+                _serverSource.Name = ServerSource.Name;
+                _serverSource.Password = Password;
+                return _serverSource;
+            }
         }
 
         string SetToEdit(IServerSource source)
@@ -186,7 +205,18 @@ namespace Warewolf.Studio.ViewModels
 
         }
         public bool Testrun { get; set; }
-
+        public Guid ID
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged(() => ID);
+            }
+        }
 
 
 
