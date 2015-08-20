@@ -86,36 +86,50 @@ namespace Warewolf.Studio.ViewModels
         {
             _model = model;
             _saveDialog = saveDialog;
+            Init();
             Header = Resources.Languages.Core.WebserviceTabHeader;
             HeaderText = Resources.Languages.Core.WebserviceTabHeader;
             ResourceName = Resources.Languages.Core.WebserviceTabHeader;
-            WebRequestMethods = new ObservableCollection<WebRequestMethod>(Dev2EnumConverter.GetEnumsToList<WebRequestMethod>());
 
+        }
+
+        void Init()
+        {
+            WebRequestMethods = new ObservableCollection<WebRequestMethod>(Dev2EnumConverter.GetEnumsToList<WebRequestMethod>());
+            SelectedWebRequestMethod = WebRequestMethods.First();
             Sources = Model.Sources;
             Inputs = new ObservableCollection<IServiceInput>();
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
+            EditWebSourceCommand = new DelegateCommand(() => Model.EditSource(SelectedSource), () => SelectedSource != null);
             var variables = new ObservableCollection<NameValue>();
             variables.CollectionChanged += VariablesOnCollectionChanged;
             Variables = variables;
             var headerCollection = new ObservableCollection<NameValue>();
             headerCollection.CollectionChanged += HeaderCollectionOnCollectionChanged;
             Headers = headerCollection;
+            Headers.Add(new ObservableAwareNameValue(headerCollection, UpdateRequestVariables));
             RequestBody = "";
+            Response = "";
+            TestCommand = new DelegateCommand(() => Test(_model, ToModel()), CanTest);
+            CreateNewSourceCommand = new DelegateCommand(_model.CreateNewSource);
+            SaveCommand = new DelegateCommand(Save, CanSave);
+            NewWebSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
+            PasteResponseCommand = new DelegateCommand(HandlePasteResponse);
+            RemoveHeaderCommand = new DelegateCommand(DeleteCell);
+            AddHeaderCommand = new DelegateCommand(Add);
         }
 
-        public ManageWebServiceViewModel(IWebServiceModel model, IRequestServiceNameViewModel saveDialog, IWebService service)
+        public ManageWebServiceViewModel(IWebServiceModel model, IWebService service)
             : base(ResourceType.WebService)
         {
             _model = model;
-            _saveDialog = saveDialog;
+            Init();
             _webService = service;
             Variables = new ObservableCollection<NameValue>();
             RequestUrlQuery = service.QueryString;
             Inputs = service.Inputs;
             OutputMapping = service.OutputMappings;
             Item = service;
-
-            Init();
             FromModel(service);
         }
 
@@ -147,35 +161,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        void Init()
-        {
-            Header = Resources.Languages.Core.WebserviceTabHeader;
-            HeaderText = Resources.Languages.Core.WebserviceTabHeader;
-            ResourceName = Resources.Languages.Core.WebserviceTabHeader;
-            WebRequestMethods = new ObservableCollection<WebRequestMethod>(Dev2EnumConverter.GetEnumsToList<WebRequestMethod>());
-            SelectedWebRequestMethod = WebRequestMethods.First();
-            Sources = Model.Sources;
-            Inputs = new ObservableCollection<IServiceInput>();
-            OutputMapping = new ObservableCollection<IServiceOutputMapping>();
-            EditWebSourceCommand = new DelegateCommand(() => Model.EditSource(SelectedSource), () => SelectedSource != null);
-            var variables = new ObservableCollection<NameValue>();
-            variables.CollectionChanged += VariablesOnCollectionChanged;
-            Variables = variables;
-            var headerCollection = new ObservableCollection<NameValue>();
-            headerCollection.CollectionChanged += HeaderCollectionOnCollectionChanged;
-            Headers = headerCollection;
-            Headers.Add(new ObservableAwareNameValue(headerCollection, UpdateRequestVariables));
-            RequestBody = "";
-            Response = "";
-            TestCommand = new DelegateCommand(() => Test(_model, ToModel()), CanTest);
-            CreateNewSourceCommand = new DelegateCommand(_model.CreateNewSource);
-            SaveCommand = new DelegateCommand(Save, CanSave);
-            NewWebSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
-            PasteResponseCommand = new DelegateCommand(HandlePasteResponse);
-            RemoveHeaderCommand = new DelegateCommand(DeleteCell);
-            AddHeaderCommand = new DelegateCommand(Add);
-        }
-
+       
         void HandlePasteResponse()
         {
             Response = _model.HandlePasteResponse(Response ?? "");

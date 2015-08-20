@@ -306,10 +306,20 @@ namespace Dev2.Studio.Views.Workflow
             var vm = DataContext as WorkflowInputDataViewModel;
             if(vm != null)
             {
-                if(tabItem != null && tabItem.Header.ToString() == "XML")
+                if(tabItem != null)
                 {
-                    vm.XmlData = _editor.Text;
-                    vm.SetWorkflowInputData();
+                    if (tabItem.Header.ToString() == "XML")
+                    {
+                        vm.XmlData = _editor.Text;
+                        vm.SetWorkflowInputData();
+                    }
+                    else if (tabItem.Header.ToString() == "JSON")
+                    {
+                        var xmlDocument = JsonConvert.DeserializeXmlNode(_jsonEditor.Text, "DataList");
+                        var xmlData = xmlDocument.InnerXml;
+                        vm.XmlData = xmlData;
+                        vm.SetWorkflowInputData();
+                    }
                 }
             }
             DestroyTimer();

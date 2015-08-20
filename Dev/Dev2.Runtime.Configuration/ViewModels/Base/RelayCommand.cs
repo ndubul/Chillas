@@ -53,6 +53,7 @@ namespace Dev2.Runtime.Configuration.ViewModels.Base
             if (CanExecuteChanged != null)
             {
                 CanExecuteChanged(this, EventArgs.Empty);
+                CommandManager.InvalidateRequerySuggested();
             }
         }
         #endregion

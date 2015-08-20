@@ -133,5 +133,10 @@ namespace Dev2.Security
             : base(authorizationContext, action, canExecute)
         {
         }
+
+        public void RaiseCanExecuteChanged()
+        {
+             CommandManager.InvalidateRequerySuggested();
+        }
     }
 }
