@@ -263,34 +263,34 @@ Scenario Outline: Find all occurances of Characters in a string
 	| <result> |
 
 Examples: 
-| No | Index            | Characters                        | Directon      | Result                          |
-| 1  | All Occurrences  | ""                                | Left to Right | No Character to search          |
-| 2  | All Occurrences  | " "                               | Left to Right | [[result]] = 1                  |
-| 3  | All Occurrences  | w                                 | Left to Right | [[rs(1).a]] = 1,[[rs(2).a]] = 5 |
-| 4  | All Occurrences  | [[b]] = ""                        | Left to Right | [[result]] = -1                 |
-| 5  | All Occurrences  | [[rs(1).a]] = a                   | Left to Right | [[result]] = 2                  |
-| 6  | All Occurrences  | [[rs().a]] = w                    | Left to Right | [[rs(1).a]] = 1,[[rs(2).a]] = 5 |
-| 7  | All Occurrences  | [[rs().a]] = w                    | Right to Left | [[rs(1).a]] = 4,[[rs(2).a]] = 8 |
-| 8  | All Occurrences  | [[rs(*).a]] = w                   | Right to Left | [[rs(1).a]] = 4,[[rs(2).a]] = 8 |
-| 9  | All Occurrences  | [[int]] = 1,[[rs([[int]]).a]] = a | Right to Left | [[rs(1).a]] = 7                 |
-| 10 | First Occurrence | ""                                | Left to Right | No Character to search          |
-| 11 | First Occurrence | " "                               | Left to Right | [[result]] = 1                  |
-| 12 | First Occurrence | w                                 | Left to Right | [[result]] = 2                  |
-| 13 | First Occurrence | [[b]] = ""                        | Left to Right | [[result]] = -1                 |
-| 14 | First Occurrence | [[rs(1).a]] = a                   | Left to Right | [[result]] = 2                  |
-| 15 | First Occurrence | [[rs().a]] = w                    | Left to Right | [[rs(1).a]] = 1                 |
-| 16 | First Occurrence | [[rs().a]] = w                    | Right to Left | [[rs(1).a]] = 4                 |
-| 17 | First Occurrence | [[rs(*).a]] = w                   | Right to Left | [[rs(1).a]] = 4                 |
-| 18 | First Occurrence | [[int]] = 1,[[rs([[int]]).a]] = w | Right to Left | [[rs(1).a]] = 4                 |
-| 19 | Last Occurrence  | ""                                | Left to Right | No Character to search          |
-| 20 | Last Occurrence  | " "                               | Left to Right | [[result]] = 1                  |
-| 21 | Last Occurrence  | w                                 | Left to Right | [[result]] = 2                  |
-| 22 | Last Occurrence  | [[b]] = ""                        | Left to Right | [[result]] = -1                 |
-| 23 | Last Occurrence  | [[rs(1).a]] = a                   | Left to Right | [[result]] = 2                  |
-| 24 | Last Occurrence  | [[rs().a]] = w                    | Left to Right | [[rs(1).a]] = 1                 |
-| 25 | Last Occurrence  | [[rs().a]] = w                    | Right to Left | [[rs(1).a]] = 4                 |
-| 26 | Last Occurrence  | [[rs(*).a]] = w                   | Right to Left | [[rs(1).a]] = 4                 |
-| 27 | Last Occurrence  | [[int]] = 1,[[rs([[int]]).a]] = w | Right to Left | [[rs(1).a]] = 4                 |
+| No | Index            | Characters                        | Directon      | Result                           |
+| 1  | All Occurrences  | ""                                | Left to Right | No Character to search           |
+| 2  | All Occurrences  | " "                               | Left to Right | [[result]] = 1                   |
+| 3  | All Occurrences  | w                                 | Left to Right | [[rs(1).a]] = 1,[[rs(2).a]] = 5  |
+| 4  | All Occurrences  | [[b]] = ""                        | Left to Right | [[result]] = -1                  |
+| 5  | All Occurrences  | [[rs(1).a]] = a                   | Left to Right | [[result]] = 2                   |
+| 6  | All Occurrences  | [[rs().a]] = w                    | Left to Right | [[rs(1).a]] = 1,[[rs(2).a]] = 5  |
+| 7  | All Occurrences  | [[rs().a]] = w                    | Right to Left | [[rs(1).a]] = 4,[[rs(2).a]] = 8  |
+| 8  | All Occurrences  | [[rs(*).a]] = w                   | Right to Left | [[rs(1).a]] = 4,[[rs(2).a]] = 8  |
+| 9  | All Occurrences  | [[int]] = 1,[[rs([[int]]).a]] = a | Right to Left | [[rs(1).a]] = 7                  |
+| 10 | First Occurrence | ""                                | Left to Right | No Character to search           |
+| 11 | First Occurrence | " "                               | Left to Right | [[result]] = 1                   |
+| 12 | First Occurrence | w                                 | Left to Right | [[result]] = 2                   |
+| 13 | First Occurrence | [[b]] = ""                        | Left to Right | [[result]] = -1                  |
+| 14 | First Occurrence | [[rs(1).a]] = a                   | Left to Right | [[result]] = 2                   |
+| 15 | First Occurrence | [[rs().a]] = w                    | Left to Right | [[rs(1).a]] = 1                  |
+| 16 | First Occurrence | [[rs().a]] = w                    | Right to Left | [[rs(1).a]] = 4                  |
+| 17 | First Occurrence | [[rs(*).a]] = w                   | Right to Left | [[rs(1).a]] = 4                  |
+| 18 | First Occurrence | [[int]] = 1,[[rs([[int]]).a]] = w | Right to Left | [[rs(1).a]] = 4                  |
+| 19 | Last Occurrence  | ""                                | Left to Right | No Character to search           |
+| 20 | Last Occurrence  | " "                               | Left to Right | [[result]] = 1                   |
+| 21 | Last Occurrence  | w                                 | Left to Right | [[result]] = 2                   |
+| 22 | Last Occurrence  | [[b]] = ""                        | Left to Right | [[result]] = -1                  |
+| 23 | Last Occurrence  | [[rs(1).a]] = a                   | Left to Right | [[result]] = 2                   |
+| 24 | Last Occurrence  | [[rs().a]] = w                    | Left to Right | [[rs(1).a]] = 1                  |
+| 25 | Last Occurrence  | [[rs().a]] = w                    | Right to Left | [[rs(1).a]] = 4                  |
+| 26 | Last Occurrence  | [[rs(*).a]] = w                   | Right to Left | [[rs(1).a]] = 4                  |
+| 27 | Last Occurrence  | [[int]] = 1,[[rs([[int]]).a]] = w | Right to Left | [[rs([[int]]).a]] = 4, [[int]]=1 |
 
 Scenario Outline: Find all Recordsets with invalid Indexes
 	Given I have a findindex variable "<var>" equal to "<value>"
