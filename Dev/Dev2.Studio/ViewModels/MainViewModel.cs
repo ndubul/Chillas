@@ -954,7 +954,7 @@ namespace Dev2.Studio.ViewModels
         {
 
             var server = CustomContainer.Get<IServer>();
-            var viewModel = new ManageWebServiceViewModel(new ManageWebServiceModel(server.UpdateRepository, server.QueryProxy, this,""), null, selectedSource);
+            var viewModel = new ManageWebServiceViewModel(new ManageWebServiceModel(server.UpdateRepository, server.QueryProxy, this,""), selectedSource);
             var vm = new SourceViewModel<IWebService>(EventPublisher, viewModel, PopupProvider, new ManageWebserviceControl());
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), vm);
             AddAndActivateWorkSurface(workSurfaceContextViewModel);

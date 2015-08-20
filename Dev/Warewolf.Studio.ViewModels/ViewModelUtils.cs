@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
+using Dev2.Runtime.Configuration.ViewModels.Base;
+using Dev2.Security;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -24,10 +25,36 @@ namespace Warewolf.Studio.ViewModels
 
         static void RaiseCanExecuteChangedInternal(ICommand commandForCanExecuteChange)
         {
-            var command = commandForCanExecuteChange as DelegateCommand;
-            if(command != null)
+            if(commandForCanExecuteChange != null)
             {
-                command.RaiseCanExecuteChanged();
+                var typeOfCommand = commandForCanExecuteChange.GetType();
+            
+                if (typeOfCommand == typeof(Microsoft.Practices.Prism.Commands.DelegateCommand))
+                {
+                    var command = commandForCanExecuteChange as Microsoft.Practices.Prism.Commands.DelegateCommand;
+                    if (command != null)
+                    {
+                        command.RaiseCanExecuteChanged();
+                        return;
+                    }
+                }
+                if (typeOfCommand == typeof(RelayCommand))
+                {
+                    var command = commandForCanExecuteChange as RelayCommand;
+                    if (command != null)
+                    {
+                        command.RaiseCanExecuteChanged();
+                        return;
+                    }
+                }
+                if (typeOfCommand == typeof(AuthorizeCommand))
+                {
+                    var command = commandForCanExecuteChange as AuthorizeCommand;
+                    if (command != null)
+                    {
+                        command.RaiseCanExecuteChanged();
+                    }
+                }
             }
         }
     }
