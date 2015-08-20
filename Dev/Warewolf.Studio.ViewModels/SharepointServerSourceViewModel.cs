@@ -49,6 +49,7 @@ namespace Warewolf.Studio.ViewModels
         string _headerText;
         string _testMessage;
         bool _testFailed;
+        string _path;
 
         public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
             : base(ResourceType.SharepointServerSource)
@@ -61,9 +62,10 @@ namespace Warewolf.Studio.ViewModels
             Executor = executor;
             _updateManager = updateManager;
             _aggregator = aggregator;
-            IsWindows = true;
+            ServerName = String.Empty;
             _warewolfserverName = updateManager.ServerName;
-            _authenticationType = AuthenticationType.Anonymous;
+            _authenticationType = AuthenticationType.Windows;
+            IsWindows = true;
             HeaderText = Resources.Languages.Core.SharePointServiceNewHeaderLabel;
             Header = Resources.Languages.Core.SharePointServiceNewHeaderLabel;
             TestCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(TestConnection, CanTest);
@@ -391,6 +393,19 @@ namespace Warewolf.Studio.ViewModels
             get { return AuthenticationType == AuthenticationType.User; }
         }
 
+        public string Path
+        {
+            get
+            {
+                return _path;
+            }
+            set
+            {
+                _path = value;
+                OnPropertyChanged(() => Path);
+            }
+        }
+
         ISharepointServerSource ToNewSource()
         {
             return new SharePointServiceSourceDefinition
@@ -596,11 +611,11 @@ namespace Warewolf.Studio.ViewModels
 
             return new SharePointServiceSourceDefinition
             {
-                Name = Item.Name,
+                Name = ResourceName,
                 Server = ServerName,
                 AuthenticationType = AuthenticationType,
                 Id = Item.Id,
-                Path = Item.Path
+                Path = Path
             };
         }
 

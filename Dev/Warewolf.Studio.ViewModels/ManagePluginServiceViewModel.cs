@@ -91,7 +91,8 @@ namespace Warewolf.Studio.ViewModels
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "model", model } });
             _model = model;
-          
+            IsNew = true;
+            Id = Guid.NewGuid();
             Inputs = new ObservableCollection<IServiceInput>();
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
             AvalaibleActions = new ObservableCollection<IPluginAction>();
@@ -115,6 +116,8 @@ namespace Warewolf.Studio.ViewModels
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "model", model } });
             _model = model;
             _pluginService = selectedSource;
+            Item = selectedSource;
+            IsNew = false;
             FromModel(selectedSource);
         }
 
@@ -136,7 +139,7 @@ namespace Warewolf.Studio.ViewModels
 
         void Save()
         {
-            if (Item == null)
+            if (IsNew)
             {
                 var saveOutPut = _saveDialog.ShowSaveDialog();
                 if (saveOutPut == MessageBoxResult.OK || saveOutPut == MessageBoxResult.Yes)
@@ -157,6 +160,8 @@ namespace Warewolf.Studio.ViewModels
             }
             ErrorText = "";
         }
+
+        public bool IsNew { get; set; }
 
         public string MappingsHeader
         {
@@ -709,7 +714,7 @@ namespace Warewolf.Studio.ViewModels
                 Source = SelectedSource,
                 Name = Name,
                 Path = Path,
-                Id = _pluginService == null ? Guid.NewGuid() : _pluginService.Id
+                Id = Item == null ? Guid.NewGuid() : Item.Id
             };
 
         }

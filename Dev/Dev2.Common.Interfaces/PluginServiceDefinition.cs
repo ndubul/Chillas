@@ -64,7 +64,7 @@ namespace Dev2.Common.Interfaces
             {
                 return true;
             }
-            return string.Equals(Name, other.Name) && Equals(Source, other.Source) && string.Equals(Path, other.Path) && Equals(Action, other.Action);
+            return string.Equals(Name, other.Name) && Id.Equals(other.Id) && Equals(Source, other.Source) && string.Equals(Path, other.Path) && Equals(Action, other.Action);
         }
 
         /// <summary>

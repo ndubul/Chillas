@@ -44,7 +44,7 @@ namespace Dev2.Common.Interfaces.Core
         /// <param name="other">An object to compare with this object.</param>
         public bool Equals(ISharepointServerSource other)
         {
-            return Equals(other as WebServiceSourceDefinition);
+            return Equals(other as SharePointServiceSourceDefinition);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Dev2.Common.Interfaces.Core
             {
                 return false;
             }
-            return Equals((WebServiceSourceDefinition)obj);
+            return Equals((SharePointServiceSourceDefinition)obj);
         }
 
         /// <summary>
