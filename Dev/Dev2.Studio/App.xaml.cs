@@ -9,6 +9,7 @@
 */
 
 using System;
+using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
@@ -21,12 +22,17 @@ using System.Windows.Threading;
 using Dev2.Common;
 using Dev2.Common.Common;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Help;
 using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Common.Wrappers;
 using Dev2.CustomControls.Progress;
 using Dev2.Diagnostics.Debug;
 using Dev2.Instrumentation;
+using Microsoft.Practices.Prism.PubSubEvents;
+using Warewolf.Core;
+using Warewolf.Studio.Models.Help;
 using Warewolf.Studio.Models.Toolbox;
+using Warewolf.Studio.ViewModels.Help;
 using Warewolf.Studio.ViewModels.ToolBox;
 // ReSharper disable RedundantUsingDirective
 using Dev2.Interfaces;
@@ -172,6 +178,8 @@ namespace Dev2.Studio
             CustomContainer.Register<IServer>(server);
             var toolBoxViewModel = new ToolboxViewModel(new ToolboxModel(server, server, null), new ToolboxModel(server, server, null));
             CustomContainer.Register<IToolboxViewModel>(toolBoxViewModel);
+            var helpViewModel = new HelpWindowViewModel(new HelpDescriptorViewModel(new HelpDescriptor("", "<body>This is the default help</body>", null)), new HelpModel(new EventAggregator()));
+            CustomContainer.Register<IHelpWindowViewModel>(helpViewModel);
             var splashViewModel = new SplashViewModel(server, new ExternalProcessExecutor());
 
             SplashPage splashPage = new SplashPage();

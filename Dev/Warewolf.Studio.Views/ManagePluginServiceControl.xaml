@@ -302,7 +302,12 @@
                                     Command="{Binding TestPluginCommand}"
                                     HorizontalAlignment="Left" 
                                     VerticalAlignment="Bottom" 
-                                    Width="100">Test</Button>
+                                    Width="100">Test
+                                <i:Interaction.Behaviors>
+                                    <core:HelpSetter Text="{x:Static languages:Core.PluginServiceTestHelp}"
+                                 DataContext="{Binding}" />
+                                </i:Interaction.Behaviors>
+                            </Button>
                             <views:CircularProgressBar Grid.Column="1"
                                                        Width="25"
                                                        HorizontalAlignment="Right" 

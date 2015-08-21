@@ -11,6 +11,7 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Threading;
+using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
@@ -155,10 +156,11 @@ namespace Warewolf.Studio.ViewModels
 
         public override void UpdateHelpDescriptor(string helpText)
         {
-            var helpDescriptor = new HelpDescriptor("", helpText, null);
-            VerifyArgument.IsNotNull("helpDescriptor", helpDescriptor);
-            _aggregator.GetEvent<HelpChangedEvent>().Publish(helpDescriptor);
-
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
 
         void FromSource(IWebServiceSource webServiceSource)
