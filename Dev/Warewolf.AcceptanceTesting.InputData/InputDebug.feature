@@ -1,7 +1,9 @@
-﻿Feature: InputDebug
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+﻿Feature:Ensuring the Input Debug window is fully functional
+# Open Debug window to add inputs
+# Working with tabs in Debug window
+# Message when there are no inputs
+# Incorrect Xml syntax entered
+# Incorrect Json syntax entered
 
 @ignore
 Scenario: Open Debug window to add inputs
@@ -18,6 +20,7 @@ Scenario: Open Debug window to add inputs
 	And the debug output window appears as
 	| Output |
 	| [[b]]  |
+
 	
 Scenario Outline: Working with tabs in Debug window
 	Given I have a new workflow
@@ -32,16 +35,47 @@ Scenario Outline: Working with tabs in Debug window
 	And I assign '<variable1>' the value '<value>'
 	When I switch to the '<Mode>' tab
 	And '<value>' is visible in the '<Mode>' tab
+	And remember debug input equals "Checked"
 	When I press '<launch>'
 	And the execution has '<error>' error
 	Then '<response>'
-	And the output appears as 
-	|                                              |
-	| <DataList><b>Successful Test.</b></DataList> |
 	Examples: 
-	| variable1 | Value | type  | variable2 | type2  | Debug | Mode       | launch | Response     |
-	| [[a]]     | Test  | input | [[b]]     | output | F5    | Input Data | F6     | [[b]] = Test |
-	
+	| variable1     | Value | type  | variable2 | type2  | Debug | Mode       | launch | Response                                     |
+	| [[a]]         | Test  | input | [[b]]     | output | F5    | Input Data | F6     | [[b]] = Test                                 |
+	| [[rec().set]] | Test  |       | [[b]]     | output | F6    | Input Data |        | [[b]] = Test                                 |
+	| [[a]]         | Test  | input | [[b]]     | output | F5    | Input Data | F7     | <DataList><b>Successful Test.</b></DataList> |
+	| [[var]]       | Test  | input | [[b]]     | output | F5    | Xml        | F6     | [[b]] = Test                                 |
+	| [[rec().set]] | Test  |       | [[b]]     | output | F6    | Xml        |        | [[b]] = Test                                 |
+	| [[a]]         | Test  | input | [[b]]     | output | F5    | Xml        | F7     | <DataList><b>Successful Test.</b></DataList> |
+	| [[var]]       | Test  | input | [[b]]     | output | F5    | Json       | F6     | [[b]] = Test                                 |
+	| [[rec().set]] | Test  |       | [[b]]     | output | F6    | Json       |        | [[b]] = Test                                 |
+	| [[a]]         | Test  | input | [[b]]     | output | F5    | Json       | F7     | <DataList><b>Successful Test.</b></DataList> |	
 
 
+Scenario: Message when there are no inputs
+	Given I have a new workflow
+	And I press 'F5'
+	Then the Input Debug window is opened
+	And "Mark the Input checkbox in the variable window to set workflow inputs" message is visible
 
+Scenario: Incorrect Xml syntax entered
+	Given I a new workflow
+	And I have variable "[[variable1]]" set as Input
+	And I press 'F5'
+	When I switch to the "Xml" tab
+	And the xml "<DataList><a></a></DataList>" is visible
+	And I insert "<DataList><a>Test</a><DataList"
+	And I execute the input
+	And the execution has "An" error
+	Then error message "Incorrectly formatted Xml has been entereed" is visible
+
+	Scenario: Incorrect Json syntax entered
+	Given I a new workflow
+	And I have variable "[[variable1]]" set as Input
+	And I press 'F5'
+	When I switch to the "Xml" tab
+	And the json "{"variable": ""}" is visible
+	And I insert "{"variable": "test"variable2}"
+	And I execute the input
+	And the execution has "An" error
+	Then error message "Incorrectly formatted Json has been entereed" is visible
