@@ -116,7 +116,9 @@
     <Compile Include="ExplorerItemNodeViewModel.cs" />
     <Compile Include="ExplorerItemViewModel.cs" />
     <Compile Include="ExplorerViewModel.cs" />
+    <Compile Include="Help\HelpDescriptorViewModel.cs" />
     <Compile Include="Help\HelpModel.cs" />
+    <Compile Include="Help\HelpWindowViewModel.cs" />
     <Compile Include="Help\IHelpChangedEvent.cs" />
     <Compile Include="IDockViewModel.cs" />
     <Compile Include="ManageDatabaseServiceViewModel.cs" />

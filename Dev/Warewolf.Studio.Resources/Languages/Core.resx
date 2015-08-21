@@ -805,6 +805,12 @@ You need Administrator permission.</value>
   <data name="DatabaseServiceSaveHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;DatabaseServiceSaveHelp&lt;/p&gt;&lt;/body&gt;</value>
   </data>
+  <data name="WebServiceSourceSaveHelp" xml:space="preserve">
+    <value>&lt;body&gt;&lt;p&gt;WebServiceSourceSaveHelp&lt;/p&gt;&lt;/body&gt;</value>
+  </data>
+  <data name="WebServiceSourceServerHelp" xml:space="preserve">
+    <value>&lt;body&gt;&lt;p&gt;WebServiceSourceServerHelp&lt;/p&gt;&lt;/body&gt;</value>
+  </data>
   <data name="WebServiceWebRequestHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;WebServiceWebRequestHelp&lt;/p&gt;&lt;/body&gt;</value>
   </data>
@@ -876,6 +882,9 @@ You need Administrator permission.</value>
   </data>
   <data name="PluginServiceRefreshHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;PluginServiceRefreshHelp&lt;/p&gt;&lt;/body&gt;</value>
+  </data>
+  <data name="PluginServiceTestHelp" xml:space="preserve">
+    <value>&lt;body&gt;&lt;p&gt;DatabaseServiceTestHelp&lt;/p&gt;&lt;/body&gt;</value>
   </data>
   <data name="PluginServiceTestInputHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;PluginServiceTestInputHelp&lt;/p&gt;&lt;/body&gt;</value>

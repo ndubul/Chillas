@@ -58,7 +58,7 @@
                      Text="{Binding HostName,UpdateSourceTrigger=PropertyChanged}"
                      views:FocusExtension.IsFocused="True">
                 <i:Interaction.Behaviors>
-                    <core:HelpSetter Text="{x:Static languages:Core.DatabaseSourceServerHelp}" DataContext="{Binding}" />
+                    <core:HelpSetter Text="{x:Static languages:Core.WebServiceSourceServerHelp}" DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </TextBox>
             <TextBlock VerticalAlignment="Center" 
@@ -219,7 +219,7 @@
                 Command="{Binding OkCommand}" 
                 Content="Save">
             <i:Interaction.Behaviors>
-                <core:HelpSetter Text="{x:Static languages:Core.DatabaseSourceSaveHelp}" DataContext="{Binding}" />
+                <core:HelpSetter Text="{x:Static languages:Core.WebServiceSourceSaveHelp}" DataContext="{Binding}" />
             </i:Interaction.Behaviors>
         </Button>
     </Grid>

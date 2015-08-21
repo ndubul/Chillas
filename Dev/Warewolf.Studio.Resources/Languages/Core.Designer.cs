@@ -1621,6 +1621,15 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseServiceTestHelp&lt;/p&gt;&lt;/body&gt;.
+        /// </summary>
+        public static string PluginServiceTestHelp {
+            get {
+                return ResourceManager.GetString("PluginServiceTestHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceTestInputHelp&lt;/p&gt;&lt;/body&gt;.
         /// </summary>
         public static string PluginServiceTestInputHelp {
@@ -2441,6 +2450,24 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string WebServiceSelectedSourceHelp {
             get {
                 return ResourceManager.GetString("WebServiceSelectedSourceHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceSourceSaveHelp&lt;/p&gt;&lt;/body&gt;.
+        /// </summary>
+        public static string WebServiceSourceSaveHelp {
+            get {
+                return ResourceManager.GetString("WebServiceSourceSaveHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceSourceServerHelp&lt;/p&gt;&lt;/body&gt;.
+        /// </summary>
+        public static string WebServiceSourceServerHelp {
+            get {
+                return ResourceManager.GetString("WebServiceSourceServerHelp", resourceCulture);
             }
         }
         

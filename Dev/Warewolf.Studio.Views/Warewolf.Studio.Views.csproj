@@ -47,6 +47,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Editors.XamComboEditor.v15.1.Design.dll</HintPath>
     </Reference>
+    <Reference Include="InfragisticsWPF4.Controls.Editors.XamRichTextEditor.v15.1, Version=15.1.20151.2055, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Binaries\InfragisticsWPF4.Controls.Editors.XamRichTextEditor.v15.1.dll</HintPath>
+    </Reference>
     <Reference Include="InfragisticsWPF4.Controls.Grids.XamGrid.v15.1, Version=15.1.20151.2055, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\InfragisticsWPF4.Controls.Grids.XamGrid.v15.1.dll</HintPath>
@@ -70,6 +74,14 @@
     <Reference Include="InfragisticsWPF4.DataPresenter.v15.1, Version=15.1.20151.2055, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\InfragisticsWPF4.DataPresenter.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.Documents.RichTextDocument.Html.v15.1, Version=15.1.20151.2055, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Binaries\InfragisticsWPF4.Documents.RichTextDocument.Html.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="InfragisticsWPF4.Documents.RichTextDocument.v15.1, Version=15.1.20151.2055, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Binaries\InfragisticsWPF4.Documents.RichTextDocument.v15.1.dll</HintPath>
     </Reference>
     <Reference Include="InfragisticsWPF4.DragDrop.v15.1, Version=15.1.20151.2055, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -134,6 +146,9 @@
     </Compile>
     <Compile Include="ExplorerViewTestClass.cs" />
     <Compile Include="FocusExtension.cs" />
+    <Compile Include="HelpView.xaml.cs">
+      <DependentUpon>HelpView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ManageDatabaseServiceControl.xaml.cs">
       <DependentUpon>ManageDatabaseServiceControl.xaml</DependentUpon>
     </Compile>
@@ -199,6 +214,10 @@
     <Page Include="CircularProgressBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HelpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ManageDatabaseServiceControl.xaml">
       <SubType>Designer</SubType>
