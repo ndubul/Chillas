@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
 using System.Xml;
+using Dev2.Common.Interfaces.PopupController;
 using Dev2.Data.Interfaces;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.UI;
@@ -44,6 +45,7 @@ namespace Dev2.Studio.Views.Workflow
             SetUpTextEditor();
             AddBlackOutEffect();
             _currentTab = InputTab.Grid;
+            _popupController = CustomContainer.Get<Dev2.Common.Interfaces.Studio.Controller.IPopupController>();
         }
 
         private TextEditor _editor;
@@ -53,6 +55,7 @@ namespace Dev2.Studio.Views.Workflow
         DispatcherTimer _foldingUpdateTimer;
         Grid _blackoutGrid;
         InputTab _currentTab;
+        Common.Interfaces.Studio.Controller.IPopupController _popupController;
 
         private void SetUpTextEditor()
         {
@@ -122,8 +125,7 @@ namespace Dev2.Studio.Views.Workflow
                                 ShowDataInOutputWindow(vm.XmlData);
                                 break;
                             case InputTab.Json:
-                                var xmlDocument = JsonConvert.DeserializeXmlNode(_jsonEditor.Text, "DataList");
-                                vm.XmlData = xmlDocument.InnerXml;
+                                vm.XmlData = GetXmlDataFromJson();
                                 vm.SetWorkflowInputData();
                                 vm.SetXmlData();
                                 ShowDataInOutputWindow(vm.XmlData);
@@ -153,7 +155,8 @@ namespace Dev2.Studio.Views.Workflow
                                     }
                                     catch
                                     {
-                                        // ignored
+
+                                        ShowInvalidDataPopupMessage();
                                     }
                                 }
                                 break;
@@ -172,8 +175,7 @@ namespace Dev2.Studio.Views.Workflow
                         var xmlData = _editor.Text;
                         if (_currentTab == InputTab.Json)
                         {
-                            var xmlDocument = JsonConvert.DeserializeXmlNode(_jsonEditor.Text, "DataList");
-                            xmlData = xmlDocument.InnerXml;                           
+                            xmlData = GetXmlDataFromJson();                           
                         }
                         vm.XmlData = xmlData;
                         vm.SetWorkflowInputData();
@@ -181,6 +183,25 @@ namespace Dev2.Studio.Views.Workflow
                     }
                 }
             }
+        }
+
+        void ShowInvalidDataPopupMessage()
+        {
+            _popupController.Show("The data you have entered is invalid. Please correct the data.", "Invalid data entered.", MessageBoxButton.OK, MessageBoxImage.Error, null);
+        }
+
+        string GetXmlDataFromJson()
+        {
+            try
+            {
+                var xmlDocument = JsonConvert.DeserializeXmlNode(_jsonEditor.Text, "DataList");
+                return xmlDocument.InnerXml;
+            }
+            catch(Exception)
+            {
+                ShowInvalidDataPopupMessage();
+            }
+            return _editor.Text;
         }
 
         private void MenuItemAddRow(object sender, RoutedEventArgs e)
@@ -315,9 +336,7 @@ namespace Dev2.Studio.Views.Workflow
                     }
                     else if (tabItem.Header.ToString() == "JSON")
                     {
-                        var xmlDocument = JsonConvert.DeserializeXmlNode(_jsonEditor.Text, "DataList");
-                        var xmlData = xmlDocument.InnerXml;
-                        vm.XmlData = xmlData;
+                        vm.XmlData = GetXmlDataFromJson();
                         vm.SetWorkflowInputData();
                     }
                 }
@@ -377,6 +396,7 @@ namespace Dev2.Studio.Views.Workflow
             Application.Current.MainWindow.Effect = effect;
         }
     }
+  
 
     public enum InputTab
     {
