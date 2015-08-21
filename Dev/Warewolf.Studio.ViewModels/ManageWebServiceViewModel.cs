@@ -202,7 +202,7 @@ namespace Warewolf.Studio.ViewModels
         {
             try
             {
-                if (Item == null)
+                if (_webService == null)
                 {
                     var saveOutPut = _saveDialog.ShowSaveDialog();
                     if (saveOutPut == MessageBoxResult.OK || saveOutPut == MessageBoxResult.Yes)

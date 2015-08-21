@@ -27,7 +27,6 @@ using Dev2.Common.Interfaces.Threading;
 using Dev2.Common.Interfaces.Versioning;
 using Dev2.ConnectionHelpers;
 using Dev2.Core.Tests.Environments;
-using Dev2.Core.Tests.Utils;
 using Dev2.Interfaces;
 using Dev2.Messages;
 using Dev2.Models;
@@ -37,6 +36,7 @@ using Dev2.Studio.Core;
 using Dev2.Studio.Core.AppResources.DependencyInjection.EqualityComparers;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
+using Dev2.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
@@ -2337,7 +2337,7 @@ namespace Dev2.Core.Tests.ModelTests
             ExplorerItemModel resourceItem;
 #pragma warning disable 168
             var serverItem = SetupExplorerItemModelWithFolderAndOneChildMockedStudioRepository(displayName, envID, resourceId, new Mock<IConnectControlSingleton>().Object, out resourceItem, mockStudioRepository.Object);
-            ExplorerItemModel childItem = new ExplorerItemModel(mockStudioRepository.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, new Mock<IConnectControlSingleton>().Object) { DisplayName = "bob" };
+            ExplorerItemModel childItem = new ExplorerItemModel(mockStudioRepository.Object, new SynchronousAsyncWorker(), new Mock<IConnectControlSingleton>().Object) { DisplayName = "bob" };
             resourceItem.Children.Add(childItem);
 #pragma warning restore 168
             //------------Execute Test---------------------------
@@ -4584,7 +4584,7 @@ namespace Dev2.Core.Tests.ModelTests
 
         static ExplorerItemModel SetupExplorerItemModelWithFolderAndOneChildMockedStudioRepository(string displayName, Guid envID, Guid resourceId, IConnectControlSingleton connectControlSingleton, out ExplorerItemModel resourceItem, IStudioResourceRepository repo)
         {
-            var serverItem = new ExplorerItemModel(repo, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, connectControlSingleton)
+            var serverItem = new ExplorerItemModel(repo, new SynchronousAsyncWorker(), connectControlSingleton)
             {
                 ResourceType = ResourceType.Server,
                 DisplayName = displayName,
@@ -4592,7 +4592,7 @@ namespace Dev2.Core.Tests.ModelTests
                 Permissions = Permissions.Administrator,
                 EnvironmentId = envID
             };
-            var folderItem = new ExplorerItemModel(repo, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, connectControlSingleton)
+            var folderItem = new ExplorerItemModel(repo, new SynchronousAsyncWorker(), connectControlSingleton)
             {
                 ResourceType = ResourceType.Folder,
                 DisplayName = Guid.NewGuid().ToString(),
@@ -4601,7 +4601,7 @@ namespace Dev2.Core.Tests.ModelTests
                 EnvironmentId = envID
             };
 
-            resourceItem = new ExplorerItemModel(repo, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, connectControlSingleton)
+            resourceItem = new ExplorerItemModel(repo, new SynchronousAsyncWorker(), connectControlSingleton)
             {
                 ResourceType = ResourceType.WorkflowService,
                 DisplayName = Guid.NewGuid().ToString(),

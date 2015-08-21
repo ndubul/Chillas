@@ -162,7 +162,14 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                 {
                     if(!positions.ContainsKey(a.OutputVariable))
                     {
-                        positions.Add(a.OutputVariable, 1);
+                        if (update == 0)
+                        {
+                            positions.Add(a.OutputVariable, 1);
+                        }
+                        else
+                        {
+                            positions.Add(a.OutputVariable, update);
+                        }
                     }
                     IsSingleValueRule.ApplyIsSingleValueRule(a.OutputVariable, allErrors);
                 });
