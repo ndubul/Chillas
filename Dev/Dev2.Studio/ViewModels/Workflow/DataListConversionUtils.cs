@@ -15,6 +15,7 @@ using System.Linq;
 using Dev2.Data;
 using Dev2.Data.Binary_Objects;
 using Dev2.Data.Interfaces;
+using Dev2.Data.Util;
 using Dev2.DataList.Contract.Binary_Objects;
 using Dev2.Studio.Core;
 
@@ -90,6 +91,7 @@ namespace Dev2.ViewModels.Workflow
                     singleRes.Field = col.Name;
                     singleRes.RecordsetIndex = column.Key.ToString();
                     singleRes.Value = col.Value;
+                    singleRes.DisplayValue = DataListUtil.CreateRecordsetDisplayValue(recordSet.Name, col.Name, column.Key.ToString());
                     singleRes.Description = col.Description;
                     result.Add(singleRes);
 

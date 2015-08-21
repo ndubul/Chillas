@@ -23,6 +23,7 @@ using Dev2.Data.Binary_Objects;
 using Dev2.Data.Interfaces;
 using Dev2.DataList.Contract.Binary_Objects;
 using Dev2.Instrumentation;
+using Dev2.Runtime.Collections;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Services.Security;
 using Dev2.Session;
@@ -657,7 +658,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             if(dlItem.IsRecordset)
             {
                 IList<IScalar> recsetCols = columns;
-                foreach(var col in recsetCols)
+                foreach(var col in recsetCols.Distinct(new ScalarNameComparer()))
                 {
                     WorkflowInputs.Insert(indexToInsertAt + 1, new DataListItem
                     {
@@ -707,5 +708,43 @@ namespace Dev2.Studio.ViewModels.Workflow
 
             return result;
         }
+    }
+
+    internal class ScalarNameComparer : IEqualityComparer<IScalar>
+    {
+        #region Implementation of IEqualityComparer<in IScalar>
+
+        /// <summary>
+        /// Determines whether the specified objects are equal.
+        /// </summary>
+        /// <returns>
+        /// true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        /// <param name="x">The first object of type <paramref name="T"/> to compare.</param><param name="y">The second object of type <paramref name="T"/> to compare.</param>
+        public bool Equals(IScalar x, IScalar y)
+        {
+            if (x == null) return false;
+            if (y == null) return false;
+            if (x.Name == null && y.Name == null) return true;
+            if (x.Name != null)
+            {
+                return x.Name.Equals(y.Name, StringComparison.OrdinalIgnoreCase);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the specified object.
+        /// </summary>
+        /// <returns>
+        /// A hash code for the specified object.
+        /// </returns>
+        /// <param name="obj">The <see cref="T:System.Object"/> for which a hash code is to be returned.</param><exception cref="T:System.ArgumentNullException">The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is null.</exception>
+        public int GetHashCode(IScalar obj)
+        {
+            return obj.Name.GetHashCode();
+        }
+
+        #endregion
     }
 }
