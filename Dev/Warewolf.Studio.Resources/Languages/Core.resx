@@ -703,8 +703,8 @@ You need Administrator permission.</value>
   <data name="PluginServiceNewHeaderLabel" xml:space="preserve">
     <value>New Plugin Connector</value>
   </data>
-  <data name="PluginSserviceEditHeaderLabel" xml:space="preserve">
-    <value>Edit Plugin Connector - </value>
+  <data name="PluginServiceEditHeaderLabel" xml:space="preserve">
+    <value>Edit </value>
   </data>
   <data name="DatabaseSourceServerEditHeaderLabel" xml:space="preserve">
     <value>Edit </value>
@@ -782,7 +782,7 @@ You need Administrator permission.</value>
     <value>&lt;body&gt;&lt;p&gt;DatabaseSourceCancelHelp&lt;/p&gt;&lt;/body&gt;</value>
   </data>
   <data name="DatabaseServiceSourceTypesHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseServiceSourceTypesHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>&lt;h1&gt;Database Service Source Types&lt;/h1&gt;&lt;br/&gt;Allows you to select a database souce type</value>
   </data>
   <data name="DatabaseServiceEditSourceHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;DatabaseServiceEditSourceHelp&lt;/p&gt;&lt;/body&gt;</value>
@@ -1013,7 +1013,7 @@ You need Administrator permission.</value>
     <value>New DB Connector</value>
   </data>
   <data name="DatabaseServiceDBSourceEditTabHeader" xml:space="preserve">
-    <value>Edit:</value>
+    <value>Edit </value>
   </data>
   <data name="DatabaseServiceInputsHeader" xml:space="preserve">
     <value>Inputs</value>
@@ -1068,5 +1068,28 @@ You need Administrator permission.</value>
   </data>
   <data name="EmailAttachmentSaveCommandHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;EmailAttachmentSaveCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+  </data>
+  <data name="StandardBodyHeaderParagraphOpening" xml:space="preserve">
+    <value>&lt;body&gt;&lt;h1&gt;</value>
+  </data>
+  <data name="StandardBodyParagraphClosing" xml:space="preserve">
+    <value>&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</value>
+  </data>
+  <data name="StandardBodyParagraphOpening" xml:space="preserve">
+    <value>&lt;/h1&gt;&lt;p&gt;</value>
+  </data>
+  <data name="StandardStyling" xml:space="preserve">
+    <value>&lt;head&gt;
+    &lt;style&gt;
+        h1 {
+            font-size: 16px;
+            font-family: 'Calibri';
+            text-decoration: underline;
+        }
+        p {
+            font-size: 12px;
+            font-family: 'Calibri';
+        }
+    &lt;/style&gt;</value>
   </data>
 </root>

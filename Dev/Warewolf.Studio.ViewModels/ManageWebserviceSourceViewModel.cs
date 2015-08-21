@@ -60,6 +60,8 @@ namespace Warewolf.Studio.ViewModels
             _authenticationType = AuthenticationType.Anonymous;
             _hostName = String.Empty;
             _defaultQuery = String.Empty;
+            _userName = String.Empty;
+            _password = String.Empty;
             HeaderText = Resources.Languages.Core.WebserviceNewHeaderLabel;
             Header = Resources.Languages.Core.WebserviceNewHeaderLabel;
             TestCommand = new DelegateCommand(TestConnection, CanTest);
@@ -107,7 +109,7 @@ namespace Warewolf.Studio.ViewModels
             else
             {
                 HeaderText = string.Format("{0} {1} ", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim());
-                Header = string.Format("{0} - {1}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name));
+                Header = string.Format("{0} {1}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name));
             }
         }
 
@@ -315,6 +317,8 @@ namespace Warewolf.Studio.ViewModels
                 HostName = HostName,
                 AuthenticationType = AuthenticationType,
                 DefaultQuery = DefaultQuery,
+                Password = Password,
+                UserName = UserName,
                 Id = Item.Id,
                 Path = Item.Path
             };
