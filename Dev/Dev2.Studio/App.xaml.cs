@@ -9,7 +9,6 @@
 */
 
 using System;
-using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
@@ -28,6 +27,7 @@ using Dev2.Common.Wrappers;
 using Dev2.CustomControls.Progress;
 using Dev2.Diagnostics.Debug;
 using Dev2.Instrumentation;
+using Dev2.Studio.Core;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warewolf.Core;
 using Warewolf.Studio.Models.Help;
@@ -172,8 +172,7 @@ namespace Dev2.Studio
         {
             // Create the window 
 
-            var server = new Warewolf.Studio.AntiCorruptionLayer.Server(new Uri(AppSettings.LocalHost));
-            server.ResourceName = "localhost";
+            var server = new Warewolf.Studio.AntiCorruptionLayer.Server(EnvironmentRepository.Instance.Source.Connection);
             server.Connect();
             CustomContainer.Register<IServer>(server);
             var toolBoxViewModel = new ToolboxViewModel(new ToolboxModel(server, server, null), new ToolboxModel(server, server, null));

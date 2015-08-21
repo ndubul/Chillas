@@ -38,6 +38,7 @@ using Dev2.Services.Security;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
+using Dev2.Threading;
 using Dev2.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -103,9 +104,9 @@ namespace Dev2.Core.Tests.Repositories
             GetEnvironmentRepository(mockEnvironment);
 
             //------------Execute Test---------------------------
-            repository.Load(Guid.Empty, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object);
+            repository.Load(Guid.Empty, new SynchronousAsyncWorker());
             //------------Assert Results-------------------------
-            mockExplorerResourceRepository.Verify(m => m.Load(It.IsAny<Guid>()), Times.Never());
+            mockExplorerResourceRepository.Verify(m => m.Load(It.IsAny<Guid>()), Times.AtLeastOnce());
         }
 
         [TestMethod]
@@ -127,7 +128,7 @@ namespace Dev2.Core.Tests.Repositories
                 };
             var countBeforeConnecting = repository.ExplorerItemModels.Count;
             //------------Execute Test---------------------------
-            repository.Load(Guid.Empty, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object);
+            repository.Load(Guid.Empty, new SynchronousAsyncWorker());
             //------------Assert Results-------------------------
             Assert.AreEqual(0, countBeforeConnecting);
         }
@@ -150,7 +151,7 @@ namespace Dev2.Core.Tests.Repositories
                 };
             var countBeforeConnecting = repository.ExplorerItemModels.Count;
             //------------Execute Test---------------------------
-            repository.Load(Guid.Empty, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object);
+            repository.Load(Guid.Empty, new SynchronousAsyncWorker());
             //------------Assert Results-------------------------
             Assert.AreEqual(0, countBeforeConnecting);
             Assert.AreEqual(0, repository.ExplorerItemModels.Count);
@@ -1885,7 +1886,7 @@ namespace Dev2.Core.Tests.Repositories
                 });
 
             //------------Assert Results-------------------------
-            mockResourceRepo.Verify(repository => repository.LoadResourceFromWorkspaceAsync(It.IsAny<Guid>(), It.IsAny<Studio.Core.AppResources.Enums.ResourceType>(), It.IsAny<Guid>()), Times.Once());
+            mockResourceRepo.Verify(repository => repository.LoadResourceFromWorkspace(It.IsAny<Guid>(), It.IsAny<Studio.Core.AppResources.Enums.ResourceType>(), It.IsAny<Guid>()), Times.Once());
         }
 
         [TestMethod]
@@ -1968,7 +1969,7 @@ namespace Dev2.Core.Tests.Repositories
                 });
 
             //------------Assert Results-------------------------
-            mockResourceRepo.Verify(repository => repository.LoadResourceFromWorkspaceAsync(It.IsAny<Guid>(), It.IsAny<Studio.Core.AppResources.Enums.ResourceType>(), It.IsAny<Guid>()), Times.Once());
+            mockResourceRepo.Verify(repository => repository.LoadResourceFromWorkspace(It.IsAny<Guid>(), It.IsAny<Studio.Core.AppResources.Enums.ResourceType>(), It.IsAny<Guid>()), Times.Once());
         }
 
         [TestMethod]
@@ -2008,7 +2009,7 @@ namespace Dev2.Core.Tests.Repositories
                 });
 
             //------------Assert Results-------------------------
-            mockResourceRepo.Verify(repository => repository.LoadResourceFromWorkspaceAsync(It.IsAny<Guid>(), It.IsAny<Studio.Core.AppResources.Enums.ResourceType>(), It.IsAny<Guid>()), Times.Once());
+            mockResourceRepo.Verify(repository => repository.LoadResourceFromWorkspace(It.IsAny<Guid>(), It.IsAny<Studio.Core.AppResources.Enums.ResourceType>(), It.IsAny<Guid>()), Times.Once());
         }
 
         [TestMethod]
@@ -2338,7 +2339,7 @@ namespace Dev2.Core.Tests.Repositories
             new EnvironmentRepository(testEnvironmentRespository);
             IEnvironmentModel internalEnvironmentModel = environmentModel;
             studioResourceRepository.GetCurrentEnvironment = () => internalEnvironmentModel.ID;
-            ExplorerItemModel serverExplorerItem = new ExplorerItemModel(studioResourceRepository, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, new Mock<IConnectControlSingleton>().Object) { EnvironmentId = Guid.NewGuid(), ResourceType = ResourceType.Server };
+            ExplorerItemModel serverExplorerItem = new ExplorerItemModel(studioResourceRepository, new SynchronousAsyncWorker(), new Mock<IConnectControlSingleton>().Object) { EnvironmentId = Guid.NewGuid(), ResourceType = ResourceType.Server };
             //------------Execute Test---------------------------
             studioResourceRepository.AddServerNode(serverExplorerItem);
             //------------Assert Results-------------------------
@@ -2370,7 +2371,7 @@ namespace Dev2.Core.Tests.Repositories
             new EnvironmentRepository(testEnvironmentRespository);
             IEnvironmentModel internalEnvironmentModel = environmentModel;
             studioResourceRepository.GetCurrentEnvironment = () => internalEnvironmentModel.ID;
-            ExplorerItemModel serverExplorerItem = new ExplorerItemModel(studioResourceRepository, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, new Mock<IConnectControlSingleton>().Object) { EnvironmentId = Guid.NewGuid(), ResourceType = ResourceType.Server };
+            ExplorerItemModel serverExplorerItem = new ExplorerItemModel(studioResourceRepository, new SynchronousAsyncWorker(), new Mock<IConnectControlSingleton>().Object) { EnvironmentId = Guid.NewGuid(), ResourceType = ResourceType.Server };
             //------------Execute Test---------------------------
             studioResourceRepository.AddServerNode(serverExplorerItem);
             //------------Assert Results-------------------------
@@ -2404,7 +2405,7 @@ namespace Dev2.Core.Tests.Repositories
             new EnvironmentRepository(testEnvironmentRespository);
             IEnvironmentModel internalEnvironmentModel = environmentModel;
             studioResourceRepository.GetCurrentEnvironment = () => internalEnvironmentModel.ID;
-            ExplorerItemModel serverExplorerItem = new ExplorerItemModel(studioResourceRepository, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, new Mock<IConnectControlSingleton>().Object) { EnvironmentId = Guid.NewGuid(), ResourceType = ResourceType.Server };
+            ExplorerItemModel serverExplorerItem = new ExplorerItemModel(studioResourceRepository, new SynchronousAsyncWorker(), new Mock<IConnectControlSingleton>().Object) { EnvironmentId = Guid.NewGuid(), ResourceType = ResourceType.Server };
             studioResourceRepository.AddServerNode(serverExplorerItem);
             //------------Execute Test---------------------------
             studioResourceRepository.AddServerNode(serverExplorerItem);

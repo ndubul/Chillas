@@ -2045,7 +2045,6 @@ namespace Dev2.Studio.ViewModels.Workflow
             if (_wd != null)
             {
 
-                _wd.Context.Items.Unsubscribe<Selection>(OnItemSelected);
                 _wd.ModelChanged -= WdOnModelChanged;
                 _wd.Context.Services.Unsubscribe<ModelService>(ModelServiceSubscribe);
                 _wd.Context.Services.Unsubscribe<ViewStateService>(ViewStateServiceSubscribe);
@@ -2055,10 +2054,7 @@ namespace Dev2.Studio.ViewModels.Workflow
 
                 _wd.Context.Services.Unsubscribe<DesignerView>(DesigenrViewSubscribe);
 
-                Selection.Unsubscribe(_wd.Context, SelectedItemChanged);
-                CommandManager.RemovePreviewExecutedHandler(_wd.View, PreviewExecutedRoutedEventHandler);
-                CommandManager.RemovePreviewCanExecuteHandler(_wd.View, CanExecuteRoutedEventHandler);
-                Selection.Unsubscribe(_wd.Context, SelectedItemChanged);
+               
             }
 
             if (_debugSelectionChangedService != null)
@@ -2103,7 +2099,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             }
             try
             {
-                CEventHelper.RemoveAllEventHandlers(_wd);
+               // CEventHelper.RemoveAllEventHandlers(_wd);
             }
             // ReSharper disable EmptyGeneralCatchClause
             catch { }
@@ -2112,7 +2108,6 @@ namespace Dev2.Studio.ViewModels.Workflow
 
             _wd = null;
             base.OnDispose();
-            GC.SuppressFinalize(this);
         }
 
 
