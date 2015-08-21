@@ -32,15 +32,16 @@ Scenario Outline: Working with tabs in Debug window
 	And I assign '<variable1>' the value '<value>'
 	When I switch to the '<Mode>' tab
 	And '<value>' is visible in the '<Mode>' tab
-	When I press '<Debug>'
+	When I press '<launch>'
 	And the execution has '<error>' error
 	Then '<response>'
 	And the output appears as 
 	|                                              |
 	| <DataList><b>Successful Test.</b></DataList> |
 	Examples: 
-	| variable1 | Value | type  | variable2 | type2  | Debug                | Mode |
-	| [[a]]     | Test  | input | [[b]]     | output | View In Browser (F7) |
+	| variable1 | Value | type  | variable2 | type2  | Debug | Mode       | launch | Response     |
+	| [[a]]     | Test  | input | [[b]]     | output | F5    | Input Data | F6     | [[b]] = Test |
+	
 
 
 
