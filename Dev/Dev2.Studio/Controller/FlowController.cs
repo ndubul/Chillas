@@ -14,7 +14,6 @@
 
 using System;
 using System.Activities.Presentation.Model;
-using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Decision;
@@ -40,11 +39,11 @@ namespace Dev2.Studio.Controller
 {
     public interface IFlowController
     {
-        void ConfigureSwitchExpression(ConfigureSwitchExpressionMessage args);
+      
 
-        void ConfigureSwitchCaseExpression(ConfigureCaseExpressionMessage args);
 
-        void EditSwitchCaseExpression(EditCaseExpressionMessage args);
+
+
 
         void Handle(ConfigureDecisionExpressionMessage message);
 
@@ -120,7 +119,7 @@ namespace Dev2.Studio.Controller
         }
         }
 
-        public void ConfigureSwitchExpression(ConfigureSwitchExpressionMessage args)
+        public static void ConfigureSwitchExpression(ConfigureSwitchExpressionMessage args)
         {
             var expression = ConfigureActivity<DsfFlowSwitchActivity>(args.ModelItem, GlobalConstants.SwitchExpressionPropertyText, args.IsNew);
             if(expression == null)
@@ -139,14 +138,14 @@ namespace Dev2.Studio.Controller
             }
             catch
             {
-                _popupController.Show(GlobalConstants.SwitchWizardErrorString,
-                                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
-                                      MessageBoxImage.Error, null);
+                //_popupController.Show(GlobalConstants.SwitchWizardErrorString,
+                //                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
+                //                      MessageBoxImage.Error, null);
             }
         }
         }
 
-        Dev2DecisionCallbackHandler StartSwitchDropWizard(ModelItem modelItem)
+        static Dev2DecisionCallbackHandler StartSwitchDropWizard(ModelItem modelItem)
         {
             var large = new ConfigureSwitch();
             var dataContext = new SwitchDesignerViewModel(modelItem);
@@ -167,7 +166,7 @@ namespace Dev2.Studio.Controller
             return null;
         }
 
-        public void ConfigureSwitchCaseExpression(ConfigureCaseExpressionMessage args)
+        public static void ConfigureSwitchCaseExpression(ConfigureCaseExpressionMessage args)
         {
             _callBackHandler = ShowSwitchDragDialog(args.ModelItem,args.ExpressionText);
             if(_callBackHandler != null)
@@ -179,14 +178,14 @@ namespace Dev2.Studio.Controller
             }
             catch
             {
-                _popupController.Show(GlobalConstants.SwitchWizardErrorString,
-                                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
-                                      MessageBoxImage.Error, null);
+                //_popupController.Show(GlobalConstants.SwitchWizardErrorString,
+                //                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
+                //                      MessageBoxImage.Error, null);
             }
             }
         }
 
-        Dev2DecisionCallbackHandler ShowSwitchDragDialog(ModelItem modelData, string variable = "")
+        static Dev2DecisionCallbackHandler ShowSwitchDragDialog(ModelItem modelData, string variable = "")
         {
             var large = new ConfigureSwitchArm();
             var dataContext = new SwitchDesignerViewModel(modelData) { SwitchVariable = variable };
@@ -208,7 +207,7 @@ namespace Dev2.Studio.Controller
         }
 
         // 28.01.2013 - Travis.Frisinger : Added for Case Edits
-        public void EditSwitchCaseExpression(EditCaseExpressionMessage args)
+        public static void EditSwitchCaseExpression(EditCaseExpressionMessage args)
         {
             ModelProperty switchCaseValue = args.ModelItem.Properties["Case"];
             var switchVal = args.ModelItem.Properties["ParentFlowSwitch"];
@@ -230,9 +229,9 @@ namespace Dev2.Studio.Controller
             }
             catch
             {
-                _popupController.Show(GlobalConstants.SwitchWizardErrorString,
-                                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
-                                      MessageBoxImage.Error, null);
+                //_popupController.Show(GlobalConstants.SwitchWizardErrorString,
+                //                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
+                //                      MessageBoxImage.Error, null);
             }
         }
         }
