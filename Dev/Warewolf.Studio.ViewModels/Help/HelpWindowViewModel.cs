@@ -84,17 +84,9 @@ namespace Warewolf.Studio.ViewModels.Help
 
         public void UpdateHelpText(string helpText)
         {
-            const string StandardStyling = "<html>" +
-                                           "<style>" +
-                                           "p.MsoNormal, li.MsoNormal, div.MsoNormal {" +
-                                           "font-size: 20pt;" +
-                                           "font-family: 'Calibri';" +
-                                           "margin-bottom: 10pt;" +
-                                           "}" +
-                                           "</style>";
-            const string StandardBodyParagraphOpening = "<body><p class=\"MsoNormal\">";
-            const string StandardBodyParagraphClosing = "</p></body></html>";
-            var textToDisplay = StandardStyling + StandardBodyParagraphOpening + helpText + StandardBodyParagraphClosing;
+            var textToDisplay = Resources.Languages.Core.StandardStyling.Replace("\r\n", "") +
+                                helpText +
+                                Resources.Languages.Core.StandardBodyParagraphClosing;
             CurrentHelpText = new HelpDescriptorViewModel(new HelpDescriptor("", textToDisplay, null));
         }
 

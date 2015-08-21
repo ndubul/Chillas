@@ -353,7 +353,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;h1&gt;Database Service Source Types&lt;/h1&gt;&lt;br/&gt;Allows you to select a database souce type.
+        ///   Looks up a localized string similar to &lt;h1&gt;Database Service Source Types&lt;/h1&gt;&lt;br/&gt;&lt;p&gt;Allows you to select a database souce type&lt;/p&gt;.
         /// </summary>
         public static string DatabaseServiceSourceTypesHelp {
             get {
@@ -2121,16 +2121,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;h1&gt;.
-        /// </summary>
-        public static string StandardBodyHeaderParagraphOpening {
-            get {
-                return ResourceManager.GetString("StandardBodyHeaderParagraphOpening", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;.
+        ///   Looks up a localized string similar to &lt;/body&gt;&lt;/html&gt;.
         /// </summary>
         public static string StandardBodyParagraphClosing {
             get {
@@ -2139,27 +2130,25 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;/h1&gt;&lt;p&gt;.
-        /// </summary>
-        public static string StandardBodyParagraphOpening {
-            get {
-                return ResourceManager.GetString("StandardBodyParagraphOpening", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;head&gt;
+        ///   Looks up a localized string similar to &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///
+        ///&lt;head runat=&quot;server&quot;&gt;
         ///    &lt;style&gt;
         ///        h1 {
-        ///            font-size: 16px;
-        ///            font-family: &apos;Calibri&apos;;
+        ///            font-size: 15px;
+        ///            font-family: &apos;Source Sans Pro&apos;;
         ///            text-decoration: underline;
+        ///            align-content: center;
         ///        }
-        ///        p {
-        ///            font-size: 12px;
-        ///            font-family: &apos;Calibri&apos;;
+        ///        h2 {
+        ///            font-size: 16px;
+        ///            font-family: &apos;Source Sans Pro&apos;;
+        ///            text-decoration: underline;
+        ///            align-content: center;
         ///        }
-        ///    &lt;/style&gt;.
+        ///        h3 {
+        ///            font-size: 17px;
+        ///            font-family: &apos;Sourc [rest of string was truncated]&quot;;.
         /// </summary>
         public static string StandardStyling {
             get {
@@ -2384,7 +2373,8 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceNewWebSourceHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Create New Web Source&lt;/h1&gt;
+        ///    &lt;p&gt;Allows a user to create a new Web Source&lt;/p&gt;.
         /// </summary>
         public static string WebServiceNewWebSourceHelp {
             get {
@@ -2438,7 +2428,8 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceRequestBodyHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Web Service Request Body&lt;/h1&gt;
+        ///    &lt;p&gt;HTTP Message Body is the data bytes transmitted in an HTTP transaction message immediately following the headers if there is any&lt;/p&gt;.
         /// </summary>
         public static string WebServiceRequestBodyHelp {
             get {
@@ -2456,6 +2447,26 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;h1&gt;Web Service Request Headers&lt;/h1&gt;
+        ///    &lt;p&gt;HTTP header fields are components of the header section of request and response messages in the Hypertext Transfer Protocol (HTTP)&lt;/p&gt;
+        ///    &lt;table&gt;
+        ///        &lt;tr&gt;
+        ///            &lt;th&gt;Name&lt;/th&gt;
+        ///            &lt;th&gt;Value&lt;/th&gt;
+        ///        &lt;/tr&gt;
+        ///        &lt;tr&gt;
+        ///            &lt;td&gt;&lt;label&gt;Header&lt;/label&gt;&lt;/td&gt;
+        ///            &lt;td&gt;&lt;label&gt;Value&lt;/label&gt;&lt;/td&gt;
+        ///        &lt;/tr&gt;
+        ///    &lt;/table&gt;.
+        /// </summary>
+        public static string WebServiceRequestHeadersTableHelp {
+            get {
+                return ResourceManager.GetString("WebServiceRequestHeadersTableHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to URL.
         /// </summary>
         public static string WebserviceRequestURLHeader {
@@ -2465,7 +2476,8 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceRequestUrlHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Web Service Request Url&lt;/h1&gt;
+        ///    &lt;p&gt;A URL is a reference to a resource that specifies the location of the resource on a computer network and a mechanism for retrieving it&lt;/p&gt;.
         /// </summary>
         public static string WebServiceRequestUrlHelp {
             get {
@@ -2492,7 +2504,8 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceSelectedSourceHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Edit Selected Web Source&lt;/h1&gt;
+        ///    &lt;p&gt;Allows a user to edit the selected Web Source&lt;/p&gt;.
         /// </summary>
         public static string WebServiceSelectedSourceHelp {
             get {
@@ -2519,7 +2532,8 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceSourcesHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Web Sources&lt;/h1&gt;
+        ///    &lt;p&gt;Provides a list of available saved web sources. If a Web Source does not exist under this list, then click the &apos;New&apos; button to create a new Web Source&lt;/p&gt;.
         /// </summary>
         public static string WebServiceSourcesHelp {
             get {
@@ -2555,7 +2569,17 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceWebRequestHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h3&gt;HTTP Methods&lt;/h3&gt;
+        ///    &lt;p&gt;Indicates the method to be performed on the object identified by the URL&lt;/p&gt;
+        ///    &lt;ol&gt;
+        ///        &lt;li&gt;GET&lt;/li&gt;
+        ///        &lt;li&gt;POST&lt;/li&gt;
+        ///        &lt;li&gt;PUT&lt;/li&gt;
+        ///    &lt;/ol&gt;
+        ///    &lt;h1&gt;Examples&lt;/h1&gt;
+        ///    &lt;p&gt; GET http://www.example.com/customers/12345 &lt;/p&gt;
+        ///    &lt;p&gt; POST http://www.example.com/customers &lt;/p&gt;
+        ///    &lt;p&gt; PUT http://www.example.com/customers/12345 &lt;/p&gt;.
         /// </summary>
         public static string WebServiceWebRequestHelp {
             get {

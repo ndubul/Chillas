@@ -61,7 +61,7 @@
                                   Padding="{StaticResource ComboBoxItemPadding}"
                                   Margin="{StaticResource ElementBorderTop}">
                             <i:Interaction.Behaviors>
-                                <core:HelpSetter Text="{x:Static languages:Core.DatabaseServiceSaveHelp}"
+                                <core:HelpSetter Text="{x:Static languages:Core.WebServiceWebRequestHelp}"
                                  DataContext="{Binding}" />
                             </i:Interaction.Behaviors>
                         </ComboBox>
@@ -194,6 +194,10 @@
                                             </xamGrid:ContextMenuSettings.ContextMenu>
                                         </xamGrid:ContextMenuSettings>
                                     </xamGrid:XamGridEx.ContextMenuSettings>
+                                    <i:Interaction.Behaviors>
+                                        <core:HelpSetter Text="{x:Static languages:Core.WebServiceRequestHeadersTableHelp}"
+                                 DataContext="{Binding}" />
+                                    </i:Interaction.Behaviors>
                                 </xamGrid:XamGridEx>
                             </Grid>
                         </ScrollViewer>

@@ -782,7 +782,7 @@ You need Administrator permission.</value>
     <value>&lt;body&gt;&lt;p&gt;DatabaseSourceCancelHelp&lt;/p&gt;&lt;/body&gt;</value>
   </data>
   <data name="DatabaseServiceSourceTypesHelp" xml:space="preserve">
-    <value>&lt;h1&gt;Database Service Source Types&lt;/h1&gt;&lt;br/&gt;Allows you to select a database souce type</value>
+    <value>&lt;h1&gt;Database Service Source Types&lt;/h1&gt;&lt;br/&gt;&lt;p&gt;Allows you to select a database souce type&lt;/p&gt;</value>
   </data>
   <data name="DatabaseServiceEditSourceHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;DatabaseServiceEditSourceHelp&lt;/p&gt;&lt;/body&gt;</value>
@@ -812,22 +812,37 @@ You need Administrator permission.</value>
     <value>&lt;body&gt;&lt;p&gt;WebServiceSourceServerHelp&lt;/p&gt;&lt;/body&gt;</value>
   </data>
   <data name="WebServiceWebRequestHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceWebRequestHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>&lt;h3&gt;HTTP Methods&lt;/h3&gt;
+    &lt;p&gt;Indicates the method to be performed on the object identified by the URL&lt;/p&gt;
+    &lt;ol&gt;
+        &lt;li&gt;GET&lt;/li&gt;
+        &lt;li&gt;POST&lt;/li&gt;
+        &lt;li&gt;PUT&lt;/li&gt;
+    &lt;/ol&gt;
+    &lt;h1&gt;Examples&lt;/h1&gt;
+    &lt;p&gt; GET http://www.example.com/customers/12345 &lt;/p&gt;
+    &lt;p&gt; POST http://www.example.com/customers &lt;/p&gt;
+    &lt;p&gt; PUT http://www.example.com/customers/12345 &lt;/p&gt;</value>
   </data>
   <data name="WebServiceSourcesHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceSourcesHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>&lt;h1&gt;Web Sources&lt;/h1&gt;
+    &lt;p&gt;Provides a list of available saved web sources. If a Web Source does not exist under this list, then click the 'New' button to create a new Web Source&lt;/p&gt;</value>
   </data>
   <data name="WebServiceSelectedSourceHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceSelectedSourceHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>&lt;h1&gt;Edit Selected Web Source&lt;/h1&gt;
+    &lt;p&gt;Allows a user to edit the selected Web Source&lt;/p&gt;</value>
   </data>
   <data name="WebServiceNewWebSourceHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceNewWebSourceHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>&lt;h1&gt;Create New Web Source&lt;/h1&gt;
+    &lt;p&gt;Allows a user to create a new Web Source&lt;/p&gt;</value>
   </data>
   <data name="WebServiceRequestBodyHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceRequestBodyHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>&lt;h1&gt;Web Service Request Body&lt;/h1&gt;
+    &lt;p&gt;HTTP Message Body is the data bytes transmitted in an HTTP transaction message immediately following the headers if there is any&lt;/p&gt;</value>
   </data>
   <data name="WebServiceRequestUrlHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceRequestUrlHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>&lt;h1&gt;Web Service Request Url&lt;/h1&gt;
+    &lt;p&gt;A URL is a reference to a resource that specifies the location of the resource on a computer network and a mechanism for retrieving it&lt;/p&gt;</value>
   </data>
   <data name="WebServiceTestCommandHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;WebServiceTestCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
@@ -1069,27 +1084,90 @@ You need Administrator permission.</value>
   <data name="EmailAttachmentSaveCommandHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;EmailAttachmentSaveCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
   </data>
-  <data name="StandardBodyHeaderParagraphOpening" xml:space="preserve">
-    <value>&lt;body&gt;&lt;h1&gt;</value>
-  </data>
   <data name="StandardBodyParagraphClosing" xml:space="preserve">
-    <value>&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</value>
-  </data>
-  <data name="StandardBodyParagraphOpening" xml:space="preserve">
-    <value>&lt;/h1&gt;&lt;p&gt;</value>
+    <value>&lt;/body&gt;&lt;/html&gt;</value>
   </data>
   <data name="StandardStyling" xml:space="preserve">
-    <value>&lt;head&gt;
+    <value>&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+
+&lt;head runat="server"&gt;
     &lt;style&gt;
         h1 {
-            font-size: 16px;
-            font-family: 'Calibri';
+            font-size: 15px;
+            font-family: 'Source Sans Pro';
             text-decoration: underline;
+            align-content: center;
+        }
+        h2 {
+            font-size: 16px;
+            font-family: 'Source Sans Pro';
+            text-decoration: underline;
+            align-content: center;
+        }
+        h3 {
+            font-size: 17px;
+            font-family: 'Source Sans Pro';
+            text-decoration: underline;
+            align-content: center;
         }
         p {
             font-size: 12px;
-            font-family: 'Calibri';
+            font-family: 'Source Sans Pro';
         }
-    &lt;/style&gt;</value>
+        table {
+            border-left: 1px solid GrayText ;
+            border-right: 1px solid GrayText;
+            border-bottom: 1px solid GrayText;
+	        border-spacing: 1px;
+        }
+
+        table {
+            width: 100%;
+        }
+        th {
+            font-size: 13px;
+            background: rgb(244, 244, 244);
+            margin-left: 3px;
+        }
+        td {
+            font-size: 12px;
+            background: rgb(244, 244, 244);
+            border: 1px solid GrayText;
+            padding: 0;
+        }
+        ul {
+            font-size: 12px;
+            font-family: 'Source Sans Pro';
+            list-style-type: circle;
+        }
+        ol {
+            font-size: 12px;
+            font-family: 'Source Sans Pro';
+            list-style-type: square;
+        }
+        label {
+            font-size: 12px;
+            margin: 3px;
+            font-family: 'Source Sans Pro';
+            font-style: italic;
+        }
+    &lt;/style&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;</value>
+  </data>
+  <data name="WebServiceRequestHeadersTableHelp" xml:space="preserve">
+    <value>&lt;h1&gt;Web Service Request Headers&lt;/h1&gt;
+    &lt;p&gt;HTTP header fields are components of the header section of request and response messages in the Hypertext Transfer Protocol (HTTP)&lt;/p&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th&gt;Value&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;label&gt;Header&lt;/label&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;label&gt;Value&lt;/label&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;</value>
   </data>
 </root>
