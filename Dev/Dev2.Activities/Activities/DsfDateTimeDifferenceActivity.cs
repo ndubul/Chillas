@@ -161,7 +161,6 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                 var ifItr = new WarewolfIterator(dataObject.Environment.Eval(InputFormat ?? string.Empty, update));
                 colItr.AddVariableToIterateOn(ifItr);
                 int indexToUpsertTo = 1;
-
                 while(colItr.HasMoreData())
                 {
                     IDateTimeDiffTO transObj = ConvertToDateTimeDiffTo(colItr.FetchNextValue(input1Itr),
@@ -174,12 +173,16 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                     string result;
                     string error;
                     string expression = Result;
+
                     if(comparer.TryCompare(transObj, out result, out error))
                     {
-                        if(DataListUtil.IsValueRecordset(Result) &&
+                        if (DataListUtil.IsValueRecordset(Result) &&
                            DataListUtil.GetRecordsetIndexType(Result) == enRecordsetIndexType.Star)
                         {
-                            expression = Result.Replace(GlobalConstants.StarExpression, indexToUpsertTo.ToString(CultureInfo.InvariantCulture));
+                            if (update == 0)
+                            {
+                                expression = Result.Replace(GlobalConstants.StarExpression, indexToUpsertTo.ToString(CultureInfo.InvariantCulture));
+                            }
                         }
                         else
                         {

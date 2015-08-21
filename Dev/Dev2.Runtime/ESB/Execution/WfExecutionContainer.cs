@@ -53,7 +53,7 @@ namespace Dev2.Runtime.ESB.Execution
             Guid result = GlobalConstants.NullDataListID;
 
 
-
+            Dev2Logger.Log.Debug("Entered Wf Container");
 
             // Set Service Name
             DataObject.ServiceName = ServiceAction.ServiceName;
@@ -131,7 +131,9 @@ namespace Dev2.Runtime.ESB.Execution
 
         public void Eval(Guid resourceID, IDSFDataObject dataObject)
         {
+            Dev2Logger.Log.Debug("Getting Resource to Execute");
             IDev2Activity resource = ResourceCatalog.Instance.Parse(TheWorkspace.ID, resourceID);
+            Dev2Logger.Log.Debug("Got Resource to Execute");
             EvalInner(dataObject, resource, dataObject.ForEachUpdateValue);
 
         }
@@ -186,6 +188,10 @@ namespace Dev2.Runtime.ESB.Execution
 
         static void EvalInner(IDSFDataObject dsfDataObject, IDev2Activity resource,int update)
         {
+            if(resource == null)
+            {
+                return;
+            }
             var next = resource.Execute(dsfDataObject, update);
             while(next != null)
             {
