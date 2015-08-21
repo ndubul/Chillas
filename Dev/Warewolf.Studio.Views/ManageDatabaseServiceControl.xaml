@@ -329,6 +329,7 @@
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" 
+                               Style="{StaticResource ErrorTextBlockStyle}" 
                                Text="{Binding ErrorText}" 
                                HorizontalAlignment="Left" 
                                TextWrapping="WrapWithOverflow" 

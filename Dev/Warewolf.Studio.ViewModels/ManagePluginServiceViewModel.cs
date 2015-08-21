@@ -75,6 +75,7 @@ namespace Warewolf.Studio.ViewModels
         ICollection<NameValue> _inputValues;
         string _headerText;
         string _resourceName;
+        string _testResultString;
 
         #region Implementation of IServiceMappings
 
@@ -290,7 +291,14 @@ namespace Warewolf.Studio.ViewModels
             {
                 IsTesting = true;
                 var serializer = new Dev2JsonSerializer();
-                ResponseService = serializer.Deserialize<RecordsetList>(model.TestService(ToModel()));
+                var testService = model.TestService(ToModel());
+                ResponseService = serializer.Deserialize<RecordsetList>(testService);
+                if (ResponseService.Any(recordset => recordset.HasErrors))
+                {
+                    var errorMessage = string.Join(Environment.NewLine, ResponseService.Select(recordset => recordset.ErrorMessage));
+                    throw new Exception(errorMessage);
+                }
+                TestResultString = testService;
                 UpdateMappingsFromResponse();
                 ErrorText = "";
                 CanEditMappings = true;
@@ -313,6 +321,19 @@ namespace Warewolf.Studio.ViewModels
 
 
         }
+
+        public string TestResultString
+        {
+            get
+            {
+                return _testResultString;
+            }
+            set
+            {
+                SetProperty(ref _testResultString, value);
+            }
+        }
+
         void UpdateMappingsFromResponse()
         {
             if (ResponseService != null)

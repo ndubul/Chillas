@@ -401,18 +401,17 @@
                                       VerticalScrollBarVisibility="Auto"
                                       MaxHeight="110">
                             <Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=ActualWidth}" >
-                                <TextBox HorizontalAlignment="Stretch"
-                                         AcceptsReturn="True"
-                                         TextWrapping="Wrap"
+                                <TextBlock 
+                                         Text="{Binding TestResultString}"
                                          Height="90"
-                                         VerticalScrollBarVisibility="Auto"
-                                         VerticalContentAlignment="Stretch"
-                                         VerticalAlignment="Stretch">
+                                         VerticalAlignment="Stretch"
+                                         TextWrapping="Wrap"
+                                         HorizontalAlignment="Stretch">
                                     <i:Interaction.Behaviors>
                                         <core:HelpSetter Text="{x:Static languages:Core.PluginServiceTestResultsHelp}"
                                                          DataContext="{Binding}" />
                                     </i:Interaction.Behaviors>
-                                </TextBox>
+                                </TextBlock>
                             </Grid>
                         </ScrollViewer>
                     </Grid>
@@ -449,7 +448,8 @@
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" 
-                               Text="" 
+                               Style="{StaticResource ErrorTextBlockStyle}" 
+                               Text="{Binding ErrorText}" 
                                HorizontalAlignment="Left" 
                                TextWrapping="WrapWithOverflow" 
                                x:Name="ErrorTextBlock" ></TextBlock>

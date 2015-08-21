@@ -59,5 +59,6 @@ namespace Dev2.Common.Interfaces
         ICollection<INamespaceItem> NameSpaces { get; set; }
         INamespaceItem SelectedNamespace { get; set; }
         ICollection<NameValue> InputValues { get; set; }
+        string TestResultString { get; set; }
     }
 }
