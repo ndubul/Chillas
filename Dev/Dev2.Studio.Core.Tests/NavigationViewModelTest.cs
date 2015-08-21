@@ -181,7 +181,7 @@ namespace Dev2.Core.Tests
             var mockStudioRepo = new Mock<IStudioResourceRepository>();
             mockStudioRepo.SetupGet(p => p.ExplorerItemModels).Returns(explorerItemModels);
 
-            var viewmodel = new NavigationViewModel(new Mock<IEventAggregator>().Object, new TestAsyncWorker(), null, environmentRepository, mockStudioRepo.Object, new Mock<IConnectControlSingleton>().Object, () => { }) { SelectedItem = resource2 };
+            var viewmodel = new NavigationViewModel(new Mock<IEventAggregator>().Object, new SynchronousAsyncWorker(), null, environmentRepository, mockStudioRepo.Object, new Mock<IConnectControlSingleton>().Object, () => { }) { SelectedItem = resource2 };
 
             viewmodel.Environments.Add(mockEnvironment.Object);
             viewmodel.ExplorerItemModels = explorerItemModels;
@@ -227,7 +227,7 @@ namespace Dev2.Core.Tests
             var mockStudioRepo = new Mock<IStudioResourceRepository>();
             mockStudioRepo.SetupGet(p => p.ExplorerItemModels).Returns(explorerItemModels);
 
-            var viewmodel = new NavigationViewModel(new Mock<IEventAggregator>().Object, new TestAsyncWorker(), null, environmentRepository, mockStudioRepo.Object, new Mock<IConnectControlSingleton>().Object, () => { }) { SelectedItem = resource2 };
+            var viewmodel = new NavigationViewModel(new Mock<IEventAggregator>().Object, new SynchronousAsyncWorker(), null, environmentRepository, mockStudioRepo.Object, new Mock<IConnectControlSingleton>().Object, () => { }) { SelectedItem = resource2 };
 
             viewmodel.Environments.Add(mockEnvironment.Object);
             viewmodel.ExplorerItemModels = explorerItemModels;
@@ -720,7 +720,7 @@ namespace Dev2.Core.Tests
             var studioResourceRepository = new StudioResourceRepository(localhostExplorerItemModel, _Invoke);
             studioResourceRepository.ExplorerItemModels.Add(anotherEnvironment);
             studioResourceRepository.GetExplorerProxy = guid => new Mock<IClientExplorerResourceRepository>().Object;
-            var viewModel = new NavigationViewModel(publisher.Object, new TestAsyncWorker(), null, envRepo.Object, studioResourceRepository, new Mock<IConnectControlSingleton>().Object, () => { });
+            var viewModel = new NavigationViewModel(publisher.Object, new SynchronousAsyncWorker(), null, envRepo.Object, studioResourceRepository, new Mock<IConnectControlSingleton>().Object, () => { });
 
 
             foreach(var env in envList)
@@ -997,7 +997,7 @@ namespace Dev2.Core.Tests
         {
             var studioResourceRepository = BuildExplorerItems(mockResourceRepository.Object,mockClone);
             connectControlASingleton = connectControlASingleton ?? new Mock<IConnectControlSingleton>();
-            var navigationViewModel = new NavigationViewModel(new Mock<IEventAggregator>().Object, new TestAsyncWorker(), null, environmentRepository, studioResourceRepository, connectControlASingleton.Object, () => { }, isFromActivityDrop, activityType);
+            var navigationViewModel = new NavigationViewModel(new Mock<IEventAggregator>().Object, new SynchronousAsyncWorker(), null, environmentRepository, studioResourceRepository, connectControlASingleton.Object, () => { }, isFromActivityDrop, activityType);
             return navigationViewModel;
         }
 

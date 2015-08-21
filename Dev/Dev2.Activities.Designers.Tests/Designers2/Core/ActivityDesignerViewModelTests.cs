@@ -136,7 +136,7 @@ namespace Dev2.Activities.Designers.Tests.Designers2.Core
             IObservableReadOnlyList<IErrorInfo> testErrors = new ObservableReadOnlyList<IErrorInfo> { errorInfo };
             setupResourceModelMock.Setup(c => c.Errors).Returns(testErrors);
             setupResourceModelMock.Setup(c => c.GetErrors(It.IsAny<Guid>())).Returns(new List<IErrorInfo> { errorInfo });
-            var viewModel = new ServiceDesignerViewModel(mockModelItem.Object, setupResourceModelMock.Object, envRepo.Object, new Mock<IEventAggregator>().Object, new TestAsyncWorker());
+            var viewModel = new ServiceDesignerViewModel(mockModelItem.Object, setupResourceModelMock.Object, envRepo.Object, new Mock<IEventAggregator>().Object, new SynchronousAsyncWorker());
 
             Assert.AreEqual(1, viewModel.TitleBarToggles.Count);
 

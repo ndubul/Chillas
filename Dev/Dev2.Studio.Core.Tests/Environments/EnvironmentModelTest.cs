@@ -743,7 +743,7 @@ namespace Dev2.Core.Tests.Environments
     public class TestEqualityConnection : ServerProxy
     {
         public TestEqualityConnection(Guid serverID, string serverUri)
-            : base(serverUri, CredentialCache.DefaultCredentials, new TestAsyncWorker())
+            : base(serverUri, CredentialCache.DefaultCredentials, new SynchronousAsyncWorker())
         {
             ServerID = serverID;
         }

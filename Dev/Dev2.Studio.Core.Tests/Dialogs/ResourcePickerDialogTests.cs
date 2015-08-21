@@ -142,7 +142,7 @@ namespace Dev2.Core.Tests.Dialogs
             //var envRepo = EnvironmentRepository.Create(new Mock<IEnvironmentModel>().Object);
 
             //------------Execute Test---------------------------
-            var dialog = new TestResourcePickerDialog(ActivityType, envRepo, new Mock<IEventAggregator>().Object, new TestAsyncWorker(), IsFromActivityDrop, repository)
+            var dialog = new TestResourcePickerDialog(ActivityType, envRepo, new Mock<IEventAggregator>().Object, new SynchronousAsyncWorker(), IsFromActivityDrop, repository)
             {
                 CreateDialogResult = dialogWindow.Object
             };
@@ -180,7 +180,7 @@ namespace Dev2.Core.Tests.Dialogs
             mockEnvironmentModel.Setup(model => model.ResourceRepository).Returns(mockResourceRepository.Object);
             var envRepo = new TestLoadEnvironmentRespository(mockEnvironmentModel.Object);
             var selectedResource = mockResourceRepository.Object.All().ToList()[1];
-            var dialog = new TestResourcePickerDialog(ActivityType, envRepo, mockEventAggregator.Object, new TestAsyncWorker(), IsFromActivityDrop, repository)
+            var dialog = new TestResourcePickerDialog(ActivityType, envRepo, mockEventAggregator.Object, new SynchronousAsyncWorker(), IsFromActivityDrop, repository)
             {
                 CreateDialogResult = dialogWindow.Object,
                 SelectedResource = selectedResource
@@ -218,7 +218,7 @@ namespace Dev2.Core.Tests.Dialogs
             mockEnvironmentModel.Setup(model => model.ResourceRepository).Returns(mockResourceRepository.Object);
             var envRepo = new TestLoadEnvironmentRespository(mockEnvironmentModel.Object);
             var selectedResource = mockResourceRepository.Object.All().ToList()[1];
-            var dialog = new TestResourcePickerDialog(ActivityType, envRepo, mockEventAggregator.Object, new TestAsyncWorker(), IsFromActivityDrop, repository)
+            var dialog = new TestResourcePickerDialog(ActivityType, envRepo, mockEventAggregator.Object, new SynchronousAsyncWorker(), IsFromActivityDrop, repository)
             {
                 CreateDialogResult = dialogWindow.Object,
                 SelectedResource = new Mock<IResourceModel>().Object
@@ -297,7 +297,7 @@ namespace Dev2.Core.Tests.Dialogs
             server2Item.Children.Add(resourceItemServer2);
             repository.ExplorerItemModels.Add(server2Item);
 
-            var dialog = new TestResourcePickerDialog(ActivityType, envRepo, mockEventAggregator.Object, new TestAsyncWorker(), IsFromActivityDrop, repository)
+            var dialog = new TestResourcePickerDialog(ActivityType, envRepo, mockEventAggregator.Object, new SynchronousAsyncWorker(), IsFromActivityDrop, repository)
             {
                 CreateDialogResult = dialogWindow.Object,
                 SelectedResource = new Mock<IResourceModel>().Object

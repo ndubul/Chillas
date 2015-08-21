@@ -29,6 +29,7 @@ using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Deploy;
 using Dev2.Studio.TO;
+using Dev2.Threading;
 using Dev2.ViewModels.Deploy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -386,7 +387,7 @@ namespace Dev2.Core.Tests
 
         static DeployNavigationViewModel CreateDeployNavigationViewModel(IEnvironmentModel environmentModel, StudioResourceRepository studioResourceRepository)
         {
-            return CreateDeployNavigationViewModel(environmentModel, new Mock<IEventAggregator>().Object, new TestAsyncWorker(), new Mock<IEnvironmentRepository>().Object, studioResourceRepository);
+            return CreateDeployNavigationViewModel(environmentModel, new Mock<IEventAggregator>().Object, new SynchronousAsyncWorker(), new Mock<IEnvironmentRepository>().Object, studioResourceRepository);
         }
 
         static DeployNavigationViewModel CreateDeployNavigationViewModel(IEnvironmentModel environmentModel, IEventAggregator eventAggregator, IAsyncWorker asyncWorker, IEnvironmentRepository environmentRepository, StudioResourceRepository studioResourceRepository)

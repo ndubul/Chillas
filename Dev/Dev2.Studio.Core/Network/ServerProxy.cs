@@ -19,12 +19,12 @@ using System.Threading.Tasks;
 using Dev2.Common;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Infrastructure.Events;
+using Dev2.Common.Interfaces.Threading;
 using Dev2.Data.ServiceModel.Messages;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Security;
 using Dev2.SignalR.Wrappers;
 using Dev2.Studio.Core.Interfaces;
-using Dev2.Threading;
 
 namespace Dev2.Network
 {

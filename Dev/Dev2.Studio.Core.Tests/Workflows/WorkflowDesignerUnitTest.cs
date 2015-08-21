@@ -1449,7 +1449,7 @@ namespace Dev2.Core.Tests.Workflows
             new WorkflowDesignerViewModel(new Mock<IEventAggregator>().Object,
                 // ReSharper restore ObjectCreationAsStatement
                 null, null,
-                new Mock<IPopupController>().Object, new TestAsyncWorker(), false);
+                new Mock<IPopupController>().Object, new SynchronousAsyncWorker(), false);
 
         }
 
@@ -1834,7 +1834,7 @@ namespace Dev2.Core.Tests.Workflows
             var eventAggregator = new Mock<IEventAggregator>();
             var wd = new WorkflowDesignerViewModelMock(crm.Object, wh.Object, eventAggregator.Object);
             wd.SetActiveEnvironment(env.Object);
-            wd.SetDataObject(new ExplorerItemModel(new Mock<IStudioResourceRepository>().Object, new TestAsyncWorker(), new Mock<IConnectControlSingleton>().Object));
+            wd.SetDataObject(new ExplorerItemModel(new Mock<IStudioResourceRepository>().Object, new SynchronousAsyncWorker(), new Mock<IConnectControlSingleton>().Object));
 
             // Execute unit
             wd.TestModelServiceModelChanged(eventArgs.Object);
@@ -4055,7 +4055,7 @@ namespace Dev2.Core.Tests.Workflows
                 workflowHelper = wh.Object;
             }
 
-            var viewModel = new WorkflowDesignerViewModel(eventPublisher, resourceModel, workflowHelper, popupController.Object, new TestAsyncWorker(), createDesigner, _isDesignerInited, false);
+            var viewModel = new WorkflowDesignerViewModel(eventPublisher, resourceModel, workflowHelper, popupController.Object, new SynchronousAsyncWorker(), createDesigner, _isDesignerInited, false);
 
             _isDesignerInited = true;
 

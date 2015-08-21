@@ -295,7 +295,7 @@ namespace Dev2.Core.Tests.Network
         {
         }
         public TestServerProxyWithChunking()
-            : base("http://localhost:8080", CredentialCache.DefaultCredentials, new TestAsyncWorker())
+            : base("http://localhost:8080", CredentialCache.DefaultCredentials, new SynchronousAsyncWorker())
         {
 
         }

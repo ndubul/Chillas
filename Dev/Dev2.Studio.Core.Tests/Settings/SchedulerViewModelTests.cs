@@ -893,7 +893,7 @@ Warewolf leverages Windows Task Scheduler and the schedules can be viewed there 
 
             var agg = new Mock<IEventAggregator>();
             agg.Setup(a => a.Publish(It.IsAny<DebugOutputMessage>())).Verifiable();
-            var schedulerViewModel = new SchedulerViewModel(agg.Object, new DirectoryObjectPickerDialog(), new PopupController(), new TestAsyncWorker(), new Mock<IConnectControlViewModel>().Object);
+            var schedulerViewModel = new SchedulerViewModel(agg.Object, new DirectoryObjectPickerDialog(), new PopupController(), new SynchronousAsyncWorker(), new Mock<IConnectControlViewModel>().Object);
 
 
             schedulerViewModel.PropertyChanged += delegate(object sender, PropertyChangedEventArgs args)
