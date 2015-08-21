@@ -22,6 +22,7 @@ using Dev2.Common.Interfaces.Diagnostics.Debug;
 using Dev2.Common.Interfaces.Threading;
 using Dev2.Communication;
 using Dev2.Controller;
+using Dev2.Core.Tests.Utils;
 using Dev2.Integration.Tests.MEF.WebTester;
 using Dev2.Network;
 using Moq;
@@ -67,7 +68,7 @@ namespace Dev2.Integration.Tests.Helpers
         {
             CommunicationControllerFactory fact = new CommunicationControllerFactory();
             var comm = fact.CreateController(serviceName);
-            var prx = new ServerProxy("http://localhost:3142", CredentialCache.DefaultNetworkCredentials, new TestAsyncWorker());
+            var prx = new ServerProxy("http://localhost:3142", CredentialCache.DefaultNetworkCredentials, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object);
             prx.Connect(Guid.NewGuid());
             foreach (var payloadArgument in payloadArguments)
             {

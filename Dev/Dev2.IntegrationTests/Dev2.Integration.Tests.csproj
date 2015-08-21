@@ -407,6 +407,10 @@
       <Project>{2b734597-c85d-4295-9782-c722f4645ed9}</Project>
       <Name>Dev2.Sql</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dev2.Studio.Core.Tests\Dev2.Studio.Core.Tests.csproj">
+      <Project>{1FD73E36-FC73-4BDF-BCBA-278A44F06550}</Project>
+      <Name>Dev2.Studio.Core.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dev2.Studio.Core\Dev2.Studio.Core.csproj">
       <Project>{a58b157b-960b-4e84-8957-24e4884c5c77}</Project>
       <Name>Dev2.Studio.Core</Name>

@@ -18,7 +18,7 @@ Scenario: Open Debug window to add inputs
 	And the debug output window appears as
 	| Output |
 	| [[b]]  |
-
+	
 Scenario Outline: Working with tabs in Debug window
 	Given I have a new workflow
 	And I have variable '<variable1>' set as '<type>'
