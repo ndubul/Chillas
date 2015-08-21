@@ -227,7 +227,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit:.
+        ///   Looks up a localized string similar to Edit .
         /// </summary>
         public static string DatabaseServiceDBSourceEditTabHeader {
             get {
@@ -353,7 +353,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseServiceSourceTypesHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Database Service Source Types&lt;/h1&gt;&lt;br/&gt;Allows you to select a database souce type.
         /// </summary>
         public static string DatabaseServiceSourceTypesHelp {
             get {
@@ -1549,6 +1549,15 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit .
+        /// </summary>
+        public static string PluginServiceEditHeaderLabel {
+            get {
+                return ResourceManager.GetString("PluginServiceEditHeaderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceEditSourceHelp&lt;/p&gt;&lt;/body&gt;.
         /// </summary>
         public static string PluginServiceEditSourceHelp {
@@ -1707,15 +1716,6 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string PluginSourceRefreshCommandHelp {
             get {
                 return ResourceManager.GetString("PluginSourceRefreshCommandHelp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit Plugin Connector - .
-        /// </summary>
-        public static string PluginSserviceEditHeaderLabel {
-            get {
-                return ResourceManager.GetString("PluginSserviceEditHeaderLabel", resourceCulture);
             }
         }
         
@@ -2117,6 +2117,53 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string SplashImage {
             get {
                 return ResourceManager.GetString("SplashImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;body&gt;&lt;h1&gt;.
+        /// </summary>
+        public static string StandardBodyHeaderParagraphOpening {
+            get {
+                return ResourceManager.GetString("StandardBodyHeaderParagraphOpening", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;.
+        /// </summary>
+        public static string StandardBodyParagraphClosing {
+            get {
+                return ResourceManager.GetString("StandardBodyParagraphClosing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;/h1&gt;&lt;p&gt;.
+        /// </summary>
+        public static string StandardBodyParagraphOpening {
+            get {
+                return ResourceManager.GetString("StandardBodyParagraphOpening", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;head&gt;
+        ///    &lt;style&gt;
+        ///        h1 {
+        ///            font-size: 16px;
+        ///            font-family: &apos;Calibri&apos;;
+        ///            text-decoration: underline;
+        ///        }
+        ///        p {
+        ///            font-size: 12px;
+        ///            font-family: &apos;Calibri&apos;;
+        ///        }
+        ///    &lt;/style&gt;.
+        /// </summary>
+        public static string StandardStyling {
+            get {
+                return ResourceManager.GetString("StandardStyling", resourceCulture);
             }
         }
         

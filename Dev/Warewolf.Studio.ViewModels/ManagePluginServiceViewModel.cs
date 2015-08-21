@@ -136,7 +136,7 @@ namespace Warewolf.Studio.ViewModels
             SelectedAction = AvalaibleActions.FirstOrDefault(a => a.Method == selectedConnector.Action.Method);
             Item.Source = SelectedSource;
             Item.Action = SelectedAction;
-            Header = selectedConnector.Name;
+            Header = Resources.Languages.Core.PluginServiceEditHeaderLabel + selectedConnector.Name;
         }
 
         void Save()

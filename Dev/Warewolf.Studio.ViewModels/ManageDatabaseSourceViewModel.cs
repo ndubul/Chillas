@@ -160,8 +160,8 @@ namespace Warewolf.Studio.ViewModels
             {
             }
             HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel  + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
-           
-            Header = ((_dbSource == null ? ResourceName : _dbSource.Name));
+
+            Header = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel + ((_dbSource == null ? ResourceName : _dbSource.Name));
         }
 
         public override bool CanSave()

@@ -315,7 +315,7 @@ namespace Warewolf.Studio.ViewModels
             else
             {
                 HeaderText = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim());
-                Header = string.Format("{0}", ((_pluginSource == null ? ResourceName : _pluginSource.Name)));
+                Header = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, ((_pluginSource == null ? ResourceName : _pluginSource.Name)));
             }
         }
 
