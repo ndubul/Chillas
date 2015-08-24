@@ -305,9 +305,19 @@
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="DropboxSource"
-                                          AutomationProperties.AutomationId ="UI_NewEmailSourceContextMenuItem_AutoID" >
+                                          AutomationProperties.AutomationId ="UI_NewDropboxSourceContextMenuItem_AutoID" >
                                     <MenuItem.Icon>
                                         <Image Width="14" Height="14" Source="{StaticResource DropBoxLogo}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                                <MenuItem Header="New Sharepoint Source"
+                                          Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
+                                          Command="{Binding NewResourceCommand}"
+                                          CommandParameter="SharepointServerSource"
+                                          AutomationProperties.AutomationId ="UI_NewSharepointSourceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <Image Width="14" Height="14" Source="{StaticResource SharepointLogo}" />
                                     </MenuItem.Icon>
                                 </MenuItem>
 
