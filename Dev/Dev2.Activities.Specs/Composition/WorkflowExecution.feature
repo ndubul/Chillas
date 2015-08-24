@@ -4185,3 +4185,4 @@ Scenario: Time Zone Changes
 	And the 'TimeZoneChange' in Workflow 'TimeZoneChangeTest' debug outputs as
 	  |                      |
 	  | [[Result]] = Pass |
+
