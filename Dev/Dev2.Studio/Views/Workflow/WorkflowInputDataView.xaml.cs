@@ -331,8 +331,15 @@ namespace Dev2.Studio.Views.Workflow
                 {
                     if (tabItem.Header.ToString() == "XML")
                     {
-                        vm.XmlData = _editor.Text;
-                        vm.SetWorkflowInputData();
+                        try
+                        {
+                            vm.XmlData = _editor.Text;
+                            vm.SetWorkflowInputData();
+                        }
+                        catch
+                        {
+                            ShowInvalidDataPopupMessage();
+                        }
                     }
                     else if (tabItem.Header.ToString() == "JSON")
                     {
