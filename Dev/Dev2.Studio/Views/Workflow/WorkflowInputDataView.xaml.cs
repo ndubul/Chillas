@@ -121,14 +121,28 @@ namespace Dev2.Studio.Views.Workflow
                         switch(_currentTab)
                         {
                             case InputTab.Grid:
-                                vm.SetXmlData();
-                                ShowDataInOutputWindow(vm.XmlData);
+                                try
+                                {
+                                    vm.SetXmlData();
+                                    ShowDataInOutputWindow(vm.XmlData);
+                                }
+                                catch
+                                {
+                                    ShowInvalidDataPopupMessage();
+                                }
                                 break;
                             case InputTab.Json:
-                                vm.XmlData = GetXmlDataFromJson();
-                                vm.SetWorkflowInputData();
-                                vm.SetXmlData();
-                                ShowDataInOutputWindow(vm.XmlData);
+                                try
+                                {
+                                    vm.XmlData = GetXmlDataFromJson();
+                                    vm.SetWorkflowInputData();
+                                    vm.SetXmlData();
+                                    ShowDataInOutputWindow(vm.XmlData);
+                                }
+                                catch
+                                {
+                                    ShowInvalidDataPopupMessage();
+                                }
                                 break;
                         }
                         _currentTab = InputTab.Xml;
