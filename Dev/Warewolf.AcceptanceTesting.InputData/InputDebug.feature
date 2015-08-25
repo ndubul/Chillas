@@ -67,15 +67,31 @@ Scenario: Incorrect Xml syntax entered
 	And I insert "<DataList><a>Test</a><DataList"
 	And I execute the input
 	And the execution has "An" error
-	Then error message "Incorrectly formatted Xml has been entereed" is visible
+	Then error message "Incorrectly formatted Xml has been entered" is visible
 
-	Scenario: Incorrect Json syntax entered
+Scenario: Incorrect Json syntax entered
 	Given I a new workflow
 	And I have variable "[[variable1]]" set as Input
 	And I press 'F5'
 	When I switch to the "Xml" tab
 	And the json "{"variable": ""}" is visible
 	And I insert "{"variable": "test"variable2}"
-	And I execute the input
+	And I execute the input "F6"
 	And the execution has "An" error
-	Then error message "Incorrectly formatted Json has been entereed" is visible
+	Then error message "Incorrectly formatted Json has been entered" is visible
+	And the "Input Data" window remains opened
+
+Scenario: Shortcut Keys now working after error
+	Given I a new workflow
+	And I have variable "[[variable1]]" set as Input
+	And I press 'F5'
+	When I switch to the "Xml" tab
+	And the json "{"variable": ""}" is visible
+	And I insert "{"variable": "test"variable2}"
+	And I execute the input using "F6"
+	And the execution has "An" error
+	Then error message "Incorrectly formatted Json has been entered" is visible
+	And the "Input Data" window remains opened
+	And I added {"variable": "test"}"
+	And I execute the input using "F6" 
+	And the execution has "No" error

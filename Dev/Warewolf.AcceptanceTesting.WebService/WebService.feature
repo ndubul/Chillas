@@ -218,12 +218,32 @@ Scenario: Edit Web source
 	And I select "Dev2CountriesWebService" as data source
 	And "Edit" is "Enabled"
 	And I click "Edit"
-	Then the "Edit - Web Source" tab is opened 
+	Then the "Edit - Dev2CountriesWebService" tab is opened 
  
- 
- 
- 
- 
+Scenario: Changing Sources 
+	Given I click "New Web Service Connector"
+	Then "New Web Service Connector" tab is opened
+	And Select Request Method & Source is focused
+	And "New" is "Enabled"
+	And "1 Select Request Method & Source" is "Enabled"
+	And "Edit" is "Disabled"
+	And "2 Request" is "Disabled"
+	And "3 Variables" is "Disabled" 
+	And "4 Response" is "Disabled" 
+	And "5 Defaults and Mapping" is "Disabled" 
+	And I select "Dev2CountriesWebService" as data source
+	And "New" is "Enabled"
+	And "Edit" is "Enabled"
+	Then "2 Request" is "Enabled"
+	And "3 Variables" is "Enabled" 
+	When Test Connection is "Successful"
+	Then "4 Response" is "Enabled" 
+	And the response is loaded
+	And "5 Default and Mapping" is "Enabled" 
+	And I change data source to "Google Address Lookup" 
+	And "4 Response" is "Disabled" 
+	And "5 Defaults and Mapping" is "Disabled"
+ 	And "Save" is "Disabled"
  
  
  
