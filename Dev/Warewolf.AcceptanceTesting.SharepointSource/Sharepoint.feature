@@ -3,7 +3,7 @@
 	As a math idiot
 	I want to be told the sum of two numbers
 
-@mytag
+@ignore
 Scenario: Creating New Sharepoint Source 
    Given I open New Sharepoint Source 
    Then "New Sharepoint Service Source" tab is opened

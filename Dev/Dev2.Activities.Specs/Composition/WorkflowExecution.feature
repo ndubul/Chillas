@@ -4186,3 +4186,16 @@ Scenario: Time Zone Changes
 	  |                      |
 	  | [[Result]] = Pass |
 
+
+#show dependacies
+Scenario: View Dependancies on a workflow with no dependancies
+	Given I have a a workflow "Hello World"
+	When I click "Show all dependancies" 
+	Then the "Dependancies - Hello World" tab is opened
+	And "Show what depends on Hello World" is checked by default
+	And "Show what Hello World depends on" is visible
+	And Nesting Levels equals "0" equals "All levels"
+	And "Refresh" is enabled
+	And "Hello World" is visible
+	And "Hello World" has no dependancies
+
