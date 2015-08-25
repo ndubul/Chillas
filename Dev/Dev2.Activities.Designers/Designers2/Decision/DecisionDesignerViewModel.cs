@@ -151,13 +151,11 @@ namespace Dev2.Activities.Designers2.Decision
 
         static Dev2DecisionStack SetupTos(ObservableCollection<DecisionTO> value)
         {
-           
-            var val = new Dev2DecisionStack();
-            val.TheStack = new List<Dev2Decision>();
+
+            var val = new Dev2DecisionStack { TheStack = new List<Dev2Decision>() };
             foreach(var decisionTO in value.Where(a=>!a.IsEmpty()))
             {
-                var dev2Decision = new Dev2Decision();
-                dev2Decision.Col1 = decisionTO.MatchValue;
+                var dev2Decision = new Dev2Decision { Col1 = decisionTO.MatchValue };
                 if(!String.IsNullOrEmpty(decisionTO.SearchCriteria))
                 {
                     dev2Decision.Col2 = decisionTO.SearchCriteria;
