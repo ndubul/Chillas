@@ -764,52 +764,52 @@ You need Administrator permission.</value>
     <value>Cancel Test</value>
   </data>
   <data name="DatabaseSourceServerTypesHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseSourceServerTypesHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseSourceServerTypesHelp</value>
   </data>
   <data name="DatabaseSourceDatabasesHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseSourceDatabasesHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseSourceDatabasesHelp</value>
   </data>
   <data name="DatabaseSourceSaveHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseSourceSaveHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseSourceSaveHelp</value>
   </data>
   <data name="DatabaseSourceServerHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseSourceServerHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseSourceServerHelp</value>
   </data>
   <data name="DatabaseSourceTestConnectionHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseSourceTestConnectionHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseSourceTestConnectionHelp</value>
   </data>
   <data name="DatabaseSourceCancelHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseSourceCancelHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseSourceCancelHelp</value>
   </data>
   <data name="DatabaseServiceSourceTypesHelp" xml:space="preserve">
     <value>&lt;h1&gt;Database Service Source Types&lt;/h1&gt;&lt;br/&gt;&lt;p&gt;Allows you to select a database souce type&lt;/p&gt;</value>
   </data>
   <data name="DatabaseServiceEditSourceHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseServiceEditSourceHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseServiceEditSourceHelp</value>
   </data>
   <data name="DatabaseServiceNewSourceHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseServiceNewSourceHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseServiceNewSourceHelp</value>
   </data>
   <data name="DatabaseServiceSelectActionHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseServiceSelectActionHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseServiceSelectActionHelp</value>
   </data>
   <data name="DatabaseServiceRefreshHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseServiceRefreshHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseServiceRefreshHelp</value>
   </data>
   <data name="DatabaseServiceInputsHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseServiceInputsHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseServiceInputsHelp</value>
   </data>
   <data name="DatabaseServiceTestHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseServiceTestHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseServiceTestHelp</value>
   </data>
   <data name="DatabaseServiceSaveHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseServiceSaveHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseServiceSaveHelp</value>
   </data>
   <data name="WebServiceSourceSaveHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceSourceSaveHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>WebServiceSourceSaveHelp</value>
   </data>
   <data name="WebServiceSourceServerHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceSourceServerHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>WebServiceSourceServerHelp</value>
   </data>
   <data name="WebServiceWebRequestHelp" xml:space="preserve">
     <value>&lt;h3&gt;HTTP Methods&lt;/h3&gt;
@@ -845,79 +845,79 @@ You need Administrator permission.</value>
     &lt;p&gt;A URL is a reference to a resource that specifies the location of the resource on a computer network and a mechanism for retrieving it&lt;/p&gt;</value>
   </data>
   <data name="WebServiceTestCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceTestCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>WebServiceTestCommandHelp</value>
   </data>
   <data name="WebServicePasteHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServicePasteHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>WebServicePasteHelp</value>
   </data>
   <data name="WebServiceSaveCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceSaveCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>WebServiceSaveCommandHelp</value>
   </data>
   <data name="WebServiceCancelCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServiceCancelCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>WebServiceCancelCommandHelp</value>
   </data>
   <data name="WebServicePasteInputHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServicePasteInputHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>WebServicePasteInputHelp</value>
   </data>
   <data name="WebServicePasteSaveCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServicePasteSaveCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>WebServicePasteSaveCommandHelp</value>
   </data>
   <data name="WebServicePasteCancelCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WebServicePasteCancelCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>WebServicePasteCancelCommandHelp</value>
   </data>
   <data name="PluginSourceClearSearchHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginSourceClearSearchHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginSourceClearSearchHelp</value>
   </data>
   <data name="PluginSourceRefreshCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginSourceRefreshCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginSourceRefreshCommandHelp</value>
   </data>
   <data name="PluginSourceDllFullNameHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginSourceDllFullNameHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginSourceDllFullNameHelp</value>
   </data>
   <data name="PluginSourceOkCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginSourceOkCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginSourceOkCommandHelp</value>
   </data>
   <data name="PluginSourceCancelCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginSourceCancelCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginSourceCancelCommandHelp</value>
   </data>
   <data name="PluginServiceSourcesHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginServiceSourcesHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginServiceSourcesHelp</value>
   </data>
   <data name="PluginServiceEditSourceHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginServiceEditSourceHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginServiceEditSourceHelp</value>
   </data>
   <data name="PluginServiceNewSourceHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginServiceNewSourceHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginServiceNewSourceHelp</value>
   </data>
   <data name="PluginServiceNamespaceHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginServiceNamespaceHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginServiceNamespaceHelp</value>
   </data>
   <data name="PluginServiceSelectActionHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginServiceSelectActionHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginServiceSelectActionHelp</value>
   </data>
   <data name="PluginServiceRefreshHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginServiceRefreshHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginServiceRefreshHelp</value>
   </data>
   <data name="PluginServiceTestHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;DatabaseServiceTestHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>DatabaseServiceTestHelp</value>
   </data>
   <data name="PluginServiceTestInputHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginServiceTestInputHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginServiceTestInputHelp</value>
   </data>
   <data name="PluginServiceTestResultsHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginServiceTestResultsHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginServiceTestResultsHelp</value>
   </data>
   <data name="PluginServiceSaveCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginServiceSaveCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginServiceSaveCommandHelp</value>
   </data>
   <data name="PluginServiceCancelCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PluginServiceCancelCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PluginServiceCancelCommandHelp</value>
   </data>
   <data name="EmailSourceNewHeaderLabel" xml:space="preserve">
     <value>New Email Source</value>
   </data>
   <data name="EmailSourceEditHeaderLabel" xml:space="preserve">
-    <value>Edit Email Source - </value>
+    <value>Edit </value>
   </data>
   <data name="HostNameLabel" xml:space="preserve">
     <value>Host</value>
@@ -938,79 +938,79 @@ You need Administrator permission.</value>
     <value>To</value>
   </data>
   <data name="EmailSourceHostNameHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailSourceHostNameHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailSourceHostNameHelp</value>
   </data>
   <data name="EmailSourceEnableSslHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailSourceEnableSslHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailSourceEnableSslHelp</value>
   </data>
   <data name="EmailSourcePortHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailSourcePortHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailSourcePortHelp</value>
   </data>
   <data name="EmailSourceTimeoutHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailSourceTimeoutHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailSourceTimeoutHelp</value>
   </data>
   <data name="EmailSourceEmailFromHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailSourceEmailFromHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailSourceEmailFromHelp</value>
   </data>
   <data name="EmailSourceEmailToHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailSourceEmailToHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailSourceEmailToHelp</value>
   </data>
   <data name="EmailSourceTestHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailSourceTestHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailSourceTestHelp</value>
   </data>
   <data name="EmailSourceSaveHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailSourceSaveHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailSourceSaveHelp</value>
   </data>
   <data name="EmailSourceCancelHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailSourceCancelHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailSourceCancelHelp</value>
   </data>
   <data name="MappingsRecordsetNameHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;MappingsRecordsetNameHelp&lt;/p&gt;&lt;/body&gt;</value>
   </data>
   <data name="ServerProtocolHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ServerProtocolHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ServerProtocolHelp</value>
   </data>
   <data name="ServerAddressHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ServerAddressHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ServerAddressHelp</value>
   </data>
   <data name="ServerSelectWindowsHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ServerSelectWindowsHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ServerSelectWindowsHelp</value>
   </data>
   <data name="ServerSelectUserHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ServerSelectUserHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ServerSelectUserHelp</value>
   </data>
   <data name="ServerSelectPublicHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ServerSelectPublicHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ServerSelectPublicHelp</value>
   </data>
   <data name="ServerSelectPortHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ServerSelectPortHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ServerSelectPortHelp</value>
   </data>
   <data name="ServerTestConnectionHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ServerTestConnectionHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ServerTestConnectionHelp</value>
   </data>
   <data name="ServerSaveHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ServerSaveHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ServerSaveHelp</value>
   </data>
   <data name="PasswordAuthenticationHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;PasswordAuthenticationHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>PasswordAuthenticationHelp</value>
   </data>
   <data name="UserAuthenticationHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;UserAuthenticationHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>UserAuthenticationHelp</value>
   </data>
   <data name="UserNameAuthenticationHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;UserNameAuthenticationHelp&lt;/p&gt;&lt;/body&gt;</value>
   </data>
   <data name="WindowsAuthenticationHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;WindowsAuthenticationHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>WindowsAuthenticationHelp</value>
   </data>
   <data name="ConnectControlViewSelectHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ConnectControlViewSelectHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ConnectControlViewSelectHelp</value>
   </data>
   <data name="ConnectControlViewEditHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ConnectControlViewEditHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ConnectControlViewEditHelp</value>
   </data>
   <data name="ConnectControlViewToggleConnectionHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ConnectControlViewToggleConnectionHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>ConnectControlViewToggleConnectionHelp</value>
   </data>
   <data name="ExplorerViewFilterSearchHelp" xml:space="preserve">
     <value>&lt;body&gt;&lt;p&gt;ExplorerViewFilterSearchHelp&lt;/p&gt;&lt;/body&gt;</value>
@@ -1079,82 +1079,184 @@ You need Administrator permission.</value>
     <value>http://warewolf.io/knowledge-base/</value>
   </data>
   <data name="EmailAttachmentCancelCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailAttachmentCancelCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailAttachmentCancelCommandHelp</value>
   </data>
   <data name="EmailAttachmentSaveCommandHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;EmailAttachmentSaveCommandHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>EmailAttachmentSaveCommandHelp</value>
   </data>
   <data name="StandardBodyParagraphClosing" xml:space="preserve">
-    <value>&lt;/body&gt;&lt;/html&gt;</value>
+    <value>&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
   </data>
   <data name="StandardStyling" xml:space="preserve">
     <value>&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
 
 &lt;head runat="server"&gt;
     &lt;style&gt;
+        div {
+            clear: both;
+            margin: 0;
+            font-size: 12px;
+            font-family: 'Source Sans Pro';
+        }
+
         h1 {
-            font-size: 15px;
+            font-size: 17px;
             font-family: 'Source Sans Pro';
             text-decoration: underline;
             align-content: center;
         }
+
         h2 {
             font-size: 16px;
             font-family: 'Source Sans Pro';
             text-decoration: underline;
             align-content: center;
         }
+
         h3 {
-            font-size: 17px;
+            font-size: 15px;
             font-family: 'Source Sans Pro';
             text-decoration: underline;
             align-content: center;
         }
+
         p {
             font-size: 12px;
             font-family: 'Source Sans Pro';
         }
+
         table {
-            border-left: 1px solid GrayText ;
+            border-left: 1px solid GrayText;
             border-right: 1px solid GrayText;
             border-bottom: 1px solid GrayText;
-	        border-spacing: 1px;
+            border-spacing: 1px;
         }
 
         table {
             width: 100%;
         }
+
         th {
             font-size: 13px;
             background: rgb(244, 244, 244);
             margin-left: 3px;
         }
+
         td {
             font-size: 12px;
+            height: 25px;
             background: rgb(244, 244, 244);
             border: 1px solid GrayText;
             padding: 0;
+            vertical-align: central;
+            align-content: center;
         }
+
         ul {
             font-size: 12px;
             font-family: 'Source Sans Pro';
             list-style-type: circle;
         }
+
         ol {
             font-size: 12px;
             font-family: 'Source Sans Pro';
             list-style-type: square;
         }
+
+        /* unvisited link */
+        a:link {
+            text-decoration: none;
+            color: rgb(243,112,13);
+        }
+
+        /* visited link */
+        a:visited {
+            text-decoration: none;
+            color: rgb(243,112,13);
+        }
+
+        /* mouse over link */
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* selected link */
+        a:active {
+            text-decoration: underline;
+            color: rgb(243,112,13);
+        }
+
         label {
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            padding-left: 25px;
+            margin-right: 15px;
+            font-size: 13px;
+        }
+
+        input[type=radio] {
+            display: none;
+        }
+
+        label:before {
+            content: "";
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
             font-size: 12px;
-            margin: 3px;
             font-family: 'Source Sans Pro';
-            font-style: italic;
+            position: absolute;
+            left: 0;
+            bottom: 1px;
+            border: 1px solid GrayText;
+            background-color: whitesmoke;
+            box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+        }
+
+        .radio label:before {
+            border-radius: 8px;
+        }
+
+        input[type=radio]:checked + label:before {
+            content: "\2022";
+            border: 1px solid rgb(243,112,13);
+            font-size: 30px;
+            text-align: center;
+            line-height: 18px;
+        }
+
+        input[type=checkbox] {
+            display: none;
+        }
+
+        .checkbox label:before {
+            border-radius: 3px;
+        }
+
+        input[type=checkbox] + label:hover:before,
+        input[type=radio] + label:hover:before {
+            border: 1px solid rgb(243,112,13);
+        }
+
+        input[type=checkbox]:checked + label:before {
+            content: "\2713";
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+            font-size: 15px;
+            color: rgb(43,39,38);
+            border: 1px solid rgb(243,112,13);
+            text-align: center;
+            line-height: 15px;
         }
     &lt;/style&gt;
     &lt;title&gt;&lt;/title&gt;
 &lt;/head&gt;
-&lt;body&gt;</value>
+&lt;body&gt;
+    &lt;div&gt;</value>
   </data>
   <data name="WebServiceRequestHeadersTableHelp" xml:space="preserve">
     <value>&lt;h1&gt;Web Service Request Headers&lt;/h1&gt;

@@ -254,6 +254,8 @@ namespace Dev2.Studio.ViewModels.Workflow
                 return _cancelComand ?? (_cancelComand = new DelegateCommand(param => Cancel()));
             }
         }
+        public bool IsInError { get; set; }
+
         #endregion Cammands
 
         #region Methods
@@ -264,9 +266,12 @@ namespace Dev2.Studio.ViewModels.Workflow
         public void Save()
         {
             //2012.10.11: massimo.guerrera - Added for PBI 5781
-            DoSaveActions();
-            ExecuteWorkflow();
-            RequestClose();
+            if (!IsInError)
+            {
+                DoSaveActions();
+                ExecuteWorkflow();
+                RequestClose();
+            }
         }
 
         public void DoSaveActions()
@@ -313,12 +318,15 @@ namespace Dev2.Studio.ViewModels.Workflow
 
         public void ViewInBrowser()
         {
-            Tracker.TrackEvent(TrackerEventGroup.Workflows, TrackerEventName.ViewInBrowserClicked);
-            DoSaveActions();
-            string payload = BuildWebPayLoad();
-            SendViewInBrowserRequest(payload);
-            SendFinishedMessage();
-            RequestClose();
+            if (!IsInError)
+            {
+                Tracker.TrackEvent(TrackerEventGroup.Workflows, TrackerEventName.ViewInBrowserClicked);
+                DoSaveActions();
+                string payload = BuildWebPayLoad();
+                SendViewInBrowserRequest(payload);
+                SendFinishedMessage();
+                RequestClose();
+            }
         }
 
         public string BuildWebPayLoad()

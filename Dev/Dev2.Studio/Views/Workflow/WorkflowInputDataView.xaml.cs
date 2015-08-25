@@ -19,7 +19,6 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
 using System.Xml;
-using Dev2.Common.Interfaces.PopupController;
 using Dev2.Data.Interfaces;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.UI;
@@ -45,7 +44,7 @@ namespace Dev2.Studio.Views.Workflow
             SetUpTextEditor();
             AddBlackOutEffect();
             _currentTab = InputTab.Grid;
-            _popupController = CustomContainer.Get<Dev2.Common.Interfaces.Studio.Controller.IPopupController>();
+            _popupController = CustomContainer.Get<Common.Interfaces.Studio.Controller.IPopupController>();
         }
 
         private TextEditor _editor;
@@ -55,7 +54,7 @@ namespace Dev2.Studio.Views.Workflow
         DispatcherTimer _foldingUpdateTimer;
         Grid _blackoutGrid;
         InputTab _currentTab;
-        Common.Interfaces.Studio.Controller.IPopupController _popupController;
+        readonly Common.Interfaces.Studio.Controller.IPopupController _popupController;
 
         private void SetUpTextEditor()
         {
@@ -116,6 +115,7 @@ namespace Dev2.Studio.Views.Workflow
                 var vm = DataContext as WorkflowInputDataViewModel;
                 if(vm != null)
                 {
+                    vm.IsInError = false;
                     if(tabItem != null && tabItem.Header.ToString() == "XML")
                     {
                         switch(_currentTab)
@@ -171,6 +171,7 @@ namespace Dev2.Studio.Views.Workflow
                                     {
 
                                         ShowInvalidDataPopupMessage();
+                                        
                                     }
                                 }
                                 break;
@@ -186,14 +187,21 @@ namespace Dev2.Studio.Views.Workflow
                     }
                     else
                     {
-                        var xmlData = _editor.Text;
-                        if (_currentTab == InputTab.Json)
+                        try
                         {
-                            xmlData = GetXmlDataFromJson();                           
+                            var xmlData = _editor.Text;
+                            if (_currentTab == InputTab.Json)
+                            {
+                                xmlData = GetXmlDataFromJson();                           
+                            }
+                            vm.XmlData = xmlData;
+                            vm.SetWorkflowInputData();
+                            _currentTab = InputTab.Grid;
                         }
-                        vm.XmlData = xmlData;
-                        vm.SetWorkflowInputData();
-                        _currentTab = InputTab.Grid;
+                        catch
+                        {
+                            vm.IsInError = true;
+                        }
                     }
                 }
             }
@@ -202,6 +210,11 @@ namespace Dev2.Studio.Views.Workflow
         void ShowInvalidDataPopupMessage()
         {
             _popupController.Show("The data you have entered is invalid. Please correct the data.", "Invalid data entered.", MessageBoxButton.OK, MessageBoxImage.Error, null);
+            var vm = DataContext as WorkflowInputDataViewModel;
+            if (vm != null)
+            {
+                vm.IsInError = true;
+            }
         }
 
         string GetXmlDataFromJson()
@@ -287,19 +300,6 @@ namespace Dev2.Studio.Views.Workflow
             }
         }
 
-        private void DataListInputsSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var row = GetSelectedRow(DataListInputs);
-            if(row != null)
-            {
-                var intelbox = FindByName("txtValue", row) as IntellisenseTextBox;
-                if(intelbox != null)
-                {
-                    intelbox.Focus();
-                }
-            }
-        }
-
         private FrameworkElement FindByName(string name, FrameworkElement root)
         {
             if(root != null)
@@ -325,7 +325,7 @@ namespace Dev2.Studio.Views.Workflow
             return null;
         }
 
-        public static CellsPanel GetSelectedRow(XamGrid grid)
+        static CellsPanel GetSelectedRow(XamGrid grid)
         {
             if(grid.ActiveCell != null)
             {
@@ -341,6 +341,7 @@ namespace Dev2.Studio.Views.Workflow
             var vm = DataContext as WorkflowInputDataViewModel;
             if(vm != null)
             {
+                vm.IsInError = false;
                 if(tabItem != null)
                 {
                     if (tabItem.Header.ToString() == "XML")
@@ -380,14 +381,9 @@ namespace Dev2.Studio.Views.Workflow
             DestroyTimer();
         }
 
-        void DataListInputs_OnLoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            e.Row.Tag = e.Row.GetIndex();
-        }
-
         void WorkflowInputDataView_OnMouseDown(object sender, MouseButtonEventArgs e)
         {if (Mouse.LeftButton == MouseButtonState.Pressed)
-            this.DragMove();
+            DragMove();
         }
 
         void WorkflowInputDataView_OnClosed(object sender, EventArgs e)
@@ -407,9 +403,11 @@ namespace Dev2.Studio.Views.Workflow
         {
             var effect = new BlurEffect { Radius = 10, KernelType = KernelType.Gaussian, RenderingBias = RenderingBias.Quality };
             var content = Application.Current.MainWindow.Content as Grid;
-            _blackoutGrid = new Grid();
-            _blackoutGrid.Background = new SolidColorBrush(Colors.Black);
-            _blackoutGrid.Opacity = 0.75;
+            _blackoutGrid = new Grid
+            {
+                Background = new SolidColorBrush(Colors.Black),
+                Opacity = 0.75
+            };
             if (content != null)
             {
                 content.Children.Add(_blackoutGrid);
