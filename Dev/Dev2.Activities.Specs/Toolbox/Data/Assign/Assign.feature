@@ -731,6 +731,15 @@ Scenario: Assign a Variable That Does Not Exist
 	Then the execution has "AN" error
 	And the execution has "Scalar value { var } is NULL" error
 
+Scenario: Assigning variables with space after closing brace
+	Given I assign the value "10" to a variable "[[x]]"
+	And I add " " after the closing bracket 
+	Then additional closing brackets are added to the variable "[[x]] ]]"
+	When the assign tool is executed
+	Then the execution has "AN" error
+	And the execution has "Variable - Invalid expression: opening and closing brackets don't match" error
+
+
 
 
 
