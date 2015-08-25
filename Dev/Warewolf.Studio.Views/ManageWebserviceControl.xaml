@@ -79,8 +79,8 @@
                             </i:Interaction.Behaviors>
                         </ComboBox>
                         <Button Width="25" 
-                                Command="{Binding SelectedSource}" 
-                                IsEnabled="{Binding HasChanged}" 
+                                Command="{Binding EditWebSourceCommand}" 
+                                IsEnabled="{Binding CanEditHeadersAndUrl}" 
                                 Content=" ... " 
                                 Margin="{StaticResource ElementBorderControlLeftTop}">
                             <i:Interaction.Behaviors>
@@ -443,7 +443,7 @@
                                Text="{Binding MappingsHeader}" 
                                Style="{StaticResource SourceHeader}" ></TextBlock>
                     </StackPanel>
-                    <views:MappingsView Grid.Row="1" ></views:MappingsView>
+                    <views:MappingsView x:Name="MappingsView" Grid.Row="1" ></views:MappingsView>
                 </Grid>
                 <Grid Grid.Row="5" Grid.Column="0">
                     <Grid.ColumnDefinitions>

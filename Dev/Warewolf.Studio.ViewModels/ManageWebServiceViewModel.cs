@@ -60,7 +60,6 @@ namespace Warewolf.Studio.ViewModels
         string _outputName;
         string _resourceName;
         bool _requestBodyEnabled;
-        ICommand _editWebSourceCommand;
         IList<IServiceOutputMapping> _outputMapping;
         string _errorMessage;
         bool _isTesting;
@@ -100,7 +99,6 @@ namespace Warewolf.Studio.ViewModels
             Sources = Model.Sources;
             Inputs = new ObservableCollection<IServiceInput>();
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
-            EditWebSourceCommand = new DelegateCommand(() => Model.EditSource(SelectedSource), () => SelectedSource != null);
             var variables = new ObservableCollection<NameValue>();
             variables.CollectionChanged += VariablesOnCollectionChanged;
             Variables = variables;
@@ -114,6 +112,7 @@ namespace Warewolf.Studio.ViewModels
             CreateNewSourceCommand = new DelegateCommand(_model.CreateNewSource);
             SaveCommand = new DelegateCommand(Save, CanSave);
             NewWebSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
+            EditWebSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource), () => SelectedSource != null);
             PasteResponseCommand = new DelegateCommand(HandlePasteResponse);
             RemoveHeaderCommand = new DelegateCommand(DeleteCell);
             AddHeaderCommand = new DelegateCommand(Add);
@@ -569,18 +568,7 @@ namespace Warewolf.Studio.ViewModels
         /// <summary>
         /// Command to create a new web source 
         /// </summary>
-        public ICommand EditWebSourceCommand
-        {
-            get
-            {
-                return _editWebSourceCommand;
-            }
-            set
-            {
-                _editWebSourceCommand = value;
-                OnPropertyChanged(() => EditWebSourceCommand);
-            }
-        }
+        public ICommand EditWebSourceCommand { get; set; }
         /// <summary>
         /// Available Sources
         /// </summary>
@@ -609,19 +597,39 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _selectedSource = value;
-                if (_selectedSource != null)
+                if (!Equals(_selectedSource, value))
                 {
-                    RequestUrlQuery = _selectedSource.DefaultQuery ?? "";
-                    SourceUrl = _selectedSource.HostName;
-                    CanEditHeadersAndUrl = true;
-                    ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
+                    _selectedSource = value;
+                    PerformRefresh();
+                    if (_selectedSource != null)
+                    {
+                        RequestUrlQuery = _selectedSource.DefaultQuery ?? "";
+                        SourceUrl = _selectedSource.HostName;
+                        CanEditHeadersAndUrl = true;
+                        ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
+                    }
+                    else
+                    {
+                        CanEditHeadersAndUrl = false;
+                    }
+                    OnPropertyChanged(() => SelectedSource);
+                    ViewModelUtils.RaiseCanExecuteChanged(EditWebSourceCommand);
                 }
-                else
-                {
-                    CanEditHeadersAndUrl = false;
-                }
-                OnPropertyChanged(() => SelectedSource);
+            }
+        }
+
+        private void PerformRefresh()
+        {
+            try
+            {
+                Init();
+                CanEditHeadersAndUrl = false;
+                CanEditResponse = false;
+                CanEditMappings = false;
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = e.Message;
             }
         }
         /// <summary>
