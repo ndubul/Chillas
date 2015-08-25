@@ -20,7 +20,7 @@
         AutomationProperties.AutomationId="UI_DebugInputWindow_AutoID">
 
     <Window.Icon>
-        <BitmapImage UriSource="pack://application:,,,/Warewolf Studio;component/Images/ExecuteDebugStart-32.png" />
+        <Binding Source="{StaticResource ExecuteDebugStart-32}"/>
     </Window.Icon>
     <Window.InputBindings>
         <KeyBinding Key="F6" Command="{Binding Path=OkCommand}"/>

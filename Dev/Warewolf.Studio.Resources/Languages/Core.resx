@@ -212,13 +212,7 @@ Version History will also be deleted.</value>
   </data>
   <data name="DialogTitle_HasDuplicateName" xml:space="preserve">
     <value>{0} exists</value>
-  </data>
-  <data name="Pack_Uri_Debug_Image" xml:space="preserve">
-    <value>pack://application:,,,/Warewolf Studio;component/Images/ExecuteDebugStart-32.png</value>
-  </data>
-  <data name="Pack_Uri_Stop_Image" xml:space="preserve">
-    <value>pack://application:,,,/Warewolf Studio;component/Images/ExecuteDebugStop-32.png</value>
-  </data>
+  </data>  
   <data name="Ribbon_Debug" xml:space="preserve">
     <value>Debug</value>
   </data>

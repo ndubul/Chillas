@@ -104,9 +104,10 @@ namespace Dev2.Core.Tests.AppResources.Converters
             object convert = explorerItemModelToIconConverter.Convert(new object[] { ResourceType.DbService, false }, null, null, null);
             DrawingImage bitmapImage = convert as DrawingImage;
             //------------Assert Results-------------------------
-            if(bitmapImage != null)
+            if(bitmapImage != null && drawingImage!=null)
             {
-                Assert.AreEqual(drawingImage, bitmapImage);
+                Assert.AreEqual(drawingImage.Height,bitmapImage.Height);
+                Assert.AreEqual(drawingImage.Width,bitmapImage.Width);
             }
             else
             {
