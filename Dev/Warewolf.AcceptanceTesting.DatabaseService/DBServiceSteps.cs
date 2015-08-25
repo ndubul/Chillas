@@ -28,6 +28,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         [BeforeFeature("DBService")]
         public static void SetupForSystem()
         {
+            Utils.SetupResourceDictionary();
             var view = new ManageDatabaseServiceControl();
             var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
             mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Verifiable();
