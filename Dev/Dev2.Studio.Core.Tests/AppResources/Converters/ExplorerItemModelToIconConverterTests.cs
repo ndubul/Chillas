@@ -172,7 +172,9 @@ namespace Dev2.Core.Tests.AppResources.Converters
         public void ExplorerItemModelToIconConverter_Convert_WithResourceTypeOfDbSource_CorrectBitmapImage()
         // ReSharper restore InconsistentNaming
         {
-            Uri expected = new Uri("pack://application:,,,/Warewolf Studio;component/Images/DatabaseSource-32.png");
+            const string pathname = "/Warewolf.Studio.Themes.Luna;component/Images.xaml";
+            ResourceDictionary dict = Application.LoadComponent(new Uri(pathname, System.UriKind.Relative)) as ResourceDictionary;
+            var drawingImage = dict[CustomMenuIcons.DbSource] as DrawingImage;
             //------------Setup for test--------------------------
             var explorerItemModelToIconConverter = new ExplorerItemModelToIconConverter();
 
@@ -180,13 +182,14 @@ namespace Dev2.Core.Tests.AppResources.Converters
             object convert = explorerItemModelToIconConverter.Convert(new object[] { ResourceType.DbSource, false }, null, null, null);
             BitmapImage bitmapImage = convert as BitmapImage;
             //------------Assert Results-------------------------
-            if(bitmapImage != null)
+            if (bitmapImage != null && drawingImage != null)
             {
-                Assert.AreEqual(expected, bitmapImage.UriSource);
+                Assert.AreEqual(drawingImage.Height, bitmapImage.Height);
+                Assert.AreEqual(drawingImage.Width, bitmapImage.Width);
             }
             else
             {
-                Assert.Fail("No BitmapImage was returned.");
+                Assert.Fail("No Image was returned.");
             }
         }
 

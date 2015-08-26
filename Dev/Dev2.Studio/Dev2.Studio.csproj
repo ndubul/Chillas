@@ -981,6 +981,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\ServiceSettings-32.png" />
+    <Resource Include="Images\ServiceStatusError-32.png" />
+    <Resource Include="Images\ServiceStatusOK-32.png" />
+    <Resource Include="Images\ServiceStatusWarning-16.png" />
     <Resource Include="Images\AuthExecute-12.png" />
     <Resource Include="Images\AuthNone-16.png" />
     <Resource Include="Images\AuthView-12.png" />
