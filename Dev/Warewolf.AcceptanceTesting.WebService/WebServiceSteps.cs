@@ -199,13 +199,32 @@ namespace Warewolf.AcceptanceTesting.WebService
 
         [When(@"I select ""(.*)"" as data source")]
         [Given(@"I select ""(.*)"" as data source")]
+        [Then(@"I select ""(.*)"" as data source")]
         public void WhenISelectAsDataSource(string webServiceName)
         {
             var view = Utils.GetView<ManageWebserviceControl>();
-            view.SelectWebService(_demoWebServiceSourceDefinition);
+            WebServiceSourceDefinition webServiceSourceDefinition = new WebServiceSourceDefinition
+            {
+                Name = webServiceName
+            };
+            view.SelectWebService(webServiceSourceDefinition);
             var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
             Assert.AreEqual(webServiceName, viewModel.SelectedSource.Name);
         }
+
+        [Then(@"I change data source to ""(.*)""")]
+        public void ThenIChangeDataSourceTo(string webServiceName)
+        {
+            var view = Utils.GetView<ManageWebserviceControl>();
+            WebServiceSourceDefinition webServiceSourceDefinition = new WebServiceSourceDefinition
+            {
+                Name = webServiceName 
+            };
+            view.SelectWebService(webServiceSourceDefinition);
+            var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
+            Assert.AreEqual(webServiceName, viewModel.SelectedSource.Name);
+        }
+
 
         [When(@"I select Method ""(.*)""")]
         public void WhenISelectMethod(string method)
