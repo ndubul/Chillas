@@ -38,7 +38,7 @@ namespace Warewolf.Studio.Views
         {
             try
             {
-                SourcesComboBox.SelectedItem = webServiceName.Name;
+                SourcesComboBox.SelectedItem = webServiceName;
             }
             // ReSharper disable once EmptyGeneralCatchClause
             catch (Exception)
@@ -49,6 +49,16 @@ namespace Warewolf.Studio.Views
         public void TestAction()
         {
             TestButton.Command.Execute(null);
+        }
+
+        public void EditAction()
+        {
+            EditButton.Command.Execute(null);
+        }
+
+        public void PasteAction()
+        {
+            PasteButton.Command.Execute(null);
         }
 
         public void Save()
@@ -64,6 +74,16 @@ namespace Warewolf.Studio.Views
                 be.UpdateTarget();
             }
             return HeadersGrid.ItemsSource as ItemCollection;
+        }
+
+        public string GetOutputs()
+        {
+            BindingExpression be = Response.GetBindingExpression(ItemsControl.ItemsSourceProperty);
+            if (be != null)
+            {
+                be.UpdateTarget();
+            }
+            return Response.Text;
         }
 
         public bool IsDataSourceFocused()
@@ -117,21 +137,21 @@ namespace Warewolf.Studio.Views
                     }
                 case "3 Variables":
                     {
-                        BindingExpression be = VariablesGrid.GetBindingExpression(VisibilityProperty);
+                        BindingExpression be = RequestVarGrid.GetBindingExpression(VisibilityProperty);
                         if (be != null)
                         {
                             be.UpdateTarget();
                         }
-                        return VariablesGrid.Visibility == Visibility.Visible;
+                        return RequestVarGrid.Visibility == Visibility.Visible;
                     }
                 case "4 Response":
                     {
-                        BindingExpression be = MappingsGrid.GetBindingExpression(VisibilityProperty);
+                        BindingExpression be = ResponseGrid.GetBindingExpression(VisibilityProperty);
                         if (be != null)
                         {
                             be.UpdateTarget();
                         }
-                        return MappingsGrid.Visibility == Visibility.Visible;
+                        return ResponseGrid.Visibility == Visibility.Visible;
                     }
                 case "5 Default and Mapping":
                     {

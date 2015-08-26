@@ -33,7 +33,6 @@
         <TextBox TextWrapping="Wrap" 
                  MinHeight="369" 
                  AcceptsReturn="True" 
-                 Margin="{StaticResource ElementBorderLeftRight}"
                  VerticalContentAlignment="Top"
                  SnapsToDevicePixels="True" 
                  VerticalScrollBarVisibility="Auto"
@@ -50,7 +49,7 @@
 
         </TextBox>
         <StackPanel Grid.Row="1" 
-                    Margin="0,-2,5,5"
+                    Margin="{StaticResource ControlBorderTop}"
                     Orientation="Horizontal" 
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Center">
