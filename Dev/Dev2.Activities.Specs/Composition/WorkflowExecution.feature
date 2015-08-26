@@ -4188,9 +4188,10 @@ Scenario: Time Zone Changes
 
 
 #show dependacies
+@ignore
 Scenario: View Dependancies on a workflow with no dependancies
-	Given I have a a workflow "Hello World"
-	When I click "Show all dependancies" 
+	Given I have a workflow "Hello World"
+	When I select "Show all dependancies" 
 	Then the "Dependancies - Hello World" tab is opened
 	And "Show what depends on Hello World" is checked by default
 	And "Show what Hello World depends on" is visible
@@ -4199,3 +4200,38 @@ Scenario: View Dependancies on a workflow with no dependancies
 	And "Hello World" is visible
 	And "Hello World" has no dependancies
 
+Scenario: View workflow with multiple dependancies
+	Given I have a workflow "11365_WebService"	
+	And I select "Show All Dependancies"
+	Then the "Dependancies - 11365_WebService" tab is opened
+	And "Show what depends on 11365_WebService" is checked by default
+	And "Show what Hello World depends on" is visible
+	And Nesting Levels equals "0" equals "All levels"
+	And Nothing depends on "11365_WebService"
+	When I select "Show what 11365_WebService depends on"
+	Then "FetchCities" is shown as the first level of dependancy
+	And "Dev2GetCountriesWebService" is shown as the second level of dependancy
+
+Scenario: View workflow based on nested levels
+	Given I have a workflow "11365_WebService"	
+	And I select "Show All Dependancies"
+	Then the "Dependancies - 11365_WebService" tab is opened
+	And "Show what depends on 11365_WebService" is checked by default
+	And "Show what Hello World depends on" is visible
+	And Nothing depends on "11365_WebService"
+	When I select "Show what 11365_WebService depends on"
+	And Nesting Levels "1" equals "First level" only
+	Then "FetchCities" is shown as the first level of dependancy
+	And "Dev2GetCountriesWebService" is invisible
+	And Nesting Levels "2" equals "Second level" 
+	Then "FetchCities" is shown as the first level of dependancy
+	And "Dev2GetCountriesWebService" is shown as the second level of dependancy
+
+Scenario:  Viewing Depenancies
+	Given I have a workflow "11365_WebService"	
+	And I select "Show All Dependancies"
+	Then the "Dependancies - 11365_WebService" tab is opened
+	When I select "Show what 11365_WebService depends on"
+	And Nesting Levels equals "0" equals "All levels"
+	And I double click "Dev2GetCountriesWebService"
+	Then the "Edit - Dev2GetCountriesWebService" tab is opened

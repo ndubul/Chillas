@@ -44,7 +44,7 @@ namespace Dev2.Studio.Views.Workflow
             SetUpTextEditor();
             AddBlackOutEffect();
             _currentTab = InputTab.Grid;
-            _popupController = CustomContainer.Get<Common.Interfaces.Studio.Controller.IPopupController>();
+            
         }
 
         private TextEditor _editor;
@@ -54,7 +54,7 @@ namespace Dev2.Studio.Views.Workflow
         DispatcherTimer _foldingUpdateTimer;
         Grid _blackoutGrid;
         InputTab _currentTab;
-        readonly Common.Interfaces.Studio.Controller.IPopupController _popupController;
+        
 
         private void SetUpTextEditor()
         {
@@ -106,8 +106,6 @@ namespace Dev2.Studio.Views.Workflow
 
         private void TabControlSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-
             if(e.Source is TabControl)
             {
                 var tabCtrl = e.Source as TabControl;
@@ -128,7 +126,7 @@ namespace Dev2.Studio.Views.Workflow
                                 }
                                 catch
                                 {
-                                    ShowInvalidDataPopupMessage();
+                                    vm.ShowInvalidDataPopupMessage();
                                 }
                                 break;
                             case InputTab.Json:
@@ -141,7 +139,7 @@ namespace Dev2.Studio.Views.Workflow
                                 }
                                 catch
                                 {
-                                    ShowInvalidDataPopupMessage();
+                                    vm.ShowInvalidDataPopupMessage();
                                 }
                                 break;
                         }
@@ -169,9 +167,7 @@ namespace Dev2.Studio.Views.Workflow
                                     }
                                     catch
                                     {
-
-                                        ShowInvalidDataPopupMessage();
-                                        
+                                        vm.ShowInvalidDataPopupMessage();
                                     }
                                 }
                                 break;
@@ -207,15 +203,7 @@ namespace Dev2.Studio.Views.Workflow
             }
         }
 
-        void ShowInvalidDataPopupMessage()
-        {
-            _popupController.Show("The data you have entered is invalid. Please correct the data.", "Invalid data entered.", MessageBoxButton.OK, MessageBoxImage.Error, null);
-            var vm = DataContext as WorkflowInputDataViewModel;
-            if (vm != null)
-            {
-                vm.IsInError = true;
-            }
-        }
+       
 
         string GetXmlDataFromJson()
         {
@@ -226,7 +214,11 @@ namespace Dev2.Studio.Views.Workflow
             }
             catch(Exception)
             {
-                ShowInvalidDataPopupMessage();
+                var vm = DataContext as WorkflowInputDataViewModel;
+                if(vm != null)
+                {
+                    vm.ShowInvalidDataPopupMessage();
+                }
             }
             return _editor.Text;
         }
@@ -353,7 +345,7 @@ namespace Dev2.Studio.Views.Workflow
                         }
                         catch
                         {
-                            ShowInvalidDataPopupMessage();
+                            vm.IsInError = true;
                         }
                     }
                     else if (tabItem.Header.ToString() == "JSON")

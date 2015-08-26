@@ -15,6 +15,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Dev2.Common;
@@ -23,7 +24,6 @@ using Dev2.Data.Binary_Objects;
 using Dev2.Data.Interfaces;
 using Dev2.DataList.Contract.Binary_Objects;
 using Dev2.Instrumentation;
-using Dev2.Runtime.Collections;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Services.Security;
 using Dev2.Session;
@@ -55,7 +55,7 @@ namespace Dev2.Studio.ViewModels.Workflow
         static DataListConversionUtils _dataListConversionUtils;
         bool _canViewInBrowser;
         bool _canDebug;
-
+        readonly Common.Interfaces.Studio.Controller.IPopupController _popupController;
         #endregion Fields
 
         public event Action DebugExecutionStart;
@@ -114,6 +114,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             DisplayName = "Debug input data";
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
             _dataListConversionUtils = new DataListConversionUtils();
+            _popupController = CustomContainer.Get<Common.Interfaces.Studio.Controller.IPopupController>();
         }
         #endregion Ctor
 
@@ -272,6 +273,10 @@ namespace Dev2.Studio.ViewModels.Workflow
                 ExecuteWorkflow();
                 RequestClose();
             }
+            else
+            {
+                ShowInvalidDataPopupMessage();
+            }
         }
 
         public void DoSaveActions()
@@ -316,6 +321,12 @@ namespace Dev2.Studio.ViewModels.Workflow
             WebServer.Send(_resourceModel, payload.ToString(), new AsyncWorker());
         }
 
+        public void ShowInvalidDataPopupMessage()
+        {
+            _popupController.Show("The data you have entered is invalid. Please correct the data.", "Invalid data entered.", MessageBoxButton.OK, MessageBoxImage.Error, null);
+            IsInError = true;
+        }
+
         public void ViewInBrowser()
         {
             if (!IsInError)
@@ -326,6 +337,10 @@ namespace Dev2.Studio.ViewModels.Workflow
                 SendViewInBrowserRequest(payload);
                 SendFinishedMessage();
                 RequestClose();
+            }
+            else
+            {
+                ShowInvalidDataPopupMessage();
             }
         }
 
@@ -728,7 +743,7 @@ namespace Dev2.Studio.ViewModels.Workflow
         /// <returns>
         /// true if the specified objects are equal; otherwise, false.
         /// </returns>
-        /// <param name="x">The first object of type <paramref name="T"/> to compare.</param><param name="y">The second object of type <paramref name="T"/> to compare.</param>
+        /// <param name="x">The first object of type <paramref name="x"/> to compare.</param><param name="y">The second object of type <paramref name="y"/> to compare.</param>
         public bool Equals(IScalar x, IScalar y)
         {
             if (x == null) return false;
