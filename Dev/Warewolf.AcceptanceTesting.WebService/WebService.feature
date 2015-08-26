@@ -100,10 +100,12 @@ Scenario Outline: Create Web Service with different methods
 	And "Edit" is "Enabled"
 	Then "2 Request" is "Enabled"
 	And "3 Variables" is "Enabled" 
-	And "4 Response" is "Enabled" 
-	And "5 Default and Mapping" is "Enabled"
+	And "4 Response" is "Disabled" 
+	And "5 Default and Mapping" is "Disabled"
 	When Test Connection is "Successful"
+	And "4 Response" is "Enabled" 
 	Then the response is loaded
+	And "5 Default and Mapping" is "Enabled"
 	And "Save" is "Disabled"
 	When Test Connection is "Successful"
 	Then input mappings are
