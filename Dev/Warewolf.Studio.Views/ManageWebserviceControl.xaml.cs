@@ -1,15 +1,159 @@
-﻿using Microsoft.Practices.Prism.Mvvm;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.DB;
+using Dev2.Common.Interfaces.ServerProxyLayer;
+using Dev2.Common.Interfaces.WebServices;
+using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.Views
 {
     /// <summary>
     /// Interaction logic for ManageWebserviceControl.xaml
     /// </summary>
-    public partial class ManageWebserviceControl : IView
+    public partial class ManageWebserviceControl : IView, ICheckControlEnabledView
     {
         public ManageWebserviceControl()
         {
             InitializeComponent();
+            SourcesComboBox.Focus();
+        }
+
+        public void SelectMethod(WebRequestMethod requestName)
+        {
+            try
+            {
+                RequestTypes.SelectedItem = requestName;
+            }
+            // ReSharper disable once EmptyGeneralCatchClause
+            catch (Exception)
+            {
+            }
+        }
+
+        public void SelectWebService(IWebServiceSource webServiceName)
+        {
+            try
+            {
+                SourcesComboBox.SelectedItem = webServiceName.Name;
+            }
+            // ReSharper disable once EmptyGeneralCatchClause
+            catch (Exception)
+            {
+            }
+        }
+
+        public void TestAction()
+        {
+            TestButton.Command.Execute(null);
+        }
+
+        public void Save()
+        {
+            SaveButton.Command.Execute(null);
+        }
+
+        public ItemCollection GetHeaders()
+        {
+            BindingExpression be = HeadersGrid.GetBindingExpression(ItemsControl.ItemsSourceProperty);
+            if (be != null)
+            {
+                be.UpdateTarget();
+            }
+            return HeadersGrid.ItemsSource as ItemCollection;
+        }
+
+        public bool IsDataSourceFocused()
+        {
+            return SourcesComboBox.IsFocused;
+        }
+
+        public IWebServiceSource GetSelectedWebService()
+        {
+            IWebServiceSource selectedSource = null;
+            BindingExpression bindingExpression = SourcesComboBox.GetBindingExpression(Selector.SelectedItemProperty);
+            if (bindingExpression != null)
+            {
+                bindingExpression.UpdateTarget();
+                var manageWebServiceViewModel = bindingExpression.DataItem as IManageWebServiceViewModel;
+                selectedSource = SourcesComboBox.SelectedItem as IWebServiceSource;
+                if (manageWebServiceViewModel != null)
+                {
+                    if (selectedSource == null)
+                    {
+                        selectedSource = manageWebServiceViewModel.SelectedSource;
+                    }
+                }
+            }
+            return selectedSource;
+        }
+
+        public string GetUrl()
+        {
+            return RequestUrl.Text;
+        }
+
+        public bool GetControlEnabled(string controlName)
+        {
+            switch (controlName)
+            {
+                case "Save":
+                    return SaveButton.Command.CanExecute(null);
+                case "Test":
+                    return TestButton.Command.CanExecute(null);
+                case "1 Select Request Method and Source":
+                    return SourcesComboBox.IsEnabled;
+                case "2 Request":
+                    {
+                        BindingExpression be = RequestHeadersGrid.GetBindingExpression(VisibilityProperty);
+                        if (be != null)
+                        {
+                            be.UpdateTarget();
+                        }
+                        return RequestHeadersGrid.Visibility == Visibility.Visible;
+                    }
+                case "3 Variables":
+                    {
+                        BindingExpression be = VariablesGrid.GetBindingExpression(VisibilityProperty);
+                        if (be != null)
+                        {
+                            be.UpdateTarget();
+                        }
+                        return VariablesGrid.Visibility == Visibility.Visible;
+                    }
+                case "4 Response":
+                    {
+                        BindingExpression be = MappingsGrid.GetBindingExpression(VisibilityProperty);
+                        if (be != null)
+                        {
+                            be.UpdateTarget();
+                        }
+                        return MappingsGrid.Visibility == Visibility.Visible;
+                    }
+                case "5 Default and Mapping":
+                    {
+                        BindingExpression be = MappingsGrid.GetBindingExpression(VisibilityProperty);
+                        if (be != null)
+                        {
+                            be.UpdateTarget();
+                        }
+                        return MappingsGrid.Visibility == Visibility.Visible;
+                    }
+            }
+            return false;
+        }
+
+        public ItemCollection GetInputMappings()
+        {
+            return MappingsView.GetInputMappings();
+        }
+
+        public ItemCollection GetOutputMappings()
+        {
+            return MappingsView.GetOutputMappings();
         }
 
         /// <summary>

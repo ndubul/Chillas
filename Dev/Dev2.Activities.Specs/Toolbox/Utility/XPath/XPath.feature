@@ -216,3 +216,29 @@ Scenario: Use XPath to with a comment in it
 	| 1 | [[rec(1).id]] = 1        |
 	|   | [[rec(2).id]] = 2        |
 	|   | [[rec(3).id]] = 3        |	
+
+
+@ignore
+#Audit
+Scenario Outline: Use XPath to get data off XML using recordsets
+	Given I have this xml '<Xmlvalue>'
+	And The result variable is '<Xml>' 
+	And I have a variable '<First>' output with xpath '<path>'
+	And The path variable is '<Xpath>' 
+	When the xpath tool is executed
+	Then the variable '<First>' should have a value '<value>'
+	And the execution has '<Error>' error
+	And the debug inputs as  
+	| XML        | value   | Variable | Xpath   |
+	| <Xmlvalue> | <value> | <First>  | <path> |
+	And the debug output as 
+	| # |                   |
+	| 1 | <First> = <value> |  
+Examples: 
+| Xml                            | Xmlvalue                                                                                         | First                            | Xpath                           | path                          | value                                                                | Error |
+| [[rec().a]]                    | <root><number id="1">One</number><number id="2">Two</number><number id="3">Three</number></root> | [[firstNum]]                     | [[path().set]]                  | //root/number[@id='1']/text() | One                                                                  | No    |
+| [[rec(1).a]]                   | <root><number id="1">One</number><number id="2">Two</number><number id="3">Three</number></root> | [[firstNum]]                     | [[path(1).set]]                 | //root/number[@id='1']/text() | One                                                                  | No    |
+| [[rec(*).a]]                   | <root><number id="1">One</number><number id="2">Two</number><number id="3">Three</number></root> | [[F([[int]]).number]],[[int]] =1 | [[path(*).set]]                 | //root/number[@id='1']/text() | One                                                                  | No    |
+| [[rec([[int]]).a]], [[int]] =1 | <root><number id="1">One</number><number id="2">Two</number><number id="3">Three</number></root> | [[firstNum]]                     | [[path([[int]]).set]],[[int]]=1 | //root/number[@id='1']/text() | One                                                                  | No    |
+| [[var]]                        |                                                                                                  | [[F().number]]                   | [[var]]                         | //root/number[@id='1']/text() | <InnerError>Value cannt be null. Parameter name:xmlData</InnerError> | An    |
+| [[rec().a]]                    | <root><number id="1">One</number><number id="2">Two</number><number id="3">Three</number></root> | [[firstNum]]                     | [[variable]]                    |                               | <InnerError>Value cannt be null. Parameter name:xPath</InnerError>   | An    |

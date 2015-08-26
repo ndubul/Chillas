@@ -428,6 +428,68 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        public virtual void FromatExceptionError(string source, string @namespace, string action, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Fromat exception error", exampleTags);
+#line 145
+this.ScenarioSetup(scenarioInfo);
+#line 146
+ testRunner.Given("I click \"New Plugin Service Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 147
+ testRunner.And("\"New Plugin Service\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 148
+ testRunner.When(string.Format("I select \'{0}\' as source", source), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 149
+ testRunner.And("\"2 Select a namespace\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 150
+ testRunner.And("\"3 Select an action\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 151
+ testRunner.When(string.Format("I selece \'{0}\' as namespace", @namespace), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 152
+ testRunner.Then("\"Select an action\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 153
+ testRunner.When(string.Format("I select \'{0}\' as action", action), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 154
+ testRunner.And("\"4 Provide Test Values\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 155
+ testRunner.And("\"Test\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 156
+ testRunner.When("\"Test\" is clicked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 157
+ testRunner.And("the test connection is \"unsuccessful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 158
+ testRunner.And("a studio error of \"Unhandled exception\" appears with the Excetion \"\'System.Format" +
+                    "Exception\' occurred in mscorlib.dll but was not handled in user code\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Fromat exception error")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "PluginService")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PluginService")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "testingPluginSrc")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:source", "testingPluginSrc")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:namespace", "Unlimited Framework Plugins EmailPlugin")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:action", "SampleSend")]
+        public virtual void FromatExceptionError_TestingPluginSrc()
+        {
+            this.FromatExceptionError("testingPluginSrc", "Unlimited Framework Plugins EmailPlugin", "SampleSend", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Fromat exception error")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "PluginService")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("PluginService")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "PrimitiveplugintestSrc")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:source", "PrimitiveplugintestSrc")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:namespace", "Dev2.PrimitiveTestDLL.TestClass")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:action", "FetchIntValue")]
+        public virtual void FromatExceptionError_PrimitiveplugintestSrc()
+        {
+            this.FromatExceptionError("PrimitiveplugintestSrc", "Dev2.PrimitiveTestDLL.TestClass", "FetchIntValue", ((string[])(null)));
+        }
     }
 }
 #pragma warning restore

@@ -21,6 +21,7 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Communication;
+using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
 using Warewolf.Core;
@@ -41,6 +42,7 @@ namespace Warewolf.Studio.ViewModels
         IPluginSource _selectedSource;
         IPluginAction _selectedAction;
         IPluginAction _refreshSelectedAction;
+        IPluginService _pluginService;
         ICollection<IPluginAction> _avalaibleActions;
 #pragma warning disable 649
         string _pluginSourceHeader;
@@ -73,6 +75,7 @@ namespace Warewolf.Studio.ViewModels
         ICollection<NameValue> _inputValues;
         string _headerText;
         string _resourceName;
+        string _testResultString;
 
         #region Implementation of IServiceMappings
 
@@ -90,7 +93,8 @@ namespace Warewolf.Studio.ViewModels
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "model", model } });
             _model = model;
-          
+            IsNew = true;
+            Id = Guid.NewGuid();
             Inputs = new ObservableCollection<IServiceInput>();
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
             AvalaibleActions = new ObservableCollection<IPluginAction>();
@@ -101,8 +105,6 @@ namespace Warewolf.Studio.ViewModels
             ResourceName = HeaderText;
             RefreshCommand = new DelegateCommand(Refresh);
             ErrorText = "";
-            HeaderText = Resources.Languages.Core.PluginServiceNewHeaderLabel;
-            ResourceName = HeaderText;
             TestPluginCommand = new DelegateCommand(() => Test(_model));
             SaveCommand = new DelegateCommand(() => Save(), CanSave);
             CreateNewSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
@@ -115,7 +117,9 @@ namespace Warewolf.Studio.ViewModels
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "model", model } });
             _model = model;
+            _pluginService = selectedSource;
             Item = selectedSource;
+            IsNew = false;
             FromModel(selectedSource);
         }
 
@@ -132,12 +136,12 @@ namespace Warewolf.Studio.ViewModels
             SelectedAction = AvalaibleActions.FirstOrDefault(a => a.Method == selectedConnector.Action.Method);
             Item.Source = SelectedSource;
             Item.Action = SelectedAction;
-            Header = selectedConnector.Name;
+            Header = Resources.Languages.Core.PluginServiceEditHeaderLabel + selectedConnector.Name;
         }
 
         void Save()
         {
-            if (Item == null)
+            if (IsNew)
             {
                 var saveOutPut = _saveDialog.ShowSaveDialog();
                 if (saveOutPut == MessageBoxResult.OK || saveOutPut == MessageBoxResult.Yes)
@@ -158,6 +162,8 @@ namespace Warewolf.Studio.ViewModels
             }
             ErrorText = "";
         }
+
+        public bool IsNew { get; set; }
 
         public string MappingsHeader
         {
@@ -285,7 +291,14 @@ namespace Warewolf.Studio.ViewModels
             {
                 IsTesting = true;
                 var serializer = new Dev2JsonSerializer();
-                ResponseService = serializer.Deserialize<RecordsetList>(model.TestService(ToModel()));
+                var testService = model.TestService(ToModel());
+                ResponseService = serializer.Deserialize<RecordsetList>(testService);
+                if (ResponseService.Any(recordset => recordset.HasErrors))
+                {
+                    var errorMessage = string.Join(Environment.NewLine, ResponseService.Select(recordset => recordset.ErrorMessage));
+                    throw new Exception(errorMessage);
+                }
+                TestResultString = testService;
                 UpdateMappingsFromResponse();
                 ErrorText = "";
                 CanEditMappings = true;
@@ -308,6 +321,19 @@ namespace Warewolf.Studio.ViewModels
 
 
         }
+
+        public string TestResultString
+        {
+            get
+            {
+                return _testResultString;
+            }
+            set
+            {
+                SetProperty(ref _testResultString, value);
+            }
+        }
+
         void UpdateMappingsFromResponse()
         {
             if (ResponseService != null)
@@ -697,34 +723,58 @@ namespace Warewolf.Studio.ViewModels
 
         public override IPluginService ToModel()
         {
-            if (Item != null)
+            if (Item == null || Item.Id.Equals(Guid.Empty))
             {
-                return new PluginServiceDefinition()
-                {
-                    Name = Item.Name,
-                    Action = SelectedAction,
-                    Inputs = Inputs == null ? new List<IServiceInput>() : Inputs.ToList(),
-                    OutputMappings = OutputMapping,
-                    Source = SelectedSource,
-                    Path = Item.Path,
-                    Id = Id
-                };
+                Item = ToService();
+                return Item;
             }
             return new PluginServiceDefinition
             {
                 Action = SelectedAction,
                 Inputs = Inputs == null ? new List<IServiceInput>() : Inputs.ToList(),
-                OutputMappings = OutputMapping,
+                OutputMappings = OutputMapping == null ? new List<IServiceOutputMapping>() : OutputMapping.ToList(),
                 Source = SelectedSource,
                 Name = Name,
                 Path = Path,
-                Id = Id
+                Id = Item == null ? Guid.NewGuid() : Item.Id
             };
 
         }
 
+        IPluginService ToService()
+        {
+            if (_pluginService == null)
+                return new PluginServiceDefinition()
+                {
+                    Name = Name,
+                    Action = SelectedAction,
+                    Inputs = Inputs == null ? new List<IServiceInput>() : Inputs.ToList(),
+                    OutputMappings = OutputMapping == null ? new List<IServiceOutputMapping>() : OutputMapping.ToList(),
+                    Source = SelectedSource,
+                    Path = Path,
+                    Id = _pluginService == null ? Guid.NewGuid() : _pluginService.Id
+                };
+            // ReSharper disable once RedundantIfElseBlock
+            else
+            {
+                _pluginService.Name = Name;
+                _pluginService.Action = SelectedAction;
+                _pluginService.Inputs = Inputs == null ? new List<IServiceInput>() : Inputs.ToList();
+                _pluginService.OutputMappings = OutputMapping == null ? new List<IServiceOutputMapping>() : OutputMapping.ToList();
+                _pluginService.Source = SelectedSource;
+                _pluginService.Path = Path;
+                _pluginService.Id = _pluginService == null ? Guid.NewGuid() : _pluginService.Id;
+                return _pluginService;
+            }
+        }
+
         public override void UpdateHelpDescriptor(string helpText)
         {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
 
         #endregion

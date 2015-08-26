@@ -10,12 +10,12 @@
 //  </auto-generated>
 // ------------------------------------------------------------------------------
 #region Designer generated code
-
-using TechTalk.SpecFlow;
-
 #pragma warning disable
 namespace Dev2.Activities.Specs.Toolbox.Data.Assign
 {
+    using TechTalk.SpecFlow;
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
@@ -49,7 +49,7 @@ namespace Dev2.Activities.Specs.Toolbox.Data.Assign
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "Assign")))
             {
-                FeatureSetup(null);
+                Dev2.Activities.Specs.Toolbox.Data.Assign.AssignFeature.FeatureSetup(null);
             }
         }
         
@@ -2270,33 +2270,33 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AssignMultipleVariablesToTheEndOfARecordset1(string no, string variable, string value, string val1, string val2, string validation, string designValidation, string errorOccured, string executionError, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Assign multiple variables to the end of a recordset1", exampleTags);
-#line 613
-this.ScenarioSetup(scenarioInfo);
-#line 614
-    testRunner.Given(string.Format("I have a variable \"[[a]]\" with a value \'{0}\'", val1), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 615
-   testRunner.Given(string.Format("I have a variable \"[[b]]\" with a value \'{0}\'", val2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 616
-   testRunner.Given("I have a variable \"[[z]]\" with a value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 617
-   testRunner.Given(string.Format("I have a variable \"[[rec(1).a]]\" with a value \'{0}\'", val1), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given(string.Format("I have a variable \"[[a]]\" with a value \'{0}\'", val1), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 618
-   testRunner.Given(string.Format("I have a variable \"[[rec(2).a]]\" with a value \'{0}\'", val2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+   testRunner.Given(string.Format("I have a variable \"[[b]]\" with a value \'{0}\'", val2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 619
-   testRunner.Given("I have a variable \"[[index]]\" with a value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+   testRunner.Given("I have a variable \"[[z]]\" with a value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 620
- testRunner.And(string.Format("I assign the value \'{0}\' to a variable \'{1}\'", value, variable), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.Given(string.Format("I have a variable \"[[rec(1).a]]\" with a value \'{0}\'", val1), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 621
- testRunner.When("validating the tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.Given(string.Format("I have a variable \"[[rec(2).a]]\" with a value \'{0}\'", val2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 622
- testRunner.Then(string.Format("validation is \'{0}\'", validation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.Given("I have a variable \"[[index]]\" with a value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 623
- testRunner.And(string.Format("validation message is \'{0}\'", designValidation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I assign the value \'{0}\' to a variable \'{1}\'", value, variable), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 624
- testRunner.When("the assign tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("validating the tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 625
- testRunner.And(string.Format("the execution has \"{0}\" error", errorOccured), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then(string.Format("validation is \'{0}\'", validation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 626
+ testRunner.And(string.Format("validation message is \'{0}\'", designValidation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 627
+ testRunner.When("the assign tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 628
+ testRunner.And(string.Format("the execution has \"{0}\" error", errorOccured), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 629
  testRunner.And(string.Format("execution error message will be \'{0}\'", executionError), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3238,19 +3238,19 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AssignAVariableToAnotherVariable()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Assign a variable to another variable", ((string[])(null)));
-#line 686
+#line 685
 this.ScenarioSetup(scenarioInfo);
-#line 687
+#line 686
  testRunner.Given("I assign the value a to a variable \"[[x]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 688
+#line 687
  testRunner.And("I assign the value x to a variable \"[[b]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 689
+#line 688
  testRunner.And("I assign the value [[[[b]]]] to a variable \"[[var]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 690
+#line 689
  testRunner.When("the assign tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 691
+#line 690
  testRunner.Then("the value of \"[[var]]\" equals a", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 692
+#line 691
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table61 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3269,7 +3269,7 @@ this.ScenarioSetup(scenarioInfo);
                         "3",
                         "[[var]]  =",
                         "[[x]] = a"});
-#line 693
+#line 692
  testRunner.And("the debug inputs as", ((string)(null)), table61, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table62 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3284,7 +3284,7 @@ this.ScenarioSetup(scenarioInfo);
             table62.AddRow(new string[] {
                         "3",
                         "[[var]] = a"});
-#line 698
+#line 697
  testRunner.And("the debug output as", ((string)(null)), table62, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3296,16 +3296,41 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AssignAVariableThatDoesNotExist()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Assign a Variable That Does Not Exist", ((string[])(null)));
-#line 729
+#line 728
 this.ScenarioSetup(scenarioInfo);
-#line 730
+#line 729
  testRunner.Given("I assign the value \"[[var]]\" to a variable \"[[a]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 731
+#line 730
  testRunner.When("the assign tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 732
+#line 731
  testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 733
+#line 732
  testRunner.And("the execution has \"Scalar value { var } is NULL\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Assigning variables with space after closing brace")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Assign")]
+        public virtual void AssigningVariablesWithSpaceAfterClosingBrace()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Assigning variables with space after closing brace", ((string[])(null)));
+#line 734
+this.ScenarioSetup(scenarioInfo);
+#line 735
+ testRunner.Given("I assign the value \"10\" to a variable \"[[x]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 736
+ testRunner.And("I add \" \" after the closing bracket", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 737
+ testRunner.Then("additional closing brackets are added to the variable \"[[x]] ]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 738
+ testRunner.When("the assign tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 739
+ testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 740
+ testRunner.And("the execution has \"Variable - Invalid expression: opening and closing brackets do" +
+                    "n\'t match\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

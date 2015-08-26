@@ -7,6 +7,7 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
+using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
 using Warewolf.Core;
@@ -32,6 +33,7 @@ namespace Warewolf.Studio.ViewModels
         IServerSource _serverSource;
         string _protocol;
         string _selectedPort;
+        Guid _id;
         // ReSharper disable TooManyDependencies
         public ManageNewServerViewModel(IServerSource newServerSource,
             IStudioUpdateManager updateManager, IRequestServiceNameViewModel requestServiceNameViewModel,
@@ -51,7 +53,7 @@ namespace Warewolf.Studio.ViewModels
 
             ServerSource = newServerSource;
             Header = String.IsNullOrEmpty(newServerSource.Name) ? "New Server Source" : SetToEdit(newServerSource);
-
+            ID = Guid.NewGuid();
             IsValid = false;
             Address = newServerSource.Address;
             AuthenticationType = newServerSource.AuthenticationType;
@@ -102,11 +104,19 @@ namespace Warewolf.Studio.ViewModels
             {
                 Item = ToSource();
             }
-            return ToSource();            
+            return new ServerSource
+            {
+                Address = Protocol + "://" + Address + ":" + SelectedPort,
+                AuthenticationType = AuthenticationType,
+                ID = ServerSource.ID == Guid.Empty ? Guid.NewGuid() : Item.ID,
+                Name = ServerSource.Name,
+                Password = Password
+            };
         }
 
         IServerSource ToSource()
         {
+            if (_serverSource == null)
             return new ServerSource
             {
                 Address = Protocol + "://" + Address + ":" + SelectedPort,
@@ -114,7 +124,17 @@ namespace Warewolf.Studio.ViewModels
                 ID = ServerSource.ID == Guid.Empty ? Guid.NewGuid() : ServerSource.ID,
                 Name = ServerSource.Name,
                 Password = Password
-            };    
+            };
+            // ReSharper disable once RedundantIfElseBlock
+            else
+            {
+                _serverSource.Address = Protocol + "://" + Address + ":" + SelectedPort;
+                _serverSource.AuthenticationType = AuthenticationType;
+                _serverSource.ID = _serverSource.ID == Guid.Empty ? Guid.NewGuid() : _serverSource.ID;
+                _serverSource.Name = ServerSource.Name;
+                _serverSource.Password = Password;
+                return _serverSource;
+            }
         }
 
         string SetToEdit(IServerSource source)
@@ -186,7 +206,18 @@ namespace Warewolf.Studio.ViewModels
 
         }
         public bool Testrun { get; set; }
-
+        public Guid ID
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged(() => ID);
+            }
+        }
 
 
 
@@ -579,9 +610,11 @@ namespace Warewolf.Studio.ViewModels
 
         public override void UpdateHelpDescriptor(string helpText)
         {
-            var helpDescriptor = new HelpDescriptor("", helpText, null);
-            VerifyArgument.IsNotNull("helpDescriptor", helpDescriptor);
-            //_aggregator.GetEvent<HelpChangedEvent>().Publish(helpDescriptor);
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
 
         /// <summary>

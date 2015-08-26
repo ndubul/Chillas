@@ -1399,7 +1399,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                 Dev2Logger.Log.Info(string.Format("Null Definition For {0} :: {1}. Fetching...", _resourceModel.ID, _resourceModel.ResourceName));
 
                 // In the case of null of empty try fetching again ;)
-                var msg = EnvironmentModel.ResourceRepository.FetchResourceDefinition(_resourceModel.Environment, workspace, _resourceModel.ID);
+                var msg = EnvironmentModel.ResourceRepository.FetchResourceDefinition(_resourceModel.Environment, workspace, _resourceModel.ID, false);
                 if (msg != null)
                 {
                     xaml = msg.Message;
@@ -2047,7 +2047,6 @@ namespace Dev2.Studio.ViewModels.Workflow
             if (_wd != null)
             {
 
-                _wd.Context.Items.Unsubscribe<Selection>(OnItemSelected);
                 _wd.ModelChanged -= WdOnModelChanged;
                 _wd.Context.Services.Unsubscribe<ModelService>(ModelServiceSubscribe);
                 _wd.Context.Services.Unsubscribe<ViewStateService>(ViewStateServiceSubscribe);
@@ -2057,10 +2056,7 @@ namespace Dev2.Studio.ViewModels.Workflow
 
                 _wd.Context.Services.Unsubscribe<DesignerView>(DesigenrViewSubscribe);
 
-                Selection.Unsubscribe(_wd.Context, SelectedItemChanged);
-                CommandManager.RemovePreviewExecutedHandler(_wd.View, PreviewExecutedRoutedEventHandler);
-                CommandManager.RemovePreviewCanExecuteHandler(_wd.View, CanExecuteRoutedEventHandler);
-                Selection.Unsubscribe(_wd.Context, SelectedItemChanged);
+               
             }
 
             if (_debugSelectionChangedService != null)
@@ -2105,7 +2101,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             }
             try
             {
-                CEventHelper.RemoveAllEventHandlers(_wd);
+               // CEventHelper.RemoveAllEventHandlers(_wd);
             }
             // ReSharper disable EmptyGeneralCatchClause
             catch { }
@@ -2114,7 +2110,6 @@ namespace Dev2.Studio.ViewModels.Workflow
 
             _wd = null;
             base.OnDispose();
-            GC.SuppressFinalize(this);
         }
 
 

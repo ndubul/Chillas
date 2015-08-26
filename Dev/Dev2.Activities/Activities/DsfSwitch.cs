@@ -12,11 +12,11 @@ namespace Dev2.Activities
 {
     public class DsfSwitch:DsfActivityAbstract<string>
     {
-              public DsfFlowSwitchActivity _inner;
+              public DsfFlowSwitchActivity Inner;
 
               public DsfSwitch(DsfFlowSwitchActivity inner)
               {
-                  _inner = inner;
+                  Inner = inner;
               }
 
               public DsfSwitch() { }
@@ -53,7 +53,7 @@ namespace Dev2.Activities
             return null;
         }
 
-          public override IDev2Activity Execute(IDSFDataObject dataObject)
+          public override IDev2Activity Execute(IDSFDataObject dataObject, int update)
           {
               _debugOutputs.Clear();
               _debugInputs.Clear();
@@ -63,7 +63,7 @@ namespace Dev2.Activities
 
 
                   Dev2Switch ds = new Dev2Switch { SwitchVariable = Switch };
-                  var firstOrDefault = dataObject.Environment.EvalAsListOfStrings(ds.SwitchVariable).FirstOrDefault();
+                  var firstOrDefault = dataObject.Environment.EvalAsListOfStrings(ds.SwitchVariable, update).FirstOrDefault();
 
 
                   Debug(dataObject, firstOrDefault, ds);
@@ -74,8 +74,6 @@ namespace Dev2.Activities
                       {
                           return Switches[a];
                       }
-                      else
-                      {
                           if (Default != null)
                           {
                               var activity = Default.FirstOrDefault();
@@ -83,21 +81,15 @@ namespace Dev2.Activities
                       }
                   }
               }
-              }
               catch (Exception err)
               {
                   dataObject.Environment.Errors.Add(err.Message);
               }
-              finally
-              {
-
-              }
               
-          
               return null;
           }
 
-        protected override void ExecuteTool(IDSFDataObject dataObject)
+        protected override void ExecuteTool(IDSFDataObject dataObject, int update)
         {
            
         }
@@ -116,11 +108,11 @@ namespace Dev2.Activities
                 itemToAdd.AddRange(debugResult.GetDebugItemResult());
                 result.Add(itemToAdd);
                 _debugInputs = result;
-                DispatchDebugState(dataObject, StateType.Before);
-                DispatchDebugState(dataObject, StateType.After);
-                if(_inner != null)
+                DispatchDebugState(dataObject, StateType.Before, 0);
+                DispatchDebugState(dataObject, StateType.After, 0);
+                if(Inner != null)
                 {
-                    _inner.SetDebugInputs(_debugInputs);
+                    Inner.SetDebugInputs(_debugInputs);
                 }
             }
             }

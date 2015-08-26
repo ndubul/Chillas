@@ -87,10 +87,10 @@ namespace Dev2.Activities
         protected override void OnExecute(NativeActivityContext context)
         {
             var dataObject = context.GetExtension<IDSFDataObject>();
-            ExecuteTool(dataObject);
+            ExecuteTool(dataObject,0);
         }
 
-        protected override void ExecuteTool(IDSFDataObject dataObject)
+        protected override void ExecuteTool(IDSFDataObject dataObject, int update)
         {
             _debugOutputs.Clear();
             _debugInputs.Clear();
@@ -107,15 +107,14 @@ namespace Dev2.Activities
                 if (dataObject.IsDebugMode())
                 {
                     DebugItem debugItem = new DebugItem();
-                    AddDebugItem(new DebugEvalResult(Url, "URL", dataObject.Environment), debugItem);
+                    AddDebugItem(new DebugEvalResult(Url, "URL", dataObject.Environment,update), debugItem);
                     _debugInputs.Add(debugItem);
                 }
                 var colItr = new WarewolfListIterator();
-                var urlitr = new WarewolfIterator(dataObject.Environment.Eval(Url));
-                var headerItr = new WarewolfIterator(dataObject.Environment.Eval(Headers));
+                var urlitr = new WarewolfIterator(dataObject.Environment.Eval(Url,update));
+                var headerItr = new WarewolfIterator(dataObject.Environment.Eval(Headers,update));
                 colItr.AddVariableToIterateOn(urlitr);
                 colItr.AddVariableToIterateOn(headerItr);
-                const int IndexToUpsertTo = 1;
                 while (colItr.HasMoreData())
                 {
                     var c = colItr.FetchNextValue(urlitr);
@@ -134,7 +133,7 @@ namespace Dev2.Activities
                         if (dataObject.IsDebugMode())
                         {
                             DebugItem debugItem = new DebugItem();
-                            AddDebugItem(new DebugEvalResult(Headers, "Header", dataObject.Environment), debugItem);
+                            AddDebugItem(new DebugEvalResult(Headers, "Header", dataObject.Environment,update), debugItem);
                             _debugInputs.Add(debugItem);
                         }
                     }
@@ -142,7 +141,7 @@ namespace Dev2.Activities
                     if (!string.IsNullOrEmpty(TimeOutText))
                     {
                         int timeoutval;
-                        if (int.TryParse(WarewolfDataEvaluationCommon.EvalResultToString(dataObject.Environment.Eval(TimeOutText)), out timeoutval))
+                        if (int.TryParse(WarewolfDataEvaluationCommon.EvalResultToString(dataObject.Environment.Eval(TimeOutText,update)), out timeoutval))
                         {
                             if (timeoutval < 0)
                             {
@@ -161,7 +160,7 @@ namespace Dev2.Activities
                         if (dataObject.IsDebugMode())
                         {
                             DebugItem debugItem = new DebugItem();
-                            AddDebugItem(new DebugEvalResult(String.IsNullOrEmpty(TimeOutText) ? "100" : TimeOutText, "Time Out Seconds", dataObject.Environment), debugItem);
+                            AddDebugItem(new DebugEvalResult(String.IsNullOrEmpty(TimeOutText) ? "100" : TimeOutText, "Time Out Seconds", dataObject.Environment, update), debugItem);
                             _debugInputs.Add(debugItem);
                         }
                     }
@@ -170,13 +169,11 @@ namespace Dev2.Activities
                     {
                         var result = WebRequestInvoker.ExecuteRequest(Method,
                             c,
-                            headersEntries,
-                            timeoutMilliseconds: (TimeoutSeconds == 0 ? Timeout.Infinite : TimeoutSeconds * 1000)  // important to list the parameter name here to see the conversion from seconds to milliseconds
+                            headersEntries, (TimeoutSeconds == 0 ? Timeout.Infinite : TimeoutSeconds * 1000)  // important to list the parameter name here to see the conversion from seconds to milliseconds
                             );
 
                         allErrors.MergeErrors(errorsTo);
-                        var expression = GetExpression(IndexToUpsertTo);
-                        PushResultsToDataList(expression, result, dataObject);
+                        PushResultsToDataList(Result, result, dataObject,update);
                     }
                     else
                         throw new ApplicationException("Execution aborted - see error messages.");
@@ -196,12 +193,12 @@ namespace Dev2.Activities
                     var errorString = allErrors.MakeDisplayReady();
                     dataObject.Environment.AddError(errorString);
                     var expression = GetExpression(1);
-                    PushResultsToDataList(expression, null, dataObject);
+                    PushResultsToDataList(expression, null, dataObject,update);
                 }
                 if (dataObject.IsDebugMode())
                 {
-                    DispatchDebugState(dataObject, StateType.Before);
-                    DispatchDebugState(dataObject, StateType.After);
+                    DispatchDebugState(dataObject, StateType.Before,update);
+                    DispatchDebugState(dataObject, StateType.After,update);
                 }
             }
         }
@@ -220,21 +217,21 @@ namespace Dev2.Activities
             return expression;
         }
 
-        void PushResultsToDataList(string expression, string result, IDSFDataObject dataObject)
+        void PushResultsToDataList(string expression, string result, IDSFDataObject dataObject,int update)
         {
-            UpdateResultRegions(expression, dataObject.Environment, result);
+            UpdateResultRegions(expression, dataObject.Environment, result,update);
             if (dataObject.IsDebugMode())
             {
 
-                AddDebugOutputItem(new DebugEvalResult(expression, "", dataObject.Environment));
+                AddDebugOutputItem(new DebugEvalResult(expression, "", dataObject.Environment,update));
             }
         }
 
-        void UpdateResultRegions(string expression, IExecutionEnvironment environment, string result)
+        void UpdateResultRegions(string expression, IExecutionEnvironment environment, string result,int update)
         {
             foreach (var region in DataListCleaningUtils.SplitIntoRegions(expression))
             {
-                environment.Assign(region, result);
+                environment.Assign(region, result,update);
             }
         }
 
@@ -242,7 +239,7 @@ namespace Dev2.Activities
 
         #region GetDebugInputs
 
-        public override List<DebugItem> GetDebugInputs(IExecutionEnvironment dataList)
+        public override List<DebugItem> GetDebugInputs(IExecutionEnvironment dataList,int update)
         {
             foreach (IDebugItem debugInput in _debugInputs)
             {
@@ -255,7 +252,7 @@ namespace Dev2.Activities
 
         #region GetDebugOutputs
 
-        public override List<DebugItem> GetDebugOutputs(IExecutionEnvironment dataList)
+        public override List<DebugItem> GetDebugOutputs(IExecutionEnvironment dataList,int update)
         {
             foreach (IDebugItem debugOutput in _debugOutputs)
             {

@@ -158,6 +158,7 @@
     <Compile Include="Core\Graph\OutputFormats.cs" />
     <Compile Include="Core\PluginSourceDefinition.cs" />
     <Compile Include="Core\ServerSource.cs" />
+    <Compile Include="Core\SharePointServiceSourceDefinition.cs" />
     <Compile Include="Core\WebServiceSourceDefinition.cs" />
     <Compile Include="DataList\Contract\enTranslationDepth.cs" />
     <Compile Include="Data\IDev2Definition.cs" />
@@ -220,12 +221,14 @@
     <Compile Include="IExplorerViewModel.cs" />
     <Compile Include="IExternalProcessExecutor.cs" />
     <Compile Include="IFrameworkRepository.cs" />
+    <Compile Include="IHelpView.cs" />
     <Compile Include="IManageDatabaseSourceView.cs" />
     <Compile Include="IManageDatabaseSourceViewModel.cs" />
     <Compile Include="IManageEmailSourceViewModel.cs" />
     <Compile Include="IManageNewServerViewModel.cs" />
     <Compile Include="IManagePluginSourceModel.cs" />
     <Compile Include="IManagePluginSourceViewModel.cs" />
+    <Compile Include="IManageSharePointSourceViewModel.cs" />
     <Compile Include="IManageWebserviceSourceViewModel.cs" />
     <Compile Include="IManageWebServiceViewModel.cs" />
     <Compile Include="IMenuView.cs" />
@@ -263,6 +266,7 @@
     <Compile Include="IRequestServiceNameView.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="IServerSource.cs" />
+    <Compile Include="ISharepointServerSource.cs" />
     <Compile Include="IShellViewModel.cs" />
     <Compile Include="ISplashView.cs" />
     <Compile Include="ISplashViewModel.cs" />

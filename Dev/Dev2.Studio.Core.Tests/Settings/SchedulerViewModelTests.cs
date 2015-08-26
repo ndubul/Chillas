@@ -893,7 +893,7 @@ Warewolf leverages Windows Task Scheduler and the schedules can be viewed there 
 
             var agg = new Mock<IEventAggregator>();
             agg.Setup(a => a.Publish(It.IsAny<DebugOutputMessage>())).Verifiable();
-            var schedulerViewModel = new SchedulerViewModel(agg.Object, new DirectoryObjectPickerDialog(), new PopupController(), AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, new Mock<IConnectControlViewModel>().Object);
+            var schedulerViewModel = new SchedulerViewModel(agg.Object, new DirectoryObjectPickerDialog(), new PopupController(), new SynchronousAsyncWorker(), new Mock<IConnectControlViewModel>().Object);
 
 
             schedulerViewModel.PropertyChanged += delegate(object sender, PropertyChangedEventArgs args)
@@ -1654,7 +1654,7 @@ Warewolf leverages Windows Task Scheduler and the schedules can be viewed there 
             var mockEnvironmentModel = new Mock<IEnvironmentModel>();
             var mockConnection = new Mock<IEnvironmentConnection>();
             mockConnection.Setup(connection => connection.IsConnected).Returns(true);
-            mockConnection.Setup(connection => connection.ExecuteCommand(It.IsAny<StringBuilder>(), It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(serializeObject);
+            mockConnection.Setup(connection => connection.ExecuteCommand(It.IsAny<StringBuilder>(), It.IsAny<Guid>())).Returns(serializeObject);
             mockConnection.Setup(connection => connection.WorkspaceID).Returns(Guid.NewGuid());
             mockEnvironmentModel.Setup(model => model.Connection).Returns(mockConnection.Object);
             mockEnvironmentModel.Setup(model => model.IsConnected).Returns(true);
@@ -1728,7 +1728,7 @@ Warewolf leverages Windows Task Scheduler and the schedules can be viewed there 
             var mockEnvironmentModel = new Mock<IEnvironmentModel>();
             var mockConnection = new Mock<IEnvironmentConnection>();
             mockConnection.Setup(connection => connection.IsConnected).Returns(true);
-            mockConnection.Setup(connection => connection.ExecuteCommand(It.IsAny<StringBuilder>(), It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(serializeObject);
+            mockConnection.Setup(connection => connection.ExecuteCommand(It.IsAny<StringBuilder>(), It.IsAny<Guid>())).Returns(serializeObject);
             mockConnection.Setup(connection => connection.WorkspaceID).Returns(Guid.NewGuid());
             mockEnvironmentModel.Setup(model => model.Connection).Returns(mockConnection.Object);
             mockEnvironmentModel.Setup(model => model.IsConnected).Returns(true);
@@ -1762,7 +1762,7 @@ Warewolf leverages Windows Task Scheduler and the schedules can be viewed there 
             var mockEnvironmentModel = new Mock<IEnvironmentModel>();
             var mockConnection = new Mock<IEnvironmentConnection>();
             mockConnection.Setup(connection => connection.IsConnected).Returns(true);
-            mockConnection.Setup(connection => connection.ExecuteCommand(It.IsAny<StringBuilder>(), It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(serializeObject);
+            mockConnection.Setup(connection => connection.ExecuteCommand(It.IsAny<StringBuilder>(), It.IsAny<Guid>())).Returns(serializeObject);
             mockConnection.Setup(connection => connection.WorkspaceID).Returns(Guid.NewGuid());
             mockEnvironmentModel.Setup(model => model.Connection).Returns(mockConnection.Object);
             mockEnvironmentModel.Setup(model => model.IsConnected).Returns(true);

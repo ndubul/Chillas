@@ -771,8 +771,11 @@ namespace Dev2.Studio.ViewModels.Diagnostics
                         }
                     }
                 }
+                if (_contentItems.Exists(state => state.ID==content.ID && state.StateType==content.StateType && state.ParentID==content.ParentID))
+                {
+                    return;
+                }
                 _contentItems.Add(content);
-
                 lock (_syncContext)
                 {
                     if (_isRebuildingTree)

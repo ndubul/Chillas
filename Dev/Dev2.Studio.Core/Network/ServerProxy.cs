@@ -45,6 +45,7 @@ namespace Dev2.Network
 
         void SetupPassthroughEvents()
         {
+            
             _wrappedConnection.PermissionsChanged += (sender, args) => RaisePermissionsChanged();
             _wrappedConnection.PermissionsModified += (sender, list) => RaisePermissionsModified(list);
             _wrappedConnection.NetworkStateChanged += (sender, args) => OnNetworkStateChanged(args);           
@@ -161,14 +162,14 @@ namespace Dev2.Network
             }
         }
 
-        public StringBuilder ExecuteCommand(StringBuilder xmlRequest, Guid workspaceId, Guid dataListId)
+        public StringBuilder ExecuteCommand(StringBuilder xmlRequest, Guid workspaceId)
         {
-            return _wrappedConnection.ExecuteCommand(xmlRequest,workspaceId,dataListId);
+            return _wrappedConnection.ExecuteCommand(xmlRequest,workspaceId);
         }
 
-        public async Task<StringBuilder> ExecuteCommandAsync(StringBuilder xmlRequest, Guid workspaceId, Guid dataListId)
+        public async Task<StringBuilder> ExecuteCommandAsync(StringBuilder xmlRequest, Guid workspaceId)
         {
-            return await _wrappedConnection.ExecuteCommandAsync(xmlRequest, workspaceId, dataListId);
+            return await _wrappedConnection.ExecuteCommandAsync(xmlRequest, workspaceId);
         }
         public IHubProxyWrapper EsbProxy
         {
@@ -218,11 +219,18 @@ namespace Dev2.Network
             {
                 Dev2Logger.Log.Info("Falling Back to previous signal r client");
                 var name = _wrappedConnection.DisplayName;
-                var addedAction = _wrappedConnection.ItemAddedMessageAction;
-                 
-                _wrappedConnection = new ServerProxyWithChunking(_wrappedConnection.WebServerUri){DisplayName = name};
-                _wrappedConnection.ItemAddedMessageAction = addedAction;
-
+                
+                if (AuthenticationType == AuthenticationType.User)
+                {
+                    _wrappedConnection = new ServerProxyWithChunking(_wrappedConnection.WebServerUri.ToString(),UserName,Password)
+                    {
+                        DisplayName = name,
+                    };
+                }
+                else
+                {
+                    _wrappedConnection = new ServerProxyWithChunking(_wrappedConnection.WebServerUri) { DisplayName = name };
+                }
                 SetupPassthroughEvents();
                 _wrappedConnection.Connect(_wrappedConnection.ID);
                 _wrappedConnection.DisplayName = name;

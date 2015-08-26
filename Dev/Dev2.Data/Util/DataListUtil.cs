@@ -24,6 +24,7 @@ using Dev2.Common.Interfaces.StringTokenizer.Interfaces;
 using Dev2.Data.Binary_Objects;
 using Dev2.DataList.Contract;
 using Newtonsoft.Json;
+using Warewolf.Security.Encryption;
 using Warewolf.Storage;
 using WarewolfParserInterop;
 
@@ -442,37 +443,31 @@ namespace Dev2.Data.Util
 
             return result;
         }
-
+        
         /// <summary>
         /// Shapes the definitions to data list.
         /// </summary>
         /// <returns></returns>
-        public static IExecutionEnvironment InputsToEnvironment(IExecutionEnvironment outerEnvironment,string inputDefs)
+        public static IExecutionEnvironment InputsToEnvironment(IExecutionEnvironment outerEnvironment, string inputDefs, int update)
         {
             var env = new ExecutionEnvironment();
 
             try
             {
-
-        
             var inputs = DataListFactory.CreateInputParser().Parse(inputDefs);
-
             IRecordSetCollection inputRecSets = DataListFactory.CreateRecordSetCollection(inputs, false);
-
             IList<IDev2Definition> inputScalarList = DataListFactory.CreateScalarList(inputs, false);
-
-            CreateRecordSetsInputs(outerEnvironment, inputRecSets, inputs, env);
-            CreateScalarInputs(outerEnvironment, inputScalarList, env);
+                CreateRecordSetsInputs(outerEnvironment, inputRecSets, inputs, env,update);
+                CreateScalarInputs(outerEnvironment, inputScalarList, env,update);
             }
             finally
             {
-                
                 env.CommitAssign();
             }
             return env;
         }
 
-        static void CreateRecordSetsInputs(IExecutionEnvironment outerEnvironment, IRecordSetCollection inputRecSets, IList<IDev2Definition> inputs, ExecutionEnvironment env)
+        static void CreateRecordSetsInputs(IExecutionEnvironment outerEnvironment, IRecordSetCollection inputRecSets, IList<IDev2Definition> inputs, ExecutionEnvironment env, int update)
         {
             foreach(var recordSetDefinition in inputRecSets.RecordSets)
             {
@@ -495,7 +490,7 @@ namespace Dev2.Data.Util
                                     continue;
                                 }
                             }
-                            var warewolfEvalResult = outerEnvironment.Eval(dev2ColumnDefinition.RawValue);
+                            var warewolfEvalResult = outerEnvironment.Eval(dev2ColumnDefinition.RawValue, update);
 
                             if (warewolfEvalResult.IsWarewolfAtomListresult)
                             {
@@ -515,7 +510,7 @@ namespace Dev2.Data.Util
             }
         }
 
-        static void CreateScalarInputs(IExecutionEnvironment outerEnvironment, IEnumerable<IDev2Definition> inputScalarList, ExecutionEnvironment env)
+        static void CreateScalarInputs(IExecutionEnvironment outerEnvironment, IEnumerable<IDev2Definition> inputScalarList, ExecutionEnvironment env, int update)
         {
             foreach(var dev2Definition in inputScalarList)
             {
@@ -527,7 +522,7 @@ namespace Dev2.Data.Util
                 {
                     if (!string.IsNullOrEmpty(dev2Definition.RawValue))
                     {
-                        var warewolfEvalResult = outerEnvironment.Eval(dev2Definition.RawValue);
+                        var warewolfEvalResult = outerEnvironment.Eval(dev2Definition.RawValue, update);
                         if (warewolfEvalResult.IsWarewolfAtomListresult)
                         {
                             ScalarAtomList(warewolfEvalResult, env, dev2Definition);
@@ -546,7 +541,7 @@ namespace Dev2.Data.Util
             var data = warewolfEvalResult as WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomResult;
             if(data != null)
             {
-                env.AssignWithFrame(new AssignValue("[[" + dev2Definition.Name + "]]", ExecutionEnvironment.WarewolfAtomToString(data.Item)));
+                env.AssignWithFrame(new AssignValue("[[" + dev2Definition.Name + "]]", ExecutionEnvironment.WarewolfAtomToString(data.Item)), 0);
             }
         }
 
@@ -555,7 +550,7 @@ namespace Dev2.Data.Util
             var data = warewolfEvalResult as WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomListresult;
             if(data != null && data.Item.Any())
             {
-                env.AssignWithFrame(new AssignValue("[[" + dev2Definition.Name + "]]", ExecutionEnvironment.WarewolfAtomToString(data.Item.Last())));
+                env.AssignWithFrame(new AssignValue("[[" + dev2Definition.Name + "]]", ExecutionEnvironment.WarewolfAtomToString(data.Item.Last())), 0);
             }
         }
 
@@ -571,7 +566,7 @@ namespace Dev2.Data.Util
                 {
                     var correctRecSet = "[[" + dev2ColumnDefinition.RecordSetName + "(*)." + dev2ColumnDefinition.Name + "]]";
 
-                    env.AssignWithFrame(new AssignValue(correctRecSet, PublicFunctions.AtomtoString(recsetResult.Item)));
+                    env.AssignWithFrame(new AssignValue(correctRecSet, PublicFunctions.AtomtoString(recsetResult.Item)), 0);
                 }
             }
         }
@@ -586,7 +581,7 @@ namespace Dev2.Data.Util
             {
                 var correctRecSet = "[[" + dev2ColumnDefinition.RecordSetName + "(*)." + dev2ColumnDefinition.Name + "]]";
 
-                env.EvalAssignFromNestedStar(correctRecSet, recsetResult);
+                env.EvalAssignFromNestedStar(correctRecSet, recsetResult, 0);
             }
         }
 
@@ -914,8 +909,30 @@ namespace Dev2.Data.Util
             bool result = payload != null && payload.IndexOf(OpeningSquareBrackets, StringComparison.Ordinal) >= 0 && payload.IndexOf(ClosingSquareBrackets, StringComparison.Ordinal) >= 0;
 
             return result;
-        }      
-        
+        }
+
+        public static bool ShouldEncrypt(string value)
+        {
+            if(string.IsNullOrEmpty(value))
+            {
+                return false;
+            }
+            if(IsFullyEvaluated(value))
+            {
+                return false;
+            }
+            if(value.CanBeDecrypted())
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool NotEncrypted(string value)
+        {
+            return string.IsNullOrEmpty(value) || IsFullyEvaluated(value);
+        }
+
         /// <summary>
         /// Is the expression evaluated
         /// </summary>  
@@ -1084,13 +1101,13 @@ namespace Dev2.Data.Util
             return false;
         }
 
-        public static IList<string> GetAllPossibleExpressionsForFunctionOperations(string expression, IExecutionEnvironment env, out ErrorResultTO errors)
+        public static IList<string> GetAllPossibleExpressionsForFunctionOperations(string expression, IExecutionEnvironment env, out ErrorResultTO errors,int update)
         {
             IList<string> result = new List<string>();
             errors = new ErrorResultTO();
             try
             {
-                result = env.EvalAsListOfStrings(expression);
+                result = env.EvalAsListOfStrings(expression, update);
                 
             }
             catch(Exception err)
@@ -1129,7 +1146,10 @@ namespace Dev2.Data.Util
                     trimedData = trimedData.Substring(3);
                 }
             }
-
+            var bomMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
+            if (trimedData.StartsWith(bomMarkUtf8))
+                trimedData = trimedData.Remove(0, bomMarkUtf8.Length);
+            trimedData= trimedData.Replace("\0", "");
             return trimedData;
         }
 
@@ -1252,9 +1272,9 @@ namespace Dev2.Data.Util
 
             IList<IRecordSetDefinition> defs = recCol.RecordSets;
             HashSet<string> processedSetNames = new HashSet<string>();
+
             foreach(IRecordSetDefinition tmp in defs)
             {
-                IList<string> postProcessDefs = new List<string>();
                 // get DL recordset Name
                 if(tmp.Columns.Count > 0)
                 {
@@ -1297,12 +1317,7 @@ namespace Dev2.Data.Util
                     result.Append(string.Concat("</", setName, ">"));
                     result.Append(Environment.NewLine);
 
-                    //  Process post append data ;)
-                    foreach(var col in postProcessDefs)
-                    {
-                        result.Append(col);
-                        result.Append(Environment.NewLine);
-                    }
+
                 }
             }
 
@@ -1407,7 +1422,7 @@ namespace Dev2.Data.Util
                 return;
             }
 
-            var newTokens = new List<string>();
+     
             while(tokenizer.HasMoreOps())
             {
                 var token = tokenizer.NextToken();
@@ -1421,7 +1436,7 @@ namespace Dev2.Data.Util
                 else
                 {
                     token = AddBracketsToValueIfNotExist(string.Format("{0}{1}{2}", tokenPrefix, StripLeadingAndTrailingBracketsFromValue(token), tokenSuffix));
-                    newTokens.Add(token);
+
                     target.Add(new ObservablePair<string, string>(token, string.Empty));
                 }
             }
@@ -1432,18 +1447,13 @@ namespace Dev2.Data.Util
             }
         }
 
-        public static void OutputsToEnvironment(IExecutionEnvironment innerEnvironment, IExecutionEnvironment environment, string outputDefs)
+        public static void OutputsToEnvironment(IExecutionEnvironment innerEnvironment, IExecutionEnvironment environment, string outputDefs, int update)
         {
             try
             {
-
-
                 var outputs = DataListFactory.CreateOutputParser().Parse(outputDefs);
-
-                IRecordSetCollection outputRecSets = DataListFactory.CreateRecordSetCollection(outputs, true);
-
-                IList<IDev2Definition> outputScalarList = DataListFactory.CreateScalarList(outputs, true);
-
+                var outputRecSets = DataListFactory.CreateRecordSetCollection(outputs, true);
+                var outputScalarList = DataListFactory.CreateScalarList(outputs, true);
                 foreach (var recordSetDefinition in outputRecSets.RecordSets)
                 {
                     var outPutRecSet = outputs.FirstOrDefault(definition => definition.IsRecordSet && definition.RecordSetName == recordSetDefinition.SetName);
@@ -1451,9 +1461,8 @@ namespace Dev2.Data.Util
                     {
                         foreach (var outputColumnDefinitions in recordSetDefinition.Columns)
                         {
-
                             var correctRecSet = "[[" + outputColumnDefinitions.RecordSetName + "(*)." + outputColumnDefinitions.Name + "]]";
-                            var warewolfEvalResult = innerEnvironment.Eval(correctRecSet);
+                            var warewolfEvalResult = innerEnvironment.Eval(correctRecSet, 0);
                             if (warewolfEvalResult.IsWarewolfAtomListresult)
                             {
                                 var recsetResult = warewolfEvalResult as WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomListresult;
@@ -1464,16 +1473,15 @@ namespace Dev2.Data.Util
                                     {
                                         if (recsetResult != null)
                                         {
-
-                                            environment.EvalAssignFromNestedStar(outputColumnDefinitions.RawValue, recsetResult);
+                                            environment.EvalAssignFromNestedStar(outputColumnDefinitions.RawValue, recsetResult, update);
                                         }
                                     }
                                     if (enRecordsetIndexType == enRecordsetIndexType.Blank)
                                     {
                                         if (recsetResult != null)
                                         {
-                                            
-                                            environment.EvalAssignFromNestedLast(outputColumnDefinitions.RawValue, recsetResult);
+
+                                            environment.EvalAssignFromNestedLast(outputColumnDefinitions.RawValue, recsetResult, 0);
                                         }
                                     }
                                     if (enRecordsetIndexType == enRecordsetIndexType.Numeric)
@@ -1481,7 +1489,7 @@ namespace Dev2.Data.Util
                                         if (recsetResult != null)
                                         {
 
-                                            environment.EvalAssignFromNestedNumeric(outputColumnDefinitions.RawValue, recsetResult);
+                                            environment.EvalAssignFromNestedNumeric(outputColumnDefinitions.RawValue, recsetResult, 0);
                                         }
                                     }
 
@@ -1496,13 +1504,13 @@ namespace Dev2.Data.Util
                 {
                     if (!dev2Definition.IsRecordSet)
                     {
-                        var warewolfEvalResult = innerEnvironment.Eval(AddBracketsToValueIfNotExist(dev2Definition.Name));
+                        var warewolfEvalResult = innerEnvironment.Eval(AddBracketsToValueIfNotExist(dev2Definition.Name), update);
                         if (warewolfEvalResult.IsWarewolfAtomListresult)
                         {
                             var data = warewolfEvalResult as WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomListresult;
                             if (data != null && data.Item.Any())
                             {
-                                environment.Assign("[[" + dev2Definition.Value + "]]", ExecutionEnvironment.WarewolfAtomToString(data.Item.Last()));
+                                environment.Assign("[[" + dev2Definition.Value + "]]", ExecutionEnvironment.WarewolfAtomToString(data.Item.Last()), update);
                             }
                         }
                         else
@@ -1510,7 +1518,7 @@ namespace Dev2.Data.Util
                             var data = warewolfEvalResult as WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomResult;
                             if (data != null)
                             {
-                                environment.Assign(AddBracketsToValueIfNotExist(dev2Definition.Value), ExecutionEnvironment.WarewolfAtomToString(data.Item));
+                                environment.Assign(AddBracketsToValueIfNotExist(dev2Definition.Value), ExecutionEnvironment.WarewolfAtomToString(data.Item), update);
                             }
                         }
                     }
@@ -1711,7 +1719,7 @@ namespace Dev2.Data.Util
                                                                             false, "", false));
                             }
                         }
-                    }
+    }
                     else if (CheckIODirection(dev2ColumnArgumentDirection, ioDirection))
                     {
                         // scalar value, make it as such

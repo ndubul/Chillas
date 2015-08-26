@@ -40,6 +40,7 @@ namespace Dev2.Runtime.ESB.Management.Services
             }
             string serializedSource = null;
             StringBuilder tmp;
+            ExecuteMessage msg = new ExecuteMessage();
             values.TryGetValue("SharepointServer", out tmp);
             if(tmp != null)
             {
@@ -58,16 +59,21 @@ namespace Dev2.Runtime.ESB.Management.Services
             }
             try
             {
+                msg.HasError = false;
                 var sharepointSource = serializer.Deserialize<SharepointSource>(serializedSource);
                 var result = sharepointSource.TestConnection();
-                return serializer.SerializeToBuilder(result);
+                if (result.Contains("Failed"))
+                {
+                    msg.HasError = true;
+                }
+                msg.Message = serializer.SerializeToBuilder(result);
             }
             catch(Exception ex)
             {
                 Dev2Logger.Log.Error(ex);
-                var res = new DbColumnList(ex);
-                return serializer.SerializeToBuilder(res);
+                msg.Message = serializer.SerializeToBuilder(ex.Message);
             }
+            return serializer.SerializeToBuilder(msg);
         }
 
         /// <summary>

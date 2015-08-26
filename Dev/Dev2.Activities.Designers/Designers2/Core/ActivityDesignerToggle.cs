@@ -144,19 +144,22 @@ namespace Dev2.Activities.Designers2.Core
             image.Height = 14;
             image.Width = 14;
 
-            Brush brush = Application.Current.TryFindResource("WareWolfButtonBrush") as SolidColorBrush;
-
-            switch (sourceUri)
+            if(Application.Current != null)
             {
-                case "Question":
-                    image.Source = ImageAwesome.CreateImageSource(FontAwesomeIcon.Question, brush);
-                    break;
-                case "ServiceQuickVariableInput":
-                    image.Source = ImageAwesome.CreateImageSource(FontAwesomeIcon.ListAlt, brush);
-                    break;
-                default:
-                    image.Source = new BitmapImage(new Uri(sourceUri));
-                    break;
+                Brush brush = Application.Current.TryFindResource("WareWolfButtonBrush") as SolidColorBrush;
+
+                switch (sourceUri)
+                {
+                    case "Question":
+                        image.Source = ImageAwesome.CreateImageSource(FontAwesomeIcon.Question, brush);
+                        break;
+                    case "ServiceQuickVariableInput":
+                        image.Source = ImageAwesome.CreateImageSource(FontAwesomeIcon.ListAlt, brush);
+                        break;
+                    default:
+                        image.Source = new BitmapImage(new Uri(sourceUri));
+                        break;
+                }
             }
             return image;
         }

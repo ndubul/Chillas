@@ -31,27 +31,31 @@ namespace Dev2.Tests.Activities.TOTests
         {
             //------------Setup for test--------------------------
             var dataObject = new DsfDataObject(xmldata: string.Empty, dataListId: Guid.NewGuid());
-            dataObject.Environment.Assign("[[a]]", "10");
-            dataObject.Environment.Assign("[[as]]", "hellow world");
-            dataObject.Environment.Assign("[[af]]", "9.9");
-            dataObject.Environment.Assign("[[b]]", "20");
-            dataObject.Environment.Assign("[[rec(1).a]]", "50");
-            dataObject.Environment.Assign("[[rec(1).b]]", "500");
-            dataObject.Environment.Assign("[[rec(2).a]]", "60");
-            dataObject.Environment.Assign("[[rec(2).b]]", "600");
+            dataObject.Environment.Assign("[[a]]", "10",0);
+            dataObject.Environment.Assign("[[as]]", "hellow world", 0);
+            dataObject.Environment.Assign("[[af]]", "9.9", 0);
+            dataObject.Environment.Assign("[[b]]", "20", 0);
+            dataObject.Environment.Assign("[[rec(1).a]]", "50", 0);
+            dataObject.Environment.Assign("[[rec(1).b]]", "500", 0);
+            dataObject.Environment.Assign("[[rec(2).a]]", "60", 0);
+            dataObject.Environment.Assign("[[rec(2).b]]", "600", 0);
             //------------Execute Test---------------------------
 
             // scalar evaluating to atom
-            string sn = "[[a]]", sns = "[[as]]", snf = "[[af]]",
-                dn = "a", dns = "as", dnf = "af";
+            string sn = "[[a]]";
+            const string sns = "[[as]]";
+            const string snf = "[[af]]";
+            string dn = "a";
+            const string dns = "as";
+            const string dnf = "af";
             var scalarsSn = new[] { "[[x().z]]", "[[x]]", sn, sns, snf };
             var scalarsDn = new[] { "z", "x", dn, dns, dnf };
             var scalarsV = new[] { new object[] { null }, (object)null, 10, "hellow world", 9.9 };
             for (int i = 0; i < scalarsSn.Length; i++)
             {
                 var jsonMappingEvaluatedLocal = new JsonMappingEvaluated(
-                    env: dataObject.Environment,
-                    sourceName: scalarsSn[i]);
+                    dataObject.Environment,
+                    scalarsSn[i]);
                 //------------Assert Results-------------------------
                 jsonMappingEvaluatedLocal.Should().NotBeNull();
                 jsonMappingEvaluatedLocal.Simple.Should().NotBeNull();
@@ -70,23 +74,19 @@ namespace Dev2.Tests.Activities.TOTests
 
             // recordset
             sn = "[[rec().a]]"; dn = "a";
-            var jsonMappingEvaluated = new JsonMappingEvaluated(
-                env: dataObject.Environment,
-                sourceName: sn);
+            var jsonMappingEvaluated = new JsonMappingEvaluated(dataObject.Environment, sn);
             //------------Assert Results-------------------------
             jsonMappingEvaluated.Should().NotBeNull();
             jsonMappingEvaluated.Simple.Should().NotBeNull();
             jsonMappingEvaluated.Simple.SourceName.Should().Be(sn);
             jsonMappingEvaluated.Simple.DestinationName.Should().Be(dn);
             ((WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomListresult)jsonMappingEvaluated.EvalResult).Item.GetValue(0).Should().Be(
-                ((WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomListresult)dataObject.Environment.Eval(sn)).Item.GetValue(0));
+                ((WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomListresult)dataObject.Environment.Eval(sn,0)).Item.GetValue(0));
             jsonMappingEvaluated.Count.Should().Be(1);
 
             // recordset name
             sn = "[[rec()]]"; dn = "rec";
-            jsonMappingEvaluated = new JsonMappingEvaluated(
-                env: dataObject.Environment,
-                sourceName: sn);
+            jsonMappingEvaluated = new JsonMappingEvaluated(dataObject.Environment, sn);
             //------------Assert Results-------------------------
             jsonMappingEvaluated.Should().NotBeNull();
             jsonMappingEvaluated.Simple.Should().NotBeNull();

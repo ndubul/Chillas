@@ -12,14 +12,19 @@
 using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
+using Dev2.AppResources.DependencyVisualization;
 using Dev2.Services.Events;
+using Dev2.Studio.Core.Interfaces;
+using Dev2.Studio.ViewModels.DependencyVisualization;
+using Dev2.Utils;
 using Infragistics.Controls.Maps;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.ViewModels;
 
 // ReSharper disable once CheckNamespace
 namespace Dev2.Studio.Views.DependencyVisualization
 {
-    public partial class DependencyVisualiserView:IView
+    public partial class DependencyVisualiserView : IView
     {
         //private Point _scrollStartOffset;
         readonly IEventAggregator _eventPublisher;
@@ -41,48 +46,48 @@ namespace Dev2.Studio.Views.DependencyVisualization
             _eventPublisher = eventPublisher;
 
             Nodes.NodeControlAttachedEvent += (sender, e) =>
-        {
+            {
                 e.NodeControl.MouseLeftButtonUp += ElementMouseLeftButtonUp;
                 e.NodeControl.MouseLeftButtonDown += ElementMouseLeftButtonDown;
                 e.NodeControl.MouseMove += ElementMouseMove;
             };
 
             Nodes.NodeControlDetachedEvent += (sender, e) =>
-                {
+            {
                 e.NodeControl.MouseLeftButtonUp -= ElementMouseLeftButtonUp;
                 e.NodeControl.MouseLeftButtonDown -= ElementMouseLeftButtonDown;
-                e.NodeControl.MouseMove -= ElementMouseMove;
+                e.NodeControl.MouseMove -= ElementMouseMove;                
             };
-                }
+        }
 
         private void ElementMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-                {
+        {
             var element = (NetworkNodeNodeControl)sender;
             _currentElement = element; // keep track of which node this is
             element.CaptureMouse();
             _isMoveInEffect = true; // initiate the movement effect
             _currentPosition = e.GetPosition(element.Parent as UIElement); // keep track of position
-                }
+        }
 
         private void ElementMouseMove(object sender, MouseEventArgs e)
-                {
+        {
             var element = (NetworkNodeNodeControl)sender;
             if (_currentElement == null || !Equals(element, _currentElement))
             {
                 // this might happen if a node is released outside of the view area.
                 // terminate the movement effect.
                 _isMoveInEffect = false;
-                }
+            }
             else if (_isMoveInEffect) // is the movement effect active?
-                {
+            {
                 if (e.GetPosition(Nodes).X > Nodes.ActualWidth || e.GetPosition(Nodes).Y > Nodes.ActualHeight || e.GetPosition(Nodes).Y < 0.0)
-                    {
+                {
                     // drag is outside of the allowable area, so release the element
                     element.ReleaseMouseCapture();
                     _isMoveInEffect = false;
                 }
                 else
-                        {
+                {
                     // drag is within the allowable area, so update the element's position
                     var currentPosition = e.GetPosition(element.Parent as UIElement);
 
@@ -91,16 +96,16 @@ namespace Dev2.Studio.Views.DependencyVisualization
                         element.Node.Location.Y + (currentPosition.Y - this._currentPosition.Y) / Nodes.ZoomLevel);
 
                     _currentPosition = currentPosition;
-                        }
-                    }
                 }
+            }
+        }
 
         private void ElementMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var element = (NetworkNodeNodeControl)sender;
             element.ReleaseMouseCapture();
             _isMoveInEffect = false; // terminate the movement effect
-            }
+        }
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
@@ -150,27 +155,27 @@ namespace Dev2.Studio.Views.DependencyVisualization
             //Cursor = (MyScrollViewer.ExtentWidth > MyScrollViewer.ViewportWidth) ||
             //    (MyScrollViewer.ExtentHeight > MyScrollViewer.ViewportHeight) ?
             //    Cursors.ScrollAll : Cursors.Arrow;
-                    
+
             //CaptureMouse();
             //base.OnPreviewMouseDown(e);
-                                }   
+        }
 
         protected override void OnPreviewMouseMove(MouseEventArgs e)
-                                {
+        {
             //if (IsMouseCaptured)
             //{
             //    // Get the new mouse position. 
             //    Point mouseDragCurrentPoint = e.GetPosition(this);
-                    
+
             //    // Scroll to the new position. 
             //    MyScrollViewer.ScrollToHorizontalOffset(mouseDragCurrentPoint.X);
             //    MyScrollViewer.ScrollToVerticalOffset(mouseDragCurrentPoint.Y);
             //}
             //base.OnPreviewMouseMove(e);
-                         }
-                    
+        }
+
         protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
-            {
+        {
             //if (IsMouseCaptured)
             //{
             //    Cursor = Cursors.Arrow;
@@ -179,14 +184,27 @@ namespace Dev2.Studio.Views.DependencyVisualization
             //base.OnPreviewMouseUp(e);
         }
 
-        void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
-        {
-            //SetupNodes(WfDependsOn.IsChecked == true);
-        }
-
         void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             Nodes.UpdateNodeArrangement();
+        }
+
+        void Nodes_OnNodeMouseDoubleClick(object sender, NetworkNodeClickEventArgs e)
+        {
+            string resourceName = ((ExplorerItemNodeViewModel)e.NodeControl.Node.Data).ResourceName;
+
+            if (!string.IsNullOrEmpty(resourceName))
+            {
+                var vm = DataContext as DependencyVisualiserViewModel;
+                if (vm != null)
+                {
+                    IResourceModel resource = vm.ResourceModel.Environment.ResourceRepository.FindSingle(c => c.ResourceName == resourceName);
+                    if (resource != null)
+                    {
+                        WorkflowDesignerUtils.EditResource(resource, _eventPublisher);
+                    }
+                }
+            }
         }
     }
 }

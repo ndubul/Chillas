@@ -10,12 +10,12 @@
 //  </auto-generated>
 // ------------------------------------------------------------------------------
 #region Designer generated code
-
-using TechTalk.SpecFlow;
-
 #pragma warning disable
 namespace Dev2.Activities.Specs.Toolbox.Scripting.Script
 {
+    using TechTalk.SpecFlow;
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
@@ -49,7 +49,7 @@ namespace Dev2.Activities.Specs.Toolbox.Scripting.Script
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "Script")))
             {
-                FeatureSetup(null);
+                Dev2.Activities.Specs.Toolbox.Scripting.Script.ScriptFeature.FeatureSetup(null);
             }
         }
         
@@ -1009,6 +1009,171 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.And("the debug output as", ((string)(null)), table48, "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        public virtual void ExcuteJavascriptWithIncorrectValues(string script, string errorOccured, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Excute Javascript with incorrect values", @__tags);
+#line 337
+this.ScenarioSetup(scenarioInfo);
+#line 338
+ testRunner.Given("I have the script to execute \'<script>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 339
+ testRunner.And("I have selected the language as \"JavaScript\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 340
+ testRunner.When("I execute the script tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 341
+ testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 342
+ testRunner.And("the execution has \"<errorOccured>\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Language",
+                        "Script"});
+            table49.AddRow(new string[] {
+                        "JavaScript",
+                        "<script>"});
+#line 343
+ testRunner.And("the debug inputs as", ((string)(null)), table49, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table50.AddRow(new string[] {
+                        "[[result]] ="});
+#line 346
+ testRunner.And("the debug output as", ((string)(null)), table50, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Excute Javascript with incorrect values")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Script")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "88")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Script", "88")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ErrorOccured", "There was an error when returning a value from your script, remember to use the \'" +
+            "Return\' keyword when returning the result")]
+        public virtual void ExcuteJavascriptWithIncorrectValues_88()
+        {
+            this.ExcuteJavascriptWithIncorrectValues("88", "There was an error when returning a value from your script, remember to use the \'" +
+                    "Return\' keyword when returning the result", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Excute Javascript with incorrect values")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Script")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[var]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Script", "[[var]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ErrorOccured", "Scalar value {var} is NULL")]
+        public virtual void ExcuteJavascriptWithIncorrectValues_Var()
+        {
+            this.ExcuteJavascriptWithIncorrectValues("[[var]]", "Scalar value {var} is NULL", ((string[])(null)));
+        }
+        
+        public virtual void ExecuteJavascriptUsingRecordsets(string script, string val, string result, string resultVal, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Execute Javascript using recordsets", exampleTags);
+#line 354
+this.ScenarioSetup(scenarioInfo);
+#line 355
+ testRunner.Given(string.Format("I have the script to execute \'<script>\' equals to \'{0}\'", val), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 356
+ testRunner.And("I have selected the language as \"JavaScript\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 357
+ testRunner.When("I execute the script tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 358
+ testRunner.Then("the execution has \"No\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Language",
+                        "Script"});
+            table51.AddRow(new string[] {
+                        "JavaScript",
+                        "<script>"});
+#line 359
+ testRunner.And("the debug inputs as", ((string)(null)), table51, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table52 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table52.AddRow(new string[] {
+                        string.Format("{0} = {1}", result, resultVal)});
+#line 362
+ testRunner.And("the debug output as", ((string)(null)), table52, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Execute Javascript using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Script")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Script", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "return \"a message\";")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ResultVal", "a message")]
+        public virtual void ExecuteJavascriptUsingRecordsets_Variant0()
+        {
+            this.ExecuteJavascriptUsingRecordsets("[[rec().a]]", "return \"a message\";", "[[rs().a]]", "a message", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Execute Javascript using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Script")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Script", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "return \"a message\";")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ResultVal", "a message")]
+        public virtual void ExecuteJavascriptUsingRecordsets_Variant1()
+        {
+            this.ExecuteJavascriptUsingRecordsets("[[rec().a]]", "return \"a message\";", "[[rs(1).a]]", "a message", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Execute Javascript using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Script")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Script", "[[a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "return \"a message\";")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ResultVal", "a message")]
+        public virtual void ExecuteJavascriptUsingRecordsets_Variant2()
+        {
+            this.ExecuteJavascriptUsingRecordsets("[[a]]", "return \"a message\";", "[[rs().a]]", "a message", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Execute Javascript using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Script")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Script", "[[rec(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "return \"a message\";")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ResultVal", "a message")]
+        public virtual void ExecuteJavascriptUsingRecordsets_Variant3()
+        {
+            this.ExecuteJavascriptUsingRecordsets("[[rec(*).a]]", "return \"a message\";", "[[rs(*).a]]", "a message", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Execute Javascript using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Script")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Script", "[[rec([[int]]).a]],[[int]] =1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "return \"a message\";")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs([[int]]).a]],[[int]]=1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ResultVal", "a message")]
+        public virtual void ExecuteJavascriptUsingRecordsets_Variant4()
+        {
+            this.ExecuteJavascriptUsingRecordsets("[[rec([[int]]).a]],[[int]] =1", "return \"a message\";", "[[rs([[int]]).a]],[[int]]=1", "a message", ((string[])(null)));
         }
     }
 }

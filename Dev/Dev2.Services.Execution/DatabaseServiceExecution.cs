@@ -151,6 +151,7 @@ namespace Dev2.Services.Execution
             }
         }
 
+        // ReSharper disable once OptionalParameterHierarchyMismatch
         protected override object ExecuteService(List<MethodParameter> methodParameters, out ErrorResultTO errors, IOutputFormatter formater = null)
         {
             errors = new ErrorResultTO();
@@ -247,7 +248,7 @@ namespace Dev2.Services.Execution
                                     if (colMapping.TryGetValue(idx, out colName))
                                     {
                                         var displayExpression = DataListUtil.AddBracketsToValueIfNotExist(DataListUtil.CreateRecordsetDisplayValue(DataListUtil.ExtractRecordsetNameFromValue(def.Value), colName, rowIdx.ToString()));
-                                        environment.Assign(displayExpression, item.ToString());
+                                        environment.Assign(displayExpression, item.ToString(),0);
                                     }
 
                                     idx++;
@@ -277,7 +278,7 @@ namespace Dev2.Services.Execution
                                 }
                                 pos++;
                             }
-                            environment.Assign(DataListUtil.AddBracketsToValueIfNotExist(expression), row[idx].ToString());
+                            environment.Assign(DataListUtil.AddBracketsToValueIfNotExist(expression), row[idx].ToString(), 0);
                         }
                     }
                 }
@@ -362,10 +363,8 @@ namespace Dev2.Services.Execution
                             using (DataTable dataSet = server.FetchDataTable(parameters.ToArray(),server.GetProcedureOutParams(Service.Method.Name,Source.DatabaseName)))
                             // ReSharper restore CoVariantArrayConversion
                             {
-    ;
                                 ApplyColumnMappings(dataSet);
                                 TranslateDataTableToEnvironment(dataSet, DataObj.Environment);
-
                                 return true;
                             }
                         }

@@ -91,8 +91,9 @@
       <Private>True</Private>
       <HintPath>..\packages\FSharp.Core.3.0.0.2\lib\net40\FSharp.Core.dll</HintPath>
     </Reference>
-    <Reference Include="InfragisticsWPF4.Calculations.XamCalculationManager.v14.2">
-      <HintPath>..\Binaries\InfragisticsWPF4.Calculations.XamCalculationManager.v14.2.dll</HintPath>
+    <Reference Include="InfragisticsWPF4.Calculations.XamCalculationManager.v15.1, Version=15.1.20151.2055, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Binaries\InfragisticsWPF4.Calculations.XamCalculationManager.v15.1.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip.Reduced">
       <HintPath>..\Binaries\Ionic.Zip.Reduced.dll</HintPath>
@@ -372,6 +373,10 @@
     <ProjectReference Include="..\Dev2.Common\Dev2.Common.csproj">
       <Project>{84405fdf-0ff8-49a2-8925-8a4aeba8104a}</Project>
       <Name>Dev2.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dev2.Warewolf.Security\Warewolf.Security.csproj">
+      <Project>{ca5e9373-46fe-41b9-ab2e-bd637f48b456}</Project>
+      <Name>Warewolf.Security</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warewolf.Sharepoint\Warewolf.Sharepoint.csproj">
       <Project>{d7a04a3f-ddbd-497c-a311-efd2016830df}</Project>

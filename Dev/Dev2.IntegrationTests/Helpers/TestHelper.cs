@@ -22,6 +22,7 @@ using Dev2.Common.Interfaces.Diagnostics.Debug;
 using Dev2.Common.Interfaces.Threading;
 using Dev2.Communication;
 using Dev2.Controller;
+using Dev2.Core.Tests.Utils;
 using Dev2.Integration.Tests.MEF.WebTester;
 using Dev2.Network;
 using Moq;
@@ -67,7 +68,7 @@ namespace Dev2.Integration.Tests.Helpers
         {
             CommunicationControllerFactory fact = new CommunicationControllerFactory();
             var comm = fact.CreateController(serviceName);
-            var prx = new ServerProxy("http://localhost:3142", CredentialCache.DefaultNetworkCredentials, CreateSynchronousAsyncWorker().Object);
+            var prx = new ServerProxy("http://localhost:3142", CredentialCache.DefaultNetworkCredentials, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object);
             prx.Connect(Guid.NewGuid());
             foreach (var payloadArgument in payloadArguments)
             {
@@ -89,23 +90,6 @@ namespace Dev2.Integration.Tests.Helpers
                 return "Error: message to send to localhost server could not be generated.";
             }
             return "Error: localhost server controller could not be created.";
-        }
-
-        public static Mock<IAsyncWorker> CreateSynchronousAsyncWorker()
-        {
-            var mockWorker = new Mock<IAsyncWorker>();
-            mockWorker.Setup(r => r.Start(It.IsAny<Action>(), It.IsAny<Action>()))
-                .Returns((Action backgroundAction, Action foregroundAction) =>
-                {
-                    var task = new Task(() =>
-                    {
-                        backgroundAction.Invoke();
-                        foregroundAction.Invoke();
-                    });
-                    task.RunSynchronously();
-                    return task;
-                });
-            return mockWorker;
         }
 
         public static string PostDataToWebserver(string postandUrl, out bool wasHttps)

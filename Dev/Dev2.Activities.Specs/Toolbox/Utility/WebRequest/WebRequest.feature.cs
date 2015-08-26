@@ -105,164 +105,38 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        public virtual void EnterAURLToDownloadHtmlWithTimeoutSpecified(string url, string timeoutSeconds, string result, string[] exampleTags)
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a URL to download html with timeout specified", exampleTags);
-#line 19
-this.ScenarioSetup(scenarioInfo);
-#line 20
- testRunner.Given(string.Format("I have the url \'{0}\' with timeoutSeconds \'{1}\'", url, timeoutSeconds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
- testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 22
- testRunner.Then(string.Format("the result should contain the string \"{0}\"", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 23
- testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "URL",
-                        "Header",
-                        "Time Out Seconds"});
-            table3.AddRow(new string[] {
-                        string.Format("{0}", url),
-                        "",
-                        string.Format("{0}", timeoutSeconds)});
-#line 24
- testRunner.And("the debug inputs as", ((string)(null)), table3, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
-                        ""});
-            table4.AddRow(new string[] {
-                        "[[result]] = String"});
-#line 27
- testRunner.And("the debug output as", ((string)(null)), table4, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a URL to download html with timeout specified")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "20")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "Wait Successful")]
-        public virtual void EnterAURLToDownloadHtmlWithTimeoutSpecified_Variant0()
-        {
-            this.EnterAURLToDownloadHtmlWithTimeoutSpecified("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "20", "Wait Successful", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a URL to download html with timeout specified")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=110")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "120")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "Wait Successful")]
-        public virtual void EnterAURLToDownloadHtmlWithTimeoutSpecified_Variant1()
-        {
-            this.EnterAURLToDownloadHtmlWithTimeoutSpecified("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=110", "120", "Wait Successful", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a URL to download html with timeout specified")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=110")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "Wait Successful")]
-        public virtual void EnterAURLToDownloadHtmlWithTimeoutSpecified_Variant2()
-        {
-            this.EnterAURLToDownloadHtmlWithTimeoutSpecified("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=110", "0", "Wait Successful", ((string[])(null)));
-        }
-        
-        public virtual void EnterAURLToDownloadHtmlWithTimeoutSpecifiedTooShort(string url, string timeoutSeconds, string[] exampleTags)
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a URL to download html with timeout specified too short", exampleTags);
-#line 36
-this.ScenarioSetup(scenarioInfo);
-#line 37
- testRunner.Given(string.Format("I have the url \'{0}\' with timeoutSeconds \'{1}\'", url, timeoutSeconds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 38
- testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 39
- testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                        "URL",
-                        "Header",
-                        "Time Out Seconds"});
-            table5.AddRow(new string[] {
-                        string.Format("{0}", url),
-                        "",
-                        string.Format("{0}", timeoutSeconds)});
-#line 40
- testRunner.And("the debug inputs as", ((string)(null)), table5, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                        ""});
-            table6.AddRow(new string[] {
-                        "[[result]] = String"});
-#line 43
- testRunner.And("the debug output as", ((string)(null)), table6, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a URL to download html with timeout specified too short")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=150")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=150")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "10")]
-        public virtual void EnterAURLToDownloadHtmlWithTimeoutSpecifiedTooShort_HttpTst_Ci_Remote3142PublicWaitWaitSeconds150()
-        {
-            this.EnterAURLToDownloadHtmlWithTimeoutSpecifiedTooShort("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=150", "10", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a URL to download html with timeout specified too short")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "10")]
-        public virtual void EnterAURLToDownloadHtmlWithTimeoutSpecifiedTooShort_HttpTst_Ci_Remote3142PublicWaitWaitSeconds15()
-        {
-            this.EnterAURLToDownloadHtmlWithTimeoutSpecifiedTooShort("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "10", ((string[])(null)));
-        }
-        
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a badly formed URL")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
         public virtual void EnterABadlyFormedURL()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a badly formed URL", ((string[])(null)));
-#line 51
+#line 19
 this.ScenarioSetup(scenarioInfo);
-#line 52
+#line 20
  testRunner.Given("I have the url \"www.google.comx\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 53
+#line 21
  testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 54
+#line 22
  testRunner.Then("the result should contain the string \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 55
+#line 23
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "URL",
                         "Header"});
-            table7.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "www.google.comx",
                         ""});
-#line 56
- testRunner.And("the debug inputs as", ((string)(null)), table7, "And ");
+#line 24
+ testRunner.And("the debug inputs as", ((string)(null)), table3, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table8.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "[[result]] ="});
-#line 59
- testRunner.And("the debug output as", ((string)(null)), table8, "And ");
+#line 27
+ testRunner.And("the debug output as", ((string)(null)), table4, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -273,38 +147,38 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnterAURLMadeUpOfTextAndVariablesWithNoHeader()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a URL made up of text and variables with no header", ((string[])(null)));
-#line 63
+#line 31
 this.ScenarioSetup(scenarioInfo);
-#line 64
+#line 32
     testRunner.Given("I have the url \"http://[[site]][[file]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 65
+#line 33
  testRunner.And("I have a web request variable \"[[site]]\" equal to \"rsaklfsvrtfsbld/IntegrationTes" +
                     "tSite/\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
+#line 34
  testRunner.And("I have a web request variable \"[[file]]\" equal to \"Proxy.ashx?html\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 67
+#line 35
  testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 68
+#line 36
  testRunner.Then("the result should contain the string \"Welcome to ASP.NET Web API\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 69
+#line 37
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "URL",
                         "Header"});
-            table9.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "http://[[site]][[file]] = http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx?h" +
                             "tml",
                         ""});
-#line 70
- testRunner.And("the debug inputs as", ((string)(null)), table9, "And ");
+#line 38
+ testRunner.And("the debug inputs as", ((string)(null)), table5, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table10.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "[[result]] = String"});
-#line 73
- testRunner.And("the debug output as", ((string)(null)), table10, "And ");
+#line 41
+ testRunner.And("the debug output as", ((string)(null)), table6, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -315,38 +189,38 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnterAURLAnd2VariablesEachWithAHeaderParameterJson()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a URL and 2 variables each with a header parameter (json)", ((string[])(null)));
-#line 78
+#line 46
 this.ScenarioSetup(scenarioInfo);
-#line 79
+#line 47
  testRunner.Given("I have the url \"http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 80
+#line 48
  testRunner.And("I have a web request variable \"[[ContentType]]\" equal to \"Content-Type\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
+#line 49
  testRunner.And("I have a web request variable \"[[Type]]\" equal to \"application/json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
+#line 50
  testRunner.And("I have the Header \"[[ContentType]]: [[Type]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+#line 51
  testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 84
+#line 52
  testRunner.Then("the result should contain the string \"[\"value1\",\"value2\"]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 85
+#line 53
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "URL",
                         "Header"});
-            table11.AddRow(new string[] {
+            table7.AddRow(new string[] {
                         "http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx",
                         "[[ContentType]]: [[Type]] = Content-Type: application/json\""});
-#line 86
- testRunner.And("the debug inputs as", ((string)(null)), table11, "And ");
+#line 54
+ testRunner.And("the debug inputs as", ((string)(null)), table7, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table12.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "[[result]] = [\"value1\",\"value2\"]"});
-#line 89
- testRunner.And("the debug output as", ((string)(null)), table12, "And ");
+#line 57
+ testRunner.And("the debug output as", ((string)(null)), table8, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -357,38 +231,38 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnterAURLAnd2VariablesEachWithAHeaderParameterXml()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a URL and 2 variables each with a header parameter (xml)", ((string[])(null)));
-#line 93
+#line 61
 this.ScenarioSetup(scenarioInfo);
-#line 94
+#line 62
  testRunner.Given("I have the url \"http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 95
+#line 63
  testRunner.And("I have a web request variable \"[[ContentType]]\" equal to \"Content-Type\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 96
+#line 64
  testRunner.And("I have a web request variable \"[[Type]]\" equal to \"application/xml\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 97
+#line 65
  testRunner.And("I have the Header \"[[ContentType]]: [[Type]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 98
+#line 66
  testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 99
+#line 67
  testRunner.Then("the result should contain the string \"<string>value1</string>\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 100
+#line 68
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "URL",
                         "Header"});
-            table13.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx",
                         "[[ContentType]]: [[Type]] = Content-Type: application/xml\""});
-#line 101
- testRunner.And("the debug inputs as", ((string)(null)), table13, "And ");
+#line 69
+ testRunner.And("the debug inputs as", ((string)(null)), table9, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table14.AddRow(new string[] {
+            table10.AddRow(new string[] {
                         "[[result]] = <string>value1</string>"});
-#line 104
- testRunner.And("the debug output as", ((string)(null)), table14, "And ");
+#line 72
+ testRunner.And("the debug output as", ((string)(null)), table10, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -399,32 +273,32 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnterAURLThatReturnsJson()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a URL that returns json", ((string[])(null)));
-#line 108
+#line 76
 this.ScenarioSetup(scenarioInfo);
-#line 109
+#line 77
  testRunner.Given("I have the url \"http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx?json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 110
+#line 78
  testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 111
+#line 79
  testRunner.Then("the result should contain the string \"[\"value1\",\"value2\"]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 112
+#line 80
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "URL",
                         "Header"});
-            table15.AddRow(new string[] {
+            table11.AddRow(new string[] {
                         "http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx?json",
                         ""});
-#line 113
- testRunner.And("the debug inputs as", ((string)(null)), table15, "And ");
+#line 81
+ testRunner.And("the debug inputs as", ((string)(null)), table11, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table16.AddRow(new string[] {
+            table12.AddRow(new string[] {
                         "[[result]] = [\"value1\",\"value2\"]"});
-#line 116
- testRunner.And("the debug output as", ((string)(null)), table16, "And ");
+#line 84
+ testRunner.And("the debug output as", ((string)(null)), table12, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -435,32 +309,32 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnterAURLThatReturnsXml()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a URL that returns xml", ((string[])(null)));
-#line 120
+#line 88
 this.ScenarioSetup(scenarioInfo);
-#line 121
+#line 89
  testRunner.Given("I have the url \"http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx?xml\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 122
+#line 90
  testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 123
+#line 91
  testRunner.Then("the result should contain the string \"<string>value1</string>\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 124
+#line 92
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "URL",
                         "Header"});
-            table17.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx?xml",
                         ""});
-#line 125
- testRunner.And("the debug inputs as", ((string)(null)), table17, "And ");
+#line 93
+ testRunner.And("the debug inputs as", ((string)(null)), table13, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table18.AddRow(new string[] {
+            table14.AddRow(new string[] {
                         "[[result]] = <string>value1</string>"});
-#line 128
- testRunner.And("the debug output as", ((string)(null)), table18, "And ");
+#line 96
+ testRunner.And("the debug output as", ((string)(null)), table14, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -471,32 +345,32 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnterABlankURL()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a blank URL", ((string[])(null)));
-#line 132
+#line 100
 this.ScenarioSetup(scenarioInfo);
-#line 133
+#line 101
  testRunner.Given("I have the url \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 134
+#line 102
  testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 135
+#line 103
  testRunner.Then("the result should contain the string \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 136
+#line 104
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "URL",
                         "Header"});
-            table19.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "\"\"",
                         ""});
-#line 137
- testRunner.And("the debug inputs as", ((string)(null)), table19, "And ");
+#line 105
+ testRunner.And("the debug inputs as", ((string)(null)), table15, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table20.AddRow(new string[] {
+            table16.AddRow(new string[] {
                         "[[result]] ="});
-#line 140
- testRunner.And("the debug output as", ((string)(null)), table20, "And ");
+#line 108
+ testRunner.And("the debug output as", ((string)(null)), table16, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -507,37 +381,37 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnterAURLThatIsANegativeIndexRecordset()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a URL that is a negative index recordset", ((string[])(null)));
-#line 144
+#line 112
 this.ScenarioSetup(scenarioInfo);
-#line 145
+#line 113
  testRunner.Given("I have the url \"[[rec(-1).set]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 146
+#line 114
  testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 147
+#line 115
  testRunner.Then("the result should contain the string \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 148
+#line 116
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "URL",
                         "Header"});
-            table21.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "[[rec(-1).set]] =",
                         ""});
-#line 149
- testRunner.And("the debug inputs as", ((string)(null)), table21, "And ");
+#line 117
+ testRunner.And("the debug inputs as", ((string)(null)), table17, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table22.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "[[result]] ="});
-#line 152
- testRunner.And("the debug output as", ((string)(null)), table22, "And ");
+#line 120
+ testRunner.And("the debug output as", ((string)(null)), table18, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        public virtual void EnterANumberOrVariableThatDoesNotExistAsURL(string url, string timeoutSeconds, string error, string[] exampleTags)
+        public virtual void EnterANumberOrVariableThatDoesNotExistAsURL(string url, string timeoutSeconds, string header, string error, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "ignore"};
@@ -546,34 +420,36 @@ this.ScenarioSetup(scenarioInfo);
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a number or variable that does not exist as URL", @__tags);
-#line 158
+#line 126
 this.ScenarioSetup(scenarioInfo);
-#line 159
+#line 127
  testRunner.Given(string.Format("I have the url \'{0}\' with timeoutSeconds \'{1}\'", url, timeoutSeconds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 160
+#line 128
+ testRunner.And(string.Format("I have the Header \'{0}\'", header), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 129
  testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 161
+#line 130
  testRunner.Then(string.Format("the result should contain the string \'{0}\'", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 162
+#line 131
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "URL",
                         "Header",
                         "Time Out Seconds"});
-            table23.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         string.Format("{0}", url),
-                        "",
+                        string.Format("{0}", header),
                         string.Format("{0}", timeoutSeconds)});
-#line 163
- testRunner.And("the debug inputs as", ((string)(null)), table23, "And ");
+#line 132
+ testRunner.And("the debug inputs as", ((string)(null)), table19, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table24.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "[[result]] ="});
-#line 166
- testRunner.And("the debug output as", ((string)(null)), table24, "And ");
+#line 135
+ testRunner.And("the debug output as", ((string)(null)), table20, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -585,10 +461,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "88")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "Unable to connect to the remote server")]
         public virtual void EnterANumberOrVariableThatDoesNotExistAsURL_Variant0()
         {
-            this.EnterANumberOrVariableThatDoesNotExistAsURL("88", "", "Unable to connect to the remote server", ((string[])(null)));
+            this.EnterANumberOrVariableThatDoesNotExistAsURL("88", "", "", "Unable to connect to the remote server", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -598,10 +475,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "[[y]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "Invalid URI: The hostname could not be parsed")]
         public virtual void EnterANumberOrVariableThatDoesNotExistAsURL_Variant1()
         {
-            this.EnterANumberOrVariableThatDoesNotExistAsURL("[[y]]", "", "Invalid URI: The hostname could not be parsed", ((string[])(null)));
+            this.EnterANumberOrVariableThatDoesNotExistAsURL("[[y]]", "", "", "Invalid URI: The hostname could not be parsed", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -611,10 +489,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "[[y]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "Value [[y]] for TimeoutSeconds Text could not be interpreted as a numeric value.")]
         public virtual void EnterANumberOrVariableThatDoesNotExistAsURL_Variant2()
         {
-            this.EnterANumberOrVariableThatDoesNotExistAsURL("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "[[y]]", "Value [[y]] for TimeoutSeconds Text could not be interpreted as a numeric value.", ((string[])(null)));
+            this.EnterANumberOrVariableThatDoesNotExistAsURL("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "[[y]]", "", "Value [[y]] for TimeoutSeconds Text could not be interpreted as a numeric value.", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -624,10 +503,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "\" \"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "Value    for TimeoutSeconds Text could not be interpreted as a numeric value.")]
         public virtual void EnterANumberOrVariableThatDoesNotExistAsURL_Variant3()
         {
-            this.EnterANumberOrVariableThatDoesNotExistAsURL("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "\" \"", "Value    for TimeoutSeconds Text could not be interpreted as a numeric value.", ((string[])(null)));
+            this.EnterANumberOrVariableThatDoesNotExistAsURL("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "\" \"", "", "Value    for TimeoutSeconds Text could not be interpreted as a numeric value.", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -637,45 +517,74 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "sdf")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "Value sdf for TimeoutSeconds Text could not be interpreted as a numeric value.")]
         public virtual void EnterANumberOrVariableThatDoesNotExistAsURL_Variant4()
         {
-            this.EnterANumberOrVariableThatDoesNotExistAsURL("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "sdf", "Value sdf for TimeoutSeconds Text could not be interpreted as a numeric value.", ((string[])(null)));
+            this.EnterANumberOrVariableThatDoesNotExistAsURL("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "sdf", "", "Value sdf for TimeoutSeconds Text could not be interpreted as a numeric value.", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a number or variable that does not exist as URL")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "10")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "21245")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "Index was outside the bounds of the array")]
+        public virtual void EnterANumberOrVariableThatDoesNotExistAsURL_Variant5()
+        {
+            this.EnterANumberOrVariableThatDoesNotExistAsURL("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "10", "21245", "Index was outside the bounds of the array", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a number or variable that does not exist as URL")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 6")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "10")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "[[var]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "Object reference not set to instance  of object")]
+        public virtual void EnterANumberOrVariableThatDoesNotExistAsURL_Variant6()
+        {
+            this.EnterANumberOrVariableThatDoesNotExistAsURL("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "10", "[[var]]", "Object reference not set to instance  of object", ((string[])(null)));
         }
         
         public virtual void EnterAURLToDownloadHtmlWithVariablesAndRecordsets(string url, string header, string timeoutSeconds, string result, string output, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enter a URL to download html with variables and recordsets", exampleTags);
-#line 177
+#line 148
 this.ScenarioSetup(scenarioInfo);
-#line 178
+#line 149
  testRunner.Given(string.Format("I have the url \'{0}\' with timeoutSeconds \'{1}\'", url, timeoutSeconds), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 179
+#line 150
  testRunner.And(string.Format("I have the Header \'{0}\'", header), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 180
+#line 151
  testRunner.When("the web request tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 181
+#line 152
  testRunner.Then(string.Format("the result should contain the string \'{0}\' equals \'{1}\'", result, output), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 182
+#line 153
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "URL",
                         "Header",
                         "Time Out Seconds"});
-            table25.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         string.Format("{0}", url),
                         string.Format("{0}", header),
                         string.Format("{0}", timeoutSeconds)});
-#line 183
- testRunner.And("the debug inputs as", ((string)(null)), table25, "And ");
+#line 154
+ testRunner.And("the debug inputs as", ((string)(null)), table21, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table26.AddRow(new string[] {
+            table22.AddRow(new string[] {
                         "[[result]] = String"});
-#line 186
- testRunner.And("the debug output as", ((string)(null)), table26, "And ");
+#line 157
+ testRunner.And("the debug output as", ((string)(null)), table22, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -757,13 +666,69 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 5")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "Content-Type: application/xml")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "[[rec([[int]]).set]] = 20, [[int]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs(1).set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "[[rs(1).set]]= <DataList><Result>Wait Successful</Result></DataList>")]
         public virtual void EnterAURLToDownloadHtmlWithVariablesAndRecordsets_Variant5()
         {
-            this.EnterAURLToDownloadHtmlWithVariablesAndRecordsets("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "", "[[rec([[int]]).set]] = 20, [[int]]", "[[rs(1).set]]", "[[rs(1).set]]= <DataList><Result>Wait Successful</Result></DataList>", ((string[])(null)));
+            this.EnterAURLToDownloadHtmlWithVariablesAndRecordsets("http://tst-ci-remote:3142/Public/Wait?WaitSeconds=15", "Content-Type: application/xml", "[[rec([[int]]).set]] = 20, [[int]]", "[[rs(1).set]]", "[[rs(1).set]]= <DataList><Result>Wait Successful</Result></DataList>", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a URL to download html with variables and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 6")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "[[Rec().a]] = Content-Type: application/xml\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[result]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "<string>value1</string>")]
+        public virtual void EnterAURLToDownloadHtmlWithVariablesAndRecordsets_Variant6()
+        {
+            this.EnterAURLToDownloadHtmlWithVariablesAndRecordsets("http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx", "[[Rec().a]] = Content-Type: application/xml\"", "", "[[result]]", "<string>value1</string>", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a URL to download html with variables and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "[[Rec(1).a]] = Content-Type: application/xml\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[result]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "<string>value1</string>")]
+        public virtual void EnterAURLToDownloadHtmlWithVariablesAndRecordsets_Variant7()
+        {
+            this.EnterAURLToDownloadHtmlWithVariablesAndRecordsets("http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx", "[[Rec(1).a]] = Content-Type: application/xml\"", "", "[[result]]", "<string>value1</string>", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a URL to download html with variables and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 8")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "[[Rec(*).a]] = Content-Type: application/xml\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[result]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "<string>value1</string>")]
+        public virtual void EnterAURLToDownloadHtmlWithVariablesAndRecordsets_Variant8()
+        {
+            this.EnterAURLToDownloadHtmlWithVariablesAndRecordsets("http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx", "[[Rec(*).a]] = Content-Type: application/xml\"", "", "[[result]]", "<string>value1</string>", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Enter a URL to download html with variables and recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebRequest")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 9")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:url", "http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Header", "[[Rec([[int]]).a]] = Content-Type: application/xml\", [[int]] = 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:timeoutSeconds", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[result]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:output", "<string>value1</string>")]
+        public virtual void EnterAURLToDownloadHtmlWithVariablesAndRecordsets_Variant9()
+        {
+            this.EnterAURLToDownloadHtmlWithVariablesAndRecordsets("http://rsaklfsvrtfsbld/IntegrationTestSite/Proxy.ashx", "[[Rec([[int]]).a]] = Content-Type: application/xml\", [[int]] = 2", "", "[[result]]", "<string>value1</string>", ((string[])(null)));
         }
     }
 }

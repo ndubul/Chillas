@@ -141,9 +141,25 @@ Scenario: Plugin service GetType test
 	Then Save is "Disabled"
 	And "5 Edit Default and Mapping Names" is "Disabled" 
 	
-	
-	
-	
+
+Scenario Outline: Fromat exception error
+	Given I click "New Plugin Service Connector"
+	And "New Plugin Service" tab is opened
+	When I select '<source>' as source
+	And "2 Select a namespace" is "Enabled"
+	And "3 Select an action" is "Disabled" 
+	When I selece '<namespace>' as namespace
+	Then "Select an action" is "Enabled"
+	When I select '<action>' as action
+	And "4 Provide Test Values" is "Enabled" 
+	And "Test" is "Enabled"
+	When "Test" is clicked
+	And the test connection is "unsuccessful"
+	And a studio error of "Unhandled exception" appears with the Excetion "'System.FormatException' occurred in mscorlib.dll but was not handled in user code"
+	Examples: 
+	| source                 | namespace                               | action        |
+	| testingPluginSrc       | Unlimited Framework Plugins EmailPlugin | SampleSend    |
+	| PrimitiveplugintestSrc | Dev2.PrimitiveTestDLL.TestClass         | FetchIntValue |
 	
 	
 	

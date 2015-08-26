@@ -12,6 +12,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Dev2.Common.Interfaces.Help;
 using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Security;
 using Dev2.Studio.Core.Interfaces;
@@ -40,6 +41,7 @@ namespace Dev2.Interfaces
         AuthorizeCommand SettingsCommand { get; }
         AuthorizeCommand SchedulerCommand { get; }
         IToolboxViewModel ToolboxViewModel { get; }
+        IHelpWindowViewModel HelpViewModel { get; }
 
         void DisplayDialogForNewVersion();
 

@@ -75,7 +75,7 @@ namespace Dev2.Activities.Specs.Toolbox.Utility.FormatNumber
             ScenarioContext.Current.Add("to", to.Replace('"', ' ').Trim());
         }
 
-        [Given(@"I want to show (.*) decimals")]
+        [Given(@"I want to show (.*) decimals with value (.*)") ]
         public void GivenIWantToShowDecimals(string decimalToShow)
         {
             ScenarioContext.Current.Add("decimalToShow", decimalToShow.Replace('"', ' ').Trim());

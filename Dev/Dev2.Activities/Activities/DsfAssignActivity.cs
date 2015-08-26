@@ -14,10 +14,10 @@ using System.Activities;
 using System.Collections.Generic;
 using Dev2;
 using Dev2.Activities;
+// ReSharper disable CheckNamespace
 
 namespace Unlimited.Applications.BusinessDesignStudio.Activities
 {
-    // TODO: DELETE UNUSED
     public class DsfAssignActivity : DsfActivityAbstract<string>
     {
 
@@ -78,7 +78,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
             return GetForEachItems(FieldValue);
         }
 
-        protected override void ExecuteTool(IDSFDataObject dataObject)
+        protected override void ExecuteTool(IDSFDataObject dataObject, int update)
         {
         }
 

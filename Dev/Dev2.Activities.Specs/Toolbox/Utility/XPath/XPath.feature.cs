@@ -10,12 +10,12 @@
 //  </auto-generated>
 // ------------------------------------------------------------------------------
 #region Designer generated code
-
-using TechTalk.SpecFlow;
-
 #pragma warning disable
 namespace Dev2.Activities.Specs.Toolbox.Utility.XPath
 {
+    using TechTalk.SpecFlow;
+    
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
@@ -49,7 +49,7 @@ namespace Dev2.Activities.Specs.Toolbox.Utility.XPath
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "XPath")))
             {
-                FeatureSetup(null);
+                Dev2.Activities.Specs.Toolbox.Utility.XPath.XPathFeature.FeatureSetup(null);
             }
         }
         
@@ -758,6 +758,169 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.And("the debug output as", ((string)(null)), table31, "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        public virtual void UseXPathToGetDataOffXMLUsingRecordsets(string xml, string xmlvalue, string first, string xpath, string path, string value, string error, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Use XPath to get data off XML using recordsets", @__tags);
+#line 223
+this.ScenarioSetup(scenarioInfo);
+#line 224
+ testRunner.Given(string.Format("I have this xml \'{0}\'", xmlvalue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 225
+ testRunner.And(string.Format("The result variable is \'{0}\'", xml), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 226
+ testRunner.And(string.Format("I have a variable \'{0}\' output with xpath \'{1}\'", first, path), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 227
+ testRunner.And(string.Format("The path variable is \'{0}\'", xpath), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 228
+ testRunner.When("the xpath tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 229
+ testRunner.Then(string.Format("the variable \'{0}\' should have a value \'{1}\'", first, value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 230
+ testRunner.And(string.Format("the execution has \'{0}\' error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+                        "XML",
+                        "value",
+                        "Variable",
+                        "Xpath"});
+            table32.AddRow(new string[] {
+                        string.Format("{0}", xmlvalue),
+                        string.Format("{0}", value),
+                        string.Format("{0}", first),
+                        string.Format("{0}", path)});
+#line 231
+ testRunner.And("the debug inputs as", ((string)(null)), table32, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+                        "#",
+                        ""});
+            table33.AddRow(new string[] {
+                        "1",
+                        string.Format("{0} = {1}", first, value)});
+#line 234
+ testRunner.And("the debug output as", ((string)(null)), table33, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Use XPath to get data off XML using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "XPath")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
+            "/number></root>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[firstNum]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[path().set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "//root/number[@id=\'1\']/text()")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "One")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
+        public virtual void UseXPathToGetDataOffXMLUsingRecordsets_Variant0()
+        {
+            this.UseXPathToGetDataOffXMLUsingRecordsets("[[rec().a]]", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
+                    "/number></root>", "[[firstNum]]", "[[path().set]]", "//root/number[@id=\'1\']/text()", "One", "No", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Use XPath to get data off XML using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "XPath")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[rec(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
+            "/number></root>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[firstNum]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[path(1).set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "//root/number[@id=\'1\']/text()")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "One")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
+        public virtual void UseXPathToGetDataOffXMLUsingRecordsets_Variant1()
+        {
+            this.UseXPathToGetDataOffXMLUsingRecordsets("[[rec(1).a]]", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
+                    "/number></root>", "[[firstNum]]", "[[path(1).set]]", "//root/number[@id=\'1\']/text()", "One", "No", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Use XPath to get data off XML using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "XPath")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[rec(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
+            "/number></root>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[F([[int]]).number]],[[int]] =1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[path(*).set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "//root/number[@id=\'1\']/text()")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "One")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
+        public virtual void UseXPathToGetDataOffXMLUsingRecordsets_Variant2()
+        {
+            this.UseXPathToGetDataOffXMLUsingRecordsets("[[rec(*).a]]", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
+                    "/number></root>", "[[F([[int]]).number]],[[int]] =1", "[[path(*).set]]", "//root/number[@id=\'1\']/text()", "One", "No", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Use XPath to get data off XML using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "XPath")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[rec([[int]]).a]], [[int]] =1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
+            "/number></root>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[firstNum]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[path([[int]]).set]],[[int]]=1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "//root/number[@id=\'1\']/text()")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "One")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
+        public virtual void UseXPathToGetDataOffXMLUsingRecordsets_Variant3()
+        {
+            this.UseXPathToGetDataOffXMLUsingRecordsets("[[rec([[int]]).a]], [[int]] =1", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
+                    "/number></root>", "[[firstNum]]", "[[path([[int]]).set]],[[int]]=1", "//root/number[@id=\'1\']/text()", "One", "No", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Use XPath to get data off XML using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "XPath")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[var]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[F().number]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[var]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "//root/number[@id=\'1\']/text()")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "<InnerError>Value cannt be null. Parameter name:xmlData</InnerError>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
+        public virtual void UseXPathToGetDataOffXMLUsingRecordsets_Variant4()
+        {
+            this.UseXPathToGetDataOffXMLUsingRecordsets("[[var]]", "", "[[F().number]]", "[[var]]", "//root/number[@id=\'1\']/text()", "<InnerError>Value cannt be null. Parameter name:xmlData</InnerError>", "An", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Use XPath to get data off XML using recordsets")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "XPath")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
+            "/number></root>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[firstNum]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[variable]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "<InnerError>Value cannt be null. Parameter name:xPath</InnerError>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
+        public virtual void UseXPathToGetDataOffXMLUsingRecordsets_Variant5()
+        {
+            this.UseXPathToGetDataOffXMLUsingRecordsets("[[rec().a]]", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
+                    "/number></root>", "[[firstNum]]", "[[variable]]", "", "<InnerError>Value cannt be null. Parameter name:xPath</InnerError>", "An", ((string[])(null)));
         }
     }
 }

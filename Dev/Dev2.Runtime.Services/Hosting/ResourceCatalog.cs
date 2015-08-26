@@ -45,6 +45,8 @@ using ServiceStack.Common.Extensions;
 using Warewolf.ResourceManagement;
 
 // ReSharper disable InconsistentNaming
+// ReSharper disable LocalizableElement
+
 namespace Dev2.Runtime.Hosting
 {
 
@@ -216,6 +218,26 @@ namespace Dev2.Runtime.Hosting
                     return foundResource;
                 }
             }
+        }
+
+        public IResource GetResource(string resourceName, Guid workspaceId)
+        {
+            if (string.IsNullOrEmpty(resourceName))
+            {
+                return null;
+            }
+            var allResources = GetResources(workspaceId);
+            IResource foundResource = null;
+            if (allResources != null)
+            {
+                foundResource = allResources.FirstOrDefault(resource => resourceName.Equals(resource.ResourceName, StringComparison.OrdinalIgnoreCase));
+                if (foundResource == null && workspaceId != Guid.Empty)
+                {
+                    allResources = GetResources(GlobalConstants.ServerWorkspaceID);
+                    foundResource = allResources.FirstOrDefault(resource => resourceName.Equals(resource.ResourceName, StringComparison.OrdinalIgnoreCase));
+                }
+            }
+            return foundResource;
         }
 
 
@@ -882,7 +904,9 @@ namespace Dev2.Runtime.Hosting
             if (_parsers != null && _parsers.TryGetValue(workspaceID,out parser))
             {
                 parser.RemoveFromCache(resource.ResourceID);
-            }            
+            }
+            List<DynamicServiceObjectBase> objects;
+            _frequentlyUsedServices.TryRemove(resource.ResourceName, out objects);
         }
 
         #endregion
@@ -937,6 +961,7 @@ namespace Dev2.Runtime.Hosting
             //
             // Calculate the files which are to be deleted from the destination, this respects the delete parameter
             //
+            // ReSharper disable once CollectionNeverQueried.Local
             var filesToDeleteFromDestination = new List<FileInfo>();
             if(delete)
             {
@@ -1088,8 +1113,8 @@ namespace Dev2.Runtime.Hosting
             catch(Exception e)
             {
                 Dev2Logger.Log.Error("Error getting resources",e);
+                throw;
             }
-            return null;
         }
 
         public virtual IResource GetResource(Guid workspaceID, Guid serviceID)
@@ -1651,6 +1676,7 @@ namespace Dev2.Runtime.Hosting
                 if(!_frequentlyUsedServices.TryGetValue(resource.ResourceName, out objects))
                 {
                     objects = GenerateObjectGraph(resource);
+                    _frequentlyUsedServices.TryAdd(resource.ResourceName, objects);
                 }
                 else
                 {
@@ -1700,9 +1726,7 @@ namespace Dev2.Runtime.Hosting
 
         public List<Guid> GetDependants(Guid workspaceID, Guid? resourceId)
         {
-            // ReSharper disable LocalizableElement
-            if(resourceId == null) throw new ArgumentNullException("resourceId", "No resource name given.");
-            // ReSharper restore LocalizableElement
+            if(resourceId == null) throw new ArgumentNullException("resourceId", @"No resource name given.");
 
             var resources = GetResources(workspaceID);
             var dependants = new List<Guid>();
@@ -1722,6 +1746,7 @@ namespace Dev2.Runtime.Hosting
 
         public ResourceCatalogResult RenameResource(Guid workspaceID, Guid? resourceID, string newName)
         {
+
             if(resourceID == null)
             {
                 throw new ArgumentNullException("resourceID", @"No value provided for resourceID");
@@ -1911,8 +1936,24 @@ namespace Dev2.Runtime.Hosting
         public ResourceCatalogResult RenameCategory(Guid workspaceID, string oldCategory, string newCategory)
         {
             VerifyArguments(oldCategory, newCategory);
-            var resourcesToUpdate = Instance.GetResources(workspaceID, resource => resource.ResourcePath.StartsWith(oldCategory + "\\", StringComparison.OrdinalIgnoreCase)).ToList();
-            return RenameCategory(workspaceID, oldCategory, newCategory, resourcesToUpdate);
+            try
+            {
+                var resourcesToUpdate = Instance.GetResources(workspaceID, resource =>
+                {
+                    return resource.ResourcePath.StartsWith(oldCategory + "\\", StringComparison.OrdinalIgnoreCase);
+                }).ToList();
+
+                return RenameCategory(workspaceID, oldCategory, newCategory, resourcesToUpdate);
+            }
+            catch (Exception err)
+            {
+                Dev2Logger.Log.Error("Rename Category error", err);
+                return new ResourceCatalogResult
+                {
+                    Status = ExecStatus.Fail,
+                    Message = string.Format("<CompilerMessage>{0} from '{1}' to '{2}'</CompilerMessage>", "Failed to Category", oldCategory, newCategory)
+                };
+            }
         }
 
         public ResourceCatalogResult RenameCategory(Guid workspaceID, string oldCategory, string newCategory, List<IResource> resourcesToUpdate)
@@ -1964,6 +2005,7 @@ namespace Dev2.Runtime.Hosting
             }
         }
 
+        // ReSharper disable UnusedParameter.Local
         static void VerifyArguments(string oldCategory, string newCategory)
         {
             if(oldCategory == null)

@@ -150,7 +150,7 @@ namespace Warewolf.Studio.Views
                         }
                         return TestActionGrid.Visibility == Visibility.Visible;
                     }
-                case "4 Edit Default and Mapping Names":
+                case "4 Default and Mapping":
                     {
                         BindingExpression be = MappingsGrid.GetBindingExpression(VisibilityProperty);
                         if (be != null)

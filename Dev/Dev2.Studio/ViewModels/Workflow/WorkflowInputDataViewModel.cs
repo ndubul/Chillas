@@ -15,6 +15,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Dev2.Common;
@@ -54,7 +55,7 @@ namespace Dev2.Studio.ViewModels.Workflow
         static DataListConversionUtils _dataListConversionUtils;
         bool _canViewInBrowser;
         bool _canDebug;
-
+        readonly Common.Interfaces.Studio.Controller.IPopupController _popupController;
         #endregion Fields
 
         public event Action DebugExecutionStart;
@@ -113,6 +114,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             DisplayName = "Debug input data";
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
             _dataListConversionUtils = new DataListConversionUtils();
+            _popupController = CustomContainer.Get<Common.Interfaces.Studio.Controller.IPopupController>();
         }
         #endregion Ctor
 
@@ -253,6 +255,8 @@ namespace Dev2.Studio.ViewModels.Workflow
                 return _cancelComand ?? (_cancelComand = new DelegateCommand(param => Cancel()));
             }
         }
+        public bool IsInError { get; set; }
+
         #endregion Cammands
 
         #region Methods
@@ -263,9 +267,16 @@ namespace Dev2.Studio.ViewModels.Workflow
         public void Save()
         {
             //2012.10.11: massimo.guerrera - Added for PBI 5781
-            DoSaveActions();
-            ExecuteWorkflow();
-            RequestClose();
+            if (!IsInError)
+            {
+                DoSaveActions();
+                ExecuteWorkflow();
+                RequestClose();
+            }
+            else
+            {
+                ShowInvalidDataPopupMessage();
+            }
         }
 
         public void DoSaveActions()
@@ -307,17 +318,30 @@ namespace Dev2.Studio.ViewModels.Workflow
 
         protected virtual void SendExecuteRequest(XElement payload)
         {
-            WebServer.Send(WebServerMethod.POST, _resourceModel, payload.ToString(), new AsyncWorker());
+            WebServer.Send(_resourceModel, payload.ToString(), new AsyncWorker());
+        }
+
+        public void ShowInvalidDataPopupMessage()
+        {
+            _popupController.Show("The data you have entered is invalid. Please correct the data.", "Invalid data entered.", MessageBoxButton.OK, MessageBoxImage.Error, null);
+            IsInError = true;
         }
 
         public void ViewInBrowser()
         {
-            Tracker.TrackEvent(TrackerEventGroup.Workflows, TrackerEventName.ViewInBrowserClicked);
-            DoSaveActions();
-            string payload = BuildWebPayLoad();
-            SendViewInBrowserRequest(payload);
-            SendFinishedMessage();
-            RequestClose();
+            if (!IsInError)
+            {
+                Tracker.TrackEvent(TrackerEventGroup.Workflows, TrackerEventName.ViewInBrowserClicked);
+                DoSaveActions();
+                string payload = BuildWebPayLoad();
+                SendViewInBrowserRequest(payload);
+                SendFinishedMessage();
+                RequestClose();
+            }
+            else
+            {
+                ShowInvalidDataPopupMessage();
+            }
         }
 
         public string BuildWebPayLoad()
@@ -332,7 +356,7 @@ namespace Dev2.Studio.ViewModels.Workflow
 
         protected virtual void SendViewInBrowserRequest(string payload)
         {
-            WebServer.OpenInBrowser(WebServerMethod.POST, _resourceModel, payload);
+            WebServer.OpenInBrowser(_resourceModel, payload);
         }
 
         private void SendFinishedMessage()
@@ -657,7 +681,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             if(dlItem.IsRecordset)
             {
                 IList<IScalar> recsetCols = columns;
-                foreach(var col in recsetCols)
+                foreach(var col in recsetCols.Distinct(new ScalarNameComparer()))
                 {
                     WorkflowInputs.Insert(indexToInsertAt + 1, new DataListItem
                     {
@@ -707,5 +731,43 @@ namespace Dev2.Studio.ViewModels.Workflow
 
             return result;
         }
+    }
+
+    internal class ScalarNameComparer : IEqualityComparer<IScalar>
+    {
+        #region Implementation of IEqualityComparer<in IScalar>
+
+        /// <summary>
+        /// Determines whether the specified objects are equal.
+        /// </summary>
+        /// <returns>
+        /// true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        /// <param name="x">The first object of type <paramref name="x"/> to compare.</param><param name="y">The second object of type <paramref name="y"/> to compare.</param>
+        public bool Equals(IScalar x, IScalar y)
+        {
+            if (x == null) return false;
+            if (y == null) return false;
+            if (x.Name == null && y.Name == null) return true;
+            if (x.Name != null)
+            {
+                return x.Name.Equals(y.Name, StringComparison.OrdinalIgnoreCase);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the specified object.
+        /// </summary>
+        /// <returns>
+        /// A hash code for the specified object.
+        /// </returns>
+        /// <param name="obj">The <see cref="T:System.Object"/> for which a hash code is to be returned.</param><exception cref="T:System.ArgumentNullException">The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is null.</exception>
+        public int GetHashCode(IScalar obj)
+        {
+            return obj.Name.GetHashCode();
+        }
+
+        #endregion
     }
 }

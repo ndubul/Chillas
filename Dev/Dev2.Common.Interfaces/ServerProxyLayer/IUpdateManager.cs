@@ -66,6 +66,10 @@ namespace Dev2.Common.Interfaces.ServerProxyLayer
 
         void TestConnection(IWebServiceSource resource);
 
+        void SaveSharePointServiceSource(ISharepointServerSource resource, Guid serverWorkspaceID);
+
+        void TestConnection(ISharepointServerSource resource);
+
         string TestWebService(IWebService inputValues);
 
         void SaveWebservice(IWebService model, Guid serverWorkspaceID);

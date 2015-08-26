@@ -24,9 +24,11 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Threading;
+using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Warewolf.Studio.ViewModels.Help;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -158,8 +160,8 @@ namespace Warewolf.Studio.ViewModels
             {
             }
             HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel  + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
-           
-            Header = ((_dbSource == null ? ResourceName : _dbSource.Name));
+
+            Header = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel + ((_dbSource == null ? ResourceName : _dbSource.Name));
         }
 
         public override bool CanSave()
@@ -354,8 +356,23 @@ namespace Warewolf.Studio.ViewModels
         }
         public override IDbSource ToModel()
         {
-   
-            return ToDbSource();
+            if (Item == null)
+            {
+                Item = ToDbSource();
+                return Item;
+            }
+
+            return new DbSourceDefinition
+            {
+                AuthenticationType = AuthenticationType,
+                ServerName = GetServerName(),
+                Password = Password,
+                UserName = UserName,
+                Type = (enSourceType)Enum.Parse(typeof(enSourceType), ServerType.Value),
+                Name = ResourceName,
+                DbName = DatabaseName,
+                Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
+            };
         }
 
         IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
@@ -639,7 +656,12 @@ namespace Warewolf.Studio.ViewModels
         }
 
         public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
             {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
 
         public bool IsEmpty { get { return ServerName != null && (String.IsNullOrEmpty(ServerName.Name) && AuthenticationType == AuthenticationType.Windows && String.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Password)); } }

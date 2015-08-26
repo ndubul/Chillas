@@ -11,6 +11,7 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Threading;
+using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
@@ -57,6 +58,10 @@ namespace Warewolf.Studio.ViewModels
             _aggregator = aggregator;
             _warewolfserverName = updateManager.ServerName;
             _authenticationType = AuthenticationType.Anonymous;
+            _hostName = String.Empty;
+            _defaultQuery = String.Empty;
+            _userName = String.Empty;
+            _password = String.Empty;
             HeaderText = Resources.Languages.Core.WebserviceNewHeaderLabel;
             Header = Resources.Languages.Core.WebserviceNewHeaderLabel;
             TestCommand = new DelegateCommand(TestConnection, CanTest);
@@ -103,8 +108,8 @@ namespace Warewolf.Studio.ViewModels
             }
             else
             {
-                HeaderText = string.Format("{0} {1} on {2}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim(), serverName);
-                Header = string.Format("{0} - {1}", ((_webServiceSource == null ? ResourceName : _webServiceSource.Name)),serverName);
+                HeaderText = string.Format("{0} {1} ", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim());
+                Header = string.Format("{0} {1}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name));
             }
         }
 
@@ -153,10 +158,11 @@ namespace Warewolf.Studio.ViewModels
 
         public override void UpdateHelpDescriptor(string helpText)
         {
-            var helpDescriptor = new HelpDescriptor("", helpText, null);
-            VerifyArgument.IsNotNull("helpDescriptor", helpDescriptor);
-            _aggregator.GetEvent<HelpChangedEvent>().Publish(helpDescriptor);
-
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
 
         void FromSource(IWebServiceSource webServiceSource)
@@ -311,6 +317,8 @@ namespace Warewolf.Studio.ViewModels
                 HostName = HostName,
                 AuthenticationType = AuthenticationType,
                 DefaultQuery = DefaultQuery,
+                Password = Password,
+                UserName = UserName,
                 Id = Item.Id,
                 Path = Item.Path
             };

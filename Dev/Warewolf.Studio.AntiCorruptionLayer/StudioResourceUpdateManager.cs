@@ -69,6 +69,11 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             UpdateManagerProxy.TestConnection(resource);
         }
 
+        public void TestConnection(ISharepointServerSource resource)
+        {
+            UpdateManagerProxy.TestConnection(resource);
+        }
+
         public IList<string> TestDbConnection(IDbSource serverSource)
         {
             return UpdateManagerProxy.TestDbConnection(serverSource);
@@ -101,6 +106,22 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             }
         }
 
+        public void Save(ISharepointServerSource resource)
+        {
+            try
+            {
+                UpdateManagerProxy.SaveSharePointServiceSource(resource, GlobalConstants.ServerWorkspaceID);
+                if (SharePointServiceSourceSaved != null)
+                {
+                    SharePointServiceSourceSaved(resource);
+                }
+            }
+            catch (Exception)
+            {
+                //
+            }
+        }
+
         public void Save(IDatabaseService toDbSource)
         {
             UpdateManagerProxy.SaveDbService(toDbSource);
@@ -118,6 +139,8 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         }
 
         public event Action<IWebServiceSource> WebServiceSourceSaved;
+
+        public event Action<ISharepointServerSource> SharePointServiceSourceSaved;
 
         public string TestPluginService(IPluginService inputValues)
         {

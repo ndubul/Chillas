@@ -149,6 +149,10 @@ namespace Warewolf.Studio.ServerProxyLayer
 
             var workspaceId = Connection.WorkspaceID;
             var result =  comsController.ExecuteCommand<IList<IToolDescriptor>>(Connection, workspaceId);
+            if (result == null)
+            {
+                result = new List<IToolDescriptor>();
+            }
             return result;
         }
 

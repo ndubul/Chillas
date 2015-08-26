@@ -305,9 +305,19 @@
                                           Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
                                           Command="{Binding NewResourceCommand}"
                                           CommandParameter="DropboxSource"
-                                          AutomationProperties.AutomationId ="UI_NewEmailSourceContextMenuItem_AutoID" >
+                                          AutomationProperties.AutomationId ="UI_NewDropboxSourceContextMenuItem_AutoID" >
                                     <MenuItem.Icon>
                                         <Image Width="14" Height="14" Source="{StaticResource DropBoxLogo}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                                <MenuItem Header="New Sharepoint Source"
+                                          Visibility="{Binding CanAddResoure, Converter={StaticResource BoolToVisConverter}}"
+                                          Command="{Binding NewResourceCommand}"
+                                          CommandParameter="SharepointServerSource"
+                                          AutomationProperties.AutomationId ="UI_NewSharepointSourceContextMenuItem_AutoID" >
+                                    <MenuItem.Icon>
+                                        <Image Width="14" Height="14" Source="{StaticResource SharepointLogo}" />
                                     </MenuItem.Icon>
                                 </MenuItem>
 
@@ -399,6 +409,7 @@
                                             Style="{StaticResource ButtonTransparentStyle}" />
                                     
                                     <Image Style="{StaticResource AuthNoneIconStyle}"
+                                           Margin="-3,0,6,0"
                                            Visibility="{Binding Permissions, Converter={StaticResource NavigationViewModelPermissionVisibilityConverter}, ConverterParameter=None}"
                                            ToolTip="{x:Static help:HelpTextResources.ExplorerSecurityToolTipNone}"
                                            AutomationProperties.AutomationId="UI_NotAutherized_AutoID" />

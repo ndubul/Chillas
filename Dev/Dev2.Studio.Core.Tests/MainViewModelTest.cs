@@ -51,6 +51,7 @@ using Dev2.Studio.ViewModels.DependencyVisualization;
 using Dev2.Studio.ViewModels.Help;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Studio.ViewModels.WorkSurface;
+using Dev2.Threading;
 using Dev2.Util;
 using Dev2.Utilities;
 using Dev2.ViewModels.Deploy;
@@ -103,7 +104,7 @@ namespace Dev2.Core.Tests
             ActiveEnvironment.Setup(e => e.CanStudioExecute).Returns(canStudioExecute);
             // ReSharper disable MaximumChainedReferences
             AuthorizationService.Setup(a => a.IsAuthorized(AuthorizationContext.Administrator, It.IsAny<string>())).Returns(isAuthorized);
-            
+
 
             var actual = MainViewModel.SettingsCommand.CanExecute(null);
             Assert.AreEqual(expected, actual);
@@ -128,7 +129,7 @@ namespace Dev2.Core.Tests
             var versionChecker = new Mock<IVersionChecker>();
             var asyncWorker = new Mock<IAsyncWorker>();
 
-            var mvm = new Mock<MainViewModel>(eventPublisher.Object, asyncWorker.Object, environmentRepository.Object, versionChecker.Object, false, null, null, null, null,  new Mock<IStudioResourceRepository>().Object, new Mock<IConnectControlSingleton>().Object, new Mock<IConnectControlViewModel>().Object);
+            var mvm = new Mock<MainViewModel>(eventPublisher.Object, asyncWorker.Object, environmentRepository.Object, versionChecker.Object, false, null, null, null, null, new Mock<IStudioResourceRepository>().Object, new Mock<IConnectControlSingleton>().Object, new Mock<IConnectControlViewModel>().Object);
             mvm.Setup(c => c.ShowStartPage()).Verifiable();
 
             //construct
@@ -163,14 +164,14 @@ namespace Dev2.Core.Tests
             var resourceRepo = new Mock<IResourceRepository>();
             resourceRepo.Setup(r => r.All()).Returns(new List<IResourceModel>(new[] { resourceModel.Object }));
             resourceRepo.Setup(r => r.ReloadResource(It.IsAny<Guid>(), It.IsAny<ResourceType>(), It.IsAny<IEqualityComparer<IResourceModel>>(), true)).Verifiable();
-            resourceRepo.Setup(r => r.FetchResourceDefinition(It.IsAny<IEnvironmentModel>(), It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(new ExecuteMessage());
+            resourceRepo.Setup(r => r.FetchResourceDefinition(It.IsAny<IEnvironmentModel>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<bool>())).Returns(new ExecuteMessage());
 
 
             var envConn = new Mock<IEnvironmentConnection>();
             envConn.Setup(conn => conn.ServerEvents).Returns(new Mock<IEventPublisher>().Object);
             envConn.Setup(conn => conn.WorkspaceID).Returns(workspaceID);
             envConn.Setup(conn => conn.ServerID).Returns(serverID);
-            envConn.Setup(conn => conn.ExecuteCommand(It.IsAny<StringBuilder>(), It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(new StringBuilder());
+            envConn.Setup(conn => conn.ExecuteCommand(It.IsAny<StringBuilder>(), It.IsAny<Guid>())).Returns(new StringBuilder());
 
             var env = new Mock<IEnvironmentModel>();
             env.Setup(e => e.Connection).Returns(envConn.Object);
@@ -272,7 +273,7 @@ namespace Dev2.Core.Tests
             var resourceRepo = new Mock<IResourceRepository>();
             resourceRepo.Setup(r => r.All()).Returns(new List<IResourceModel>(new[] { resourceModel.Object }));
             resourceRepo.Setup(r => r.ReloadResource(It.IsAny<Guid>(), It.IsAny<ResourceType>(), It.IsAny<IEqualityComparer<IResourceModel>>(), true)).Verifiable();
-            resourceRepo.Setup(r => r.FetchResourceDefinition(It.IsAny<IEnvironmentModel>(), It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(new ExecuteMessage());
+            resourceRepo.Setup(r => r.FetchResourceDefinition(It.IsAny<IEnvironmentModel>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<bool>())).Returns(new ExecuteMessage());
 
             var envConn = new Mock<IEnvironmentConnection>();
             envConn.Setup(conn => conn.WorkspaceID).Returns(workspaceID);
@@ -381,7 +382,7 @@ namespace Dev2.Core.Tests
 
         #endregion
 
-        
+
 
         #region Add Work Surface
 
@@ -738,7 +739,7 @@ namespace Dev2.Core.Tests
         {
             CreateFullExportsAndVm();
             WindowManager.Setup(w => w.ShowDialog(It.IsAny<IDialogueViewModel>(), null, null)).Verifiable();
-           CustomContainer.Register(new DialogViewModelFactory() as IDialogViewModelFactory);
+            CustomContainer.Register(new DialogViewModelFactory() as IDialogViewModelFactory);
             MainViewModel.DisplayAboutDialogueCommand.Execute(null);
             WindowManager.Verify(w => w.ShowDialog(It.IsAny<IDialogueViewModel>(), null, null), Times.Once());
         }
@@ -943,7 +944,6 @@ namespace Dev2.Core.Tests
         {
             CreateFullExportsAndVm();
             int HitCounter = 0;
-            IContextualResourceModel payloadResourceModel = null;
             MockStudioResourceRepository.Setup(repository => repository.AddResouceItem(It.IsAny<IContextualResourceModel>()));
 
             Mock<IAuthorizationService> mockAuthService = new Mock<IAuthorizationService>();
@@ -952,15 +952,8 @@ namespace Dev2.Core.Tests
             MainViewModel.Handle(new SetActiveEnvironmentMessage(EnvironmentModel.Object));
             MainViewModel.NewResourceCommand.Execute("Service");
             Assert.AreEqual(1, HitCounter);
-            if(payloadResourceModel != null)
-            {
-                Assert.AreEqual(Guid.Empty, payloadResourceModel.ID);
-            }
-            else
-            {
-                Assert.Fail("The resource passed in was null");
-            }
             MockStudioResourceRepository.Verify(repository => repository.AddResouceItem(It.IsAny<IContextualResourceModel>()), Times.Never());
+            Assert.Fail("The resource passed in was null");
         }
 
         [TestMethod]
@@ -968,7 +961,6 @@ namespace Dev2.Core.Tests
         {
             CreateFullExportsAndVm();
             int HitCounter = 0;
-            IContextualResourceModel payloadResourceModel = null;
             MockStudioResourceRepository.Setup(repository => repository.AddResouceItem(It.IsAny<IContextualResourceModel>()));
   
 
@@ -978,15 +970,8 @@ namespace Dev2.Core.Tests
             MainViewModel.Handle(new SetActiveEnvironmentMessage(EnvironmentModel.Object));
             MainViewModel.Handle(new ShowNewResourceWizard("Service"));
             Assert.AreEqual(1, HitCounter);
-            if(payloadResourceModel != null)
-            {
-                Assert.AreEqual(Guid.Empty, payloadResourceModel.ID);
-            }
-            else
-            {
-                Assert.Fail("The resource passed in was null");
-            }
             MockStudioResourceRepository.Verify(repository => repository.AddResouceItem(It.IsAny<IContextualResourceModel>()), Times.Never());
+            Assert.Fail("The resource passed in was null");
         }
 
         [TestMethod]
@@ -994,7 +979,6 @@ namespace Dev2.Core.Tests
         {
             CreateFullExportsAndVm();
             int HitCounter = 0;
-            IContextualResourceModel payloadResourceModel = null;
             MockStudioResourceRepository.Setup(repository => repository.AddResouceItem(It.IsAny<IContextualResourceModel>()));
 
 
@@ -1006,15 +990,8 @@ namespace Dev2.Core.Tests
             mockResourceModel.Setup(model => model.WorkflowXaml).Returns(new StringBuilder());
             MainViewModel.Handle(new ShowEditResourceWizardMessage(mockResourceModel.Object));
             Assert.AreEqual(1, HitCounter);
-            if(payloadResourceModel != null)
-            {
-                Assert.AreEqual(Guid.Empty, payloadResourceModel.ID);
-            }
-            else
-            {
-                Assert.Fail("The resource passed in was null");
-            }
             MockStudioResourceRepository.Verify(repository => repository.AddResouceItem(It.IsAny<IContextualResourceModel>()), Times.Never());
+            Assert.Fail("The resource passed in was null");
         }
 
         [TestMethod]
@@ -1041,7 +1018,7 @@ namespace Dev2.Core.Tests
             mockAuthService.Setup(c => c.GetResourcePermissions(It.IsAny<Guid>())).Returns(Permissions.Administrator);
             environmentRepo.Setup(c => c.AuthorizationService).Returns(mockAuthService.Object);
             var resourceRepo = new Mock<IResourceRepository>();
-            resourceRepo.Setup(c => c.FetchResourceDefinition(It.IsAny<IEnvironmentModel>(), It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(new ExecuteMessage());
+            resourceRepo.Setup(c => c.FetchResourceDefinition(It.IsAny<IEnvironmentModel>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<bool>())).Returns(new ExecuteMessage());
             resourceRepo.Setup(r => r.Save(It.IsAny<IResourceModel>())).Verifiable();
             environmentRepo.Setup(e => e.ResourceRepository).Returns(resourceRepo.Object);
             environmentRepo.Setup(e => e.IsConnected).Returns(true);
@@ -1178,13 +1155,13 @@ namespace Dev2.Core.Tests
             PopupController.Setup(s => s.Show()).Returns(MessageBoxResult.No);
             var msg = new DeleteResourcesMessage(new List<IContextualResourceModel> { FirstResource.Object }, "", false);
             var repo = MainViewModel.ExplorerViewModel.NavigationViewModel;
-            
-            PrivateObject p = new PrivateObject(repo,new PrivateType(typeof(NavigationViewModelBase)));
+
+            PrivateObject p = new PrivateObject(repo, new PrivateType(typeof(NavigationViewModelBase)));
             p.SetField("_studioResourceRepository", MockStudioResourceRepository.Object);
-            p.SetField("_searchFilter","bob");
+            p.SetField("_searchFilter", "bob");
             MainViewModel.Handle(msg);
 
-            MockStudioResourceRepository.Verify(a=>a.Filter(It.IsAny<Func<IExplorerItemModel,bool>>()), Times.Once());
+            MockStudioResourceRepository.Verify(a => a.Filter(It.IsAny<Func<IExplorerItemModel, bool>>()), Times.Once());
         }
 
         [TestMethod]
@@ -1392,7 +1369,7 @@ namespace Dev2.Core.Tests
             resourceModel.Setup(m => m.ResourceName).Returns("Some resource name 4");
             Mock<IPopupController> mockPopUp = Dev2MockFactory.CreateIPopup(MessageBoxResult.No);
             var workflowHelper = new Mock<IWorkflowHelper>();
-            var designerViewModel = new WorkflowDesignerViewModel(new Mock<IEventAggregator>().Object, resourceModel.Object, workflowHelper.Object, mockPopUp.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, false);
+            var designerViewModel = new WorkflowDesignerViewModel(new Mock<IEventAggregator>().Object, resourceModel.Object, workflowHelper.Object, mockPopUp.Object, new SynchronousAsyncWorker(), false);
             var contextViewModel1 = new WorkSurfaceContextViewModel(
                 new WorkSurfaceKey { ResourceID = resourceID, ServerID = serverID, WorkSurfaceContext = designerViewModel.WorkSurfaceContext },
                 designerViewModel);
@@ -1453,7 +1430,7 @@ namespace Dev2.Core.Tests
             Mock<IPopupController> mockPopUp = Dev2MockFactory.CreateIPopup(MessageBoxResult.No);
             mockPopUp.Setup(m => m.Show(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>(), It.IsAny<string>())).Verifiable();
             var workflowHelper = new Mock<IWorkflowHelper>();
-            var designerViewModel = new WorkflowDesignerViewModel(new Mock<IEventAggregator>().Object, resourceModel.Object, workflowHelper.Object, mockPopUp.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, false);
+            var designerViewModel = new WorkflowDesignerViewModel(new Mock<IEventAggregator>().Object, resourceModel.Object, workflowHelper.Object, mockPopUp.Object, new SynchronousAsyncWorker(), false);
             var contextViewModel1 = new WorkSurfaceContextViewModel(
                 new WorkSurfaceKey { ResourceID = resourceID, ServerID = serverID, WorkSurfaceContext = designerViewModel.WorkSurfaceContext },
                 designerViewModel);
@@ -1765,7 +1742,7 @@ namespace Dev2.Core.Tests
 
             var resourceRepo = new Mock<IResourceRepository>();
             resourceRepo.Setup(r => r.Save(It.IsAny<IResourceModel>())).Verifiable();
-            resourceRepo.Setup(r => r.FetchResourceDefinition(It.IsAny<IEnvironmentModel>(), It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(new ExecuteMessage());
+            resourceRepo.Setup(r => r.FetchResourceDefinition(It.IsAny<IEnvironmentModel>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<bool>())).Returns(new ExecuteMessage());
 
             var envConn = new Mock<IEnvironmentConnection>();
             var env = new Mock<IEnvironmentModel>();
@@ -1783,7 +1760,7 @@ namespace Dev2.Core.Tests
 
             Mock<IPopupController> mockPopUp = Dev2MockFactory.CreateIPopup(MessageBoxResult.No);
             var workflowHelper = new Mock<IWorkflowHelper>();
-            var designerViewModel = new WorkflowDesignerViewModel(new Mock<IEventAggregator>().Object, resourceModel.Object, workflowHelper.Object, mockPopUp.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, false);
+            var designerViewModel = new WorkflowDesignerViewModel(new Mock<IEventAggregator>().Object, resourceModel.Object, workflowHelper.Object, mockPopUp.Object, new SynchronousAsyncWorker(), false);
             var contextViewModel = new WorkSurfaceContextViewModel(
                 new WorkSurfaceKey { ResourceID = resourceID, ServerID = serverID, WorkSurfaceContext = designerViewModel.WorkSurfaceContext },
                 designerViewModel);
@@ -1834,7 +1811,7 @@ namespace Dev2.Core.Tests
 
             Mock<IPopupController> mockPopUp = Dev2MockFactory.CreateIPopup(MessageBoxResult.No);
             var workflowHelper = new Mock<IWorkflowHelper>();
-            var designerViewModel = new WorkflowDesignerViewModel(new Mock<IEventAggregator>().Object, resourceModel.Object, workflowHelper.Object, mockPopUp.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, false);
+            var designerViewModel = new WorkflowDesignerViewModel(new Mock<IEventAggregator>().Object, resourceModel.Object, workflowHelper.Object, mockPopUp.Object, new SynchronousAsyncWorker(), false);
             var contextViewModel = new WorkSurfaceContextViewModel(
                 new WorkSurfaceKey { ResourceID = resourceID, ServerID = serverID, WorkSurfaceContext = designerViewModel.WorkSurfaceContext },
                 designerViewModel);
@@ -2000,7 +1977,7 @@ namespace Dev2.Core.Tests
             var mvm = new MainViewModel(eventPublisher.Object, asyncWorker.Object, environmentRepository.Object, versionChecker.Object, false);
             var popup = new Mock<IPopupController>();
             popup.Setup(a => a.ShowSchedulerCloseConfirmation()).Returns(MessageBoxResult.Cancel).Verifiable();
-            var scheduler = new SchedulerViewModel(EventPublishers.Aggregator, new DirectoryObjectPickerDialog(), popup.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, new Mock<IConnectControlViewModel>().Object) { WorkSurfaceContext = WorkSurfaceContext.Scheduler };
+            var scheduler = new SchedulerViewModel(EventPublishers.Aggregator, new DirectoryObjectPickerDialog(), popup.Object, new SynchronousAsyncWorker(), new Mock<IConnectControlViewModel>().Object) { WorkSurfaceContext = WorkSurfaceContext.Scheduler };
             var task = new Mock<IScheduledResource>();
             task.Setup(a => a.IsDirty).Returns(true);
             scheduler.SelectedTask = task.Object;
@@ -2038,7 +2015,7 @@ namespace Dev2.Core.Tests
             var mvm = new MainViewModel(eventPublisher.Object, asyncWorker.Object, environmentRepository.Object, versionChecker.Object, false);
             var popup = new Mock<IPopupController>();
             popup.Setup(a => a.ShowSchedulerCloseConfirmation()).Returns(MessageBoxResult.Cancel).Verifiable();
-            var scheduler = new SchedulerViewModel(EventPublishers.Aggregator, new DirectoryObjectPickerDialog(), popup.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, new Mock<IConnectControlViewModel>().Object) { WorkSurfaceContext = WorkSurfaceContext.Scheduler };
+            var scheduler = new SchedulerViewModel(EventPublishers.Aggregator, new DirectoryObjectPickerDialog(), popup.Object, new SynchronousAsyncWorker(), new Mock<IConnectControlViewModel>().Object) { WorkSurfaceContext = WorkSurfaceContext.Scheduler };
             var task = new Mock<IScheduledResource>();
             task.Setup(a => a.IsDirty).Returns(false);
             scheduler.SelectedTask = task.Object;
@@ -2080,7 +2057,7 @@ namespace Dev2.Core.Tests
             var mvm = new MainViewModel(eventPublisher.Object, asyncWorker.Object, environmentRepository.Object, versionChecker.Object, false);
             var popup = new Mock<IPopupController>();
             popup.Setup(a => a.ShowSchedulerCloseConfirmation()).Returns(MessageBoxResult.Cancel).Verifiable();
-            var settings = new SettingsViewModelForTest(EventPublishers.Aggregator, popup.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, new NativeWindow()) { RetValue = false, WorkSurfaceContext = WorkSurfaceContext.Settings };
+            var settings = new SettingsViewModelForTest(EventPublishers.Aggregator, popup.Object, new SynchronousAsyncWorker(), new NativeWindow()) { RetValue = false, WorkSurfaceContext = WorkSurfaceContext.Settings };
             var task = new Mock<IScheduledResource>();
             task.Setup(a => a.IsDirty).Returns(true);
             settings.IsDirty = true;
@@ -2117,7 +2094,7 @@ namespace Dev2.Core.Tests
             var mvm = new MainViewModel(eventPublisher.Object, asyncWorker.Object, environmentRepository.Object, versionChecker.Object, false);
             var popup = new Mock<IPopupController>();
 
-            var settings = new SettingsViewModelForTest(EventPublishers.Aggregator, popup.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, new NativeWindow()) { RetValue = true, WorkSurfaceContext = WorkSurfaceContext.Settings };
+            var settings = new SettingsViewModelForTest(EventPublishers.Aggregator, popup.Object, new SynchronousAsyncWorker(), new NativeWindow()) { RetValue = true, WorkSurfaceContext = WorkSurfaceContext.Settings };
             var task = new Mock<IScheduledResource>();
             task.Setup(a => a.IsDirty).Returns(true);
             settings.IsDirty = true;
@@ -2153,7 +2130,7 @@ namespace Dev2.Core.Tests
             var mvm = new MainViewModel(eventPublisher.Object, asyncWorker.Object, environmentRepository.Object, versionChecker.Object, false);
             var popup = new Mock<IPopupController>();
             popup.Setup(a => a.ShowSchedulerCloseConfirmation()).Returns(MessageBoxResult.Yes).Verifiable();
-            var scheduler = new SchedulerViewModelForTesting(EventPublishers.Aggregator, new DirectoryObjectPickerDialog(), popup.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object) { RetValue = true, WorkSurfaceContext = WorkSurfaceContext.Scheduler };
+            var scheduler = new SchedulerViewModelForTesting(EventPublishers.Aggregator, new DirectoryObjectPickerDialog(), popup.Object, new SynchronousAsyncWorker()) { RetValue = true, WorkSurfaceContext = WorkSurfaceContext.Scheduler };
             var task = new Mock<IScheduledResource>();
             task.Setup(a => a.IsDirty).Returns(true);
             scheduler.SelectedTask = task.Object;
@@ -2187,7 +2164,7 @@ namespace Dev2.Core.Tests
             Mock<IResourceRepository> mockResourceRepository = new Mock<IResourceRepository>();
             Mock<IContextualResourceModel> mockResourceModel = new Mock<IContextualResourceModel>();
             mockResourceModel.Setup(model => model.ID).Returns(resourceID);
-            mockResourceRepository.Setup(repository => repository.FindSingle(It.IsAny<Expression<Func<IResourceModel, bool>>>(), false)).Returns(mockResourceModel.Object);
+            mockResourceRepository.Setup(repository => repository.FindSingle(It.IsAny<Expression<Func<IResourceModel, bool>>>(), false, false)).Returns(mockResourceModel.Object);
             Mock<IEnvironmentModel> mockEnvironmentModel = new Mock<IEnvironmentModel>();
             mockEnvironmentModel.Setup(model => model.ID).Returns(environmentID);
             mockEnvironmentModel.Setup(model => model.ResourceRepository).Returns(mockResourceRepository.Object);
@@ -2198,7 +2175,7 @@ namespace Dev2.Core.Tests
             envRepo.Setup(e => e.FindSingle(It.IsAny<Expression<Func<IEnvironmentModel, bool>>>())).Returns(environmentModel);
             envRepo.Setup(e => e.Source.IsConnected).Returns(false);
             envRepo.Setup(e => e.Source.Connection.IsConnected).Returns(false);
-            var vm = new MainViewModel(eventAggregator.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, envRepo.Object, new Mock<IVersionChecker>().Object, false, new Mock<IBrowserPopupController>().Object);
+            var vm = new MainViewModel(eventAggregator.Object, new SynchronousAsyncWorker(), envRepo.Object, new Mock<IVersionChecker>().Object, false, new Mock<IBrowserPopupController>().Object);
             vm.AddDeployResourcesWorkSurface(mockResourceModel.Object);
             var expected = new Mock<IExplorerItemModel>();
             expected.Setup(model => model.ResourceId).Returns(resourceID);
@@ -2231,7 +2208,7 @@ namespace Dev2.Core.Tests
             Mock<IResourceRepository> mockResourceRepository = new Mock<IResourceRepository>();
             Mock<IContextualResourceModel> mockResourceModel = new Mock<IContextualResourceModel>();
             mockResourceModel.Setup(model => model.ID).Returns(resourceID);
-            mockResourceRepository.Setup(repository => repository.FindSingle(It.IsAny<Expression<Func<IResourceModel, bool>>>(), false)).Returns(mockResourceModel.Object);
+            mockResourceRepository.Setup(repository => repository.FindSingle(It.IsAny<Expression<Func<IResourceModel, bool>>>(), false, false)).Returns(mockResourceModel.Object);
             Mock<IEnvironmentModel> mockEnvironmentModel = new Mock<IEnvironmentModel>();
             mockEnvironmentModel.Setup(model => model.ID).Returns(environmentID);
             mockEnvironmentModel.Setup(model => model.ResourceRepository).Returns(mockResourceRepository.Object);
@@ -2241,7 +2218,7 @@ namespace Dev2.Core.Tests
             envRepo.Setup(e => e.FindSingle(It.IsAny<Expression<Func<IEnvironmentModel, bool>>>())).Returns(environmentModel);
             envRepo.Setup(e => e.Source.IsConnected).Returns(false);
             envRepo.Setup(e => e.Source.Connection.IsConnected).Returns(false);
-            var vm = new MainViewModel(eventAggregator.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, envRepo.Object, new Mock<IVersionChecker>().Object, false, new Mock<IBrowserPopupController>().Object);
+            var vm = new MainViewModel(eventAggregator.Object, new SynchronousAsyncWorker(), envRepo.Object, new Mock<IVersionChecker>().Object, false, new Mock<IBrowserPopupController>().Object);
             vm.AddDeployResourcesWorkSurface(mockResourceModel.Object);
             var expected = new Mock<IExplorerItemModel>();
             expected.Setup(model => model.ResourceId).Returns(resourceID);
@@ -2273,10 +2250,11 @@ namespace Dev2.Core.Tests
             }));
             //------------Assert Results-------------------------
             Assert.IsTrue(_actionCalled);
-            
+
             MockStudioResourceRepository.Verify(a => a.Filter(It.IsAny<Func<IExplorerItemModel, bool>>()), Times.Once());
         }
-        public static ExecuteMessage MakeMsg(string msg)
+
+        static ExecuteMessage MakeMsg(string msg)
         {
             var result = new ExecuteMessage { HasError = false };
             result.SetMessage(msg);
@@ -2311,7 +2289,7 @@ namespace Dev2.Core.Tests
             envRepo.Setup(e => e.Source.IsConnected).Returns(false);
             envRepo.Setup(e => e.Source.Connection.IsConnected).Returns(false);
 
-            var vm = new MainViewModel(eventAggregator.Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, envRepo.Object, new Mock<IVersionChecker>().Object, false, new Mock<IBrowserPopupController>().Object);
+            var vm = new MainViewModel(eventAggregator.Object, new SynchronousAsyncWorker(), envRepo.Object, new Mock<IVersionChecker>().Object, false, new Mock<IBrowserPopupController>().Object);
 
             var workSurfaceContextViewModel = new Mock<WorkSurfaceContextViewModel>(eventAggregator.Object, new WorkSurfaceKey(), new Mock<IWorkSurfaceViewModel>().Object, new Mock<IPopupController>().Object, new Action<IContextualResourceModel, bool>(
                 (a, b) => { }));
@@ -2365,7 +2343,7 @@ namespace Dev2.Core.Tests
             environmentRepository.Setup(c => c.Source).Returns(environmentModel.Object);
             environmentRepository.Setup(c => c.ReadSession()).Returns(new[] { Guid.NewGuid() });
             environmentRepository.Setup(c => c.All()).Returns(new[] { environmentModel.Object });
-          
+
         }
 
         [TestMethod]
@@ -2409,7 +2387,7 @@ namespace Dev2.Core.Tests
             //            new Thread(() =>
             //            {
             //                var vm = new MainViewModel(new Mock<IEventAggregator>().Object,
-            //                                     AsyncWorkerTests.CreateSynchronousAsyncWorker().Object,
+            //                                     new SynchronousAsyncWorker(),
             //                                     environmentRepository.Object,
             //                                     new Mock<IVersionChecker>().Object,
             //                                     false,
@@ -2575,7 +2553,7 @@ namespace Dev2.Core.Tests
             //------------Execute Test---------------------------
             // ReSharper disable ConvertToConstant.Local
             bool save = false;
-          
+
             bool drop = false;
             // ReSharper restore ConvertToConstant.Local
             var newEnvironment = new Mock<IEnvironmentModel>();
@@ -2584,9 +2562,9 @@ namespace Dev2.Core.Tests
             fact.Setup(a => a.Create()).Returns(new Mock<IDropNetClient>().Object);
             viewModel.DropboxFactory = fact.Object;
 
-            viewModel.ShowSaveDialog = (a,b,c,d)=>save=true;
+            viewModel.ShowSaveDialog = (a, b, c, d) => save = true;
             viewModel.ShowDropboxAction = (window, vm) => { drop = true; return true; };
-            viewModel.CreateOAuthType(newEnvironment.Object,"dropBox","bob",false);
+            viewModel.CreateOAuthType(newEnvironment.Object, "dropBox", "bob", false);
             //------------Assert Results-------------------------
             Assert.IsFalse(save);
             Assert.IsTrue(drop);
@@ -2617,7 +2595,7 @@ namespace Dev2.Core.Tests
 
             viewModel.ShowSaveDialog = (a, b, c, d) => save = true;
             viewModel.ShowDropboxAction = (window, vm) => { drop = true; return true; };
-            viewModel.CreateOAuthType(newEnvironment.Object, "DropboxSource", "bob",false);
+            viewModel.CreateOAuthType(newEnvironment.Object, "DropboxSource", "bob", false);
             //------------Assert Results-------------------------
             Assert.IsFalse(save);
             Assert.IsTrue(drop);
@@ -2648,12 +2626,12 @@ namespace Dev2.Core.Tests
             viewModel.SetActiveEnvironment(newEnvironment.Object);
             newEnvironment.Setup(a => a.ResourceRepository).Returns(resourceRep.Object);
             viewModel.ShowSaveDialog = (a, b, c, d) => save = true;
-            viewModel.ShowDropboxAction = (window, vm) => { vm.HasAuthenticated = true; drop = true;  return true; };
-            viewModel.CreateOAuthType(newEnvironment.Object, "DropboxSource", "bob",false);
+            viewModel.ShowDropboxAction = (window, vm) => { vm.HasAuthenticated = true; drop = true; return true; };
+            viewModel.CreateOAuthType(newEnvironment.Object, "DropboxSource", "bob", false);
             //------------Assert Results-------------------------
             Assert.IsTrue(save);
             Assert.IsTrue(drop);
-         }
+        }
 
 
     }

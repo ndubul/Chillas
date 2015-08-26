@@ -59,7 +59,7 @@ Scenario Outline: Create Web Service with different methods
 	Given I click "New Web Service Connector"
 	Then "New Web Service Connector" tab is opened
 	And Select Request Method & Source is focused
-	When I select "<Method>" as Method
+	When I select Method "<Method>"
 	And I select "Dev2CountriesWebService" as data source
 	Then "2 Request" is "Enabled"
 	And "2 Request Body" is "<Body>"
@@ -78,11 +78,11 @@ Scenario Outline: Create Web Service with different methods
 	| Output      | Output Alias |
 	| CountryID   | CountryID    |
 	| Description | Description  |
-	When I click "Save" 
+	When I save
 	Then Save Dialog is opened
-	And I save as "Testing Web Service Connector Save"
-	Then title is "Testing Web Service Connector Save"
-	And "Testing Web Service Connector Save" tab is opened
+	And I save as "Testing Web Service Connector"
+	Then title is "Testing Web Service Connector"
+	And "Testing Web Service Connector" tab is opened
 	Examples:
 	| Method  | Body     |
 	| Get     | Disabled |
@@ -96,7 +96,7 @@ Scenario Outline: Create Web Service with different methods
 
  Scenario: Editing Web Service
 	Given I click "Dev2GetCountriesWebService" 
-	Then "Edit Web Service - Dev2GetCountriesWebService" tab is opened	
+	Then "Edit Dev2GetCountriesWebService" tab is opened	
 	And method is selected as "GET"
 	And "Dev2CountriesWebService" selected as data source
 	And "New" is "Enabled"
@@ -106,9 +106,9 @@ Scenario Outline: Create Web Service with different methods
 	And "4 Response" is "Enabled" 
 	And "5 Default and Mapping" is "Enabled"
 	When Test Connection is "Successful"
-	Then response is loaded
+	Then the response is loaded
 	And "Save" is "Disabled"
-	When Test Connecton is "Successful"
+	When Test Connection is "Successful"
 	Then input mappings are
 	| Input | Default Value | Required Field | Empty is Null |
 	|       |               |                |               |
@@ -117,7 +117,7 @@ Scenario Outline: Create Web Service with different methods
 	| CountryID   | CountryID    |
 	| Description | Description  |
 	And "Save" is "Enabled" 
-	When I save the webservice
+	When I save
 	Then Save Dialog is opened
 
  
@@ -145,7 +145,7 @@ Scenario: Adding parameters in request headers is updating variables
 	| extension | json          |                |               |
 	| prefix    | a             |                |               |
 	| [[a]]     | T             |                |               |
-	When I save the webservice
+	When I save
 	Then Save Dialog is opened
  
  
@@ -210,7 +210,7 @@ Scenario: Adding parameters in request headers is updating variables
 	| CountryID   | CountryID    |
 	| Description | Description  |
 	And "Save" is "Enabled" 
-	When I save the webservice
+	When I save
 	Then Save Dialog is opened
 	
 Scenario: Edit Web source
@@ -218,12 +218,32 @@ Scenario: Edit Web source
 	And I select "Dev2CountriesWebService" as data source
 	And "Edit" is "Enabled"
 	And I click "Edit"
-	Then the "Edit - Web Source" tab is opened 
+	Then the "Edit - Dev2CountriesWebService" tab is opened 
  
- 
- 
- 
- 
+Scenario: Changing Sources 
+	Given I click "New Web Service Connector"
+	Then "New Web Service Connector" tab is opened
+	And Select Request Method & Source is focused
+	And "New" is "Enabled"
+	And "1 Select Request Method & Source" is "Enabled"
+	And "Edit" is "Disabled"
+	And "2 Request" is "Disabled"
+	And "3 Variables" is "Disabled" 
+	And "4 Response" is "Disabled" 
+	And "5 Defaults and Mapping" is "Disabled" 
+	And I select "Dev2CountriesWebService" as data source
+	And "New" is "Enabled"
+	And "Edit" is "Enabled"
+	Then "2 Request" is "Enabled"
+	And "3 Variables" is "Enabled" 
+	When Test Connection is "Successful"
+	Then "4 Response" is "Enabled" 
+	And the response is loaded
+	And "5 Default and Mapping" is "Enabled" 
+	And I change data source to "Google Address Lookup" 
+	And "4 Response" is "Disabled" 
+	And "5 Defaults and Mapping" is "Disabled"
+ 	And "Save" is "Disabled"
  
  
  

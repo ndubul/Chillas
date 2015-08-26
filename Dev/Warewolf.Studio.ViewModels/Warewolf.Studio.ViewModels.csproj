@@ -116,7 +116,9 @@
     <Compile Include="ExplorerItemNodeViewModel.cs" />
     <Compile Include="ExplorerItemViewModel.cs" />
     <Compile Include="ExplorerViewModel.cs" />
+    <Compile Include="Help\HelpDescriptorViewModel.cs" />
     <Compile Include="Help\HelpModel.cs" />
+    <Compile Include="Help\HelpWindowViewModel.cs" />
     <Compile Include="Help\IHelpChangedEvent.cs" />
     <Compile Include="IDockViewModel.cs" />
     <Compile Include="ManageDatabaseServiceViewModel.cs" />
@@ -137,6 +139,8 @@
     <Compile Include="MenuViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestServiceNameViewModel.cs" />
+    <Compile Include="SharepointServerSourceModel.cs" />
+    <Compile Include="SharepointServerSourceViewModel.cs" />
     <Compile Include="SourceBaseImpl.cs" />
     <Compile Include="SplashViewModel.cs" />
     <Compile Include="ToolBox\ToolBoxCategoryViewModel.cs" />

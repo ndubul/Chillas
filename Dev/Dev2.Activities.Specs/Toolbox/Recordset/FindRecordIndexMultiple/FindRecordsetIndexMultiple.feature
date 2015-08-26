@@ -2411,8 +2411,41 @@ Scenario: Find an index
 	|             | [[rs(3).field]] = 20 |   |            |  |    |     |                             |                                |
 	|             | [[rs(4).field]] = 34 | 1 | Is Between |  | 16 | 33  | NO                          | NO                             |
 	And the debug output as
-	|                 |
+	|                |
 	| [[result]] = 3 |
 
+Scenario Outline:Find index using invalid inputs
+	Given I have the following in field '<inField>' equals '<value>'
+	And the fields to search is '<Match>'
+	And search the recordset with type '<Match>' and criteria is "<Criteria>"
+	And The result variable is "<result>" equals '<varVal>'
+	When the find records index multiple tool is executed
+	Then the find records index multiple result should be "-1"
+	And the execution has "An" error
+	Examples: 
+	| inField       | values     | Match       | Criteria  | result | varVal                                             |
+	| [[var]]       | Super      | Starts With | S         | [[a]]  | Error: Scalar not allowed                          |
+	| [[v]]         |            | Starts With | S         | [[a]]  | Error: Scalar not allowed                          |
+	| Safely        | Safely     | Starts With | S         | [[a]]  | Invalid expression, Only Recordsets can be entered |
+	| 423423        | 423423     | Contains    | 23        | [[a]]  | Invalid expression, Only Recordsets can be entered |
+	|               |            | Contains    | 23        | [[a]]  | Invalid expression, Only Recordsets can be entered |
 
 
+
+Scenario Outline:Find index using valid inputs
+	Given I have the following in field '<inField>' equals '<value>'
+	And the fields to search is '<Match>'
+	And search the recordset with type '<Match>' and criteria is '<Criteria>' equals '<Critval>'
+	And The result variable is "<result>" equals '<varVal>'
+	When the find records index multiple tool is executed
+	Then the find records index multiple result should be '<Index>'
+	And the execution has "No" error
+	Examples: 
+	| inField                       | values     | Match       | Criteria                     | Critval | Index | result                       | varVal |
+	| [[rec([[int]]).set,[[int]]= 1 | Super      | Starts With | [[rc().a]]                   | s       | 1     | [[rs().a]]                   | 1      |
+	| [[rec().set]]                 | Super Star | Starts With | [[rc(1).a]]                  | S       | 2     | [[rs(1).a]]                  | 1      |
+	| [[rec().set]]                 | Safely     | Starts With | [[rc(*).a]]                  | S       | 1     | [[rs(*).a]]                  | 1      |
+	| [[rec().set]]                 | 423423     | Contains    | [[rc([[int]]).a]], [[int]]=1 | 23      | 2     | [[rs([[int]]).a]], [[int]]=2 | 2      |
+	| [[rec().set]]                 | 2313       | Contains    | 23                           |         | 2     | [[a]]                        | 2      |
+	| [[rec().set]]                 | Super      | Contains    | [[va]]                       | s       | 2     | [[a]]                        | 1      |
+	| [[rec().set]]                 | Super      | Contains    | [[var]]                      | ""      | 2     | [[a]]                        | 1,2    |

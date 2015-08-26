@@ -45,6 +45,8 @@ namespace Warewolf.Studio.Core
                         return dict[CustomMenuIcons.PluginService] as DrawingImage;
                     case ResourceType.WebSource:
                         return dict[CustomMenuIcons.WebSource] as DrawingImage;
+                    case ResourceType.SharepointServerSource:
+                        return Application.Current.Resources["AddSharepointBlackLogo"];
                     case ResourceType.ServerSource:
                     case ResourceType.Server:
                         return dict[CustomMenuIcons.ServerSource] as DrawingImage;
@@ -55,6 +57,10 @@ namespace Warewolf.Studio.Core
                         return ImageAwesome.CreateImageSource(FontAwesomeIcon.History, Brushes.Black);
                     case ResourceType.Settings:
                         return ImageAwesome.CreateImageSource(FontAwesomeIcon.Cogs, Brushes.Black);
+                    case ResourceType.DependencyViewer:
+                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.Sitemap, Brushes.Black);
+                    case ResourceType.DeployViewer:
+                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.PaperPlane, Brushes.Black);
                     default:
                         return dict[CustomMenuIcons.Folder] as DrawingImage;
                 }

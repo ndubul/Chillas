@@ -17,10 +17,12 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using Dev2;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
+using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Warewolf.Core;
 
@@ -56,6 +58,8 @@ namespace Warewolf.Studio.ViewModels
         string _headerText;
         string _resourceName;
         IDatabaseService _dbService;
+        string _name;
+        string _path;
 
         /// <exception cref="ArgumentNullException"><paramref name="model"/> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="saveDialog"/> is <see langword="null" />.</exception>
@@ -70,6 +74,7 @@ namespace Warewolf.Studio.ViewModels
             _model = model;
             _saveDialog = saveDialog;
             CanEditSource = false;
+            IsNew = true;
             CreateNewSourceCommand = new DelegateCommand(model.CreateNewSource);
             EditSourceCommand = new DelegateCommand(() => model.EditSource(SelectedSource));
             Sources = model.RetrieveSources();
@@ -103,6 +108,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 throw new ArgumentNullException("service");
             }
+            IsNew = false;
             _dbService = service;
             FromService(service);
             PerformRefresh();
@@ -160,7 +166,7 @@ namespace Warewolf.Studio.ViewModels
             SelectedAction = service.Action;
             Inputs = service.Inputs;
             OutputMapping = service.OutputMappings;
-            Header = Name;
+            Header = Resources.Languages.Core.DatabaseServiceDBSourceEditTabHeader + Name;
             CanEditMappings = true;
         }
 
@@ -352,9 +358,7 @@ namespace Warewolf.Studio.ViewModels
         {
             try
             {
-
-
-                if (Item == null || Item.Id.Equals(Guid.Empty))
+                if (IsNew)
                 {
                     var saveOutPut = _saveDialog.ShowSaveDialog();
                     if (saveOutPut == MessageBoxResult.OK || saveOutPut == MessageBoxResult.Yes)
@@ -365,27 +369,50 @@ namespace Warewolf.Studio.ViewModels
                         _model.SaveService(ToModel());
                         Item = ToModel();
                         Header = Path + Name;
-
                     }
                 }
                 else
                 {
                     _model.SaveService(ToModel());
+                    Item = ToModel();
                 }
                 ErrorText = "";
             }
             catch (Exception err)
             {
-
                 ErrorText = err.Message;
             }
         }
 
+        public bool IsNew { get; set; }
+
         public Guid Id { get; set; }
 
-        public string Path { get; set; }
+        public string Path
+        {
+            get
+            {
+                return _path;
+            }
+            set
+            {
+                _path = value;
+                OnPropertyChanged(() => Path);
+            }
+        }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged(() => Name);
+            }
+        }
 
         #region Implementation of IManageDbServiceViewModel
 
@@ -645,13 +672,8 @@ namespace Warewolf.Studio.ViewModels
             if (Item == null || Item.Id.Equals(Guid.Empty))
             {
                 Item = ToService();
+                return Item;
             }
-            return ToService();
-            
-        }
-
-        IDatabaseService ToService()
-        {
             return new DatabaseService
             {
                 Action = SelectedAction,
@@ -660,12 +682,46 @@ namespace Warewolf.Studio.ViewModels
                 Source = SelectedSource,
                 Name = Name,
                 Path = Path,
-                Id = Id
+                Id = _dbService == null ? Guid.NewGuid() : _dbService.Id
             };
+            
+        }
+
+        IDatabaseService ToService()
+        {
+            if (_dbService == null)
+                return new DatabaseService
+                {
+                    Action = SelectedAction,
+                    Inputs = Inputs == null ? new List<IServiceInput>() : Inputs.ToList(),
+                    OutputMappings = OutputMapping,
+                    Source = SelectedSource,
+                    Name = Name,
+                    Path = Path,
+                    Id = _dbService == null ? Guid.NewGuid() : _dbService.Id
+                }
+            ;
+            // ReSharper disable once RedundantIfElseBlock
+            else
+            {
+                _dbService.Action = SelectedAction;
+                _dbService.Inputs = Inputs == null ? new List<IServiceInput>() : Inputs.ToList();
+                _dbService.OutputMappings = OutputMapping;
+                _dbService.Source = SelectedSource;
+                _dbService.Name = Name;
+                _dbService.Path = Path;
+                _dbService.Id = _dbService == null ? Guid.NewGuid() : _dbService.Id;
+                return _dbService;
+            }
         }
 
         public override void UpdateHelpDescriptor(string helpText)
         {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
 
         #endregion

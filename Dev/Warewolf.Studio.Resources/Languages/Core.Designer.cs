@@ -164,7 +164,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ConnectControlViewEditHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to ConnectControlViewEditHelp.
         /// </summary>
         public static string ConnectControlViewEditHelp {
             get {
@@ -173,7 +173,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ConnectControlViewSelectHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to ConnectControlViewSelectHelp.
         /// </summary>
         public static string ConnectControlViewSelectHelp {
             get {
@@ -182,7 +182,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ConnectControlViewToggleConnectionHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to ConnectControlViewToggleConnectionHelp.
         /// </summary>
         public static string ConnectControlViewToggleConnectionHelp {
             get {
@@ -227,7 +227,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit:.
+        ///   Looks up a localized string similar to Edit .
         /// </summary>
         public static string DatabaseServiceDBSourceEditTabHeader {
             get {
@@ -254,7 +254,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseServiceEditSourceHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseServiceEditSourceHelp.
         /// </summary>
         public static string DatabaseServiceEditSourceHelp {
             get {
@@ -272,7 +272,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseServiceInputsHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseServiceInputsHelp.
         /// </summary>
         public static string DatabaseServiceInputsHelp {
             get {
@@ -308,7 +308,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseServiceNewSourceHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseServiceNewSourceHelp.
         /// </summary>
         public static string DatabaseServiceNewSourceHelp {
             get {
@@ -326,7 +326,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseServiceRefreshHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseServiceRefreshHelp.
         /// </summary>
         public static string DatabaseServiceRefreshHelp {
             get {
@@ -335,7 +335,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseServiceSaveHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseServiceSaveHelp.
         /// </summary>
         public static string DatabaseServiceSaveHelp {
             get {
@@ -344,7 +344,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseServiceSelectActionHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseServiceSelectActionHelp.
         /// </summary>
         public static string DatabaseServiceSelectActionHelp {
             get {
@@ -353,7 +353,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseServiceSourceTypesHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Database Service Source Types&lt;/h1&gt;&lt;br/&gt;&lt;p&gt;Allows you to select a database souce type&lt;/p&gt;.
         /// </summary>
         public static string DatabaseServiceSourceTypesHelp {
             get {
@@ -371,7 +371,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseServiceTestHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseServiceTestHelp.
         /// </summary>
         public static string DatabaseServiceTestHelp {
             get {
@@ -380,7 +380,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseSourceCancelHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseSourceCancelHelp.
         /// </summary>
         public static string DatabaseSourceCancelHelp {
             get {
@@ -398,7 +398,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseSourceDatabasesHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseSourceDatabasesHelp.
         /// </summary>
         public static string DatabaseSourceDatabasesHelp {
             get {
@@ -416,7 +416,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseSourceSaveHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseSourceSaveHelp.
         /// </summary>
         public static string DatabaseSourceSaveHelp {
             get {
@@ -434,7 +434,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseSourceServerHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseSourceServerHelp.
         /// </summary>
         public static string DatabaseSourceServerHelp {
             get {
@@ -470,7 +470,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseSourceServerTypesHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseSourceServerTypesHelp.
         /// </summary>
         public static string DatabaseSourceServerTypesHelp {
             get {
@@ -479,7 +479,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;DatabaseSourceTestConnectionHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseSourceTestConnectionHelp.
         /// </summary>
         public static string DatabaseSourceTestConnectionHelp {
             get {
@@ -720,7 +720,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailAttachmentCancelCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailAttachmentCancelCommandHelp.
         /// </summary>
         public static string EmailAttachmentCancelCommandHelp {
             get {
@@ -729,7 +729,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailAttachmentSaveCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailAttachmentSaveCommandHelp.
         /// </summary>
         public static string EmailAttachmentSaveCommandHelp {
             get {
@@ -738,7 +738,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailSourceCancelHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailSourceCancelHelp.
         /// </summary>
         public static string EmailSourceCancelHelp {
             get {
@@ -747,7 +747,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Email Source - .
+        ///   Looks up a localized string similar to Edit .
         /// </summary>
         public static string EmailSourceEditHeaderLabel {
             get {
@@ -756,7 +756,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailSourceEmailFromHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailSourceEmailFromHelp.
         /// </summary>
         public static string EmailSourceEmailFromHelp {
             get {
@@ -774,7 +774,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailSourceEmailToHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailSourceEmailToHelp.
         /// </summary>
         public static string EmailSourceEmailToHelp {
             get {
@@ -792,7 +792,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailSourceEnableSslHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailSourceEnableSslHelp.
         /// </summary>
         public static string EmailSourceEnableSslHelp {
             get {
@@ -810,7 +810,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailSourceHostNameHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailSourceHostNameHelp.
         /// </summary>
         public static string EmailSourceHostNameHelp {
             get {
@@ -828,7 +828,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailSourcePortHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailSourcePortHelp.
         /// </summary>
         public static string EmailSourcePortHelp {
             get {
@@ -837,7 +837,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailSourceSaveHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailSourceSaveHelp.
         /// </summary>
         public static string EmailSourceSaveHelp {
             get {
@@ -846,7 +846,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailSourceTestHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailSourceTestHelp.
         /// </summary>
         public static string EmailSourceTestHelp {
             get {
@@ -855,7 +855,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;EmailSourceTimeoutHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to EmailSourceTimeoutHelp.
         /// </summary>
         public static string EmailSourceTimeoutHelp {
             get {
@@ -1513,7 +1513,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PasswordAuthenticationHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PasswordAuthenticationHelp.
         /// </summary>
         public static string PasswordAuthenticationHelp {
             get {
@@ -1540,7 +1540,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceCancelCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginServiceCancelCommandHelp.
         /// </summary>
         public static string PluginServiceCancelCommandHelp {
             get {
@@ -1549,7 +1549,16 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceEditSourceHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to Edit .
+        /// </summary>
+        public static string PluginServiceEditHeaderLabel {
+            get {
+                return ResourceManager.GetString("PluginServiceEditHeaderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PluginServiceEditSourceHelp.
         /// </summary>
         public static string PluginServiceEditSourceHelp {
             get {
@@ -1558,7 +1567,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceNamespaceHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginServiceNamespaceHelp.
         /// </summary>
         public static string PluginServiceNamespaceHelp {
             get {
@@ -1576,7 +1585,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceNewSourceHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginServiceNewSourceHelp.
         /// </summary>
         public static string PluginServiceNewSourceHelp {
             get {
@@ -1585,7 +1594,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceRefreshHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginServiceRefreshHelp.
         /// </summary>
         public static string PluginServiceRefreshHelp {
             get {
@@ -1594,7 +1603,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceSaveCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginServiceSaveCommandHelp.
         /// </summary>
         public static string PluginServiceSaveCommandHelp {
             get {
@@ -1603,7 +1612,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceSelectActionHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginServiceSelectActionHelp.
         /// </summary>
         public static string PluginServiceSelectActionHelp {
             get {
@@ -1612,7 +1621,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceSourcesHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginServiceSourcesHelp.
         /// </summary>
         public static string PluginServiceSourcesHelp {
             get {
@@ -1621,7 +1630,16 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceTestInputHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to DatabaseServiceTestHelp.
+        /// </summary>
+        public static string PluginServiceTestHelp {
+            get {
+                return ResourceManager.GetString("PluginServiceTestHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PluginServiceTestInputHelp.
         /// </summary>
         public static string PluginServiceTestInputHelp {
             get {
@@ -1630,7 +1648,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginServiceTestResultsHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginServiceTestResultsHelp.
         /// </summary>
         public static string PluginServiceTestResultsHelp {
             get {
@@ -1639,7 +1657,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginSourceCancelCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginSourceCancelCommandHelp.
         /// </summary>
         public static string PluginSourceCancelCommandHelp {
             get {
@@ -1648,7 +1666,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginSourceClearSearchHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginSourceClearSearchHelp.
         /// </summary>
         public static string PluginSourceClearSearchHelp {
             get {
@@ -1657,7 +1675,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginSourceDllFullNameHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginSourceDllFullNameHelp.
         /// </summary>
         public static string PluginSourceDllFullNameHelp {
             get {
@@ -1684,7 +1702,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginSourceOkCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginSourceOkCommandHelp.
         /// </summary>
         public static string PluginSourceOkCommandHelp {
             get {
@@ -1693,20 +1711,11 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;PluginSourceRefreshCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to PluginSourceRefreshCommandHelp.
         /// </summary>
         public static string PluginSourceRefreshCommandHelp {
             get {
                 return ResourceManager.GetString("PluginSourceRefreshCommandHelp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit Plugin Connector - .
-        /// </summary>
-        public static string PluginSserviceEditHeaderLabel {
-            get {
-                return ResourceManager.GetString("PluginSserviceEditHeaderLabel", resourceCulture);
             }
         }
         
@@ -1869,7 +1878,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ServerAddressHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to ServerAddressHelp.
         /// </summary>
         public static string ServerAddressHelp {
             get {
@@ -1878,7 +1887,16 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ServerProtocolHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to Server Name:.
+        /// </summary>
+        public static string ServerNameLabel {
+            get {
+                return ResourceManager.GetString("ServerNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ServerProtocolHelp.
         /// </summary>
         public static string ServerProtocolHelp {
             get {
@@ -1887,7 +1905,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ServerSaveHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to ServerSaveHelp.
         /// </summary>
         public static string ServerSaveHelp {
             get {
@@ -1896,7 +1914,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ServerSelectPortHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to ServerSelectPortHelp.
         /// </summary>
         public static string ServerSelectPortHelp {
             get {
@@ -1905,7 +1923,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ServerSelectPublicHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to ServerSelectPublicHelp.
         /// </summary>
         public static string ServerSelectPublicHelp {
             get {
@@ -1914,7 +1932,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ServerSelectUserHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to ServerSelectUserHelp.
         /// </summary>
         public static string ServerSelectUserHelp {
             get {
@@ -1923,7 +1941,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ServerSelectWindowsHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to ServerSelectWindowsHelp.
         /// </summary>
         public static string ServerSelectWindowsHelp {
             get {
@@ -2049,7 +2067,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;ServerTestConnectionHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to ServerTestConnectionHelp.
         /// </summary>
         public static string ServerTestConnectionHelp {
             get {
@@ -2076,11 +2094,70 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string SharePointServiceEditHeaderLabel {
+            get {
+                return ResourceManager.GetString("SharePointServiceEditHeaderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New SharePoint Service Source.
+        /// </summary>
+        public static string SharePointServiceNewHeaderLabel {
+            get {
+                return ResourceManager.GetString("SharePointServiceNewHeaderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Images\SplashImage_New_2014.jpg.
         /// </summary>
         public static string SplashImage {
             get {
                 return ResourceManager.GetString("SplashImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;/div&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
+        /// </summary>
+        public static string StandardBodyParagraphClosing {
+            get {
+                return ResourceManager.GetString("StandardBodyParagraphClosing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///
+        ///&lt;head runat=&quot;server&quot;&gt;
+        ///    &lt;style&gt;
+        ///        div {
+        ///            clear: both;
+        ///            margin: 0;
+        ///            font-size: 12px;
+        ///            font-family: &apos;Source Sans Pro&apos;;
+        ///        }
+        ///
+        ///        h1 {
+        ///            font-size: 17px;
+        ///            font-family: &apos;Source Sans Pro&apos;;
+        ///            text-decoration: underline;
+        ///            align-content: center;
+        ///        }
+        ///
+        ///        h2 {
+        ///            font-size: 16px;
+        ///            font-family: &apos;Source Sans Pro&apos;;
+        ///         [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string StandardStyling {
+            get {
+                return ResourceManager.GetString("StandardStyling", resourceCulture);
             }
         }
         
@@ -2157,7 +2234,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;UserAuthenticationHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to UserAuthenticationHelp.
         /// </summary>
         public static string UserAuthenticationHelp {
             get {
@@ -2256,7 +2333,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceCancelCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to WebServiceCancelCommandHelp.
         /// </summary>
         public static string WebServiceCancelCommandHelp {
             get {
@@ -2301,7 +2378,8 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceNewWebSourceHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Create New Web Source&lt;/h1&gt;
+        ///    &lt;p&gt;Allows a user to create a new Web Source&lt;/p&gt;.
         /// </summary>
         public static string WebServiceNewWebSourceHelp {
             get {
@@ -2310,7 +2388,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServicePasteCancelCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to WebServicePasteCancelCommandHelp.
         /// </summary>
         public static string WebServicePasteCancelCommandHelp {
             get {
@@ -2319,7 +2397,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServicePasteHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to WebServicePasteHelp.
         /// </summary>
         public static string WebServicePasteHelp {
             get {
@@ -2328,7 +2406,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServicePasteInputHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to WebServicePasteInputHelp.
         /// </summary>
         public static string WebServicePasteInputHelp {
             get {
@@ -2337,7 +2415,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServicePasteSaveCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to WebServicePasteSaveCommandHelp.
         /// </summary>
         public static string WebServicePasteSaveCommandHelp {
             get {
@@ -2355,7 +2433,8 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceRequestBodyHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Web Service Request Body&lt;/h1&gt;
+        ///    &lt;p&gt;HTTP Message Body is the data bytes transmitted in an HTTP transaction message immediately following the headers if there is any&lt;/p&gt;.
         /// </summary>
         public static string WebServiceRequestBodyHelp {
             get {
@@ -2373,6 +2452,26 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;h1&gt;Web Service Request Headers&lt;/h1&gt;
+        ///    &lt;p&gt;HTTP header fields are components of the header section of request and response messages in the Hypertext Transfer Protocol (HTTP)&lt;/p&gt;
+        ///    &lt;table&gt;
+        ///        &lt;tr&gt;
+        ///            &lt;th&gt;Name&lt;/th&gt;
+        ///            &lt;th&gt;Value&lt;/th&gt;
+        ///        &lt;/tr&gt;
+        ///        &lt;tr&gt;
+        ///            &lt;td&gt;&lt;label&gt;Header&lt;/label&gt;&lt;/td&gt;
+        ///            &lt;td&gt;&lt;label&gt;Value&lt;/label&gt;&lt;/td&gt;
+        ///        &lt;/tr&gt;
+        ///    &lt;/table&gt;.
+        /// </summary>
+        public static string WebServiceRequestHeadersTableHelp {
+            get {
+                return ResourceManager.GetString("WebServiceRequestHeadersTableHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to URL.
         /// </summary>
         public static string WebserviceRequestURLHeader {
@@ -2382,7 +2481,8 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceRequestUrlHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Web Service Request Url&lt;/h1&gt;
+        ///    &lt;p&gt;A URL is a reference to a resource that specifies the location of the resource on a computer network and a mechanism for retrieving it&lt;/p&gt;.
         /// </summary>
         public static string WebServiceRequestUrlHelp {
             get {
@@ -2400,7 +2500,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceSaveCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to WebServiceSaveCommandHelp.
         /// </summary>
         public static string WebServiceSaveCommandHelp {
             get {
@@ -2409,7 +2509,8 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceSelectedSourceHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Edit Selected Web Source&lt;/h1&gt;
+        ///    &lt;p&gt;Allows a user to edit the selected Web Source&lt;/p&gt;.
         /// </summary>
         public static string WebServiceSelectedSourceHelp {
             get {
@@ -2418,7 +2519,26 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceSourcesHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to WebServiceSourceSaveHelp.
+        /// </summary>
+        public static string WebServiceSourceSaveHelp {
+            get {
+                return ResourceManager.GetString("WebServiceSourceSaveHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebServiceSourceServerHelp.
+        /// </summary>
+        public static string WebServiceSourceServerHelp {
+            get {
+                return ResourceManager.GetString("WebServiceSourceServerHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;h1&gt;Web Sources&lt;/h1&gt;
+        ///    &lt;p&gt;Provides a list of available saved web sources. If a Web Source does not exist under this list, then click the &apos;New&apos; button to create a new Web Source&lt;/p&gt;.
         /// </summary>
         public static string WebServiceSourcesHelp {
             get {
@@ -2436,7 +2556,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceTestCommandHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to WebServiceTestCommandHelp.
         /// </summary>
         public static string WebServiceTestCommandHelp {
             get {
@@ -2454,7 +2574,17 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WebServiceWebRequestHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to &lt;h3&gt;HTTP Methods&lt;/h3&gt;
+        ///    &lt;p&gt;Indicates the method to be performed on the object identified by the URL&lt;/p&gt;
+        ///    &lt;ol&gt;
+        ///        &lt;li&gt;GET&lt;/li&gt;
+        ///        &lt;li&gt;POST&lt;/li&gt;
+        ///        &lt;li&gt;PUT&lt;/li&gt;
+        ///    &lt;/ol&gt;
+        ///    &lt;h1&gt;Examples&lt;/h1&gt;
+        ///    &lt;p&gt; GET http://www.example.com/customers/12345 &lt;/p&gt;
+        ///    &lt;p&gt; POST http://www.example.com/customers &lt;/p&gt;
+        ///    &lt;p&gt; PUT http://www.example.com/customers/12345 &lt;/p&gt;.
         /// </summary>
         public static string WebServiceWebRequestHelp {
             get {
@@ -2463,7 +2593,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;WindowsAuthenticationHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to WindowsAuthenticationHelp.
         /// </summary>
         public static string WindowsAuthenticationHelp {
             get {

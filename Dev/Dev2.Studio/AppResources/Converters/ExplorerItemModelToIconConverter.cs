@@ -72,7 +72,7 @@ namespace Dev2.AppResources.Converters
                 case ResourceType.OauthSource :
                     return Application.Current.Resources["DropBoxLogo"];
                 case ResourceType.SharepointServerSource:
-                    return Application.Current.Resources["AddSharepointLogo"];
+                    return Application.Current.Resources["AddSharepointBlackLogo"];
                 default:
                     return _dict[CustomMenuIcons.WorkflowService] as DrawingImage;
             }

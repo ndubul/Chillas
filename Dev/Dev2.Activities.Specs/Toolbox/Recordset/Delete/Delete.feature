@@ -247,3 +247,27 @@ Scenario Outline: Ensure delete variables of different types produce desired res
 	And the debug output as  
 	|                      |
 	| [[result]] = Failure |
+
+Scenario Outline: Delete a record 
+	Given I have the following recordset
+	| rs       | val |
+	| rs().row | 1   |
+	| rs().row | 2   |
+	| rs().row | 3   |
+	And I delete a record "[[rs(2)]]"
+	When the delete tool is executed
+	Then the delete result should be "Success"
+	And the recordset "[[rs(*).row]]" will be as follows
+	| rs       | val |
+	| rs().row | 1   |
+	| rs().row | 3   |
+	And the execution has "NO" error
+	And the debug output as  
+	|                      |
+	| <result> = <Success> |	
+	Examples: 
+	| result                     | Success |
+	| [[rj().a]]                 | Success |
+	| [[rj(1).a]]                | Success |
+	| [[rj(*).a]]                | Success |
+	| [[rj([[int]]).a]], [[int]] | Success |

@@ -42,6 +42,7 @@
 /Dev/Dev2.Server/bin/Debug/CefSharp
 /Dev/Dev2.Server/bin/Debug/SSL Generation
 /Dev/Dev2.Server/bin/Debug/ServerStarted
+/Dev/Dev2.Server/bin/Debug/ServerLog.txt
 /Dev/Dev2.Server/bin/Debug/*.dll
 /Dev/Dev2.Server/bin/Debug/*.pdb
 /Dev/Dev2.Server/bin/Debug/*.exe
@@ -105,6 +106,8 @@
 /Dev/Dev2.Diagnostics/obj
 /Dev/Dev2.Explorer.Specs/bin
 /Dev/Dev2.Explorer.Specs/obj
+/Dev/Dev2.Flickering.Specs/bin
+/Dev/Dev2.Flickering.Specs/obj
 /Dev/Dev2.Infrastructure/bin
 /Dev/Dev2.Infrastructure/obj
 /Dev/Dev2.Infrastructure.Tests/bin
@@ -181,6 +184,10 @@
 /Dev/Dev2.SignalR.Wrappers.Old/obj
 /Dev/Dev2.Sql.Tests/bin
 /Dev/Dev2.Sql.Tests/obj
+/Dev/Dev2.Warewolf.Security/bin
+/Dev/Dev2.Warewolf.Security/obj
+/Dev/Dev2.Warewolf.Security.Tests/bin
+/Dev/Dev2.Warewolf.Security.Tests/obj
 /Dev/ConsoleApplicationToTestNetwork/bin
 /Dev/ConsoleApplicationToTestNetwork/obj
 /Dev/Dev2.SignalR.Wrappers/bin
@@ -191,6 +198,10 @@
 /Dev/Dev2.SignalR.Wrappers.New/obj
 /Dev/Dev2.TaskScheduler.Wrappers.Test/bin
 /Dev/Dev2.TaskScheduler.Wrappers.Test/obj
+/Dev/Dev2.Warewolf.Security/bin
+/Dev/Dev2.Warewolf.Security/obj
+/Dev/Dev2.Warewolf.Security.Tests/bin
+/Dev/Dev2.Warewolf.Security.Tests/obj
 /Dev/Example Shipper/Example Shipper/bin
 /Dev/Example Shipper/Example Shipper/obj
 /Dev/ExecutionEngine/bin
@@ -303,10 +314,14 @@
 /Dev/Warewolf.AcceptanceTesting.DatabaseSource/obj
 /Dev/Warewolf.AcceptanceTesting.DesignSurface/bin
 /Dev/Warewolf.AcceptanceTesting.DesignSurface/obj
+/Dev/Warewolf.AcceptanceTesting.DropboxSource/bin
+/Dev/Warewolf.AcceptanceTesting.DropboxSource/obj
 /Dev/Warewolf.AcceptanceTesting.EmailDialog/bin
 /Dev/Warewolf.AcceptanceTesting.EmailDialog/obj
 /Dev/Warewolf.AcceptanceTesting.EmailSource/bin
 /Dev/Warewolf.AcceptanceTesting.EmailSource/obj
+/Dev/Warewolf.AcceptanceTesting.InputData/bin
+/Dev/Warewolf.AcceptanceTesting.InputData/obj
 /Dev/Warewolf.AcceptanceTesting.PluginService/bin
 /Dev/Warewolf.AcceptanceTesting.PluginService/obj
 /Dev/Warewolf.AcceptanceTesting.PluginSource/bin

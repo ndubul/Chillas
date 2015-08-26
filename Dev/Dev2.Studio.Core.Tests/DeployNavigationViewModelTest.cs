@@ -30,6 +30,7 @@ using Dev2.Services.Security;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
+using Dev2.Threading;
 using Dev2.Util;
 using Dev2.ViewModels.Deploy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -436,7 +437,7 @@ namespace Dev2.Core.Tests
         DeployNavigationViewModel CreateViewModel(IEnvironmentRepository environmentRepository, Mock<IResourceRepository> mockResourceRepository)
         {
             StudioResourceRepository studioResourceRepository = BuildExplorerItems(mockResourceRepository.Object);
-            var navigationViewModel = new DeployNavigationViewModel(new Mock<IEventAggregator>().Object, AsyncWorkerTests.CreateSynchronousAsyncWorker().Object, environmentRepository, studioResourceRepository, _target, new Mock<IConnectControlSingleton>().Object);
+            var navigationViewModel = new DeployNavigationViewModel(new Mock<IEventAggregator>().Object, new SynchronousAsyncWorker(), environmentRepository, studioResourceRepository, _target, new Mock<IConnectControlSingleton>().Object);
             return navigationViewModel;
         }
 

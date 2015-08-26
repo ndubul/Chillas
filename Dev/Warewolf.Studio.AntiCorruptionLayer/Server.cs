@@ -44,7 +44,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         {
             VerifyArgument.IsNotNull("uri",uri);
             VerifyArgument.IsNotNull("credentials", credentials);
-            _environmentConnection = new ServerProxy(uri,credentials,new AsyncWorker()) { ItemAddedMessageAction = StudioResourceRepository.Instance.ItemAddedMessageHandler  };
+            _environmentConnection = new ServerProxy(uri,credentials,new AsyncWorker());
             _serverId = Guid.NewGuid();
             _proxyLayer = new StudioServerProxy(new CommunicationControllerFactory(), EnvironmentConnection);
             UpdateRepository = new StudioResourceUpdateManager(new CommunicationControllerFactory(), EnvironmentConnection);

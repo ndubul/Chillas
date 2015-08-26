@@ -21,6 +21,7 @@ using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.Threading;
+using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warewolf.Core;
@@ -293,8 +294,13 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _assemblyName = value;
+                if (string.IsNullOrEmpty(_assemblyName))
+                {
+                    SelectedDll = null;
+                }
                 OnPropertyChanged(() => Header);
                 OnPropertyChanged(()=>AssemblyName);
+                ViewModelUtils.RaiseCanExecuteChanged(OkCommand);
             }
         }
 
@@ -309,7 +315,7 @@ namespace Warewolf.Studio.ViewModels
             else
             {
                 HeaderText = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim());
-                Header = string.Format("{0}", ((_pluginSource == null ? ResourceName : _pluginSource.Name)));
+                Header = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, ((_pluginSource == null ? ResourceName : _pluginSource.Name)));
             }
         }
 
@@ -320,10 +326,11 @@ namespace Warewolf.Studio.ViewModels
 
         public override void UpdateHelpDescriptor(string helpText)
         {
-            var helpDescriptor = new HelpDescriptor("", helpText, null);
-            VerifyArgument.IsNotNull("helpDescriptor", helpDescriptor);
-            _aggregator.GetEvent<HelpChangedEvent>().Publish(helpDescriptor);
-
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
 
 
@@ -370,7 +377,13 @@ namespace Warewolf.Studio.ViewModels
 
         void ToItem()
         {
-            Item = new PluginSourceDefinition { Id = _pluginSource.Id, Name = _pluginSource.Name, Path = _pluginSource.Path, SelectedDll = SelectedDll };
+            Item = new PluginSourceDefinition
+            {
+                Id = _pluginSource.Id, 
+                Name = _pluginSource.Name, 
+                Path = _pluginSource.Path, 
+                SelectedDll = SelectedDll
+            };
         }
 
         void Save(IPluginSource source)
