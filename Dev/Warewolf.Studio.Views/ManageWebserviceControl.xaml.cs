@@ -8,6 +8,7 @@ using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.WebServices;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.Views
 {
@@ -113,7 +114,7 @@ namespace Warewolf.Studio.Views
 
         public string GetUrl()
         {
-            return RequestUrl.Text;
+            return ((ManageWebServiceViewModel)DataContext).SourceUrl;
         }
 
         public bool GetControlEnabled(string controlName)
@@ -162,6 +163,11 @@ namespace Warewolf.Studio.Views
                         }
                         return MappingsGrid.Visibility == Visibility.Visible;
                     }
+                case "Paste":
+                    {
+
+                        return PasteButton.IsEnabled;
+                    }
             }
             return false;
         }
@@ -182,6 +188,37 @@ namespace Warewolf.Studio.Views
         /// <param name="connectionId">An identifier token to distinguish calls.</param><param name="target">The target to connect events and names to.</param>
         public void Connect(int connectionId, object target)
         {
+        }
+
+        public string GetQueryString()
+        {
+            return ((ManageWebServiceViewModel)DataContext).RequestUrlQuery;
+        }
+
+        public void SetQueryString(string querystring)
+        {
+             RequestUrl.Text = querystring;
+        }
+
+        public string GetHeader()
+        {
+            return ((ManageWebServiceViewModel)DataContext).HeaderText;
+        }
+
+        public void SetHeader(string s, string querystring)
+        {
+             ((ManageWebServiceViewModel)DataContext).Headers.Add(new NameValue{ Name= s,Value = querystring});
+        }
+
+        public void SetBody(string body)
+        {
+            RequestBody.Text = body;
+            ((ManageWebServiceViewModel)DataContext).RequestBody = body;
+        }
+
+        public object GetBody()
+        {
+            return RequestBody.Text;
         }
     }
 }

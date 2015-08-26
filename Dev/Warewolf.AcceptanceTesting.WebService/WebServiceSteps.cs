@@ -48,6 +48,7 @@ namespace Warewolf.AcceptanceTesting.WebService
             FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
         }
 
+
         private static void SetupModel(Mock<IWebServiceModel> mockWebServiceModel)
         {
             _demoWebServiceSourceDefinition = new WebServiceSourceDefinition
@@ -212,6 +213,38 @@ namespace Warewolf.AcceptanceTesting.WebService
             Assert.AreEqual(webServiceName, viewModel.SelectedSource.Name);
         }
 
+
+        [When(@"I select ""(.*)"" as data source with default query as ""(.*)""")]
+        public void WhenISelectAsDataSourceWithDefaultQueryAs(string webServiceName, string query)
+        {
+            var view = Utils.GetView<ManageWebserviceControl>();
+            WebServiceSourceDefinition webServiceSourceDefinition = new WebServiceSourceDefinition
+            {
+                Name = webServiceName
+                , DefaultQuery = query
+            };
+            view.SelectWebService(webServiceSourceDefinition);
+            var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
+            Assert.AreEqual(webServiceName, viewModel.SelectedSource.Name);
+        }
+
+        [When(@"I select ""(.*)"" as data source with default query as '(.*)' and URL as ""(.*)""")]
+        public void WhenISelectAsDataSourceWithDefaultQueryAsAndURLAs(string webServiceName, string query, string url)
+        {
+            var view = Utils.GetView<ManageWebserviceControl>();
+            WebServiceSourceDefinition webServiceSourceDefinition = new WebServiceSourceDefinition
+            {
+                Name = webServiceName
+                ,
+                DefaultQuery = query,
+                HostName = url
+            };
+            view.SelectWebService(webServiceSourceDefinition);
+            var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
+            Assert.AreEqual(webServiceName, viewModel.SelectedSource.Name);
+        }
+
+
         [Then(@"I change data source to ""(.*)""")]
         public void ThenIChangeDataSourceTo(string webServiceName)
         {
@@ -222,7 +255,8 @@ namespace Warewolf.AcceptanceTesting.WebService
             };
             view.SelectWebService(webServiceSourceDefinition);
             var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
-            Assert.AreEqual(webServiceName, viewModel.SelectedSource.Name);
+            viewModel.SelectedSource = webServiceSourceDefinition;
+            //Assert.AreEqual(webServiceName, viewModel.SelectedSource.Name);
         }
 
 
@@ -273,6 +307,24 @@ namespace Warewolf.AcceptanceTesting.WebService
                 }
             }
         }
+
+        [Then(@"service input mappings are")]
+        public void ThenServiceInputMappingsAre(Table table)
+        {
+              var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
+              int i = 0;
+              foreach (var input in viewModel.Inputs)
+              {
+                  var inputMapping = input;
+                  if (inputMapping != null)
+                  {
+                      Assert.AreEqual(inputMapping.Name, table.Rows.ToList()[i][0].Replace("[[","").Replace("]]",""));
+                  }
+                  i++;
+              }
+            
+        }
+
 
         [Given(@"output mappings are")]
         [When(@"output mappings are")]
@@ -325,6 +377,76 @@ namespace Warewolf.AcceptanceTesting.WebService
             Assert.IsFalse(viewModel.IsTesting);
             Assert.AreEqual(String.Empty, viewModel.ErrorMessage);
         }
+
+        [Then(@"parameters as ""(.*)""")]
+        public void ThenParametersAs(string p0)
+        {
+            var webServiceModel = ScenarioContext.Current.Get<Mock<IWebServiceModel>>("model");
+            SetupModel(webServiceModel);
+            var view = Utils.GetView<ManageWebserviceControl>();
+            view.TestAction();
+            var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
+            Assert.IsFalse(viewModel.IsTesting);
+            Assert.AreEqual(String.Empty, viewModel.ErrorMessage);
+        }
+
+        [Then(@"URL parameters as ""(.*)""")]
+        public void ThenURLParametersAs(string querystring)
+        {
+
+            var view = Utils.GetView<ManageWebserviceControl>();
+             var qs = view.GetQueryString();
+             Assert.AreEqual(qs, querystring);
+        }
+        [When(@"I change request url parameter to ""(.*)""")]
+        public void WhenIChangeRequestUrlParameterTo(string querystring)
+        {
+
+            var view = Utils.GetView<ManageWebserviceControl>();
+             view.SetQueryString(querystring);
+            var qs = view.GetQueryString();
+            Assert.AreEqual(qs, querystring);
+        }
+
+        [When(@"I type the request body as ""(.*)""")]
+        public void WhenITypeTheRequestBodyAs(string body)
+        {
+            var view = Utils.GetView<ManageWebserviceControl>();
+            view.SetBody(body);
+            var qs = view.GetBody();
+            Assert.AreEqual(qs, body);
+        }
+
+
+        [Then(@"I edit the header as ""(.*)""")]
+        public void ThenIEditTheHeaderAs(string header)
+        {
+
+        }
+        [Then(@"I edit the headers as")]
+        public void ThenIEditTheHeadersAs(Table table)
+        {
+            var view = Utils.GetView<ManageWebserviceControl>();
+            foreach(var header in table.Rows)
+            {
+                view.SetHeader(header[0],header[1]);
+            }
+           
+
+        }
+
+
+        [When(@"Variables are")]
+        public void WhenVariablesAre(Table table)
+        {
+            var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
+            foreach(var tableRow in table.Rows)
+            {
+                Assert.IsTrue(viewModel.Variables.Select(a=>a.Name).Contains(tableRow[0]));
+            }
+            
+        }
+
 
 
         [When(@"I select ""(.*)"" as Method")]

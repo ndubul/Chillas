@@ -27,7 +27,7 @@ namespace Dev2.Common.Interfaces.Core
             {
                 return true;
             }
-            return string.Equals(HostName, other.HostName) && string.Equals(UserName, other.UserName) && string.Equals(Password, other.Password) && AuthenticationType == other.AuthenticationType && string.Equals(DefaultQuery, other.DefaultQuery);
+            return string.Equals(HostName, other.HostName) && string.Equals(Name, other.Name) && string.Equals(UserName, other.UserName) && string.Equals(Password, other.Password) && AuthenticationType == other.AuthenticationType && string.Equals(DefaultQuery, other.DefaultQuery);
         }
 
         /// <summary>
