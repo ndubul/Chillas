@@ -67,10 +67,10 @@
                                   Grid.Column="0"
                                   DisplayMemberPath="Name" 
                                   Width="250" 
+                                  Focusable="True"
                                   ItemsSource="{Binding Sources}"
                                   SelectedItem="{Binding SelectedSource}"
-                                  Margin="{StaticResource ControlBorderRight}"
-                                  Focusable="True" >
+                                  Margin="{StaticResource ControlBorderRight}">
                             <!--<customControls:WatermarkTextBox.Watermark>
                                 <StackPanel VerticalAlignment="Top">
                                     <Label Style="{StaticResource WatermarkLabelStyle}">Choose...</Label>
@@ -83,6 +83,7 @@
                         </ComboBox>
                         <Button Width="25" 
                                 Grid.Column="1"
+                                x:Name="EditButton"
                                 Height="26"
                                 Content=" ... " 
                                 IsEnabled="{Binding CanEditNamespace}"
@@ -95,6 +96,7 @@
                         </Button>
                         <Button Content="New" 
                                 Height="26"
+                                x:Name="NewButton"
                                 Grid.Column="2"
                                 Margin="0,-1,0,0"
                                 Command="{Binding CreateNewSourceCommand}"
@@ -229,13 +231,13 @@
                             </ig:XamComboEditor>
                             <!-- NEED TO ADD LOGIC TO REFRESH COMMAND AND VISIBILITY -->
                             <Button Margin="0,5,0,0"
+                                    x:Name="RefreshButton"
                                     Grid.Column="1"
                                     Command="{Binding RefreshCommand}"
                                     Visibility="{Binding IsRefreshing,Converter={StaticResource NotConverter}}">
                                 <fa:FontAwesome TextOptions.TextFormattingMode="Display" 
                                             FontSize="16" 
                                             Icon="Refresh" 
-                                            Margin="0,2,0,0"
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center"/>
                                 <i:Interaction.Behaviors>
@@ -246,6 +248,7 @@
                             <!-- NEED TO ADD LOGIC TO VISIBILITY -->
                             <views:CircularProgressBar Grid.Column="1"
                                                    Width="25"
+                                                       Margin="0,2,0,0"
                                                    Height="25"
                                                    Padding="2.5"
                                                        Visibility="{Binding IsRefreshing,Converter={StaticResource BoolToVisibilityConverter}}"/>
