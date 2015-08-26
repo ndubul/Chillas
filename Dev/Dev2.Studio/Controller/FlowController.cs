@@ -14,6 +14,7 @@
 
 using System;
 using System.Activities.Presentation.Model;
+using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Decision;
@@ -54,16 +55,16 @@ namespace Dev2.Studio.Controller
 
         #region Fields
 
-        private readonly IPopupController _popupController;
+        private static readonly IPopupController PopupController = CustomContainer.Get<IPopupController>();
         private static Dev2DecisionCallbackHandler _callBackHandler;
 
         #endregion Fields
 
         #region ctor
 
-        public FlowController(IPopupController popupController)
+        public FlowController()
         {
-            _popupController = popupController;
+            
             EventPublishers.Aggregator.Subscribe(this);
             _callBackHandler = new Dev2DecisionCallbackHandler();
         }
@@ -132,9 +133,9 @@ namespace Dev2.Studio.Controller
                 }
                 catch
                 {
-                    //_popupController.Show(GlobalConstants.SwitchWizardErrorString,
-                    //                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
-                    //                      MessageBoxImage.Error, null);
+                    PopupController.Show(GlobalConstants.SwitchWizardErrorString,
+                                          GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
+                                          MessageBoxImage.Error, null);
                 }
             }
         }
@@ -172,9 +173,9 @@ namespace Dev2.Studio.Controller
                 }
                 catch
                 {
-                    //_popupController.Show(GlobalConstants.SwitchWizardErrorString,
-                    //                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
-                    //                      MessageBoxImage.Error, null);
+                    PopupController.Show(GlobalConstants.SwitchWizardErrorString,
+                                          GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
+                                          MessageBoxImage.Error, null);
                 }
             }
         }
@@ -223,9 +224,9 @@ namespace Dev2.Studio.Controller
                 }
                 catch
                 {
-                    //_popupController.Show(GlobalConstants.SwitchWizardErrorString,
-                    //                      GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
-                    //                      MessageBoxImage.Error, null);
+                    PopupController.Show(GlobalConstants.SwitchWizardErrorString,
+                                          GlobalConstants.SwitchWizardErrorHeading, MessageBoxButton.OK,
+                                          MessageBoxImage.Error, null);
                 }
             }
         }
@@ -305,7 +306,7 @@ namespace Dev2.Studio.Controller
 
         public void Handle(ConfigureDecisionExpressionMessage message)
         {
-            //ConfigureDecisionExpression(message);
+
         }
 
         public void Handle(ConfigureSwitchExpressionMessage message)

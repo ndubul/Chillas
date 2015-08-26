@@ -1098,15 +1098,17 @@ namespace Dev2.Studio.ViewModels.Workflow
 
                     if (modelProperty != null)
                     {
-                        string displayName = modelProperty.ComputedValue.ToString();
+                        if(modelProperty.ComputedValue != null)
+                        {
+                            string displayName = modelProperty.ComputedValue.ToString();
 
-                        var resourceModel =
-                            _resourceModel.Environment.ResourceRepository.All()
-                                          .FirstOrDefault(
-                                              resource =>
-                                              resource.ResourceName.Equals(displayName,
-                                                  StringComparison.InvariantCultureIgnoreCase));
-
+                            var resourceModel =
+                                _resourceModel.Environment.ResourceRepository.All()
+                                    .FirstOrDefault(
+                                        resource =>
+                                            resource.ResourceName.Equals(displayName,
+                                                StringComparison.InvariantCultureIgnoreCase));
+                        }
                     }
                 }
             }

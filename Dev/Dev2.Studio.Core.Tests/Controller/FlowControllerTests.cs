@@ -302,7 +302,7 @@ namespace Dev2.Core.Tests
 
             #endregion
 
-            var flowController = new FlowController(new Mock<IPopupController>().Object);
+            var flowController = new FlowController();
             var message = new ConfigureDecisionExpressionMessage { ModelItem = source.Object, EnvironmentModel = env.Object, IsNew = true };
 
             flowController.Handle(message);
