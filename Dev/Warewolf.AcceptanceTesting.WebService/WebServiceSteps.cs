@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using Dev2.Common.Interfaces;
@@ -15,6 +16,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TechTalk.SpecFlow;
 using Warewolf.AcceptanceTesting.Core;
+using Warewolf.Core;
 using Warewolf.Studio.Core.Infragistics_Prism_Region_Adapter;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
@@ -36,6 +38,7 @@ namespace Warewolf.AcceptanceTesting.WebService
             mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Verifiable();
             var mockWebServiceModel = new Mock<IWebServiceModel>();
             SetupModel(mockWebServiceModel);
+
             var viewModel = new ManageWebServiceViewModel(mockWebServiceModel.Object, mockRequestServiceNameViewModel.Object);
             view.DataContext = viewModel;
             Utils.ShowTheViewForTesting(view);
@@ -55,7 +58,7 @@ namespace Warewolf.AcceptanceTesting.WebService
             {
                 Name = "Testing Web Service Connector"
             };
-            mockWebServiceModel.Setup(model => model.RetrieveSources()).Returns(new List<IWebServiceSource>
+            mockWebServiceModel.Setup(model => model.Sources).Returns(new ObservableCollection<IWebServiceSource>
             {
                 _demoWebServiceSourceDefinition,
                 _testWebServiceSourceDefinition
@@ -78,8 +81,10 @@ namespace Warewolf.AcceptanceTesting.WebService
             recordset.Fields.Add(countryID);
             recordset.Records.Add(recordSetRec);
             webService.Recordsets.Add(recordset);
+            webService.RequestResponse = "[{\"CountryID\":1,\"Description\":\"Afghanistan\"},{\"CountryID\":2,\"Description\":\"Albania\"},{\"CountryID\":3,\"Description\":\"Algeria\"},{\"CountryID\":4,\"Description\":\"Andorra\"},{\"CountryID\":5,\"Description\":\"Angola\"},{\"CountryID\":6,\"Description\":\"Argentina\"},{\"CountryID\":7,\"Description\":\"Armenia\"},{\"CountryID\":8,\"Description\":\"Australia\"},{\"CountryID\":9,\"Description\":\"Austria\"},{\"CountryID\":10,\"Description\":\"Azerbaijan\"}]";
             var serializer = new Dev2JsonSerializer();
             var serializedWebService = serializer.Serialize(webService);
+          
             mockWebServiceModel.Setup(serviceModel => serviceModel.TestService(It.IsAny<IWebService>())).Returns(serializedWebService);
         }
 
@@ -96,17 +101,64 @@ namespace Warewolf.AcceptanceTesting.WebService
         public void GivenIClick(string p0)
         {
             var view = Utils.GetView<ManageWebserviceControl>();
-            Assert.IsNotNull(view);
-            Assert.IsNotNull(view.DataContext);
-            Assert.IsInstanceOfType(view.DataContext, typeof(ManageWebServiceViewModel));
+            view.EditAction();
         }
+
+        [When(@"I click the ""(.*)"" tool")]
+        public void WhenIClickTheTool(string p0)
+        {
+            var view = Utils.GetView<ManageWebserviceControl>();
+            view.PasteAction();
+        }
+
+        [Given(@"I open New Web Service Connector")]
+        public void GivenIOpenNewWebServiceConnector()
+        {
+            var sourceControl = ScenarioContext.Current.Get<ManageWebserviceControl>(Utils.ViewNameKey);
+            Assert.IsNotNull(sourceControl);
+            Assert.IsNotNull(sourceControl.DataContext); 
+        }
+
+
+        [Given(@"I open ""(.*)""")]
+        public void GivenIOpen(string serviceName)
+        {
+            var webService = new WebServiceDefinition { Name = serviceName, Source = _demoWebServiceSourceDefinition, QueryString = "?extension=json&prefix=a", Inputs = new List<IServiceInput>() };
+            var dbOutputMapping = new ServiceOutputMapping("CountryID", "CountryID") { RecordSetName = "UnnamedArrayData" };
+            webService.OutputMappings = new List<IServiceOutputMapping> { dbOutputMapping };
+            ScenarioContext.Current.Remove("viewModel");
+            ScenarioContext.Current.Remove("requestServiceNameViewModel");
+            var requestServiceNameViewModelMock = new Mock<IRequestServiceNameViewModel>();
+            ScenarioContext.Current.Add("requestServiceNameViewModel", requestServiceNameViewModelMock);
+            var viewModel = new ManageWebServiceViewModel(ScenarioContext.Current.Get<Mock<IWebServiceModel>>("model").Object, webService);
+            ScenarioContext.Current.Add("viewModel", viewModel);
+            var view = Utils.GetView<ManageWebserviceControl>();
+            try
+            {
+                view.DataContext = null;
+                view.DataContext = viewModel;
+            }
+            catch
+            {
+                //Do nothing
+            }
+        }
+
 
         [Then(@"""(.*)"" tab is opened")]
         public void ThenTabIsOpened(string headerText)
         {
-            var viewModel = ScenarioContext.Current.Get<IDockAware>("viewModel");
+            var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
             Assert.AreEqual(headerText, viewModel.Header);
         }
+
+        [Then(@"""(.*)"" is opened in another tab")]
+        public void ThenIsOpenedInAnotherTab(string p0)
+        {
+            var webServiceModel = ScenarioContext.Current.Get<Mock<IWebServiceModel>>("model");
+            webServiceModel.Verify(a => a.EditSource(_demoWebServiceSourceDefinition));
+        }
+
 
         [Then(@"""(.*)"" is ""(.*)""")]
         [When(@"""(.*)"" is ""(.*)""")]
@@ -116,17 +168,17 @@ namespace Warewolf.AcceptanceTesting.WebService
             var view = Utils.GetView<ManageWebserviceControl>();
             switch (name)
             {
-                case "1 Select Request Method and Source ":
-                    Utils.CheckControlEnabled("name", state, view);
+                case "1 Select Request Method and Source":
+                    Utils.CheckControlEnabled(name, state, view);
                     break;
                 case "2 Request":
-                    Utils.CheckControlEnabled("name", state, view);
+                    Utils.CheckControlEnabled(name, state, view);
                     break;
                 case "3 Variables":
-                    Utils.CheckControlEnabled("name", state, view);
+                    Utils.CheckControlEnabled(name, state, view);
                     break;
                 case "4 Response":
-                    Utils.CheckControlEnabled("name", state, view);
+                    Utils.CheckControlEnabled(name, state, view);
                     break;
 
             }
@@ -139,7 +191,7 @@ namespace Warewolf.AcceptanceTesting.WebService
             switch (name)
             {
                 case "Paste":
-                    Utils.CheckControlEnabled("name", state, view);
+                    Utils.CheckControlEnabled(name, state, view);
                     break;
 
             }
@@ -151,7 +203,7 @@ namespace Warewolf.AcceptanceTesting.WebService
         {
             var view = Utils.GetView<ManageWebserviceControl>();
             view.SelectWebService(_demoWebServiceSourceDefinition);
-            var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
+            var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
             Assert.AreEqual(webServiceName, viewModel.SelectedSource.Name);
         }
 
@@ -167,9 +219,14 @@ namespace Warewolf.AcceptanceTesting.WebService
         }
 
         [Then(@"method is selected as ""(.*)""")]
-        public void ThenMethodIsSelectedAs(string p0)
+        public void ThenMethodIsSelectedAs(string method)
         {
-            ScenarioContext.Current.Pending();
+            var view = Utils.GetView<ManageWebserviceControl>();
+            WebRequestMethod requestMethod;
+            Enum.TryParse(method, out requestMethod);
+            view.SelectMethod(requestMethod);
+            var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
+            Assert.AreEqual(method, viewModel.SelectedWebRequestMethod.ToString());
         }
 
         [Given(@"input mappings are")]
@@ -180,7 +237,7 @@ namespace Warewolf.AcceptanceTesting.WebService
             var view = Utils.GetView<ManageWebserviceControl>();
             var inputMappings = view.GetHeaders();
             var i = 0;
-            if (inputMappings.SourceCollection == null)
+            if (inputMappings == null)
             {
                 Assert.AreEqual(0, table.RowCount);
             }
@@ -204,22 +261,25 @@ namespace Warewolf.AcceptanceTesting.WebService
         public void ThenOutputMappingsAre(Table table)
         {
             var view = Utils.GetView<ManageWebserviceControl>();
-            var outputMappings = view.GetOutputMappings();
-            if (outputMappings.SourceCollection == null)
+            var outputMappings = ((ManageWebServiceViewModel)view.DataContext).OutputMapping;
+
+            if (outputMappings == null)
             {
                 Assert.AreEqual(0, table.RowCount);
             }
             else
             {
-                foreach (var output in outputMappings.SourceCollection)
+                foreach (var output in outputMappings)
                 {
-                    var outputMapping = output as IServiceOutputMapping;
+                    var outputMapping = output;
                     if (outputMapping != null)
                     {
                     }
                 }
             }
         }
+
+        public string RecordsetName { get; set; }
 
         [Then(@"Save Dialog is opened")]
         public void ThenSaveDialogIsOpened()
@@ -249,11 +309,14 @@ namespace Warewolf.AcceptanceTesting.WebService
 
 
         [When(@"I select ""(.*)"" as Method")]
-        public void WhenISelectAsMethod(string webServiceName)
+        public void WhenISelectAsMethod(string method)
         {
             var view = Utils.GetView<ManageWebserviceControl>();
-            var selectedDataSource = view.GetSelectedWebService();
-            Assert.AreEqual(webServiceName, selectedDataSource.Name);
+            WebRequestMethod requestMethod;
+            Enum.TryParse(method, out requestMethod);
+            view.SelectMethod(requestMethod);
+            var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
+            Assert.AreEqual(method, viewModel.SelectedWebRequestMethod.ToString());
         }
 
         [Then(@"Select Request Method & Source is focused")]
@@ -265,6 +328,7 @@ namespace Warewolf.AcceptanceTesting.WebService
         }
 
         [Then(@"I save as ""(.*)""")]
+        [When(@"I save as ""(.*)""")]
         public void ThenISaveAs(string resourceName)
         {
             var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
@@ -277,16 +341,15 @@ namespace Warewolf.AcceptanceTesting.WebService
         [Then(@"title is ""(.*)""")]
         public void ThenTitleIs(string title)
         {
-            var manageWebserviceControl = ScenarioContext.Current.Get<ManageWebserviceControl>(Utils.ViewNameKey);
-            var viewModel = ScenarioContext.Current.Get<ManageWebserviceSourceViewModel>("viewModel");
-            Assert.AreEqual(title, viewModel.HeaderText);
+            var viewModel = ScenarioContext.Current.Get<ManageWebServiceViewModel>("viewModel");
+            Assert.AreEqual(title, viewModel.Header);
         }
 
         [Then(@"the response is loaded")]
         public void ThenTheResponseIsLoaded()
         {
-            var model = ScenarioContext.Current.Get<Mock<IWebServiceModel>>("model");
-            
+            var viewModel = Utils.GetViewModel<ManageWebServiceViewModel>();
+            Assert.AreNotEqual(String.Empty, viewModel.Response);
         }
 
         [Then(@"request URL has ""(.*)""")]
@@ -303,9 +366,5 @@ namespace Warewolf.AcceptanceTesting.WebService
             var selectedDataSource = view.GetSelectedWebService();
             Assert.AreEqual(selectedDataSourceName, selectedDataSource.Name);
         }
-
-
-
-
     }
 }

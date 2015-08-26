@@ -151,7 +151,10 @@ namespace Warewolf.Studio.ViewModels
 
             if (SelectedSource != null)
             {
-                RequestUrlQuery = service.QueryString.Replace(SelectedSource.HostName, "");
+                if(SelectedSource.HostName != null)
+                {
+                    RequestUrlQuery = service.QueryString.Replace(SelectedSource.HostName, "");
+                }
                 Item.RequestUrl = RequestUrlQuery;
             }
             else

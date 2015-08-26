@@ -921,6 +921,12 @@ namespace Dev2.Studio.ViewModels
 
         }
 
+        public string OpenPasteWindow(string current)
+        {
+            var pasteView = new ManageWebservicePasteView();
+            return pasteView.ShowView(current);
+        }
+
         public void EditResource(IDbSource selectedSource)
         {
 

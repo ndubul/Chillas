@@ -79,6 +79,7 @@
                             </i:Interaction.Behaviors>
                         </ComboBox>
                         <Button Width="25" 
+                                x:Name="EditButton"
                                 Command="{Binding EditWebSourceCommand}" 
                                 IsEnabled="{Binding CanEditHeadersAndUrl}" 
                                 Content=" ... " 
@@ -391,6 +392,7 @@
                     </StackPanel>
                     <Button Width="25" 
                             Height="25"
+                            x:Name="PasteButton"
                             Grid.Column="0"
                             Grid.Row="1"
                             Command="{Binding PasteResponseCommand}"

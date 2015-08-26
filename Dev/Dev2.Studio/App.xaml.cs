@@ -179,6 +179,7 @@ namespace Dev2.Studio
             CustomContainer.Register<IToolboxViewModel>(toolBoxViewModel);
             var helpViewModel = new HelpWindowViewModel(new HelpDescriptorViewModel(new HelpDescriptor("", "<body>This is the default help</body>", null)), new HelpModel(new EventAggregator()));
             CustomContainer.Register<IHelpWindowViewModel>(helpViewModel);
+            
             var splashViewModel = new SplashViewModel(server, new ExternalProcessExecutor());
 
             SplashPage splashPage = new SplashPage();

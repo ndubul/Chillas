@@ -169,7 +169,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         public void ThenTabIsOpened(string tabName)
         {
             var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
-            Assert.AreEqual("*"+tabName,viewModel.Header);
+            Assert.AreEqual(tabName,viewModel.Header);
         }
 
         [Given(@"Data Source is focused")]
@@ -187,7 +187,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             var view = Utils.GetView<ManageDatabaseServiceControl>();
             switch(name)
             {
-                case "1 Data Source " :
+                case "1 Data Source" :
                     Utils.CheckControlEnabled("name",state,view);
                     break;
                 case "2 Select Action":
