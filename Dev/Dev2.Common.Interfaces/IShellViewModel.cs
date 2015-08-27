@@ -16,5 +16,7 @@ namespace Dev2.Common.Interfaces
         void EditResource(IEmailServiceSource selectedSource);
 
         void NewResource(string resourceType);
+
+        string OpenPasteWindow(string current);
     }
 }

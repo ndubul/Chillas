@@ -73,7 +73,8 @@
                                         Header="#"
                                         HeaderStyle="{StaticResource ActivityMapppingDataGridHeaderStyle}"
                                         IsReadOnly="True"
-                                        d:DataContext="{d:DesignInstance Type=to:DecisionTO}">
+                                        d:DataContext="{d:DesignInstance Type=to:DecisionTO}"
+                                        >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding ModelItem, 

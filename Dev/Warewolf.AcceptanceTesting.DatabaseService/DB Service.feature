@@ -6,7 +6,7 @@ Feature: DB Service
 
 Scenario: Creating DB Service
 	Given I click "New Data Base Service Connector"
-	Then "New Database Connector" tab is opened
+	Then "New DB Connector" tab is opened
 	And Data Source is focused
 	And "1 Data Source" is "Enabled"
 	And "2 Select Action" is "Disabled"

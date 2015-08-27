@@ -527,7 +527,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                     if (modelProperty != null && ((modelProperty.Value != null) && modelProperty.Value.ToString().Contains("Case")))
                     {
                         Dev2Logger.Log.Info("Publish message of type - " + typeof(ConfigureCaseExpressionMessage));
-                        EventPublisher.Publish(new ConfigureCaseExpressionMessage { ModelItem = mi, ExpressionText = switchExpressionValue, EnvironmentModel = _resourceModel.Environment });
+                        FlowController.ConfigureSwitchCaseExpression(new ConfigureCaseExpressionMessage { ModelItem = mi, ExpressionText = switchExpressionValue, EnvironmentModel = _resourceModel.Environment });
                     }
                 }
             }
@@ -680,7 +680,7 @@ namespace Dev2.Studio.ViewModels.Workflow
         {
             // Travis.Frisinger : 28.01.2013 - Switch Amendments
             Dev2Logger.Log.Info("Publish message of type - " + typeof(ConfigureSwitchExpressionMessage));
-            EventPublisher.Publish(new ConfigureSwitchExpressionMessage { ModelItem = mi, EnvironmentModel = _resourceModel.Environment, IsNew = true });
+            FlowController.ConfigureSwitchExpression(new ConfigureSwitchExpressionMessage { ModelItem = mi, EnvironmentModel = _resourceModel.Environment, IsNew = true });
         }
 
         protected void InitializeFlowDecision(ModelItem mi)
@@ -1098,15 +1098,17 @@ namespace Dev2.Studio.ViewModels.Workflow
 
                     if (modelProperty != null)
                     {
-                        string displayName = modelProperty.ComputedValue.ToString();
+                        if(modelProperty.ComputedValue != null)
+                        {
+                            string displayName = modelProperty.ComputedValue.ToString();
 
-                        var resourceModel =
-                            _resourceModel.Environment.ResourceRepository.All()
-                                          .FirstOrDefault(
-                                              resource =>
-                                              resource.ResourceName.Equals(displayName,
-                                                  StringComparison.InvariantCultureIgnoreCase));
-
+                            var resourceModel =
+                                _resourceModel.Environment.ResourceRepository.All()
+                                    .FirstOrDefault(
+                                        resource =>
+                                            resource.ResourceName.Equals(displayName,
+                                                StringComparison.InvariantCultureIgnoreCase));
+                        }
                     }
                 }
             }
@@ -1721,14 +1723,14 @@ namespace Dev2.Studio.ViewModels.Workflow
                     {
                         if (dp != null && !WizardEngineAttachedProperties.GetDontOpenWizard(dp))
                         {
-                            EventPublisher.Publish(new EditCaseExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment });
+                            FlowController.EditSwitchCaseExpression(new EditCaseExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment });
                         }
                     }
 
                     // Handle Switch Edits
                     if (dp != null && !WizardEngineAttachedProperties.GetDontOpenWizard(dp) && item.ItemType == typeof(FlowSwitch<string>))
                     {
-                        EventPublisher.Publish(new ConfigureSwitchExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment });
+                        FlowController.ConfigureSwitchExpression(new ConfigureSwitchExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment });
                     }
 
                     //// Handle Decision Edits

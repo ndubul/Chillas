@@ -48,11 +48,12 @@ namespace Dev2.Activities.Designers2.Decision
         {
             AddTitleBarLargeToggle();
             AddTitleBarHelpToggle();
-
+            Collection = new ObservableCollection<IDev2TOFn>();
             WhereOptions = new ObservableCollection<string>(FindRecsetOptions.FindAll().Select(c => c.HandlesType()));
             SearchTypeUpdatedCommand = new DelegateCommand(OnSearchTypeChanged);
             ConfigureDecisionExpression(ModelItem);
             InitializeItems(new ObservableCollection<IDev2TOFn>(Tos));
+  
   
         }
 
@@ -93,7 +94,7 @@ namespace Dev2.Activities.Designers2.Decision
         public void GetExpressionText()
         {
             //IDataListCompiler compiler = DataListFactory.CreateDataListCompiler();
-            var stack = SetupTos(_observables);
+            var stack = SetupTos(Collection);
             stack.Mode = RequireAllDecisionsToBeTrue ? Dev2DecisionMode.AND : Dev2DecisionMode.OR;
             stack.DisplayText = DisplayText;
             stack.FalseArmText = FalseArmText;
@@ -126,7 +127,7 @@ namespace Dev2.Activities.Designers2.Decision
             {
                
                 _observables = value;
-                var stack = SetupTos(value);
+                var stack = SetupTos(Collection);
                 ExpressionText = DataListUtil.ConvertModelToJson(stack).ToString();
             }
         }
@@ -149,15 +150,14 @@ namespace Dev2.Activities.Designers2.Decision
             return new ObservableCollection<DecisionTO>{new DecisionTO()};
         }
 
-        static Dev2DecisionStack SetupTos(ObservableCollection<DecisionTO> value)
+        static Dev2DecisionStack SetupTos(ObservableCollection<IDev2TOFn> valuecoll)
         {
-           
-            var val = new Dev2DecisionStack();
-            val.TheStack = new List<Dev2Decision>();
+
+            var val = new Dev2DecisionStack { TheStack = new List<Dev2Decision>() };
+            var value = valuecoll.Select(a => a as DecisionTO);
             foreach(var decisionTO in value.Where(a=>!a.IsEmpty()))
             {
-                var dev2Decision = new Dev2Decision();
-                dev2Decision.Col1 = decisionTO.MatchValue;
+                var dev2Decision = new Dev2Decision { Col1 = decisionTO.MatchValue };
                 if(!String.IsNullOrEmpty(decisionTO.SearchCriteria))
                 {
                     dev2Decision.Col2 = decisionTO.SearchCriteria;
