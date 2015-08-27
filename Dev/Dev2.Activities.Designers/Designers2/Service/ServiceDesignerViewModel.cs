@@ -44,6 +44,7 @@ using Dev2.Studio.Core.Messages;
 using Dev2.Studio.Factory;
 using Dev2.Studio.ViewModels.DataList;
 using Dev2.Threading;
+using FontAwesome.WPF;
 
 namespace Dev2.Activities.Designers2.Service
 {
@@ -814,7 +815,7 @@ namespace Dev2.Activities.Designers2.Service
         void AddTitleBarEditToggle()
         {
             // ReSharper disable RedundantArgumentName
-            var toggle = ActivityDesignerToggle.Create("pack://application:,,,/Dev2.Activities.Designers;component/Images/ServicePropertyEdit-32.png", "Edit", "pack://application:,,,/Dev2.Activities.Designers;component/Images/ServicePropertyEdit-32.png", "Edit", "ShowParentToggle",
+            var toggle = ActivityDesignerToggle.Create("ServicePropertyEdit", "Edit", "ServicePropertyEdit", "Edit", "ShowParentToggle",
                 autoReset: true,
                 target: this,
                 dp: ShowParentProperty
