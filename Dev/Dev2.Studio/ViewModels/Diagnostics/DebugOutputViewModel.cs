@@ -110,6 +110,7 @@ namespace Dev2.Studio.ViewModels.Diagnostics
 
             SessionID = Guid.NewGuid();
             _popup = CustomContainer.Get<IPopupController>();
+            ClearSearchTextCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(() => SearchText = "");
         }
 
         #endregion
@@ -413,6 +414,8 @@ namespace Dev2.Studio.ViewModels.Diagnostics
         {
             get { return _rootItems ?? (_rootItems = new ObservableCollection<IDebugTreeViewItemViewModel>()); }
         }
+
+        public ICommand ClearSearchTextCommand { get; private set; }
 
         /// <summary>
         ///     Gets/sets a fragment of the name to search for.

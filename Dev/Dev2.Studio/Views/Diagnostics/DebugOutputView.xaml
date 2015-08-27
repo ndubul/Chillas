@@ -11,40 +11,34 @@
              xmlns:customControls="clr-namespace:Dev2.Studio.CustomControls"
              xmlns:customControls2="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
              xmlns:converters="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.CustomControls"
-    xmlns:diagnostics2="clr-namespace:Dev2.ViewModels.Diagnostics"
-    mc:Ignorable="d"
+             xmlns:diagnostics2="clr-namespace:Dev2.ViewModels.Diagnostics"
+             xmlns:customControls1="clr-namespace:Warewolf.Studio.CustomControls;assembly=Warewolf.Studio.CustomControls"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d"
              Name="DebugOutput"
              d:DataContext="{d:DesignInstance localDiagnostics:DebugOutputViewModel}">
-    <Grid>
+    <Grid Margin="{StaticResource ElementBorder}">
         <Grid.Resources>
             <converters:IsValidDateTimeConverter x:Key="IsValidDateTimeConverter" />
 
             <Style x:Key="VersionVisibility">
                 <Style.Setters>
-                    <Setter Property="FrameworkElement.Visibility"
-                            Value="Collapsed" />
+                    <Setter Property="FrameworkElement.Visibility" Value="Collapsed" />
                 </Style.Setters>
-
-
             </Style>
 
             <Style x:Key="ServerVisibility">
                 <Style.Setters>
-                    <Setter Property="FrameworkElement.Visibility"
-                            Value="Collapsed" />
-                    <Setter Property="AutomationProperties.AutomationId"
-                            Value="UI_DebugShowType_AutoID" />
+                    <Setter Property="FrameworkElement.Visibility" Value="Collapsed" />
+                    <Setter Property="AutomationProperties.AutomationId" Value="UI_DebugShowType_AutoID" />
                 </Style.Setters>
-
                 <Style.Triggers>
                     <MultiDataTrigger>
                         <MultiDataTrigger.Conditions>
-                            <Condition Binding="{Binding DataContext.ShowServer, ElementName=DebugOutput}"
-                                       Value="True" />                         
+                            <Condition Binding="{Binding DataContext.ShowServer, ElementName=DebugOutput}" Value="True" />
                         </MultiDataTrigger.Conditions>
                         <MultiDataTrigger.Setters>
-                            <Setter Property="FrameworkElement.Visibility"
-                                    Value="Visible" />
+                            <Setter Property="FrameworkElement.Visibility" Value="Visible" />
                         </MultiDataTrigger.Setters>
                     </MultiDataTrigger>
                 </Style.Triggers>
@@ -52,19 +46,15 @@
 
             <Style x:Key="TypeVisibility">
                 <Style.Setters>
-                    <Setter Property="FrameworkElement.Visibility"
-                            Value="Collapsed" />
+                    <Setter Property="FrameworkElement.Visibility" Value="Collapsed" />
                 </Style.Setters>
-
                 <Style.Triggers>
                     <MultiDataTrigger>
                         <MultiDataTrigger.Conditions>
-                            <Condition Binding="{Binding DataContext.ShowType, ElementName=DebugOutput}"
-                                       Value="True" />
+                            <Condition Binding="{Binding DataContext.ShowType, ElementName=DebugOutput}" Value="True" />
                         </MultiDataTrigger.Conditions>
                         <MultiDataTrigger.Setters>
-                            <Setter Property="FrameworkElement.Visibility"
-                                    Value="Visible" />
+                            <Setter Property="FrameworkElement.Visibility" Value="Visible" />
                         </MultiDataTrigger.Setters>
                     </MultiDataTrigger>
                 </Style.Triggers>
@@ -72,8 +62,7 @@
 
             <Style x:Key="StartTimeVisibility">
                 <Style.Setters>
-                    <Setter Property="FrameworkElement.Visibility"
-                            Value="Collapsed" />
+                    <Setter Property="FrameworkElement.Visibility" Value="Collapsed" />
                 </Style.Setters>
 
                 <Style.Triggers>
@@ -251,7 +240,7 @@
                         <MultiDataTrigger.Conditions>
                             <Condition Binding="{Binding Content.NumberOfSteps, Converter={StaticResource IntToVisibilityConverter}}"
                                        Value="Visible" />
-                       </MultiDataTrigger.Conditions>
+                        </MultiDataTrigger.Conditions>
                         <MultiDataTrigger.Setters>
                             <Setter Property="FrameworkElement.Visibility"
                                     Value="Visible" />
@@ -340,10 +329,9 @@
             </i:Interaction.Behaviors>
             <Border Background="White"
                     BorderBrush="LightGray"
-                    BorderThickness="1"
-                    Padding="2">
+                    BorderThickness="1">
                 <StackPanel>
-                    <CheckBox IsChecked="{Binding ShowType}"
+                    <CheckBox IsChecked="{Binding ShowType}" 
                               Content="Type"
                               AutomationProperties.AutomationId="UI_DebugOutputShowTypeOption_AutoID" />
                     <CheckBox IsChecked="{Binding ShowTime}"
@@ -358,11 +346,11 @@
                     <CheckBox IsChecked="{Binding ShowOutputs}"
                               Content="Outputs"
                               AutomationProperties.AutomationId="UI_DebugOutputShowOutputsOption_AutoID" />
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="6,0,0,3">
                         <TextBox Width="20"
                                  Text="{Binding DepthMax, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource IntEnsureMinConverter}, ConverterParameter=0}" />
                         <TextBlock Text="Nesting Levels"
-                                   Margin="5,0,0,0"
+                                   Margin="{StaticResource ControlBorderLeft}"
                                    VerticalAlignment="Center"
                                    AutomationProperties.AutomationId="UI_DebugOutputNestingLevelTextBlock_AutoID" />
                     </StackPanel>
@@ -370,26 +358,30 @@
             </Border>
         </Popup>
 
-        <Grid Margin="2">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            
-            <customControls2:FilterTextBox Grid.Column="0"
-                                           Width="Auto"
-                                           Margin="0,0,-2,0"
-                                           SearchText="{Binding Path=SearchText,Mode=TwoWay}" 
-                                           HorizontalContentAlignment="Stretch"
-                                           VerticalAlignment="Stretch" />
+            <customControls1:SearchTextBox Grid.Row="0" 
+                                              Grid.Column="0"
+                                              x:Name="SearchTextBox" 
+                                              Style="{StaticResource SearchTextboxStyle}"
+                                              ClearSearchCommand="{Binding Path=ClearSearchTextCommand}"
+                                              LabelText="Filter"
+                                              HorizontalAlignment="Stretch"
+                                              Text="{Binding Path=SearchText, Delay=300, UpdateSourceTrigger=PropertyChanged}" >
+            </customControls1:SearchTextBox>
 
             <Button Grid.Column="1"
                     x:Name="OptionsButton"
-                    Content="Options"
                     Command="{Binding ShowOptionsCommand}"
-                    Margin="0,0,2,0"
+                    Margin="3,0,0,-1"
                     AutomationProperties.AutomationId="UI_DebugOutputOptionsButton_AutoID">
+                <Button.Content>
+                    <fa:FontAwesome Icon="Gear" FontSize="16"></fa:FontAwesome>
+                </Button.Content>
                 <i:Interaction.Behaviors>
                     <b:ButtonPopupWorkaroundBehavior IsInWorkaroundState="{Binding SkipOptionsCommandExecute, Mode=TwoWay}" />
                 </i:Interaction.Behaviors>
@@ -397,14 +389,15 @@
 
             <Button Grid.Column="2"
                     Content="{Binding ExpandAllMode, Converter={StaticResource BoolToPlusMinusConverter}}"
+                    FontSize="24"
                     Command="{Binding ExpandAllCommand}"
-                    Margin="0,0,3,0"
-                    Width="20"
+                    Margin="3,0,0,-1"
                     AutomationProperties.AutomationId="UI_DebugOutputExpandAllMode_AutoID" />
         </Grid>
-        
+
         <Border BorderBrush="LightGray"
                 BorderThickness="0,2,0,0"
+                Margin="{StaticResource ControlBorderTop}"
                 Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -417,14 +410,14 @@
                       VirtualizingStackPanel.VirtualizationMode="Recycling"
                       BorderBrush="Transparent"
                       x:Name="DebugOutputTree">
-                     <TreeView.InputBindings>
+                    <TreeView.InputBindings>
                         <KeyBinding Gesture="CTRL+A"
-                                    Command="{Binding SelectAllCommand}" />                       
+                                    Command="{Binding SelectAllCommand}" />
                     </TreeView.InputBindings>
-                <i:Interaction.Behaviors>
-                    <b:TreeviewScrollToEndOnNewContent />
-                </i:Interaction.Behaviors>
-                <TreeView.Resources>
+                    <i:Interaction.Behaviors>
+                        <b:TreeviewScrollToEndOnNewContent />
+                    </i:Interaction.Behaviors>
+                    <TreeView.Resources>
                         <DataTemplate x:Key="DebugGroupLineItemTemplate">
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
@@ -450,9 +443,9 @@
                                 </Button>
                             </StackPanel>
                         </DataTemplate>
-                        
-                    <DataTemplate x:Key="DebugLineItemTemplate">
-                        <StackPanel Orientation="Vertical">
+
+                        <DataTemplate x:Key="DebugLineItemTemplate">
+                            <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock VerticalAlignment="Top"
                                                Text="{Binding Label}" Padding="{Binding Label, Converter={StaticResource PaddingThicknessConverter}}"
@@ -479,103 +472,103 @@
                                     cal:Action.TargetWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeView}}">
                                     <TextBlock Margin="0 -7"
                                                Padding="0,0,0,5">...</TextBlock>
-                            </Button>
-                        </StackPanel>
-                    </DataTemplate>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
 
-                    <DataTemplate x:Key="DebugLineGroupRowTemplate">
-                        <ItemsControl ItemsSource="{Binding Value.LineItems}" 
+                        <DataTemplate x:Key="DebugLineGroupRowTemplate">
+                            <ItemsControl ItemsSource="{Binding Value.LineItems}" 
                                           ItemTemplate="{StaticResource DebugGroupLineItemTemplate}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
                                         <VirtualizingStackPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </DataTemplate>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </DataTemplate>
 
-                    <DataTemplate x:Key="DebugLineGroupTemplate">
+                        <DataTemplate x:Key="DebugLineGroupTemplate">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding GroupLabel}"
                                            VerticalAlignment="Top" />
-                            <Expander Header="{Binding GroupName}" 
+                                <Expander Header="{Binding GroupName}" 
                                       AutomationProperties.AutomationId="UI_DefaultRecordSetIOTemplate_AutoID" 
                                           Style="{StaticResource PlusMinusExpander}" Margin="-3,-3,0,0">
                                     <Grid Margin="18,0,0,0">
                                         <ScrollViewer MaxHeight="200"
                                                       VerticalScrollBarVisibility="Auto"
                                                   HorizontalScrollBarVisibility="Auto">
-                                        <ItemsControl ItemsSource="{Binding Rows}" 
+                                            <ItemsControl ItemsSource="{Binding Rows}" 
                                                           ItemTemplate="{StaticResource DebugLineGroupRowTemplate}" />
-                                    </ScrollViewer>
-                                </Grid>
-                            </Expander>
-                        </StackPanel>
-                    </DataTemplate>
+                                        </ScrollViewer>
+                                    </Grid>
+                                </Expander>
+                            </StackPanel>
+                        </DataTemplate>
 
-                    <diagnostics:DebugLineTemplateSelector x:Key="DebugLineTemplateSelector" 
+                        <diagnostics:DebugLineTemplateSelector x:Key="DebugLineTemplateSelector" 
                                                            ItemTemplate="{StaticResource DebugLineItemTemplate}" 
                                                            GroupTemplate="{StaticResource DebugLineGroupTemplate}" />
 
-                    <DataTemplate x:Key="DebugLinesTemplate">
-                        <Grid>
+                        <DataTemplate x:Key="DebugLinesTemplate">
+                            <Grid>
                                 <ItemsControl ItemsSource="{Binding LineItems}"
                                               Focusable="False"
                                               ItemTemplateSelector="{StaticResource DebugLineTemplateSelector}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
                                             <VirtualizingStackPanel Orientation="Horizontal"
                                                                     Focusable="False"/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
-                        </Grid>
-                    </DataTemplate>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </Grid>
+                        </DataTemplate>
 
-                    <HierarchicalDataTemplate ItemsSource="{Binding Children}" 
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}" 
                                               DataType="{x:Type diagnostics2:DebugStringTreeViewItemViewModel}">
                             <TextBlock Grid.Row="0"
                                        Text="{Binding Content}"
                                        HorizontalAlignment="Stretch" />
-                    </HierarchicalDataTemplate>                    
+                        </HierarchicalDataTemplate>
 
-                    <HierarchicalDataTemplate ItemsSource="{Binding Children}" 
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}" 
                                               DataType="{x:Type diagnostics2:DebugStateTreeViewItemViewModel}">
                             <Grid HorizontalAlignment="Stretch"
                                   KeyboardNavigation.DirectionalNavigation="Continue">
                                 <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
+                                <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
                                     <RowDefinition />
-                            </Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
 
                                 <Border Grid.RowSpan="10"
                                         Style="{StaticResource ErrorBorderStyle}" />
 
                                 <TextBlock Grid.Row="0"
                                            Grid.Column="1">
-                            <Run Text="{Binding Content.ActivityType, Converter={StaticResource EnumToStringConverter}}" />
-                            <Run Text=": " />
-                            </TextBlock>
+                                    <Run Text="{Binding Content.ActivityType, Converter={StaticResource EnumToStringConverter}}" />
+                                    <Run Text=": " />
+                                </TextBlock>
                                 <StackPanel Grid.Row="0"
                                             Grid.Column="2"
                                             Orientation="Horizontal">
-                                <Button Content="{Binding Content.DisplayName}" 
+                                    <Button Content="{Binding Content.DisplayName}" 
                                             Command="{Binding DataContext.OpenItemCommand, RelativeSource={RelativeSource AncestorType={x:Type TreeView}}}"
                                         CommandParameter="{Binding Content}" 
                                         Style="{StaticResource BlueHeadingStyle}" 
@@ -583,14 +576,14 @@
                                             Focusable="False"
                                         IsEnabled="{Binding Content.ActivityType, Converter={StaticResource EnumToBoolConverterActivityTypeWorkflow}}" />
 
-                            </StackPanel>
+                                </StackPanel>
 
                                 <TextBlock Grid.Row="1"
                                            Grid.Column="1"
                                            Style="{StaticResource VersionVisibility}">
-                            <Run Text="Version" />
-                            <Run Text=": " />
-                            </TextBlock>
+                                    <Run Text="Version" />
+                                    <Run Text=": " />
+                                </TextBlock>
                                 <TextBlock Grid.Row="1"
                                            Grid.Column="2"
                                            Text="{Binding Content.Version}"
@@ -600,32 +593,32 @@
                                 <TextBlock Grid.Row="2"
                                            Grid.Column="1"
                                            Style="{StaticResource ServerVisibility}">
-                            <Run Text="Server" />
-                            <Run Text=": " />
-                            </TextBlock>
+                                    <Run Text="Server" />
+                                    <Run Text=": " />
+                                </TextBlock>
                                 <TextBlock Grid.Row="2"
                                            Grid.Column="2"
                                            Text="{Binding Content.Server}"
-                                       Style="{StaticResource ServerVisibility}" />
+                                           Style="{StaticResource ServerVisibility}" />
 
                                 <TextBlock Grid.Row="3"
                                            Grid.Column="1"
                                            Style="{StaticResource TypeVisibility}">
-                            <Run Text="Type" />
-                            <Run Text=": " />
-                            </TextBlock>
+                                    <Run Text="Type" />
+                                    <Run Text=": " />
+                                </TextBlock>
                                 <TextBlock Grid.Row="3"
                                            Grid.Column="2"
-                                       Text="{Binding Content.Name}" 
-                                       Style="{StaticResource TypeVisibility}" 
+                                           Text="{Binding Content.Name}" 
+                                           Style="{StaticResource TypeVisibility}" 
                                            AutomationProperties.AutomationId="UI_DebugOutputTypeTextBlock_AutoID" />
 
                                 <TextBlock Grid.Row="4"
                                            Grid.Column="1"
                                            Style="{StaticResource StartTimeVisibility}">
-                            <Run Text="Start Time" />
-                            <Run Text=": " />
-                            </TextBlock>
+                                    <Run Text="Start Time" />
+                                    <Run Text=": " />
+                                </TextBlock>
                                 <TextBlock Grid.Row="4"
                                            Grid.Column="2"
                                        Text="{Binding Content.StartTime, Converter={StaticResource DateTimeToStringConverter}}" 
@@ -637,7 +630,7 @@
                                            Style="{StaticResource EndTimeVisibility}">
                             <Run Text="End Time" />
                             <Run Text=": " />
-                            </TextBlock>
+                                </TextBlock>
                                 <TextBlock Grid.Row="4"
                                            Grid.Column="2"
                                        Text="{Binding Content.EndTime, Converter={StaticResource DateTimeToStringConverter}}" 
@@ -645,24 +638,23 @@
                                        AutomationProperties.AutomationId="UI_DebugOutputTimeTextBlock_AutoID" />
 
                                 <TextBlock Grid.Row="5"
-                                           Visibility="{Binding  Content.IsDurationVisible, Converter={StaticResource BoolToVisConverter}}"
                                            Grid.Column="1"
                                            Style="{StaticResource DurationVisibility}">
-                            <Run Text="Duration" />
-                            <Run Text=": " />
-                            </TextBlock >
-                                <TextBlock Grid.Row="5"   Visibility="{Binding Content.IsDurationVisible, Converter={StaticResource BoolToVisConverter}}"
+                                    <Run Text="Duration" />
+                                    <Run Text=": " />
+                                </TextBlock >
+                                <TextBlock Grid.Row="5" 
                                            Grid.Column="2"
                                            Text="{Binding Content.Duration, Converter={StaticResource TimeSpanToStringConverter}}"
                                            Style="{StaticResource DurationVisibility}"
-                                       AutomationProperties.AutomationId="UI_DebugOutputDurationTextBlock_AutoID" />
+                                           AutomationProperties.AutomationId="UI_DebugOutputDurationTextBlock_AutoID" />
 
                                 <TextBlock Grid.Row="6"
                                            Grid.Column="1"
                                            Style="{StaticResource InputsVisibility}">
-                            <Run Text="Inputs" />
-                            <Run Text=": " />
-                            </TextBlock>
+                                    <Run Text="Inputs" />
+                                    <Run Text=": " />
+                                </TextBlock>
                                 <StackPanel Grid.Row="6"
                                             Grid.Column="2"
                                             Orientation="Horizontal"
@@ -672,14 +664,14 @@
                                                   Focusable="False"
                                                   ItemTemplate="{StaticResource DebugLinesTemplate}"
                                                   AutomationProperties.AutomationId="UI_DebugOutputInputPanel_AutoId" />
-                            </StackPanel>
+                                </StackPanel>
 
                                 <TextBlock Grid.Row="7"
                                            Grid.Column="1"
                                            Style="{StaticResource OutputsVisibility}">
                             <Run Text="Outputs" />
                             <Run Text=": " />
-                            </TextBlock>
+                                </TextBlock>
                                 <StackPanel Grid.Row="7"
                                             Grid.Column="2"
                                             Orientation="Horizontal"
@@ -689,7 +681,7 @@
                                                   Focusable="False"
                                                   ItemTemplate="{StaticResource DebugLinesTemplate}"
                                                   AutomationProperties.AutomationId="UI_DebugOutputOutputPanel_AutoId" />
-                            </StackPanel>
+                                </StackPanel>
 
                                 <TextBlock Grid.Row="8"
                                            Grid.Column="1"
@@ -729,20 +721,20 @@
                                            Style="{StaticResource ErrorsVisibility}">
                             <Run Text="Error" />
                             <Run Text=": " />
-                            </TextBlock>
+                                </TextBlock>
                                 <TextBlock Grid.Row="11"
                                            Grid.Column="2"
                                        Text="{Binding Content.ErrorMessage}" 
                                            Style="{StaticResource ErrorsVisibility}" />
 
-                        </Grid>
-                    </HierarchicalDataTemplate>
-                </TreeView.Resources>
-                <TreeView.ItemContainerStyleSelector>
-                    <diagnostics:DebugStyleSelector DebugStateStyle="{StaticResource DebugStateStyle}" 
+                            </Grid>
+                        </HierarchicalDataTemplate>
+                    </TreeView.Resources>
+                    <TreeView.ItemContainerStyleSelector>
+                        <diagnostics:DebugStyleSelector DebugStateStyle="{StaticResource DebugStateStyle}" 
                                                         DebugStringStyle="{StaticResource DebugStringStyle}" />
-                </TreeView.ItemContainerStyleSelector>
-            </TreeView>
+                    </TreeView.ItemContainerStyleSelector>
+                </TreeView>
                 <customControls:Dev2StatusBar AutomationProperties.AutomationId="Dev2StatusBarAutomationID"  
                                               Grid.Row="1"
                                               Height="Auto"
@@ -750,8 +742,8 @@
                                               VerticalContentAlignment="Center"
                                               StatusBarLabelText="{Binding ProcessingText}" 
                                               Visibility="{Binding ShowDebugStatus, Converter={StaticResource BoolToVisibilityConverterPositive}}"
-                                              ProgressBarVisiblity="{Binding IsProcessing, Converter={StaticResource BoolToVisConverter}}" />         
+                                              ProgressBarVisiblity="{Binding IsProcessing, Converter={StaticResource BoolToVisConverter}}" />
             </Grid>
-        </Border>        
+        </Border>
     </Grid>
 </UserControl>
