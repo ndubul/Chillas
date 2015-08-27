@@ -91,7 +91,7 @@ namespace Warewolf.Studio.ViewModels
         void Init()
         {
             WebRequestMethods = new ObservableCollection<WebRequestMethod>(Dev2EnumConverter.GetEnumsToList<WebRequestMethod>());
-            SelectedWebRequestMethod = WebRequestMethods.First();
+           // SelectedWebRequestMethod = WebRequestMethods.First();
             Sources = Model.Sources;
             Inputs = new ObservableCollection<IServiceInput>();
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
@@ -108,7 +108,7 @@ namespace Warewolf.Studio.ViewModels
       
             SaveCommand = new DelegateCommand(Save, CanSave);
             NewWebSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
-            EditWebSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource), () => SelectedSource != null);
+            EditWebSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource));
             PasteResponseCommand = new DelegateCommand(HandlePasteResponse);
             RemoveHeaderCommand = new DelegateCommand(DeleteCell);
             AddHeaderCommand = new DelegateCommand(Add);
@@ -559,6 +559,7 @@ namespace Warewolf.Studio.ViewModels
                 if (!Equals(_selectedSource, value))
                 {
                     _selectedSource = value;
+                    OnPropertyChanged(() => SelectedSource);
                     PerformRefresh();
                     if (_selectedSource != null)
                     {
@@ -571,7 +572,7 @@ namespace Warewolf.Studio.ViewModels
                     {
                         CanEditHeadersAndUrl = false;
                     }
-                    OnPropertyChanged(() => SelectedSource);
+                
                     ViewModelUtils.RaiseCanExecuteChanged(EditWebSourceCommand);
                 }
             }
