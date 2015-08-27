@@ -12,6 +12,7 @@
                       xmlns:attachedProperties2="clr-namespace:Dev2.Studio.AppResources.AttachedProperties;assembly=Dev2.Activities.Designers"
                       xmlns:behaviors2="clr-namespace:Dev2.Studio.AppResources.Behaviors;assembly=Dev2.CustomControls"
                       xmlns:controls="clr-namespace:Dev2.Activities.Designers2.Core.Controls;assembly=Dev2.Activities.Designers"
+                      xmlns:fa="http://schemas.fontawesome.io/icons/"
                       Name="BaseConvertDesigner"
                       MouseEnter="DsfBaseConvertActivityDesigner_OnMouseEnter"
                       MouseLeave="DsfBaseConvertActivityDesigner_OnMouseLeave"
@@ -52,7 +53,7 @@
                                     PreviewMouseMove="UIElement_OnPreviewMouseMove"
                                     IsChecked="{Binding IsAdornerOpen}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.DisplayName, StringFormat=[UI_{0}_QuickVariableAddBtn_AutoID]}">
-                                <Image Source="/Images/ServiceQuickVariableInput-32.png" Width="15" Height="15"/>
+                                <fa:FontAwesome Icon="Pencil" FontSize="15"></fa:FontAwesome>
                             </adorners:AdornerToggleButton>
                         </StackPanel>
                         <ContentControl x:Name="resizeContent" 

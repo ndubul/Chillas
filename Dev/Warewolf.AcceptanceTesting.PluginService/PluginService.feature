@@ -124,7 +124,7 @@ Scenario: Plugin service GetType test
 	And "2 Select a Namespace" is "Enabled"
 	When I select "Unlimited Framework Plugins EmailPlugin" as namespace
 	Then "3 Select an Action" is "Enabled" 
-	When I select "SampleSend" as action
+	When I select "GetType" as action
 	And "4 Provide Test Values" is "Enabled" 
 	And "Test" is "Enabled"
 	When "Test" is clicked

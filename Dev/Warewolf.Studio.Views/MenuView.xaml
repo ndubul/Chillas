@@ -449,6 +449,7 @@
                     Width="{Binding ButtonWidth}"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
+                    Visibility="{Binding HasNewVersion, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Style="{StaticResource SideMenuButtonStyle}"
                     ToolTip="{Binding DownloadToolTip}">
                 <i:Interaction.Triggers>

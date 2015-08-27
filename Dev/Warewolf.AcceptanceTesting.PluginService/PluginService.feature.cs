@@ -389,7 +389,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 126
  testRunner.Then("\"3 Select an Action\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 127
- testRunner.When("I select \"SampleSend\" as action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I select \"GetType\" as action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 128
  testRunner.And("\"4 Provide Test Values\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 129
