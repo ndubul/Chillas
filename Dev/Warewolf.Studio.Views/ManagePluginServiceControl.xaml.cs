@@ -1,15 +1,198 @@
-﻿using Microsoft.Practices.Prism.Mvvm;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.ServerProxyLayer;
+using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.Views
 {
     /// <summary>
     /// Interaction logic for ManagePluginServiceControl.xaml
     /// </summary>
-    public partial class ManagePluginServiceControl : IView
+    public partial class ManagePluginServiceControl : IView, ICheckControlEnabledView
     {
         public ManagePluginServiceControl()
         {
             InitializeComponent();
+            SourcesComboBox.Focus();
+        }
+
+        public bool IsSelectSourceFocused()
+        {
+            return SourcesComboBox.IsFocused;
+        }
+        public void SelectPluginSource(IPluginSource pluginSource)
+        {
+            try
+            {
+                SourcesComboBox.SelectedItem = pluginSource;
+            }
+            // ReSharper disable once EmptyGeneralCatchClause
+            catch (Exception)
+            {
+            }
+        }
+        public void SelectNamespace(INamespaceItem namespaceItem)
+        {
+            try
+            {
+                NamespaceComboBox.SelectedItem = namespaceItem;
+            }
+            // ReSharper disable once EmptyGeneralCatchClause
+            catch (Exception)
+            {
+            }
+        }
+        public void SelectAction(IPluginAction pluginAction)
+        {
+            try
+            {
+                ActionsComboBox.SelectedItem = pluginAction;
+            }
+            // ReSharper disable once EmptyGeneralCatchClause
+            catch (Exception)
+            {
+            }
+        }
+
+        public void TestAction()
+        {
+            TestButton.Command.Execute(null);
+        }
+
+        public void EditAction()
+        {
+            EditButton.Command.Execute(null);
+        }
+
+        public void NewAction()
+        {
+            NewButton.Command.Execute(null);
+        }
+
+        public void RefreshAction()
+        {
+            RefreshButton.Command.Execute(null);
+        }
+
+        public void Save()
+        {
+            SaveButton.Command.Execute(null);
+        }
+
+        public IPluginSource GetSelectedPluginSource()
+        {
+            IPluginSource selectedSource = null;
+            BindingExpression bindingExpression = SourcesComboBox.GetBindingExpression(Selector.SelectedItemProperty);
+            if (bindingExpression != null)
+            {
+                bindingExpression.UpdateTarget();
+                var manageWebServiceViewModel = bindingExpression.DataItem as IPluginServiceViewModel;
+                selectedSource = SourcesComboBox.SelectedItem as IPluginSource;
+                if (manageWebServiceViewModel != null)
+                {
+                    if (selectedSource == null)
+                    {
+                        selectedSource = manageWebServiceViewModel.SelectedSource;
+                    }
+                }
+            }
+            return selectedSource;
+        }
+
+        public IPluginAction GetSelectedActionSource()
+        {
+            IPluginAction selectedAction = null;
+            BindingExpression bindingExpression = ActionsComboBox.GetBindingExpression(Selector.SelectedItemProperty);
+            if (bindingExpression != null)
+            {
+                bindingExpression.UpdateTarget();
+                var manageWebServiceViewModel = bindingExpression.DataItem as IPluginServiceViewModel;
+                selectedAction = ActionsComboBox.SelectedItem as IPluginAction;
+                if (manageWebServiceViewModel != null)
+                {
+                    if (selectedAction == null)
+                    {
+                        selectedAction = manageWebServiceViewModel.SelectedAction;
+                    }
+                }
+            }
+            else
+            {
+                var manageWebServiceViewModel = DataContext as IPluginServiceViewModel;
+                selectedAction = ActionsComboBox.SelectedItem as IPluginAction;
+                if (manageWebServiceViewModel != null)
+                {
+                    if (selectedAction == null)
+                    {
+                        selectedAction = manageWebServiceViewModel.SelectedAction;
+                    }
+                }
+            }
+            return selectedAction;
+        }
+
+        public bool GetControlEnabled(string controlName)
+        {
+            switch (controlName)
+            {
+                case "Save":
+                    return SaveButton.Command.CanExecute(null);
+                case "Test":
+                    return TestButton.Command.CanExecute(null);
+                case "1 Select a Source":
+                    return SourcesComboBox.IsEnabled;
+                case "2 Select a Namespace":
+                    {
+                        BindingExpression be = NamespaceGrid.GetBindingExpression(VisibilityProperty);
+                        if (be != null)
+                        {
+                            be.UpdateTarget();
+                        }
+                        return NamespaceGrid.Visibility == Visibility.Visible;
+                    }
+                case "3 Select an Action":
+                    {
+                        BindingExpression be = ActionGrid.GetBindingExpression(VisibilityProperty);
+                        if (be != null)
+                        {
+                            be.UpdateTarget();
+                        }
+                        return ActionGrid.Visibility == Visibility.Visible;
+                    }
+                case "4 Provide Test Values":
+                    {
+                        BindingExpression be = TestGrid.GetBindingExpression(VisibilityProperty);
+                        if (be != null)
+                        {
+                            be.UpdateTarget();
+                        }
+                        return TestGrid.Visibility == Visibility.Visible;
+                    }
+                case "5 Default and Mapping":
+                    {
+                        BindingExpression be = MappingsGrid.GetBindingExpression(VisibilityProperty);
+                        if (be != null)
+                        {
+                            be.UpdateTarget();
+                        }
+                        return MappingsGrid.Visibility == Visibility.Visible;
+                    }
+            }
+            return false;
+        }
+
+        public ItemCollection GetInputs()
+        {
+            BindingExpression be = InputGrid.GetBindingExpression(ItemsControl.ItemsSourceProperty);
+            if (be != null)
+            {
+                be.UpdateTarget();
+            }
+            return InputGrid.ItemsSource as ItemCollection;
         }
 
         /// <summary>
