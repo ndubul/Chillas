@@ -3493,7 +3493,7 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        public virtual void EnsuringAllInputsWorkAsExpected(string variable1, string var1, string variable2, string var2, string variable3, string var3, string decision, string[] exampleTags)
+        public virtual void EnsuringAllInputsWorkAsExpected(string variable1, string var1, string variable2, string var2, string variable3, string var3, string requirement, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "ignore"};
@@ -3513,9 +3513,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 1261
  testRunner.And(string.Format("check if \'{0}\' \"IsBetween\" \'{1}\' and \'{2}\'", variable1, variable2, variable3), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1262
- testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And(string.Format("\"Require All decisions to be True\" is \'{0}\'", requirement), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 1263
- testRunner.Then(string.Format("the decision result should be \"{0}\"", decision), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 1264
  testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -3533,10 +3533,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable3", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var3", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:decision", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Requirement", "true")]
         public virtual void EnsuringAllInputsWorkAsExpected_Variant0()
         {
-            this.EnsuringAllInputsWorkAsExpected("", "", "", "", "", "", "", ((string[])(null)));
+            this.EnsuringAllInputsWorkAsExpected("", "", "", "", "", "", "true", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -3550,10 +3550,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "\" \"")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable3", "[[rs(1).set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var3", "5")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:decision", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Requirement", "true")]
         public virtual void EnsuringAllInputsWorkAsExpected_Variant1()
         {
-            this.EnsuringAllInputsWorkAsExpected("[[q]]", "", "[[rec(1).a]]", "\" \"", "[[rs(1).set]]", "5", "", ((string[])(null)));
+            this.EnsuringAllInputsWorkAsExpected("[[q]]", "", "[[rec(1).a]]", "\" \"", "[[rs(1).set]]", "5", "true", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -3567,10 +3567,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "22")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable3", "33")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var3", "33")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:decision", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Requirement", "true")]
         public virtual void EnsuringAllInputsWorkAsExpected_Variant2()
         {
-            this.EnsuringAllInputsWorkAsExpected("[[rec().a]]", "27", "22", "22", "33", "33", "", ((string[])(null)));
+            this.EnsuringAllInputsWorkAsExpected("[[rec().a]]", "27", "22", "22", "33", "33", "true", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -3584,10 +3584,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "\"South Africa\"")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable3", "H")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var3", "H")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:decision", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Requirement", "true")]
         public virtual void EnsuringAllInputsWorkAsExpected_Variant3()
         {
-            this.EnsuringAllInputsWorkAsExpected("[[rec(*).a]]", "T", "\"South Africa\"", "\"South Africa\"", "H", "H", "", ((string[])(null)));
+            this.EnsuringAllInputsWorkAsExpected("[[rec(*).a]]", "T", "\"South Africa\"", "\"South Africa\"", "H", "H", "true", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -3601,10 +3601,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable3", "[[q]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var3", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:decision", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Requirement", "true")]
         public virtual void EnsuringAllInputsWorkAsExpected_Variant4()
         {
-            this.EnsuringAllInputsWorkAsExpected("[[rec([[int]]).a]]", "2", "[[p]]", "", "[[q]]", "", "", ((string[])(null)));
+            this.EnsuringAllInputsWorkAsExpected("[[rec([[int]]).a]]", "2", "[[p]]", "", "[[q]]", "", "true", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -3618,10 +3618,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "\" \"")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable3", "\" \"")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var3", "\" \"")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:decision", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Requirement", "false")]
         public virtual void EnsuringAllInputsWorkAsExpected_Variant5()
         {
-            this.EnsuringAllInputsWorkAsExpected("[[a]]", "10", "\" \"", "\" \"", "\" \"", "\" \"", "", ((string[])(null)));
+            this.EnsuringAllInputsWorkAsExpected("[[a]]", "10", "\" \"", "\" \"", "\" \"", "\" \"", "false", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -3635,10 +3635,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "22")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable3", "[[rs(*).set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var3", "33")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:decision", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Requirement", "true")]
         public virtual void EnsuringAllInputsWorkAsExpected_Variant6()
         {
-            this.EnsuringAllInputsWorkAsExpected("[[a]]", "27", "[[rec().a]]", "22", "[[rs(*).set]]", "33", "", ((string[])(null)));
+            this.EnsuringAllInputsWorkAsExpected("[[a]]", "27", "[[rec().a]]", "22", "[[rs(*).set]]", "33", "true", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -3652,10 +3652,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "\"South Africa\"")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable3", "[[rs().set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var3", "H")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:decision", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Requirement", "true")]
         public virtual void EnsuringAllInputsWorkAsExpected_Variant7()
         {
-            this.EnsuringAllInputsWorkAsExpected("[[a]]", "T", "[[rec([[int]].a)", "\"South Africa\"", "[[rs().set]]", "H", "", ((string[])(null)));
+            this.EnsuringAllInputsWorkAsExpected("[[a]]", "T", "[[rec([[int]].a)", "\"South Africa\"", "[[rs().set]]", "H", "true", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -3669,10 +3669,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "5")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable3", "[[rs([[int]]).set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var3", "7")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:decision", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Requirement", "true")]
         public virtual void EnsuringAllInputsWorkAsExpected_Variant8()
         {
-            this.EnsuringAllInputsWorkAsExpected("[[a]]", "2", "[[rec(*).a]]", "5", "[[rs([[int]]).set]]", "7", "", ((string[])(null)));
+            this.EnsuringAllInputsWorkAsExpected("[[a]]", "2", "[[rec(*).a]]", "5", "[[rs([[int]]).set]]", "7", "true", ((string[])(null)));
         }
     }
 }

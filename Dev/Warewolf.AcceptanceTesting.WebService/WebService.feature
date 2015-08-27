@@ -105,8 +105,8 @@ Scenario Outline: Create Web Service with different methods
 	When Test Connection is "Successful"
 	And "4 Response" is "Enabled" 
 	Then the response is loaded
-	And "5 Default and Mapping" is "Enabled"
-	And "Save" is "Disabled"
+	And "5 Defaults and Mapping" is "Enabled"
+	And "Save" is "Enabled"
 	When Test Connection is "Successful"
 	Then input mappings are
 	| Input | Default Value | Required Field | Empty is Null |
@@ -125,7 +125,7 @@ Scenario: Adding parameters in request headers is updating variables
 	When I select "Get" as Method
 	And I select "Dev2CountriesWebService" as data source with default query as '?extension=[[extension]]&prefix=[[prefix]]' and URL as "http://rsaklfsvrtfsbld/integrationTestSite/GetCountries.ashx" 
 	And "New" is "Enabled"
-	Then "2 Request headers" is "Enabled"
+	Then "2 Request" is "Enabled"
 	And I edit the headers as
          | name  | Value |
          | [[a]] | T     |
@@ -135,7 +135,7 @@ Scenario: Adding parameters in request headers is updating variables
 	Then "4 Response" is "Enabled" 
 	And "Paste" tool is "Enabled" 
 	When I click the "Paste" tool
-	And "5 Defaults and Mapping" is "Enable"
+	And "5 Defaults and Mapping" is "Enabled"
 	And "Save" is "Enabled"
     Then service input mappings are
 	| Input     | Default Value | Required Field | Empty is Null |
@@ -165,7 +165,7 @@ Scenario: Adding parameters in request headers is updating variables
 	When Test Connection is "Successful"
 	Then "4 Response" is "Enabled" 
 	And the response is loaded
-	And "5 Default and Mapping" is "Enabled" 
+	And "5 Defaults and Mapping" is "Enabled" 
     Then service input mappings are
 	| Input         | Default Value | Required Field | Empty is Null |
 	| [[variable1]] | json          |                |               |
@@ -192,7 +192,7 @@ Scenario: Adding parameters in request headers is updating variables
 	When Test Connection is "Successful"
 	Then "4 Response" is "Enabled" 
 	And the response is loaded
-	And "5 Default and Mapping" is "Enabled" 
+	And "5 Defaults and Mapping" is "Enabled" 
     Then service input mappings are
 	| Input     | Default Value | Required Field | Empty is Null |
 	| extension |               |                |               |
@@ -216,7 +216,7 @@ Scenario: Changing Sources
 	And Select Request Method & Source is focused
 	And "New" is "Enabled"
 	And "1 Select Request Method & Source" is "Enabled"
-	And "Edit" is "Disabled"
+	And "Edit" is "Enabled"
 	And "2 Request" is "Disabled"
 	And "3 Variables" is "Disabled" 
 	And "4 Response" is "Disabled" 
@@ -229,7 +229,7 @@ Scenario: Changing Sources
 	When Test Connection is "Successful"
 	Then "4 Response" is "Enabled" 
 	And the response is loaded
-	And "5 Default and Mapping" is "Enabled" 
+	And "5 Defaults and Mapping" is "Enabled" 
 	And I change data source to "Google Address Lookup" 
 	And "4 Response" is "Disabled" 
 	And "5 Defaults and Mapping" is "Disabled"

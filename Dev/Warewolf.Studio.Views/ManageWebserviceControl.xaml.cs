@@ -125,8 +125,17 @@ namespace Warewolf.Studio.Views
                     return SaveButton.Command.CanExecute(null);
                 case "Test":
                     return TestButton.Command.CanExecute(null);
+                case "New":
+                    return New.Command.CanExecute(null);
+                case "Edit":
+                    return EditButton.Command.CanExecute(null);
                 case "1 Select Request Method and Source":
                     return SourcesComboBox.IsEnabled;
+                case "1 Select Request Method & Source":
+                    return SourcesComboBox.IsEnabled;
+
+                case "2 Request Body" :
+                    return ((ManageWebServiceViewModel)DataContext).RequestBodyEnabled ;
                 case "2 Request":
                     {
                         BindingExpression be = RequestHeadersGrid.GetBindingExpression(VisibilityProperty);
@@ -154,7 +163,7 @@ namespace Warewolf.Studio.Views
                         }
                         return ResponseGrid.Visibility == Visibility.Visible;
                     }
-                case "5 Default and Mapping":
+                case "5 Defaults and Mapping":
                     {
                         BindingExpression be = MappingsGrid.GetBindingExpression(VisibilityProperty);
                         if (be != null)

@@ -200,6 +200,10 @@ namespace Warewolf.AcceptanceTesting.WebService
                     Utils.CheckControlEnabled(name, state, view);
                     break;
 
+                default:
+                    Utils.CheckControlEnabled(name, state, view);
+                    break;
+
             }
         }
 

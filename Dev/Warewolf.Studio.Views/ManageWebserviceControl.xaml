@@ -81,7 +81,7 @@
                         <Button Width="25" 
                                 x:Name="EditButton"
                                 Command="{Binding EditWebSourceCommand}" 
-                                IsEnabled="{Binding CanEditHeadersAndUrl}" 
+                                IsEnabled="{Binding CanEditHeadersAndUrl,UpdateSourceTrigger=PropertyChanged}" 
                                 Content=" ... " 
                                 Margin="{StaticResource ElementBorderControlLeftTop}">
                             <i:Interaction.Behaviors>
@@ -90,6 +90,7 @@
                             </i:Interaction.Behaviors>
                         </Button>
                         <Button Content="New" 
+                                x:Name="New"
                             Margin="{StaticResource ElementBorderControlLeftTop}"
                             Style="{StaticResource ButtonOrangeStyle}" 
                             Command="{Binding NewWebSourceCommand}" 
