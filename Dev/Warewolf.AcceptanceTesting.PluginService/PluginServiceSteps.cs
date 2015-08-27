@@ -175,7 +175,7 @@ namespace Warewolf.AcceptanceTesting.PluginService
         public void GivenTabIsOpened(string headerText)
         {
             var viewModel = Utils.GetViewModel<ManagePluginServiceViewModel>();
-            Assert.AreEqual(headerText, viewModel.Header);
+            Assert.AreEqual(headerText, viewModel.Header.Replace(" *", ""));
         }
 
         [Given(@"Select a source is focused")]
@@ -291,8 +291,8 @@ namespace Warewolf.AcceptanceTesting.PluginService
         [Then(@"""(.*)"" isopened in another tab")]
         public void ThenIsopenedInAnotherTab(string p0)
         {
-            //var PluginServiceModel = ScenarioContext.Current.Get<Mock<IPluginServiceModel>>("model");
-            //PluginServiceModel.Verify(a => a.EditSource(_demoPluginSourceDefinition));
+            var pluginServiceModel = ScenarioContext.Current.Get<Mock<IPluginServiceModel>>("model");
+            pluginServiceModel.Verify(a => a.CreateNewSource());
         }
 
         [Given(@"""(.*)"" is selected as source")]

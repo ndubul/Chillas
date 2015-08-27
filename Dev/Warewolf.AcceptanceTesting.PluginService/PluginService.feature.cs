@@ -82,7 +82,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.Given("I open New Plugin Service Connector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.And("\"New Plugin Connector *\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"New Plugin Connector\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
  testRunner.And("Select a source is focused", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
@@ -414,7 +414,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 137
  testRunner.Given("I open New Plugin Service Connector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 138
- testRunner.And("\"New Plugin Connector *\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"New Plugin Connector\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 139
  testRunner.When(string.Format("I select \"{0}\" as source", source), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 140

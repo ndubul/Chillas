@@ -6,7 +6,7 @@ Feature: PluginService
 
 Scenario: Opening Plugin Service Connector tab
 	Given I open New Plugin Service Connector
-	And "New Plugin Connector *" tab is opened
+	And "New Plugin Connector" tab is opened
 	And Select a source is focused
 	And "1 Select a Source" is "Enabled"
 	And "2 Select a Namespace" is "Enabled"
@@ -135,7 +135,7 @@ Scenario: Plugin service GetType test
 
 Scenario Outline: Fromat exception error
 	Given I open New Plugin Service Connector
-	And "New Plugin Connector *" tab is opened
+	And "New Plugin Connector" tab is opened
 	When I select "<source>" as source
 	And "2 Select a Namespace" is "Enabled"
 	And "3 Select an Action" is "Disabled" 
