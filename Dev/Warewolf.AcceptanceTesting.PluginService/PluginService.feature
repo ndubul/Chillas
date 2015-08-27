@@ -9,9 +9,9 @@ Scenario: Opening Plugin Service Connector tab
 	And "New Plugin Connector" tab is opened
 	And Select a source is focused
 	And "1 Select a Source" is "Enabled"
-	And "2 Select a Namespace" is "Enabled"
-	And "3 Select an Action" is "Enabled" 
-	And "4 Provide Test Values" is "Enabled" 
+	And "2 Select a Namespace" is "Disabled"
+	And "3 Select an Action" is "Disabled" 
+	And "4 Provide Test Values" is "Disabled" 
 	And "Test" is "Disabled"
 	And "Save" is "Disabled"
     And "5 Defaults and Mapping" is "Disabled" 
@@ -124,7 +124,7 @@ Scenario: Plugin service GetType test
 	And "2 Select a Namespace" is "Enabled"
 	When I select "Unlimited Framework Plugins EmailPlugin" as namespace
 	Then "3 Select an Action" is "Enabled" 
-	When I select "SampleSend" as action
+	When I select "GetType" as action
 	And "4 Provide Test Values" is "Enabled" 
 	And "Test" is "Enabled"
 	When "Test" is clicked

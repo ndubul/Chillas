@@ -126,9 +126,20 @@ Scenario: Search while GAC tree view is loading
 	Given I open New Plugin Source
 	When I click "GAC"
 	And "Save" is "Disabled"
-	When I Search for "vjslib" before the tree view is completely loaded
+	When I filter for "vjslib" before the tree view is completely loaded
 	And I click "vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 	Then Assembly value is "GAC:vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 	And "Save" is "Enabled"
 	When I save Plugin source
 	Then the save dialog is opened
+
+
+Scenario: Clear filter using clear filter button
+	Given I open New Plugin Source
+	When I click "GAC"
+	And "Save" is "Disabled"
+	When I filter for "vjslib"
+	And I click "Clear"
+	Then "GAC" tree-view is repopulated
+	And "Save" is "Disabled"
+	

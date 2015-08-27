@@ -1259,20 +1259,21 @@ Scenario Outline: Ensuring all inputs work as expected
 	And a decision variable '<variable2>' value '<Var2>'
 	And a decision variable '<variable3>' value '<Var3>'	
 	And check if '<variable1>' "IsBetween" '<variable2>' and '<variable3>'
+	And "Require All decisions to be True" is '<Requirement>'
 	When the decision tool is executed
-	Then the decision result should be "<decision>"
 	Then the execution has "NO" error
 	Examples: 
-	| variable1          | Var1 | variable2        | Var2           | variable3           | Var3 | decision |
-	|                    |      |                  |                |                     |      |          |
-	| [[q]]              |      | [[rec(1).a]]     | " "            | [[rs(1).set]]       | 5    |          |
-	| [[rec().a]]        | 27   | 22               | 22             | 33                  | 33   |          |
-	| [[rec(*).a]]       | T    | "South Africa"   | "South Africa" | H                   | H    |          |
-	| [[rec([[int]]).a]] | 2    | [[p]]            |                | [[q]]               |      |          |
-	| [[a]]              | 10   | " "              | " "            | " "                 | " "  |          |
-	| [[a]]              | 27   | [[rec().a]]      | 22             | [[rs(*).set]]       | 33   |          |
-	| [[a]]              | T    | [[rec([[int]].a) | "South Africa" | [[rs().set]]        | H    |          |
-	| [[a]]              | 2    | [[rec(*).a]]     | 5              | [[rs([[int]]).set]] | 7    |          |
-	
+	| variable1          | Var1 | variable2        | Var2           | variable3           | Var3 | Requirement |
+	|                    |      |                  |                |                     |      | true        |
+	| [[q]]              |      | [[rec(1).a]]     | " "            | [[rs(1).set]]       | 5    | true        |
+	| [[rec().a]]        | 27   | 22               | 22             | 33                  | 33   | true        |
+	| [[rec(*).a]]       | T    | "South Africa"   | "South Africa" | H                   | H    | true        |
+	| [[rec([[int]]).a]] | 2    | [[p]]            |                | [[q]]               |      | true        |
+	| [[a]]              | 10   | " "              | " "            | " "                 | " "  | false       |
+	| [[a]]              | 27   | [[rec().a]]      | 22             | [[rs(*).set]]       | 33   | true        |
+	| [[a]]              | T    | [[rec([[int]].a) | "South Africa" | [[rs().set]]        | H    | true        |
+	| [[a]]              | 2    | [[rec(*).a]]     | 5              | [[rs([[int]]).set]] | 7    | true        |
 	#failing
 	#[[rec(*).a]]
+
+
