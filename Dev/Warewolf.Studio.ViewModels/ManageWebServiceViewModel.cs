@@ -45,7 +45,7 @@ namespace Warewolf.Studio.ViewModels
 
         ICollection<IWebServiceSource> _sources;
         IWebServiceSource _selectedSource;
-        IWebService _webService;
+        readonly IWebService _webService;
         ICollection<NameValue> _headers;
         string _requestUrlQuery;
         string _sourceUrl;
@@ -69,10 +69,6 @@ namespace Warewolf.Studio.ViewModels
         string _path;
         bool _canEditHeadersAndUrl;
         string _recordsetName;
-        ICommand _addHeaderCommand;
-        ICommand _removeHeaderCommand;
-        NameValue _selectedRow;
-        ICollection<object> _selectedDataItems;
         bool _canEditResponse;
         bool _isInputsEmptyRows;
         bool _isOutputMappingEmptyRows;
@@ -109,7 +105,7 @@ namespace Warewolf.Studio.ViewModels
             RequestBody = "";
             Response = "";
             TestCommand = new DelegateCommand(() => Test(_model, ToModel()), CanTest);
-            CreateNewSourceCommand = new DelegateCommand(_model.CreateNewSource);
+      
             SaveCommand = new DelegateCommand(Save, CanSave);
             NewWebSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
             EditWebSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource), () => SelectedSource != null);
@@ -181,8 +177,6 @@ namespace Warewolf.Studio.ViewModels
             Headers.Remove(SelectedRow);
         }
 
-        public DelegateCommand CreateNewSourceCommand { get; set; }
-
         void VariablesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             Inputs.Clear();
@@ -195,7 +189,7 @@ namespace Warewolf.Studio.ViewModels
             return Variables.Select(nameValue => new ServiceInput(DataListUtil.RemoveLanguageBrackets(nameValue.Name), nameValue.Value)).Cast<IServiceInput>().ToList();
         }
 
-        public bool CanTest()
+        bool CanTest()
         {
             return SelectedSource != null;
         }
@@ -257,7 +251,7 @@ namespace Warewolf.Studio.ViewModels
 
         }
 
-        public WebService ResponseWebService { get; set; }
+        WebService ResponseWebService { get; set; }
 
         void UpdateMappingsFromResponse()
         {
@@ -403,50 +397,12 @@ namespace Warewolf.Studio.ViewModels
                 OnPropertyChanged(() => CanEditResponse);
             }
         }
-        public ICommand AddHeaderCommand
-        {
-            get
-            {
-                return _addHeaderCommand;
-            }
-            set
-            {
-                _addHeaderCommand = value;
-            }
-        }
-        public ICommand RemoveHeaderCommand
-        {
-            get
-            {
-                return _removeHeaderCommand;
-            }
-            set
-            {
-                _removeHeaderCommand = value;
-            }
-        }
-        public NameValue SelectedRow
-        {
-            get
-            {
-                return _selectedRow;
-            }
-            set
-            {
-                _selectedRow = value;
-            }
-        }
-        public ICollection<object> SelectedDataItems
-        {
-            get
-            {
-                return _selectedDataItems;
-            }
-            set
-            {
-                _selectedDataItems = value;
-            }
-        }
+        // ReSharper disable once MemberCanBePrivate.Global
+        public ICommand AddHeaderCommand { get; set; }
+        public ICommand RemoveHeaderCommand { get; private set; }
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
+        public NameValue SelectedRow { get; set; }
+        public ICollection<object> SelectedDataItems { get; set; }
 
         public bool CanEditMappings
         {
@@ -502,7 +458,7 @@ namespace Warewolf.Studio.ViewModels
         public string HeaderText
         {
             get { return _headerText; }
-            set
+            private set
             {
                 _headerText = value;
                 OnPropertyChanged(() => HeaderText);
@@ -893,7 +849,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 return _inputs;
             }
-            set
+            private set
             {
                 _inputs = value;
                 IsInputsEmptyRows = true;
@@ -1003,14 +959,7 @@ namespace Warewolf.Studio.ViewModels
         /// Output Column alias Header
         /// </summary>
         public string OutputAliasHeader { get; set; }
-        public IRequestServiceNameViewModel SaveDialog
-        {
-            get
-            {
-                return _saveDialog;
-            }
-        }
-        public IWebServiceModel Model
+        IWebServiceModel Model
         {
             get
             {
@@ -1100,6 +1049,7 @@ namespace Warewolf.Studio.ViewModels
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public void Dispose()
         {
         }

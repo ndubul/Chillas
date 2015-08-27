@@ -123,10 +123,10 @@ Scenario: Adding parameters in request headers is updating variables
 	Given I open New Web Service Connector
 	Then "New Web Service Connector" tab is opened
 	When I select "Get" as Method
-	And I select "Dev2CountriesWebService" as data source
+	And I select "Dev2CountriesWebService" as data source with default query as '?extension=[[extension]]&prefix=[[prefix]]' and URL as "http://rsaklfsvrtfsbld/integrationTestSite/GetCountries.ashx" 
 	And "New" is "Enabled"
 	Then "2 Request headers" is "Enabled"
-	And input mappings are
+	And I edit the headers as
          | name  | Value |
          | [[a]] | T     |
 	And "3 Variables" is "Enabled" 
@@ -137,7 +137,7 @@ Scenario: Adding parameters in request headers is updating variables
 	When I click the "Paste" tool
 	And "5 Defaults and Mapping" is "Enable"
 	And "Save" is "Enabled"
-    Then input mappings are
+    Then service input mappings are
 	| Input     | Default Value | Required Field | Empty is Null |
 	| extension | json          |                |               |
 	| prefix    | a             |                |               |
@@ -150,23 +150,23 @@ Scenario: Adding parameters in request headers is updating variables
 	Given I open New Web Service Connector
 	Then "New Web Service Connector" tab is opened
 	When I select "Get" as Method
-	And I select "Dev2CountriesWebService" as data source
+	And I select "Dev2CountriesWebService" as data source with default query as '?extension=[[extension]]&prefix=[[prefix]]' and URL as "http://rsaklfsvrtfsbld/integrationTestSite/GetCountries.ashx" 
 	And "New" is "Enabled"
 	And "Edit" is "Enabled"
 	Then "2 Request" is "Enabled"
 	And "3 Variables" is "Enabled" 
 	And request URL has "http://rsaklfsvrtfsbld/integrationTestSite/GetCountries.ashx" 
-	And parameters as "?extension=[[extension]]&prefix=[[prefix]]"
+	And URL parameters as "?extension=[[extension]]&prefix=[[prefix]]"
 	When I change request url parameter to "?extension=[[variable1]]&prefix=[[variable2]]"
-	And "3 Variables" are
-	|                 |
-	| [[variable1]] = |
-	| [[variable2]] = |   
+	And Variables are
+	|               |
+	| [[variable1]] |
+	| [[variable2]] |
 	When Test Connection is "Successful"
 	Then "4 Response" is "Enabled" 
 	And the response is loaded
 	And "5 Default and Mapping" is "Enabled" 
-    Then input mappings are
+    Then service input mappings are
 	| Input         | Default Value | Required Field | Empty is Null |
 	| [[variable1]] | json          |                |               |
 	| [[variable2]] | a             |                |               |
@@ -176,19 +176,16 @@ Scenario: Adding parameters in request headers is updating variables
 	Given I open New Web Service Connector
 	Then "New Web Service Connector" tab is opened	
 	When I select "Delete" as Method
-	And I select "Dev2CountriesWebService" as data source
+	And I select "Dev2CountriesWebService" as data source with default query as '?extension=[[extension]]&prefix=[[prefix]]' and URL as "http://rsaklfsvrtfsbld/integrationTestSite/GetCountries.ashx" 
 	And "New" is "Enabled"
 	And "Edit" is "Enabled"
 	Then "2 Request" is "Enabled"
-	When I type "Request" as
-	| Name  | Value |
-	| [[a]] |       |
-	| [[b]] |       |
+	When I type the request body as "[[a]] bob [[b]]"
 	And "3 Variables" is "Enabled" 
-	And "3 Variables" are
+	And Variables are
 	|                  |
-	| extension = json |
-	| prefix  = a      |
+	| [[extension]] |
+	| [[prefix]] |
 	| [[a]]            |
 	| [[b]]            |
 	And "Test" is "Enabled"
@@ -196,16 +193,12 @@ Scenario: Adding parameters in request headers is updating variables
 	Then "4 Response" is "Enabled" 
 	And the response is loaded
 	And "5 Default and Mapping" is "Enabled" 
-	Then input mappings are
+    Then service input mappings are
 	| Input     | Default Value | Required Field | Empty is Null |
 	| extension |               |                |               |
 	| prefix    |               |                |               |
 	| a         |               |                |               |
 	| b         |               |                |               |
-	And output mappings are
-	| Output      | Output Alias |
-	| CountryID   | CountryID    |
-	| Description | Description  |
 	And "Save" is "Enabled" 
 	When I save
 	Then Save Dialog is opened
