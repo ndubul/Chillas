@@ -43,9 +43,11 @@ namespace Warewolf.Studio.Views
         {
             var effect = new BlurEffect { Radius = 10, KernelType = KernelType.Gaussian, RenderingBias = RenderingBias.Quality };
             var content = Application.Current.MainWindow.Content as Grid;
-            _blackoutGrid = new Grid();
-            _blackoutGrid.Background = new SolidColorBrush(Colors.Black);
-            _blackoutGrid.Opacity = 0.75;
+            _blackoutGrid = new Grid
+            {
+                Background = new SolidColorBrush(Colors.DarkGray),
+                Opacity = 0.5
+            };
             if (content != null)
             {
                 content.Children.Add(_blackoutGrid);

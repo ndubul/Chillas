@@ -156,6 +156,9 @@ namespace Dev2.Activities.Designers2.Core
                     case "ServiceQuickVariableInput":
                         image.Source = ImageAwesome.CreateImageSource(FontAwesomeIcon.ListAlt, brush);
                         break;
+                    case "ServicePropertyEdit":
+                        image.Source = ImageAwesome.CreateImageSource(FontAwesomeIcon.Pencil, brush);
+                        break;
                     default:
                         image.Source = new BitmapImage(new Uri(sourceUri));
                         break;

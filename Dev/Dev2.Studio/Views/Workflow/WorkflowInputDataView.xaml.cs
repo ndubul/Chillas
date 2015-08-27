@@ -397,8 +397,8 @@ namespace Dev2.Studio.Views.Workflow
             var content = Application.Current.MainWindow.Content as Grid;
             _blackoutGrid = new Grid
             {
-                Background = new SolidColorBrush(Colors.Black),
-                Opacity = 0.75
+                Background = new SolidColorBrush(Colors.DarkGray),
+                Opacity = 0.5
             };
             if (content != null)
             {
