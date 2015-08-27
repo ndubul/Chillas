@@ -17,9 +17,10 @@ using Moq;
 using TechTalk.SpecFlow;
 using Warewolf.AcceptanceTesting.Core;
 using Warewolf.Core;
-using Warewolf.Studio.Core.Infragistics_Prism_Region_Adapter;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable All
 
 namespace Warewolf.AcceptanceTesting.WebService
 {
@@ -47,6 +48,23 @@ namespace Warewolf.AcceptanceTesting.WebService
             FeatureContext.Current.Add("model", mockWebServiceModel);
             FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
         }
+
+        [BeforeScenario]
+        public static void Reset()
+        {
+            var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
+            mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Verifiable();
+            var mockWebServiceModel = new Mock<IWebServiceModel>();
+            SetupModel(mockWebServiceModel);
+
+            var viewModel = new ManageWebServiceViewModel(mockWebServiceModel.Object, mockRequestServiceNameViewModel.Object);
+
+            ((ManageWebserviceControl)FeatureContext.Current[Utils.ViewNameKey]).DataContext = viewModel;
+            FeatureContext.Current[Utils.ViewModelNameKey]= viewModel;
+            FeatureContext.Current["model"] =  mockWebServiceModel;
+            FeatureContext.Current["requestServiceNameViewModel"]= mockRequestServiceNameViewModel;
+        }
+
 
 
         private static void SetupModel(Mock<IWebServiceModel> mockWebServiceModel)
