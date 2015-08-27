@@ -544,6 +544,9 @@ You need Administrator permission.</value>
   <data name="MenuDialogDebugLabel" xml:space="preserve">
     <value>Debug</value>
   </data>
+  <data name="MenuDialogStopDebugLabel" xml:space="preserve">
+    <value>Stop</value>
+  </data>
   <data name="MenuDialogDeployLabel" xml:space="preserve">
     <value>Deploy</value>
   </data>

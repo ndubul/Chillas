@@ -19,6 +19,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Dev2.Activities.Designers2.Core.Adorners;
@@ -27,6 +28,7 @@ using Dev2.Activities.Designers2.Core.Help;
 using Dev2.Activities.Designers2.Sequence;
 using Dev2.Studio.Core.Activities.Services;
 using Dev2.Utilities;
+using FontAwesome.WPF;
 
 namespace Dev2.Activities.Designers2.Core
 {
@@ -372,13 +374,15 @@ namespace Dev2.Activities.Designers2.Core
             {
                 if(ViewModel.ShowLarge)
                 {
-                    var icon = new Image { Source = new BitmapImage(new Uri("pack://application:,,,/Dev2.Activities.Designers;component/Images/ServiceCollapseMapping-32.png")), Height = 16, Width = 16 };
+                    var imageSource = ImageAwesome.CreateImageSource(FontAwesomeIcon.Compress, Brushes.Black);
+                    var icon = new Image { Source = imageSource, Height = 14, Width = 14 };
                     _showCollapseLargeView.Header = "Collapse Large View";
                     _showCollapseLargeView.Icon = icon;
                 }
                 else if(ViewModel.ShowSmall)
                 {
-                    var icon = new Image { Source = new BitmapImage(new Uri("pack://application:,,,/Dev2.Activities.Designers;component/Images/ServiceExpandMapping-32.png")), Height = 16, Width = 16 };
+                    var imageSource = ImageAwesome.CreateImageSource(FontAwesomeIcon.Expand, Brushes.Black);
+                    var icon = new Image { Source = imageSource, Height = 14, Width = 14 };
                     _showCollapseLargeView.Header = "Show Large View";
                     _showCollapseLargeView.Icon = icon;
                 }
