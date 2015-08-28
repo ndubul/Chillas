@@ -385,7 +385,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="XML\DependenciesGraphUniqueTest.xml" />
-    <EmbeddedResource Include="Assets\Dev2Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dev2.Activities.Designers\Dev2.Activities.Designers.csproj">
@@ -486,6 +485,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\" />
     <Folder Include="Configuration\" />
     <Folder Include="Diagnostics\Debug\" />
     <Folder Include="ViewModelTests\Configuration\" />
@@ -500,11 +500,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="XML\ResourceWithErrors.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Activities\TestImage.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

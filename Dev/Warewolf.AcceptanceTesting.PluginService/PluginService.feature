@@ -61,8 +61,8 @@ Scenario: Opening saved Plugin Service
 	And "testingPluginSrc" is selected as source
 	And "2 Select a Namespace" is "Enabled"
 	And "3 Select an Action" is "Enabled"
-	And "4 Provide Test Values" is "Enabled"
-	And "5 Edit Default and Mapping Names" is "Enabled"   
+	And "4 Provide Test Values" is "Disabled"
+	And "5 Edit Default and Mapping Names" is "Disabled"   
 	And I change the source to "PrimitivePlugintestSrc"
 	Then "2 Select a namespace" is "Enabled"
 	And "3 Select an Action" is "Enabled"
@@ -144,7 +144,7 @@ Scenario Outline: Fromat exception error
 	When I select "<action>" as action
 	And "4 Provide Test Values" is "Enabled" 
 	And "Test" is "Enabled"
-	When "Test" is clicked
+	When "Test" is clicked and expeced to be unsuccessful
 	And the Test Connection is "Unsuccessful"
 	Examples: 
 	| source                 | namespace                               | action        |
