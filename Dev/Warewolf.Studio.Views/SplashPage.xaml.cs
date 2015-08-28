@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using Dev2.Common.Interfaces;
 
 namespace Warewolf.Studio.Views
@@ -70,6 +71,18 @@ namespace Warewolf.Studio.Views
             _isDialog = isDialog;
             if (_isDialog)
             {
+                var effect = new BlurEffect { Radius = 10, KernelType = KernelType.Gaussian, RenderingBias = RenderingBias.Quality };
+                var content = Application.Current.MainWindow.Content as Grid;
+                _blackoutGrid = new Grid
+                {
+                    Background = new SolidColorBrush(Colors.DarkGray),
+                    Opacity = 0.5
+                };
+                if (content != null)
+                {
+                    content.Children.Add(_blackoutGrid);
+                }
+                Application.Current.MainWindow.Effect = effect;
                 ShowDialog();
             }
             else
@@ -88,9 +101,21 @@ namespace Warewolf.Studio.Views
         {
             if (e.Key == Key.Escape)
             {
+                RemoveBlackOutEffect();
                 Close();
             }
         }
 
+        #region Implementation of IComponentConnector
+
+        /// <summary>
+        /// Attaches events and names to compiled content. 
+        /// </summary>
+        /// <param name="connectionId">An identifier token to distinguish calls.</param><param name="target">The target to connect events and names to.</param>
+        public void Connect(int connectionId, object target)
+        {
+        }
+
+        #endregion
     }
 }

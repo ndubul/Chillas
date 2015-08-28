@@ -43,6 +43,7 @@ namespace Dev2.Interfaces
         IToolboxViewModel ToolboxViewModel { get; }
         IHelpWindowViewModel HelpViewModel { get; }
 
+        void ShowAboutBox();
         void DisplayDialogForNewVersion();
 
         Task<bool> CheckForNewVersion();

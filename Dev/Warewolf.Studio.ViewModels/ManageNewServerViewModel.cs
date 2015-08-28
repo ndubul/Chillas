@@ -53,6 +53,7 @@ namespace Warewolf.Studio.ViewModels
 
             ServerSource = newServerSource;
             Header = String.IsNullOrEmpty(newServerSource.Name) ? "New Server Source" : SetToEdit(newServerSource);
+            HeaderText = String.IsNullOrEmpty(newServerSource.Name) ? "New Server Source" : SetToEdit(newServerSource);
             ID = Guid.NewGuid();
             IsValid = false;
             Address = newServerSource.Address;

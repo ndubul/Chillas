@@ -15,6 +15,8 @@ using System.Windows.Input;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Interfaces;
+using Dev2.Studio.Core.AppResources.Converters;
+using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 
@@ -30,6 +32,7 @@ namespace Warewolf.Studio.ViewModels
         ICommand _saveCommand;
         ICommand _executeServiceCommand;
         ICommand _supportCommand;
+        FontAwesomeIcon _debugIcon;
 
         public MenuViewModel(IMainViewModel mainViewModel)
         {
@@ -75,6 +78,20 @@ namespace Warewolf.Studio.ViewModels
             ButtonWidth = 125;
             IsPanelLockedOpen = true;
             IsPanelOpen = true;
+            DebugIcon = FontAwesomeIcon.Play;
+        }
+
+        public FontAwesomeIcon DebugIcon
+        {
+            get
+            {
+                return _debugIcon;
+            }
+            set
+            {
+                _debugIcon = value;
+                OnPropertyChanged(() => DebugIcon);
+            }
         }
 
         public ICommand SupportCommand { get; set; }
@@ -297,12 +314,20 @@ namespace Warewolf.Studio.ViewModels
                 return String.Empty;
             }
         }
+        public bool IsProcessing
+        {
+            get
+            {
+                return false;
+                //return _debugStatus != DebugStatus.Ready && _debugStatus != DebugStatus.Finished && _debugStatus != DebugStatus.Stopping;
+            }
+        }
         public string DebugLabel
         {
             get
             {
                 if (ButtonWidth == 125)
-                    return Resources.Languages.Core.MenuDialogDebugLabel;
+                    return IsProcessing ? Resources.Languages.Core.MenuDialogStopDebugLabel : Resources.Languages.Core.MenuDialogDebugLabel;
                 return String.Empty;
             }
         }

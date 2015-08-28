@@ -1417,14 +1417,14 @@ namespace Dev2.UI
 
         public string AddBracketsToExpression(string expression)
         {
-            string result = expression;
+            string result = expression.Trim();
 
             if(!result.StartsWith("[["))
             {
                 result = string.Concat(!result.StartsWith("[") ? "[[" : "[", result);
             }
 
-            if(!expression.EndsWith("]]"))
+            if (!result.EndsWith("]]"))
             {
                 result = string.Concat(result, !expression.EndsWith("]") ? "]]" : "]");
             }
