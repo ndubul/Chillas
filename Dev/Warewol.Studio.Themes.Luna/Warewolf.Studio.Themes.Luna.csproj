@@ -862,8 +862,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\newmoon.jpg" />
-    <Resource Include="Images\StartNode.png" />
-    <Resource Include="Images\Warewolf-logo-transparent.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dev2.Activities.Designers\Dev2.Activities.Designers.csproj">
