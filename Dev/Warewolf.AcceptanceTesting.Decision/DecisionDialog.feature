@@ -1,7 +1,7 @@
 ﻿Feature: DecisionDialog
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+	In order to create decisions
+	As a Warewolf User
+	I want to be shown the decision window setup
 
 #WOLF-1082 
 Scenario Outline: Ensure Inputs are enabled on decision window load
@@ -80,7 +80,7 @@ Scenario Outline: Ensure Match Type droplist is populated correctly
 	And drop a "Decision" onto the design surface
 	And the decision tool window is opened
 	And I select the "Match Type" menu
-	And Match Type has '<Options>' visible
+	And Match Type has '<options>' visible
 	Examples: 
 	| options            |
 	| Choose...          |
