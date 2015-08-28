@@ -46,7 +46,7 @@ namespace Warewolf.AcceptanceTesting.PluginService
 
         }
 
-        private static void SetupModel(Mock<IPluginServiceModel> mockPluginServiceModel)
+        private static void SetupModel(Mock<IPluginServiceModel> mockPluginServiceModel, bool errortest = false)
         {
             _demoPluginSourceDefinition = new PluginSourceDefinition
             {
@@ -123,9 +123,22 @@ namespace Warewolf.AcceptanceTesting.PluginService
 
             var serializer = new Dev2JsonSerializer();
             var serializedPluginService = serializer.Serialize(pluginService);
-
-            mockPluginServiceModel.Setup(model => model.TestService(It.IsAny<IPluginService>()))
-                .Returns(serializedPluginService);
+            RecordsetList lst = new RecordsetList();
+            if (errortest)
+                mockPluginServiceModel.Setup(model => model.TestService(It.IsAny<IPluginService>()))
+                .Throws(new Exception());
+            else
+            {
+                mockPluginServiceModel.Setup(model => model.TestService(It.IsAny<IPluginService>()))
+    .Returns(serializer.Serialize(lst));
+            }
+            try { 
+            Utils.GetViewModel<ManagePluginServiceViewModel>().Model = mockPluginServiceModel.Object;
+                }
+            catch
+            {
+                // ignored
+            }
         }
 
         [BeforeScenario("PluginService")]
@@ -148,7 +161,12 @@ namespace Warewolf.AcceptanceTesting.PluginService
             ScenarioContext.Current.Remove("requestServiceNameViewModel");
             var requestServiceNameViewModelMock = new Mock<IRequestServiceNameViewModel>();
             ScenarioContext.Current.Add("requestServiceNameViewModel", requestServiceNameViewModelMock);
-            var viewModel = new ManagePluginServiceViewModel(ScenarioContext.Current.Get<Mock<IPluginServiceModel>>("model").Object, pluginService);
+            var viewModel = new ManagePluginServiceViewModel(ScenarioContext.Current.Get<Mock<IPluginServiceModel>>("model").Object, pluginService)
+            {
+                SelectedAction = _pluginAction,
+                SelectedNamespace = new NamespaceItem() { FullName = "bob"}
+            };
+
             ScenarioContext.Current.Add("viewModel", viewModel);
             var view = Utils.GetView<ManagePluginServiceControl>();
             try
@@ -218,8 +236,21 @@ namespace Warewolf.AcceptanceTesting.PluginService
             var view = Utils.GetView<ManagePluginServiceControl>();
             view.TestAction();
             var viewModel = Utils.GetViewModel<ManagePluginServiceViewModel>();
+            viewModel.TestPluginCommand.Execute(null);
             Assert.AreNotSame(String.Empty, viewModel.ErrorText);
         }
+
+        [When(@"""(.*)"" is clicked and expeced to be unsuccessful")]
+        public void WhenIsClickedAndExpecedToBeUnsuccessful(string p0)
+        {
+            var pluginServiceModel = ScenarioContext.Current.Get<Mock<IPluginServiceModel>>("model");
+            SetupModel(pluginServiceModel,true);
+            var view = Utils.GetView<ManagePluginServiceControl>();
+            view.TestAction();
+            var viewModel = Utils.GetViewModel<ManagePluginServiceViewModel>();
+            Assert.AreNotSame(String.Empty, viewModel.ErrorText);
+        }
+
 
         [When(@"""(.*)"" is clicked")]
         public void WhenIsClicked(string name)
@@ -333,7 +364,8 @@ namespace Warewolf.AcceptanceTesting.PluginService
         public void GivenInputMappingsAre(Table table)
         {
             var view = Utils.GetView<ManagePluginServiceControl>();
-            var inputMappings = view.GetInputs();
+            var vm  = Utils.GetViewModel<ManagePluginServiceViewModel>();
+            var inputMappings = vm.Inputs;
             var i = 0;
             if (inputMappings == null)
             {
@@ -341,9 +373,9 @@ namespace Warewolf.AcceptanceTesting.PluginService
             }
             else
             {
-                foreach (var input in inputMappings.SourceCollection)
+                foreach (var input in inputMappings)
                 {
-                    var inputMapping = input as IServiceInput;
+                    var inputMapping = input;
                     if (inputMapping != null)
                     {
                         Assert.AreEqual(inputMapping.Name, table.Rows.ToList()[i][0]);
@@ -407,7 +439,8 @@ namespace Warewolf.AcceptanceTesting.PluginService
             var view = Utils.GetView<ManagePluginServiceControl>();
             PluginAction pluginAction = new PluginAction
             {
-                FullName = actionName
+                FullName = actionName,
+                Inputs = new List<IServiceInput>() { new ServiceInput("data", "data") { } }
             };
             view.SelectAction(pluginAction);
             var viewModel = Utils.GetViewModel<ManagePluginServiceViewModel>();
