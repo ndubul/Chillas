@@ -938,6 +938,15 @@ namespace Dev2.Studio.ViewModels
             return pasteView.ShowView(current);
         }
 
+        public void EditServer(IServerSource selectedServer)
+        {
+            var server = CustomContainer.Get<IServer>();
+            var serverViewModel = new ManageNewServerViewModel(selectedServer, server.UpdateRepository, CustomContainer.Get<IRequestServiceNameViewModel>(), server.ResourceName, Guid.Empty);
+            var vm = new SourceViewModel<IServerSource>(EventPublisher, serverViewModel, PopupProvider, new ManageServerControl());
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.WebSource), vm);
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
+        }
+
         public void EditResource(IDbSource selectedSource)
         {
 
