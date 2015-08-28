@@ -31,8 +31,8 @@ namespace Warewolf.AcceptanceTesting.WebService
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "WebService", "In order to create New Web Service in Warewolf\nAs a Warewolf User\nI want to Creat" +
-                    "e or Edit Warewolf Web Service.", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "WebService", "In order to create New Web Service in Warewolf\r\nAs a Warewolf User\r\nI want to Cre" +
+                    "ate or Edit Warewolf Web Service.", ProgrammingLanguage.CSharp, new string[] {
                         "WebService"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -610,7 +610,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 217
  testRunner.And("\"New\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 218
- testRunner.And("\"1 Select Request Method & Source\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"1 Select Request Method and Source\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 219
  testRunner.And("\"Edit\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 220
