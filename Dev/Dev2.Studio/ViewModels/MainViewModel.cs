@@ -658,6 +658,17 @@ namespace Dev2.Studio.ViewModels
             var factory = CustomContainer.Get<IDialogViewModelFactory>();
             WindowManager.ShowDialog(factory.CreateAboutDialog());
         }
+        public void ShowAboutBox()
+        {
+            var server = CustomContainer.Get<IServer>();
+            var splashViewModel = new SplashViewModel(server, new ExternalProcessExecutor());
+
+            SplashPage splashPage = new SplashPage { DataContext = splashViewModel };
+            ISplashView splashView = splashPage;
+            splashViewModel.ShowServerVersion();
+            // Show it 
+            splashView.Show(true);
+        }
 
         // Write CodedUI Test Because of Silly Chicken affect ;)
         private bool ShowRemovePopup(IWorkflowDesignerViewModel workflowVm)

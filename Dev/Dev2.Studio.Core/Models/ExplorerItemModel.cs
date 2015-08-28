@@ -918,8 +918,11 @@ namespace Dev2.Models
 
         void ShowServerVersionAbout()
         {
-            var factory = CustomContainer.Get<IDialogViewModelFactory>();
-            WindowManager.ShowDialog(factory.CreateServerAboutDialog(_studioResourceRepository.GetServerVersion(EnvironmentId)));
+            var mainView = CustomContainer.Get<IMainViewModel>();
+            mainView.ShowAboutBox();
+
+            //var factory = CustomContainer.Get<IDialogViewModelFactory>();
+            //WindowManager.ShowDialog(factory.CreateServerAboutDialog(_studioResourceRepository.GetServerVersion(EnvironmentId)));
         }
         public IWindowManager WindowManager
         {
