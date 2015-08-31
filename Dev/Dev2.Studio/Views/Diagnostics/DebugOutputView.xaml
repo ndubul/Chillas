@@ -434,7 +434,7 @@
                                         Focusable="False"
                                         VerticalAlignment="Bottom"
                                         HorizontalAlignment="Left"
-                                        Width="15"
+                                        Style="{StaticResource ButtonTransparentStyle}"
                                         Visibility="{Binding MoreLink, Converter={StaticResource StringToVisibilityConverter}}"
                                         cal:Message.Attach="OpenMoreLink($DataContext)"
                                         cal:Action.TargetWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeView}}">
@@ -466,12 +466,11 @@
                                         Focusable="False"
                                         VerticalAlignment="Bottom"
                                         HorizontalAlignment="Left"
-                                Width="15" 
-                                Visibility="{Binding MoreLink, Converter={StaticResource StringToVisibilityConverter}}"
-                                    cal:Message.Attach="OpenMoreLink($DataContext)"
-                                    cal:Action.TargetWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeView}}">
-                                    <TextBlock Margin="0 -7"
-                                               Padding="0,0,0,5">...</TextBlock>
+                                        Style="{StaticResource ButtonTransparentStyle}"
+                                        Visibility="{Binding MoreLink, Converter={StaticResource StringToVisibilityConverter}}"
+                                        cal:Message.Attach="OpenMoreLink($DataContext)"
+                                        cal:Action.TargetWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TreeView}}">
+                                    <TextBlock Margin="0 -7" Padding="0,0,0,5">...</TextBlock>
                                 </Button>
                             </StackPanel>
                         </DataTemplate>

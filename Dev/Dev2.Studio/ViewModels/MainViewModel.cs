@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Claims;
@@ -1499,15 +1500,38 @@ namespace Dev2.Studio.ViewModels
         public override void ActivateItem(WorkSurfaceContextViewModel item)
         {
             _previousActive = ActiveItem;
+            if(_previousActive != null)
+            {
+                if(_previousActive.DebugOutputViewModel != null)
+                {
+                    _previousActive.DebugOutputViewModel.PropertyChanged-=DebugOutputViewModelOnPropertyChanged;
+                }
+            }
             base.ActivateItem(item);
             if (item == null || item.ContextualResourceModel == null) return;
-
+            if(item.DebugOutputViewModel != null)
+            {
+                item.DebugOutputViewModel.PropertyChanged += DebugOutputViewModelOnPropertyChanged;
+            }
             if (ExplorerViewModel != null)
             {
                 ExplorerViewModel.BringItemIntoView(item);
             }
         }
 
+        void DebugOutputViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == "IsProcessing")
+            {
+                if (MenuViewModel != null)
+                {
+                    if(ActiveItem.DebugOutputViewModel != null)
+                    {
+                        MenuViewModel.IsProcessing = ActiveItem.DebugOutputViewModel.IsProcessing;
+                    }
+                }
+            }
+        }
 
         #endregion
         #region Resource Deletion

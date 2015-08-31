@@ -744,7 +744,7 @@ namespace Dev2.Settings.Scheduler
 
         ActivityDesignerToggle CreateHelpToggle()
         {
-            var toggle = ActivityDesignerToggle.Create("pack://application:,,,/Dev2.Activities.Designers;component/Images/ServiceHelp-32.png", "Close Help", "pack://application:,,,/Dev2.Activities.Designers;component/Images/ServiceHelp-32.png", "Open Help", "HelpToggle"
+            var toggle = ActivityDesignerToggle.Create("ServiceHelp", "Close Help", "ServiceHelp", "Open Help", "HelpToggle"
                 );
 
             return toggle;

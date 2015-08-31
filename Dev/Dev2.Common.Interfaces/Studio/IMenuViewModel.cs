@@ -49,6 +49,7 @@ namespace Dev2.Common.Interfaces.Studio
         string NewServiceToolTip { get; }
         string SaveToolTip { get; }
         ICommand SupportCommand { get; }
+        bool IsProcessing { get; set; }
 
         void Lock();
     }

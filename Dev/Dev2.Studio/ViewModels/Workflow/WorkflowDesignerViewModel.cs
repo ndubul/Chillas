@@ -1220,7 +1220,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             {
                 //For Changing the icon of the flowchart.
                 WorkflowDesignerIcons.Activities.Flowchart = Application.Current.TryFindResource("Explorer-WorkflowService-Icon") as DrawingBrush;
-                WorkflowDesignerIcons.Activities.StartNode = new DrawingBrush(new ImageDrawing(new BitmapImage(new Uri(@"pack://application:,,,/Warewolf Studio;component/Images/StartNode-Chasdigal.png")), new Rect(0, 0, 32, 32)));
+                WorkflowDesignerIcons.Activities.StartNode = new DrawingBrush(new ImageDrawing(new BitmapImage(new Uri(@"pack://application:,,,/Warewolf Studio;component/Images/StartNode.png")), new Rect(0, 0, 32, 32)));
                 SubscribeToDebugSelectionChanged();
             }
         }
