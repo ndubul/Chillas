@@ -9,24 +9,6 @@ Background: Setup for workflow execution
 			And All environments disconnected
 			And Debug states are cleared
 
-Scenario: Simple workflow executing against the server
-	 Given I have a workflow "WorkflowWithAssign"
-	 And "WorkflowWithAssign" contains an Assign "Rec To Convert" as
-	  | variable    | value |
-	  | [[rec().a]] | yes   |
-	  | [[rec().a]] | no    |	 
-	  When "WorkflowWithAssign" is executed
-	  Then the workflow execution has "NO" error
-	  And the "WorkflowWithAssign" has a start and end duration
-	  And the 'Rec To Convert' in WorkFlow 'WorkflowWithAssign' debug inputs as
-	  | # | Variable      | New Value |
-	  | 1 | [[rec().a]] = | yes       |
-	  | 2 | [[rec().a]] = | no        |
-	  And the 'Rec To Convert' in Workflow 'WorkflowWithAssign' debug outputs as    
-	  | # |                    |
-	  | 1 | [[rec(1).a]] = yes |
-	  | 2 | [[rec(2).a]] = no  |
-
 Scenario: Workflow with multiple tools executing against the server
 	  Given I have a workflow "WorkflowWithAssignAndCount"
 	  And "WorkflowWithAssignAndCount" contains an Assign "Rec To Convert" as
@@ -4187,6 +4169,18 @@ Scenario: Time Zone Changes
 	  | [[Result]] = Pass |
 
 
+#FOREACH
+@ignore
+Scenario: ForEach Acceptance Tests
+	  Given I have a workflow "Master Test"
+	  And "Master Test" contains "Testing/For Each" from server "localhost" with mapping as
+      | Input to Service | From Variable | Output from Service | To Variable |
+	  |                  |               | Result              | [[Result]]  |
+	  When "Master Test" is executed
+	Then the workflow execution has "NO" error
+	  And the 'Testing/For Each' in Workflow 'Master Test' debug outputs as
+	  |                   |
+	  | [[Result]] = Pass |
 #show dependacies
 @ignore
 Scenario: View Dependancies on a workflow with no dependancies
