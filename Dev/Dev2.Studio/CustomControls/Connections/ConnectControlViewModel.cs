@@ -18,12 +18,15 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Dev2.Common.Interfaces.Data;
+using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Core;
+using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.ConnectionHelpers;
 using Dev2.Interfaces;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
+using Warewolf.Studio.ViewModels;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.CustomControls.Connections
@@ -296,28 +299,7 @@ namespace Dev2.CustomControls.Connections
 
                 if(selectedServer.EnvironmentModel.Name == ConnectControlSingleton.NewServerText)
                 {
-                    int newServerIndex;
-
-                    if(!AddNewServer(out newServerIndex, OpenConnectionWizard))
-                    {
-                        if(_dispatcher != null)
-                        {
-                            _dispatcher.BeginInvoke(
-                            new Action(() =>
-                            {
-                                _selectedServerIndex = origValue;
-                                OnPropertyChanged();
-                            }),
-                            DispatcherPriority.ContextIdle,
-                            null
-                        );
-                        }
-                        else
-                        {
-                            _selectedServerIndex = origValue;
-                            OnPropertyChanged();
-                        }
-                    }
+                    _mainViewModel.NewResourceCommand.Execute("Server");
                 }
                 else
                 {
@@ -397,27 +379,6 @@ namespace Dev2.CustomControls.Connections
             return true;
         }
 
-#pragma warning disable 649
-        private readonly Action<IEnvironmentModel, ResourceType, string, string, string, string, string> _openWizard;
-#pragma warning restore 649
-
-        public void OpenConnectionWizard(int selectedIndex)
-        {
-            var localhost = Servers.FirstOrDefault(c => c.EnvironmentModel.IsLocalHost);
-            if(localhost != null)
-            {
-                if(selectedIndex >= 0)
-                {
-                    var environmentModel = Get(selectedIndex);
-                    _openWizard(localhost.EnvironmentModel, ResourceType.Server, null, string.Empty, environmentModel.ID.ToString(), null, environmentModel.Name);
-                }
-                else
-                {
-                    _openWizard(localhost.EnvironmentModel, ResourceType.Server, null, string.Empty, null, null, null);
-                }
-            }
-        }
-
         IEnvironmentModel Get(int selectedIndex)
         {
             var selectedServer = Servers[selectedIndex];
@@ -438,7 +399,16 @@ namespace Dev2.CustomControls.Connections
             get
             {
                 return _editCommand ??
-                       (_editCommand = new RelayCommand(param => _connectControlSingleton.EditConnection(SelectedServerIndex, OpenConnectionWizard)));
+                       (_editCommand = new RelayCommand(param => _mainViewModel.EditServer(new ServerSource()
+                       {
+                           Address = SelectedServer.EnvironmentModel.Connection.AppServerUri.ToString(), 
+                           ID = SelectedServer.EnvironmentModel.ID, 
+                           AuthenticationType = SelectedServer.EnvironmentModel.Connection.AuthenticationType, 
+                           UserName = SelectedServer.EnvironmentModel.Connection.UserName, 
+                           Password = SelectedServer.EnvironmentModel.Connection.Password, 
+                           Name = SelectedServer.EnvironmentModel.Name, 
+                           ResourcePath = SelectedServer.EnvironmentModel.ResourceRepository.FindSingle(a => a.ID == SelectedServer.EnvironmentModel.ID).Category 
+                       })));
             }
         }
 

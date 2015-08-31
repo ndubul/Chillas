@@ -7,6 +7,7 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
+using Dev2.ConnectionHelpers;
 using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
@@ -85,10 +86,13 @@ namespace Warewolf.Studio.ViewModels
                     var source = ToModel();
 
                     ServerSource = source;
+                    ServerSource.Name = RequestServiceNameViewModel.ResourceName.Name;
+                    ServerSource.ResourcePath = RequestServiceNameViewModel.ResourceName.Path;
                     _updateManager.Save(source);
                     HeaderText = SetToEdit(source);
                     if (CloseAction != null)
                         CloseAction.Invoke();
+                    ConnectControlSingleton.Instance.AddServerAndConnect(ServerSource);
                 }
                 catch (Exception err)
                 {
