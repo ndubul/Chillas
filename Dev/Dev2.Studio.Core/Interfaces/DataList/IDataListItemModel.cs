@@ -9,32 +9,12 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Dev2.Data.Binary_Objects;
 
 // ReSharper disable once CheckNamespace
 namespace Dev2.Studio.Core.Interfaces.DataList
 {
-    public interface IVariableListItemModel
-    {
-        bool IsInUse { get; set; }
-        string Name { get; set; }
-        string Description { get; set; }
-        bool HasError { get; }
-        string ErrorMessage { get; }
-        bool IsEditable { get; set; }
-        enDev2ColumnArgumentDirection ColumnIODirection { get; set; }
-        void SetErrorMessage(string errorMessage);
-        void RemoveErrorMessage(string errorMessage);
-    }
-
-    public interface IObjectVariableListItemModel:IVariableListItemModel
-    {
-        ICollection<IObjectVariableListItemModel> Properties { get; set; }
-        IObjectVariableListItemModel Parent { get; set; }
-    }
-
     public interface IDataListItemModel
     {
 

@@ -20,7 +20,6 @@ using System.Windows.Input;
 using System.Xml;
 using Caliburn.Micro;
 using Dev2.Common;
-using Dev2.Data;
 using Dev2.Data.Binary_Objects;
 using Dev2.Data.Interfaces;
 using Dev2.Data.Util;
@@ -35,7 +34,6 @@ using Dev2.Studio.Core.Interfaces.DataList;
 using Dev2.Studio.Core.Messages;
 using Dev2.Studio.Core.Models.DataList;
 using Dev2.Studio.Core.ViewModels.Base;
-using Microsoft.Practices.Prism.Mvvm;
 using ServiceStack.Common.Extensions;
 
 // ReSharper disable CheckNamespace
@@ -177,31 +175,6 @@ namespace Dev2.Studio.ViewModels.DataList
             }
         }
 
-        public ObservableCollection<IObjectVariableListItemModel> Objects
-        {
-            get
-            {
-                return _objects;
-            }
-            set
-            {
-                _objects = value;
-                OnPropertyChanged("Objects");
-            }
-        }
-
-        public ObservableCollection<IVariableListItemModel> Scalars
-        {
-            get
-            {
-                return _scalars;
-            }
-            set
-            {
-                _scalars = value;
-                OnPropertyChanged("Scalars");
-            }
-        } 
         public ObservableCollection<IDataListItemModel> RecsetCollection
         {
             get
@@ -222,8 +195,6 @@ namespace Dev2.Studio.ViewModels.DataList
         bool _toggleSortOrder = true;
         ObservableCollection<IDataListItemModel> _backupScalars;
         ObservableCollection<IDataListItemModel> _backupRecsets;
-        ObservableCollection<IObjectVariableListItemModel> _objects;
-        ObservableCollection<IVariableListItemModel> _scalars;
 
         #endregion Properties
 
@@ -243,12 +214,10 @@ namespace Dev2.Studio.ViewModels.DataList
                 WriteToResourceModel();
             }, CanDelete);
             ClearSearchTextCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(() => SearchText = "");
-            Objects = new ObservableCollection<IObjectVariableListItemModel>();
-            Scalars = new ObservableCollection<IVariableListItemModel>();
             ViewSortDelete = true;
         }
 
-        bool CanDelete(object itemx)
+        bool CanDelete(Object itemx)
         {
 
            var item =itemx as IDataListItemModel;
@@ -493,38 +462,14 @@ namespace Dev2.Studio.ViewModels.DataList
         {
             Resource = resourceModel;
             if(Resource == null) return;
-            Scalars.Clear();
-            Objects.Clear();
-            if (!string.IsNullOrEmpty(resourceModel.DataList))
+
+            string errorString;
+            CreateListsOfIDataListItemModelToBindTo(out errorString);
+            if(!string.IsNullOrEmpty(errorString))
             {
-                var dataListModel = new DataListModel();
-                dataListModel.CreateShape(resourceModel.DataList);
-                foreach(var scalar in dataListModel.Scalars.Where(scalar => string.IsNullOrEmpty(SearchText) || (!string.IsNullOrEmpty(scalar.Name) && scalar.Name.Contains(SearchText))))
-                {
-                    Scalars.Add(CreateScalar(scalar));
-                }
-                foreach(var recordSet in dataListModel.RecordSets.Where(recordSet => (recordSet.Columns != null && recordSet.Columns.Any(pair => pair.Value.Any(scalar => scalar.Name.Contains(SearchText)))) || (!string.IsNullOrEmpty(recordSet.Name) && recordSet.Name.Contains(SearchText)) || string.IsNullOrEmpty(SearchText)))
-                {
-                    Objects.Add(CreateObject(recordSet));
-                }
+                throw new Exception(errorString);
             }
-            //CreateListsOfIDataListItemModelToBindTo(out errorString);
-            //if(!string.IsNullOrEmpty(errorString))
-            //{
-           //     throw new Exception(errorString);
-           // }
         }
-
-        IObjectVariableListItemModel CreateObject(IRecordSet arg)
-        {
-            return new ObjectVariableListItemModel(arg);
-        }
-
-        IVariableListItemModel CreateScalar(IScalar input)
-        {
-            return new VariableListItemModel(input);
-        }
-
         public void InitializeDataListViewModel()
         {
             if(Resource == null) return;
@@ -534,53 +479,56 @@ namespace Dev2.Studio.ViewModels.DataList
         void FilterItems()
         {
             //ConvertDataListStringToCollections(Resource.DataList);
-//            if (_backupScalars != null)
-//            {
-//                ScalarCollection.Clear();
-//                foreach (var dataListItemModel in _backupScalars)
-//                {
-//                    ScalarCollection.Add(dataListItemModel);
-//                }
-//            }
-//            if (_backupRecsets != null)
-//            {
-//                RecsetCollection.Clear();
-//                foreach (var dataListItemModel in _backupRecsets)
-//                {
-//                    RecsetCollection.Add(dataListItemModel);
-//                }
-//            }
-//
-            InitializeDataListViewModel();
-            
+            if (_backupScalars != null)
+            {
+                ScalarCollection.Clear();
+                foreach (var dataListItemModel in _backupScalars)
+                {
+                    ScalarCollection.Add(dataListItemModel);
+                }
+            }
+            if (_backupRecsets != null)
+            {
+                RecsetCollection.Clear();
+                foreach (var dataListItemModel in _backupRecsets)
+                {
+                    RecsetCollection.Add(dataListItemModel);
+                }
+            }
 
-//            _backupScalars = new ObservableCollection<IDataListItemModel>();
-//            _backupRecsets = new ObservableCollection<IDataListItemModel>();
-//            foreach (var dataListItemModel in ScalarCollection)
-//            {
-//                _backupScalars.Add(dataListItemModel);
-//            }
-//            foreach (var dataListItemModel in RecsetCollection)
-//            {
-//                _backupRecsets.Add(dataListItemModel);
-//            }
-//            
-//            for(int index = 0; index < ScalarCollection.Count; index++)
-//            {
-//                var item = ScalarCollection[index];
-//                if (!item.Name.ToUpper().Contains(SearchText.ToUpper()))
-//                    ScalarCollection.Remove(item);
-//                
-//            }
-//
-//            for (int index = 0; index < RecsetCollection.Count; index++)
-//            {
-//                var item = RecsetCollection[index];
-//                item.Filter(SearchText);
-//                if (!item.FilterText.ToUpper().Contains(SearchText.ToUpper()))
-//                    RecsetCollection.Remove(item);
-//               
-//            }
+
+            if (SearchText == null)
+            {
+
+                return;
+            }
+            _backupScalars = new ObservableCollection<IDataListItemModel>();
+            _backupRecsets = new ObservableCollection<IDataListItemModel>();
+            foreach (var dataListItemModel in ScalarCollection)
+            {
+                _backupScalars.Add(dataListItemModel);
+            }
+            foreach (var dataListItemModel in RecsetCollection)
+            {
+                _backupRecsets.Add(dataListItemModel);
+            }
+            
+            for(int index = 0; index < ScalarCollection.Count; index++)
+            {
+                var item = ScalarCollection[index];
+                if (!item.Name.ToUpper().Contains(SearchText.ToUpper()))
+                    ScalarCollection.Remove(item);
+                
+            }
+
+            for (int index = 0; index < RecsetCollection.Count; index++)
+            {
+                var item = RecsetCollection[index];
+                item.Filter(SearchText);
+                if (!item.FilterText.ToUpper().Contains(SearchText.ToUpper()))
+                    RecsetCollection.Remove(item);
+               
+            }
 
          
         }
@@ -825,25 +773,31 @@ namespace Dev2.Studio.ViewModels.DataList
 
         void AddRowToScalars()
         {
-            var blankList = Scalars.Where(c => string.IsNullOrEmpty(c.Name));
-            if(blankList.Count() != 0) return;
-            Scalars.Add(new VariableListItemModel(new Scalar()));
+            List<IDataListItemModel> blankList = ScalarCollection.Where(c => c.IsBlank).ToList();
+            if(blankList.Count != 0) return;
+
+            IDataListItemModel scalar = DataListItemModelFactory.CreateDataListModel(string.Empty);
+            ScalarCollection.Add(scalar);
         }
 
         void AddRowToRecordsets()
         {
-            var blankObjectList = Objects.Where(model => string.IsNullOrEmpty(model.Name));
-            if (!blankObjectList.Any())
+            List<IDataListItemModel> blankList = RecsetCollection.Where
+                (c => c.IsBlank && c.Children.Count == 1 && c.Children[0].IsBlank).ToList();
+
+            if(blankList.Count == 0)
             {
-                Objects.Add(new ObjectVariableListItemModel(new RecordSet()));
+                AddRecordSet();
             }
-            foreach(var objectVariableListItemModel in Objects)
+
+            foreach(var recset in RecsetCollection)
             {
-                if (!objectVariableListItemModel.Properties.Any(model => string.IsNullOrEmpty(model.Name)))
-                {
-                    var variableListItemModel = new ObjectVariableListItemModel(new RecordSet()) { Parent = objectVariableListItemModel };
-                    objectVariableListItemModel.Properties.Add(variableListItemModel);
-                }
+                List<IDataListItemModel> blankChildList = recset.Children.Where(c => c.IsBlank).ToList();
+                if(blankChildList.Count != 0) continue;
+
+                IDataListItemModel newChild = DataListItemModelFactory.CreateDataListModel(string.Empty);
+                newChild.Parent = recset;
+                recset.Children.Add(newChild);
             }
         }
 
@@ -929,16 +883,12 @@ namespace Dev2.Studio.ViewModels.DataList
         /// </summary>
         private void AddRecordSet()
         {
-            //            IDataListItemModel recset = DataListItemModelFactory.CreateDataListModel(string.Empty);
-//            IDataListItemModel childItem = DataListItemModelFactory.CreateDataListModel(string.Empty);
-//            recset.IsExpanded = false;
-//            childItem.Parent = recset;
-//            recset.Children.Add(childItem);
-//            RecsetCollection.Add(recset);
-
-            var recordSet = new RecordSet();
-            recordSet.AddColumn("","",0);
-            Objects.Add(new ObjectVariableListItemModel(recordSet));
+            IDataListItemModel recset = DataListItemModelFactory.CreateDataListModel(string.Empty);
+            IDataListItemModel childItem = DataListItemModelFactory.CreateDataListModel(string.Empty);
+            recset.IsExpanded = false;
+            childItem.Parent = recset;
+            recset.Children.Add(childItem);
+            RecsetCollection.Add(recset);
         }
 
         /// <summary>
@@ -1011,7 +961,7 @@ namespace Dev2.Studio.ViewModels.DataList
                 ErrorResultTO errors = new ErrorResultTO();
                 try
                 {
-                    InitializeDataListViewModel();
+                    ConvertDataListStringToCollections(Resource.DataList);
                 }
                 catch(Exception)
                 {
@@ -1020,29 +970,29 @@ namespace Dev2.Studio.ViewModels.DataList
             }
             else
             {
-                Objects.Clear();
-                Objects.Add(new ObjectVariableListItemModel(new RecordSet()));
-                Scalars.Clear();
+                RecsetCollection.Clear();
+                AddRecordSet();
+                ScalarCollection.Clear();
             }
-//
-//            BaseCollection = new OptomizedObservableCollection<DataListHeaderItemModel>();
-//
-//            DataListHeaderItemModel varNode = DataListItemModelFactory.CreateDataListHeaderItem("Variable");
-//            if(ScalarCollection.Count == 0)
-//            {
-//                var dataListItemModel = DataListItemModelFactory.CreateDataListModel(string.Empty);
-//                ScalarCollection.Add(dataListItemModel);
-//            }
-//            varNode.Children = ScalarCollection;
-//            BaseCollection.Add(varNode);
-//
-//            DataListHeaderItemModel recordsetsNode = DataListItemModelFactory.CreateDataListHeaderItem("Recordset");
-//            if(RecsetCollection.Count == 0)
-//            {
-//                AddRecordSet();
-//            }
-//            recordsetsNode.Children = RecsetCollection;
-//            BaseCollection.Add(recordsetsNode);
+
+            BaseCollection = new OptomizedObservableCollection<DataListHeaderItemModel>();
+
+            DataListHeaderItemModel varNode = DataListItemModelFactory.CreateDataListHeaderItem("Variable");
+            if(ScalarCollection.Count == 0)
+            {
+                var dataListItemModel = DataListItemModelFactory.CreateDataListModel(string.Empty);
+                ScalarCollection.Add(dataListItemModel);
+            }
+            varNode.Children = ScalarCollection;
+            BaseCollection.Add(varNode);
+
+            DataListHeaderItemModel recordsetsNode = DataListItemModelFactory.CreateDataListHeaderItem("Recordset");
+            if(RecsetCollection.Count == 0)
+            {
+                AddRecordSet();
+            }
+            recordsetsNode.Children = RecsetCollection;
+            BaseCollection.Add(recordsetsNode);
         }
 
         public void ClearCollections()
@@ -1572,179 +1522,5 @@ namespace Dev2.Studio.ViewModels.DataList
         {
             return DataListUtil.AddBracketsToValueIfNotExist(model.DisplayName) + " : " + model.ErrorMessage;
         }
-    }
-
-    internal class ObjectVariableListItemModel : VariableListItemModel, IObjectVariableListItemModel
-    {
-        ICollection<IObjectVariableListItemModel> _properties;
-        IObjectVariableListItemModel _parent;
-
-        public ObjectVariableListItemModel(IRecordSet recordSet):base(recordSet)
-        {
-            Properties = CreateProperties(recordSet.Columns);
-        }
-
-        ObjectVariableListItemModel(IScalar scalar, ObjectVariableListItemModel objectVariableListItemModel)
-            : base(scalar)
-        {
-            Parent = objectVariableListItemModel;
-        }
-
-        ICollection<IObjectVariableListItemModel> CreateProperties(Dictionary<int, List<IScalar>> columns)
-        {
-            if (columns == null || columns.Count == 0)
-            {
-                return new ObservableCollection<IObjectVariableListItemModel>();
-            }
-            var props = new List<IObjectVariableListItemModel>();
-            foreach(var column in columns)
-            {
-                props.AddRange(column.Value.Select(scalar => new ObjectVariableListItemModel(scalar, this)));
-            }
-            return new ObservableCollection<IObjectVariableListItemModel>(props);
-        }
-
-        #region Implementation of IObjectVariableListItemModel
-
-        public ICollection<IObjectVariableListItemModel> Properties
-        {
-            get
-            {
-                return _properties;
-            }
-            set
-            {
-                SetProperty(ref _properties, value);
-            }
-        }
-        public IObjectVariableListItemModel Parent
-        {
-            get
-            {
-                return _parent;
-            }
-            set
-            {
-                SetProperty(ref _parent, value);
-            }
-        }
-
-        #endregion
-    }
-
-    internal class VariableListItemModel : BindableBase,IVariableListItemModel
-    {
-        bool _isInUse;
-        string _name;
-        string _description;
-        bool _hasError;
-        string _errorMessage;
-        bool _isEditable;
-        enDev2ColumnArgumentDirection _columnIODirection;
-
-        public VariableListItemModel(IScalar input)
-        {
-            Name = input.Name;
-            Description = input.Description;
-            ColumnIODirection = input.IODirection;
-        }
-
-        #region Implementation of IVariableListItemModel
-
-        public bool IsInUse
-        {
-            get
-            {
-                return _isInUse;
-            }
-            set
-            {
-                SetProperty(ref _isInUse, value);
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                SetProperty(ref _name, value);
-            }
-        }
-        public string Description
-        {
-            get
-            {
-                return _description;
-            }
-            set
-            {
-                SetProperty(ref _description, value);
-            }
-        }
-        public bool HasError
-        {
-            get
-            {
-                return _hasError;
-            }
-            private set
-            {
-                SetProperty(ref _hasError, value);
-            }
-        }
-        public string ErrorMessage
-        {
-            get
-            {
-                return _errorMessage;
-            }
-            private set
-            {
-                SetProperty(ref _errorMessage, value);
-            }
-        }
-        public bool IsEditable
-        {
-            get
-            {
-                return _isEditable;
-            }
-            set
-            {
-                SetProperty(ref _isEditable, value);
-            }
-        }
-        public enDev2ColumnArgumentDirection ColumnIODirection
-        {
-            get
-            {
-                return _columnIODirection;
-            }
-            set
-            {
-                SetProperty(ref _columnIODirection, value);
-            }
-        }
-
-        public void SetErrorMessage(string errorMessage)
-        {
-            HasError = true;
-            ErrorMessage = errorMessage;
-        }
-
-        public void RemoveErrorMessage(string errorMessage)
-        {
-            if (ErrorMessage.Equals(errorMessage, StringComparison.OrdinalIgnoreCase))
-            {
-                ErrorMessage = null;
-                HasError = false;
-                    
-            }
-        }
-
-        #endregion
     }
 }
