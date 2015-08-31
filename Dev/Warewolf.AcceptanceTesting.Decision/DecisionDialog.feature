@@ -1,13 +1,14 @@
 ﻿Feature: DecisionDialog
-	In order to create decisions
+	In order to create a decision
 	As a Warewolf User
 	I want to be shown the decision window setup
 
+@ignore
 #WOLF-1082 
 Scenario Outline: Ensure Inputs are enabled on decision window load
 	Given I have a workflow "New Workflow"
-	And drop a "Decision" onto the design surface
-	Then the Decision window is opened
+	And drop a "Decision" tool onto the design surface
+a
 	And '<Inputs>' fields are "Enabled"
 	And "Add Statement" is visible
 	And a decision variable '<variable>' value '<value>'
@@ -25,7 +26,7 @@ Scenario Outline: Ensure Inputs are enabled on decision window load
 
 Scenario: Ensuring decision text is visible under tool
 	Given I have a workflow "New Workflow"
-	And drop a "Decision" onto the design surface
+	And drop a "Decision" tool onto the design surface
 	And the decision tool window is opened
 	And a decision variable "[[A]]" value "123 234"		
 	And is "[[A]]" "IsEqual" "123   234"	
@@ -35,7 +36,7 @@ Scenario: Ensuring decision text is visible under tool
 	
 Scenario: Ensure Decision window caches correctly
 	Given I have a workflow "New Workflow"
-	And drop a "Decision" onto the design surface
+	And drop a "Decision" tool onto the design surface
 	And a decision variable "[[A]]" value "123 234"	
 	And a decision variable "[[B]]" value "1"	
 	And "Require All Decisions To Be True" is "True"	
@@ -49,7 +50,7 @@ Scenario: Ensure Decision window caches correctly
 
 Scenario: Ensure statement line can be removed
 	Given I have a workflow "New Workflow"
-	And drop a "Decision" onto the design surface
+	And drop a "Decision" tool onto the design surface
 	And a decision variable "[[A]]" value "123 234"	
 	And a decision variable "[[B]]" value "1"
 	And Match Type equals ">"
@@ -66,7 +67,7 @@ Scenario: Ensure statement line can be removed
 
 Scenario: Validation on incorrectly formatted variables
 	Given I have a workflow "New Workflow"
-	And drop a "Decision" onto the design surface
+	And drop a "Decision" tool onto the design surface
 	And a decision variable "[[A]]}" value ""
 	And a decision variable "[[rec().a]]" value "28/08/2015"	
 	And Match Type equals "="
@@ -77,7 +78,7 @@ Scenario: Validation on incorrectly formatted variables
 
 Scenario Outline: Ensure Match Type droplist is populated correctly
 	Given I have a workflow "New Workflow"
-	And drop a "Decision" onto the design surface
+	And drop a "Decision" tool onto the design surface
 	And the decision tool window is opened
 	And I select the "Match Type" menu
 	And Match Type has '<options>' visible
