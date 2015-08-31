@@ -17,6 +17,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Xml;
 using Dev2.Studio.ViewModels;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Views;
@@ -33,7 +34,7 @@ namespace Dev2.Studio.Views
         ContentPane _contentPane;
         private static bool _isSuperMaximising;
         private bool _isLocked;
-        string _filePath;
+        string _savedLayout;
 
         #region Constructor
 
@@ -46,27 +47,44 @@ namespace Dev2.Studio.Views
             KeyDown += Shell_KeyDown;
             SourceInitialized += WinSourceInitialized;
 
-            //GetFilePath();
+            if (File.Exists(FilePath))
+            {
+                GetFilePath();
+                using (FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                {
+                    var streamReader = new StreamReader(fs);
+                    _savedLayout = streamReader.ReadToEnd();
 
-            //using (FileStream fs = new FileStream(_filePath, FileMode.Open, FileAccess.Read))
-            //{
-            //    DockManager.LoadLayout(fs);
-            //}  
+                }
+                if (!string.IsNullOrEmpty(_savedLayout))
+                {
+                    DockManager.LoadLayout(_savedLayout);
+
+                }
+            }
         }
 
-        private void GetFilePath()
+
+
+        private string FilePath
         {
-            _filePath = Path.Combine(new[]
+            get
+            {
+                return Path.Combine(new[]
                     {
                         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                         StringResources.App_Data_Directory,
                         StringResources.User_Interface_Layouts_Directory,
                         "WorkspaceLayout.xml"
                     });
+            }
+        }
 
-            if (!File.Exists(_filePath))
+        private void GetFilePath()
+        {
+            if (!File.Exists(FilePath))
             {
-                FileInfo fileInfo = new FileInfo(_filePath);
+                FileInfo fileInfo = new FileInfo(FilePath);
                 if (fileInfo.Directory != null)
                 {
                     string finalDirectoryPath = fileInfo.Directory.FullName;
@@ -192,7 +210,49 @@ namespace Dev2.Studio.Views
 
         void OnLoaded(object sender, RoutedEventArgs e)
         {
-            //Dev2SplashScreen.Close(TimeSpan.FromSeconds(0.3));
+            var xmlDocument = new XmlDocument();
+            if(_savedLayout != null)
+            {
+                xmlDocument.LoadXml(_savedLayout);
+            }
+            MainViewModel mainViewModel = DataContext as MainViewModel;
+            if (mainViewModel != null)
+            {
+                var elementsByTagNameMenuExpanded = xmlDocument.GetElementsByTagName("MenuExpanded");
+                var elementsByTagNameMenuPanelOpen = xmlDocument.GetElementsByTagName("MenuPanelOpen");
+                var elementsByTagNameMenuPanelLockedOpen = xmlDocument.GetElementsByTagName("MenuPanelLockedOpen");
+
+                if (elementsByTagNameMenuExpanded.Count > 0)
+                {
+                    var menuExpandedString = elementsByTagNameMenuExpanded[0].InnerXml;
+
+                    bool menuExpanded;
+                    if (bool.TryParse(menuExpandedString, out menuExpanded))
+                    {
+                        mainViewModel.MenuExpanded = menuExpanded;
+                    }
+                }
+                if (elementsByTagNameMenuPanelOpen.Count > 0)
+                {
+                    var menuPanelOpenString = elementsByTagNameMenuPanelOpen[0].InnerXml;
+
+                    bool panelOpen;
+                    if (bool.TryParse(menuPanelOpenString, out panelOpen))
+                    {
+                        mainViewModel.MenuViewModel.IsPanelOpen = panelOpen;
+                    }
+                }
+                if (elementsByTagNameMenuPanelLockedOpen.Count > 0)
+                {
+                    var menuPanelLockedOpenString = elementsByTagNameMenuPanelLockedOpen[0].InnerXml;
+
+                    bool panelLockedOpen;
+                    if (bool.TryParse(menuPanelLockedOpenString, out panelLockedOpen))
+                    {
+                        mainViewModel.MenuViewModel.IsPanelLockedOpen = panelLockedOpen;
+                    }
+                }
+            }
         }
 
         //public void ClearToolboxSelection()
@@ -241,9 +301,27 @@ namespace Dev2.Studio.Views
             }
 
             GetFilePath();
-            using (FileStream fs = new FileStream(_filePath, FileMode.Create, FileAccess.Write))
+            var dockManagerLayout = DockManager.SaveLayout();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml(dockManagerLayout);
+            var menuExpandedNode = document.CreateNode(XmlNodeType.Element, "MenuExpanded", document.NamespaceURI);
+            menuExpandedNode.InnerXml = (mainViewModel != null && mainViewModel.MenuExpanded).ToString();
+
+            var menuPanelOpenNode = document.CreateNode(XmlNodeType.Element, "MenuPanelOpen", document.NamespaceURI);
+            menuPanelOpenNode.InnerXml = (mainViewModel != null && mainViewModel.MenuViewModel.IsPanelOpen).ToString();
+
+            var menuPanelLockedOpenNode = document.CreateNode(XmlNodeType.Element, "MenuPanelLockedOpen", document.NamespaceURI);
+            menuPanelLockedOpenNode.InnerXml = (mainViewModel != null && mainViewModel.MenuViewModel.IsPanelLockedOpen).ToString();
+
+            if (document.DocumentElement != null)
             {
-                DockManager.SaveLayout(fs);
+                document.DocumentElement.AppendChild(menuExpandedNode);
+                document.DocumentElement.AppendChild(menuPanelOpenNode);
+                document.DocumentElement.AppendChild(menuPanelLockedOpenNode);
+            }
+            using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.Write))
+            {
+                document.Save(fs);
             }
         }
 
@@ -287,11 +365,6 @@ namespace Dev2.Studio.Views
 
         }
 
-        //void ContentPaneOnPreviewDragEnter(object sender, System.Windows.DragEventArgs dragEventArgs)
-        //{
-        //    dragEventArgs.Handled = true;
-        //}
-
         void ActuallWindowOnActivated(object sender, EventArgs eventArgs)
         {
             MainViewModel mainViewModel = DataContext as MainViewModel;
@@ -302,11 +375,8 @@ namespace Dev2.Studio.Views
                 {
                     mainViewModel.AddWorkSurfaceContext(workflowDesignerViewModel.ResourceModel);
                 }
-
             }
-
         }
-
 
         private void SlidingMenuPane_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
