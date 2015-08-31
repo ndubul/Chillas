@@ -81,6 +81,26 @@ namespace Dev2.Studio.Core.InterfaceImplementors
             return environments.ToList();
         }
 
+        public List<IEnvironmentModel> ReloadServers()
+        {
+            return ReloadServers(EnvironmentRepository.Instance);
+        }
+
+        public List<IEnvironmentModel> ReloadServers(IEnvironmentRepository environmentRepository)
+        {
+            // PBI 6597 : TWR
+            // BUG 9276 : TWR : 2013.04.19 - refactored so that we share environments
+
+            if (environmentRepository == null)
+            {
+                throw new ArgumentNullException("environmentRepository");
+            }
+
+            var environments = environmentRepository.ReloadServers();
+
+            return environments.ToList();
+        }
+
         #endregion Methods
     }
 }

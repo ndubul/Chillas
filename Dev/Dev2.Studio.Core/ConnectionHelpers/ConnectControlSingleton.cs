@@ -13,6 +13,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Dev2.AppResources.Repositories;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Threading;
 using Dev2.Network;
 using Dev2.Studio.Core;
@@ -85,6 +86,12 @@ namespace Dev2.ConnectionHelpers
                     ConnectedServerChanged(this, new ConnectedServerChangedEvent(localhostId));
                 }
             }
+        }
+
+        public void AddServerAndConnect(IServerSource serverSource)
+        {
+            ReloadServer();
+            ToggleConnection(serverSource.ID);
         }
 
         public void Refresh(Guid environmentId)
@@ -219,6 +226,22 @@ namespace Dev2.ConnectionHelpers
             };
         }
 
+        void ReloadServer()
+        {
+            Servers.Clear();
+            Servers.Add(CreateNewRemoteServerEnvironment());
+
+            var servers = _serverProvider.ReloadServers();
+            foreach (var server in servers)
+            {
+                Servers.Add(new ConnectControlEnvironment
+                {
+                    EnvironmentModel = server,
+                    IsConnected = server.IsConnected,
+                    AllowEdit = !server.IsLocalHost
+                });
+            }
+        }
         void LoadServers()
         {
             Servers.Clear();

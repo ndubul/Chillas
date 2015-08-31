@@ -131,8 +131,6 @@ namespace Warewolf.Studio.Views
                     return EditButton.Command.CanExecute(null);
                 case "1 Select Request Method and Source":
                     return SourcesComboBox.IsEnabled;
-                case "1 Select Request Method & Source":
-                    return SourcesComboBox.IsEnabled;
 
                 case "2 Request Body" :
                     return ((ManageWebServiceViewModel)DataContext).RequestBodyEnabled ;

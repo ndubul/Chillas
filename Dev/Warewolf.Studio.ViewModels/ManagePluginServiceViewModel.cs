@@ -30,7 +30,7 @@ namespace Warewolf.Studio.ViewModels
 {
     public class ManagePluginServiceViewModel : SourceBaseImpl<IPluginService>, IPluginServiceViewModel
     {
-        readonly IPluginServiceModel _model;
+         IPluginServiceModel _model;
         readonly IRequestServiceNameViewModel _saveDialog;
         string _mappingsHeader;
         ICollection<IServiceInput> _inputs;
@@ -813,6 +813,17 @@ namespace Warewolf.Studio.ViewModels
                     AvalaibleActions = new ObservableCollection<IPluginAction>(_model.GetActions(SelectedSource, value));
                 }
                 OnPropertyChanged(() => SelectedNamespace);
+            }
+        }
+        public IPluginServiceModel Model
+        {
+            get
+            {
+                return _model;
+            }
+            set
+            {
+                _model = value;
             }
         }
     }

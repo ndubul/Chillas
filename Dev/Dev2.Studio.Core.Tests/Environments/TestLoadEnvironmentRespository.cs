@@ -35,7 +35,7 @@ namespace Dev2.Core.Tests.Environments
             }
         }
 
-        protected override void LoadInternal()
+        protected override void LoadInternal(bool force = false)
         {
             // Override, so that we don't connect to the server!
             LoadInternalHitCount++;

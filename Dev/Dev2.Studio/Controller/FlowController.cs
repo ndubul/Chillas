@@ -271,10 +271,6 @@ namespace Dev2.Studio.Controller
 
         #region Protected Methods
 
-        //protected static Dev2DecisionCallbackHandler StartDecisionWizard(IEnvironmentModel environmentModel, string val)
-        //{
-        //    return RootWebSite.ShowDecisionDialog(environmentModel, val);
-        //}
 
         protected static Dev2DecisionCallbackHandler StartDecisionWizard(ModelItem mi)
         {

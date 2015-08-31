@@ -136,6 +136,12 @@ namespace Dev2.Studio.Core
             return Environments;
         }
 
+        public virtual ICollection<IEnvironmentModel> ReloadServers()
+        {
+            LoadInternal(true);
+            return Environments;
+        }
+
         public ICollection<IEnvironmentModel> Find(Expression<Func<IEnvironmentModel, bool>> expression)
         {
             LoadInternal();
@@ -346,11 +352,11 @@ namespace Dev2.Studio.Core
         #endregion
 
         #region LoadInternal
-        protected virtual void LoadInternal()
+        protected virtual void LoadInternal(bool force = false)
         {
             lock (RestoreLock)
             {
-                if (IsLoaded)
+                if (IsLoaded && !force)
                 {
                     return;
                 }

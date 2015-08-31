@@ -34,6 +34,8 @@ namespace Dev2.Studio.Core.Interfaces
 
         void ForceLoad();
 
+        ICollection<IEnvironmentModel> ReloadServers();
+
         void Remove(Guid id);
 
         IEnvironmentModel Get(Guid id);

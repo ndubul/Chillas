@@ -20,6 +20,8 @@ namespace Dev2.Studio.Core.Interfaces
     public interface IEnvironmentModelProvider
     {
         List<IEnvironmentModel> Load();
+        List<IEnvironmentModel> ReloadServers();
         List<IEnvironmentModel> Load(IEnvironmentRepository environmentRepository);
+        List<IEnvironmentModel> ReloadServers(IEnvironmentRepository environmentRepository);
     }
 }
