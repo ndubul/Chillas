@@ -162,12 +162,12 @@ namespace Dev2.Runtime.WebServer.Hubs
         /// <param name="dataListId">The data list unique identifier.</param>
         /// <param name="messageId">The message unique identifier.</param>
         /// <returns></returns>
-        public async Task<string> ExecuteCommand(Envelope envelope, bool endOfStream, Guid workspaceId, Guid dataListId, Guid messageId)
+        public async Task<Receipt> ExecuteCommand(Envelope envelope, bool endOfStream, Guid workspaceId, Guid dataListId, Guid messageId)
         {
             var internalServiceRequestHandler = new InternalServiceRequestHandler { ExecutingUser = Context.User };
             try
             {
-                var task = new Task<string>(() =>
+                var task = new Task<Receipt>(() =>
                 {
                     try
                     {
@@ -182,11 +182,12 @@ namespace Dev2.Runtime.WebServer.Hubs
                         MessageCache.TryRemove(messageId, out sb);
                         var request = _serializer.Deserialize<EsbExecuteRequest>(sb);
 
+                        var user = string.Empty;
                         // ReSharper disable ConditionIsAlwaysTrueOrFalse
                         if (Context.User.Identity != null)
                         // ReSharper restore ConditionIsAlwaysTrueOrFalse
                         {
-                            var user = Context.User.Identity.Name;
+                            user = Context.User.Identity.Name;
                             // set correct principle ;)
                             Thread.CurrentPrincipal = Context.User;
                             Dev2Logger.Log.Debug("Execute Command Invoked For [ " + user + " ] For Service [ " + request.ServiceName + " ]");
@@ -194,8 +195,22 @@ namespace Dev2.Runtime.WebServer.Hubs
 
                         var processRequest = internalServiceRequestHandler.ProcessRequest(request, workspaceId, dataListId, Context.ConnectionId);
 
+                        // always place requesting user in here ;)
+                        var future = new FutureReceipt
+                        {
+                            PartID = 0,
+                            RequestID = messageId,
+                            User = user
+                        };
+
                         var value = processRequest.ToString();
-                        return value;
+
+                        if (!ResultsCache.Instance.AddResult(future, value))
+                        {
+                            Dev2Logger.Log.Error(new Exception("Failed to build future receipt for [ " + Context.ConnectionId + " ] Value [ " + value + " ]"));
+                        }
+
+                        return new Receipt { PartID = envelope.PartID, ResultParts = 1 };
 
                     }
                     catch (Exception e)
@@ -210,6 +225,7 @@ namespace Dev2.Runtime.WebServer.Hubs
             catch (Exception e)
             {
                 Dev2Logger.Log.Error(e);
+                Dev2Logger.Log.Info("Is End of Stream:"+endOfStream);
             }
             return null;
         }
@@ -381,13 +397,17 @@ namespace Dev2.Runtime.WebServer.Hubs
             
             SetupEvents();
 
-            var workspaceId = Server.GetWorkspaceID(Context.User.Identity);
-            ResourceCatalog.Instance.LoadResourceActivityCache(workspaceId);
-            var hubCallerConnectionContext = Clients;
-            var user = hubCallerConnectionContext.User(Context.User.Identity.Name);
-            user.SendWorkspaceID(workspaceId);
-            user.SendServerID(HostSecurityProvider.Instance.ServerID);
-            PermissionsHaveBeenModified(null, null);
+            Task t = new Task(() =>
+            {
+                var workspaceId = Server.GetWorkspaceID(Context.User.Identity);
+                ResourceCatalog.Instance.LoadResourceActivityCache(workspaceId);
+                var hubCallerConnectionContext = Clients;
+                var user = hubCallerConnectionContext.User(Context.User.Identity.Name);
+                user.SendWorkspaceID(workspaceId);
+                user.SendServerID(HostSecurityProvider.Instance.ServerID);
+                PermissionsHaveBeenModified(null, null);
+            });
+            t.Start();
         }
 
         protected void SetupEvents()
