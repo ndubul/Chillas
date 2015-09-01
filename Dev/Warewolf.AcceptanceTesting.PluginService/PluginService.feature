@@ -61,20 +61,19 @@ Scenario: Opening saved Plugin Service
 	And "testingPluginSrc" is selected as source
 	And "2 Select a Namespace" is "Enabled"
 	And "3 Select an Action" is "Enabled"
-	And "4 Provide Test Values" is "Disabled"
-	And "5 Edit Default and Mapping Names" is "Disabled"   
-	And I change the source to "PrimitivePlugintestSrc"
-	Then "2 Select a namespace" is "Enabled"
-	And "3 Select an Action" is "Enabled"
 	And "4 Provide Test Values" is "Enabled"
-	And "5 Edit Default and Mapping Names" is "Enabled" 
-	And "Save" is "Disabled"
+	And "5 Edit Default and Mapping Names" is "Disabled"   
+	And I change the source to "PrimitivePlugintest"
+	Then "2 Select a namespace" is "Enabled"
+	And 3 Select an Action VM is "Disabled"
+	And  Provide Test Values VM is "Disabled"
+	And  Edit Default and Mapping Names VM is "Disabled" 
+	And "Save" is "Disabled" 
     When I select "Unlimited Framework Plugins EmailPlugin" as namespace
-	Then "3 Select an action" is "Enabled" 
-	And "FetchStringvalue" is selected as action
-	Then "4 Provide Test Values" is "Enabled" 
+	Then 3 Select an Action VM is "Enabled"
+	When I select "FetchStringvalue" as action
+	Then Provide Test Values VM is "Enabled"
 	And "Test" is "Enabled"
-	 | Name | value |
 	When Test Connection is "Successful"
 	Then "5 Default and Mapping" is "Enabled" 
 	Then "Save" is "Enabled"
@@ -86,7 +85,7 @@ Scenario: Opening saved Plugin Service
 	| Name   | Name         |
 	When I save as "IntegrationTestPluginNull"
     Then the Save Dialog is opened
-    Then title is "IntegrationTestPluginNull"
+    Then title is "Edit IntegrationTestPluginNull"
 
 
 Scenario: Refreshing plugin source action step 
@@ -95,10 +94,10 @@ Scenario: Refreshing plugin source action step
 	And "2 Select a Namespace" is "Enabled"
 	And "3 Select an Action" is "Enabled"
 	And "4 Provide Test Values" is "Enabled"
-	And "5 Edit Default and Mapping Names" is "Enabled"   
+	And "5 Edit Default and Mapping Names" is "Disabled"   
 	When "Refresh" is clicked
 	Then "3 Select an action" is "Enabled" 
-	And "FetchStringvalue" is selected as action
+	When I select "FetchStringvalue" as action
 	And "4 Provide Test Values" is "Enabled" 
 	Then "5 Default and Mapping" is "Disabled" 
 	And "Test" is "Enabled"
@@ -114,42 +113,36 @@ Scenario: Refreshing plugin source action step
 	When "Save" is clicked
 	When I save as "Testing IntegrationTestPluginNull"
     Then the Save Dialog is opened
-    Then title is "Edit Testing IntegrationTestPluginNull"
+    Then title is "Edit IntegrationTestPluginNull"
 	
 	
 
 Scenario: Plugin service GetType test
 	Given I open New Plugin Service Connector
-	When I select "testingPluginSrc" as source
+	When I select "IntegrationTestPluginNull" as source
 	And "2 Select a Namespace" is "Enabled"
 	When I select "Unlimited Framework Plugins EmailPlugin" as namespace
 	Then "3 Select an Action" is "Enabled" 
-	When I select "GetType" as action
-	And "4 Provide Test Values" is "Enabled" 
-	And "Test" is "Enabled"
-	When "Test" is clicked
-	Then the Test Connection is "Unsuccessful"
-	Then "Save" is "Disabled"
-	And "5 Edit Default and Mapping Names" is "Disabled" 
+	And "GetType" is not an Action
 	
 
-Scenario Outline: Fromat exception error
-	Given I open New Plugin Service Connector
-	And "New Plugin Connector" tab is opened
-	When I select "<source>" as source
-	And "2 Select a Namespace" is "Enabled"
-	And "3 Select an Action" is "Disabled" 
-	When I select "<namespace>" as namespace
-	Then "Select an Action" is "Enabled"
-	When I select "<action>" as action
-	And "4 Provide Test Values" is "Enabled" 
-	And "Test" is "Enabled"
-	When "Test" is clicked and expeced to be unsuccessful
-	And the Test Connection is "Unsuccessful"
-	Examples: 
-	| source                 | namespace                               | action        |
-	| testingPluginSrc       | Unlimited Framework Plugins EmailPlugin | SampleSend    |
-	| PrimitiveplugintestSrc | Dev2.PrimitiveTestDLL.TestClass         | FetchIntValue |
+#Scenario Outline: Fromat exception error
+#	Given I open New Plugin Service Connector
+#	And "New Plugin Connector" tab is opened
+#	When I select "<source>" as source
+#	And "2 Select a Namespace" is "Enabled"
+#	And "3 Select an Action" is "Disabled" 
+#	When I select "<namespace>" as namespace
+#	Then "Select an Action" is "Enabled"
+#	When I select "<action>" as action
+#	And "4 Provide Test Values" is "Enabled" 
+#	And "Test" is "Enabled"
+#	When "Test" is clicked and expeced to be unsuccessful
+#	And the Test Connection is "Unsuccessful"
+#	Examples: 
+#	| source                 | namespace                               | action        |
+#	| testingPluginSrc       | Unlimited Framework Plugins EmailPlugin | SampleSend    |
+#	| PrimitiveplugintestSrc | Dev2.PrimitiveTestDLL.TestClass         | FetchIntValue |
 	
 	
 	
