@@ -372,10 +372,13 @@ namespace Dev2.Studio.Core.Models.DataList
                 foreach(var dataListItemModel in Children)
                 {
                     var child = (DataListItemModel)dataListItemModel;
-                    child.UpdatingChildren = true;
-                    child.Input = value;
-                    child.UpdatingChildren = false;
-                    updatedChildren.Add(child);
+                    if (!string.IsNullOrEmpty(child.DisplayName))
+                    {
+                        child.UpdatingChildren = true;
+                        child.Input = value;
+                        child.UpdatingChildren = false;
+                        updatedChildren.Add(child);
+                    }
                 }
             }
             UpdatingChildren = false;
@@ -398,10 +401,13 @@ namespace Dev2.Studio.Core.Models.DataList
                 foreach(var dataListItemModel in Children)
                 {
                     var child = (DataListItemModel)dataListItemModel;
-                    child.UpdatingChildren = true;
-                    child.Output = value;
-                    child.UpdatingChildren = false;
-                    updatedChildren.Add(child);
+                    if (!string.IsNullOrEmpty(child.DisplayName))
+                    {
+                        child.UpdatingChildren = true;
+                        child.Output = value;
+                        child.UpdatingChildren = false;
+                        updatedChildren.Add(child);
+                    }
                 }
             }
             UpdatingChildren = false;
