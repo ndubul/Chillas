@@ -215,7 +215,7 @@ Scenario: Changing Sources
 	Then "New Web Service Connector" tab is opened
 	And Select Request Method & Source is focused
 	And "New" is "Enabled"
-	And "1 Select Request Method & Source" is "Enabled"
+	And "1 Select Request Method and Source" is "Enabled"
 	And "Edit" is "Enabled"
 	And "2 Request" is "Disabled"
 	And "3 Variables" is "Disabled" 

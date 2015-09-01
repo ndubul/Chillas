@@ -153,6 +153,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Binaries\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Log4Net.Async">
+      <HintPath>..\packages\Log4Net.Async.1.3.0.0\lib\net40\Log4Net.Async.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
@@ -981,13 +984,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\ServiceSettings-32.png" />
+    <Resource Include="Images\StartNode-Chasdigal.png" />
     <Resource Include="Images\ServiceStatusError-32.png" />
     <Resource Include="Images\ServiceStatusOK-32.png" />
     <Resource Include="Images\ServiceStatusWarning-16.png" />
-    <Resource Include="Images\AuthExecute-12.png" />
     <Resource Include="Images\AuthNone-16.png" />
-    <Resource Include="Images\AuthView-12.png" />
     <Resource Include="Resources\HelpCommunity-32_files\image0.png" />
     <Resource Include="Resources\RemoteWarewolf-32_files\image0.png" />
     <Resource Include="Resources\RemoteWarewolf-32_files\image1.png" />
@@ -1026,31 +1027,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Warewolf.ico" />
-    <Content Include="Help\debugplay.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Help\EntityDataModel_NewEntityModelService.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Help\EntityDataModel_OtherModelService.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Help\expand.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Help\source.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Help\StudioHomepage.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <!-- Handle Images - Must be save level since MS can't write a Copy routine that moves directories, only files ;( -->
-    <Content Include="Help\viewinbrowser.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Help\workerservice.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Help\StudioShortCutKeys.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

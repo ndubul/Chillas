@@ -11,11 +11,13 @@
 
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Xml;
 using Dev2.Studio.ViewModels;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Views;
@@ -32,6 +34,7 @@ namespace Dev2.Studio.Views
         ContentPane _contentPane;
         private static bool _isSuperMaximising;
         private bool _isLocked;
+        string _savedLayout;
 
         #region Constructor
 
@@ -43,6 +46,55 @@ namespace Dev2.Studio.Views
             Loaded += OnLoaded;
             KeyDown += Shell_KeyDown;
             SourceInitialized += WinSourceInitialized;
+
+            if (File.Exists(FilePath))
+            {
+                GetFilePath();
+                using (FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                {
+                    var streamReader = new StreamReader(fs);
+                    _savedLayout = streamReader.ReadToEnd();
+
+                }
+                if (!string.IsNullOrEmpty(_savedLayout))
+                {
+                    DockManager.LoadLayout(_savedLayout);
+
+                }
+            }
+        }
+
+
+
+        private string FilePath
+        {
+            get
+            {
+                return Path.Combine(new[]
+                    {
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        StringResources.App_Data_Directory,
+                        StringResources.User_Interface_Layouts_Directory,
+                        "WorkspaceLayout.xml"
+                    });
+            }
+        }
+
+        private void GetFilePath()
+        {
+            if (!File.Exists(FilePath))
+            {
+                FileInfo fileInfo = new FileInfo(FilePath);
+                if (fileInfo.Directory != null)
+                {
+                    string finalDirectoryPath = fileInfo.Directory.FullName;
+
+                    if (!Directory.Exists(finalDirectoryPath))
+                    {
+                        Directory.CreateDirectory(finalDirectoryPath);
+                    }
+                }
+            }
         }
 
         #endregion Constructor
@@ -62,7 +114,7 @@ namespace Dev2.Studio.Views
         }
 
         private static IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-            {
+        {
             switch (msg)
             {
                 case 0x0024:/* WM_GETMINMAXINFO */
@@ -70,9 +122,9 @@ namespace Dev2.Studio.Views
                     {
                         WmGetMinMaxInfo(hwnd, lParam);
                         handled = true;
-            }
+                    }
                     break;
-        }
+            }
 
             return (IntPtr)0;
         }
@@ -97,7 +149,7 @@ namespace Dev2.Studio.Views
         [StructLayout(LayoutKind.Sequential)]
         // ReSharper disable InconsistentNaming
         public struct MINMAXINFO
-            {
+        {
             public POINT ptReserved;
             public POINT ptMaxSize;
             public POINT ptMaxPosition;
@@ -137,11 +189,11 @@ namespace Dev2.Studio.Views
             }
             if (e.Key == Key.G && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                
+
             }
             if (e.Key == Key.I && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                
+
             }
             if (e.Key == Key.F11)
             {
@@ -158,7 +210,49 @@ namespace Dev2.Studio.Views
 
         void OnLoaded(object sender, RoutedEventArgs e)
         {
-            //Dev2SplashScreen.Close(TimeSpan.FromSeconds(0.3));
+            var xmlDocument = new XmlDocument();
+            if(_savedLayout != null)
+            {
+                xmlDocument.LoadXml(_savedLayout);
+            }
+            MainViewModel mainViewModel = DataContext as MainViewModel;
+            if (mainViewModel != null)
+            {
+                var elementsByTagNameMenuExpanded = xmlDocument.GetElementsByTagName("MenuExpanded");
+                var elementsByTagNameMenuPanelOpen = xmlDocument.GetElementsByTagName("MenuPanelOpen");
+                var elementsByTagNameMenuPanelLockedOpen = xmlDocument.GetElementsByTagName("MenuPanelLockedOpen");
+
+                if (elementsByTagNameMenuExpanded.Count > 0)
+                {
+                    var menuExpandedString = elementsByTagNameMenuExpanded[0].InnerXml;
+
+                    bool menuExpanded;
+                    if (bool.TryParse(menuExpandedString, out menuExpanded))
+                    {
+                        mainViewModel.MenuExpanded = menuExpanded;
+                    }
+                }
+                if (elementsByTagNameMenuPanelOpen.Count > 0)
+                {
+                    var menuPanelOpenString = elementsByTagNameMenuPanelOpen[0].InnerXml;
+
+                    bool panelOpen;
+                    if (bool.TryParse(menuPanelOpenString, out panelOpen))
+                    {
+                        mainViewModel.MenuViewModel.IsPanelOpen = panelOpen;
+                    }
+                }
+                if (elementsByTagNameMenuPanelLockedOpen.Count > 0)
+                {
+                    var menuPanelLockedOpenString = elementsByTagNameMenuPanelLockedOpen[0].InnerXml;
+
+                    bool panelLockedOpen;
+                    if (bool.TryParse(menuPanelLockedOpenString, out panelLockedOpen))
+                    {
+                        mainViewModel.MenuViewModel.IsPanelLockedOpen = panelLockedOpen;
+                    }
+                }
+            }
         }
 
         //public void ClearToolboxSelection()
@@ -205,6 +299,30 @@ namespace Dev2.Studio.Views
                     e.Cancel = true;
                 }
             }
+
+            GetFilePath();
+            var dockManagerLayout = DockManager.SaveLayout();
+            XmlDocument document = new XmlDocument();
+            document.LoadXml(dockManagerLayout);
+            var menuExpandedNode = document.CreateNode(XmlNodeType.Element, "MenuExpanded", document.NamespaceURI);
+            menuExpandedNode.InnerXml = (mainViewModel != null && mainViewModel.MenuExpanded).ToString();
+
+            var menuPanelOpenNode = document.CreateNode(XmlNodeType.Element, "MenuPanelOpen", document.NamespaceURI);
+            menuPanelOpenNode.InnerXml = (mainViewModel != null && mainViewModel.MenuViewModel.IsPanelOpen).ToString();
+
+            var menuPanelLockedOpenNode = document.CreateNode(XmlNodeType.Element, "MenuPanelLockedOpen", document.NamespaceURI);
+            menuPanelLockedOpenNode.InnerXml = (mainViewModel != null && mainViewModel.MenuViewModel.IsPanelLockedOpen).ToString();
+
+            if (document.DocumentElement != null)
+            {
+                document.DocumentElement.AppendChild(menuExpandedNode);
+                document.DocumentElement.AppendChild(menuPanelOpenNode);
+                document.DocumentElement.AppendChild(menuPanelLockedOpenNode);
+            }
+            using (FileStream fs = new FileStream(FilePath, FileMode.Create, FileAccess.Write))
+            {
+                document.Save(fs);
+            }
         }
 
 
@@ -223,8 +341,8 @@ namespace Dev2.Studio.Views
                     var windowType = actuallWindow.GetType();
                     if (windowType.FullName == "Infragistics.Windows.Controls.ToolWindowHostWindow")
                     {
-                       actuallWindow.Activated -= ActuallWindowOnActivated;
-                       actuallWindow.Activated += ActuallWindowOnActivated;
+                        actuallWindow.Activated -= ActuallWindowOnActivated;
+                        actuallWindow.Activated += ActuallWindowOnActivated;
                     }
                 }
             }
@@ -232,25 +350,20 @@ namespace Dev2.Studio.Views
 
         public void UpdatePane(ContentPane contentPane)
         {
-            if(contentPane == null)
+            if (contentPane == null)
                 throw new ArgumentNullException("contentPane");
 
 
             WorkflowDesignerViewModel workflowDesignerViewModel = contentPane.TabHeader as WorkflowDesignerViewModel;
             if (workflowDesignerViewModel != null && contentPane.ContentVisibility == Visibility.Visible)
-                        {
+            {
 
-                            contentPane.CloseButtonVisibility = Visibility.Visible;
-                        }
+                contentPane.CloseButtonVisibility = Visibility.Visible;
+            }
 
 
-            
+
         }
-
-        //void ContentPaneOnPreviewDragEnter(object sender, System.Windows.DragEventArgs dragEventArgs)
-        //{
-        //    dragEventArgs.Handled = true;
-        //}
 
         void ActuallWindowOnActivated(object sender, EventArgs eventArgs)
         {
@@ -262,11 +375,8 @@ namespace Dev2.Studio.Views
                 {
                     mainViewModel.AddWorkSurfaceContext(workflowDesignerViewModel.ResourceModel);
                 }
-
             }
-
         }
-
 
         private void SlidingMenuPane_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -290,11 +400,11 @@ namespace Dev2.Studio.Views
         }
 
         private void EnterSuperMaximisedMode()
-                {
+        {
             _isSuperMaximising = true;
             var dependencyObject = GetTemplateChild("PART_TITLEBAR");
             if (dependencyObject != null)
-                    {
+            {
                 dependencyObject.SetValue(VisibilityProperty, Visibility.Collapsed);
                 WindowState = WindowState.Normal;
                 WindowState = WindowState.Maximized;
@@ -302,17 +412,17 @@ namespace Dev2.Studio.Views
         }
 
         private void CloseSuperMaximised(object sender, RoutedEventArgs e)
-                        {
+        {
             ExitSuperMaximisedMode();
         }
 
         private void ExitSuperMaximisedMode()
-                            {
+        {
             DoCloseExitFullScreenPanelAnimation();
             _isSuperMaximising = false;
             var dependencyObject = GetTemplateChild("PART_TITLEBAR");
             if (dependencyObject != null)
-                                {
+            {
                 dependencyObject.SetValue(VisibilityProperty, Visibility.Visible);
                 WindowState = WindowState.Normal;
                 WindowState = WindowState.Maximized;
@@ -339,10 +449,10 @@ namespace Dev2.Studio.Views
                 }
             }
             if (!_isLocked)
-                                    {
+            {
                 DoAnimateOpenTitleBar();
-                                    }
-                                }
+            }
+        }
 
         private void DoAnimateOpenTitleBar()
         {
@@ -353,19 +463,19 @@ namespace Dev2.Studio.Views
                 storyboard.SetValue(Storyboard.TargetProperty, titleBar);
                 storyboard.Begin();
             }
-                            }
+        }
 
         private void HideFullScreenPanel_OnMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (_isSuperMaximising)
             {
                 DoCloseExitFullScreenPanelAnimation();
-                        }
+            }
             if (!_isLocked)
             {
                 DoAnimateCloseTitle();
-                    }
-                }
+            }
+        }
 
         private void DoAnimateCloseTitle()
         {
@@ -479,7 +589,7 @@ namespace Dev2.Studio.Views
                     DoAnimateCloseTitle();
                 }
                 else
-        {
+                {
                     fontAwesome.Icon = FontAwesomeIcon.Lock;
                 }
                 dependencyObject.SetValue(ContentProperty, fontAwesome);

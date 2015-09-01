@@ -15,7 +15,6 @@ using System.Windows.Input;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Interfaces;
-using Dev2.Studio.Core.AppResources.Converters;
 using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
@@ -33,6 +32,7 @@ namespace Warewolf.Studio.ViewModels
         ICommand _executeServiceCommand;
         ICommand _supportCommand;
         FontAwesomeIcon _debugIcon;
+        bool _isProcessing;
 
         public MenuViewModel(IMainViewModel mainViewModel)
         {
@@ -79,6 +79,7 @@ namespace Warewolf.Studio.ViewModels
             IsPanelLockedOpen = true;
             IsPanelOpen = true;
             DebugIcon = FontAwesomeIcon.Play;
+            
         }
 
         public FontAwesomeIcon DebugIcon
@@ -316,10 +317,12 @@ namespace Warewolf.Studio.ViewModels
         }
         public bool IsProcessing
         {
-            get
+            get { return _isProcessing; }
+            set
             {
-                return false;
-                //return _debugStatus != DebugStatus.Ready && _debugStatus != DebugStatus.Finished && _debugStatus != DebugStatus.Stopping;
+                SetProperty(ref _isProcessing, value);
+                DebugIcon = _isProcessing ? FontAwesomeIcon.Stop : FontAwesomeIcon.Play;
+                OnPropertyChanged(()=>DebugLabel);
             }
         }
         public string DebugLabel

@@ -1,14 +1,15 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WarewolfParserInterop")]
+[assembly: AssemblyTitle("Warewolf.AcceptanceTesting.Switch")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("WarewolfParserInterop")]
+[assembly: AssemblyProduct("Warewolf.AcceptanceTesting.Switch")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b9797b9e-9b61-4a07-99b7-741a5a5833e3")]
+[assembly: Guid("a797ebe4-b3ac-4cbf-833f-6b2abc3ff42b")]
 
 // Version information for an assembly consists of the following four values:
 //

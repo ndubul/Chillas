@@ -905,8 +905,7 @@ namespace Dev2.Runtime.Hosting
             {
                 parser.RemoveFromCache(resource.ResourceID);
             }
-            List<DynamicServiceObjectBase> objects;
-            _frequentlyUsedServices.TryRemove(resource.ResourceName, out objects);
+
         }
 
         #endregion
@@ -1676,7 +1675,7 @@ namespace Dev2.Runtime.Hosting
                 if(!_frequentlyUsedServices.TryGetValue(resource.ResourceName, out objects))
                 {
                     objects = GenerateObjectGraph(resource);
-                    _frequentlyUsedServices.TryAdd(resource.ResourceName, objects);
+                    //_frequentlyUsedServices.TryAdd(resource.ResourceName, objects);
                 }
                 else
                 {

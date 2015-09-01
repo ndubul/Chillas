@@ -15,6 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Xml.Linq;
+using Dev2.Common;
 using Dev2.Common.Common;
 using Dev2.Common.Interfaces.Core.DynamicServices;
 using Dev2.Data.ServiceModel;
@@ -133,6 +134,12 @@ namespace Dev2.Studio.Core
         public virtual ICollection<IEnvironmentModel> All()
         {
             LoadInternal();
+            return Environments;
+        }
+
+        public virtual ICollection<IEnvironmentModel> ReloadServers()
+        {
+            LoadInternal(true);
             return Environments;
         }
 
@@ -346,11 +353,11 @@ namespace Dev2.Studio.Core
         #endregion
 
         #region LoadInternal
-        protected virtual void LoadInternal()
+        protected virtual void LoadInternal(bool force = false)
         {
             lock (RestoreLock)
             {
-                if (IsLoaded)
+                if (IsLoaded && !force)
                 {
                     return;
                 }
@@ -438,9 +445,10 @@ namespace Dev2.Studio.Core
                 defaultEnvironment.Connect();
             }
             // ReSharper disable EmptyGeneralCatchClause
-            catch (Exception)
+            catch (Exception err)
             // ReSharper restore EmptyGeneralCatchClause
             {
+                Dev2Logger.Log.Info((err));
                 //Swallow exception for localhost connection
             }
             if (!defaultEnvironment.IsConnected)

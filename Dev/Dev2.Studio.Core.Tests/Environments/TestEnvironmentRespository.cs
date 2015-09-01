@@ -46,7 +46,7 @@ namespace Dev2.Core.Tests.Environments
             return base.RemoveInternal(environment);
         }
 
-        protected override void LoadInternal()
+        protected override void LoadInternal(bool force = false)
         {
             base.LoadInternal();
             IsLoaded = true;

@@ -353,7 +353,7 @@ namespace Dev2.Settings.Security
 
         ActivityDesignerToggle CreateHelpToggle(DependencyProperty targetProperty)
         {
-            var toggle = ActivityDesignerToggle.Create("pack://application:,,,/Dev2.Activities.Designers;component/Images/ServiceHelp-32.png", "Close Help", "pack://application:,,,/Dev2.Activities.Designers;component/Images/ServiceHelp-32.png", "Open Help", "HelpToggle", this, targetProperty
+            var toggle = ActivityDesignerToggle.Create("ServiceHelp", "Close Help", "ServiceHelp", "Open Help", "HelpToggle", this, targetProperty
                 );
 
             return toggle;

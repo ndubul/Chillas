@@ -717,7 +717,7 @@ namespace Dev2.Core.Tests.ViewModelTests
             var actualEnvironmentId = Guid.Empty.ToString();
             var viewModel = new ConnectControlViewModel(mainViewModel.Object, environmentRepository.Object, e => { }, connectControlSingleton.Object, "TEST : ", true);
             //------------Execution-------------------------------
-            viewModel.OpenConnectionWizard(-1);
+            //viewModel.OpenConnectionWizard(-1);
             //------------Assert------------------------------
             Assert.IsNotNull(viewModel);
             Assert.AreEqual(null, actualEnvironmentId);
@@ -759,7 +759,7 @@ namespace Dev2.Core.Tests.ViewModelTests
             var actualEnvironmentId = Guid.Empty.ToString();
             var viewModel = new ConnectControlViewModel(mainViewModel.Object, environmentRepository.Object, e => { }, connectControlSingleton.Object, "TEST : ", true);
             //------------Execution-------------------------------
-            viewModel.OpenConnectionWizard(1);
+            //viewModel.OpenConnectionWizard(1);
             //------------Assert------------------------------
             Assert.IsNotNull(viewModel);
             Assert.AreNotEqual(Guid.Empty.ToString(), actualEnvironmentId);
