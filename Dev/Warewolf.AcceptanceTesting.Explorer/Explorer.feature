@@ -204,6 +204,7 @@ Scenario: Context menu
 	And "New Web Service Source" is visible
 	And "New Email Source" is visible
 	And "New Dropbox Source" is visible
+	And "New Sharepoint Source" is visible
 	And "Server version"
 
 Scenario: Show dependencies
@@ -228,6 +229,15 @@ Scenario: Move Nested Folder up tree-view
 	And I change path "localhost/MyFolder/NewFolder" to "localhost/NewFolder"
 	Then both "localhost/MyFolder" and "localhost/NewFolder" are visible in root
 
+
+Scenario: Opening server source from explorer
+	Given the explorer is visible
+	And I open "LocalHost"
+	Then I should see the path "localhost/tst-ci-remote"
+	And I open "localhost/tst-ci-remote"
+	Then "Edit - tst-ci-remote" tab is opened
+
+	
 
 #@Explorer
 #Scenario: Opening Versions in Explorer
