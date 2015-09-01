@@ -31,8 +31,8 @@ namespace Warewolf.Studio.ViewModels
     public class ManagePluginServiceViewModel : SourceBaseImpl<IPluginService>, IPluginServiceViewModel
     {
          IPluginServiceModel _model;
-        readonly IRequestServiceNameViewModel _saveDialog;
-        string _mappingsHeader;
+        public IRequestServiceNameViewModel SaveDialog { get;  set; }
+        
         ICollection<IServiceInput> _inputs;
         IList<IServiceOutputMapping> _outputMapping;
         string _recordsetName;
@@ -83,7 +83,7 @@ namespace Warewolf.Studio.ViewModels
             : this(model)
         {
 
-            _saveDialog = saveDialog;
+            SaveDialog = saveDialog;
 
 
         }
@@ -106,7 +106,7 @@ namespace Warewolf.Studio.ViewModels
             RefreshCommand = new DelegateCommand(Refresh);
             ErrorText = "";
             TestPluginCommand = new DelegateCommand(() => Test(_model));
-            SaveCommand = new DelegateCommand(() => Save(), CanSave);
+            SaveCommand = new DelegateCommand(Save, CanSave);
             CreateNewSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
             EditSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource));
         }
@@ -143,11 +143,11 @@ namespace Warewolf.Studio.ViewModels
         {
             if (IsNew)
             {
-                var saveOutPut = _saveDialog.ShowSaveDialog();
+                var saveOutPut = SaveDialog.ShowSaveDialog();
                 if (saveOutPut == MessageBoxResult.OK || saveOutPut == MessageBoxResult.Yes)
                 {
-                    Name = _saveDialog.ResourceName.Name;
-                    Path = _saveDialog.ResourceName.Path;
+                    Name = SaveDialog.ResourceName.Name;
+                    Path = SaveDialog.ResourceName.Path;
                     Id = Guid.NewGuid();
                     _model.SaveService(ToModel());
                     Item = ToModel();
@@ -162,14 +162,25 @@ namespace Warewolf.Studio.ViewModels
             }
             ErrorText = "";
         }
-
+        public IPluginService PluginService
+        {
+            get
+            {
+                return _pluginService;
+            }
+            set
+            {
+                _pluginService = value;
+                FromModel(_pluginService);
+            }
+        }
         public bool IsNew { get; set; }
 
         public string MappingsHeader
         {
             get
             {
-                return _mappingsHeader;
+                return "";
             }
         }
         public ICollection<IServiceInput> Inputs
@@ -805,7 +816,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _selectedNamespace = value;
-                if (SelectedNamespace != null)
+                if (_selectedNamespace != null)
                 {
                     CanTest = false;
                     CanEditMappings = false;
