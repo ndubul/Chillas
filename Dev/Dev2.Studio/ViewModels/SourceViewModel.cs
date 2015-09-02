@@ -100,6 +100,22 @@ namespace Dev2.ViewModels
             }
         }
 
+        #region Overrides of Screen
+
+        protected override void OnDeactivate(bool close)
+        {
+            if (close)
+            {
+                var shouldSave = DoDeactivate();
+                if (shouldSave)
+                {
+                    ViewModel.Save();
+                }
+            }
+        }
+
+        #endregion
+
         public bool DoDeactivate()
         {
             if (ViewModel.HasChanged)

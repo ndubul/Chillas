@@ -139,7 +139,7 @@ namespace Warewolf.Studio.ViewModels
             Header = Resources.Languages.Core.PluginServiceEditHeaderLabel + selectedConnector.Name;
         }
 
-        void Save()
+        public override void Save()
         {
             if (IsNew)
             {

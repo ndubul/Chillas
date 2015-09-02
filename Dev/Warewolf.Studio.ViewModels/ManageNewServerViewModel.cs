@@ -11,7 +11,6 @@ using Dev2.ConnectionHelpers;
 using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
-using Warewolf.Core;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -74,7 +73,7 @@ namespace Warewolf.Studio.ViewModels
             return TestPassed;
         }
 
-        void Save()
+        public override void Save()
         {
             var res = MessageBoxResult.OK;
             if (String.IsNullOrEmpty(ServerSource.Name))

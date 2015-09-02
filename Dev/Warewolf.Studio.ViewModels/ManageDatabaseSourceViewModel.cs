@@ -28,7 +28,6 @@ using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warewolf.Studio.ViewModels.Help;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -373,6 +372,11 @@ namespace Warewolf.Studio.ViewModels
                 DbName = DatabaseName,
                 Id = _dbSource == null ? Guid.NewGuid() : _dbSource.Id
             };
+        }
+
+        public override void Save()
+        {
+            SaveConnection();
         }
 
         IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
