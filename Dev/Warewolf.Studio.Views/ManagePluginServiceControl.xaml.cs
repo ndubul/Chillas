@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -201,6 +202,11 @@ namespace Warewolf.Studio.Views
         /// <param name="connectionId">An identifier token to distinguish calls.</param><param name="target">The target to connect events and names to.</param>
         public void Connect(int connectionId, object target)
         {
+        }
+
+        public string[] GetActionNames()
+        {
+           return ActionsComboBox.Items.Select(a => ((IPluginAction)a.Data).FullName).ToArray();
         }
     }
 }

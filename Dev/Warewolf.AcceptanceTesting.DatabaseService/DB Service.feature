@@ -5,7 +5,7 @@ Feature: DB Service
 	I want to be shown the database service setup
 
 Scenario: Creating DB Service
-	Given I click "New Data Base Service Connector"
+	Given I click "New DataBase Service Connector"
 	Then "New DB Connector" tab is opened
 	And Data Source is focused
 	And "1 Data Source" is "Enabled"

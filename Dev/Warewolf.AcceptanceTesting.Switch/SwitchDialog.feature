@@ -1,28 +1,48 @@
 ﻿Feature: SwitchDialog
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+	In order to create a switch function
+	As a Warewolf User
+	I want to be shown the switch window setup
 
 #Wolf-1086
 @ignore
 Scenario: Using switch tool
-	Given I have a workflow "New Workflow"
+	Given I open a "New Workflow"
 	And drop a "Switch" tool onto the design surface
 	Then the Switch tool window is opened
 	And "Variable to Switch on" is "Enabled"
 	And "Display text" is "Enabled"
 	And "Done" is "Enabled"
 	And "Cancel" is "Enabled"
-	And "Variable to Switch on" equals "4"
-	And "Display text" equals "Four"
+	And I have variable "[[var]]" equals "4"
+	And "Variable to Switch on" equals "[[var]]"
+	And "Display text" equals "[[var]]"
 	And "Done" is selected
 	And the Switch tool window is closed
 
-Scenario: Assigning value to switch arms
-	Given I have a workflow "New Workflow"
+Scenario: Assigning values to Display  
+	Given I open a "New Workflow"
 	And drop a "Switch" tool onto the design surface
 	Then the Switch tool window is opened
-	And "Variable to Switch on" equals "4"
-	And "Display text" equals "Four"
+	And I have variable "[[var]]" equals "4"
+	And I have variable "[[rec().set]]" equals "Age"
+	And "Variable to Switch on" equals "[[var]]"
+	And "Display text" equals "[[rec().set]]"
 	And "Done" is selected
 	And the switch tool window is closed
+	And I set the default arm
+	And I set the switch arm as "1"
+	And "1" is visible on the switch arm
+	And "[[rec().set]]" is visible 
+
+Scenario: Assigning variable to switch arms
+	Given I open a "New Workflow"
+	And drop a "Switch" tool onto the design surface
+	Then the Switch tool window is opened
+	And "Variable to Switch on" equals "[[var]]"
+	And "Display text" equals "[[var]]"
+	And "Done" is selected
+	And the switch tool window is closed
+	And "[[var]]" is visible in the variable list
+	And I set the default arm
+	When I set the switch arm as "[[var]]"
+	And a validation error is shown 

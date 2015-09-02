@@ -32,7 +32,8 @@ Examples:
 | " "                             |     |                 |
 | [[a]]                           |     |                 |
 | [[rec().a]]                     | 3   | [[rec().a]] = 3 |
+| [[rec(1).a]]                    | 3   | [[rec().a]] = 3 |
 | [[rec(*).a]]                    | 3   | [[rec().a]] = 3 |
 | [[rec([[int]]).a]] ,[[int]] = 1 | 3   | [[rec().a]] = 3 |
 
-#error on [[rec(*).a]]
+#error on [[rec(*).a]] - unable to varify tool not working

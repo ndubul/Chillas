@@ -201,6 +201,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
@@ -340,7 +341,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Utility - Xpath.feature</DependentUpon>
     </Compile>
-    <Compile Include="UnityBootstrapperForExplorerTesting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -445,6 +445,10 @@
       <Project>{13C0C6E9-7DC3-4DC3-8535-031C263CEE0B}</Project>
       <Name>Dev2.Common.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dev2.Core\Dev2.Core.csproj">
+      <Project>{6007C1F1-CE38-474A-A88C-0C05A77BC415}</Project>
+      <Name>Dev2.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dev2.Data\Dev2.Data.csproj">
       <Project>{4BD0C970-ECD6-470B-B9EE-17ECFE53E5FB}</Project>
       <Name>Dev2.Data</Name>
@@ -453,13 +457,17 @@
       <Project>{615EAE6D-040C-4364-B708-63DC8755CD4F}</Project>
       <Name>Dev2.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dev2.Studio.Core\Dev2.Studio.Core.csproj">
+      <Project>{A58B157B-960B-4E84-8957-24E4884C5C77}</Project>
+      <Name>Dev2.Studio.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dev2.Util\Dev2.Util.csproj">
       <Project>{1990550D-EA6F-4DAC-9B5E-8571E86923ED}</Project>
       <Name>Dev2.Util</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServerProxyLayer\Warewolf.Studio.ServerProxyLayer.csproj">
-      <Project>{97a827ff-65c4-4267-99d2-dce6803b2348}</Project>
-      <Name>Warewolf.Studio.ServerProxyLayer</Name>
+    <ProjectReference Include="..\Warewol.Studio.Themes.Luna\Warewolf.Studio.Themes.Luna.csproj">
+      <Project>{18717e42-df21-45a4-9527-f0bb95d7135d}</Project>
+      <Name>Warewolf.Studio.Themes.Luna</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warewolf.AcceptanceTesting.Core\Warewolf.AcceptanceTesting.Core.csproj">
       <Project>{cb0f5535-5e1d-41f9-a23c-f59fdc816b75}</Project>
@@ -481,9 +489,9 @@
       <Project>{a62da168-5bf3-4c14-b880-4ad83478e3a7}</Project>
       <Name>Warewolf.Studio.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Warewolf.Studio.Themes.Luna\Warewolf.Studio.Themes.Luna.csproj">
-      <Project>{c4ac2140-5663-4d3c-9fcd-6d65004cd54e}</Project>
-      <Name>Warewolf.Studio.Themes.Luna</Name>
+    <ProjectReference Include="..\Warewolf.Studio.ServerProxyLayer\Warewolf.Studio.ServerProxyLayer.csproj">
+      <Project>{c35c7c88-1eae-4421-ac03-cefa26461d6c}</Project>
+      <Name>Warewolf.Studio.ServerProxyLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warewolf.Studio.ViewModels\Warewolf.Studio.ViewModels.csproj">
       <Project>{c870fe6d-5889-4dfc-90d9-68fa3e525be2}</Project>

@@ -7,6 +7,7 @@ using Dev2.Common.Interfaces;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -18,7 +19,7 @@ namespace Warewolf.Studio.ViewModels
 		private IExplorerTreeItem _selectedItem;
 		private object[] _selectedDataItems;
 
-		public ExplorerViewModelBase()
+	    protected ExplorerViewModelBase()
 		{
 
 			RefreshCommand = new DelegateCommand(Refresh);
@@ -202,40 +203,40 @@ namespace Warewolf.Studio.ViewModels
 		}
 	}
 
-//	public class ExplorerViewModel : ExplorerViewModelBase
-//	{
-//		public ExplorerViewModel(IShellViewModel shellViewModel, IEventAggregator aggregator)
-//		{
-//			if (shellViewModel == null)
-//			{
-//				throw new ArgumentNullException("shellViewModel");
-//			}
-//			var localhostEnvironment = CreateEnvironmentFromServer(shellViewModel.LocalhostServer, shellViewModel);
-//			Environments = new ObservableCollection<IEnvironmentViewModel> { localhostEnvironment };
-//			LoadEnvironment(localhostEnvironment);
-//
-//			ConnectControlViewModel = new ConnectControlViewModel(shellViewModel.LocalhostServer, aggregator);
-//			ShowConnectControl = true;
-//			aggregator.GetEvent<ItemAddedEvent>().Subscribe(ItemAdded);
-//		}
-//
+	public class ExplorerViewModel : ExplorerViewModelBase
+	{
+		public ExplorerViewModel(IShellViewModel shellViewModel, IEventAggregator aggregator)
+		{
+			if (shellViewModel == null)
+			{
+				throw new ArgumentNullException("shellViewModel");
+			}
+			var localhostEnvironment = CreateEnvironmentFromServer(shellViewModel.LocalhostServer, shellViewModel);
+			Environments = new ObservableCollection<IEnvironmentViewModel> { localhostEnvironment };
+			LoadEnvironment(localhostEnvironment);
+
+			//ConnectControlViewModel = new ConnectControlViewModel(shellViewModel.LocalhostServer, aggregator);
+			//ShowConnectControl = true;
+			//aggregator.GetEvent<ItemAddedEvent>().Subscribe(ItemAdded);
+		}
+
 //		void ItemAdded(IExplorerItem obj)
 //		{
 //
 //		}
-//
-//		private async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment)
-//		{
-//			await localhostEnvironment.Connect();
-//			await localhostEnvironment.Load();
-//		}
-//
-//
-//		IEnvironmentViewModel CreateEnvironmentFromServer(IServer server, IShellViewModel shellViewModel)
-//		{
-//			return new EnvironmentViewModel(server, shellViewModel);
-//		}
-//	}
+
+		private async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment)
+		{
+			await localhostEnvironment.Connect();
+			await localhostEnvironment.Load();
+		}
+
+
+		IEnvironmentViewModel CreateEnvironmentFromServer(IServer server, IShellViewModel shellViewModel)
+		{
+			return new EnvironmentViewModel(server, shellViewModel);
+		}
+	}
 
 	public class SingleEnvironmentExplorerViewModel : ExplorerViewModelBase
 	{

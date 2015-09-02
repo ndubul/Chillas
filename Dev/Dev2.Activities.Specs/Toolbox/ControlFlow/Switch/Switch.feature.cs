@@ -184,10 +184,23 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Switch")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[rec(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[rec(1).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:switch", "[[rec().a]] = 3")]
         public virtual void EnsureThatAVariableRecordsetEvaluatesToTheValueOnTheDatalist_Variant3()
+        {
+            this.EnsureThatAVariableRecordsetEvaluatesToTheValueOnTheDatalist("[[rec(1).a]]", "3", "[[rec().a]] = 3", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure that a variable/recordset evaluates to the value on the datalist")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Switch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[rec(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:switch", "[[rec().a]] = 3")]
+        public virtual void EnsureThatAVariableRecordsetEvaluatesToTheValueOnTheDatalist_Variant4()
         {
             this.EnsureThatAVariableRecordsetEvaluatesToTheValueOnTheDatalist("[[rec(*).a]]", "3", "[[rec().a]] = 3", ((string[])(null)));
         }
@@ -196,11 +209,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure that a variable/recordset evaluates to the value on the datalist")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Switch")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 5")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[rec([[int]]).a]] ,[[int]] = 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:switch", "[[rec().a]] = 3")]
-        public virtual void EnsureThatAVariableRecordsetEvaluatesToTheValueOnTheDatalist_Variant4()
+        public virtual void EnsureThatAVariableRecordsetEvaluatesToTheValueOnTheDatalist_Variant5()
         {
             this.EnsureThatAVariableRecordsetEvaluatesToTheValueOnTheDatalist("[[rec([[int]]).a]] ,[[int]] = 1", "3", "[[rec().a]] = 3", ((string[])(null)));
         }

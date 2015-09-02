@@ -15,6 +15,7 @@ using System.Windows;
 using Dev2.AppResources.Repositories;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Infrastructure;
+using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Events;
 using Dev2.Studio.Core;
@@ -87,7 +88,7 @@ namespace Dev2.Webs
             selectedPath = selectedPath.Replace("\\", "\\\\");
 
             var item = StudioResourceRepository.Instance.FindItem(model => model.ResourcePath.Equals(selectedPath, StringComparison.OrdinalIgnoreCase));
-            var requestViewModel = await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server), new RequestServiceNameView(), item.ResourceId);
+            var requestViewModel = await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server,CustomContainer.Get<IShellViewModel>()), new RequestServiceNameView(), item.ResourceId);
             var messageBoxResult = requestViewModel.ShowSaveDialog();
             if(messageBoxResult == MessageBoxResult.OK)
             {

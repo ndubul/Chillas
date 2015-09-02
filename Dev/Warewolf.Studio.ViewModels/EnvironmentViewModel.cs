@@ -27,21 +27,22 @@ namespace Warewolf.Studio.ViewModels
         bool _canCreateFolder;
 		bool _canShowServerVersion;
 	    private bool _canCreateWorkflowService;
+	    IShellViewModel _shellViewModel;
 
-	    public EnvironmentViewModel(IServer server)
+	    public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel)
         {
 			if (server == null) throw new ArgumentNullException("server");
-            //if (shellViewModel == null) throw new ArgumentNullException("shellViewModel");
-            //_shellViewModel = shellViewModel;
+            if (shellViewModel == null) throw new ArgumentNullException("shellViewModel");
+            _shellViewModel = shellViewModel;
             Server = server;
             //Server.NetworkStateChanged += Server_NetworkStateChanged;
             //server.ItemAddedEvent += ServerItemAddedEvent;
             _children = new ObservableCollection<IExplorerItemViewModel>();
-            //NewCommand = new DelegateCommand<ResourceType?>(type => ShellViewModel.NewResource(type, Guid.Empty));
+            NewCommand = new DelegateCommand<string>(type => ShellViewModel.NewResource(type));
             DisplayName = server.ResourceName;
             RefreshCommand = new DelegateCommand(async () => await Load());
             IsServerIconVisible = true;
-            SelectAction = new Action<IExplorerItemViewModel>(a=>{});
+            SelectAction = a=>{};
             Expand = new DelegateCommand<int?>(clickCount =>
             {
                 if (clickCount != null && clickCount == 2)
@@ -61,6 +62,14 @@ namespace Warewolf.Studio.ViewModels
 	        AreVersionsVisible = false;
 
         }
+
+	    public IShellViewModel ShellViewModel
+	    {
+	        get
+	        {
+	            return _shellViewModel;
+	        }
+	    }
 
 	    public bool CanCreateWorkflowService
 	    {
@@ -110,7 +119,7 @@ namespace Warewolf.Studio.ViewModels
                 var id = Guid.NewGuid();
                 var name = GetChildNameFromChildren();
                 Server.ExplorerRepository.CreateFolder("root", name, id);
-                var child = new ExplorerItemViewModel(Server, null, a => { SelectAction(a); })
+                var child = new ExplorerItemViewModel(Server, this, a => { SelectAction(a); })
                {
                    ResourceName = name,
                    ResourceId = id, 

@@ -167,15 +167,7 @@ Scenario: Opening and Editing workflow from Explorer
 	Given the explorer is visible
 	And I open "localhost" server
 	When I open "Hello World"
-	And "Hello World" tab is opened 
-	And I create new variable [[v]] as output
-	Then "*" is visible in the tab header
-	When I save "*" is not visible
-	And debug out as 
-	|                                            |                                                         |
-	| "Worksapce Item updated 8/12/2015 9:58:01" | Updated WorkflowService 'Hello World'8/12/2015 9:58:01" |
-	When I refresh the explorer
-	And "Hello World" is visible with no duplicate
+	And "Hello World" tab is opened 	
 
 Scenario: Renaming Folder And Workflow Service on a remote server
 	Given the explorer is visible
@@ -204,6 +196,7 @@ Scenario: Context menu
 	And "New Web Service Source" is visible
 	And "New Email Source" is visible
 	And "New Dropbox Source" is visible
+	And "New Sharepoint Source" is visible
 	And "Server version"
 
 Scenario: Show dependencies
@@ -223,11 +216,20 @@ Scenario: Open saved Server Sources
 
 Scenario: Move Nested Folder up tree-view
 	Given the explorer is visible
-	And I open "LocalHost"
+	And I open "localhost"
 	Then path "localhost/MyFolder/NewFolder" is visible
 	And I change path "localhost/MyFolder/NewFolder" to "localhost/NewFolder"
 	Then both "localhost/MyFolder" and "localhost/NewFolder" are visible in root
 
+
+Scenario: Opening server source from explorer
+	Given the explorer is visible
+	And I open "LocalHost"
+	Then I should see the path "localhost/tst-ci-remote"
+	And I open "localhost/tst-ci-remote"
+	Then "Edit - tst-ci-remote" tab is opened
+
+	
 
 #@Explorer
 #Scenario: Opening Versions in Explorer
