@@ -68,7 +68,6 @@ using Dev2.Studio.Core.Workspaces;
 using Dev2.Studio.Enums;
 using Dev2.Studio.Factory;
 using Dev2.Studio.ViewModels.DependencyVisualization;
-using Dev2.Studio.ViewModels.Explorer;
 using Dev2.Studio.ViewModels.Help;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Studio.ViewModels.WorkSurface;
@@ -114,7 +113,7 @@ namespace Dev2.Studio.ViewModels
         #region Fields
 
         private IEnvironmentModel _activeEnvironment;
-        private ExplorerViewModel _explorerViewModel;
+        private Explorer.ExplorerViewModel _explorerViewModel;
         private WorkSurfaceContextViewModel _previousActive;
         private bool _disposed;
 
@@ -150,7 +149,7 @@ namespace Dev2.Studio.ViewModels
 
         public bool CloseCurrent { get; private set; }
 
-        public ExplorerViewModel ExplorerViewModel
+        public Explorer.ExplorerViewModel ExplorerViewModel
         {
             get { return _explorerViewModel; }
             set
@@ -432,7 +431,7 @@ namespace Dev2.Studio.ViewModels
 
             if(ExplorerViewModel == null)
             {
-                ExplorerViewModel = new ExplorerViewModel(eventPublisher, asyncWorker, environmentRepository, StudioResourceRepository, ConnectControlSingl, this, false, enDsfActivityType.All, AddWorkspaceItems, connectControlViewModel);
+                ExplorerViewModel = new Explorer.ExplorerViewModel(eventPublisher, asyncWorker, environmentRepository, StudioResourceRepository, ConnectControlSingl, this, false, enDsfActivityType.All, AddWorkspaceItems, connectControlViewModel);
             }
 
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
@@ -939,6 +938,14 @@ namespace Dev2.Studio.ViewModels
             return pasteView.ShowView(current);
         }
 
+        public IServer LocalhostServer
+        {
+            get
+            {
+                return CustomContainer.Get<IServer>(); 
+            }           
+        }
+
         public void EditServer(IServerSource selectedServer)
         {
             var server = CustomContainer.Get<IServer>();
@@ -1093,7 +1100,7 @@ namespace Dev2.Studio.ViewModels
         private async Task<IRequestServiceNameViewModel> GetSaveViewModel(IServer server, string resourcePath)
         {
             var item = StudioResourceRepository.FindItem(model => model.ResourcePath.Equals(resourcePath,StringComparison.OrdinalIgnoreCase));
-            return await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server), new RequestServiceNameView(), item.ResourceId);
+            return await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server, this), new RequestServiceNameView(), item.ResourceId);
         }
 
         async void AddNewServerSourceSurface(string resourcePath)

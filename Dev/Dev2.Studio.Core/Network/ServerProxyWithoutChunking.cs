@@ -443,7 +443,7 @@ namespace Dev2.Network
             var serverExplorerItem = _serializer.Deserialize<ServerExplorerItem>(obj);
             if (serverExplorerItem.ServerId == ServerID)
             {
-                return;
+              //  return;
             }
             serverExplorerItem.ServerId = ID;
             if (ItemAddedMessageAction != null)

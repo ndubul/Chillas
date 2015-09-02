@@ -18,7 +18,6 @@ using System.Reflection;
 using System.Windows;
 using Caliburn.Micro;
 using Dev2.Common.Interfaces;
-using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Controller;
@@ -35,7 +34,6 @@ using Dev2.Studio.Core.Services.System;
 using Dev2.Studio.Factory;
 using Dev2.Studio.ViewModels;
 using Dev2.Threading;
-using Moq;
 using Warewolf.Studio.AntiCorruptionLayer;
 using Warewolf.Studio.ServerProxyLayer;
 
@@ -77,7 +75,9 @@ namespace Dev2
             CustomContainer.Register<IDockAwareWindowManager>(new XamDockManagerDockAwareWindowManager());
             CustomContainer.Register<ISystemInfoService>(new SystemInfoService());
             CustomContainer.Register<IPopupController>(new PopupController());
-            CustomContainer.Register<IMainViewModel>(new MainViewModel());
+            var mainViewModel = new MainViewModel();
+            CustomContainer.Register<IMainViewModel>(mainViewModel);
+            CustomContainer.Register<IShellViewModel>(mainViewModel);
             CustomContainer.Register<IWindowsServiceManager>(new WindowsServiceManager());
             CustomContainer.Register<IDialogViewModelFactory>(new DialogViewModelFactory());
             var fact = new CommunicationControllerFactory();
@@ -86,7 +86,6 @@ namespace Dev2
             CustomContainer.Register<IStudioUpdateManager>(new StudioResourceUpdateManager(fact,conn));
             CustomContainer.Register<IQueryManager>(new QueryManagerProxy(fact,conn));
             CustomContainer.Register<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>(new Microsoft.Practices.Prism.PubSubEvents.EventAggregator());
-            CustomContainer.Register <IRequestServiceNameViewModel>(new Mock<IRequestServiceNameViewModel>().Object);
             
             ClassRoutedEventHandlers.RegisterEvents();
         }
