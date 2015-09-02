@@ -15,7 +15,6 @@ namespace Warewolf.Studio.ViewModels
 {
 	public class EnvironmentViewModel : BindableBase, IEnvironmentViewModel
     {
-        //readonly IShellViewModel _shellViewModel;
         ObservableCollection<IExplorerItemViewModel> _children;
         bool _isConnecting;
         bool _isConnected;
@@ -27,7 +26,7 @@ namespace Warewolf.Studio.ViewModels
         bool _canCreateFolder;
 		bool _canShowServerVersion;
 	    private bool _canCreateWorkflowService;
-	    IShellViewModel _shellViewModel;
+	    readonly IShellViewModel _shellViewModel;
 
 	    public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel)
         {
@@ -119,7 +118,7 @@ namespace Warewolf.Studio.ViewModels
                 var id = Guid.NewGuid();
                 var name = GetChildNameFromChildren();
                 Server.ExplorerRepository.CreateFolder("root", name, id);
-                var child = new ExplorerItemViewModel(Server, this, a => { SelectAction(a); })
+                var child = new ExplorerItemViewModel(Server, this, a => { SelectAction(a); }, _shellViewModel)
                {
                    ResourceName = name,
                    ResourceId = id, 
@@ -553,7 +552,7 @@ namespace Warewolf.Studio.ViewModels
             // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (var explorerItem in explorerItems)
             {
-                var itemCreated = new ExplorerItemViewModel(server, parent, a => { SelectAction(a); })
+                var itemCreated = new ExplorerItemViewModel(server, parent, a => { SelectAction(a); }, _shellViewModel)
                 {
                     ResourceName = explorerItem.DisplayName,
                     ResourceId = explorerItem.ResourceId,

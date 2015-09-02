@@ -166,7 +166,7 @@ Scenario: Creating Folder in remote host
 Scenario: Opening and Editing workflow from Explorer
 	Given the explorer is visible
 	And I open "localhost" server
-	When I open "Hello World"
+	When I open 'Resource 1' in "localhost/Folder 1"
 	And "Hello World" tab is opened 	
 
 Scenario: Renaming Folder And Workflow Service on a remote server

@@ -19,7 +19,6 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 {
     public class Server : Resource,IServer
     {
-        Dev2.Studio.Core.Interfaces.IEnvironmentConnection _environmentConnection;
         readonly Guid _serverId;
         readonly StudioServerProxy _proxyLayer;
         IList<IToolDescriptor> _tools;
@@ -44,7 +43,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         {
             VerifyArgument.IsNotNull("uri",uri);
             VerifyArgument.IsNotNull("credentials", credentials);
-            _environmentConnection = new ServerProxy(uri,credentials,new AsyncWorker());
+            EnvironmentConnection = new ServerProxy(uri,credentials,new AsyncWorker());
             _serverId = Guid.NewGuid();
             _proxyLayer = new StudioServerProxy(new CommunicationControllerFactory(), EnvironmentConnection);
             UpdateRepository = new StudioResourceUpdateManager(new CommunicationControllerFactory(), EnvironmentConnection);
@@ -190,17 +189,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
                 return _proxyLayer;
             }
         }
-        public Dev2.Studio.Core.Interfaces.IEnvironmentConnection EnvironmentConnection
-        {
-            get
-            {
-                return _environmentConnection;
-            }
-            private set
-            {
-                _environmentConnection = value;
-            }
-        }
+        public Dev2.Studio.Core.Interfaces.IEnvironmentConnection EnvironmentConnection { get; private set; }
 
         #endregion
 

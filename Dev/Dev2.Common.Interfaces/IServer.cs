@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dev2.Common.Interfaces.Data;
@@ -35,6 +36,7 @@ namespace Dev2.Common.Interfaces
         string GetServerVersion();
 
         void Connect();
+
     }
 
     //public delegate void PermissionsChanged(PermissionsChangedArgs args);

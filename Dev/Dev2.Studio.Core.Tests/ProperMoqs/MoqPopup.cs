@@ -10,11 +10,11 @@
 */
 
 using System.Windows;
-using Dev2.Common.Interfaces.Studio.Controller;
+using Dev2.Common.Interfaces.PopupController;
 
 namespace Dev2.Core.Tests.ProperMoqs
 {
-    public class MoqPopup : IPopupController
+    public class MoqPopup : Common.Interfaces.Studio.Controller.IPopupController
     {
         readonly MessageBoxResult _result;
 
@@ -47,11 +47,18 @@ namespace Dev2.Core.Tests.ProperMoqs
 
         public MessageBoxButton Buttons { get; set; }
 
+        public MessageBoxResult Show(IPopupMessage popupMessage)
+        {
+            Show(popupMessage.Description, popupMessage.Header, popupMessage.Buttons, popupMessage.Image, popupMessage.DontShowAgainKey);
+            return _result;
+        }
+
         public MessageBoxResult Show()
         {
             ShowHitCount++;
             return _result;
         }
+
         // public MessageBoxResult Show(string description, string header = "", MessageBoxButton buttons = MessageBoxButton.OK, MessageBoxImage image = MessageBoxImage.Asterisk, string dontShowAgainKey = null)
         public MessageBoxResult Show(string description, string header, MessageBoxButton buttons, MessageBoxImage image, string dontShowAgainKey)
         {

@@ -22,5 +22,7 @@ namespace Dev2.Common.Interfaces
         void VerifyItemDoesNotExist(string path);
 
         void Refresh();
+
+        IExplorerTreeItem OpenItem(string resourceName, string folderName);
     }
 }

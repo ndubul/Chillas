@@ -11,14 +11,14 @@
 
 using System.ComponentModel.Composition;
 using System.Windows;
-using Dev2.Common.Interfaces.Studio.Controller;
+using Dev2.Common.Interfaces.PopupController;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Core.Tests.ProperMoqs
 // ReSharper restore CheckNamespace
 {
-    [Export(typeof(IPopupController))]
-    public class MoqPopup : IPopupController
+    [Export(typeof(Common.Interfaces.Studio.Controller.IPopupController))]
+    public class MoqPopup : Common.Interfaces.Studio.Controller.IPopupController
     {
         readonly MessageBoxResult _result;
 
@@ -51,11 +51,15 @@ namespace Dev2.Core.Tests.ProperMoqs
 
         public MessageBoxButton Buttons { get; set; }
 
+        public MessageBoxResult Show(IPopupMessage popupMessage)
+        {
+            return Show(popupMessage.Description,popupMessage.Header,popupMessage.Buttons,popupMessage.Image,popupMessage.DontShowAgainKey);
+        }
+
         public MessageBoxResult Show()
         {
             return _result;
         }
-
         public MessageBoxResult Show(string description, string header, MessageBoxButton buttons, MessageBoxImage image, string dontShowAgainKey)
         {
             Description = description;

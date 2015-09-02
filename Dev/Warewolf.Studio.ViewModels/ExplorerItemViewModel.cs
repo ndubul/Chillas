@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
@@ -11,14 +12,13 @@ using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
-using Warewolf.Core;
+using Warewolf.Studio.Core.Popup;
 
 namespace Warewolf.Studio.ViewModels
 {
 	public class ExplorerItemViewModel : BindableBase, IExplorerItemViewModel
     {
 	    readonly Action<IExplorerItemViewModel> _selectAction;
-	    //readonly IShellViewModel _shellViewModel;
         string _resourceName;
         private bool _isVisible;
         bool _allowEditing;
@@ -35,24 +35,23 @@ namespace Warewolf.Studio.ViewModels
         bool _userShouldEditValueNow;
         string _versionNumber;
         ICollection<IExplorerItemViewModel> _children;
-        Guid _resourceId;
-        bool _isExpanded;
+	    bool _isExpanded;
         bool _canCreateServerSource;
         bool _canCreateFolder;
         string _filter;
         private bool _isSelected;
         bool _canShowVersions;
+	    readonly IShellViewModel _shellViewModel;
 
-        // ReSharper disable TooManyDependencies
-        public ExplorerItemViewModel( IServer server, IExplorerTreeItem parent,Action<IExplorerItemViewModel> selectAction)
-            // ReSharper restore TooManyDependencies
+	    public ExplorerItemViewModel( IServer server, IExplorerTreeItem parent,Action<IExplorerItemViewModel> selectAction,IShellViewModel shellViewModel)
         {
             _selectAction = selectAction;
+            _shellViewModel = shellViewModel;
             RollbackCommand = new DelegateCommand(() =>
             {
-//                var output = _explorerRepository.Rollback(ResourceId, VersionNumber);
-//                parent.AreVersionsVisible = true;
-//                parent.ResourceName = output.DisplayName;
+                var output = _explorerRepository.Rollback(ResourceId, VersionNumber);
+                parent.AreVersionsVisible = true;
+                parent.ResourceName = output.DisplayName;
             });
             _canShowVersions = true;
             Parent = parent;
@@ -60,7 +59,7 @@ namespace Warewolf.Studio.ViewModels
             LostFocus = new DelegateCommand(LostFocusCommand);
 
             Children = new ObservableCollection<IExplorerItemViewModel>();
-            //OpenCommand = new DelegateCommand(() => shellViewModel.AddService(ResourceId, Server));
+            OpenCommand = new DelegateCommand(() => shellViewModel.OpenResource(ResourceId, Server));
             //DeployCommand = new DelegateCommand(() => shellViewModel.DeployService(this));
             RenameCommand = new DelegateCommand(() => IsRenaming = true);
             Server = server;
@@ -171,30 +170,29 @@ namespace Warewolf.Studio.ViewModels
                 var id = Guid.NewGuid();
                 var name = GetChildNameFromChildren();
 				_explorerRepository.CreateFolder(ResourcePath, name, id);
-                var child = new ExplorerItemViewModel(Server,this,_selectAction)
-               {
-                   ResourceName = name,
-                   ResourceId = id,
-                   ResourceType = ResourceType.Folder,
-                   CanCreateDbService = CanCreateDbService,
-                   CanCreateFolder = CanCreateFolder,
-                   CanCreateDbSource = CanCreateDbSource,
-                   CanCreatePluginService = CanCreatePluginService,
-                   CanShowVersions = CanShowVersions,
-                   CanRename = CanRename,
-                   CanCreatePluginSource = CanCreatePluginSource,
-                   CanCreateEmailSource = CanCreateEmailSource,
-                   CanCreateServerSource = CanCreateServerSource,
-                   CanCreateWebService = CanCreateWebService,
-                   CanCreateWebSource = CanCreateWebSource,
-                   ResourcePath = ResourcePath+"\\"+name,
-                   CanCreateWorkflowService = CanCreateWorkflowService 
-                  
-               };
-				//child.SetFromServer(Server.Permissions.FirstOrDefault(a => a.IsServer));
-                child.IsSelected = true;
-                child.IsRenaming = true;
-               AddChild(child);
+                var child = new ExplorerItemViewModel(Server, this, _selectAction, _shellViewModel)
+                {
+                    ResourceName = name,
+                    ResourceId = id,
+                    ResourceType = ResourceType.Folder,
+                    CanCreateDbService = CanCreateDbService,
+                    CanCreateFolder = CanCreateFolder,
+                    CanCreateDbSource = CanCreateDbSource,
+                    CanCreatePluginService = CanCreatePluginService,
+                    CanShowVersions = CanShowVersions,
+                    CanRename = CanRename,
+                    CanCreatePluginSource = CanCreatePluginSource,
+                    CanCreateEmailSource = CanCreateEmailSource,
+                    CanCreateServerSource = CanCreateServerSource,
+                    CanCreateWebService = CanCreateWebService,
+                    CanCreateWebSource = CanCreateWebSource,
+                    ResourcePath = ResourcePath + "\\" + name,
+                    CanCreateWorkflowService = CanCreateWorkflowService,
+                    IsSelected = true,
+                    IsRenaming = true
+                };
+                //child.SetFromServer(Server.Permissions.FirstOrDefault(a => a.IsServer));
+                AddChild(child);
                
             }
 
@@ -226,13 +224,13 @@ namespace Warewolf.Studio.ViewModels
 
         string GetChildNameFromChildren()
         {
-            const string newFolder = "New Folder";
+            const string NewFolder = "New Folder";
             int count = 0;
-            string folderName = newFolder;
+            string folderName = NewFolder;
 			while (Children.Any(a => a.ResourceName == folderName))
             {
                 count++;
-				folderName = newFolder + " " + count;
+				folderName = NewFolder + " " + count;
             }
             return folderName;
         }
@@ -268,26 +266,26 @@ namespace Warewolf.Studio.ViewModels
 
         public void SetPermissions(List<IWindowsGroupPermission> permissions)
         {
-            //if (ResourceType == ResourceType.Folder)
-            //{
-            //    CanEdit = false;
-            //    CanExecute = false;
-            //    return;
-            //}
-            //var resourcePermission = permissions.FirstOrDefault(permission => permission.ResourceID == ResourceId);
-            //if (resourcePermission != null)
-            //{
-            //    SetFromPermission(resourcePermission);
-            //}
-            //else
-            //{
-            //    var serverPermission =
-            //        permissions.FirstOrDefault(permission => permission.IsServer && permission.ResourceID == Guid.Empty);
-            //    if (serverPermission != null)
-            //    {
-            //        SetFromServer(serverPermission);
-            //    }
-            //}
+            if (ResourceType == ResourceType.Folder)
+            {
+                CanEdit = false;
+                CanExecute = false;
+                return;
+            }
+            var resourcePermission = permissions.FirstOrDefault(permission => permission.ResourceID == ResourceId);
+            if (resourcePermission != null)
+            {
+                SetFromPermission(resourcePermission);
+            }
+            else
+            {
+                var serverPermission =
+                    permissions.FirstOrDefault(permission => permission.IsServer && permission.ResourceID == Guid.Empty);
+                if (serverPermission != null)
+                {
+                    SetFromServer(serverPermission);
+                }
+            }
         }
 
         void SetFromServer(IWindowsGroupPermission serverPermission)
@@ -364,7 +362,7 @@ namespace Warewolf.Studio.ViewModels
             {
 				if (_resourceName != null && (Parent != null && Parent.Children.Any(a => a.ResourceName == value) && value!=_resourceName))
                 {
-                    //_shellViewModel.ShowPopup(PopupMessages.GetDuplicateMessage(value));
+                    _shellViewModel.ShowPopup(PopupMessages.GetDuplicateMessage(value));
 
                 }
                 else
@@ -377,11 +375,14 @@ namespace Warewolf.Studio.ViewModels
                         {
                             if(!ResourcePath.Contains("\\"))
                             {
-                                ResourcePath = ResourcePath.Replace(_resourceName, newName);
+                                if(_resourceName != null)
+                                {
+                                    ResourcePath = ResourcePath.Replace(_resourceName, newName);
+                                }
                             }
                             else
                             {
-                                ResourcePath = ResourcePath.Substring(0, ResourcePath.LastIndexOf("\\") + 1)+newName;
+                                ResourcePath = ResourcePath.Substring(0, ResourcePath.LastIndexOf("\\", StringComparison.OrdinalIgnoreCase) + 1)+newName;
                             }
                             
                             _resourceName = newName;
@@ -434,19 +435,8 @@ namespace Warewolf.Studio.ViewModels
             }
         }
         public bool Checked { get; set; }
-        public Guid ResourceId
-        {
-            get
-            {
-                return _resourceId;
-            }
-            set
-            {
-                _resourceId = value;
-
-            }
-        }
-        public ResourceType ResourceType
+        public Guid ResourceId { get; set; }
+	    public ResourceType ResourceType
         {
             get
             {
@@ -491,7 +481,7 @@ namespace Warewolf.Studio.ViewModels
                     OnPropertyChanged(() => IsSelected);
                     if (_isSelected)
                     {
-                        var helpDescriptor = new HelpDescriptor("", string.Format("<body><H1>{0}</H1><a href=\"http://warewolf.io\">Warewolf</a><p>Inputs: {1}</p><p>Outputs: {2}</p></body>", ResourceName, Inputs, Outputs), null);
+                        //var helpDescriptor = new HelpDescriptor("", string.Format("<body><H1>{0}</H1><a href=\"http://warewolf.io\">Warewolf</a><p>Inputs: {1}</p><p>Outputs: {2}</p></body>", ResourceName, Inputs, Outputs), null);
                         //_shellViewModel.UpdateHelpDescriptor(helpDescriptor);
                     }
                 }
@@ -637,7 +627,16 @@ namespace Warewolf.Studio.ViewModels
                 return ResourceType == ResourceType.Version;
             }
         }
-        public bool AreVersionsVisible
+
+	    public IShellViewModel ShellViewModel
+	    {
+	        get
+            {
+                return _shellViewModel;
+            }	        
+	    }
+
+	    public bool AreVersionsVisible
         {
             get
             {
@@ -650,22 +649,22 @@ namespace Warewolf.Studio.ViewModels
                 VersionHeader = !value ? "Show Version History" : "Hide Version History";
                 if (value)
                 {
-//					_children = new ObservableCollection<IExplorerItemViewModel>(_explorerRepository.GetVersions(ResourceId).Select(a => new ExplorerItemViewModel(Server, this)
-//                    {
-//						ResourceName = "v." + a.VersionNumber + " " + a.DateTimeStamp.ToString(CultureInfo.InvariantCulture) + " " + a.Reason.Replace(".xml",""),
-//                        VersionNumber = a.VersionNumber,
-//						ResourceId = ResourceId,
-//                         IsVersion = true,
-//                         CanCreatePluginSource = false,
-//                         CanCreateEmailSource = false,
-//						CanCreateWebService = false,
-//                         CanCreateDbService = false,
-//                         CanCreateDbSource = false,
-//                         CanCreatePluginService = false,
-//                         CanCreateWebSource = false,
-//						ResourceType = ResourceType.Version
-//                    }
-//                    ));
+					_children = new ObservableCollection<IExplorerItemViewModel>(_explorerRepository.GetVersions(ResourceId).Select(a => new ExplorerItemViewModel(Server, this,null,_shellViewModel)
+                    {
+						ResourceName = "v." + a.VersionNumber + " " + a.DateTimeStamp.ToString(CultureInfo.InvariantCulture) + " " + a.Reason.Replace(".xml",""),
+                        VersionNumber = a.VersionNumber,
+						ResourceId = ResourceId,
+                         IsVersion = true,
+                         CanCreatePluginSource = false,
+                         CanCreateEmailSource = false,
+						CanCreateWebService = false,
+                         CanCreateDbService = false,
+                         CanCreateDbSource = false,
+                         CanCreatePluginService = false,
+                         CanCreateWebSource = false,
+						ResourceType = ResourceType.Version
+                    }
+                    ));
                     OnPropertyChanged(() => Children);
                     if (Children.Count > 0) IsExpanded = true;
                 }
@@ -751,9 +750,8 @@ namespace Warewolf.Studio.ViewModels
                  }
                  return true;
             }
-			catch (Exception err)
+			catch (Exception)
             {
-                //ShellViewModel.Handle(err);
                 return false;
             }
         }

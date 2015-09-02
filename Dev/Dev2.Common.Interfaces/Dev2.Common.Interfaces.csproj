@@ -312,6 +312,7 @@
     <Compile Include="ServerProxyLayer\IDbSource.cs" />
     <Compile Include="ServerProxyLayer\IPluginProxy.cs" />
     <Compile Include="ServerProxyLayer\IUpdateManager.cs" />
+    <Compile Include="ServerProxyLayer\IVersionManager.cs" />
     <Compile Include="ServerProxyLayer\IWebServiceSource.cs" />
     <Compile Include="ServerStats.cs" />
     <Compile Include="Services\Sql\IDbFactory.cs" />

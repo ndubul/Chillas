@@ -72,7 +72,7 @@ namespace Warewolf.Studio.Views
                 }
 
                 return explorerItemViewModel;
-            }
+            }            
             return null;
         }
 
@@ -257,7 +257,7 @@ namespace Warewolf.Studio.Views
                 var item = (node.Data as IExplorerTreeItem);
                 if (item != null)
                 {
-                    item.AddChild(new ExplorerItemViewModel(item.Server, item ,a=>{} )
+                    item.AddChild(new ExplorerItemViewModel(item.Server, item ,a=>{},item.ShellViewModel )
                     {
                         ResourceName = path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal)),
                         ResourcePath = path
@@ -271,7 +271,7 @@ namespace Warewolf.Studio.Views
                 if (explorerViewModelBase != null)
                 {
                     var item = explorerViewModelBase.SelectedItem;
-                    item.AddChild(new ExplorerItemViewModel(item.Server, item,a => { }) { ResourceName = path });
+                    item.AddChild(new ExplorerItemViewModel(item.Server, item,a => { },item.ShellViewModel) { ResourceName = path });
                 }
             }
         }
@@ -288,7 +288,7 @@ namespace Warewolf.Studio.Views
                 {
                     if (item != null)
                     {
-                        item.AddChild(new ExplorerItemViewModel(item.Server, item, a => { }) { ResourceName = name + i, ResourceType = resourceType });
+                        item.AddChild(new ExplorerItemViewModel(item.Server, item, a => { },item.ShellViewModel) { ResourceName = name + i, ResourceType = resourceType });
                     }
                 }
             }
@@ -301,7 +301,7 @@ namespace Warewolf.Studio.Views
                 {
                     if (item != null)
                     {
-                        item.AddChild(new ExplorerItemViewModel(item.Server, null, a => { }) { ResourceName = name + i, ResourceType = resourceType });
+                        item.AddChild(new ExplorerItemViewModel(item.Server, null, a => { },item.ShellViewModel) { ResourceName = name + i, ResourceType = resourceType });
                     }
                 }
             }
@@ -333,7 +333,7 @@ namespace Warewolf.Studio.Views
             {
                 if (item != null)
                 {
-                    items.Add(new ExplorerItemViewModel(item.Server, item, a => { }) { ResourceName = Name + i, ResourceType = ResourceType.Version });
+                    items.Add(new ExplorerItemViewModel(item.Server, item, a => { },null) { ResourceName = Name + i, ResourceType = ResourceType.Version });
                 }
             }
             return items;
@@ -444,6 +444,12 @@ namespace Warewolf.Studio.Views
         {
             var item = _explorerView.ExplorerTree.ActiveNode.Data as IExplorerTreeItem;
             return item;
+        }
+
+        public IExplorerTreeItem OpenItem(string resourceName, string folderName)
+        {
+            var folderNode = GetFolderXamDataTreeNode(folderName);
+            return GetNodeWithName(resourceName, folderNode).Data as IExplorerTreeItem;
         }
     }
 }

@@ -12,6 +12,7 @@
 // ReSharper disable CheckNamespace
 
 using System.Windows;
+using Dev2.Common.Interfaces.PopupController;
 
 namespace Dev2.Common.Interfaces.Studio.Controller
 // ReSharper restore CheckNamespace
@@ -24,6 +25,7 @@ namespace Dev2.Common.Interfaces.Studio.Controller
         MessageBoxImage ImageType { get; set; }
         MessageBoxButton Buttons { get; set; }
         string DontShowAgainKey { get; set; }
+        MessageBoxResult Show(IPopupMessage popupMessage);
         MessageBoxResult Show();
 
         MessageBoxResult Show(string description, string header, MessageBoxButton buttons, MessageBoxImage image,

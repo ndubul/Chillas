@@ -12,13 +12,13 @@
 using System;
 using System.Windows;
 using Dev2.Common;
-using Dev2.Common.Interfaces.Studio.Controller;
+using Dev2.Common.Interfaces.PopupController;
 using Dev2.Studio.ViewModels.Dialogs;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.Controller
 {
-    public class PopupController : IPopupController
+    public class PopupController : Common.Interfaces.Studio.Controller.IPopupController
     {
         public string Header { get; set; }
 
@@ -32,6 +32,11 @@ namespace Dev2.Studio.Controller
 
         public string DontShowAgainKey { get; set; }
 
+        public MessageBoxResult Show(IPopupMessage popupMessage)
+        {
+            return Show(popupMessage.Description, popupMessage.Header, popupMessage.Buttons, popupMessage.Image, popupMessage.DontShowAgainKey);
+        }
+        
         public MessageBoxResult Show()
         {
             return ShowDev2MessageBox(Description, Header, Buttons, ImageType, DontShowAgainKey);

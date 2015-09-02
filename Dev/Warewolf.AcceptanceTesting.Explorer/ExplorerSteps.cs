@@ -81,6 +81,23 @@ namespace Warewolf.AcceptanceTesting.Explorer
             Assert.IsNotNull(environmentViewModel);
         }
 
+        [Given(@"I open '(.*)' in ""(.*)""")]
+        [When(@"I open '(.*)' in ""(.*)""")]
+        public void WhenIOpenIn(string resourceName,string folderName)
+        {
+            var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
+            var environmentViewModel = explorerView.OpenItem(resourceName,folderName);
+            Assert.IsNotNull(environmentViewModel);
+        }
+
+
+        [When(@"""(.*)"" tab is opened")]
+        public void WhenTabIsOpened(string p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+
         [Given(@"I should see ""(.*)"" folders")]
         [When(@"I should see ""(.*)"" folders")]
         [Then(@"I should see ""(.*)"" folders")]
