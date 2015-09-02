@@ -1502,7 +1502,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                 if (!OpeningWorkflowsHelper.IsWorkflowWaitingforDesignerLoad(workSurfaceKey))
                 {
                     // an additional case we need to account for - Designer has resized and is only visible once focus is lost?! ;)
-                    if (OpeningWorkflowsHelper.IsWaitingForFistFocusLoss(workSurfaceKey) || WatermarkSential.IsWatermarkBeingApplied)
+                    if (OpeningWorkflowsHelper.IsWaitingForFistFocusLoss(workSurfaceKey))
                     {
                         ResourceModel.WorkflowXaml = ServiceDefinition;
                         OpeningWorkflowsHelper.RemoveWorkflowWaitingForFirstFocusLoss(workSurfaceKey);

@@ -4221,7 +4221,7 @@ Scenario: View workflow based on nested levels
 	Then "FetchCities" is shown as the first level of dependancy
 	And "Dev2GetCountriesWebService" is shown as the second level of dependancy
 
-Scenario:  Viewing Depenancies
+Scenario: Viewing Depenancies
 	Given I have a workflow "11365_WebService"	
 	And I select "Show All Dependancies"
 	Then the "Dependancies - 11365_WebService" tab is opened
@@ -4229,3 +4229,19 @@ Scenario:  Viewing Depenancies
 	And Nesting Levels equals "0" equals "All levels"
 	And I double click "Dev2GetCountriesWebService"
 	Then the "Edit - Dev2GetCountriesWebService" tab is opened
+
+Scenario: Studio persistence 
+	Given I  have the Warewolf studio opened
+	And an option to "Lock/Unlock" the side menu is visible
+	And I "Lock" the side menu
+	And I Dock the tool Box window in the right panel in the studio
+	When I close and re-open the studio
+	Then the studio side menu is "Locked"
+	And the Tool Box window is in the right panel in the studio 
+
+
+Scenario: Drop menu for opened tabs
+	Given I have many tabs opened
+	And the tabs are not all visible
+	Then  an option to view all hidden tabs is available
+

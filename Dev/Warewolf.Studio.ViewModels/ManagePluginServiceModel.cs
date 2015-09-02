@@ -10,6 +10,7 @@
 */
 
 using System.Collections.Generic;
+using System.Linq;
 using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
@@ -52,7 +53,7 @@ namespace Warewolf.Studio.ViewModels
 
         public ICollection<IPluginAction> GetActions(IPluginSource source, INamespaceItem ns)
         {
-            return _queryProxy.PluginActions(source,ns);
+            return _queryProxy.PluginActions(source,ns).Where(a=>a.Method!= "GetType").ToList();
         }
 
         public ICollection<INamespaceItem> GetNameSpaces(IPluginSource source)

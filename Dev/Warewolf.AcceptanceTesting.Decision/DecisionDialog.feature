@@ -8,6 +8,7 @@
 Scenario Outline: Ensure Inputs are enabled on decision window load
 	Given I have a workflow "New Workflow"
 	And drop a "Decision" tool onto the design surface
+	Then the Decision window is opened
 	And '<Inputs>' fields are "Enabled"
 	And "Add Statement" is visible
 	And a decision variable '<variable>' value '<value>'
