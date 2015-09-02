@@ -18,8 +18,6 @@ using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Studio.Core.Interfaces;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warewolf.Core;
-using Warewolf.Studio.Models.Help;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -617,6 +615,11 @@ namespace Warewolf.Studio.ViewModels
                 Id = Item.Id,
                 Path = Path
             };
+        }
+
+        public override void Save()
+        {
+            SaveConnection();
         }
 
         public bool CanTest()

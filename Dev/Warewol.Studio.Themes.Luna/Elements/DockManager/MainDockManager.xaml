@@ -630,11 +630,13 @@
     <!--  ROBIN  -->
     <Style x:Key="RootMenuStyle" TargetType="{x:Type Menu}">
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Visibility" Value="Collapsed" />
+        <Setter Property="Visibility" Value="Visible" />
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <igWindows:CardPanel AllowDrop="True" />
+                    <igWindows:CardPanel x:Name="CardPanel" AllowDrop="True" />
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
@@ -766,6 +768,9 @@
                         <Trigger Property="AllowClosing" Value="False">
                             <Setter TargetName="closeBtn" Property="Visibility" Value="Collapsed" />
                         </Trigger>
+                        <Trigger Property="CloseButtonVisibility" Value="Hidden">
+                            <Setter TargetName="closeBtn" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
 
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1" />
@@ -846,12 +851,12 @@
                             <DockPanel>
 
                                 <!--  Dev2  -->
-                                <Button x:Name="closeBtn"
+                                <!--<Button x:Name="closeBtn"
                                         VerticalAlignment="Center"
                                         Command="{x:Static igDock:TabGroupPane.CloseSelectedItemCommand}"
                                         DockPanel.Dock="Right"
                                         Foreground="{StaticResource BrushLightForeground}"
-                                        Style="{DynamicResource {x:Static igDock:PaneHeaderPresenter.CloseButtonStyleKey}}" />
+                                        Style="{DynamicResource {x:Static igDock:PaneHeaderPresenter.CloseButtonStyleKey}}" />-->
 
                                 <!--  Dev2  -->
                                 <Menu x:Name="filesMenu"
@@ -927,13 +932,13 @@
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
                             <Setter TargetName="PART_TabHeaderPanel" Property="Margin" Value="0" />
-                            <Setter TargetName="closeBtn" Property="DockPanel.Dock" Value="Bottom" />
+                            <!--<Setter TargetName="closeBtn" Property="DockPanel.Dock" Value="Bottom" />-->
                             <Setter TargetName="filesMenu" Property="DockPanel.Dock" Value="Bottom" />
                             <Setter TargetName="showNavigatorButton" Property="DockPanel.Dock" Value="Bottom" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter TargetName="PART_TabHeaderPanel" Property="Margin" Value="0" />
-                            <Setter TargetName="closeBtn" Property="DockPanel.Dock" Value="Bottom" />
+                            <!--<Setter TargetName="closeBtn" Property="DockPanel.Dock" Value="Bottom" />-->
                             <Setter TargetName="filesMenu" Property="DockPanel.Dock" Value="Bottom" />
                             <Setter TargetName="showNavigatorButton" Property="DockPanel.Dock" Value="Bottom" />
                         </Trigger>

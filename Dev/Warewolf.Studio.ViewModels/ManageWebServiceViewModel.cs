@@ -194,7 +194,7 @@ namespace Warewolf.Studio.ViewModels
             return SelectedSource != null;
         }
 
-        void Save()
+        public override void Save()
         {
             try
             {

@@ -131,5 +131,9 @@ namespace Dev2.Core.Tests.ProperMoqs
         {
             return MessageBoxResult.None;
         }
+        public MessageBoxResult ShowItemSourceCloseConfirmation(string nameOfItem)
+        {
+            return MessageBoxResult.None;
+        }
     }
 }

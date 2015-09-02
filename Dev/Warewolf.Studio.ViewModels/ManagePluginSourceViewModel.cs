@@ -24,9 +24,7 @@ using Dev2.Common.Interfaces.Threading;
 using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warewolf.Core;
 using Warewolf.Studio.Core;
-using Warewolf.Studio.Models.Help;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -351,7 +349,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        void Save()
+        public override void Save()
         {
             if (_pluginSource == null)
             {

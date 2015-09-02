@@ -132,6 +132,22 @@ namespace Dev2.Studio.Controller
             return Show();
         }
 
+        public MessageBoxResult ShowItemSourceCloseConfirmation(string nameOfItem)
+        {
+            Header = "Changes not saved";
+            var description = "Your changes have not been saved." + Environment.NewLine
+                              + "Would you like to save? " + Environment.NewLine +
+                              "-----------------------------------------------------------------" +
+                              Environment.NewLine +
+                              "Yes - Saves your changes" + Environment.NewLine +
+                              "No - Discard your changes." + Environment.NewLine +
+                              "Cancel - Returns you to the tab.";
+            Description = description;
+            Buttons = MessageBoxButton.YesNoCancel;
+            ImageType = MessageBoxImage.Information;
+            return Show();
+        }
+
         public MessageBoxResult ShowNoInputsSelectedWhenClickLink()
         {
             Header = "Did you know?";

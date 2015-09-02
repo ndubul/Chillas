@@ -18,5 +18,7 @@ namespace Dev2.Interfaces
         bool DoDeactivate();
 
         bool IsDirty { get; }
+
+        void Dispose();
     }
 }

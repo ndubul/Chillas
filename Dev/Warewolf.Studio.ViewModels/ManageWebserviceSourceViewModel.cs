@@ -226,7 +226,11 @@ namespace Warewolf.Studio.ViewModels
             _updateManager.Save(source);
 
         }
+        public override void Save()
+        {
+            SaveConnection();
 
+        }
 
 
         void TestConnection()

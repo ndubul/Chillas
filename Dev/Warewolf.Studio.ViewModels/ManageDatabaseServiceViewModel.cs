@@ -354,7 +354,7 @@ namespace Warewolf.Studio.ViewModels
             return mappings;
         }
 
-        private void Save()
+        public override void Save()
         {
             try
             {
