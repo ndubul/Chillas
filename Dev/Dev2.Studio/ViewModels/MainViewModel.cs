@@ -2084,6 +2084,18 @@ namespace Dev2.Studio.ViewModels
                             }
                         }
                     }
+                    else
+                    {
+                        var tab = vm as IStudioTab;
+                        if(tab != null)
+                        {
+                            remove = tab.DoDeactivate();
+                            if (remove)
+                            {
+                                tab.Dispose();
+                            }
+                        }
+                    }
                 }
             }
 

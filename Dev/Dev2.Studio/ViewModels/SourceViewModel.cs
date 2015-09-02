@@ -100,27 +100,11 @@ namespace Dev2.ViewModels
             }
         }
 
-        #region Overrides of Screen
-
-        protected override void OnDeactivate(bool close)
-        {
-            if (close)
-            {
-                var shouldSave = DoDeactivate();
-                if (shouldSave)
-                {
-                    ViewModel.Save();
-                }
-            }
-        }
-
-        #endregion
-
         public bool DoDeactivate()
         {
             if (ViewModel.HasChanged)
             {
-                MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowItemCloseCloseConfirmation(DisplayName);
+                MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowItemSourceCloseConfirmation(ViewModel.Header);
                 if(showSchedulerCloseConfirmation == MessageBoxResult.Cancel || showSchedulerCloseConfirmation == MessageBoxResult.None)
                 {
                     return false;
@@ -128,6 +112,13 @@ namespace Dev2.ViewModels
                 if(showSchedulerCloseConfirmation == MessageBoxResult.No)
                 {
                     return true;
+                }
+                if (showSchedulerCloseConfirmation == MessageBoxResult.Yes)
+                {
+                    if (ViewModel.CanSave())
+                    {
+                        ViewModel.Save();
+                    }
                 }
             }
             return true;
