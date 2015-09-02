@@ -326,7 +326,7 @@ namespace Dev2.Settings
 
             if(SecurityViewModel != null)
             {
-                if(!DoDeactivate())
+                if(!DoDeactivate(true))
                 {
                     return;
                 }
@@ -432,24 +432,26 @@ namespace Dev2.Settings
 
         #region Overrides of Screen
 
-        public virtual bool DoDeactivate()
+        public virtual bool DoDeactivate(bool showMessage)
         {
-            var messageBoxResult = GetSaveResult();
-            if(messageBoxResult == MessageBoxResult.Cancel || messageBoxResult == MessageBoxResult.None)
+            if (showMessage)
             {
-                return false;
-            }
-            if(messageBoxResult == MessageBoxResult.Yes)
-            {
-                return SaveSettings();
-            }
+                var messageBoxResult = GetSaveResult();
+                if (messageBoxResult == MessageBoxResult.Cancel || messageBoxResult == MessageBoxResult.None)
+                {
+                    return false;
+                }
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    return SaveSettings();
+                }
 
-            if(messageBoxResult == MessageBoxResult.No)
-            {
-                IsDirty = false;
-                ResetIsDirtyForChildren();
+                if (messageBoxResult == MessageBoxResult.No)
+                {
+                    IsDirty = false;
+                    ResetIsDirtyForChildren();
+                }
             }
-
             return true;
         }
 

@@ -100,25 +100,35 @@ namespace Dev2.ViewModels
             }
         }
 
-        public bool DoDeactivate()
+        public bool DoDeactivate(bool showMessage)
         {
-            if (ViewModel.HasChanged)
+            if (showMessage)
             {
-                MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowItemSourceCloseConfirmation(ViewModel.Header);
-                if(showSchedulerCloseConfirmation == MessageBoxResult.Cancel || showSchedulerCloseConfirmation == MessageBoxResult.None)
+                if (ViewModel.HasChanged)
                 {
-                    return false;
-                }
-                if(showSchedulerCloseConfirmation == MessageBoxResult.No)
-                {
-                    return true;
-                }
-                if (showSchedulerCloseConfirmation == MessageBoxResult.Yes)
-                {
-                    if (ViewModel.CanSave())
+                    MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowItemSourceCloseConfirmation(ViewModel.Header);
+                    if (showSchedulerCloseConfirmation == MessageBoxResult.Cancel || showSchedulerCloseConfirmation == MessageBoxResult.None)
                     {
-                        ViewModel.Save();
+                        return false;
                     }
+                    if (showSchedulerCloseConfirmation == MessageBoxResult.No)
+                    {
+                        return true;
+                    }
+                    if (showSchedulerCloseConfirmation == MessageBoxResult.Yes)
+                    {
+                        if (ViewModel.CanSave())
+                        {
+                            ViewModel.Save();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (ViewModel.CanSave())
+                {
+                    ViewModel.Save();
                 }
             }
             return true;

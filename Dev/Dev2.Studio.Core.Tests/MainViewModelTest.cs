@@ -2650,7 +2650,7 @@ namespace Dev2.Core.Tests
 
         }
 
-        public override bool DoDeactivate()
+        public override bool DoDeactivate(bool b)
         {
             return RetValue;
         }
@@ -2675,7 +2675,7 @@ namespace Dev2.Core.Tests
         }
 
 
-        public override bool DoDeactivate()
+        public override bool DoDeactivate(bool b)
         {
             return RetValue;
         }
