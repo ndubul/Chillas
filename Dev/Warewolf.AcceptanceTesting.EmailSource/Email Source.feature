@@ -79,8 +79,8 @@ Scenario: Fail Send
 
 
 Scenario: Edit saves From and To
-	Given I click "Edit - Test Email Source"
-	Then "Edit -Test Email Source" tab is opened
+	Given I click "Test Email Source"
+	Then "Test Email Source" tab is opened
 	When the page loads
 	Then "Host" has the focus
 	And "Host" is "somehost"

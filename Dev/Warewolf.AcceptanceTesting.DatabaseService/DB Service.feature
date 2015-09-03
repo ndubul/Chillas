@@ -42,12 +42,12 @@ Scenario: Creating DB Service
 Scenario: Opening Saved DB Service
    Given I open "InsertDummyUser" service
    And "InsertDummyUser" tab is opened
+   Then "1 Data Source" is "Enabled"
    And Data Source is focused
-   And "DemoDB" is selected as the data source
+   When "DemoDB" is selected as the data source
+   Then "2 Select Action" is "Enabled"
    And "dbo.InsertDummyUser" is selected as the action
-   And "1 Data Source" is "Enabled"
-   And "2 Select Action" is "Enabled"
-   And "3 Test Connector and Calculate Outputs" is "Enabled" 
+   Then "3 Test Connector and Calculate Outputs" is "Enabled" 
    And inputs are
    | fname  | lname | username | password | lastAccessDate |
    | Change | Test  | wolf     | Dev      | 10/1/1990      |
@@ -68,12 +68,12 @@ Scenario: Opening Saved DB Service
  Scenario: Editing DB Service Mappings
    Given I open "InsertDummyUser" service
    And "InsertDummyUser" tab is opened
+   Then "1 Data Source" is "Enabled"
    And Data Source is focused
-   And "DemoDB" is selected as the data source
+   When "DemoDB" is selected as the data source
+   Then "2 Select Action" is "Enabled"
    And "dbo.InsertDummyUser" is selected as the action
-   And "1 Data Source" is "Enabled"
-   And "2 Select Action" is "Enabled"
-   And "3 Test Connector and Calculate Outputs" is "Enabled" 
+   Then "3 Test Connector and Calculate Outputs" is "Enabled" 
    And Inspect Data Connector hyper link is "Visible"
    And "Save" is "Disabled"
    When inputs are
@@ -99,17 +99,16 @@ Scenario: Opening Saved DB Service
 	  | UserID | UserID       | dbo_InsertDummyUser |
    When I save
    Then "InsertDummyUser" is saved
-   And Save Dialog is not opened 
 
  Scenario: Editing DB Service and Test Execution is unsuccesful
    Given I open "InsertDummyUser" service
    And "InsertDummyUser" tab is opened
+   Then "1 Data Source" is "Enabled"
    And Data Source is focused
-   And "DemoDB" is selected as the data source
+   When "DemoDB" is selected as the data source
+   Then "2 Select Action" is "Enabled"
    And "dbo.InsertDummyUser" is selected as the action
-   And "1 Data Source" is "Enabled"
-   And "2 Select Action" is "Enabled"
-   And "3 Test Connector and Calculate Outputs" is "Enabled" 
+   Then "3 Test Connector and Calculate Outputs" is "Enabled" 
    And Inspect Data Connector hyper link is "Visible"
    And inputs are
    | fname  | lname | username | password | lastAccessDate |
@@ -136,17 +135,17 @@ Scenario: Refresh in select Action
 	And "Save" is "Disabled"
 	When I select "DemoDB" as data source
 	Then "2 Select Action" is "Enabled"
-	And  the "Refresh" button is "Enabled"
+	And "Refresh" is "Enabled"
 	When I select "dbo.InsertDummyUser" as the action
 	Then "3 Test Connector and Calculate Outputs" is "Enabled"
 	And inputs are
    | fname | lname  | username | password | lastAccessDate |
    | Test  | Tester | wolf     | Dev      | 10/1/1990      |
-   And I select the "Refresh" button 
-   Then "3 Test Connector and Calculate Outputs" is reloaded
+   When I select "Refresh" 
+   Then "3 Test Connector and Calculate Outputs" is "reloaded"
    And  all inputs are cleared
-   And the "Test" is "Enabled"
-   And the "Save" is disabled
+   And "Test" is "Enabled"
+   And "Save" is "Disabled"
    When I test the action
 	Then outputs are
 	| Recordset Name         | UserID |
@@ -157,8 +156,8 @@ Scenario: Refresh in select Action
 	Then Save Dialog is opened 
 
 Scenario: Changing Actions
-	Given I click new Database Connector
-	Then "new Database Connector" tab is opened
+	Given I click New Data Base Service Connector
+	Then "New Database Connector" tab is opened
 	And "1 Data Source" is "Enabled"
 	And "2 Select Action" is "Disabled"
 	And "3 Test Connector and Calculate Outputs" is "Disabled" 
@@ -173,9 +172,9 @@ Scenario: Changing Actions
 	| fname | lname | username | password | lastAccessDate |
 	| Dummy | User  | Test     | password | 12/05/2001     |
 	When I change the action from "dbo.InsertDummyUser" to "dbo.ImportOrder"
-	Then "3 Test Connector and Calculate Outputs" is reloaded
+	Then "3 Test Connector and Calculate Outputs" is "Reloaded"
 	And "Test" is "Enabled"
-	And input is now
+	And inputs are
 	| ProductId |
 	| 1         |
 	And "4 Edit Default and Mapping Names" is "Disabled" 

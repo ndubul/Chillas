@@ -24,9 +24,9 @@ Scenario: Create a new Dropbox Source
 	And "Password" is "•••••••"
 	And I click "Log In"
 	Then "Warewolf ESB would like access to the files and folders in your Dropbox" is visible
-	And "Cancel" is enabled
-	And "Allow" is enabled
-	When I click "Allow"
+	And "Cancel" is "Enabled"
+	And "Allow" is "Enabled"
+	When "Allow" is clicked
 	Then the save dialog is opened
 	And I save as "MyDropboxSource"
 	Then "MyDropboxSource is visible in the Explorer
@@ -40,9 +40,9 @@ Scenario: Denying Warewolf access to Dropbox
 	And "Password" is "•••••••"
 	And I click "Log In"
 	Then "Warewolf ESB would like access to the files and folders in your Dropbox" is visible
-	And "Cancel" is enabled
-	And "Allow" is enabled
-	When I click "Cancel"
+	And "Cancel" is "Enabled"
+	And "Allow" is "Enabled"
+	When "Cancel" is clicked
 	Then "New Dropbox Source" tab is closed
 
 Scenario: Edit saved Dropbox Source

@@ -1,7 +1,7 @@
 ﻿Feature: EmailDialog
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+	In order to attach files
+	I want to attach items to me email to send
+	So that I can reuse them
 
 
 # Send Email with an attachment
@@ -22,7 +22,7 @@ Scenario: Selecting multiple attachments
 	And I attach "C:\Temp\Testing\test.txt"
 	And I navigate to "E:\AppData\Le"
 	And I attach "E:\AppData\Le\test.txt"
-	Then files to attach should appear as "C:\Temp\Testing\test.txt;E:\AppData\Le\test.txt"
+	Then attachment should appear as "C:\Temp\Testing\test.txt;E:\AppData\Le\test.txt"
 
 
 Scenario: Ensure that dialog tree view is populated correctly
