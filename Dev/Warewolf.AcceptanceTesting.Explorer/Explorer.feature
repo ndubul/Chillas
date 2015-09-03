@@ -180,6 +180,7 @@ Scenario Outline: Opening and Editing workflow from Explorer
 	And I open "<Host>" server
 	When I open "Hello World"
 	And "Hello World" tab is opened 
+	Examples: 
 	| Host                          |
 	| localhost                     |
 	| Remote Connection Integration |
