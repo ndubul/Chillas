@@ -14,8 +14,6 @@ using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warewolf.Core;
-using Warewolf.Studio.Models.Help;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -113,7 +111,7 @@ namespace Warewolf.Studio.ViewModels
         {
             if (_emailServiceSource != null)
             {
-                HeaderText = Resources.Languages.Core.EmailSourceEditHeaderLabel + _warewolfserverName.Trim() + "\\" + (_emailServiceSource.ResourceName ?? ResourceName).Trim();
+                HeaderText = _warewolfserverName.Trim() + "\\" + (_emailServiceSource.ResourceName ?? ResourceName).Trim();
                 Header = ((_emailServiceSource.ResourceName ?? ResourceName));
             }
         }
@@ -142,6 +140,11 @@ namespace Warewolf.Studio.ViewModels
                 mainViewModel.HelpViewModel.UpdateHelpText(helpText);
             }
 
+        }
+
+        public override void Save()
+        {
+            SaveConnection();
         }
 
         public string ResourceName

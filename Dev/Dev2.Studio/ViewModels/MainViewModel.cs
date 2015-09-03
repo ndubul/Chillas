@@ -68,7 +68,6 @@ using Dev2.Studio.Core.Workspaces;
 using Dev2.Studio.Enums;
 using Dev2.Studio.Factory;
 using Dev2.Studio.ViewModels.DependencyVisualization;
-using Dev2.Studio.ViewModels.Explorer;
 using Dev2.Studio.ViewModels.Help;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Studio.ViewModels.WorkSurface;
@@ -114,7 +113,7 @@ namespace Dev2.Studio.ViewModels
         #region Fields
 
         private IEnvironmentModel _activeEnvironment;
-        private ExplorerViewModel _explorerViewModel;
+        private Explorer.ExplorerViewModel _explorerViewModel;
         private WorkSurfaceContextViewModel _previousActive;
         private bool _disposed;
 
@@ -150,7 +149,7 @@ namespace Dev2.Studio.ViewModels
 
         public bool CloseCurrent { get; private set; }
 
-        public ExplorerViewModel ExplorerViewModel
+        public Explorer.ExplorerViewModel ExplorerViewModel
         {
             get { return _explorerViewModel; }
             set
@@ -228,7 +227,7 @@ namespace Dev2.Studio.ViewModels
                     var vm = ActiveItem.WorkSurfaceViewModel as IStudioTab;
                     if (vm != null)
                     {
-                        return new AuthorizeCommand(AuthorizationContext.Any, o => vm.DoDeactivate(), o => vm.IsDirty);
+                        return new AuthorizeCommand(AuthorizationContext.Any, o => vm.DoDeactivate(false), o => vm.IsDirty);
                     }
                 }                
                 return ActiveItem.SaveCommand;
@@ -432,7 +431,7 @@ namespace Dev2.Studio.ViewModels
 
             if(ExplorerViewModel == null)
             {
-                ExplorerViewModel = new ExplorerViewModel(eventPublisher, asyncWorker, environmentRepository, StudioResourceRepository, ConnectControlSingl, this, false, enDsfActivityType.All, AddWorkspaceItems, connectControlViewModel);
+                ExplorerViewModel = new Explorer.ExplorerViewModel(eventPublisher, asyncWorker, environmentRepository, StudioResourceRepository, ConnectControlSingl, this, false, enDsfActivityType.All, AddWorkspaceItems, connectControlViewModel);
             }
 
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
@@ -939,6 +938,14 @@ namespace Dev2.Studio.ViewModels
             return pasteView.ShowView(current);
         }
 
+        public IServer LocalhostServer
+        {
+            get
+            {
+                return CustomContainer.Get<IServer>(); 
+            }           
+        }
+
         public void EditServer(IServerSource selectedServer)
         {
             var server = CustomContainer.Get<IServer>();
@@ -1093,7 +1100,7 @@ namespace Dev2.Studio.ViewModels
         private async Task<IRequestServiceNameViewModel> GetSaveViewModel(IServer server, string resourcePath)
         {
             var item = StudioResourceRepository.FindItem(model => model.ResourcePath.Equals(resourcePath,StringComparison.OrdinalIgnoreCase));
-            return await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server), new RequestServiceNameView(), item.ResourceId);
+            return await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server, this), new RequestServiceNameView(), item.ResourceId);
         }
 
         async void AddNewServerSourceSurface(string resourcePath)
@@ -1491,7 +1498,7 @@ namespace Dev2.Studio.ViewModels
                     var viewModel = vm as IStudioTab;
                     if(viewModel != null)
                     {
-                        viewModel.DoDeactivate();                        
+                        viewModel.DoDeactivate(true);                        
                     }
                 }
             }
@@ -2058,7 +2065,7 @@ namespace Dev2.Studio.ViewModels
                         var settingsViewModel = vm as SettingsViewModel;
                         if (settingsViewModel != null)
                         {
-                            remove = settingsViewModel.DoDeactivate();
+                            remove = settingsViewModel.DoDeactivate(true);
                             if (remove)
                             {
                                 settingsViewModel.Dispose();
@@ -2070,10 +2077,22 @@ namespace Dev2.Studio.ViewModels
                         var schedulerViewModel = vm as SchedulerViewModel;
                         if (schedulerViewModel != null)
                         {
-                            remove = schedulerViewModel.DoDeactivate();
+                            remove = schedulerViewModel.DoDeactivate(true);
                             if (remove)
                             {
                                 schedulerViewModel.Dispose();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var tab = vm as IStudioTab;
+                        if(tab != null)
+                        {
+                            remove = tab.DoDeactivate(true);
+                            if (remove)
+                            {
+                                tab.Dispose();
                             }
                         }
                     }
@@ -2097,7 +2116,7 @@ namespace Dev2.Studio.ViewModels
                         if (settingsViewModel != null && settingsViewModel.IsDirty)
                         {
                             ActivateItem(workSurfaceContextViewModel);
-                            bool remove = settingsViewModel.DoDeactivate();
+                            bool remove = settingsViewModel.DoDeactivate(true);
                             if (!remove)
                             {
                                 return false;
@@ -2110,7 +2129,7 @@ namespace Dev2.Studio.ViewModels
                         if (schedulerViewModel != null && schedulerViewModel.SelectedTask != null && schedulerViewModel.SelectedTask.IsDirty)
                         {
                             ActivateItem(workSurfaceContextViewModel);
-                            bool remove = schedulerViewModel.DoDeactivate();
+                            bool remove = schedulerViewModel.DoDeactivate(true);
                             if (!remove)
                             {
                                 return false;

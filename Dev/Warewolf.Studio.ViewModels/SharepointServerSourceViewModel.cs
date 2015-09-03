@@ -18,8 +18,6 @@ using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Studio.Core.Interfaces;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warewolf.Core;
-using Warewolf.Studio.Models.Help;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -360,8 +358,8 @@ namespace Warewolf.Studio.ViewModels
 
         void SetupHeaderTextFromExisting()
         {
-            HeaderText = string.Format("{0} {1} ", Resources.Languages.Core.SharePointServiceEditHeaderLabel, (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim());
-            Header = string.Format("{0} - {1}", Resources.Languages.Core.SharePointServiceEditHeaderLabel, (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name));
+            HeaderText = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
+            Header = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
         }
 
         public string HeaderText
@@ -617,6 +615,11 @@ namespace Warewolf.Studio.ViewModels
                 Id = Item.Id,
                 Path = Path
             };
+        }
+
+        public override void Save()
+        {
+            SaveConnection();
         }
 
         public bool CanTest()

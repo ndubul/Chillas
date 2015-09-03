@@ -103,13 +103,13 @@ namespace Warewolf.Studio.ViewModels
             var serverName = _warewolfserverName;
             if(serverName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
             {
-                HeaderText = string.Format("{0} {1}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim());
-                Header = string.Format("{0}", ((_webServiceSource == null ? ResourceName : _webServiceSource.Name)));
+                HeaderText = (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim();
+                Header = (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim();
             }
             else
             {
-                HeaderText = string.Format("{0} {1} ", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim());
-                Header = string.Format("{0} {1}", Resources.Languages.Core.WebserviceEditHeaderLabel, (_webServiceSource == null ? ResourceName : _webServiceSource.Name));
+                HeaderText = (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim();
+                Header = (_webServiceSource == null ? ResourceName : _webServiceSource.Name).Trim();
             }
         }
 
@@ -226,7 +226,11 @@ namespace Warewolf.Studio.ViewModels
             _updateManager.Save(source);
 
         }
+        public override void Save()
+        {
+            SaveConnection();
 
+        }
 
 
         void TestConnection()

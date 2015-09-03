@@ -7,7 +7,7 @@
               xmlns:customControls="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
               d:DesignHeight="300"
               d:DesignWidth="300">
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
         <customControls:CircularProgressBar x:Name="CircularProgressBar"
                                             Grid.Column="1"
                                             Height="150"

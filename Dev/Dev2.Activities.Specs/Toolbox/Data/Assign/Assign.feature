@@ -739,6 +739,15 @@ Scenario: Assigning variables with space after closing brace
 	Then the execution has "AN" error
 	And the execution has "Variable - Invalid expression: opening and closing brackets don't match" error
 
+@ignore
+Scenario: Removing variable and value from assign 
+	Given I assign the value "10" to a variable "[[x]]"
+	And I assign the value "20" to a variable "[[var]]" 
+	And I assign the value "30" to a variable "[[variable]]"
+	When I remove "[[var]]" equals "20"
+	Then the assign tool row index is update
+
+
 
 
 

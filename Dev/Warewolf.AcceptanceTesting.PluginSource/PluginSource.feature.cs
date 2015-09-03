@@ -132,7 +132,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 41
     testRunner.Then("the save dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 42
- testRunner.Then("title is \"Edit Testing Resource Save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("title is \"Testing Resource Save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 43
  testRunner.And("\"Testing Resource Save\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -183,7 +183,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 59
  testRunner.Given("I open \"Test\" plugin source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 60
- testRunner.Then("title is \"Edit Test\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("title is \"Test\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 61
  testRunner.And("\"GAC\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
@@ -216,7 +216,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 71
  testRunner.Given("I open \"Test File\" plugin source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 72
- testRunner.Then("title is \"Edit Test File\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("title is \"Test File\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 73
  testRunner.And("\"File System\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74

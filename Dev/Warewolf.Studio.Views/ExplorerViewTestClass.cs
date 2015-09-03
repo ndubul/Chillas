@@ -127,7 +127,7 @@ namespace Warewolf.Studio.Views
                     if (env != null)
                     {
                         env.CreateFolderCommand.Execute(null);
-                        var explorerItemViewModel = env.Children.FirstOrDefault(a => a.IsRenaming);
+                        var explorerItemViewModel = env.Children.FirstOrDefault(a => a != null && a.IsRenaming);
                         if (explorerItemViewModel != null)
                         {
                             explorerItemViewModel.ResourceName = folder;
@@ -257,7 +257,12 @@ namespace Warewolf.Studio.Views
                 var item = (node.Data as IExplorerTreeItem);
                 if (item != null)
                 {
-                    item.AddChild(new ExplorerItemViewModel(item.Server, item ,a=>{} ) { ResourceName = path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal)) });
+                    item.AddChild(new ExplorerItemViewModel(item.Server, item ,a=>{} )
+                    {
+                        ResourceName = path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal)),
+                        ResourcePath = path
+                        
+                    });
                 }
             }
             else

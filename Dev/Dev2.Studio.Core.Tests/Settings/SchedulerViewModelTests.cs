@@ -1668,7 +1668,7 @@ Warewolf leverages Windows Task Scheduler and the schedules can be viewed there 
             popup.Setup(a => a.ShowSchedulerCloseConfirmation()).Returns(MessageBoxResult.No);
             var schedulerViewModel = new SchedulerViewModel(new Mock<IEventAggregator>().Object, new Mock<DirectoryObjectPickerDialog>().Object, popup.Object, new SynchronousAsyncWorker(), new Mock<IConnectControlViewModel>().Object) { SelectedTask = scheduledResourceForTest, CurrentEnvironment = null };
             //------------Execute Test---------------------------
-            Assert.IsTrue(schedulerViewModel.DoDeactivate());
+            Assert.IsTrue(schedulerViewModel.DoDeactivate(true));
             //------------Assert Results-------------------------
 
         }
@@ -1742,7 +1742,7 @@ Warewolf leverages Windows Task Scheduler and the schedules can be viewed there 
             popup.Setup(a => a.ShowSchedulerCloseConfirmation()).Returns(MessageBoxResult.Cancel);
             var schedulerViewModel = new SchedulerViewModel(new Mock<IEventAggregator>().Object, new Mock<DirectoryObjectPickerDialog>().Object, popup.Object, new SynchronousAsyncWorker(), new Mock<IConnectControlViewModel>().Object) { SelectedTask = scheduledResourceForTest, CurrentEnvironment = null };
             //------------Execute Test---------------------------
-            Assert.IsFalse(schedulerViewModel.DoDeactivate());
+            Assert.IsFalse(schedulerViewModel.DoDeactivate(true));
             //------------Assert Results-------------------------
 
         }
@@ -1781,7 +1781,7 @@ Warewolf leverages Windows Task Scheduler and the schedules can be viewed there 
             auth.Setup(a => a.IsAuthorized(AuthorizationContext.Administrator, null)).Returns(false).Verifiable();
             schedulerViewModel.CurrentEnvironment = mockEnvironmentModel.Object;
             //------------Execute Test---------------------------
-            schedulerViewModel.DoDeactivate();
+            schedulerViewModel.DoDeactivate(true);
             //------------Assert Results-------------------------
             auth.Verify(a => a.IsAuthorized(AuthorizationContext.Administrator, null));
             Assert.AreEqual(@"Error while saving: You don't have permission to schedule on this server. You need Administrator permission.", schedulerViewModel.Error);

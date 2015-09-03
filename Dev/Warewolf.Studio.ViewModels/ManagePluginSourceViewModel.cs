@@ -24,9 +24,7 @@ using Dev2.Common.Interfaces.Threading;
 using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warewolf.Core;
 using Warewolf.Studio.Core;
-using Warewolf.Studio.Models.Help;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -309,13 +307,13 @@ namespace Warewolf.Studio.ViewModels
             var serverName = _warewolfserverName;
             if (serverName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
             {
-                HeaderText = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim());
-                Header = string.Format("{0}", ((_pluginSource == null ? ResourceName : _pluginSource.Name)));
+                HeaderText = (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
+                Header = (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
             }
             else
             {
-                HeaderText = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim());
-                Header = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, ((_pluginSource == null ? ResourceName : _pluginSource.Name)));
+                HeaderText = (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
+                Header = (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
             }
         }
 
@@ -351,7 +349,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        void Save()
+        public override void Save()
         {
             if (_pluginSource == null)
             {

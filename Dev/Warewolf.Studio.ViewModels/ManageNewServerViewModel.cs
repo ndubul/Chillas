@@ -11,7 +11,6 @@ using Dev2.ConnectionHelpers;
 using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
-using Warewolf.Core;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -74,7 +73,7 @@ namespace Warewolf.Studio.ViewModels
             return TestPassed;
         }
 
-        void Save()
+        public override void Save()
         {
             var res = MessageBoxResult.OK;
             if (String.IsNullOrEmpty(ServerSource.Name))
@@ -144,7 +143,7 @@ namespace Warewolf.Studio.ViewModels
 
         string SetToEdit(IServerSource source)
         {
-            return "Edit " + _connectedServer.Trim() + "/" + source.ResourcePath + source.Name;
+            return _connectedServer.Trim() + "/" + source.ResourcePath + source.Name;
         }
 
         public Action CloseAction { get; set; }
@@ -177,7 +176,6 @@ namespace Warewolf.Studio.ViewModels
 
             OnPropertyChanged(() => Validate);
             OnPropertyChanged(() => CanClickOk);
-
         }
 
         /// <summary>

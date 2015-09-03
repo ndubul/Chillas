@@ -118,12 +118,9 @@ namespace Warewolf.Studio.ViewModels
             : base(ResourceType.WebService)
         {
             _model = model;
-            Init();
+            //Init();
+            Sources = _model.Sources;
             _webService = service;
-            Variables = new ObservableCollection<NameValue>();
-            RequestUrlQuery = service.QueryString;
-            Inputs = service.Inputs;
-            OutputMapping = service.OutputMappings;
             Item = service;
             FromModel(service);
         }
@@ -144,6 +141,10 @@ namespace Warewolf.Studio.ViewModels
                     Headers.Add(nameValue);
                 }
             }
+            else
+            {
+                service.Headers = new List<NameValue>();
+            }
 
             if (SelectedSource != null)
             {
@@ -157,6 +158,10 @@ namespace Warewolf.Studio.ViewModels
             {
                 RequestUrlQuery = "";
             }
+            RequestUrlQuery = service.QueryString;
+            Inputs = service.Inputs;
+            OutputMapping = service.OutputMappings;
+            
         }
 
        
@@ -194,7 +199,7 @@ namespace Warewolf.Studio.ViewModels
             return SelectedSource != null;
         }
 
-        void Save()
+        public override void Save()
         {
             try
             {
@@ -215,6 +220,7 @@ namespace Warewolf.Studio.ViewModels
                 else
                 {
                     _model.SaveService(ToModel());
+                    Item = ToModel();
                 }
                 ErrorMessage = "";
             }

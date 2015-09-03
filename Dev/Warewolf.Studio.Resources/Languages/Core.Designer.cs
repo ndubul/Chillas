@@ -2333,7 +2333,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit.
+        ///   Looks up a localized string similar to Edit .
         /// </summary>
         public static string WebserviceEditHeaderLabel {
             get {
