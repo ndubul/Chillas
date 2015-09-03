@@ -57,7 +57,7 @@ Scenario: Creating Plugin Service by selecting existing source
 
 Scenario: Opening saved Plugin Service 
 	Given I open "IntegrationTestPluginNull" 
-	And "Edit IntegrationTestPluginNull" tab is opened
+	And "IntegrationTestPluginNull" tab is opened
 	And "testingPluginSrc" is selected as source
 	And "2 Select a Namespace" is "Enabled"
 	And "3 Select an Action" is "Enabled"
@@ -90,7 +90,7 @@ Scenario: Opening saved Plugin Service
 
 Scenario: Refreshing plugin source action step 
 	Given I open "IntegrationTestPluginNull"
-	And "Edit IntegrationTestPluginNull" tab is opened
+	And "IntegrationTestPluginNull" tab is opened
 	And "2 Select a Namespace" is "Enabled"
 	And "3 Select an Action" is "Enabled"
 	And "4 Provide Test Values" is "Enabled"

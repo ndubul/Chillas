@@ -59,10 +59,10 @@ Scenario: Creating New DB Source General Testing
    When I save the source as "SavedDBSource"
    Then the save dialog is opened
    Then "SavedDBSource" tab is opened
-   And title is "Edit SavedDBSource"
+   And title is "SavedDBSource"
    When I type Server as "RSA"
    Then "SavedDBSource *" is the tab Header
-   And title is "Edit SavedDBSource"
+   And title is "SavedDBSource"
    
 
 	

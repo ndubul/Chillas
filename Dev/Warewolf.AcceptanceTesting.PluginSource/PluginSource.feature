@@ -39,7 +39,7 @@ Scenario: New Plugin Source File
 	Then "Save" is "Enabled"
 	When I save as "Testing Resource Save"
     Then the save dialog is opened
-	Then title is "Edit Testing Resource Save"
+	Then title is "Testing Resource Save"
 	And "Testing Resource Save" tab is opened
 	
 
@@ -57,7 +57,7 @@ Scenario: New Plugin Source GAC
 	 
 Scenario: Editing Plugin Source
 	Given I open "Test" plugin source
-	Then title is "Edit Test"
+	Then title is "Test"
 	And "GAC" is "visible"
 	And Assembly value is "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll"
 	And "Save" is "Disabled"
@@ -69,7 +69,7 @@ Scenario: Editing Plugin Source
 
 Scenario: Change Plugin Source Assembly Input
 	Given I open "Test File" plugin source
-	Then title is "Edit Test File"
+	Then title is "Test File"
 	And "File System" is "visible"
 	And "C:\" is "visible"
 	And Assembly value is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
