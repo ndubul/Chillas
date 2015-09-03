@@ -78,7 +78,8 @@ namespace Dev2.Studio.Controller
             Header = "Rename conflict";
             Description = "The following task has been renamed " + oldName + " -> " + newName + ". You will lose the history for the old task." + Environment.NewLine +
                           " Would you like to save the new name?" + Environment.NewLine +
-                          "-------------------------------------------------------------------" +
+                          "-----------------------------------------------------------------" +
+                              Environment.NewLine +
                           "Yes - Save with the new name." + Environment.NewLine +
                           "No - Save with the old name." + Environment.NewLine +
                           "Cancel - Returns you to Scheduler.";
@@ -92,7 +93,8 @@ namespace Dev2.Studio.Controller
             Header = "Settings have changed";
             var description = "Settings have not been saved." + Environment.NewLine
                               + "Would you like to save the settings? " + Environment.NewLine +
-                              "-------------------------------------------------------------------" +
+                              "-----------------------------------------------------------------" +
+                              Environment.NewLine +
                               "Yes - Save the settings." + Environment.NewLine +
                               "No - Discard your changes." + Environment.NewLine +
                               "Cancel - Returns you to settings.";
@@ -107,7 +109,8 @@ namespace Dev2.Studio.Controller
             Header = "Scheduler Task has changes";
             var description = "Scheduler Task has not been saved." + Environment.NewLine
                               + "Would you like to save the Task? " + Environment.NewLine +
-                              "-------------------------------------------------------------------" +
+                              "-----------------------------------------------------------------" +
+                              Environment.NewLine +
                               "Yes - Save the Task." + Environment.NewLine +
                               "No - Discard your changes." + Environment.NewLine +
                               "Cancel - Returns you to Scheduler.";
@@ -122,7 +125,8 @@ namespace Dev2.Studio.Controller
             Header = string.Format("{0} Changes not saved", nameOfItem);
             var description = nameOfItem+" has not been saved." + Environment.NewLine
                               + "Would you like to save the Task? " + Environment.NewLine +
-                              "-------------------------------------------------------------------" +
+                              "-----------------------------------------------------------------" +
+                              Environment.NewLine +
                               "Yes - Save "+ nameOfItem +"." + Environment.NewLine +
                               "No - Discard your changes." + Environment.NewLine +
                               "Cancel - Returns you to "+nameOfItem+".";

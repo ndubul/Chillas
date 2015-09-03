@@ -938,7 +938,7 @@ namespace Dev2.Settings.Scheduler
         {
             var tmpEnv = obj as IEnvironmentModel;
 
-            if(!DoDeactivate())
+            if(!DoDeactivate(true))
             {
                 return;
             }
@@ -1053,20 +1053,23 @@ namespace Dev2.Settings.Scheduler
         }
         #region Public Methods
 
-        public virtual bool DoDeactivate()
+        public virtual bool DoDeactivate(bool showMessage)
         {
-            if(SelectedTask != null && SelectedTask.IsDirty)
+            if (showMessage)
             {
-                MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowSchedulerCloseConfirmation();
-                if(showSchedulerCloseConfirmation == MessageBoxResult.Cancel || showSchedulerCloseConfirmation == MessageBoxResult.None)
+                if (SelectedTask != null && SelectedTask.IsDirty)
                 {
-                    return false;
+                    MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowSchedulerCloseConfirmation();
+                    if (showSchedulerCloseConfirmation == MessageBoxResult.Cancel || showSchedulerCloseConfirmation == MessageBoxResult.None)
+                    {
+                        return false;
+                    }
+                    if (showSchedulerCloseConfirmation == MessageBoxResult.No)
+                    {
+                        return true;
+                    }
+                    return SaveTasks();
                 }
-                if(showSchedulerCloseConfirmation == MessageBoxResult.No)
-                {
-                    return true;
-                }
-                return SaveTasks();
             }
             return true;
         }

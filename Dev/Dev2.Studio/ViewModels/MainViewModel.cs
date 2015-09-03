@@ -227,7 +227,7 @@ namespace Dev2.Studio.ViewModels
                     var vm = ActiveItem.WorkSurfaceViewModel as IStudioTab;
                     if (vm != null)
                     {
-                        return new AuthorizeCommand(AuthorizationContext.Any, o => vm.DoDeactivate(), o => vm.IsDirty);
+                        return new AuthorizeCommand(AuthorizationContext.Any, o => vm.DoDeactivate(false), o => vm.IsDirty);
                     }
                 }                
                 return ActiveItem.SaveCommand;
@@ -1508,7 +1508,7 @@ namespace Dev2.Studio.ViewModels
                     var viewModel = vm as IStudioTab;
                     if(viewModel != null)
                     {
-                        viewModel.DoDeactivate();                        
+                        viewModel.DoDeactivate(true);                        
                     }
                 }
             }
@@ -2075,7 +2075,7 @@ namespace Dev2.Studio.ViewModels
                         var settingsViewModel = vm as SettingsViewModel;
                         if (settingsViewModel != null)
                         {
-                            remove = settingsViewModel.DoDeactivate();
+                            remove = settingsViewModel.DoDeactivate(true);
                             if (remove)
                             {
                                 settingsViewModel.Dispose();
@@ -2087,7 +2087,7 @@ namespace Dev2.Studio.ViewModels
                         var schedulerViewModel = vm as SchedulerViewModel;
                         if (schedulerViewModel != null)
                         {
-                            remove = schedulerViewModel.DoDeactivate();
+                            remove = schedulerViewModel.DoDeactivate(true);
                             if (remove)
                             {
                                 schedulerViewModel.Dispose();
@@ -2099,7 +2099,7 @@ namespace Dev2.Studio.ViewModels
                         var tab = vm as IStudioTab;
                         if(tab != null)
                         {
-                            remove = tab.DoDeactivate();
+                            remove = tab.DoDeactivate(true);
                             if (remove)
                             {
                                 tab.Dispose();
@@ -2126,7 +2126,7 @@ namespace Dev2.Studio.ViewModels
                         if (settingsViewModel != null && settingsViewModel.IsDirty)
                         {
                             ActivateItem(workSurfaceContextViewModel);
-                            bool remove = settingsViewModel.DoDeactivate();
+                            bool remove = settingsViewModel.DoDeactivate(true);
                             if (!remove)
                             {
                                 return false;
@@ -2139,7 +2139,7 @@ namespace Dev2.Studio.ViewModels
                         if (schedulerViewModel != null && schedulerViewModel.SelectedTask != null && schedulerViewModel.SelectedTask.IsDirty)
                         {
                             ActivateItem(workSurfaceContextViewModel);
-                            bool remove = schedulerViewModel.DoDeactivate();
+                            bool remove = schedulerViewModel.DoDeactivate(true);
                             if (!remove)
                             {
                                 return false;

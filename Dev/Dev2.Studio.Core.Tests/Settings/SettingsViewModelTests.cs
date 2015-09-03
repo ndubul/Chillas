@@ -931,7 +931,7 @@ You need Administrator permission.", viewModel.Errors);
             var viewModel = CreateSettingsViewModel(mockPopupController.Object, CreateSettings().ToString(), "Success", securityViewModel);
             viewModel.IsDirty = true;
             //------------Execute Test---------------------------
-            var result = viewModel.DoDeactivate();
+            var result = viewModel.DoDeactivate(true);
             //------------Assert Results-------------------------
 
             Assert.IsTrue(result);
@@ -962,7 +962,7 @@ You need Administrator permission.", viewModel.Errors);
                 }
             };
 
-            var result = viewModel.DoDeactivate();
+            var result = viewModel.DoDeactivate(true);
             //------------Assert Results-------------------------
 
             Assert.IsTrue(result);
@@ -985,7 +985,7 @@ You need Administrator permission.", viewModel.Errors);
 
             viewModel.IsDirty = true;
             //------------Execute Test---------------------------
-            var result = viewModel.DoDeactivate();
+            var result = viewModel.DoDeactivate(true);
             //------------Assert Results-------------------------
 
             Assert.IsFalse(result);
