@@ -60,6 +60,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionDialog.feature</DependentUpon>
     </Compile>
+    <Compile Include="DecisionDialogSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
