@@ -1,4 +1,5 @@
 ﻿
+
 namespace Dev2.Common.Interfaces.DB
 {
     public interface ISourceBase<T>
@@ -7,5 +8,6 @@ namespace Dev2.Common.Interfaces.DB
         bool HasChanged { get; }
         T ToModel();
 
+        void Save();
     }
 }

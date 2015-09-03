@@ -344,7 +344,7 @@ Sofware development by: www.dev2.co.za
   <data name="DialogBody_NotSaved" xml:space="preserve">
     <value>The workflow '{0}' that you are closing is not saved.
 Would you like to save the workflow?
--------------------------------------------------------------------
+-----------------------------------------------------------------
 Yes - Save the workflow.
 No - Discard your changes.
 Cancel - Returns you to the workflow.</value>

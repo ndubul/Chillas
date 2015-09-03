@@ -77,6 +77,7 @@ namespace Warewolf.AcceptanceTesting.Core
                 mockIExplorerItem.Setup(item => item.ResourceType).Returns(ResourceType.Folder);
                 mockIExplorerItem.Setup(item => item.DisplayName).Returns(name);
                 mockIExplorerItem.Setup(item => item.Children).Returns(new List<IExplorerItem>());
+                mockIExplorerItem.Setup(item => item.ResourcePath).Returns(name);
                 folders.Add(mockIExplorerItem.Object);
             }
             CreateChildrenForFolder(folders[1], new[] { "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1", "Child 1" });
@@ -103,8 +104,11 @@ namespace Warewolf.AcceptanceTesting.Core
                 }
                 var mockIExplorerItem = new Mock<IExplorerItem>();
                 mockIExplorerItem.Setup(item => item.ResourceType).Returns(resourceType);
-                mockIExplorerItem.Setup(item => item.DisplayName).Returns(explorerItem.DisplayName + " " + name);
+                var resourceName = explorerItem.DisplayName + " " + name;
+                mockIExplorerItem.Setup(item => item.DisplayName).Returns(resourceName);
                 mockIExplorerItem.Setup(item => item.ResourceId).Returns(Guid.NewGuid());
+                mockIExplorerItem.Setup(item => item.Parent).Returns(explorerItem);
+                mockIExplorerItem.Setup(item => item.ResourcePath).Returns(explorerItem.ResourcePath + "\\" + resourceName);
                 explorerItem.Children.Add(mockIExplorerItem.Object);
                 i++;
             }

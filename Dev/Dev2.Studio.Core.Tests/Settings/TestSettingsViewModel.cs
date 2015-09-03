@@ -57,7 +57,7 @@ namespace Dev2.Core.Tests.Settings
 
         public void CallDeactivate()
         {
-            DoDeactivate();
+            DoDeactivate(true);
         }
     }
 }

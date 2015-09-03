@@ -70,6 +70,6 @@ namespace Warewolf.Studio.ViewModels
         public event EventHandler IsActiveChanged;
         public abstract void UpdateHelpDescriptor(string helpText);
 
-
+        public abstract void Save();
     }
 }

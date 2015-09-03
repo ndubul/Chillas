@@ -18,5 +18,7 @@ namespace Dev2.Common.Interfaces
         void NewResource(string resourceType);
 
         string OpenPasteWindow(string current);
+
+        IServer LocalhostServer { get; }
     }
 }
