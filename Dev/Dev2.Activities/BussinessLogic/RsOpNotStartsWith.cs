@@ -31,5 +31,13 @@ namespace Dev2.DataList
         {
             return "Doesn't Start With";
         }
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 2;
+            }
+        }
     }
+
 }
