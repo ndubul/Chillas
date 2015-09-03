@@ -16,6 +16,7 @@ namespace Dev2.Activities.Designers2.Core
         where TDev2TOFn : class, IDev2TOFn, IPerformsValidation, new()
     {
         TDev2TOFn _initialDto = new TDev2TOFn();
+        ObservableCollection<IDev2TOFn> _collection;
 
         protected ActivityCollectionDesignerObservableViewModel(ModelItem modelItem)
             : base(modelItem)
@@ -44,7 +45,7 @@ namespace Dev2.Activities.Designers2.Core
             }
 
             AddBlankRow();
-            UpdateDisplayName();
+         
 
             Collection.CollectionChanged+=ModelItemCollectionOnCollectionChanged;
         }
@@ -230,7 +231,19 @@ namespace Dev2.Activities.Designers2.Core
                 UpdateDisplayName();
             }
         }
-        public ObservableCollection<IDev2TOFn> Collection { get; protected set; }
+
+        public ObservableCollection<IDev2TOFn> Collection
+        {
+            get
+            {
+                return _collection;
+            }
+            protected set
+            {
+                _collection = value;
+            }
+        }
+
         void AddDto(int indexNumber, string initializeWith = "")
         {
             //

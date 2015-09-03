@@ -4,9 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using Dev2.Common.Interfaces;
-using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.ServerProxyLayer;
-using Dev2.Common.Interfaces.WebServices;
 using Microsoft.Practices.Prism.Mvvm;
 using Warewolf.Studio.ViewModels;
 
@@ -64,7 +62,11 @@ namespace Warewolf.Studio.Views
 
         public void Save()
         {
-            SaveButton.Command.Execute(null);
+            var viewModel = DataContext as ManageWebServiceViewModel;
+            if (viewModel != null)
+            {
+                viewModel.SaveCommand.Execute(null);
+            }
         }
 
         public ItemCollection GetHeaders()
@@ -122,7 +124,8 @@ namespace Warewolf.Studio.Views
             switch (controlName)
             {
                 case "Save":
-                    return SaveButton.Command.CanExecute(null);
+                    var viewModel = DataContext as ManageWebServiceViewModel;
+                    return viewModel != null && viewModel.SaveCommand.CanExecute(null);
                 case "Test":
                     return TestButton.Command.CanExecute(null);
                 case "New":

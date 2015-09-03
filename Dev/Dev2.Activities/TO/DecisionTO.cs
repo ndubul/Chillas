@@ -9,18 +9,28 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
 using Dev2.Data.Decisions.Operations;
+using Dev2.Data.SystemTemplates.Models;
+using Dev2.DataList;
+using Dev2.DataList.Contract;
 using Dev2.Interfaces;
 using Dev2.Providers.Validation.Rules;
+using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Util;
 using Dev2.Utilities;
 using Dev2.Validation;
+using Microsoft.SharePoint.Client;
 
 namespace Dev2.TO
 {
     public class DecisionTO : ValidatedObject, IDev2TOFn
     {
+        readonly Action<DecisionTO> _updateDisplayAction;
         int _indexNum;
         string _searchType;
         bool _isSearchCriteriaEnabled;
@@ -32,39 +42,101 @@ namespace Dev2.TO
         bool _isSearchCriteriaVisible;
         bool _isFromFocused;
         bool _isToFocused;
+        bool _isSinglematchCriteriaVisible;
+        bool _isBetweenCriteriaVisible;
+        static IList<IFindRecsetOptions> _whereoptions = FindRecsetOptions.FindAll();
+        Action<DecisionTO> _deleteAction;
+        bool _isLast;
+        public RelayCommand DeleteCommand { get;  set; }
 
         public DecisionTO()
             : this("Match", "Match On", "Equal", 0)
         {
         }
 
-        public DecisionTO(string matchValue, string searchCriteria, string searchType, int indexNum, bool inserted = false, string from = "", string to = "")
+        public DecisionTO(string matchValue, string searchCriteria, string searchType, int indexNum, bool inserted = false, string from = "", string to = "", Action<DecisionTO> updateDisplayAction = null, Action<DecisionTO> delectAction = null)
         {
+            _updateDisplayAction = updateDisplayAction??(a=>{});
             Inserted = inserted;
+
             MatchValue = matchValue;
             SearchCriteria = searchCriteria;
             SearchType = searchType;
             IndexNumber = indexNum;
-            IsSearchCriteriaEnabled = false;
-            IsSearchCriteriaVisible = true;
+            IsSearchCriteriaEnabled = true;
+     
             From = @from;
             To = to;
             IsSearchTypeFocused = false;
-        //    IsMatchValueFocused = false;
+            DeleteAction = delectAction;
+            DeleteCommand = new RelayCommand(a=>
+            {
+                if (DeleteAction != null)
+                {
+                    DeleteAction(this);
+                }
+            }, CanDelete);
+            
         }
 
-        public DecisionTO(Data.SystemTemplates.Models.Dev2Decision a)
+        public Action<DecisionTO> DeleteAction
         {
+            get
+            {
+                return _deleteAction;
+            }
+            set
+            {
+                _deleteAction = value;
+            }
+        }
+
+        public DecisionTO(Dev2Decision a, int ind, Action<DecisionTO> updateDisplayAction = null,Action<DecisionTO> delectAction = null)
+        {
+            _updateDisplayAction = updateDisplayAction ?? (x => { });
             Inserted = false;
             MatchValue = a.Col1;
             SearchCriteria = a.Col2;
             SearchType = DecisionDisplayHelper.GetDisplayValue(a.EvaluationFn);
-            IndexNumber = 1;
-            IsSearchCriteriaEnabled = false;
+            IndexNumber = ind;
+            IsSearchCriteriaEnabled = true;
             IsSearchCriteriaVisible = true;
             From = a.Col2;
             To = a.Col3;
             IsSearchTypeFocused = false;
+            DeleteAction = delectAction;
+            IsLast = false;
+     //       _whereoptions = FindRecsetOptions.FindAll();
+            DeleteCommand = new RelayCommand(x =>
+            {
+                if (DeleteAction != null)
+                {
+                    DeleteAction(this);
+                }
+            },CanDelete);
+
+        }
+
+        public bool CanDelete(object obj)
+        {
+            return !IsLast;
+        }
+
+        public bool IsLast
+        {
+            get
+            {
+                return _isLast;
+            }
+            set
+            {
+                _isLast = value;
+
+                if(DeleteCommand != null)
+                {
+                    DeleteCommand.RaiseCanExecuteChanged();
+                }
+            }
         }
 
         [FindMissing]
@@ -79,6 +151,7 @@ namespace Dev2.TO
                 _from = value;
                 OnPropertyChanged();
                 RaiseCanAddRemoveChanged();
+                if (IndexNumber == 0) _updateDisplayAction(this);
             }
         }
 
@@ -96,6 +169,7 @@ namespace Dev2.TO
                 _to = value;
                 OnPropertyChanged();
                 RaiseCanAddRemoveChanged();
+                if (IndexNumber == 0) _updateDisplayAction(this);
             }
         }
         
@@ -113,6 +187,7 @@ namespace Dev2.TO
                 _searchCriteria = value;
                 OnPropertyChanged();
                 RaiseCanAddRemoveChanged();
+                if (IndexNumber == 0) _updateDisplayAction(this);
             }
         }
 
@@ -126,12 +201,16 @@ namespace Dev2.TO
             set
             {
                 _matchValue = value;
+               
                 OnPropertyChanged();
                 RaiseCanAddRemoveChanged();
+                if (IndexNumber == 0) _updateDisplayAction(this);
             }
         }
 
-    //    public bool IsMatchValueFocused { get { return _isMatchValueFocused; } set { OnPropertyChanged(ref _isMatchValueFocused, value); } }
+        
+
+        //    public bool IsMatchValueFocused { get { return _isMatchValueFocused; } set { OnPropertyChanged(ref _isMatchValueFocused, value); } }
 
      //   public bool IsSearchCriteriaFocused { get { return _isSearchCriteriaFocused; } set { OnPropertyChanged(ref _isSearchCriteriaFocused, value); } }
 
@@ -152,6 +231,8 @@ namespace Dev2.TO
                     {
                         IsSearchCriteriaEnabled = true;
                     }
+                    UpdateMatchVisibility(this, _searchType, _whereoptions);
+                    if(IndexNumber==0) _updateDisplayAction(this);
                 }
             }
         }
@@ -272,6 +353,61 @@ namespace Dev2.TO
             return ruleSet;
         }
 
-        public Data.SystemTemplates.Models.Dev2Decision Decision { get; set; }
+        public Dev2Decision Decision { get; set; }
+        public bool IsSinglematchCriteriaVisible
+        {
+            get
+            {
+                return _isSinglematchCriteriaVisible;
+            }
+            set
+            {
+                _isSinglematchCriteriaVisible = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsBetweenCriteriaVisible
+        {
+            get
+            {
+                return _isBetweenCriteriaVisible;
+            }
+            set
+            {
+                _isBetweenCriteriaVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public static void UpdateMatchVisibility(DecisionTO to, string value, IList<IFindRecsetOptions> whereOptions)
+        {
+
+            var opt = whereOptions.FirstOrDefault(a => value.ToLower().StartsWith(a.HandlesType().ToLower()));
+            if (opt != null)
+            {
+                switch (opt.ArgumentCount)
+                {
+                    case 1:
+                        to.IsSearchCriteriaVisible = false;
+                        to.IsBetweenCriteriaVisible = false;
+                        to.IsSinglematchCriteriaVisible = false;
+                        break;
+                    case 2:
+                        to.IsSearchCriteriaVisible = true;
+                        to.IsBetweenCriteriaVisible = false;
+                        to.IsSinglematchCriteriaVisible = true;
+                        break;
+                    case 3:
+                        to.IsSearchCriteriaVisible = true;
+                        to.IsBetweenCriteriaVisible = true;
+                        to.IsSinglematchCriteriaVisible = false;
+                        break;
+
+                }
+            }
+        }
     }
+
+
 }

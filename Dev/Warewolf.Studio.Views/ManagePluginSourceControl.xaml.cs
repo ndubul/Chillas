@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,6 +6,7 @@ using Dev2.Common.Interfaces;
 using Infragistics.Controls.Menus;
 using Microsoft.Practices.Prism.Mvvm;
 using Warewolf.Studio.Core;
+using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.Views
 {
@@ -122,7 +121,11 @@ namespace Warewolf.Studio.Views
 
         public void PerformSave()
         {
-            SaveButton.Command.Execute(null);
+            var viewModel = DataContext as ManagePluginSourceViewModel;
+            if (viewModel != null)
+            {
+                viewModel.OkCommand.Execute(null);
+            }
         }
 
         public void SetAssemblyName(string assemblyName)
@@ -150,7 +153,8 @@ namespace Warewolf.Studio.Views
             switch(controlName)
             {
                 case "Save":
-                    return SaveButton.Command.CanExecute(null);
+                    var viewModel = DataContext as ManagePluginSourceViewModel;
+                    return viewModel != null && viewModel.OkCommand.CanExecute(null);
             }
             return false;
         }

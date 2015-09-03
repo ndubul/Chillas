@@ -9,6 +9,7 @@
              xmlns:customControls="clr-namespace:Warewolf.Studio.CustomControls;assembly=Warewolf.Studio.CustomControls"
              xmlns:views="clr-namespace:Warewolf.Studio.Views"
              xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces;assembly=Dev2.Common.Interfaces"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              >
@@ -200,11 +201,12 @@
                                        Visibility="{Binding Path=Testing,Converter={StaticResource BoolToVisibilityConverter}}" />
                         <Button ToolTip="{Binding Path=SendToolTip}" 
                                 HorizontalAlignment="Right" 
-                                Width="Auto" 
-                                Height="30" 
-                                Content="Send" 
+                                Width="50" 
                                 IsEnabled="{Binding EnableSend}"
                                 Command="{Binding Path=SendCommand}">
+                            <Button.Content>
+                                <fa:FontAwesome Icon="PaperPlaneOutlined" FontSize="16"></fa:FontAwesome>
+                            </Button.Content>
                             <i:Interaction.Behaviors>
                                 <core:HelpSetter Text="{x:Static languages:Core.ServerTestConnectionHelp}"
                                  DataContext="{Binding}" />
@@ -212,20 +214,6 @@
                         </Button>
                     </StackPanel>
                 </Grid>
-                <StackPanel Grid.Row="3" 
-                            Margin="{StaticResource ControlBorderTop}"
-                            Orientation="Horizontal" 
-                            HorizontalAlignment="Right" >
-                    <Button Width="60" 
-                            Height="30" 
-                            Content="Save" 
-                            Command="{Binding Path=OkCommand}">
-                        <i:Interaction.Behaviors>
-                            <core:HelpSetter Text="{x:Static languages:Core.EmailSourceSaveHelp}"
-                                 DataContext="{Binding}" />
-                        </i:Interaction.Behaviors>
-                    </Button>
-                </StackPanel>
             </Grid>
         </Grid>
     </ScrollViewer>

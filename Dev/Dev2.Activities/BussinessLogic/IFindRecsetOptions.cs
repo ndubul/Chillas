@@ -22,5 +22,6 @@ namespace Dev2.DataList.Contract
     {
         string HandlesType();
         Func<DataASTMutable.WarewolfAtom, bool> GenerateFunc(IEnumerable<DataASTMutable.WarewolfAtom> values, IEnumerable<DataASTMutable.WarewolfAtom> from, IEnumerable<DataASTMutable.WarewolfAtom> to, bool all);
+        int ArgumentCount { get; }
     }
 }

@@ -208,7 +208,7 @@ Scenario: Edit Web source
 	And I select "Dev2CountriesWebService" as data source
 	And "Edit" is "Enabled"
 	And I click "Edit"
-	Then "Edit Dev2CountriesWebService" is opened in another tab
+	Then "Dev2CountriesWebService" is opened in another tab
  
 Scenario: Changing Sources 
 	Given I click "New Web Service Connector"

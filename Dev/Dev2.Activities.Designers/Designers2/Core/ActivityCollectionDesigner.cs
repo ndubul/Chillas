@@ -35,7 +35,10 @@ namespace Dev2.Activities.Designers2.Core
         {
             base.OnLoaded();
             InitializeContextMenu();
-            _dataContext.ModelItemCollection.CollectionChanged += ModelItemCollectionCollectionChanged;
+            if(_dataContext.ModelItemCollection != null)
+            {
+                _dataContext.ModelItemCollection.CollectionChanged += ModelItemCollectionCollectionChanged;
+            }
         }
         protected override void OnUnloaded()
         {

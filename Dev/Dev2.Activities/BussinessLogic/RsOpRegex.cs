@@ -42,5 +42,12 @@ namespace Dev2.DataList
         {
             return "Is Regex";
         }
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 2;
+            }
+        }
     }
 }

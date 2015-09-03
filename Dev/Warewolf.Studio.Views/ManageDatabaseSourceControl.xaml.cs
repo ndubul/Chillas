@@ -22,36 +22,44 @@ namespace Warewolf.Studio.Views
             InitializeComponent();
         }
 
-        public void EnterServerName(string serverName,bool add=false)
+        public void EnterServerName(string serverName, bool add = false)
         {
             var comboEditorItem = ServerTextBox.Items.FirstOrDefault(item =>
             {
                 var computerName = item.Data as ComputerName;
-                if(computerName != null)
+                if (computerName != null)
                 {
                     return computerName.Name.Equals(serverName, StringComparison.OrdinalIgnoreCase);
                 }
                 return false;
             });
-            if(comboEditorItem==null&& add)
+            if (comboEditorItem == null && add)
             {
-                (ServerTextBox.ItemsSource as ICollection<IComputerName>).Add(new ComputerName(){Name= serverName});
-                EnterServerName(serverName, false);
+                var computerNames = ServerTextBox.ItemsSource as ICollection<IComputerName>;
+                if (computerNames != null)
+                {
+                    computerNames.Add(new ComputerName() { Name = serverName });
+                }
+                EnterServerName(serverName);
             }
-            if(comboEditorItem != null)
+            if (comboEditorItem != null)
             {
                 try
                 {
                     ServerTextBox.SelectedItem = comboEditorItem.Data;
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     //Ignore exception running from test
                 }
             }
             else
             {
-                (DataContext as IManageDatabaseSourceViewModel).ServerName = new ComputerName(){Name= serverName};
+                var manageDatabaseSourceViewModel = DataContext as IManageDatabaseSourceViewModel;
+                if (manageDatabaseSourceViewModel != null)
+                {
+                    manageDatabaseSourceViewModel.ServerName = new ComputerName() { Name = serverName };
+                }
             }
         }
 
@@ -70,7 +78,8 @@ namespace Warewolf.Studio.Views
             switch (controlName)
             {
                 case "Save":
-                    return SaveButton.Command.CanExecute(null);
+                    var viewModel = DataContext as ManageDatabaseSourceViewModel;
+                    return viewModel != null && viewModel.OkCommand.CanExecute(null);
                 case "Test Connection":
                     return TestConnectionButton.Command.CanExecute(null);
             }
@@ -95,7 +104,7 @@ namespace Warewolf.Studio.Views
             {
                 DatabaseComboxBox.SelectedItem = databaseName;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //Stupid exception when running from tests
             }
@@ -140,7 +149,11 @@ namespace Warewolf.Studio.Views
 
         public void PerformSave()
         {
-            SaveButton.Command.Execute(null);
+            var viewModel = DataContext as ManageDatabaseSourceViewModel;
+            if (viewModel != null)
+            {
+                viewModel.OkCommand.Execute(null);
+            }
         }
 
         public void EnterUserName(string userName)
@@ -155,7 +168,7 @@ namespace Warewolf.Studio.Views
 
         public string GetErrorMessage()
         {
-            return (DataContext as ManageDatabaseSourceViewModel).TestMessage;
+            return ((ManageDatabaseSourceViewModel)DataContext).TestMessage;
         }
 
 
@@ -187,13 +200,13 @@ namespace Warewolf.Studio.Views
 
         public void VerifyServerExistsintComboBox(string serverName)
         {
-           
+
         }
 
-        public  IEnumerable<string> GetServerOptions()
+        public IEnumerable<string> GetServerOptions()
         {
-           
-          return new List<string>();
+
+            return new List<string>();
         }
 
         public string GetSelectedDbOption()
@@ -218,16 +231,16 @@ namespace Warewolf.Studio.Views
 
         public void Cancel()
         {
-            
+
         }
 
         public string GetHeader()
         {
-            return (DataContext as ManageDatabaseSourceViewModel).HeaderText;
+            return ((ManageDatabaseSourceViewModel)DataContext).HeaderText;
         }
-        public string  GetTabHeader()
+        public string GetTabHeader()
         {
-            return (DataContext as ManageDatabaseSourceViewModel).Header;
+            return ((ManageDatabaseSourceViewModel)DataContext).Header;
         }
         public void CancelTest()
         {

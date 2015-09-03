@@ -27,6 +27,8 @@ namespace Dev2.DataList
             return CreateFunc(values,from,to,all);
         }
 
+        public abstract int ArgumentCount { get; }
+
         public virtual Func<DataASTMutable.WarewolfAtom, bool> CreateFunc(IEnumerable<DataASTMutable.WarewolfAtom> values, IEnumerable<DataASTMutable.WarewolfAtom> from, IEnumerable<DataASTMutable.WarewolfAtom> to, bool all)
         {
             return null;

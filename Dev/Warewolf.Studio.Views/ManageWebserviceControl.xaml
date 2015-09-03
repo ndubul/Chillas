@@ -448,7 +448,7 @@
                     </StackPanel>
                     <views:MappingsView x:Name="MappingsView" Grid.Row="1" ></views:MappingsView>
                 </Grid>
-                <Grid Grid.Row="5" Grid.Column="0">
+                <Grid Grid.Row="5" Grid.Column="0" Margin="{StaticResource ControlBorderTop}" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -460,19 +460,7 @@
                                Text="{Binding ErrorText}" 
                                HorizontalAlignment="Left" 
                                TextWrapping="WrapWithOverflow" 
-                               x:Name="ErrorTextBlock" ></TextBlock>
-                    <Button x:Name="SaveButton" 
-                            Grid.Column="2" 
-                            Margin="{StaticResource ControlBorderTopRight}" 
-                            HorizontalAlignment="Right" 
-                            VerticalAlignment="Bottom" 
-                            Command="{Binding SaveCommand}" 
-                            Width="100">Save
-                        <i:Interaction.Behaviors>
-                            <core:HelpSetter Text="{x:Static languages:Core.WebServiceSaveCommandHelp}"
-                                                         DataContext="{Binding}" />
-                        </i:Interaction.Behaviors>
-                    </Button>                    
+                               x:Name="ErrorTextBlock" ></TextBlock>               
                 </Grid>
             </Grid>
         </Grid>

@@ -158,9 +158,9 @@ namespace Warewolf.Studio.ViewModels
             if (_warewolfserverName != null)
             {
             }
-            HeaderText = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel  + (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
+            HeaderText = (_dbSource == null ? ResourceName : _dbSource.Name).Trim();
 
-            Header = Resources.Languages.Core.DatabaseSourceServerEditHeaderLabel + ((_dbSource == null ? ResourceName : _dbSource.Name));
+            Header = ((_dbSource == null ? ResourceName : _dbSource.Name));
         }
 
         public override bool CanSave()

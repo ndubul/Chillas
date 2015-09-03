@@ -29,6 +29,13 @@ namespace Dev2.BussinessLogic
         {
             return "Not Hex";
         }
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 1;
+            }
+        }
     }
 }
 

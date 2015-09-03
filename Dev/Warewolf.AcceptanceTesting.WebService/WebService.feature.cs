@@ -587,7 +587,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 210
  testRunner.And("I click \"Edit\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 211
- testRunner.Then("\"Edit Dev2CountriesWebService\" is opened in another tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"Dev2CountriesWebService\" is opened in another tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

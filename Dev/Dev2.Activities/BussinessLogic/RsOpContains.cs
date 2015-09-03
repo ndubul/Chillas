@@ -38,5 +38,13 @@ namespace Dev2.DataList
         {
             return "Contains";
         }
+
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 2;
+            }
+        }
     }
 }

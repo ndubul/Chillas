@@ -34,7 +34,7 @@ namespace Dev2.Studio.Views
         ContentPane _contentPane;
         private static bool _isSuperMaximising;
         private bool _isLocked;
-        string _savedLayout;
+        readonly string _savedLayout;
 
         #region Constructor
 
@@ -557,14 +557,7 @@ namespace Dev2.Studio.Views
 
         private void ToggleWindowState()
         {
-            if (WindowState == WindowState.Normal)
-            {
-                WindowState = WindowState.Maximized;
-            }
-            else
-            {
-                WindowState = WindowState.Normal;
-            }
+            WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
         }
 
         private void PART_MINIMIZE_Click(object sender, RoutedEventArgs e)

@@ -31,5 +31,13 @@ namespace Dev2.DataList
         {
             return "Ends With";
         }
+
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 2;
+            }
+        }
     }
 }

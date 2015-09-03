@@ -118,9 +118,7 @@
                                                 Margin="{StaticResource ControlBorderRight}"
                                                 Visibility="{Binding Testing, Converter={StaticResource BoolToVisibilityConverterPositive},Mode=OneWay}"
                                                 AutomationProperties.AutomationId="UI_SettingsProgress_Indicator" />
-                <Button Width="50" Command="{Binding TestCommand}" Margin="{StaticResource ControlBorderRight}">Test</Button>
-                <Button Width="50" Command="{Binding SaveCommand}" Margin="{StaticResource ControlBorderRight}">Save</Button>
-                <Button Width="50" Command="{Binding CancelCommand}">Cancel</Button>
+                <Button Width="50" Command="{Binding TestCommand}" >Test</Button>
             </StackPanel>
         </Grid>
     </Grid>

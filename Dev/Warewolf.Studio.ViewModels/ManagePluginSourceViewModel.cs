@@ -307,13 +307,13 @@ namespace Warewolf.Studio.ViewModels
             var serverName = _warewolfserverName;
             if (serverName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
             {
-                HeaderText = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim());
-                Header = string.Format("{0}", ((_pluginSource == null ? ResourceName : _pluginSource.Name)));
+                HeaderText = (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
+                Header = (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
             }
             else
             {
-                HeaderText = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim());
-                Header = string.Format("{0} {1}", Resources.Languages.Core.PluginSourceEditHeaderLabel, ((_pluginSource == null ? ResourceName : _pluginSource.Name)));
+                HeaderText = (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
+                Header = (_pluginSource == null ? ResourceName : _pluginSource.Name).Trim();
             }
         }
 
