@@ -5,8 +5,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using Dev2.Common.Interfaces;
-using Dev2.Common.Interfaces.ServerProxyLayer;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.Views
 {
@@ -81,7 +81,11 @@ namespace Warewolf.Studio.Views
 
         public void Save()
         {
-            SaveButton.Command.Execute(null);
+            var viewModel = DataContext as ManagePluginServiceViewModel;
+            if (viewModel != null)
+            {
+                viewModel.SaveCommand.Execute(null);
+            }
         }
 
         public IPluginSource GetSelectedPluginSource()
@@ -106,7 +110,7 @@ namespace Warewolf.Studio.Views
 
         public IPluginAction GetSelectedActionSource()
         {
-            IPluginAction selectedAction = null;
+            IPluginAction selectedAction;
             BindingExpression bindingExpression = ActionsComboBox.GetBindingExpression(Selector.SelectedItemProperty);
             if (bindingExpression != null)
             {
@@ -141,7 +145,8 @@ namespace Warewolf.Studio.Views
             switch (controlName)
             {
                 case "Save":
-                    return SaveButton.Command.CanExecute(null);
+                    var viewModel = DataContext as ManagePluginServiceViewModel;
+                    return viewModel != null && viewModel.SaveCommand.CanExecute(null);
                 case "Test":
                     return TestButton.Command.CanExecute(null);
                 case "1 Select a Source":

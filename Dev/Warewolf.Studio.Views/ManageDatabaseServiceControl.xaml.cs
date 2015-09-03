@@ -7,6 +7,7 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.Views
 {
@@ -53,7 +54,11 @@ namespace Warewolf.Studio.Views
 
         public void Save()
         {
-            SaveButton.Command.Execute(null);
+            var viewModel = DataContext as ManageDatabaseServiceViewModel;
+            if (viewModel != null)
+            {
+                viewModel.SaveCommand.Execute(null);
+            }
         }
 
         public bool IsDataSourceFocused()
@@ -127,7 +132,8 @@ namespace Warewolf.Studio.Views
             switch (controlName)
             {
                 case "Save":
-                    return SaveButton.Command.CanExecute(null);
+                    var viewModel = DataContext as ManageDatabaseServiceViewModel;
+                    return viewModel != null && viewModel.SaveCommand.CanExecute(null);
                 case "Test":
                     return TestActionButton.Command.CanExecute(null);
                 case "1 Data Source":

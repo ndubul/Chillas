@@ -170,37 +170,6 @@
                         </i:Interaction.Behaviors>
                     </TextBox>
                 </Grid>
-                <Grid Grid.Row="5" Margin="{StaticResource ControlBorderTop}" 
-                      Width="{Binding ElementName=GridContainer, Path=ActualWidth}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1"
-                            x:Name="SaveButton" 
-                            Margin="{StaticResource ControlBorderRight}"
-                            Width="60" 
-                            Height="30" 
-                            Command="{Binding OkCommand}" 
-                            Content="Save">
-                        <i:Interaction.Behaviors>
-                            <core:HelpSetter Text="{x:Static languages:Core.PluginSourceOkCommandHelp}"
-                                                         DataContext="{Binding}" />
-                        </i:Interaction.Behaviors>
-                    </Button>
-                    <Button Grid.Column="2"
-                            x:Name="CancelButton" 
-                            Width="60" 
-                            Height="30" 
-                            Command="{Binding}" 
-                            Content="Cancel">
-                        <i:Interaction.Behaviors>
-                            <core:HelpSetter Text="{x:Static languages:Core.PluginSourceCancelCommandHelp}"
-                                                         DataContext="{Binding}" />
-                        </i:Interaction.Behaviors>
-                    </Button>
-                </Grid>
             </Grid>
         </Grid>
     </ScrollViewer>
