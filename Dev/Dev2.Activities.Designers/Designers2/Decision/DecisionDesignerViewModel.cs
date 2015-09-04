@@ -192,7 +192,7 @@ namespace Dev2.Activities.Designers2.Decision
                         TrueArmText = decisions.TrueArmText;
                         FalseArmText = decisions.FalseArmText;
                         DisplayText = decisions.DisplayText;
-                       
+                        RequireAllDecisionsToBeTrue = decisions.Mode==Dev2DecisionMode.AND;
                         return new ObservableCollection<IDev2TOFn>(decisions.TheStack.Select((a,i) => new DecisionTO(a,i,UpdateDecisionDisplayName,DeleteRow)));
                     
                     }
