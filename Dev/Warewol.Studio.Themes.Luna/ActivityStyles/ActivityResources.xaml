@@ -99,6 +99,18 @@
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Height" Value="Auto" />
     </Style>
+    <Style x:Key="ActivityMapppingDecisionDataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="Background" Value="{StaticResource DataGridColumnHeaderBackgroundBrush}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="3,0" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="Margin" Value="0,0,0,-1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DataGridBorderBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource BrushDarkForeground}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Height" Value="Auto" />
+    </Style>
 
     <Style x:Key="ActivityMapppingDataGridIntellisenseTextBoxStyle" TargetType="{x:Type ui:IntellisenseTextBox}" BasedOn="{StaticResource DatagridIntellisenseTextBoxStyle}">
         <Setter Property="BorderThickness" Value="0"/>

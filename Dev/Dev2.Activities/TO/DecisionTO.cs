@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
 using Dev2.Data.Decisions.Operations;
 using Dev2.Data.SystemTemplates.Models;
@@ -24,7 +23,6 @@ using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Util;
 using Dev2.Utilities;
 using Dev2.Validation;
-using Microsoft.SharePoint.Client;
 
 namespace Dev2.TO
 {
@@ -91,7 +89,7 @@ namespace Dev2.TO
             }
         }
 
-        public DecisionTO(Dev2Decision a, int ind, Action<DecisionTO> updateDisplayAction = null,Action<DecisionTO> delectAction = null)
+        public DecisionTO(Dev2Decision a, int ind, Action<DecisionTO> updateDisplayAction = null,Action<DecisionTO> deleteAction = null)
         {
             _updateDisplayAction = updateDisplayAction ?? (x => { });
             Inserted = false;
@@ -104,9 +102,8 @@ namespace Dev2.TO
             From = a.Col2;
             To = a.Col3;
             IsSearchTypeFocused = false;
-            DeleteAction = delectAction;
+            DeleteAction = deleteAction;
             IsLast = false;
-     //       _whereoptions = FindRecsetOptions.FindAll();
             DeleteCommand = new RelayCommand(x =>
             {
                 if (DeleteAction != null)
@@ -117,7 +114,7 @@ namespace Dev2.TO
 
         }
 
-        public bool CanDelete(object obj)
+        bool CanDelete(object obj)
         {
             return !IsLast;
         }
@@ -353,7 +350,6 @@ namespace Dev2.TO
             return ruleSet;
         }
 
-        public Dev2Decision Decision { get; set; }
         public bool IsSinglematchCriteriaVisible
         {
             get
