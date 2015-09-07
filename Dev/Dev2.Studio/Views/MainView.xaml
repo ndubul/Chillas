@@ -417,7 +417,7 @@
                    MouseEnter="ShowFullScreenPanel_OnMouseEnter" />
         <Rectangle x:Name="HideFullScreenPanel"
                    Height="20"
-                   Margin="0,25,0,0"
+                   Margin="0,37,0,0"
                    VerticalAlignment="Top"
                    Fill="#00000000"
                    IsHitTestVisible="True"

@@ -745,7 +745,7 @@
                                                                         RelativeSource={RelativeSource AncestorType={x:Type igDock:PaneTabItem}}}"
                                                 Opacity="0.4"
                                                 Style="{StaticResource TabButton}"
-                                                Visibility="Visible">
+                                                Visibility="{Binding CloseButtonVisibility}">
                                             <fa:FontAwesome HorizontalAlignment="Center"
                                                             VerticalAlignment="Top"
                                                             FontSize="12"
