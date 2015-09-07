@@ -12,6 +12,7 @@ namespace Warewolf.Studio.ViewModels.Help
     {
         IHelpDescriptorViewModel _currentHelpText;
         readonly IHelpDescriptorViewModel _defaultViewModel;
+        bool _webPageVisible;
 
         public HelpWindowViewModel(IHelpDescriptorViewModel defaultViewModel, IHelpWindowModel model)
         {
@@ -81,13 +82,34 @@ namespace Warewolf.Studio.ViewModels.Help
                 OnPropertyChanged(() => HelpImage);
             }
         }
+        public bool WebPageVisible
+        {
+            get
+            {
+                return _webPageVisible;
+            }
+            set
+            {
+                _webPageVisible = value;
+                OnPropertyChanged(() => WebPageVisible);
+            }
+        }
 
         public void UpdateHelpText(string helpText)
         {
-            var textToDisplay = Resources.Languages.Core.StandardStyling.Replace("\r\n", "") +
-                                helpText +
-                                Resources.Languages.Core.StandardBodyParagraphClosing;
-            CurrentHelpText = new HelpDescriptorViewModel(new HelpDescriptor("", textToDisplay, null));
+            if (string.IsNullOrWhiteSpace(helpText))
+            {
+                _webPageVisible = true;
+            }
+            else
+            {
+                _webPageVisible = false;
+                var textToDisplay = Resources.Languages.Core.StandardStyling.Replace("\r\n", "") +
+                                    helpText +
+                                    Resources.Languages.Core.StandardBodyParagraphClosing;
+                CurrentHelpText = new HelpDescriptorViewModel(new HelpDescriptor("", textToDisplay, null));
+            }
+            OnPropertyChanged(() => WebPageVisible);
         }
 
         #endregion
