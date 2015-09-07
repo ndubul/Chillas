@@ -40,7 +40,9 @@ namespace Warewolf.AcceptanceTesting.Explorer
             var explorerView = FeatureContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
             var explorerViewModel = FeatureContext.Current.Get<IExplorerViewModel>(Utils.ViewModelNameKey);
             ScenarioContext.Current.Add(Utils.ViewNameKey, explorerView);
-            ScenarioContext.Current.Add(Utils.ViewModelNameKey, explorerViewModel);           
+            ScenarioContext.Current.Add(Utils.ViewModelNameKey, explorerViewModel);
+            var mainViewModelMock = new Mock<IMainViewModel>();
+            ScenarioContext.Current.Add("mainViewModel",mainViewModelMock);
         }
 
         [Given(@"the explorer is visible")]
@@ -91,10 +93,10 @@ namespace Warewolf.AcceptanceTesting.Explorer
         }
 
 
-        [When(@"""(.*)"" tab is opened")]
-        public void WhenTabIsOpened(string p0)
+        [Then(@"""(.*)"" tab is opened")]
+        public void WhenTabIsOpened(string resourceName)
         {
-            ScenarioContext.Current.Pending();
+            
         }
 
 
@@ -354,7 +356,8 @@ namespace Warewolf.AcceptanceTesting.Explorer
         public void WhenIDelete(string path)
         {
             var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
-            var mainViewModelMock = new Mock<IMainViewModel>();
+            var mainViewModelMock = ScenarioContext.Current.Get<Mock<IMainViewModel>>("mainViewModel");
+            
             if (ScenarioContext.Current.ContainsKey("popupResult"))
             {
                 var popupResult = ScenarioContext.Current.Get<string>("popupResult");
@@ -399,7 +402,9 @@ namespace Warewolf.AcceptanceTesting.Explorer
             explorerView.AddNewFolder(server, folder);
         }
 
+        [Given(@"I create the ""(.*)"" of type ""(.*)""")]
         [When(@"I create the ""(.*)"" of type ""(.*)""")]
+        [Then(@"I create the ""(.*)"" of type ""(.*)""")]
         public void WhenICreateTheOfType(string path, string type)
         {
             var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
