@@ -91,7 +91,6 @@
     <Style x:Key="ActivityMapppingDataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Background" Value="{StaticResource DataGridColumnHeaderBackgroundBrush}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="3,0" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="BorderBrush" Value="{StaticResource DataGridBorderBrush}" />
         <Setter Property="Foreground" Value="{StaticResource BrushDarkForeground}"/>
