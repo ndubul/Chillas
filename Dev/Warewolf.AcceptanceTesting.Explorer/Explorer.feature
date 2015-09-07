@@ -4,6 +4,32 @@ Feature: Explorer
 	As a Warewolf User
 	I want explorer view of my resources with management options
 
+# Connected to localhost server
+# Expand a folder
+# Rename folder
+# Search explorer
+# Creating Folder in localhost
+# Creating And Deleting Folder and Popup says cancel in localhost
+# Deleting Resource in folders
+# Deleting Resource in localhost Server
+# Renaming Folder And Workflow Service
+# Searching resources by using filter
+# Checking versions 
+# Clear filter
+# Search explorer on remote server
+# Connected to remote server
+# Creating Folder in remote host
+# Opening and Editing workflow from Explorer
+# Renaming Folder And Workflow Service on a remote server
+# Context menu
+# Show dependencies
+# Open saved Server Sources
+# Move Nested Folder up tree-view
+# Opening server source from explorer
+# Move Nested Folder up tree-view
+# Opening server source from explorer
+# Show Server Version
+
 @Explorer
 Scenario: Connected to localhost server
 	Given the explorer is visible
@@ -256,7 +282,48 @@ Scenario Outline: Opening server source from explorer
 	| LocalHost                     | localhost/tst-ci-remote                 | tst-ci-remote |
 	| Remote Connection Integration | Remote Connection Integration/Sandbox-1 | Sandbox       |
 
-	
+Scenario Outline: Show Server Version
+	Given the explorer is visible
+	And I open "<Host>"
+	And I right click on "<Host>" 
+	And context menu is visible
+	And "New Folder" is "visible"
+	And "New Service" is "visible"
+	And "New Database Connector" is "visible"
+	And "New Plugin Connector" is "visible"
+	And "New Web Service Connector" is "visible"
+	And "New Remote Warewolf Source" is "visible"
+	And "New Database Source" is "visible"
+	And "New Plugin Source" is "visible"
+	And "New Web Service Source" is "visible"
+	And "New Email Source" is "visible"
+	And "New Dropbox Source" is "visible"
+	And "New Sharepoint Source" is "visible"
+	And "Server Version" is "visible"
+	When I click on "Server Version"
+	Then "Warewolf Splash Screen" is "visible"
+	And "Studio Version" is "visible"
+	And "Server Version" is "Visible"
+	Examples: 
+	| Host                          |
+	| Localhost                     |
+	| Remote Connection Integration |
+
+Scenario: Checking versions in remote connection 
+  Given the explorer is visible
+  When I open "Remote Connection Integration" server
+  And I create the "Remote Connection Integration/Folder 1/Resource 1" of type "WorkflowService" 
+  Then I should see "67" folders
+  And I Setup  "3" Versions to be returned for "Remote Connection Integration/Folder 1/Resource 1"
+  When I Show Version History for "Remote Connection Integration/Folder 1/Resource 1"
+  Then I should see "3" versions with "View" Icons in "Remote Connection Integration/Folder 1/Resource 1"
+  When I search for "Resource 1" in explorer
+  Then I should see the path "Remote Connection Integration/Folder 1/Resource 1"
+  Then I should see "3" versions with "View" Icons in "Remote Connection Integration/Folder 1/Resource 1"
+
+
+
+
 
 #@Explorer
 #Scenario: Opening Versions in Explorer
