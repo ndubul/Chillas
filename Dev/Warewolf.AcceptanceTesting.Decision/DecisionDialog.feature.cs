@@ -173,7 +173,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 29
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 30
- testRunner.And("the decision tool window is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the Decision window is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 31
  testRunner.And("a decision variable \"[[A]]\" value \"123 234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 32
@@ -300,7 +300,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 81
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 82
- testRunner.And("the decision tool window is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the Decision window is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 83
  testRunner.And("I select the \"Match Type\" menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 84

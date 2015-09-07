@@ -32,5 +32,13 @@ namespace Dev2.DataList
         {
             return ">=";
         }
+
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 2;
+            }
+        }
     }
 }

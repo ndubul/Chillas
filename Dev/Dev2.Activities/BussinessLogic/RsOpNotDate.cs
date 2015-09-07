@@ -30,5 +30,12 @@ namespace Dev2.DataList
         {
             return "Not Date";
         }
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 1;
+            }
+        }
     }
 }

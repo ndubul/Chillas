@@ -19,7 +19,7 @@ Scenario: Creating New Sharepoint Source
    And "Save" is "Enabled"
    When I save as "Testing Sharepoint Resource Save"
    Then the save dialog is opened
-   Then title is "Edit Testing Sharepoint Resource Save"
+   Then title is "Testing Sharepoint Resource Save"
    And "Testing Sharepoint Resource Save" tab is opened
 
 
@@ -87,7 +87,7 @@ Scenario: Testing Auth type as Anonymous and swaping it resets the test connecti
 Scenario: Editing saved Sharepoint Source 
    Given I open "Test" Sharepoint source
    Then "Test" tab is opened
-   And title is "Edit Test"
+   And title is "Test"
    And Address is "http://rsaklfsvrsharep"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"

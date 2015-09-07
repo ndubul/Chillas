@@ -166,7 +166,7 @@ namespace Warewolf.Studio.ViewModels
             SelectedAction = service.Action;
             Inputs = service.Inputs;
             OutputMapping = service.OutputMappings;
-            Header = Resources.Languages.Core.DatabaseServiceDBSourceEditTabHeader + Name;
+            Header = Name;
             CanEditMappings = true;
         }
 

@@ -194,6 +194,82 @@
             </Trigger>-->
         </Style.Triggers>
     </Style>
+    <Style x:Key="ButtonOrangeTransparentStyle" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="MinHeight" Value="25" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="MinWidth" Value="25" />
+        <Setter Property="Background" Value="{StaticResource ButtonPressedTransparentBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonBackgroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DisabledVisualElement" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Unfocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle x:Name="Bd"
+                                   Fill="{StaticResource ButtonPressedTransparentBrush}"
+                                   Stroke="{StaticResource ButtonPressedTransparentBrush}"
+                                   StrokeThickness="1" />
+                        <ContentControl x:Name="ContentControl"
+                                        Margin="{TemplateBinding Padding}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        IsTabStop="False">
+                            <ContentPresenter x:Name="contentPresenter" />
+                        </ContentControl>
+                        <Rectangle x:Name="FocusedVisualElement"
+                                   Stroke="{StaticResource ButtonPressedTransparentBrush}"
+                                   StrokeThickness="1"
+                                   Visibility="Collapsed" />
+                        <Rectangle x:Name="DisabledVisualElement"
+                                   Fill="{StaticResource SolidWhite}"
+                                   Stroke="{StaticResource SolidWhite}"
+                                   Opacity="1"
+                                   Visibility="Collapsed" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Bd" Property="Stroke" Value="{StaticResource ButtonPressedTransparentBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="False">
+                            <Setter TargetName="Bd" Property="Stroke" Value="{StaticResource ButtonPressedTransparentBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource ButtonHoverBackgroundBrush}" />
+            </Trigger>
+            <Trigger Property="Button.IsPressed" Value="True">
+                <Setter Property="Control.Foreground" Value="White" />
+            </Trigger>
+            <!--<Trigger Property="Control.IsFocused" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource ButtonHoverBackgroundBrush}" />
+            </Trigger>-->
+        </Style.Triggers>
+    </Style>
     <Style x:Key="ButtonSchedulerTransparentStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Background" Value="{StaticResource ButtonPressedTransparentBrush}" />
@@ -1255,45 +1331,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--<Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
-        <Setter Property="Opacity" Value="0.3" />
-        <Setter Property="Width" Value="16" />
-        <Setter Property="Height" Value="16" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}"
-                            CornerRadius="{TemplateBinding Border.CornerRadius}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            SnapsToDevicePixels="True">
-                        <Path x:Name="CloseGlyph"
-                              Width="12"
-                              Height="12"
-                              Stretch="Fill"
-                              Opacity="1"
-                              Data="M8.4446707,-0.6250003 L10.625006,1.5604857 L7.1956725,4.9880161 L10.625,8.4285631 L8.5070467,10.625005 L5.0209293,7.1613607 L1.5554626,10.625 L-0.62499386,8.4862156 L2.8442898,5.0018182 L-0.625,1.5548685 L1.602536,-0.62499505 L5.0254283,2.8090899 z"
-                              Fill="{TemplateBinding Foreground}" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.3" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Opacity" Value="1" />
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Opacity" Value="1" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.3" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="True" />
-        </Style.Triggers>
-    </Style>-->
 </ResourceDictionary>

@@ -31,5 +31,12 @@ namespace Dev2.DataList
         {
             return "Is XML";
         }
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 1;
+            }
+        }
     }
 }

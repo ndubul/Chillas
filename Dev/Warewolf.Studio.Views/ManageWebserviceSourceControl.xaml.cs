@@ -5,6 +5,7 @@ using System.Windows.Documents;
 using Dev2.Common.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.Views
 {
@@ -34,7 +35,8 @@ namespace Warewolf.Studio.Views
             switch (controlName)
             {
                 case "Save":
-                    return SaveButton.Command.CanExecute(null);
+                    var viewModel = DataContext as ManageWebserviceSourceViewModel;
+                    return viewModel != null && viewModel.OkCommand.CanExecute(null);
                 case "Test Connection":
                     return TestConnectionButton.Command.CanExecute(null);
                 case "TestQuery":
@@ -82,7 +84,11 @@ namespace Warewolf.Studio.Views
 
         public void PerformSave()
         {
-            SaveButton.Command.Execute(null);
+            var viewModel = DataContext as ManageWebserviceSourceViewModel;
+            if (viewModel != null)
+            {
+                viewModel.OkCommand.Execute(null);
+            }
         }
 
         public void EnterUserName(string userName)

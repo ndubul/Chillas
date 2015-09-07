@@ -242,9 +242,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 81
 this.ScenarioSetup(scenarioInfo);
 #line 82
- testRunner.Given("I click \"Edit - Test Email Source\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I click \"Test Email Source\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 83
- testRunner.Then("\"Edit -Test Email Source\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"Test Email Source\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 84
  testRunner.When("the page loads", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 85

@@ -209,18 +209,5 @@
                 </i:Interaction.Behaviors>
             </TextBlock>
         </StackPanel>
-        <Button x:Name="SaveButton" 
-                Grid.Row="6" 
-                Margin="{StaticResource ControlBorderTop}" 
-                Width="60" 
-                Height="30" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Center" 
-                Command="{Binding OkCommand}" 
-                Content="Save">
-            <i:Interaction.Behaviors>
-                <core:HelpSetter Text="{x:Static languages:Core.WebServiceSourceSaveHelp}" DataContext="{Binding}" />
-            </i:Interaction.Behaviors>
-        </Button>
     </Grid>
 </UserControl>

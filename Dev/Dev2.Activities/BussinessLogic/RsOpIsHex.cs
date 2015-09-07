@@ -30,6 +30,14 @@ namespace Dev2.BussinessLogic
             return a => values.All(x => a.ToString().IsHex());
 
         }
+
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 1;
+            }
+        }
     }
 }
 

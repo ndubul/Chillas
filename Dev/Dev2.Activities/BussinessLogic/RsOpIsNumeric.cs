@@ -31,5 +31,13 @@ namespace Dev2.DataList
         {
             return "Is Numeric";
         }
+
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 1;
+            }
+        }
     }
 }

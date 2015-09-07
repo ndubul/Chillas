@@ -31,5 +31,12 @@ namespace Dev2.DataList
         {
             return "Not Alphanumeric";
         }
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 1;
+            }
+        }
     }
 }

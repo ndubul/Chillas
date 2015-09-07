@@ -328,7 +328,7 @@
                             <Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=ActualWidth}" >
                                 <xamGrid:XamGridEx x:Name="InputGrid" 
                                                      Style="{StaticResource XamGridStyle}"
-                                                     ItemsSource="{Binding Path=InputValues}"
+                                                     ItemsSource="{Binding Path=Inputs}"
                                                      AutoGenerateColumns="False"
                                                      IsAlternateRowsEnabled="False"
                                                      ColumnLayoutHeaderVisibility="Never"
@@ -346,7 +346,8 @@
                                                 </DataTemplate>
                                             </ig:TextColumn.AddNewRowEditorTemplate>
                                         </ig:TextColumn>
-                                        <xamGrid:TextBoxColumn Key="Value" HeaderText="Value" MinimumWidth="100" IsResizable="False" Watermark="Value">
+                                        <xamGrid:TextBoxColumn Key="Value"  HeaderText="Value" MinimumWidth="100" IsResizable="False" Watermark="Value" >
+                                            
                                         </xamGrid:TextBoxColumn>
                                     </ig:XamGrid.Columns>
                                     <ig:XamGrid.SortingSettings>
@@ -442,7 +443,7 @@
                     <views:MappingsView x:Name="MappingsView" Grid.Row="1"></views:MappingsView>
                 </Grid>
                 <!-- SAVE -->
-                <Grid Grid.Row="5" 
+                <Grid Grid.Row="5" Margin="{StaticResource ControlBorderTop}" 
                       Width="{Binding ElementName=GridContainer, Path=ActualWidth}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -456,19 +457,6 @@
                                HorizontalAlignment="Left" 
                                TextWrapping="WrapWithOverflow" 
                                x:Name="ErrorTextBlock" ></TextBlock>
-                    <Button x:Name="SaveButton" 
-                            Grid.Column="2" 
-                            Margin="{StaticResource ControlBorderTopRight}" 
-                            HorizontalAlignment="Right" 
-                            VerticalAlignment="Bottom" 
-                            Command="{Binding SaveCommand}" 
-                            Content="Save"
-                            Width="100">
-                        <i:Interaction.Behaviors>
-                            <core:HelpSetter Text="{x:Static languages:Core.PluginServiceSaveCommandHelp}"
-                                                         DataContext="{Binding}" />
-                        </i:Interaction.Behaviors>
-                    </Button>
                 </Grid>
             </Grid>
         </Grid>

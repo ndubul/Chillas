@@ -143,7 +143,7 @@ namespace Warewolf.Studio.ViewModels
 
         string SetToEdit(IServerSource source)
         {
-            return "Edit " + _connectedServer.Trim() + "/" + source.ResourcePath + source.Name;
+            return _connectedServer.Trim() + "/" + source.ResourcePath + source.Name;
         }
 
         public Action CloseAction { get; set; }
@@ -176,7 +176,6 @@ namespace Warewolf.Studio.ViewModels
 
             OnPropertyChanged(() => Validate);
             OnPropertyChanged(() => CanClickOk);
-
         }
 
         /// <summary>

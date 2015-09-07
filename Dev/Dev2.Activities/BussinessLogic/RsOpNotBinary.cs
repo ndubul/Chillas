@@ -29,5 +29,12 @@ namespace Dev2.BussinessLogic
         {
             return "Not Binary";
         }
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 1;
+            }
+        }
     }
 }

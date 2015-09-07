@@ -358,8 +358,8 @@ namespace Warewolf.Studio.ViewModels
 
         void SetupHeaderTextFromExisting()
         {
-            HeaderText = string.Format("{0} {1} ", Resources.Languages.Core.SharePointServiceEditHeaderLabel, (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim());
-            Header = string.Format("{0} - {1}", Resources.Languages.Core.SharePointServiceEditHeaderLabel, (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name));
+            HeaderText = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
+            Header = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
         }
 
         public string HeaderText

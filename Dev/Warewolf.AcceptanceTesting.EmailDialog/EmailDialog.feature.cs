@@ -31,8 +31,8 @@ namespace Warewolf.AcceptanceTesting.EmailDialog
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "EmailDialog", "In order to avoid silly mistakes\r\nAs a math idiot\r\nI want to be told the sum of t" +
-                    "wo numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "EmailDialog", "In order to attach files\nI want to attach items to me email to send\nSo that I can" +
+                    " reuse them", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -114,8 +114,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 24
  testRunner.And("I attach \"E:\\AppData\\Le\\test.txt\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 25
- testRunner.Then("files to attach should appear as \"C:\\Temp\\Testing\\test.txt;E:\\AppData\\Le\\test.txt" +
-                    "\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("attachment should appear as \"C:\\Temp\\Testing\\test.txt;E:\\AppData\\Le\\test.txt\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

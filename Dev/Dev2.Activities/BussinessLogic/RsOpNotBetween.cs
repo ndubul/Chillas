@@ -81,6 +81,14 @@ namespace Dev2.BussinessLogic
         {
             return "Not Between";
         }
+
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 3;
+            }
+        }
     }
 }
 

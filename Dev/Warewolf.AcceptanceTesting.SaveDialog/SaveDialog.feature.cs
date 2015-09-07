@@ -331,7 +331,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 116
  testRunner.And("the \"Localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 117
- testRunner.When("I \"Crtl+Shft+F\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I click \"Crtl+Shft+F\" keyboard shortcut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 118
  testRunner.Then("\"New Folder\" is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 119
@@ -358,7 +358,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 126
  testRunner.And("the \"localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 127
- testRunner.And("\"localhost/Hello World\" is visible in the explorer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"Hello World\" is visible in \"localhost/Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 128
  testRunner.When("I attempt to save a workflow as \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 129

@@ -111,7 +111,7 @@ namespace Warewolf.Studio.ViewModels
         {
             if (_emailServiceSource != null)
             {
-                HeaderText = Resources.Languages.Core.EmailSourceEditHeaderLabel + _warewolfserverName.Trim() + "\\" + (_emailServiceSource.ResourceName ?? ResourceName).Trim();
+                HeaderText = _warewolfserverName.Trim() + "\\" + (_emailServiceSource.ResourceName ?? ResourceName).Trim();
                 Header = ((_emailServiceSource.ResourceName ?? ResourceName));
             }
         }

@@ -31,8 +31,8 @@ namespace Warewolf.AcceptanceTesting.PluginService
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "PluginService", "In order to use .net dlls\nAs a warewolf user\nI want to be able to create plugin s" +
-                    "ervices", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "PluginService", "In order to use .net dlls\r\nAs a warewolf user\r\nI want to be able to create plugin" +
+                    " services", ProgrammingLanguage.CSharp, new string[] {
                         "PluginService"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -221,7 +221,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 59
  testRunner.Given("I open \"IntegrationTestPluginNull\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 60
- testRunner.And("\"Edit IntegrationTestPluginNull\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"IntegrationTestPluginNull\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
  testRunner.And("\"testingPluginSrc\" is selected as source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
@@ -287,7 +287,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 87
     testRunner.Then("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 88
-    testRunner.Then("title is \"Edit IntegrationTestPluginNull\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("title is \"IntegrationTestPluginNull\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -304,7 +304,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 92
  testRunner.Given("I open \"IntegrationTestPluginNull\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 93
- testRunner.And("\"Edit IntegrationTestPluginNull\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"IntegrationTestPluginNull\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 94
  testRunner.And("\"2 Select a Namespace\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 95
@@ -360,7 +360,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 115
     testRunner.Then("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 116
-    testRunner.Then("title is \"Edit IntegrationTestPluginNull\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("title is \"IntegrationTestPluginNull\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

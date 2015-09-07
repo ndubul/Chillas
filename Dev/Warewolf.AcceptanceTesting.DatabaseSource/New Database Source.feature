@@ -59,10 +59,10 @@ Scenario: Creating New DB Source General Testing
    When I save the source as "SavedDBSource"
    Then the save dialog is opened
    Then "SavedDBSource" tab is opened
-   And title is "Edit SavedDBSource"
+   And title is "SavedDBSource"
    When I type Server as "RSA"
    Then "SavedDBSource *" is the tab Header
-   And title is "Edit SavedDBSource"
+   And title is "SavedDBSource"
    
 
 	
@@ -161,7 +161,7 @@ Scenario: Testing as Windows and swaping it resets the test connection
 
 
 Scenario: Editing saved DB Source Remembers Previouse Auth Selection
-	Given I open "Edit Database Source - Test" 
+	Given I open "Database Source - Test" 
     And Server as "RSAKLFSVRGENDEV"
     And "Save" is "Disabled"
     And "Test Connection" is "Enabled"
@@ -189,7 +189,7 @@ Scenario: Editing saved DB Source Remembers Previouse Auth Selection
 	
 
 Scenario: Editing saved DB Source Remembers credentials
-	Given I open "Edit Database Source - Test" 
+	Given I open "Database Source - Test" 
     And Server as "RSAKLFSVRGENDEV"
     And "Save" is "Disabled"
     And "Test Connection" is "Enabled"
@@ -211,7 +211,7 @@ Scenario: Editing saved DB Source Remembers credentials
 	Then "Save" is "Enabled"
 	    
 Scenario: Editing saved DB Source and canceling without saving
-	Given I open "Edit Database Source - Test" 
+	Given I open "Database Source - Test" 
     And Server as "RSAKLFSVRGENDEV"
     And "Save" is "Disabled"
     And "Test Connection" is "Enabled"

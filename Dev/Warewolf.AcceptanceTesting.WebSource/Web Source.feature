@@ -24,7 +24,7 @@ Scenario: Creating New Web Source
    And "Save" is "Enabled"
    When I save as "Testing Resource Save"
    Then the save dialog is opened
-   Then title is "Edit Testing Resource Save"
+   Then title is "Testing Resource Save"
    And "Testing Resource Save" tab is opened
    When I click TestQuery
    Then the browser window opens with "http://RSAKLFSVRTFSBLD/IntegrationTestSite/GetCountries.ashx?extension=json&prefix=a"
@@ -102,7 +102,7 @@ Scenario: Testing Auth type as Anonymous and swaping it resets the test connecti
 Scenario: Editing saved Web Source 
    Given I open "Test" web source
    Then "Test" tab is opened
-   And title is "Edit Test"
+   And title is "Test"
    And Address is "http://RSAKLFSVRTFSBLD/IntegrationTestSite"
    And Default Query is "/GetCountries.ashx?extension=json&prefix=a"
    And "Save" is "Disabled"

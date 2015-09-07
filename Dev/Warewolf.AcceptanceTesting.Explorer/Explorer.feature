@@ -4,6 +4,32 @@ Feature: Explorer
 	As a Warewolf User
 	I want explorer view of my resources with management options
 
+# Connected to localhost server
+# Expand a folder
+# Rename folder
+# Search explorer
+# Creating Folder in localhost
+# Creating And Deleting Folder and Popup says cancel in localhost
+# Deleting Resource in folders
+# Deleting Resource in localhost Server
+# Renaming Folder And Workflow Service
+# Searching resources by using filter
+# Checking versions 
+# Clear filter
+# Search explorer on remote server
+# Connected to remote server
+# Creating Folder in remote host
+# Opening and Editing workflow from Explorer
+# Renaming Folder And Workflow Service on a remote server
+# Context menu
+# Show dependencies
+# Open saved Server Sources
+# Move Nested Folder up tree-view
+# Opening server source from explorer
+# Move Nested Folder up tree-view
+# Opening server source from explorer
+# Show Server Version
+
 @Explorer
 Scenario: Connected to localhost server
 	Given the explorer is visible
@@ -155,6 +181,18 @@ Scenario: Clear filter
 
 #WOLF-1025
 @ignore
+Scenario: Search explorer on remote server
+	Given the explorer is visible
+	And I open "Remote Connection Integration" server
+	Then I should see "66" folders
+	When I search for "Hello World"
+	Then I should see "Hello World" only
+
+Scenario: Connected to remote server
+	Given the explorer is visible
+	When I open "Remote Connection Integration" server
+	Then I should see "66" folders
+
 Scenario: Creating Folder in remote host
    Given the explorer is visible
    When I open "Remote Connection Integration" server
@@ -163,29 +201,32 @@ Scenario: Creating Folder in remote host
    Then I should see the path "Remote Connection Integration/MyNewFolder" 
 
 
-Scenario: Opening and Editing workflow from Explorer
+Scenario Outline: Opening and Editing workflow from Explorer
 	Given the explorer is visible
-	And I open "localhost" server
-    And I create the "localhost/Folder 1/Resource 1" of type "WorkflowService" 
-	When I open 'Resource 1' in "localhost/Folder 1"
-	Then "Resource 1" tab is opened 	
+	And I open "<Host>" server
+	When I open "Hello World"
+	And "Hello World" tab is opened 
+	Examples: 
+	| Host                          |
+	| localhost                     |
+	| Remote Connection Integration |
 
 Scenario: Renaming Folder And Workflow Service on a remote server
 	Given the explorer is visible
 	And I open "Remote Connection Integration" server
-	When I rename "Remote Connection Integration/Folder 2" to "Test Rename"
-	Then I should see "1" child for "Test Rename"
+	When I rename "Remote Connection Integration/Folder 2" to "Remote Connection Integration/Test Rename"
+	Then I should see "0" child for "Test Rename"
 	When I open "Test Rename"
 	And I create the "Remote Connection Integration/Test Rename/New Test 1" of type "WorkflowService" 
 	Then I should see the path "Remote Connection Integration/Test Rename/New Test 1"
-	And I should see "2" children for "Test Rename"
-	And I should not see the path "Remote Connection Integration/Folder 2" in explorer
+	And I should see "1" children for "Test Rename"
+	And "Remote Connection Integration/Folder 2" is not "visible"
 
-Scenario: Context menu
+Scenario Outline: Context menu
 	Given the explorer is visible
-	And I open "localhost" server
-	Then I should see "5" folders
-	When I right click on "LocalHost" a context menu is visible
+	And I open "<Host>" server
+	Then I should see "<total>" folders
+	When I right click on "<Host>" a context menu is visible
 	And "New Folder" is visible
 	And "New Service" is visible
 	And "New Database Connector" is visible
@@ -199,6 +240,10 @@ Scenario: Context menu
 	And "New Dropbox Source" is visible
 	And "New Sharepoint Source" is visible
 	And "Server version"
+	Examples: 
+	| Host                          | total |
+	| localhost                     | 5     |
+	| Remote Connection Integration | 66    |
 
 Scenario: Show dependencies
 	Given the explorer is visible
@@ -211,26 +256,74 @@ Scenario: Show dependencies
 Scenario: Open saved Server Sources
 	Given the explorer is visible
 	And I open "Remote Connection Integration"
-	Then path "Remote Connection Integration/Server" is visible
+	Then I should see the path "Remote Connection Integration/Server"
 	And I open "Remote Connection Integration/Server/Trav"
 	Then the "Trav" server tab is opened
 
-Scenario: Move Nested Folder up tree-view
+Scenario Outline: Move Nested Folder up tree-view
 	Given the explorer is visible
-	And I open "localhost"
-	Then path "localhost/MyFolder/NewFolder" is visible
-	And I change path "localhost/MyFolder/NewFolder" to "localhost/NewFolder"
-	Then both "localhost/MyFolder" and "localhost/NewFolder" are visible in root
+	And I open "<Host>"
+	Then path "<path>" is visible
+	And I change path "<From>" to "<To>"
+	Then both "<Folder1>" and "<Folder2>" are visible
+	Examples: 
+	| Host                          | path                                          | From                                          | To                                    | Folder1                               | Folder2                               |
+	| LocalHost                     | localhost/MyFolder/NewFolder                  | localhost/MyFolder/NewFolder                  | localhost/NewFolder                   | localhost/MyFolder                    | localhost/NewFolder                   |
+	| Remote Connection Integration | Remote Connection Integration/Testing/ForEach | Remote Connection Integration/Testing/ForEach | Remote Connection Integration/ForEach | Remote Connection Integration/ForEach | Remote Connection Integration/Testing |  
 
-
-Scenario: Opening server source from explorer
+Scenario Outline: Opening server source from explorer
 	Given the explorer is visible
-	And I open "LocalHost"
-	Then I should see the path "localhost/tst-ci-remote"
-	And I open "localhost/tst-ci-remote"
-	Then "Edit - tst-ci-remote" tab is opened
+	And I open "<Host>"
+	Then I should see the path "<path>"
+	And I open "<path>"
+	Then "<Hostname>" tab is opened
+	Examples:
+	| Host                          | path                                    | HostName      |
+	| LocalHost                     | localhost/tst-ci-remote                 | tst-ci-remote |
+	| Remote Connection Integration | Remote Connection Integration/Sandbox-1 | Sandbox       |
 
-	
+Scenario Outline: Show Server Version
+	Given the explorer is visible
+	And I open "<Host>"
+	And I right click on "<Host>" 
+	And context menu is visible
+	And "New Folder" is "visible"
+	And "New Service" is "visible"
+	And "New Database Connector" is "visible"
+	And "New Plugin Connector" is "visible"
+	And "New Web Service Connector" is "visible"
+	And "New Remote Warewolf Source" is "visible"
+	And "New Database Source" is "visible"
+	And "New Plugin Source" is "visible"
+	And "New Web Service Source" is "visible"
+	And "New Email Source" is "visible"
+	And "New Dropbox Source" is "visible"
+	And "New Sharepoint Source" is "visible"
+	And "Server Version" is "visible"
+	When I click on "Server Version"
+	Then "Warewolf Splash Screen" is "visible"
+	And "Studio Version" is "visible"
+	And "Server Version" is "Visible"
+	Examples: 
+	| Host                          |
+	| Localhost                     |
+	| Remote Connection Integration |
+
+Scenario: Checking versions in remote connection 
+  Given the explorer is visible
+  When I open "Remote Connection Integration" server
+  And I create the "Remote Connection Integration/Folder 1/Resource 1" of type "WorkflowService" 
+  Then I should see "67" folders
+  And I Setup  "3" Versions to be returned for "Remote Connection Integration/Folder 1/Resource 1"
+  When I Show Version History for "Remote Connection Integration/Folder 1/Resource 1"
+  Then I should see "3" versions with "View" Icons in "Remote Connection Integration/Folder 1/Resource 1"
+  When I search for "Resource 1" in explorer
+  Then I should see the path "Remote Connection Integration/Folder 1/Resource 1"
+  Then I should see "3" versions with "View" Icons in "Remote Connection Integration/Folder 1/Resource 1"
+
+
+
+
 
 #@Explorer
 #Scenario: Opening Versions in Explorer

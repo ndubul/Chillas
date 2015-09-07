@@ -114,7 +114,7 @@ Scenario: Context Menu Folder actions
 Scenario: Ensure new folder can be created in root
 	Given the Save Dialog is opened
 	And the "Localhost" server is visible in save dialog
-	When I "Crtl+Shft+F" 
+	When I click "Crtl+Shft+F" keyboard shortcut
 	Then "New Folder" is created
 	And "New Folder" name is the focus
 	When I rename "New Folder" to "TestFolder"
@@ -124,6 +124,6 @@ Scenario: Ensure new folder can be created in root
 Scenario: Saving a Workflow in localhost with an existing name
 	Given the Save Dialog is opened
 	And the "localhost" server is visible in save dialog
-	And "localhost/Hello World" is visible in the explorer
+	And "Hello World" is visible in "localhost/Hello World"
 	When I attempt to save a workflow as "Hello World"
 	Then an error message appear with the value "An item with name 'Hello World' already exists in this folder."

@@ -27,7 +27,7 @@ Scenario Outline: Ensure Inputs are enabled on decision window load
 Scenario: Ensuring decision text is visible under tool
 	Given I have a workflow "New Workflow"
 	And drop a "Decision" tool onto the design surface
-	And the decision tool window is opened
+	And the Decision window is opened
 	And a decision variable "[[A]]" value "123 234"		
 	And is "[[A]]" "IsEqual" "123   234"	
 	And "Done" is selected
@@ -79,7 +79,7 @@ Scenario: Validation on incorrectly formatted variables
 Scenario Outline: Ensure Match Type droplist is populated correctly
 	Given I have a workflow "New Workflow"
 	And drop a "Decision" tool onto the design surface
-	And the decision tool window is opened
+	And the Decision window is opened
 	And I select the "Match Type" menu
 	And Match Type has '<options>' visible
 	Examples: 

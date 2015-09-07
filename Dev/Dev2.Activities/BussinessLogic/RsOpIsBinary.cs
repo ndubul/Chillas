@@ -30,5 +30,13 @@ namespace Dev2.BussinessLogic
             return a => values.All(x => a.ToString().IsBinary());
 
         }
+
+        public override int ArgumentCount
+        {
+            get
+            {
+                return 1;
+            }
+        }
     }
 }
