@@ -6,15 +6,22 @@
 
 # Send Email with an attachment
 # Selecting multiple attachments
+
 @ignore
 #wolf - 991
 Scenario: Send Email with an attachment
-	Given the "from" account is "warewolf@dev2.co.za"
-	And to address is "test1@freemail.com" 	
-	And I  want to attach an item
-	When I expand the Email tool
-	And I click "Attachments"
-	Then the webs file chooser dialog opens 
+	Given I have a workflow "New Workflow"
+	And I drag the "Email" tool onto the design surface
+	And Mail Source is "EmaiSource" 
+	And "From" account is "warewolf@dev2.co.za"
+	And "To" address is "test1@freemail.com" 	
+	And I  want to attach "C:\Test.txt"
+	When I expand the Email tool to Large view
+	And I click "..." for attachments
+	Then the file chooser dialog opens 
+	Then I navigate to "C:\Test.txt"
+	And I click "Save"
+	Then attachment should appear as "C:\Test.txt"
 
 Scenario: Selecting multiple attachments
 	Given the Email dialog is opened
@@ -31,5 +38,15 @@ Scenario: Ensure that dialog tree view is populated correctly
 	And I expand "C:\"
 	Then all the folders in "C:\" are visible
 
+
+#Wolf-1099
+Scenario: Ensure Email tool accepts HTML
+	Given I have a workflow "New Workflow"
+	And I drag the "Email" tool onto the design surface
+	And Mail Source is "EmaiSource" 
+	And "From" account is "warewolf@dev2.co.za"
+	And "To" address is "test1@freemail.com" 	
+	And "Html Body" is "Checked"
+	And Body as "<h1 style="color:blue">This is a Blue Heading</h1>"
 
 
