@@ -256,12 +256,31 @@
                                        HorizontalAlignment="Stretch"
                                        VerticalAlignment="Stretch"
                                        Background="Transparent">
-                    <Image Name="image1"
-                                       Width="20"
-                                       Height="20"
-                                       Margin="7.5,7.5,7.5,7.5"
-                                       Source="{StaticResource Menu-System-WebService}"
-                                       Visibility="Visible" />
+
+                    <Image Name="image1" Width="20" Height="20" Margin="7.5,7.5,7.5,7.5" Source="{StaticResource Menu-System-WebService}" >
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image Name="image2" Width="20" Height="20" Margin="7.5,7.5,7.5,7.5" Source="{StaticResource Menu-System-WebService-MouseOver}" >
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                     <TextBlock Height="35"
                                            HorizontalAlignment="Left"
                                            Padding="16,8,0,5"
