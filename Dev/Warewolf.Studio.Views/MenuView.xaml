@@ -251,48 +251,23 @@
                     HorizontalAlignment="Left"
                     Style="{StaticResource SideMenuButtonStyle}"
                     ToolTip="{Binding Path=WebServiceToolTip}">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Rectangle Name="Bd"
-                                       Fill="{StaticResource WareWolfMenuBrush}"
-                                       Stroke="{StaticResource WareWolfMenuBrush}"
-                                       StrokeThickness="1" />
-                            <DockPanel Width="{Binding ButtonWidth}"
+                <DockPanel Width="{Binding ButtonWidth}"
                                        Height="35"
                                        HorizontalAlignment="Stretch"
                                        VerticalAlignment="Stretch"
                                        Background="Transparent">
-                                <Image Name="image1"
+                    <Image Name="image1"
                                        Width="20"
                                        Height="20"
                                        Margin="7.5,7.5,7.5,7.5"
                                        Source="{StaticResource Menu-System-WebService}"
                                        Visibility="Visible" />
-                                <TextBlock Height="35"
+                    <TextBlock Height="35"
                                            HorizontalAlignment="Left"
                                            Padding="16,8,0,5"
                                            Style="{StaticResource MenuTextBlockStyle}"
                                            Text="{Binding Path=WebLabel}" />
-                            </DockPanel>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter TargetName="image1" Property="Source" Value="{StaticResource Menu-System-WebService-MouseOver}" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="false">
-                                <Setter TargetName="image1" Property="Source" Value="{StaticResource Menu-System-WebService}" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter TargetName="image1" Property="Source" Value="{StaticResource Menu-System-WebService}" />
-                                <Setter TargetName="Bd" Property="Stroke" Value="{StaticResource WareWolfOrangeBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="false">
-                                <Setter TargetName="Bd" Property="Stroke" Value="{StaticResource WareWolfMenuBrush}" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
+                </DockPanel>
             </Button>
 
             <Separator Grid.Row="10"

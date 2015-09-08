@@ -233,6 +233,7 @@
             <Grid Grid.Column="0">
                 <ContentControl Width="60"
                                 SizeChanged="SlidingMenuPane_OnSizeChanged"
+                                
                                 >
                     <views1:MenuView DataContext="{Binding MenuViewModel}"/>
                     <ContentControl.Style>
@@ -346,7 +347,7 @@
                         <igDock:SplitPane x:Name="DockCentre" AutomationProperties.AutomationId="UI_SplitPane_AutoID">
                             <igDock:TabGroupPane x:Name="TabManager" TabStripPlacement="Top"  AutomationProperties.AutomationId="UI_TabManager_AutoID">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:TabGroupPaneBindingBehavior DocumentHost="{Binding ElementName=DocumentHost}" 
+                                    <behaviors:TabGroupPaneBindingBehavior DocumentHost="{Binding ElementName=DocumentHost, IsAsync=True}" 
                                                                    SelectedItem="{Binding DataContext.ActiveItem, ElementName=DocumentHost, Mode=TwoWay}" />
                                 </i:Interaction.Behaviors>
                                 <dock:ContentPaneFactory.PaneFactory>

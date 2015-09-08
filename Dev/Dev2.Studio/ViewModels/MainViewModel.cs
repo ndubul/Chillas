@@ -1514,8 +1514,6 @@ namespace Dev2.Studio.ViewModels
                     _previousActive.DebugOutputViewModel.PropertyChanged-=DebugOutputViewModelOnPropertyChanged;
                 }
             }
-            var helpViewModel = CustomContainer.Get<IHelpWindowViewModel>();
-            helpViewModel.UpdateHelpText("Test");
             base.ActivateItem(item);
             if (item == null || item.ContextualResourceModel == null) return;
             if(item.DebugOutputViewModel != null)
