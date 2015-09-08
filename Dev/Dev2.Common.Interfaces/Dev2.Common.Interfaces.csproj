@@ -281,6 +281,7 @@
     <Compile Include="IWarewolfListIterator.cs" />
     <Compile Include="IWarewolfWebClient.cs" />
     <Compile Include="IWebLatestVersionDialog.cs" />
+    <Compile Include="IWorksurfaceKey.cs" />
     <Compile Include="NameValue.cs" />
     <Compile Include="PathOperations\IResult.cs" />
     <Compile Include="Patterns\ISpookyLoadable.cs" />
