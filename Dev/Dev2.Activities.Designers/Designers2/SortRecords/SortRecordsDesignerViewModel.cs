@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Windows;
 using Dev2.Activities.Designers2.Core;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
+using Dev2.Interfaces;
 using Dev2.Validation;
 
 namespace Dev2.Activities.Designers2.SortRecords
@@ -65,6 +66,13 @@ namespace Dev2.Activities.Designers2.SortRecords
             }
         }
 
-
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
+        }
     }
 }

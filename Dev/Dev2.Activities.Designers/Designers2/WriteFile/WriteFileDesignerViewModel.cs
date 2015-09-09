@@ -11,6 +11,7 @@
 
 using System.Activities.Presentation.Model;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.WriteFile
 {
@@ -47,5 +48,14 @@ namespace Dev2.Activities.Designers2.WriteFile
         bool Overwrite { set { SetProperty(value); } get { return GetProperty<bool>(); } }
         bool AppendTop { set { SetProperty(value); } get { return GetProperty<bool>(); } }
         bool AppendBottom { set { SetProperty(value); } get { return GetProperty<bool>(); } }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
+        }
     }
 }

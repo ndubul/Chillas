@@ -15,6 +15,7 @@ using Dev2.Activities.Designers2.Core;
 using Dev2.Common.Interfaces.Enums.Enums;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
 using Dev2.Converters;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.BaseConvert
 {
@@ -24,7 +25,7 @@ namespace Dev2.Activities.Designers2.BaseConvert
             : base(modelItem)
         {
             AddTitleBarQuickVariableInputToggle();
-            AddTitleBarHelpToggle();
+            //AddTitleBarHelpToggle();
 
             dynamic mi = ModelItem;
             InitializeItems(mi.ConvertCollection);
@@ -44,6 +45,15 @@ namespace Dev2.Activities.Designers2.BaseConvert
         protected override IEnumerable<IActionableErrorInfo> ValidateCollectionItem(ModelItem mi)
         {
             yield break;
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

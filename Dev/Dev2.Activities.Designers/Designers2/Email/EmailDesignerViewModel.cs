@@ -26,6 +26,7 @@ using Dev2.Common.Interfaces.Threading;
 using Dev2.Communication;
 using Dev2.Data.Enums;
 using Dev2.Data.Util;
+using Dev2.Interfaces;
 using Dev2.Providers.Errors;
 using Dev2.Providers.Validation.Rules;
 using Dev2.Runtime.Configuration.ViewModels.Base;
@@ -496,6 +497,15 @@ namespace Dev2.Activities.Designers2.Email
                     EmailSource = null;
                     EmailSource = selectedSource;
                 }
+            }
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
             }
         }
     }
