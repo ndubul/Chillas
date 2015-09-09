@@ -270,16 +270,20 @@ namespace Dev2.Activities.Designers2.Core
         public void Expand()
         {
             ShowLarge = true;
+            ShowLargeChanged = ShowLarge;
         }
+
+        public bool ShowLargeChanged { get; set; }
 
         public virtual void Collapse()
         {
             ShowLarge = false;
+            ShowLargeChanged = ShowLarge;
         }
 
         public virtual void Restore()
         {
-            ShowLarge = PreviousView == ShowLargeProperty.Name;
+            ShowLarge = PreviousView == ShowLargeProperty.Name && ShowLargeChanged != ShowLarge;
         }
 
         protected virtual void OnModelItemPropertyChanged(object sender, PropertyChangedEventArgs e)

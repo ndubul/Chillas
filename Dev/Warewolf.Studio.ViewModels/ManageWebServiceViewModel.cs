@@ -42,7 +42,7 @@ namespace Warewolf.Studio.ViewModels
         WebRequestMethod _selectedWebRequestMethod;
         ICollection<WebRequestMethod> _webRequestMethods;
         ICommand _newWebSourceCommand;
-
+        readonly IWorkSurfaceKey _workSurfaceKey;
         ICollection<IWebServiceSource> _sources;
         IWebServiceSource _selectedSource;
         readonly IWebService _webService;
@@ -76,11 +76,12 @@ namespace Warewolf.Studio.ViewModels
 
         #region Implementation of IManageWebServiceViewModel
 
-        public ManageWebServiceViewModel(IWebServiceModel model, IRequestServiceNameViewModel saveDialog)
+        public ManageWebServiceViewModel(IWebServiceModel model, IRequestServiceNameViewModel saveDialog, IWorkSurfaceKey resourceModel)
             : base(ResourceType.WebService)
         {
             _model = model;
             _saveDialog = saveDialog;
+            _workSurfaceKey = resourceModel;
             Init();
             Header = Resources.Languages.Core.WebserviceTabHeader;
             HeaderText = Resources.Languages.Core.WebserviceTabHeader;
@@ -108,7 +109,10 @@ namespace Warewolf.Studio.ViewModels
       
             SaveCommand = new DelegateCommand(Save, CanSave);
             NewWebSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
-            EditWebSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource));
+            if(_workSurfaceKey != null)
+            {
+                EditWebSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource, _workSurfaceKey));
+            }
             PasteResponseCommand = new DelegateCommand(HandlePasteResponse);
             RemoveHeaderCommand = new DelegateCommand(DeleteCell);
             AddHeaderCommand = new DelegateCommand(Add);

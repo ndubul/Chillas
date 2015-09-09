@@ -62,7 +62,8 @@
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
             <Setter Property="WindowStyle" Value="None" />
-            <Setter Property="AllowsTransparency" Value="True" />
+            <Setter Property="AllowsTransparency" Value="False" />
+            <Setter Property="ResizeMode" Value="NoResize"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Window}">
@@ -232,6 +233,7 @@
             <Grid Grid.Column="0">
                 <ContentControl Width="60"
                                 SizeChanged="SlidingMenuPane_OnSizeChanged"
+                                
                                 >
                     <views1:MenuView DataContext="{Binding MenuViewModel}"/>
                     <ContentControl.Style>
@@ -345,7 +347,7 @@
                         <igDock:SplitPane x:Name="DockCentre" AutomationProperties.AutomationId="UI_SplitPane_AutoID">
                             <igDock:TabGroupPane x:Name="TabManager" TabStripPlacement="Top"  AutomationProperties.AutomationId="UI_TabManager_AutoID">
                                 <i:Interaction.Behaviors>
-                                    <behaviors:TabGroupPaneBindingBehavior DocumentHost="{Binding ElementName=DocumentHost}" 
+                                    <behaviors:TabGroupPaneBindingBehavior DocumentHost="{Binding ElementName=DocumentHost, IsAsync=True}" 
                                                                    SelectedItem="{Binding DataContext.ActiveItem, ElementName=DocumentHost, Mode=TwoWay}" />
                                 </i:Interaction.Behaviors>
                                 <dock:ContentPaneFactory.PaneFactory>
@@ -417,7 +419,7 @@
                    MouseEnter="ShowFullScreenPanel_OnMouseEnter" />
         <Rectangle x:Name="HideFullScreenPanel"
                    Height="20"
-                   Margin="0,25,0,0"
+                   Margin="0,37,0,0"
                    VerticalAlignment="Top"
                    Fill="#00000000"
                    IsHitTestVisible="True"

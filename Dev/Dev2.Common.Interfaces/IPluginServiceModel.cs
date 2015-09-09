@@ -20,7 +20,7 @@ namespace Dev2.Common.Interfaces
         ICollection<IPluginAction> GetActions(IPluginSource source, INamespaceItem value);
         ICollection<INamespaceItem> GetNameSpaces(IPluginSource source);
         void CreateNewSource();
-        void EditSource(IPluginSource selectedSource);
+        void EditSource(IPluginSource selectedSource, IWorkSurfaceKey resourceModel);
         string TestService(IPluginService inputValues);
         IEnumerable<IServiceOutputMapping> GetPluginOutputMappings(IPluginAction action);
         void SaveService(IPluginService model);

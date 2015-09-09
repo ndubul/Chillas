@@ -9,14 +9,10 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
-using Dev2.Common.Interfaces.ServerProxyLayer;
-using Dev2.Common.Interfaces.WebServices;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Dev2.Common.Interfaces.ServerProxyLayer;
+using Dev2.Common.Interfaces.WebServices;
 
 namespace Dev2.Common.Interfaces.WebService
 {
@@ -25,7 +21,7 @@ namespace Dev2.Common.Interfaces.WebService
 
         ICollection<IWebServiceSource> RetrieveSources();
         void CreateNewSource();
-        void EditSource(IWebServiceSource selectedSource);
+        void EditSource(IWebServiceSource selectedSource, IWorkSurfaceKey resourceModel);
         string TestService(IWebService inputValues);
         void SaveService(IWebService toModel);
 

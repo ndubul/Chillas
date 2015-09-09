@@ -34,7 +34,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Verifiable();
             var mockDbServiceModel = new Mock<IDbServiceModel>();
             SetupModel(mockDbServiceModel);
-            var viewModel = new ManageDatabaseServiceViewModel(mockDbServiceModel.Object, mockRequestServiceNameViewModel.Object);
+            var viewModel = new ManageDatabaseServiceViewModel(mockDbServiceModel.Object, mockRequestServiceNameViewModel.Object, null);
             view.DataContext = viewModel;
 
            
@@ -296,7 +296,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             ScenarioContext.Current.Remove("requestServiceNameViewModel");
             var requestServiceNameViewModelMock = new Mock<IRequestServiceNameViewModel>();
             ScenarioContext.Current.Add("requestServiceNameViewModel", requestServiceNameViewModelMock);
-            var viewModel = new ManageDatabaseServiceViewModel(ScenarioContext.Current.Get<Mock<IDbServiceModel>>("model").Object, requestServiceNameViewModelMock.Object, databaseService);
+            var viewModel = new ManageDatabaseServiceViewModel(ScenarioContext.Current.Get<Mock<IDbServiceModel>>("model").Object, requestServiceNameViewModelMock.Object, databaseService, null);
             ScenarioContext.Current.Add("viewModel",viewModel);
             var view = Utils.GetView<ManageDatabaseServiceControl>();
             try

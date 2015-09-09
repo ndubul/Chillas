@@ -79,8 +79,8 @@ namespace Warewolf.Studio.ViewModels
 
         #region Implementation of IServiceMappings
 
-        public ManagePluginServiceViewModel(IPluginServiceModel model, IRequestServiceNameViewModel saveDialog)
-            : this(model)
+        public ManagePluginServiceViewModel(IPluginServiceModel model, IRequestServiceNameViewModel saveDialog, IWorkSurfaceKey resourceModel)
+            : this(model, resourceModel)
         {
 
             SaveDialog = saveDialog;
@@ -88,7 +88,7 @@ namespace Warewolf.Studio.ViewModels
 
         }
 
-        public ManagePluginServiceViewModel(IPluginServiceModel model)
+        public ManagePluginServiceViewModel(IPluginServiceModel model, IWorkSurfaceKey resourceModel)
             : base(ResourceType.PluginService)
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "model", model } });
@@ -108,12 +108,12 @@ namespace Warewolf.Studio.ViewModels
             TestPluginCommand = new DelegateCommand(() => Test(_model));
             SaveCommand = new DelegateCommand(Save, CanSave);
             CreateNewSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
-            EditSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource));
+            EditSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource, resourceModel));
         }
 
 
-        public ManagePluginServiceViewModel(IPluginServiceModel model, IPluginService selectedSource)
-            : this(model)
+        public ManagePluginServiceViewModel(IPluginServiceModel model, IPluginService selectedSource, IWorkSurfaceKey resourceModel)
+            : this(model, resourceModel)
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "model", model } });
             _model = model;

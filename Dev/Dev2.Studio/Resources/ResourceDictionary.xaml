@@ -441,7 +441,7 @@
                                           FontSize="{TemplateBinding FontSize}"
                                           FontFamily="{TemplateBinding FontFamily}"
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                          Margin="1"
+                                          
                                           MinWidth="0"
                                           MinHeight="0"
                                           Padding="{TemplateBinding Padding}"

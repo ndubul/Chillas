@@ -37,7 +37,7 @@ namespace Warewolf.AcceptanceTesting.PluginService
             var mockPluginServiceModel = new Mock<IPluginServiceModel>();
             SetupModel(mockPluginServiceModel);
 
-            var viewModel = new ManagePluginServiceViewModel(mockPluginServiceModel.Object, mockRequestServiceNameViewModel.Object);
+            var viewModel = new ManagePluginServiceViewModel(mockPluginServiceModel.Object, mockRequestServiceNameViewModel.Object, null);
           
             view.DataContext = viewModel;
 

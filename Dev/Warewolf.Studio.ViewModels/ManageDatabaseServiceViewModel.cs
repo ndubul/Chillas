@@ -18,6 +18,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using Dev2;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.SaveDialog;
@@ -63,7 +64,7 @@ namespace Warewolf.Studio.ViewModels
 
         /// <exception cref="ArgumentNullException"><paramref name="model"/> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="saveDialog"/> is <see langword="null" />.</exception>
-        public ManageDatabaseServiceViewModel(IDbServiceModel model, IRequestServiceNameViewModel saveDialog)
+        public ManageDatabaseServiceViewModel(IDbServiceModel model, IRequestServiceNameViewModel saveDialog, IWorkSurfaceKey resourceModel)
             : base(ResourceType.DbService)
         {
             if (model == null)
@@ -76,7 +77,10 @@ namespace Warewolf.Studio.ViewModels
             CanEditSource = false;
             IsNew = true;
             CreateNewSourceCommand = new DelegateCommand(model.CreateNewSource);
-            EditSourceCommand = new DelegateCommand(() => model.EditSource(SelectedSource));
+            if(resourceModel != null)
+            {
+                EditSourceCommand = new DelegateCommand(() => model.EditSource(SelectedSource, resourceModel));
+            }
             Sources = model.RetrieveSources();
 
             Header = Resources.Languages.Core.DatabaseServiceDBSourceTabHeader;
@@ -97,8 +101,8 @@ namespace Warewolf.Studio.ViewModels
         /// <exception cref="ArgumentNullException"><paramref name="model" /> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="saveDialog"/> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="service"/> is <see langword="null" />.</exception>
-        public ManageDatabaseServiceViewModel(IDbServiceModel model, IRequestServiceNameViewModel saveDialog, IDatabaseService service)
-            : this(model, saveDialog)
+        public ManageDatabaseServiceViewModel(IDbServiceModel model, IRequestServiceNameViewModel saveDialog, IDatabaseService service, IWorkSurfaceKey resourceModel)
+            : this(model, saveDialog, resourceModel)
         {
             if (saveDialog == null&& model==null)
             {
