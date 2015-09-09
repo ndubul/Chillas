@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TechTalk.SpecFlow;
 using Warewolf.AcceptanceTesting.Core;
+using Warewolf.Studio.Core;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
 
@@ -27,7 +28,9 @@ namespace Warewolf.AcceptanceTesting.Explorer
             mockExplorerRepository.Setup(repository => repository.CreateFolder(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Guid>()));
             mockExplorerRepository.Setup(repository => repository.Rename(It.IsAny<IExplorerItemViewModel>(), It.IsAny<string>())).Returns(true);
             mockShellViewModel.Setup(model => model.LocalhostServer).Returns(new ServerForTesting(mockExplorerRepository));
-            var explorerViewModel = new ExplorerViewModel(mockShellViewModel.Object,new Mock<IEventAggregator>().Object );
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            mockEventAggregator.Setup(aggregator => aggregator.GetEvent<ServerAddedEvent>()).Returns(new ServerAddedEvent());
+            var explorerViewModel = new ExplorerViewModel(mockShellViewModel.Object,mockEventAggregator.Object );
             explorerView.DataContext = explorerViewModel;
             Utils.ShowTheViewForTesting(explorerView);
             FeatureContext.Current.Add(Utils.ViewNameKey, explorerView);
@@ -40,7 +43,9 @@ namespace Warewolf.AcceptanceTesting.Explorer
             var explorerView = FeatureContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
             var explorerViewModel = FeatureContext.Current.Get<IExplorerViewModel>(Utils.ViewModelNameKey);
             ScenarioContext.Current.Add(Utils.ViewNameKey, explorerView);
-            ScenarioContext.Current.Add(Utils.ViewModelNameKey, explorerViewModel);           
+            ScenarioContext.Current.Add(Utils.ViewModelNameKey, explorerViewModel);
+            var mainViewModelMock = new Mock<IMainViewModel>();
+            ScenarioContext.Current.Add("mainViewModel",mainViewModelMock);
         }
 
         [Given(@"the explorer is visible")]
@@ -59,7 +64,24 @@ namespace Warewolf.AcceptanceTesting.Explorer
             IExplorerViewModel explorerViewModel = (IExplorerViewModel)explorerView.DataContext;
             var server = new ServerForTesting(new Mock<IExplorerRepository>());
             server.ResourceName = name;
-            //explorerViewModel.ConnectControlViewModel.Connect(server);            
+            explorerViewModel.ConnectControlViewModel.Connect(server);            
+        }
+
+        [Given(@"I connect to ""(.*)"" server")]
+        [When(@"I connect to ""(.*)"" server")]
+        [Then(@"I connect to ""(.*)"" server")]
+        public void WhenIConnectToServer(string serverName)
+        {
+            var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
+            Assert.IsNotNull(explorerView.DataContext);
+            IExplorerViewModel explorerViewModel = (IExplorerViewModel)explorerView.DataContext;
+            var explorerRepository = new Mock<IExplorerRepository>();
+            explorerRepository.Setup(repository => repository.CreateFolder(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Guid>()));
+            explorerRepository.Setup(repository => repository.Rename(It.IsAny<IExplorerItemViewModel>(), It.IsAny<string>())).Returns(true);
+            var server = new ServerForTesting(explorerRepository);
+            server.ResourceName = serverName;
+            explorerViewModel.ConnectControlViewModel.Connect(server);            
+
         }
 
         [Given(@"I open ""(.*)"" server")]
@@ -80,6 +102,23 @@ namespace Warewolf.AcceptanceTesting.Explorer
             var environmentViewModel = explorerView.OpenFolderNode(folderName);
             Assert.IsNotNull(environmentViewModel);
         }
+
+        [Given(@"I open '(.*)' in ""(.*)""")]
+        [When(@"I open '(.*)' in ""(.*)""")]
+        public void WhenIOpenIn(string resourceName,string folderName)
+        {
+            var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
+            var environmentViewModel = explorerView.OpenItem(resourceName,folderName);
+            Assert.IsNotNull(environmentViewModel);
+        }
+
+
+        [Then(@"""(.*)"" tab is opened")]
+        public void WhenTabIsOpened(string resourceName)
+        {
+            
+        }
+
 
         [Given(@"I should see ""(.*)"" folders")]
         [When(@"I should see ""(.*)"" folders")]
@@ -123,11 +162,10 @@ namespace Warewolf.AcceptanceTesting.Explorer
         }
 
         [Then(@"I should see ""(.*)"" only")]
-        public void ThenIShouldSee(string folderName)
+        public void ThenIShouldSee(string itemName)
         {
             var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
-            var environmentViewModel = explorerView.OpenFolderNode(folderName);
-            Assert.IsNotNull(environmentViewModel);
+            explorerView.VerifyItemExists(itemName);
         }
 
         [Then(@"I should see ""(.*)"" resources in ""(.*)""")]
@@ -337,7 +375,8 @@ namespace Warewolf.AcceptanceTesting.Explorer
         public void WhenIDelete(string path)
         {
             var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
-            var mainViewModelMock = new Mock<IMainViewModel>();
+            var mainViewModelMock = ScenarioContext.Current.Get<Mock<IMainViewModel>>("mainViewModel");
+            
             if (ScenarioContext.Current.ContainsKey("popupResult"))
             {
                 var popupResult = ScenarioContext.Current.Get<string>("popupResult");
@@ -382,7 +421,9 @@ namespace Warewolf.AcceptanceTesting.Explorer
             explorerView.AddNewFolder(server, folder);
         }
 
+        [Given(@"I create the ""(.*)"" of type ""(.*)""")]
         [When(@"I create the ""(.*)"" of type ""(.*)""")]
+        [Then(@"I create the ""(.*)"" of type ""(.*)""")]
         public void WhenICreateTheOfType(string path, string type)
         {
             var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
@@ -397,7 +438,9 @@ namespace Warewolf.AcceptanceTesting.Explorer
             mockExplorerRepository.Setup(repository => repository.CreateFolder(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Guid>()));
             mockExplorerRepository.Setup(repository => repository.Rename(It.IsAny<IExplorerItemViewModel>(), It.IsAny<string>())).Returns(true);
             mockShellViewModel.Setup(model => model.LocalhostServer).Returns(new ServerForTesting(mockExplorerRepository));
-            var explorerViewModel = new ExplorerViewModel(mockShellViewModel.Object, new Mock<IEventAggregator>().Object);
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            mockEventAggregator.Setup(aggregator => aggregator.GetEvent<ServerAddedEvent>()).Returns(new ServerAddedEvent());
+            var explorerViewModel = new ExplorerViewModel(mockShellViewModel.Object, mockEventAggregator.Object);
             var view = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
             view.DataContext = explorerViewModel;
             FeatureContext.Current.Remove(Utils.ViewModelNameKey);

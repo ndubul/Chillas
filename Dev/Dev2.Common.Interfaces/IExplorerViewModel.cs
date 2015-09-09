@@ -16,7 +16,7 @@ namespace Dev2.Common.Interfaces
         event SelectedExplorerEnvironmentChanged SelectedEnvironmentChanged;
         IEnvironmentViewModel SelectedEnvironment { get; set; }
         IServer SelectedServer { get;  }
-	    //IConnectControlViewModel ConnectControlViewModel { get; }
+	    IConnectControlViewModel ConnectControlViewModel { get; }
         string SearchText { get; set; }
 	    ICommand RefreshCommand { get; set; }
         bool IsRefreshing { get; set; }
