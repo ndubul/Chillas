@@ -51,6 +51,7 @@ namespace Warewolf.Studio.ViewModels
            
             });
 	        server.Connect();
+            IsConnected = server.IsConnected();
             //ShowServerVersionCommand = new DelegateCommand(ShowServerVersionAbout);
             CanCreateFolder = Server.UserPermissions == Permissions.Administrator || server.UserPermissions == Permissions.Contribute;
             CreateFolderCommand = new DelegateCommand(CreateFolder);

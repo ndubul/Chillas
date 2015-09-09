@@ -37,23 +37,33 @@ namespace Warewolf.Studio.Views
             {
                 xamDataTreeNode.IsExpanded = true;
             }
-            return xamDataTreeNode == null ? null : xamDataTreeNode.Data as IEnvironmentViewModel;
+            var environmentViewModel = xamDataTreeNode == null ? null : xamDataTreeNode.Data as IEnvironmentViewModel;
+            if (environmentViewModel != null)
+            {
+                environmentViewModel.IsExpanded = true;
+            }
+            return environmentViewModel;
         }
 
         public List<IExplorerTreeItem> GetFoldersVisible()
         {
-            var folderItems = _explorerView.ExplorerTree.Nodes[0].Nodes.Where(node =>
+            var folderItems = new List<IExplorerTreeItem>();
+            foreach (var serverNode in _explorerView.ExplorerTree.Nodes)
             {
-                var explorerItem = node.Data as IExplorerTreeItem;
-                if (explorerItem != null)
+                var folders = serverNode.Nodes.Where(node =>
                 {
-                    if (explorerItem.ResourceType == ResourceType.Folder)
+                    var explorerItem = node.Data as IExplorerTreeItem;
+                    if (explorerItem != null)
                     {
-                        return true;
+                        if (explorerItem.ResourceType == ResourceType.Folder)
+                        {
+                            return true;
+                        }
                     }
-                }
-                return false;
-            }).Select(node => node.Data as IExplorerTreeItem);
+                    return false;
+                }).Select(node => node.Data as IExplorerTreeItem);
+                folderItems.AddRange(folders);
+            }
             return folderItems.ToList();
         }
 

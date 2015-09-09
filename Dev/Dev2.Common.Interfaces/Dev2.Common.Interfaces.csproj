@@ -203,6 +203,7 @@
     <Compile Include="IAdminManager.cs" />
     <Compile Include="IAssignValue.cs" />
     <Compile Include="ICheckControlEnabledView.cs" />
+    <Compile Include="IConnectControlViewModel.cs" />
     <Compile Include="IDllListing.cs" />
     <Compile Include="IEmailAttachmentModel.cs" />
     <Compile Include="IEmailAttachmentView.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="IManageWebServiceViewModel.cs" />
     <Compile Include="IMenuView.cs" />
     <Compile Include="INamespaceItem.cs" />
+    <Compile Include="INetworkStateChangedEventArgs.cs" />
     <Compile Include="Infrastructure\Communication\IExecuteMessage.cs" />
     <Compile Include="Infrastructure\Events\IEventPublisher.cs" />
     <Compile Include="Infrastructure\IExplorerRepositorySync.cs" />

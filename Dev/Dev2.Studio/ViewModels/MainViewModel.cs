@@ -37,7 +37,6 @@ using Dev2.Common.Interfaces.Threading;
 using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Common.Interfaces.WebServices;
 using Dev2.ConnectionHelpers;
-using Dev2.CustomControls.Connections;
 using Dev2.Data.ServiceModel;
 using Dev2.Factory;
 using Dev2.Helpers;
@@ -401,7 +400,7 @@ namespace Dev2.Studio.ViewModels
 
         public MainViewModel(IEventAggregator eventPublisher, IAsyncWorker asyncWorker, IEnvironmentRepository environmentRepository,
             IVersionChecker versionChecker, bool createDesigners = true, IBrowserPopupController browserPopupController = null,
-            Common.Interfaces.Studio.Controller.IPopupController popupController = null, IWindowManager windowManager = null, IStudioResourceRepository studioResourceRepository = null, IConnectControlSingleton connectControlSingleton = null, IConnectControlViewModel connectControlViewModel = null)
+            Common.Interfaces.Studio.Controller.IPopupController popupController = null, IWindowManager windowManager = null, IStudioResourceRepository studioResourceRepository = null, IConnectControlSingleton connectControlSingleton = null, Dev2.CustomControls.Connections.IConnectControlViewModel connectControlViewModel = null)
             : base(eventPublisher)
         {
             if (environmentRepository == null)

@@ -179,24 +179,28 @@ Scenario: Clear filter
   Then I should see the path "localhost/Folder 2"
   Then I should see the path "localhost/Folder 2"
 
-#WOLF-1025
-@ignore
+
 Scenario: Search explorer on remote server
 	Given the explorer is visible
+	And I connect to "Remote Connection Integration" server
 	And I open "Remote Connection Integration" server
-	Then I should see "66" folders
+	And I create the "Remote Connection Integration/Hello World" of type "WorkflowService" 
+	Then I should see "10" folders
 	When I search for "Hello World"
 	Then I should see "Hello World" only
 
 Scenario: Connected to remote server
 	Given the explorer is visible
-	When I open "Remote Connection Integration" server
-	Then I should see "66" folders
+	When I connect to "Remote Connection Integration" server
+	And I open "Remote Connection Integration" server
+	Then I should see "10" folders
+	Then I should see the path "Remote Connection Integration/Folder 2"
 
 Scenario: Creating Folder in remote host
    Given the explorer is visible
-   When I open "Remote Connection Integration" server
-   Then I should see "66" folders
+   And I connect to "Remote Connection Integration" server
+   And I open "Remote Connection Integration" server
+   And I should see "10" folders
    When I add "MyNewFolder" in "Remote Connection Integration"
    Then I should see the path "Remote Connection Integration/MyNewFolder" 
 
@@ -222,6 +226,7 @@ Scenario: Renaming Folder And Workflow Service on a remote server
 	And I should see "1" children for "Test Rename"
 	And "Remote Connection Integration/Folder 2" is not "visible"
 
+@ignore
 Scenario Outline: Context menu
 	Given the explorer is visible
 	And I open "<Host>" server
