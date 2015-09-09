@@ -31,8 +31,8 @@ namespace Warewolf.AcceptanceTesting.Decision
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DecisionDialog", "In order to create a decision\r\nAs a Warewolf User\r\nI want to be shown the decisio" +
-                    "n window setup", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DecisionDialog", "In order to create a decision\nAs a Warewolf User\nI want to be shown the decision " +
+                    "window setup", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -69,15 +69,9 @@ namespace Warewolf.AcceptanceTesting.Decision
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void EnsureInputsAreEnabledOnDecisionWindowLoad(string inputs, string variable, string value, string variable2, string value2, string variable3, string value3, string matchType, string[] exampleTags)
+        public virtual void EnsureInputsAreEnabledOnDecisionWindowLoad(string inputs, string variable, string variable2, string value2, string variable3, string value3, string matchType, string[] exampleTags)
         {
-            string[] @__tags = new string[] {
-                    "ignore"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure Inputs are enabled on decision window load", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure Inputs are enabled on decision window load", exampleTags);
 #line 8
 this.ScenarioSetup(scenarioInfo);
 #line 9
@@ -89,19 +83,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 12
  testRunner.And(string.Format("\'{0}\' fields are \"Enabled\"", inputs), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
- testRunner.And("\"Add Statement\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("an empty row has been added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
- testRunner.And("a decision variable \'<variable>\' value \'<value>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("the decision match variables \'{0}\'and match \'{1}\' and to match\'{2}\'", variable, variable2, variable3), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 15
- testRunner.And("a decision variable \'<variable2>\' value \'<value2>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("MatchType  is \'{0}\'", matchType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
- testRunner.And("a decision variable \'<variable3>\' value \'<value3>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
- testRunner.And(string.Format("check if \'<variable>\' \"{0}\" \'<variable2>\'", matchType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
- testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 19
- testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("the inputs are \'{0}\'", inputs), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -109,55 +97,49 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Inputs are enabled on decision window load")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Match, MatchType, Match")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Inputs", "Match, MatchType, Match")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Visible, Visible, Visible")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Inputs", "Visible, Visible, Visible")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "[[a]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value", "10")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable2", "[[b]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value2", "12")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable3", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value3", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:MatchType", "<")]
-        public virtual void EnsureInputsAreEnabledOnDecisionWindowLoad_MatchMatchTypeMatch()
+        public virtual void EnsureInputsAreEnabledOnDecisionWindowLoad_VisibleVisibleVisible()
         {
-            this.EnsureInputsAreEnabledOnDecisionWindowLoad("Match, MatchType, Match", "[[a]]", "10", "[[b]]", "12", "", "", "<", ((string[])(null)));
+            this.EnsureInputsAreEnabledOnDecisionWindowLoad("Visible, Visible, Visible", "[[a]]", "[[b]]", "12", "", "", "<", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Inputs are enabled on decision window load")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Match, MatchType")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Inputs", "Match, MatchType")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Visible, Visible")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Inputs", "Visible, Visible")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "[[a]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value", "10")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable2", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value2", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable3", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value3", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:MatchType", "is Alphanumeric")]
-        public virtual void EnsureInputsAreEnabledOnDecisionWindowLoad_MatchMatchType()
+        public virtual void EnsureInputsAreEnabledOnDecisionWindowLoad_VisibleVisible()
         {
-            this.EnsureInputsAreEnabledOnDecisionWindowLoad("Match, MatchType", "[[a]]", "10", "", "", "", "", "is Alphanumeric", ((string[])(null)));
+            this.EnsureInputsAreEnabledOnDecisionWindowLoad("Visible, Visible", "[[a]]", "", "", "", "", "is Alphanumeric", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Inputs are enabled on decision window load")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Match, MatchType, Match, Match")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Inputs", "Match, MatchType, Match, Match")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Visible, Visible, Visible, Visible")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Inputs", "Visible, Visible, Visible, Visible")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable", "[[a]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value", "10")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable2", "[[b]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value2", "5")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Variable3", "[[c]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value3", "15")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:MatchType", "isBetween")]
-        public virtual void EnsureInputsAreEnabledOnDecisionWindowLoad_MatchMatchTypeMatchMatch()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:MatchType", "Is Between")]
+        public virtual void EnsureInputsAreEnabledOnDecisionWindowLoad_VisibleVisibleVisibleVisible()
         {
-            this.EnsureInputsAreEnabledOnDecisionWindowLoad("Match, MatchType, Match, Match", "[[a]]", "10", "[[b]]", "5", "[[c]]", "15", "isBetween", ((string[])(null)));
+            this.EnsureInputsAreEnabledOnDecisionWindowLoad("Visible, Visible, Visible, Visible", "[[a]]", "[[b]]", "5", "[[c]]", "15", "Is Between", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -166,23 +148,23 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsuringDecisionTextIsVisibleUnderTool()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensuring decision text is visible under tool", ((string[])(null)));
-#line 27
+#line 24
 this.ScenarioSetup(scenarioInfo);
-#line 28
+#line 25
  testRunner.Given("I have a workflow \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 29
+#line 26
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
+#line 27
  testRunner.And("the Decision window is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
+#line 28
  testRunner.And("a decision variable \"[[A]]\" value \"123 234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 32
+#line 29
  testRunner.And("is \"[[A]]\" \"IsEqual\" \"123   234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
+#line 30
  testRunner.And("\"Done\" is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
+#line 31
  testRunner.Then("the Decision tool window is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 35
+#line 32
  testRunner.And("\"[[A]] = 123 234\" is visible in tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -194,29 +176,31 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureDecisionWindowCachesCorrectly()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure Decision window caches correctly", ((string[])(null)));
-#line 37
+#line 34
 this.ScenarioSetup(scenarioInfo);
-#line 38
+#line 35
  testRunner.Given("I have a workflow \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 39
+#line 36
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
+#line 37
  testRunner.And("a decision variable \"[[A]]\" value \"123 234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
- testRunner.And("a decision variable \"[[B]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 42
+#line 38
+ testRunner.And("a decision variable \"[[B]]\" value \"\'1\'\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 39
  testRunner.And("\"Require All Decisions To Be True\" is \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
+#line 40
+ testRunner.And("the Decision window is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
  testRunner.When("I change decision variable \"[[B]]\" to \"3111\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 44
+#line 42
  testRunner.And("\"Done\" is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
+#line 43
  testRunner.Then("I open the Decision tool window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 46
+#line 44
  testRunner.And("decision variable \"[[B]]\" is not visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 45
  testRunner.And("\"3111\" is visible in Match field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
+#line 46
  testRunner.And("\"Require All Decisions To Be True\" is \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -228,35 +212,35 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureStatementLineCanBeRemoved()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure statement line can be removed", ((string[])(null)));
-#line 51
+#line 49
 this.ScenarioSetup(scenarioInfo);
-#line 52
+#line 50
  testRunner.Given("I have a workflow \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 53
+#line 51
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
+#line 52
  testRunner.And("a decision variable \"[[A]]\" value \"123 234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 53
  testRunner.And("a decision variable \"[[B]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 54
  testRunner.And("Match Type equals \">\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
+#line 55
  testRunner.And("a decision variable \"[[c]]\" value \"Lester\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
+#line 56
  testRunner.And("a decision variable \"[[d]]\" value \"L\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 59
+#line 57
  testRunner.And("Match Type equals \"Starts With\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 60
+#line 58
  testRunner.And("\"Require All Decisions To Be True\" is \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 61
+#line 59
  testRunner.And("I right click to view the context menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
+#line 60
  testRunner.And("I select \"remove statement line\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 61
  testRunner.And("\"[[c]]\" \"Starts With\" \"[[d]]\" is removed from the decision", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 64
+#line 62
  testRunner.And("\"Done\" is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
+#line 63
  testRunner.And("the decision has \"No\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -268,23 +252,23 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ValidationOnIncorrectlyFormattedVariables()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validation on incorrectly formatted variables", ((string[])(null)));
-#line 68
+#line 66
 this.ScenarioSetup(scenarioInfo);
-#line 69
+#line 67
  testRunner.Given("I have a workflow \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 70
+#line 68
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
+#line 69
  testRunner.And("a decision variable \"[[A]]}\" value \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 72
+#line 70
  testRunner.And("a decision variable \"[[rec().a]]\" value \"28/08/2015\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 73
+#line 71
  testRunner.And("Match Type equals \"=\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
+#line 72
  testRunner.And("\"Done\" is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
+#line 73
  testRunner.And("the decision tool has \"An\" Error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 76
+#line 74
  testRunner.And("Error message \"incorrect match variable \"[[A]]}\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -293,17 +277,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly(string options, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure Match Type droplist is populated correctly", exampleTags);
-#line 79
+#line 77
 this.ScenarioSetup(scenarioInfo);
-#line 80
+#line 78
  testRunner.Given("I have a workflow \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 81
+#line 79
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
+#line 80
  testRunner.And("the Decision window is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 83
+#line 81
  testRunner.And("I select the \"Match Type\" menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 84
+#line 82
  testRunner.And(string.Format("Match Type has \'{0}\' visible", options), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

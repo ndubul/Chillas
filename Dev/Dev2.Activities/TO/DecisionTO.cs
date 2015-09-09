@@ -42,7 +42,7 @@ namespace Dev2.TO
         bool _isToFocused;
         bool _isSinglematchCriteriaVisible;
         bool _isBetweenCriteriaVisible;
-        static IList<IFindRecsetOptions> _whereoptions = FindRecsetOptions.FindAll();
+        public static readonly IList<IFindRecsetOptions> Whereoptions = FindRecsetOptions.FindAll();
         Action<DecisionTO> _deleteAction;
         bool _isLast;
         public RelayCommand DeleteCommand { get;  set; }
@@ -228,7 +228,7 @@ namespace Dev2.TO
                     {
                         IsSearchCriteriaEnabled = true;
                     }
-                    UpdateMatchVisibility(this, _searchType, _whereoptions);
+                    UpdateMatchVisibility(this, _searchType, Whereoptions);
                     if(IndexNumber==0) _updateDisplayAction(this);
                 }
             }

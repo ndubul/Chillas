@@ -324,7 +324,7 @@ namespace Dev2.Studio.Controller
 
         #region ConfigureActivity
 
-        static ModelItem ConfigureActivity<T>(ModelItem modelItem, string propertyName, bool isNew) where T : class, IFlowNodeActivity, new()
+        public static ModelItem ConfigureActivity<T>(ModelItem modelItem, string propertyName, bool isNew) where T : class, IFlowNodeActivity, new()
         {
             var property = modelItem.Properties[propertyName];
             if (property == null)
