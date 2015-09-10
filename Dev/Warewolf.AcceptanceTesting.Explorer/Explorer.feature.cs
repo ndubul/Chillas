@@ -159,7 +159,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 59
  testRunner.When("I search for \"Folder 3\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 60
- testRunner.Then("I should see \"Folder 3\" only", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should see \"localhost/Folder 3\" only", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 61
  testRunner.And("I should not see \"Folder 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
@@ -394,9 +394,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Checking versions")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         public virtual void CheckingVersions()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Checking versions", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Checking versions", new string[] {
+                        "Explorer"});
 #line 150
 this.ScenarioSetup(scenarioInfo);
 #line 151
@@ -427,9 +429,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Clear filter")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         public virtual void ClearFilter()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Clear filter", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Clear filter", new string[] {
+                        "Explorer"});
 #line 163
 this.ScenarioSetup(scenarioInfo);
 #line 164
@@ -474,9 +478,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Search explorer on remote server")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         public virtual void SearchExplorerOnRemoteServer()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search explorer on remote server", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search explorer on remote server", new string[] {
+                        "Explorer"});
 #line 183
 this.ScenarioSetup(scenarioInfo);
 #line 184
@@ -493,7 +499,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 189
  testRunner.When("I search for \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 190
- testRunner.Then("I should see \"Hello World\" only", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should see \"Remote Connection Integration/Hello World\" only", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -502,20 +508,22 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Connected to remote server")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         public virtual void ConnectedToRemoteServer()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Connected to remote server", ((string[])(null)));
-#line 192
-this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Connected to remote server", new string[] {
+                        "Explorer"});
 #line 193
- testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 194
- testRunner.When("I connect to \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 195
- testRunner.And("I open \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I connect to \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 196
- testRunner.Then("I should see \"10\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I open \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 197
+ testRunner.Then("I should see \"10\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 198
  testRunner.Then("I should see the path \"Remote Connection Integration/Folder 2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -525,22 +533,24 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Creating Folder in remote host")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         public virtual void CreatingFolderInRemoteHost()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating Folder in remote host", ((string[])(null)));
-#line 199
-this.ScenarioSetup(scenarioInfo);
-#line 200
-   testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating Folder in remote host", new string[] {
+                        "Explorer"});
 #line 201
-   testRunner.And("I connect to \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 202
-   testRunner.And("I open \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 203
-   testRunner.And("I should see \"10\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("I connect to \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 204
-   testRunner.When("I add \"MyNewFolder\" in \"Remote Connection Integration\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.And("I open \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 205
+   testRunner.And("I should see \"10\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 206
+   testRunner.When("I add \"MyNewFolder\" in \"Remote Connection Integration\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 207
    testRunner.Then("I should see the path \"Remote Connection Integration/MyNewFolder\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -548,16 +558,24 @@ this.ScenarioSetup(scenarioInfo);
         
         public virtual void OpeningAndEditingWorkflowFromExplorer(string host, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening and Editing workflow from Explorer", exampleTags);
-#line 208
-this.ScenarioSetup(scenarioInfo);
-#line 209
- testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+            string[] @__tags = new string[] {
+                    "Explorer"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening and Editing workflow from Explorer", @__tags);
 #line 210
- testRunner.And(string.Format("I open \"{0}\" server", host), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 211
- testRunner.When("I open \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 212
+ testRunner.And(string.Format("I open \"{0}\" server", host), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 213
+ testRunner.And(string.Format("I create the \"{0}/Hello World\" of type \"WorkflowService\"", host), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 214
+ testRunner.When("I open \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 215
  testRunner.And("\"Hello World\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -566,6 +584,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opening and Editing workflow from Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "localhost")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Host", "localhost")]
@@ -578,6 +597,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opening and Editing workflow from Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Remote Connection Integration")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Host", "Remote Connection Integration")]
         public virtual void OpeningAndEditingWorkflowFromExplorer_RemoteConnectionIntegration()
@@ -589,130 +609,71 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Renaming Folder And Workflow Service on a remote server")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         public virtual void RenamingFolderAndWorkflowServiceOnARemoteServer()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Renaming Folder And Workflow Service on a remote server", ((string[])(null)));
-#line 218
-this.ScenarioSetup(scenarioInfo);
-#line 219
- testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 220
- testRunner.And("I open \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 221
- testRunner.When("I rename \"Remote Connection Integration/Folder 2\" to \"Remote Connection Integrati" +
-                    "on/Test Rename\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Renaming Folder And Workflow Service on a remote server", new string[] {
+                        "Explorer"});
 #line 222
- testRunner.Then("I should see \"0\" child for \"Test Rename\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 223
- testRunner.When("I open \"Test Rename\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 224
- testRunner.And("I create the \"Remote Connection Integration/Test Rename/New Test 1\" of type \"Work" +
-                    "flowService\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 225
- testRunner.Then("I should see the path \"Remote Connection Integration/Test Rename/New Test 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 226
- testRunner.And("I should see \"1\" children for \"Test Rename\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 227
- testRunner.And("\"Remote Connection Integration/Folder 2\" is not \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        public virtual void ContextMenu(string host, string total, string[] exampleTags)
-        {
-            string[] @__tags = new string[] {
-                    "ignore"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Context menu", @__tags);
-#line 230
 this.ScenarioSetup(scenarioInfo);
-#line 231
+#line 223
  testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 224
+ testRunner.And("I connect to \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 225
+    testRunner.And("I open \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 226
+ testRunner.When("I rename \"Remote Connection Integration/Folder 2\" to \"Folder New\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 227
+ testRunner.Then("I should see \"18\" children for \"Folder New\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 228
+ testRunner.When("I open \"Folder New\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 229
+ testRunner.And("I create the \"Remote Connection Integration/Folder New/Resource 1\" of type \"Workf" +
+                    "lowService\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 230
+ testRunner.And("I create the \"Remote Connection Integration/Folder New/Resource 2\" of type \"Workf" +
+                    "lowService\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 231
+ testRunner.Then("I should see the path \"Remote Connection Integration/Folder New\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 232
- testRunner.And(string.Format("I open \"{0}\" server", host), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I should see the path \"Remote Connection Integration/Folder New/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 233
- testRunner.Then(string.Format("I should see \"{0}\" folders", total), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I should not see the path \"Remote Connection Integration/Folder 2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 234
- testRunner.When(string.Format("I right click on \"{0}\" a context menu is visible", host), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I rename \"Remote Connection Integration/Folder New/Resource 1\" to \"WorkFlow1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 235
- testRunner.And("\"New Folder\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I should see the path \"Remote Connection Integration/Folder New/WorkFlow1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 236
- testRunner.And("\"New Service\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I rename \"Remote Connection Integration/Folder New/Resource 2\" to \"WorkFlow1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 237
- testRunner.And("\"New Database Connector\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 238
- testRunner.And("\"New Plugin Connector\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 239
- testRunner.And("\"New Web Service Connector\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 240
- testRunner.And("\"New Remote Warewolf Source\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 241
- testRunner.And("\"New Database Source\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 242
- testRunner.And("\"New Plugin Source\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 243
- testRunner.And("\"New Web Service Source\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 244
- testRunner.And("\"New Email Source\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 245
- testRunner.And("\"New Dropbox Source\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 246
- testRunner.And("\"New Sharepoint Source\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 247
- testRunner.And("\"Server version\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("Conflict error message is occurs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Context menu")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "localhost")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Host", "localhost")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:total", "5")]
-        public virtual void ContextMenu_Localhost()
-        {
-            this.ContextMenu("localhost", "5", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Context menu")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Remote Connection Integration")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Host", "Remote Connection Integration")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:total", "66")]
-        public virtual void ContextMenu_RemoteConnectionIntegration()
-        {
-            this.ContextMenu("Remote Connection Integration", "66", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Show dependencies")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         public virtual void ShowDependencies()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show dependencies", ((string[])(null)));
-#line 253
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show dependencies", new string[] {
+                        "Explorer"});
+#line 240
 this.ScenarioSetup(scenarioInfo);
-#line 254
+#line 241
  testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 255
+#line 242
  testRunner.And("I open \"Remote Connection Integration\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 256
+#line 243
  testRunner.And("I right click on \"Hello World\" a context menu is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 257
+#line 244
  testRunner.And("I select \"Show Dependencies\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 258
+#line 245
  testRunner.Then("the Show Dependencies tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 259
+#line 246
  testRunner.And("\"Hello World\" is visible with all dependencies", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -722,20 +683,22 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Open saved Server Sources")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         public virtual void OpenSavedServerSources()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open saved Server Sources", ((string[])(null)));
-#line 261
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open saved Server Sources", new string[] {
+                        "Explorer"});
+#line 249
 this.ScenarioSetup(scenarioInfo);
-#line 262
+#line 250
  testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 263
+#line 251
  testRunner.And("I open \"Remote Connection Integration\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 264
+#line 252
  testRunner.Then("I should see the path \"Remote Connection Integration/Server\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 265
+#line 253
  testRunner.And("I open \"Remote Connection Integration/Server/Trav\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 266
+#line 254
  testRunner.Then("the \"Trav\" server tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -743,18 +706,24 @@ this.ScenarioSetup(scenarioInfo);
         
         public virtual void MoveNestedFolderUpTree_View(string host, string path, string from, string to, string folder1, string folder2, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Move Nested Folder up tree-view", exampleTags);
-#line 268
+            string[] @__tags = new string[] {
+                    "Explorer"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Move Nested Folder up tree-view", @__tags);
+#line 257
 this.ScenarioSetup(scenarioInfo);
-#line 269
+#line 258
  testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 270
+#line 259
  testRunner.And(string.Format("I open \"{0}\"", host), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 271
+#line 260
  testRunner.Then(string.Format("path \"{0}\" is visible", path), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 272
+#line 261
  testRunner.And(string.Format("I change path \"{0}\" to \"{1}\"", from, to), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 273
+#line 262
  testRunner.Then(string.Format("both \"{0}\" and \"{1}\" are visible", folder1, folder2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -763,6 +732,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Move Nested Folder up tree-view")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "LocalHost")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Host", "LocalHost")]
@@ -780,6 +750,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Move Nested Folder up tree-view")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Remote Connection Integration")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Host", "Remote Connection Integration")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "Remote Connection Integration/Testing/ForEach")]
@@ -794,18 +765,24 @@ this.ScenarioSetup(scenarioInfo);
         
         public virtual void OpeningServerSourceFromExplorer(string host, string path, string hostName, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening server source from explorer", exampleTags);
-#line 279
+            string[] @__tags = new string[] {
+                    "Explorer"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening server source from explorer", @__tags);
+#line 269
 this.ScenarioSetup(scenarioInfo);
-#line 280
+#line 270
  testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 281
+#line 271
  testRunner.And(string.Format("I open \"{0}\"", host), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 282
+#line 272
  testRunner.Then(string.Format("I should see the path \"{0}\"", path), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 283
+#line 273
  testRunner.And(string.Format("I open \"{0}\"", path), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 284
+#line 274
  testRunner.Then("\"<Hostname>\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -814,6 +791,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opening server source from explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "LocalHost")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Host", "LocalHost")]
@@ -828,6 +806,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opening server source from explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Remote Connection Integration")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Host", "Remote Connection Integration")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "Remote Connection Integration/Sandbox-1")]
@@ -837,112 +816,149 @@ this.ScenarioSetup(scenarioInfo);
             this.OpeningServerSourceFromExplorer("Remote Connection Integration", "Remote Connection Integration/Sandbox-1", "Sandbox", ((string[])(null)));
         }
         
-        public virtual void ShowServerVersion(string host, string[] exampleTags)
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Checking versions in remote connection")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        public virtual void CheckingVersionsInRemoteConnection()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Show Server Version", exampleTags);
-#line 290
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Checking versions in remote connection", new string[] {
+                        "Explorer"});
+#line 281
 this.ScenarioSetup(scenarioInfo);
+#line 282
+  testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 283
+  testRunner.When("I open \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 284
+  testRunner.And("I create the \"Remote Connection Integration/Folder 1/Resource 1\" of type \"Workflo" +
+                    "wService\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 285
+  testRunner.Then("I should see \"67\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 286
+  testRunner.And("I Setup  \"3\" Versions to be returned for \"Remote Connection Integration/Folder 1/" +
+                    "Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 287
+  testRunner.When("I Show Version History for \"Remote Connection Integration/Folder 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 288
+  testRunner.Then("I should see \"3\" versions with \"View\" Icons in \"Remote Connection Integration/Fol" +
+                    "der 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 289
+  testRunner.When("I search for \"Resource 1\" in explorer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 290
+  testRunner.Then("I should see the path \"Remote Connection Integration/Folder 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 291
- testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 292
- testRunner.And(string.Format("I open \"{0}\"", host), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 293
- testRunner.And(string.Format("I right click on \"{0}\"", host), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 294
- testRunner.And("context menu is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 295
- testRunner.And("\"New Folder\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 296
- testRunner.And("\"New Service\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 297
- testRunner.And("\"New Database Connector\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 298
- testRunner.And("\"New Plugin Connector\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 299
- testRunner.And("\"New Web Service Connector\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 300
- testRunner.And("\"New Remote Warewolf Source\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 301
- testRunner.And("\"New Database Source\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 302
- testRunner.And("\"New Plugin Source\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 303
- testRunner.And("\"New Web Service Source\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 304
- testRunner.And("\"New Email Source\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 305
- testRunner.And("\"New Dropbox Source\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 306
- testRunner.And("\"New Sharepoint Source\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 307
- testRunner.And("\"Server Version\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 308
- testRunner.When("I click on \"Server Version\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 309
- testRunner.Then("\"Warewolf Splash Screen\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 310
- testRunner.And("\"Studio Version\" is \"visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 311
- testRunner.And("\"Server Version\" is \"Visible\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.Then("I should see \"3\" versions with \"View\" Icons in \"Remote Connection Integration/Fol" +
+                    "der 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Show Server Version")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opening Versions in Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Localhost")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Host", "Localhost")]
-        public virtual void ShowServerVersion_Localhost()
-        {
-            this.ShowServerVersion("Localhost", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Show Server Version")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Remote Connection Integration")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Host", "Remote Connection Integration")]
-        public virtual void ShowServerVersion_RemoteConnectionIntegration()
+        public virtual void OpeningVersionsInExplorer()
         {
-            this.ShowServerVersion("Remote Connection Integration", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Checking versions in remote connection")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
-        public virtual void CheckingVersionsInRemoteConnection()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Checking versions in remote connection", ((string[])(null)));
-#line 317
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening Versions in Explorer", new string[] {
+                        "Explorer"});
+#line 294
 this.ScenarioSetup(scenarioInfo);
-#line 318
+#line 295
   testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 296
+  testRunner.When("I open \"localhost\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 297
+  testRunner.And("I create the \"localhost/Folder 1/Resource 1\" of type \"WorkflowService\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 298
+  testRunner.Then("I should see the path \"localhost/Folder 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 299
+  testRunner.And("I Setup  \"3\" Versions to be returned for \"localhost/Folder 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 300
+ testRunner.When("I Show Version History for \"localhost/Folder 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 301
+ testRunner.Then("I should see \"3\" versions with \"View\" Icons in \"localhost/Folder 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 302
+  testRunner.When("I Make \"localhost/Folder 1/Resource 1/v.1\" the current version of \"localhost/Fold" +
+                    "er 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 303
+ testRunner.Then("I should see \"4\" versions with \"View\" Icons in \"localhost/Folder 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 304
+ testRunner.When("I Delete Version \"localhost/Folder 1/Resource 1/v.1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 305
+ testRunner.Then("I should see \"3\" versions with \"View\" Icons in \"localhost/Folder 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("No Version history option for services and sources.")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        public virtual void NoVersionHistoryOptionForServicesAndSources_()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No Version history option for services and sources.", ((string[])(null)));
+#line 308
+this.ScenarioSetup(scenarioInfo);
+#line 309
+  testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 310
+  testRunner.When("I open \"localhost\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 311
+  testRunner.And("I Setup a resource  \"1\" \"WebService\" to be returned for \"localhost\" called \"WebSe" +
+                    "rvice\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 312
+  testRunner.And("I Add  \"1\" \"PluginService\" to be returned for \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 313
+  testRunner.And("I Add  \"1\" \"ServerSource\" to be returned for \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 314
+  testRunner.Then("I should see the path \"localhost/WebService\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 315
+  testRunner.Then("I should see the path \"localhost/PluginService\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 316
+  testRunner.Then("I should see the path \"localhost/ServerSource\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 317
+  testRunner.And("\"Show Version History\" Context menu  should be \"Invisible\" for \"localhost/WebServ" +
+                    "ice 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 318
+  testRunner.And("\"Show Version History\" \"localhost/PluginService\" should be \"Invisible\" for \"local" +
+                    "host/Webservice\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 319
-  testRunner.When("I open \"Remote Connection Integration\" server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 320
-  testRunner.And("I create the \"Remote Connection Integration/Folder 1/Resource 1\" of type \"Workflo" +
-                    "wService\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 321
-  testRunner.Then("I should see \"67\" folders", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.And("\"Show Version History\" \"localhost/Remoteserver\" should be \"Invisible\" for \"localh" +
+                    "ost/Webservice\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opening Dependencies Of All Services In Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Explorer")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Explorer")]
+        public virtual void OpeningDependenciesOfAllServicesInExplorer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening Dependencies Of All Services In Explorer", ((string[])(null)));
 #line 322
-  testRunner.And("I Setup  \"3\" Versions to be returned for \"Remote Connection Integration/Folder 1/" +
-                    "Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 323
-  testRunner.When("I Show Version History for \"Remote Connection Integration/Folder 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.Given("the explorer is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 324
-  testRunner.Then("I should see \"3\" versions with \"View\" Icons in \"Remote Connection Integration/Fol" +
-                    "der 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I open Show Dependencies of \"WF1\" in \"Folder1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 325
-  testRunner.When("I search for \"Resource 1\" in explorer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("\"WF1 Dependents\" is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 326
-  testRunner.Then("I should see the path \"Remote Connection Integration/Folder 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I open Show Dependencies of \"WebServ1\" in \"Folder1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 327
-  testRunner.Then("I should see \"3\" versions with \"View\" Icons in \"Remote Connection Integration/Fol" +
-                    "der 1/Resource 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"WebServ1 Dependents\" is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 328
+ testRunner.When("I open Show Dependencies of \"DB Service1\" in \"Folder1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 329
+ testRunner.Then("\"DB Service1 Dependents\" is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 330
+ testRunner.When("I open Show Dependencies of \"PluginServ1\" in \"Folder1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 331
+ testRunner.Then("\"PluginServ1 Dependents\" is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
