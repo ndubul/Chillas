@@ -12,9 +12,9 @@ namespace Dev2.Common.Interfaces
     public interface IServer:IResource
     {
         //Task<bool> Connect();
-        //List<IResource> Load();
+        List<IResource> Load();
         Task<IExplorerItem> LoadExplorer();
-       // IList<IServer> GetServerConnections();
+        IList<IServer> GetServerConnections();
         IList<IToolDescriptor> LoadTools();
         [JsonIgnore]
         IExplorerRepository ExplorerRepository { get; }
@@ -24,8 +24,8 @@ namespace Dev2.Common.Interfaces
         IQueryManager QueryProxy { get; }
         bool IsConnected();
         void ReloadTools();
-      //  void Disconnect();
-     //   void Edit();
+        void Disconnect();
+        void Edit();
         List<IWindowsGroupPermission> Permissions { get; set; }
 
         // event PermissionsChanged PermissionsChanged;
@@ -35,9 +35,10 @@ namespace Dev2.Common.Interfaces
         string GetServerVersion();
 
         void Connect();
+
     }
 
     //public delegate void PermissionsChanged(PermissionsChangedArgs args);
-   // public delegate void NetworkStateChanged(INetworkStateChangedEventArgs args);
+    public delegate void NetworkStateChanged(INetworkStateChangedEventArgs args);
    // public delegate void ItemAddedEvent(IExplorerItem args);
 }

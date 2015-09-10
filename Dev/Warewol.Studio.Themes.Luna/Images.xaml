@@ -122,6 +122,7 @@
         <ResourceDictionary Source="Images/FileLogo.xaml" />
         <ResourceDictionary Source="Images/ViewFileLogo.xaml" />
         <ResourceDictionary Source="Images/EditFileLogo.xaml" />
+        <ResourceDictionary Source="Images/Email-Source.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

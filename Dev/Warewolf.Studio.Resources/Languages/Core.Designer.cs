@@ -110,6 +110,47 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///To assign a value to a variable, put the value in here.&lt;br /&gt;
+        ///If you put an = as the first character, it will turn into a calculation e.g. =[[qty]]*[[price]]&lt;br /&gt;
+        ///&lt;br /&gt;
+        ///Allowed:&lt;br /&gt;
+        ///Data   
+        ///&lt;ol&gt;
+        ///    &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///    &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///    &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///    &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///    &lt;li&gt;= fx&lt;/li&gt;
+        ///&lt;/ol&gt;.
+        /// </summary>
+        public static string AssignHelpNewValue {
+            get {
+                return ResourceManager.GetString("AssignHelpNewValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///To assign a value to a variable, put the variable here.&lt;br /&gt;
+        ///You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///Using recordset () will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///&lt;br /&gt;
+        ///Allowed:
+        ///&lt;ol&gt;
+        ///    &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///    &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///    &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///    &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///&lt;/ol&gt;.
+        /// </summary>
+        public static string AssignHelpVariable {
+            get {
+                return ResourceManager.GetString("AssignHelpVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authentication Type:.
         /// </summary>
         public static string AuthenticationTypeLabel {
@@ -119,11 +160,170 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Any variable and data goes in here.&lt;br /&gt;
+        ///        To convert Text, Hex, Binary and Base64, put the data to be converted in here.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string BaseConversionHelpBaseInput {
+            get {
+                return ResourceManager.GetString("BaseConversionHelpBaseInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To perform a calculation, put the calculation in here in BODMAS format.&lt;br /&gt;
+        ///        There are many supporting functions like average() and sum() that can be used with recordsets e.g. Sum([[staff(*).salaries]]) will sum all the salaries fields of the staff recordset.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*) [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string CalculateHelpFx {
+            get {
+                return ResourceManager.GetString("CalculateHelpFx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns the formatted number.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset () will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        
+        ///        &lt;ul&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ul&gt;.
+        /// </summary>
+        public static string CalculateHelpResult {
+            get {
+                return ResourceManager.GetString("CalculateHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel Test.
         /// </summary>
         public static string CancelTest {
             get {
                 return ResourceManager.GetString("CancelTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the type of conversion you would like to make.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string CaseConversionHelpConvertToCaseType {
+            get {
+                return ResourceManager.GetString("CaseConversionHelpConvertToCaseType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To convert the case of some text, put the variable containing the text here.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CaseConversionHelpTextInput {
+            get {
+                return ResourceManager.GetString("CaseConversionHelpTextInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To execute a command line action or actions, enter them in here. Acts like a batch file. Any user driven task will simply be ignored.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CMDLineHelpCMD {
+            get {
+                return ResourceManager.GetString("CMDLineHelpCMD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The process priority for execution. Very helpful for long running processes that need/don’t need to be resource intensive.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string CMDLineHelpPrioritytype {
+            get {
+                return ResourceManager.GetString("CMDLineHelpPrioritytype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returns the output of the execution if any. Varies depending on what was executed.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CMDLineHelpResult {
+            get {
+                return ResourceManager.GetString("CMDLineHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments do not execute and are place holders for future services or tools or simply to leave commentary inside the workflow.&lt;br /&gt;
+        ///        You can connect comments into the process flow and they will simply be skipped during execution. However, they will appear in the debug output.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Notes and comments will not be executed at run time but will show up in the debug output..
+        /// </summary>
+        public static string CommentHelpComment {
+            get {
+                return ResourceManager.GetString("CommentHelpComment", resourceCulture);
             }
         }
         
@@ -196,6 +396,301 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string ContributorsUrl {
             get {
                 return ResourceManager.GetString("ContributorsUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        Put the full path of the destination you are copying to here.&lt;br /&gt;
+        ///        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CopyHelpDestination {
+            get {
+                return ResourceManager.GetString("CopyHelpDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To copy a file or folder, put the full path and file or folder name here.&lt;br /&gt;
+        ///        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CopyHelpFileFolder {
+            get {
+                return ResourceManager.GetString("CopyHelpFileFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the file or folder already exists, you can force a new one to overwrite the old one.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        If it exists already, force an overwrite.
+        /// </summary>
+        public static string CopyHelpForceoverwrite {
+            get {
+                return ResourceManager.GetString("CopyHelpForceoverwrite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For protected resources, specify the Password of an account with permission to access the destination. By default the account running Warewolf Server.exe service will be used.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CopyHelpPassword {
+            get {
+                return ResourceManager.GetString("CopyHelpPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns Success or will be blank depending on the success of the Copy action.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset () will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///      [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string CopyHelpResult {
+            get {
+                return ResourceManager.GetString("CopyHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For protected resources, specify the Username of an account with permission to access the source. By default the account running Warewolf Server.exe service will be used.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CopyHelpUsername {
+            get {
+                return ResourceManager.GetString("CopyHelpUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Count the number of records/indexes in a recordset, put the recordset name in here. E.g. [[Customer()]]&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        [[Recordset()]].
+        /// </summary>
+        public static string CountHelpRecordset {
+            get {
+                return ResourceManager.GetString("CountHelpRecordset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns a number specifying how many records/indexes are in the recordset.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset() will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt; [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string CountHelpResult {
+            get {
+                return ResourceManager.GetString("CountHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To create a file or folder, put the full path and file or folder name here.&lt;br /&gt;
+        ///        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CreateHelpFileFolder {
+            get {
+                return ResourceManager.GetString("CreateHelpFileFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the file or folder already exists, you can force a new one to overwrite the old one.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        If it exists already, force an overwrite.
+        /// </summary>
+        public static string CreateHelpForceOverWrite {
+            get {
+                return ResourceManager.GetString("CreateHelpForceOverWrite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For protected resources, specify the Password of an account with permission to perform this action. By default the account running Warewolf Server.exe service will be used.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CreateHelpPassword {
+            get {
+                return ResourceManager.GetString("CreateHelpPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns Success or will be blank depending on the success of the Create action.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset() will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///     [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string CreateHelpResult {
+            get {
+                return ResourceManager.GetString("CreateHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For protected resources, specify the Username of an account with permission to perform this action. By default the account running Warewolf Server.exe service will be used.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CreateHelpUsername {
+            get {
+                return ResourceManager.GetString("CreateHelpUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To create JSON data, enter the Name and Data of the JSON variables.&lt;br /&gt;
+        ///        To create JSON Arrays use a single recordset field with a star for every record e.g.&lt;br /&gt;
+        ///        [[rec(*).name]]&lt;br /&gt;
+        ///        To create JSON Objects, use a comma seperated list of recordset fields, or, just the recordset name to use the whole recordset. e.g.&lt;br /&gt;
+        ///        [[rec(*).surname]], [[rec(*).name]], [[rec(*).middle]]&lt;br /&gt;
+        ///        or simply&lt;br /&gt;
+        ///        [[rec(*)]]&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string CreateJSONHelpInput {
+            get {
+                return ResourceManager.GetString("CreateJSONHelpInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The JSON variable name will default to the Warewolf variable name in the Data column.&lt;br /&gt;
+        ///        Array and Object names will default to the recordset name used.&lt;br/&gt;
+        ///        Object data names will be the field names of the recordset.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data.
+        /// </summary>
+        public static string CreateJSONHelpName {
+            get {
+                return ResourceManager.GetString("CreateJSONHelpName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns the inputs in JSON format.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset() will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string CreateJSONHelpResult {
+            get {
+                return ResourceManager.GetString("CreateJSONHelpResult", resourceCulture);
             }
         }
         
@@ -515,6 +1010,457 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For Index you can specify if your data is aligned to the right or left.&lt;br/&gt;
+        ///        E.g. Text is normally left and numbers normally right.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string DataMergeHelpAlignType {
+            get {
+                return ResourceManager.GetString("DataMergeHelpAlignType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To join two or more pieces of data together list them in the order you would like them joined. If you use recordset (*) notation, the list will be repeated for every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DataMergeHelpInput {
+            get {
+                return ResourceManager.GetString("DataMergeHelpInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If Index is being used and there is extra space between the data supplied and the number of index characters, you can specify what makes up the padding e.g.&lt;br/&gt;
+        ///        0 for numbers or blank space for text.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DataMergeHelpPadding {
+            get {
+                return ResourceManager.GetString("DataMergeHelpPadding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns the merged string.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset() will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DataMergeHelpResult {
+            get {
+                return ResourceManager.GetString("DataMergeHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For Index use the number of characters that this merge will use. It will either trim if too little, or pad if too much.&lt;br /&gt;
+        ///        For Char put any characters or combination of characters you would like.&lt;br/&gt;
+        ///        Not applicable to New Line or Tab&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt; [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string DataMergeHelpUsing {
+            get {
+                return ResourceManager.GetString("DataMergeHelpUsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the type of merge you would like between each piece of merged data, if any.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string DataMergeHelpWithType {
+            get {
+                return ResourceManager.GetString("DataMergeHelpWithType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If there is an occurrence or an item being split on, that should not be split on, it will be preceded with this character. e.g.&lt;br/&gt; 
+        ///        A comma separated file might have a comma in a name, so don’t split on it if it is preceded by / or some other characters.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string DataSplitHelpEscape {
+            get {
+                return ResourceManager.GetString("DataSplitHelpEscape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you would like the data or item you are splitting on to be included in the result data, select this checkbox.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Include the information you are splitting on?.
+        /// </summary>
+        public static string DataSplitHelpInclude {
+            get {
+                return ResourceManager.GetString("DataSplitHelpInclude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default direction to process is forward or left to right (reading direction).&lt;br/&gt; 
+        ///        Selecting Backwards will process from the end of the data (right) to the beginning (left).&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Which direction would you like to process in?.
+        /// </summary>
+        public static string DataSplitHelpProcessDirection {
+            get {
+                return ResourceManager.GetString("DataSplitHelpProcessDirection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns the split data in the pattern as described by the results.&lt;br /&gt;
+        ///        The variable pattern will be repeated until the end of the input data.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset() will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Re [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string DataSplitHelpResult {
+            get {
+                return ResourceManager.GetString("DataSplitHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For file processing you can skip rows in the file that are blank. This saves you having to remove them afterwards.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Blank rows will be ignored.
+        /// </summary>
+        public static string DataSplitHelpSkipBlankRows {
+            get {
+                return ResourceManager.GetString("DataSplitHelpSkipBlankRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To split a value into one or more variables, put the value in here.&lt;br /&gt;
+        ///        You can process entire file content or just trim the white space from a variable.&lt;br/&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DataSplitHelpString {
+            get {
+                return ResourceManager.GetString("DataSplitHelpString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For Index use the number of characters that this split will use.&lt;br /&gt;
+        ///        For Char put any characters or combination of characters you would like.&lt;br /&gt;
+        ///        Not applicable to New Line, Tab or End&lt;br/&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DataSplitHelpUsing {
+            get {
+                return ResourceManager.GetString("DataSplitHelpUsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select where you would like to split the data.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string DataSplitHelpWithType {
+            get {
+                return ResourceManager.GetString("DataSplitHelpWithType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To find the difference in time between two date times, put the first date time in here.&lt;br/&gt;
+        ///        The format needs to be the same for the two.&lt;br/&gt;
+        ///        Leaving this field blank will give you the system date time.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Fie [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string DateTimeDifferenceHelpDatetime1 {
+            get {
+                return ResourceManager.GetString("DateTimeDifferenceHelpDatetime1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To find the difference in time between two date times, put the second date time in here.&lt;br/&gt;
+        ///        The format needs to be the same for the two.&lt;br/&gt;
+        ///        Leaving this field blank will give you the system date time.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Fi [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string DateTimeDifferenceHelpDatetime2 {
+            get {
+                return ResourceManager.GetString("DateTimeDifferenceHelpDatetime2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Describe the format of the date times you are entering. e.g.&lt;br/&gt;
+        ///        23-July 1978 would be described as dd-MM yyyy.&lt;br/&gt;
+        ///        Leaving this field blank will assume the system date time format.&lt;br/&gt;
+        ///        To escape text or non-date information use &apos;around the text you want to escape&apos;. e.g.&lt;br/&gt;
+        ///        Time is now 15 hours and 33 minutes. Would have an input format of &apos;Time is now&apos; 24hr &apos;hours and&apos; min &apos;minutes.&apos;&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///    [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string DateTimeDifferenceHelpInputFormat {
+            get {
+                return ResourceManager.GetString("DateTimeDifferenceHelpInputFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the unit of time to output the difference in.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string DateTimeDifferenceHelpOutputType {
+            get {
+                return ResourceManager.GetString("DateTimeDifferenceHelpOutputType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns the difference in time between the two date times.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset() will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DateTimeDifferenceHelpResult {
+            get {
+                return ResourceManager.GetString("DateTimeDifferenceHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Put a positive or negative number here to add or subtract from the input date time.&lt;br/&gt; 
+        ///        Leave this field blank if you do not want to change the date time.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DateTimeHelpAddtime {
+            get {
+                return ResourceManager.GetString("DateTimeHelpAddtime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To format a date time, or to add/subtract from a date time, put it in here.&lt;br/&gt; 
+        ///        Leaving this field blank will give you the system date time.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DateTimeHelpDatetime {
+            get {
+                return ResourceManager.GetString("DateTimeHelpDatetime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Describe the format of the date time you are entering. e.g. &lt;br/&gt; 
+        ///        23-July 1978 would be described as dd-MM yyyy.&lt;br/&gt;
+        ///        Leaving this field blank will assume the system date time format.&lt;br/&gt;
+        ///        To escape text or non-date information use &apos;around the text you want to escape&apos;. e.g. &lt;br/&gt; 
+        ///        Time is now 15 hours and 33 minutes. Would have an input format of &apos;Time is now&apos; 24hr &apos;hours and&apos; min &apos;minutes.&apos;&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string DateTimeHelpInputformat {
+            get {
+                return ResourceManager.GetString("DateTimeHelpInputformat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Describe the format you would like the date time to be returned in.&lt;br/&gt;
+        ///        Leaving this field blank will assume the same as the Input Format.&lt;br/&gt;
+        ///        To include text or non-date information use &apos;around the text you want to escape&apos;. e.g.&lt;br/&gt; 
+        ///        Time is now 15 hours and 33 minutes. Would have an output format of &apos;Time is now&apos; 24hr &apos;hours and&apos; min &apos;minutes.&apos;&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Re [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string DateTimeHelpOutputformat {
+            get {
+                return ResourceManager.GetString("DateTimeHelpOutputformat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns the formatted and/or added/subtracted date time.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset() will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DateTimeHelpResult {
+            get {
+                return ResourceManager.GetString("DateTimeHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the unit of time to add or subtract. This is ignored if the unit is blank or 0.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string DateTimeHelpTimeType {
+            get {
+                return ResourceManager.GetString("DateTimeHelpTimeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Run and debug your workflow service.
         /// </summary>
         public static string DebugToolTip {
@@ -556,6 +1502,105 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string DeleteConfirmation {
             get {
                 return ResourceManager.GetString("DeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To Delete a file or folder, put the full path and file or folder name to delete in here.&lt;br/&gt;
+        ///        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DeleteHelpFileFolder {
+            get {
+                return ResourceManager.GetString("DeleteHelpFileFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For protected resources, specify the Password of an account with permission to perform this action.&lt;br/&gt;
+        ///        By default the account running Warewolf Server.exe service will be used.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DeleteHelpPassword {
+            get {
+                return ResourceManager.GetString("DeleteHelpPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * in Recordset will execute every index in the given recordset.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Recordset(n)]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*)]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset()]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DeleteHelpRecords {
+            get {
+                return ResourceManager.GetString("DeleteHelpRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns Success or Failure depending on the success of the Delete action.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset() will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string DeleteHelpResult {
+            get {
+                return ResourceManager.GetString("DeleteHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For protected resources, specify the Username of an account with permission to perform this action.&lt;br/&gt;
+        ///        By default the account running Warewolf Server.exe service will be used.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string DeleteHelpUsername {
+            get {
+                return ResourceManager.GetString("DeleteHelpUsername", resourceCulture);
             }
         }
         
@@ -734,6 +1779,200 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string EmailAttachmentSaveCommandHelp {
             get {
                 return ResourceManager.GetString("EmailAttachmentSaveCommandHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the path to the attachments you want to send separated by a semicolon ;&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;.
+        /// </summary>
+        public static string EmailHelpAttachments {
+            get {
+                return ResourceManager.GetString("EmailHelpAttachments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List the email addresses you want to blind carbon copy on the email you are sending separated by a semicolon ;&lt;br /&gt;
+        ///        If you are on a domain, you still need to provide the email address of the account you are sending to.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string EmailHelpBcc {
+            get {
+                return ResourceManager.GetString("EmailHelpBcc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The main body of the email goes in here.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string EmailHelpBody {
+            get {
+                return ResourceManager.GetString("EmailHelpBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List the email addresses you want to carbon copy on the email you are sending separated by a semicolon ;&lt;br /&gt;
+        ///        If you are on a domain, you still need to provide the email address of the account you are sending to.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string EmailHelpCc {
+            get {
+                return ResourceManager.GetString("EmailHelpCc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any data or variable can go in here.&lt;br/&gt;
+        ///        To send an email, enter the email address of the account you want to send from.&lt;br /&gt;
+        ///        If you are on a domain, you still need to provide the email address of the account you are sending from.&lt;br /&gt;
+        ///        If you leave it blank, the account used to setup the Email Source will be used.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///         [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string EmailHelpFromAddress {
+            get {
+                return ResourceManager.GetString("EmailHelpFromAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a preconfigured email source or &quot;New Email Source...&quot; to add a new one.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Select a preconfigured email source or &quot;New Email Source...&quot; to add a new one..
+        /// </summary>
+        public static string EmailHelpMailSource {
+            get {
+                return ResourceManager.GetString("EmailHelpMailSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the password, if there is one, for the account you are sending from.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string EmailHelpPassword {
+            get {
+                return ResourceManager.GetString("EmailHelpPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the message priority.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string EmailHelpPriorityType {
+            get {
+                return ResourceManager.GetString("EmailHelpPriorityType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns Success or Failure depending on the success of the send action.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string EmailHelpResult {
+            get {
+                return ResourceManager.GetString("EmailHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the subject for your email.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string EmailHelpSubject {
+            get {
+                return ResourceManager.GetString("EmailHelpSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List the email addresses you want to send to separated by a semicolon ;&lt;br/&gt;
+        ///        If you are on a domain, you still need to provide the email address of the account you are sending to.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string EmailHelpTo {
+            get {
+                return ResourceManager.GetString("EmailHelpTo", resourceCulture);
             }
         }
         
@@ -1077,6 +2316,173 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string FeedbackEmail {
             get {
                 return ResourceManager.GetString("FeedbackEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the type of information you want to match on.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string FindHelpLookForMatchType {
+            get {
+                return ResourceManager.GetString("FindHelpLookForMatchType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See in tool&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string FindHelpMatch {
+            get {
+                return ResourceManager.GetString("FindHelpMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Will only return rows that match all of the criteria if selected.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Should each criteria be met?.
+        /// </summary>
+        public static string FindHelpRequireAllMatchesToBeTrue {
+            get {
+                return ResourceManager.GetString("FindHelpRequireAllMatchesToBeTrue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns the indexes of the successful matches.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset() will add a new record and (*) will assign every record.&lt;br /&gt;
+        ///        If there are multiple results and a scalar is used, then each result will be separated with a comma.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///           [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string FindHelpResult {
+            get {
+                return ResourceManager.GetString("FindHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        Put the index of the string you are looking for in here.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        Data   
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string FindIndexHelpCharacters {
+            get {
+                return ResourceManager.GetString("FindIndexHelpCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the direction to search in.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string FindIndexHelpDirectiontype {
+            get {
+                return ResourceManager.GetString("FindIndexHelpDirectiontype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select which index(es) you would like found.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        na.
+        /// </summary>
+        public static string FindIndexHelpIndexType {
+            get {
+                return ResourceManager.GetString("FindIndexHelpIndexType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any variable and/or data goes in here.&lt;br /&gt;
+        ///        To find the character index(es) of a string inside another string, put the string to be searched here.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:&lt;br /&gt;
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        ///        &lt;/ol&gt;.
+        /// </summary>
+        public static string FindIndexHelpInField {
+            get {
+                return ResourceManager.GetString("FindIndexHelpInField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only variables go in here.&lt;br /&gt;
+        ///        Returns the index(es) of the found string.&lt;br /&gt;
+        ///        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        ///        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        ///        If you are finding All Occurrences and using a scalar, the results will be comma separated.&lt;br /&gt;
+        ///        &lt;br /&gt;
+        ///
+        ///        Allowed:
+        ///        &lt;ol&gt;
+        ///            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+        ///            &lt;li&gt;[[Reco [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string FindIndexHelpResult {
+            get {
+                return ResourceManager.GetString("FindIndexHelpResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value that the search will start at, this must be a number, date or time and must be the same type as the &quot;To&quot; type..
+        /// </summary>
+        public static string FindRecordsFromHelpText {
+            get {
+                return ResourceManager.GetString("FindRecordsFromHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value that the search will end at, this must be a number, date or time and must be the same type as the &quot;From&quot; type..
+        /// </summary>
+        public static string FindRecordsToHelpText {
+            get {
+                return ResourceManager.GetString("FindRecordsToHelpText", resourceCulture);
             }
         }
         

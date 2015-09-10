@@ -363,9 +363,12 @@
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Variable}" Foreground="{StaticResource DebugItemVariableBrush}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" AutomationProperties.AutomationId="UI_DebugOutputVariableTextBlock_AutoID" />
-                                        <TextBlock Grid.Column="1" Text="{Binding Operator}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" AutomationProperties.AutomationId="UI_DebugOutputOperatorTextBlock_AutoID"/>
-                                        <TextBlock Grid.Column="2" Text="{Binding Value}" Foreground="{StaticResource DebugItemValueBrush}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" AutomationProperties.AutomationId="UI_DebugOutputValueTextBlock_AutoID" />
+                                        <TextBlock Text="{Binding Variable}" Foreground="{StaticResource DebugItemVariableBrush}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" 
+                                                   AutomationProperties.AutomationId="UI_DebugOutputVariableTextBlock_AutoID" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Operator}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" 
+                                                   AutomationProperties.AutomationId="UI_DebugOutputOperatorTextBlock_AutoID"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding Value}" Foreground="{StaticResource DebugItemValueBrush}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" 
+                                                   AutomationProperties.AutomationId="UI_DebugOutputValueTextBlock_AutoID" />
                                     </Grid>
                                 </StackPanel>
                                 <Button x:Name="MoreLink"
@@ -392,10 +395,14 @@
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Label}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" AutomationProperties.AutomationId="UI_DebugOutputLabelTextBlock_AutoID" />
-                                        <TextBlock Grid.Column="1" x:Name="VariableTextBlock" Text="{Binding Variable}" Foreground="{StaticResource DebugItemVariableBrush}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" AutomationProperties.AutomationId="UI_DebugOutputVariableTextBlock_AutoID" />
-                                        <TextBlock Grid.Column="2" Text="{Binding Operator}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" AutomationProperties.AutomationId="UI_DebugOutputOperatorTextBlock_AutoID" />
-                                        <TextBlock Grid.Column="3" Text="{Binding Value}" Foreground="{StaticResource DebugItemValueBrush}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" AutomationProperties.AutomationId="UI_DebugOutputValueTextBlock_AutoID" />
+                                        <TextBlock Text="{Binding Label}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" 
+                                                   AutomationProperties.AutomationId="UI_DebugOutputLabelTextBlock_AutoID" />
+                                        <TextBlock Grid.Column="1" x:Name="VariableTextBlock" Text="{Binding Variable}" Foreground="{StaticResource DebugItemVariableBrush}" 
+                                                   Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" AutomationProperties.AutomationId="UI_DebugOutputVariableTextBlock_AutoID" />
+                                        <TextBlock Grid.Column="2" Text="{Binding Operator}" Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" 
+                                                   AutomationProperties.AutomationId="UI_DebugOutputOperatorTextBlock_AutoID" />
+                                        <TextBlock Grid.Column="3" Text="{Binding Value}" Foreground="{StaticResource DebugItemValueBrush}" 
+                                                   Style="{StaticResource TextBlockDebugOutputNoPaddingStyle}" AutomationProperties.AutomationId="UI_DebugOutputValueTextBlock_AutoID" />
                                     </Grid>
                                 </StackPanel>
                                 <Button x:Name="MoreLink"
@@ -493,22 +500,27 @@
                                 </StackPanel>
 
                                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Version :" Style="{StaticResource VersionVisibility}"/>
-                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Content.Version}" Style="{StaticResource VersionVisibility}" AutomationProperties.AutomationId="UI_DebugOutputVersionTextBlock_AutoID" />
+                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Content.Version}" Style="{StaticResource VersionVisibility}" 
+                                           AutomationProperties.AutomationId="UI_DebugOutputVersionTextBlock_AutoID" />
 
                                 <TextBlock Grid.Row="2" Grid.Column="1" Text="Server :" Style="{StaticResource ServerVisibility}"/>
                                 <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Content.Server}" Style="{StaticResource ServerVisibility}" />
 
                                 <TextBlock Grid.Row="3" Grid.Column="1" Text="Type :" Style="{StaticResource TypeVisibility}"/>
-                                <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Content.Name}" Style="{StaticResource TypeVisibility}" AutomationProperties.AutomationId="UI_DebugOutputTypeTextBlock_AutoID" />
+                                <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Content.Name}" Style="{StaticResource TypeVisibility}" 
+                                           AutomationProperties.AutomationId="UI_DebugOutputTypeTextBlock_AutoID" />
 
                                 <TextBlock Grid.Row="4" Grid.Column="1" Text="Start Time :" Style="{StaticResource StartTimeVisibility}" />
-                                <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding Content.StartTime, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource StartTimeVisibility}" AutomationProperties.AutomationId="UI_DebugOutputStartTimeTextBlock_AutoID" />
+                                <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding Content.StartTime, Converter={StaticResource DateTimeToStringConverter}}" 
+                                           Style="{StaticResource StartTimeVisibility}" AutomationProperties.AutomationId="UI_DebugOutputStartTimeTextBlock_AutoID" />
 
                                 <TextBlock Grid.Row="4" Grid.Column="1" Text="End Time :" Style="{StaticResource EndTimeVisibility}" />
-                                <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding Content.EndTime, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource EndTimeVisibility}" AutomationProperties.AutomationId="UI_DebugOutputTimeTextBlock_AutoID" />
+                                <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding Content.EndTime, Converter={StaticResource DateTimeToStringConverter}}" 
+                                           Style="{StaticResource EndTimeVisibility}" AutomationProperties.AutomationId="UI_DebugOutputTimeTextBlock_AutoID" />
 
                                 <TextBlock Grid.Row="5" Grid.Column="1" Text="Duration :" Style="{StaticResource DurationVisibility}" />
-                                <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding Content.Duration, Converter={StaticResource TimeSpanToStringConverter}}" Style="{StaticResource DurationVisibility}" AutomationProperties.AutomationId="UI_DebugOutputDurationTextBlock_AutoID" />
+                                <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding Content.Duration, Converter={StaticResource TimeSpanToStringConverter}}" 
+                                           Style="{StaticResource DurationVisibility}" AutomationProperties.AutomationId="UI_DebugOutputDurationTextBlock_AutoID" />
 
                                 <TextBlock Grid.Row="6" Grid.Column="1" Text="Inputs :" Style="{StaticResource InputsVisibility}" />
                                 <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal" Grid.IsSharedSizeScope="True" Style="{StaticResource InputsVisibility}">

@@ -11,6 +11,7 @@
 
 using System.Activities.Presentation.Model;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.Create
 {
@@ -28,6 +29,15 @@ namespace Dev2.Activities.Designers2.Create
             Errors = null;
             ValidateUserNameAndPassword();
             ValidateOutputPath();
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

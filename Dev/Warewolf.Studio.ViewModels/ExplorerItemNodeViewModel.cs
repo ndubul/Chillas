@@ -12,7 +12,7 @@ namespace Warewolf.Studio.ViewModels
         // ReSharper disable TooManyDependencies
         public ExplorerItemNodeViewModel(IServer server, IExplorerItemViewModel parent)
             // ReSharper restore TooManyDependencies
-            : base(server, parent,a=>{})
+            : base(server, parent,a=>{},parent.ShellViewModel)
         {
             Self = this;
             Weight = 1;

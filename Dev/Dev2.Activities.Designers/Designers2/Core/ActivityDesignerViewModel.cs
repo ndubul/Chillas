@@ -22,6 +22,7 @@ using System.Windows.Input;
 using Dev2.Activities.Designers2.Core.Converters;
 using Dev2.Activities.Designers2.Core.Help;
 using Dev2.Activities.Designers2.Service;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
 using Dev2.Runtime.Configuration.ViewModels.Base;
@@ -37,7 +38,7 @@ namespace Dev2.Activities.Designers2.Core
     /// Rather bind to <see cref="ModelItem"/>.PropertyName - this will ensure that the built-in undo/redo framework just works.
     /// </remarks>
     /// </summary>
-    public abstract class ActivityDesignerViewModel : DependencyObject, IClosable, IHelpSource, IValidator, IErrorsSource,IDisposable
+    public abstract class ActivityDesignerViewModel : DependencyObject, IClosable, IHelpSource, IValidator, IErrorsSource,IDisposable,IUpdatesHelp
     {
         static Action<Type> CreateShowExampleWorkflowAction()
         {
@@ -411,5 +412,11 @@ namespace Dev2.Activities.Designers2.Core
         }
 
         protected virtual void OnDispose(){}
+
+        #region Implementation of IUpdatesHelp
+
+        public abstract void UpdateHelpDescriptor(string helpText);
+
+        #endregion
     }
 }

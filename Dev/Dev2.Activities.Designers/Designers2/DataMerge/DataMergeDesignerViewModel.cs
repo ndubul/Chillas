@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Dev2.Activities.Designers2.Core;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
+using Dev2.Interfaces;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Activities.Utils;
@@ -33,7 +34,7 @@ namespace Dev2.Activities.Designers2.DataMerge
         {
             AddTitleBarLargeToggle();
             AddTitleBarQuickVariableInputToggle();
-            AddTitleBarHelpToggle();
+            //AddTitleBarHelpToggle();
 
             ItemsList = new List<string> { "None", "Index", "Chars", "New Line", "Tab" };
             AlignmentTypes = new List<string> { "Left", "Right" };
@@ -125,6 +126,15 @@ namespace Dev2.Activities.Designers2.DataMerge
                 }
             }
             base.OnDispose();
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

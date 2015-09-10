@@ -29,15 +29,14 @@ using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Core.DynamicServices;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.Help;
+using Dev2.Common.Interfaces.PopupController;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 using Dev2.Common.Interfaces.Studio;
-using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Common.Interfaces.Threading;
 using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Common.Interfaces.WebServices;
 using Dev2.ConnectionHelpers;
-using Dev2.CustomControls.Connections;
 using Dev2.Data.ServiceModel;
 using Dev2.Factory;
 using Dev2.Helpers;
@@ -141,7 +140,7 @@ namespace Dev2.Studio.ViewModels
 
         IWindowManager WindowManager { get; set; }
 
-        public IPopupController PopupProvider { private get; set; }
+        public Common.Interfaces.Studio.Controller.IPopupController PopupProvider { private get; set; }
 
         public IEnvironmentRepository EnvironmentRepository { get; private set; }
 
@@ -401,7 +400,7 @@ namespace Dev2.Studio.ViewModels
 
         public MainViewModel(IEventAggregator eventPublisher, IAsyncWorker asyncWorker, IEnvironmentRepository environmentRepository,
             IVersionChecker versionChecker, bool createDesigners = true, IBrowserPopupController browserPopupController = null,
-            IPopupController popupController = null, IWindowManager windowManager = null, IStudioResourceRepository studioResourceRepository = null, IConnectControlSingleton connectControlSingleton = null, IConnectControlViewModel connectControlViewModel = null)
+            Common.Interfaces.Studio.Controller.IPopupController popupController = null, IWindowManager windowManager = null, IStudioResourceRepository studioResourceRepository = null, IConnectControlSingleton connectControlSingleton = null, Dev2.CustomControls.Connections.IConnectControlViewModel connectControlViewModel = null)
             : base(eventPublisher)
         {
             if (environmentRepository == null)
@@ -949,7 +948,7 @@ namespace Dev2.Studio.ViewModels
         {
             var db = new EmailSource(resourceModel.WorkflowXaml.ToXElement());
 
-            var def = new EmailServiceSourceDefinition()
+            var def = new EmailServiceSourceDefinition
             {
                 Id = db.ResourceID,
                 HostName = db.Host,
@@ -979,6 +978,16 @@ namespace Dev2.Studio.ViewModels
             {
                 return CustomContainer.Get<IServer>(); 
             }           
+        }
+
+        public void OpenResource(Guid resourceId, IServer server)
+        {
+            
+        }
+
+        public void ShowPopup(IPopupMessage popupMessage)
+        {
+            PopupProvider.Show(popupMessage);
         }
 
         public void EditServer(IServerSource selectedServer)
@@ -1642,7 +1651,7 @@ namespace Dev2.Studio.ViewModels
             bool confirmDeleteAfterDependencies = ConfirmDeleteAfterDependencies(models);
             if (confirmDeleteAfterDependencies)
             {
-                IPopupController result = new PopupController();
+                Common.Interfaces.Studio.Controller.IPopupController result = new PopupController();
                 if (models.Count > 1)
                 {
                     var contextualResourceModel = models.FirstOrDefault();
@@ -1677,7 +1686,7 @@ namespace Dev2.Studio.ViewModels
             return false;
         }
 
-        bool ShowDeleteDialogForFolder(string folderBeingDeleted, IPopupController result)
+        bool ShowDeleteDialogForFolder(string folderBeingDeleted, Common.Interfaces.Studio.Controller.IPopupController result)
         {
             var deletePrompt = String.Format(StringResources.DialogBody_ConfirmFolderDelete, folderBeingDeleted);
             var deleteAnswer = result.Show(deletePrompt, StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, MessageBoxImage.Warning, null);

@@ -15,6 +15,8 @@
                                xmlns:sys="clr-namespace:System;assembly=mscorlib"
                                xmlns:provider="clr-namespace:Dev2.Intellisense.Provider;assembly=Dev2.Intellisense"
                                xmlns:converters="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.CustomControls"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="280"
                                MaxWidth="280"
                                mc:Ignorable="d"
@@ -57,17 +59,12 @@
                     <TextBlock Text="Data to split" VerticalAlignment="Top" Margin="0,-3,0,0"></TextBlock>
                 </ui:IntellisenseTextBox.DefaultText>
                 <i:Interaction.Behaviors>
-                    <help:HelpSetter Text="{x:Static help:HelpTextResources.DataSplitHelpString}"
-                                     DataContext="{Binding}" />
+                    <core1:HelpSetter Text="{x:Static languages:Core.DataSplitHelpString}" DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="ModelItem.SourceString"
                                          SourcePropertyValue="{Binding  ModelItem.SourceString, UpdateSourceTrigger=PropertyChanged}"
                                          Target="{Binding}" />
                 </i:Interaction.Behaviors>
-                <!--                <ui:IntellisenseTextBox.IntellisenseProvider>   -->
-                <!--                    ~1~Disable variable validation@1@-->
-                <!--                    <provider:BlankIntellisenseProvider/>-->
-                <!--                </ui:IntellisenseTextBox.IntellisenseProvider>-->
             </ui:IntellisenseTextBox>
         </Grid>
         <controls:Dev2DataGrid x:Name="SmallDataGrid"
@@ -115,8 +112,7 @@
                                                     ToolTip="{x:Static help:HelpTextResources.DataSplitToolTipResults}"
                                                     Style="{StaticResource DatagridIntellisenseTextBoxStyle}">
                                 <i:Interaction.Behaviors>
-                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.DataSplitHelpResult}"
-                                                     DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                    <core1:HelpSetter Text="{x:Static languages:Core.DataSplitHelpResult}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                     <errors:ErrorsSetter Source="{Binding}"
                                                          SourcePropertyName="OutputVariable"
                                                          SourcePropertyValue="{Binding OutputVariable, UpdateSourceTrigger=PropertyChanged}"
@@ -150,8 +146,7 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                                 <i:Interaction.Behaviors>
-                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.DataSplitHelpWithType}"
-                                                     DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                    <core1:HelpSetter Text="{x:Static languages:Core.DataSplitHelpWithType}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                     <errors:ErrorsSetter Source="{Binding}"
                                                          SourcePropertyName="SplitType"
                                                          SourcePropertyValue="{Binding SplitType, UpdateSourceTrigger=PropertyChanged}"
@@ -182,8 +177,7 @@
                                                     ToolTip="{x:Static help:HelpTextResources.DataSplitToolTipUsing}"
                                                     Style="{StaticResource DatagridIntellisenseTextBoxStyle}">
                                 <i:Interaction.Behaviors>
-                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.DataSplitHelpUsing}"
-                                                     DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                    <core1:HelpSetter Text="{x:Static languages:Core.DataSplitHelpUsing}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                     <errors:ErrorsSetter Source="{Binding}"
                                                          SourcePropertyName="At"
                                                          SourcePropertyValue="{Binding At, UpdateSourceTrigger=PropertyChanged}"

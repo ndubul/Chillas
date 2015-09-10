@@ -37,23 +37,33 @@ namespace Warewolf.Studio.Views
             {
                 xamDataTreeNode.IsExpanded = true;
             }
-            return xamDataTreeNode == null ? null : xamDataTreeNode.Data as IEnvironmentViewModel;
+            var environmentViewModel = xamDataTreeNode == null ? null : xamDataTreeNode.Data as IEnvironmentViewModel;
+            if (environmentViewModel != null)
+            {
+                environmentViewModel.IsExpanded = true;
+            }
+            return environmentViewModel;
         }
 
         public List<IExplorerTreeItem> GetFoldersVisible()
         {
-            var folderItems = _explorerView.ExplorerTree.Nodes[0].Nodes.Where(node =>
+            var folderItems = new List<IExplorerTreeItem>();
+            foreach (var serverNode in _explorerView.ExplorerTree.Nodes)
             {
-                var explorerItem = node.Data as IExplorerTreeItem;
-                if (explorerItem != null)
+                var folders = serverNode.Nodes.Where(node =>
                 {
-                    if (explorerItem.ResourceType == ResourceType.Folder)
+                    var explorerItem = node.Data as IExplorerTreeItem;
+                    if (explorerItem != null)
                     {
-                        return true;
+                        if (explorerItem.ResourceType == ResourceType.Folder)
+                        {
+                            return true;
+                        }
                     }
-                }
-                return false;
-            }).Select(node => node.Data as IExplorerTreeItem);
+                    return false;
+                }).Select(node => node.Data as IExplorerTreeItem);
+                folderItems.AddRange(folders);
+            }
             return folderItems.ToList();
         }
 
@@ -72,7 +82,7 @@ namespace Warewolf.Studio.Views
                 }
 
                 return explorerItemViewModel;
-            }
+            }            
             return null;
         }
 
@@ -99,12 +109,18 @@ namespace Warewolf.Studio.Views
         private XamDataTreeNode GetFolderXamDataTreeNode(string folderName)
         {
             var flattenTree = TreeUtils.Descendants(_explorerView.ExplorerTree.Nodes[0]);
+            var searchName = folderName;
+            if (folderName.Contains("/"))
+            {
+                var lastIndex = folderName.LastIndexOf("/", StringComparison.OrdinalIgnoreCase);
+                searchName = folderName.Substring(lastIndex+1);
+            }
             var foundFolder = flattenTree.FirstOrDefault(node =>
             {
                 var explorerItem = node.Data as IExplorerTreeItem;
                 if (explorerItem != null)
                 {
-                    if (explorerItem.ResourceName != null && (explorerItem.ResourceName.ToLowerInvariant().Contains(folderName.ToLowerInvariant()) &&
+                    if (explorerItem.ResourceName != null && (explorerItem.ResourceName.ToLowerInvariant().Contains(searchName.ToLowerInvariant()) &&
                                                               explorerItem.ResourceType == ResourceType.Folder))
                     {
                         return true;
@@ -257,7 +273,7 @@ namespace Warewolf.Studio.Views
                 var item = (node.Data as IExplorerTreeItem);
                 if (item != null)
                 {
-                    item.AddChild(new ExplorerItemViewModel(item.Server, item ,a=>{} )
+                    item.AddChild(new ExplorerItemViewModel(item.Server, item ,a=>{},item.ShellViewModel )
                     {
                         ResourceName = path.Substring(1 + path.LastIndexOf("/", StringComparison.Ordinal)),
                         ResourcePath = path
@@ -271,7 +287,7 @@ namespace Warewolf.Studio.Views
                 if (explorerViewModelBase != null)
                 {
                     var item = explorerViewModelBase.SelectedItem;
-                    item.AddChild(new ExplorerItemViewModel(item.Server, item,a => { }) { ResourceName = path });
+                    item.AddChild(new ExplorerItemViewModel(item.Server, item,a => { },item.ShellViewModel) { ResourceName = path });
                 }
             }
         }
@@ -288,7 +304,7 @@ namespace Warewolf.Studio.Views
                 {
                     if (item != null)
                     {
-                        item.AddChild(new ExplorerItemViewModel(item.Server, item, a => { }) { ResourceName = name + i, ResourceType = resourceType });
+                        item.AddChild(new ExplorerItemViewModel(item.Server, item, a => { },item.ShellViewModel) { ResourceName = name + i, ResourceType = resourceType });
                     }
                 }
             }
@@ -301,7 +317,7 @@ namespace Warewolf.Studio.Views
                 {
                     if (item != null)
                     {
-                        item.AddChild(new ExplorerItemViewModel(item.Server, null, a => { }) { ResourceName = name + i, ResourceType = resourceType });
+                        item.AddChild(new ExplorerItemViewModel(item.Server, null, a => { },item.ShellViewModel) { ResourceName = name + i, ResourceType = resourceType });
                     }
                 }
             }
@@ -333,7 +349,7 @@ namespace Warewolf.Studio.Views
             {
                 if (item != null)
                 {
-                    items.Add(new ExplorerItemViewModel(item.Server, item, a => { }) { ResourceName = Name + i, ResourceType = ResourceType.Version });
+                    items.Add(new ExplorerItemViewModel(item.Server, item, a => { },null) { ResourceName = Name + i, ResourceType = ResourceType.Version });
                 }
             }
             return items;
@@ -444,6 +460,12 @@ namespace Warewolf.Studio.Views
         {
             var item = _explorerView.ExplorerTree.ActiveNode.Data as IExplorerTreeItem;
             return item;
+        }
+
+        public IExplorerTreeItem OpenItem(string resourceName, string folderName)
+        {
+            var folderNode = GetFolderXamDataTreeNode(folderName);
+            return GetNodeWithName(resourceName, folderNode).Data as IExplorerTreeItem;
         }
     }
 }

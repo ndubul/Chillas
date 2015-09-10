@@ -31,40 +31,29 @@
         <Grid Grid.Row="3" Grid.Column="0" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource AddPluginLogo}"></Grid>
         <Grid Grid.Row="4" Grid.Column="0" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource WebLogo}"></Grid>
         <Grid Grid.Row="5" Grid.Column="0" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource AddWebLogo}"></Grid>
-        <Grid Grid.Row="7" Grid.Column="0" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource AddSharepointLogo}"></Grid>
+        <Grid Grid.Row="6" Grid.Column="0" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource EmailSourceLogo}"></Grid>
+        <Grid Grid.Row="7" Grid.Column="0" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource EmailServiceLogo}"></Grid>
+        
+        <Grid Grid.Row="8" Grid.Column="0" Margin="{StaticResource ControlBorderTop}">
+            <Image Width="40" Height="40" Source="{StaticResource ControlFlow-Descision}" />
+        </Grid>
+        <Grid Grid.Row="9" Grid.Column="0" Margin="{StaticResource ControlBorderTop}">
+            <Image Width="40" Height="40" Source="{StaticResource ControlFlow-Switch}" />
+        </Grid>
+        <Grid Grid.Row="10" Grid.Column="0" Margin="{StaticResource ControlBorderTop}">
+            <Image Width="40" Height="40" Source="{StaticResource ControlFlow-Sequence}" />
+        </Grid>
+        <Grid Grid.Row="11" Grid.Column="0" Margin="{StaticResource ControlBorderTop}">
+            <Image Width="40" Height="40" Source="{StaticResource Explorer-WorkflowService}" />
+        </Grid>
 
+
+        <Grid Grid.Row="0" Grid.Column="1" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource AddSharepointLogo}"></Grid>
         <Grid Grid.Row="1" Grid.Column="1" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource AddDropBoxLogo}"></Grid>
         <Grid Grid.Row="2" Grid.Column="1" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource DotNetLogo}"></Grid>
         <Grid Grid.Row="3" Grid.Column="1" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource AddDotNetLogo}"></Grid>
         <Grid Grid.Row="4" Grid.Column="1" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource FileLogo}"></Grid>
         <Grid Grid.Row="5" Grid.Column="1" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource ViewFileLogo}"></Grid>
         <Grid Grid.Row="6" Grid.Column="1" Margin="{StaticResource ControlBorderTop}" Height="40" Width="40" Background="{StaticResource EditFileLogo}"></Grid>
-
-        <Grid Grid.Row="8" Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="12" Height="12" Source="{StaticResource ControlFlow-Descision}" />
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Row="9" Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="12" Height="12" Source="{StaticResource Explorer-WorkflowService}" />
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Row="10" Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="12" Height="12" Source="{StaticResource Explorer-WorkflowService}" />
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Row="11" Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="12" Height="12" Source="{StaticResource Explorer-WorkflowService}" />
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Row="12" Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="12" Height="12" Source="{StaticResource Explorer-WorkflowService}" />
-            </StackPanel>
-        </Grid>
-
     </Grid>
 </Window>

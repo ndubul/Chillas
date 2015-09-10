@@ -15,6 +15,7 @@ using System.Windows;
 using Dev2.Activities.Designers2.Core;
 using Dev2.Common.Interfaces.Enums;
 using Dev2.Common.Interfaces.Enums.Enums;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.Random
 {
@@ -104,6 +105,15 @@ namespace Dev2.Activities.Designers2.Random
 
         public override void Validate()
         {
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

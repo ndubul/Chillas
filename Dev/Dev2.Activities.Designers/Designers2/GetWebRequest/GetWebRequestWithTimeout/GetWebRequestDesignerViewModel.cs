@@ -21,6 +21,7 @@ using Dev2.Activities.Preview;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
 using Dev2.Data.Util;
 using Dev2.DataList.Contract;
+using Dev2.Interfaces;
 using Dev2.Providers.Errors;
 
 namespace Dev2.Activities.Designers2.GetWebRequest.GetWebRequestWithTimeout
@@ -319,6 +320,15 @@ namespace Dev2.Activities.Designers2.GetWebRequest.GetWebRequestWithTimeout
             }
 
             return result;
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

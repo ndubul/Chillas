@@ -24,7 +24,7 @@
                         VerticalAlignment="Stretch"
                         Source="http://warewolf.io/knowledge-base/"
                         LoadCompleted="WebBrowserHost_OnLoadCompleted"
-                        Visibility="{Binding WebPageVisible, UpdateSourceTrigger=PropertyChanged}" />
+                        Visibility="Hidden" />
         </ScrollViewer>
         <ig:HtmlDocumentAdapter x:Name="HtmlDocumentAdapter" IsEnabled="False"
                                 Document="{Binding Path=Document, ElementName=XamRichTextEditor}"

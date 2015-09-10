@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Data;
+using Dev2.Common.Interfaces.Versioning;
 using Dev2.Controller;
 using Dev2.Studio.Core.Interfaces;
 using Warewolf.Studio.ServerProxyLayer;
@@ -24,17 +28,16 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             }
             QueryManagerProxy = new QueryManagerProxy(controllerFactory, environmentConnection);
             UpdateManagerProxy = new ExplorerUpdateManagerProxy(controllerFactory,environmentConnection);
-            //VersionManager = new VersionManagerProxy(environmentConnection, controllerFactory); //todo:swap
+            VersionManager = new VersionManagerProxy(environmentConnection, controllerFactory); //todo:swap
             AdminManagerProxy = new AdminManagerProxy(controllerFactory, environmentConnection); //todo:swap
         }
 
         public AdminManagerProxy AdminManagerProxy { get; set; }
 
-      //  public Dev2.Common.Interfaces.ServerProxyLayer.IVersionManager VersionManager { get; set; }
+        public Dev2.Common.Interfaces.ServerProxyLayer.IVersionManager VersionManager { get; set; }
         public IQueryManager QueryManagerProxy { get; set; }
         public ExplorerUpdateManagerProxy UpdateManagerProxy { get; set; }
 
-//        #region Implementation of IExplorerRepository
 
         public bool Rename(IExplorerItemViewModel vm, string newName)
         {
@@ -50,25 +53,25 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         public bool Delete(IExplorerItemViewModel explorerItemViewModel)
         {
-//            if (explorerItemViewModel.ResourceType == ResourceType.Version)
-//                VersionManager.DeleteVersion(explorerItemViewModel.ResourceId, explorerItemViewModel.VersionNumber);
-//            else
+            if (explorerItemViewModel.ResourceType == ResourceType.Version)
+                VersionManager.DeleteVersion(explorerItemViewModel.ResourceId, explorerItemViewModel.VersionNumber);
+            else
                 UpdateManagerProxy.DeleteResource(explorerItemViewModel.ResourceId);
             return true;
         }
 
 
-//
-//        public ICollection<IVersionInfo> GetVersions(Guid id)
-//        {
-//            return new List<IVersionInfo>(VersionManager.GetVersions(id).Select(a => a.VersionInfo));
-//        }
-//
-//        public IRollbackResult Rollback(Guid resourceId, string version)
-//        {
-//           return  VersionManager.RollbackTo(resourceId,version);
-//        }
-//
+
+        public ICollection<IVersionInfo> GetVersions(Guid id)
+        {
+            return new List<IVersionInfo>(VersionManager.GetVersions(id).Select(a => a.VersionInfo));
+        }
+
+        public IRollbackResult Rollback(Guid resourceId, string version)
+        {
+           return  VersionManager.RollbackTo(resourceId,version);
+        }
+
         public void CreateFolder(string parentPath, string name, Guid id)
         {
             UpdateManagerProxy.AddFolder(parentPath, name, id);

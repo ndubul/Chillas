@@ -3,6 +3,7 @@ using Dev2.Activities.Designers2.Core;
 using Dev2.Common;
 using Dev2.Data.SystemTemplates;
 using Dev2.Data.SystemTemplates.Models;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.Switch
 {
@@ -65,6 +66,15 @@ namespace Dev2.Activities.Designers2.Switch
 
         public override void Validate()
         {
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

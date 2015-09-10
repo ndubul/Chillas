@@ -43,7 +43,7 @@ namespace Warewolf.Studio.Core
 
             {MenuIcons.WebSource, "Explorer-WebService-Create"},
             {MenuIcons.PluginSource, "Explorer-DLL-Create"},
-            {MenuIcons.EmailSource, "Utility-SendMail"},
+            {MenuIcons.EmailSource, "EmailSourceImageLogo"},
             {MenuIcons.DbSource, "Explorer-DB-Create"},
             {MenuIcons.ServerSource, "System-Logo-Create"},
             {MenuIcons.StartPage, "Fa-Home"}

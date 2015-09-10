@@ -10,6 +10,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
              xmlns:comment="clr-namespace:Dev2.Activities.Designers2.Comment"
+             xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+             xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
              mc:Ignorable="d" 
                                MinWidth="250"
                                MinHeight="50"
@@ -34,8 +36,7 @@
                             ToolTip="{x:Static help:HelpTextResources.CommentToolTipComment}"
                             attachedProperties:WizardEngineAttachedProperties.DontOpenWizard="True">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.CommentHelpComment}"
-                             DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.CommentHelpComment}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                  SourcePropertyName="Path=ModelItem.Text"
                                  SourcePropertyValue="{Binding  Path=ModelItem.Text, UpdateSourceTrigger=PropertyChanged}"

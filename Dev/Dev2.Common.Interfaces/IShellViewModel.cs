@@ -1,4 +1,6 @@
+using System;
 using Dev2.Common.Interfaces.DB;
+using Dev2.Common.Interfaces.PopupController;
 using Dev2.Common.Interfaces.ServerProxyLayer;
 
 namespace Dev2.Common.Interfaces
@@ -20,5 +22,9 @@ namespace Dev2.Common.Interfaces
         string OpenPasteWindow(string current);
 
         IServer LocalhostServer { get; }
+
+        void OpenResource(Guid resourceId, IServer server);
+
+        void ShowPopup(IPopupMessage getDuplicateMessage);
     }
 }

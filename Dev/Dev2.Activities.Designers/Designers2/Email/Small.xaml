@@ -9,6 +9,8 @@
                                xmlns:local="clr-namespace:Dev2.Activities.Designers2.Email"
                                xmlns:help="clr-namespace:Dev2.Activities.Designers2.Core.Help"
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="250"
                                MaxWidth="250"
                                mc:Ignorable="d"
@@ -44,8 +46,7 @@
                       ToolTip="{x:Static help:HelpTextResources.EmailToolTipMailSource}"
                       DisplayMemberPath="ResourceName">
                 <i:Interaction.Behaviors>
-                    <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpMailSource}"
-                                     DataContext="{Binding}" />
+                    <core1:HelpSetter Text="{x:Static languages:Core.EmailHelpMailSource}" DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="TheSelectedEmailSource"
                                          SourcePropertyValue="{Binding SelectedEmailSource, UpdateSourceTrigger=PropertyChanged}"
@@ -69,8 +70,7 @@
                                 Text="{Binding ModelItem.To,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_tostxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpTo}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.EmailHelpTo}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.To"
                                      SourcePropertyValue="{Binding ModelItem.To, UpdateSourceTrigger=PropertyChanged}"
@@ -88,8 +88,7 @@
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipSubject}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_subjecttxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpSubject}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.EmailHelpSubject}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.Subject"
                                      SourcePropertyValue="{Binding ModelItem.Subject, UpdateSourceTrigger=PropertyChanged}"
@@ -118,8 +117,7 @@
                 <TextBlock Text="Email Content" VerticalAlignment="Top" Margin="0,-3,0,0"></TextBlock>
             </ui:IntellisenseTextBox.DefaultText>
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpBody}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.EmailHelpBody}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.Body"
                                      SourcePropertyValue="{Binding ModelItem.Body, UpdateSourceTrigger=PropertyChanged}"
@@ -139,8 +137,7 @@
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Resultstxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.EmailHelpResult}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.EmailHelpResult}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName=" ModelItem.Result"
                                      SourcePropertyValue="{Binding  ModelItem.Result, UpdateSourceTrigger=PropertyChanged}"

@@ -35,7 +35,6 @@ namespace Warewolf.AcceptanceTesting.Core
 
         public void Connect()
         {
-           // return Task.FromResult(true);
         }
 
         public List<IResource> Load()

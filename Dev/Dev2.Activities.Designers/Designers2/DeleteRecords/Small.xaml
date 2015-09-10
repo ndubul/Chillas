@@ -9,6 +9,8 @@
                                xmlns:local="clr-namespace:Dev2.Activities.Designers2.DeleteRecords"
                                xmlns:help="clr-namespace:Dev2.Activities.Designers2.Core.Help"
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="200"
                                MaxWidth="200"
                                mc:Ignorable="d"
@@ -38,8 +40,7 @@
                                 Converter={StaticResource ModelTextConverter}, ConverterParameter=True}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Recorstxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.DeleteHelpRecords}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.DeleteHelpRecords}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.RecordsetName"
                                      SourcePropertyValue="{Binding ModelItem.RecordsetName, UpdateSourceTrigger=PropertyChanged}"
@@ -60,8 +61,7 @@
                                 AllowMultilinePaste="False" 
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Resulttxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.DeleteHelpResult}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.DeleteHelpResult}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.Result"
                                      SourcePropertyValue="{Binding ModelItem.Result, UpdateSourceTrigger=PropertyChanged}"

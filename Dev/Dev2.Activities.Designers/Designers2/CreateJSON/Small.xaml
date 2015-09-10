@@ -14,6 +14,8 @@
                                xmlns:to="clr-namespace:Dev2.TO;assembly=Dev2.Activities"
                                xmlns:interfaceImplementors="clr-namespace:Dev2.Studio.InterfaceImplementors;assembly=Dev2.Intellisense"
                                xmlns:provider="clr-namespace:Dev2.Intellisense.Provider;assembly=Dev2.Intellisense"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="230"
                                MaxWidth="230"
                                mc:Ignorable="d"
@@ -58,8 +60,7 @@
                                                     Margin="0,0,1,1"
                                                 ToolTip="{x:Static help:HelpTextResources.CreateJSONToolTipName}">
                                 <i:Interaction.Behaviors>
-                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.CreateJSONHelpName}"
-                                                 DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                    <core1:HelpSetter Text="{x:Static languages:Core.CreateJSONHelpName}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                     <errors:ErrorsSetter Source="{Binding}"
                                                      SourcePropertyName="DestinationName"
                                                      SourcePropertyValue="{Binding DestinationName, UpdateSourceTrigger=PropertyChanged}"
@@ -96,8 +97,7 @@
                                                     Margin="0,0,1,1"
                                                     ToolTip="{x:Static help:HelpTextResources.CreateJSONToolTipInput}">
                                 <i:Interaction.Behaviors>
-                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.CreateJSONHelpInput}"
-                                                 DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                    <core1:HelpSetter Text="{x:Static languages:Core.CreateJSONHelpInput}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                     <errors:ErrorsSetter Source="{Binding}"
                                                      SourcePropertyName="SourceName"
                                                      SourcePropertyValue="{Binding SourceName, UpdateSourceTrigger=PropertyChanged}"
@@ -131,8 +131,7 @@
                                     ToolTip="{x:Static help:HelpTextResources.CreateJSONToolTipResult}"
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}">
                 <i:Interaction.Behaviors>
-                    <help:HelpSetter Text="{x:Static help:HelpTextResources.CreateJSONHelpResult}"
-                                     DataContext="{Binding}" />
+                    <core1:HelpSetter Text="{x:Static languages:Core.CreateJSONHelpResult}" DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="ModelItem.JsonString"
                                          SourcePropertyValue="{Binding  ModelItem.JsonString, UpdateSourceTrigger=PropertyChanged}"

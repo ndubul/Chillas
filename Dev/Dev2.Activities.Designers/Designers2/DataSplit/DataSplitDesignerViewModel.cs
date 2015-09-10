@@ -17,6 +17,7 @@ using System.Windows.Input;
 using Dev2.Activities.Designers2.Core;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
+using Dev2.Interfaces;
 using Dev2.Providers.Validation.Rules;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
@@ -38,7 +39,7 @@ namespace Dev2.Activities.Designers2.DataSplit
 
             AddTitleBarLargeToggle();
             AddTitleBarQuickVariableInputToggle();
-            AddTitleBarHelpToggle();
+            //AddTitleBarHelpToggle();
 
             ItemsList = new List<string>
             {
@@ -143,6 +144,15 @@ namespace Dev2.Activities.Designers2.DataSplit
             foreach(var error in dto.GetRuleSet("At", GetDatalistString()).ValidateRules("'Using'", () => mi.SetProperty("IsAtFocused", true)))
             {
                 yield return error;
+            }
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
             }
         }
 
