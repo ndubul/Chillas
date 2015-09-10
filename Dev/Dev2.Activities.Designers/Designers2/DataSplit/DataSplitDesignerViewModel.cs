@@ -39,7 +39,6 @@ namespace Dev2.Activities.Designers2.DataSplit
 
             AddTitleBarLargeToggle();
             AddTitleBarQuickVariableInputToggle();
-            //AddTitleBarHelpToggle();
 
             ItemsList = new List<string>
             {

@@ -12,6 +12,8 @@
                                xmlns:provider="clr-namespace:Dev2.Intellisense.Provider;assembly=Dev2.Intellisense"
                                xmlns:attachedProperties="clr-namespace:Dev2.Activities.AttachedProperties"
                                xmlns:local="clr-namespace:Dev2.Activities.Designers2.WriteFile"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                MinWidth="255"
                                Width="255"
                                MaxWidth="600"
@@ -67,8 +69,7 @@
                 </interfaceImplementors:CompositeIntellisenseProvider>
             </ui:IntellisenseTextBox.IntellisenseProvider>
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.WriteFileHelpFilename}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.WriteFileHelpFilename}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.OutputPath"
                                      SourcePropertyValue="{Binding ModelItem.OutputPath, UpdateSourceTrigger=PropertyChanged}"
@@ -88,8 +89,7 @@
             <RadioButton Margin="{StaticResource ControlBorderRight}" IsChecked="{Binding Path=ModelItem.AppendTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Append Top</RadioButton>
             <RadioButton Margin="{StaticResource ControlBorderRight}" IsChecked="{Binding Path=ModelItem.AppendBottom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Append Bottom</RadioButton>
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.WriteFileHelpMethod}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.WriteFileHelpMethod}" DataContext="{Binding}" />
             </i:Interaction.Behaviors>
         </StackPanel>
         
@@ -101,9 +101,9 @@
                                 Grid.Row="2"
                                 DefaultText="[[logtext]]"
                                 AllowMultilinePaste="True"
-                                                AcceptsReturn="True"
-                                                AllowUserInsertLine="True"
-                                                MaxHeight="80"
+                                AcceptsReturn="True"
+                                AllowUserInsertLine="True"
+                                MaxHeight="80"
                                 Margin="{StaticResource ControlBorderTop}"
                                 TextWrapping="Wrap"
                                 WrapInBrackets="False"
@@ -113,8 +113,7 @@
                                 attachedProperties:FocusSetter.IsFocused="{Binding FileHasContent, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Contentstxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.WriteFileHelpContents}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.WriteFileHelpContents}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.FileContents"
                                      SourcePropertyValue="{Binding  ModelItem.FileContents, UpdateSourceTrigger=PropertyChanged}"
@@ -137,8 +136,7 @@
                                 attachedProperties:FocusSetter.IsFocused="{Binding IsUserNameFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_UserNametxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.WriteFileHelpUsername}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.WriteFileHelpUsername}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.Username"
                                      SourcePropertyValue="{Binding  ModelItem.Username, UpdateSourceTrigger=PropertyChanged}"
@@ -151,16 +149,15 @@
                Margin="{StaticResource ControlBorderTop}"
                Text="Password" />
         <PasswordBox Grid.Column="1"
-                                Grid.Row="4"           
+                     Grid.Row="4"           
                      Margin="{StaticResource ControlBorderTop}"
-                                ToolTip="{x:Static help:HelpTextResources.WriteFileToolTipPassword}"                                
-                                attachedProperties:FocusSetter.IsFocused="{Binding IsPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                attachedProperties:PasswordBoxAssistant.BindPassword="true"
-                                attachedProperties:PasswordBoxAssistant.BoundPassword="{Binding Path=ModelItem.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Passwordtxt_AutoID}">
+                     ToolTip="{x:Static help:HelpTextResources.WriteFileToolTipPassword}"                                
+                     attachedProperties:FocusSetter.IsFocused="{Binding IsPasswordFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     attachedProperties:PasswordBoxAssistant.BindPassword="true"
+                     attachedProperties:PasswordBoxAssistant.BoundPassword="{Binding Path=ModelItem.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Passwordtxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.WriteFileHelpPassword}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.WriteFileHelpPassword}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.Password"
                                      SourcePropertyValue="{Binding  ModelItem.Password, UpdateSourceTrigger=PropertyChanged}"
@@ -183,8 +180,7 @@
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Resulttxt_AutoID}"
                                 ToolTip="{x:Static help:HelpTextResources.WriteFileToolTipResult}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.WriteFileHelpResult}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.WriteFileHelpResult}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.Result"
                                      SourcePropertyValue="{Binding ModelItem.Result, UpdateSourceTrigger=PropertyChanged}"

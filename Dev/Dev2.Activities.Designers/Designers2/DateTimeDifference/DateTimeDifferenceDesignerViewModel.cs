@@ -23,7 +23,6 @@ namespace Dev2.Activities.Designers2.DateTimeDifference
         public DateTimeDifferenceDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             OutputTypes = new List<string>(DateTimeComparer.OutputFormatTypes);
             SelectedOutputType = string.IsNullOrEmpty(OutputType) ? OutputTypes[0] : OutputType;
         }

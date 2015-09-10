@@ -24,7 +24,6 @@ namespace Dev2.Activities.Designers2.SortRecords
         public SortRecordsDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             SortOrderTypes = new List<string> { "Forward", "Backwards" };
             SelectedSelectedSort = string.IsNullOrEmpty(SelectedSort) ? SortOrderTypes[0] : SelectedSort;
         }

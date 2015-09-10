@@ -29,7 +29,6 @@ namespace Dev2.Activities.Designers2.CreateJSON
         {
             AddTitleBarLargeToggle();
             AddTitleBarQuickVariableInputToggle();
-            //AddTitleBarHelpToggle();
 
             dynamic mi = ModelItem;
             InitializeItems(mi.JsonMappings);

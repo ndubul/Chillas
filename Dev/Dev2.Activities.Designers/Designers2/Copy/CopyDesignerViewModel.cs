@@ -21,7 +21,6 @@ namespace Dev2.Activities.Designers2.Copy
             : base(modelItem, "File or Folder", "Destination")
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
         }
 
         public override void Validate()

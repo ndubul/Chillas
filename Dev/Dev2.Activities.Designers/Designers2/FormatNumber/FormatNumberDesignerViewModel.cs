@@ -25,7 +25,6 @@ namespace Dev2.Activities.Designers2.FormatNumber
         public FormatNumberDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             RoundingTypes = new List<string>(Dev2EnumConverter.ConvertEnumsTypeToStringList<enRoundingType>());
             SelectedRoundingType = string.IsNullOrEmpty(RoundingType) ? RoundingTypes[0] : RoundingType;
            

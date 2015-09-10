@@ -71,7 +71,6 @@ namespace Dev2.Activities.Designers2.Email
             _eventPublisher.Subscribe(this);
 
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
 
             EmailSources = new ObservableCollection<EmailSource>();
             Priorities = new ObservableCollection<enMailPriorityEnum> { enMailPriorityEnum.High, enMailPriorityEnum.Normal, enMailPriorityEnum.Low };

@@ -10,6 +10,8 @@
                                xmlns:activities="clr-namespace:System.Activities;assembly=System.Activities"
                                xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
                                xmlns:attachedProperties2="clr-namespace:Dev2.Studio.AppResources.AttachedProperties"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="200"
                                MinHeight="35"
                                mc:Ignorable="d"
@@ -49,8 +51,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.SequenceHelpSequence}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.SequenceHelpSequence}" DataContext="{Binding}" />
             </i:Interaction.Behaviors>
         </DataGrid>
         <Border BorderBrush="Black"

@@ -21,7 +21,6 @@ namespace Dev2.Activities.Designers2.Create
             : base(modelItem, string.Empty, "File or Folder")
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
         }
 
         public override void Validate()

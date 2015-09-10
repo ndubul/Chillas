@@ -2231,4 +2231,1114 @@ Data
   <data name="FindRecordsToHelpText" xml:space="preserve">
     <value>The value that the search will end at, this must be a number, date or time and must be the same type as the "From" type.</value>
   </data>
+  <data name="FindHelpFrom" xml:space="preserve">
+    <value>The value that the search will start at, this must be a number, date or time and must be the same type as the "To" type.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="FindHelpInFields" xml:space="preserve">
+    <value>To find the indexes/rows that match certain criteria, put the comma separated list of fields to search in here.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="FindHelpRequireAllFieldsToMatch" xml:space="preserve">
+    <value>Will only return rows where each field specified meets the match criteria if selected.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Should all the fields match?</value>
+  </data>
+  <data name="FindHelpTo" xml:space="preserve">
+    <value>The value that the search will end at, this must be a number, date or time and must be the same type as the "From" type.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ForEachHelpForEachType" xml:space="preserve">
+    <value>Generaly Replaces the * in the activity with the relevant index. e.g.&lt;br/&gt;
+        If 1-3 is provided then [[Customer(*).ID]] will execute as [[Customer(1).ID]], [[Customer(2).ID]], [[Customer(3).ID]].&lt;br /&gt;
+        * in Range allows you to input a range of indexes.&lt;br/&gt;
+        * in CSV allows a specific set of indexes to be specified e.g. 1,5,7,9.&lt;br/&gt;
+        * in Recordset will execute every index in the given recordset.&lt;br/&gt;
+        * in Executes will execute the activity a given number of times and replace the * with the number of times it has executed e.g.&lt;br/&gt; 
+        1,2,3... up to the number you specify.&lt;br/&gt; 
+        Will only return rows where each field specified meets the match criteria if selected.&lt;br /&gt;
+        No Subs. Execution WILL NOT substitute * with anything. The inner item(s) will execute given number of times in full.&lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        na</value>
+  </data>
+  <data name="FormatNumberHelpDecimalsToShow" xml:space="preserve">
+    <value>How many decimals should be returned as a factor of 10? e.g.&lt;br/&gt;
+        3 will show 0.000 and negative 3 (-3) will show 15000 as 15.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="FormatNumberHelpNumber" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        To format a number, put the number in here.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="FormatNumberHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns the formatted number.&lt;br /&gt;
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="FormatNumberHelpRoundType" xml:space="preserve">
+    <value>How would you like to round the number?&lt;br/&gt;
+        None: No rounding is done&lt;br /&gt;
+        Normal: 5,6,7,8,9 round up 1,2,3,4 round down&lt;br/&gt;
+        Up: 1-9 all round up&lt;br/&gt;
+        Down: 1-9 all round down&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        na</value>
+  </data>
+  <data name="FormatNumberHelpRoundValue" xml:space="preserve">
+    <value>At what point in the number should the rounding be done as a factor of 10? e.g.&lt;br/&gt;
+        3 will round to 3 decimal places and negative 3 (-3) will round to the nearest thousand.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="LengthHelpRecordset" xml:space="preserve">
+    <value>To get the length or max index in a recordset, put the recordset name in here. E.g.&lt;br/&gt;
+        [[Customer()]]&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        [[Recordset()]]</value>
+  </data>
+  <data name="LengthHelpResult" xml:space="preserve">
+    <value>Only variables go in here. Returns a number specifying the highest index / max index in the recordset.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="MoveHelpDestination" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        Put the full path of the destination you are moving to here.&lt;br/&gt;
+        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="MoveHelpFileFolder" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        To Move a file or folder, put the full path and file or folder name to move in here.&lt;br/&gt;
+        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="MoveHelpForceoverwrite" xml:space="preserve">
+    <value>If the file or folder already exists, you can force a new one to overwrite the old one.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        If it exists already, force an overwrite</value>
+  </data>
+  <data name="MoveHelpPassword" xml:space="preserve">
+    <value>For protected resources, specify the Password of an account with permission to access the source.&lt;br/&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="MoveHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns Success or will be blank depending on the success of the Move action.&lt;br /&gt;
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="MoveHelpUsername" xml:space="preserve">
+    <value>For protected resources, specify the Username of an account with permission to access the source.&lt;br/&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="RandomHelpLength" xml:space="preserve">
+    <value>Determines the character length to generate.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="RandomHelpRangeFrom" xml:space="preserve">
+    <value>To generate a random number put the lowest/smallest number you would like in here.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="RandomHelpRangeTo" xml:space="preserve">
+    <value>To generate a random number put the highest/largest number you would like in here.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="RandomHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns the randomly generated result.&lt;br /&gt;
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="RandomHelpType" xml:space="preserve">
+    <value>The type of random information to generate.&lt;br/&gt;
+        Letters: Alphabetical letters only.&lt;br /&gt;
+        Numbers: Numbers only.&lt;br/&gt;
+        Letters and Numbers: A random combination of letters and numbers.&lt;br/&gt;
+        GUID: A randomly generated Globally Unique Identifier.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        na</value>
+  </data>
+  <data name="ReadFileHelpFilename" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        To read the content of a file, put the full path and file name in here.&lt;br/&gt;
+        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReadFileHelpPassword" xml:space="preserve">
+    <value>For protected resources, specify the Password of an account with permission to perform this action.&lt;br/&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReadFileHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns the content of the file.&lt;br /&gt;
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReadFileHelpUsername" xml:space="preserve">
+    <value>For protected resources, specify the Username of an account with permission to perform this action.&lt;br/&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReadFolderHelpFolder" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        To read the content of a folder, put the full path in here.&lt;br/&gt;
+        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReadFolderHelpPassword" xml:space="preserve">
+    <value>For protected resources, specify the Password of an account with permission to perform this action.&lt;br/&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReadFolderHelpRead" xml:space="preserve">
+    <value>Files will only return files.&lt;br/&gt;
+        Folders will only return folders.&lt;br/&gt;
+        Files and Folders will return everything.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        What do you want to read?</value>
+  </data>
+  <data name="ReadFolderHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns the content of the folder specified. Each item found will be returned as a separate result so this tool is best used with a recordset.&lt;br /&gt;
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        Using recordset() will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReadFolderHelpUsername" xml:space="preserve">
+    <value>For protected resources, specify the Username of an account with permission to perform this action.&lt;br/&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="RenameHelpFileFolder" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        To rename a file or folder, put the full path and file or folder name in here.&lt;br/&gt;
+        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="RenameHelpForceoverwrite" xml:space="preserve">
+    <value>If the file or folder already exists, you can force a new one to overwrite the old one.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        If it exists already, force an overwrite</value>
+  </data>
+  <data name="RenameHelpNewName" xml:space="preserve">
+    <value>Put the full path and new name of the resource here.&lt;br/&gt;
+        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="RenameHelpPassword" xml:space="preserve">
+    <value>For protected resources, specify the Password of an account with permission to access the source.&lt;br/&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="RenameHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns Success or will be blank depending on the success of the Rename action.&lt;br /&gt;
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="RenameHelpUsername" xml:space="preserve">
+    <value>For protected resources, specify the Username of an account with permission to access the source.&lt;br/&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReplaceHelpFind" xml:space="preserve">
+    <value>Put the information you are looking for in here.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReplaceHelpInFields" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        To search and replace a string, put the variable containing the string to search in here.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReplaceHelpReplaceWith" xml:space="preserve">
+    <value>Put the replacement information in here.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ReplaceHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns the count of the number of replacements.&lt;br /&gt;
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br /&gt;
+        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ScriptingHelpLanguageType" xml:space="preserve">
+    <value>What type of scripting language do you want to use?&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        na</value>
+  </data>
+  <data name="ScriptingHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns the output of the script, if any.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ScriptingHelpScript" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        To run a programming script, put the script you want to execute in here.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="SequenceHelpSequence" xml:space="preserve">
+    <value>To execute a set of Activities in sequence put them in the order you want them executed.&lt;br/&gt;
+        To execute more than one item in a loop construct etc. put the activities in a sequence first and then put the sequence into the loop construct.&lt;br /&gt;
+        Error handling operates as a catch all for all items in the sequence.&lt;br/&gt;</value>
+  </data>
+  <data name="ServiceHelpInput" xml:space="preserve">
+    <value>Insert the input data for this service.&lt;br /&gt;
+        It will be mapped to the input field listed in the To Service column.&lt;br /&gt;
+        If the input is a Recordset field then you can use (*) to pass all the recordset fields into the workflow service. e.g.&lt;br /&gt;
+        [[my(*).recs]] - input().records&lt;br/&gt;
+        You can also put multiple fields into one field with other text much like the assign tool.&lt;br/&gt;
+        By default similar matches from the variable list are used where possible.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ServiceHelpOutput" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Insert the variable that you want the output of the workflow to be mapped into.&lt;br/&gt; 
+        By default similar matches from the variable list are used where possible.&lt;br/&gt;
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br/&gt;
+        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="ServiceHelpRunWorkflowAsync" xml:space="preserve">
+    <value>Selecting this checkbox will cause the workflow to execute as "Fire and Forget".&lt;br/&gt;
+        This will free up the parent workflow to continue without waiting for a response from the nested workflow.&lt;br/&gt;
+        Warning: Any data returned from this workflow will not be mapped back and will therefore not be available for use.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:</value>
+  </data>
+  <data name="SharepointDeleteHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns the number of records deleted.&lt;br/&gt; 
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br/&gt;
+        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="SharepointHelpFieldToMatchOn" xml:space="preserve">
+    <value>Select the field you want to match on.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        na</value>
+  </data>
+  <data name="SharepointHelpList" xml:space="preserve">
+    <value>Select a list to read data from.&lt;br/&gt;
+        If the list changed, click the refresh button.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Select a list to read data from.</value>
+  </data>
+  <data name="SharepointHelpServer" xml:space="preserve">
+    <value>Select a preconfigured Sharepoint server source or "New Sharepoint Server Source..." to add a new one.</value>
+  </data>
+  <data name="SharepointInsertHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns Success or Failure.&lt;br/&gt; 
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br/&gt;
+        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="SharepointToolTipToVariable" xml:space="preserve">
+    <value>To read list item data into a variable, put the variable here.</value>
+  </data>
+  <data name="SortHelpSortField" xml:space="preserve">
+    <value>To Sort a recordset enter the field in the recordset you would like to sort on.&lt;br/&gt;
+        To sort on more than one field, perform the sort action for each field you would like to sort on, ending with the priority sort.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        [[Recordset().Field]]</value>
+  </data>
+  <data name="SortHelpSortOrderType" xml:space="preserve">
+    <value>Select the order of the sorting.&lt;br/&gt;
+        Forward will go 1-9 then a-Z.&lt;br/&gt;
+        Backward will go Z-a then 9-1.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        na</value>
+  </data>
+  <data name="SQLBulkInsertHelpBatchSize" xml:space="preserve">
+    <value>The number of rows you would like to insert at a time.&lt;br/&gt;
+        The default is 0 which will do everything in 1 batch.&lt;br/&gt;
+        If you specify 50, then 50 rows will be bulk inserted at a time.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Number   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="SQLBulkInsertHelpCheckConstraints" xml:space="preserve">
+    <value>Check constraints while data is being inserted. By default, constraints are not checked.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Check constraints while data is being inserted.</value>
+  </data>
+  <data name="SQLBulkInsertHelpDatabase" xml:space="preserve">
+    <value>Select a preconfigured database source or "New Database Source..." to add a new one.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Select a preconfigured database source or "New Database Source..." to add a new one.</value>
+  </data>
+  <data name="SQLBulkInsertHelpFiretriggers" xml:space="preserve">
+    <value>When specified, cause the server to fire the insert triggers for the rows being inserted into the database.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        When specified, cause the server to fire the insert triggers for the rows being inserted into the database.</value>
+  </data>
+  <data name="SQLBulkInsertHelpInputData" xml:space="preserve">
+    <value>To bulk insert data into a table, put the data to insert in here.&lt;br /&gt;
+        Using recordset (*) notation will put the entire recordset in and is the normal usage scenario for large data inserts to SQL.&lt;br/&gt;
+        A single Recordset will yield the best performance. Do not mix, scalars and/or different recordsets for optimum performance.&lt;br/&gt;
+        To quickly change the input data, press the Quick Variable Input button and amend the mappings as necessary.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="SQLBulkInsertHelpKeepidentity" xml:space="preserve">
+    <value>Preserve source identity values. When not specified, identity values are assigned by the destination.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Preserve source identity values.</value>
+  </data>
+  <data name="SQLBulkInsertHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns Success or the record numbers with errors.&lt;br/&gt; 
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br/&gt;
+        Using recordset () will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="SQLBulkInsertHelpSkipblankrows" xml:space="preserve">
+    <value>Blank records will not be added to the SQL table.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Blank rows will be ignored</value>
+  </data>
+  <data name="SQLBulkInsertHelpTable" xml:space="preserve">
+    <value>Select a table to perform the bulk insert into.&lt;br/&gt;
+        If the table schema has changed or recently added to the source, click the refresh button.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Select a table to perform the bulk insert into.</value>
+  </data>
+  <data name="SQLBulkInsertHelpTablelock" xml:space="preserve">
+    <value>Obtain a bulk update lock for the duration of the bulk copy operation. When not specified, row locks are used.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Obtain a bulk update lock for the duration of the bulk copy operation.</value>
+  </data>
+  <data name="SqlBulkInsertHelpTimeout" xml:space="preserve">
+    <value>The number of seconds you would like the operation to complete in.&lt;br /&gt;
+        All batches in total must complete within this time period.&lt;br /&gt;
+        The default is 0 which will be no time constraint.&lt;br/&gt;
+        If you specify 30, then 30 seconds will be allowed for the entire operation to complete before timing out.&lt;br/&gt;
+        Note, the timeout is purely for the actual SQL connection and not the preparation of the data to be inserted.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Number   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="SqlBulkInsertHelpUseInternalTransaction" xml:space="preserve">
+    <value>When specified, each batch of the bulk-copy operation will occur within a transaction.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        When specified, each batch of the bulk-copy operation will occur within a transaction.</value>
+  </data>
+  <data name="SQLBulkInsertToolTipInputData" xml:space="preserve">
+    <value>To bulk insert data into a table, put the data to insert in here.&lt;br/&gt;
+        Using recordset (*) notation will put the entire recordset in and is the normal usage scenario for large data inserts to SQL.&lt;br /&gt;
+        A single Recordset will yield the best performance.&lt;br/&gt;
+        Do not mix, scalars and/or different recordsets for optimum performance.&lt;br/&gt;
+        To quickly change the input data, press the Quick Variable Input button and amend the mappings as necessary.</value>
+  </data>
+  <data name="SystemInformationHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns the type of system information selected.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="SystemInformationHelpSysInfoType" xml:space="preserve">
+    <value>Select the type of system information you would like to use.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        na</value>
+  </data>
+  <data name="UniqueHelpInFields" xml:space="preserve">
+    <value>To identify unique information in a recordset, put the comma separated fields that need to be unique in here. &lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        [[Recordset().Field]]</value>
+  </data>
+  <data name="UniqueHelpResults" xml:space="preserve">
+    <value>Returns the unique combinations into the variables specified.&lt;br/&gt;
+        If there are multiple fields being returned, there should be multiple Results fields specified. Use a comma to separate the variables.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="UniqueHelpReturnFields" xml:space="preserve">
+    <value>Which fields from the recordset would you like returned when a Unique combination is found?&lt;br/&gt;
+        Use a comma separated list of the fields.&lt;br/&gt;
+        Where multiple rows are the same, the first one will be deemed Unique.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        [[Recordset().Field]]</value>
+  </data>
+  <data name="UnzipHelpArchivePassword" xml:space="preserve">
+    <value>Specify the password needed to open the zip file here.&lt;br /&gt;
+        Leaving the Archive Password blank will result in no archive password being used to open the file.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="UnzipHelpDestination" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        Put the full path of the destination you are unzipping to here.&lt;br /&gt;
+        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="UnzipHelpForceoverwrite" xml:space="preserve">
+    <value>If a file or folder already exists, you can force a new one to overwrite the old one.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        If it exists already, force an overwrite</value>
+  </data>
+  <data name="UnzipHelpPassword" xml:space="preserve">
+    <value>For protected resources, specify the Password of an account with permission to access the source.&lt;br/&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="UnzipHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns Success or will be blank depending on the success of the Unzip action.&lt;br/&gt; 
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br/&gt;
+        Using recordset() will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="UnzipHelpUsername" xml:space="preserve">
+    <value>For protected resources, specify the Username of an account with permission to access the source.&lt;br/&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="UnzipToolTipZipname" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br/&gt;
+        To unzip a file, put the full path and zip file name in here.&lt;br/&gt;
+        You can use File System, URI, SFTP, FTP or FTPS format.</value>
+  </data>
+  <data name="WriteFileHelpContents" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        Put the contents you want written to the file in here.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="WriteFileHelpFilename" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        To write content to a file, put the full path and file name in here.&lt;br /&gt;
+        You can use File System, URI, SFTP, FTP or FTPS format.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="WriteFileHelpMethod" xml:space="preserve">
+    <value>Overwrite will replace the file contents with the new content.&lt;br/&gt;
+        Append Top puts the new content at the beginning of the file.&lt;br/&gt;
+        Append Bottom will add the new content to the end of the file.</value>
+  </data>
+  <data name="WriteFileHelpPassword" xml:space="preserve">
+    <value>For protected resources, specify the Password of an account with permission to perform this action.&lt;br /&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="WriteFileHelpResult" xml:space="preserve">
+    <value>Only variables go in here.&lt;br /&gt;
+        Returns Success or will be blank depending on the success of the Write action.&lt;br/&gt; 
+        You can use [[Scalar]] as well as [[Recordset().Fields]].&lt;br/&gt;
+        Using recordset() will add a new record and (*) will assign every record.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="WriteFileHelpUsername" xml:space="preserve">
+    <value>For protected resources, specify the Username of an account with permission to perform this action.&lt;br /&gt;
+        By default the account running Warewolf Server.exe service will be used.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="NativeActivityHelpCallthiswebservice" xml:space="preserve">
+    <value>If an error occurs you can execute a web service / Warewolf workflow to log the error that occurred. E.g.&lt;br /&gt;
+        http://ServerName:3142/Services/LogErrors?Severity=1&amp;amp;Error=[[ErrorMsg]]&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="NativeActivityHelpEndtheworkflow" xml:space="preserve">
+    <value>To end the workflow if an error has occurred at this point, make sure the checkbox is selected. &lt;br/&gt;
+        If you have also called a web service / Warewolf workflow, that will finish executing first.&lt;br/&gt;
+        If the workflow is nested, the calling workflow will resume.&lt;br/&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Ends the executing workflow at this point</value>
+  </data>
+  <data name="NativeActivityHelpPuterrorinthisvariable" xml:space="preserve">
+    <value>If an error occurs the error message will be placed into this variable as well the result variable.&lt;br/&gt;
+        If left empty the result will still be placed in the result variable.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="WebRequestHelpHeader" xml:space="preserve">
+    <value>To supply additional header information in your get request, put the header info in here.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="WebRequestHelpResult" xml:space="preserve">
+    <value>Only a single variable goes in here.&lt;br/&gt;
+        Returns the response text of the web get request.&lt;br/&gt; 
+        &lt;br /&gt;
+
+        Allowed:
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
+  <data name="WebRequestHelpURL" xml:space="preserve">
+    <value>Any variable and/or data goes in here.&lt;br /&gt;
+        To traverse and retrieve the raw response from a webpage, enter it in here.&lt;br /&gt;
+        &lt;br /&gt;
+
+        Allowed:&lt;br /&gt;
+        Data   
+        &lt;ol&gt;
+            &lt;li&gt;[[Scalar]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(n).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
+            &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
+        &lt;/ol&gt;</value>
+  </data>
 </root>
