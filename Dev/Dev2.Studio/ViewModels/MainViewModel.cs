@@ -982,7 +982,6 @@ namespace Dev2.Studio.ViewModels
 
         public void OpenResource(Guid resourceId, IServer server)
         {
-            
         }
 
         public void ShowPopup(IPopupMessage popupMessage)

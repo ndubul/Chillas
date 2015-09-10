@@ -108,7 +108,12 @@ namespace Warewolf.Studio.Views
 
         private XamDataTreeNode GetFolderXamDataTreeNode(string folderName)
         {
-            var flattenTree = TreeUtils.Descendants(_explorerView.ExplorerTree.Nodes[0]);
+            var flattenTree = new List<XamDataTreeNode>();
+            foreach (var node in _explorerView.ExplorerTree.Nodes)
+            {
+                var xamDataTreeNodes = TreeUtils.Descendants(node);
+                flattenTree.AddRange(xamDataTreeNodes);
+            }
             var searchName = folderName;
             if (folderName.Contains("/"))
             {

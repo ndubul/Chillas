@@ -43,7 +43,7 @@ namespace Warewolf.Studio.ViewModels
         bool _canShowVersions;
 	    readonly IShellViewModel _shellViewModel;
 
-	    public ExplorerItemViewModel( IServer server, IExplorerTreeItem parent,Action<IExplorerItemViewModel> selectAction,IShellViewModel shellViewModel)
+	    public ExplorerItemViewModel(IServer server, IExplorerTreeItem parent,Action<IExplorerItemViewModel> selectAction,IShellViewModel shellViewModel)
         {
             _selectAction = selectAction;
             _shellViewModel = shellViewModel;
