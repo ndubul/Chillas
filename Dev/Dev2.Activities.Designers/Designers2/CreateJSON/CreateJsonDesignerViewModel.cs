@@ -14,6 +14,7 @@ using System.Activities.Presentation.Model;
 using System.Collections.Generic;
 using Dev2.Activities.Designers2.Core;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
+using Dev2.Interfaces;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Activities.Utils;
 using Dev2.TO;
@@ -28,7 +29,7 @@ namespace Dev2.Activities.Designers2.CreateJSON
         {
             AddTitleBarLargeToggle();
             AddTitleBarQuickVariableInputToggle();
-            AddTitleBarHelpToggle();
+            //AddTitleBarHelpToggle();
 
             dynamic mi = ModelItem;
             InitializeItems(mi.JsonMappings);
@@ -62,6 +63,14 @@ namespace Dev2.Activities.Designers2.CreateJSON
             }
         }
 
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
+        }
 
         #endregion
 

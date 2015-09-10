@@ -14,6 +14,8 @@
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
                                xmlns:controls="clr-namespace:Dev2.Activities.Designers2.Core.Controls"
                                xmlns:local="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.CustomControls"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                MinWidth="350"
                                Width="350"
                                Height="250"
@@ -96,8 +98,7 @@
                                                     Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
                                                     ToolTip="{x:Static help:HelpTextResources.AssignToolTipVariable}">
                                 <i:Interaction.Behaviors>
-                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.AssignHelpVariable}"
-                                                     DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                    <core1:HelpSetter Text="{x:Static languages:Core.AssignHelpVariable}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                     <errors:ErrorsSetter Source="{Binding}"
                                                          SourcePropertyName="FieldName"
                                                          SourcePropertyValue="{Binding FieldName, UpdateSourceTrigger=PropertyChanged}"
@@ -148,8 +149,7 @@
                                                     Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
                                                     ToolTip="{x:Static help:HelpTextResources.AssignToolTipNewValue}">
                                 <i:Interaction.Behaviors>
-                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.AssignHelpNewValue}"
-                                                     DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                    <core1:HelpSetter Text="{x:Static languages:Core.AssignHelpNewValue}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                     <errors:ErrorsSetter Source="{Binding}"
                                                          SourcePropertyName="FieldValue"
                                                          SourcePropertyValue="{Binding FieldValue, UpdateSourceTrigger=PropertyChanged}"

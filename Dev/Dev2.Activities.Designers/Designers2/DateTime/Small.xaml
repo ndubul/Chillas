@@ -9,6 +9,8 @@
                                xmlns:local="clr-namespace:Dev2.Activities.Designers2.DateTime"
                                xmlns:help="clr-namespace:Dev2.Activities.Designers2.Core.Help"
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="270"
                                MaxWidth="270"
                                mc:Ignorable="d"
@@ -47,8 +49,7 @@
                                 ToolTip="{x:Static help:HelpTextResources.DateTimeToolTipDatetime}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Inputtxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.DateTimeHelpDatetime}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.DateTimeHelpDatetime}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="DateTime"
                                      SourcePropertyValue="{Binding ModelItem.DateTime, UpdateSourceTrigger=PropertyChanged}"
@@ -74,8 +75,7 @@
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_InputFormattxt_AutoID}"
                                 ToolTip="{x:Static help:HelpTextResources.DateTimeToolTipInputformat}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.DateTimeHelpInputformat}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.DateTimeHelpInputformat}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="InputFormat"
                                      SourcePropertyValue="{Binding ModelItem.InputFormat, UpdateSourceTrigger=PropertyChanged}"
@@ -93,8 +93,7 @@
                   AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_AddTimeTypecbx_AutoID}"
                   ToolTip="{x:Static help:HelpTextResources.DateTimeToolTipTimeType}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.DateTimeHelpTimeType}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.DateTimeHelpTimeType}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="SelectedTimeModifierType"
                                      SourcePropertyValue="{Binding SelectedTimeModifierType, UpdateSourceTrigger=PropertyChanged}"
@@ -112,8 +111,7 @@
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_AddTimeAmounttxt_AutoID}"
                                 ToolTip="{x:Static help:HelpTextResources.DateTimeToolTipAddtime}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.DateTimeHelpAddtime}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.DateTimeHelpAddtime}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="TimeModifierAmountDisplay"
                                      SourcePropertyValue="{Binding ModelItem.TimeModifierAmountDisplay, UpdateSourceTrigger=PropertyChanged}"
@@ -138,8 +136,7 @@
                                 IntellisenseProvider="{StaticResource DateTimeCompositeIntellisenseProvider}"
                                 ToolTip="{x:Static help:HelpTextResources.DateTimeToolTipOutputformat}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.DateTimeHelpOutputformat}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.DateTimeHelpOutputformat}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="OutputFormat"
                                      SourcePropertyValue="{Binding ModelItem.OutputFormat, UpdateSourceTrigger=PropertyChanged}"
@@ -159,8 +156,7 @@
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Resulttxt_AutoID}"
                                 ToolTip="{x:Static help:HelpTextResources.DateTimeToolTipResult}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.DateTimeHelpResult}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.DateTimeHelpResult}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="Result"
                                      SourcePropertyValue="{Binding ModelItem.Result, UpdateSourceTrigger=PropertyChanged}"
