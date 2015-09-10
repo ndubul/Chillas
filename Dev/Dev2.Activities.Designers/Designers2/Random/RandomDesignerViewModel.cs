@@ -24,7 +24,6 @@ namespace Dev2.Activities.Designers2.Random
         public RandomDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             RandomTypes = Dev2EnumConverter.ConvertEnumsTypeToStringList<enRandomType>();
             SelectedRandomType = Dev2EnumConverter.ConvertEnumValueToString(RandomType);
         }

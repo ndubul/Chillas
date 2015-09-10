@@ -409,7 +409,7 @@ namespace Dev2.Activities.Designers2.Service
                 
             }
         }
-        string Type { get { return GetProperty<string>(); } }
+        public string Type { get { return GetProperty<string>(); } }
         // ReSharper disable InconsistentNaming
         Guid EnvironmentID { get { return GetProperty<Guid>(); } }
 
@@ -787,25 +787,40 @@ namespace Dev2.Activities.Designers2.Service
             ImageSource = GetIconPath(actionType);
         }
 
+
+        public string ResourceType
+        {
+            get;
+            set;
+        }
+
         string GetIconPath(Common.Interfaces.Core.DynamicServices.enActionType actionType)
         {
             switch (actionType)
             {
                 case Common.Interfaces.Core.DynamicServices.enActionType.InvokeStoredProc:
+                    ResourceType = Common.Interfaces.Data.ResourceType.DbService.ToString();
                     return "DatabaseService-32";
 
                 case Common.Interfaces.Core.DynamicServices.enActionType.InvokeWebService:
+                    ResourceType = Common.Interfaces.Data.ResourceType.WebService.ToString();
                     return "WebService-32";
 
                 case Common.Interfaces.Core.DynamicServices.enActionType.Plugin:
+                    ResourceType = Common.Interfaces.Data.ResourceType.PluginService.ToString();
                     return "PluginService-32";
 
                 case Common.Interfaces.Core.DynamicServices.enActionType.Workflow:
-                    return string.IsNullOrEmpty(ServiceUri)
-                        ? "Workflow-32"
-                        : "RemoteWarewolf-32";
+                    if(string.IsNullOrEmpty(ServiceUri))
+                    {
+                        ResourceType = Common.Interfaces.Data.ResourceType.WorkflowService.ToString();
+                        return "Workflow-32";
+                    }
+                    ResourceType = Common.Interfaces.Data.ResourceType.Server.ToString();
+                    return "RemoteWarewolf-32";
 
                 case Common.Interfaces.Core.DynamicServices.enActionType.RemoteService:
+                    ResourceType = Common.Interfaces.Data.ResourceType.Server.ToString();
                     return "RemoteWarewolf-32";
 
             }

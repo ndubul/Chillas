@@ -34,7 +34,6 @@ namespace Dev2.Activities.Designers2.DataMerge
         {
             AddTitleBarLargeToggle();
             AddTitleBarQuickVariableInputToggle();
-            //AddTitleBarHelpToggle();
 
             ItemsList = new List<string> { "None", "Index", "Chars", "New Line", "Tab" };
             AlignmentTypes = new List<string> { "Left", "Right" };

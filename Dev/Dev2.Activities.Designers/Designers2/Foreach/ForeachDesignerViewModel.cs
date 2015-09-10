@@ -26,7 +26,6 @@ namespace Dev2.Activities.Designers2.Foreach
         public ForeachDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             ForeachTypes = Dev2EnumConverter.ConvertEnumsTypeToStringList<enForEachType>();
             SelectedForeachType = Dev2EnumConverter.ConvertEnumValueToString(ForEachType);
         }

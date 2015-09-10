@@ -24,7 +24,6 @@ namespace Dev2.Activities.Designers2.DateTime
         public DateTimeDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             TimeModifierTypes = new List<string>(DateTimeFormatter.TimeModifierTypes);
             SelectedTimeModifierType = string.IsNullOrEmpty(TimeModifierType) ? TimeModifierTypes[0] : TimeModifierType;
         }

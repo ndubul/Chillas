@@ -24,7 +24,6 @@ namespace Dev2.Activities.Designers2.WriteFile
             : base(modelItem, string.Empty, "File Name")
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
 
             if (!Overwrite && !AppendTop && !AppendBottom)
             {

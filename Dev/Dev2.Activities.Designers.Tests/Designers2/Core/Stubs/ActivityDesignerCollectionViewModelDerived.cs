@@ -26,6 +26,14 @@ namespace Dev2.Activities.Designers.Tests.Designers2.Core.Stubs
 
         public override string CollectionName { get { return "FieldsCollection"; } }
 
+        #region Overrides of ActivityDesignerViewModel
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+        }
+
+        #endregion
+
         public void TestAddTitleBarQuickVariableInputToggle()
         {
             AddTitleBarQuickVariableInputToggle();
@@ -40,5 +48,13 @@ namespace Dev2.Activities.Designers.Tests.Designers2.Core.Stubs
         {
             yield break;
         }
+
+        #region Overrides of ActivityDesignerViewModel
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+        }
+
+        #endregion
     }
 }

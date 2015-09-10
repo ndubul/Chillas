@@ -26,11 +26,8 @@
                             <ColumnDefinition SharedSizeGroup="A" />
                             <ColumnDefinition SharedSizeGroup="B" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0"
-                               Margin="0,0,-2,0"
-                               Text="{Binding Path=Key, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Grid.Column="1"
-                               Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Grid.Column="0" Margin="0,0,-2,0" Text="{Binding Path=Key, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
@@ -55,8 +52,7 @@
                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                         AutomationProperties.AutomationId="UI_FixErrors_AutoID">
                     <Button.ToolTip>
-                        <ItemsControl ItemsSource="{Binding Path=DesignValidationErrors}"
-                                      ItemTemplate="{StaticResource ErrorListTemplate}" />
+                        <ItemsControl ItemsSource="{Binding Path=DesignValidationErrors}" ItemTemplate="{StaticResource ErrorListTemplate}" />
                     </Button.ToolTip>
                     <Image Source="{Binding Path=WorstError, Converter={StaticResource ErrorTypeToImageConverter}}"
                            Height="16"
@@ -65,8 +61,7 @@
                 </Button>
                 <AutomationProperties.AutomationId>
                     <MultiBinding StringFormat="[UI_{0}_FixBtn_AutoID]">
-                        <Binding Path="ModelItem.ServiceName"
-                                 RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="ModelItem.ServiceName" RelativeSource="{RelativeSource Self}" />
                     </MultiBinding>
                 </AutomationProperties.AutomationId>
             </Grid>

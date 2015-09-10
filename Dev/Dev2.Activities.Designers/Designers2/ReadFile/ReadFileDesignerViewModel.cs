@@ -21,7 +21,6 @@ namespace Dev2.Activities.Designers2.ReadFile
             : base(modelItem, "File Name", string.Empty)
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
         }        
 
         public override void Validate()

@@ -29,7 +29,6 @@ namespace Dev2.Activities.Designers2.Zip
             : base(modelItem, "File or Folder", "Destination")
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
 
             CompressionRatioList = Dev2EnumConverter.ConvertEnumsTypeToStringList<CompressionRatios>();
 

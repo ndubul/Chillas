@@ -11,6 +11,8 @@
                                xmlns:sa="http://schemas.microsoft.com/netfx/2009/xaml/activities"
                                xmlns:help="clr-namespace:Dev2.Activities.Designers2.Core.Help"
                                xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                MinWidth="200"
                                MinHeight="188"
                                MaxWidth="Infinity"
@@ -25,42 +27,40 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Border Grid.Row="0">
-        <sap:WorkflowItemsPresenter x:Uid="sad:WorkflowItemsPresenter_1"                                    
+            <sap:WorkflowItemsPresenter x:Uid="sad:WorkflowItemsPresenter_1"                                    
                                     x:Name="ActivitiesPresenter"
                                     AllowedItemType="{x:Type sa:Activity}"
                                     HintText="Add New Activity"
                                     ToolTip="{x:Static help:HelpTextResources.SequenceTooltipSequence}"
                                     IsDefaultContainer="true">
-            <sap:WorkflowItemsPresenter.Items>
-                <Binding Path="ModelItem.Activities"/>
-            </sap:WorkflowItemsPresenter.Items>
-            <sap:WorkflowItemsPresenter.SpacerTemplate>
-                <DataTemplate x:Uid="DataTemplate_9">
-                    <presentation:VerticalConnector x:Uid="sacd:VerticalConnector_1"
+                <sap:WorkflowItemsPresenter.Items>
+                    <Binding Path="ModelItem.Activities"/>
+                </sap:WorkflowItemsPresenter.Items>
+                <sap:WorkflowItemsPresenter.SpacerTemplate>
+                    <DataTemplate x:Uid="DataTemplate_9">
+                        <presentation:VerticalConnector x:Uid="sacd:VerticalConnector_1"
                                                     AllowedItemType="{x:Type sa:Activity}"
                                                     Focusable="true"
                                                     Context="{Binding Path=Context}" />
-                </DataTemplate>
-            </sap:WorkflowItemsPresenter.SpacerTemplate>
-            <sap:WorkflowItemsPresenter.ItemsPanel>
-                <ItemsPanelTemplate x:Uid="ItemsPanelTemplate_1">
-                    <StackPanel x:Uid="StackPanel_1"
-                                Orientation="Vertical" />
-                </ItemsPanelTemplate>
-            </sap:WorkflowItemsPresenter.ItemsPanel>
-            <i:Interaction.Behaviors>
-        <help:HelpSetter Text="{x:Static help:HelpTextResources.SequenceHelpSequence}"
-                         DataContext="{Binding}" />
-    </i:Interaction.Behaviors>
-            <AutomationProperties.AutomationId>
+                    </DataTemplate>
+                </sap:WorkflowItemsPresenter.SpacerTemplate>
+                <sap:WorkflowItemsPresenter.ItemsPanel>
+                    <ItemsPanelTemplate x:Uid="ItemsPanelTemplate_1">
+                        <StackPanel x:Uid="StackPanel_1" Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </sap:WorkflowItemsPresenter.ItemsPanel>
+                <i:Interaction.Behaviors>
+                    <core1:HelpSetter Text="{x:Static languages:Core.SequenceHelpSequence}" DataContext="{Binding}" />
+                </i:Interaction.Behaviors>
+                <AutomationProperties.AutomationId>
                     <MultiBinding StringFormat="UI_{0}_ActivitiesPresenter_AutoID">
                         <Binding Path="ModelItem.AutomationID" />
                     </MultiBinding>
                 </AutomationProperties.AutomationId>
-        </sap:WorkflowItemsPresenter>    
+            </sap:WorkflowItemsPresenter>
         </Border>
-        
+
         <errors:OnError Grid.Row="1" />
     </Grid>
-     
+
 </core:ActivityDesignerTemplate>

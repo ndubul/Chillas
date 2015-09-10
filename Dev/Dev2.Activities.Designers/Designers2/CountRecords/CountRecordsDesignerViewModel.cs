@@ -22,7 +22,6 @@ namespace Dev2.Activities.Designers2.CountRecords
         public CountRecordsDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             RecordsetNameValue = RecordsetName;
         }
         

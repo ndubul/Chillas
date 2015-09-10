@@ -31,7 +31,6 @@ namespace Dev2.Activities.Designers2.GetWebRequest
             : base(modelItem)
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
 
             PreviewViewModel = new PreviewViewModel
                 {

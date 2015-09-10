@@ -49,7 +49,6 @@ namespace Dev2.Activities.Designers2.SharepointListRead
             :base(modelItem)
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
             VerifyArgument.IsNotNull("asyncWorker", asyncWorker);
             _asyncWorker = asyncWorker;
             VerifyArgument.IsNotNull("environmentModel", environmentModel);

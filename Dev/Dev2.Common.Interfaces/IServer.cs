@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dev2.Common.Interfaces.Data;
@@ -27,10 +28,11 @@ namespace Dev2.Common.Interfaces
         void Disconnect();
         void Edit();
         List<IWindowsGroupPermission> Permissions { get; set; }
+        Guid EnvironmentID { get; set; }
 
-        // event PermissionsChanged PermissionsChanged;
-       // event NetworkStateChanged NetworkStateChanged;
-       // event ItemAddedEvent ItemAddedEvent;
+         event PermissionsChanged PermissionsChanged;
+         event NetworkStateChanged NetworkStateChanged;
+         event ItemAddedEvent ItemAddedEvent;
        
         string GetServerVersion();
 
@@ -38,7 +40,15 @@ namespace Dev2.Common.Interfaces
 
     }
 
-    //public delegate void PermissionsChanged(PermissionsChangedArgs args);
+    public delegate void PermissionsChanged(PermissionsChangedArgs args);
+
+    public class PermissionsChangedArgs
+    {
+        public PermissionsChangedArgs(List<IWindowsGroupPermission> windowsGroupPermissions)
+        {
+        }
+    }
+
     public delegate void NetworkStateChanged(INetworkStateChangedEventArgs args);
-   // public delegate void ItemAddedEvent(IExplorerItem args);
+    public delegate void ItemAddedEvent(IExplorerItem args);
 }

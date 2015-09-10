@@ -38,7 +38,6 @@ namespace Dev2.Activities.Designers2.Sequence
         public SequenceDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             AddTitleBarLargeToggle();
         }
 

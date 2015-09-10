@@ -262,7 +262,7 @@
                                           CommandParameter="Server"
                                           AutomationProperties.AutomationId ="UI_NewServerServiceContextMenuItem_AutoID" >
                                     <MenuItem.Icon>
-                                        <Image  Width="14" Height="14" Source="{StaticResource System-Logo}" />
+                                        <Image  Width="14" Height="14" Source="{StaticResource System-Logo-Create}" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <MenuItem Header="New Database Source"
