@@ -42,5 +42,14 @@ namespace Dev2.Activities.Designers.Tests.Designers2.Core.Credentials
         {
             UpdateErrors(errors);
         }
+
+        #region Overrides of ActivityDesignerViewModel
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+
+        }
+
+        #endregion
     }
 }

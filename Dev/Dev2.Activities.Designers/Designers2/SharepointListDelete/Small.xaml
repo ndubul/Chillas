@@ -7,16 +7,12 @@
                                xmlns:help="clr-namespace:Dev2.Activities.Designers2.Core.Help"
                                xmlns:attachedProperties="clr-namespace:Dev2.Activities.AttachedProperties"
                                xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                               xmlns:controls="clr-namespace:Dev2.Activities.Designers2.Core.Controls"
-                               xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces;assembly=Dev2.Common.Interfaces"
                                xmlns:ui="clr-namespace:Dev2.UI;assembly=Dev2.Intellisense"
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
                                xmlns:sharepointListDelete="clr-namespace:Dev2.Activities.Designers2.SharepointListDelete"
-                               xmlns:behaviors="clr-namespace:Dev2.Studio.AppResources.Behaviors;assembly=Dev2.CustomControls"
-                               xmlns:system="clr-namespace:System;assembly=mscorlib"
-                               xmlns:to="clr-namespace:Dev2.TO;assembly=Dev2.Activities"
-                               xmlns:converters="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.CustomControls"
                                xmlns:fa="http://schemas.fontawesome.io/icons/"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
                                Width="290"
                                MaxWidth="290"
                                mc:Ignorable="d"
@@ -51,8 +47,7 @@
                   attachedProperties:FocusSetter.IsFocused="{Binding IsSelectedSharepointServerFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Database_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointHelpServer}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.SharepointHelpServer}" DataContext="{Binding}" />
             </i:Interaction.Behaviors>
         </ComboBox>
         <Button Grid.Column="2"
@@ -78,8 +73,7 @@
                   attachedProperties:FocusSetter.IsFocused="{Binding IsSelectedListFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_TableName_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointHelpList}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.SharepointHelpList}" DataContext="{Binding}" />
             </i:Interaction.Behaviors>
         </ComboBox>
         <Button Grid.Column="2"
@@ -107,8 +101,7 @@
                                 ToolTip="{x:Static help:HelpTextResources.SharepointDelteToolTipResult}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Result_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointDeleteHelpResult}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.SharepointDeleteHelpResult}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="Result"
                                      SourcePropertyValue="{Binding ModelItem.DeleteCount, UpdateSourceTrigger=PropertyChanged}"

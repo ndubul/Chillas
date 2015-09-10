@@ -21,7 +21,6 @@ namespace Dev2.Activities.Designers2.Unzip
             : base(modelItem, "Zip Name", "Destination")
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
         }
 
         public override void Validate()

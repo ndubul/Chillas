@@ -25,7 +25,6 @@ namespace Dev2.Activities.Designers2.BaseConvert
             : base(modelItem)
         {
             AddTitleBarQuickVariableInputToggle();
-            //AddTitleBarHelpToggle();
 
             dynamic mi = ModelItem;
             InitializeItems(mi.ConvertCollection);

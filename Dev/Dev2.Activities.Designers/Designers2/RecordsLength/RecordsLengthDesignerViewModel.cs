@@ -22,7 +22,6 @@ namespace Dev2.Activities.Designers2.RecordsLength
         public RecordsLengthDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             RecordsetNameValue = RecordsetName;
         }
         

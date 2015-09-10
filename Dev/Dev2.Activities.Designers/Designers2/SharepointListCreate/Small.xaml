@@ -13,6 +13,8 @@
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
                                xmlns:sharepointListCreate="clr-namespace:Dev2.Activities.Designers2.SharepointListCreate"
                                xmlns:fa="http://schemas.fontawesome.io/icons/"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="290"
                                MaxWidth="290"
                                mc:Ignorable="d" 
@@ -48,8 +50,7 @@
                   attachedProperties:FocusSetter.IsFocused="{Binding IsSelectedSharepointServerFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Database_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointHelpServer}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.SharepointHelpServer}" DataContext="{Binding}" />
             </i:Interaction.Behaviors>
         </ComboBox>
         <Button Grid.Column="2"
@@ -75,8 +76,7 @@
                   attachedProperties:FocusSetter.IsFocused="{Binding IsSelectedListFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_TableName_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointHelpList}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.SharepointHelpList}" DataContext="{Binding}" />
             </i:Interaction.Behaviors>
         </ComboBox>
         <Button Grid.Column="2"
@@ -119,8 +119,7 @@
                                                     Text="{Binding VariableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Style="{StaticResource ActivityMapppingDataGridIntellisenseTextBoxStyle}">
                                 <i:Interaction.Behaviors>
-                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointToolTipToVariable}"
-                                                     DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                    <core1:HelpSetter Text="{x:Static languages:Core.SharepointToolTipToVariable}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                     <errors:ErrorsSetter Source="{Binding}"
                                                          SourcePropertyName="VariableName"
                                                          SourcePropertyValue="{Binding VariableName, UpdateSourceTrigger=PropertyChanged}"
@@ -180,8 +179,7 @@
                                 ToolTip="{x:Static help:HelpTextResources.SharepointInsertToolTipResult}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Result_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointInsertHelpResult}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.SharepointInsertHelpResult}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="Result"
                                      SourcePropertyValue="{Binding ModelItem.Result, UpdateSourceTrigger=PropertyChanged}"

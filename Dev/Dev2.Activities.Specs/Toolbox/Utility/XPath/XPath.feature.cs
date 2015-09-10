@@ -760,7 +760,7 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        public virtual void UseXPathToGetDataOffXMLUsingRecordsets(string xml, string xmlvalue, string first, string xpath, string path, string value, string error, string[] exampleTags)
+        public virtual void UseXPathToGetDataOffXMLUsingRecordsets(string xml, string xmlvalue, string recordset, string xpath, string path, string value, string error, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "ignore"};
@@ -776,14 +776,12 @@ this.ScenarioSetup(scenarioInfo);
 #line 225
  testRunner.And(string.Format("The result variable is \'{0}\'", xml), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 226
- testRunner.And(string.Format("I have a variable \'{0}\' output with xpath \'{1}\'", first, path), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("The path variable is \'{0}\' equals \'{1}\'", xpath, path), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 227
- testRunner.And(string.Format("The path variable is \'{0}\'", xpath), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 228
  testRunner.When("the xpath tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 228
+ testRunner.Then(string.Format("the variable \'{0}\' should have a value \'{1}\'", recordset, value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 229
- testRunner.Then(string.Format("the variable \'{0}\' should have a value \'{1}\'", first, value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 230
  testRunner.And(string.Format("the execution has \'{0}\' error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
@@ -794,9 +792,9 @@ this.ScenarioSetup(scenarioInfo);
             table32.AddRow(new string[] {
                         string.Format("{0}", xmlvalue),
                         string.Format("{0}", value),
-                        string.Format("{0}", first),
+                        string.Format("{0}", recordset),
                         string.Format("{0}", path)});
-#line 231
+#line 230
  testRunner.And("the debug inputs as", ((string)(null)), table32, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
@@ -804,8 +802,8 @@ this.ScenarioSetup(scenarioInfo);
                         ""});
             table33.AddRow(new string[] {
                         "1",
-                        string.Format("{0} = {1}", first, value)});
-#line 234
+                        string.Format("<First> = {0}", value)});
+#line 233
  testRunner.And("the debug output as", ((string)(null)), table33, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -819,7 +817,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[rec().a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
             "/number></root>")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[firstNum]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Recordset", "[[firstNum]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[path().set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "//root/number[@id=\'1\']/text()")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "One")]
@@ -838,7 +836,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[rec(1).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
             "/number></root>")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[firstNum]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Recordset", "[[firstNum]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[path(1).set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "//root/number[@id=\'1\']/text()")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "One")]
@@ -857,7 +855,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[rec(*).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
             "/number></root>")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[F([[int]]).number]],[[int]] =1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Recordset", "[[F([[int]]).number]],[[int]] =1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[path(*).set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "//root/number[@id=\'1\']/text()")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "One")]
@@ -876,7 +874,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[rec([[int]]).a]], [[int]] =1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
             "/number></root>")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[firstNum]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Recordset", "[[firstNum]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[path([[int]]).set]],[[int]]=1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "//root/number[@id=\'1\']/text()")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "One")]
@@ -894,7 +892,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[var]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[F().number]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Recordset", "[[F().number]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[var]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "//root/number[@id=\'1\']/text()")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "<InnerError>Value cannt be null. Parameter name:xmlData</InnerError>")]
@@ -912,7 +910,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xml", "[[rec().a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xmlvalue", "<root><number id=\"1\">One</number><number id=\"2\">Two</number><number id=\"3\">Three<" +
             "/number></root>")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:First", "[[firstNum]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Recordset", "[[firstNum]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Xpath", "[[variable]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:path", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "<InnerError>Value cannt be null. Parameter name:xPath</InnerError>")]

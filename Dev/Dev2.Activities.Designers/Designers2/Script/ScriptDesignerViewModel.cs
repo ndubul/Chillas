@@ -24,7 +24,6 @@ namespace Dev2.Activities.Designers2.Script
         public ScriptDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             ScriptTypes = Dev2EnumConverter.ConvertEnumsTypeToStringList<enScriptType>();
             SelectedScriptType = Dev2EnumConverter.ConvertEnumValueToString(ScriptType);
         }

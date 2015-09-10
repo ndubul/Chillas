@@ -39,7 +39,6 @@ namespace Dev2.Activities.Designers2.FindRecordsMultipleCriteria
             : base(modelItem)
         {
             AddTitleBarLargeToggle();
-            //AddTitleBarHelpToggle();
 
             WhereOptions = new ObservableCollection<string>(FindRecsetOptions.FindAll().Select(c => c.HandlesType()));
             SearchTypeUpdatedCommand = new DelegateCommand(OnSearchTypeChanged);

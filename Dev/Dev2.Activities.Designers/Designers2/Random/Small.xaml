@@ -9,6 +9,8 @@
                                xmlns:local="clr-namespace:Dev2.Activities.Designers2.Random"
                                xmlns:help="clr-namespace:Dev2.Activities.Designers2.Core.Help"
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="200"
                                MaxWidth="200"
                                mc:Ignorable="d"
@@ -36,8 +38,7 @@
                   AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Wherecbx_AutoID}"
                   ToolTip="{x:Static help:HelpTextResources.RandomToolTipType}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.RandomHelpType}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.RandomHelpType}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.RandomType"
                                      SourcePropertyValue="{Binding ModelItem.RandomType, UpdateSourceTrigger=PropertyChanged}"
@@ -63,8 +64,7 @@
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Lengthstxt_AutoID}">
                 <i:Interaction.Behaviors>
-                    <help:HelpSetter Text="{x:Static help:HelpTextResources.RandomHelpRangeFrom}"
-                                 DataContext="{Binding}" />
+                    <core1:HelpSetter Text="{x:Static languages:Core.RandomHelpRangeFrom}" DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.From"
                                      SourcePropertyValue="{Binding ModelItem.From, UpdateSourceTrigger=PropertyChanged}"
@@ -84,8 +84,7 @@
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Lengthstxt_AutoID}">
                 <i:Interaction.Behaviors>
-                    <help:HelpSetter Text="{x:Static help:HelpTextResources.RandomHelpLength}"
-                                     DataContext="{Binding}" />
+                    <core1:HelpSetter Text="{x:Static languages:Core.RandomHelpLength}" DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="ModelItem.Length"
                                          SourcePropertyValue="{Binding ModelItem.Length, UpdateSourceTrigger=PropertyChanged}"
@@ -103,8 +102,7 @@
                                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Lengthstxt_AutoID}"
                                     ToolTip="{x:Static help:HelpTextResources.RandomToolTipRangeTo}">
                 <i:Interaction.Behaviors>
-                    <help:HelpSetter Text="{x:Static help:HelpTextResources.RandomHelpRangeTo}"
-                                     DataContext="{Binding}" />
+                    <core1:HelpSetter Text="{x:Static languages:Core.RandomHelpRangeTo}" DataContext="{Binding}" />
                     <errors:ErrorsSetter Source="{Binding}"
                                          SourcePropertyName="ModelItem.To"
                                          SourcePropertyValue="{Binding ModelItem.To, UpdateSourceTrigger=PropertyChanged}"
@@ -125,8 +123,7 @@
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Resulttxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.RandomHelpResult}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.RandomHelpResult}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="Result"
                                      SourcePropertyValue="{Binding ModelItem.Result, UpdateSourceTrigger=PropertyChanged}"

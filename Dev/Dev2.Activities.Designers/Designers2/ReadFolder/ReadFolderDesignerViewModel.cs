@@ -21,7 +21,6 @@ namespace Dev2.Activities.Designers2.ReadFolder
             : base(modelItem, "Directory", string.Empty)
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
 
             if (!IsFilesAndFoldersSelected && !IsFoldersSelected && !IsFilesSelected)
             {

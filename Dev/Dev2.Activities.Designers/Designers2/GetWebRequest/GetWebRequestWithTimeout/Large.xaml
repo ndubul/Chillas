@@ -12,6 +12,8 @@
                                xmlns:preview="clr-namespace:Dev2.Activities.Preview"
                                xmlns:attachedProperties="clr-namespace:Dev2.Activities.AttachedProperties"
                                xmlns:getWebRequestWithTimeout="clr-namespace:Dev2.Activities.Designers2.GetWebRequest.GetWebRequestWithTimeout"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                MinHeight="300"
                                MinWidth="255"
                                Width="255"
@@ -55,8 +57,7 @@
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Inputtxt_AutoID}"
                                 ToolTip="{x:Static help:HelpTextResources.WebRequestToolTipURL}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.WebRequestHelpURL}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.WebRequestHelpURL}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="Url"
                                      SourcePropertyValue="{Binding ModelItem.Url, UpdateSourceTrigger=PropertyChanged}"
@@ -79,7 +80,7 @@
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Inputtxt_AutoID}"
                                 ToolTip="{x:Static help:HelpTextResources.WebRequestToolTipHeader}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.WebRequestHelpHeader}"
+                <core1:HelpSetter Text="{x:Static languages:Core.WebRequestHelpHeader}"
                                  DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="Headers"
@@ -110,7 +111,7 @@
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_InputFormattxt_AutoID}"
                                 ToolTip="{x:Static help:HelpTextResources.WebRequestToolTipResult}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.WebRequestHelpResult}"
+                <core1:HelpSetter Text="{x:Static languages:Core.WebRequestHelpResult}"
                                  DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="Result"

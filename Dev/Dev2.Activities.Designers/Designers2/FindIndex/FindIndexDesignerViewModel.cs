@@ -22,7 +22,6 @@ namespace Dev2.Activities.Designers2.FindIndex
         public FindIndexDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             IndexList = new List<string> { "First Occurrence", "Last Occurrence", "All Occurrences" };
             DirectionList = new List<string> { "Left to Right", "Right to Left" };
             SelectedIndex = string.IsNullOrEmpty(Index) ? IndexList[0] : Index;

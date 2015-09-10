@@ -21,7 +21,6 @@ namespace Dev2.Activities.Designers2.Rename
             : base(modelItem, "File or Folder", "New Name")
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
         }
 
         public override void Validate()

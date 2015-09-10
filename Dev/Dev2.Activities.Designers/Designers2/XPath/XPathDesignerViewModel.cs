@@ -34,7 +34,6 @@ namespace Dev2.Activities.Designers2.XPath
         {
             AddTitleBarLargeToggle();
             AddTitleBarQuickVariableInputToggle();
-            //AddTitleBarHelpToggle();
             dynamic mi = ModelItem;
             InitializeItems(mi.ResultsCollection);
         }

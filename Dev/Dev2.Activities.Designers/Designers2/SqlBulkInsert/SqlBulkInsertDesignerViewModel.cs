@@ -90,7 +90,6 @@ namespace Dev2.Activities.Designers2.SqlBulkInsert
 
             AddTitleBarLargeToggle();
             AddTitleBarQuickVariableInputToggle();
-            //AddTitleBarHelpToggle();
 
             dynamic mi = ModelItem;
             ModelItemCollection = mi.InputMappings;

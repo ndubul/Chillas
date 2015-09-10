@@ -21,7 +21,6 @@ namespace Dev2.Activities.Designers2.Comment
         public CommentDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             ShowLarge = true;
             ThumbVisibility = Visibility.Visible;
         }

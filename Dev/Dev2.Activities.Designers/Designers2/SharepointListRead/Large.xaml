@@ -8,7 +8,6 @@
                                xmlns:core="clr-namespace:Dev2.Activities.Designers2.Core"
                                xmlns:help="clr-namespace:Dev2.Activities.Designers2.Core.Help"
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
-                               xmlns:activities="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities"
                                xmlns:controls="clr-namespace:Dev2.Activities.Designers2.Core.Controls"
                                xmlns:behaviors2="clr-namespace:Dev2.Studio.AppResources.Behaviors;assembly=Dev2.CustomControls"
                                xmlns:sys="clr-namespace:System;assembly=mscorlib"
@@ -18,6 +17,8 @@
                                xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces;assembly=Dev2.Common.Interfaces"
                                xmlns:to="clr-namespace:Dev2.TO;assembly=Dev2.Activities"
                                xmlns:fa="http://schemas.fontawesome.io/icons/"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
                                Width="350"
                                MinWidth="350"
                                MinHeight="450"
@@ -53,59 +54,54 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0"
-               Grid.Row="0"
-               Text="Server" />
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Server" />
             <ComboBox Grid.Column="1"
-                  Grid.Row="0"
-                  x:Name="InitialFocusElement"
-                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-                  ItemsSource="{Binding SharepointServers}"
-                  DisplayMemberPath="ResourceName"
+                      Grid.Row="0"
+                      x:Name="InitialFocusElement"
+                      ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+                      ItemsSource="{Binding SharepointServers}"
+                      DisplayMemberPath="ResourceName"
                       Margin="{StaticResource ControlBorderRight}"
                       IsEnabled="{Binding IsRefreshing,Converter={StaticResource InverseBooleanConverter}}"
-                  SelectedItem="{Binding SelectedSharepointServer, Mode=TwoWay}"
-                  ToolTip="{x:Static help:HelpTextResources.SharepointToolTipServer}"
-                  attachedProperties:FocusSetter.IsFocused="{Binding IsSelectedSharepointServerFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Database_AutoID}">
+                      SelectedItem="{Binding SelectedSharepointServer, Mode=TwoWay}"
+                      ToolTip="{x:Static help:HelpTextResources.SharepointToolTipServer}"
+                      attachedProperties:FocusSetter.IsFocused="{Binding IsSelectedSharepointServerFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Database_AutoID}">
                 <i:Interaction.Behaviors>
-                    <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointHelpServer}"
-                                 DataContext="{Binding}" />
+                    <core1:HelpSetter Text="{x:Static languages:Core.SharepointHelpServer}" DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </ComboBox>
             <Button Grid.Column="2"
-                Grid.Row="0"
-                Content="..."
-                Command="{Binding EditSharepointServerCommand}"
-                ToolTip="Edit Sharepoint Server Source"
-                AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_EditDatabaseCommand_AutoID}" />
-
+                    Grid.Row="0"
+                    Content="..."
+                    Command="{Binding EditSharepointServerCommand}"
+                    ToolTip="Edit Sharepoint Server Source"
+                    AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_EditDatabaseCommand_AutoID}" />
             <TextBlock Grid.Column="0"
-               Grid.Row="1"
-               Text="List"
-               Margin="{StaticResource ControlBorderTop}" />
+                       Grid.Row="1"
+                       Text="List"
+                       Margin="{StaticResource ControlBorderTop}" />
             <ComboBox Grid.Column="1"
-                  Grid.Row="1"
-                  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-                  ItemsSource="{Binding Lists}"
-                  DisplayMemberPath="FullName"
+                      Grid.Row="1"
+                      ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+                      ItemsSource="{Binding Lists}"
+                      DisplayMemberPath="FullName"
                       Margin="{StaticResource ControlBorderTopRight}"
                       IsEnabled="{Binding IsRefreshing,Converter={StaticResource InverseBooleanConverter}}"
-                  SelectedItem="{Binding SelectedList, Mode=TwoWay}"
-                  ToolTip="{x:Static help:HelpTextResources.SharepointToolTipList}"
-                  attachedProperties:FocusSetter.IsFocused="{Binding IsSelectedListFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_TableName_AutoID}">
+                      SelectedItem="{Binding SelectedList, Mode=TwoWay}"
+                      ToolTip="{x:Static help:HelpTextResources.SharepointToolTipList}"
+                      attachedProperties:FocusSetter.IsFocused="{Binding IsSelectedListFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_TableName_AutoID}">
                 <i:Interaction.Behaviors>
-                    <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointHelpList}"
-                                 DataContext="{Binding}" />
+                    <core1:HelpSetter Text="{x:Static languages:Core.SharepointHelpList}" DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </ComboBox>
             <Button Grid.Column="2"
-                Grid.Row="1"
-                Command="{Binding RefreshListsCommand}"
+                    Grid.Row="1"
+                    Command="{Binding RefreshListsCommand}"
                     Margin="{StaticResource ControlBorderTop}"
-                ToolTip="Refresh Lists"
-                AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RefreshTablesCommand_AutoID}" >
+                    ToolTip="Refresh Lists"
+                    AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RefreshTablesCommand_AutoID}" >
                 <Button.Content>
                     <fa:FontAwesome Icon="Refresh"></fa:FontAwesome>
                 </Button.Content>
@@ -124,22 +120,21 @@
                     <!-- DO NOT override ItemsPanel - doing so causes column sizing issues on first drop -->
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="SizeToCells"
-                                        MinWidth="65"
-                                        Header="From Field"
-                                        HeaderStyle="{StaticResource ActivityMapppingDataGridHeaderStyle}"
-                                        d:DataContext="{d:DesignInstance Type=interfaces:ISharepointReadListTo}">
+                                                MinWidth="65"
+                                                Header="From Field"
+                                                HeaderStyle="{StaticResource ActivityMapppingDataGridHeaderStyle}"
+                                                d:DataContext="{d:DesignInstance Type=interfaces:ISharepointReadListTo}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid Background="{StaticResource DataGridColumnHeaderBackgroundBrush}">
                                         <TextBlock Text="{Binding FieldName}"
-                                           TextTrimming="CharacterEllipsis"
-                                           VerticalAlignment="Center"
-                                           Padding="3,0"
-                                           ToolTip="{Binding FieldName}">                               
+                                                   TextTrimming="CharacterEllipsis"
+                                                   VerticalAlignment="Center"
+                                                   Padding="3,0"
+                                                   ToolTip="{Binding FieldName}">                               
                                 <AutomationProperties.AutomationId>
                                     <MultiBinding StringFormat="UI_{0}_Row{1}_OutputColumnName_AutoID">
-                                        <Binding Path="DataContext.ModelItem.AutomationID"
-                                                 RelativeSource="{RelativeSource AncestorType=core:ActivityDesignerTemplate}" />
+                                        <Binding Path="DataContext.ModelItem.AutomationID" RelativeSource="{RelativeSource AncestorType=core:ActivityDesignerTemplate}" />
                                         <Binding Path="IndexNumber" />
                                     </MultiBinding>
                                 </AutomationProperties.AutomationId>
@@ -156,26 +151,25 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ui:IntellisenseTextBox DefaultText="[[Recordset(*).field]]"
-                                                    AllowMultilinePaste="False"
-                                                    AcceptsReturn="False"
-                                                    MaxHeight="52"
+                                                            AllowMultilinePaste="False"
+                                                            AcceptsReturn="False"
+                                                            MaxHeight="52"
                                                             Margin="0,0,1,1"
-                                                    TextWrapping="NoWrap"
-                                                    ToolTip="{x:Static help:HelpTextResources.SharepointToolTipToVariable}"
-                                                    Text="{Binding VariableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                    Style="{StaticResource ActivityMapppingDataGridIntellisenseTextBoxStyle}">
+                                                            TextWrapping="NoWrap"
+                                                            ToolTip="{x:Static help:HelpTextResources.SharepointToolTipToVariable}"
+                                                            Text="{Binding VariableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            Style="{StaticResource ActivityMapppingDataGridIntellisenseTextBoxStyle}">
                                         <i:Interaction.Behaviors>
-                                            <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointToolTipToVariable}"
+                                            <core1:HelpSetter Text="{x:Static languages:Core.SharepointToolTipToVariable}"
                                                      DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                             <errors:ErrorsSetter Source="{Binding}"
-                                                         SourcePropertyName="VariableName"
-                                                         SourcePropertyValue="{Binding VariableName, UpdateSourceTrigger=PropertyChanged}"
-                                                         Target="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                                                 SourcePropertyName="VariableName"
+                                                                 SourcePropertyValue="{Binding VariableName, UpdateSourceTrigger=PropertyChanged}"
+                                                                 Target="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                         </i:Interaction.Behaviors>
                                         <AutomationProperties.AutomationId>
                                             <MultiBinding StringFormat="UI_{0}_Row{1}_InputColumn_AutoID">
-                                                <Binding Path="DataContext.ModelItem.AutomationID"
-                                                 RelativeSource="{RelativeSource AncestorType=core:ActivityDesignerTemplate}" />
+                                                <Binding Path="DataContext.ModelItem.AutomationID" RelativeSource="{RelativeSource AncestorType=core:ActivityDesignerTemplate}" />
                                                 <Binding Path="IndexNumber" />
                                             </MultiBinding>
                                         </AutomationProperties.AutomationId>
@@ -236,15 +230,15 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-                                      Margin="0,0,1,1"
-                                      DisplayMemberPath="FieldName"
-                                      SelectedValuePath="InternalName"
-                                      ItemsSource="{Binding DataContext.ListItems, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"                                          
-                                      SelectedItem="{Binding FieldName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
-                                      SelectedValue="{Binding InternalName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
-                                      ToolTip="{x:Static help:HelpTextResources.SharepointToolTipFieldToFilterOn}">
+                                          Margin="0,0,1,1"
+                                          DisplayMemberPath="FieldName"
+                                          SelectedValuePath="InternalName"
+                                          ItemsSource="{Binding DataContext.ListItems, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"                                          
+                                          SelectedItem="{Binding FieldName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
+                                          SelectedValue="{Binding InternalName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
+                                          ToolTip="{x:Static help:HelpTextResources.SharepointToolTipFieldToFilterOn}">
                                     <i:Interaction.Behaviors>
-                                        <help:HelpSetter Text="{x:Static help:HelpTextResources.SharepointHelpFieldToMatchOn}"
+                                        <core1:HelpSetter Text="{x:Static languages:Core.SharepointHelpFieldToMatchOn}"
                                                      DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                         <errors:ErrorsSetter Source="{Binding}"
                                                          SourcePropertyName="FieldName"
@@ -263,18 +257,18 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Width="30*"
-                                        Header="Match Type"
-                                        HeaderStyle="{StaticResource ActivityMapppingDataGridHeaderStyle}"
-                                        d:DataContext="{d:DesignInstance Type=to:SharepointSearchTo}">
+                                            Header="Match Type"
+                                            HeaderStyle="{StaticResource ActivityMapppingDataGridHeaderStyle}"
+                                            d:DataContext="{d:DesignInstance Type=to:SharepointSearchTo}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-                                      Margin="0,0,1,1"
-                                      ItemsSource="{Binding DataContext.WhereOptions, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
-                                      SelectedValue="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
-                                      ToolTip="{x:Static help:HelpTextResources.FindToolTipLookForMatchType}">
+                                          Margin="0,0,1,1"
+                                          ItemsSource="{Binding DataContext.WhereOptions, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}"
+                                          SelectedValue="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}"
+                                          ToolTip="{x:Static help:HelpTextResources.FindToolTipLookForMatchType}">
                                     <i:Interaction.Behaviors>
-                                        <help:HelpSetter Text="{x:Static help:HelpTextResources.FindHelpLookForMatchType}"
+                                        <core1:HelpSetter Text="{x:Static languages:Core.FindHelpLookForMatchType}"
                                                      DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                         <errors:ErrorsSetter Source="{Binding}"
                                                          SourcePropertyName="SearchType"
@@ -283,8 +277,7 @@
                                     </i:Interaction.Behaviors>
                                     <AutomationProperties.AutomationId>
                                         <MultiBinding StringFormat="UI_{0}_Row{1}_SearchType_AutoID">
-                                            <Binding Path="DataContext.ModelItem.AutomationID"
-                                                 RelativeSource="{RelativeSource AncestorType=core:ActivityDesignerTemplate}" />
+                                            <Binding Path="DataContext.ModelItem.AutomationID" RelativeSource="{RelativeSource AncestorType=core:ActivityDesignerTemplate}" />
                                             <Binding Path="IndexNumber" />
                                         </MultiBinding>
                                     </AutomationProperties.AutomationId>
@@ -304,25 +297,25 @@
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <ui:IntellisenseTextBox DefaultText="Match"
-                                                        FilterType="All"
-                                                        Grid.Column="0"
-                                                        Grid.ColumnSpan="2"
-                                                        AllowUserCalculateMode="False"
-                                                        ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                                                        VerticalScrollBarVisibility="Hidden"
-                                                        TextWrapping="Wrap"
-                                                        AllowMultilinePaste="True"
-                                                        AcceptsReturn="True"
-                                                        AllowUserInsertLine="True"
-                                                        MaxHeight="52"
-                                                        Padding="3"
+                                                            FilterType="All"
+                                                            Grid.Column="0"
+                                                            Grid.ColumnSpan="2"
+                                                            AllowUserCalculateMode="False"
+                                                            ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                                            VerticalScrollBarVisibility="Hidden"
+                                                            TextWrapping="Wrap"
+                                                            AllowMultilinePaste="True"
+                                                            AcceptsReturn="True"
+                                                            AllowUserInsertLine="True"
+                                                            MaxHeight="52"
+                                                            Padding="3"
                                                             Margin="0,0,1,1"
-                                                        attachedProperties:FocusSetter.IsFocused="{Binding IsSearchCriteriaFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                        Text="{Binding ValueToMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                        Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
-                                                        ToolTip="{x:Static help:HelpTextResources.FindToolTipMatch}">
+                                                            attachedProperties:FocusSetter.IsFocused="{Binding IsSearchCriteriaFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            Text="{Binding ValueToMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
+                                                            ToolTip="{x:Static help:HelpTextResources.FindToolTipMatch}">
                                         <i:Interaction.Behaviors>
-                                            <help:HelpSetter Text="{x:Static help:HelpTextResources.FindHelpMatch}"
+                                            <core1:HelpSetter Text="{x:Static languages:Core.FindHelpMatch}"
                                                          DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                             <errors:ErrorsSetter Source="{Binding}"
                                                              SourcePropertyName="ValueToMatch"
@@ -344,15 +337,15 @@
                 </DataGrid.Columns>
             </controls:Dev2DataGrid>
             <CheckBox Grid.Row="2"
-                  Grid.Column="0"
+                      Grid.Column="0"
                       Margin="{StaticResource ControlBorderTop}"
-                  Grid.ColumnSpan="2"
-                  Content="Require All Matches To Be True"
-                  IsChecked="{Binding ModelItem.RequireAllCriteriaToMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  ToolTip="{x:Static help:HelpTextResources.FindToolTipRequireAllMatchesToBeTrue}"
-                  AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RequireAllTrue_AutoID}">
+                      Grid.ColumnSpan="2"
+                      Content="Require All Matches To Be True"
+                      IsChecked="{Binding ModelItem.RequireAllCriteriaToMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ToolTip="{x:Static help:HelpTextResources.FindToolTipRequireAllMatchesToBeTrue}"
+                      AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_RequireAllTrue_AutoID}">
                 <i:Interaction.Behaviors>
-                    <help:HelpSetter Text="{x:Static help:HelpTextResources.FindHelpRequireAllMatchesToBeTrue}"
+                    <core1:HelpSetter Text="{x:Static languages:Core.FindHelpRequireAllMatchesToBeTrue}"
                                  DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </CheckBox>

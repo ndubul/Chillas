@@ -49,7 +49,6 @@ namespace Dev2.Activities.Designers2.Decision
             : base(modelItem)
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
             Collection = new ObservableCollection<IDev2TOFn>();
             Collection.CollectionChanged += CollectionCollectionChanged;
             WhereOptions = new ObservableCollection<string>(FindRecsetOptions.FindAll().Select(c => c.HandlesType()));
