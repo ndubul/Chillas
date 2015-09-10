@@ -30,7 +30,6 @@ namespace Warewolf.Studio.ServerProxyLayer
         /// <returns>a list of tree dependencies</returns>
         public IList<IResource> FetchDependencies(Guid resourceId)
         {
-
             return FetchDependantsFromServerService(resourceId, true);
         }
 
