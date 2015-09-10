@@ -15420,6 +15420,32 @@ this.FeatureBackground();
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Launch workflow using hyper-link")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WorkflowExecution")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WorkflowExecution")]
+        public virtual void LaunchWorkflowUsingHyper_Link()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Launch workflow using hyper-link", ((string[])(null)));
+#line 4248
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 4249
+ testRunner.Given("I have a workflow \"Hello World\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 4250
+ testRunner.And("\"http://rsaklfleroy:3142/secure/Hello%20World.json?<DataList></DataList>\" is visi" +
+                    "ble", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 4251
+ testRunner.When("I click \"http://rsaklfleroy:3142/secure/Hello%20World.json?<DataList></DataList>\"" +
+                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 4252
+ testRunner.Then("\"http://rsaklfleroy:3142/secure/Hello%20World.json?<DataList></DataList>\" is open" +
+                    "ed in web browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
