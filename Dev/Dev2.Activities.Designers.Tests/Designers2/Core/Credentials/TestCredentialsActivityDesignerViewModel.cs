@@ -29,6 +29,10 @@ namespace Dev2.Activities.Designers.Tests.Designers2.Core.Credentials
             throw new NotImplementedException();
         }
 
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+        }
+
         public void TestValidateUserNameAndPassword()
         {
             base.ValidateUserNameAndPassword();

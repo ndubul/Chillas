@@ -189,10 +189,11 @@ namespace Warewolf.AcceptanceTesting.Core
                 
             }
         }
-        
-//        public event PermissionsChanged PermissionsChanged;
-//        public event NetworkStateChanged NetworkStateChanged;
-//        public event ItemAddedEvent ItemAddedEvent;
+        public Guid EnvironmentID { get; set; }
+
+                public event PermissionsChanged PermissionsChanged;
+        public event NetworkStateChanged NetworkStateChanged;
+        public event ItemAddedEvent ItemAddedEvent;
 
         [JsonIgnore]
         public IStudioUpdateManager UpdateRepository

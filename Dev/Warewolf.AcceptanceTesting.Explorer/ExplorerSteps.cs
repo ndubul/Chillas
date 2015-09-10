@@ -28,6 +28,7 @@ namespace Warewolf.AcceptanceTesting.Explorer
             mockExplorerRepository.Setup(repository => repository.CreateFolder(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Guid>()));
             mockExplorerRepository.Setup(repository => repository.Rename(It.IsAny<IExplorerItemViewModel>(), It.IsAny<string>())).Returns(true);
             mockShellViewModel.Setup(model => model.LocalhostServer).Returns(new ServerForTesting(mockExplorerRepository));
+            mockShellViewModel.Setup(model => model.OpenResource(It.IsAny<Guid>(),It.IsAny<IServer>())).Verifiable();
             var mockEventAggregator = new Mock<IEventAggregator>();
             mockEventAggregator.Setup(aggregator => aggregator.GetEvent<ServerAddedEvent>()).Returns(new ServerAddedEvent());
             var explorerViewModel = new ExplorerViewModel(mockShellViewModel.Object,mockEventAggregator.Object );
@@ -35,6 +36,7 @@ namespace Warewolf.AcceptanceTesting.Explorer
             Utils.ShowTheViewForTesting(explorerView);
             FeatureContext.Current.Add(Utils.ViewNameKey, explorerView);
             FeatureContext.Current.Add(Utils.ViewModelNameKey, explorerViewModel);
+            FeatureContext.Current.Add("mockShellViewModel", mockShellViewModel);
         }
          
         [BeforeScenario("Explorer")]
@@ -46,6 +48,7 @@ namespace Warewolf.AcceptanceTesting.Explorer
             ScenarioContext.Current.Add(Utils.ViewModelNameKey, explorerViewModel);
             var mainViewModelMock = new Mock<IMainViewModel>();
             ScenarioContext.Current.Add("mainViewModel",mainViewModelMock);
+            ScenarioContext.Current.Add("mockShellViewModel", FeatureContext.Current.Get<Mock<IShellViewModel>>("mockShellViewModel"));
         }
 
         [Given(@"the explorer is visible")]
@@ -103,19 +106,23 @@ namespace Warewolf.AcceptanceTesting.Explorer
             Assert.IsNotNull(environmentViewModel);
         }
 
+       
         [Given(@"I open '(.*)' in ""(.*)""")]
         [When(@"I open '(.*)' in ""(.*)""")]
         public void WhenIOpenIn(string resourceName,string folderName)
         {
             var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
             var environmentViewModel = explorerView.OpenItem(resourceName,folderName);
-            Assert.IsNotNull(environmentViewModel);
-        }
+            Assert.IsNotNull(environmentViewModel);            
+        }       
 
 
+        [When(@"""(.*)"" tab is opened")]
         [Then(@"""(.*)"" tab is opened")]
         public void WhenTabIsOpened(string resourceName)
         {
+            var mockShellViewModel = ScenarioContext.Current.Get<Mock<IShellViewModel>>("mockShellViewModel");
+            mockShellViewModel.Verify();
             
         }
 

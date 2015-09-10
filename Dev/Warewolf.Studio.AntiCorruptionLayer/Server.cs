@@ -1,20 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Controller;
-using Dev2.Network;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Security;
 using Dev2.Studio.Core;
-using Dev2.Threading;
 
 namespace Warewolf.Studio.AntiCorruptionLayer
 {
@@ -23,60 +19,30 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         readonly Guid _serverId;
         readonly StudioServerProxy _proxyLayer;
         IList<IToolDescriptor> _tools;
-        //IList<IToolDescriptor> _tools;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Object"/> class.
-        /// </summary>
-        public Server(string uri,string userName,string password):this(uri,new NetworkCredential(userName,password))
+        public Server(Dev2.Studio.Core.Interfaces.IEnvironmentModel environmentModel)
         {
-            VerifyArgument.IsNotNull("userName", userName);
-            VerifyArgument.IsNotNull("password", password);
-        }
-
-        public Server(Uri uri)
-            : this(uri.ToString(), CredentialCache.DefaultNetworkCredentials)
-        {
-       
-        }
-        
-        public Server(string uri,ICredentials credentials)
-        {
-            VerifyArgument.IsNotNull("uri",uri);
-            VerifyArgument.IsNotNull("credentials", credentials);
-            EnvironmentConnection = new ServerProxy(uri,credentials,new AsyncWorker());
-            _serverId = Guid.NewGuid();
-            _proxyLayer = new StudioServerProxy(new CommunicationControllerFactory(), EnvironmentConnection);
-            UpdateRepository = new StudioResourceUpdateManager(new CommunicationControllerFactory(), EnvironmentConnection);
-            EnvironmentConnection.PermissionsModified += RaisePermissionsModifiedEvent;
-            EnvironmentConnection.NetworkStateChanged += RaiseNetworkStateChangeEvent;
-        }
-
-        public Server(Dev2.Studio.Core.Interfaces.IEnvironmentConnection environmentConnection)
-        {
-            EnvironmentConnection = environmentConnection;
+            EnvironmentConnection = environmentModel.Connection;
+            EnvironmentID = environmentModel.ID;
             _serverId = EnvironmentConnection.ServerID;
             _proxyLayer = new StudioServerProxy(new CommunicationControllerFactory(), EnvironmentConnection);
             UpdateRepository = new StudioResourceUpdateManager(new CommunicationControllerFactory(), EnvironmentConnection);
             EnvironmentConnection.PermissionsModified += RaisePermissionsModifiedEvent;
             ResourceName = EnvironmentConnection.DisplayName;
-            
+            EnvironmentConnection.NetworkStateChanged+=RaiseNetworkStateChangeEvent;
+            EnvironmentConnection.ItemAddedMessageAction+=ItemAdded;
         }
 
+        public Guid EnvironmentID { get; set; }
 
         void ItemAdded(IExplorerItem obj)
         {
-            RaiseItemAdded(obj);
-        }
-
-        void RaiseItemAdded(IExplorerItem explorerItem)
-        {
-           // if (ItemAddedEvent != null)
+            if (ItemAddedEvent != null)
             {
-            //    ItemAddedEvent(explorerItem);
+                ItemAddedEvent(obj);
             }
         }
-
+        
         public string GetServerVersion()
         {
             if(!EnvironmentConnection.IsConnected)
@@ -96,10 +62,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         void RaisePermissionsModifiedEvent(object sender, List<WindowsGroupPermission> windowsGroupPermissions)
         {
-//            if (PermissionsChanged != null)
-//            {
-//                PermissionsChanged(new PermissionsChangedArgs(e));
-//            }
+            if (PermissionsChanged != null)
+            {
+                PermissionsChanged(new PermissionsChangedArgs(windowsGroupPermissions.Cast<IWindowsGroupPermission>().ToList()));
+            }
             Permissions = windowsGroupPermissions.Select(permission => permission as IWindowsGroupPermission).ToList();
         }
 
@@ -123,7 +89,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         {
             return null;
         }
-//
+
         public async Task<IExplorerItem> LoadExplorer()
         {
             var result = await ProxyLayer.QueryManagerProxy.Load();
@@ -134,7 +100,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         public IList<IServer> GetServerConnections()
         {
             var environmentModels = EnvironmentRepository.Instance.ReloadServers();
-            return environmentModels.Select(environmentModel => new Server(environmentModel.Connection)).Cast<IServer>().ToList();
+            return environmentModels.Select(environmentModel => new Server(environmentModel)).Cast<IServer>().ToList();
         }
 
         public IList<IToolDescriptor> LoadTools()
@@ -178,9 +144,9 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         public List<IWindowsGroupPermission> Permissions { get; set; }
 
-       // public event PermissionsChanged PermissionsChanged;
+        public event PermissionsChanged PermissionsChanged;
         public event NetworkStateChanged NetworkStateChanged;
-       // public event ItemAddedEvent ItemAddedEvent;
+        public event ItemAddedEvent ItemAddedEvent;
 
         public IStudioUpdateManager UpdateRepository { get; private set; }
         public IExplorerItem ExplorerItems { get; set; }
@@ -205,7 +171,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         /// </returns>
         public override string ToString()
         {
-            return "localhost";
+            return EnvironmentConnection.DisplayName;
         }
 
         #endregion

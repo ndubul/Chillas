@@ -982,6 +982,14 @@ namespace Dev2.Studio.ViewModels
 
         public void OpenResource(Guid resourceId, IServer server)
         {
+            var environmentModel = EnvironmentRepository.Get(server.EnvironmentID);
+            if (environmentModel != null)
+            {
+                var resourceModel = environmentModel.ResourceRepository.FindSingle(model => model.ID == resourceId, true);
+                var contextualResourceModel = new ResourceModel(environmentModel,EventPublisher);
+                contextualResourceModel.Update(resourceModel);
+                DisplayResourceWizard(contextualResourceModel,true);
+            }
         }
 
         public void ShowPopup(IPopupMessage popupMessage)

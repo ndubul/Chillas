@@ -207,16 +207,22 @@ Scenario: Creating Folder in remote host
    Then I should see the path "Remote Connection Integration/MyNewFolder" 
 
 @Explorer
-Scenario Outline: Opening and Editing workflow from Explorer
+Scenario: Opening and Editing workflow from Explorer localhost
 	Given the explorer is visible
-	And I open "<Host>" server
-	And I create the "<Host>/Hello World" of type "WorkflowService" 
-	When I open "Hello World"
+	And I open "localhost" server
+	And I create the "localhost/Hello World" of type "WorkflowService" 
+	When I open 'Hello World' in "localhost"
+	And "Hello World" tab is opened
+
+@Explorer
+Scenario: Opening and Editing workflow from Explorer Remote
+	Given the explorer is visible
+	And I connect to "Remote Connection Integration" server
+	And I open "Remote Connection Integration" server
+	And I create the "Remote Connection Integration/Hello World" of type "WorkflowService" 
+	When I open 'Hello World' in "Remote Connection Integration"
 	And "Hello World" tab is opened 
-	Examples: 
-	| Host                          |
-	| localhost                     |
-	| Remote Connection Integration |
+	
 
 @Explorer
 Scenario: Renaming Folder And Workflow Service on a remote server
