@@ -35,7 +35,7 @@
     <sap:ActivityDesigner.Icon>
         <DrawingBrush Stretch="Uniform">
             <DrawingBrush.Drawing>
-                <ImageDrawing Rect="0, 0, 16, 16" ImageSource="{Binding ResourceModel.ServerResourceType, Converter={StaticResource ResourceTypeToIconConverter}}" />
+                <ImageDrawing Rect="0, 0, 16, 16" ImageSource="{Binding ResourceType, Converter={StaticResource ResourceTypeToIconConverter}}" />
             </DrawingBrush.Drawing>
         </DrawingBrush>    
     </sap:ActivityDesigner.Icon>

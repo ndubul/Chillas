@@ -13,11 +13,13 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0"
+                               Margin="0,15,0,0"
                                TextWrapping="Wrap"
                                VerticalAlignment="Top"
                                Visibility="{Binding WorkflowLinkVisible}"
                                HorizontalAlignment="Center">
                                 <Hyperlink Command="{Binding Path=OpenWorkflowLinkCommand}"
+                                           Style="{StaticResource HyperLinkStyle}"
                                            CommandParameter="{Binding}">
                                     <Run Text="{Binding Path=DisplayWorkflowLink,Mode=OneWay}" />
                                 </Hyperlink>

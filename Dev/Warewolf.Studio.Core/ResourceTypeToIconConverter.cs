@@ -23,9 +23,9 @@ namespace Warewolf.Studio.Core
         {
 
             const string pathname = "/Warewolf.Studio.Themes.Luna;component/Images.xaml";
-            ResourceDictionary dict = Application.LoadComponent(new Uri(pathname, System.UriKind.Relative)) as ResourceDictionary;
+            ResourceDictionary dict = Application.LoadComponent(new Uri(pathname, System.UriKind.Relative)) as ResourceDictionary;           
             ResourceType resourceType;
-            if (Enum.TryParse(value.ToString(), out resourceType))
+            if (value != null && Enum.TryParse(value.ToString(), out resourceType))
             {
                 switch (resourceType)
                 {
@@ -48,8 +48,9 @@ namespace Warewolf.Studio.Core
                     case ResourceType.SharepointServerSource:
                         return Application.Current.Resources["AddSharepointBlackLogo"];
                     case ResourceType.ServerSource:
-                    case ResourceType.Server:
                         return dict[CustomMenuIcons.ServerSource] as DrawingImage;
+                    case ResourceType.Server:
+                        return dict[CustomMenuIcons.Server] as DrawingImage;
                     case ResourceType.StartPage:
                         var imageSource = ImageAwesome.CreateImageSource(FontAwesomeIcon.Home, Brushes.Black);
                         return imageSource;
