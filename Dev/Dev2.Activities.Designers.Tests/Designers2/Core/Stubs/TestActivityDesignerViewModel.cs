@@ -33,6 +33,10 @@ namespace Dev2.Activities.Designers.Tests.Designers2.Core.Stubs
         {
         }
 
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+        }
+
         public void TestAddTitleBarHelpToggle()
         {
             AddTitleBarHelpToggle();

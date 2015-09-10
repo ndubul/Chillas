@@ -21,18 +21,7 @@ namespace Warewolf.Studio.Views
 
         public IEnvironmentViewModel OpenEnvironmentNode(string nodeName)
         {
-            var xamDataTreeNode = _explorerView.ExplorerTree.Nodes.FirstOrDefault(node =>
-            {
-                var explorerItem = node.Data as IEnvironmentViewModel;
-                if (explorerItem != null)
-                {
-                    if (explorerItem.DisplayName.ToLowerInvariant().Contains(nodeName.ToLowerInvariant()))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            });
+            var xamDataTreeNode = GetEnvironmentNode(nodeName);
             if (xamDataTreeNode != null)
             {
                 xamDataTreeNode.IsExpanded = true;
@@ -43,6 +32,23 @@ namespace Warewolf.Studio.Views
                 environmentViewModel.IsExpanded = true;
             }
             return environmentViewModel;
+        }
+
+        XamDataTreeNode GetEnvironmentNode(string nodeName)
+        {
+            var xamDataTreeNode = _explorerView.ExplorerTree.Nodes.FirstOrDefault(node =>
+            {
+                var explorerItem = node.Data as IEnvironmentViewModel;
+                if(explorerItem != null)
+                {
+                    if(explorerItem.DisplayName.ToLowerInvariant().Contains(nodeName.ToLowerInvariant()))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            });
+            return xamDataTreeNode;
         }
 
         public List<IExplorerTreeItem> GetFoldersVisible()
@@ -469,8 +475,14 @@ namespace Warewolf.Studio.Views
 
         public IExplorerTreeItem OpenItem(string resourceName, string folderName)
         {
-            var folderNode = GetFolderXamDataTreeNode(folderName);
-            return GetNodeWithName(resourceName, folderNode).Data as IExplorerTreeItem;
+            var folderNode = GetFolderXamDataTreeNode(folderName) ?? GetEnvironmentNode(folderName);
+            var explorerTreeItem = GetNodeWithName(resourceName, folderNode).Data as IExplorerTreeItem;
+            var itemModel = explorerTreeItem as IExplorerItemViewModel;
+            if (itemModel != null)
+            {
+                itemModel.OpenCommand.Execute(null);
+            }
+            return explorerTreeItem;
         }
     }
 }

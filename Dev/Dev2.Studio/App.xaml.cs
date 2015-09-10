@@ -172,7 +172,7 @@ namespace Dev2.Studio
         {
             // Create the window 
 
-            var server = new Warewolf.Studio.AntiCorruptionLayer.Server(EnvironmentRepository.Instance.Source.Connection);
+            var server = new Warewolf.Studio.AntiCorruptionLayer.Server(EnvironmentRepository.Instance.Source);
             server.Connect();
             CustomContainer.Register<IServer>(server);
             var toolBoxViewModel = new ToolboxViewModel(new ToolboxModel(server, server, null), new ToolboxModel(server, server, null));
