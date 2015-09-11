@@ -20,7 +20,7 @@ namespace Dev2.Common.Interfaces.DB
         ICollection<IDbSource> RetrieveSources();
         ICollection<IDbAction> GetActions(IDbSource source);
         void CreateNewSource();
-        void EditSource(IDbSource selectedSource, IWorkSurfaceKey resourceModel);
+        void EditSource(IDbSource selectedSource);
         DataTable TestService(IDatabaseService inputValues);
         IEnumerable<IServiceOutputMapping> GetDbOutputMappings(IDbAction action);
         void SaveService(IDatabaseService toModel);

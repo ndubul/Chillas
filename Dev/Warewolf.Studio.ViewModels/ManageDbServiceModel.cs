@@ -54,9 +54,9 @@ namespace Warewolf.Studio.ViewModels
             _shell.NewResource(ResourceType.DbSource.ToString());
         }
 
-        public void EditSource(IDbSource selectedSource, IWorkSurfaceKey resourceModel)
+        public void EditSource(IDbSource selectedSource)
         {
-            _shell.EditResource(selectedSource, resourceModel);
+            _shell.EditResource(selectedSource);
 
         }
 

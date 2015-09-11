@@ -307,7 +307,7 @@
                                           CommandParameter="DropboxSource"
                                           AutomationProperties.AutomationId ="UI_NewDropboxSourceContextMenuItem_AutoID" >
                                     <MenuItem.Icon>
-                                        <Image Width="14" Height="14" Source="{StaticResource DropBoxLogo}" />
+                                        <Image Width="14" Height="14" Source="{StaticResource AddDropBoxBlackLogo}" />
                                     </MenuItem.Icon>
                                 </MenuItem>
 
@@ -317,7 +317,7 @@
                                           CommandParameter="SharepointServerSource"
                                           AutomationProperties.AutomationId ="UI_NewSharepointSourceContextMenuItem_AutoID" >
                                     <MenuItem.Icon>
-                                        <Image Width="14" Height="14" Source="{StaticResource SharepointLogo}" />
+                                        <Image Width="14" Height="14" Source="{StaticResource AddSharepointBlackLogo}" />
                                     </MenuItem.Icon>
                                 </MenuItem>
 

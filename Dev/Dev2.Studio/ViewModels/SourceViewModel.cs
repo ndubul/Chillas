@@ -104,6 +104,7 @@ namespace Dev2.ViewModels
         {
             if (showMessage)
             {
+                ViewModel.UpdateHelpDescriptor(String.Empty);
                 if (ViewModel.HasChanged)
                 {
                     MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowItemSourceCloseConfirmation(ViewModel.Header);
@@ -126,6 +127,7 @@ namespace Dev2.ViewModels
             }
             else
             {
+                ViewModel.UpdateHelpDescriptor(String.Empty);
                 if (ViewModel.CanSave())
                 {
                     ViewModel.Save();

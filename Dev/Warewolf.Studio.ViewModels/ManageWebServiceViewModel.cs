@@ -42,7 +42,6 @@ namespace Warewolf.Studio.ViewModels
         WebRequestMethod _selectedWebRequestMethod;
         ICollection<WebRequestMethod> _webRequestMethods;
         ICommand _newWebSourceCommand;
-        readonly IWorkSurfaceKey _workSurfaceKey;
         ICollection<IWebServiceSource> _sources;
         IWebServiceSource _selectedSource;
         readonly IWebService _webService;
@@ -76,12 +75,11 @@ namespace Warewolf.Studio.ViewModels
 
         #region Implementation of IManageWebServiceViewModel
 
-        public ManageWebServiceViewModel(IWebServiceModel model, IRequestServiceNameViewModel saveDialog, IWorkSurfaceKey resourceModel)
+        public ManageWebServiceViewModel(IWebServiceModel model, IRequestServiceNameViewModel saveDialog)
             : base(ResourceType.WebService)
         {
             _model = model;
             _saveDialog = saveDialog;
-            _workSurfaceKey = resourceModel;
             Init();
             Header = Resources.Languages.Core.WebserviceTabHeader;
             HeaderText = Resources.Languages.Core.WebserviceTabHeader;
@@ -92,7 +90,7 @@ namespace Warewolf.Studio.ViewModels
         void Init()
         {
             WebRequestMethods = new ObservableCollection<WebRequestMethod>(Dev2EnumConverter.GetEnumsToList<WebRequestMethod>());
-           // SelectedWebRequestMethod = WebRequestMethods.First();
+            // SelectedWebRequestMethod = WebRequestMethods.First();
             Sources = Model.Sources;
             Inputs = new ObservableCollection<IServiceInput>();
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
@@ -106,13 +104,10 @@ namespace Warewolf.Studio.ViewModels
             RequestBody = "";
             Response = "";
             TestCommand = new DelegateCommand(() => Test(_model, ToModel()), CanTest);
-      
+
             SaveCommand = new DelegateCommand(Save, CanSave);
             NewWebSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
-            if(_workSurfaceKey != null)
-            {
-                EditWebSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource, _workSurfaceKey));
-            }
+            EditWebSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource));
             PasteResponseCommand = new DelegateCommand(HandlePasteResponse);
             RemoveHeaderCommand = new DelegateCommand(DeleteCell);
             AddHeaderCommand = new DelegateCommand(Add);
@@ -152,7 +147,7 @@ namespace Warewolf.Studio.ViewModels
 
             if (SelectedSource != null)
             {
-                if(SelectedSource.HostName != null)
+                if (SelectedSource.HostName != null)
                 {
                     RequestUrlQuery = service.QueryString.Replace(SelectedSource.HostName, "");
                 }
@@ -165,10 +160,10 @@ namespace Warewolf.Studio.ViewModels
             RequestUrlQuery = service.QueryString;
             Inputs = service.Inputs;
             OutputMapping = service.OutputMappings;
-            
+
         }
 
-       
+
         void HandlePasteResponse()
         {
             Response = _model.HandlePasteResponse(Response ?? "");
@@ -582,7 +577,7 @@ namespace Warewolf.Studio.ViewModels
                     {
                         CanEditHeadersAndUrl = false;
                     }
-                
+
                     ViewModelUtils.RaiseCanExecuteChanged(EditWebSourceCommand);
                 }
             }

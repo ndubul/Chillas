@@ -29,8 +29,9 @@ namespace Dev2.Common.Interfaces
         void Edit();
         List<IWindowsGroupPermission> Permissions { get; set; }
         Guid EnvironmentID { get; set; }
+        Guid? ServerID { get; }
 
-         event PermissionsChanged PermissionsChanged;
+        event PermissionsChanged PermissionsChanged;
          event NetworkStateChanged NetworkStateChanged;
          event ItemAddedEvent ItemAddedEvent;
        

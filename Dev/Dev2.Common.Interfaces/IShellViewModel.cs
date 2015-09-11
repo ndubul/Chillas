@@ -7,15 +7,15 @@ namespace Dev2.Common.Interfaces
 {
     public interface IShellViewModel
     {
-        void EditResource(IDbSource selectedSource, IWorkSurfaceKey key);
+        void EditResource(IDbSource selectedSource, IWorkSurfaceKey key = null);
 
-        void EditResource(IPluginSource selectedSource, IWorkSurfaceKey key);
+        void EditResource(IPluginSource selectedSource, IWorkSurfaceKey key = null);
 
-        void EditResource(IWebServiceSource selectedSource, IWorkSurfaceKey key);
+        void EditResource(IWebServiceSource selectedSource, IWorkSurfaceKey key = null);
 
-        void EditResource(IDatabaseService selectedSource, IWorkSurfaceKey key);
+        void EditResource(IDatabaseService selectedSource, IWorkSurfaceKey key = null);
 
-        void EditResource(IEmailServiceSource selectedSource, IWorkSurfaceKey key);
+        void EditResource(IEmailServiceSource selectedSource, IWorkSurfaceKey key = null);
 
         void NewResource(string resourceType);
 

@@ -779,7 +779,7 @@ You need Administrator permission.</value>
     <value>DatabaseSourceCancelHelp</value>
   </data>
   <data name="DatabaseServiceSourceTypesHelp" xml:space="preserve">
-    <value>&lt;h1&gt;Database Service Source Types&lt;/h1&gt;&lt;br/&gt;&lt;p&gt;Allows you to select a database souce type&lt;/p&gt;</value>
+    <value>DatabaseServiceSourceTypesHelp</value>
   </data>
   <data name="DatabaseServiceEditSourceHelp" xml:space="preserve">
     <value>DatabaseServiceEditSourceHelp</value>
@@ -801,6 +801,12 @@ You need Administrator permission.</value>
   </data>
   <data name="DatabaseServiceSaveHelp" xml:space="preserve">
     <value>DatabaseServiceSaveHelp</value>
+  </data>
+  <data name="SharepointServiceSourceServerHelp" xml:space="preserve">
+    <value>SharepointServiceSourceServerHelp</value>
+  </data>
+  <data name="SharepointServiceSourceTestHelp" xml:space="preserve">
+    <value>SharepointServiceSourceTestHelp</value>
   </data>
   <data name="WebServiceSourceSaveHelp" xml:space="preserve">
     <value>WebServiceSourceSaveHelp</value>
@@ -896,7 +902,7 @@ You need Administrator permission.</value>
     <value>PluginServiceRefreshHelp</value>
   </data>
   <data name="PluginServiceTestHelp" xml:space="preserve">
-    <value>DatabaseServiceTestHelp</value>
+    <value>PluginServiceTestHelp</value>
   </data>
   <data name="PluginServiceTestInputHelp" xml:space="preserve">
     <value>PluginServiceTestInputHelp</value>

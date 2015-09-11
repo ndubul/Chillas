@@ -40,7 +40,7 @@ namespace Warewolf.AcceptanceTesting.WebService
             var mockWebServiceModel = new Mock<IWebServiceModel>();
             SetupModel(mockWebServiceModel);
 
-            var viewModel = new ManageWebServiceViewModel(mockWebServiceModel.Object, mockRequestServiceNameViewModel.Object, null);
+            var viewModel = new ManageWebServiceViewModel(mockWebServiceModel.Object, mockRequestServiceNameViewModel.Object);
             view.DataContext = viewModel;
             Utils.ShowTheViewForTesting(view);
             FeatureContext.Current.Add(Utils.ViewNameKey, view);
@@ -57,7 +57,7 @@ namespace Warewolf.AcceptanceTesting.WebService
             var mockWebServiceModel = new Mock<IWebServiceModel>();
             SetupModel(mockWebServiceModel);
 
-            var viewModel = new ManageWebServiceViewModel(mockWebServiceModel.Object, mockRequestServiceNameViewModel.Object, null);
+            var viewModel = new ManageWebServiceViewModel(mockWebServiceModel.Object, mockRequestServiceNameViewModel.Object);
 
             ((ManageWebserviceControl)FeatureContext.Current[Utils.ViewNameKey]).DataContext = viewModel;
             FeatureContext.Current[Utils.ViewModelNameKey]= viewModel;
@@ -175,7 +175,7 @@ namespace Warewolf.AcceptanceTesting.WebService
         public void ThenIsOpenedInAnotherTab(string p0)
         {
             var webServiceModel = ScenarioContext.Current.Get<Mock<IWebServiceModel>>("model");
-            webServiceModel.Verify(a => a.EditSource(_demoWebServiceSourceDefinition, null));
+            webServiceModel.Verify(a => a.EditSource(_demoWebServiceSourceDefinition));
         }
 
 

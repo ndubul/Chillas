@@ -81,6 +81,7 @@
                                   Width="250" 
                                   Padding="{StaticResource ComboBoxItemPadding}"
                                   Focusable="True"
+                                  views:FocusExtension.IsFocused="True"
                                   Margin="{StaticResource ElementBorderTop}" 
                                   SelectedItem="{Binding SelectedSource}" >
                             <i:Interaction.Behaviors>

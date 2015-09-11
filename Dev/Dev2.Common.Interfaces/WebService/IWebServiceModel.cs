@@ -21,7 +21,7 @@ namespace Dev2.Common.Interfaces.WebService
 
         ICollection<IWebServiceSource> RetrieveSources();
         void CreateNewSource();
-        void EditSource(IWebServiceSource selectedSource, IWorkSurfaceKey resourceModel);
+        void EditSource(IWebServiceSource selectedSource);
         string TestService(IWebService inputValues);
         void SaveService(IWebService toModel);
 

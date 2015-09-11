@@ -21,6 +21,7 @@ namespace Warewolf.AcceptanceTesting.Core
             MockExplorerRepo = explorerRepository;
             _explorerProxy = explorerRepository.Object;
             ResourceName = "localhost";
+            ServerID = Guid.Empty; 
         }
 
         private readonly IExplorerRepository _explorerProxy;
@@ -191,7 +192,8 @@ namespace Warewolf.AcceptanceTesting.Core
         }
         public Guid EnvironmentID { get; set; }
 
-                public event PermissionsChanged PermissionsChanged;
+        public Guid? ServerID { get; private set; }
+        public event PermissionsChanged PermissionsChanged;
         public event NetworkStateChanged NetworkStateChanged;
         public event ItemAddedEvent ItemAddedEvent;
 

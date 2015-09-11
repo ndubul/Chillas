@@ -848,7 +848,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;h1&gt;Database Service Source Types&lt;/h1&gt;&lt;br/&gt;&lt;p&gt;Allows you to select a database souce type&lt;/p&gt;.
+        ///   Looks up a localized string similar to DatabaseServiceSourceTypesHelp.
         /// </summary>
         public static string DatabaseServiceSourceTypesHelp {
             get {
@@ -3410,7 +3410,7 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DatabaseServiceTestHelp.
+        ///   Looks up a localized string similar to PluginServiceTestHelp.
         /// </summary>
         public static string PluginServiceTestHelp {
             get {
@@ -4543,6 +4543,24 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string SharePointServiceNewHeaderLabel {
             get {
                 return ResourceManager.GetString("SharePointServiceNewHeaderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SharepointServiceSourceServerHelp.
+        /// </summary>
+        public static string SharepointServiceSourceServerHelp {
+            get {
+                return ResourceManager.GetString("SharepointServiceSourceServerHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SharepointServiceSourceTestHelp.
+        /// </summary>
+        public static string SharepointServiceSourceTestHelp {
+            get {
+                return ResourceManager.GetString("SharepointServiceSourceTestHelp", resourceCulture);
             }
         }
         

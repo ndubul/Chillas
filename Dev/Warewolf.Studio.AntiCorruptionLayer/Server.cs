@@ -34,6 +34,13 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         }
 
         public Guid EnvironmentID { get; set; }
+        public Guid? ServerID
+        {
+            get
+            {
+                return EnvironmentConnection.ServerID;
+            }
+        }
 
         void ItemAdded(IExplorerItem obj)
         {

@@ -15,7 +15,6 @@ using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
-using Dev2.Studio.Core.Interfaces;
 using Warewolf.Core;
 
 namespace Warewolf.Studio.ViewModels
@@ -67,9 +66,9 @@ namespace Warewolf.Studio.ViewModels
             _shell.NewResource(ResourceType.PluginSource.ToString());
         }
 
-        public void EditSource(IPluginSource selectedSource, IWorkSurfaceKey resourceModel)
+        public void EditSource(IPluginSource selectedSource)
         {
-            _shell.EditResource(selectedSource, resourceModel);
+            _shell.EditResource(selectedSource);
 
         }
 

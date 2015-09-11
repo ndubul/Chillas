@@ -50,10 +50,6 @@ namespace Dev2.Activities.Designers.Tests.Designers2.Core.FileActivityDesigner
             throw new NotImplementedException();
         }
 
-        public override void UpdateHelpDescriptor(string helpText)
-        {
-        }
-
         public string TestValidatePath(string label, string path, Action onError, bool pathIsRequired)
         {
             return base.ValidatePath(label, path, onError, pathIsRequired);

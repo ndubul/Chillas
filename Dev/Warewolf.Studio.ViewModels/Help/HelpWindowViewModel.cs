@@ -99,11 +99,12 @@ namespace Warewolf.Studio.ViewModels.Help
         {
             if (string.IsNullOrWhiteSpace(helpText))
             {
-                _webPageVisible = true;
+                CurrentHelpText = new HelpDescriptorViewModel(new HelpDescriptor("", String.Empty, null));
+                WebPageVisible = true;
             }
             else
             {
-                _webPageVisible = false;
+                WebPageVisible = false;
                 var textToDisplay = Resources.Languages.Core.StandardStyling.Replace("\r\n", "") +
                                     helpText +
                                     Resources.Languages.Core.StandardBodyParagraphClosing;
