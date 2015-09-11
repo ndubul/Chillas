@@ -4245,3 +4245,8 @@ Scenario: Drop menu for opened tabs
 	And the tabs are not all visible
 	Then  an option to view all hidden tabs is available
 
+Scenario: Launch workflow using hyper-link
+	Given I have a workflow "Hello World"	
+	And "http://rsaklfleroy:3142/secure/Hello%20World.json?<DataList></DataList>" is visible
+	When I click "http://rsaklfleroy:3142/secure/Hello%20World.json?<DataList></DataList>"
+	Then "http://rsaklfleroy:3142/secure/Hello%20World.json?<DataList></DataList>" is opened in web browser
