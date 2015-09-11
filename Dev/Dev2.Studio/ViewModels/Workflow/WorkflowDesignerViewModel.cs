@@ -1295,6 +1295,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                             break;
                         case ActivitySelectionType.Remove:
                             RemoveModelItemFromSelection(selectedModelItem);
+                            ClearSelection();
                             break;
                     }
                 }
@@ -1343,6 +1344,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             {
                 SelectedDebugItems.Remove(selectedModelItem);
             }
+            Selection.Unsubscribe(_wd.Context, SelectedItemChanged);
         }
 
         protected virtual void AddModelItemToSelection(ModelItem selectedModelItem)
