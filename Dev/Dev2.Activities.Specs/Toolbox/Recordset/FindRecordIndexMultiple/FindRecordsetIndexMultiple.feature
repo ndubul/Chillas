@@ -2423,12 +2423,12 @@ Scenario Outline:Find index using invalid inputs
 	Then the find records index multiple result should be "-1"
 	And the execution has "An" error
 	Examples: 
-	| inField       | values     | Match       | Criteria  | result | varVal                                             |
-	| [[var]]       | Super      | Starts With | S         | [[a]]  | Error: Scalar not allowed                          |
-	| [[v]]         |            | Starts With | S         | [[a]]  | Error: Scalar not allowed                          |
-	| Safely        | Safely     | Starts With | S         | [[a]]  | Invalid expression, Only Recordsets can be entered |
-	| 423423        | 423423     | Contains    | 23        | [[a]]  | Invalid expression, Only Recordsets can be entered |
-	|               |            | Contains    | 23        | [[a]]  | Invalid expression, Only Recordsets can be entered |
+	| inField | values | Match       | Criteria | result | varVal                                             |
+	| [[var]] | Super  | Starts With | S        | [[a]]  | Error: unexpected expression                       |
+	| [[v]]   |        | Starts With | S        | [[a]]  | Error: unexpected expression                       |
+	| Safely  | Safely | Starts With | S        | [[a]]  | Invalid expression, Only Recordsets can be entered |
+	| 423423  | 423423 | Contains    | 23       | [[a]]  | Invalid expression, Only Recordsets can be entered |
+	|         |        | Contains    | 23       | [[a]]  | Invalid expression, Only Recordsets can be entered |
 
 
 
