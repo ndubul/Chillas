@@ -117,5 +117,7 @@ namespace Dev2.Studio.Core.Interfaces.DataList
         void CreateListsOfIDataListItemModelToBindTo(out string errorString);
 
         void ClearCollections();
+
+        void UpdateHelpDescriptor(string helpText);
     }
 }

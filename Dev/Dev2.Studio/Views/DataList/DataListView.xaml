@@ -8,6 +8,8 @@
              xmlns:customControls2="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
              xmlns:customControls="clr-namespace:Warewolf.Studio.CustomControls;assembly=Warewolf.Studio.CustomControls"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:core="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+             xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
              LostKeyboardFocus="UserControlLostKeyboardFocus"
              x:Name="DataListViewControl"
              AutomationProperties.AutomationId="UI_DataListView_AutoID">
@@ -49,6 +51,10 @@
                     Command="{Binding FindUnusedAndMissingCommand}"
                     ToolTip="Removes all unused variables from the variable list">
                 <fa:FontAwesome Icon="Trash" FontSize="15"></fa:FontAwesome>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.DataListDeleteButtonHelp}"
+                                                         DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
             <TextBlock Grid.Column="2" Text="Sort list"></TextBlock>
             <Button Grid.Column="3"
@@ -59,6 +65,10 @@
                     Command="{Binding SortCommand}"
                     ToolTip="Sorts the items alphabeticaly">
                 <fa:FontAwesome Icon="Sort" FontSize="15"></fa:FontAwesome>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.DataListSortButtonHelp}"
+                                                         DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
         </Grid>
 
@@ -115,6 +125,8 @@
                                     </customControls:VariableTextBox.Style>
                                     <i:Interaction.Behaviors>
                                         <behaviors:TextboxSelectAllOnFocusBehavior />
+                                        <core:HelpSetter Text="{x:Static languages:Core.DataListVariableInputHelp}"
+                                                         DataContext="{Binding .}" />
                                     </i:Interaction.Behaviors>
                                 </customControls:VariableTextBox>
                             </ScrollViewer>
@@ -127,7 +139,12 @@
                                   VerticalAlignment="Center"
                                   Checked="Inputcbx_OnChecked"
                                   Unchecked="Inputcbx_OnChecked"
-                                  AutomationProperties.AutomationId="UI_IsInputCheckbox_AutoID" />
+                                  AutomationProperties.AutomationId="UI_IsInputCheckbox_AutoID" >
+                                <i:Interaction.Behaviors>
+                                    <core:HelpSetter Text="{x:Static languages:Core.DataListInputCheckBoxHelp}"
+                                                         DataContext="{Binding .}" />
+                                </i:Interaction.Behaviors>
+                            </CheckBox>
 
                             <CheckBox IsTabStop="False"
                                   Grid.Column="2"
@@ -137,7 +154,12 @@
                                   Margin="0,-1,0,-1"
                                   Checked="Outputcbx_OnChecked"
                                   Unchecked="Outputcbx_OnChecked"
-                                  AutomationProperties.AutomationId="UI_IsOutputCheckbox_AutoID" />
+                                  AutomationProperties.AutomationId="UI_IsOutputCheckbox_AutoID" >
+                                <i:Interaction.Behaviors>
+                                    <core:HelpSetter Text="{x:Static languages:Core.DataListOutputCheckBoxHelp}"
+                                                         DataContext="{Binding .}" />
+                                </i:Interaction.Behaviors>
+                            </CheckBox>
                         </Grid>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type Models:DataListHeaderItemModel}" ItemsSource="{Binding Path=Children}">

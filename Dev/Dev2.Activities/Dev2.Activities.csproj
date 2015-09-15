@@ -279,7 +279,9 @@
     <Compile Include="BussinessLogic\RsOpIsBase64.cs" />
     <Compile Include="BussinessLogic\RsOpIsBetween.cs" />
     <Compile Include="BussinessLogic\RsOpIsBinary.cs" />
+    <Compile Include="BussinessLogic\RsOpIsError.cs" />
     <Compile Include="BussinessLogic\RsOpIsHex.cs" />
+    <Compile Include="BussinessLogic\RsOpIsNoError.cs" />
     <Compile Include="BussinessLogic\RsOpNotBase64.cs" />
     <Compile Include="BussinessLogic\RsOpNotBetween.cs" />
     <Compile Include="BussinessLogic\RsOpNotBinary.cs" />

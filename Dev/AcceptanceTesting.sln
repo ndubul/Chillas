@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev2.Server", "Dev2.Server\Dev2.Server.csproj", "{87AEFD04-29F3-45B6-A7C6-4161F9190876}"
 EndProject
@@ -147,6 +147,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warewolf.Studio.Themes.Luna", "Warewol.Studio.Themes.Luna\Warewolf.Studio.Themes.Luna.csproj", "{18717E42-DF21-45A4-9527-F0BB95D7135D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warewolf.Studio.Views", "Warewolf.Studio.Views\Warewolf.Studio.Views.csproj", "{F0D6A8C9-FF25-40C9-99DB-CCBC21ABDC36}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C52B12C2-6A1D-4C4F-A878-CF283662A226} = {C52B12C2-6A1D-4C4F-A878-CF283662A226}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warewolf.Studio.ViewModels", "Warewolf.Studio.ViewModels\Warewolf.Studio.ViewModels.csproj", "{C52B12C2-6A1D-4C4F-A878-CF283662A226}"
 EndProject

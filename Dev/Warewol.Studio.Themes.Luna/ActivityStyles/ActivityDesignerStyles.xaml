@@ -26,7 +26,8 @@
         <Border x:Name="ShapeBorder"
                 MinHeight="{TemplateBinding FrameworkElement.MinHeight}"
                 MinWidth="{TemplateBinding FrameworkElement.MinWidth}"
-                CornerRadius="4">
+                Background="{DynamicResource DesignerViewBackground}"
+                CornerRadius="10">
             <Border.Style>
                 <Style>
                     <Setter Property="Border.BorderBrush" Value="{Binding Path=Background,RelativeSource={RelativeSource TemplatedParent}}" />
@@ -44,10 +45,24 @@
                             <Setter Property="Border.BorderThickness" Value="4" />
                             <Setter Property="FrameworkElement.Margin" Value="-4,-4,-4,-4" />
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                            <Setter Property="Border.Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect BlurRadius="15" Color="#FFF19D5E"></DropShadowEffect>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                            <Setter Property="Border.Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect BlurRadius="0" Color="Transparent"></DropShadowEffect>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Border.Style>
-            <Grid Background="{DynamicResource DesignerViewBackground}">
+            <Grid Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -65,14 +80,16 @@
                             <!-- HEADER CORNER RADIUS ONLY SET LEFT AND TOP -->
                             <Setter Property="Border.CornerRadius" Value="10,10,0,0" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=ModelItem.IsPrimarySelection,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
-                                    <Setter Property="Border.BorderBrush" Value="#F3700D" />
-                                    <!--<Setter Property="Border.Background" Value="#FFF19D5E" />-->
-                                </DataTrigger>
                                 <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
                                     <Setter Property="Border.BorderBrush" Value="#F3700D" />
                                     <!--<Setter Property="Border.Background" Value="#FFF19D5E" />-->
                                 </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                    <Setter Property="Border.BorderBrush" Value="{DynamicResource WorkflowViewElementBorderBrush}" />
+                                    <!--<Setter Property="Border.Background" Value="#FFF19D5E" />-->
+                                </DataTrigger>
+
                                 <DataTrigger Binding="{Binding Path=Content,RelativeSource={RelativeSource AncestorType={x:Type sap:WorkflowViewElement}}}" Value="{x:Null}">
                                     <Setter Property="Border.CornerRadius" Value="2" />
                                 </DataTrigger>
@@ -80,6 +97,7 @@
                         </Style>
                     </Border.Style>
                 </Border>
+                <!-- ACTIVITY ICON -->
                 <Viewbox Grid.Row="0"
                          Margin="9,0,3,0"
                          Width="16"
@@ -213,11 +231,12 @@
                             <Setter Property="UIElement.Visibility" Value="Visible" />
                             <Setter Property="Shape.StrokeThickness" Value="1" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=ModelItem.IsPrimarySelection,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
-                                    <Setter Property="Shape.Stroke" Value="#F3700D" />
-                                </DataTrigger>
                                 <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
                                     <Setter Property="Shape.Stroke" Value="#F3700D" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                    <Setter Property="Shape.Stroke" Value="{DynamicResource WorkflowViewElementBorderBrush}" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -226,6 +245,10 @@
             </Grid>
         </Border>
     </ControlTemplate>
+
+    <Style x:Key="FrameworkElementStyle" TargetType="{x:Type FrameworkElement}">
+        <Setter Property="Margin" Value="10" />
+    </Style>
 
     <Style x:Key="ActivityDesignerStyle" TargetType="{x:Type sap:ActivityDesigner}">
         <Setter Property="Control.Template" Value="{StaticResource ActivityDesignerTemplate}" />

@@ -50,7 +50,7 @@ namespace Dev2.Common.Interfaces.Studio
         string SaveToolTip { get; }
         ICommand SupportCommand { get; }
         bool IsProcessing { get; set; }
-
+        void UpdateHelpDescriptor(string helpText);
         void Lock();
     }
 }

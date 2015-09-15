@@ -1,5 +1,7 @@
 ﻿using System.Activities.Presentation.Model;
+using System.Windows;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Activities.Designers2.Decision;
 using Dev2.Common;
 using Dev2.Data.SystemTemplates;
 using Dev2.Data.SystemTemplates.Models;
@@ -9,6 +11,9 @@ namespace Dev2.Activities.Designers2.Switch
 {
     public class SwitchDesignerViewModel : ActivityDesignerViewModel
     {
+        string _switchExpression;
+        string _switchVariable;
+
         public SwitchDesignerViewModel(ModelItem mi):base(mi)
         {
             Initialize();
@@ -43,14 +48,51 @@ namespace Dev2.Activities.Designers2.Switch
                 string val = switchCaseValue.ComputedValue.ToString();
                 ds.SwitchExpression = val;
             }
-            DisplayText = ds.DisplayText;
+          
             SwitchVariable = ds.SwitchVariable;
             SwitchExpression = ds.SwitchExpression;
+            DisplayText = ds.DisplayText;
         }
 
-        public string SwitchExpression { get; set; }
-        public string SwitchVariable { get; set; }
-        public string DisplayText { get; set; }
+        public string SwitchExpression
+        {
+            get
+            {
+                return _switchExpression;
+            }
+            set
+            {
+                _switchExpression = value;
+            }
+        }
+        public string SwitchVariable
+        {
+            get
+            {
+                return _switchVariable;
+            }
+            set
+            {
+                _switchVariable = value;
+                if(string.IsNullOrEmpty(value))
+                {
+                    DisplayText = "Switch";
+                    DisplayName = "Switch";
+                }
+                else
+                {
+                    DisplayText = value;
+                    DisplayName = value;
+                }
+            }
+        }
+        public static readonly DependencyProperty DisplayTextProperty = DependencyProperty.Register("DisplayText", typeof(string), typeof(SwitchDesignerViewModel), new PropertyMetadata(default(string)));
+
+        public string DisplayText
+        {
+            get { return (string)GetValue(DisplayTextProperty); }
+            set { SetValue(DisplayTextProperty, value); }
+        }
 
         public Dev2Switch Switch
         {

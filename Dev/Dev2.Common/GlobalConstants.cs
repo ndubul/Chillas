@@ -402,7 +402,9 @@ or type_desc LIKE '%Procedure%'";
             "Not Numeric",
             "Not Regex",
             "Not Text",
-            "Not XML"
+            "Not XML",
+            "There is No Error",
+            "There is An Error"
         };
 
 

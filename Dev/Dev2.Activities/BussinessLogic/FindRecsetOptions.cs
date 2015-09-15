@@ -89,6 +89,19 @@ namespace Dev2.DataList
         /// <returns></returns>
         public static IList<IFindRecsetOptions> FindAll()
         {
+            return _options.Values.Where(a=>a.ArgumentCount>0).ToList();
+        }
+        /// <summary>
+        /// Find all AbstractRecsetSearchValidation objects
+        /// </summary>
+        /// <returns></returns>
+        public static IList<IFindRecsetOptions> FindAllDecision()
+        {
+            return _options.Values.ToList();
+        }
+
+        public static IList<IFindRecsetOptions> FindAllWithErrors()
+        {
             return _options.Values.ToList();
         }
     }

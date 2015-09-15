@@ -1,5 +1,5 @@
 
-<Service ID="1f630caf-aa38-4f05-b871-eb5ef88a7ce1" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="FormatNumber" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5729.26268">
+<Service ID="1f630caf-aa38-4f05-b871-eb5ef88a7ce1" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="FormatNumber" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5736.16179">
   <DisplayName>FormatNumber</DisplayName>
   <Category>Testing\For Each\FormatNumber</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -36,9 +36,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>jw4S+7g99j4IClACIoh9ldo7dZE=</DigestValue>
+        <DigestValue>QxjW2F8j2ishaP+YCM/ndb0DoO8=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>fGQ535jNO1lki2eT47L801Y+8/WTysMnMG5d4NCS+M7d3NTxxop+QvfHJMmA9Twm1TCEJix6nt/eds/h93pa9rJBvZllOEQaQxggdhoEi1qWwOP94r1cMKAwSD0ggToFiA4rQcooP6MnrqaJcksFXbFDyikwX8cFcoD/jGzaiX4=</SignatureValue>
+    <SignatureValue>uyRAa9aahUcscF32eiDe2zDFGoUtkyrbMHfMJrl2axX9voY0hnJnjK9MPhWCDTMkvWBhMBHQlCcOi0fnvSKBwsRIbpcOhHpNVOkteMWY/zyzoTVK01QoaBB8wVczCeAu74k2psM09GRKET1rKxCT9trIGr0B+FbTM7Tl+oBgvjQ=</SignatureValue>
   </Signature>
 </Service>
