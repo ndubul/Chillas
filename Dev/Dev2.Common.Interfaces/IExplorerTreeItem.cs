@@ -40,6 +40,8 @@ namespace Dev2.Common.Interfaces
         IExplorerTreeItem Parent { get; set; }
         bool CanCreateWorkflowService { get; set; }
         bool AreVersionsVisible { get; set; }
+        IShellViewModel ShellViewModel { get;}
+
         void AddChild(IExplorerItemViewModel child);
         void RemoveChild(IExplorerItemViewModel child);
         void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction);

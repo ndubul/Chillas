@@ -65,6 +65,8 @@
                       Grid.Row="0" 
                       x:Name="ServerTypeComboBox"
                       ItemsSource="{Binding Types}" 
+                      Focusable="True"
+                      views:FocusExtension.IsFocused="True"
                       SelectedValue="{Binding ServerType}">
                 <i:Interaction.Behaviors>
                     <core:HelpSetter Text="{x:Static languages:Core.DatabaseSourceServerTypesHelp}"

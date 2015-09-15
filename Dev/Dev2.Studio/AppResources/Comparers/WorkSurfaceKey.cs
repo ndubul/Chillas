@@ -11,6 +11,7 @@
 
 using System;
 using System.Text;
+using Dev2.Common.Interfaces;
 using Dev2.Studio.Core.AppResources.Enums;
 
 // ReSharper disable once CheckNamespace
@@ -21,7 +22,7 @@ namespace Dev2.Studio.AppResources.Comparers
     /// </summary>
     /// <author>Jurie.smit</author>
     /// <date>2/27/2013</date>
-    public class WorkSurfaceKey : IEquatable<WorkSurfaceKey>
+    public class WorkSurfaceKey : IWorkSurfaceKey,IEquatable<WorkSurfaceKey>
     {
         public WorkSurfaceContext WorkSurfaceContext { get; set; }
 

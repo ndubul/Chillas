@@ -40,6 +40,11 @@ namespace Warewolf.Studio.Views
 	        return ExplorerViewTestClass.OpenFolderNode(folderName);
 	    }
 
+        public IExplorerTreeItem OpenItem(string resourceName,string folderName)
+        {
+            return ExplorerViewTestClass.OpenItem(resourceName,folderName);
+        }
+
 	    public int GetVisibleChildrenCount(string folderName)
 	    {
 	        return ExplorerViewTestClass.GetVisibleChildrenCount(folderName);

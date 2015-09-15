@@ -9,6 +9,8 @@
                                xmlns:local="clr-namespace:Dev2.Activities.Designers2.Script"
                                xmlns:help="clr-namespace:Dev2.Activities.Designers2.Core.Help"
                                xmlns:errors="clr-namespace:Dev2.Activities.Designers2.Core.Errors"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="230"
                                MaxWidth="230"
                                mc:Ignorable="d"
@@ -38,8 +40,7 @@
                    AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_ScriptTypecbx_AutoID}"
                    ToolTip="{x:Static help:HelpTextResources.ScriptingToolTipLanguageType}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.ScriptingHelpLanguageType}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.ScriptingHelpLanguageType}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="SelectedTimeModifierType"
                                      SourcePropertyValue="{Binding SelectedTimeModifierType, UpdateSourceTrigger=PropertyChanged}"
@@ -51,10 +52,10 @@
                                  Grid.Column="0"
                                  Grid.Row="1" 
                                  DefaultText="{Binding ScriptTypeDefaultText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  AllowMultilinePaste="True"
-                                                AcceptsReturn="True"
-                                                AllowUserInsertLine="True"
-                                                MaxHeight="53"
+                                 AllowMultilinePaste="True"
+                                 AcceptsReturn="True"
+                                 AllowUserInsertLine="True"
+                                 MaxHeight="53"
                                  TextWrapping="Wrap"
                                  Height="53"
                                  MinHeight="53"
@@ -67,8 +68,7 @@
                                  Text="{Binding Path=ModelItem.Script, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_txtScript_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.ScriptingHelpScript}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.ScriptingHelpScript}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="ModelItem.Script"
                                      SourcePropertyValue="{Binding ModelItem.Script, UpdateSourceTrigger=PropertyChanged}"
@@ -91,8 +91,7 @@
                                 Text="{Binding Path=ModelItem.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Resulttxt_AutoID}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.ScriptingHelpResult}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.ScriptingHelpResult}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="Result"
                                      SourcePropertyValue="{Binding ModelItem.Result, UpdateSourceTrigger=PropertyChanged}"

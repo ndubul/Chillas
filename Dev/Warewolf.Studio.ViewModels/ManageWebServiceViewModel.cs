@@ -42,7 +42,6 @@ namespace Warewolf.Studio.ViewModels
         WebRequestMethod _selectedWebRequestMethod;
         ICollection<WebRequestMethod> _webRequestMethods;
         ICommand _newWebSourceCommand;
-
         ICollection<IWebServiceSource> _sources;
         IWebServiceSource _selectedSource;
         readonly IWebService _webService;
@@ -91,7 +90,7 @@ namespace Warewolf.Studio.ViewModels
         void Init()
         {
             WebRequestMethods = new ObservableCollection<WebRequestMethod>(Dev2EnumConverter.GetEnumsToList<WebRequestMethod>());
-           // SelectedWebRequestMethod = WebRequestMethods.First();
+            // SelectedWebRequestMethod = WebRequestMethods.First();
             Sources = Model.Sources;
             Inputs = new ObservableCollection<IServiceInput>();
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
@@ -105,7 +104,7 @@ namespace Warewolf.Studio.ViewModels
             RequestBody = "";
             Response = "";
             TestCommand = new DelegateCommand(() => Test(_model, ToModel()), CanTest);
-      
+
             SaveCommand = new DelegateCommand(Save, CanSave);
             NewWebSourceCommand = new DelegateCommand(() => _model.CreateNewSource());
             EditWebSourceCommand = new DelegateCommand(() => _model.EditSource(SelectedSource));
@@ -148,7 +147,7 @@ namespace Warewolf.Studio.ViewModels
 
             if (SelectedSource != null)
             {
-                if(SelectedSource.HostName != null)
+                if (SelectedSource.HostName != null)
                 {
                     RequestUrlQuery = service.QueryString.Replace(SelectedSource.HostName, "");
                 }
@@ -161,10 +160,10 @@ namespace Warewolf.Studio.ViewModels
             RequestUrlQuery = service.QueryString;
             Inputs = service.Inputs;
             OutputMapping = service.OutputMappings;
-            
+
         }
 
-       
+
         void HandlePasteResponse()
         {
             Response = _model.HandlePasteResponse(Response ?? "");
@@ -578,7 +577,7 @@ namespace Warewolf.Studio.ViewModels
                     {
                         CanEditHeadersAndUrl = false;
                     }
-                
+
                     ViewModelUtils.RaiseCanExecuteChanged(EditWebSourceCommand);
                 }
             }

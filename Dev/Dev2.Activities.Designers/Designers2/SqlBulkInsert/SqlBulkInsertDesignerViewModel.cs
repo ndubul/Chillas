@@ -27,6 +27,7 @@ using Dev2.Common.Interfaces.Threading;
 using Dev2.Data.Parsers;
 using Dev2.Data.Util;
 using Dev2.DataList.Contract;
+using Dev2.Interfaces;
 using Dev2.Providers.Errors;
 using Dev2.Providers.Validation.Rules;
 using Dev2.Runtime.Configuration.ViewModels.Base;
@@ -89,7 +90,6 @@ namespace Dev2.Activities.Designers2.SqlBulkInsert
 
             AddTitleBarLargeToggle();
             AddTitleBarQuickVariableInputToggle();
-            AddTitleBarHelpToggle();
 
             dynamic mi = ModelItem;
             ModelItemCollection = mi.InputMappings;
@@ -725,6 +725,15 @@ namespace Dev2.Activities.Designers2.SqlBulkInsert
             {
                 var mi = ModelItemCollection[i];
                 mi.SetProperty("InputColumn", newMappings[i]);
+            }
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
             }
         }
 

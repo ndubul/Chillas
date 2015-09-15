@@ -14,6 +14,7 @@
 #6 Short cut Keys
 
 @TabControl
+@ignore
 Scenario: 1 Change Workflow And Close dialog Options
 	Given I have a New Workflow open
 	Then "New Workflow 1" tab is opened
@@ -167,5 +168,36 @@ Scenario: 6 Short Cut Keys Are Working
 	And I press "CTRL+D"
 	Then "Deploy" tab is "Visible"
 
+Scenario: Closing unsaved Workflows
+	Given "Hello World" tab is opened
+	And I add variable "[[Surname]]" equals "tubman"
+	Then "Hello World *" tab is "Visible"
+	And "Hello World *" tab is closed
+	Then a warning message appears prompting to "Save"
+	When "Save" is clicked
+	Then the save dialog is opened
 
-		
+
+#Wolf-1115
+Scenario: Closing unsaved tab on remote server
+	Given I "Start" the studio
+	And selected Source Server is "Remote Intergration Connection"
+	And "New" is clicked
+	And "New Workflow - Remote Intergration Connection" tab is opened
+	And I drag an "Assign" tool into the workflow
+	And "New Workflow - Remote Intergration Connection *" tab is visible
+	And I disconnect from Source Server is "Remote Intergration Connection"
+	And I close "New Workflow - Remote Intergration Connection *" tab
+	Then a warning message appears prompting to "Save"
+	When "Save" is clicked
+	And the Save Dialog is opened
+	Then "New Workflow - Remote Intergration Connection *" Server is changed to "Local"
+	And "New Workflow - Remote Intergration Connection *" is saved as "Test -Local"
+	
+
+Scenario: Opening the same workflow multiple times
+	Given I open "Dev2GetCountriesWebService" 
+	Then "Dev2GetCountriesWebService" tab is opened	
+	And I open "Dev2GetCountriesWebService" 
+	Then focus is put on "Dev2GetCountriesWebService"
+	And No new tabs are opened

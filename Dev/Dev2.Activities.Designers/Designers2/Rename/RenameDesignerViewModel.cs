@@ -11,6 +11,7 @@
 
 using System.Activities.Presentation.Model;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.Rename
 {
@@ -20,7 +21,6 @@ namespace Dev2.Activities.Designers2.Rename
             : base(modelItem, "File or Folder", "New Name")
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
         }
 
         public override void Validate()
@@ -29,6 +29,15 @@ namespace Dev2.Activities.Designers2.Rename
             ValidateUserNameAndPassword();
             ValidateDestinationUsernameAndPassword();
             ValidateInputAndOutputPaths();
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

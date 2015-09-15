@@ -11,6 +11,7 @@
 
 using System.Activities.Presentation.Model;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.Delete
 {
@@ -19,8 +20,6 @@ namespace Dev2.Activities.Designers2.Delete
         public DeleteDesignerViewModel(ModelItem modelItem)
             : base(modelItem, "File or Folder", string.Empty)
         {
-            AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
         }
 
         public override void Validate()
@@ -28,6 +27,15 @@ namespace Dev2.Activities.Designers2.Delete
             Errors = null;
             ValidateUserNameAndPassword();
             ValidateInputPath();
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

@@ -11,6 +11,7 @@
 
 using System.Activities.Presentation.Model;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.UniqueRecords
 {
@@ -19,11 +20,19 @@ namespace Dev2.Activities.Designers2.UniqueRecords
         public UniqueRecordsDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
         }
 
         public override void Validate()
         {
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

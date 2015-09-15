@@ -61,7 +61,7 @@ namespace Dev2.Studio.Factory
             (T vm, WorkSurfaceContext workSurfaceContext)
             where T : IWorkSurfaceViewModel
         {
-            var key = WorkSurfaceKeyFactory.CreateKey(workSurfaceContext);
+            var key = WorkSurfaceKeyFactory.CreateKey(workSurfaceContext) as WorkSurfaceKey;
             return CreateWorkSurfaceContextViewModel(vm, workSurfaceContext, key);
         }
 

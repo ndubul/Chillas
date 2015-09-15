@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Windows;
 using Dev2.Activities.Designers2.Core;
 using Dev2.Common.DateAndTime;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.DateTimeDifference
 {
@@ -22,7 +23,6 @@ namespace Dev2.Activities.Designers2.DateTimeDifference
         public DateTimeDifferenceDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             OutputTypes = new List<string>(DateTimeComparer.OutputFormatTypes);
             SelectedOutputType = string.IsNullOrEmpty(OutputType) ? OutputTypes[0] : OutputType;
         }
@@ -50,6 +50,15 @@ namespace Dev2.Activities.Designers2.DateTimeDifference
 
         public override void Validate()
         {
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

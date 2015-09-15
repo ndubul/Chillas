@@ -18,15 +18,12 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
-using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.ConnectionHelpers;
 using Dev2.Interfaces;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
-using Warewolf.Studio.ViewModels;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.CustomControls.Connections

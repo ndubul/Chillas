@@ -43,5 +43,13 @@ namespace Dev2.Activities.Designers.Tests.Designers2.Core.Stubs
             yield return new ActionableErrorInfo();
         }
 
+        #region Overrides of ActivityDesignerViewModel
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            UpdateHelpDescriptor(helpText);
+        }
+
+        #endregion
     }
 }

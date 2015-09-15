@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using Dev2.Activities.Designers2.Core;
 using Dev2.Common.Common;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.CaseConvert
 {
@@ -26,7 +27,6 @@ namespace Dev2.Activities.Designers2.CaseConvert
             : base(modelItem)
         {
             AddTitleBarQuickVariableInputToggle();
-            AddTitleBarHelpToggle();
             dynamic mi = ModelItem;
             InitializeItems(mi.ConvertCollection);
 
@@ -49,6 +49,15 @@ namespace Dev2.Activities.Designers2.CaseConvert
         protected override IEnumerable<IActionableErrorInfo> ValidateCollectionItem(ModelItem mi)
         {
             yield break;
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

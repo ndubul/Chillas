@@ -37,7 +37,7 @@ namespace Warewolf.Studio.ViewModels
         // ReSharper disable TooManyDependencies
         public ManageNewServerViewModel(IServerSource newServerSource,
             IStudioUpdateManager updateManager, IRequestServiceNameViewModel requestServiceNameViewModel,
-            string connectedServer, Guid originationSource):base(ResourceType.Server)
+            string connectedServer, Guid originationSource):base(ResourceType.ServerSource)
         // ReSharper restore TooManyDependencies
         {
             //VerifyArgument.AreNotNull(new Dictionary<string, object> { { "newServerSource", newServerSource }, { "updateManager", updateManager }, { "requestServiceNameViewModel", requestServiceNameViewModel } ,{"connectedServer",connectedServer}});

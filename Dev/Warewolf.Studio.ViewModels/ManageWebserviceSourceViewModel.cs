@@ -15,8 +15,6 @@ using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Warewolf.Core;
-using Warewolf.Studio.Models.Help;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -31,7 +29,6 @@ namespace Warewolf.Studio.ViewModels
         private string _defaultQuery;
         private string _testMessage;
         private string _testDefault;
-        // private string _header;
         readonly IManageWebServiceSourceModel _updateManager;
         readonly IEventAggregator _aggregator;
         IWebServiceSource _webServiceSource;

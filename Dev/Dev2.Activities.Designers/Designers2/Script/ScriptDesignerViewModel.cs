@@ -15,6 +15,7 @@ using System.Windows;
 using Dev2.Activities.Designers2.Core;
 using Dev2.Common.Interfaces.Enums;
 using Dev2.Common.Interfaces.Enums.Enums;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.Script
 {
@@ -23,7 +24,6 @@ namespace Dev2.Activities.Designers2.Script
         public ScriptDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             ScriptTypes = Dev2EnumConverter.ConvertEnumsTypeToStringList<enScriptType>();
             SelectedScriptType = Dev2EnumConverter.ConvertEnumValueToString(ScriptType);
         }
@@ -77,6 +77,15 @@ namespace Dev2.Activities.Designers2.Script
 
         public override void Validate()
         {
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

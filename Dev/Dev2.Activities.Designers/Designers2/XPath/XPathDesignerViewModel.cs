@@ -17,6 +17,7 @@ using Dev2.Activities.Designers2.Core;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
 using Dev2.Data.Util;
+using Dev2.Interfaces;
 using Dev2.Providers.Validation.Rules;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Activities.Utils;
@@ -33,7 +34,6 @@ namespace Dev2.Activities.Designers2.XPath
         {
             AddTitleBarLargeToggle();
             AddTitleBarQuickVariableInputToggle();
-            AddTitleBarHelpToggle();
             dynamic mi = ModelItem;
             InitializeItems(mi.ResultsCollection);
         }
@@ -92,6 +92,15 @@ namespace Dev2.Activities.Designers2.XPath
             foreach(var error in dto.GetRuleSet("XPath", GetDatalistString()).ValidateRules("'XPath'", () => mi.SetProperty("IsXpathVariableFocused", true)))
             {
                 yield return error;
+            }
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
             }
         }
     }

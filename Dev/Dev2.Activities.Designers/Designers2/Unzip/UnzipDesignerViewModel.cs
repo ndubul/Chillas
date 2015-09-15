@@ -11,6 +11,7 @@
 
 using System.Activities.Presentation.Model;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.Unzip
 {
@@ -20,7 +21,6 @@ namespace Dev2.Activities.Designers2.Unzip
             : base(modelItem, "Zip Name", "Destination")
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
         }
 
         public override void Validate()
@@ -36,5 +36,13 @@ namespace Dev2.Activities.Designers2.Unzip
 
         string ArchivePassword { set { SetProperty(value); } get { return GetProperty<string>(); } }
 
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
+        }
     }
 }

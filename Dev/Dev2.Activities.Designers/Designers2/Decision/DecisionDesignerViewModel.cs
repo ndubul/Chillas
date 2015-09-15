@@ -49,7 +49,6 @@ namespace Dev2.Activities.Designers2.Decision
             : base(modelItem)
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
             Collection = new ObservableCollection<IDev2TOFn>();
             Collection.CollectionChanged += CollectionCollectionChanged;
             WhereOptions = new ObservableCollection<string>(FindRecsetOptions.FindAll().Select(c => c.HandlesType()));
@@ -91,7 +90,7 @@ namespace Dev2.Activities.Designers2.Decision
             {
                 Collection.Remove(row);
                 UpdateDecisionDisplayName((DecisionTO)Tos[0]);
-            }
+        }
         }
        public ICommand DeleteCommand
         {
@@ -356,5 +355,14 @@ namespace Dev2.Activities.Designers2.Decision
         }
 
         #endregion
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
+        }
     }
 }

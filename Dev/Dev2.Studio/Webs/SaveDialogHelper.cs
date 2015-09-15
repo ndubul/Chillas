@@ -15,7 +15,6 @@ using System.Windows;
 using Dev2.AppResources.Repositories;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Infrastructure;
-using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Events;
 using Dev2.Studio.Core;
@@ -69,7 +68,7 @@ namespace Dev2.Webs
 
             EnvironmentRepository.Instance.ActiveEnvironment = environment;
 
-            IServer server = new Server(environment.Connection);
+            IServer server = new Server(environment);
             if(server.Permissions == null)
             {
                 server.Permissions = new List<IWindowsGroupPermission>();

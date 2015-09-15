@@ -11,6 +11,7 @@
 
 using System.Activities.Presentation.Model;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.Copy
 {
@@ -20,7 +21,6 @@ namespace Dev2.Activities.Designers2.Copy
             : base(modelItem, "File or Folder", "Destination")
         {
             AddTitleBarLargeToggle();
-            AddTitleBarHelpToggle();
         }
 
         public override void Validate()
@@ -32,6 +32,13 @@ namespace Dev2.Activities.Designers2.Copy
 
         }
 
-
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
+        }
     }
 }

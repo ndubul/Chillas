@@ -80,6 +80,13 @@ namespace Dev2.Activities.Designers.Tests.Designers2.Core.FileActivityDesigner
             base.ValidateInputAndOutputPaths();
         }
 
+        #region Overrides of ActivityDesignerViewModel
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+        }
+
+        #endregion
 
 
         public string TestValidateFileContent(string content, string label, Action onError, bool contentIsRequired)

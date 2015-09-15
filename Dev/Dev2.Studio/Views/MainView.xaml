@@ -342,8 +342,8 @@
                         </igDock:SplitPane>
                     </igDock:XamDockManager.Panes>
                     <!-- Document Content Host - For Tabbed workflow pane -->
-                    <igDock:DocumentContentHost x:Name="DocumentHost"
-                                            AutomationProperties.AutomationId="UI_DocumentHost_AutoID" >
+                    <igDock:DocumentContentHost x:Name="DocumentHost" FocusManager.FocusedElement="{Binding ElementName=DisplayContentControl, UpdateSourceTrigger=PropertyChanged}"
+                                            AutomationProperties.AutomationId="UI_DocumentHost_AutoID" Focusable="True" >
                         <igDock:SplitPane x:Name="DockCentre" AutomationProperties.AutomationId="UI_SplitPane_AutoID">
                             <igDock:TabGroupPane x:Name="TabManager" TabStripPlacement="Top"  AutomationProperties.AutomationId="UI_TabManager_AutoID">
                                 <i:Interaction.Behaviors>
@@ -373,7 +373,7 @@
                                                 <Setter Property="ContentTemplate">
                                                     <Setter.Value>
                                                         <DataTemplate>
-                                                            <ContentControl cal:View.Model="{Binding .}" MouseDown="ContentControl_MouseEnter" />
+                                                            <ContentControl x:Name="DisplayContentControl" cal:View.Model="{Binding .}" MouseDown="ContentControl_MouseEnter" />
                                                         </DataTemplate>
                                                     </Setter.Value>
                                                 </Setter>

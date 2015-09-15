@@ -124,7 +124,7 @@ namespace Dev2.Settings.Scheduler
 
             var taskServiceConvertorFactory = new TaskServiceConvertorFactory();
             SchedulerFactory = new ClientSchedulerFactory(new Dev2TaskService(taskServiceConvertorFactory), taskServiceConvertorFactory);
-            ConnectControlViewModel = connectControlViewModel ?? new ConnectControlViewModel(OnServerChanged, "Server: ", false);
+            ConnectControlViewModel = connectControlViewModel ?? new CustomControls.Connections.ConnectControlViewModel(OnServerChanged, "Server: ", false);
         }
 
         #endregion

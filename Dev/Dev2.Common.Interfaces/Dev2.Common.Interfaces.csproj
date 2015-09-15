@@ -203,6 +203,7 @@
     <Compile Include="IAdminManager.cs" />
     <Compile Include="IAssignValue.cs" />
     <Compile Include="ICheckControlEnabledView.cs" />
+    <Compile Include="IConnectControlViewModel.cs" />
     <Compile Include="IDllListing.cs" />
     <Compile Include="IEmailAttachmentModel.cs" />
     <Compile Include="IEmailAttachmentView.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="IManageWebServiceViewModel.cs" />
     <Compile Include="IMenuView.cs" />
     <Compile Include="INamespaceItem.cs" />
+    <Compile Include="INetworkStateChangedEventArgs.cs" />
     <Compile Include="Infrastructure\Communication\IExecuteMessage.cs" />
     <Compile Include="Infrastructure\Events\IEventPublisher.cs" />
     <Compile Include="Infrastructure\IExplorerRepositorySync.cs" />
@@ -281,6 +283,7 @@
     <Compile Include="IWarewolfListIterator.cs" />
     <Compile Include="IWarewolfWebClient.cs" />
     <Compile Include="IWebLatestVersionDialog.cs" />
+    <Compile Include="IWorksurfaceKey.cs" />
     <Compile Include="NameValue.cs" />
     <Compile Include="PathOperations\IResult.cs" />
     <Compile Include="Patterns\ISpookyLoadable.cs" />
@@ -312,6 +315,7 @@
     <Compile Include="ServerProxyLayer\IDbSource.cs" />
     <Compile Include="ServerProxyLayer\IPluginProxy.cs" />
     <Compile Include="ServerProxyLayer\IUpdateManager.cs" />
+    <Compile Include="ServerProxyLayer\IVersionManager.cs" />
     <Compile Include="ServerProxyLayer\IWebServiceSource.cs" />
     <Compile Include="ServerStats.cs" />
     <Compile Include="Services\Sql\IDbFactory.cs" />

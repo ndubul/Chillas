@@ -15,6 +15,8 @@
                                xmlns:dev2="clr-namespace:Dev2;assembly=Dev2.Core"
                                xmlns:behavior="clr-namespace:Dev2.CustomControls.Behavior;assembly=Dev2.CustomControls"
                                xmlns:converters="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.CustomControls"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="280"
                                MaxWidth="280"
                                mc:Ignorable="d"
@@ -69,8 +71,7 @@
                                                     ToolTip="{x:Static help:HelpTextResources.BaseConversionToolTipBaseInput}"
                                                     MaxHeight="52">
                                 <i:Interaction.Behaviors>
-                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.BaseConversionHelpBaseInput}"
-                                                     DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                    <core1:HelpSetter Text="{x:Static languages:Core.BaseConversionHelpBaseInput}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                     <errors:ErrorsSetter Source="{Binding}"
                                                          SourcePropertyName="FromExpression"
                                                          SourcePropertyValue="{Binding FromExpression, UpdateSourceTrigger=PropertyChanged}"

@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Dev2.Common.Interfaces;
 using Microsoft.Practices.ObjectBuilder2;
-using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 
@@ -22,9 +21,9 @@ namespace Warewolf.Studio.ViewModels
 	    protected ExplorerViewModelBase()
 		{
 
-			RefreshCommand = new DelegateCommand(Refresh);
-			ClearSearchTextCommand = new DelegateCommand(() => SearchText = "");
-            CreateFolderCommand = new DelegateCommand(CreateFolder);
+			RefreshCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(Refresh);
+			ClearSearchTextCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(() => SearchText = "");
+            CreateFolderCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(CreateFolder);
 		}
 
 	    void CreateFolder()
@@ -195,7 +194,7 @@ namespace Warewolf.Studio.ViewModels
 		{
 			return null;
 		}
-		//public IConnectControlViewModel ConnectControlViewModel { get; internal set; }
+		public IConnectControlViewModel ConnectControlViewModel { get; internal set; }
 		protected virtual void OnSelectedEnvironmentChanged(IEnvironmentViewModel e)
 		{
 			var handler = SelectedEnvironmentChanged;
@@ -205,22 +204,34 @@ namespace Warewolf.Studio.ViewModels
 
 	public class ExplorerViewModel : ExplorerViewModelBase
 	{
-		public ExplorerViewModel(IShellViewModel shellViewModel, IEventAggregator aggregator)
+	    readonly IShellViewModel _shellViewModel;
+
+	    public ExplorerViewModel(IShellViewModel shellViewModel, IEventAggregator aggregator)
 		{
 			if (shellViewModel == null)
 			{
 				throw new ArgumentNullException("shellViewModel");
 			}
 			var localhostEnvironment = CreateEnvironmentFromServer(shellViewModel.LocalhostServer, shellViewModel);
+            _shellViewModel = shellViewModel;
 			Environments = new ObservableCollection<IEnvironmentViewModel> { localhostEnvironment };
 			LoadEnvironment(localhostEnvironment);
 
-			//ConnectControlViewModel = new ConnectControlViewModel(shellViewModel.LocalhostServer, aggregator);
-			//ShowConnectControl = true;
+			ConnectControlViewModel = new ConnectControlViewModel(shellViewModel.LocalhostServer, aggregator);
+			ShowConnectControl = true;
+            ConnectControlViewModel.ServerConnected+=ServerConnected;
 			//aggregator.GetEvent<ItemAddedEvent>().Subscribe(ItemAdded);
 		}
 
-//		void ItemAdded(IExplorerItem obj)
+	    async void ServerConnected(object _, IServer server)
+	    {
+            var environmentModel = CreateEnvironmentFromServer(server, _shellViewModel);
+            
+            await environmentModel.Load();
+            Environments.Add(environmentModel);
+	    }
+
+	    //		void ItemAdded(IExplorerItem obj)
 //		{
 //
 //		}

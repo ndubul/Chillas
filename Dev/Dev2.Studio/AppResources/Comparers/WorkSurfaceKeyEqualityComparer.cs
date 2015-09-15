@@ -44,8 +44,7 @@ namespace Dev2.Studio.AppResources.Comparers
             bool res = false;
             if (x.EnvironmentID != null && y.EnvironmentID != null)
             {
-                if ((x.WorkSurfaceContext == y.WorkSurfaceContext)
-                 && x.ResourceID == y.ResourceID
+                if (x.ResourceID == y.ResourceID
                  && x.ServerID == y.ServerID
                     && x.EnvironmentID == y.EnvironmentID)
                 {
@@ -54,8 +53,7 @@ namespace Dev2.Studio.AppResources.Comparers
             }
             else
             {
-                if ((x.WorkSurfaceContext == y.WorkSurfaceContext)
-                 && x.ResourceID == y.ResourceID
+                if (x.ResourceID == y.ResourceID
                  && x.ServerID == y.ServerID)
                 {
                     res = true;

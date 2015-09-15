@@ -12,6 +12,7 @@
 using System.Activities.Presentation.Model;
 using System.Windows;
 using Dev2.Activities.Designers2.Core;
+using Dev2.Interfaces;
 
 namespace Dev2.Activities.Designers2.Comment
 {
@@ -20,7 +21,6 @@ namespace Dev2.Activities.Designers2.Comment
         public CommentDesignerViewModel(ModelItem modelItem)
             : base(modelItem)
         {
-            AddTitleBarHelpToggle();
             ShowLarge = true;
             ThumbVisibility = Visibility.Visible;
         }
@@ -32,6 +32,15 @@ namespace Dev2.Activities.Designers2.Comment
 
         public override void Validate()
         {
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
     }
 }

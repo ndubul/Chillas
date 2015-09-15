@@ -12,6 +12,8 @@
                                xmlns:activities="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities"
                                xmlns:controls="clr-namespace:Dev2.Activities.Designers2.Core.Controls"
                                xmlns:converters="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.CustomControls"
+                               xmlns:core1="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+                               xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                                Width="290"
                                MaxWidth="290"
                                mc:Ignorable="d"
@@ -48,8 +50,7 @@
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_FieldsToSearch_AutoID}"
                                 ToolTip="{x:Static help:HelpTextResources.FindToolTipInFields}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.FindHelpInFields}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.FindHelpInFields}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="FieldsToSearch"
                                      SourcePropertyValue="{Binding ModelItem.FieldsToSearch, UpdateSourceTrigger=PropertyChanged}"
@@ -95,8 +96,7 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                                 <i:Interaction.Behaviors>
-                                    <help:HelpSetter Text="{x:Static help:HelpTextResources.FindHelpLookForMatchType}"
-                                                     DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                    <core1:HelpSetter Text="{x:Static languages:Core.FindHelpLookForMatchType}" DataContext="{Binding}" />
                                     <errors:ErrorsSetter Source="{Binding}"
                                                          SourcePropertyName="SearchType"
                                                          SourcePropertyValue="{Binding SearchType, UpdateSourceTrigger=PropertyChanged}"
@@ -143,8 +143,7 @@
                                                         Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
                                                         ToolTip="{x:Static help:HelpTextResources.FindToolTipMatch}">
                                     <i:Interaction.Behaviors>
-                                        <help:HelpSetter Text="{x:Static help:HelpTextResources.FindHelpMatch}"
-                                                         DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                        <core1:HelpSetter Text="{x:Static languages:Core.FindHelpMatch}" DataContext="{Binding}" />
                                         <errors:ErrorsSetter Source="{Binding}"
                                                              SourcePropertyName="SearchCriteria"
                                                              SourcePropertyValue="{Binding SearchCriteria, UpdateSourceTrigger=PropertyChanged}"
@@ -176,8 +175,7 @@
                                                         Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
                                                         ToolTip="{x:Static help:HelpTextResources.FindToolTipFrom}">
                                     <i:Interaction.Behaviors>
-                                        <help:HelpSetter Text="{x:Static help:HelpTextResources.FindHelpFrom}"
-                                                         DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                        <core1:HelpSetter Text="{x:Static languages:Core.FindHelpFrom}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                         <errors:ErrorsSetter Source="{Binding}"
                                                              SourcePropertyName="From"
                                                              SourcePropertyValue="{Binding From, UpdateSourceTrigger=PropertyChanged}"
@@ -208,8 +206,7 @@
                                                         Style="{StaticResource DatagridIntellisenseTextBoxStyle}"
                                                         ToolTip="{x:Static help:HelpTextResources.FindToolTipTo}">
                                     <i:Interaction.Behaviors>
-                                        <help:HelpSetter Text="{x:Static help:HelpTextResources.FindHelpTo}"
-                                                         DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
+                                        <core1:HelpSetter Text="{x:Static languages:Core.FindHelpTo}" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=core:ActivityDesignerTemplate}}" />
                                         <errors:ErrorsSetter Source="{Binding}"
                                                              SourcePropertyName="To"
                                                              SourcePropertyValue="{Binding To, UpdateSourceTrigger=PropertyChanged}"
@@ -243,8 +240,7 @@
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_Result_AutoID}"
                                 ToolTip="{x:Static help:HelpTextResources.FindToolTipResult}">
             <i:Interaction.Behaviors>
-                <help:HelpSetter Text="{x:Static help:HelpTextResources.FindHelpResult}"
-                                 DataContext="{Binding}" />
+                <core1:HelpSetter Text="{x:Static languages:Core.FindHelpResult}" DataContext="{Binding}" />
                 <errors:ErrorsSetter Source="{Binding}"
                                      SourcePropertyName="Result"
                                      SourcePropertyValue="{Binding ModelItem.Result, UpdateSourceTrigger=PropertyChanged}"
