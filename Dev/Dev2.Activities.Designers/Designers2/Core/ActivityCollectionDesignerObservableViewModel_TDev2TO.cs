@@ -270,6 +270,11 @@ namespace Dev2.Activities.Designers2.Core
                     }
                 }
             }
+           UpdateDto(dto);
+        }
+
+        public virtual void UpdateDto(IDev2TOFn dto)
+        {
         }
 
         protected virtual IDev2TOFn CreateDto(int indexNumber, string initializeWith)

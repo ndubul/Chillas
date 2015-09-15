@@ -1,5 +1,5 @@
 
-<Service ID="f1d79eba-c65c-4003-afec-59bab52ab3ee" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="DeleteFolder" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5729.26268">
+<Service ID="f1d79eba-c65c-4003-afec-59bab52ab3ee" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="DeleteFolder" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5736.16179">
   <DisplayName>DeleteFolder</DisplayName>
   <Category>Testing\For Each\DeleteFolder</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>m4iVB1kluPSc8l6ERszC2FqsODg=</DigestValue>
+        <DigestValue>jDLk8uVfj1w3KjSlZ7x+zv1ZLN0=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>auzukK+4gZgbX7Dc8KTRF5rZ79/NuW2guME5le34m7YSMFZBr7aFlhdn6Gscl7n5WtdY2CU3olGOyT20+olc++SDjouwONerZDCSZKtEUdEgeSCjL5osYSElsrYcuVdOeb1Y1lNWQdBxmiW+oU0GXUig4dcx6o4qdOJL2kYgIjM=</SignatureValue>
+    <SignatureValue>tsaSID4xxltQqg4C/7ZrreRIW+NTJjx0wFERYbW0hAB6ZG2nDmZqTWLjPOORkhZmyMZ4Vvr96/C+3SpR3tQXMVyE3vymfhN25I2xjm0ejZmwbqbuzRXbWrykg+BsENFbfcNXWiOIeQaVDNAn4MB1oIEdAUdBQlGZWSF6UfXIFHo=</SignatureValue>
   </Signature>
 </Service>

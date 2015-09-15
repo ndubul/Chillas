@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Explorer;
@@ -39,7 +40,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             get
             {
                 return EnvironmentConnection.ServerID;
-            }
+        }
         }
 
         void ItemAdded(IExplorerItem obj)
@@ -49,7 +50,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
                 ItemAddedEvent(obj);
             }
         }
-        
+
         public string GetServerVersion()
         {
             if(!EnvironmentConnection.IsConnected)

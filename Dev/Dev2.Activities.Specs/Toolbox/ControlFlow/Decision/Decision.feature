@@ -1276,4 +1276,18 @@ Scenario Outline: Ensuring all inputs work as expected
 	#failing
 	#[[rec(*).a]]
 
-
+#Wolf-675
+Scenario: decide if variable [[A]] greater than variable [[B]] (False)
+	Given a decision variable "[[A]]" value "30"
+	And  a decision variable "[[B]]" value "\"
+	And is "[[A]]" "Equals" "[[B]]"	
+	When the decision tool is executed
+	#Then the decision result should be "False"
+	Then the execution has "NO" error
+	Then the debug inputs as  
+	|            | Statement | Require All decisions to be True |
+	| [[A]] = 30 |           |                                  |
+	| [[B]] = \ | String    | YES                              |
+	And the debug output as 
+	|       |
+	| False |

@@ -3,66 +3,57 @@
 	As a Warewolf User
 	I want to be shown the decision window setup
 
-@ignore
+
 #WOLF-1082 
 Scenario Outline: Ensure Inputs are enabled on decision window load
 	Given I have a workflow "New Workflow"
 	And drop a "Decision" tool onto the design surface
 	Then the Decision window is opened
 	And '<Inputs>' fields are "Enabled"
-	And "Add Statement" is visible
-	And a decision variable '<variable>' value '<value>'
-	And a decision variable '<variable2>' value '<value2>'
-	And a decision variable '<variable3>' value '<value3>'
-	And check if '<variable>' "<MatchType>" '<variable2>'
-	When the decision tool is executed
-	Then the execution has "NO" error
+	And an empty row has been added
+	And the decision match variables '<Variable>'and match '<Variable2>' and to match'<Variable3>'
+	And MatchType  is '<MatchType>'
+	Then the inputs are '<Inputs>'
 	Examples: 
-	| Inputs                         | Variable | Value | Variable2 | Value2 | Variable3 | Value3 | MatchType       |
-	| Match, MatchType, Match        | [[a]]    | 10    | [[b]]     | 12     |           |        | <               |
-	| Match, MatchType               | [[a]]    | 10    |           |        |           |        | is Alphanumeric |
-	| Match, MatchType, Match, Match | [[a]]    | 10    | [[b]]     | 5      | [[c]]     | 15     | isBetween       |
+	| Inputs                             | Variable | Variable2 | Value2 | Variable3 | Value3 | MatchType       |
+	| Visible, Visible, Visible          | [[a]]    | [[b]]     | 12     |           |        | <               |
+	| Visible, Visible                   | [[a]]    |           |        |           |        | is Alphanumeric |
+	| Visible, Visible, Visible, Visible | [[a]]    | [[b]]     | 5      | [[c]]     | 15     | Is Between       |
 
 
 Scenario: Ensuring decision text is visible under tool
 	Given I have a workflow "New Workflow"
 	And drop a "Decision" tool onto the design surface
 	And the Decision window is opened
-	And a decision variable "[[A]]" value "123 234"		
-	And is "[[A]]" "IsEqual" "123   234"	
+	And a decision variable "[[A]]" operation "=" right  "123 234" position "0"
 	And "Done" is selected
 	Then the Decision tool window is closed
-	And "[[A]] = 123 234" is visible in tool
+	And "If [[A]] Is = 123 234" is visible in tool
 	
 Scenario: Ensure Decision window caches correctly
 	Given I have a workflow "New Workflow"
 	And drop a "Decision" tool onto the design surface
-	And a decision variable "[[A]]" value "123 234"	
-	And a decision variable "[[B]]" value "1"	
-	And "Require All Decisions To Be True" is "True"	
-	When I change decision variable "[[B]]" to "3111"
+	And a decision variable "[[A]]" operation "=" right  "a123 234" position "0"
+	And a decision variable "[[B]]" operation "=" right  "1a23" position "1"
+	And "Require All Decisions To Be True" is "True"
+	And the Decision window is opened	
+	When I change decision variable position "0" to "3a111"
 	And "Done" is selected
 	Then I open the Decision tool window
 	And decision variable "[[B]]" is not visible
-	And "3111" is visible in Match field
-	And "Require All Decisions To Be True" is "True"	
+	And "3a111" is visible in Match field
+	And "Require All Decisions To Be True" has a value of "True"	
 
 
 Scenario: Ensure statement line can be removed
 	Given I have a workflow "New Workflow"
 	And drop a "Decision" tool onto the design surface
-	And a decision variable "[[A]]" value "123 234"	
-	And a decision variable "[[B]]" value "1"
-	And Match Type equals ">"
-	And a decision variable "[[c]]" value "Lester"
-	And a decision variable "[[d]]" value "L"	
-	And Match Type equals "Starts With"	
+	And a decision variable "[[A]]" operation "=" right  "a123 234" position "0"
+	And a decision variable "[[B]]" operation "=" right  "1a23" position "1"
 	And "Require All Decisions To Be True" is "True"
-	And I right click to view the context menu
-	And I select "remove statement line"
-	And "[[c]]" "Starts With" "[[d]]" is removed from the decision
-	And "Done" is selected
-	And the decision has "No" error
+	When I select the "remove statement line" button at position 0
+	Then "[[A]]" is removed from the decision
+
 
 
 Scenario: Validation on incorrectly formatted variables
@@ -84,13 +75,12 @@ Scenario Outline: Ensure Match Type droplist is populated correctly
 	And Match Type has '<options>' visible
 	Examples: 
 	| options            |
-	| Choose...          |
 	| There is An Error  |
 	| There is No Error  |
 	| =                  |
 	| >                  |
 	| <                  |
-	| <>                 |
+	| <> (Not Equal)     |
 	| >=                 |
 	| <=                 |
 	| Starts With        |
