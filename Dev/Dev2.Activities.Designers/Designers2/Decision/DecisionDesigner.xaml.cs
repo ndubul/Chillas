@@ -35,5 +35,7 @@ namespace Dev2.Activities.Designers2.Decision
                 largeView.DoneButton.Command.Execute(null);
             }
         }
+
+
     }
 }

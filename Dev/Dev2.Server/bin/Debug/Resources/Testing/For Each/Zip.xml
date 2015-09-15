@@ -1,5 +1,5 @@
 
-<Service ID="ed22cf94-2340-48d5-b558-b3750532f767" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Zip" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5729.26351">
+<Service ID="ed22cf94-2340-48d5-b558-b3750532f767" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Zip" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5735.28274">
   <DisplayName>Zip</DisplayName>
   <Category>Testing\For Each\Zip</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>8OE5XjRw9SvVBiVjUWr7zB3kBSc=</DigestValue>
+        <DigestValue>DTimQLuXYZmbf+zAbYA/0rRzupU=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>tixijgAug/BA6YSZhxBg+0SUeP78BBVf98t+msucrli/dXX66QHn3bbECP0+umSWUEpTRBARuaGB0hrUnPTaMVZXO5dRVymc8dpTMFVU+76oZ5k864oQ0O2VF4VdcPtW5OWduYu2R2dWl1uTOz5Gntbyw0uMTjm5KQ5zC8dc/LM=</SignatureValue>
+    <SignatureValue>pqKL4frIP5BoXbVpMqv8lG+4zLsG4PUI5z0r2exUeaibrouOp8seCDbM4nVYk+5t0zXRDAj+wCpVdbrnq9e8s/SD4124D18G61tJFMP9wxM13ejHIZ2eZeRywTpQhkvivFVPT7Lyg1m7zW3A6+BmjVAidTNiV7rJlQcgnplrENg=</SignatureValue>
   </Signature>
 </Service>

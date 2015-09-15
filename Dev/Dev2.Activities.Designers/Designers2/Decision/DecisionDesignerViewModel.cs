@@ -87,8 +87,11 @@ namespace Dev2.Activities.Designers2.Decision
 
         public  void DeleteRow(DecisionTO row)
         {
-            if(row!= Collection.Last())
+            if (row != Collection.Last())
+            {
                 Collection.Remove(row);
+                UpdateDecisionDisplayName((DecisionTO)Tos[0]);
+            }
         }
        public ICommand DeleteCommand
         {
@@ -130,6 +133,18 @@ namespace Dev2.Activities.Designers2.Decision
             Tos = ToObservableCollection();
         }
 
+        #region Overrides of ActivityCollectionDesignerObservableViewModel<DecisionTO>
+
+        public override void UpdateDto(IDev2TOFn dto)
+        {
+            var decto = dto as DecisionTO;
+            if(decto != null)
+            {
+                decto.UpdateDisplayAction = UpdateDecisionDisplayName;
+            }
+        }
+
+        #endregion
 
         public void GetExpressionText()
         {
@@ -272,11 +287,11 @@ namespace Dev2.Activities.Designers2.Decision
 
         void UpdateDecisionDisplayName(DecisionTO dec)
         {
-            if (dec != null && dec.IndexNumber == 0)
+            if (dec != null && dec.IndexNumber == 1)
             {
 
                 DisplayName = String.Format("If {0} {3} {1} {2}", dec.MatchValue, dec.SearchType, dec.IsBetweenCriteriaVisible ? string.Format("{0} and {1}", dec.From, dec.To) : dec.SearchCriteria, dec.SearchType==null|| dec.SearchType.ToLower().Contains("is")?"":"Is");
-                DisplayText = DisplayName;
+                DisplayText = String.Format("If {0} {3} {1} {2}", dec.MatchValue, dec.SearchType, dec.IsBetweenCriteriaVisible ? string.Format("{0} and {1}", dec.From, dec.To) : dec.SearchCriteria, dec.SearchType == null || dec.SearchType.ToLower().Contains("is") ? "" : "Is");
             }
         }
 

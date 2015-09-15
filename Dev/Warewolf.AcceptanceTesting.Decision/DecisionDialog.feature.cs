@@ -157,15 +157,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 27
  testRunner.And("the Decision window is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
- testRunner.And("a decision variable \"[[A]]\" value \"123 234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[A]]\" operation \"=\" right  \"123 234\" position \"0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
- testRunner.And("is \"[[A]]\" \"IsEqual\" \"123   234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
  testRunner.And("\"Done\" is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
+#line 30
  testRunner.Then("the Decision tool window is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 32
- testRunner.And("\"[[A]] = 123 234\" is visible in tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+ testRunner.And("\"If [[A]] Is = 123 234\" is visible in tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -176,32 +174,32 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureDecisionWindowCachesCorrectly()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure Decision window caches correctly", ((string[])(null)));
-#line 34
+#line 33
 this.ScenarioSetup(scenarioInfo);
-#line 35
+#line 34
  testRunner.Given("I have a workflow \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
+#line 35
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 36
+ testRunner.And("a decision variable \"[[A]]\" operation \"=\" right  \"a123 234\" position \"0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 37
- testRunner.And("a decision variable \"[[A]]\" value \"123 234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" operation \"=\" right  \"1a23\" position \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 38
- testRunner.And("a decision variable \"[[B]]\" value \"\'1\'\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"Require All Decisions To Be True\" is \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 39
- testRunner.And("\"Require All Decisions To Be True\" is \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
  testRunner.And("the Decision window is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 40
+ testRunner.When("I change decision variable position \"0\" to \"3a111\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 41
- testRunner.When("I change decision variable \"[[B]]\" to \"3111\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 42
  testRunner.And("\"Done\" is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
+#line 42
  testRunner.Then("I open the Decision tool window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 44
+#line 43
  testRunner.And("decision variable \"[[B]]\" is not visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 44
+ testRunner.And("\"3a111\" is visible in Match field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 45
- testRunner.And("\"3111\" is visible in Match field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 46
- testRunner.And("\"Require All Decisions To Be True\" is \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"Require All Decisions To Be True\" has a value of \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -212,36 +210,22 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureStatementLineCanBeRemoved()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure statement line can be removed", ((string[])(null)));
-#line 49
+#line 48
 this.ScenarioSetup(scenarioInfo);
-#line 50
+#line 49
  testRunner.Given("I have a workflow \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
+#line 50
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 51
+ testRunner.And("a decision variable \"[[A]]\" operation \"=\" right  \"a123 234\" position \"0\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
- testRunner.And("a decision variable \"[[A]]\" value \"123 234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a decision variable \"[[B]]\" operation \"=\" right  \"1a23\" position \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 53
- testRunner.And("a decision variable \"[[B]]\" value \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
- testRunner.And("Match Type equals \">\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
- testRunner.And("a decision variable \"[[c]]\" value \"Lester\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
- testRunner.And("a decision variable \"[[d]]\" value \"L\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 57
- testRunner.And("Match Type equals \"Starts With\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 58
  testRunner.And("\"Require All Decisions To Be True\" is \"True\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 59
- testRunner.And("I right click to view the context menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 60
- testRunner.And("I select \"remove statement line\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 61
- testRunner.And("\"[[c]]\" \"Starts With\" \"[[d]]\" is removed from the decision", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
- testRunner.And("\"Done\" is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
- testRunner.And("the decision has \"No\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 54
+ testRunner.When("I select the \"remove statement line\" button at position 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 55
+ testRunner.Then("\"[[A]]\" is removed from the decision", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -252,23 +236,23 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ValidationOnIncorrectlyFormattedVariables()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validation on incorrectly formatted variables", ((string[])(null)));
-#line 66
+#line 59
 this.ScenarioSetup(scenarioInfo);
-#line 67
+#line 60
  testRunner.Given("I have a workflow \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 68
+#line 61
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 69
+#line 62
  testRunner.And("a decision variable \"[[A]]}\" value \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
+#line 63
  testRunner.And("a decision variable \"[[rec().a]]\" value \"28/08/2015\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 71
+#line 64
  testRunner.And("Match Type equals \"=\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 72
+#line 65
  testRunner.And("\"Done\" is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 73
+#line 66
  testRunner.And("the decision tool has \"An\" Error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
+#line 67
  testRunner.And("Error message \"incorrect match variable \"[[A]]}\" is visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -277,17 +261,17 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly(string options, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure Match Type droplist is populated correctly", exampleTags);
-#line 77
+#line 70
 this.ScenarioSetup(scenarioInfo);
-#line 78
+#line 71
  testRunner.Given("I have a workflow \"New Workflow\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 79
+#line 72
  testRunner.And("drop a \"Decision\" tool onto the design surface", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 80
+#line 73
  testRunner.And("the Decision window is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 81
+#line 74
  testRunner.And("I select the \"Match Type\" menu", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 82
+#line 75
  testRunner.And(string.Format("Match Type has \'{0}\' visible", options), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -297,18 +281,8 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Choose...")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant0()
-        {
-            this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Choose...", ((string[])(null)));
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "There is An Error")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant1()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant0()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("There is An Error", ((string[])(null)));
         }
@@ -316,9 +290,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "There is No Error")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant2()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant1()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("There is No Error", ((string[])(null)));
         }
@@ -326,9 +300,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "=")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant3()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant2()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("=", ((string[])(null)));
         }
@@ -336,9 +310,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", ">")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant4()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant3()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly(">", ((string[])(null)));
         }
@@ -346,9 +320,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "<")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant5()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant4()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("<", ((string[])(null)));
         }
@@ -356,19 +330,19 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 6")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "<>")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant6()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "<> (Not Equal)")]
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant5()
         {
-            this.EnsureMatchTypeDroplistIsPopulatedCorrectly("<>", ((string[])(null)));
+            this.EnsureMatchTypeDroplistIsPopulatedCorrectly("<> (Not Equal)", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 6")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", ">=")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant7()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant6()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly(">=", ((string[])(null)));
         }
@@ -376,9 +350,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 8")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 7")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "<=")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant8()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant7()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("<=", ((string[])(null)));
         }
@@ -386,9 +360,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 9")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 8")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Starts With")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant9()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant8()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Starts With", ((string[])(null)));
         }
@@ -396,9 +370,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 10")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 9")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Ends With")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant10()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant9()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Ends With", ((string[])(null)));
         }
@@ -406,9 +380,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 11")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 10")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Contains")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant11()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant10()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Contains", ((string[])(null)));
         }
@@ -416,9 +390,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 12")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 11")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Doesn\'t Start With")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant12()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant11()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Doesn\'t Start With", ((string[])(null)));
         }
@@ -426,9 +400,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 13")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 12")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Doesn\'t End With")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant13()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant12()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Doesn\'t End With", ((string[])(null)));
         }
@@ -436,9 +410,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 14")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 13")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Doesn\'t Contain")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant14()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant13()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Doesn\'t Contain", ((string[])(null)));
         }
@@ -446,9 +420,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 15")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 14")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is Alphanumeric")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant15()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant14()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is Alphanumeric", ((string[])(null)));
         }
@@ -456,9 +430,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 16")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 15")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is Base64")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant16()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant15()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is Base64", ((string[])(null)));
         }
@@ -466,9 +440,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 17")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 16")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is Between")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant17()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant16()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is Between", ((string[])(null)));
         }
@@ -476,9 +450,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 18")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 17")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is Binary")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant18()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant17()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is Binary", ((string[])(null)));
         }
@@ -486,9 +460,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 19")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 18")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is Date")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant19()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant18()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is Date", ((string[])(null)));
         }
@@ -496,9 +470,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 20")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 19")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is Email")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant20()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant19()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is Email", ((string[])(null)));
         }
@@ -506,9 +480,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 21")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 20")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is Hex")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant21()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant20()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is Hex", ((string[])(null)));
         }
@@ -516,9 +490,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 22")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 21")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is Numeric")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant22()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant21()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is Numeric", ((string[])(null)));
         }
@@ -526,9 +500,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 23")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 22")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is RegEx")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant23()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant22()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is RegEx", ((string[])(null)));
         }
@@ -536,9 +510,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 24")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 23")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is Text")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant24()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant23()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is Text", ((string[])(null)));
         }
@@ -546,9 +520,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 25")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 24")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Is Xml")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant25()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant24()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Is Xml", ((string[])(null)));
         }
@@ -556,9 +530,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 26")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 25")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not Alphanumeric")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant26()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant25()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not Alphanumeric", ((string[])(null)));
         }
@@ -566,9 +540,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 27")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 26")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not Base64")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant27()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant26()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not Base64", ((string[])(null)));
         }
@@ -576,9 +550,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 28")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 27")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not Between")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant28()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant27()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not Between", ((string[])(null)));
         }
@@ -586,9 +560,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 29")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 28")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not Binary")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant29()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant28()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not Binary", ((string[])(null)));
         }
@@ -596,9 +570,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 30")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 29")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not Date")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant30()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant29()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not Date", ((string[])(null)));
         }
@@ -606,9 +580,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 31")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 30")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not Email")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant31()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant30()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not Email", ((string[])(null)));
         }
@@ -616,9 +590,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 32")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 31")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not Hex")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant32()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant31()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not Hex", ((string[])(null)));
         }
@@ -626,9 +600,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 33")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 32")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not Numeric")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant33()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant32()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not Numeric", ((string[])(null)));
         }
@@ -636,9 +610,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 34")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 33")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not RegEx")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant34()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant33()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not RegEx", ((string[])(null)));
         }
@@ -646,9 +620,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 35")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 34")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not Text")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant35()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant34()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not Text", ((string[])(null)));
         }
@@ -656,9 +630,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Match Type droplist is populated correctly")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DecisionDialog")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 36")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 35")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:options", "Not Xml")]
-        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant36()
+        public virtual void EnsureMatchTypeDroplistIsPopulatedCorrectly_Variant35()
         {
             this.EnsureMatchTypeDroplistIsPopulatedCorrectly("Not Xml", ((string[])(null)));
         }

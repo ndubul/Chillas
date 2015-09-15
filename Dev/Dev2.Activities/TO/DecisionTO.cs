@@ -28,7 +28,7 @@ namespace Dev2.TO
 {
     public class DecisionTO : ValidatedObject, IDev2TOFn
     {
-        readonly Action<DecisionTO> _updateDisplayAction;
+        public Action<DecisionTO> UpdateDisplayAction { get;  set; }
         int _indexNum;
         string _searchType;
         bool _isSearchCriteriaEnabled;
@@ -42,7 +42,7 @@ namespace Dev2.TO
         bool _isToFocused;
         bool _isSinglematchCriteriaVisible;
         bool _isBetweenCriteriaVisible;
-        public static readonly IList<IFindRecsetOptions> Whereoptions = FindRecsetOptions.FindAll();
+        public static readonly IList<IFindRecsetOptions> Whereoptions = FindRecsetOptions.FindAllDecision();
         Action<DecisionTO> _deleteAction;
         bool _isLast;
         public RelayCommand DeleteCommand { get;  set; }
@@ -54,7 +54,7 @@ namespace Dev2.TO
 
         public DecisionTO(string matchValue, string searchCriteria, string searchType, int indexNum, bool inserted = false, string from = "", string to = "", Action<DecisionTO> updateDisplayAction = null, Action<DecisionTO> delectAction = null)
         {
-            _updateDisplayAction = updateDisplayAction??(a=>{});
+            UpdateDisplayAction = updateDisplayAction??(a=>{});
             Inserted = inserted;
 
             MatchValue = matchValue;
@@ -91,7 +91,7 @@ namespace Dev2.TO
 
         public DecisionTO(Dev2Decision a, int ind, Action<DecisionTO> updateDisplayAction = null,Action<DecisionTO> deleteAction = null)
         {
-            _updateDisplayAction = updateDisplayAction ?? (x => { });
+            UpdateDisplayAction = updateDisplayAction ?? (x => { });
             Inserted = false;
             MatchValue = a.Col1;
             SearchCriteria = a.Col2;
@@ -114,7 +114,7 @@ namespace Dev2.TO
 
         }
 
-        bool CanDelete(object obj)
+       public bool CanDelete(object obj)
         {
             return !IsLast;
         }
@@ -148,7 +148,7 @@ namespace Dev2.TO
                 _from = value;
                 OnPropertyChanged();
                 RaiseCanAddRemoveChanged();
-                if (IndexNumber == 0) _updateDisplayAction(this);
+                UpdateDisplay();
             }
         }
 
@@ -166,7 +166,7 @@ namespace Dev2.TO
                 _to = value;
                 OnPropertyChanged();
                 RaiseCanAddRemoveChanged();
-                if (IndexNumber == 0) _updateDisplayAction(this);
+                UpdateDisplay();
             }
         }
         
@@ -184,7 +184,15 @@ namespace Dev2.TO
                 _searchCriteria = value;
                 OnPropertyChanged();
                 RaiseCanAddRemoveChanged();
-                if (IndexNumber == 0) _updateDisplayAction(this);
+                UpdateDisplay();
+            }
+        }
+
+        void UpdateDisplay()
+        {
+            if(IndexNumber == 1)
+            {
+                UpdateDisplayAction(this);
             }
         }
 
@@ -201,7 +209,7 @@ namespace Dev2.TO
                
                 OnPropertyChanged();
                 RaiseCanAddRemoveChanged();
-                if (IndexNumber == 0) _updateDisplayAction(this);
+                UpdateDisplay();
             }
         }
 
@@ -229,7 +237,7 @@ namespace Dev2.TO
                         IsSearchCriteriaEnabled = true;
                     }
                     UpdateMatchVisibility(this, _searchType, Whereoptions);
-                    if(IndexNumber==0) _updateDisplayAction(this);
+                    UpdateDisplay();
                 }
             }
         }
