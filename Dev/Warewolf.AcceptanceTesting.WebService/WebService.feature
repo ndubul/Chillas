@@ -234,7 +234,31 @@ Scenario: Changing Sources
 	And "4 Response" is "Disabled" 
 	And "5 Defaults and Mapping" is "Disabled"
  	And "Save" is "Disabled"
- 
+
+#wolf-1034
+Scenario: Web Connector returns text
+	Given I open New Web Service Connector
+	And I select "Testing Return Text" as data source
+    And "New" is "Enabled"
+	And "Edit" is "Enabled"
+	Then "2 Request" is "Enabled"
+	And "3 Variables" is "Enabled" 
+	And "4 Response" is "Disabled" 
+	And "5 Default and Mapping" is "Disabled"
+	When Test Connection is "Successful"
+	And "4 Response" is "Enabled" 
+	Then the response is loaded
+	And "5 Defaults and Mapping" is "Enabled"
+	And "Save" is "Enabled"
+	When Test Connection is "Successful"
+	Then input mappings are
+	| Input | Default Value | Required Field | Empty is Null |
+	And output mappings are
+	| Output   | Output Alias |
+	| Response | Response     |
+	And "Save" is "Enabled" 
+	When I save
+	Then Save Dialog is opened
  
  
  

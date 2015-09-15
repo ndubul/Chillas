@@ -11542,10 +11542,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Match", "Starts With")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Criteria", "S")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[a]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:varVal", "Error: Scalar not allowed")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:varVal", "Error: unexpected expression")]
         public virtual void FindIndexUsingInvalidInputs_Var()
         {
-            this.FindIndexUsingInvalidInputs("[[var]]", "Super", "Starts With", "S", "[[a]]", "Error: Scalar not allowed", ((string[])(null)));
+            this.FindIndexUsingInvalidInputs("[[var]]", "Super", "Starts With", "S", "[[a]]", "Error: unexpected expression", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -11557,10 +11557,10 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Match", "Starts With")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Criteria", "S")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[a]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:varVal", "Error: Scalar not allowed")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:varVal", "Error: unexpected expression")]
         public virtual void FindIndexUsingInvalidInputs_V()
         {
-            this.FindIndexUsingInvalidInputs("[[v]]", "", "Starts With", "S", "[[a]]", "Error: Scalar not allowed", ((string[])(null)));
+            this.FindIndexUsingInvalidInputs("[[v]]", "", "Starts With", "S", "[[a]]", "Error: unexpected expression", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]

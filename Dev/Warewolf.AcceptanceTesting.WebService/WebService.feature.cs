@@ -650,6 +650,70 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Web Connector returns text")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WebService")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WebService")]
+        public virtual void WebConnectorReturnsText()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Web Connector returns text", ((string[])(null)));
+#line 239
+this.ScenarioSetup(scenarioInfo);
+#line 240
+ testRunner.Given("I open New Web Service Connector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 241
+ testRunner.And("I select \"Testing Return Text\" as data source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 242
+    testRunner.And("\"New\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 243
+ testRunner.And("\"Edit\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 244
+ testRunner.Then("\"2 Request\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 245
+ testRunner.And("\"3 Variables\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 246
+ testRunner.And("\"4 Response\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 247
+ testRunner.And("\"5 Default and Mapping\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 248
+ testRunner.When("Test Connection is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 249
+ testRunner.And("\"4 Response\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 250
+ testRunner.Then("the response is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 251
+ testRunner.And("\"5 Defaults and Mapping\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 252
+ testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 253
+ testRunner.When("Test Connection is \"Successful\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Input",
+                        "Default Value",
+                        "Required Field",
+                        "Empty is Null"});
+#line 254
+ testRunner.Then("input mappings are", ((string)(null)), table11, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Output",
+                        "Output Alias"});
+            table12.AddRow(new string[] {
+                        "Response",
+                        "Response"});
+#line 256
+ testRunner.And("output mappings are", ((string)(null)), table12, "And ");
+#line 259
+ testRunner.And("\"Save\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 260
+ testRunner.When("I save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 261
+ testRunner.Then("Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

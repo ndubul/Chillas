@@ -152,3 +152,17 @@ Scenario: Cancel Test
    Then "Cancel Test" is "Disabled"
    And Validation message is thrown
    And Validation message is "Test Cancelled"
+
+#wolf-1034
+Scenario: Web Source returns text
+   Given I open New Web Source
+   Then "New Web Service Source" tab is opened
+   And title is "New Web Service Source"
+   And I type Address as "http://warewolf.io/version.txt"
+   And "Test Connection" is "Enabled"
+   When Test Connecton is "Successfull"
+   Then "Save" is "Enabled"	
+   When I save the source
+   Then the save dialog is opened
+    Then title is "Testing Return Text"
+   And "Testing Return Text" tab is opened
