@@ -112,7 +112,7 @@
                 </DockPanel>
                 <i:Interaction.Behaviors>
                     <core:HelpSetter Text="{x:Static languages:Core.MenuNewServiceHelp}" 
-                                     DataContext="{Binding .}" />
+                                     DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </Button>
 
