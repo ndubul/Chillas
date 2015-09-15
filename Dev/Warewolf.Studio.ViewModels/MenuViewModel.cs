@@ -18,10 +18,11 @@ using Dev2.Interfaces;
 using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class MenuViewModel : BindableBase, IMenuViewModel, IMenuView
+    public class MenuViewModel : BindableBase, IMenuViewModel, IMenuView,IUpdatesHelp
     {
 
         bool _hasNewVersion;
@@ -30,7 +31,6 @@ namespace Warewolf.Studio.ViewModels
         bool _isOverLock;
         ICommand _saveCommand;
         ICommand _executeServiceCommand;
-        ICommand _supportCommand;
         FontAwesomeIcon _debugIcon;
         bool _isProcessing;
 
@@ -161,6 +161,14 @@ namespace Warewolf.Studio.ViewModels
         public ICommand IsOverLockCommand { get; private set; }
         public ICommand IsNotOverLockCommand { get; private set; }
 
+        public void UpdateHelpDescriptor(string helpText)
+        {
+            if (_viewModel != null)
+            {
+                _viewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
+        }
+
         public void Lock()
         {
             if (!IsPanelLockedOpen)
@@ -245,13 +253,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public bool CanExecuteService { get; set; }
-        public bool CanSetSettings { get; set; }
-        public bool CanSetSchedules { get; set; }
-        public bool CanSave { get; set; }
-        public bool CanDeploy { get; set; }
-        public bool CanCreateNewService { get; set; }
-
+        
         public string NewLabel
         {
             get

@@ -6,6 +6,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:studio="clr-namespace:Dev2.Common.Interfaces.Studio;assembly=Dev2.Common.Interfaces"
+             xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
+             xmlns:core="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
              Width="150"
              ScrollViewer.VerticalScrollBarVisibility="Disabled"
              d:DataContext="{d:DesignInstance Type={x:Type studio:IMenuViewModel}}"
@@ -108,6 +110,10 @@
                                Style="{StaticResource MenuTextBlockStyle}"
                                Text="{Binding Path=NewLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuNewServiceHelp}" 
+                                     DataContext="{Binding}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <!-- SAVE -->
@@ -139,6 +145,10 @@
                                Style="{StaticResource MenuTextBlockStyle}"
                                Text="{Binding Path=SaveLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuSaveTabHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <!-- DEPLOY -->
@@ -170,6 +180,10 @@
                                Style="{StaticResource MenuTextBlockStyle}"
                                Text="{Binding Path=DeployLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuDeployHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <Separator Grid.Row="6"
@@ -208,6 +222,10 @@
                                Style="{StaticResource MenuTextBlockStyle}"
                                Text="{Binding Path=DatabaseLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuNewDatabaseConnectorHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <!-- PLUGIN -->
@@ -240,6 +258,10 @@
                                Style="{StaticResource MenuTextBlockStyle}"
                                Text="{Binding Path=DLLLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuNewPluginConnectorHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <!-- WEB -->
@@ -287,6 +309,10 @@
                                            Style="{StaticResource MenuTextBlockStyle}"
                                            Text="{Binding Path=WebLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuNewWebConnectorHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <Separator Grid.Row="10"
@@ -323,6 +349,10 @@
                                Style="{StaticResource MenuTextBlockStyle}"
                                Text="{Binding Path=TaskLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuSchedulerHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <!-- DEBUG -->
@@ -354,6 +384,10 @@
                                Style="{StaticResource MenuTextBlockStyle}"
                                Text="{Binding Path=DebugLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuDebugHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <Separator Grid.Row="13"
@@ -395,6 +429,10 @@
                                Style="{StaticResource MenuTextBlockStyle}"
                                Text="{Binding Path=SettingsLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuSettingsHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <Separator Grid.Row="15"
@@ -436,6 +474,10 @@
                                Style="{StaticResource MenuTextBlockStyle}"
                                Text="{Binding Path=SupportLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <Button Grid.Row="17"
@@ -474,6 +516,10 @@
                                Style="{StaticResource MenuTextBlockStyle}"
                                Text="{Binding Path=NewVersionLabel}" />
                 </DockPanel>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuNewVersionHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <Separator Grid.Row="18"
@@ -517,6 +563,10 @@
                         <i:InvokeCommandAction Command="{Binding IsNotOverLockCommand}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
+                <i:Interaction.Behaviors>
+                    <core:HelpSetter Text="{x:Static languages:Core.MenuLockMenuHelp}" 
+                                     DataContext="{Binding .}" />
+                </i:Interaction.Behaviors>
             </Button>
 
             <Image Grid.Row="20"

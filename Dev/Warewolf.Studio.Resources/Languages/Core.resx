@@ -808,6 +808,44 @@ You need Administrator permission.</value>
   <data name="SharepointServiceSourceTestHelp" xml:space="preserve">
     <value>SharepointServiceSourceTestHelp</value>
   </data>
+
+  <data name="MenuNewServiceHelp" xml:space="preserve">
+    <value>MenuNewServiceHelp</value>
+  </data>
+  <data name="MenuSaveTabHelp" xml:space="preserve">
+    <value>MenuSaveTabHelp</value>
+  </data>
+  <data name="MenuDeployHelp" xml:space="preserve">
+    <value>MenuDeployHelp</value>
+  </data>
+  <data name="MenuNewDatabaseConnectorHelp" xml:space="preserve">
+    <value>MenuNewDatabaseConnectorHelp</value>
+  </data>
+  <data name="MenuNewPluginConnectorHelp" xml:space="preserve">
+    <value>MenuNewPluginConnectorHelp</value>
+  </data>
+  <data name="MenuNewWebConnectorHelp" xml:space="preserve">
+    <value>MenuNewWebConnectorHelp</value>
+  </data>
+  <data name="MenuSchedulerHelp" xml:space="preserve">
+    <value>MenuSchedulerHelp</value>
+  </data>
+  <data name="MenuDebugHelp" xml:space="preserve">
+    <value>MenuDebugHelp</value>
+  </data>
+  <data name="MenuSettingsHelp" xml:space="preserve">
+    <value>MenuSettingsHelp</value>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>MenuHelp</value>
+  </data>
+  <data name="MenuNewVersionHelp" xml:space="preserve">
+    <value>MenuNewVersionHelp</value>
+  </data>
+  <data name="MenuLockMenuHelp" xml:space="preserve">
+    <value>MenuLockMenuHelp</value>
+  </data>
+
   <data name="WebServiceSourceSaveHelp" xml:space="preserve">
     <value>WebServiceSourceSaveHelp</value>
   </data>
@@ -968,8 +1006,37 @@ You need Administrator permission.</value>
     <value>EmailSourceCancelHelp</value>
   </data>
   <data name="MappingsRecordsetNameHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;MappingsRecordsetNameHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>MappingsRecordsetNameHelp</value>
   </data>
+  <data name="MappingsDefaultValueHelp" xml:space="preserve">
+    <value>MappingsDefaultValueHelp</value>
+  </data>
+  <data name="MappingsRequiredFieldHelp" xml:space="preserve">
+    <value>MappingsRequiredFieldHelp</value>
+  </data>
+  <data name="MappingsEmptyIsNullHelp" xml:space="preserve">
+    <value>MappingsEmptyIsNullHelp</value>
+  </data>
+  <data name="MappingsAliasHelp" xml:space="preserve">
+    <value>MappingsAliasHelp</value>
+  </data>
+
+  <data name="DataListDeleteButtonHelp" xml:space="preserve">
+    <value>DataListDeleteButtonHelp</value>
+  </data>
+  <data name="DataListSortButtonHelp" xml:space="preserve">
+    <value>DataListSortButtonHelp</value>
+  </data>
+  <data name="DataListVariableInputHelp" xml:space="preserve">
+    <value>DataListVariableInputHelp</value>
+  </data>
+  <data name="DataListInputCheckBoxHelp" xml:space="preserve">
+    <value>DataListInputCheckBoxHelp</value>
+  </data>
+  <data name="DataListOutputCheckBoxHelp" xml:space="preserve">
+    <value>DataListOutputCheckBoxHelp</value>
+  </data>
+  
   <data name="ServerProtocolHelp" xml:space="preserve">
     <value>ServerProtocolHelp</value>
   </data>

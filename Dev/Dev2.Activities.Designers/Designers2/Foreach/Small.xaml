@@ -144,9 +144,10 @@
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>
         </Grid>
-        <Border BorderBrush="Black" BorderThickness="1,1,1,1" Margin="5,0,5,5">
+        <Border BorderBrush="#CFD6E1" BorderThickness="1" Margin="5,0,5,5" CornerRadius="12">
             <sap:WorkflowItemPresenter x:Name="DropPoint"
                                        AllowDrop="False"
+                                       Margin="3"
                                        HintText="Drop Activity Here"
                                        BorderBrush="Black"
                                        BorderThickness="2"

@@ -50,7 +50,18 @@ namespace Dev2.Common.Interfaces.Studio
         string SaveToolTip { get; }
         ICommand SupportCommand { get; }
         bool IsProcessing { get; set; }
+        string DeployToolTip { get; }
+        string DatabaseToolTip { get; }
+        string PluginToolTip { get; }
+        string WebServiceToolTip { get; }
+        string SchedulerToolTip { get; }
+        string DebugToolTip { get; }
+        string SettingsToolTip { get; }
+        string HelpToolTip { get; }
+        string DownloadToolTip { get; }
+        string LockToolTip { get; }
 
+        void UpdateHelpDescriptor(string helpText);
         void Lock();
     }
 }
