@@ -1,5 +1,5 @@
 
-<Service ID="3a5a9342-1c81-44b1-b0c5-fb0511a6d670" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Count Records" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5736.16179">
+<Service ID="3a5a9342-1c81-44b1-b0c5-fb0511a6d670" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Count Records" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5736.16317">
   <DisplayName>Count Records</DisplayName>
   <Category>Testing\For Each\Count Records</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -39,9 +39,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>LAEKgteynjszWJEnwuGvkljktUk=</DigestValue>
+        <DigestValue>g2sunHqc/eAuzZmfIgn4fngnMIs=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>n2QzlMVE8w7ekalwoJFikkWYKNZVhLf0OPJsWq9lAeKiz8tudYyqe71O7yLpZoU8DPSR2QV0uyhVo0Kk84UERQjT1DZnENLPumYhfeEDMRCFCmSRLBVmNn9mvXiUSOQJUmZXv/8BHjLfX0mTkQHWgnP7FgQLT8fRRbykUHYginU=</SignatureValue>
+    <SignatureValue>gBebO4iuaL4AIcXtFMMJziCb+fsuXusuE4H1tvPkaMVbHhALsM1mDInDFvHg/SFaMf1LAcNhChS6gDXA3zRnmJO3Zb2Msr3Na9W6Hd4WVsbafv64dCFrGIwz750nFvcuKTBFKp9tqhiqLDWJwN5Ec56qvlQtTjnzz2JAb8W7OOc=</SignatureValue>
   </Signature>
 </Service>

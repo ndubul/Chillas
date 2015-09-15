@@ -48,7 +48,7 @@
                                     MinWidth="200" MaxWidth="200"
                                     WrapInBrackets="True"
                                     HorizontalAlignment="Left"
-                                    x:Name="DisplayText"
+                                    x:Name="VariabletoSwitchon"
                                     Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
                                     Text="{Binding SwitchVariable,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     attachedProperties:FocusSetter.IsFocused="{Binding IsDisplayTextFocused, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -63,7 +63,7 @@
                 </i:Interaction.Behaviors>
             </ui:IntellisenseTextBox>
             <TextBlock Grid.Column="0" Grid.Row="1" Text="Display text:" Margin="{StaticResource ControlBorderTop}" />
-            <TextBox Grid.Column="1" Grid.Row="1" MinWidth="200" MaxWidth="200" HorizontalAlignment="Left" Margin="{StaticResource ControlBorderTop}" Text="{Binding DisplayText}"/>
+            <TextBox Grid.Column="1" x:Name="DisplayText" Grid.Row="1" MinWidth="200" MaxWidth="200" HorizontalAlignment="Left" Margin="{StaticResource ControlBorderTop}" Text="{Binding DisplayText}"/>
         </Grid>      
         
     </Grid>
