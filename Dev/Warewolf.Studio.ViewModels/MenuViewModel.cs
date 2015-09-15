@@ -12,6 +12,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Input;
+using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Interfaces;
@@ -160,6 +161,14 @@ namespace Warewolf.Studio.ViewModels
 
         public ICommand IsOverLockCommand { get; private set; }
         public ICommand IsNotOverLockCommand { get; private set; }
+
+        public void UpdateHelpDescriptor(string helpText)
+        {
+            if (_viewModel != null)
+            {
+                _viewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
+        }
 
         public void Lock()
         {

@@ -1010,6 +1010,51 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DataListDeleteButtonHelp.
+        /// </summary>
+        public static string DataListDeleteButtonHelp {
+            get {
+                return ResourceManager.GetString("DataListDeleteButtonHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DataListInputCheckBoxHelp.
+        /// </summary>
+        public static string DataListInputCheckBoxHelp {
+            get {
+                return ResourceManager.GetString("DataListInputCheckBoxHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DataListOutputCheckBoxHelp.
+        /// </summary>
+        public static string DataListOutputCheckBoxHelp {
+            get {
+                return ResourceManager.GetString("DataListOutputCheckBoxHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DataListSortButtonHelp.
+        /// </summary>
+        public static string DataListSortButtonHelp {
+            get {
+                return ResourceManager.GetString("DataListSortButtonHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DataListVariableInputHelp.
+        /// </summary>
+        public static string DataListVariableInputHelp {
+            get {
+                return ResourceManager.GetString("DataListVariableInputHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For Index you can specify if your data is aligned to the right or left.&lt;br/&gt;
         ///        E.g. Text is normally left and numbers normally right.&lt;br /&gt;
         ///        &lt;br /&gt;
@@ -2772,11 +2817,47 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;body&gt;&lt;p&gt;MappingsRecordsetNameHelp&lt;/p&gt;&lt;/body&gt;.
+        ///   Looks up a localized string similar to MappingsAliasHelp.
+        /// </summary>
+        public static string MappingsAliasHelp {
+            get {
+                return ResourceManager.GetString("MappingsAliasHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MappingsDefaultValueHelp.
+        /// </summary>
+        public static string MappingsDefaultValueHelp {
+            get {
+                return ResourceManager.GetString("MappingsDefaultValueHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MappingsEmptyIsNullHelp.
+        /// </summary>
+        public static string MappingsEmptyIsNullHelp {
+            get {
+                return ResourceManager.GetString("MappingsEmptyIsNullHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MappingsRecordsetNameHelp.
         /// </summary>
         public static string MappingsRecordsetNameHelp {
             get {
                 return ResourceManager.GetString("MappingsRecordsetNameHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MappingsRequiredFieldHelp.
+        /// </summary>
+        public static string MappingsRequiredFieldHelp {
+            get {
+                return ResourceManager.GetString("MappingsRequiredFieldHelp", resourceCulture);
             }
         }
         
@@ -2786,6 +2867,24 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string MenuDatabaseToolTip {
             get {
                 return ResourceManager.GetString("MenuDatabaseToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MenuDebugHelp.
+        /// </summary>
+        public static string MenuDebugHelp {
+            get {
+                return ResourceManager.GetString("MenuDebugHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MenuDeployHelp.
+        /// </summary>
+        public static string MenuDeployHelp {
+            get {
+                return ResourceManager.GetString("MenuDeployHelp", resourceCulture);
             }
         }
         
@@ -2952,11 +3051,29 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MenuHelp.
+        /// </summary>
+        public static string MenuHelp {
+            get {
+                return ResourceManager.GetString("MenuHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Get some help from the community and other resources.
         /// </summary>
         public static string MenuHelpToolTip {
             get {
                 return ResourceManager.GetString("MenuHelpToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MenuLockMenuHelp.
+        /// </summary>
+        public static string MenuLockMenuHelp {
+            get {
+                return ResourceManager.GetString("MenuLockMenuHelp", resourceCulture);
             }
         }
         
@@ -2970,11 +3087,56 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MenuNewDatabaseConnectorHelp.
+        /// </summary>
+        public static string MenuNewDatabaseConnectorHelp {
+            get {
+                return ResourceManager.GetString("MenuNewDatabaseConnectorHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MenuNewPluginConnectorHelp.
+        /// </summary>
+        public static string MenuNewPluginConnectorHelp {
+            get {
+                return ResourceManager.GetString("MenuNewPluginConnectorHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MenuNewServiceHelp.
+        /// </summary>
+        public static string MenuNewServiceHelp {
+            get {
+                return ResourceManager.GetString("MenuNewServiceHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a new service.
         /// </summary>
         public static string MenuNewServiceToolTip {
             get {
                 return ResourceManager.GetString("MenuNewServiceToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MenuNewVersionHelp.
+        /// </summary>
+        public static string MenuNewVersionHelp {
+            get {
+                return ResourceManager.GetString("MenuNewVersionHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MenuNewWebConnectorHelp.
+        /// </summary>
+        public static string MenuNewWebConnectorHelp {
+            get {
+                return ResourceManager.GetString("MenuNewWebConnectorHelp", resourceCulture);
             }
         }
         
@@ -2988,6 +3150,15 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MenuSaveTabHelp.
+        /// </summary>
+        public static string MenuSaveTabHelp {
+            get {
+                return ResourceManager.GetString("MenuSaveTabHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save this tab.
         /// </summary>
         public static string MenuSaveToolTip {
@@ -2997,11 +3168,29 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MenuSchedulerHelp.
+        /// </summary>
+        public static string MenuSchedulerHelp {
+            get {
+                return ResourceManager.GetString("MenuSchedulerHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Schedule a service to run.
         /// </summary>
         public static string MenuSchedulerToolTip {
             get {
                 return ResourceManager.GetString("MenuSchedulerToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MenuSettingsHelp.
+        /// </summary>
+        public static string MenuSettingsHelp {
+            get {
+                return ResourceManager.GetString("MenuSettingsHelp", resourceCulture);
             }
         }
         

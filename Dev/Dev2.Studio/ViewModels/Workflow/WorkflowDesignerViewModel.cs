@@ -98,7 +98,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                                              IHandle<AddStringListToDataListMessage>,
                                              IHandle<EditActivityMessage>,
                                              IHandle<SaveUnsavedWorkflowMessage>,
-                                             IHandle<UpdateWorksurfaceFlowNodeDisplayName>, IWorkflowDesignerViewModel
+                                             IHandle<UpdateWorksurfaceFlowNodeDisplayName>, IWorkflowDesignerViewModel, INotifyPropertyChanged
     {
         static readonly Type[] DecisionSwitchTypes = { typeof(FlowSwitch<string>), typeof(FlowDecision) };
 
@@ -1220,7 +1220,8 @@ namespace Dev2.Studio.ViewModels.Workflow
             {
                 //For Changing the icon of the flowchart.
                 WorkflowDesignerIcons.Activities.Flowchart = Application.Current.TryFindResource("Explorer-WorkflowService-Icon") as DrawingBrush;
-                WorkflowDesignerIcons.Activities.StartNode = new DrawingBrush(new ImageDrawing(new BitmapImage(new Uri(@"pack://application:,,,/Warewolf Studio;component/Images/StartNode.png")), new Rect(0, 0, 32, 32)));
+                //WorkflowDesignerIcons.Activities.StartNode = Application.Current.TryFindResource("System-StartNodePink-Icon") as DrawingBrush;
+                WorkflowDesignerIcons.Activities.StartNode = Application.Current.TryFindResource("System-StartNode-Icon") as DrawingBrush;
                 SubscribeToDebugSelectionChanged();
             }
         }
@@ -1286,11 +1287,15 @@ namespace Dev2.Studio.ViewModels.Workflow
                     switch (args.SelectionType)
                     {
                         case ActivitySelectionType.Single:
+                            ClearSelection();
                             SelectSingleModelItem(selectedModelItem);
+                            
                             BringIntoView(selectedModelItem);
                             break;
                         case ActivitySelectionType.Add:
+                            ClearSelection();
                             AddModelItemToSelection(selectedModelItem);
+                            
                             BringIntoView(selectedModelItem);
                             break;
                         case ActivitySelectionType.Remove:
@@ -1334,6 +1339,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             {
                 return;
             }
+            Selection.Subscribe(_wd.Context, SelectedItemChanged);
             Selection.SelectOnly(_wd.Context, selectedModelItem);
             SelectedDebugItems.Add(selectedModelItem);
         }
@@ -1353,6 +1359,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             {
                 return;
             }
+            Selection.Subscribe(_wd.Context, SelectedItemChanged);
             Selection.Union(_wd.Context, selectedModelItem);
             SelectedDebugItems.Add(selectedModelItem);
         }

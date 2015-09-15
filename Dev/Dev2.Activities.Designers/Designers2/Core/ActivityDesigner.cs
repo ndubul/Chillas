@@ -75,6 +75,45 @@ namespace Dev2.Activities.Designers2.Core
             }
             base.OnPreviewMouseDoubleClick(e);
         }
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            UpdateView(e);
+            if (!(e.OriginalSource is IScrollInfo))
+            {
+                e.Handled = true;
+            }
+            base.OnPreviewMouseDown(e);
+        }
+
+        void UpdateView(MouseButtonEventArgs eventArgs)
+        {
+            var originalSource = eventArgs.OriginalSource;
+            var fe = originalSource as FrameworkElement;
+            if (fe != null && (fe.TemplatedParent is ToggleButton || fe.TemplatedParent is ActivityDesignerButton))
+            {
+                return;
+            }
+
+            if ((originalSource is Panel) || (originalSource is Shape) || (originalSource is Decorator) ||
+               (originalSource is ScrollViewer))
+            {
+                if (eventArgs.Source is Large)
+                {
+                    return;
+                }
+                _isInitialFocusDone = false;
+                SetInitialiFocus();
+
+                //ActivityDesignerStyle
+                //var actDesign = ContentDesignerTemplate.Parent as ActivityDesigner;
+                //if (actDesign != null)
+                //{
+                //    actDesign.Style = Application.Current.TryFindResource("ActivityDesignerStyle") as Style;
+                //}
+                //ContentDesignerTemplate.Style = Application.Current.TryFindResource("ActivityDesignerTemplate") as Style;
+                eventArgs.Handled = true;
+            }
+        }
 
         void ToggleView(MouseButtonEventArgs eventArgs)
         {

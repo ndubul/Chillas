@@ -25,6 +25,7 @@ using Dev2.Data.Interfaces;
 using Dev2.Data.Util;
 using Dev2.DataList.Contract;
 using Dev2.DataList.Contract.Binary_Objects;
+using Dev2.Interfaces;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Services.Events;
 using Dev2.Studio.Core;
@@ -1000,6 +1001,14 @@ namespace Dev2.Studio.ViewModels.DataList
             BaseCollection.Clear();
         }
 
+        public void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
+        }
 
         public void ConvertDataListStringToCollections(string dataList)
         {
