@@ -12,17 +12,17 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Input;
-using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Interfaces;
 using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class MenuViewModel : BindableBase, IMenuViewModel, IMenuView
+    public class MenuViewModel : BindableBase, IMenuViewModel, IMenuView,IUpdatesHelp
     {
 
         bool _hasNewVersion;
@@ -31,7 +31,6 @@ namespace Warewolf.Studio.ViewModels
         bool _isOverLock;
         ICommand _saveCommand;
         ICommand _executeServiceCommand;
-        ICommand _supportCommand;
         FontAwesomeIcon _debugIcon;
         bool _isProcessing;
 
@@ -254,13 +253,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public bool CanExecuteService { get; set; }
-        public bool CanSetSettings { get; set; }
-        public bool CanSetSchedules { get; set; }
-        public bool CanSave { get; set; }
-        public bool CanDeploy { get; set; }
-        public bool CanCreateNewService { get; set; }
-
+        
         public string NewLabel
         {
             get

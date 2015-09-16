@@ -98,7 +98,9 @@ namespace Dev2.Studio.ViewModels.Workflow
                                              IHandle<AddStringListToDataListMessage>,
                                              IHandle<EditActivityMessage>,
                                              IHandle<SaveUnsavedWorkflowMessage>,
-                                             IHandle<UpdateWorksurfaceFlowNodeDisplayName>, IWorkflowDesignerViewModel, INotifyPropertyChanged
+                                             IHandle<SelectModelItemMessage>,
+                                             IHandle<UpdateWorksurfaceFlowNodeDisplayName>, 
+                                             IWorkflowDesignerViewModel
     {
         static readonly Type[] DecisionSwitchTypes = { typeof(FlowSwitch<string>), typeof(FlowDecision) };
 
@@ -1015,6 +1017,7 @@ namespace Dev2.Studio.ViewModels.Workflow
         internal void OnItemSelected(Selection item)
         {
             NotifyItemSelected(item.PrimarySelection);
+            item.PrimarySelection.SetProperty("IsSelected",true);
         }
 
         #endregion Internal Methods
@@ -2068,13 +2071,6 @@ namespace Dev2.Studio.ViewModels.Workflow
                
             }
 
-            if (_debugSelectionChangedService != null)
-            {
-                _debugSelectionChangedService.Unsubscribe();
-                _debugSelectionChangedService.Dispose();
-                _debugSelectionChangedService = null;
-            }
-
             if (DesignerManagementService != null)
             {
                 DesignerManagementService.Dispose();
@@ -2116,8 +2112,6 @@ namespace Dev2.Studio.ViewModels.Workflow
             catch { }
             // ReSharper restore EmptyGeneralCatchClause
 
-
-            _wd = null;
             base.OnDispose();
         }
 
@@ -2219,6 +2213,20 @@ namespace Dev2.Studio.ViewModels.Workflow
             resourceModel.Environment.ResourceRepository.SaveToServer(resourceModel);
             resourceModel.Environment.ResourceRepository.Save(resourceModel);
             resourceModel.IsWorkflowSaved = true;
+        }
+
+        #endregion
+
+        #region Implementation of IHandle<SelectModelItemMessage>
+
+        public void Handle(SelectModelItemMessage message)
+        {
+            if(message.ModelItem != null)
+            {
+                Selection.Subscribe(_wd.Context,SelectedItemChanged);
+                Selection.SelectOnly(_wd.Context, message.ModelItem);
+                BringIntoView(message.ModelItem);
+            }
         }
 
         #endregion

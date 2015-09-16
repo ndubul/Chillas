@@ -1277,7 +1277,7 @@ Scenario Outline: Ensuring all inputs work as expected
 	#[[rec(*).a]]
 
 #Wolf-675
-Scenario: decide if variable [[A]] greater than variable [[B]] (False)
+Scenario: decide if variable [[A]] greater than a variable [[B]] (False)
 	Given a decision variable "[[A]]" value "30"
 	And  a decision variable "[[B]]" value "\"
 	And is "[[A]]" "Equals" "[[B]]"	

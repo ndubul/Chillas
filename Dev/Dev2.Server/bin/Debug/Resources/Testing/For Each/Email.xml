@@ -1,5 +1,5 @@
 
-<Service ID="068f5f63-ecaf-432d-96cf-590547fe5bdd" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Email" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5736.16179">
+<Service ID="068f5f63-ecaf-432d-96cf-590547fe5bdd" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Email" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5736.16317">
   <DisplayName>Email</DisplayName>
   <Category>Testing\For Each\Email</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -36,9 +36,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>5iYnplTZbVoAYjVrjoW+koYc12c=</DigestValue>
+        <DigestValue>kmzNP8uz4joBHzcbynsXuJB5dOQ=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>NRpUKOC3HZrnpYsXhI3UUygYKgBOCxTx5TKG+54D2KuEIb3NQEd3A57pJOQeSeuTZBRH1Jjg+73xFVL1JgfVTP2CVVvV4e4W6jKGk97fWhriVMf7xyjW1MNI6AFJwz9v0slFlsnV6+7H3IPOjkN/yrfPAYq7q/k6DicarMLba7U=</SignatureValue>
+    <SignatureValue>YPOoucRu1YSnBJz68XPUEL8jo61+q9ugaTe4hkcV06ALdcAvp6jR2c93nkjSbCxyRSkZFILoTrXIgIq/CtdQgIRnGCIZK648Ch17ri+4UREXFK7dogKQGQO79O8p1TSNNc+rD7I7r1sPbydo2gzqj2qRMNzWWgYpJDBwBxvTirE=</SignatureValue>
   </Signature>
 </Service>

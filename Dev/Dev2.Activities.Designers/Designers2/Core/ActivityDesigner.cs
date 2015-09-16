@@ -20,12 +20,12 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Dev2.Activities.Designers2.Core.Adorners;
 using Dev2.Activities.Designers2.Core.Errors;
 using Dev2.Activities.Designers2.Core.Help;
 using Dev2.Activities.Designers2.Sequence;
+using Dev2.Services.Events;
 using Dev2.Studio.Core.Activities.Services;
 using Dev2.Utilities;
 using FontAwesome.WPF;
@@ -103,7 +103,11 @@ namespace Dev2.Activities.Designers2.Core
                 }
                 _isInitialFocusDone = false;
                 SetInitialiFocus();
-
+                if(ViewModel != null)
+                {
+                    EventPublishers.Aggregator.Publish(new SelectModelItemMessage(ViewModel.ModelItem));
+                    ViewModel.IsSelected = true;
+                }
                 //ActivityDesignerStyle
                 //var actDesign = ContentDesignerTemplate.Parent as ActivityDesigner;
                 //if (actDesign != null)
@@ -251,7 +255,7 @@ namespace Dev2.Activities.Designers2.Core
             if(designerManagementService != null)
             {
                 _designerManagementService = designerManagementService;
-
+                
                 _designerManagementService.CollapseAllRequested += OnDesignerManagementServiceCollapseAllRequested;
                 _designerManagementService.ExpandAllRequested += OnDesignerManagementServiceExpandAllRequested;
                 _designerManagementService.RestoreAllRequested += OnDesignerManagementServiceRestoreAllRequested;
