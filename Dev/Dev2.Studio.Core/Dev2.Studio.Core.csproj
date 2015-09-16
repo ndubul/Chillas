@@ -486,6 +486,7 @@
     <Compile Include="Security\ClientAuthorizationService.cs" />
     <Compile Include="Security\ClientSecurityService.cs" />
     <Compile Include="Security\AuthorizeCommand.cs" />
+    <Compile Include="SelectModelItemMessage.cs" />
     <Compile Include="Services\Communication\MailToEmailCommService.cs" />
     <Compile Include="Services\Communication\EmailCommMessage.cs" />
     <Compile Include="Services\Communication\IAsynCommService.cs" />
