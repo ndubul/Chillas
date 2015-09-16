@@ -143,6 +143,7 @@
     <Compile Include="ManageWebServiceViewModel.cs" />
     <Compile Include="MenuViewModel.cs" />
     <Compile Include="ManagePasteViewModel.cs" />
+    <Compile Include="MessageBoxViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestServiceNameViewModel.cs" />
     <Compile Include="SharepointServerSourceModel.cs" />

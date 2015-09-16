@@ -263,7 +263,7 @@ namespace Dev2 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you wish to delete the {0} {1}?
+        ///   Looks up a localized string similar to Are you sure you wish to delete {0} {1}?
         ///
         ///Version History will also be deleted..
         /// </summary>

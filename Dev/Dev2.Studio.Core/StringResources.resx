@@ -367,7 +367,7 @@ Would you like to start the setup now?</value>
     <value>Workflow not saved...</value>
   </data>
   <data name="DialogBody_ConfirmDelete" xml:space="preserve">
-    <value>Are you sure you wish to delete the {0} {1}?
+    <value>Are you sure you wish to delete {0} {1}?
 
 Version History will also be deleted.</value>
   </data>
