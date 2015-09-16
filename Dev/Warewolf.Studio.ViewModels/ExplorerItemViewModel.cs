@@ -59,7 +59,10 @@ namespace Warewolf.Studio.ViewModels
             LostFocus = new DelegateCommand(LostFocusCommand);
 
             Children = new ObservableCollection<IExplorerItemViewModel>();
-            OpenCommand = new DelegateCommand(() => shellViewModel.OpenResource(ResourceId, Server));
+            OpenCommand = new DelegateCommand(() =>
+            {
+                shellViewModel.OpenResource(ResourceId, Server);
+            });
             //DeployCommand = new DelegateCommand(() => shellViewModel.DeployService(this));
             RenameCommand = new DelegateCommand(() => IsRenaming = true);
             Server = server;
@@ -726,7 +729,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public bool Move(IExplorerItemViewModel destination)
+        public bool Move(IExplorerTreeItem destination)
         {
             try
             {
@@ -740,12 +743,12 @@ namespace Warewolf.Studio.ViewModels
                  }
                  else if (destination.ResourceType <= ResourceType.Folder)
                  {
-                     destination.AddSibling(this);
+                     destination.AddChild(this);
                      RemoveChildFromParent();
                  }
                  else if (destination.Parent == null)
                  {
-                     destination.AddSibling(this);
+                     destination.AddChild(this);
                      RemoveChildFromParent();
                  }
                  return true;

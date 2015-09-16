@@ -8,7 +8,7 @@ namespace Dev2.Common.Interfaces
     {
         bool Rename(IExplorerItemViewModel vm, string newName);
 
-        bool Move(IExplorerItemViewModel explorerItemViewModel, IExplorerItemViewModel destination);
+        bool Move(IExplorerItemViewModel explorerItemViewModel, IExplorerTreeItem destination);
 
         bool Delete(IExplorerItemViewModel explorerItemViewModel);
 

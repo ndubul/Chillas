@@ -99,13 +99,13 @@ namespace Warewolf.Studio.ServerProxyLayer
         /// <summary>
         /// Move a resource to another folder
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="destinationid"></param>
-        public void MoveItem(Guid id, Guid destinationid)
+        /// <param name="sourcePath"></param>
+        /// <param name="destinationPath"></param>
+        public void MoveItem(string sourcePath, string destinationPath)
         {
             var controller = CommunicationControllerFactory.CreateController("MoveItemService");
-            controller.AddPayloadArgument("itemToMove", id.ToString());
-            controller.AddPayloadArgument("newPath", destinationid.ToString());
+            controller.AddPayloadArgument("itemToMove", sourcePath);
+            controller.AddPayloadArgument("newPath", destinationPath);
             controller.ExecuteCommand<IExplorerRepositoryResult>(Connection, GlobalConstants.ServerWorkspaceID);
         }
 

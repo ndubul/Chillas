@@ -24,7 +24,7 @@ namespace Dev2.Common.Interfaces
         string VersionNumber { get; set; }
         string VersionHeader { get; set; }
         void Filter(string filter);
-        bool Move(IExplorerItemViewModel destination);
+        bool Move(IExplorerTreeItem destination);
         bool CanDrop { get; set; }
         bool CanDrag { get; set; }
         ICommand OpenVersionCommand { get; set; }
@@ -35,7 +35,7 @@ namespace Dev2.Common.Interfaces
         string Outputs { get; set; }
         string ExecuteToolTip { get; }
         string EditToolTip { get; }
-        string ResourcePath { get; set; }
+       
 
         void AddSibling(IExplorerItemViewModel sibling);
         void CreateNewFolder();

@@ -45,6 +45,11 @@ namespace Warewolf.Studio.Views
             return ExplorerViewTestClass.OpenItem(resourceName,folderName);
         }
 
+	    public void Move(string originalPath, string destinationPath)
+	    {
+            ExplorerViewTestClass.Move(originalPath, destinationPath);
+	    }
+
 	    public int GetVisibleChildrenCount(string folderName)
 	    {
 	        return ExplorerViewTestClass.GetVisibleChildrenCount(folderName);

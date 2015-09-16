@@ -243,15 +243,6 @@ Scenario: Renaming Folder And Workflow Service on a remote server
 	Then Conflict error message is occurs
 
 @Explorer
-Scenario: Show dependencies
-	Given the explorer is visible
-	And I open "Remote Connection Integration"
-	And I right click on "Hello World" a context menu is visible
-	And I select "Show Dependencies"
-	Then the Show Dependencies tab is opened
-	And "Hello World" is visible with all dependencies
-
-@Explorer
 Scenario: Open saved Server Sources
 	Given the explorer is visible
 	And I open "Remote Connection Integration"
@@ -260,28 +251,25 @@ Scenario: Open saved Server Sources
 	Then the "Trav" server tab is opened
 
 @Explorer
-Scenario Outline: Move Nested Folder up tree-view
+Scenario: Move Nested Folder up tree-view Remote
 	Given the explorer is visible
-	And I open "<Host>"
-	Then path "<path>" is visible
-	And I change path "<From>" to "<To>"
-	Then both "<Folder1>" and "<Folder2>" are visible
-	Examples: 
-	| Host                          | path                                          | From                                          | To                                    | Folder1                               | Folder2                               |
-	| LocalHost                     | localhost/MyFolder/NewFolder                  | localhost/MyFolder/NewFolder                  | localhost/NewFolder                   | localhost/MyFolder                    | localhost/NewFolder                   |
-	| Remote Connection Integration | Remote Connection Integration/Testing/ForEach | Remote Connection Integration/Testing/ForEach | Remote Connection Integration/ForEach | Remote Connection Integration/ForEach | Remote Connection Integration/Testing |  
+	And I connect to "Remote Connection Integration" server
+	And I open "Remote Connection Integration"
+	When I create "Remote Connection Integration/Testing"
+	When I create "Remote Connection Integration/Testing/ForEach"
+	And I change path "Remote Connection Integration/Testing/ForEach" to "Remote Connection Integration/ForEach"
+	Then I should see the path "Remote Connection Integration/Testing" 
+	Then I should see the path "Remote Connection Integration/ForEach" 
 
 @Explorer
-Scenario Outline: Opening server source from explorer
+Scenario: Move Nested Folder up tree-view 
 	Given the explorer is visible
-	And I open "<Host>"
-	Then I should see the path "<path>"
-	And I open "<path>"
-	Then "<Hostname>" tab is opened
-	Examples:
-	| Host                          | path                                    | HostName      |
-	| LocalHost                     | localhost/tst-ci-remote                 | tst-ci-remote |
-	| Remote Connection Integration | Remote Connection Integration/Sandbox-1 | Sandbox       |
+	And I open "localhost"
+	When I create "localhost/MyFolder"
+	When I create "localhost/MyFolder/NewFolder"
+	And I change path "localhost/MyFolder/NewFolder" to "localhost"
+	Then I should see the path "localhost/MyFolder" 
+	Then I should see the path "localhost/NewFolder" 
 
 @Explorer
 Scenario: Checking versions in remote connection 
@@ -311,20 +299,6 @@ Scenario: Opening Versions in Explorer
  Then I should see "3" versions with "View" Icons in "localhost/Folder 1/Resource 1"
 
 
-Scenario: No Version history option for services and sources.
-  Given the explorer is visible
-  When I open "localhost" server
-  And I Setup a resource  "1" "WebService" to be returned for "localhost" called "WebService"
-  And I Add  "1" "PluginService" to be returned for "localhost"
-  And I Add  "1" "ServerSource" to be returned for "localhost"
-  Then I should see the path "localhost/WebService"
-  Then I should see the path "localhost/PluginService"
-  Then I should see the path "localhost/ServerSource"
-  And "Show Version History" Context menu  should be "Invisible" for "localhost/WebService 1"
-  And "Show Version History" "localhost/PluginService" should be "Invisible" for "localhost/Webservice"
-  And "Show Version History" "localhost/Remoteserver" should be "Invisible" for "localhost/Webservice"
-
- 
 Scenario: Opening Dependencies Of All Services In Explorer
    Given the explorer is visible
 	When I open Show Dependencies of "WF1" in "Folder1"

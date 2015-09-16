@@ -132,7 +132,7 @@ namespace Warewolf.Studio.Views
                 if (explorerItem != null)
                 {
                     if (explorerItem.ResourceName != null && (explorerItem.ResourceName.ToLowerInvariant().Contains(searchName.ToLowerInvariant()) &&
-                                                              explorerItem.ResourceType == ResourceType.Folder))
+                                                              (explorerItem.ResourceType == ResourceType.Folder || explorerItem.ResourceType==ResourceType.ServerSource)))
                     {
                         return true;
                     }
@@ -483,6 +483,23 @@ namespace Warewolf.Studio.Views
                 itemModel.OpenCommand.Execute(null);
             }
             return explorerTreeItem;
+        }
+
+        public void Move(string originalPath, string destinationPath)
+        {
+            var sourceNode = GetFolderXamDataTreeNode(originalPath) ?? GetEnvironmentNode(originalPath);
+            var destinationNode = GetFolderXamDataTreeNode(destinationPath) ?? GetEnvironmentNode(destinationPath);
+            var explorerItem = sourceNode.Data as IExplorerItemViewModel;
+            var destinationItem = destinationNode.Data as IExplorerTreeItem;
+            if(explorerItem != null)
+            {
+                explorerItem.Move(destinationItem);
+                BindingExpression be = _explorerView.ExplorerTree.GetBindingExpression(XamDataTree.ItemsSourceProperty);
+                if (be != null)
+                {
+                    be.UpdateSource();
+                }
+            }
         }
     }
 }
