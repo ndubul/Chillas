@@ -1,17 +1,16 @@
 ﻿using System.Activities.Presentation.Model;
 using System.Windows;
 using Dev2.Activities.Designers2.Core;
-using Dev2.Activities.Designers2.Decision;
 using Dev2.Common;
 using Dev2.Data.SystemTemplates;
 using Dev2.Data.SystemTemplates.Models;
 using Dev2.Interfaces;
+using Dev2.Utilities;
 
 namespace Dev2.Activities.Designers2.Switch
 {
     public class SwitchDesignerViewModel : ActivityDesignerViewModel
     {
-        string _switchExpression;
         string _switchVariable;
 
         public SwitchDesignerViewModel(ModelItem mi):base(mi)
@@ -27,7 +26,7 @@ namespace Dev2.Activities.Designers2.Switch
             if (expressionText != null && expressionText.Value != null)
             {
                 ds = new Dev2Switch();
-                var val = Utilities.ActivityHelper.ExtractData(expressionText.Value.ToString());
+                var val = ActivityHelper.ExtractData(expressionText.Value.ToString());
                 if (!string.IsNullOrEmpty(val))
                 {
                     ds.SwitchVariable = val;
@@ -54,17 +53,7 @@ namespace Dev2.Activities.Designers2.Switch
             DisplayText = ds.DisplayText;
         }
 
-        public string SwitchExpression
-        {
-            get
-            {
-                return _switchExpression;
-            }
-            set
-            {
-                _switchExpression = value;
-            }
-        }
+        public string SwitchExpression { get; set; }
         public string SwitchVariable
         {
             get
@@ -98,10 +87,12 @@ namespace Dev2.Activities.Designers2.Switch
         {
             get
             {
-                var dev2Switch = new Dev2Switch();
-                dev2Switch.DisplayText = DisplayText;
-                dev2Switch.SwitchVariable = SwitchVariable;
-                dev2Switch.SwitchExpression = SwitchExpression;
+                var dev2Switch = new Dev2Switch
+                {
+                    DisplayText = DisplayText,
+                    SwitchVariable = SwitchVariable,
+                    SwitchExpression = SwitchExpression
+                };
                 return dev2Switch;
             }
         }
