@@ -27,6 +27,7 @@ using Dev2.Activities.Designers2.Core.Help;
 using Dev2.Activities.Designers2.Sequence;
 using Dev2.Services.Events;
 using Dev2.Studio.Core.Activities.Services;
+using Dev2.Studio.Core.ViewModels;
 using Dev2.Utilities;
 using FontAwesome.WPF;
 
@@ -105,16 +106,12 @@ namespace Dev2.Activities.Designers2.Core
                 SetInitialiFocus();
                 if(ViewModel != null)
                 {
-                    EventPublishers.Aggregator.Publish(new SelectModelItemMessage(ViewModel.ModelItem));
+                    //EventPublishers.Aggregator.Publish(new SelectModelItemMessage(ViewModel.ModelItem));
                     ViewModel.IsSelected = true;
+                    ViewModel.ZIndexPosition = ZIndexPosition.Front;
+                    //Context.Services.Publish(new SelectModelItemMessage(ViewModel.ModelItem));
+                    Selection.SelectOnly(Context, ViewModel.ModelItem);
                 }
-                //ActivityDesignerStyle
-                //var actDesign = ContentDesignerTemplate.Parent as ActivityDesigner;
-                //if (actDesign != null)
-                //{
-                //    actDesign.Style = Application.Current.TryFindResource("ActivityDesignerStyle") as Style;
-                //}
-                //ContentDesignerTemplate.Style = Application.Current.TryFindResource("ActivityDesignerTemplate") as Style;
                 eventArgs.Handled = true;
             }
         }

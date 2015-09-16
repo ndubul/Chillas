@@ -6,8 +6,11 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.WorkSurface;
+using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Mvvm;
 using Warewolf.Studio.ViewModels;
+using Warewolf.Studio.Views;
+
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace Dev2.ViewModels
@@ -107,16 +110,25 @@ namespace Dev2.ViewModels
                 ViewModel.UpdateHelpDescriptor(String.Empty);
                 if (ViewModel.HasChanged)
                 {
-                    MessageBoxResult showSchedulerCloseConfirmation = _popupController.ShowItemSourceCloseConfirmation(ViewModel.Header);
-                    if (showSchedulerCloseConfirmation == MessageBoxResult.Cancel || showSchedulerCloseConfirmation == MessageBoxResult.None)
+                    var msgBoxViewModel = new MessageBoxViewModel(String.Format(StringResources.ItemSource_NotSaved), String.Format("Save {0}?",  ViewModel.Header.Replace("*", "")),
+                                                    MessageBoxButton.YesNoCancel, FontAwesomeIcon.ExclamationTriangle);
+
+                    MessageBoxView msgBoxView = new MessageBoxView
+                    {
+                        DataContext = msgBoxViewModel
+                    };
+                    msgBoxView.ShowDialog();
+                    var result = msgBoxViewModel.Result;
+
+                    if (result == MessageBoxResult.Cancel || result == MessageBoxResult.None)
                     {
                         return false;
                     }
-                    if (showSchedulerCloseConfirmation == MessageBoxResult.No)
+                    if (result == MessageBoxResult.No)
                     {
                         return true;
                     }
-                    if (showSchedulerCloseConfirmation == MessageBoxResult.Yes)
+                    if (result == MessageBoxResult.Yes)
                     {
                         if (ViewModel.CanSave())
                         {

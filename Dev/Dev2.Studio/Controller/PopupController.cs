@@ -143,7 +143,7 @@ namespace Dev2.Studio.Controller
                               + "Would you like to save? " + Environment.NewLine +
                               "-----------------------------------------------------------------" +
                               Environment.NewLine +
-                              "Yes - Saves your changes" + Environment.NewLine +
+                              "Yes - Save your changes." + Environment.NewLine +
                               "No - Discard your changes." + Environment.NewLine +
                               "Cancel - Returns you to the tab.";
             Description = description;

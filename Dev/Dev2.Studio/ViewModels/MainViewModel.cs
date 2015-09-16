@@ -81,6 +81,7 @@ using Dev2.Views.DropBox;
 using Dev2.Webs;
 using Dev2.Webs.Callbacks;
 using Dev2.Workspaces;
+using FontAwesome.WPF;
 using Infragistics.Windows.DockManager.Events;
 using ServiceStack.Common;
 using Warewolf.Core;
@@ -678,8 +679,15 @@ namespace Dev2.Studio.ViewModels
         // Write CodedUI Test Because of Silly Chicken affect ;)
         private bool ShowRemovePopup(IWorkflowDesignerViewModel workflowVm)
         {
-            var result = PopupProvider.Show(string.Format(StringResources.DialogBody_NotSaved, workflowVm.ResourceModel.ResourceName), StringResources.DialogTitle_NotSaved,
-                                            MessageBoxButton.YesNoCancel, MessageBoxImage.Question, null);
+            var msgBoxViewModel = new MessageBoxViewModel(string.Format(StringResources.DialogBody_NotSaved, workflowVm.ResourceModel.ResourceName), 
+                String.Format("Save {0}?", workflowVm.ResourceModel.ResourceName), MessageBoxButton.YesNoCancel, FontAwesomeIcon.ExclamationTriangle);
+
+            MessageBoxView msgBoxView = new MessageBoxView
+            {
+                DataContext = msgBoxViewModel
+            };
+            msgBoxView.ShowDialog();
+            var result = msgBoxViewModel.Result;
 
             switch (result)
             {
@@ -994,7 +1002,14 @@ namespace Dev2.Studio.ViewModels
 
         public void ShowPopup(IPopupMessage popupMessage)
         {
-            PopupProvider.Show(popupMessage);
+            var msgBoxViewModel = new MessageBoxViewModel(popupMessage.Description, popupMessage.Header,
+                                                    popupMessage.Buttons, FontAwesomeIcon.ExclamationTriangle);
+
+            MessageBoxView msgBoxView = new MessageBoxView
+            {
+                DataContext = msgBoxViewModel
+            };
+            msgBoxView.ShowDialog();
         }
 
         public void EditServer(IServerSource selectedServer)
@@ -1697,22 +1712,52 @@ namespace Dev2.Studio.ViewModels
                 return true;
             }
 
-
             if (models.Count > 1)
             {
-                new DeleteFolderDialog().ShowDialog();
+                var model = models.FirstOrDefault();
+                if(model != null)
+                {
+                    var msgBoxViewModel = new MessageBoxViewModel(String.Format(StringResources.DialogBody_HasDependencies, model.ResourceName,
+                                                    model.ResourceType.GetDescription()), String.Format(StringResources.DialogTitle_HasDependencies, model.ResourceType.GetDescription()), 
+                                                    MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle);
+
+                    MessageBoxView msgBoxView = new MessageBoxView
+                    {
+                        DataContext = msgBoxViewModel
+                    };
+                    msgBoxView.ShowDialog();
+                }
                 return false;
             }
             if (models.Count == 1)
             {
                 var model = models.FirstOrDefault();
-                var dialog = new DeleteResourceDialog(model);
-                dialog.ShowDialog();
-                if (dialog.OpenDependencyGraph)
+
+                if(model != null)
                 {
-                    ShowDependencies(false,model);
+                    var msgBoxViewModel = new MessageBoxViewModel(String.Format(StringResources.DialogBody_HasDependencies, model.ResourceName, model.ResourceType.GetDescription()), 
+                        String.Format(StringResources.DialogTitle_HasDependencies, model.ResourceType.GetDescription()),
+                        MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle);
+
+                    MessageBoxView msgBoxView = new MessageBoxView
+                    {
+                        DataContext = msgBoxViewModel
+                    };
+                    msgBoxView.ShowDialog();
+                    if (msgBoxView.OpenDependencyGraph)
+                    {
+                        ShowDependencies(false, model);
+                    }
+                    return false;
                 }
-                return false;
+
+                //var dialog = new DeleteResourceDialog(model);
+                //dialog.ShowDialog();
+                //if (dialog.OpenDependencyGraph)
+                //{
+                //    ShowDependencies(false,model);
+                //}
+                //return false;
             }
             return true;
         }
@@ -1746,10 +1791,17 @@ namespace Dev2.Studio.ViewModels
                         }
                         var deletePrompt = String.Format(StringResources.DialogBody_ConfirmDelete, deletionName,
                             description);
-                        var deleteAnswer = PopupProvider.Show(deletePrompt, StringResources.DialogTitle_ConfirmDelete,
-                            MessageBoxButton.YesNo, MessageBoxImage.Warning, null);
 
-                        var shouldDelete = deleteAnswer == MessageBoxResult.Yes;
+                        var msgBoxViewModel = new MessageBoxViewModel(string.Format(deletePrompt), StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, FontAwesomeIcon.ExclamationTriangle);
+
+                        MessageBoxView msgBoxView = new MessageBoxView
+                        {
+                            DataContext = msgBoxViewModel
+                        };
+                        msgBoxView.ShowDialog();
+
+                        var shouldDelete = msgBoxViewModel.Result == MessageBoxResult.Yes;
+
                         return shouldDelete;
                     }
                 }
@@ -1760,8 +1812,19 @@ namespace Dev2.Studio.ViewModels
         bool ShowDeleteDialogForFolder(string folderBeingDeleted, Common.Interfaces.Studio.Controller.IPopupController result)
         {
             var deletePrompt = String.Format(StringResources.DialogBody_ConfirmFolderDelete, folderBeingDeleted);
-            var deleteAnswer = result.Show(deletePrompt, StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, MessageBoxImage.Warning, null);
-            var confirmDelete = deleteAnswer == MessageBoxResult.Yes;
+
+            var msgBoxViewModel = new MessageBoxViewModel(string.Format(deletePrompt), StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, FontAwesomeIcon.ExclamationTriangle);
+
+            MessageBoxView msgBoxView = new MessageBoxView
+            {
+                DataContext = msgBoxViewModel
+            };
+            msgBoxView.ShowDialog();
+
+            var confirmDelete = msgBoxViewModel.Result == MessageBoxResult.Yes;
+
+            //var deleteAnswer = result.Show(deletePrompt, StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, MessageBoxImage.Warning, null);
+            //var confirmDelete = deleteAnswer == MessageBoxResult.Yes;
             return confirmDelete;
         }
 
