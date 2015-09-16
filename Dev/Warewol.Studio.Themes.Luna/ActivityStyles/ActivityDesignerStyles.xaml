@@ -82,12 +82,10 @@
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
                                     <Setter Property="Border.BorderBrush" Value="#F3700D" />
-                                    <!--<Setter Property="Border.Background" Value="#FFF19D5E" />-->
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="False">
                                     <Setter Property="Border.BorderBrush" Value="{DynamicResource WorkflowViewElementBorderBrush}" />
-                                    <!--<Setter Property="Border.Background" Value="#FFF19D5E" />-->
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding Path=Content,RelativeSource={RelativeSource AncestorType={x:Type sap:WorkflowViewElement}}}" Value="{x:Null}">

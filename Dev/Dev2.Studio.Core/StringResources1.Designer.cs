@@ -684,6 +684,20 @@ namespace Dev2 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your changes have not been saved.
+        ///Would you like to save? 
+        ///-----------------------------------------------------------------
+        ///Yes - Save your changes.
+        ///No - Discard your changes.
+        ///Cancel - Returns you to the tab..
+        /// </summary>
+        public static string ItemSource_NotSaved {
+            get {
+                return ResourceManager.GetString("ItemSource_NotSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TUW-DEVFS/dsfLive.
         /// </summary>
         public static string Live_SPN_Endpoint_Identity {

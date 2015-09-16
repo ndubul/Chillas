@@ -349,6 +349,14 @@ Yes - Save the workflow.
 No - Discard your changes.
 Cancel - Returns you to the workflow.</value>
   </data>
+  <data name="ItemSource_NotSaved" xml:space="preserve">
+    <value>Your changes have not been saved.
+Would you like to save? 
+-----------------------------------------------------------------
+Yes - Save your changes.
+No - Discard your changes.
+Cancel - Returns you to the tab.</value>
+  </data>
   <data name="DialogBody_UpdateAvailable" xml:space="preserve">
     <value>A new version of Warewolf is available:
     
