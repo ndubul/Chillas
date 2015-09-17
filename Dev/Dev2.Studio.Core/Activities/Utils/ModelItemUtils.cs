@@ -26,17 +26,23 @@ namespace Dev2.Studio.Core.Activities.Utils
 
         public static void SetProperty<T>(string propertyName, T value, ModelItem modelItem)
         {
-            var modelProperty = modelItem.Properties[propertyName];
-            if(modelProperty != null)
+            if(propertyName != null)
             {
-                // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
-                if(modelProperty.PropertyType == typeof(InArgument<T>))
+                if(modelItem != null)
                 {
-                    modelProperty.SetValue(InArgument<T>.FromValue(value));
-                }
-                else
-                {
-                    modelProperty.SetValue(value);
+                    var modelProperty = modelItem.Properties[propertyName];
+                    if(modelProperty != null)
+                    {
+                        // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
+                        if(modelProperty.PropertyType == typeof(InArgument<T>))
+                        {
+                            modelProperty.SetValue(InArgument<T>.FromValue(value));
+                        }
+                        else
+                        {
+                            modelProperty.SetValue(value);
+                        }
+                    }
                 }
             }
         }
