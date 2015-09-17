@@ -9,7 +9,7 @@
     <ControlTemplate x:Key="ActivityDesignerTemplate" TargetType="{x:Type sap:ActivityDesigner}">
         <ControlTemplate.Resources>
             <ControlTemplate x:Key="UnselectedNameTextBoxTemplate">
-                <TextBlock Margin="9,1,3,1" TextTrimming="CharacterEllipsis"
+                <TextBlock Margin="0" TextTrimming="CharacterEllipsis"
                            Text="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Text}" />
             </ControlTemplate>
             <Style x:Key="NameTextBoxStyle" TargetType="{x:Type TextBox}">
@@ -45,7 +45,9 @@
                             <Setter Property="Border.BorderThickness" Value="4" />
                             <Setter Property="FrameworkElement.Margin" Value="-4,-4,-4,-4" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+
+                        <!-- LEAVE THIS CODE UNTIL FURTHER INVESTIGATION ON ACTIVITY DESIGNER -->
+                        <!--<DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
                             <Setter Property="Border.Effect">
                                 <Setter.Value>
                                     <DropShadowEffect BlurRadius="15" Color="#FFF19D5E"></DropShadowEffect>
@@ -58,7 +60,7 @@
                                     <DropShadowEffect BlurRadius="0" Color="Transparent"></DropShadowEffect>
                                 </Setter.Value>
                             </Setter>
-                        </DataTrigger>
+                        </DataTrigger>-->
                     </Style.Triggers>
                 </Style>
             </Border.Style>
@@ -79,7 +81,9 @@
                             <Setter Property="Border.Background" Value="White" />
                             <!-- HEADER CORNER RADIUS ONLY SET LEFT AND TOP -->
                             <Setter Property="Border.CornerRadius" Value="10,10,0,0" />
-                            <Style.Triggers>
+
+                            <!-- LEAVE THIS CODE UNTIL FURTHER INVESTIGATION ON ACTIVITY DESIGNER -->
+                            <!--<Style.Triggers>
                                 <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
                                     <Setter Property="Border.BorderBrush" Value="#F3700D" />
                                 </DataTrigger>
@@ -91,7 +95,7 @@
                                 <DataTrigger Binding="{Binding Path=Content,RelativeSource={RelativeSource AncestorType={x:Type sap:WorkflowViewElement}}}" Value="{x:Null}">
                                     <Setter Property="Border.CornerRadius" Value="2" />
                                 </DataTrigger>
-                            </Style.Triggers>
+                            </Style.Triggers>-->
                         </Style>
                     </Border.Style>
                 </Border>
@@ -228,7 +232,10 @@
                             <Setter Property="Shape.Stroke" Value="{DynamicResource WorkflowViewElementBorderBrush}" />
                             <Setter Property="UIElement.Visibility" Value="Visible" />
                             <Setter Property="Shape.StrokeThickness" Value="1" />
-                            <Style.Triggers>
+
+                            <!-- LEAVE THIS CODE UNTIL FURTHER INVESTIGATION ON ACTIVITY DESIGNER -->
+                            
+                            <!--<Style.Triggers>
                                 <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
                                     <Setter Property="Shape.Stroke" Value="#F3700D" />
                                 </DataTrigger>
@@ -236,7 +243,7 @@
                                 <DataTrigger Binding="{Binding Path=ModelItem.IsSelection,RelativeSource={RelativeSource TemplatedParent}}" Value="False">
                                     <Setter Property="Shape.Stroke" Value="{DynamicResource WorkflowViewElementBorderBrush}" />
                                 </DataTrigger>
-                            </Style.Triggers>
+                            </Style.Triggers>-->
                         </Style>
                     </Rectangle.Style>
                 </Rectangle>
