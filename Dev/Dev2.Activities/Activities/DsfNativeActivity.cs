@@ -458,6 +458,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                 }
                 else
                 {
+                    _debugState.StateType = stateType;
                     Dev2Logger.Log.Info("Debug Already Started");
                 }
 

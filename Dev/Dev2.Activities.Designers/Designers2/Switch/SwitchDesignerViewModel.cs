@@ -13,12 +13,12 @@ namespace Dev2.Activities.Designers2.Switch
     {
         string _switchVariable;
 
-        public SwitchDesignerViewModel(ModelItem mi):base(mi)
+        public SwitchDesignerViewModel(ModelItem mi, string display):base(mi)
         {
-            Initialize();
+            Initialize(display);
         }
 
-        void Initialize()
+        void Initialize(string display)
         {
             var expressionText = ModelItem.Properties[GlobalConstants.SwitchExpressionTextPropertyText];
             ModelProperty switchCaseValue = ModelItem.Properties["Case"];
@@ -36,11 +36,17 @@ namespace Dev2.Activities.Designers2.Switch
             {
                 ds = DataListConstants.DefaultSwitch;
             }
-
-            var displayName = ModelItem.Properties[GlobalConstants.DisplayNamePropertyText];
-            if (displayName != null && displayName.Value != null)
+            if (string.IsNullOrEmpty(display))
             {
-                ds.DisplayText = displayName.Value.ToString();
+                var displayName = ModelItem.Properties[GlobalConstants.DisplayNamePropertyText];
+                if (displayName != null && displayName.Value != null)
+                {
+                    ds.DisplayText = displayName.Value.ToString();
+                }
+            }
+            else
+            {
+                ds.DisplayText = display; 
             }
             if (switchCaseValue != null)
             {
@@ -51,6 +57,10 @@ namespace Dev2.Activities.Designers2.Switch
             SwitchVariable = ds.SwitchVariable;
             SwitchExpression = ds.SwitchExpression;
             DisplayText = ds.DisplayText;
+            if(DisplayText!= SwitchVariable && DisplayText != "Switch")
+            {
+                _hascustomeDisplayText = true;
+            }
         }
 
         public string SwitchExpression { get; set; }
@@ -68,7 +78,7 @@ namespace Dev2.Activities.Designers2.Switch
                     DisplayText = "Switch";
                     DisplayName = "Switch";
                 }
-                else
+                else if((!_hascustomeDisplayText) ||string.IsNullOrEmpty(DisplayText) )
                 {
                     DisplayText = value;
                     DisplayName = value;
@@ -76,11 +86,19 @@ namespace Dev2.Activities.Designers2.Switch
             }
         }
         public static readonly DependencyProperty DisplayTextProperty = DependencyProperty.Register("DisplayText", typeof(string), typeof(SwitchDesignerViewModel), new PropertyMetadata(default(string)));
+        bool _hascustomeDisplayText;
 
         public string DisplayText
         {
             get { return (string)GetValue(DisplayTextProperty); }
-            set { SetValue(DisplayTextProperty, value); }
+            set
+            {
+                if(string.IsNullOrEmpty(value))
+                {
+                    _hascustomeDisplayText = false;
+                }
+                SetValue(DisplayTextProperty, value);
+            }
         }
 
         public Dev2Switch Switch
