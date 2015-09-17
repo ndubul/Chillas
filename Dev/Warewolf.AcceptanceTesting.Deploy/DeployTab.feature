@@ -237,6 +237,41 @@ Scenario: Deploying items from one server to the next with the same name
 	 Then the User is prompted to "Rename or Delete" one of the resources
 
 
+Scenario: Warning message no longer appears
+     Given I have deploy tab opened
+	 And selected Source Server is "localhost"
+     And selected Destination Server is "Remote"
+	 And I select "Examples\Utility - Date and Time" from Source Server
+	 When I deploy 
+	 Then deploy is successfull
+	 And the validation message is "Items deployed successfully"
+	 And "Examples\Utility - Date and Time" is visible on Destination Server
+	 And I select "Examples\Utility - Date and Time" from Source Server
+	 When I deploy
+	 Then a warning popup appears ""
+	 When I click OK on Resource exists in the destination server popup
+	 When I deploy again
+	 Then warning popup no longer appears
+
+Scenario: Renaming resource after deploying and re-deploy
+     Given I have deploy tab opened
+	 And selected Source Server is "localhost"
+     And selected Destination Server is "Remote"
+	 And I select "Examples\Utility - Date and Time" from Source Server
+	 When I deploy 
+	 Then deploy is successfull
+	 And the validation message is "Items deployed successfully"
+	 And "Examples\Utility - Date and Time" is visible on Destination Server
+	 And I select "Examples\Utility - Date and Time" from Source Server
+	 When I deploy
+	 Then a warning popup appears ""
+	 When I click OK on Resource exists in the destination server popup
+	 And I rename "Examples\Utility - Date and Time" to "Examples\Utility - Date and Time updated"
+	 And I deploy
+	 Then "Examples\Utility - Date and Time" is over-written on "Remote" 
+	 And "Examples\Utility - Date and Time update" is visible on "Remote"
+
+
 
 ###REQUIREMENTS Check to see what needs to be included
 

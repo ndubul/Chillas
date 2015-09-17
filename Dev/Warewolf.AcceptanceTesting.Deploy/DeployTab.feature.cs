@@ -626,6 +626,93 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Warning message no longer appears")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DeployTab")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Deploy")]
+        public virtual void WarningMessageNoLongerAppears()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Warning message no longer appears", ((string[])(null)));
+#line 240
+this.ScenarioSetup(scenarioInfo);
+#line 241
+     testRunner.Given("I have deploy tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 242
+  testRunner.And("selected Source Server is \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 243
+     testRunner.And("selected Destination Server is \"Remote\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 244
+  testRunner.And("I select \"Examples\\Utility - Date and Time\" from Source Server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 245
+  testRunner.When("I deploy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 246
+  testRunner.Then("deploy is successfull", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 247
+  testRunner.And("the validation message is \"Items deployed successfully\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 248
+  testRunner.And("\"Examples\\Utility - Date and Time\" is visible on Destination Server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 249
+  testRunner.And("I select \"Examples\\Utility - Date and Time\" from Source Server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 250
+  testRunner.When("I deploy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 251
+  testRunner.Then("a warning popup appears \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 252
+  testRunner.When("I click OK on Resource exists in the destination server popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 253
+  testRunner.When("I deploy again", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 254
+  testRunner.Then("warning popup no longer appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Renaming resource after deploying and re-deploy")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DeployTab")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Deploy")]
+        public virtual void RenamingResourceAfterDeployingAndRe_Deploy()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Renaming resource after deploying and re-deploy", ((string[])(null)));
+#line 256
+this.ScenarioSetup(scenarioInfo);
+#line 257
+     testRunner.Given("I have deploy tab opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 258
+  testRunner.And("selected Source Server is \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 259
+     testRunner.And("selected Destination Server is \"Remote\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 260
+  testRunner.And("I select \"Examples\\Utility - Date and Time\" from Source Server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 261
+  testRunner.When("I deploy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 262
+  testRunner.Then("deploy is successfull", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 263
+  testRunner.And("the validation message is \"Items deployed successfully\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 264
+  testRunner.And("\"Examples\\Utility - Date and Time\" is visible on Destination Server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 265
+  testRunner.And("I select \"Examples\\Utility - Date and Time\" from Source Server", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 266
+  testRunner.When("I deploy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 267
+  testRunner.Then("a warning popup appears \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 268
+  testRunner.When("I click OK on Resource exists in the destination server popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 269
+  testRunner.And("I rename \"Examples\\Utility - Date and Time\" to \"Examples\\Utility - Date and Time " +
+                    "updated\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 270
+  testRunner.And("I deploy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 271
+  testRunner.Then("\"Examples\\Utility - Date and Time\" is over-written on \"Remote\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 272
+  testRunner.And("\"Examples\\Utility - Date and Time update\" is visible on \"Remote\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
