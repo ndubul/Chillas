@@ -26,7 +26,7 @@ namespace Warewolf.AcceptanceTesting.Switch
             Dev2DecisionStack stack = new Dev2DecisionStack();
             var mi = CreateModelItem("");
             FeatureContext.Current["modelItem"] = mi;
-            var vm = new SwitchDesignerViewModel(mi);
+            var vm = new SwitchDesignerViewModel(mi,"");
             var view = new ConfigureSwitch();
             FeatureContext.Current.Add("view", view);
             FeatureContext.Current["viewModel"] = vm;

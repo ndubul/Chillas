@@ -122,7 +122,16 @@ namespace Dev2.Studio.Controller
                 return;
             }
             var expressionText = expression.Properties[GlobalConstants.SwitchExpressionTextPropertyText];
-            _callBackHandler = StartSwitchDropWizard(expression);
+            var modelProperty = args.ModelItem.Properties[GlobalConstants.DisplayNamePropertyText];
+            if(modelProperty != null)
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                _callBackHandler = StartSwitchDropWizard(expression, modelProperty.Value.ToString());
+            }
+            else
+            {
+                _callBackHandler = StartSwitchDropWizard(expression, "");
+            }
             if (_callBackHandler != null)
             {
                 try
@@ -140,10 +149,10 @@ namespace Dev2.Studio.Controller
             }
         }
 
-        static Dev2DecisionCallbackHandler StartSwitchDropWizard(ModelItem modelItem)
+        static Dev2DecisionCallbackHandler StartSwitchDropWizard(ModelItem modelItem, string display)
         {
             var large = new ConfigureSwitch();
-            var dataContext = new SwitchDesignerViewModel(modelItem);
+            var dataContext = new SwitchDesignerViewModel(modelItem,display);
             large.DataContext = dataContext;
             var window = new WindowBorderLess();
             var contentPresenter = window.FindChild<ContentPresenter>();
@@ -183,7 +192,7 @@ namespace Dev2.Studio.Controller
         static Dev2DecisionCallbackHandler ShowSwitchDragDialog(ModelItem modelData, string variable = "")
         {
             var large = new ConfigureSwitchArm();
-            var dataContext = new SwitchDesignerViewModel(modelData) { SwitchVariable = variable };
+            var dataContext = new SwitchDesignerViewModel(modelData,"") { SwitchVariable = variable };
             large.DataContext = dataContext;
             var window = new WindowBorderLess();
             var contentPresenter = window.FindChild<ContentPresenter>();
