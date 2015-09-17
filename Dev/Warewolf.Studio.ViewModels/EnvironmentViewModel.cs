@@ -37,7 +37,7 @@ namespace Warewolf.Studio.ViewModels
             //Server.NetworkStateChanged += Server_NetworkStateChanged;
             //server.ItemAddedEvent += ServerItemAddedEvent;
             _children = new ObservableCollection<IExplorerItemViewModel>();
-            NewCommand = new DelegateCommand<string>(type => ShellViewModel.NewResource(type));
+            NewCommand = new DelegateCommand<string>(type => ShellViewModel.NewResource(type,ResourcePath));
             DisplayName = server.ResourceName;
             RefreshCommand = new DelegateCommand(async () => await Load());
             IsServerIconVisible = true;

@@ -1,5 +1,5 @@
 
-<Source ID="2a7a78af-826f-4334-a402-b35e910295c9" Name="Email Plugin" ResourceType="PluginSource" IsValid="false" AssemblyLocation="GAC:Microsoft.MediaCenter.Interop, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" AssemblyName="Microsoft.MediaCenter.Interop, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="Plugin" ServerVersion="0.0.5736.16317" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
+<Source ID="2a7a78af-826f-4334-a402-b35e910295c9" Name="Email Plugin" ResourceType="PluginSource" IsValid="false" AssemblyLocation="GAC:Microsoft.MediaCenter.Interop, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" AssemblyName="Microsoft.MediaCenter.Interop, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="Plugin" ServerVersion="0.0.5738.29596" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
   <DisplayName>Email Plugin</DisplayName>
   <Category>Acceptance Testing Resources\Email Plugin</Category>
   <AuthorRoles>
@@ -16,9 +16,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>V5SA1ZuLLmFhE5zStUXcHap5nfY=</DigestValue>
+        <DigestValue>hqaDIGLuXrDpxdU3vHlYrOp+Z3o=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>ACLA8b3NO/jVA4AEap26sa+JOw+IG9+7AHMGZxPF/1fHUsMyYC2wJPEV4EPh5UmbTR9YiZyP6Jeb1oz+tBbastkQksVvFvzMVTw+Iz+coXZFh0NJ52H0/hOOuc4FG2LE1jYP5rfVKdJGwFPaZPAsEXbotPn+Tdf/RbxxyZY+9eU=</SignatureValue>
+    <SignatureValue>FazAe/W7Vg88EIStWv4MtSeNcKR0rxYEpIK6NId/goMjh16akjrE8CTrZlZ4ZhtAc919Id7zWBdRvqttltNn3LxCOw8tCdCFqZigA41BW5D5KLT0YJMN0xAK4EoQ41IGsBwOlpzbGTFbM0b9jytnb9BuSgqYunSETAWa31M4u54=</SignatureValue>
   </Signature>
 </Source>

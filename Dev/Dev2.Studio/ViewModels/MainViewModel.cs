@@ -64,7 +64,6 @@ using Dev2.Studio.Core.Utils;
 using Dev2.Studio.Core.ViewModels;
 using Dev2.Studio.Core.ViewModels.Base;
 using Dev2.Studio.Core.Workspaces;
-using Dev2.Studio.Enums;
 using Dev2.Studio.Factory;
 using Dev2.Studio.ViewModels.DependencyVisualization;
 using Dev2.Studio.ViewModels.Help;
@@ -72,7 +71,6 @@ using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Studio.ViewModels.WorkSurface;
 using Dev2.Studio.Views;
 using Dev2.Studio.Views.DependencyVisualization;
-using Dev2.Studio.Views.ResourceManagement;
 using Dev2.Threading;
 using Dev2.Utils;
 using Dev2.ViewModels;
@@ -113,7 +111,7 @@ namespace Dev2.Studio.ViewModels
         #region Fields
 
         private IEnvironmentModel _activeEnvironment;
-        private Explorer.ExplorerViewModel _explorerViewModel;
+        private ExplorerViewModel _explorerViewModel;
         private WorkSurfaceContextViewModel _previousActive;
         private bool _disposed;
 
@@ -149,7 +147,7 @@ namespace Dev2.Studio.ViewModels
 
         public bool CloseCurrent { get; private set; }
 
-        public Explorer.ExplorerViewModel ExplorerViewModel
+        public ExplorerViewModel ExplorerViewModel
         {
             get { return _explorerViewModel; }
             set
@@ -347,7 +345,7 @@ namespace Dev2.Studio.ViewModels
             get
             {
                 return _newResourceCommand ?? (_newResourceCommand =
-                    new AuthorizeCommand<string>(AuthorizationContext.Contribute, NewResource, param => IsActiveEnvironmentConnected()));
+                    new AuthorizeCommand<string>(AuthorizationContext.Contribute, param=>NewResource(param,""), param => IsActiveEnvironmentConnected()));
             }
         }
 
@@ -377,7 +375,6 @@ namespace Dev2.Studio.ViewModels
 
 
         public IVersionChecker Version { get; private set; }
-        IConnectControlSingleton ConnectControlSingl { get; set; }
 
         public bool HasActiveConnection
         {
@@ -414,7 +411,6 @@ namespace Dev2.Studio.ViewModels
                 throw new ArgumentNullException("versionChecker");
             }
             Version = versionChecker;
-            ConnectControlSingl = connectControlSingleton ?? ConnectControlSingleton.Instance;
 
             VerifyArgument.IsNotNull("asyncWorker", asyncWorker);
             _asyncWorker = asyncWorker;
@@ -431,7 +427,7 @@ namespace Dev2.Studio.ViewModels
 
             if(ExplorerViewModel == null)
             {
-                ExplorerViewModel = new Explorer.ExplorerViewModel(eventPublisher, asyncWorker, environmentRepository, StudioResourceRepository, ConnectControlSingl, this, false, enDsfActivityType.All, AddWorkspaceItems, connectControlViewModel);
+                ExplorerViewModel = new ExplorerViewModel(this,CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
             }
 
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
@@ -496,7 +492,7 @@ namespace Dev2.Studio.ViewModels
                     actionToDoOnDelete();
                 }
             }
-            ExplorerViewModel.NavigationViewModel.UpdateSearchFilter();
+            //ExplorerViewModel.NavigationViewModel.UpdateSearchFilter();
         }
 
         public void Handle(SetActiveEnvironmentMessage message)
@@ -504,7 +500,7 @@ namespace Dev2.Studio.ViewModels
             Dev2Logger.Log.Info(message.GetType().Name);
             var activeEnvironment = message.EnvironmentModel;
             SetActiveEnvironment(activeEnvironment);
-            ExplorerViewModel.UpdateActiveEnvironment(ActiveEnvironment, message.SetFromConnectControl);
+            //ExplorerViewModel.UpdateActiveEnvironment(ActiveEnvironment, message.SetFromConnectControl);
         }
 
         public void SetActiveEnvironment(IEnvironmentModel activeEnvironment)
@@ -632,7 +628,7 @@ namespace Dev2.Studio.ViewModels
             string newWorflowName = NewWorkflowNames.Instance.GetNext();
 
             IContextualResourceModel tempResource = ResourceModelFactory.CreateResourceModel(activeEnvironment, resourceType,
-                                                                                              resourceType);
+                                                                                              newWorflowName);
             tempResource.Category = string.IsNullOrEmpty(resourcePath) ? "Unassigned\\" + newWorflowName : resourcePath + "\\" + newWorflowName;
             tempResource.ResourceName = newWorflowName;
             tempResource.DisplayName = newWorflowName;
@@ -765,14 +761,16 @@ namespace Dev2.Studio.ViewModels
                 case "SharepointServerSource":
                     EditSharePointSource(resourceModel);
                     break;
+                default:
+                    AddWorkSurfaceContext(resourceModel);
+                    break;
             }
-            //WebController.DisplayDialogue(resourceModel, isedit);
         }
 
         void EditDbSource(IContextualResourceModel resourceModel)
         {
             var db = new DbSource(resourceModel.WorkflowXaml.ToXElement());
-            var def = new DbSourceDefinition()
+            var def = new DbSourceDefinition
             {
                 AuthenticationType = db.AuthenticationType,
                 DbName = db.DatabaseName,
@@ -988,14 +986,20 @@ namespace Dev2.Studio.ViewModels
             }           
         }
 
+        public void SetActiveEnvironment(Guid environmentID)
+        {
+            ActiveEnvironment = EnvironmentRepository.Get(environmentID);
+        }
+
         public void OpenResource(Guid resourceId, IServer server)
         {
             var environmentModel = EnvironmentRepository.Get(server.EnvironmentID);
             if (environmentModel != null)
             {
-                var resourceModel = environmentModel.ResourceRepository.FindSingle(model => model.ID == resourceId, true);
+                environmentModel.ResourceRepository.LoadResourceFromWorkspace( resourceId, Guid.Empty);
+                var resource = environmentModel.ResourceRepository.FindSingle(model => model.ID == resourceId, true);
                 var contextualResourceModel = new ResourceModel(environmentModel,EventPublisher);
-                contextualResourceModel.Update(resourceModel);
+                contextualResourceModel.Update(resource);
                 DisplayResourceWizard(contextualResourceModel,true);
             }
         }
@@ -1184,14 +1188,9 @@ namespace Dev2.Studio.ViewModels
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
-        public void NewResource(string resourceType)
+        public void NewResource(string resourceType, string resourcePath)
         {
-            NewResource(resourceType, "");
-        }
-
-        private void NewResource(string resourceType, string resourcePath)
-        {
-            if (resourceType == "Workflow")
+            if (resourceType == "Workflow" || resourceType=="WorkflowService")
             {
                 TempSave(ActiveEnvironment, resourceType, resourcePath);
                 if (View != null)
@@ -1684,7 +1683,7 @@ namespace Dev2.Studio.ViewModels
             }
             if (ExplorerViewModel != null)
             {
-                ExplorerViewModel.BringItemIntoView(item);
+                //ExplorerViewModel.BringItemIntoView(item);
             }
         }
 
@@ -1876,7 +1875,7 @@ namespace Dev2.Studio.ViewModels
                     actionToDoOnDelete();
                 }
             }
-            ExplorerViewModel.NavigationViewModel.UpdateSearchFilter();
+            //ExplorerViewModel.NavigationViewModel.UpdateSearchFilter();
         }
 
         #endregion delete

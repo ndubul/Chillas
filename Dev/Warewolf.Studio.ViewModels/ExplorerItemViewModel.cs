@@ -66,7 +66,11 @@ namespace Warewolf.Studio.ViewModels
             //DeployCommand = new DelegateCommand(() => shellViewModel.DeployService(this));
             RenameCommand = new DelegateCommand(() => IsRenaming = true);
             Server = server;
-            //NewCommand = new DelegateCommand<ResourceType?>(type => shellViewModel.NewResource(type, ResourceId));
+            NewCommand = new DelegateCommand<ResourceType?>(type =>
+            {
+                shellViewModel.SetActiveEnvironment(Server.EnvironmentID);
+                shellViewModel.NewResource(type.ToString(), ResourcePath);
+            });
             CanCreateDbService = true; 
             CanCreateWorkflowService = true; 
             CanCreateServerSource = true; 
@@ -80,7 +84,7 @@ namespace Warewolf.Studio.ViewModels
             CanCreateWebSource = true;
             CanCreateWebService = true;
             _explorerRepository = server.ExplorerRepository;
-            //Server.PermissionsChanged += UpdatePermissions;
+            Server.PermissionsChanged += UpdatePermissions;
             ShowVersionHistory = new DelegateCommand((() => AreVersionsVisible = (!AreVersionsVisible)));
             DeleteCommand = new DelegateCommand(Delete);
            // OpenVersionCommand = new DelegateCommand(() => { if (ResourceType == ResourceType.Version) ShellViewModel.OpenVersion(ResourceId, VersionNumber); });
@@ -262,10 +266,10 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-//        public void UpdatePermissions(PermissionsChangedArgs args)
-//        {
-//            SetPermissions(args.Permissions);
-//        }
+        public void UpdatePermissions(PermissionsChangedArgs args)
+        {
+            SetPermissions(args.WindowsGroupPermissions);
+        }
 
         public void SetPermissions(List<IWindowsGroupPermission> permissions)
         {
@@ -484,6 +488,7 @@ namespace Warewolf.Studio.ViewModels
                     OnPropertyChanged(() => IsSelected);
                     if (_isSelected)
                     {
+                        _shellViewModel.SetActiveEnvironment(Server.EnvironmentID);
                         //var helpDescriptor = new HelpDescriptor("", string.Format("<body><H1>{0}</H1><a href=\"http://warewolf.io\">Warewolf</a><p>Inputs: {1}</p><p>Outputs: {2}</p></body>", ResourceName, Inputs, Outputs), null);
                         //_shellViewModel.UpdateHelpDescriptor(helpDescriptor);
                     }

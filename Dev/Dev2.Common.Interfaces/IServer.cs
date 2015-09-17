@@ -45,8 +45,11 @@ namespace Dev2.Common.Interfaces
 
     public class PermissionsChangedArgs
     {
+        public List<IWindowsGroupPermission> WindowsGroupPermissions { get; set; }
+
         public PermissionsChangedArgs(List<IWindowsGroupPermission> windowsGroupPermissions)
         {
+            WindowsGroupPermissions = windowsGroupPermissions;
         }
     }
 

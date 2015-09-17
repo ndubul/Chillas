@@ -156,6 +156,7 @@ namespace Dev2.Studio.Core.Factories
                         break;
 
                     case "WorkflowService":
+                    case "Workflow":
                         resource.ResourceType = ResourceType.WorkflowService;
                         resource.DisplayName = displayName;
                         resource.ServerResourceType = "WorkflowService";

@@ -1147,39 +1147,7 @@ namespace Dev2.Core.Tests
         }
 
 
-        [TestMethod]
-        public void DeleteResourceExpectThatFilterIsUpdated()
-        {
-            CreateFullExportsAndVm();
-            SetupForDelete();
-            PopupController.Setup(s => s.Show()).Returns(MessageBoxResult.No);
-            var msg = new DeleteResourcesMessage(new List<IContextualResourceModel> { FirstResource.Object }, "", false);
-            var repo = MainViewModel.ExplorerViewModel.NavigationViewModel;
 
-            PrivateObject p = new PrivateObject(repo, new PrivateType(typeof(NavigationViewModelBase)));
-            p.SetField("_studioResourceRepository", MockStudioResourceRepository.Object);
-            p.SetField("_searchFilter", "bob");
-            MainViewModel.Handle(msg);
-
-            MockStudioResourceRepository.Verify(a => a.Filter(It.IsAny<Func<IExplorerItemModel, bool>>()), Times.Once());
-        }
-
-        [TestMethod]
-        public void DeleteResourceExpectThatFilterIsNotUpdatedIfNoFilterExists()
-        {
-            CreateFullExportsAndVm();
-            SetupForDelete();
-            PopupController.Setup(s => s.Show()).Returns(MessageBoxResult.No);
-            var msg = new DeleteResourcesMessage(new List<IContextualResourceModel> { FirstResource.Object }, "", false);
-            var repo = MainViewModel.ExplorerViewModel.NavigationViewModel;
-
-            PrivateObject p = new PrivateObject(repo, new PrivateType(typeof(NavigationViewModelBase)));
-            p.SetField("_studioResourceRepository", MockStudioResourceRepository.Object);
-            p.SetField("_searchFilter", "");
-            MainViewModel.Handle(msg);
-
-            MockStudioResourceRepository.Verify(a => a.Filter(It.IsAny<Func<IExplorerItemModel, bool>>()), Times.Never());
-        }
 
         [TestMethod]
         public void DeleteResourceWithDeclineExpectsDependencyServiceCalled()
@@ -2230,29 +2198,7 @@ namespace Dev2.Core.Tests
             Assert.AreEqual(expected.Object.EnvironmentId, actual.EnvironmentID, "MainViewModel Handle DeployResourcesMessage did not publish message with the selected environment.");
         }
 
-        [TestMethod]
-        [Owner("Hagashen Naidu")]
-        [TestCategory("MainViewModel_Handle_DeleteFolderMessage")]
-        public void MainViewModel_Handle_DeleteFolderMessage_RefreshFilters()
-        {
-            //------------Setup for test--------------------------
-            CreateFullExportsAndVm();
-            bool _actionCalled = false;
-            PopupController.Setup(controller => controller.Show(It.IsAny<string>(), It.IsAny<string>(), MessageBoxButton.YesNo, MessageBoxImage.Warning, null)).Returns(MessageBoxResult.Yes);
-            //------------Execute Test---------------------------
-            var repo = MainViewModel.ExplorerViewModel.NavigationViewModel;
-            PrivateObject p = new PrivateObject(repo, new PrivateType(typeof(NavigationViewModelBase)));
-            p.SetField("_studioResourceRepository", MockStudioResourceRepository.Object);
-            p.SetField("_searchFilter", "bob");
-            MainViewModel.Handle(new DeleteFolderMessage("MyFolder", () =>
-            {
-                _actionCalled = true;
-            }));
-            //------------Assert Results-------------------------
-            Assert.IsTrue(_actionCalled);
-
-            MockStudioResourceRepository.Verify(a => a.Filter(It.IsAny<Func<IExplorerItemModel, bool>>()), Times.Once());
-        }
+      
 
         static ExecuteMessage MakeMsg(string msg)
         {
