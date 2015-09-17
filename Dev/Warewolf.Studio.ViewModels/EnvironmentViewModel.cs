@@ -57,6 +57,7 @@ namespace Warewolf.Studio.ViewModels
             CreateFolderCommand = new DelegateCommand(CreateFolder);
             Parent = null;
             ResourceType = ResourceType.ServerSource;
+            ResourcePath = "";
             ResourceName = DisplayName;
 			CanShowServerVersion = true;
 	        AreVersionsVisible = false;
@@ -270,8 +271,9 @@ namespace Warewolf.Studio.ViewModels
         }
 
         public ResourceType ResourceType { get; set; }
+	    public string ResourcePath { get; set; }
 
-        public string ResourceName { get; set; }
+	    public string ResourceName { get; set; }
 
         public bool IsExpanderVisible
         {

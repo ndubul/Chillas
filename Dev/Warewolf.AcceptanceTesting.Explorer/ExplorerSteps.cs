@@ -428,6 +428,15 @@ namespace Warewolf.AcceptanceTesting.Explorer
             explorerView.AddNewFolder(server, folder);
         }
 
+        [Given(@"I change path ""(.*)"" to ""(.*)""")]
+        [When(@"I change path ""(.*)"" to ""(.*)""")]
+        public void WhenIChangePathTo(string originalPath, string destinationPath)
+        {
+            var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
+            explorerView.Move(originalPath, destinationPath);
+        }
+
+
         [Given(@"I create the ""(.*)"" of type ""(.*)""")]
         [When(@"I create the ""(.*)"" of type ""(.*)""")]
         [Then(@"I create the ""(.*)"" of type ""(.*)""")]
@@ -440,18 +449,17 @@ namespace Warewolf.AcceptanceTesting.Explorer
         [AfterScenario("Explorer")]
         public void AfterScenario()
         {
-            var mockShellViewModel = new Mock<IShellViewModel>();
             var mockExplorerRepository = new Mock<IExplorerRepository>();
             mockExplorerRepository.Setup(repository => repository.CreateFolder(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Guid>()));
             mockExplorerRepository.Setup(repository => repository.Rename(It.IsAny<IExplorerItemViewModel>(), It.IsAny<string>())).Returns(true);
-            mockShellViewModel.Setup(model => model.LocalhostServer).Returns(new ServerForTesting(mockExplorerRepository));
             var mockEventAggregator = new Mock<IEventAggregator>();
             mockEventAggregator.Setup(aggregator => aggregator.GetEvent<ServerAddedEvent>()).Returns(new ServerAddedEvent());
+            var mockShellViewModel = ScenarioContext.Current.Get<Mock<IShellViewModel>>("mockShellViewModel");
             var explorerViewModel = new ExplorerViewModel(mockShellViewModel.Object, mockEventAggregator.Object);
             var view = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey);
             view.DataContext = explorerViewModel;
-            FeatureContext.Current.Remove(Utils.ViewModelNameKey);
-            FeatureContext.Current.Add(Utils.ViewModelNameKey, explorerViewModel);
+            ScenarioContext.Current.Remove(Utils.ViewModelNameKey);
+            ScenarioContext.Current.Add(Utils.ViewModelNameKey, explorerViewModel);
         }
 
     }

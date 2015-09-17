@@ -53,7 +53,7 @@
                 <fa:FontAwesome Icon="Trash" FontSize="15"></fa:FontAwesome>
                 <i:Interaction.Behaviors>
                     <core:HelpSetter Text="{x:Static languages:Core.DataListDeleteButtonHelp}"
-                                                         DataContext="{Binding .}" />
+                                                         DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </Button>
             <TextBlock Grid.Column="2" Text="Sort list"></TextBlock>
@@ -67,7 +67,7 @@
                 <fa:FontAwesome Icon="Sort" FontSize="15"></fa:FontAwesome>
                 <i:Interaction.Behaviors>
                     <core:HelpSetter Text="{x:Static languages:Core.DataListSortButtonHelp}"
-                                                         DataContext="{Binding .}" />
+                                                         DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </Button>
         </Grid>
@@ -126,7 +126,7 @@
                                     <i:Interaction.Behaviors>
                                         <behaviors:TextboxSelectAllOnFocusBehavior />
                                         <core:HelpSetter Text="{x:Static languages:Core.DataListVariableInputHelp}"
-                                                         DataContext="{Binding .}" />
+                                                         DataContext="{Binding}" />
                                     </i:Interaction.Behaviors>
                                 </customControls:VariableTextBox>
                             </ScrollViewer>
@@ -142,7 +142,7 @@
                                   AutomationProperties.AutomationId="UI_IsInputCheckbox_AutoID" >
                                 <i:Interaction.Behaviors>
                                     <core:HelpSetter Text="{x:Static languages:Core.DataListInputCheckBoxHelp}"
-                                                         DataContext="{Binding .}" />
+                                                         DataContext="{Binding}" />
                                 </i:Interaction.Behaviors>
                             </CheckBox>
 
@@ -157,7 +157,7 @@
                                   AutomationProperties.AutomationId="UI_IsOutputCheckbox_AutoID" >
                                 <i:Interaction.Behaviors>
                                     <core:HelpSetter Text="{x:Static languages:Core.DataListOutputCheckBoxHelp}"
-                                                         DataContext="{Binding .}" />
+                                                         DataContext="{Binding}" />
                                 </i:Interaction.Behaviors>
                             </CheckBox>
                         </Grid>

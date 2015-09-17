@@ -20,6 +20,7 @@ using System.Windows.Input;
 using System.Xml;
 using Caliburn.Micro;
 using Dev2.Common;
+using Dev2.Common.Interfaces;
 using Dev2.Data.Binary_Objects;
 using Dev2.Data.Interfaces;
 using Dev2.Data.Util;
@@ -40,7 +41,7 @@ using ServiceStack.Common.Extensions;
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.ViewModels.DataList
 {
-    public class DataListViewModel : BaseViewModel, IDataListViewModel
+    public class DataListViewModel : BaseViewModel, IDataListViewModel, IUpdatesHelp
     {
         #region Fields
 

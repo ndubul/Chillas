@@ -219,7 +219,10 @@ namespace Warewolf.Studio.ViewModels
 
         async void CheckForNewVersion(IMainViewModel mainViewModel)
         {
-            HasNewVersion = await mainViewModel.CheckForNewVersion();
+            if(mainViewModel != null)
+            {
+                HasNewVersion = await mainViewModel.CheckForNewVersion();
+            }
         }
 
         public int ButtonWidth { get; set; }

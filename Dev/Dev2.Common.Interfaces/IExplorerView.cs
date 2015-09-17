@@ -24,5 +24,7 @@ namespace Dev2.Common.Interfaces
         void Refresh();
 
         IExplorerTreeItem OpenItem(string resourceName, string folderName);
+
+        void Move(string originalPath, string destinationPath);
     }
 }

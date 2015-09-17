@@ -8,6 +8,7 @@ namespace Dev2.Common.Interfaces
     public interface IExplorerTreeItem
     {
         ResourceType ResourceType { get; set; }
+        string ResourcePath { get; set; }
         string ResourceName { get; set; } 
         bool IsExpanderVisible { get; set; }
         ICommand NewCommand { get; set; }
