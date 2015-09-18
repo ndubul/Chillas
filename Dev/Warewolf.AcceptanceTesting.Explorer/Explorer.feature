@@ -243,14 +243,6 @@ Scenario: Renaming Folder And Workflow Service on a remote server
 	Then Conflict error message is occurs
 
 @Explorer
-Scenario: Open saved Server Sources
-	Given the explorer is visible
-	And I open "Remote Connection Integration"
-	Then I should see the path "Remote Connection Integration/Server"
-	And I open "Remote Connection Integration/Server/Trav"
-	Then the "Trav" server tab is opened
-
-@Explorer
 Scenario: Move Nested Folder up tree-view Remote
 	Given the explorer is visible
 	And I connect to "Remote Connection Integration" server
@@ -274,14 +266,10 @@ Scenario: Move Nested Folder up tree-view
 @Explorer
 Scenario: Checking versions in remote connection 
   Given the explorer is visible
+  And I connect to "Remote Connection Integration" server
   When I open "Remote Connection Integration" server
   And I create the "Remote Connection Integration/Folder 1/Resource 1" of type "WorkflowService" 
-  Then I should see "67" folders
-  And I Setup  "3" Versions to be returned for "Remote Connection Integration/Folder 1/Resource 1"
   When I Show Version History for "Remote Connection Integration/Folder 1/Resource 1"
-  Then I should see "3" versions with "View" Icons in "Remote Connection Integration/Folder 1/Resource 1"
-  When I search for "Resource 1" in explorer
-  Then I should see the path "Remote Connection Integration/Folder 1/Resource 1"
   Then I should see "3" versions with "View" Icons in "Remote Connection Integration/Folder 1/Resource 1"
 
 @Explorer

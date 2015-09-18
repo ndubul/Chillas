@@ -4,7 +4,8 @@
                     xmlns:converters1="clr-namespace:Dev2.AppResources.Converters;assembly=Dev2.Studio.Core"
                     xmlns:converters2="clr-namespace:Dev2.Studio.Core.AppResources.Converters;assembly=Dev2.Studio.Core"
                     xmlns:interfaceImplementors="clr-namespace:Dev2.Studio.InterfaceImplementors;assembly=Dev2.Intellisense"
-                    xmlns:ui="clr-namespace:Dev2.UI;assembly=Dev2.Intellisense">
+                    xmlns:ui="clr-namespace:Dev2.UI;assembly=Dev2.Intellisense"
+                    xmlns:converters3="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.Studio.Core">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ActivityStyles.xaml" />
@@ -13,8 +14,8 @@
     </ResourceDictionary.MergedDictionaries>
 
     <converters:EmptyStringToBoolConverter x:Key="EmptyStringToBoolConverter" />
-    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
-    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverterInverse" TrueValue="Collapsed" FalseValue="Visible"/>
+    <converters3:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
+    <converters3:BoolToVisibilityConverter x:Key="BoolToVisibilityConverterInverse" TrueValue="Collapsed" FalseValue="Visible"/>
 
     <converters1:CollectionToVisibilityConverter x:Key="CollectionToVisibilityConverterPositive" TrueValue="Visible" FalseValue="Collapsed" />
     <converters1:CollectionToVisibilityConverter x:Key="CollectionToVisibilityConverterNegative" TrueValue="Collapsed" FalseValue="Visible" />

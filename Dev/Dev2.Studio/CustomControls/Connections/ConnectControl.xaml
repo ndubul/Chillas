@@ -5,7 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:customControls="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
     xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces;assembly=Dev2.Common.Interfaces"
     x:Name="ConnectUserControl"
+             
     mc:Ignorable="d"
     IsEnabled="{Binding IsEnabled,Mode=TwoWay}">
     <Grid>
@@ -19,7 +21,7 @@
                   Grid.Column="0"
                   x:Name="TheServerComboBox"
                   Style="{StaticResource ComboBoxStyle}"
-                  SelectedIndex="{Binding SelectedServerIndex, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedConnection}"
                   ItemsSource="{Binding Servers}"
                   SelectedValuePath="EnvironmentModel"
                   VerticalAlignment="Bottom"

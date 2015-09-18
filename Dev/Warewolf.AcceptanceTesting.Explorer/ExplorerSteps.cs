@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using Dev2;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Explorer;
+using Dev2.Common.Interfaces.Versioning;
+using Dev2.Explorer;
 using Dev2.Interfaces;
+using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -37,6 +42,7 @@ namespace Warewolf.AcceptanceTesting.Explorer
             FeatureContext.Current.Add(Utils.ViewNameKey, explorerView);
             FeatureContext.Current.Add(Utils.ViewModelNameKey, explorerViewModel);
             FeatureContext.Current.Add("mockShellViewModel", mockShellViewModel);
+            FeatureContext.Current.Add("mockExplorerRepository", mockExplorerRepository);
         }
          
         [BeforeScenario("Explorer")]
@@ -49,6 +55,7 @@ namespace Warewolf.AcceptanceTesting.Explorer
             var mainViewModelMock = new Mock<IMainViewModel>();
             ScenarioContext.Current.Add("mainViewModel",mainViewModelMock);
             ScenarioContext.Current.Add("mockShellViewModel", FeatureContext.Current.Get<Mock<IShellViewModel>>("mockShellViewModel"));
+            ScenarioContext.Current.Add("mockExplorerRepository", FeatureContext.Current.Get<Mock<IExplorerRepository>>("mockExplorerRepository"));
         }
 
         [Given(@"the explorer is visible")]
@@ -269,21 +276,20 @@ namespace Warewolf.AcceptanceTesting.Explorer
         [When(@"I Show Version History for ""(.*)""")]
         public void WhenIShowVersionHistoryFor(string path)
         {
-//            var explorerView = ScenarioContext.Current.Get<IExplorerView>("explorerView") as ExplorerView;
-//            var boot = FeatureContext.Current.Get<UnityBootstrapperForExplorerTesting>("bootstrapper");            
-//          
-//            if(explorerView != null)
-//            {
-//                // ReSharper disable MaximumChainedReferences
-//                boot.ExplorerRepository.Setup(a => a.GetVersions(It.IsAny<Guid>())).Returns(new List<IVersionInfo>
-//                {
-//                    new VersionInfo(DateTime.Now,"bob","Leon","3",Guid.Empty,Guid.Empty),
-//                    new VersionInfo(DateTime.Now,"bob","Leon","2",Guid.Empty,Guid.Empty),
-//                    new VersionInfo(DateTime.Now,"bob","Leon","1",Guid.Empty,Guid.Empty)
-//                });
-//                // ReSharper restore MaximumChainedReferences
-//                explorerView.ExplorerViewTestClass.ShowVersionHistory(path);
-//            }
+            var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey) as ExplorerView;
+            var mockRepo = ScenarioContext.Current.Get<Mock<IExplorerRepository>>("mockExplorerRepository");
+            if(explorerView != null)
+            {
+                // ReSharper disable MaximumChainedReferences
+                mockRepo.Setup(a => a.GetVersions(It.IsAny<Guid>())).Returns(new List<IVersionInfo>
+                {
+                    new VersionInfo(DateTime.Now,"bob","Leon","3",Guid.Empty,Guid.Empty),
+                    new VersionInfo(DateTime.Now,"bob","Leon","2",Guid.Empty,Guid.Empty),
+                    new VersionInfo(DateTime.Now,"bob","Leon","1",Guid.Empty,Guid.Empty)
+                });
+                // ReSharper restore MaximumChainedReferences
+                explorerView.ExplorerViewTestClass.ShowVersionHistory(path);
+            }
         }
 
         [Then(@"I should see ""(.*)"" versions with ""(.*)"" Icons in ""(.*)""")]
@@ -293,7 +299,7 @@ namespace Warewolf.AcceptanceTesting.Explorer
             if(explorerView != null)
             {
                 var node = explorerView.ExplorerViewTestClass.VerifyItemExists(path);
-                Assert.AreEqual(node.Nodes.Count,count);
+                Assert.AreEqual(count,node.Nodes.Count);
                 foreach(var node1 in node.Nodes)
                 {
                     var itm = node1.Data as ExplorerItemViewModel;
@@ -309,51 +315,50 @@ namespace Warewolf.AcceptanceTesting.Explorer
         [When(@"I Make ""(.*)"" the current version of ""(.*)""")]
         public void WhenIMakeTheCurrentVersionOf(string versionPath, string resourcePath)
         {
-//             var boot = FeatureContext.Current.Get<UnityBootstrapperForExplorerTesting>("bootstrapper");
-//            // ReSharper disable once MaximumChainedReferences
-//             boot.ExplorerRepository.Setup(a => a.Rollback(Guid.Empty, "1")).Returns(new RollbackResult
-//             {
-//                    DisplayName = "Resource 1" , 
-//                     VersionHistory = new List<IExplorerItem>()
-//                 }
-//             );
-//            // ReSharper disable once MaximumChainedReferences
-//             boot.ExplorerRepository.Setup(a => a.GetVersions(It.IsAny<Guid>())).Returns(new List<IVersionInfo>
-//             {
-//                     new VersionInfo(DateTime.Now,"bob","Leon","4",Guid.Empty,Guid.Empty),
-//                    new VersionInfo(DateTime.Now,"bob","Leon","3",Guid.Empty,Guid.Empty),
-//                    new VersionInfo(DateTime.Now,"bob","Leon","2",Guid.Empty,Guid.Empty),
-//                    new VersionInfo(DateTime.Now,"bob","Leon","1",Guid.Empty,Guid.Empty)
-//                });
-//            var explorerView = ScenarioContext.Current.Get<IExplorerView>("explorerView") as ExplorerView;
-//            if(explorerView != null)
-//            {
-//                var tester = explorerView.ExplorerViewTestClass;
-//                tester.PerformVersionRollback(versionPath);
-//            }
+            var mockRepo = ScenarioContext.Current.Get<Mock<IExplorerRepository>>("mockExplorerRepository");
+            // ReSharper disable once MaximumChainedReferences
+            mockRepo.Setup(a => a.Rollback(Guid.Empty, "1")).Returns(new RollbackResult
+             {
+                    DisplayName = "Resource 1" , 
+                     VersionHistory = new List<IExplorerItem>()
+                 }
+             );
+            // ReSharper disable once MaximumChainedReferences
+            mockRepo.Setup(a => a.GetVersions(It.IsAny<Guid>())).Returns(new List<IVersionInfo>
+             {
+                     new VersionInfo(DateTime.Now,"bob","Leon","4",Guid.Empty,Guid.Empty),
+                    new VersionInfo(DateTime.Now,"bob","Leon","3",Guid.Empty,Guid.Empty),
+                    new VersionInfo(DateTime.Now,"bob","Leon","2",Guid.Empty,Guid.Empty),
+                    new VersionInfo(DateTime.Now,"bob","Leon","1",Guid.Empty,Guid.Empty)
+                });
+            var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey) as ExplorerView;
+            if(explorerView != null)
+            {
+                var tester = explorerView.ExplorerViewTestClass;
+                tester.PerformVersionRollback(versionPath);
+            }
         }
 
         [When(@"I Delete Version ""(.*)""")]
         public void WhenIDeleteVersion(string versionPath)
         {
-//            var boot = FeatureContext.Current.Get<UnityBootstrapperForExplorerTesting>("bootstrapper");
-//            boot.ExplorerRepository.Setup(a => a.Delete(It.IsAny<IExplorerItemViewModel>()));
-//            // ReSharper disable once MaximumChainedReferences
-//            boot.PopupController.Setup(a => a.Show(It.IsAny<IPopupMessage>())).Returns(MessageBoxResult.OK);
-//            // ReSharper disable once MaximumChainedReferences
-//            boot.ExplorerRepository.Setup(a => a.GetVersions(It.IsAny<Guid>())).Returns(new List<IVersionInfo>
-//             {
-//                    new VersionInfo(DateTime.Now,"bob","Leon","3",Guid.Empty,Guid.Empty),
-//                    new VersionInfo(DateTime.Now,"bob","Leon","2",Guid.Empty,Guid.Empty),
-//                    new VersionInfo(DateTime.Now,"bob","Leon","1",Guid.Empty,Guid.Empty)
-//              });
-//
-//            var explorerView = ScenarioContext.Current.Get<IExplorerView>("explorerView") as ExplorerView;
-//            if (explorerView != null)
-//            {
-//                var tester = explorerView.ExplorerViewTestClass;
-//                tester.PerformVersionDelete(versionPath);
-//            }    
+            var mockRepo = ScenarioContext.Current.Get<Mock<IExplorerRepository>>("mockExplorerRepository");
+            mockRepo.Setup(a => a.Delete(It.IsAny<IExplorerItemViewModel>()));
+            // ReSharper disable once MaximumChainedReferences
+            // ReSharper disable once MaximumChainedReferences
+            mockRepo.Setup(a => a.GetVersions(It.IsAny<Guid>())).Returns(new List<IVersionInfo>
+             {
+                    new VersionInfo(DateTime.Now,"bob","Leon","3",Guid.Empty,Guid.Empty),
+                    new VersionInfo(DateTime.Now,"bob","Leon","2",Guid.Empty,Guid.Empty),
+                    new VersionInfo(DateTime.Now,"bob","Leon","1",Guid.Empty,Guid.Empty)
+              });
+
+            var explorerView = ScenarioContext.Current.Get<IExplorerView>("explorerView") as ExplorerView;
+            if (explorerView != null)
+            {
+                var tester = explorerView.ExplorerViewTestClass;
+                tester.PerformVersionDelete(versionPath);
+            }    
         }
 
         [Then(@"I Setup  ""(.*)"" Versions to be returned for ""(.*)""")]

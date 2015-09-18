@@ -17,7 +17,7 @@ namespace Dev2.Common.Interfaces
 
         void EditResource(IEmailServiceSource selectedSource, IWorkSurfaceKey key = null);
 
-        void NewResource(string resourceType);
+        void NewResource(string resourceType,string resourcePath);
 
         string OpenPasteWindow(string current);
 
@@ -26,5 +26,7 @@ namespace Dev2.Common.Interfaces
         void OpenResource(Guid resourceId, IServer server);
 
         void ShowPopup(IPopupMessage getDuplicateMessage);
+
+        void SetActiveEnvironment(Guid environmentID);
     }
 }

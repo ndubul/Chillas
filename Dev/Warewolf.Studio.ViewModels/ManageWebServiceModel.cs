@@ -76,7 +76,7 @@ namespace Warewolf.Studio.ViewModels
 
         public void CreateNewSource()
         {
-            _shell.NewResource(ResourceType.WebSource.ToString());
+            _shell.NewResource(ResourceType.WebSource.ToString(),"");
         }
 
         public void EditSource(IWebServiceSource selectedSource)

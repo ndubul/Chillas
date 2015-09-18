@@ -31,7 +31,8 @@ namespace Warewolf.Studio.ServerProxyLayer
             var workSpaceId = Guid.NewGuid();
             var controller = CommunicationControllerFactory.CreateController("GetVersions");
             controller.AddPayloadArgument("resourceId", resourceId.ToString());
-            return controller.ExecuteCommand<IList<IExplorerItem>>(_connection, workSpaceId);
+            var items = controller.ExecuteCommand<IList<IExplorerItem>>(_connection, workSpaceId);
+            return items;
         }
 
         /// <summary>

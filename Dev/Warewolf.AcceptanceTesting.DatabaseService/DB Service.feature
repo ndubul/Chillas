@@ -223,7 +223,41 @@ Scenario: Ensure recordset values can be saved to a variable
    
 
 
-
+#Scenario:  Mixing scalars and recordset input and outputs
+#	Given I click "New DataBase Service Connector"
+#	Then "New DB Connector" tab is opened
+#	And Data Source is focused
+#	And "1 Data Source" is "Enabled"
+#	And "2 Select Action" is "Disabled"
+#	And "3 Test Connector and Calculate Outputs" is "Disabled" 
+#	And "4 Edit Default and Mapping Names" is "Disabled" 
+#	And "Save" is "Disabled"
+#	When I select "GreenPoint" as data source
+#	Then "2 Select Action" is "Enabled"
+#	When I select "dbo.Pr_CitiesGetByCountry" as the action
+#	Then "3 Test Connector and Calculate Outputs" is "Enabled" 
+#	And "Test" is "Enabled"
+#	And inputs are
+#	| CountryName  | Prefix |
+#	| South Africa | Sa     |
+#	And "4 Edit Default and Mapping Names" is "Disabled" 
+#	When I test the action
+#	Then outputs are
+#	| Record Name                  | CityID | City      |
+#	| dbo_Pr_CitiesgetByCountry(1) | 8873   | Saldanha  |
+#	| dbo_Pr_CitiesgetByCountry(2) | 8864   | Sasolburg |
+#	And "4 Edit Default and Mapping Names" is "Enabled" 
+#    And "Save" is "Enabled"
+#	And input mappings are
+#	| Inputs      | Default value | Required Field | Empty is Null |
+#	| CountryName |               |                |               |
+#	| Prefix      |               |                |               |  
+#	And output mappings are
+#	| Output | Output Alias | Recordset Name            |
+#	| CityID | CityID       | dbo.Pr_CitiesGetByCountry |
+#	| City   | City         | dbo.Pr_CitiesGetByCountry |
+#	When I save
+#	Then Save Dialog is opened 	
 
 
 

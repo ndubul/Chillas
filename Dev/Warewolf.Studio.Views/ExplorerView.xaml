@@ -46,11 +46,11 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-<!--            ~1~  URI LOOKUP  @1@-->
+            <!-- URI LOOKUP-->
 <!--            <StackPanel HorizontalAlignment="Stretch" -->
 <!--                        VerticalAlignment="Stretch" -->
 <!--                        Visibility="{Binding ShowConnectControl, Converter={StaticResource BoolToVisibilityConverter}}" >-->
-<!--                <views:ConnectControlView DataContext="{Binding ConnectControlViewModel}"/>-->
+<!--                <connections:ConnectControl DataContext="{Binding ConnectControlViewModel}"/>-->
 <!--            </StackPanel>-->
             <!--  SERVICE FILTER  -->
             <Grid Grid.Row="1" Margin="0,-1,0,0">
