@@ -1249,7 +1249,7 @@ namespace Dev2.Studio.ViewModels
 
         private async Task<IRequestServiceNameViewModel> GetSaveViewModel(IServer server, string resourcePath)
         {
-            var item = StudioResourceRepository.FindItem(model => model.ResourcePath.Equals(resourcePath,StringComparison.OrdinalIgnoreCase));
+            var item = server.ExplorerRepository.FindItem(model => model.ResourcePath.Equals(resourcePath, StringComparison.OrdinalIgnoreCase));
             return await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server, this), new RequestServiceNameView(), item.ResourceId);
         }
 

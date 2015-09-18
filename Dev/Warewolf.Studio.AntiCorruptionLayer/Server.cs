@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Explorer;
@@ -100,8 +99,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         public async Task<IExplorerItem> LoadExplorer()
         {
-            var result = await ProxyLayer.QueryManagerProxy.Load();
-            ExplorerItems = result;
+            var result = await ProxyLayer.LoadExplorer();
             return result;
         }
 
@@ -157,7 +155,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         public event ItemAddedEvent ItemAddedEvent;
 
         public IStudioUpdateManager UpdateRepository { get; private set; }
-        public IExplorerItem ExplorerItems { get; set; }
+        
         public StudioServerProxy ProxyLayer
         {
             get
