@@ -269,6 +269,7 @@ Scenario: Checking versions in remote connection
   And I connect to "Remote Connection Integration" server
   When I open "Remote Connection Integration" server
   And I create the "Remote Connection Integration/Folder 1/Resource 1" of type "WorkflowService" 
+  And I Setup  "3" Versions to be returned for "Remote Connection Integration/Folder 1/Resource 1"
   When I Show Version History for "Remote Connection Integration/Folder 1/Resource 1"
   Then I should see "3" versions with "View" Icons in "Remote Connection Integration/Folder 1/Resource 1"
 
