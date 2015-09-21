@@ -62,7 +62,7 @@
         <Border x:Uid="Border_1" 
                 Grid.RowSpan="2" 
                 BorderThickness="1"
-                BorderBrush="{DynamicResource WorkflowViewElementBorderBrush}" CornerRadius="4"/>
+                BorderBrush="{DynamicResource WorkflowViewElementBorderBrush}" CornerRadius="12"/>
         <Rectangle x:Uid="Rectangle_1" Grid.RowSpan="2">
             <FrameworkElement.Style>
                 <Style x:Uid="Style_1">

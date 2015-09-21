@@ -7,6 +7,8 @@
                        xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
                        xmlns:core="clr-namespace:Dev2.Activities.Designers2.Core"
                        xmlns:local="clr-namespace:Dev2.Activities.Designers2.Calculate"
+                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                       xmlns:behaviors="clr-namespace:Dev2.Studio.AppResources.Behaviors;assembly=Dev2.CustomControls"
                        mc:Ignorable="d"
                        d:DataContext="{d:DesignInstance local:CalculateDesignerViewModel}"
                        Style="{DynamicResource ContentViewStyle}">
@@ -16,14 +18,230 @@
     </sap:ActivityDesigner.Icon>
 
     <sap:ActivityDesigner.Resources>
-        <local:Small x:Key="Small"
-                     AutomationProperties.AutomationId="SmallViewContent" />
+        <local:Small x:Key="Small" AutomationProperties.AutomationId="SmallViewContent" />
 
-        <Style x:Key="ContentViewStyle"
-               BasedOn="{StaticResource ActivityDesignerStyle}"
-               TargetType="{x:Type sap:ActivityDesigner}">
-            <Setter Property="Content"
-                    Value="{DynamicResource Small}" />
+        <Style x:Key="WorkingActivityDesignerStyle" TargetType="{x:Type sap:ActivityDesigner}">
+            <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+            <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+            <Setter Property="UIElement.Focusable" Value="True" />
+            <Setter Property="Control.Background" Value="{DynamicResource DesignerViewBackground}" />
+            <Setter Property="Control.BorderBrush" Value="{DynamicResource WorkflowViewElementBorderBrush}" />
+            <Setter Property="FrameworkElement.MinWidth" Value="200" />
+            <Setter Property="FrameworkElement.MinHeight" Value="20" />
+            <Setter Property="Control.BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type sap:ActivityDesigner}">
+                        <Border x:Name="ShapeBorder"
+                                MinHeight="{TemplateBinding FrameworkElement.MinHeight}"
+                                MinWidth="{TemplateBinding FrameworkElement.MinWidth}"
+                                Background="{DynamicResource DesignerViewBackground}"
+                                CornerRadius="10">
+                            <Border.Style>
+                                <Style>
+                                    <Setter Property="Border.BorderBrush" Value="{Binding Path=Background,RelativeSource={RelativeSource TemplatedParent}}" />
+                                    <Setter Property="Border.BorderThickness" Value="0" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=ModelItem.IsCurrentContext,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                            <Setter Property="Border.BorderBrush" Value="{DynamicResource WorkflowViewElementCurrentContextBackground}" />
+                                            <Setter Property="AutomationProperties.AutomationId" Value="CurrentContext" />
+                                            <Setter Property="Border.BorderThickness" Value="4" />
+                                            <Setter Property="FrameworkElement.Margin" Value="-4,-4,-4,-4" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=ModelItem.IsCurrentLocation,RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                            <Setter Property="Border.BorderBrush" Value="{DynamicResource WorkflowViewElementCurrentLocationBackground}" />
+                                            <Setter Property="AutomationProperties.AutomationId" Value="CurrentLocation" />
+                                            <Setter Property="Border.BorderThickness" Value="4" />
+                                            <Setter Property="FrameworkElement.Margin" Value="-4,-4,-4,-4" />
+                                        </DataTrigger>
+
+                                        <!-- LEAVE THIS CODE UNTIL FURTHER INVESTIGATION ON ACTIVITY DESIGNER -->
+                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="Border.Effect">
+                                                <Setter.Value>
+                                                    <DropShadowEffect Direction="-75" RenderingBias="Quality" ShadowDepth="2" Color="#FFF19D5E"></DropShadowEffect>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                                            <Setter Property="Border.Effect" Value="{x:Null}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid Background="Transparent" UseLayoutRounding="True">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Border x:Name="TitleBar_C36A1CF2_4B36_4F0D_B427_9825C2E110DE"
+                                        Grid.Row="0"
+                                        BorderThickness="1"
+                                        SnapsToDevicePixels="True">
+                                    <Border.Style>
+                                        <Style>
+                                            <Setter Property="Border.BorderBrush" Value="{DynamicResource WorkflowViewElementBorderBrush}" />
+                                            <Setter Property="Border.Background" Value="White" />
+                                            <!-- HEADER CORNER RADIUS ONLY SET LEFT AND TOP -->
+                                            <Setter Property="Border.CornerRadius" Value="10,10,0,0" />
+
+                                            <!-- LEAVE THIS CODE UNTIL FURTHER INVESTIGATION ON ACTIVITY DESIGNER -->
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                    <Setter Property="Border.BorderBrush" Value="#F3700D" />
+                                                </DataTrigger>
+
+                                                <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                                                    <Setter Property="Border.BorderBrush" Value="{DynamicResource WorkflowViewElementBorderBrush}" />
+                                                </DataTrigger>
+
+                                                <DataTrigger Binding="{Binding Path=Content,RelativeSource={RelativeSource AncestorType={x:Type sap:WorkflowViewElement}}}" Value="{x:Null}">
+                                                    <Setter Property="Border.CornerRadius" Value="2" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                </Border>
+                                <!-- ACTIVITY ICON -->
+                                <Viewbox Grid.Row="0"
+                                         Margin="9,0,3,0"
+                                         Width="16"
+                                         Height="16"
+                                         IsHitTestVisible="False"
+                                         HorizontalAlignment="Left">
+                                    <Rectangle Width="16" Height="14"
+                                               Fill="{Binding Path=Icon,RelativeSource={RelativeSource AncestorType={x:Type sap:ActivityDesigner}}}" />
+                                </Viewbox>
+                                <Grid Grid.Row="0" Margin="23,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="22"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Margin="5,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" MaxWidth="{Binding Path=ActualWidth,ElementName=DisplayNameWidthSetter}">
+                                        <TextBlock Text="{Binding ModelItem.DisplayName}" 
+                                                   Visibility="{Binding IsSelected, Converter={StaticResource BoolToVisibilityConverterNegative}}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   VerticalAlignment="Center" 
+                                                   HorizontalAlignment="Left" />
+                                        <TextBox Text="{Binding ModelItem.DisplayName}" 
+                                                 Visibility="{Binding IsSelected, Converter={StaticResource BoolToVisibilityConverterPositive}}"
+                                                 VerticalAlignment="Center" 
+                                                 HorizontalContentAlignment="Left"
+                                                 Height="20"
+                                                 BorderThickness="0,0,0,0"
+                                                 AutomationProperties.Name="DisplayName"
+                                                 AutomationProperties.AutomationId="DisplayNameBox"
+                                                 Background="{x:Null}"
+                                                 BorderBrush="{x:Null}"/>
+                                    </Grid>
+
+                                    <Rectangle Name="DisplayNameWidthSetter"
+                                               Grid.Column="0"
+                                               HorizontalAlignment="Stretch"
+                                               Margin="0,0,10,0" />
+                                    <ItemsControl Grid.Column="1" 
+                                                  HorizontalAlignment="Right"
+                                                  Focusable="False"
+                                                  Padding="1"
+                                                  ItemsSource="{Binding TitleBarToggles}"
+                                                  Visibility="{Binding TitleBarTogglesVisibility}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <!-- QUICK VARIABLE INPUT BUTTON -->
+                                                <core:ActivityDesignerToggleButton Width="20"
+                                                                   Height="20"
+                                                                   Margin="0,0,7,0"
+                                                                   ToolTip="{Binding ToolTip}"
+                                                                   IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                                   Content="{Binding Image, Mode=TwoWay}"
+                                                                   Style="{StaticResource ActivityToggleButtonStyle}" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" Focusable="False" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Grid>
+
+                                <ContentPresenter x:Name="PART_ContentPresenter"
+                                                  Grid.Row="1"
+                                                  Margin="1,0,1,1"
+                                                  Content="{Binding Path=Content, RelativeSource={RelativeSource AncestorType={x:Type sap:WorkflowViewElement}}}" />
+
+                                <!-- Button Bar -->
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ItemsControl Grid.Column="1" Focusable="False"
+                                                  ItemsSource="{Binding ElementName=PART_ContentPresenter, Path=Content.LeftButtons}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" Focusable="False" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                    <ItemsControl Grid.Column="2" Focusable="False"
+                                                  ItemsSource="{Binding ElementName=PART_ContentPresenter, Path=Content.RightButtons}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" Focusable="False" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Grid>
+
+                                <Thumb Grid.Row="2"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Right"
+                                       Visibility="{Binding ThumbVisibility}"
+                                       Style="{StaticResource BottomRightResizeThumbStyle}">
+                                    <i:Interaction.Behaviors>
+                                        <behaviors:ThumbResizeBehavior TargetElement="{Binding ElementName=PART_ContentPresenter, Path=Content}" />
+                                    </i:Interaction.Behaviors>
+                                </Thumb>
+
+                                <!-- RECTANGLE TO THE CONTAINER, CHANGE THE RADIUS HERE -->
+                                <Rectangle Grid.RowSpan="3"
+                                           SnapsToDevicePixels="True"
+                                           RadiusX="10"
+                                           RadiusY="10"
+                                           Panel.ZIndex="1">
+                                    <Rectangle.Style>
+                                        <Style>
+                                            <Setter Property="Shape.Stroke" Value="{DynamicResource WorkflowViewElementBorderBrush}" />
+                                            <Setter Property="UIElement.Visibility" Value="Visible" />
+                                            <Setter Property="Shape.StrokeThickness" Value="1" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                    <Setter Property="Shape.Stroke" Value="#F3700D" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                                                    <Setter Property="Shape.Stroke" Value="{DynamicResource WorkflowViewElementBorderBrush}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Rectangle.Style>
+                                </Rectangle>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ContentViewStyle" BasedOn="{StaticResource WorkingActivityDesignerStyle}" TargetType="{x:Type sap:ActivityDesigner}">
+            <Setter Property="Content" Value="{DynamicResource Small}" />
         </Style>
     </sap:ActivityDesigner.Resources>
 

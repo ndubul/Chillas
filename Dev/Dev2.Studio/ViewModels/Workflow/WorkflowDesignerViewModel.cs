@@ -1296,14 +1296,12 @@ namespace Dev2.Studio.ViewModels.Workflow
                             BringIntoView(selectedModelItem);
                             break;
                         case ActivitySelectionType.Add:
-                            ClearSelection();
                             AddModelItemToSelection(selectedModelItem);
                             
                             BringIntoView(selectedModelItem);
                             break;
                         case ActivitySelectionType.Remove:
                             RemoveModelItemFromSelection(selectedModelItem);
-                            ClearSelection();
                             break;
                     }
                 }
@@ -1342,7 +1340,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             {
                 return;
             }
-            Selection.Subscribe(_wd.Context, SelectedItemChanged);
+            //Selection.Subscribe(_wd.Context, SelectedItemChanged);
             Selection.SelectOnly(_wd.Context, selectedModelItem);
             SelectedDebugItems.Add(selectedModelItem);
         }
@@ -1362,8 +1360,17 @@ namespace Dev2.Studio.ViewModels.Workflow
             {
                 return;
             }
-            Selection.Subscribe(_wd.Context, SelectedItemChanged);
+            //Selection.Subscribe(_wd.Context, SelectedItemChanged);
             Selection.Union(_wd.Context, selectedModelItem);
+
+            ModelService modelService = _wd.Context.Services.GetService<ModelService>();
+            IEnumerable<ModelItem> activityCollection = modelService.Find(modelService.Root, typeof(Activity));
+
+            var modelItems = activityCollection as ModelItem[] ?? activityCollection.ToArray();
+            var index = modelItems.ToList().IndexOf(selectedModelItem);
+
+            Selection.Select(_wd.Context, modelItems.ElementAt(index));
+
             SelectedDebugItems.Add(selectedModelItem);
         }
 
