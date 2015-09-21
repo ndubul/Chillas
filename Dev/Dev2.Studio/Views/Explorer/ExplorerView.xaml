@@ -16,6 +16,7 @@
              xmlns:connections="clr-namespace:Dev2.CustomControls.Connections"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:core="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
+             xmlns:connections1="clr-namespace:Dev2.CustomControls.Connections;assembly=Warewolf.Studio.Views"
              AllowDrop="True"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance explorer:ExplorerViewModel}"
@@ -40,7 +41,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <connections:ConnectControl DataContext="{Binding ConnectControlViewModel}"
+        <connections1:ConnectControl DataContext="{Binding ConnectControlViewModel}"
                              Grid.ColumnSpan="2"
                              Margin="{StaticResource ControlBorderBottom}"
                              EditButtonAutomationID="UI_ExplorerEditBtn_AutoID"

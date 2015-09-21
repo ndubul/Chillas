@@ -23,7 +23,7 @@ namespace Dev2.Common.Interfaces
         IStudioUpdateManager UpdateRepository { get; }
         [JsonIgnore]
         IQueryManager QueryProxy { get; }
-        bool IsConnected();
+        bool IsConnected{get;}
         void ReloadTools();
         void Disconnect();
         void Edit();
