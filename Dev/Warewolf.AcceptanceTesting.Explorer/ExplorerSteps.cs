@@ -90,8 +90,9 @@ namespace Warewolf.AcceptanceTesting.Explorer
             explorerRepository.Setup(repository => repository.Rename(It.IsAny<IExplorerItemViewModel>(), It.IsAny<string>())).Returns(true);
             var server = new ServerForTesting(explorerRepository);
             server.ResourceName = serverName;
-            explorerViewModel.ConnectControlViewModel.Connect(server);            
-
+            explorerViewModel.ConnectControlViewModel.Connect(server);       
+            ScenarioContext.Current.Add("mockRemoteExplorerRepository",explorerRepository);
+            
         }
 
         [Given(@"I open ""(.*)"" server")]
@@ -277,17 +278,8 @@ namespace Warewolf.AcceptanceTesting.Explorer
         public void WhenIShowVersionHistoryFor(string path)
         {
             var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey) as ExplorerView;
-            var mockRepo = ScenarioContext.Current.Get<Mock<IExplorerRepository>>("mockExplorerRepository");
             if(explorerView != null)
             {
-                // ReSharper disable MaximumChainedReferences
-                mockRepo.Setup(a => a.GetVersions(It.IsAny<Guid>())).Returns(new List<IVersionInfo>
-                {
-                    new VersionInfo(DateTime.Now,"bob","Leon","3",Guid.Empty,Guid.Empty),
-                    new VersionInfo(DateTime.Now,"bob","Leon","2",Guid.Empty,Guid.Empty),
-                    new VersionInfo(DateTime.Now,"bob","Leon","1",Guid.Empty,Guid.Empty)
-                });
-                // ReSharper restore MaximumChainedReferences
                 explorerView.ExplorerViewTestClass.ShowVersionHistory(path);
             }
         }
@@ -316,6 +308,10 @@ namespace Warewolf.AcceptanceTesting.Explorer
         public void WhenIMakeTheCurrentVersionOf(string versionPath, string resourcePath)
         {
             var mockRepo = ScenarioContext.Current.Get<Mock<IExplorerRepository>>("mockExplorerRepository");
+            if (versionPath.Contains("Remote Connection Integration"))
+            {
+                mockRepo = ScenarioContext.Current.Get<Mock<IExplorerRepository>>("mockRemoteExplorerRepository");
+            }
             // ReSharper disable once MaximumChainedReferences
             mockRepo.Setup(a => a.Rollback(Guid.Empty, "1")).Returns(new RollbackResult
              {
@@ -343,6 +339,10 @@ namespace Warewolf.AcceptanceTesting.Explorer
         public void WhenIDeleteVersion(string versionPath)
         {
             var mockRepo = ScenarioContext.Current.Get<Mock<IExplorerRepository>>("mockExplorerRepository");
+            if (versionPath.Contains("Remote Connection Integration"))
+            {
+                mockRepo = ScenarioContext.Current.Get<Mock<IExplorerRepository>>("mockRemoteExplorerRepository");
+            }
             mockRepo.Setup(a => a.Delete(It.IsAny<IExplorerItemViewModel>()));
             // ReSharper disable once MaximumChainedReferences
             // ReSharper disable once MaximumChainedReferences
@@ -353,7 +353,7 @@ namespace Warewolf.AcceptanceTesting.Explorer
                     new VersionInfo(DateTime.Now,"bob","Leon","1",Guid.Empty,Guid.Empty)
               });
 
-            var explorerView = ScenarioContext.Current.Get<IExplorerView>("explorerView") as ExplorerView;
+            var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey) as ExplorerView;
             if (explorerView != null)
             {
                 var tester = explorerView.ExplorerViewTestClass;
@@ -361,13 +361,31 @@ namespace Warewolf.AcceptanceTesting.Explorer
             }    
         }
 
+        [Given(@"I Setup  ""(.*)"" Versions to be returned for ""(.*)""")]
+        [When(@"I Setup  ""(.*)"" Versions to be returned for ""(.*)""")]
         [Then(@"I Setup  ""(.*)"" Versions to be returned for ""(.*)""")]
         public void ThenISetupVersionsToBeReturnedFor(int count, string path)
         {
             var explorerView = ScenarioContext.Current.Get<IExplorerView>(Utils.ViewNameKey) as ExplorerView;
             // ReSharper disable once PossibleNullReferenceException
-            var tester = explorerView.ExplorerViewTestClass;
-            tester.CreateChildNodes(count, path);
+            
+            var mockRepo = ScenarioContext.Current.Get<Mock<IExplorerRepository>>("mockExplorerRepository");
+            if (path.Contains("Remote Connection Integration"))
+            {
+                mockRepo = ScenarioContext.Current.Get<Mock<IExplorerRepository>>("mockRemoteExplorerRepository");
+            }
+            if (explorerView != null)
+            {
+                var tester = explorerView.ExplorerViewTestClass;
+                tester.CreateChildNodes(count, path);
+                // ReSharper disable MaximumChainedReferences
+                mockRepo.Setup(a => a.GetVersions(It.IsAny<Guid>())).Returns(new List<IVersionInfo>
+                {
+                    new VersionInfo(DateTime.Now,"bob","Leon","3",Guid.Empty,Guid.Empty),
+                    new VersionInfo(DateTime.Now,"bob","Leon","2",Guid.Empty,Guid.Empty),
+                    new VersionInfo(DateTime.Now,"bob","Leon","1",Guid.Empty,Guid.Empty)
+                });                
+            }
             ScenarioContext.Current.Add("versions", count);
         }
 
