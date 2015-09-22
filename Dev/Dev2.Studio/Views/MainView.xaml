@@ -414,15 +414,13 @@
                    Height="15"
                    Margin="0,-6,0,0"
                    VerticalAlignment="Top"
-                   Fill="#00000000"
-                   IsHitTestVisible="True"
+                   Fill="Transparent"
                    MouseEnter="ShowFullScreenPanel_OnMouseEnter" />
         <Rectangle x:Name="HideFullScreenPanel"
                    Height="20"
                    Margin="0,37,0,0"
                    VerticalAlignment="Top"
-                   Fill="#00000000"
-                   IsHitTestVisible="True"
+                   Fill="Transparent"
                    MouseEnter="HideFullScreenPanel_OnMouseEnter" />
     </Grid>
 </Window>
