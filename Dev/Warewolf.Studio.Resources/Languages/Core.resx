@@ -646,6 +646,9 @@ You need Administrator permission.</value>
   <data name="MenuWebServiceToolTip" xml:space="preserve">
     <value>Create a new web service</value>
   </data>
+  <data name="ServerSourceNewHeaderLabel" xml:space="preserve">
+    <value>New Server Source</value>
+  </data>
   <data name="ServerSourceDialogAddressPortTip" xml:space="preserve">
     <value>Enter the port on the server</value>
   </data>

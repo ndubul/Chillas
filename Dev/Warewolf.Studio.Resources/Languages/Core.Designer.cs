@@ -4528,6 +4528,15 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Server Source.
+        /// </summary>
+        public static string ServerSourceNewHeaderLabel {
+            get {
+                return ResourceManager.GetString("ServerSourceNewHeaderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server is not connected.
         /// </summary>
         public static string ServerSourceNotConnected {

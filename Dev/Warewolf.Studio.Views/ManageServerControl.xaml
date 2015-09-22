@@ -56,6 +56,7 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <ComboBox Width="75" 
+                          x:Name="ProtocolItems"
                           ItemsSource="{Binding Path=Protocols}" 
                           IsEditable="False" 
                           Margin="{StaticResource ControlBorderRight}"
@@ -72,6 +73,7 @@
                     </i:Interaction.Behaviors>
                 </ComboBox>
                 <TextBox Grid.Column="1" 
+                         x:Name="AddressTextBox"
                          Text="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}" 
                          ToolTip="{Binding Path=AddressToolTip}" >
                     <i:Interaction.Behaviors>
@@ -84,8 +86,9 @@
                            Text=":"></TextBlock>
                 <TextBox Grid.Column="3" 
                          MinWidth="35"
+                         x:Name="PortTextBox"
                          Text="{Binding SelectedPort, UpdateSourceTrigger=PropertyChanged}" 
-                         wpfTextBoxAutoComplete:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding Ports}" 
+                         
                          ToolTip="{Binding Path=PortToolTip}">
                     <i:Interaction.Behaviors>
                         <core:HelpSetter Text="{x:Static languages:Core.ServerSelectPortHelp}"
@@ -114,6 +117,7 @@
                 </Grid.ColumnDefinitions>
                 <RadioButton ToolTip="{Binding Path=WindowsAuthenticationToolTip}" 
                              Padding="0,0,5,0" 
+                             x:Name="WindowsRadioButton" 
                              VerticalAlignment="Center" 
                              HorizontalAlignment="Left" 
                              Margin="{StaticResource ControlBorderRight}"
@@ -125,6 +129,7 @@
                     </i:Interaction.Behaviors>
                 </RadioButton>
                 <RadioButton Grid.Column="1" 
+                             x:Name="UserRadioButton" 
                              ToolTip="{Binding Path=UserAuthenticationToolTip}" 
                              Padding="0,0,5,0" 
                              VerticalAlignment="Center" 
@@ -138,6 +143,7 @@
                     </i:Interaction.Behaviors>
                 </RadioButton>
                 <RadioButton Grid.Column="2" 
+                             x:Name="PublicRadioButton" 
                              ToolTip="{Binding Path=PublicToolTip}" 
                              Padding="0,0,5,0" 
                              VerticalAlignment="Center" 
@@ -166,6 +172,7 @@
             <TextBlock Text="{Binding UserNameLabel}" ></TextBlock>
             <TextBox Grid.Row="0" 
                      Grid.Column="1" 
+                     x:Name="UsernameTextBox"
                      Text="{Binding Path=UserName}" 
                      ToolTip="{Binding Path=UserNameToolTip}" >
                 <i:Interaction.Behaviors>
@@ -224,6 +231,7 @@
                                        Visibility="{Binding Path=Testing,Converter={StaticResource BoolToVisibilityConverter}}" />
             <Button ToolTip="{Binding Path=TestToolTip}" 
                     HorizontalAlignment="Right" 
+                    x:Name="TestConnectionButton" 
                     Width="60" 
                     Height="30" 
                     Margin="{StaticResource ControlBorderRight}"
