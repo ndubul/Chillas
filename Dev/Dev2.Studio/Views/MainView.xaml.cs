@@ -43,6 +43,8 @@ namespace Dev2.Studio.Views
             InitializeComponent();
             _isSuperMaximising = false;
             _isLocked = true;
+            HideFullScreenPanel.IsHitTestVisible = false;
+            ShowFullScreenPanel.IsHitTestVisible = false;
             Loaded += OnLoaded;
             KeyDown += Shell_KeyDown;
             SourceInitialized += WinSourceInitialized;
@@ -199,10 +201,14 @@ namespace Dev2.Studio.Views
             {
                 if (_isSuperMaximising)
                 {
+                    HideFullScreenPanel.IsHitTestVisible = false;
+                    ShowFullScreenPanel.IsHitTestVisible = false;
                     ExitSuperMaximisedMode();
                 }
                 else
                 {
+                    HideFullScreenPanel.IsHitTestVisible = true;
+                    ShowFullScreenPanel.IsHitTestVisible = true;
                     EnterSuperMaximisedMode();
                 }
             }

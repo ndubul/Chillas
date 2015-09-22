@@ -21,10 +21,9 @@
                             OverridesDefaultStyle="False" 
                             MaxWidth="{Binding ElementName=ScrollViewer, Path=ActualWidth}" 
                             VerticalAlignment="Top" HorizontalAlignment="Center">
-                    <TextBlock Margin="0,15,0,0"
+                    <TextBlock Margin="0,5,0,0"
                                TextWrapping="Wrap"
                                VerticalAlignment="Top"
-                               Padding="0,0,15,0"
                                MaxWidth="{Binding ElementName=ScrollViewer, Path=ActualWidth}"
                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                ScrollViewer.VerticalScrollBarVisibility="Auto"
