@@ -132,6 +132,7 @@
     <Compile Include="ManageDbServiceModel.cs" />
     <Compile Include="ManageEmailSourceModel.cs" />
     <Compile Include="ManageEmailSourceViewModel.cs" />
+    <Compile Include="ManageNewServerSourceModel.cs" />
     <Compile Include="ManageNewServerViewModel.cs" />
     <Compile Include="ManagePluginServiceModel.cs" />
     <Compile Include="ManagePluginServiceViewModel.cs" />

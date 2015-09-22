@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.SaveDialog;
-using Dev2.ConnectionHelpers;
+using Dev2.Common.Interfaces.Threading;
 using Dev2.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -25,47 +28,84 @@ namespace Warewolf.Studio.ViewModels
 
         #region Implementation of IInnerDialogueTemplate
 
-        readonly IStudioUpdateManager _updateManager;
-        readonly IRequestServiceNameViewModel _requestServiceNameViewModel;
-        readonly string _connectedServer;
+        public IAsyncWorker AsyncWorker { get; set; }
+        readonly IManageServerSourceModel _updateManager;
+        CancellationTokenSource _token;
 
+        string _resourceName;
+        readonly string _warewolfserverName;
         string _headerText;
         IServerSource _serverSource;
         string _protocol;
         string _selectedPort;
         Guid _id;
-        // ReSharper disable TooManyDependencies
-        public ManageNewServerViewModel(IServerSource newServerSource,
-            IStudioUpdateManager updateManager, IRequestServiceNameViewModel requestServiceNameViewModel,
-            string connectedServer, Guid originationSource):base(ResourceType.ServerSource)
-        // ReSharper restore TooManyDependencies
+        
+        public ManageNewServerViewModel(IManageServerSourceModel updateManager, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
+            :base(ResourceType.ServerSource)
         {
-            //VerifyArgument.AreNotNull(new Dictionary<string, object> { { "newServerSource", newServerSource }, { "updateManager", updateManager }, { "requestServiceNameViewModel", requestServiceNameViewModel } ,{"connectedServer",connectedServer}});
+            VerifyArgument.IsNotNull("executor", executor);
+            VerifyArgument.IsNotNull("asyncWorker", asyncWorker);
+            VerifyArgument.IsNotNull("updateManager", updateManager);
+            VerifyArgument.IsNotNull("aggregator", aggregator);
+
             Protocols = new[] { "https", "http" };
             Protocol = Protocols[0];
          
             Ports = new ObservableCollection<string> { "3143", "3142" };
             SelectedPort = Ports[0];
             _updateManager = updateManager;
-            _requestServiceNameViewModel = requestServiceNameViewModel;
-            _connectedServer = connectedServer;
-            OriginationSource = originationSource;
 
-            ServerSource = newServerSource;
-            Header = String.IsNullOrEmpty(newServerSource.Name) ? "New Server Source" : SetToEdit(newServerSource);
-            HeaderText = String.IsNullOrEmpty(newServerSource.Name) ? "New Server Source" : SetToEdit(newServerSource);
+            _warewolfserverName = updateManager.ServerName;
+            Header = Resources.Languages.Core.ServerSourceNewHeaderLabel;
+            HeaderText = Resources.Languages.Core.ServerSourceNewHeaderLabel;
             ID = Guid.NewGuid();
             IsValid = false;
-            Address = newServerSource.Address;
-            AuthenticationType = newServerSource.AuthenticationType;
-            UserName = newServerSource.UserName;
-            Password = newServerSource.Password;
             TestPassed = false;
 
+            TestCommand = new DelegateCommand(TestConnection, CanTest);
+            OkCommand = new DelegateCommand(SaveConnection, CanSave);
+            CancelTestCommand = new DelegateCommand(CancelTest, CanCancelTest);
+        }
+        public ManageNewServerViewModel(IManageServerSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
+            : this(updateManager, aggregator, asyncWorker,executor)
+        {
+            VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
+            RequestServiceNameViewModel = requestServiceNameViewModel;
 
-            TestCommand = new DelegateCommand(Test);
-            OkCommand = new DelegateCommand(Save);
-            CancelCommand = new DelegateCommand(() => CloseAction.Invoke());
+        }
+        public ManageNewServerViewModel(IManageServerSourceModel updateManager, IEventAggregator aggregator, IServerSource serverSource, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
+            : this(updateManager, aggregator, asyncWorker, executor)
+        {
+            VerifyArgument.IsNotNull("serverSource", serverSource);
+            _serverSource = serverSource;
+            _warewolfserverName = updateManager.ServerName;
+            SetupHeaderTextFromExisting();
+            FromSource(serverSource);
+        }
+
+        void SetupHeaderTextFromExisting()
+        {
+            var serverName = _warewolfserverName;
+            if (serverName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
+            {
+                HeaderText = (_serverSource == null ? ResourceName : _serverSource.Name).Trim();
+                Header = (_serverSource == null ? ResourceName : _serverSource.Name).Trim();
+            }
+            else
+            {
+                HeaderText = (_serverSource == null ? ResourceName : _serverSource.Name).Trim();
+                Header = (_serverSource == null ? ResourceName : _serverSource.Name).Trim();
+            }
+        }
+
+        void FromSource(IServerSource serverSource)
+        {
+            ResourceName = serverSource.Name;
+            AuthenticationType = serverSource.AuthenticationType;
+            UserName = serverSource.UserName;
+            Address = serverSource.Address;
+            Password = serverSource.Password;
+            Header = ResourceName;
         }
 
         public override bool CanSave()
@@ -73,33 +113,69 @@ namespace Warewolf.Studio.ViewModels
             return TestPassed;
         }
 
-        public override void Save()
+        //public override void Save()
+        //{
+        //    var res = MessageBoxResult.OK;
+        //    if (String.IsNullOrEmpty(ServerSource.Name))
+        //        res = RequestServiceNameViewModel.ShowSaveDialog();
+        //    if (res == MessageBoxResult.OK)
+        //    {
+        //        try
+        //        {
+        //            var source = ToModel();
+
+        //            ServerSource = source;
+        //            ServerSource.Name = RequestServiceNameViewModel.ResourceName.Name;
+        //            ServerSource.ResourcePath = RequestServiceNameViewModel.ResourceName.Path;
+        //            _updateManager.Save(source);
+        //            HeaderText = SetToEdit(source);
+        //            if (CloseAction != null)
+        //                CloseAction.Invoke();
+        //            ConnectControlSingleton.Instance.AddServerAndConnect(ServerSource);
+        //        }
+        //        catch (Exception err)
+        //        {
+
+        //            TestMessage = err.Message;
+        //        }
+        //    }
+
+        //}
+
+        void SaveConnection()
         {
-            var res = MessageBoxResult.OK;
-            if (String.IsNullOrEmpty(ServerSource.Name))
-                res = RequestServiceNameViewModel.ShowSaveDialog();
-            if (res == MessageBoxResult.OK)
+            if (_serverSource == null)
             {
-                try
-                {
-                    var source = ToModel();
+                var res = RequestServiceNameViewModel.ShowSaveDialog();
 
-                    ServerSource = source;
-                    ServerSource.Name = RequestServiceNameViewModel.ResourceName.Name;
-                    ServerSource.ResourcePath = RequestServiceNameViewModel.ResourceName.Path;
-                    _updateManager.Save(source);
-                    HeaderText = SetToEdit(source);
-                    if (CloseAction != null)
-                        CloseAction.Invoke();
-                    ConnectControlSingleton.Instance.AddServerAndConnect(ServerSource);
-                }
-                catch (Exception err)
+                if (res == MessageBoxResult.OK)
                 {
-
-                    TestMessage = err.Message;
+                    ResourceName = RequestServiceNameViewModel.ResourceName.Name;
+                    var src = ToSource();
+                    src.ResourcePath = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
+                    Save(src);
+                    Item = src;
+                    _serverSource = src;
+                    SetupHeaderTextFromExisting();
                 }
             }
+            else
+            {
+                var src = ToSource();
+                Save(src);
+                Item = src;
+                _serverSource = src;
+                SetupHeaderTextFromExisting();
+            }
+        }
 
+        void Save(IServerSource source)
+        {
+            _updateManager.Save(source);
+        }
+        public override void Save()
+        {
+            SaveConnection();
         }
 
         public override IServerSource ToModel()
@@ -141,41 +217,73 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        string SetToEdit(IServerSource source)
+        public Action CloseAction { get; set; }
+        public bool CanTest()
         {
-            return _connectedServer.Trim() + "/" + source.ResourcePath + source.Name;
+            if (Testing)
+                return false;
+            if (String.IsNullOrEmpty(Address))
+            {
+                return false;
+            }
+            if (AuthenticationType == AuthenticationType.User)
+            {
+                return !String.IsNullOrEmpty(UserName) && !String.IsNullOrEmpty(Password);
+            }
+            return true;
         }
 
-        public Action CloseAction { get; set; }
-        void Test()
+        bool CanCancelTest()
         {
-            TestFailed = false;
-            TestPassed = false;
-            Testing = true;
-            TestMessage = _updateManager.TestConnection(new ServerSource
-            {
-                Address = Protocol +"://" + Address + ":" + SelectedPort,
-                AuthenticationType = AuthenticationType,
-                ID = ServerSource.ID == Guid.Empty ? Guid.NewGuid() : ServerSource.ID,
-                Name = String.IsNullOrEmpty(ServerSource.Name) ? "" : ServerSource.Name,
-                Password = Password,
-                ResourcePath = "" //todo: needs to come from explorer
-            });
-            Testrun = true;
-            Testing = false;
-            if (TestMessage == "")
-            {
-                TestPassed = true;
-                TestFailed = false;
-            }
-            else
-            {
-                TestPassed = false;
-                TestFailed = true;
-            }
+            return Testing;
+        }
 
-            OnPropertyChanged(() => Validate);
-            OnPropertyChanged(() => CanClickOk);
+        void CancelTest()
+        {
+            if (_token != null)
+            {
+                if (!_token.IsCancellationRequested && _token.Token.CanBeCanceled)
+                {
+                    _token.Cancel();
+                    Dispatcher.CurrentDispatcher.Invoke(() =>
+                    {
+                        Testing = false;
+                        TestFailed = true;
+                        TestPassed = false;
+                        TestMessage = "Test Cancelled";
+                    });
+                }
+            }
+        }
+
+        void TestConnection()
+        {
+            _token = new CancellationTokenSource();
+            AsyncWorker.Start(SetupProgressSpinner, () =>
+            {
+                TestMessage = "Passed";
+                TestFailed = false;
+                TestPassed = true;
+                Testing = false;
+            },
+            _token, exception =>
+            {
+                TestFailed = true;
+                TestPassed = false;
+                Testing = false;
+                TestMessage = exception != null ? exception.Message : "Failed";
+            });
+        }
+
+        void SetupProgressSpinner()
+        {
+            Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                Testing = true;
+                TestFailed = false;
+                TestPassed = false;
+            });
+            _updateManager.TestConnection(ToSource());
         }
 
         /// <summary>
@@ -236,6 +344,8 @@ namespace Warewolf.Studio.ViewModels
         /// Command for cancel
         /// </summary>
         public ICommand CancelCommand { get; set; }
+        public ICommand CancelTestCommand { get; set; }
+
         public bool CanClickOk
         {
             get
@@ -257,7 +367,6 @@ namespace Warewolf.Studio.ViewModels
                 OnPropertyChanged(() => Header);
             }
         }
-        public Guid OriginationSource { get; private set; }
 
         #endregion
 
@@ -274,36 +383,35 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                
                 _address = value;
 
                 OnPropertyChanged(() => Address);
                 OnPropertyChanged(() => Validate);
                 OnPropertyChanged(() => CanClickOk);
             }
-
         }
         /// <summary>
         ///  Windows or user or publlic
         /// </summary>
         public AuthenticationType AuthenticationType
         {
-            get
-            {
-                return _authenticationType;
-            }
+            get { return _authenticationType; }
             set
             {
-                if (value != _authenticationType)
+                if (_authenticationType != value)
                 {
                     _authenticationType = value;
                     OnPropertyChanged(() => AuthenticationType);
+                    OnPropertyChanged(() => Header);
                     OnPropertyChanged(() => IsUserNameVisible);
                     Testrun = false;
                     TestPassed = false;
+                    ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
+                    ViewModelUtils.RaiseCanExecuteChanged(OkCommand);
                 }
             }
         }
+
         /// <summary>
         /// User Name
         /// </summary>
@@ -355,7 +463,18 @@ namespace Warewolf.Studio.ViewModels
 
         #endregion
 
-
+        public string ResourceName
+        {
+            get
+            {
+                return _resourceName;
+            }
+            set
+            {
+                _resourceName = value;
+                OnPropertyChanged(ResourceName);
+            }
+        }
         public bool TestPassed
         {
             get
@@ -488,17 +607,9 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _serverSource = value;
-                if(!String.IsNullOrEmpty(value.Name))
-                HeaderText = SetToEdit(value);
             }
         }
-        public IRequestServiceNameViewModel RequestServiceNameViewModel
-        {
-            get
-            {
-                return _requestServiceNameViewModel;
-            }
-        }
+        IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
         public string Protocol
         {
             get
@@ -630,5 +741,16 @@ namespace Warewolf.Studio.ViewModels
         {
             return _headerText;
         }
+    }
+
+    public interface IManageServerSourceModel
+    {
+
+        void TestConnection(IServerSource resource);
+
+        void Save(IServerSource toDbSource);
+
+
+        string ServerName { get; set; }
     }
 }
