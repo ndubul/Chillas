@@ -130,9 +130,9 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             }
         }
         
-        public bool IsConnected()
+        public bool IsConnected
         {
-            return EnvironmentConnection.IsConnected;
+            get { return EnvironmentConnection.IsConnected; }
         }
 
         public void ReloadTools()

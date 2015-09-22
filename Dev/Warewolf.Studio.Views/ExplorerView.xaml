@@ -13,6 +13,7 @@
              xmlns:core="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
              xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
              xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces;assembly=Dev2.Common.Interfaces"
+             xmlns:connections="clr-namespace:Dev2.CustomControls.Connections"
              x:Name="ExplorerViewControl"
              d:DataContext="{d:DesignInstance Type=interfaces:IExplorerViewModel,
                                               IsDesignTimeCreatable=False}"
@@ -47,11 +48,11 @@
             </Grid.ColumnDefinitions>
 
             <!-- URI LOOKUP-->
-<!--            <StackPanel HorizontalAlignment="Stretch" -->
-<!--                        VerticalAlignment="Stretch" -->
-<!--                        Visibility="{Binding ShowConnectControl, Converter={StaticResource BoolToVisibilityConverter}}" >-->
-<!--                <connections:ConnectControl DataContext="{Binding ConnectControlViewModel}"/>-->
-<!--            </StackPanel>-->
+            <StackPanel HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Visibility="{Binding ShowConnectControl, Converter={StaticResource BoolToVisibilityConverter}}" >
+                <connections:ConnectControl DataContext="{Binding ConnectControlViewModel}"/>
+            </StackPanel>
             <!--  SERVICE FILTER  -->
             <Grid Grid.Row="1" Margin="0,-1,0,0">
                 <Grid.RowDefinitions>

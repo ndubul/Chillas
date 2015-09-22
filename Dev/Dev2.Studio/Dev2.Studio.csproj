@@ -552,9 +552,6 @@
     <Compile Include="AppResources\TextEditorCompletion\TextEditorCompletionData.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Webs\Callbacks\ConnectCallbackHandler.cs" />
-    <Compile Include="CustomControls\Connections\ConnectControl.xaml.cs">
-      <DependentUpon>ConnectControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Diagnostics\DebugOutputFilterStrategy.cs" />
     <Compile Include="Deploy\DeployStatsCalculator.cs" />
     <Compile Include="Factory\ExceptionFactory.cs" />
@@ -693,10 +690,6 @@
     <Page Include="ActivityDesigners\DsfTransformActivityDesigner.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CustomControls\Connections\ConnectControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomControls\Progress\ProgressDialog.xaml">
       <SubType>Designer</SubType>

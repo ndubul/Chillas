@@ -13,6 +13,7 @@ namespace Warewolf.Studio.ViewModels
     {
         bool _isConnected;
         bool _isConnecing;
+        IServer _selectedConnection;
 
         public ConnectControlViewModel(IServer server,IEventAggregator aggregator)
         {
@@ -25,8 +26,7 @@ namespace Warewolf.Studio.ViewModels
                 throw  new ArgumentNullException("aggregator");
             }
             Server = server;
-            Servers = Server.GetServerConnections();
-            Servers = new List<IServer> { server };
+            Servers = new List<IServer>(Server.GetServerConnections());
             SelectedConnection = server;
             aggregator.GetEvent<ServerAddedEvent>().Subscribe(ServerAdded);
             EditConnectionCommand = new DelegateCommand(Edit);
@@ -36,7 +36,7 @@ namespace Warewolf.Studio.ViewModels
                 {
                     return;
                 }
-                if (SelectedConnection.IsConnected())
+                if (SelectedConnection.IsConnected)
                 {
                     SelectedConnection.Disconnect();
                 }
@@ -51,6 +51,7 @@ namespace Warewolf.Studio.ViewModels
             });
         }
 
+
         void ServerAdded(IServer server)
         {
             Servers.Add(server);
@@ -59,7 +60,18 @@ namespace Warewolf.Studio.ViewModels
 
         public IServer Server { get; set; }
         public IList<IServer> Servers { get; set; }
-        public IServer SelectedConnection { get; set; }
+        public IServer SelectedConnection
+        {
+            get
+            {
+                return _selectedConnection;
+            }
+            set
+            {
+                _selectedConnection = value;
+                OnPropertyChanged(()=>SelectedConnection);
+            }
+        }
         public ICommand EditConnectionCommand { get; set; }
         public ICommand ToggleConnectionStateCommand { get; set; }
         public bool IsConnected

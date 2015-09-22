@@ -95,7 +95,7 @@ namespace Warewolf.Studio.Models.Toolbox
         /// <returns></returns>
         public bool IsEnabled()
         {
-            return Server.IsConnected() && _localServer.IsConnected(); 
+            return Server.IsConnected && _localServer.IsConnected; 
         }
 
         public event ServerDisconnected OnserverDisconnected;

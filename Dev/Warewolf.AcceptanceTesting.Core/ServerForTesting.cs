@@ -153,9 +153,9 @@ namespace Warewolf.AcceptanceTesting.Core
             get { throw new NotImplementedException(); }
         }
 
-        public bool IsConnected()
+        public bool IsConnected
         {
-            return true;
+            get { return true; }
         }
 
         public void ReloadTools()

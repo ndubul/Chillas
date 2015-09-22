@@ -9,6 +9,7 @@
              xmlns:customControls="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
              xmlns:ui="clr-namespace:Dev2.UI" xmlns:connections="clr-namespace:Dev2.CustomControls.Connections"
     xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:connections1="clr-namespace:Dev2.CustomControls.Connections;assembly=Warewolf.Studio.Views"
     Padding="10"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -34,7 +35,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <connections:ConnectControl  DataContext="{Binding ConnectControlViewModel}"
+        <connections1:ConnectControl  DataContext="{Binding ConnectControlViewModel}"
                            Grid.Row="0"
                            Width="400"
                            HorizontalAlignment="Left"
