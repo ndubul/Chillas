@@ -134,7 +134,15 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public void AddChild(IExplorerItemViewModel child)
+	    public int ChildrenCount
+	    {
+	        get
+	        {
+                return Children != null ? Children.Count : 0;
+	        }
+	    }
+
+	    public void AddChild(IExplorerItemViewModel child)
         {
             var tempChildren = new ObservableCollection<IExplorerItemViewModel>(_children);
             tempChildren.Insert(0,child);
@@ -439,6 +447,7 @@ namespace Warewolf.Studio.ViewModels
                 
                 _children = value;
                 OnPropertyChanged(() => Children);
+                OnPropertyChanged(() => ChildrenCount);
             }
         }
         public bool Checked { get; set; }

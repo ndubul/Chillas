@@ -14,6 +14,7 @@
              xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
              xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces;assembly=Dev2.Common.Interfaces"
              xmlns:connections="clr-namespace:Dev2.CustomControls.Connections"
+             xmlns:converters="clr-namespace:Dev2.Studio.Core.AppResources.Converters;assembly=Dev2.Studio.Core"
              x:Name="ExplorerViewControl"
              d:DataContext="{d:DesignInstance Type=interfaces:IExplorerViewModel,
                                               IsDesignTimeCreatable=False}"
@@ -26,6 +27,7 @@
         <views:WidthConverter x:Key="WidthConverter" />
         <core:ResourceTypeToIconVisibility x:Key="ResourceTypeToVisibilityConverter" />
         <views:NotConverter x:Key="NotConverter" />
+        <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
     </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding Path=CreateFolderCommand}" Key="F"  Modifiers="Control+Shift" />
@@ -664,6 +666,7 @@
                                     </ig:ContextMenuService.Manager>
 
                                     <!-- ADD TEXT TRIMMING TO DISPLAY ECLIPSE ON VIEW WIDTH SETTING -->
+                                    <StackPanel Orientation="Horizontal">
                                     <TextBlock x:Name="ResourceNameTextBlock"
                                                    MinWidth="5"
                                                    Height="20"
@@ -679,7 +682,11 @@
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
                                     </TextBlock>
-
+                                        <TextBlock Text=" (" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                        <TextBlock Text="{Binding Data.ChildrenCount, Mode=OneWay}" 
+                                            Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                        <TextBlock Text=")" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                    </StackPanel>
                                     <!-- VIEW ICON -->
                                     <Button x:Name="EditButton"
                                                 Width="22"

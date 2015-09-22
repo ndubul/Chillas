@@ -71,6 +71,13 @@ namespace Warewolf.Studio.ViewModels
 	            return _shellViewModel;
 	        }
 	    }
+	    public int ChildrenCount
+	    {
+	        get
+	        {
+	            return Children != null ? Children.Count : 0;
+	        }
+	    }
 
 	    public bool CanCreateWorkflowService
 	    {
@@ -254,6 +261,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 _children = new ObservableCollection<IExplorerItemViewModel>( value);
                 OnPropertyChanged(() => Children);
+                OnPropertyChanged(() => ChildrenCount);
             }
         }
 
