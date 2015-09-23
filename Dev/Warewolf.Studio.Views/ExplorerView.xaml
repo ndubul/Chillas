@@ -12,10 +12,9 @@
              xmlns:core="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
              xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
              xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces;assembly=Dev2.Common.Interfaces"
-    xmlns:converters="clr-namespace:Dev2.Studio.Core.AppResources.Converters;assembly=Dev2.Studio.Core"
+             xmlns:converters="clr-namespace:Dev2.Studio.Core.AppResources.Converters;assembly=Dev2.Studio.Core"
              x:Name="ExplorerViewControl"
-             d:DataContext="{d:DesignInstance Type=interfaces:IExplorerViewModel,
-                                              IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance Type=interfaces:IExplorerViewModel, IsDesignTimeCreatable=False}"
              d:DesignHeight="480"
              d:DesignWidth="640"
              mc:Ignorable="d">
@@ -48,8 +47,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- URI LOOKUP-->
-            <StackPanel HorizontalAlignment="Stretch" 
-                        VerticalAlignment="Stretch" 
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                         Visibility="{Binding ShowConnectControl, Converter={StaticResource BoolToVisibilityConverter}}" >
                 <views:ConnectControl DataContext="{Binding ConnectControlViewModel}"/>
             </StackPanel>
@@ -74,8 +72,7 @@
                                               HorizontalAlignment="Stretch"
                                               Text="{Binding SearchText, Delay=300, UpdateSourceTrigger=PropertyChanged}" >
                     <i:Interaction.Behaviors>
-                        <core:HelpSetter Text="{x:Static languages:Core.ExplorerViewFilterSearchHelp}"
-                                 DataContext="{Binding}" />
+                        <core:HelpSetter Text="{x:Static languages:Core.ExplorerViewFilterSearchHelp}" DataContext="{Binding}" />
                     </i:Interaction.Behaviors>
                 </customControls:SearchTextBox>
                 <Button Grid.Row="0"
@@ -86,62 +83,57 @@
                         VerticalAlignment="Center"
                         Margin="0,3,0,-1"
                         Command="{Binding RefreshCommand}"
-                        Visibility="{Binding Path=IsRefreshing,
-                                         Converter={StaticResource NotConverter}}">
+                        Visibility="{Binding Path=IsRefreshing, Converter={StaticResource NotConverter}}">
                     <fa:FontAwesome TextOptions.TextFormattingMode="Display" 
                                     FontSize="16" 
                                     Icon="Refresh" 
                                     VerticalAlignment="Top" 
                                     HorizontalAlignment="Center"/>
                     <i:Interaction.Behaviors>
-                        <core:HelpSetter Text="{x:Static languages:Core.ExplorerViewRefreshHelp}"
-                                 DataContext="{Binding}" />
+                        <core:HelpSetter Text="{x:Static languages:Core.ExplorerViewRefreshHelp}" DataContext="{Binding}" />
                     </i:Interaction.Behaviors>
                 </Button>
                 <views:CircularProgressBar Grid.Row="0"
                                            Grid.Column="1"
                                            Width="25"
                                            Height="25"
-                                           
                                            Padding="2.5"
-                                           Visibility="{Binding Path=IsRefreshing,
-                                                            Converter={StaticResource BoolToVisibilityConverter}}" />
+                                           Visibility="{Binding Path=IsRefreshing, Converter={StaticResource BoolToVisibilityConverter}}" />
 
             </Grid>
             <!--  EXPLORER TREE  -->
 
-            <ig:XamDataTree Margin="{StaticResource ElementBorderTop}" x:Name="ExplorerTree"
-                        Grid.Row="2"
-                        ActiveDataItem="{Binding SelectedItem, Mode=TwoWay}"
-                        IsSelectedMemberPath="IsSelected"
-                        DisplayMemberPath="DisplayName"
-                        IsDraggable="False"
-                        IsDropTarget="False"
-                        InitializeNode="ExplorerTree_OnInitializeNode"
-                        NodeExitedEditMode="ExplorerTree_OnNodeExitedEditMode"
-                        SelectedDataItems="{Binding SelectedDataItems}"
-                        ItemsSource="{Binding Environments}"
-                        NodeDragDrop="ExplorerTree_OnNodeDragDrop"                            
-                        NodeLineVisibility="Hidden" >                
+            <ig:XamDataTree Margin="{StaticResource ElementBorderTop}" 
+                            x:Name="ExplorerTree"
+                            Grid.Row="2"
+                            ActiveDataItem="{Binding SelectedItem, Mode=TwoWay}"
+                            IsSelectedMemberPath="IsSelected"
+                            DisplayMemberPath="DisplayName"
+                            IsDraggable="False"
+                            IsDropTarget="False"
+                            InitializeNode="ExplorerTree_OnInitializeNode"
+                            NodeExitedEditMode="ExplorerTree_OnNodeExitedEditMode"
+                            SelectedDataItems="{Binding SelectedDataItems}"
+                            ItemsSource="{Binding Environments}"
+                            NodeDragDrop="ExplorerTree_OnNodeDragDrop"                            
+                            NodeLineVisibility="Hidden" >
                 <ig:DragDropManager.DragSource>
-                    <ig:DragSource IsDraggable="False" DragChannels="ExplorerChannel" >
-                    </ig:DragSource>
+                    <ig:DragSource IsDraggable="False" DragChannels="ExplorerChannel" />
                 </ig:DragDropManager.DragSource>
                 <ig:XamDataTree.EditingSettings>
                     <ig:TreeEditingSettings AllowDeletion="False"
-                                        AllowEditing="True"
-                                        IsEnterKeyEditingEnabled="False"
-                                        IsF2EditingEnabled="True"
-                                        IsMouseActionEditingEnabled="None"
-                                        IsOnNodeActiveEditingEnabled="False"
-                                        />
+                                            AllowEditing="True"
+                                            IsEnterKeyEditingEnabled="False"
+                                            IsF2EditingEnabled="True"
+                                            IsMouseActionEditingEnabled="None"
+                                            IsOnNodeActiveEditingEnabled="False" />
                 </ig:XamDataTree.EditingSettings>
 
                 <ig:XamDataTree.GlobalNodeLayouts>
                     <ig:NodeLayout Key="Environments"
-                               DisplayMemberPath="DisplayName"
-                               IsExpandedMemberPath="IsExpanded"
-                               TargetTypeName="IEnvironmentViewModel">
+                                   DisplayMemberPath="DisplayName"
+                                   IsExpandedMemberPath="IsExpanded"
+                                   TargetTypeName="IEnvironmentViewModel">
                         <ig:NodeLayout.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -152,52 +144,36 @@
                                         <ColumnDefinition Width="20" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Button
-                                    Grid.Row="0"
-                                        Grid.Column="0"
-                                        Width="20"
-                                        Height="20"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="0"
-                                        Command="{Binding Path=Data.RefreshCommand}"
-                                        Padding="-4"
-                                        Style="{StaticResource ExplorerTreeButtonStyle}">
+                                    <Button Grid.Row="0"
+                                            Grid.Column="0"
+                                            Width="20"
+                                            Height="20"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            BorderThickness="0"
+                                            Command="{Binding Path=Data.RefreshCommand}"
+                                            Padding="-4"
+                                            Style="{StaticResource ExplorerTreeButtonStyle}">
                                         <Grid>
-                                            <Image Width="18"
-                                               Height="18"
-                                               Source="{StaticResource System-Logo}"
-                                               Visibility="{Binding Path=Data.IsServerIconVisible,
-                                                                    Converter={StaticResource BoolToVisibilityConverter}}" />
-                                            <Image Width="18"
-                                               Height="18"
-                                               Source="{StaticResource System-Logo-Mono}"
-                                               Visibility="{Binding Path=Data.IsServerUnavailableIconVisible,
-                                                                    Converter={StaticResource BoolToVisibilityConverter}}" />
+                                            <Image Width="18" Height="18" Source="{StaticResource System-Logo}"
+                                                   Visibility="{Binding Path=Data.IsServerIconVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                            <Image Width="18" Height="18" Source="{StaticResource System-Logo-Mono}"
+                                                   Visibility="{Binding Path=Data.IsServerUnavailableIconVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
                                         </Grid>
                                     </Button>
 
-                                    <views:CircularProgressBar Grid.Row="0"
-                                                           Grid.Column="0"
-                                                           Visibility="{Binding Path=Data.IsConnecting,
-                                                                               Converter={StaticResource BoolToVisibilityConverter}}" />
-                                    <StackPanel 
-                                        Grid.Row="0"
-                                           Grid.Column="1"
-                                        Orientation="Horizontal">
-                                    <TextBlock 
-                                           FontSize="12"
-                                           Foreground="Black"
-                                           Text="{Binding Data.DisplayName}" />
-                                    <TextBlock Text=" (" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                    <TextBlock Text="{Binding Data.ChildrenCount, Mode=OneWay}" 
-                                            Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                    <TextBlock Text=")" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                                            <i:InvokeCommandAction Command="{Binding Path=Data.Expand}"  />
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
+                                    <views:CircularProgressBar Grid.Row="0" Grid.Column="0" Visibility="{Binding Path=Data.IsConnecting, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                    
+                                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                        <TextBlock FontSize="12" Foreground="Black" Padding="0,4,0,4"  Text="{Binding Data.DisplayName}" />
+                                        <TextBlock Text=" (" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                        <TextBlock Text="{Binding Data.ChildrenCount, Mode=OneWay}" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                        <TextBlock Text=")" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                <i:InvokeCommandAction Command="{Binding Path=Data.Expand}"  />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
                                     </StackPanel>
                                     <ig:ContextMenuService.Manager>
                                         <ig:ContextMenuManager>
@@ -210,151 +186,114 @@
                                                     </ig:XamContextMenu.ItemsPanel>
 
                                                     <ig:XamMenuItem Name="NewService"
-                                                                InputGestureText="[Ctrl+W]"
-                                                                Command="{Binding Path=Data.NewCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.WorkflowService}"
-                                                                Header="New Workflow Service"
-                                                                Visibility="{Binding Path=Data.CanCreateWorkflowService,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    InputGestureText="[Ctrl+W]"
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.WorkflowService}"
+                                                                    Header="New Workflow Service"
+                                                                    Visibility="{Binding Path=Data.CanCreateWorkflowService, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>
-                                                            <Image Width="12"
-                                                               Height="12"
-                                                               Source="{StaticResource Explorer-WorkflowService}" />
+                                                            <Image Width="12" Height="12" Source="{StaticResource Explorer-WorkflowService}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuItem Name="NewServerSource"
-                                                                Command="{Binding Path=Data.NewCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.ServerSource}"
-                                                                Header="New Server Source"
-                                                                Visibility="{Binding Path=Data.CanCreateServerSource,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.ServerSource}"
+                                                                    Header="New Server Source"
+                                                                    Visibility="{Binding Path=Data.CanCreateServerSource, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>
-                                                            <Image Width="12"
-                                                               Height="12"
-                                                               Source="{StaticResource System-Logo-Create}" />
+                                                            <Image Width="12" Height="12" Source="{StaticResource System-Logo-Create}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
 
                                                     <ig:XamMenuItem Name="NewDataBaseService"
-                                                                InputGestureText="[Ctrl+Shift+D]"
-                                                                Command="{Binding Path=Data.NewCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.DbService}"
-                                                                Header="New Database Connector"
-                                                                Visibility="{Binding Path=Data.CanCreateDbService,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    InputGestureText="[Ctrl+Shift+D]"
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.DbService}"
+                                                                    Header="New Database Connector"
+                                                                    Visibility="{Binding Path=Data.CanCreateDbService, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>
-                                                            <Image Width="12"
-                                                               Height="12"
-                                                               Source="{StaticResource Explorer-DB}" />
+                                                            <Image Width="12" Height="12" Source="{StaticResource Explorer-DB}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuItem Name="NewDataBaseSource"
-                                                                Command="{Binding Path=Data.NewCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.DbSource}"
-                                                                Header="New Database Source"
-                                                                Visibility="{Binding Path=Data.CanCreateDbSource,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.DbSource}"
+                                                                    Header="New Database Source"
+                                                                    Visibility="{Binding Path=Data.CanCreateDbSource, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>
-                                                            <Image Width="12"
-                                                               Height="12"
-                                                               Source="{StaticResource Explorer-DB-Create}" />
+                                                            <Image Width="12" Height="12" Source="{StaticResource Explorer-DB-Create}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
 
                                                     <ig:XamMenuItem Name="NewWebService"
-                                                                InputGestureText="[Ctrl+Shift+W]"
-                                                                Command="{Binding Path=Data.NewCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.WebService}"
-                                                                Header="New Web Service Connector"
-                                                                Visibility="{Binding Path=Data.CanCreateWebService,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    InputGestureText="[Ctrl+Shift+W]"
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.WebService}"
+                                                                    Header="New Web Service Connector"
+                                                                    Visibility="{Binding Path=Data.CanCreateWebService, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>
-                                                            <Image Width="12"
-                                                               Height="12"
-                                                               Source="{StaticResource Explorer-WebService}" />
+                                                            <Image Width="12" Height="12" Source="{StaticResource Explorer-WebService}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuItem Name="NewWebSource"
-                                                                Command="{Binding Path=Data.NewCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.WebSource}"
-                                                                Header="New Web Service Source"
-                                                                Visibility="{Binding Path=Data.CanCreateWebSource,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.WebSource}"
+                                                                    Header="New Web Service Source"
+                                                                    Visibility="{Binding Path=Data.CanCreateWebSource, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>
-                                                            <Image Width="12"
-                                                               Height="12"
-                                                               Source="{StaticResource Explorer-WebService-Create}" />
+                                                            <Image Width="12" Height="12" Source="{StaticResource Explorer-WebService-Create}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuItem Name="NewPluginService"
-                                                                InputGestureText="[Ctrl+Shift+P]"
-                                                                Command="{Binding Path=Data.NewCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.PluginService}"
-                                                                Header="New Plugin Connector"
-                                                                Visibility="{Binding Path=Data.CanCreatePluginService,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    InputGestureText="[Ctrl+Shift+P]"
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.PluginService}"
+                                                                    Header="New Plugin Connector"
+                                                                    Visibility="{Binding Path=Data.CanCreatePluginService, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>
-                                                            <Image Width="12"
-                                                               Height="12"
-                                                               Source="{StaticResource Explorer-DLL}" />
+                                                            <Image Width="12" Height="12" Source="{StaticResource Explorer-DLL}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuItem Name="NewPluginSource"
-                                                                Command="{Binding Path=Data.NewCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.PluginSource}"
-                                                                Header="New Plugin Source"
-                                                                Visibility="{Binding Path=Data.CanCreatePluginSource,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.PluginSource}"
+                                                                    Header="New Plugin Source"
+                                                                    Visibility="{Binding Path=Data.CanCreatePluginSource, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>
-                                                            <Image Width="12"
-                                                               Height="12"
-                                                               Source="{StaticResource Explorer-DLL-Create}" />
+                                                            <Image Width="12" Height="12" Source="{StaticResource Explorer-DLL-Create}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
                                                     <ig:XamMenuItem Name="NewEmailSource"
-                                                                Command="{Binding Path=Data.NewCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.EmailSource}"
-                                                                Header="New Email Source"
-                                                                Visibility="{Binding Path=Data.CanCreateEmailSource,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.EmailSource}"
+                                                                    Header="New Email Source"
+                                                                    Visibility="{Binding Path=Data.CanCreateEmailSource, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>
-                                                            <Image Width="12"
-                                                               Height="12"
-                                                               Source="{StaticResource Utility-SendMail}" />
+                                                            <Image Width="12" Height="12" Source="{StaticResource Utility-SendMail}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
 
                                                     <ig:XamMenuItem Name="NewFolder"
-                                                                InputGestureText="[Ctrl+Shift+F]"
-                                                                Command="{Binding Path=Data.CreateFolderCommand}"
-                                                                CommandParameter="{x:Static data:ResourceType.Folder}"
-                                                                Header="New Folder"
-                                                                Visibility="{Binding Path=Data.CanCreateFolder,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}">
+                                                                    InputGestureText="[Ctrl+Shift+F]"
+                                                                    Command="{Binding Path=Data.CreateFolderCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.Folder}"
+                                                                    Header="New Folder"
+                                                                    Visibility="{Binding Path=Data.CanCreateFolder, Converter={StaticResource BoolToVisibilityConverter}}">
                                                     </ig:XamMenuItem>
-                                                    <ig:XamMenuSeparator  Visibility="{Binding Path=Data.CanDeploy,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}"/>
-                                                    
+                                                    <ig:XamMenuSeparator Visibility="{Binding Path=Data.CanDeploy, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
                                                     <ig:XamMenuItem Name="Deploy"
-																Command="{Binding Path=Data.DeployCommand}"
-                                                                CommandParameter="{Binding Path=Data}"
-                                                                Header="Deploy"
-                                                                Visibility="{Binding Path=Data.CanDeploy,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}" />
+																    Command="{Binding Path=Data.DeployCommand}"
+                                                                    CommandParameter="{Binding Path=Data}"
+                                                                    Header="Deploy"
+                                                                    Visibility="{Binding Path=Data.CanDeploy, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-                                                    <ig:XamMenuSeparator   Visibility="{Binding Path=Data.CanShowServerVersion,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}"                                                  
-                                                    />
-
+                                                    <ig:XamMenuSeparator Visibility="{Binding Path=Data.CanShowServerVersion, Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                                     <ig:XamMenuItem Name="ServerVersion"
-                                                                 Header="Server Version"
-                                                                Command="{Binding Path=Data.ShowServerVersionCommand}"
-                                                                         Visibility="{Binding Path=Data.CanShowServerVersion,
-                                                                                     Converter={StaticResource BoolToVisibilityConverter}}"
-                                                                >
-                                                    </ig:XamMenuItem>
-
+                                                                    Header="Server Version"
+                                                                    Command="{Binding Path=Data.ShowServerVersionCommand}"
+                                                                    Visibility="{Binding Path=Data.CanShowServerVersion, Converter={StaticResource BoolToVisibilityConverter}}" />
 
                                                 </ig:XamContextMenu>
                                             </ig:ContextMenuManager.ContextMenu>
@@ -367,16 +306,14 @@
                     </ig:NodeLayout>
 
                     <ig:NodeLayout Key="Children"
-                                   
                                    DisplayMemberPath="ResourceName"
                                    IsExpandedMemberPath="IsExpanded"
                                    TargetTypeName="IExplorerItemViewModel" 
-                                   Visibility="{Binding Path=Data.IsVisible,                               
-                                                    Converter={StaticResource BoolToVisibilityConverter}}">
+                                   Visibility="{Binding Path=Data.IsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                         <ig:NodeLayout.EditorTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <TextBox MaxWidth="200" Height="20"
+                                    <TextBox MaxWidth="200" Height="20" Padding="0,4,0,4" 
                                          Text="{Binding Data.ResourceName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" GotKeyboardFocus="UIElement_OnGotKeyboardFocus"></TextBox>
                                 </Grid>
                             </DataTemplate>
@@ -387,24 +324,24 @@
                                     <EventTrigger RoutedEvent="ig:XamDataTreeNodeControl.MouseEnter">
                                         <BeginStoryboard>
                                             <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="EditPermissionImageEnabled"
-                                                                           Storyboard.TargetProperty="Source">
+                                                <ObjectAnimationUsingKeyFrames Duration="0" 
+                                                                               Storyboard.TargetName="EditPermissionImageEnabled" 
+                                                                               Storyboard.TargetProperty="Source">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Permission-Enabled}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="EditPermissionImageDisabled"
-                                                                           Storyboard.TargetProperty="Source">
+                                                                               Storyboard.TargetName="EditPermissionImageDisabled"
+                                                                               Storyboard.TargetProperty="Source">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Permission-Disabled}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="ExecutePermissionImageEnabled"
-                                                                           Storyboard.TargetProperty="Source">
+                                                                               Storyboard.TargetName="ExecutePermissionImageEnabled"
+                                                                               Storyboard.TargetProperty="Source">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Run-Enabled}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="ExecutePermissionImageDisabled"
-                                                                           Storyboard.TargetProperty="Source">
+                                                                               Storyboard.TargetName="ExecutePermissionImageDisabled"
+                                                                               Storyboard.TargetProperty="Source">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Run-Disabled}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
@@ -414,30 +351,30 @@
                                         <BeginStoryboard>
                                             <Storyboard>
                                                 <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="EditPermissionImageEnabled"
-                                                                           Storyboard.TargetProperty="Source">
+                                                                               Storyboard.TargetName="EditPermissionImageEnabled"
+                                                                               Storyboard.TargetProperty="Source">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="EditPermissionImageDisabled"
-                                                                           Storyboard.TargetProperty="Source">
+                                                                               Storyboard.TargetName="EditPermissionImageDisabled"
+                                                                               Storyboard.TargetProperty="Source">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="ExecutePermissionImageEnabled"
-                                                                           Storyboard.TargetProperty="Source">
+                                                                               Storyboard.TargetName="ExecutePermissionImageEnabled"
+                                                                               Storyboard.TargetProperty="Source">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="ExecutePermissionImageDisabled"
-                                                                           Storyboard.TargetProperty="Source">
+                                                                               Storyboard.TargetName="ExecutePermissionImageDisabled"
+                                                                               Storyboard.TargetProperty="Source">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </EventTrigger>
                                 </DataTemplate.Triggers>
-                                    <!-- ADD NEW GRID LAYOUT TO ALIGN DATA TREE ITEMS -->
+                                <!-- ADD NEW GRID LAYOUT TO ALIGN DATA TREE ITEMS -->
                                 <Grid>
                                     <Grid.Width>
                                         <MultiBinding Converter="{StaticResource WidthConverter}">
@@ -671,13 +608,20 @@
                                     </ig:ContextMenuService.Manager>
 
                                     <!-- ADD TEXT TRIMMING TO DISPLAY ECLIPSE ON VIEW WIDTH SETTING -->
-                                    <StackPanel Orientation="Horizontal">
-                                    <TextBlock x:Name="ResourceNameTextBlock"
+                                    
+                                        <Grid Margin="0,0,-22,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                        
+                                        <TextBlock x:Name="ResourceNameTextBlock"
                                                    MinWidth="5"
                                                    Height="20"
                                                    Focusable="True"
                                                    TextTrimming="CharacterEllipsis"
-                                                   Margin="0,0,-22,0"
                                                    VerticalAlignment="Center"
                                                    HorizontalAlignment="Stretch"
                                                    Text="{Binding Path=Data.ResourceName}">
@@ -686,33 +630,34 @@
                                                     <i:InvokeCommandAction Command="{Binding Path=Data.Expand}" />
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
-                                    </TextBlock>
-                                        <TextBlock Text=" (" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                        <TextBlock Text="{Binding Data.ChildrenCount, Mode=OneWay}" 
-                                            Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                        <TextBlock Text=")" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                    </StackPanel>
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="1" Text="(" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding Data.ChildrenCount, Mode=OneWay}" Padding="0,4,0,4" 
+                                                   Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                            <TextBlock Grid.Column="3" Text=")" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                        </Grid>
+                                    
                                     <!-- VIEW ICON -->
                                     <Button x:Name="EditButton"
-                                                Width="22"
-                                                Grid.Column="1"
-                                                HorizontalAlignment="Right"
-                                                Margin="0,0,-22,0"
-                                                Style="{StaticResource ExplorerTreeButtonStyle}"
-                                                Visibility="{Binding Data.CanEdit,
-                                                                    Converter={StaticResource BoolToVisibilityConverter}}"
-                                                ToolTip="{Binding Path=Data.EditToolTip}">
+                                            Width="22"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            Margin="0,0,-22,0"
+                                            Command="{Binding Path=Data.OpenCommand}"
+                                            Style="{StaticResource ExplorerTreeButtonStyle}"
+                                            Visibility="{Binding Data.CanEdit, Converter={StaticResource BoolToVisibilityConverter}}"
+                                            ToolTip="{Binding Path=Data.EditToolTip}">
                                         <Button.Content>
                                             <StackPanel>
-                                        <!-- CHANGE TOP MARGIN TO ALIGN EDIT IMAGE WITH TEXTBLOCK -->
+                                                <!-- CHANGE TOP MARGIN TO ALIGN EDIT IMAGE WITH TEXTBLOCK -->
                                                 <Image x:Name="EditPermissionImageDisabled"
-                                                   Width="14"
-                                                   Height="15"
-                                                   Margin="0,-1,0,0"
-                                                   Stretch="Uniform"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   Source="{StaticResource System-Spacer}" >
+                                                       Width="14"
+                                                       Height="15"
+                                                       Margin="0,-1,0,0"
+                                                       Stretch="Uniform"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Source="{StaticResource System-Spacer}" >
                                                     <Image.Style>
                                                         <Style TargetType="Image">
                                                             <Setter Property="Visibility" Value="Visible" />
@@ -725,13 +670,13 @@
                                                     </Image.Style>
                                                 </Image>
                                                 <Image x:Name="EditPermissionImageEnabled"
-                                                   Width="14"
-                                                   Height="15"
-                                                   Margin="0,-1,0,0"
-                                                   Stretch="Uniform"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   Source="{StaticResource Explorer-Permission-Enabled}" >
+                                                       Width="14"
+                                                       Height="15"
+                                                       Margin="0,-1,0,0"
+                                                       Stretch="Uniform"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Source="{StaticResource Explorer-Permission-Enabled}" >
                                                     <Image.Style>
                                                         <Style TargetType="Image">
                                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -743,31 +688,30 @@
                                                         </Style>
                                                     </Image.Style>
                                                 </Image>
-                                                
+
                                             </StackPanel>
                                         </Button.Content>
                                     </Button>
 
                                     <!-- PLAY ICON -->
                                     <Button x:Name="ExecuteButton"
-                                                Width="22"
-                                                Grid.Column="2"
-                                                HorizontalAlignment="Right"
-                                                Margin="0,0,-22,0"
-                                                Style="{StaticResource ExplorerTreeButtonStyle}"
-                                                Visibility="{Binding Data.CanEdit,
-                                                                    Converter={StaticResource BoolToVisibilityConverter}}"
-                                                ToolTip="{Binding Path=Data.EditToolTip}">
+                                            Width="22"
+                                            Grid.Column="2"
+                                            HorizontalAlignment="Right"
+                                            Margin="0,0,-22,0"
+                                            Style="{StaticResource ExplorerTreeButtonStyle}"
+                                            Visibility="{Binding Data.CanEdit, Converter={StaticResource BoolToVisibilityConverter}}"
+                                            ToolTip="{Binding Path=Data.EditToolTip}">
                                         <Button.Content>
                                             <StackPanel>
                                                 <!-- CHANGE TOP MARGIN TO ALIGN EDIT IMAGE WITH TEXTBLOCK -->
                                                 <Image x:Name="ExecutePermissionImageDisabled"
-                                                   Height="11"
-                                                   Margin="0,-2,0,0"
-                                                   Stretch="Uniform"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   Source="{StaticResource System-Spacer}" >
+                                                       Height="11"
+                                                       Margin="0,-1,0,0"
+                                                       Stretch="Uniform"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Source="{StaticResource System-Spacer}" >
                                                     <Image.Style>
                                                         <Style TargetType="Image">
                                                             <Setter Property="Visibility" Value="Visible" />
@@ -780,12 +724,12 @@
                                                     </Image.Style>
                                                 </Image>
                                                 <Image x:Name="ExecutePermissionImageEnabled"
-                                                   Height="11"
-                                                   Margin="0,-2,0,0"
-                                                   Stretch="Uniform"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   Source="{StaticResource Explorer-Run-Enabled}" >
+                                                       Height="11"
+                                                       Margin="0,-1,0,0"
+                                                       Stretch="Uniform"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Source="{StaticResource Explorer-Run-Enabled}" >
                                                     <Image.Style>
                                                         <Style TargetType="Image">
                                                             <Setter Property="Visibility" Value="Collapsed" />
@@ -797,7 +741,6 @@
                                                         </Style>
                                                     </Image.Style>
                                                 </Image>
-
                                             </StackPanel>
                                         </Button.Content>
                                     </Button>
@@ -807,13 +750,11 @@
                         <ig:NodeLayout.ExpandedIconTemplate>
                             <DataTemplate>
                                 <Image x:Name="ResourceImage"
-                                           Width="14"
-                                           Height="14"
-                                           Margin="-37,0,0,0"
-                                           Source="{Binding Data.ResourceType,
-                                                            Converter={StaticResource ResourceTypeToIconConverter}}"
-                                           Visibility="{Binding Data.ResourceType,
-                                                                Converter={StaticResource ResourceTypeToVisibilityConverter}}" >
+                                       Width="14"
+                                       Height="14"
+                                       Margin="-37,0,0,0"
+                                       Source="{Binding Data.ResourceType, Converter={StaticResource ResourceTypeToIconConverter}}"
+                                       Visibility="{Binding Data.ResourceType, Converter={StaticResource ResourceTypeToVisibilityConverter}}" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseLeftButtonDown">
                                             <i:InvokeCommandAction Command="{Binding Path=Data.Expand}" />
@@ -826,13 +767,11 @@
                             <DataTemplate>
                                 <!-- CHANGE TOP MARGIN TO ALIGN RESOURCE IMAGE -->
                                 <Image x:Name="ResourceImage"
-                                           Width="14"
-                                           Height="15"
-                                           Margin="-37,0,-5,0"
-                                           Source="{Binding Data.ResourceType,
-                                                            Converter={StaticResource ResourceTypeToIconConverter}}"
-                                           Visibility="{Binding Data.ResourceType,
-                                                                Converter={StaticResource ResourceTypeToVisibilityConverter}}" >
+                                       Width="14"
+                                       Height="15"
+                                       Margin="-37,0,-5,0"
+                                       Source="{Binding Data.ResourceType, Converter={StaticResource ResourceTypeToIconConverter}}"
+                                       Visibility="{Binding Data.ResourceType, Converter={StaticResource ResourceTypeToVisibilityConverter}}" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseLeftButtonDown">
                                             <i:InvokeCommandAction Command="{Binding Path=Data.Expand}" />
@@ -842,7 +781,7 @@
                             </DataTemplate>
                         </ig:NodeLayout.CollapsedIconTemplate>
                     </ig:NodeLayout>
-                </ig:XamDataTree.GlobalNodeLayouts>                
+                </ig:XamDataTree.GlobalNodeLayouts>
             </ig:XamDataTree>
         </Grid>
     </Grid>
