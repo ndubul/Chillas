@@ -13,7 +13,7 @@ using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.ViewModels
 {
-	public class EnvironmentViewModel : BindableBase, IEnvironmentViewModel
+    public class EnvironmentViewModel : BindableBase, IEnvironmentViewModel
     {
         ObservableCollection<IExplorerItemViewModel> _children;
         bool _isConnecting;
@@ -24,33 +24,33 @@ namespace Warewolf.Studio.ViewModels
         private bool _isExpanded;
         private bool _isSelected;
         bool _canCreateFolder;
-		bool _canShowServerVersion;
-	    private bool _canCreateWorkflowService;
-	    readonly IShellViewModel _shellViewModel;
+        bool _canShowServerVersion;
+        private bool _canCreateWorkflowService;
+        readonly IShellViewModel _shellViewModel;
 
-	    public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel)
+        public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel)
         {
-			if (server == null) throw new ArgumentNullException("server");
+            if (server == null) throw new ArgumentNullException("server");
             if (shellViewModel == null) throw new ArgumentNullException("shellViewModel");
             _shellViewModel = shellViewModel;
             Server = server;
             //Server.NetworkStateChanged += Server_NetworkStateChanged;
             //server.ItemAddedEvent += ServerItemAddedEvent;
             _children = new ObservableCollection<IExplorerItemViewModel>();
-            NewCommand = new DelegateCommand<string>(type => ShellViewModel.NewResource(type,ResourcePath));
+            NewCommand = new DelegateCommand<string>(type => ShellViewModel.NewResource(type, ResourcePath));
             DisplayName = server.ResourceName;
             RefreshCommand = new DelegateCommand(async () => await Load());
             IsServerIconVisible = true;
-            SelectAction = a=>{};
+            SelectAction = a => { };
             Expand = new DelegateCommand<int?>(clickCount =>
             {
                 if (clickCount != null && clickCount == 2)
                 {
                     IsExpanded = !IsExpanded;
                 }
-           
+
             });
-	        server.Connect();
+            server.Connect();
             IsConnected = server.IsConnected;
             //ShowServerVersionCommand = new DelegateCommand(ShowServerVersionAbout);
             CanCreateFolder = Server.UserPermissions == Permissions.Administrator || server.UserPermissions == Permissions.Contribute;
@@ -59,62 +59,62 @@ namespace Warewolf.Studio.ViewModels
             ResourceType = ResourceType.ServerSource;
             ResourcePath = "";
             ResourceName = DisplayName;
-			CanShowServerVersion = true;
-	        AreVersionsVisible = false;
+            CanShowServerVersion = true;
+            AreVersionsVisible = false;
 
         }
 
-	    public IShellViewModel ShellViewModel
-	    {
-	        get
-	        {
-	            return _shellViewModel;
-	        }
-	    }
-	    public int ChildrenCount
-	    {
-	        get
-	        {
-	            return Children != null ? Children.Count : 0;
-	        }
-	    }
+        public IShellViewModel ShellViewModel
+        {
+            get
+            {
+                return _shellViewModel;
+            }
+        }
+        public int ChildrenCount
+        {
+            get
+            {
+                return Children != null ? Children.Count : 0;
+            }
+        }
 
-	    public bool CanCreateWorkflowService
-	    {
-	        get { return _canCreateWorkflowService; }
-	        set
-	        {
-	            _canCreateWorkflowService = value;
+        public bool CanCreateWorkflowService
+        {
+            get { return _canCreateWorkflowService; }
+            set
+            {
+                _canCreateWorkflowService = value;
                 OnPropertyChanged(() => CanCreateWorkflowService);
-	        }
-	    }
+            }
+        }
 
-	    public bool AreVersionsVisible { get; set; }
+        public bool AreVersionsVisible { get; set; }
 
-//	    void ServerItemAddedEvent(IExplorerItem args)
-//        {
-//			if (args.ResourcePath == args.DisplayName)
-//            {
-//                Children.Add(new ExplorerItemViewModel(_shellViewModel, Server, new Mock<IExplorerHelpDescriptorBuilder>().Object, null));
-//                return;
-//            }
-//           var found = Find(args.ResourcePath.Substring(0,args.ResourcePath.LastIndexOf("\\", StringComparison.Ordinal)));
-//            if(found != null)
-//            {
-//				if (found.Children.All(a => a.ResourceName != args.DisplayName))
-//					_shellViewModel.ExecuteOnDispatcher(() =>
-//					found.AddChild(new ExplorerItemViewModel(_shellViewModel, Server, new Mock<IExplorerHelpDescriptorBuilder>().Object, found)
-//                    {
-//                        ResourceId = args.ResourceId,
-//                        ResourceName = args.DisplayName,
-//                        Parent = found,
-//                        CanCreateDbService = true,
-//                        CanCreateDbSource = false,
-//                        ResourceType = args.ResourceType
-//                    }
-//                    ));
-//            }
-//        }
+        //	    void ServerItemAddedEvent(IExplorerItem args)
+        //        {
+        //			if (args.ResourcePath == args.DisplayName)
+        //            {
+        //                Children.Add(new ExplorerItemViewModel(_shellViewModel, Server, new Mock<IExplorerHelpDescriptorBuilder>().Object, null));
+        //                return;
+        //            }
+        //           var found = Find(args.ResourcePath.Substring(0,args.ResourcePath.LastIndexOf("\\", StringComparison.Ordinal)));
+        //            if(found != null)
+        //            {
+        //				if (found.Children.All(a => a.ResourceName != args.DisplayName))
+        //					_shellViewModel.ExecuteOnDispatcher(() =>
+        //					found.AddChild(new ExplorerItemViewModel(_shellViewModel, Server, new Mock<IExplorerHelpDescriptorBuilder>().Object, found)
+        //                    {
+        //                        ResourceId = args.ResourceId,
+        //                        ResourceName = args.DisplayName,
+        //                        Parent = found,
+        //                        CanCreateDbService = true,
+        //                        CanCreateDbSource = false,
+        //                        ResourceType = args.ResourceType
+        //                    }
+        //                    ));
+        //            }
+        //        }
 
         IExplorerItemViewModel Find(string resourcePath)
         {
@@ -123,30 +123,30 @@ namespace Warewolf.Studio.ViewModels
 
         void CreateFolder()
         {
-                IsExpanded = true;
-                var id = Guid.NewGuid();
-                var name = GetChildNameFromChildren();
-                Server.ExplorerRepository.CreateFolder("root", name, id);
-                var child = new ExplorerItemViewModel(Server, this, a => { SelectAction(a); }, _shellViewModel)
-               {
-                   ResourceName = name,
-                   ResourceId = id, 
-                   ResourceType = ResourceType.Folder,
-                   ResourcePath = name
-               };
-                child.IsSelected = true;
-                child.IsRenaming = true;
-               _children.Insert(0,child);
-               OnPropertyChanged(() => Children);
-               
-            
+            IsExpanded = true;
+            var id = Guid.NewGuid();
+            var name = GetChildNameFromChildren();
+            Server.ExplorerRepository.CreateFolder("root", name, id);
+            var child = new ExplorerItemViewModel(Server, this, a => { SelectAction(a); }, _shellViewModel)
+           {
+               ResourceName = name,
+               ResourceId = id,
+               ResourceType = ResourceType.Folder,
+               ResourcePath = name
+           };
+            child.IsSelected = true;
+            child.IsRenaming = true;
+            _children.Insert(0, child);
+            OnPropertyChanged(() => Children);
+
+
         }
 
         public ICommand ShowServerVersionCommand { get; set; }
 
-	    public Action<IExplorerItemViewModel> SelectAction { get;  set; }
+        public Action<IExplorerItemViewModel> SelectAction { get; set; }
 
-	    public void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction)
+        public void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction)
         {
             foreach (var explorerItemViewModel in Children)
             {
@@ -173,7 +173,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 explorerItemViewModel.Apply(a =>
                 {
-                    if (a.ResourcePath == path) 
+                    if (a.ResourcePath == path)
                     {
                         a.IsExpanded = true;
                         foundAction(a);
@@ -190,6 +190,8 @@ namespace Warewolf.Studio.ViewModels
             CanCreatePluginService = false;
             CanCreatePluginSource = false;
             CanCreateEmailSource = false;
+            CanCreateDropboxSource = false;
+            CanCreateSharePointSource = false;
             CanCreateServerSource = false;
             CanCreateWebService = false;
             CanCreateWebSource = false;
@@ -203,63 +205,64 @@ namespace Warewolf.Studio.ViewModels
 
 
 
-	    //
-//        void Server_NetworkStateChanged(INetworkStateChangedEventArgs args)
-//        {
-//            switch (args.State)
-//            {
-//                case ConnectionNetworkState.Connected:
-//                {
-//                    Server.Connect();
-//                    if (!IsConnecting)
-//                        ShellViewModel.ExecuteOnDispatcher(async () => await Load());
-//                    break;
-//                }
-//                case ConnectionNetworkState.Disconnected:
-//                {
-//                    ShellViewModel.ExecuteOnDispatcher(() =>
-//                    {
-//                        IsConnected = false;
-//                        Children = new ObservableCollection<IExplorerItemViewModel>();
-//
-//                    });
-//                }
-//                    break;
-//                case ConnectionNetworkState.Connecting:
-//                {
-//                    ShellViewModel.ExecuteOnDispatcher(() =>
-//                    {
-//                        if (!IsConnecting)
-//                            IsConnected = false;
-//                        Children = new ObservableCollection<IExplorerItemViewModel>();                        
-//                    });
-//                }
-//                    break;
-//                default:
-//                {
-//                    
-//                }
-//                    break;
-//            }
-//        }
+        //
+        //        void Server_NetworkStateChanged(INetworkStateChangedEventArgs args)
+        //        {
+        //            switch (args.State)
+        //            {
+        //                case ConnectionNetworkState.Connected:
+        //                {
+        //                    Server.Connect();
+        //                    if (!IsConnecting)
+        //                        ShellViewModel.ExecuteOnDispatcher(async () => await Load());
+        //                    break;
+        //                }
+        //                case ConnectionNetworkState.Disconnected:
+        //                {
+        //                    ShellViewModel.ExecuteOnDispatcher(() =>
+        //                    {
+        //                        IsConnected = false;
+        //                        Children = new ObservableCollection<IExplorerItemViewModel>();
+        //
+        //                    });
+        //                }
+        //                    break;
+        //                case ConnectionNetworkState.Connecting:
+        //                {
+        //                    ShellViewModel.ExecuteOnDispatcher(() =>
+        //                    {
+        //                        if (!IsConnecting)
+        //                            IsConnected = false;
+        //                        Children = new ObservableCollection<IExplorerItemViewModel>();                        
+        //                    });
+        //                }
+        //                    break;
+        //                default:
+        //                {
+        //                    
+        //                }
+        //                    break;
+        //            }
+        //        }
 
         public IServer Server { get; set; }
 
         public ICommand Expand
         {
-            get; set; 
+            get;
+            set;
         }
 
         public ICollection<IExplorerItemViewModel> Children
         {
             get
             {
-				if (_children == null) return _children;
-				return new ObservableCollection<IExplorerItemViewModel>(_children.Where(a => a.IsVisible));
+                if (_children == null) return _children;
+                return new ObservableCollection<IExplorerItemViewModel>(_children.Where(a => a.IsVisible));
             }
             set
             {
-                _children = new ObservableCollection<IExplorerItemViewModel>( value);
+                _children = new ObservableCollection<IExplorerItemViewModel>(value);
                 OnPropertyChanged(() => Children);
                 OnPropertyChanged(() => ChildrenCount);
             }
@@ -279,19 +282,19 @@ namespace Warewolf.Studio.ViewModels
         }
 
         public ResourceType ResourceType { get; set; }
-	    public string ResourcePath { get; set; }
+        public string ResourcePath { get; set; }
 
-	    public string ResourceName { get; set; }
+        public string ResourceName { get; set; }
 
         public bool IsExpanderVisible
         {
             get
             {
-				return Children.Count > 0;
+                return Children.Count > 0;
             }
             set
             {
-                
+
             }
         }
         public ICommand NewCommand
@@ -315,7 +318,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _canCreateServerSource = value;
-                OnPropertyChanged(()=>CanCreateServerSource);
+                OnPropertyChanged(() => CanCreateServerSource);
             }
         }
         public bool CanCreateWebService { get; set; }
@@ -323,13 +326,15 @@ namespace Warewolf.Studio.ViewModels
         public bool CanCreatePluginService { get; set; }
         public bool CanCreatePluginSource { get; set; }
         public bool CanCreateEmailSource { get; set; }
+        public bool CanCreateDropboxSource { get; set; }
+        public bool CanCreateSharePointSource { get; set; }
         public bool CanRename { get; set; }
         public bool CanDelete { get; set; }
         public bool CanCreateFolder
         {
             get
             {
-				return Server.Permissions != null && Server.Permissions.Any(a => (a.Contribute || a.Administrator) && a.IsServer);
+                return Server.Permissions != null && Server.Permissions.Any(a => (a.Contribute || a.Administrator) && a.IsServer);
             }
             set
             {
@@ -355,7 +360,7 @@ namespace Warewolf.Studio.ViewModels
             get { return _isExpanded; }
             set
             {
-                
+
                 _isExpanded = value;
                 OnPropertyChanged(() => IsExpanded);
             }
@@ -369,22 +374,22 @@ namespace Warewolf.Studio.ViewModels
                 _isSelected = value;
                 OnPropertyChanged(() => IsSelected);
             }
-		}
+        }
 
-	    public bool CanShowServerVersion
-	    {
-	        get { return _canShowServerVersion; }
-	        set
-	        {
-	            _canShowServerVersion = value;
-	            OnPropertyChanged(() => CanShowServerVersion);
-	        }
-	    }
+        public bool CanShowServerVersion
+        {
+            get { return _canShowServerVersion; }
+            set
+            {
+                _canShowServerVersion = value;
+                OnPropertyChanged(() => CanShowServerVersion);
+            }
+        }
 
-//	    void ShowServerVersionAbout()
-//        {
-//            ShellViewModel.ShowAboutBox(Server);
-//        }
+        //	    void ShowServerVersionAbout()
+        //        {
+        //            ShellViewModel.ShowAboutBox(Server);
+        //        }
 
         string GetChildNameFromChildren()
         {
@@ -417,9 +422,9 @@ namespace Warewolf.Studio.ViewModels
             }
             private set
             {
-               
+
                 _isConnected = value;
-               
+
                 OnPropertyChanged(() => IsConnected);
             }
         }
@@ -427,11 +432,11 @@ namespace Warewolf.Studio.ViewModels
 
         public async Task<bool> Connect()
         {
-			if (Server != null)
+            if (Server != null)
             {
                 IsConnecting = true;
                 IsConnected = false;
-               // IsConnected = await Server.Connect();
+                // IsConnected = await Server.Connect();
                 IsConnected = true;
                 IsConnecting = false;
                 return IsConnected;
@@ -448,11 +453,11 @@ namespace Warewolf.Studio.ViewModels
             private set
             {
                 _isConnecting = value;
-               IsServerIconVisible = !value;
-               IsServerUnavailableIconVisible = !value;
+                IsServerIconVisible = !value;
+                IsServerUnavailableIconVisible = !value;
 
-				OnPropertyChanged(() => IsConnecting);
-       
+                OnPropertyChanged(() => IsConnecting);
+
             }
         }
 
@@ -468,9 +473,9 @@ namespace Warewolf.Studio.ViewModels
             {
                 IsConnecting = true;
                 var explorerItems = await Server.LoadExplorer();
-				var explorerItemViewModels = CreateExplorerItems(explorerItems.Children, Server, this, selectedId != null);
+                var explorerItemViewModels = CreateExplorerItems(explorerItems.Children, Server, this, selectedId != null);
                 Children = explorerItemViewModels;
-                
+
                 IsLoaded = true;
                 IsConnecting = false;
                 IsExpanded = true;
@@ -504,8 +509,8 @@ namespace Warewolf.Studio.ViewModels
         }
         public void SetItemCheckedState(Guid id, bool state)
         {
-			var resource = AsList().FirstOrDefault(a => a.ResourceId == id);
-			if (resource != null)
+            var resource = AsList().FirstOrDefault(a => a.ResourceId == id);
+            if (resource != null)
             {
                 resource.Checked = state;
             }
@@ -513,13 +518,13 @@ namespace Warewolf.Studio.ViewModels
 
         public void RemoveItem(IExplorerItemViewModel vm)
         {
-			if (vm.ResourceType != ResourceType.Server)
+            if (vm.ResourceType != ResourceType.Server)
             {
-				var res = AsList(_children).FirstOrDefault(a => a.Children != null && a.Children.Any(b => b.ResourceId == vm.ResourceId));
-				if (res != null)
+                var res = AsList(_children).FirstOrDefault(a => a.Children != null && a.Children.Any(b => b.ResourceId == vm.ResourceId));
+                if (res != null)
                 {
                     res.RemoveChild(res.Children.FirstOrDefault(a => a.ResourceId == vm.ResourceId));
-					OnPropertyChanged(() => Children);
+                    OnPropertyChanged(() => Children);
                 }
             }
         }
@@ -529,12 +534,12 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-				return _isServerIconVisible && IsConnected;
+                return _isServerIconVisible && IsConnected;
             }
             set
             {
                 _isServerIconVisible = value;
-				OnPropertyChanged(() => IsServerIconVisible);
+                OnPropertyChanged(() => IsServerIconVisible);
             }
         }
         public bool IsServerUnavailableIconVisible
@@ -556,7 +561,7 @@ namespace Warewolf.Studio.ViewModels
         {
             if (explorerItems == null) return new ObservableCollection<IExplorerItemViewModel>();
             var explorerItemModels = new ObservableCollection<IExplorerItemViewModel>();
-            if(parent != null)
+            if (parent != null)
             {
                 parent.Children = new ObservableCollection<IExplorerItemViewModel>();
             }
@@ -573,15 +578,15 @@ namespace Warewolf.Studio.ViewModels
                     //Outputs = explorerItem.Outputs
                 };
                 itemCreated.SetPermissions(server.Permissions);
-				if (isDialog)
+                if (isDialog)
                 {
                     SetPropertiesForDialog(itemCreated);
                 }
-				itemCreated.Children = CreateExplorerItems(explorerItem.Children, server, itemCreated, isDialog);
+                itemCreated.Children = CreateExplorerItems(explorerItem.Children, server, itemCreated, isDialog);
                 explorerItemModels.Add(itemCreated);
-                
+
             }
-			return explorerItemModels;
+            return explorerItemModels;
         }
 
         private static void SetPropertiesForDialog(ExplorerItemViewModel itemCreated)
@@ -591,6 +596,8 @@ namespace Warewolf.Studio.ViewModels
             itemCreated.CanCreatePluginService = false;
             itemCreated.CanCreatePluginSource = false;
             itemCreated.CanCreateEmailSource = false;
+            itemCreated.CanCreateDropboxSource = false;
+            itemCreated.CanCreateSharePointSource = false;
             itemCreated.CanCreateServerSource = false;
             itemCreated.CanCreateWebService = false;
             itemCreated.CanCreateWebSource = false;
@@ -611,12 +618,12 @@ namespace Warewolf.Studio.ViewModels
                 return Resources.Languages.Core.EnvironmentExplorerRefreshToolTip;
             }
         }
-//        public IShellViewModel ShellViewModel
-//        {
-//            get
-//            {
-//                return _shellViewModel;
-//            }
-//        }
+        //        public IShellViewModel ShellViewModel
+        //        {
+        //            get
+        //            {
+        //                return _shellViewModel;
+        //            }
+        //        }
     }
 }

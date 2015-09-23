@@ -273,6 +273,26 @@
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
 
+                                                    <ig:XamMenuItem Name="NewDropboxSource"
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="DropboxSource"
+                                                                    Header="New Dropbox Source"
+                                                                    Visibility="{Binding Path=Data.CanCreateDropboxSource, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                        <ig:XamMenuItem.Icon>
+                                                            <Image Width="12" Height="12" Source="{StaticResource AddDropBoxBlackLogo}" />
+                                                        </ig:XamMenuItem.Icon>
+                                                    </ig:XamMenuItem>
+
+                                                    <ig:XamMenuItem Name="NewSharepointSource"
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.SharepointServerSource}"
+                                                                    Header="New Sharepoint Source"
+                                                                    Visibility="{Binding Path=Data.CanCreateSharePointSource, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                        <ig:XamMenuItem.Icon>
+                                                            <Image Width="12" Height="12" Source="{StaticResource AddSharepointBlackLogo}" />
+                                                        </ig:XamMenuItem.Icon>
+                                                    </ig:XamMenuItem>
+
                                                     <ig:XamMenuItem Name="NewFolder"
                                                                     InputGestureText="[Ctrl+Shift+F]"
                                                                     Command="{Binding Path=Data.CreateFolderCommand}"
@@ -529,6 +549,26 @@
                                                                Source="{StaticResource Utility-SendMail}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
+                                                    <ig:XamMenuItem Name="NewDropboxSource"
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.DropboxSource}"
+                                                                    Header="New Dropbox Source"
+                                                                    Visibility="{Binding Path=Data.CanCreateDropboxSource, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                        <ig:XamMenuItem.Icon>
+                                                            <Image Width="12" Height="12" Source="{StaticResource AddDropBoxBlackLogo}" />
+                                                        </ig:XamMenuItem.Icon>
+                                                    </ig:XamMenuItem>
+
+                                                    <ig:XamMenuItem Name="NewSharepointSource"
+                                                                    Command="{Binding Path=Data.NewCommand}"
+                                                                    CommandParameter="{x:Static data:ResourceType.SharepointServerSource}"
+                                                                    Header="New Sharepoint Source"
+                                                                    Visibility="{Binding Path=Data.CanCreateSharePointSource, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                        <ig:XamMenuItem.Icon>
+                                                            <Image Width="12" Height="12" Source="{StaticResource AddSharepointBlackLogo}" />
+                                                        </ig:XamMenuItem.Icon>
+                                                    </ig:XamMenuItem>
+                                                    
                                                     <ig:XamMenuSeparator />
                                                     <ig:XamMenuItem Name="NewFolderFromItem"
                                                                 InputGestureText="[Ctrl+Shift+F]"
