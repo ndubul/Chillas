@@ -51,12 +51,9 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             UpdateManagerProxy.SaveEmailServiceSource(emailServiceSource, GlobalConstants.ServerWorkspaceID);
         }
 
-        public string TestConnection(IServerSource serverSource)
+        public void TestConnection(IServerSource serverSource)
         {
-
-
-            return UpdateManagerProxy.TestConnection(serverSource);
-
+            UpdateManagerProxy.TestConnection(serverSource);
         }
 
         public string TestConnection(IEmailServiceSource emailServiceSource)

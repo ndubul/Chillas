@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -38,19 +41,22 @@ namespace Warewolf.Studio.ViewModels
         IServerSource _serverSource;
         string _protocol;
         string _selectedPort;
-        Guid _id;
-        
+        bool _testing;
+        IComputerName _serverName;
+        IList<IComputerName> _computerNames;
+
         public ManageNewServerViewModel(IManageServerSourceModel updateManager, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
-            :base(ResourceType.ServerSource)
+            : base(ResourceType.ServerSource)
         {
             VerifyArgument.IsNotNull("executor", executor);
             VerifyArgument.IsNotNull("asyncWorker", asyncWorker);
             VerifyArgument.IsNotNull("updateManager", updateManager);
             VerifyArgument.IsNotNull("aggregator", aggregator);
 
+            AsyncWorker = asyncWorker;
             Protocols = new[] { "https", "http" };
             Protocol = Protocols[0];
-         
+
             Ports = new ObservableCollection<string> { "3143", "3142" };
             SelectedPort = Ports[0];
             _updateManager = updateManager;
@@ -58,20 +64,17 @@ namespace Warewolf.Studio.ViewModels
             _warewolfserverName = updateManager.ServerName;
             Header = Resources.Languages.Core.ServerSourceNewHeaderLabel;
             HeaderText = Resources.Languages.Core.ServerSourceNewHeaderLabel;
-            ID = Guid.NewGuid();
-            IsValid = false;
-            TestPassed = false;
 
             TestCommand = new DelegateCommand(TestConnection, CanTest);
             OkCommand = new DelegateCommand(SaveConnection, CanSave);
             CancelTestCommand = new DelegateCommand(CancelTest, CanCancelTest);
         }
         public ManageNewServerViewModel(IManageServerSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
-            : this(updateManager, aggregator, asyncWorker,executor)
+            : this(updateManager, aggregator, asyncWorker, executor)
         {
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
             RequestServiceNameViewModel = requestServiceNameViewModel;
-
+            GetLoadComputerNamesTask(null);
         }
         public ManageNewServerViewModel(IManageServerSourceModel updateManager, IEventAggregator aggregator, IServerSource serverSource, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
             : this(updateManager, aggregator, asyncWorker, executor)
@@ -79,33 +82,72 @@ namespace Warewolf.Studio.ViewModels
             VerifyArgument.IsNotNull("serverSource", serverSource);
             _serverSource = serverSource;
             _warewolfserverName = updateManager.ServerName;
-            SetupHeaderTextFromExisting();
-            FromSource(serverSource);
+
+            Item = new ServerSource
+            {
+                AuthenticationType = _serverSource.AuthenticationType,
+                ID = _serverSource.ID,
+                Name = _serverSource.Name,
+                Password = _serverSource.Password,
+                ResourcePath = _serverSource.ResourcePath,
+                ServerName = _serverSource.ServerName,
+                UserName = _serverSource.UserName,
+                Address = _serverSource.Address
+            };
+
+            GetLoadComputerNamesTask(() =>
+                {
+                    FromSource();
+                    SetupHeaderTextFromExisting();
+                }
+            );
         }
 
         void SetupHeaderTextFromExisting()
         {
-            var serverName = _warewolfserverName;
-            if (serverName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
+            if (_warewolfserverName != null)
             {
-                HeaderText = (_serverSource == null ? ResourceName : _serverSource.Name).Trim();
-                Header = (_serverSource == null ? ResourceName : _serverSource.Name).Trim();
             }
-            else
+            HeaderText = (_serverSource == null ? ResourceName : _serverSource.Name).Trim();
+
+            Header = ((_serverSource == null ? ResourceName : _serverSource.Name));
+        }
+
+        void FromSource()
+        {
+            ResourceName = _serverSource.Name;
+            AuthenticationType = _serverSource.AuthenticationType;
+            UserName = _serverSource.UserName;
+            ServerName = ComputerNames.FirstOrDefault(name => _serverSource.ServerName == name.Name);
+            Address = GetAddressName();
+            Password = _serverSource.Password;
+            Header = ResourceName;
+        }
+
+        public IComputerName ServerName
+        {
+            get { return _serverName ?? new ComputerName(); }
+            set
             {
-                HeaderText = (_serverSource == null ? ResourceName : _serverSource.Name).Trim();
-                Header = (_serverSource == null ? ResourceName : _serverSource.Name).Trim();
+                if (value != _serverName)
+                {
+                    _serverName = value;
+                    OnPropertyChanged(() => ServerName);
+                    OnPropertyChanged(() => Header);
+                    Reset();
+                    Address = GetAddressName();
+                }
             }
         }
 
-        void FromSource(IServerSource serverSource)
+        void Reset()
         {
-            ResourceName = serverSource.Name;
-            AuthenticationType = serverSource.AuthenticationType;
-            UserName = serverSource.UserName;
-            Address = serverSource.Address;
-            Password = serverSource.Password;
-            Header = ResourceName;
+            TestPassed = false;
+            TestMessage = "";
+            TestFailed = false;
+            Testing = false;
+            ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
+            ViewModelUtils.RaiseCanExecuteChanged(OkCommand);
         }
 
         public override bool CanSave()
@@ -113,34 +155,17 @@ namespace Warewolf.Studio.ViewModels
             return TestPassed;
         }
 
-        //public override void Save()
-        //{
-        //    var res = MessageBoxResult.OK;
-        //    if (String.IsNullOrEmpty(ServerSource.Name))
-        //        res = RequestServiceNameViewModel.ShowSaveDialog();
-        //    if (res == MessageBoxResult.OK)
-        //    {
-        //        try
-        //        {
-        //            var source = ToModel();
-
-        //            ServerSource = source;
-        //            ServerSource.Name = RequestServiceNameViewModel.ResourceName.Name;
-        //            ServerSource.ResourcePath = RequestServiceNameViewModel.ResourceName.Path;
-        //            _updateManager.Save(source);
-        //            HeaderText = SetToEdit(source);
-        //            if (CloseAction != null)
-        //                CloseAction.Invoke();
-        //            ConnectControlSingleton.Instance.AddServerAndConnect(ServerSource);
-        //        }
-        //        catch (Exception err)
-        //        {
-
-        //            TestMessage = err.Message;
-        //        }
-        //    }
-
-        //}
+        void GetLoadComputerNamesTask(Action additionalUiAction)
+        {
+            AsyncWorker.Start(() => _updateManager.GetComputerNames().Select(name => new ComputerName { Name = name } as IComputerName).ToList(), names =>
+            {
+                ComputerNames = names;
+                if (additionalUiAction != null)
+                {
+                    additionalUiAction();
+                }
+            });
+        }
 
         void SaveConnection()
         {
@@ -183,41 +208,57 @@ namespace Warewolf.Studio.ViewModels
             if (Item == null)
             {
                 Item = ToSource();
+                return Item;
             }
             return new ServerSource
             {
-                Address = Protocol + "://" + Address + ":" + SelectedPort,
+                Name = Item.Name,
+                Address = GetAddressName(),
                 AuthenticationType = AuthenticationType,
-                ID = ServerSource.ID == Guid.Empty ? Guid.NewGuid() : Item.ID,
-                Name = ServerSource.Name,
-                Password = Password
+                Password = Password,
+                UserName = UserName,
+                ID = Item.ID,
+                ResourcePath = Item.ResourcePath
+            };
+        }
+
+        IServerSource ToNewSource()
+        {
+
+            return new ServerSource
+            {
+                AuthenticationType = AuthenticationType,
+                Address = GetAddressName(),
+                Password = Password,
+                UserName = UserName,
+                Name = ResourceName,
+                ID = _serverSource == null ? Guid.NewGuid() : _serverSource.ID
             };
         }
 
         IServerSource ToSource()
         {
             if (_serverSource == null)
-            return new ServerSource
-            {
-                Address = Protocol + "://" + Address + ":" + SelectedPort,
-                AuthenticationType = AuthenticationType,
-                ID = ServerSource.ID == Guid.Empty ? Guid.NewGuid() : ServerSource.ID,
-                Name = ServerSource.Name,
-                Password = Password
-            };
+                return new ServerSource
+                {
+                    Address = GetAddressName(),
+                    AuthenticationType = AuthenticationType,
+                    Name = ResourceName,
+                    Password = Password,
+                    ID = _serverSource == null ? Guid.NewGuid() : _serverSource.ID
+                }
+            ;
             // ReSharper disable once RedundantIfElseBlock
             else
             {
-                _serverSource.Address = Protocol + "://" + Address + ":" + SelectedPort;
                 _serverSource.AuthenticationType = AuthenticationType;
-                _serverSource.ID = _serverSource.ID == Guid.Empty ? Guid.NewGuid() : _serverSource.ID;
-                _serverSource.Name = ServerSource.Name;
+                _serverSource.Address = GetAddressName();
                 _serverSource.Password = Password;
+                _serverSource.UserName = UserName;
                 return _serverSource;
             }
         }
 
-        public Action CloseAction { get; set; }
         public bool CanTest()
         {
             if (Testing)
@@ -279,63 +320,14 @@ namespace Warewolf.Studio.ViewModels
         {
             Dispatcher.CurrentDispatcher.Invoke(() =>
             {
+                TestMessage = "";
                 Testing = true;
                 TestFailed = false;
                 TestPassed = false;
             });
-            _updateManager.TestConnection(ToSource());
+            _updateManager.TestConnection(ToNewSource());
         }
 
-        /// <summary>
-        /// called by outer when validating
-        /// </summary>
-        /// <returns></returns>
-        public string Validate
-        {
-
-            get
-            {
-                IsValid = false;
-
-
-
-                if (!Testrun)
-                {
-                    return Resources.Languages.Core.ServerSourceDialogNoTestMessage;
-                }
-
-                if (TestFailed)
-                {
-                    return Resources.Languages.Core.TestConnectionLabel; 
-                }
-
-                IsValid = true;
-                return String.Empty;
-            }
-
-
-
-        }
-        public bool Testrun { get; set; }
-        public Guid ID
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-                OnPropertyChanged(() => ID);
-            }
-        }
-
-
-
-        /// <summary>
-        /// Is valid 
-        /// </summary>
-        public bool IsValid { get; set; }
         /// <summary>
         /// Command for save/ok
         /// </summary>
@@ -346,25 +338,26 @@ namespace Warewolf.Studio.ViewModels
         public ICommand CancelCommand { get; set; }
         public ICommand CancelTestCommand { get; set; }
 
-        public bool CanClickOk
-        {
-            get
-            {
-                return Validate == "";
-            }
-        }
-
         public string HeaderText
         {
-            get
-            {
-                return _headerText;
-            }
+            get { return _headerText; }
             set
             {
                 _headerText = value;
                 OnPropertyChanged(() => HeaderText);
                 OnPropertyChanged(() => Header);
+            }
+        }
+        public IList<IComputerName> ComputerNames
+        {
+            get
+            {
+                return _computerNames;
+            }
+            set
+            {
+                _computerNames = value;
+                OnPropertyChanged(()=>ComputerNames);
             }
         }
 
@@ -383,15 +376,17 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _address = value;
-
-                OnPropertyChanged(() => Address);
-                OnPropertyChanged(() => Validate);
-                OnPropertyChanged(() => CanClickOk);
+                if (_address != value)
+                {
+                    _address = value;
+                    OnPropertyChanged(() => Address);
+                    OnPropertyChanged(() => Header);
+                    Reset();
+                }
             }
         }
         /// <summary>
-        ///  Windows or user or publlic
+        ///  Windows or user or public
         /// </summary>
         public AuthenticationType AuthenticationType
         {
@@ -403,11 +398,8 @@ namespace Warewolf.Studio.ViewModels
                     _authenticationType = value;
                     OnPropertyChanged(() => AuthenticationType);
                     OnPropertyChanged(() => Header);
-                    OnPropertyChanged(() => IsUserNameVisible);
-                    Testrun = false;
-                    TestPassed = false;
-                    ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
-                    ViewModelUtils.RaiseCanExecuteChanged(OkCommand);
+                    OnPropertyChanged(() => UserAuthenticationSelected);
+                    Reset();
                 }
             }
         }
@@ -423,8 +415,13 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _userName = value;
-                OnPropertyChanged(() => UserName);
+                if (_userName != value)
+                {
+                    _userName = value;
+                    OnPropertyChanged(() => UserName);
+                    OnPropertyChanged(() => Header);
+                    Reset();
+                }
             }
         }
         /// <summary>
@@ -438,8 +435,13 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _password = value;
-                OnPropertyChanged(() => Password);
+                if (_password != value)
+                {
+                    _password = value;
+                    OnPropertyChanged(() => Password);
+                    OnPropertyChanged(() => Header);
+                    Reset();
+                }
             }
         }
 
@@ -448,20 +450,33 @@ namespace Warewolf.Studio.ViewModels
         /// </summary>
         public string TestMessage
         {
-            get
-            {
-                return _testMessage;
-            }
-
-            set
+            get { return _testMessage; }
+            // ReSharper disable UnusedMember.Local
+            private set
+            // ReSharper restore UnusedMember.Local
             {
                 _testMessage = value;
                 OnPropertyChanged(() => TestMessage);
+                OnPropertyChanged(() => TestPassed);
             }
-
         }
 
         #endregion
+
+        private string GetAddressName()
+        {
+            string addressName = null;
+            if (ServerName != null)
+            {
+                addressName = GetAddressName(Protocol,ServerName.Name,SelectedPort);
+            }
+            return addressName;
+        }
+
+        string GetAddressName(string protocol, string serverName, string port)
+        {
+            return protocol + "://" + serverName + ":" + port;
+        }
 
         public string ResourceName
         {
@@ -477,15 +492,12 @@ namespace Warewolf.Studio.ViewModels
         }
         public bool TestPassed
         {
-            get
-            {
-                return _testPassed;
-            }
+            get { return _testPassed; }
             set
             {
                 _testPassed = value;
                 OnPropertyChanged(() => TestPassed);
-                OnPropertyChanged(() => CanClickOk);
+                ViewModelUtils.RaiseCanExecuteChanged(OkCommand);
             }
         }
         public bool TestFailed
@@ -498,59 +510,29 @@ namespace Warewolf.Studio.ViewModels
             {
                 _testPassed = value;
                 OnPropertyChanged(() => TestFailed);
-                OnPropertyChanged(() => CanClickOk);
             }
         }
         public bool Testing
         {
             get
             {
-                return _testPassed;
+                return _testing;
             }
             set
             {
-                _testPassed = value;
+                _testing = value;
                 OnPropertyChanged(() => Testing);
-                OnPropertyChanged(() => CanClickOk);
+                ViewModelUtils.RaiseCanExecuteChanged(OkCommand);
+                ViewModelUtils.RaiseCanExecuteChanged(CancelTestCommand);
             }
         }
 
-        public bool IsOkEnabled
+        public bool UserAuthenticationSelected
         {
-            get
-            {
-                return IsValid;
-            }
-
+            get { return AuthenticationType == AuthenticationType.User; }
         }
 
-        public bool IsTestEnabled
-        {
-            get
-            {
-                return (Address.Length > 0);
-            }
-
-        }
-
-        public bool IsUserNameVisible
-        {
-            get
-            {
-                return AuthenticationType == AuthenticationType.User;
-            }
-
-        }
-
-        public bool IsPasswordVisible
-        {
-            get
-            {
-                return AuthenticationType == AuthenticationType.User;
-            }
-
-        }
-
+        [ExcludeFromCodeCoverage]
         public string AddressLabel
         {
             get
@@ -558,7 +540,7 @@ namespace Warewolf.Studio.ViewModels
                 return Resources.Languages.Core.ServerSourceDialogAddressLabel;
             }
         }
-
+        [ExcludeFromCodeCoverage]
         public string UserNameLabel
         {
             get
@@ -566,7 +548,7 @@ namespace Warewolf.Studio.ViewModels
                 return Resources.Languages.Core.UserNameLabel;
             }
         }
-
+        [ExcludeFromCodeCoverage]
         public string AuthenticationLabel
         {
             get
@@ -574,7 +556,7 @@ namespace Warewolf.Studio.ViewModels
                 return Resources.Languages.Core.AuthenticationTypeLabel;
             }
         }
-
+        [ExcludeFromCodeCoverage]
         public string PasswordLabel
         {
             get
@@ -583,7 +565,7 @@ namespace Warewolf.Studio.ViewModels
 
             }
         }
-
+        [ExcludeFromCodeCoverage]
         public string TestLabel
         {
             get
@@ -591,24 +573,20 @@ namespace Warewolf.Studio.ViewModels
                 return Resources.Languages.Core.TestConnectionLabel;
             }
         }
-
+        [ExcludeFromCodeCoverage]
+        public string CancelTestLabel
+        {
+            get
+            {
+                return Resources.Languages.Core.CancelTest;
+            }
+        }
 
         /// <summary>
         /// Test if connection is successful
         /// </summary>
-        public ICommand TestCommand
-        { get; set; }
-        public IServerSource ServerSource
-        {
-            get
-            {
-                return _serverSource;
-            }
-            set
-            {
-                _serverSource = value;
-            }
-        }
+        public ICommand TestCommand { get; set; }
+
         IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
         public string Protocol
         {
@@ -618,15 +596,19 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _protocol = value;
-                OnPropertyChanged(Protocol);
-                if (Protocol == "https" && SelectedPort == "3142")
+                if (_protocol != value)
                 {
-                    SelectedPort = "3143";
-                }
-                else if(Protocol == "http" && SelectedPort == "3143")
-                {
-                    SelectedPort = "3142";
+                    _protocol = value;
+                    OnPropertyChanged(Protocol);
+                    Reset();
+                    if (Protocol == "https" && SelectedPort == "3142")
+                    {
+                        SelectedPort = "3143";
+                    }
+                    else if (Protocol == "http" && SelectedPort == "3143")
+                    {
+                        SelectedPort = "3142";
+                    }
                 }
             }
         }
@@ -644,10 +626,8 @@ namespace Warewolf.Studio.ViewModels
                 {
                     _selectedPort = value;
                     OnPropertyChanged(() => SelectedPort);
-                    TestPassed = false;
-                    OnPropertyChanged(()=>TestPassed);
+                    Reset();
                 }
-               
             }
         }
 
@@ -655,7 +635,7 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return Resources.Languages.Core.ServerSourceDialogAddressToolTip; 
+                return Resources.Languages.Core.ServerSourceDialogAddressToolTip;
             }
         }
         public string ProtocolToolTip
@@ -745,7 +725,7 @@ namespace Warewolf.Studio.ViewModels
 
     public interface IManageServerSourceModel
     {
-
+        IList<string> GetComputerNames();
         void TestConnection(IServerSource resource);
 
         void Save(IServerSource toDbSource);

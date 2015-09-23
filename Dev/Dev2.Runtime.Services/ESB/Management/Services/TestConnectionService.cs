@@ -44,16 +44,19 @@
                     values.TryGetValue("ServerSource", out resourceDefinition);
 
                     IServerSource src = serializer.Deserialize<ServerSource>(resourceDefinition);
-                    Connection con = new Connection();
-                    con.Address = src.Address;
-                    con.AuthenticationType = src.AuthenticationType;
-                    con.UserName = src.UserName;
-                    con.Password = src.Password;
                     Connections tester = new Connections();
-                    var res = tester.CanConnectToServer(con);
-                    msg.HasError = false;
-                    msg.Message = new StringBuilder( res.IsValid ? "" : res.ErrorMessage);
 
+                    var result = tester.CanConnectToServer(new Connection
+                    {
+                        Address = src.Address,
+                        AuthenticationType = src.AuthenticationType,
+                        UserName = src.UserName,
+                        Password = src.Password
+                    });
+
+                    msg.HasError = false;
+                    msg.Message = new StringBuilder(result.IsValid ? "" : result.ErrorMessage);
+                    msg.HasError = !result.IsValid;
                   
                 }
                 catch (Exception err)

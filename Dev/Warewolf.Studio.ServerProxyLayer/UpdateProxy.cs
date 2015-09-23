@@ -92,11 +92,9 @@ namespace Warewolf.Studio.ServerProxyLayer
             comsController.AddPayloadArgument("ServerSource", serialiser.SerializeToBuilder(resource));
             var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
             if (output == null)
-                throw new WarewolfSaveException( "Unable to contact server",null);
+                throw new WarewolfSaveException("Unable to contact server", null);
             if (output.HasError)
                 throw new WarewolfSaveException(output.Message.ToString(), null);
-
-            
         }
 
         /// <summary>
@@ -104,7 +102,7 @@ namespace Warewolf.Studio.ServerProxyLayer
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
-        public string TestConnection(IServerSource resource)
+        public void TestConnection(IServerSource resource)
         {
             var con = Connection;
             var comsController = CommunicationControllerFactory.CreateController("TestConnectionService");
@@ -112,13 +110,9 @@ namespace Warewolf.Studio.ServerProxyLayer
             comsController.AddPayloadArgument("ServerSource", serialiser.SerializeToBuilder(resource));
             var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
             if (output == null)
-                return "Unable to contact server";
+                throw new WarewolfTestException("Unable to contact Server", null);
             if (output.HasError)
-                return output.Message.ToString();
-
-            return output.Message.ToString();
-
-
+                throw new WarewolfTestException(output.Message.ToString(), null);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
 using Dev2.Runtime.ServiceModel.Data;
 
 namespace Dev2.Common.Interfaces
@@ -31,14 +32,6 @@ namespace Dev2.Common.Interfaces
         /// </summary>
         string TestMessage { get; }
 
-        bool IsOkEnabled { get; }
-
-        bool IsTestEnabled { get;  }
-
-        bool IsUserNameVisible { get; }
-
-        bool IsPasswordVisible { get; }
-
         string AddressLabel { get; }
 
         string UserNameLabel { get; }
@@ -58,5 +51,7 @@ namespace Dev2.Common.Interfaces
         /// Header text that is used on the view
         /// </summary>
         string HeaderText { get; set; }
+        IList<IComputerName> ComputerNames { get; set; }
+        IComputerName ServerName { get; set; }
     }
 }

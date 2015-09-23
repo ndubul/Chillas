@@ -6,6 +6,7 @@ namespace Dev2.Common.Interfaces
 {
     public interface IServerSource:IEquatable<IServerSource>
     {
+        string ServerName { get; set; }
         /// <summary>
         /// The server address that we are trying to connect to
         /// </summary>

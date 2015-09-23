@@ -47,7 +47,7 @@ namespace Dev2.Common.Interfaces.ServerProxyLayer
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
-        string TestConnection(IServerSource resource);
+        void TestConnection(IServerSource resource);
 
         ///// <summary>
         ///// Tests if a valid connection to a server can be made returns 'Success' on a successful connection

@@ -1019,7 +1019,7 @@ namespace Dev2.Studio.ViewModels
         public void EditServer(IServerSource selectedServer)
         {
             var server = CustomContainer.Get<IServer>();
-            var viewModel = new ManageNewServerViewModel(new ManageNewServerSourceModel(server.UpdateRepository, ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedServer, _asyncWorker, new ExternalProcessExecutor());
+            var viewModel = new ManageNewServerViewModel(new ManageNewServerSourceModel(server.UpdateRepository, server.QueryProxy, ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedServer, _asyncWorker, new ExternalProcessExecutor());
             var vm = new SourceViewModel<IServerSource>(EventPublisher, viewModel, PopupProvider, new ManageServerControl());
 
             var key = WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource) as WorkSurfaceKey;
@@ -1206,7 +1206,7 @@ namespace Dev2.Studio.ViewModels
             {
                 CreateOAuthType(ActiveEnvironment, resourceType, resourcePath);
             }
-            else if(resourceType == "Server")
+            else if (resourceType == "ServerSource")
             {
                 AddNewServerSourceSurface(resourcePath);
             }
@@ -1257,7 +1257,7 @@ namespace Dev2.Studio.ViewModels
         {
             var server = CustomContainer.Get<IServer>();
             var saveViewModel = await GetSaveViewModel(server, resourcePath);
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource) as WorkSurfaceKey, new SourceViewModel<IServerSource>(EventPublisher, new ManageNewServerViewModel(new ManageNewServerSourceModel(server.UpdateRepository, ActiveEnvironment.Name), saveViewModel, new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker, new ExternalProcessExecutor()), PopupProvider, new ManageServerControl()));
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.ServerSource) as WorkSurfaceKey, new SourceViewModel<IServerSource>(EventPublisher, new ManageNewServerViewModel(new ManageNewServerSourceModel(server.UpdateRepository, server.QueryProxy, ActiveEnvironment.Name), saveViewModel, new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker, new ExternalProcessExecutor()), PopupProvider, new ManageServerControl()));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 

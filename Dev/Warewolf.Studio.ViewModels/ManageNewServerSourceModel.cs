@@ -9,6 +9,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using Dev2.Common.Interfaces;
 
 namespace Warewolf.Studio.ViewModels
@@ -16,10 +17,12 @@ namespace Warewolf.Studio.ViewModels
     public class ManageNewServerSourceModel: IManageServerSourceModel
     {
         readonly IStudioUpdateManager _updateRepository;
+        readonly IQueryManager _queryProxy;
 
-        public ManageNewServerSourceModel(IStudioUpdateManager updateRepository, string serverName)
+        public ManageNewServerSourceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy, string serverName)
         {
             _updateRepository = updateRepository;
+            _queryProxy = queryProxy;
 
             ServerName = serverName;
             if (ServerName.Contains("("))
@@ -30,6 +33,11 @@ namespace Warewolf.Studio.ViewModels
         }
 
         #region Implementation of IManageServerSourceModel
+
+        public IList<string> GetComputerNames()
+        {
+            return _queryProxy.GetComputerNames();
+        }
 
         public void TestConnection(IServerSource resource)
         {

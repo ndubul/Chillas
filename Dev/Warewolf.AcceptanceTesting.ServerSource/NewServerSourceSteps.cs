@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.SaveDialog;
@@ -25,6 +26,7 @@ namespace Warewolf.AcceptanceTesting.ServerSource
             var manageServerControl = new ManageServerControl();
             var mockStudioUpdateManager = new Mock<IManageServerSourceModel>();
             mockStudioUpdateManager.Setup(model => model.ServerName).Returns("localhost");
+            mockStudioUpdateManager.Setup(model => model.GetComputerNames()).Returns(new List<string> { "rsaklfhuggspc", "barney", "SANDBOX-1" });
             var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
             var mockEventAggregator = new Mock<IEventAggregator>();
             var mockExecutor = new Mock<IExternalProcessExecutor>();
@@ -62,24 +64,16 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         public void ThenTabIsOpened(string headerText)
         {
             var viewModel = Utils.GetViewModel<ManageNewServerViewModel>();
-            Assert.AreEqual(headerText, viewModel.HeaderText);
-        }
-
-        [Then(@"Address is focused")]
-        public void ThenAddressIsFocused()
-        {
-            var view = Utils.GetView<ManageServerControl>();
-            var isDataSourceFocused = view.IsAddressFocused();
-            Assert.IsTrue(isDataSourceFocused);
+            Assert.AreEqual(headerText, viewModel.Header);
         }
 
         [Then(@"selected protocol is ""(.*)""")]
         public void ThenSelectedProtocolIs(string protocol)
         {
-            var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
-            var viewModel = ScenarioContext.Current.Get<ManageNewServerViewModel>("viewModel");
+            var view = Utils.GetView<ManageServerControl>();
+            view.SetProtocol(protocol);
+            var viewModel = Utils.GetViewModel<ManageNewServerViewModel>();
             Assert.AreEqual(protocol, viewModel.Protocol);
-            Assert.AreEqual(protocol, manageServerControl.GetProtocol());
         }
 
         [Then(@"server port is ""(.*)""")]
@@ -94,10 +88,10 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         [Then(@"Authentication Type selected is ""(.*)""")]
         public void ThenAuthenticationTypeSelectedIs(string authenticationTypeString)
         {
-            var authenticationType = String.Equals(authenticationTypeString, "Windows",
+            var authenticationType = String.Equals(authenticationTypeString, "User",
                 StringComparison.OrdinalIgnoreCase)
-                ? AuthenticationType.Windows
-                : AuthenticationType.Public;
+                ? AuthenticationType.User
+                : AuthenticationType.Windows;
 
             var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
             manageServerControl.SetAuthenticationType(authenticationType);
@@ -114,14 +108,22 @@ namespace Warewolf.AcceptanceTesting.ServerSource
             Utils.CheckControlEnabled(controlName, enabledString, ScenarioContext.Current.Get<ICheckControlEnabledView>(Utils.ViewNameKey));
         }
 
-        [Given(@"I entered ""(.*)"" as address")]
-        public void GivenIEnteredAsAddress(string address)
+        [Given(@"I type Server as ""(.*)""")]
+        public void GivenITypeServerAs(string serverName)
         {
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.EnterAddressName(address);
-            var viewModel = ScenarioContext.Current.Get<ManageNewServerViewModel>("viewModel");
-            Assert.AreEqual(address, viewModel.Address);
+            if (serverName == "Incorrect")
+            {
+
+            }
+            else
+            {
+                var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
+                manageDatabaseSourceControl.EnterServerName(serverName);
+                var viewModel = ScenarioContext.Current.Get<ManageNewServerViewModel>("viewModel");
+                Assert.AreEqual(serverName, viewModel.ServerName.Name);
+            }
         }
+
 
         [Given(@"I select protocol as ""(.*)""")]
         public void GivenISelectProtocolAs(string protocol)
@@ -136,7 +138,7 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         public void GivenIEnterServerPortAs(int port)
         {
             var view = Utils.GetView<ManageServerControl>();
-            view.SetProtocol(port.ToString());
+            view.SetPort(port.ToString());
             var viewModel = Utils.GetViewModel<ManageNewServerViewModel>();
             Assert.AreEqual(port.ToString(), viewModel.SelectedPort);
         }
@@ -144,10 +146,26 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         [Given(@"Authentication Type as ""(.*)""")]
         public void GivenAuthenticationTypeAs(string authenticationTypeString)
         {
-            var authenticationType = String.Equals(authenticationTypeString, "Windows",
-                StringComparison.OrdinalIgnoreCase)
-                ? AuthenticationType.Windows
-                : AuthenticationType.Public;
+            AuthenticationType authenticationType;
+            switch (authenticationTypeString)
+            {
+                case "User":
+                    authenticationType = String.Equals(authenticationTypeString, "User", StringComparison.OrdinalIgnoreCase)
+                        ? AuthenticationType.User : AuthenticationType.Windows;
+                    break;
+                case "Windows":
+                    authenticationType = String.Equals(authenticationTypeString, "Windows", StringComparison.OrdinalIgnoreCase)
+                        ? AuthenticationType.Windows : AuthenticationType.Public;
+                    break;
+                case "Public":
+                    authenticationType = String.Equals(authenticationTypeString, "Public", StringComparison.OrdinalIgnoreCase)
+                        ? AuthenticationType.Public : AuthenticationType.Windows;
+                    break;
+                default:
+                    authenticationType = String.Equals(authenticationTypeString, "Windows", StringComparison.OrdinalIgnoreCase)
+                        ? AuthenticationType.Windows : AuthenticationType.Public;
+                    break;
+            }
 
             var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
             manageServerControl.SetAuthenticationType(authenticationType);
@@ -161,31 +179,35 @@ namespace Warewolf.AcceptanceTesting.ServerSource
             var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
             var mockStudioUpdateManager = new Mock<IManageServerSourceModel>();
             mockStudioUpdateManager.Setup(model => model.ServerName).Returns("localhost");
+            mockStudioUpdateManager.Setup(model => model.GetComputerNames()).Returns(new List<string> { "rsaklfhuggspc", "barney", "SANDBOX-1" });
             var mockEventAggregator = new Mock<IEventAggregator>();
             var mockExecutor = new Mock<IExternalProcessExecutor>();
 
             var serverSourceDefinition = new Dev2.Common.Interfaces.Core.ServerSource
             {
                 Name = "ServerSource",
-                Address = "SANDBOX-1",
+                Address = "https://SANDBOX-1:3143",
+                ServerName = "SANDBOX-1",
                 AuthenticationType = AuthenticationType.User,
                 UserName = "Integrationtester",
                 Password = "I73573r0"
             };
+            FeatureContext.Current["svrsrc"] = serverSourceDefinition;
             var manageServerSourceViewModel = new ManageNewServerViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object, serverSourceDefinition, new SynchronousAsyncWorker(), mockExecutor.Object);
             manageServerControl.DataContext = manageServerSourceViewModel;
             ScenarioContext.Current.Remove("viewModel");
             ScenarioContext.Current.Add("viewModel", manageServerSourceViewModel);
         }
 
-        [Then(@"remote server name is ""(.*)""")]
-        public void ThenRemoteServerNameIs(string address)
+        [Then(@"Server as ""(.*)""")]
+        public void ThenServerAs(string server)
         {
-            var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
-            var viewModel = ScenarioContext.Current.Get<ManageNewServerViewModel>("viewModel");
-            Assert.AreEqual(address, viewModel.Address);
-            Assert.AreEqual(address, manageServerControl.GetAddress());
+            var svr = FeatureContext.Current.Get<IServerSource>("svrsrc");
+            svr.ServerName = server;
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.SelectServer("server");
         }
+
 
         [When(@"I Test Connection to remote server")]
         public void WhenITestConnectionToRemoteServer()
@@ -197,17 +219,17 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         [When(@"I enter Username as ""(.*)""")]
         public void WhenIEnterUsernameAs(string username)
         {
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.EnterUserName(username);
+            var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
+            manageServerControl.EnterUserName(username);
             var viewModel = ScenarioContext.Current.Get<ManageNewServerViewModel>("viewModel");
-            Assert.AreEqual(username, viewModel.UserName);
+            Assert.AreEqual(username, manageServerControl.GetUsername());
         }
 
         [When(@"I enter Password as ""(.*)""")]
         public void WhenIEnterPasswordAs(string password)
         {
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.EnterPassword(password);
+            var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
+            manageServerControl.EnterPassword(password);
             var viewModel = ScenarioContext.Current.Get<ManageNewServerViewModel>("viewModel");
             Assert.AreEqual(password, viewModel.Password);
         }
@@ -215,14 +237,20 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         [Then(@"validation message is ""(.*)""")]
         public void ThenValidationMessageIs(string errorMsg)
         {
-            var viewModel = Utils.GetViewModel<ManageNewServerViewModel>();
-            if (string.IsNullOrEmpty(viewModel.TestMessage))
+            var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<ManageNewServerViewModel>("viewModel");
+            var errorMessageFromControl = manageServerControl.GetErrorMessage();
+            var errorMessageOnViewModel = viewModel.TestMessage;
+            var isErrorMessageOnControl = errorMessageFromControl.Equals(errorMsg, StringComparison.OrdinalIgnoreCase);
+            Assert.IsTrue(isErrorMessageOnControl);
+            if (string.IsNullOrWhiteSpace(errorMsg))
             {
-                Assert.IsNull(viewModel.TestMessage);
+                Assert.AreEqual(errorMsg, "");
             }
             else
             {
-                Assert.AreEqual(errorMsg, viewModel.TestMessage);
+                var isErrorMessage = errorMessageOnViewModel.Equals(errorMsg, StringComparison.OrdinalIgnoreCase);
+                Assert.IsTrue(isErrorMessage);
             }
         }
 
@@ -255,9 +283,13 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         }
 
         [When(@"I save the server source")]
+        [Then(@"I save the server source")]
         public void WhenISaveTheServerSource()
         {
-            ScenarioContext.Current.Pending();
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Verifiable();
+            var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
+            manageServerControl.PerformSave();
         }
 
         [When(@"Test Connecton is ""(.*)""")]
@@ -280,11 +312,11 @@ namespace Warewolf.AcceptanceTesting.ServerSource
             else
             {
                 mockUpdateManager.Setup(manager => manager.TestConnection(It.IsAny<IServerSource>()))
-                    .Throws(new WarewolfTestException("Server not found", null));
+                    .Throws(new WarewolfTestException("Connection Error: Unauthorized", null));
 
             }
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.TestAction();
+            var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
+            manageServerControl.TestAction();
         }
 
 
@@ -309,10 +341,10 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         [Then(@"Authentication Type as ""(.*)""")]
         public void ThenAuthenticationTypeAs(string authenticationTypeString)
         {
-            var authenticationType = String.Equals(authenticationTypeString, "Windows",
+            var authenticationType = String.Equals(authenticationTypeString, "Public",
                 StringComparison.OrdinalIgnoreCase)
-                ? AuthenticationType.Windows
-                : AuthenticationType.Anonymous;
+                ? AuthenticationType.Public
+                : AuthenticationType.Windows;
 
             var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
             manageServerControl.SetAuthenticationType(authenticationType);
@@ -321,15 +353,10 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         }
 
         [Then(@"tab name is ""(.*)""")]
-        public void ThenTabNameIs(string p0)
+        public void ThenTabNameIs(string headerText)
         {
-            ScenarioContext.Current.Pending();
-        }
-
-        [Then(@"server source ""(.*)"" is saved")]
-        public void ThenServerSourceIsSaved(string p0)
-        {
-            ScenarioContext.Current.Pending();
+            var viewModel = ScenarioContext.Current.Get<ManageNewServerViewModel>("viewModel");
+            Assert.AreEqual(headerText, viewModel.Header); 
         }
 
         [AfterScenario("ServerSource")]
@@ -337,15 +364,19 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         {
             var mockExecutor = new Mock<IExternalProcessExecutor>();
             var mockUpdateManager = ScenarioContext.Current.Get<Mock<IManageServerSourceModel>>("updateManager");
+            mockUpdateManager.Setup(model => model.ServerName).Returns("localhost");
+            mockUpdateManager.Setup(model => model.GetComputerNames()).Returns(new List<string> { "rsaklfhuggspc", "barney", "SANDBOX-1" });
             var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
             var mockEventAggregator = new Mock<IEventAggregator>();
             var viewModel = new ManageNewServerViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockExecutor.Object);
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageWebserviceSourceControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.DataContext = viewModel;
+            var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
+            manageServerControl.DataContext = viewModel;
             FeatureContext.Current.Remove("viewModel");
             FeatureContext.Current.Add("viewModel", viewModel);
             FeatureContext.Current.Remove("externalProcessExecutor");
             FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+            ScenarioContext.Current.Remove("viewModel");
+            ScenarioContext.Current.Add("viewModel", viewModel);
 
         }
     }

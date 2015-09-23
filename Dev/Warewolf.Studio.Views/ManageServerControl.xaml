@@ -13,6 +13,7 @@
              xmlns:interfaces="clr-namespace:Dev2.Common.Interfaces;assembly=Dev2.Common.Interfaces"
              xmlns:serviceModel="clr-namespace:Dev2.Runtime.ServiceModel.Data;assembly=Dev2.Common.Interfaces"
              xmlns:converters="clr-namespace:Dev2.AppResources.Converters;assembly=Dev2.Studio.Core"
+             xmlns:ig="http://schemas.infragistics.com/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" BorderBrush="White"
              d:DataContext="{d:DesignInstance Type=interfaces:IManageNewServerViewModel,
@@ -36,11 +37,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Background="{StaticResource WareWolfMenuBrush}" 
-                        HorizontalAlignment="Stretch">
-            <TextBlock Margin="5" 
-                           Text="{Binding HeaderText}" 
-                           Style="{StaticResource SourceHeader}" />
+        <StackPanel Background="{StaticResource WareWolfMenuBrush}" HorizontalAlignment="Stretch">
+            <TextBlock Margin="5" Text="{Binding HeaderText}" Style="{StaticResource SourceHeader}" />
         </StackPanel>
         <Grid Grid.Row="1" Margin="{StaticResource ElementBorderTop}" >
             <Grid.ColumnDefinitions>
@@ -68,31 +66,40 @@
                         </ItemsPanelTemplate>
                     </ComboBox.ItemsPanel>
                     <i:Interaction.Behaviors>
-                        <core:HelpSetter Text="{x:Static languages:Core.ServerProtocolHelp}"
-                                 DataContext="{Binding}" />
+                        <core:HelpSetter Text="{x:Static languages:Core.ServerProtocolHelp}" DataContext="{Binding}" />
                     </i:Interaction.Behaviors>
                 </ComboBox>
-                <TextBox Grid.Column="1" 
-                         x:Name="AddressTextBox"
-                         Text="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}" 
-                         ToolTip="{Binding Path=AddressToolTip}" >
+                <ig:XamComboEditor x:Name="AddressTextBox"
+                               Grid.Column="1" 
+                               ItemsSource="{Binding Path=ComputerNames}"
+                               SelectedItem="{Binding ServerName,UpdateSourceTrigger=PropertyChanged}"
+                               IsEditable="True"
+                               AllowDrop="True"
+                               MaxDropDownHeight="200"
+                               CustomValueEnteredAction="Allow"
+                               Focusable="False"
+                               views:FocusExtension.IsFocused="False"
+                               Loaded="XamComboEditor_Loaded">
+                    <ig:XamComboEditor.ItemFilters>
+                        <ig:ComboItemFilter FieldName="Name" LogicalOperator="And">
+                            <ig:ComboItemFilter.Conditions>
+                                <ig:ComparisonCondition Operator="Contains" />
+                            </ig:ComboItemFilter.Conditions>
+                        </ig:ComboItemFilter>
+                    </ig:XamComboEditor.ItemFilters>
                     <i:Interaction.Behaviors>
                         <core:HelpSetter Text="{x:Static languages:Core.ServerAddressHelp}"
                                  DataContext="{Binding}" />
                     </i:Interaction.Behaviors>
-                </TextBox>
-                <TextBlock Grid.Column="2" 
-                           HorizontalAlignment="Center" 
-                           Text=":"></TextBlock>
+                </ig:XamComboEditor>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text=":"></TextBlock>
                 <TextBox Grid.Column="3" 
                          MinWidth="35"
                          x:Name="PortTextBox"
                          Text="{Binding SelectedPort, UpdateSourceTrigger=PropertyChanged}" 
-                         
                          ToolTip="{Binding Path=PortToolTip}">
                     <i:Interaction.Behaviors>
-                        <core:HelpSetter Text="{x:Static languages:Core.ServerSelectPortHelp}"
-                                 DataContext="{Binding}" />
+                        <core:HelpSetter Text="{x:Static languages:Core.ServerSelectPortHelp}" DataContext="{Binding}" />
                     </i:Interaction.Behaviors>
                 </TextBox>
             </Grid>
@@ -106,9 +113,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" 
-                       x:Name="Authentication"
-                       Text="{Binding Path=AuthenticationLabel}" ></TextBlock>
+            <TextBlock Grid.Column="0" x:Name="Authentication" Text="{Binding Path=AuthenticationLabel}" />
             <Grid Grid.Column="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -124,8 +129,7 @@
                              IsChecked="{Binding Path=AuthenticationType, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, 
                                         ConverterParameter={x:Static serviceModel:AuthenticationType.Windows}}">Windows
                     <i:Interaction.Behaviors>
-                        <core:HelpSetter Text="{x:Static languages:Core.ServerSelectWindowsHelp}"
-                                 DataContext="{Binding}" />
+                        <core:HelpSetter Text="{x:Static languages:Core.ServerSelectWindowsHelp}" DataContext="{Binding}" />
                     </i:Interaction.Behaviors>
                 </RadioButton>
                 <RadioButton Grid.Column="1" 
@@ -138,8 +142,7 @@
                              IsChecked="{Binding Path=AuthenticationType, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, 
                                         ConverterParameter={x:Static serviceModel:AuthenticationType.User}}">User
                     <i:Interaction.Behaviors>
-                        <core:HelpSetter Text="{x:Static languages:Core.ServerSelectUserHelp}"
-                                 DataContext="{Binding}" />
+                        <core:HelpSetter Text="{x:Static languages:Core.ServerSelectUserHelp}" DataContext="{Binding}" />
                     </i:Interaction.Behaviors>
                 </RadioButton>
                 <RadioButton Grid.Column="2" 
@@ -151,8 +154,7 @@
                              IsChecked="{Binding Path=AuthenticationType, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, 
                                         ConverterParameter={x:Static serviceModel:AuthenticationType.Public}}">Public
                     <i:Interaction.Behaviors>
-                        <core:HelpSetter Text="{x:Static languages:Core.ServerSelectPublicHelp}"
-                                 DataContext="{Binding}" />
+                        <core:HelpSetter Text="{x:Static languages:Core.ServerSelectPublicHelp}" DataContext="{Binding}" />
                     </i:Interaction.Behaviors>
                 </RadioButton>
             </Grid>
@@ -160,7 +162,7 @@
         <Grid Grid.Row="3" 
               x:Name="UserNamePasswordContainer"
               Margin="0,-3,0,0"
-              Visibility="{Binding Path=IsUserNameVisible,Converter={StaticResource BoolToVisibilityConverter}}">
+              Visibility="{Binding Path=UserAuthenticationSelected,Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -176,8 +178,7 @@
                      Text="{Binding Path=UserName}" 
                      ToolTip="{Binding Path=UserNameToolTip}" >
                 <i:Interaction.Behaviors>
-                    <core:HelpSetter Text="{x:Static languages:Core.UserNameAuthenticationHelp}"
-                                 DataContext="{Binding}" />
+                    <core:HelpSetter Text="{x:Static languages:Core.UserNameAuthenticationHelp}" DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </TextBox>
             <TextBlock Grid.Row="1" 
@@ -192,8 +193,7 @@
                          customControls:PasswordBoxAssistant.BindPassword="true"
                          customControls:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Behaviors>
-                    <core:HelpSetter Text="{x:Static languages:Core.PasswordAuthenticationHelp}"
-                                 DataContext="{Binding}" />
+                    <core:HelpSetter Text="{x:Static languages:Core.PasswordAuthenticationHelp}" DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </PasswordBox>
         </Grid>
@@ -202,15 +202,10 @@
                     Orientation="Horizontal" 
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Center">
-            <TextBlock Text="{Binding Path=TestMessage}" 
-                       HorizontalAlignment="Right" 
-                       Margin="{StaticResource ControlBorderRight}"
-                       VerticalAlignment="Center" ></TextBlock>
-            <TextBlock Style="{StaticResource ErrorTextBlockStyle}"  
-                       TextAlignment="Right" 
-                       Margin="{StaticResource ControlBorderRight}"
-                       VerticalAlignment="Center" 
-                       Text="{Binding Path=Validate}"></TextBlock>
+            <TextBlock TextWrapping="WrapWithOverflow" 
+                       x:Name="ErrorTextBlock" 
+                       Text="{Binding TestMessage}" 
+                       Visibility="{Binding Path=TestFailed,Converter={StaticResource BoolToVisibilityConverter}}"></TextBlock>
             <fa:ImageAwesome Width="14"  
                              Height="14" 
                              Foreground="{StaticResource WareWolfOrangeBrush}" 
@@ -227,32 +222,23 @@
                              HorizontalAlignment="Right" />
             <views:CircularProgressBar Width="14"
                                        Height="14"
-                                       Margin="{StaticResource ControlBorderRight}"
+                                       Margin="{StaticResource ControlBorderRight}" 
                                        Visibility="{Binding Path=Testing,Converter={StaticResource BoolToVisibilityConverter}}" />
-            <Button ToolTip="{Binding Path=TestToolTip}" 
-                    HorizontalAlignment="Right" 
-                    x:Name="TestConnectionButton" 
-                    Width="60" 
+            <Button x:Name="TestConnectionButton" 
+                    Margin="{StaticResource ControlBorderRight}" 
+                    Width="120" 
                     Height="30" 
-                    Margin="{StaticResource ControlBorderRight}"
-                    Content="Test" 
-                    Command="{Binding Path=TestCommand}">
+                    Command="{Binding TestCommand}" 
+                    Content="{Binding TestLabel}" 
+                    ToolTip="{Binding Path=TestToolTip}">
                 <i:Interaction.Behaviors>
-                    <core:HelpSetter Text="{x:Static languages:Core.ServerTestConnectionHelp}"
-                                 DataContext="{Binding}" />
+                    <core:HelpSetter Text="{x:Static languages:Core.ServerTestConnectionHelp}" DataContext="{Binding}" />
                 </i:Interaction.Behaviors>
             </Button>
-            <Button Width="60" 
+            <Button x:Name="CancelButton" Width="120" 
                     Height="30" 
-                    Content="Save" 
-                    IsEnabled="{Binding Path=CanClickOk}" 
-                    ToolTip="{Binding Path=SaveToolTip}" 
-                    Command="{Binding Path=OkCommand}">
-                <i:Interaction.Behaviors>
-                    <core:HelpSetter Text="{x:Static languages:Core.ServerSaveHelp}"
-                                 DataContext="{Binding}" />
-                </i:Interaction.Behaviors>
-            </Button>
+                    Command="{Binding CancelTestCommand}" 
+                    Content="{Binding CancelTestLabel}"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

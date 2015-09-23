@@ -8,6 +8,7 @@ namespace Dev2.Common.Interfaces.Core
     {
         #region Implementation of IServerSource
 
+        public string ServerName { get; set; }
         /// <summary>
         /// The server address that we are trying to connect to
         /// </summary>
@@ -73,7 +74,7 @@ namespace Dev2.Common.Interfaces.Core
             {
                 return true;
             }
-            return string.Equals(Address, other.Address) && AuthenticationType == other.AuthenticationType && string.Equals(UserName, other.UserName) && string.Equals(Password, other.Password) && ID.Equals(other.ID) && string.Equals(Name, other.Name) && string.Equals(ResourcePath, other.ResourcePath);
+            return string.Equals(Address, other.Address) && AuthenticationType == other.AuthenticationType && string.Equals(UserName, other.UserName) && string.Equals(Password, other.Password) && string.Equals(Name, other.Name);
         }
 
         /// <summary>

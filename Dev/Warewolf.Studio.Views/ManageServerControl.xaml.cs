@@ -1,9 +1,16 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using Dev2.Common.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
+using Infragistics.Controls.Editors.Primitives;
+using Infragistics.Windows;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.Views
 {
@@ -15,17 +22,73 @@ namespace Warewolf.Studio.Views
         public ManageServerControl()
         {
             InitializeComponent();
-            AddressTextBox.Focus();
         }
 
-        public bool IsAddressFocused()
+        // ReSharper disable once InconsistentNaming
+        private void XamComboEditor_Loaded(object sender, RoutedEventArgs e)
         {
-            return AddressTextBox.IsFocused;
+            SpecializedTextBox txt = Utilities.GetDescendantFromType(sender as DependencyObject, typeof(SpecializedTextBox), false) as SpecializedTextBox;
+            if (txt != null)
+            {
+                txt.SelectAll();
+                txt.Focus();
+                var selectedItem = AddressTextBox.SelectedItem as ComputerName;
+                if (selectedItem != null) txt.Text = selectedItem.Name;
+                AddressTextBox.Style = Application.Current.TryFindResource("XamComboEditorStyle") as Style;
+            }
         }
 
-        public void EnterAddressName(string address)
+        public void SelectServer(string serverName)
         {
-            AddressTextBox.Text = address;
+            try
+            {
+                EnterServerName(serverName);
+            }
+            catch (Exception)
+            {
+                //Stupid exception when running from tests
+            }
+        }
+
+        public void EnterServerName(string serverName, bool add = false)
+        {
+            var comboEditorItem = AddressTextBox.Items.FirstOrDefault(item =>
+            {
+                var computerName = item.Data as ComputerName;
+                if (computerName != null)
+                {
+                    return computerName.Name.Equals(serverName, StringComparison.OrdinalIgnoreCase);
+                }
+                return false;
+            });
+            if (comboEditorItem == null && add)
+            {
+                var computerNames = AddressTextBox.ItemsSource as ICollection<IComputerName>;
+                if (computerNames != null)
+                {
+                    computerNames.Add(new ComputerName() { Name = serverName });
+                }
+                EnterServerName(serverName);
+            }
+            if (comboEditorItem != null)
+            {
+                try
+                {
+                    AddressTextBox.SelectedItem = comboEditorItem.Data;
+                }
+                catch (Exception)
+                {
+                    //Ignore exception running from test
+                }
+            }
+            else
+            {
+                var manageDatabaseSourceViewModel = DataContext as IManageNewServerViewModel;
+                if (manageDatabaseSourceViewModel != null)
+                {
+                    manageDatabaseSourceViewModel.ServerName = new ComputerName() { Name = serverName };
+                }
+            }
         }
 
         public void EnterUserName(string username)
@@ -45,7 +108,7 @@ namespace Warewolf.Studio.Views
 
         public string GetAddress()
         {
-            return AddressTextBox.Text;
+            return AddressTextBox.SelectedItem.ToString();
         }
 
         public string GetPort()
@@ -108,6 +171,15 @@ namespace Warewolf.Studio.Views
             }
         }
 
+        public void PerformSave()
+        {
+            var viewModel = DataContext as ManageNewServerViewModel;
+            if (viewModel != null)
+            {
+                viewModel.OkCommand.Execute(null);
+            }
+        }
+
         public Visibility GetUsernameVisibility()
         {
             BindingExpression be = UserNamePasswordContainer.GetBindingExpression(VisibilityProperty);
@@ -130,6 +202,16 @@ namespace Warewolf.Studio.Views
         public void TestAction()
         {
             TestConnectionButton.Command.Execute(null);
+        }
+
+        public string GetErrorMessage()
+        {
+            BindingExpression be = ErrorTextBlock.GetBindingExpression(TextBlock.TextProperty);
+            if (be != null)
+            {
+                be.UpdateTarget();
+            }
+            return ErrorTextBlock.Text;
         }
 
         /// <summary>

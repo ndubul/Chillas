@@ -8,9 +8,8 @@ Feature: NewServerSource
 Scenario: Opening New Server Source
 	Given I open New Server Source
 	Then "New Server Source" tab is opened
-	And Address is focused 
-	And selected protocol is "http" 
-	And server port is "3142" 
+	And selected protocol is "https" 
+	And server port is "3143" 
 	And Authentication Type as "Windows"
 	And "Test" is "Disabled"
 	And "Save" is "Disabled"
@@ -20,7 +19,7 @@ Scenario: Opening New Server Source
 Scenario: Creating New Source as windows
 	Given I open New Server Source
 	And "Test" is "Disabled"
-	And I entered "SANDBOX-1" as address
+	And I type Server as "SANDBOX-1"
 	And "Test" is "Enabled"
 	And I select protocol as "http"
 	And I enter server port as "3142" 
@@ -38,16 +37,16 @@ Scenario: Creating New Source as windows
 @ServerSource
 Scenario: Test connection is unsuccessfull
 	Given I open New Server Source
-	And I entered "ABSCD" as address
+	And I type Server as "ABSCD"
 	When I Test Connection to remote server
 	Then Test Connecton is "Failed"
-	And validation message is "Connection Error: An error occured while sending the request."
+	And validation message is "Connection Error: Unauthorized"
 	And "Save" is "Disabled"
 
 @ServerSource
 Scenario: Creating New Source as User And HTTPS
 	Given I open New Server Source
-	And I entered "SANDBOX-1" as address
+	And I type Server as "SANDBOX-1"
 	And I select protocol as "https"
 	And I enter server port as "3143" 
 	And "Save" is "Disabled"
@@ -67,7 +66,7 @@ Scenario: Creating New Source as User And HTTPS
 @ServerSource
 Scenario: Creating server source Authentication error
 	Given I open New Server Source
-	And I entered "SANDBOX-1" as address
+	And I type Server as "SANDBOX-1"
 	And I select protocol as "http"
     And I enter server port as "3142" 
     And "Save" is "Disabled"
@@ -82,7 +81,7 @@ Scenario: Creating server source Authentication error
 @ServerSource
 Scenario: Creating New Source as Public
 	Given I open New Server Source
-	And I entered "SANDBOX-1" as address
+	And I type Server as "SANDBOX-1"
 	And I select protocol as "http"
 	And I enter server port as "3142" 
 	And "Save" is "Disabled"
@@ -101,9 +100,9 @@ Scenario: Creating New Source as Public
 Scenario: Editing Saved Server Source Authentication 
 	Given I open "ServerSource" server source
 	Then "ServerSource" tab is opened
-	And remote server name is "SANDBOX-1"
+	And Server as "SANDBOX-1"
 	And selected protocol is "https"
-	And server port is "3142" 
+	And server port is "3143" 
 	And Authentication Type selected is "User"
 	Then server Username field is "Visible"
 	And server Password field is "Visible"
@@ -119,8 +118,6 @@ Scenario: Editing Saved Server Source Authentication
 	When Test Connecton is "Passed"
 	Then tab name is "ServerSource *"
 	And "Save" is "Enabled"
-	When I save the server source
-	Then the save dialog is opened
-	And server source "ServerSource" is saved
+	Then I save the server source
 
 

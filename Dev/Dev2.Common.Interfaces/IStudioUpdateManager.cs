@@ -18,7 +18,7 @@ namespace Dev2.Common.Interfaces
         void Save(IEmailServiceSource emailServiceSource);
         void Save(ISharepointServerSource sharePointServiceSource);
 
-        string TestConnection(IServerSource serverSource);
+        void TestConnection(IServerSource serverSource);
         void TestConnection(IWebServiceSource serverSource);
         void TestConnection(ISharepointServerSource sharePointServiceSource);
         string TestConnection(IEmailServiceSource emailServiceSourceSource);
