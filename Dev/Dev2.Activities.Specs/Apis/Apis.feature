@@ -102,6 +102,11 @@ Scenario: Ensure Access will be denied if permissions changed
 	| Output                                   |
 	| Access has been denied for this request. |
 
+#wolf-1084
+Scenario: Ensure all relevant information is displayed
+	Given I execute "http://server:3142/public/apis.json" 
+	When the request returns
+	Then only publically available services should be visible
 
 
 #Scenario: Ensure api returns correctly
@@ -110,3 +115,4 @@ Scenario: Ensure Access will be denied if permissions changed
 #	When the request returns
 #	Then "http://rsaklfleroy:3142/secure/Outter.api" properties appear as
 #	| 
+
