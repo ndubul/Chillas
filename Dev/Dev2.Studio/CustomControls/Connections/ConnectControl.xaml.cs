@@ -14,7 +14,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using Dev2.ConnectionHelpers;
 
-namespace Warewolf.Studio.Views
+// ReSharper disable CheckNamespace
+namespace Dev2.CustomControls.Connections
 {
     /// <summary>
     /// Interaction logic for ConnectControl.xaml

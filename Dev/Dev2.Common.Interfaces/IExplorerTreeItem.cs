@@ -42,7 +42,7 @@ namespace Dev2.Common.Interfaces
         bool CanCreateWorkflowService { get; set; }
         bool AreVersionsVisible { get; set; }
         IShellViewModel ShellViewModel { get;}
-
+        int ChildrenCount { get; }
         void AddChild(IExplorerItemViewModel child);
         void RemoveChild(IExplorerItemViewModel child);
         void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction);

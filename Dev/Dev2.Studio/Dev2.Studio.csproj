@@ -360,6 +360,9 @@
     <Compile Include="Controller\FlowController.cs" />
     <Compile Include="Controller\PopupController.cs" />
     <Compile Include="Controller\ProcessController.cs" />
+    <Compile Include="CustomControls\Connections\ConnectControl.xaml.cs">
+      <DependentUpon>ConnectControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\Connections\ConnectControlViewModel.cs" />
     <Compile Include="CustomControls\Connections\IConnectControlViewModel.cs" />
     <Compile Include="CustomControls\Dev2StatusBar.cs" />
@@ -688,6 +691,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ActivityDesigners\DsfTransformActivityDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomControls\Connections\ConnectControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

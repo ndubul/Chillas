@@ -44,7 +44,7 @@ namespace Warewolf.Studio.ViewModels
                 {
                     IsConnecting = true;
                     IsConnected = false;
-                    SelectedConnection.Connect();
+                    Connect(SelectedConnection);
                     IsConnected = true;
                     IsConnecting = false;
                 }

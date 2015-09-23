@@ -10,7 +10,6 @@
              xmlns:models="clr-namespace:Dev2.Models;assembly=Dev2.Studio.Core"
              xmlns:connections="clr-namespace:Dev2.CustomControls.Connections"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             xmlns:connections1="clr-namespace:Dev2.CustomControls.Connections;assembly=Warewolf.Studio.Views"
              Name="DeployUserControl"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance deploy:DeployViewModel}">
@@ -54,7 +53,7 @@
                                Style="{StaticResource SourceHeader}"></TextBlock>
                 </StackPanel>
 
-                <connections1:ConnectControl DataContext="{Binding SourceConnectControlViewModel}"
+                <connections:ConnectControl DataContext="{Binding SourceConnectControlViewModel}"
                                      Grid.Row="1"
                                      Margin="{StaticResource ControlBorderTop}"
                                      ConnectButtonAutomationID="UI_SourceConnectServerbtn_AutoID"
@@ -157,7 +156,7 @@
                                Style="{StaticResource SourceHeader}"></TextBlock>
                 </StackPanel>
 
-                <connections1:ConnectControl DataContext="{Binding TargetConnectControlViewModel}"
+                <connections:ConnectControl DataContext="{Binding TargetConnectControlViewModel}"
                                             Grid.Row="1"
                                             Margin="{StaticResource ControlBorderTop}"
                                             ConnectButtonAutomationID="UI_DestinationServerConnectbtn_AutoID"
