@@ -111,7 +111,7 @@ namespace Dev2.ViewModels
                 if (ViewModel.HasChanged)
                 {
                     var msgBoxViewModel = new MessageBoxViewModel(String.Format(StringResources.ItemSource_NotSaved), String.Format("Save {0}?",  ViewModel.Header.Replace("*", "")),
-                                                    MessageBoxButton.YesNoCancel, FontAwesomeIcon.ExclamationTriangle);
+                                                    MessageBoxButton.YesNoCancel, FontAwesomeIcon.ExclamationTriangle, false);
 
                     MessageBoxView msgBoxView = new MessageBoxView
                     {

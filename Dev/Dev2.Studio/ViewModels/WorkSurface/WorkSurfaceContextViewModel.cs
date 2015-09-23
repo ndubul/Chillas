@@ -48,6 +48,9 @@ using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Utils;
 using Dev2.Webs;
 using Dev2.Workspaces;
+using FontAwesome.WPF;
+using Warewolf.Studio.ViewModels;
+using Warewolf.Studio.Views;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.ViewModels.WorkSurface
@@ -575,8 +578,15 @@ namespace Dev2.Studio.ViewModels.WorkSurface
             }
             else
             {
+                var msgBoxViewModel = new MessageBoxViewModel("Please resolve all variable errors, before debugging." + System.Environment.NewLine,
+                "Error Debugging", MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle, false);
 
-                _popupController.Show("Please resolve all variable errors, before debugging." + System.Environment.NewLine, "Error Debugging", MessageBoxButton.OK, MessageBoxImage.Error, "true");
+                MessageBoxView msgBoxView = new MessageBoxView
+                {
+                    DataContext = msgBoxViewModel
+                };
+                msgBoxView.ShowDialog();
+
                 SetDebugStatus(DebugStatus.Finished);
                 return;
             }
@@ -653,7 +663,14 @@ namespace Dev2.Studio.ViewModels.WorkSurface
 
             if(DataListViewModel != null && DataListViewModel.HasErrors)
             {
-                PopupController.Show("Please resolve the variable(s) errors below, before saving." + System.Environment.NewLine + System.Environment.NewLine + DataListViewModel.DataListErrorMessage, "Error Saving", MessageBoxButton.OK, MessageBoxImage.Error, "true");
+                var msgBoxViewModel = new MessageBoxViewModel(string.Format("Please resolve the variable(s) errors below, before saving." + System.Environment.NewLine + System.Environment.NewLine + DataListViewModel.DataListErrorMessage),
+                "Error Saving", MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle, false);
+
+                MessageBoxView msgBoxView = new MessageBoxView
+                {
+                    DataContext = msgBoxViewModel
+                };
+                msgBoxView.ShowDialog();
 
                 return false;
             }

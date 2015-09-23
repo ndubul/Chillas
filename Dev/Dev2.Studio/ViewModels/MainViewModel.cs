@@ -675,8 +675,8 @@ namespace Dev2.Studio.ViewModels
         // Write CodedUI Test Because of Silly Chicken affect ;)
         private bool ShowRemovePopup(IWorkflowDesignerViewModel workflowVm)
         {
-            var msgBoxViewModel = new MessageBoxViewModel(string.Format(StringResources.DialogBody_NotSaved, workflowVm.ResourceModel.ResourceName), 
-                String.Format("Save {0}?", workflowVm.ResourceModel.ResourceName), MessageBoxButton.YesNoCancel, FontAwesomeIcon.ExclamationTriangle);
+            var msgBoxViewModel = new MessageBoxViewModel(string.Format(StringResources.DialogBody_NotSaved, workflowVm.ResourceModel.ResourceName),
+                String.Format("Save {0}?", workflowVm.ResourceModel.ResourceName), MessageBoxButton.YesNoCancel, FontAwesomeIcon.ExclamationTriangle, false);
 
             MessageBoxView msgBoxView = new MessageBoxView
             {
@@ -1007,7 +1007,7 @@ namespace Dev2.Studio.ViewModels
         public void ShowPopup(IPopupMessage popupMessage)
         {
             var msgBoxViewModel = new MessageBoxViewModel(popupMessage.Description, popupMessage.Header,
-                                                    popupMessage.Buttons, FontAwesomeIcon.ExclamationTriangle);
+                                                    popupMessage.Buttons, FontAwesomeIcon.ExclamationTriangle, false);
 
             MessageBoxView msgBoxView = new MessageBoxView
             {
@@ -1717,8 +1717,8 @@ namespace Dev2.Studio.ViewModels
                 if(model != null)
                 {
                     var msgBoxViewModel = new MessageBoxViewModel(String.Format(StringResources.DialogBody_HasDependencies, model.ResourceName,
-                                                    model.ResourceType.GetDescription()), String.Format(StringResources.DialogTitle_HasDependencies, model.ResourceType.GetDescription()), 
-                                                    MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle);
+                        model.ResourceType.GetDescription()), String.Format(StringResources.DialogTitle_HasDependencies, model.ResourceType.GetDescription()), 
+                                                    MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle, true);
 
                     MessageBoxView msgBoxView = new MessageBoxView
                     {
@@ -1736,7 +1736,7 @@ namespace Dev2.Studio.ViewModels
                 {
                     var msgBoxViewModel = new MessageBoxViewModel(String.Format(StringResources.DialogBody_HasDependencies, model.ResourceName, model.ResourceType.GetDescription()), 
                         String.Format(StringResources.DialogTitle_HasDependencies, model.ResourceType.GetDescription()),
-                        MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle);
+                        MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle, false);
 
                     MessageBoxView msgBoxView = new MessageBoxView
                     {
@@ -1791,7 +1791,7 @@ namespace Dev2.Studio.ViewModels
                         var deletePrompt = String.Format(StringResources.DialogBody_ConfirmDelete, deletionName,
                             description);
 
-                        var msgBoxViewModel = new MessageBoxViewModel(string.Format(deletePrompt), StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, FontAwesomeIcon.ExclamationTriangle);
+                        var msgBoxViewModel = new MessageBoxViewModel(string.Format(deletePrompt), StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, FontAwesomeIcon.ExclamationTriangle, false);
 
                         MessageBoxView msgBoxView = new MessageBoxView
                         {
@@ -1812,7 +1812,7 @@ namespace Dev2.Studio.ViewModels
         {
             var deletePrompt = String.Format(StringResources.DialogBody_ConfirmFolderDelete, folderBeingDeleted);
 
-            var msgBoxViewModel = new MessageBoxViewModel(string.Format(deletePrompt), StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, FontAwesomeIcon.ExclamationTriangle);
+            var msgBoxViewModel = new MessageBoxViewModel(string.Format(deletePrompt), StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, FontAwesomeIcon.ExclamationTriangle, false);
 
             MessageBoxView msgBoxView = new MessageBoxView
             {

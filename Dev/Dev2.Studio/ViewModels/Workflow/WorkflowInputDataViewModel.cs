@@ -36,6 +36,9 @@ using Dev2.Studio.Core.ViewModels.Base;
 using Dev2.Studio.ViewModels.WorkSurface;
 using Dev2.Threading;
 using Dev2.ViewModels.Workflow;
+using FontAwesome.WPF;
+using Warewolf.Studio.ViewModels;
+using Warewolf.Studio.Views;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.ViewModels.Workflow
@@ -323,7 +326,15 @@ namespace Dev2.Studio.ViewModels.Workflow
 
         public void ShowInvalidDataPopupMessage()
         {
-            _popupController.Show("The data you have entered is invalid. Please correct the data.", "Invalid data entered.", MessageBoxButton.OK, MessageBoxImage.Error, null);
+            var msgBoxViewModel = new MessageBoxViewModel("The data you have entered is invalid. Please correct the data.",
+                "Invalid data entered", MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle, false);
+
+            MessageBoxView msgBoxView = new MessageBoxView
+            {
+                DataContext = msgBoxViewModel
+            };
+            msgBoxView.ShowDialog();
+
             IsInError = true;
         }
 

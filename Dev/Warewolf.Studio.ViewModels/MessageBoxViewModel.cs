@@ -14,7 +14,7 @@ namespace Warewolf.Studio.ViewModels
         private MessageBoxResult _result = MessageBoxResult.None;
         FontAwesomeIcon _icon;
 
-        public MessageBoxViewModel(string message, string title, MessageBoxButton buttons, FontAwesomeIcon icon)
+        public MessageBoxViewModel(string message, string title, MessageBoxButton buttons, FontAwesomeIcon icon, bool isDependenciesButtonVisible)
         {
             Title = title;
             Message = message;
@@ -24,6 +24,7 @@ namespace Warewolf.Studio.ViewModels
             NoCommand = new DelegateCommand(No);
             CancelCommand = new DelegateCommand(Cancel);
             OkCommand = new DelegateCommand(Ok);
+            IsDependenciesButtonVisible = isDependenciesButtonVisible;
         }
 
         FontAwesomeIcon Icon
@@ -61,10 +62,7 @@ namespace Warewolf.Studio.ViewModels
             get { return _buttons == MessageBoxButton.OKCancel || _buttons == MessageBoxButton.YesNoCancel; }
         }
 
-        public bool IsDependenciesButtonVisible
-        {
-            get { return _buttons == MessageBoxButton.OK || _buttons == MessageBoxButton.OKCancel; }
-        }
+        public bool IsDependenciesButtonVisible { get; set; }
 
         public bool IsOkButtonVisible
         {

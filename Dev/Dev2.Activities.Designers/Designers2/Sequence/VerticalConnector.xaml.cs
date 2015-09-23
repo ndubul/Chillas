@@ -83,7 +83,7 @@ namespace System.Activities.Core.Presentation
         {
             if(e.Handled)
                 return;
-            if(!Context.Items.GetValue<ReadOnlyState>().IsReadOnly)
+            if(Context != null && !Context.Items.GetValue<ReadOnlyState>().IsReadOnly)
             {
                 if(DragDropHelper.AllowDrop(e.Data, Context, AllowedItemType))
                 {
