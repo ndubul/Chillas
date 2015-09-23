@@ -314,3 +314,19 @@ Examples:
 | 4  | [[var]] | 1.2   | [[rs([[var]]).a]] | [[result]] =    | Index is not an integer |
 | 5  | [[b]]   | ""    | [[rs([[b]]).a]]   | [[result]] = -1 | Index is not an integer |
 | 6  | [[var]] | 123   | [[rs([[var]]).a]] | [[result]] = -1 | Index is not valid      |
+
+#wolf-914
+Scenario: Tool does not return
+	Given I have a findindex variable "" equal to ""
+	And I selected Index "All Occurrence"
+	And I search for characters ""
+	And I selected direction as "Left to Right"
+	When the data find index tool is executed
+	Then the find index result is ""
+	And the execution has "AN" error
+	And the debug inputs as
+	| In Field | Index          | Characters | Direction     |
+	|          | All Occurrence |            | Left to Right |
+	And the debug output as
+	|              |
+	| [[result]] = |
