@@ -1357,6 +1357,52 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.FindAllRecordsetsWithInvalidIndexes("6", "[[var]]", "123", "[[rs([[var]]).a]]", "[[result]] = -1", "Index is not valid", ((string[])(null)));
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Tool does not return")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "FindIndex")]
+        public virtual void ToolDoesNotReturn()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tool does not return", ((string[])(null)));
+#line 319
+this.ScenarioSetup(scenarioInfo);
+#line 320
+ testRunner.Given("I have a findindex variable \"\" equal to \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 321
+ testRunner.And("I selected Index \"All Occurrence\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 322
+ testRunner.And("I search for characters \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 323
+ testRunner.And("I selected direction as \"Left to Right\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 324
+ testRunner.When("the data find index tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 325
+ testRunner.Then("the find index result is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 326
+ testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
+                        "In Field",
+                        "Index",
+                        "Characters",
+                        "Direction"});
+            table36.AddRow(new string[] {
+                        "",
+                        "All Occurrence",
+                        "",
+                        "Left to Right"});
+#line 327
+ testRunner.And("the debug inputs as", ((string)(null)), table36, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table37.AddRow(new string[] {
+                        "[[result]] ="});
+#line 330
+ testRunner.And("the debug output as", ((string)(null)), table37, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

@@ -827,7 +827,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 252
  testRunner.Given("I have the following recordset", ((string)(null)), table45, "Given ");
 #line 257
- testRunner.And("I delete a record \"[[rs(2)]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I delete a record \"[[rs(2).row]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 258
  testRunner.When("the delete tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 259
@@ -848,7 +848,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
-                        ""});
+                        "result"});
             table47.AddRow(new string[] {
                         string.Format("{0} = {1}", result, success)});
 #line 265
@@ -872,11 +872,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Delete a record")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Delete")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rj(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rj(2).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Success", "Success")]
         public virtual void DeleteARecord_Variant1()
         {
-            this.DeleteARecord("[[rj(1).a]]", "Success", ((string[])(null)));
+            this.DeleteARecord("[[rj(2).a]]", "Success", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -894,11 +894,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Delete a record")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Delete")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rj([[int]]).a]], [[int]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rj([[int]]).a]], [[int]]= 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Success", "Success")]
         public virtual void DeleteARecord_Variant3()
         {
-            this.DeleteARecord("[[rj([[int]]).a]], [[int]]", "Success", ((string[])(null)));
+            this.DeleteARecord("[[rj([[int]]).a]], [[int]]= 1", "Success", ((string[])(null)));
         }
     }
 }
