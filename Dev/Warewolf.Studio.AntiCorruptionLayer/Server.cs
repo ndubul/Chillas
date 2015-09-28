@@ -86,12 +86,12 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             }
         }
 
-        //
-//        public async Task<bool> Connect()
-//        {
-//            return await EnvironmentConnection.ConnectAsync(_serverId);
-//        }
-//
+
+        public async Task<bool> ConnectAsync()
+        {
+            return await EnvironmentConnection.ConnectAsync(_serverId);
+        }
+
         public List<IResource> Load()
         {
             return null;

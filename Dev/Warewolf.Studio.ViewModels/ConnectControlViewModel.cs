@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Dev2;
 using Dev2.Common.Interfaces;
@@ -49,7 +50,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        void ConnectOrDisconnect()
+        public async void ConnectOrDisconnect()
         {
             if (SelectedConnection == null)
             {
@@ -64,7 +65,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 IsConnecting = true;
                 IsConnected = false;
-                Connect(SelectedConnection);
+                await Connect(SelectedConnection);
                 IsConnected = true;
                 IsConnecting = false;
             }
@@ -118,17 +119,26 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public void Connect(IServer connection)
+        public async Task<bool> Connect(IServer connection)
         {
             if (connection != null)
             {
-                connection.Connect();
-
-                if (ServerConnected != null)
+                try
                 {
-                    ServerConnected(this, connection);
+                    await connection.ConnectAsync();
+
+                    if (ServerConnected != null)
+                    {
+                        ServerConnected(this, connection);
+                    }
                 }
+                catch(Exception)
+                {
+                    return false;
+                }
+                return true;
             }
+            return false;
         }
 
         public void Disconnect(IServer connection)

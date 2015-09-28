@@ -39,6 +39,7 @@ namespace Dev2.Common.Interfaces
         string GetServerVersion();
 
         void Connect();
+        Task<bool> ConnectAsync();
 
     }
 
