@@ -87,6 +87,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _selectedConnection = value;
+                IsConnected = SelectedConnection.IsConnected;
                 OnPropertyChanged(() => SelectedConnection);
             }
         }
