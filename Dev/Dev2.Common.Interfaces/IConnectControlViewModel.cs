@@ -18,6 +18,7 @@ namespace Dev2.Common.Interfaces
         string EditConnectionToolTip { get; }
         string ConnectionsToolTip { get; }
         EventHandler<IServer> ServerConnected { get; set; }
+        EventHandler<IServer> ServerDisconnected { get; set; }
 
         void Connect(IServer connection);
 

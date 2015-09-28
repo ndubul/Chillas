@@ -9,9 +9,14 @@ using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Infrastructure;
-using Dev2.Interfaces;
+using Dev2.Services.Events;
+using Dev2.Studio.Core;
+using Dev2.Studio.Core.AppResources.DependencyInjection.EqualityComparers;
+using Dev2.Studio.Core.Interfaces;
+using Dev2.Studio.Core.Messages;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.AntiCorruptionLayer;
 using Warewolf.Studio.Core.Popup;
 
 namespace Warewolf.Studio.ViewModels
@@ -165,7 +170,6 @@ namespace Warewolf.Studio.ViewModels
         {
             foreach (var a in Children)
             {
-
                 if (a.ResourceId == id)
                 {
                     a.IsExpanded = true;
@@ -176,7 +180,6 @@ namespace Warewolf.Studio.ViewModels
                 {
                     a.SelectItem(id, foundAction);
                 }
-
             }
         }
 
@@ -213,7 +216,6 @@ namespace Warewolf.Studio.ViewModels
                 };
                 //child.SetFromServer(Server.Permissions.FirstOrDefault(a => a.IsServer));
                 AddChild(child);
-
             }
 
         }
@@ -264,18 +266,62 @@ namespace Warewolf.Studio.ViewModels
 
         void Delete()
         {
-            var mainViewModel = CustomContainer.Get<IMainViewModel>();
-            if (mainViewModel.ShowDeleteDialogForFolder(ResourceName))
+            var environmentModel = EnvironmentRepository.Instance.FindSingle(model => model.ID == Server.EnvironmentID);
+            if (environmentModel != null)
             {
-                _explorerRepository.Delete(this);
-                if (Parent != null)
+                var folderList = new List<IExplorerItemViewModel>();
+                var contextualResourceModels = new Collection<IContextualResourceModel>();
+                foreach (var childModel in this.Descendants())
                 {
-                    Parent.RemoveChild(this);
+                    if (childModel.ResourceType != ResourceType.Folder)
+                    {
+                        var child = childModel;
+                        environmentModel.ResourceRepository.LoadResourceFromWorkspace(child.ResourceId, Guid.Empty);
+                        var resourceModel = environmentModel.ResourceRepository.FindSingle(model => model.ID == child.ResourceId);
+                        if (resourceModel == null && childModel.ResourceType == ResourceType.WebSource)
+                        {
+                            environmentModel.ResourceRepository.ReloadResource(child.ResourceId, Dev2.Studio.Core.AppResources.Enums.ResourceType.Source, ResourceModelEqualityComparer.Current, true);
+                            resourceModel = environmentModel.ResourceRepository.FindSingle(model => model.ID == child.ResourceId);
+                        }
+                        if (resourceModel != null)
+                        {
+                            contextualResourceModels.Add(resourceModel as IContextualResourceModel);
+                        }
+                    }
+                    else
+                    {
+                        folderList.Add(childModel);
+                    }
                 }
-                //                else
-                //                {
-                //                    ShellViewModel.RemoveServiceFromExplorer(this);
-                //                }
+                if (contextualResourceModels.Any())
+                {
+                    var displayName = ResourceName;
+                    EventPublishers.Aggregator.Publish(new DeleteResourcesMessage(contextualResourceModels, displayName, true, () =>
+                    {
+                        _explorerRepository.Delete(this);
+                        if (Parent != null)
+                        {
+                            Parent.RemoveChild(this);
+                        }
+                    }));
+                }
+                else
+                {
+                    EventPublishers.Aggregator.Publish(new DeleteFolderMessage(ResourceName, () =>
+                    {
+                        for (int i = folderList.Count - 1; i >= 0; i--)
+                        {
+                            if (folderList[i].ResourceType == ResourceType.Folder && (folderList[i].Children.Count == 0 || folderList[i].Children.All(c => c.ResourceType == ResourceType.Folder)))
+                            {
+                                _explorerRepository.Delete(folderList[i]);
+                                if (Parent != null)
+                                {
+                                    Parent.RemoveChild(folderList[i]);
+                                }
+                            }
+                        }
+                    }));
+                }
             }
         }
 
@@ -316,7 +362,7 @@ namespace Warewolf.Studio.ViewModels
             CanRename = serverPermission.Contribute || serverPermission.Administrator;
             CanDelete = serverPermission.Contribute || serverPermission.Administrator;
             CanCreateFolder = (serverPermission.Contribute || serverPermission.Administrator);
-
+            CanDeploy = serverPermission.DeployFrom || serverPermission.Administrator;
         }
 
         void SetFromPermission(IWindowsGroupPermission resourcePermission)
@@ -326,9 +372,7 @@ namespace Warewolf.Studio.ViewModels
             CanView = resourcePermission.View || resourcePermission.Contribute || resourcePermission.Administrator;
             CanRename = resourcePermission.Contribute || resourcePermission.Administrator;
             CanDelete = resourcePermission.Contribute || resourcePermission.Administrator;
-
-
-
+            CanDeploy = resourcePermission.DeployFrom || resourcePermission.Administrator;
         }
 
         bool UserShouldEditValueNow
@@ -356,7 +400,6 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-
                 _isRenaming = value;
                 UserShouldEditValueNow = _isRenaming;
                 OnPropertyChanged(() => IsRenaming);
@@ -370,7 +413,6 @@ namespace Warewolf.Studio.ViewModels
             {
                 return !_isRenaming;
             }
-
         }
         public string ResourceName
         {
@@ -383,7 +425,6 @@ namespace Warewolf.Studio.ViewModels
                 if (_resourceName != null && (Parent != null && Parent.Children.Any(a => a.ResourceName == value) && value != _resourceName))
                 {
                     _shellViewModel.ShowPopup(PopupMessages.GetDuplicateMessage(value));
-
                 }
                 else
                 {
@@ -406,7 +447,6 @@ namespace Warewolf.Studio.ViewModels
                             }
 
                             _resourceName = newName;
-
                         }
                     }
                     if (!IsRenaming)
@@ -449,7 +489,6 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-
                 _children = value;
                 OnPropertyChanged(() => Children);
                 OnPropertyChanged(() => ChildrenCount);
@@ -537,8 +576,6 @@ namespace Warewolf.Studio.ViewModels
         // ReSharper disable MemberCanBePrivate.Global
         public bool CanCreateWorkflowService { get; set; }
         // ReSharper restore MemberCanBePrivate.Global
-
-
 
         public bool CanRename
         {
@@ -669,7 +706,6 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-
                 _areVersionsVisible = value;
                 VersionHeader = !value ? "Show Version History" : "Hide Version History";
                 if (value)
@@ -701,7 +737,6 @@ namespace Warewolf.Studio.ViewModels
                     OnPropertyChanged(() => Children);
                 }
                 OnPropertyChanged(() => AreVersionsVisible);
-
             }
         }
         public string VersionNumber

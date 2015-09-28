@@ -1736,7 +1736,7 @@ namespace Dev2.Studio.ViewModels
                 {
                     var msgBoxViewModel = new MessageBoxViewModel(String.Format(StringResources.DialogBody_HasDependencies, model.ResourceName, model.ResourceType.GetDescription()), 
                         String.Format(StringResources.DialogTitle_HasDependencies, model.ResourceType.GetDescription()),
-                        MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle, false);
+                        MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle, true);
 
                     MessageBoxView msgBoxView = new MessageBoxView
                     {
@@ -1749,14 +1749,6 @@ namespace Dev2.Studio.ViewModels
                     }
                     return false;
                 }
-
-                //var dialog = new DeleteResourceDialog(model);
-                //dialog.ShowDialog();
-                //if (dialog.OpenDependencyGraph)
-                //{
-                //    ShowDependencies(false,model);
-                //}
-                //return false;
             }
             return true;
         }
@@ -1822,8 +1814,6 @@ namespace Dev2.Studio.ViewModels
 
             var confirmDelete = msgBoxViewModel.Result == MessageBoxResult.Yes;
 
-            //var deleteAnswer = result.Show(deletePrompt, StringResources.DialogTitle_ConfirmDelete, MessageBoxButton.YesNo, MessageBoxImage.Warning, null);
-            //var confirmDelete = deleteAnswer == MessageBoxResult.Yes;
             return confirmDelete;
         }
 

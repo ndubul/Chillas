@@ -220,6 +220,7 @@ namespace Warewolf.Studio.ViewModels
 			ConnectControlViewModel = new ConnectControlViewModel(shellViewModel.LocalhostServer, aggregator);
 			ShowConnectControl = true;
             ConnectControlViewModel.ServerConnected+=ServerConnected;
+            ConnectControlViewModel.ServerDisconnected += ServerDisconnected;
 			//aggregator.GetEvent<ItemAddedEvent>().Subscribe(ItemAdded);
 		}
 
@@ -230,6 +231,15 @@ namespace Warewolf.Studio.ViewModels
             await environmentModel.Load();
             Environments.Add(environmentModel);
 	    }
+
+	    void ServerDisconnected(object _, IServer server)
+        {
+            var environmentModel = Environments.FirstOrDefault(model => model.Server.EnvironmentID == server.EnvironmentID);
+            if (environmentModel!=null)
+            {
+                Environments.Remove(environmentModel);
+            }
+        }
 
 	    //		void ItemAdded(IExplorerItem obj)
 //		{

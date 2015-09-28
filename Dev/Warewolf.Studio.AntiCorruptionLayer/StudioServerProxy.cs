@@ -107,5 +107,19 @@ namespace Warewolf.Studio.AntiCorruptionLayer
                 }
             }
         }
+
+        public static IEnumerable<IExplorerItemViewModel> Descendants(this IExplorerItemViewModel root)
+        {
+            var nodes = new Stack<IExplorerItemViewModel>(new[] { root });
+            while (nodes.Any())
+            {
+                IExplorerItemViewModel node = nodes.Pop();
+                yield return node;
+                if (node.Children != null)
+                {
+                    foreach (var n in node.Children) nodes.Push(n);
+                }
+            }
+        }
     }
 }

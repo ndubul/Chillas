@@ -14,6 +14,7 @@ using System.Activities;
 using System.Activities.Presentation.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using Dev2.Activities.Designers2.Core;
@@ -39,6 +40,20 @@ namespace Dev2.Activities.Designers2.Sequence
             : base(modelItem)
         {
             AddTitleBarLargeToggle();
+            dynamic mi = ModelItem;
+            ModelItemCollection activities = mi.Activities;
+            activities.CollectionChanged+=ActivitiesOnCollectionChanged;            
+        }
+
+        void ActivitiesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            if (notifyCollectionChangedEventArgs.Action == NotifyCollectionChangedAction.Remove)
+            {
+                dynamic mi = ModelItem;
+                ModelItemCollection activities = mi.Activities;
+                ModelItem.SetProperty("Activities",activities);
+                
+            }
         }
 
         public object SmallViewItem

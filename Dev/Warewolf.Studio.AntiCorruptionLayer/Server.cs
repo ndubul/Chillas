@@ -135,6 +135,11 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             get { return EnvironmentConnection.IsConnected; }
         }
 
+        public bool AllowEdit
+        {
+            get { return !EnvironmentConnection.IsLocalHost; }
+        }
+
         public void ReloadTools()
         {
         }
