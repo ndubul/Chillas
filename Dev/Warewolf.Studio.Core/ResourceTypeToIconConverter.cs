@@ -54,6 +54,8 @@ namespace Warewolf.Studio.Core
                     case ResourceType.StartPage:
                         var imageSource = ImageAwesome.CreateImageSource(FontAwesomeIcon.Home, Brushes.Black);
                         return imageSource;
+                    case ResourceType.OauthSource:
+                        return Application.Current.Resources["AddDropBoxBlackLogo"];
                     case ResourceType.Scheduler:
                         return ImageAwesome.CreateImageSource(FontAwesomeIcon.History, Brushes.Black);
                     case ResourceType.Settings:

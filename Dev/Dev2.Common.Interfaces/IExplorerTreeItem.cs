@@ -21,6 +21,8 @@ namespace Dev2.Common.Interfaces
         bool CanCreatePluginService { get; set; }
         bool CanCreatePluginSource { get; set; }
         bool CanCreateEmailSource { get; set; }
+        bool CanCreateDropboxSource { get; set; }
+        bool CanCreateSharePointSource { get; set; }
         bool CanRename { get; set; }
         bool CanDelete { get; set; }
         bool CanCreateFolder { get; set; }

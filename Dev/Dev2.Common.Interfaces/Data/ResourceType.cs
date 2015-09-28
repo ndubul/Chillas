@@ -36,6 +36,7 @@ namespace Dev2.Common.Interfaces.Data
         Scheduler = 32768,
         Settings = 65536,
         DependencyViewer = 131072,
-        DeployViewer = 262144
+        DeployViewer = 262144,
+        DropboxSource = 524288
     }
 }
