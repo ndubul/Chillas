@@ -236,7 +236,7 @@ Scenario: Deploying items from one server to the next with the same name
 	 And "localhost\Hello World" cantains a different createdID than "Remote Connection Integration\Hello World"
 	 Then the User is prompted to "Rename or Delete" one of the resources
 
-
+#Wolf-312
 Scenario: Warning message no longer appears
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
@@ -253,6 +253,7 @@ Scenario: Warning message no longer appears
 	 When I deploy again
 	 Then warning popup no longer appears
 
+#wolf-329
 Scenario: Renaming resource after deploying and re-deploy
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"

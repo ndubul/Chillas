@@ -1,5 +1,5 @@
 
-<Service ID="98941483-6238-4a7b-970e-f64ddb662987" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="CreateFolder" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5744.26988">
+<Service ID="98941483-6238-4a7b-970e-f64ddb662987" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="CreateFolder" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5736.16317">
   <DisplayName>CreateFolder</DisplayName>
   <Category>Testing\For Each\CreateFolder</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>rdrSdz+IWxs2kJkJApQroOmZG6c=</DigestValue>
+        <DigestValue>6J2emzkhLaBwSms6GItKCRhL7HM=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>cHmq5cqzKpfOJV04Br/ufH2AKXEJXz5WbNeiCwaTNyIeIjDDo6arBKhnTx2NTLey4y7FDIoDvSlkY8N0GtttaIoaUGeC6hPBIyMvKB953dpAgkvmaz8gSoI0+MB2yoIThYicma5vTjGHK4znqIsdHYk5sCEgqjcVoC9JlgL10T0=</SignatureValue>
+    <SignatureValue>mK5B26uXafkcIiVjidXGOEtohWzKiFhlLPc1hiJgIp5tKT9ZwZFt6aKP9QAmPbHgq82K6M9nwGt8yoW1Gjvn1ykUH1LZTmmAstAW6lve+4rXaPmOJRxjTVskqwuF/HQHfDIJMeJmgMXfVN0c7SkBaJkdAkw8dbjDn1JesMlSe0U=</SignatureValue>
   </Signature>
 </Service>

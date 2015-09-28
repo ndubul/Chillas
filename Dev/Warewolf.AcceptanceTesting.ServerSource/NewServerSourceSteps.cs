@@ -194,16 +194,9 @@ namespace Warewolf.AcceptanceTesting.ServerSource
             };
             FeatureContext.Current["svrsrc"] = serverSourceDefinition;
             var manageServerSourceViewModel = new ManageNewServerViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object, serverSourceDefinition, new SynchronousAsyncWorker(), mockExecutor.Object);
-            try
-            {
-                manageServerControl.DataContext = manageServerSourceViewModel;
-            }
-            catch(Exception)
-            {
-                //ignore stupid infragistics control
-            }
-            ScenarioContext.Current.Remove("viewModel");
-            ScenarioContext.Current.Add("viewModel", manageServerSourceViewModel);
+            manageServerControl.DataContext = manageServerSourceViewModel;
+            ScenarioContext.Current.Remove(Utils.ViewModelNameKey);
+            ScenarioContext.Current.Add(Utils.ViewModelNameKey, manageServerSourceViewModel);
         }
 
         [Then(@"Server as ""(.*)""")]
@@ -228,7 +221,6 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         {
             var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
             manageServerControl.EnterUserName(username);
-            var viewModel = ScenarioContext.Current.Get<ManageNewServerViewModel>("viewModel");
             Assert.AreEqual(username, manageServerControl.GetUsername());
         }
 
@@ -377,14 +369,7 @@ namespace Warewolf.AcceptanceTesting.ServerSource
             var mockEventAggregator = new Mock<IEventAggregator>();
             var viewModel = new ManageNewServerViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockExecutor.Object);
             var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
-            try
-            {
-                manageServerControl.DataContext = viewModel;
-            }
-            catch(Exception)
-            {
-                //ignore stupid infragistics control
-            }
+            manageServerControl.DataContext = viewModel;
             FeatureContext.Current.Remove("viewModel");
             FeatureContext.Current.Add("viewModel", viewModel);
             FeatureContext.Current.Remove("externalProcessExecutor");

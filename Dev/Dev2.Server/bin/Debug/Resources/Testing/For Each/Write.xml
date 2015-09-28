@@ -1,5 +1,5 @@
 
-<Service ID="91da89e0-d827-4489-9e3b-aefff1413f1b" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Write" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5744.26988">
+<Service ID="91da89e0-d827-4489-9e3b-aefff1413f1b" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Write" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5736.16317">
   <DisplayName>Write</DisplayName>
   <Category>Testing\For Each\Write</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>m8NbB7OGKzkXSvyTaNmYNpRz33E=</DigestValue>
+        <DigestValue>kL4FTlkOcIDjPrDy/RaIHtIHovw=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>ExGj4TNZ08jyoSFN+5gvMcQWOxibfZ5t6K5pYw2Rs8xRRq51SYGxgVV5eWZNviFVbjb9BSv2bhKt/RJD8GD9MIEYJLaeu2OkrsFaTQaVv7nZ1QBts2gTlQ1r7upaUGW8hDMRbHR1/XEne8Lsf9JStejRm9IR0dGJyCSQISPDUTw=</SignatureValue>
+    <SignatureValue>PvOhdNtZICC4IjTELsuLtR/P7mYn0LiO2fglv6m0uZtsB/QlhQRVc2SW3GjH4DC2vwDiMVGOdmPPs7WmO1jAbYLjr1bu2sPeQDqv/1O6iK5d5c2AcwyE9b51NKb2BkrrWib/b/GD33My5eYte4zy+a1dYmtJkGZb2E7wPAk2OE8=</SignatureValue>
   </Signature>
 </Service>

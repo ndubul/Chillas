@@ -1,5 +1,5 @@
 
-<Service ID="b1a9b744-ec20-4148-8623-986df74a022a" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="MasterTest" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5744.26988">
+<Service ID="b1a9b744-ec20-4148-8623-986df74a022a" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="MasterTest" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5736.16317">
   <DisplayName>MasterTest</DisplayName>
   <Category>Testing\For Each\MasterTest</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -35,9 +35,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>IjLAEvJW7zWxzsLEv7IfqT75UWk=</DigestValue>
+        <DigestValue>6DdqUYH5yVD9OHCo9tk2l/cvSMg=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>UZLYJ+PjLueZOWGYB3coLspzZQvNMszxdask+X+zrP6XIDQxFGPb4g2BQbw8asNs1Bmbfuzk8EEf2RVSY1yAKZGqIALPeNPCa0zMVRG0OF/+1HDKSsGdbbUljb1h2iWmRM5xYHBDNVaHPAB3z7acknUihc8iGn6JlZfDB5/nWlY=</SignatureValue>
+    <SignatureValue>KekUIMMdrAqJDGKhryWaZ8aMK76VraXsO6pRaG7j0M6wB8+2F4tywTHnaj/o0lKD7YnyOYYs9k4CYc38g9xey5Y4HWO5qSH36E+cp0UjcErPe93xgoOUEws2ZZSv/K1/QQ+a5hqorQjazvtxTfs58hMVsG4Al0rot6/WY2OnjQ4=</SignatureValue>
   </Signature>
 </Service>
