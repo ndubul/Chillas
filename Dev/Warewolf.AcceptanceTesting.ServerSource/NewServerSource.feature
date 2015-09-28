@@ -37,7 +37,7 @@ Scenario: Creating New Source as windows
 @ServerSource
 Scenario: Test connection is unsuccessfull
 	Given I open New Server Source
-	And I type Server as "ABSCD"
+	And I type Server as "barney"
 	When I Test Connection to remote server
 	Then Test Connecton is "Failed"
 	And validation message is "Connection Error: Unauthorized"

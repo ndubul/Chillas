@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Dev2.Common.Interfaces;
 using Dev2.Runtime.ServiceModel.Data;
+using Infragistics.Controls.Editors;
 using Infragistics.Controls.Editors.Primitives;
 using Infragistics.Windows;
 using Microsoft.Practices.Prism.Mvvm;
@@ -52,33 +53,58 @@ namespace Warewolf.Studio.Views
 
         public void EnterServerName(string serverName, bool add = false)
         {
-            var comboEditorItem = AddressTextBox.Items.FirstOrDefault(item =>
+            if(AddressTextBox.Items != null)
             {
-                var computerName = item.Data as ComputerName;
-                if (computerName != null)
+                var comboEditorItem = AddressTextBox.Items.FirstOrDefault(item =>
                 {
-                    return computerName.Name.Equals(serverName, StringComparison.OrdinalIgnoreCase);
+                    var computerName = item.Data as ComputerName;
+                    if (computerName != null)
+                    {
+                        return computerName.Name.Equals(serverName, StringComparison.OrdinalIgnoreCase);
+                    }
+                    return false;
+                });
+                if (comboEditorItem == null && add)
+                {
+                    var computerNames = AddressTextBox.ItemsSource as ICollection<IComputerName>;
+                    if (computerNames != null)
+                    {
+                        computerNames.Add(new ComputerName() { Name = serverName });
+                    }
+                    EnterServerName(serverName);
                 }
-                return false;
-            });
-            if (comboEditorItem == null && add)
-            {
-                var computerNames = AddressTextBox.ItemsSource as ICollection<IComputerName>;
-                if (computerNames != null)
+                if (comboEditorItem != null)
                 {
-                    computerNames.Add(new ComputerName() { Name = serverName });
+                    try
+                    {
+                        AddressTextBox.SelectedItem = comboEditorItem.Data;
+                        BindingExpression be = AddressTextBox.GetBindingExpression(XamComboEditor.SelectedItemProperty);
+                        if (be != null)
+                        {
+                            be.UpdateSource();
+                        }
+                        var manageDatabaseSourceViewModel = DataContext as IManageNewServerViewModel;
+
+                        if (manageDatabaseSourceViewModel != null)
+                        {
+                            if (manageDatabaseSourceViewModel.ServerName.Name == null)
+                            {
+                                manageDatabaseSourceViewModel.ServerName = new ComputerName { Name = serverName };
+                            }
+                        }                        
+                    }
+                    catch (Exception)
+                    {
+                        //Ignore exception running from test
+                    }
                 }
-                EnterServerName(serverName);
-            }
-            if (comboEditorItem != null)
-            {
-                try
+                else
                 {
-                    AddressTextBox.SelectedItem = comboEditorItem.Data;
-                }
-                catch (Exception)
-                {
-                    //Ignore exception running from test
+                    var manageDatabaseSourceViewModel = DataContext as IManageNewServerViewModel;
+                    if (manageDatabaseSourceViewModel != null)
+                    {
+                        manageDatabaseSourceViewModel.ServerName = new ComputerName { Name = serverName };
+                    }
                 }
             }
             else
@@ -86,7 +112,7 @@ namespace Warewolf.Studio.Views
                 var manageDatabaseSourceViewModel = DataContext as IManageNewServerViewModel;
                 if (manageDatabaseSourceViewModel != null)
                 {
-                    manageDatabaseSourceViewModel.ServerName = new ComputerName() { Name = serverName };
+                    manageDatabaseSourceViewModel.ServerName = new ComputerName { Name = serverName };
                 }
             }
         }

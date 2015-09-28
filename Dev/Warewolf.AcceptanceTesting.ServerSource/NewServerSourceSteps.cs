@@ -195,8 +195,8 @@ namespace Warewolf.AcceptanceTesting.ServerSource
             FeatureContext.Current["svrsrc"] = serverSourceDefinition;
             var manageServerSourceViewModel = new ManageNewServerViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object, serverSourceDefinition, new SynchronousAsyncWorker(), mockExecutor.Object);
             manageServerControl.DataContext = manageServerSourceViewModel;
-            ScenarioContext.Current.Remove("viewModel");
-            ScenarioContext.Current.Add("viewModel", manageServerSourceViewModel);
+            ScenarioContext.Current.Remove(Utils.ViewModelNameKey);
+            ScenarioContext.Current.Add(Utils.ViewModelNameKey, manageServerSourceViewModel);
         }
 
         [Then(@"Server as ""(.*)""")]
@@ -221,7 +221,6 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         {
             var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
             manageServerControl.EnterUserName(username);
-            var viewModel = ScenarioContext.Current.Get<ManageNewServerViewModel>("viewModel");
             Assert.AreEqual(username, manageServerControl.GetUsername());
         }
 
