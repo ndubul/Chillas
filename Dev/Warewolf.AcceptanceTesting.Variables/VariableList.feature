@@ -231,3 +231,21 @@ Examples:
 	| Enter | New blank line |
 	| Tab   | Input Checkbox |
 	
+
+#wolf-351
+Scenario: versioning and mapping
+	Given I have variables as
+	 | Variable | Note | Input | Output | IsUsed |
+	 | [[a]]    |      |       | YES    |        |
+	 | [[b]]    |      | YES   |        |        |
+	When I save workflow as "test"
+	And create variable "[[c]]" equals "" as ""
+	And I save "Mapping"
+	And "Mapping" is visible in the explorer
+	When I right click "Mapping" and "Show Version History"
+	Then version history is visible in the explorer
+	And I open "v1" of "Mapping"
+	Then the variables appear as
+   | Variable | Note | Input | Output | IsUsed |
+   | [[a]]    |      |       | YES    |        |
+   | [[b]]    |      | YES   |        |        |

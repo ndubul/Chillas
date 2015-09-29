@@ -197,6 +197,9 @@ Scenario: Connected to remote server
 	Then I should see "10" folders
 	Then I should see the path "Remote Connection Integration/Folder 2"
 
+
+
+
 @Explorer
 Scenario: Creating Folder in remote host
    Given the explorer is visible
@@ -298,3 +301,43 @@ Scenario: Opening Dependencies Of All Services In Explorer
 	Then "DB Service1 Dependents" is opened
 	When I open Show Dependencies of "PluginServ1" in "Folder1"
 	Then "PluginServ1 Dependents" is opened
+
+#wolf-996
+Scenario: Context menu
+	Given the explorer is visible
+	When I right-click on "Localhost"
+	Then the context menu appears as
+	| Menu Items     |
+	| New Folder     |
+	| Server Version |
+	And I right-click on "Local/Examples"
+	Then the context menu appears as
+	| Menu Items                |
+	| New Workflow Service      |
+	| New Server Source         |
+	| New Database Connector    |
+	| New Database Source       |
+	| New Web Service Connector |
+	| New Web Service Source    |
+	| New Plugin Connector      |
+	| New Plugin Source         |
+	| New Email Source          |
+	| New Dropbox Source        |
+	| New Sharepoint Source     |
+	| New Folder                |
+	| Rename                    |
+	| Delete                    |
+	| Deploy                    |
+	| Show Dependencies         |
+
+	
+#wolf-996
+Scenario: Disconnected from remote server
+	Given the explorer is visible
+	When I connect to "Remote Connection Integration" server
+	And I open "Remote Connection Integration" server
+	Then I should see "10" folders
+	Then I should see the path "Remote Connection Integration/Folder 2"
+	When I click "Disconnect"
+	Then "Remote Connection Integration" is "Disconnected"
+	And "Localhost" is visible

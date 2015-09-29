@@ -114,8 +114,8 @@ Scenario: Context Menu Folder actions
 Scenario: Ensure new folder can be created in root
 	Given the Save Dialog is opened
 	And the "Localhost" server is visible in save dialog
-	When I click "Crtl+Shft+F" keyboard shortcut
-	Then "New Folder" is created
+	When I click "Crtl+Shft+F" 
+	Then "New Folder" is visible in "localhost"
 	And "New Folder" name is the focus
 	When I rename "New Folder" to "TestFolder"
 	Then "TestFolder" is visible in "localhost"
@@ -127,3 +127,14 @@ Scenario: Saving a Workflow in localhost with an existing name
 	And "Hello World" is visible in "localhost/Hello World"
 	When I attempt to save a workflow as "Hello World"
 	Then an error message appear with the value "An item with name 'Hello World' already exists in this folder."
+
+#wolf-1115
+Scenario: saving to a disconnected server
+	Given I have "Hello World" opened on "Remote Integration Connection
+	And I click "Save"
+	And the Save Dialog is opened
+	And the "Remote Integration Connection" server is visible in save dialog
+	When I close the save dialog
+	And I "Disconnect" from "Remote Integration Connection"
+	And I open the save dialog
+	Then a warning message should appear "You are no longer connected to [[server]]. Would you like to connect?"

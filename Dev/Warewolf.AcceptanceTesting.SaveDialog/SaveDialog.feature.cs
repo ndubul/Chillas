@@ -331,9 +331,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 116
  testRunner.And("the \"Localhost\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 117
- testRunner.When("I click \"Crtl+Shft+F\" keyboard shortcut", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I click \"Crtl+Shft+F\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 118
- testRunner.Then("\"New Folder\" is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"New Folder\" is visible in \"localhost\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 119
  testRunner.And("\"New Folder\" name is the focus", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 120
@@ -364,6 +364,36 @@ this.ScenarioSetup(scenarioInfo);
 #line 129
  testRunner.Then("an error message appear with the value \"An item with name \'Hello World\' already e" +
                     "xists in this folder.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("saving to a disconnected server")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SaveDialog")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("SaveDialog")]
+        public virtual void SavingToADisconnectedServer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("saving to a disconnected server", ((string[])(null)));
+#line 132
+this.ScenarioSetup(scenarioInfo);
+#line 133
+ testRunner.Given("I have \"Hello World\" opened on \"Remote Integration Connection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 134
+ testRunner.And("I click \"Save\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 135
+ testRunner.And("the Save Dialog is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 136
+ testRunner.And("the \"Remote Integration Connection\" server is visible in save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 137
+ testRunner.When("I close the save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 138
+ testRunner.And("I \"Disconnect\" from \"Remote Integration Connection\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 139
+ testRunner.And("I open the save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 140
+ testRunner.Then("a warning message should appear \"You are no longer connected to [[server]]. Would" +
+                    " you like to connect?\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

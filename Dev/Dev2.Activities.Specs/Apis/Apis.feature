@@ -10,6 +10,9 @@
 #Ensure that if permissions are not granted that the relevant information appears
 #Ensure Access will be denied if permissions changed
 #Ensure api returns correctly
+#Ensure all relevant information is displayed
+#Ensure swagger returns correctly
+#Display formals based on http or https
 
 
 @Apis
@@ -108,11 +111,15 @@ Scenario: Ensure all relevant information is displayed
 	When the request returns
 	Then only publically available services should be visible
 
+#wolf-1085
+Scenario: Ensure swagger returns correctly
+	Given I execute "http://rsaklfleroy:3142/public/Hello%20World.api"
+	And public permissions are "View,Execute,Contribute"
+	When the request returns
+	Then "Https" is not visible in Swagger definition
 
-#Scenario: Ensure api returns correctly
-#	Given I execute "http://rsaklfleroy:3142/secure/Outter.api"
-#	And public permissions are "View,Execute,Contribute"
-#	When the request returns
-#	Then "http://rsaklfleroy:3142/secure/Outter.api" properties appear as
-#	| 
-
+#wolf-1085
+Scenario: Display formals based on http or https
+	Given I execute "http://rsaklfleroy:3142/public/Hello%20World.api"
+	When the request returns
+	Then the swagger definition should contain "produces" with the values "["application/json","application/xml"]" 

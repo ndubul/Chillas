@@ -1087,6 +1087,75 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.EnsureShorcutKeysWork("Tab", "Input Checkbox", ((string[])(null)));
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("versioning and mapping")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "VariableList")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("VariableList")]
+        public virtual void VersioningAndMapping()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("versioning and mapping", ((string[])(null)));
+#line 236
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Variable",
+                        "Note",
+                        "Input",
+                        "Output",
+                        "IsUsed"});
+            table32.AddRow(new string[] {
+                        "[[a]]",
+                        "",
+                        "",
+                        "YES",
+                        ""});
+            table32.AddRow(new string[] {
+                        "[[b]]",
+                        "",
+                        "YES",
+                        "",
+                        ""});
+#line 237
+ testRunner.Given("I have variables as", ((string)(null)), table32, "Given ");
+#line 241
+ testRunner.When("I save workflow as \"test\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 242
+ testRunner.And("create variable \"[[c]]\" equals \"\" as \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 243
+ testRunner.And("I save \"Mapping\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 244
+ testRunner.And("\"Mapping\" is visible in the explorer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 245
+ testRunner.When("I right click \"Mapping\" and \"Show Version History\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 246
+ testRunner.Then("version history is visible in the explorer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 247
+ testRunner.And("I open \"v1\" of \"Mapping\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Variable",
+                        "Note",
+                        "Input",
+                        "Output",
+                        "IsUsed"});
+            table33.AddRow(new string[] {
+                        "[[a]]",
+                        "",
+                        "",
+                        "YES",
+                        ""});
+            table33.AddRow(new string[] {
+                        "[[b]]",
+                        "",
+                        "YES",
+                        "",
+                        ""});
+#line 248
+ testRunner.Then("the variables appear as", ((string)(null)), table33, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

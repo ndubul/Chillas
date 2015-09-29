@@ -894,11 +894,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Delete a record")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Delete")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rj([[int]]).a]], [[int]]= 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rj([[int]])]], [[int]]= 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Success", "Success")]
         public virtual void DeleteARecord_Variant3()
         {
-            this.DeleteARecord("[[rj([[int]]).a]], [[int]]= 1", "Success", ((string[])(null)));
+            this.DeleteARecord("[[rj([[int]])]], [[int]]= 1", "Success", ((string[])(null)));
         }
     }
 }

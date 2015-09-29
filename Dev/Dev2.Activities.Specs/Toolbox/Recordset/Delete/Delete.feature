@@ -266,8 +266,8 @@ Scenario Outline: Delete a record
 	| result               |
 	| <result> = <Success> |	
 	Examples: 
-	| result                        | Success |
-	| [[rj().a]]                    | Success |
-	| [[rj(2).a]]                   | Success |
-	| [[rj(*).a]]                   | Success |
-	| [[rj([[int]]).a]], [[int]]= 1 | Success |
+	| result                      | Success |
+	| [[rj().a]]                  | Success |
+	| [[rj(2).a]]                 | Success |
+	| [[rj(*).a]]                 | Success |
+	| [[rj([[int]])]], [[int]]= 1 | Success |
