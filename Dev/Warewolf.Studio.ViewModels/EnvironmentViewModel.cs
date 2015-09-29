@@ -38,7 +38,11 @@ namespace Warewolf.Studio.ViewModels
             //Server.NetworkStateChanged += Server_NetworkStateChanged;
             //server.ItemAddedEvent += ServerItemAddedEvent;
             _children = new ObservableCollection<IExplorerItemViewModel>();
-            NewCommand = new DelegateCommand<string>(type => ShellViewModel.NewResource(type, ResourcePath));
+            NewCommand = new DelegateCommand<ResourceType?>(type =>
+            {
+                shellViewModel.SetActiveEnvironment(Server.EnvironmentID);
+                shellViewModel.NewResource(type.ToString(), ResourcePath);
+            });
             DisplayName = server.ResourceName;
             RefreshCommand = new DelegateCommand(async () => await Load());
             IsServerIconVisible = true;
@@ -63,6 +67,7 @@ namespace Warewolf.Studio.ViewModels
             ResourceName = DisplayName;
             CanShowServerVersion = true;
             AreVersionsVisible = false;
+            SetPropertiesForDialog();
 
         }
 
@@ -186,23 +191,23 @@ namespace Warewolf.Studio.ViewModels
 
         public void SetPropertiesForDialog()
         {
-            CanCreateDbService = false;
-            CanCreateDbSource = false;
+            CanCreateDbService = true;
+            CanCreateDbSource = true;
             CanCreateFolder = true;
-            CanCreatePluginService = false;
-            CanCreatePluginSource = false;
-            CanCreateEmailSource = false;
-            CanCreateDropboxSource = false;
-            CanCreateSharePointSource = false;
-            CanCreateServerSource = false;
-            CanCreateWebService = false;
-            CanCreateWebSource = false;
-            CanDelete = true;
+            CanCreatePluginService = true;
+            CanCreatePluginSource = true;
+            CanCreateEmailSource = true;
+            CanCreateDropboxSource = true;
+            CanCreateSharePointSource = true;
+            CanCreateServerSource = true;
+            CanCreateWebService = true;
+            CanCreateWebSource = true;
+            CanDelete = false;
             CanDeploy = false;
-            CanRename = true;
+            CanRename = false;
             CanRollback = false;
             CanShowVersions = false;
-            CanCreateWorkflowService = false;
+            CanCreateWorkflowService = true;
         }
 
 
