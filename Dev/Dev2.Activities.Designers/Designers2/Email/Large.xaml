@@ -262,16 +262,13 @@
                     ToolTip="Choose Attachments"
                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_ChooseAttachmentsBtn_AutoID}"/>
         </Grid>
-        <Label Grid.Column="0"
-               Grid.Row="9"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Html Body" />
-       <CheckBox Grid.Column="1" Grid.Row="9" IsChecked="{Binding  ModelItem.IsHtml}"></CheckBox>
-        <Label Grid.Column="0"
-               Grid.Row="10"
-            VerticalAlignment="Top"
-               Style="{StaticResource ActivityLabelStyle}"
-               Content="Body"/>
+        <TextBlock Grid.Column="0"
+                   Grid.Row="9"
+                   Text="Html Body" />
+       <CheckBox Grid.Column="1" Grid.Row="9" IsChecked="{Binding  ModelItem.IsHtml}" Margin="-6,-1,0,0"></CheckBox>
+        <TextBlock Grid.Column="0"
+                   Grid.Row="10"
+                   Text="Body"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="10"
                                 VerticalAlignment="Stretch"
@@ -289,7 +286,6 @@
                                 Text="{Binding ModelItem.Body,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipBody}"
                                 Style="{StaticResource ActivityIntellisenseTextBoxStyle}"
-                                Margin="{StaticResource ControlBorderTop}"
                                 AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_bodytxt_AutoID}">
             <ui:IntellisenseTextBox.DefaultText>
                 <TextBlock Text="Email Content" VerticalAlignment="Top" Margin="0,-3,0,0"></TextBlock>
@@ -303,14 +299,13 @@
             </i:Interaction.Behaviors>
 
         </ui:IntellisenseTextBox>
-        
-        <Label Grid.Column="0"
-               Grid.Row="11"
-            Style="{StaticResource ActivityLabelStyle}"
-               Content="Result" />
+
+        <TextBlock Grid.Column="0"
+                   Grid.Row="11"
+                   Text="Result" />
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="11"
-            DefaultText="[[EmailSuccess]]"
+                                DefaultText="[[EmailSuccess]]"
                                 WrapInBrackets="True"
                                 Text="{Binding ModelItem.Result,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipResult}"

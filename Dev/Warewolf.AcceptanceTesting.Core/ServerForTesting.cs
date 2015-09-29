@@ -38,6 +38,11 @@ namespace Warewolf.AcceptanceTesting.Core
         {
         }
 
+        public Task<bool> ConnectAsync()
+        {
+            return null;
+        }
+
         public List<IResource> Load()
         {
             return CreateResources();
@@ -157,6 +162,7 @@ namespace Warewolf.AcceptanceTesting.Core
         {
             get { return true; }
         }
+        public bool AllowEdit { get; set; }
 
         public void ReloadTools()
         {
