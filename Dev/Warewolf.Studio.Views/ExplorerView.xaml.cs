@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Dev2.Common.Interfaces;
 using Infragistics.Controls.Menus;
+using Infragistics.DragDrop;
 
 namespace Warewolf.Studio.Views
 {
@@ -204,6 +205,34 @@ namespace Warewolf.Studio.Views
             {
                 ExplorerTree.EnterEditMode(e.Node);
             }
+	    }
+
+	    void DragSource_OnDrop(object sender, DropEventArgs e)
+	    {
+            var dropped = e.DropTarget as XamDataTree;
+	        var grid = e.DragSource as Grid;
+	        if(grid != null)
+	        {
+	            var contentPresenter = grid.TemplatedParent as ContentPresenter;
+	            if(contentPresenter != null)
+	            {
+	                var xamDataTreeNodeControl = contentPresenter.TemplatedParent as XamDataTreeNodeControl;
+	                if(xamDataTreeNodeControl != null)
+	                {
+	                    XamDataTreeNode xdtn = xamDataTreeNodeControl.Node;
+
+	                    if(dropped != null)
+	                    {
+                            var destination = dropped.ActiveNode.Data as IExplorerItemViewModel;
+                            var source = xdtn.Data as IExplorerItemViewModel;
+                            if (source != null)
+                            {
+                                source.Move(destination);
+                            }
+	                    }
+	                }
+	            }
+	        }
 	    }
 	}
 }
