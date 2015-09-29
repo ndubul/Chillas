@@ -740,6 +740,7 @@
                                             HorizontalAlignment="Right"
                                             Margin="0,0,-22,0"
                                             Style="{StaticResource ExplorerTreeButtonStyle}"
+                                            Command="{Binding Path=Data.DebugCommand}"
                                             Visibility="{Binding Data.CanEdit, Converter={StaticResource BoolToVisibilityConverter}}"
                                             ToolTip="{Binding Path=Data.EditToolTip}">
                                         <Button.Content>

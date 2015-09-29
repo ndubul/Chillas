@@ -991,6 +991,11 @@ namespace Dev2.Studio.ViewModels
             ActiveEnvironment = EnvironmentRepository.Get(environmentID);
         }
 
+        public void Debug()
+        {
+            ActiveItem.DebugCommand.Execute(null);
+        }
+
         public void OpenResource(Guid resourceId, IServer server)
         {
             var environmentModel = EnvironmentRepository.Get(server.EnvironmentID);

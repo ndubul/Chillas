@@ -28,5 +28,7 @@ namespace Dev2.Common.Interfaces
         void ShowPopup(IPopupMessage getDuplicateMessage);
 
         void SetActiveEnvironment(Guid environmentID);
+
+        void Debug();
     }
 }
