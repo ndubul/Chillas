@@ -19,6 +19,8 @@ namespace Warewolf.Studio.ViewModels
         bool _isConnected;
         bool _isConnecing;
         IServer _selectedConnection;
+        bool _allowConnection;
+        public const string NewServerText = "New Remote Server...";
 
         public ConnectControlViewModel(IServer server, IEventAggregator aggregator)
         {
@@ -32,10 +34,19 @@ namespace Warewolf.Studio.ViewModels
             }
             Server = server;
             Servers = new List<IServer>(Server.GetServerConnections());
+            Servers.Add(CreateNewRemoteServerEnvironment());
             SelectedConnection = server;
             aggregator.GetEvent<ServerAddedEvent>().Subscribe(ServerAdded);
             EditConnectionCommand = new DelegateCommand(AllowConnectionEdit);
             ToggleConnectionStateCommand = new DelegateCommand(ConnectOrDisconnect);
+        }
+
+        IServer CreateNewRemoteServerEnvironment()
+        {
+            return new Server
+            {
+                ResourceName = NewServerText
+            };
         }
 
         void AllowConnectionEdit()
@@ -88,8 +99,20 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _selectedConnection = value;
-                IsConnected = SelectedConnection.IsConnected;
-                OnPropertyChanged(() => SelectedConnection);
+                if (_selectedConnection.ResourceName.Equals("New Remote Server..."))
+                {
+                    var mainViewModel = CustomContainer.Get<IShellViewModel>();
+                    mainViewModel.NewResource("ServerSource", "");
+
+                    IsConnected = false;
+                    AllowConnection = false;
+                }
+                else
+                {
+                    AllowConnection = true;
+                    IsConnected = _selectedConnection.IsConnected;
+                    OnPropertyChanged(() => SelectedConnection);
+                }
             }
         }
         public ICommand EditConnectionCommand { get; set; }
@@ -116,6 +139,18 @@ namespace Warewolf.Studio.ViewModels
             {
                 _isConnecing = value;
                 OnPropertyChanged(() => IsConnecting);
+            }
+        }
+        public bool AllowConnection
+        {
+            get
+            {
+                return _allowConnection;
+            }
+            set
+            {
+                _allowConnection = value;
+                OnPropertyChanged(() => AllowConnection);
             }
         }
 

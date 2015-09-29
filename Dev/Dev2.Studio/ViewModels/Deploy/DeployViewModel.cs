@@ -561,18 +561,21 @@ namespace Dev2.Studio.ViewModels.Deploy
                     {
                         IExplorerItemModel explorerItemModel = Source.ExplorerItemModels[0];
 
-                        var items = explorerItemModel.Descendants().Where(model => model.IsChecked.GetValueOrDefault(false)).ToList();
-                        var namingConflicts = _deployStatsCalculator.CheckForNamingConflicts(items, Target).ToList();
-                        if (namingConflicts.Any())
+                        if(explorerItemModel != null)
                         {
-                            StringBuilder message = new StringBuilder("The following items exist on the Destination Server but with a different ID. Please rename, move or delete on the destination server:" + Environment.NewLine);
-                            foreach (var namingConflict in namingConflicts)
+                            var items = explorerItemModel.Descendants().Where(model => model.IsChecked.GetValueOrDefault(false)).ToList();
+                            var namingConflicts = _deployStatsCalculator.CheckForNamingConflicts(items, Target).ToList();
+                            if (namingConflicts.Any())
                             {
-                                message.AppendLine(namingConflict.ResourcePath);
-                                namingConflict.IsChecked = false;
-                            }
+                                StringBuilder message = new StringBuilder("The following items exist on the Destination Server but with a different ID. Please rename, move or delete on the destination server:" + Environment.NewLine);
+                                foreach (var namingConflict in namingConflicts)
+                                {
+                                    message.AppendLine(namingConflict.ResourcePath);
+                                    namingConflict.IsChecked = false;
+                                }
 
-                            PopupController.Show(message.ToString(), "Resource Conflicts", MessageBoxButton.OK, MessageBoxImage.Error, null);
+                                PopupController.Show(message.ToString(), "Resource Conflicts", MessageBoxButton.OK, MessageBoxImage.Error, null);
+                            }
                         }
                     }
                 }

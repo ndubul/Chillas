@@ -33,6 +33,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             EnvironmentConnection.ItemAddedMessageAction+=ItemAdded;
         }
 
+        public Server()
+        {
+        }
+
         public Guid EnvironmentID { get; set; }
         public Guid? ServerID
         {
@@ -182,7 +186,11 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         /// </returns>
         public override string ToString()
         {
-            return EnvironmentConnection.DisplayName;
+            if(EnvironmentConnection != null)
+            {
+                return EnvironmentConnection.DisplayName;
+            }
+            return "New Remote Server...";
         }
 
         #endregion

@@ -296,6 +296,7 @@ namespace Dev2.CustomControls.Connections
 
                 if(selectedServer.EnvironmentModel.Name == ConnectControlSingleton.NewServerText)
                 {
+                    // ADD OPTION TO CREATE NEW SERVER
                     _mainViewModel.NewResourceCommand.Execute("Server");
                 }
                 else
