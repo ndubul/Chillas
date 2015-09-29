@@ -11408,6 +11408,7 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+<<<<<<< HEAD
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Find an index")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "FindRecordsetIndexMultiple")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
@@ -11416,12 +11417,23 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find an index", new string[] {
                         "ignore"});
 #line 2395
+=======
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Find Record with blank value")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "FindRecordsetIndexMultiple")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        public virtual void FindRecordWithBlankValue()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find Record with blank value", new string[] {
+                        "ignore"});
+#line 2394
+>>>>>>> development-stable
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table283 = new TechTalk.SpecFlow.Table(new string[] {
                         "rs",
                         "value"});
             table283.AddRow(new string[] {
+<<<<<<< HEAD
                         "rs().field",
                         "1"});
             table283.AddRow(new string[] {
@@ -11748,6 +11760,32 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.FindIndexUsingValidInputs("[[rec().set]]", "Super", "Contains", "[[var]]", "\"\"", "2", "[[a]]", "1,2", ((string[])(null)));
         }
+=======
+                        "rs().row",
+                        ""});
+            table283.AddRow(new string[] {
+                        "rs().set",
+                        "QWERTY"});
+#line 2395
+ testRunner.Given("I have the following recordset to search for multiple criteria", ((string)(null)), table283, "Given ");
+#line 2399
+ testRunner.And("field to search is \"[[rs().row]],[[rs().set]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 2400
+ testRunner.And("search the recordset with type \"Equals\" and criteria is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 2401
+ testRunner.And("search the recordset with type \"Equals\" and criteria is \"QWERTY\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 2402
+ testRunner.And("when match all search criteria is \"true\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 2403
+ testRunner.And("when requires all fields to match is \"false\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 2404
+ testRunner.When("the find records index multiple tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 2405
+ testRunner.Then("the execution has \"No\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+>>>>>>> development-stable
     }
 }
 #pragma warning restore

@@ -8,12 +8,22 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System.Configuration;
 
 namespace Dev2.Util
 {
     public class AppSettings
     {
         public static string LocalHost { get; set; }
+
+        static string _serviceName;
+        public static string ServiceName
+        {
+            get
+            {
+                return _serviceName ?? (_serviceName = ConfigurationManager.AppSettings["ServiceName"] ?? "Warewolf Server");
+            }
+        }
 
         public static string ServicesAddress
         {

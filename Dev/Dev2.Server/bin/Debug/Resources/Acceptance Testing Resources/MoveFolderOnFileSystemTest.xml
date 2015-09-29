@@ -1,5 +1,5 @@
 
-<Service ID="91935d25-ce80-4d95-83e5-ee13df8dc565" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="MoveFolderOnFileSystemTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.5.5707.22745">
+<Service ID="91935d25-ce80-4d95-83e5-ee13df8dc565" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="MoveFolderOnFileSystemTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5728.18028">
   <DisplayName>MoveFolderOnFileSystemTest</DisplayName>
   <Category>Acceptance Testing Resources\MoveFolderOnFileSystemTest</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>dAiVkhDuUv4adfmUXNGAixknbHo=</DigestValue>
+        <DigestValue>nV9vzi/HuU5sePjprQxmKGQBUB0=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>BuzMNdMuISNspJ2DwfBlwKs1bY28+bYoSZBInKgfHzuH5KS9L6xcDjt+oZhbILCqhzxhZHpvgel95pqv0xR5xiSNa2v5uzZtP3issDt6Vx9S3qwbGynhuIT0x9OJa1pxzI7CUcbNDBF5QbEAftJdJiH4eH/vvFNZPU4Xn3moS4Y=</SignatureValue>
+    <SignatureValue>KtlewgnAk9fkIcCUwCfb/mDUm/1uKvolYA0AeaNW4bQXmcldd3lYJl8JPR1RSiAUppWedG3y8ESDGTZeaIiEQ7plGJOk21Bl7u2wkFixk8/oJOjmibQ1exV9UW8DuG9iMsTKoRQzN9Pk0m0csreGEyPa9w0GVunt6/m9jTEM4/Q=</SignatureValue>
   </Signature>
 </Service>

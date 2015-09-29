@@ -158,12 +158,14 @@
     <Compile Include="RecordSetSearchPayload.cs" />
     <Compile Include="Reflection\GAC.cs" />
     <Compile Include="Serialization\ResourceTypeConvertor.cs" />
+    <Compile Include="SharepointSourceTo.cs" />
     <Compile Include="SingleApi.cs" />
     <Compile Include="StringTokenizer\Builders\Dev2TokenizerBuilder.cs" />
     <Compile Include="StringTokenizer\Errors\TokenizeError.cs" />
     <Compile Include="StringTokenizer\TokenOps\Dev2EoFOp.cs" />
     <Compile Include="StringTokenizer\TokenOps\Dev2IndexOp.cs" />
     <Compile Include="StringTokenizer\TokenOps\Dev2TokenOp.cs" />
+    <Compile Include="Utilities.cs" />
     <Compile Include="Utils\JSONUtils.cs" />
     <Compile Include="Utils\StringTransform.cs" />
     <Compile Include="Utils\TextUtils.cs" />

@@ -12,11 +12,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Configuration.Install;
 using System.Diagnostics;
 using System.ServiceProcess;
 using Dev2.Common;
 using Dev2.Instrumentation;
+using Dev2.Util;
 
 namespace Dev2
 {
@@ -37,7 +39,7 @@ namespace Dev2
             var serviceInstaller = new ServiceInstaller
             {
                 StartType = ServiceStartMode.Automatic,
-                ServiceName = GlobalConstants.ServiceName
+                ServiceName = AppSettings.ServiceName
             };
 
             while (Installers.Count > 0)
@@ -66,8 +68,8 @@ namespace Dev2
             {
                 using (var inst = new AssemblyInstaller(typeof (ServerLifecycleManager).Assembly, null))
                 {
-                    context = inst.Context;
-                    LogMessage("Installing service " + GlobalConstants.ServiceName, inst.Context);
+                    context = inst.Context; 
+                    LogMessage("Installing service " + AppSettings.ServiceName, inst.Context);
                     IDictionary state = new Hashtable();
                     inst.UseNewContext = true;
 
@@ -117,7 +119,7 @@ namespace Dev2
                 using (var inst = new AssemblyInstaller(typeof (ServerLifecycleManager).Assembly, null))
                 {
                     context = inst.Context;
-                    LogMessage("Uninstalling service " + GlobalConstants.ServiceName, inst.Context);
+                    LogMessage("Uninstalling service " + AppSettings.ServiceName, inst.Context);
                     IDictionary state = new Hashtable();
                     inst.UseNewContext = true;
                     try
@@ -158,7 +160,7 @@ namespace Dev2
 
             try
             {
-                var controller = new ServiceController(GlobalConstants.ServiceName);
+                var controller = new ServiceController(AppSettings.ServiceName);
 
                 if (controller.Status != ServiceControllerStatus.Stopped)
                 {
@@ -216,7 +218,7 @@ namespace Dev2
 
             try
             {
-                var controller = new ServiceController(GlobalConstants.ServiceName);
+                var controller = new ServiceController(AppSettings.ServiceName);
                 if (controller.Status != ServiceControllerStatus.Running)
                 {
                     throw new Exception(string.Format("Can't stop the service because it is in the '{0}' state.",
@@ -282,7 +284,7 @@ namespace Dev2
             bool tryStartService = false;
             try
             {
-                var controller = new ServiceController(GlobalConstants.ServiceName);
+                var controller = new ServiceController(AppSettings.ServiceName);
                 tryStartService = controller.Status != ServiceControllerStatus.Running;
                 serviceExists = true;
             }
@@ -314,7 +316,7 @@ namespace Dev2
             try
             {
                 // ReSharper disable UnusedVariable
-                var controller = new ServiceController(GlobalConstants.ServiceName);
+                var controller = new ServiceController(AppSettings.ServiceName);
                 // ReSharper restore UnusedVariable
                 serviceExists = true;
             }

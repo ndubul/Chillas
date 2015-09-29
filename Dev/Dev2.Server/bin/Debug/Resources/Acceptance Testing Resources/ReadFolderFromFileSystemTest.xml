@@ -1,5 +1,5 @@
 
-<Service ID="0b04a269-f746-4bbc-a226-88996232e642" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="ReadFolderFromFileSystemTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.5.5707.22745">
+<Service ID="0b04a269-f746-4bbc-a226-88996232e642" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="ReadFolderFromFileSystemTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5728.18028">
   <DisplayName>ReadFolderFromFileSystemTest</DisplayName>
   <Category>Acceptance Testing Resources\ReadFolderFromFileSystemTest</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -42,9 +42,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>koD/62Up/GE/UZFyaX5eQuRI5q0=</DigestValue>
+        <DigestValue>yMGJaIqSHQiW8iQJO1lwcIRXDDc=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>NNgX7s1FbAuD0P5QjO9S8E7sU8GXKlqgFax9pSVywVNJ2nq44NDJ3J7azaRXuemcYlkNxXlMb6ky7XtrVzovCgiBGhNHKQW36UNd072IdFtA5h1xh6kpHC68UJGs2Mv72gib8yrE8bz8Z8+0UsvKMPt3m1eVG5gS2oxuJqjWKCY=</SignatureValue>
+    <SignatureValue>ChjizLmmcmuaYCbyEmf6VT8J+rCaGDH3fPh1Cov/ZeQnmWggmBwInqW44kV6v6k8kftyxLhEywDpeXi+cuB0//w2SJm6tZRXSN49SpvJQ5jU0hM8bR57at3+Qcvz56BoOd1+HBtVbKgWj7YxyjbvfN5kx+EfcMf3Zy2wMW1mC6E=</SignatureValue>
   </Signature>
 </Service>

@@ -12,7 +12,7 @@
 using System;
 using System.ServiceProcess;
 using System.Threading;
-using Dev2.Common;
+using Dev2.Util;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.Core.Services
@@ -27,7 +27,7 @@ namespace Dev2.Studio.Core.Services
 
             try
             {
-                ServiceController controller = new ServiceController(GlobalConstants.ServiceName);
+                ServiceController controller = new ServiceController(AppSettings.ServiceName);
                 if(controller.Status == ServiceControllerStatus.Running)
                 {
                 }
@@ -46,7 +46,7 @@ namespace Dev2.Studio.Core.Services
 
             try
             {
-                ServiceController controller = new ServiceController(GlobalConstants.ServiceName);
+                ServiceController controller = new ServiceController(AppSettings.ServiceName);
                 result = controller.Status == ServiceControllerStatus.Running;
             }
             catch(InvalidOperationException)
@@ -63,7 +63,7 @@ namespace Dev2.Studio.Core.Services
 
             try
             {
-                ServiceController controller = new ServiceController(GlobalConstants.ServiceName);
+                ServiceController controller = new ServiceController(AppSettings.ServiceName);
                 if(controller.Status != ServiceControllerStatus.Running)
                 {
                     controller.Start();
@@ -85,7 +85,7 @@ namespace Dev2.Studio.Core.Services
 
             try
             {
-                ServiceController controller = new ServiceController(GlobalConstants.ServiceName);
+                ServiceController controller = new ServiceController(AppSettings.ServiceName);
                 if(controller.Status == ServiceControllerStatus.Running)
                 {
                     controller.Stop();

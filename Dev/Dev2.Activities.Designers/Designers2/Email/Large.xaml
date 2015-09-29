@@ -45,6 +45,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -261,11 +262,20 @@
                     ToolTip="Choose Attachments"
                     AutomationProperties.AutomationId="{Binding ModelItem.AutomationID, StringFormat=UI_{0}_ChooseAttachmentsBtn_AutoID}"/>
         </Grid>
-
-        <TextBlock Grid.Column="0" Grid.Row="9" VerticalAlignment="Top" Text="Body" Margin="{StaticResource ControlBorderTop}"/>
+        <Label Grid.Column="0"
+               Grid.Row="9"
+               Style="{StaticResource ActivityLabelStyle}"
+               Content="Html Body" />
+       <CheckBox Grid.Column="1" Grid.Row="9" IsChecked="{Binding  ModelItem.IsHtml}"></CheckBox>
+        <Label Grid.Column="0"
+               Grid.Row="10"
+            VerticalAlignment="Top"
+               Style="{StaticResource ActivityLabelStyle}"
+               Content="Body"/>
         <ui:IntellisenseTextBox Grid.Column="1"
-                                Grid.Row="9"
-                                VerticalAlignment="Top"
+                                Grid.Row="10"
+            DefaultText="Email Content"
+                                VerticalAlignment="Stretch"
                                 AllowMultilinePaste="True"
                                 AcceptsReturn="True"
                                 AllowUserInsertLine="True"
@@ -294,11 +304,14 @@
             </i:Interaction.Behaviors>
 
         </ui:IntellisenseTextBox>
-
-        <TextBlock Grid.Column="0" Grid.Row="10" Text="Result" Margin="{StaticResource ControlBorderTop}"/>
+        
+        <Label Grid.Column="0"
+               Grid.Row="11"
+            Style="{StaticResource ActivityLabelStyle}"
+               Content="Result" />
         <ui:IntellisenseTextBox Grid.Column="1"
-                                Grid.Row="10"                               
-                                DefaultText="[[EmailSuccess]]"
+                                Grid.Row="11"
+            DefaultText="[[EmailSuccess]]"
                                 WrapInBrackets="True"
                                 Text="{Binding ModelItem.Result,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="{x:Static help:HelpTextResources.EmailToolTipResult}"
@@ -315,8 +328,8 @@
         </ui:IntellisenseTextBox>
 
 
-        <errors:OnError Grid.Row="11"
-                        Grid.Column="0"
+        <errors:OnError Grid.Row="12"
+            Grid.Column="0"
                         Grid.ColumnSpan="2"/>
     </Grid>
 </core:ActivityDesignerTemplate>

@@ -62,11 +62,20 @@ namespace Dev2.Runtime.ESB.Management.Services
                 msg.HasError = false;
                 var sharepointSource = serializer.Deserialize<SharepointSource>(serializedSource);
                 var result = sharepointSource.TestConnection();
+<<<<<<< HEAD
                 if (result.Contains("Failed"))
                 {
                     msg.HasError = true;
                 }
                 msg.Message = serializer.SerializeToBuilder(result);
+=======
+                var sharepointSourceTo = new SharepointSourceTo
+                {
+                    TestMessage = result,
+                    IsSharepointOnline = sharepointSource.IsSharepointOnline
+                };
+                return serializer.SerializeToBuilder(sharepointSourceTo);
+>>>>>>> development-stable
             }
             catch(Exception ex)
             {

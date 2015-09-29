@@ -12,6 +12,7 @@
 using System;
 using System.Activities;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
@@ -19,7 +20,6 @@ using Dev2.Activities.Debug;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Diagnostics.Debug;
-using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Data;
 using Dev2.Data.Enums;
 using Dev2.Data.Util;
@@ -29,19 +29,20 @@ using Dev2.Runtime.Hosting;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Util;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
-using Warewolf.Core;
+using Warewolf.Security.Encryption;
 using Warewolf.Storage;
 
 namespace Dev2.Activities
 {
-    [ToolDescriptorInfo("Utility-SendMail", "Send Email", ToolType.Native, "8999E59A-38A3-43BB-A98F-6090C5C9EA1E", "Dev2.Acitivities", "1.0.0.0", "Legacy", "Utility", "/Warewolf.Studio.Themes.Luna;component/Images.xaml")]
     public class DsfSendEmailActivity : DsfActivityAbstract<string>
     {
         #region Fields
 
         IEmailSender _emailSender;
         IDSFDataObject _dataObject;
-
+        string _password;
+        EmailSource _selectedEmailSource;
+    
         #endregion
 
         /// <summary>
@@ -49,12 +50,60 @@ namespace Dev2.Activities
         /// </summary>
 
         // ReSharper disable MemberCanBePrivate.Global
-        public EmailSource SelectedEmailSource { get; set; }
+        public EmailSource SelectedEmailSource
+        {
+            get
+            {
+                return _selectedEmailSource;
+            }
+            set
+            {
+                _selectedEmailSource = value;
+                if(_selectedEmailSource != null)
+                {
+                    var resourceID = _selectedEmailSource.ResourceID;
+                    _selectedEmailSource = null;
+                    _selectedEmailSource = new EmailSource { ResourceID = resourceID };
+                }
+            }
+        }
         // ReSharper restore MemberCanBePrivate.Global
         [FindMissing]
         public string FromAccount { get; set; }
         [FindMissing]
-        public string Password { get; set; }
+        public string Password
+        {
+            get { return _password; }
+            set
+            {
+                if (DataListUtil.ShouldEncrypt(value))
+                {
+                    try
+                    {
+                        _password = DpapiWrapper.Encrypt(value);
+                    }
+                    catch (Exception)
+                    {
+                        _password = value;
+                    }
+                }
+                else
+                {
+                    _password = value;
+                }
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        // ReSharper disable once MemberCanBePrivate.Global
+        protected string DecryptedPassword
+        {
+            get
+            {
+                return DataListUtil.NotEncrypted(Password) ? Password : DpapiWrapper.Decrypt(Password);
+            }
+        }
+
         [FindMissing]
         public string To { get; set; }
         [FindMissing]
@@ -71,6 +120,9 @@ namespace Dev2.Activities
         public string Attachments { get; set; }
         [FindMissing]
         public string Body { get; set; }
+
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        public bool IsHtml { get; set; }
 
         /// <summary>
         /// The property that holds the result string the user enters into the "Result" box
@@ -104,7 +156,7 @@ namespace Dev2.Activities
             Subject = string.Empty;
             Attachments = string.Empty;
             Body = string.Empty;
-
+            IsHtml = false;
         }
 
         #endregion
@@ -132,7 +184,7 @@ namespace Dev2.Activities
             // ReSharper restore MethodTooLong
         {
             IDSFDataObject dataObject = context.GetExtension<IDSFDataObject>();
-            ExecuteTool(dataObject,0);
+            ExecuteTool(dataObject, 0);
         }
 
         protected override void ExecuteTool(IDSFDataObject dataObject, int update)
@@ -175,7 +227,7 @@ namespace Dev2.Activities
                 var fromAccountItr = new WarewolfIterator(dataObject.Environment.Eval(FromAccount ?? string.Empty, update));
                 colItr.AddVariableToIterateOn(fromAccountItr);
 
-                var passwordItr = new WarewolfIterator(dataObject.Environment.Eval(Password, update));
+                var passwordItr = new WarewolfIterator(dataObject.Environment.Eval(DecryptedPassword,update));
                 colItr.AddVariableToIterateOn(passwordItr);
 
                 var toItr = new WarewolfIterator(dataObject.Environment.Eval(To, update));
@@ -301,7 +353,7 @@ namespace Dev2.Activities
             var subjectValue = colItr.FetchNextValue(subjectItr);
             var bodyValue = colItr.FetchNextValue(bodyItr);
             var attachmentsValue = colItr.FetchNextValue(attachmentsItr);
-            MailMessage mailMessage = new MailMessage();
+            MailMessage mailMessage = new MailMessage { IsBodyHtml = IsHtml };
             MailPriority priority;
             if(Enum.TryParse(Priority.ToString(), true, out priority))
             {

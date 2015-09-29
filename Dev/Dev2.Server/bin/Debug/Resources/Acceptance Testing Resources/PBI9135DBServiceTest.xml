@@ -1,5 +1,5 @@
 
-<Service ID="4578dde3-f9ca-4de2-bb6c-d75b1bb9bf08" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="PBI9135DBServiceTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.5.5707.22745">
+<Service ID="4578dde3-f9ca-4de2-bb6c-d75b1bb9bf08" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="PBI9135DBServiceTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5728.18028">
   <DisplayName>PBI9135DBServiceTest</DisplayName>
   <Category>Acceptance Testing Resources\PBI9135DBServiceTest</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -36,9 +36,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>R43tUvWtE0VjTJFu5hNwZecj1uw=</DigestValue>
+        <DigestValue>3Co5z4pN2e1fueMAy7bV88FIdRc=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>oJmvAapHP4sFyEnm/cwoYml7WS+JTfsJJ3Yeycf7u7sdIM55VjnSRXd6w12Z2D74J0AWBlYO9txyNAAt0scBQimh4mbYpGcDeFma/6fI2MDb0IlMBL4IE1aMB/WYZItkElMFIaggBhZb8QyW6bhLi0mFQRNHm8MhnCEAPz4hi0c=</SignatureValue>
+    <SignatureValue>idKOi244wHTrP+p9Yt2S3V2B2Bb5OoJeTWkhjdvKbYGPUKE60AnRvH9qQzsQF9ZhdnjTI5Jcs4is9qzsFJ5IxWQl5cjsc3I9QbRzHsK+8lI5fruZQqkvUL393NyNBx80toEu709DavEUocyeAtLpDaSXTj18N8InvATD8xMwPs4=</SignatureValue>
   </Signature>
 </Service>
