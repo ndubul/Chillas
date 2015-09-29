@@ -106,7 +106,7 @@ Scenario: Ensure Access will be denied if permissions changed
 	| Access has been denied for this request. |
 
 #wolf-1084
-Scenario: Ensure all relevant information is displayed
+Scenario: Ensure all relevant information is displayed based on access type
 	Given I execute "http://server:3142/public/apis.json" 
 	When the request returns
 	Then only publically available services should be visible
