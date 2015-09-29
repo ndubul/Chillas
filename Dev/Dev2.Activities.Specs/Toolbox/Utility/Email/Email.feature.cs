@@ -16,11 +16,9 @@ namespace Dev2.Activities.Specs.Toolbox.Utility.Email
     using TechTalk.SpecFlow;
     
     
-<<<<<<< HEAD
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
-=======
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.3.0")]
->>>>>>> development-stable
+
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class EmailFeature
@@ -137,7 +135,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.And("to address is \"test1@freemail.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 43
  testRunner.And("the subject is \"Just testing\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-<<<<<<< HEAD
+
 #line 44
  testRunner.And("the sever name is \"pop3@freemail.com\" with password as \"3LittleP6\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 45
@@ -147,7 +145,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 47
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 48
-=======
+
 #line 27
  testRunner.And("the email is html", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
@@ -159,7 +157,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 31
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 32
->>>>>>> development-stable
+
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -172,22 +170,22 @@ this.ScenarioSetup(scenarioInfo);
                         "test1@freemail.com",
                         "Just testing",
                         "testing email from the cool specflow"});
-<<<<<<< HEAD
+
 #line 49
-=======
+
 #line 33
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table3, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table4.AddRow(new string[] {
                         "[[result]] ="});
-<<<<<<< HEAD
+
 #line 52
-=======
+
 #line 36
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table4, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -199,7 +197,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithBadlyFormedMultipleToAccounts()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with badly formed multiple To Accounts", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 56
 this.ScenarioSetup(scenarioInfo);
 #line 57
@@ -215,7 +213,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 62
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 63
-=======
+
 #line 40
 this.ScenarioSetup(scenarioInfo);
 #line 41
@@ -231,7 +229,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 46
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 47
->>>>>>> development-stable
+
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -244,22 +242,22 @@ this.ScenarioSetup(scenarioInfo);
                         "test1@freemail.com==test2@freemail.com",
                         "Just testing",
                         "testing email from the cool specflow"});
-<<<<<<< HEAD
+
 #line 64
-=======
+
 #line 48
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table5, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table6.AddRow(new string[] {
                         "[[result]] ="});
-<<<<<<< HEAD
+
 #line 67
-=======
+
 #line 51
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table6, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -271,7 +269,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithNoToAccounts()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with no To Accounts", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 71
 this.ScenarioSetup(scenarioInfo);
 #line 72
@@ -287,7 +285,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 77
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 78
-=======
+
 #line 55
 this.ScenarioSetup(scenarioInfo);
 #line 56
@@ -303,7 +301,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 61
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 62
->>>>>>> development-stable
+
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -316,22 +314,22 @@ this.ScenarioSetup(scenarioInfo);
                         "\"\"",
                         "Just testing",
                         "testing email from the cool specflow"});
-<<<<<<< HEAD
+
 #line 79
-=======
+
 #line 63
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table7, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table8.AddRow(new string[] {
                         "[[result]] ="});
-<<<<<<< HEAD
+
 #line 82
-=======
+
 #line 66
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table8, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -343,7 +341,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithSubjectAsBothTextAndVariableAsXml()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with Subject as both text and variable as xml", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 86
 this.ScenarioSetup(scenarioInfo);
 #line 87
@@ -361,7 +359,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 93
  testRunner.Then("the email result will be \"Success\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 94
-=======
+
 #line 70
 this.ScenarioSetup(scenarioInfo);
 #line 71
@@ -379,7 +377,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 77
  testRunner.Then("the email result will be \"Success\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 78
->>>>>>> development-stable
+
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
@@ -392,22 +390,22 @@ this.ScenarioSetup(scenarioInfo);
                         "test1@freemail.com",
                         "News: [[subject]] = News: <Wow>400%</Wow>",
                         "testing email from the cool specflow"});
-<<<<<<< HEAD
+
 #line 95
-=======
+
 #line 79
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table9, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table10.AddRow(new string[] {
                         "[[result]] = Success"});
-<<<<<<< HEAD
+
 #line 98
-=======
+
 #line 82
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table10, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -419,7 +417,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithNoBody()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with no body", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 102
 this.ScenarioSetup(scenarioInfo);
 #line 103
@@ -433,7 +431,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 107
  testRunner.Then("the email result will be \"Success\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 108
-=======
+
 #line 86
 this.ScenarioSetup(scenarioInfo);
 #line 87
@@ -447,7 +445,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 91
  testRunner.Then("the email result will be \"Success\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 92
->>>>>>> development-stable
+
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -460,22 +458,22 @@ this.ScenarioSetup(scenarioInfo);
                         "test1@freemail.com",
                         "Testing this cool framework",
                         "\"\""});
-<<<<<<< HEAD
+
 #line 109
-=======
+
 #line 93
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table11, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table12.AddRow(new string[] {
                         "[[result]] = Success"});
-<<<<<<< HEAD
+
 #line 112
-=======
+
 #line 96
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table12, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -487,7 +485,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithBodyAsBothTextAndVariable()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with Body as both text and variable", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 116
 this.ScenarioSetup(scenarioInfo);
 #line 117
@@ -506,7 +504,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 123
  testRunner.Then("the email result will be \"Success\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 124
-=======
+
 #line 100
 this.ScenarioSetup(scenarioInfo);
 #line 101
@@ -525,7 +523,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 107
  testRunner.Then("the email result will be \"Success\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 108
->>>>>>> development-stable
+
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
@@ -539,22 +537,22 @@ this.ScenarioSetup(scenarioInfo);
                         "News",
                         "testing email from [[body]] the cool specflow = testing email from <body><inner>i" +
                             "nside</inner></body> the cool specflow"});
-<<<<<<< HEAD
+
 #line 125
-=======
+
 #line 109
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table13, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table14.AddRow(new string[] {
                         "[[result]] = Success"});
-<<<<<<< HEAD
+
 #line 128
-=======
+
 #line 112
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table14, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -566,7 +564,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithVariableAsBodyThatIsXml()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with variable as Body that is xml", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 132
 this.ScenarioSetup(scenarioInfo);
 #line 133
@@ -585,7 +583,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 139
  testRunner.Then("the email result will be \"Success\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 140
-=======
+
 #line 116
 this.ScenarioSetup(scenarioInfo);
 #line 117
@@ -604,7 +602,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 123
  testRunner.Then("the email result will be \"Success\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 124
->>>>>>> development-stable
+
  testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
@@ -617,22 +615,22 @@ this.ScenarioSetup(scenarioInfo);
                         "test1@freemail.com",
                         "News",
                         "[[body]] =  <body><inner>inside</inner></body>"});
-<<<<<<< HEAD
+
 #line 141
-=======
+
 #line 125
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table15, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table16.AddRow(new string[] {
                         "[[result]] = Success"});
-<<<<<<< HEAD
+
 #line 144
-=======
+
 #line 128
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table16, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -644,7 +642,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithEverythingBlank()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with everything blank", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 148
 this.ScenarioSetup(scenarioInfo);
 #line 149
@@ -654,7 +652,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 151
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 152
-=======
+
 #line 132
 this.ScenarioSetup(scenarioInfo);
 #line 133
@@ -664,7 +662,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 135
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 136
->>>>>>> development-stable
+
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
@@ -677,22 +675,22 @@ this.ScenarioSetup(scenarioInfo);
                         "\"\"",
                         "\"\"",
                         "\"\""});
-<<<<<<< HEAD
+
 #line 153
-=======
+
 #line 137
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table17, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table18.AddRow(new string[] {
                         "[[result]] ="});
-<<<<<<< HEAD
+
 #line 156
-=======
+
 #line 140
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table18, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -704,7 +702,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithABlankFromAccount()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with a blank from account", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 160
 this.ScenarioSetup(scenarioInfo);
 #line 161
@@ -716,7 +714,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 164
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 165
-=======
+
 #line 144
 this.ScenarioSetup(scenarioInfo);
 #line 145
@@ -728,7 +726,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 148
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 149
->>>>>>> development-stable
+
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
@@ -741,22 +739,22 @@ this.ScenarioSetup(scenarioInfo);
                         "test1@freemail.com",
                         "\"\"",
                         "\"\""});
-<<<<<<< HEAD
+
 #line 166
-=======
+
 #line 150
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table19, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table20.AddRow(new string[] {
                         "[[result]] ="});
-<<<<<<< HEAD
+
 #line 169
-=======
+
 #line 153
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table20, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -768,7 +766,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithANegativeIndexRecordsetForFromAccounts()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with a negative index recordset for From Accounts", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 173
 this.ScenarioSetup(scenarioInfo);
 #line 174
@@ -784,7 +782,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 179
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 180
-=======
+
 #line 157
 this.ScenarioSetup(scenarioInfo);
 #line 158
@@ -800,7 +798,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 163
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 164
->>>>>>> development-stable
+
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
@@ -813,22 +811,22 @@ this.ScenarioSetup(scenarioInfo);
                         "me@freemail.com",
                         "Just testing",
                         "testing email from the cool specflow"});
-<<<<<<< HEAD
+
 #line 181
-=======
+
 #line 165
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table21, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table22.AddRow(new string[] {
                         "[[result]] ="});
-<<<<<<< HEAD
+
 #line 184
-=======
+
 #line 168
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table22, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -840,7 +838,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithANegativeIndexRecordsetForRecipients()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with a negative index recordset for Recipients", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 188
 this.ScenarioSetup(scenarioInfo);
 #line 189
@@ -856,7 +854,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 194
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 195
-=======
+
 #line 172
 this.ScenarioSetup(scenarioInfo);
 #line 173
@@ -872,7 +870,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 178
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 179
->>>>>>> development-stable
+
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
@@ -885,22 +883,22 @@ this.ScenarioSetup(scenarioInfo);
                         "[[me(-1).to]] =",
                         "Just testing",
                         "testing email from the cool specflow"});
-<<<<<<< HEAD
+
 #line 196
-=======
+
 #line 180
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table23, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table24.AddRow(new string[] {
                         "[[result]] ="});
-<<<<<<< HEAD
+
 #line 199
-=======
+
 #line 183
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table24, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -912,7 +910,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithANegativeIndexRecordsetForSubject()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with a negative index recordset for Subject", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 203
 this.ScenarioSetup(scenarioInfo);
 #line 204
@@ -928,7 +926,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 209
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 210
-=======
+
 #line 187
 this.ScenarioSetup(scenarioInfo);
 #line 188
@@ -944,7 +942,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 193
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 194
->>>>>>> development-stable
+
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
@@ -957,22 +955,22 @@ this.ScenarioSetup(scenarioInfo);
                         "test1@freemail.com",
                         "[[my(-1).subject]] =",
                         "testing email from the cool specflow"});
-<<<<<<< HEAD
+
 #line 211
-=======
+
 #line 195
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table25, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table26.AddRow(new string[] {
                         "[[result]] ="});
-<<<<<<< HEAD
+
 #line 214
-=======
+
 #line 198
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table26, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -984,7 +982,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SendEmailWithANegativeIndexRecordsetForBody()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Send email with a negative index recordset for Body", ((string[])(null)));
-<<<<<<< HEAD
+
 #line 218
 this.ScenarioSetup(scenarioInfo);
 #line 219
@@ -998,7 +996,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 223
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 224
-=======
+
 #line 202
 this.ScenarioSetup(scenarioInfo);
 #line 203
@@ -1012,7 +1010,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 207
  testRunner.Then("the email result will be \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 208
->>>>>>> development-stable
+
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1025,22 +1023,22 @@ this.ScenarioSetup(scenarioInfo);
                         "test1@freemail.com",
                         "\"\"",
                         "[[my(-1).body]] ="});
-<<<<<<< HEAD
+
 #line 225
-=======
+
 #line 209
->>>>>>> development-stable
+
  testRunner.And("the debug inputs as", ((string)(null)), table27, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table28.AddRow(new string[] {
                         "[[result]] ="});
-<<<<<<< HEAD
+
 #line 228
-=======
+
 #line 212
->>>>>>> development-stable
+
  testRunner.And("the debug output as", ((string)(null)), table28, "And ");
 #line hidden
             this.ScenarioCleanup();
