@@ -274,7 +274,6 @@
                Content="Body"/>
         <ui:IntellisenseTextBox Grid.Column="1"
                                 Grid.Row="10"
-            DefaultText="Email Content"
                                 VerticalAlignment="Stretch"
                                 AllowMultilinePaste="True"
                                 AcceptsReturn="True"

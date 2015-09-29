@@ -8,7 +8,6 @@ using Dev2.Communication;
 using Dev2.Data.ServiceModel;
 using Dev2.DynamicServices;
 using Dev2.DynamicServices.Objects;
-using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Workspaces;
 
 namespace Dev2.Runtime.ESB.Management.Services
@@ -62,20 +61,20 @@ namespace Dev2.Runtime.ESB.Management.Services
                 msg.HasError = false;
                 var sharepointSource = serializer.Deserialize<SharepointSource>(serializedSource);
                 var result = sharepointSource.TestConnection();
-<<<<<<< HEAD
+
                 if (result.Contains("Failed"))
                 {
                     msg.HasError = true;
                 }
                 msg.Message = serializer.SerializeToBuilder(result);
-=======
+
                 var sharepointSourceTo = new SharepointSourceTo
                 {
                     TestMessage = result,
                     IsSharepointOnline = sharepointSource.IsSharepointOnline
                 };
                 return serializer.SerializeToBuilder(sharepointSourceTo);
->>>>>>> development-stable
+
             }
             catch(Exception ex)
             {
