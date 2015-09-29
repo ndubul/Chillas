@@ -42,13 +42,13 @@
         </Button>
         <Button AutomationProperties.AutomationId="{Binding ConnectButtonAutomationID, Mode=TwoWay, ElementName=ConnectUserControl}"
                 Grid.Column="2"
-                Style="{StaticResource ButtonStyle}"
                 Margin="{StaticResource ControlBorderLeft}"
                 Command="{Binding ToggleConnectionStateCommand}"
-                Visibility="{Binding IsConnecting,Converter={StaticResource BoolToVisibilityConverterNegative}}">
+                Visibility="{Binding IsConnecting, Converter={StaticResource BoolToVisibilityConverterNegative}}">
             <Button.Content>
                 <StackPanel HorizontalAlignment="Stretch">
-                    <fa:FontAwesome Icon="Link" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></fa:FontAwesome>
+                    <fa:FontAwesome Icon="Link" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverterNegative}}"></fa:FontAwesome>
+                    <fa:FontAwesome Icon="ChainBroken" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsConnected, Converter={StaticResource BoolToVisibilityConverterPositive}}"></fa:FontAwesome>
                 </StackPanel>
             </Button.Content>
             <i:Interaction.Behaviors>

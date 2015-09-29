@@ -55,6 +55,7 @@ namespace Dev2.Studio.Core.Interfaces
         string DisplayName { get; set; }
 
         void Connect(Guid id);
+        Task<bool> ConnectAsync(Guid id);
         void Disconnect();
         Guid ID { get; }
         // BUG 9634 - 2013.07.17 - TWR : added

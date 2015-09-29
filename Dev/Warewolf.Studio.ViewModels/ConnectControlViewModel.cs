@@ -1,10 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Dev2;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Core;
+using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Warewolf.Studio.AntiCorruptionLayer;
 using Warewolf.Studio.Core;
 
 namespace Warewolf.Studio.ViewModels
@@ -15,47 +20,61 @@ namespace Warewolf.Studio.ViewModels
         bool _isConnecing;
         IServer _selectedConnection;
 
-        public ConnectControlViewModel(IServer server,IEventAggregator aggregator)
+        public ConnectControlViewModel(IServer server, IEventAggregator aggregator)
         {
-            if(server == null)
+            if (server == null)
             {
                 throw new ArgumentNullException("server");
             }
-            if(aggregator == null)
+            if (aggregator == null)
             {
-                throw  new ArgumentNullException("aggregator");
+                throw new ArgumentNullException("aggregator");
             }
             Server = server;
             Servers = new List<IServer>(Server.GetServerConnections());
             SelectedConnection = server;
             aggregator.GetEvent<ServerAddedEvent>().Subscribe(ServerAdded);
-            EditConnectionCommand = new DelegateCommand(Edit);
-            ToggleConnectionStateCommand = new DelegateCommand(() =>
-            {
-                if(SelectedConnection == null)
-                {
-                    return;
-                }
-                if (SelectedConnection.IsConnected)
-                {
-                    SelectedConnection.Disconnect();
-                }
-                else
-                {
-                    IsConnecting = true;
-                    IsConnected = false;
-                    Connect(SelectedConnection);
-                    IsConnected = true;
-                    IsConnecting = false;
-                }
-            });
+            EditConnectionCommand = new DelegateCommand(AllowConnectionEdit);
+            ToggleConnectionStateCommand = new DelegateCommand(ConnectOrDisconnect);
         }
 
+        void AllowConnectionEdit()
+        {
+            if (SelectedConnection == null)
+            {
+                return;
+            }
+            if (SelectedConnection.AllowEdit)
+            {
+                Edit();
+            }
+        }
+
+        public async void ConnectOrDisconnect()
+        {
+            if (SelectedConnection == null)
+            {
+                return;
+            }
+            if (SelectedConnection.IsConnected)
+            {
+                Disconnect(SelectedConnection);
+                IsConnected = false;
+            }
+            else
+            {
+                IsConnecting = true;
+                IsConnected = false;
+                await Connect(SelectedConnection);
+                IsConnected = true;
+                IsConnecting = false;
+            }
+        }
 
         void ServerAdded(IServer server)
         {
             Servers.Add(server);
-            OnPropertyChanged(()=>Servers);
+            OnPropertyChanged(() => Servers);
         }
 
         public IServer Server { get; set; }
@@ -69,7 +88,8 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _selectedConnection = value;
-                OnPropertyChanged(()=>SelectedConnection);
+                IsConnected = SelectedConnection.IsConnected;
+                OnPropertyChanged(() => SelectedConnection);
             }
         }
         public ICommand EditConnectionCommand { get; set; }
@@ -95,22 +115,30 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _isConnecing = value;
-                OnPropertyChanged(()=>IsConnecting);
-               
+                OnPropertyChanged(() => IsConnecting);
             }
         }
 
-        public async void Connect(IServer connection)
+        public async Task<bool> Connect(IServer connection)
         {
             if (connection != null)
             {
-                connection.Connect();
-                
-                if (ServerConnected != null)
+                try
                 {
-                    ServerConnected(this, connection);
+                    await connection.ConnectAsync();
+
+                    if (ServerConnected != null)
+                    {
+                        ServerConnected(this, connection);
+                    }
                 }
+                catch(Exception)
+                {
+                    return false;
+                }
+                return true;
             }
+            return false;
         }
 
         public void Disconnect(IServer connection)
@@ -118,6 +146,10 @@ namespace Warewolf.Studio.ViewModels
             if (connection != null)
             {
                 connection.Disconnect();
+                if (ServerDisconnected != null)
+                {
+                    ServerDisconnected(this, connection);
+                }
             }
         }
 
@@ -133,13 +165,28 @@ namespace Warewolf.Studio.ViewModels
         {
             if (SelectedConnection != null)
             {
-                SelectedConnection.Edit();
+                var server = SelectedConnection as Server;
+                var mainViewModel = CustomContainer.Get<IMainViewModel>();
+                if (server != null)
+                {
+                    var environmentConnection = server.EnvironmentConnection;
+                    mainViewModel.EditServer(new ServerSource
+                    {
+                        Address = environmentConnection.AppServerUri.ToString(),
+                        ID = environmentConnection.ID,
+                        AuthenticationType = environmentConnection.AuthenticationType,
+                        UserName = environmentConnection.UserName,
+                        Password = environmentConnection.Password,
+                        Name = server.ResourceName,
+                        ResourcePath = server.ResourcePath
+                    });
+                }
             }
         }
 
         public string ToggleConnectionToolTip
         {
-            get {   return Resources.Languages.Core.ConnectControlToggleConnectionToolTip;}
+            get { return Resources.Languages.Core.ConnectControlToggleConnectionToolTip; }
         }
         public string EditConnectionToolTip
         {
@@ -150,7 +197,8 @@ namespace Warewolf.Studio.ViewModels
             get { return Resources.Languages.Core.ConnectControlConnectionsToolTip; }
         }
         public EventHandler<IServer> ServerConnected { get; set; }
+        public EventHandler<IServer> ServerDisconnected { get; set; }
     }
 
-    
+
 }

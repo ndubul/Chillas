@@ -27,6 +27,7 @@ namespace Warewolf.Studio.ViewModels
         bool _canShowServerVersion;
         private bool _canCreateWorkflowService;
         readonly IShellViewModel _shellViewModel;
+        bool _allowEdit;
 
         public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel)
         {
@@ -52,6 +53,7 @@ namespace Warewolf.Studio.ViewModels
             });
             server.Connect();
             IsConnected = server.IsConnected;
+            AllowEdit = server.AllowEdit;
             //ShowServerVersionCommand = new DelegateCommand(ShowServerVersionAbout);
             CanCreateFolder = Server.UserPermissions == Permissions.Administrator || server.UserPermissions == Permissions.Contribute;
             CreateFolderCommand = new DelegateCommand(CreateFolder);
@@ -426,6 +428,20 @@ namespace Warewolf.Studio.ViewModels
                 _isConnected = value;
 
                 OnPropertyChanged(() => IsConnected);
+            }
+        }
+        public bool AllowEdit
+        {
+            get
+            {
+                return _allowEdit;
+            }
+            private set
+            {
+
+                _allowEdit = value;
+
+                OnPropertyChanged(() => AllowEdit);
             }
         }
         public bool IsLoaded { get; private set; }

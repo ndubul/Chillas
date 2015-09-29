@@ -24,6 +24,7 @@ namespace Dev2.Common.Interfaces
         [JsonIgnore]
         IQueryManager QueryProxy { get; }
         bool IsConnected{get;}
+        bool AllowEdit { get; }
         void ReloadTools();
         void Disconnect();
         void Edit();
@@ -38,6 +39,7 @@ namespace Dev2.Common.Interfaces
         string GetServerVersion();
 
         void Connect();
+        Task<bool> ConnectAsync();
 
     }
 

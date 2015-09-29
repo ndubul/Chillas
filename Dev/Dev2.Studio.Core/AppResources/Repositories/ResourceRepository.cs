@@ -629,7 +629,6 @@ namespace Dev2.Studio.Core.AppResources.Repositories
             {
                 comsController.AddPayloadArgument("ResourceID", resource.ID.ToString());
                 comsController.AddPayloadArgument("ResourceType", resource.ResourceType.ToString());
-                StudioResourceRepository.DeleteItem(_environmentModel.ID, resource.ID);
                 return comsController.ExecuteCommand<ExecuteMessage>(_environmentModel.Connection,
                                                               _environmentModel.Connection.WorkspaceID);
 
@@ -649,7 +648,6 @@ namespace Dev2.Studio.Core.AppResources.Repositories
 
             if (!(resource.ResourceName.Contains("Unsaved")))
             {
-                StudioResourceRepository.DeleteItem(_environmentModel.ID, resource.ID);
             }
             return result;
         }
@@ -669,7 +667,6 @@ namespace Dev2.Studio.Core.AppResources.Repositories
                 comsController.AddPayloadArgument("ResourceID", resource.ID.ToString());
                 comsController.AddPayloadArgument("ResourceType", resource.ResourceType.ToString());
                 ExecuteMessage deleteResourceFromWorkspace = comsController.ExecuteCommand<ExecuteMessage>(_environmentModel.Connection, _environmentModel.Connection.WorkspaceID);
-                StudioResourceRepository.DeleteItem(_environmentModel.ID, resource.ID);
                 return deleteResourceFromWorkspace;
             }
 

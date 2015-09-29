@@ -241,6 +241,41 @@ namespace Dev2.Network
                 throw;
             }
         }
+        
+        public async Task<bool> ConnectAsync(Guid id)
+        {
+            try
+            {
+                return await _wrappedConnection.ConnectAsync(_wrappedConnection.ID);
+           
+            }
+             catch( FallbackException)
+            {
+                Dev2Logger.Log.Info("Falling Back to previous signal r client");
+                var name = _wrappedConnection.DisplayName;
+                
+                if (AuthenticationType == AuthenticationType.User)
+                {
+                    _wrappedConnection = new ServerProxyWithChunking(_wrappedConnection.WebServerUri.ToString(),UserName,Password)
+                    {
+                        DisplayName = name,
+                    };
+                }
+                else
+                {
+                    _wrappedConnection = new ServerProxyWithChunking(_wrappedConnection.WebServerUri) { DisplayName = name };
+                }
+                SetupPassthroughEvents();
+                _wrappedConnection.Connect(_wrappedConnection.ID);
+                _wrappedConnection.DisplayName = name;
+            }
+            catch (Exception err)
+            {
+                Dev2Logger.Log.Error(err);
+                throw;
+            }
+            return false;
+        }
         public Guid ID { get { return _wrappedConnection.ID; } }
         public void Disconnect()
         {

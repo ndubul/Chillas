@@ -253,6 +253,65 @@ namespace Dev2.Network
                 HandleConnectError(e);
             }
         }
+        
+        public async Task<bool> ConnectAsync(Guid id)
+        {
+            ID = id;
+            try
+            {
+                if (!IsLocalHost)
+                {
+                    if (HubConnection.State == (ConnectionStateWrapped)ConnectionState.Reconnecting)
+                    {
+                        HubConnection.Stop(new TimeSpan(0, 0, 0, 1));
+                    }
+                }
+
+                if (HubConnection.State == (ConnectionStateWrapped)ConnectionState.Disconnected)
+                {
+                    ServicePointManager.ServerCertificateValidationCallback = ValidateServerCertificate;
+                    await HubConnection.Start();
+                    if(HubConnection.State==ConnectionStateWrapped.Disconnected)
+                    {
+                        if (!IsLocalHost)
+                        {
+                            ConnectionRetry();
+                        }
+                    }
+                }
+            }
+            catch (AggregateException aex)
+            {
+                aex.Flatten();
+                aex.Handle(ex =>
+                {
+                    if(ex.Message.Contains("1.4"))
+                        throw new FallbackException();
+                    Dev2Logger.Log.Error(this, aex);
+                    var hex = ex as HttpClientException;
+                    if (hex != null)
+                    {
+                        switch (hex.Response.StatusCode)
+                        {
+                            case HttpStatusCode.Unauthorized:
+                            case HttpStatusCode.Forbidden:
+                                UpdateIsAuthorized(false);
+                                throw new UnauthorizedAccessException();
+                        }
+                    }
+                    throw new NotConnectedException();
+                });
+            }
+            catch (NotConnectedException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                HandleConnectError(e);
+            }
+            return true;
+        }
 
         private void ConnectionRetry()
         {

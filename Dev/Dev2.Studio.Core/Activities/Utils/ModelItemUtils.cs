@@ -41,7 +41,7 @@ namespace Dev2.Studio.Core.Activities.Utils
                         else
                         {
                             modelProperty.SetValue(value);
-                        }
+                        }                        
                     }
                 }
             }
