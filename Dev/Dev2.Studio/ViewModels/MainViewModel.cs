@@ -1219,7 +1219,7 @@ namespace Dev2.Studio.ViewModels
             {
                 AddNewDbSourceSurface(resourcePath);
             }
-            else if (resourceType == "DatabaseService")
+            else if (resourceType == "DbService")
             {
                 AddNewDbServiceSurface(resourcePath);
             }

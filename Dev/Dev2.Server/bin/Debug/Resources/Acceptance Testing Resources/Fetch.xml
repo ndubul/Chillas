@@ -1,5 +1,5 @@
 
-<Service ID="d5be8b73-4ab2-4dff-a4b8-dbe6598c3c23" Version="1.0" Name="Fetch" ResourceType="DbService" IsValid="false" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5728.18028">
+<Service ID="d5be8b73-4ab2-4dff-a4b8-dbe6598c3c23" Version="1.0" Name="Fetch" ResourceType="DbService" IsValid="false" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5751.14940">
   <Actions>
     <Action Name="dbo_proc_SmallFetch" Type="InvokeStoredProc" SourceID="ebba47dc-e5d4-4303-a203-09e2e9761d16" SourceName="testingDBSrc" SourceMethod="dbo.proc_SmallFetch">
       <Inputs />
@@ -33,9 +33,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>Gv5MtIY9gOZ+Oa17b5QQrI46ZK4=</DigestValue>
+        <DigestValue>xgQhe0DVsjpfgjh1GT7jzdzx8bU=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>EdBou/FS9mY4LC2X+yfjP8lq9BolZjBhilFbNKItk1WuuzdJNnjtljYxHsqx8Z7EojomMqkNfWBuxUBg28ZOf7aNj/stz6zlDTzj4FffQtXUAgwy3hf4vNt2ISIKYXRVyhcYWZF5iIDdn3pfBwKlEgTaTZbGe4aEg5c22eZI5DY=</SignatureValue>
+    <SignatureValue>d9gkghILTzTD47/C+QWPi5bB+42kp66TIPY6Puo+7cZxHt4hXnvv/7bO0tru2M6gSqCr414wZBRqiuEZdC+hZp4fYaNCvj4CK29Q8ORXMeufMU7Iv3xatQ5YPN+Dhew80v1d8sTulCIddCsBG+3svmrjAnhDHgULFx1Be+Lv5UM=</SignatureValue>
   </Signature>
 </Service>

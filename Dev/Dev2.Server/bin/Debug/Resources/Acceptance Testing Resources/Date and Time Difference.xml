@@ -1,5 +1,5 @@
 
-<Service Name="Date and Time Difference" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="7406e75f-9280-4296-8099-22c780841f95" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5728.18028">
+<Service Name="Date and Time Difference" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="7406e75f-9280-4296-8099-22c780841f95" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5751.14940">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sads sap" x:Class="Date and Time Difference"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
@@ -361,9 +361,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>OKynqBuUITNnYgRFRXKGBzSIrwM=</DigestValue>
+        <DigestValue>GXdUGRfGrgtGPnMsFIUHQulFwXY=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>dVzLjdBfsvy4Zl/dUAfpovkj0p1jr3fduk2gJscVYwNmmo25rVZSHSSHpREP515bhOGAhDkcibIIFIkQS3fIq0ek3otZuSnNci2DAPbfCIgHoMGApsODjmn+4We1bXI4dmT19UKgdN6Yy4FGctooo6N09S+WWkPx3DZITm8TNBc=</SignatureValue>
+    <SignatureValue>mcVHgp+CQrI4Bi6Ma37fn0tA5KUR9v/zsV38+TIf5OEuZTZYVsmOw58gzhjGOm6BPlSVwWYc+qhg33MhfG2IiDv19H6m5znJwKvTYwqBilVDXKPgYPRjNH9XgebWgjy3NgD0hCN6UWtxuFOiQ5wtMdQ7CTPxVo8N4xFLdmYbB+Q=</SignatureValue>
   </Signature>
 </Service>

@@ -1,5 +1,5 @@
 
-<Service ID="bdfc8c88-ca84-4c71-861a-3f841f155e04" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Bug8372" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5728.18028">
+<Service ID="bdfc8c88-ca84-4c71-861a-3f841f155e04" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Bug8372" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5751.14940">
   <DisplayName>Bug8372</DisplayName>
   <Category>Acceptance Testing Resources\Bug8372</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -35,9 +35,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>nAW1ZyhgzGa47yX7IGB8E6fQ7dY=</DigestValue>
+        <DigestValue>ceqNdiDO04bt6W02Aaq7IaGs6r8=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>CQzwNCLaP15HQOnCeylBIg9rSqd7MQN68j/SC9/W3cxHkcoUtae7ipRnqfjJLp46staK19cVvS+M8I8Ol1T/OdwrKgx9ycGRKImhe3iLPfpU13JXSZDsD4OfYvqHf8cFwD2rOYDS0e0/UpBvhYp0aLcOp5SPhNQbpw2wLMbqjVA=</SignatureValue>
+    <SignatureValue>YmmBiNo0OzGW3D9Og+xJeWTBBKWoO23Zq3XxZBPvqt14lI8gOkOA9Yn2dJ7AFN1QvG4CMQzZsNNtpqLDqRlJTJqVppJBiB1nUi8zZNvSWaWiRZ1zNAV7ADzmWwkjiF9vv9Gvb93YKrUeV9zi/PfoxkiEp3Cvigu0pga0/ZiozU8=</SignatureValue>
   </Signature>
 </Service>

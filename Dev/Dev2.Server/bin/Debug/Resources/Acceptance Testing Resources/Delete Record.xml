@@ -1,5 +1,5 @@
 
-<Service ID="ed60df10-4698-4f57-bfcc-51b32de7dff4" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Delete Record" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5728.18028">
+<Service ID="ed60df10-4698-4f57-bfcc-51b32de7dff4" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Delete Record" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5751.14940">
   <DisplayName>Delete Record</DisplayName>
   <Category>Acceptance Testing Resources\Delete Record</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -35,9 +35,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>reDaj6C88ns5WO61zoTB32ZvfGA=</DigestValue>
+        <DigestValue>BX/NjOGjJfhZ8w5pmQcVyQzWBmw=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>HS3opcy59neVwmGJBMw28+4xgsCXr6ACkuh2dzwsSvMhYNAtHK/SW4E35rAzYGwH062yMixDc0vpflaJKu5mH8bIR2qpxSYmmDZlMYWiC+S+flIB5sDAvC91jCJk2Lbi5qMV2/7jcED+1gtGwWdUGjZSbSW9yqzJPywsi4uokuE=</SignatureValue>
+    <SignatureValue>J5hvwnljSwul77Y3TaLVaRZ9f0VzdVokpprwdrxi0FjDUxzevcNuRVP8OmJRcKzOwvSwHxXlDOZfiqRqCn12jQ5Ua/HkWIxfX39d5ygj9D9MsfCGiOR3WW5RuITXIpbV2Pbd0e+4o8SUsFYBoffwjHwM5O8+M0roWnVIK7gq17M=</SignatureValue>
   </Signature>
 </Service>
