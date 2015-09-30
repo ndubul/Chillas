@@ -123,3 +123,9 @@ Scenario: Display formals based on http or https
 	Given I execute "http://rsaklfleroy:3142/public/Hello%20World.api"
 	When the request returns
 	Then the swagger definition should contain "produces" with the values "["application/json","application/xml"]" 
+
+#wolf-1085
+Scenario: Display full path on service name
+	Given I execute "http://rsaklfleroy:3142/public/Hello%20World.api"
+	When the request returns
+	Then the swagger definition should contain "paths" with the values "{'serviceName':'Public/Hello World" 
