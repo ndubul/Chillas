@@ -232,7 +232,7 @@
             <Button Grid.Row="8"
                     Grid.Column="1"
                     Command="{Binding NewCommand}"
-                    CommandParameter="ResourceService"
+                    CommandParameter="PluginService"
                     Width="{Binding ButtonWidth}"
                     HorizontalAlignment="Left"
                     Style="{StaticResource SideMenuButtonStyle}"
