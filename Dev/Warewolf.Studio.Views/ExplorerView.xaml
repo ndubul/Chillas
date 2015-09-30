@@ -109,13 +109,13 @@
                             ActiveDataItem="{Binding SelectedItem, Mode=TwoWay}"
                             IsSelectedMemberPath="IsSelected"
                             DisplayMemberPath="DisplayName"
-                            IsDraggable="False"
-                            IsDropTarget="False"
+                            IsDraggable="True"
+                            IsDropTarget="True"
                             InitializeNode="ExplorerTree_OnInitializeNode"
                             NodeExitedEditMode="ExplorerTree_OnNodeExitedEditMode"
                             SelectedDataItems="{Binding SelectedDataItems}"
                             ItemsSource="{Binding Environments}"
-                            NodeDragDrop="ExplorerTree_OnNodeDragDrop"                            
+                            NodeDragDrop="ExplorerTree_OnNodeDragDrop"
                             NodeLineVisibility="Hidden" >
                 <ig:DragDropManager.DragSource>
                     <ig:DragSource IsDraggable="False" DragChannels="ExplorerChannel" />
@@ -333,7 +333,7 @@
                         <ig:NodeLayout.EditorTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <TextBox MaxWidth="200" Height="20" Padding="0,4,0,4" 
+                                    <TextBox MaxWidth="200" Height="20" Padding="0,0,0,0" 
                                          Text="{Binding Data.ResourceName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" GotKeyboardFocus="UIElement_OnGotKeyboardFocus"></TextBox>
                                 </Grid>
                             </DataTemplate>
@@ -740,6 +740,7 @@
                                             HorizontalAlignment="Right"
                                             Margin="0,0,-22,0"
                                             Style="{StaticResource ExplorerTreeButtonStyle}"
+                                            Command="{Binding Path=Data.DebugCommand}"
                                             Visibility="{Binding Data.CanEdit, Converter={StaticResource BoolToVisibilityConverter}}"
                                             ToolTip="{Binding Path=Data.EditToolTip}">
                                         <Button.Content>

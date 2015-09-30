@@ -68,6 +68,11 @@ namespace Warewolf.Studio.ViewModels
             {
                 shellViewModel.OpenResource(ResourceId, Server);
             });
+            DebugCommand = new DelegateCommand(() =>
+            {
+                shellViewModel.OpenResource(ResourceId, Server);
+                shellViewModel.Debug();
+            });
             //DeployCommand = new DelegateCommand(() => shellViewModel.DeployService(this));
             RenameCommand = new DelegateCommand(() => IsRenaming = true);
             Server = server;
@@ -511,6 +516,11 @@ namespace Warewolf.Studio.ViewModels
             }
         }
         public ICommand OpenCommand
+        {
+            get;
+            set;
+        }
+        public ICommand DebugCommand
         {
             get;
             set;
