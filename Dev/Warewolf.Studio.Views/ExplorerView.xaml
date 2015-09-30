@@ -618,7 +618,7 @@
 
                                                     <ig:XamMenuItem Name="NewDropboxSource"
                                                                     Command="{Binding Path=Data.NewCommand}"
-                                                                    CommandParameter="DropboxSource"
+                                                                    CommandParameter="{x:Static data:ResourceType.OauthSource}"
                                                                     Header="New Dropbox Source"
                                                                     Visibility="{Binding Path=Data.CanCreateDropboxSource, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>
