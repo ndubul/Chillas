@@ -138,3 +138,16 @@ Scenario: saving to a disconnected server
 	And I "Disconnect" from "Remote Integration Connection"
 	And I open the save dialog
 	Then a warning message should appear "You are no longer connected to [[server]]. Would you like to connect?"
+
+#Wolf-1023
+Scenario Outline: Context menu in save dialog on server name
+	Given the Save Dialog is opened
+	And I right-click on '<File>'
+	Then the context menu should appear as'<context>'
+	Examples: 
+	| File                       | context                    |
+	| localhost                  | New Folder                 |
+	| localhost\Acceptance Tests | New Folder, Rename, Delete |
+	| localhost\Hello World      | Rename, Delete             |
+
+
