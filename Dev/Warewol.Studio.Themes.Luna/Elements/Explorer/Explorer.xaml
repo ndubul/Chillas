@@ -205,7 +205,7 @@
 
     <!--  ********************************** ActiveNodeIndicator Style **********************************  -->
     <Style x:Key="ActiveNodeIndicatorStyle" TargetType="igPrimDt:ActiveNodeIndicator">
-        <Setter Property="Background" Value="{StaticResource TreeNodeActiveBackgroundBrush}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{StaticResource TreeNodeActiveBorderBrush}" />
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}" />

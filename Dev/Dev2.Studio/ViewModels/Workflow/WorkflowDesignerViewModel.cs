@@ -86,8 +86,11 @@ using Dev2.Utilities;
 using Dev2.Utils;
 using Dev2.ViewModels.Workflow;
 using Dev2.Workspaces;
+using FontAwesome.WPF;
 using Newtonsoft.Json;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
+using Warewolf.Studio.ViewModels;
+using Warewolf.Studio.Views;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.ViewModels.Workflow
@@ -99,7 +102,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                                              IHandle<EditActivityMessage>,
                                              IHandle<SaveUnsavedWorkflowMessage>,
                                              IHandle<SelectModelItemMessage>,
-                                             IHandle<UpdateWorksurfaceFlowNodeDisplayName>, 
+                                             IHandle<UpdateWorksurfaceFlowNodeDisplayName>,
                                              IWorkflowDesignerViewModel
     {
         static readonly Type[] DecisionSwitchTypes = { typeof(FlowSwitch<string>), typeof(FlowDecision) };
@@ -454,7 +457,14 @@ namespace Dev2.Studio.ViewModels.Workflow
                     {
                         if (_workflowInputDataViewModel.WorkflowInputCount == 0)
                         {
-                            PopUp.ShowNoInputsSelectedWhenClickLink();
+                            const string description = "You can pass variables into your workflow by selecting the Input checkbox in the Variables window.";
+                            var msgBoxViewModel = new MessageBoxViewModel(description, "Did you know?", MessageBoxButton.OK, FontAwesomeIcon.ExclamationTriangle, false);
+
+                            MessageBoxView msgBoxView = new MessageBoxView
+                            {
+                                DataContext = msgBoxViewModel
+                            };
+                            msgBoxView.ShowDialog();
                         }
                         if (param.ToString() != "Do not perform action")
                         {
@@ -541,22 +551,22 @@ namespace Dev2.Studio.ViewModels.Workflow
 
             var switchExpressionValue = string.Empty;
 
-            if(tmpModelItem != null)
+            if (tmpModelItem != null)
             {
                 var tmpProperty = tmpModelItem.Properties["ExpressionText"];
 
-                if(tmpProperty != null)
+                if (tmpProperty != null)
                 {
-                    if(tmpProperty.Value != null)
+                    if (tmpProperty.Value != null)
                     {
                         var tmp = tmpProperty.Value.ToString();
 
-                        if(!string.IsNullOrEmpty(tmp))
+                        if (!string.IsNullOrEmpty(tmp))
                         {
                             int start = tmp.IndexOf("(", StringComparison.Ordinal);
                             int end = tmp.IndexOf(",", StringComparison.Ordinal);
 
-                            if(start < end && start >= 0)
+                            if (start < end && start >= 0)
                             {
                                 start += 2;
                                 end -= 1;
@@ -689,7 +699,7 @@ namespace Dev2.Studio.ViewModels.Workflow
         {
             Dev2Logger.Log.Info("Publish message of type - " + typeof(ConfigureDecisionExpressionMessage));
             ModelProperty modelProperty = mi.Properties["Action"];
-            
+
             InitialiseWithAction(modelProperty);
             FlowController.ConfigureDecisionExpression(new ConfigureDecisionExpressionMessage { ModelItem = mi, EnvironmentModel = _resourceModel.Environment, IsNew = true });
         }
@@ -1017,7 +1027,7 @@ namespace Dev2.Studio.ViewModels.Workflow
         internal void OnItemSelected(Selection item)
         {
             NotifyItemSelected(item.PrimarySelection);
-            item.PrimarySelection.SetProperty("IsSelected",true);
+            item.PrimarySelection.SetProperty("IsSelected", true);
         }
 
         #endregion Internal Methods
@@ -1101,7 +1111,7 @@ namespace Dev2.Studio.ViewModels.Workflow
 
                     if (modelProperty != null)
                     {
-                        if(modelProperty.ComputedValue != null)
+                        if (modelProperty.ComputedValue != null)
                         {
                             string displayName = modelProperty.ComputedValue.ToString();
 
@@ -1177,7 +1187,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                 {
                     builder.AddCustomAttributes(designerAttribute.Key, new DesignerAttribute(designerAttribute.Value));
                 }
-                
+
                 MetadataStore.AddAttributeTable(builder.CreateTable());
 
                 _wd.Context.Services.Subscribe<ModelService>(ModelServiceSubscribe);
@@ -1292,12 +1302,12 @@ namespace Dev2.Studio.ViewModels.Workflow
                         case ActivitySelectionType.Single:
                             ClearSelection();
                             SelectSingleModelItem(selectedModelItem);
-                            
+
                             BringIntoView(selectedModelItem);
                             break;
                         case ActivitySelectionType.Add:
                             AddModelItemToSelection(selectedModelItem);
-                            
+
                             BringIntoView(selectedModelItem);
                             break;
                         case ActivitySelectionType.Remove:
@@ -1755,7 +1765,7 @@ namespace Dev2.Studio.ViewModels.Workflow
                     //// Handle Decision Edits
                     if (dp != null && !WizardEngineAttachedProperties.GetDontOpenWizard(dp) && item.ItemType == typeof(FlowDecision))
                     {
-                        FlowController.ConfigureDecisionExpression(new ConfigureDecisionExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment});
+                        FlowController.ConfigureDecisionExpression(new ConfigureDecisionExpressionMessage { ModelItem = item, EnvironmentModel = _resourceModel.Environment });
                     }
                 }
 
@@ -2075,7 +2085,7 @@ namespace Dev2.Studio.ViewModels.Workflow
 
                 _wd.Context.Services.Unsubscribe<DesignerView>(DesigenrViewSubscribe);
 
-               
+
             }
 
             if (DesignerManagementService != null)
@@ -2113,7 +2123,7 @@ namespace Dev2.Studio.ViewModels.Workflow
             }
             try
             {
-               // CEventHelper.RemoveAllEventHandlers(_wd);
+                // CEventHelper.RemoveAllEventHandlers(_wd);
             }
             // ReSharper disable EmptyGeneralCatchClause
             catch { }
@@ -2228,9 +2238,9 @@ namespace Dev2.Studio.ViewModels.Workflow
 
         public void Handle(SelectModelItemMessage message)
         {
-            if(message.ModelItem != null)
+            if (message.ModelItem != null)
             {
-                Selection.Subscribe(_wd.Context,SelectedItemChanged);
+                Selection.Subscribe(_wd.Context, SelectedItemChanged);
                 Selection.SelectOnly(_wd.Context, message.ModelItem);
                 BringIntoView(message.ModelItem);
             }
