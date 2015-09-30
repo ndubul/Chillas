@@ -466,7 +466,7 @@ namespace Warewolf.Studio.ViewModels
         private string GetAddressName()
         {
             string addressName = null;
-            if (ServerName != null)
+            if (ServerName != null && !String.IsNullOrEmpty(ServerName.Name))
             {
                 addressName = GetAddressName(Protocol,ServerName.Name,SelectedPort);
             }

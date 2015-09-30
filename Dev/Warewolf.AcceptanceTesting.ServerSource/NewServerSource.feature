@@ -17,8 +17,7 @@ Scenario: Opening New Server Source
 
 @ServerSource
 Scenario: Creating New Source as windows
-	Given I open New Server Source
-	And "Test" is "Disabled"
+	Given I open New Server Source	
 	And I type Server as "SANDBOX-1"
 	And "Test" is "Enabled"
 	And I select protocol as "http"
@@ -33,15 +32,6 @@ Scenario: Creating New Source as windows
 	Then "Save" is "Enabled"
 	When I save the server source
 	Then the save dialog is opened
-
-@ServerSource
-Scenario: Test connection is unsuccessfull
-	Given I open New Server Source
-	And I type Server as "barney"
-	When I Test Connection to remote server
-	Then Test Connecton is "Failed"
-	And validation message is "Connection Error: Unauthorized"
-	And "Save" is "Disabled"
 
 @ServerSource
 Scenario: Creating New Source as User And HTTPS
