@@ -512,15 +512,29 @@ namespace Dev2.Studio.ViewModels
 
         public void Handle(ShowDependenciesMessage message)
         {
+            var server = CustomContainer.Get<IServer>();
             Dev2Logger.Log.Info(message.GetType().Name);
             var model = message.ResourceModel;
             var dependsOnMe = message.ShowDependentOnMe;
-            ShowDependencies(dependsOnMe, model);
+            ShowDependencies(dependsOnMe, model, server);
         }
 
-        void ShowDependencies(bool dependsOnMe, IContextualResourceModel model)
+        public void ShowDependencies(Guid resourceId, IServer server)
         {
-            var vm = new DependencyVisualiserViewModel(new DependencyVisualiserView(), dependsOnMe);
+            var environmentModel = EnvironmentRepository.Get(server.EnvironmentID);
+            if (environmentModel != null)
+            {
+                environmentModel.ResourceRepository.LoadResourceFromWorkspace(resourceId, Guid.Empty);
+                var resource = environmentModel.ResourceRepository.FindSingle(model => model.ID == resourceId, true);
+                var contextualResourceModel = new ResourceModel(environmentModel, EventPublisher);
+                contextualResourceModel.Update(resource);
+                ShowDependencies(false, contextualResourceModel, server);
+            }
+        }
+
+        void ShowDependencies(bool dependsOnMe, IContextualResourceModel model, IServer server)
+        {
+            var vm = new DependencyVisualiserViewModel(new DependencyVisualiserView(), server, dependsOnMe);
             vm.ResourceType = Common.Interfaces.Data.ResourceType.DependencyViewer;
             vm.ResourceModel = model;
 
@@ -1750,7 +1764,8 @@ namespace Dev2.Studio.ViewModels
                     msgBoxView.ShowDialog();
                     if (msgBoxView.OpenDependencyGraph)
                     {
-                        ShowDependencies(false, model);
+                        var server = CustomContainer.Get<IServer>();
+                        ShowDependencies(false, model, server);
                     }
                     return false;
                 }

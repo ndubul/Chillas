@@ -44,21 +44,23 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
         bool _getDependsOnOther;
         string _nestingLevel;
         public Guid EnvironmentId { get; set; }
+        IServer Server;
 
         public DependencyVisualiserViewModel(IEventAggregator eventAggregator)
             : base(eventAggregator)
         {
         }
 
-        public DependencyVisualiserViewModel(DependencyVisualiserView view, bool getDependsOnMe=false)
+        public DependencyVisualiserViewModel(DependencyVisualiserView view, IServer server, bool getDependsOnMe = false)
             : base(EventPublishers.Aggregator)
         {
             _view = view;
+            Server = server;
             GetDependsOnMe = getDependsOnMe;
             GetDependsOnOther = !GetDependsOnMe;
             NestingLevel = "0";
         }
-        
+
         public double AvailableWidth
         {
             get
@@ -173,7 +175,6 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
         public void BuildGraphs()
         {
             var repo = ResourceModel.Environment.ResourceRepository;
-            var repos = StudioResourceRepository.Instance;
             var graphData = repo.GetDependenciesXml(ResourceModel, GetDependsOnMe);
 
             if (graphData == null)
@@ -189,7 +190,7 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             {
                 List<Guid> seenResource = new List<Guid>();
                 var acc = new List<ExplorerItemNodeViewModel>();
-                GetItems(new List<Node> { graph.Nodes.FirstOrDefault() }, StudioResourceRepository.Instance, null, acc, seenResource);
+                GetItems(new List<Node> { graph.Nodes.FirstOrDefault() }, null, acc, seenResource);
                 AllNodes = new ObservableCollection<ExplorerItemNodeViewModel>(acc);
             }
         }
@@ -218,35 +219,34 @@ namespace Dev2.Studio.ViewModels.DependencyVisualization
             }
         }
 
-        public ICollection<ExplorerItemNodeViewModel> GetItems(List<Node> nodes, IStudioResourceRepository repo, IExplorerItemNodeViewModel parent, List<ExplorerItemNodeViewModel> acc, List<Guid> seenResource)
+        public ICollection<ExplorerItemNodeViewModel> GetItems(List<Node> nodes, IExplorerItemNodeViewModel parent, List<ExplorerItemNodeViewModel> acc, List<Guid> seenResource)
         {
-            var server = CustomContainer.Get<IServer>();
             List<ExplorerItemNodeViewModel> items = new List<ExplorerItemNodeViewModel>(nodes.Count);
             foreach (var node in nodes)
             {
                 if (!seenResource.Contains(Guid.Parse(node.ID)))
                 {
-                var exploreritem = repo.FindItemById(Guid.Parse(node.ID));
-                ExplorerItemNodeViewModel item = new ExplorerItemNodeViewModel(server, parent)
-                {
-                    ResourceName = exploreritem.DisplayName,
-                    TextVisibility = true,
-                    ResourceType = exploreritem.ResourceType,
-                    IsMainNode = exploreritem.DisplayName.Equals(ResourceModel.ResourceName)
-                };
-                if (node.NodeDependencies != null && node.NodeDependencies.Count > 0)
+                    var exploreritem = Server.ExplorerRepository.FindItemByID(Guid.Parse(node.ID));
+                    ExplorerItemNodeViewModel item = new ExplorerItemNodeViewModel(Server, parent)
+                    {
+                        ResourceName = exploreritem.DisplayName,
+                        TextVisibility = true,
+                        ResourceType = exploreritem.ResourceType,
+                        IsMainNode = exploreritem.DisplayName.Equals(ResourceModel.ResourceName)
+                    };
+                    if (node.NodeDependencies != null && node.NodeDependencies.Count > 0)
                     {
                         seenResource.Add(Guid.Parse(node.ID));
-                        item.Children = new ObservableCollection<IExplorerItemViewModel>(GetItems(node.NodeDependencies, repo, item, acc, seenResource).Select(a => a as IExplorerItemViewModel));
+                        item.Children = new ObservableCollection<IExplorerItemViewModel>(GetItems(node.NodeDependencies, item, acc, seenResource).Select(a => a as IExplorerItemViewModel));
                     }
-                else
-                {
+                    else
+                    {
                         seenResource.Add(Guid.Parse(node.ID));
-                    item.Children = new ObservableCollection<IExplorerItemViewModel>();
+                        item.Children = new ObservableCollection<IExplorerItemViewModel>();
+                    }
+                    items.Add(item);
+                    acc.Add(item);
                 }
-                items.Add(item);
-                acc.Add(item);
-            }
             }
             return items;
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Dev2;
 using Dev2.Common.Interfaces;
 
 namespace Warewolf.Studio.ViewModels
@@ -12,7 +13,7 @@ namespace Warewolf.Studio.ViewModels
         // ReSharper disable TooManyDependencies
         public ExplorerItemNodeViewModel(IServer server, IExplorerItemViewModel parent)
             // ReSharper restore TooManyDependencies
-            : base(server, parent,a=>{},parent.ShellViewModel)
+            : base(server, parent,a=>{},CustomContainer.Get<IShellViewModel>())
         {
             Self = this;
             Weight = 1;

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Dev2.Common.Interfaces;
+using Dev2.Studio.Core.ViewModels;
 using Infragistics.Controls.Menus;
 using Infragistics.DragDrop;
 using Infragistics.Windows;
@@ -259,6 +260,12 @@ namespace Warewolf.Studio.Views
                         //DO NOTHING
                     }
                 }
+
+                var l = drop.Node.Data as IWorkflowDesignerViewModel;
+                //var vm = Application.Current.Resources["vm"] as VM;
+                //vm.Leagues.Remove(l);
+                //vm.ListboxLeagues.Add(l);
+
                 Reset(drop);
             }
         }

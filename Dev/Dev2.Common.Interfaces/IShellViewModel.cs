@@ -30,5 +30,7 @@ namespace Dev2.Common.Interfaces
         void SetActiveEnvironment(Guid environmentID);
 
         void Debug();
+
+        void ShowDependencies(Guid resourceId, IServer server);
     }
 }

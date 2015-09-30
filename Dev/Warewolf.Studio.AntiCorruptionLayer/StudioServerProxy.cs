@@ -51,6 +51,13 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             var explorerItemModels = ExplorerItems.Descendants().ToList();
             return searchCriteria == null ? null : explorerItemModels.FirstOrDefault(searchCriteria);
         }
+
+        public IExplorerItem FindItemByID(Guid id)
+        {
+            var explorerItemModels = ExplorerItems.Descendants().ToList();
+            return id == Guid.Empty ? null : explorerItemModels.Find(item => item.ResourceId == id);
+        }
+
         public bool Rename(IExplorerItemViewModel vm, string newName)
         {
             UpdateManagerProxy.Rename(vm.ResourceId, newName);

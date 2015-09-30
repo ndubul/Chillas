@@ -81,6 +81,10 @@ namespace Warewolf.Studio.ViewModels
                 shellViewModel.SetActiveEnvironment(Server.EnvironmentID);
                 shellViewModel.NewResource(type.ToString(), ResourcePath);
             });
+            ShowDependenciesCommand = new DelegateCommand((() =>
+            {
+                shellViewModel.ShowDependencies(ResourceId, Server);
+            }));
             CanCreateDbService = true;
             CanCreateWorkflowService = true;
             CanCreateServerSource = true;
