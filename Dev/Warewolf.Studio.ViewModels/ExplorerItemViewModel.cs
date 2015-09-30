@@ -840,9 +840,8 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return ResourceType != ResourceType.Version;
+                return ResourceType == ResourceType.Folder;
             }
-
             set
             {
             }
@@ -853,7 +852,6 @@ namespace Warewolf.Studio.ViewModels
             {
                 return ResourceType < ResourceType.Server && ResourceType != ResourceType.Version;
             }
-
             set
             {
             }

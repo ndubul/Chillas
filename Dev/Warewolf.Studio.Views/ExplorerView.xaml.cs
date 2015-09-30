@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Dev2.Common.Interfaces;
 using Infragistics.Controls.Menus;
 using Infragistics.DragDrop;
+using Infragistics.Windows;
 
 namespace Warewolf.Studio.Views
 {
@@ -124,7 +125,6 @@ namespace Warewolf.Studio.Views
 
 	    void ExplorerTree_OnNodeDragDrop(object sender, TreeDropEventArgs e)
 	    {
-            
             var node = e.DragDropEventArgs.Data as XamDataTreeNode;
 
             if (node != null)
@@ -207,32 +207,99 @@ namespace Warewolf.Studio.Views
             }
 	    }
 
+	    void ExplorerTree_OnPreviewDragOver(object sender, DragEventArgs e)
+	    {
+            var allowedEffects = e.AllowedEffects;
+	    }
+
+        private bool dropBefore = false;
+        private bool dropAfter = false;
+        private XamDataTreeNode parent = null;
+
+	    void DragSource_OnDragOver(object sender, DragDropMoveEventArgs e)
+	    {
+            var drop = Utilities.GetAncestorFromType(e.DropTarget, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
+            var drag = Utilities.GetAncestorFromType(e.DragSource, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
+
+            if (drag != null && (drop != null && drag.Node.Manager.ParentNode != null && drop.Node.Manager.ParentNode != null))
+            {
+                if (drag.Node.Data.GetType() == drop.Node.Data.GetType() && drag.Node.Manager.ParentNode.Data.Equals(drop.Node.Manager.ParentNode.Data))
+                {
+                    parent = drag.Node.Manager.ParentNode;
+
+                    if (e.GetPosition(e.DropTarget).Y < drop.ActualHeight / 2)
+                    {
+                        ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Visible;
+                        ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Collapsed;
+                        dropBefore = true;
+                        dropAfter = false;
+                    }
+                    else
+                    {
+                        ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Visible;
+                        ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Collapsed;
+                        dropBefore = false;
+                        dropAfter = true;
+                    }
+                }
+
+            }
+	    }
+
+	    void DragSource_OnDragLeave(object sender, DragDropEventArgs e)
+	    {
+            var drop = Utilities.GetAncestorFromType(e.DropTarget, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
+            Reset(drop);
+	    }
+
 	    void DragSource_OnDrop(object sender, DropEventArgs e)
 	    {
-            var dropped = e.DropTarget as XamDataTree;
-	        var grid = e.DragSource as Grid;
-	        if(grid != null)
-	        {
-	            var contentPresenter = grid.TemplatedParent as ContentPresenter;
-	            if(contentPresenter != null)
-	            {
-	                var xamDataTreeNodeControl = contentPresenter.TemplatedParent as XamDataTreeNodeControl;
-	                if(xamDataTreeNodeControl != null)
-	                {
-	                    XamDataTreeNode xdtn = xamDataTreeNodeControl.Node;
+            var drop = Utilities.GetAncestorFromType(e.DropTarget, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
+            var drag = Utilities.GetAncestorFromType(e.DragSource, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
 
-	                    if(dropped != null)
-	                    {
-                            var destination = dropped.ActiveNode.Data as IExplorerItemViewModel;
-                            var source = xdtn.Data as IExplorerItemViewModel;
-                            if (source != null)
-                            {
-                                source.Move(destination);
-                            }
-	                    }
-	                }
-	            }
-	        }
+            if (drag != null && (drop != null && drag.Node.Manager.ParentNode != null && drop.Node.Manager.ParentNode != null))
+            {
+                int dropIndex = drop.Node.Index;
+                if (dropBefore)
+                {
+                    parent.Nodes.RemoveAt(drag.Node.Index);
+                    if (dropIndex == 0)
+                    {
+                        parent.Nodes.Insert(0, drag.Node);
+                    }
+                    else
+                    {
+                        parent.Nodes.Insert(dropIndex, drag.Node);
+                    }
+
+                }
+
+                if (dropAfter)
+                {
+                    parent.Nodes.RemoveAt(drag.Node.Index);
+                    if (dropIndex == parent.Nodes.Count)
+                    {
+                        parent.Nodes.Add(drag.Node);
+                    }
+                    else
+                    {
+                        parent.Nodes.Insert(drop.Node.Index + 1, drag.Node);
+                    }
+                }
+
+                Reset(drop);
+            }
 	    }
+        private void Reset(XamDataTreeNodeControl drop)
+        {
+            if (drop != null)
+            {
+                ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Collapsed;
+                ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Collapsed;
+                dropBefore = false;
+                dropAfter = false;
+                parent = null;
+            }
+        }
 	}
 }

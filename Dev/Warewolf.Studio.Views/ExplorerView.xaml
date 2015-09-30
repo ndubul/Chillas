@@ -116,9 +116,25 @@
                             SelectedDataItems="{Binding SelectedDataItems}"
                             ItemsSource="{Binding Environments}"
                             NodeDragDrop="ExplorerTree_OnNodeDragDrop"
+                            PreviewDragOver="ExplorerTree_OnPreviewDragOver"
                             NodeLineVisibility="Hidden" >
                 <ig:DragDropManager.DragSource>
-                    <ig:DragSource IsDraggable="False" DragChannels="ExplorerChannel" />
+                    <ig:DragSource IsDraggable="False" 
+                                   DragChannels="ExplorerChannel" 
+                                   DragOver="DragSource_OnDragOver"
+                                    DragLeave="DragSource_OnDragLeave"
+                                    Drop="DragSource_OnDrop">
+                        <ig:DragSource.MoveCursorTemplate>
+                            <DataTemplate>
+                                <Ellipse Fill="Green" Width="50" Height="50" />
+                            </DataTemplate>
+                        </ig:DragSource.MoveCursorTemplate>
+                        <ig:DragSource.DropNotAllowedCursorTemplate>
+                            <DataTemplate>
+                                <Ellipse Fill="Red" Width="50" Height="50" />
+                            </DataTemplate>
+                        </ig:DragSource.DropNotAllowedCursorTemplate>
+                    </ig:DragSource>
                 </ig:DragDropManager.DragSource>
                 <ig:XamDataTree.EditingSettings>
                     <ig:TreeEditingSettings AllowDeletion="False"
@@ -132,6 +148,7 @@
                 <ig:XamDataTree.GlobalNodeLayouts>
                     <ig:NodeLayout Key="Environments"
                                    DisplayMemberPath="DisplayName"
+                                   IsDropTarget="{Binding Path=Data.IsDropTarget}"
                                    IsExpandedMemberPath="IsExpanded"
                                    TargetTypeName="IEnvironmentViewModel">
                         <ig:NodeLayout.ItemTemplate>
@@ -328,6 +345,7 @@
                     <ig:NodeLayout Key="Children"
                                    DisplayMemberPath="ResourceName"
                                    IsExpandedMemberPath="IsExpanded"
+                                   IsDropTarget="{Binding Path=Data.IsDropTarget}"
                                    TargetTypeName="IExplorerItemViewModel" 
                                    Visibility="{Binding Path=Data.IsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                         <ig:NodeLayout.EditorTemplate>
