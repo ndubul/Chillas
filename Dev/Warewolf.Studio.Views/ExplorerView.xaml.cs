@@ -15,6 +15,9 @@ namespace Warewolf.Studio.Views
 	public partial class ExplorerView : IExplorerView
 	{
 	    private readonly ExplorerViewTestClass _explorerViewTestClass;
+        private bool _dropBefore;
+        private bool _dropAfter;
+        private XamDataTreeNode parent;
 
 	    public ExplorerView()
 	    {
@@ -123,35 +126,6 @@ namespace Warewolf.Studio.Views
             }
 	    }
 
-	    void ExplorerTree_OnNodeDragDrop(object sender, TreeDropEventArgs e)
-	    {
-            var node = e.DragDropEventArgs.Data as XamDataTreeNode;
-
-            if (node != null)
-            {
-                var dropped = e.DragDropEventArgs.DropTarget as XamDataTreeNodeControl;
-                if (dropped != null)
-                {
-                    var destination = dropped.Node.Data as IExplorerItemViewModel;
-                    var source = node.Data as IExplorerItemViewModel;
-                    if (source != null && destination != null)
-                    {
-                        if (!destination.CanDrop || !source.CanDrag)
-                        {
-                            e.Handled = true;
-                            return;
-                        }
-                        if (!source.Move(destination))
-                        {
-                            e.Handled = true;
-                        }
-                    }
-                }
-            }
-            e.Handled = true;
-            
-	    }
-
 	    /// <summary>
 	    /// Attaches events and names to compiled content. 
 	    /// </summary>
@@ -159,7 +133,6 @@ namespace Warewolf.Studio.Views
 	    public void Connect(int connectionId, object target)
 	    {
 	    }
-
 
 	    void ExplorerTree_OnInitializeNode(object sender, InitializeNodeEventArgs e)
 	    {
@@ -192,8 +165,6 @@ namespace Warewolf.Studio.Views
             }
 	    }
 
-
-
 	    void ExplorerTree_OnNodeExitedEditMode(object sender, NodeEventArgs e)
 	    {
             var dataItem = e.Node.Data as IExplorerItemViewModel;
@@ -207,15 +178,6 @@ namespace Warewolf.Studio.Views
             }
 	    }
 
-	    void ExplorerTree_OnPreviewDragOver(object sender, DragEventArgs e)
-	    {
-            var allowedEffects = e.AllowedEffects;
-	    }
-
-        private bool dropBefore = false;
-        private bool dropAfter = false;
-        private XamDataTreeNode parent = null;
-
 	    void DragSource_OnDragOver(object sender, DragDropMoveEventArgs e)
 	    {
             var drop = Utilities.GetAncestorFromType(e.DropTarget, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
@@ -223,23 +185,48 @@ namespace Warewolf.Studio.Views
 
             if (drag != null && (drop != null && drag.Node.Manager.ParentNode != null && drop.Node.Manager.ParentNode != null))
             {
-                if (drag.Node.Data.GetType() == drop.Node.Data.GetType() && drag.Node.Manager.ParentNode.Data.Equals(drop.Node.Manager.ParentNode.Data))
+                var dragType = drag.Node.Data.GetType();
+                var dropType = drop.Node.Data.GetType();
+                var dropParentNodeManager = drop.Node.Manager.ParentNode.Data as IExplorerItemViewModel;
+
+                if (dropParentNodeManager != null && (dragType == dropType && dropParentNodeManager.CanDrop))
                 {
                     parent = drag.Node.Manager.ParentNode;
 
                     if (e.GetPosition(e.DropTarget).Y < drop.ActualHeight / 2)
                     {
+                        var destination = drop.Node.Data as IExplorerItemViewModel;
+                        if (destination != null && !destination.CanDrop && !dropParentNodeManager.CanDrop)
+                        {
+                            ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Collapsed;
+                            ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Collapsed;
+                            _dropBefore = false;
+                            _dropAfter = false;
+                            return;
+                        }
                         ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Visible;
                         ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Collapsed;
-                        dropBefore = true;
-                        dropAfter = false;
+                        ((Grid)Utilities.GetDescendantFromName(drop, "main")).AllowDrop = true;
+                        _dropBefore = true;
+                        _dropAfter = false;
+
                     }
                     else
                     {
+                        var destination = drop.Node.Data as IExplorerItemViewModel;
+                        if (destination != null && !destination.CanDrop && !dropParentNodeManager.CanDrop)
+                        {
+                            ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Collapsed;
+                            ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Collapsed;
+                            _dropBefore = false;
+                            _dropAfter = false;
+                            return;
+                        }
                         ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Visible;
                         ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Collapsed;
-                        dropBefore = false;
-                        dropAfter = true;
+                        ((Grid)Utilities.GetDescendantFromName(drop, "main")).AllowDrop = true;
+                        _dropBefore = false;
+                        _dropAfter = true;
                     }
                 }
 
@@ -252,52 +239,37 @@ namespace Warewolf.Studio.Views
             Reset(drop);
 	    }
 
-	    void DragSource_OnDrop(object sender, DropEventArgs e)
-	    {
+        void DragSource_OnDrop(object sender, DropEventArgs e)
+        {
             var drop = Utilities.GetAncestorFromType(e.DropTarget, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
             var drag = Utilities.GetAncestorFromType(e.DragSource, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
 
             if (drag != null && (drop != null && drag.Node.Manager.ParentNode != null && drop.Node.Manager.ParentNode != null))
             {
-                int dropIndex = drop.Node.Index;
-                if (dropBefore)
+                var destination = drop.Node.Data as IExplorerItemViewModel;
+                var source = drag.Node.Data as IExplorerItemViewModel;
+                if (source != null && destination != null)
                 {
-                    parent.Nodes.RemoveAt(drag.Node.Index);
-                    if (dropIndex == 0)
+                    if (!destination.CanDrop || !source.CanDrag)
                     {
-                        parent.Nodes.Insert(0, drag.Node);
+                        return;
                     }
-                    else
+                    if (!source.Move(destination))
                     {
-                        parent.Nodes.Insert(dropIndex, drag.Node);
-                    }
-
-                }
-
-                if (dropAfter)
-                {
-                    parent.Nodes.RemoveAt(drag.Node.Index);
-                    if (dropIndex == parent.Nodes.Count)
-                    {
-                        parent.Nodes.Add(drag.Node);
-                    }
-                    else
-                    {
-                        parent.Nodes.Insert(drop.Node.Index + 1, drag.Node);
+                        //DO NOTHING
                     }
                 }
-
                 Reset(drop);
             }
-	    }
+        }
         private void Reset(XamDataTreeNodeControl drop)
         {
             if (drop != null)
             {
                 ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Collapsed;
                 ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Collapsed;
-                dropBefore = false;
-                dropAfter = false;
+                _dropBefore = false;
+                _dropAfter = false;
                 parent = null;
             }
         }
