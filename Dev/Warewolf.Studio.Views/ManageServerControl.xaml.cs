@@ -69,7 +69,7 @@ namespace Warewolf.Studio.Views
                     var computerNames = AddressTextBox.ItemsSource as ICollection<IComputerName>;
                     if (computerNames != null)
                     {
-                        computerNames.Add(new ComputerName() { Name = serverName });
+                        computerNames.Add(new ComputerName { Name = serverName });
                     }
                     EnterServerName(serverName);
                 }
@@ -175,6 +175,15 @@ namespace Warewolf.Studio.Views
         {
             try
             {
+                if (ProtocolItems.Items.Count == 0)
+                {
+                    BindingExpression be = ProtocolItems.GetBindingExpression(ItemsControl.ItemsSourceProperty);
+                    if (be != null)
+                    {
+                        be.UpdateTarget();
+                    }
+                    ProtocolItems.DataContext = DataContext;                    
+                }
                 ProtocolItems.SelectedItem = protocol;
             }
             // ReSharper disable once EmptyGeneralCatchClause
