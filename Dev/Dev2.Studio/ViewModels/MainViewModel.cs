@@ -1231,11 +1231,11 @@ namespace Dev2.Studio.ViewModels
             {
                 AddNewWebServiceSurface(resourcePath);
             }
-            else if (resourceType == "ResourceSource")
+            else if (resourceType == "PluginSource")
             {
                 AddNewPluginSourceSurface(resourcePath);
             }
-            else if (resourceType == "ResourceService")
+            else if (resourceType == "PluginService")
             {
                 AddNewPluginServiceSurface(resourcePath);
             }

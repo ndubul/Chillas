@@ -221,7 +221,7 @@ namespace Warewolf.Studio.ViewModels
 			ShowConnectControl = true;
             ConnectControlViewModel.ServerConnected+=ServerConnected;
             ConnectControlViewModel.ServerDisconnected += ServerDisconnected;
-			//aggregator.GetEvent<ItemAddedEvent>().Subscribe(ItemAdded);
+			
 		}
 
 	    async void ServerConnected(object _, IServer server)
@@ -255,7 +255,7 @@ namespace Warewolf.Studio.ViewModels
 
 		IEnvironmentViewModel CreateEnvironmentFromServer(IServer server, IShellViewModel shellViewModel)
 		{
-			return new EnvironmentViewModel(server, shellViewModel);
+            return new EnvironmentViewModel(server, shellViewModel);
 		}
 	}
 
