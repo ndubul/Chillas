@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Dev2;
+using Dev2.Activities;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Infrastructure;
@@ -16,6 +17,7 @@ using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Unlimited.Applications.BusinessDesignStudio.Activities;
 using Warewolf.Studio.AntiCorruptionLayer;
 using Warewolf.Studio.Core.Popup;
 
@@ -47,6 +49,7 @@ namespace Warewolf.Studio.ViewModels
         private bool _isSelected;
         bool _canShowVersions;
         readonly IShellViewModel _shellViewModel;
+        Dictionary<ResourceType, Type> _activityNames;
 
         public ExplorerItemViewModel(IServer server, IExplorerTreeItem parent, Action<IExplorerItemViewModel> selectAction, IShellViewModel shellViewModel)
         {
@@ -126,6 +129,29 @@ namespace Warewolf.Studio.ViewModels
             CanView = true;
             DeleteVersionCommand = new DelegateCommand(DeleteVersion);
             CanShowServerVersion = false;
+
+            _activityNames = new Dictionary<ResourceType, Type>
+                {
+                    {
+                        ResourceType.DbService, typeof(DsfDatabaseActivity) 
+                    },
+                    {
+                        ResourceType.PluginService, typeof(DsfPluginActivity) 
+                    },
+                    {
+                        ResourceType.WebService, typeof(DsfWebserviceActivity) 
+                    }
+                };
+        }
+
+        public string ActivityName
+        {
+            get
+            {
+
+                return (_activityNames.ContainsKey(ResourceType) ? _activityNames[ResourceType] : typeof(DsfActivity)).AssemblyQualifiedName;
+
+            }
         }
 
         void DeleteVersion()

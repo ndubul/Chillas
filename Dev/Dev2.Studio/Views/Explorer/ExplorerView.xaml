@@ -92,60 +92,6 @@
 
             <navigationViews:NavigationView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type explorer2:ExplorerItemModel}" ItemsSource="{Binding Path=Children}">
-                    <HierarchicalDataTemplate.Triggers>
-                        <!--<EventTrigger RoutedEvent="StackPanel.MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="EditPermissionImageEnabled"
-                                                                           Storyboard.TargetProperty="Source">
-                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Permission-Enabled}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="EditPermissionImageDisabled"
-                                                                           Storyboard.TargetProperty="Source">
-                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Permission-Disabled}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="ExecutePermissionImageEnabled"
-                                                                           Storyboard.TargetProperty="Source">
-                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Run-Enabled}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="ExecutePermissionImageDisabled"
-                                                                           Storyboard.TargetProperty="Source">
-                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource Explorer-Run-Disabled}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="StackPanel.MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="EditPermissionImageEnabled"
-                                                                           Storyboard.TargetProperty="Source">
-                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="EditPermissionImageDisabled"
-                                                                           Storyboard.TargetProperty="Source">
-                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="ExecutePermissionImageEnabled"
-                                                                           Storyboard.TargetProperty="Source">
-                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                    <ObjectAnimationUsingKeyFrames Duration="0"
-                                                                           Storyboard.TargetName="ExecutePermissionImageDisabled"
-                                                                           Storyboard.TargetProperty="Source">
-                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource System-Spacer}" />
-                                    </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>-->
-                    </HierarchicalDataTemplate.Triggers>
                     <Border IsHitTestVisible="True" Background="Transparent">
                         <Border.RenderTransform>
                             <TransformGroup>

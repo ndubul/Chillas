@@ -17,6 +17,7 @@ namespace Warewolf.Studio.ViewModels
 		private bool _isRefreshing;
 		private IExplorerTreeItem _selectedItem;
 		private object[] _selectedDataItems;
+	    bool _fromActivityDrop;
 
 	    protected ExplorerViewModelBase()
 		{
@@ -37,6 +38,21 @@ namespace Warewolf.Studio.ViewModels
 	        }
 	    }
 
+        public bool IsFromActivityDrop
+        {
+            get
+            {
+                return _fromActivityDrop;
+            }
+            set
+            {
+                if (value != _fromActivityDrop)
+                {
+                    _fromActivityDrop = value;
+                    OnPropertyChanged(() => IsFromActivityDrop);
+                }
+            }
+        }
 	    public ICommand RefreshCommand { get; set; }
 
 		public bool IsRefreshing

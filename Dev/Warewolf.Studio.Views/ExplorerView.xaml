@@ -27,6 +27,111 @@
         <views:NotConverter x:Key="NotConverter" />
         <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
 
+        <Style x:Key="PulseStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Height="55" Width="55">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard RepeatBehavior="Forever">
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse"
+                                                                               Storyboard.TargetProperty="(FrameworkElement.Width)">
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="50"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse"
+                                                                               Storyboard.TargetProperty="(FrameworkElement.Height)">
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="50"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse"
+                                                                               Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse_Copy"
+                                                                               Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00.2500000">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse_Copy"
+                                                                               Storyboard.TargetProperty="(FrameworkElement.Width)">
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.2500000" Value="22"/>
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.7500000" Value="50"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse_Copy"
+                                                                               Storyboard.TargetProperty="(FrameworkElement.Height)">
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.2500000" Value="22"/>
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.7500000" Value="50"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse_Copy"
+                                                                               Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.2500000" Value="1"/>
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.7500000" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse"
+                                                                               Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse_Copy1"
+                                                                               Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse_Copy1"
+                                                                               Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                                                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse_Copy1"
+                                                                               Storyboard.TargetProperty="(FrameworkElement.Width)">
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="22"/>
+                                                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="50"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse_Copy1"
+                                                                               Storyboard.TargetProperty="(FrameworkElement.Height)">
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="22"/>
+                                                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="50"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed"/>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused"/>
+                                    <VisualState x:Name="Unfocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                            <Ellipse x:Name="ellipse" Stroke="#FFF3700D" HorizontalAlignment="Center" Width="22" Height="22" VerticalAlignment="Center"
+                                         StrokeThickness="2" Visibility="Collapsed"/>
+                            <Ellipse x:Name="ellipse_Copy" Stroke="#FFF3700D" StrokeThickness="2" Height="22" HorizontalAlignment="Center"
+                                         VerticalAlignment="Center" Width="22" Visibility="Collapsed"/>
+                            <Ellipse x:Name="ellipse_Copy1" Stroke="#FFF3700D" StrokeThickness="2" Height="22" HorizontalAlignment="Center"
+                                         VerticalAlignment="Center" Width="22" Visibility="Collapsed"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <Style TargetType="ig:XamDataTreeNodeControl">
             <Setter Property="Background" Value="Transparent" />
@@ -47,10 +152,37 @@
                                 <ig:DragSource DragOver="DragSource_OnDragOver"
                                                DragLeave="DragSource_OnDragLeave"
                                                Drop="DragSource_OnDrop"
-                                               IsDraggable="True"/>
+                                               DragStart="DragSource_OnDragStart"
+                                               DragChannels="1"
+                                               IsDraggable="True">
+                                    <!-- Custom Copy Cursor -->
+                                    <ig:DragSource.CopyCursorTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource PulseStyle}">
+                                                <fa:FontAwesome Icon="Plus" FontSize="14"/>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ig:DragSource.CopyCursorTemplate>
+                                    <!-- Custom Drop Not Allowed Cursor -->
+                                    <ig:DragSource.DropNotAllowedCursorTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource PulseStyle}">
+                                                <fa:FontAwesome Icon="ExclamationCircle" FontSize="16" Foreground="Red"/>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ig:DragSource.DropNotAllowedCursorTemplate>
+                                    <!-- Custom Move Cursor -->
+                                    <ig:DragSource.MoveCursorTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource PulseStyle}">
+                                                <fa:FontAwesome Icon="Arrows" FontSize="14"/>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ig:DragSource.MoveCursorTemplate>
+                                </ig:DragSource>
                             </ig:DragDropManager.DragSource>
                             <ig:DragDropManager.DropTarget>
-                                <ig:DropTarget IsDropTarget="True"/>
+                                <ig:DropTarget IsDropTarget="True" DropChannels="1"/>
                             </ig:DragDropManager.DropTarget>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -751,7 +883,6 @@
                                         <ColumnDefinition Width="22"></ColumnDefinition>
                                         <ColumnDefinition Width="22"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-
                                     <!--  CONTEXT MENU FOR THE EXPLORER TREE  -->
                                     <ig:ContextMenuService.Manager>
                                         <ig:ContextMenuManager>

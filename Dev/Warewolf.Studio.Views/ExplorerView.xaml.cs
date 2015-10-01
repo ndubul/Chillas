@@ -1,35 +1,40 @@
-﻿using System.Collections.Generic;
+﻿using System.Activities.Presentation;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Dev2.Common.Interfaces;
-using Dev2.Studio.Core.ViewModels;
+using Dev2.Common.Interfaces.Data;
+using Dev2.Services.Security;
+using Dev2.Studio.Core;
 using Infragistics.Controls.Menus;
 using Infragistics.DragDrop;
 using Infragistics.Windows;
+using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.Views
 {
-	/// <summary>
-	/// Interaction logic for ExplorerView.xaml
-	/// </summary>
-	public partial class ExplorerView : IExplorerView
-	{
-	    private readonly ExplorerViewTestClass _explorerViewTestClass;
+    /// <summary>
+    /// Interaction logic for ExplorerView.xaml
+    /// </summary>
+    public partial class ExplorerView : IExplorerView
+    {
+        private readonly ExplorerViewTestClass _explorerViewTestClass;
         private bool _dropBefore;
         private bool _dropAfter;
         private XamDataTreeNode parent;
+        DataObject _dragData;
 
-	    public ExplorerView()
-	    {
-	        InitializeComponent();
-	        _explorerViewTestClass = new ExplorerViewTestClass(this);            
-	    }
+        public ExplorerView()
+        {
+            InitializeComponent();
+            _explorerViewTestClass = new ExplorerViewTestClass(this);
+        }
 
-	    public ExplorerViewTestClass ExplorerViewTestClass
-	    {
-	        get { return _explorerViewTestClass; }
-	    }
+        public ExplorerViewTestClass ExplorerViewTestClass
+        {
+            get { return _explorerViewTestClass; }
+        }
 
         public IEnvironmentViewModel OpenEnvironmentNode(string nodeName)
         {
@@ -37,87 +42,87 @@ namespace Warewolf.Studio.Views
         }
 
         public List<IExplorerTreeItem> GetFoldersVisible()
-	    {
-	        return ExplorerViewTestClass.GetFoldersVisible();
-	    }
-
-        public IExplorerTreeItem OpenFolderNode(string folderName)
-	    {
-	        return ExplorerViewTestClass.OpenFolderNode(folderName);
-	    }
-
-        public IExplorerTreeItem OpenItem(string resourceName,string folderName)
         {
-            return ExplorerViewTestClass.OpenItem(resourceName,folderName);
+            return ExplorerViewTestClass.GetFoldersVisible();
         }
 
-	    public void Move(string originalPath, string destinationPath)
-	    {
+        public IExplorerTreeItem OpenFolderNode(string folderName)
+        {
+            return ExplorerViewTestClass.OpenFolderNode(folderName);
+        }
+
+        public IExplorerTreeItem OpenItem(string resourceName, string folderName)
+        {
+            return ExplorerViewTestClass.OpenItem(resourceName, folderName);
+        }
+
+        public void Move(string originalPath, string destinationPath)
+        {
             ExplorerViewTestClass.Move(originalPath, destinationPath);
-	    }
+        }
 
-	    public int GetVisibleChildrenCount(string folderName)
-	    {
-	        return ExplorerViewTestClass.GetVisibleChildrenCount(folderName);
-	    }
+        public int GetVisibleChildrenCount(string folderName)
+        {
+            return ExplorerViewTestClass.GetVisibleChildrenCount(folderName);
+        }
 
-	    public void PerformFolderRename(string originalFolderName, string newFolderName)
-	    {
-	        ExplorerViewTestClass.PerformFolderRename(originalFolderName, newFolderName);
-	    }
+        public void PerformFolderRename(string originalFolderName, string newFolderName)
+        {
+            ExplorerViewTestClass.PerformFolderRename(originalFolderName, newFolderName);
+        }
 
-	    public void PerformSearch(string searchTerm)
-	    {
-	        ExplorerViewTestClass.PerformSearch(searchTerm);
-	    }
+        public void PerformSearch(string searchTerm)
+        {
+            ExplorerViewTestClass.PerformSearch(searchTerm);
+        }
 
-	    public void AddNewFolder(string folder, string server)
-	    {
+        public void AddNewFolder(string folder, string server)
+        {
             ExplorerViewTestClass.PerformFolderAdd(server, folder);
-	    }
+        }
 
-	    public void VerifyItemExists(string path)
-	    {
+        public void VerifyItemExists(string path)
+        {
             ExplorerViewTestClass.VerifyItemExists(path);
-	    }
+        }
 
-	    public void DeletePath(string path)
-	    {
+        public void DeletePath(string path)
+        {
             ExplorerViewTestClass.DeletePath(path);
-	    }
+        }
 
-	    public void AddNewFolderFromPath(string path)
-	    {
+        public void AddNewFolderFromPath(string path)
+        {
             ExplorerViewTestClass.PerformFolderAdd(path);
-	    }
+        }
 
-	    public void AddNewResource(string path, string itemType)
-	    {
+        public void AddNewResource(string path, string itemType)
+        {
             ExplorerViewTestClass.PerformItemAdd(path);
-	    }
+        }
 
-	    public void AddResources(int resourceNumber, string path, string type, string name)
-	    {
-			ExplorerViewTestClass.AddChildren(resourceNumber, path, type, name);
-	    }
+        public void AddResources(int resourceNumber, string path, string type, string name)
+        {
+            ExplorerViewTestClass.AddChildren(resourceNumber, path, type, name);
+        }
 
-	    public int GetResourcesVisible(string path)
-	    {
+        public int GetResourcesVisible(string path)
+        {
             return ExplorerViewTestClass.GetFoldersResourcesVisible(path);
-	    }
+        }
 
-	    public void VerifyItemDoesNotExist(string path)
-	    {
+        public void VerifyItemDoesNotExist(string path)
+        {
             ExplorerViewTestClass.VerifyItemDoesNotExist(path);
-	    }
+        }
 
-	    public void Refresh()
-	    {
-	        ExplorerViewTestClass.Reset();
-	    }
+        public void Refresh()
+        {
+            ExplorerViewTestClass.Reset();
+        }
 
-	    public void Blur()
-	    {
+        public void Blur()
+        {
             if (Content != null)
             {
                 //Effect = new BlurEffect(){Radius = 10};
@@ -125,49 +130,49 @@ namespace Warewolf.Studio.Views
                 Overlay.Visibility = Visibility.Visible;
                 Overlay.Opacity = 0.75;
             }
-	    }
+        }
 
-	    /// <summary>
-	    /// Attaches events and names to compiled content. 
-	    /// </summary>
-	    /// <param name="connectionId">An identifier token to distinguish calls.</param><param name="target">The target to connect events and names to.</param>
-	    public void Connect(int connectionId, object target)
-	    {
-	    }
+        /// <summary>
+        /// Attaches events and names to compiled content. 
+        /// </summary>
+        /// <param name="connectionId">An identifier token to distinguish calls.</param><param name="target">The target to connect events and names to.</param>
+        public void Connect(int connectionId, object target)
+        {
+        }
 
-	    void ExplorerTree_OnInitializeNode(object sender, InitializeNodeEventArgs e)
-	    {
-	        var xamDataTreeNode = e.Node;
-	        if(xamDataTreeNode == null)
-	        {
-	            return;
-	        }
-	        var dataItem = xamDataTreeNode.Data as IExplorerItemViewModel;
-	        if(dataItem == null)
-	        {
-	            return;
-	        }
-	        if(!dataItem.IsRenaming)
-	        {
-	            return;
-	        }
-	        if(dataItem.ResourceName.StartsWith("New Folder"))
-	        {
-                ExplorerTree.EnterEditMode(xamDataTreeNode);	            
-	        }
-	    }
+        void ExplorerTree_OnInitializeNode(object sender, InitializeNodeEventArgs e)
+        {
+            var xamDataTreeNode = e.Node;
+            if (xamDataTreeNode == null)
+            {
+                return;
+            }
+            var dataItem = xamDataTreeNode.Data as IExplorerItemViewModel;
+            if (dataItem == null)
+            {
+                return;
+            }
+            if (!dataItem.IsRenaming)
+            {
+                return;
+            }
+            if (dataItem.ResourceName.StartsWith("New Folder"))
+            {
+                ExplorerTree.EnterEditMode(xamDataTreeNode);
+            }
+        }
 
-	    void UIElement_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-	    {
+        void UIElement_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
             var textBox = sender as TextBox;
             if (textBox != null)
             {
                 textBox.SelectAll();
             }
-	    }
+        }
 
-	    void ExplorerTree_OnNodeExitedEditMode(object sender, NodeEventArgs e)
-	    {
+        void ExplorerTree_OnNodeExitedEditMode(object sender, NodeEventArgs e)
+        {
             var dataItem = e.Node.Data as IExplorerItemViewModel;
             if (dataItem == null)
             {
@@ -177,10 +182,10 @@ namespace Warewolf.Studio.Views
             {
                 ExplorerTree.EnterEditMode(e.Node);
             }
-	    }
+        }
 
-	    void DragSource_OnDragOver(object sender, DragDropMoveEventArgs e)
-	    {
+        void DragSource_OnDragOver(object sender, DragDropMoveEventArgs e)
+        {
             var drop = Utilities.GetAncestorFromType(e.DropTarget, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
             var drag = Utilities.GetAncestorFromType(e.DragSource, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
 
@@ -188,16 +193,15 @@ namespace Warewolf.Studio.Views
             {
                 var dragType = drag.Node.Data.GetType();
                 var dropType = drop.Node.Data.GetType();
-                var dropParentNodeManager = drop.Node.Manager.ParentNode.Data as IExplorerItemViewModel;
+                var destination = drop.Node.Data as IExplorerItemViewModel;
 
-                if (dropParentNodeManager != null && (dragType == dropType && dropParentNodeManager.CanDrop))
+                if (destination != null && (dragType == dropType && destination.CanDrop))
                 {
                     parent = drag.Node.Manager.ParentNode;
 
                     if (e.GetPosition(e.DropTarget).Y < drop.ActualHeight / 2)
                     {
-                        var destination = drop.Node.Data as IExplorerItemViewModel;
-                        if (destination != null && !destination.CanDrop && !dropParentNodeManager.CanDrop)
+                        if (!destination.CanDrop && !destination.CanDrop)
                         {
                             ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Collapsed;
                             ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Collapsed;
@@ -210,12 +214,10 @@ namespace Warewolf.Studio.Views
                         ((Grid)Utilities.GetDescendantFromName(drop, "main")).AllowDrop = true;
                         _dropBefore = true;
                         _dropAfter = false;
-
                     }
                     else
                     {
-                        var destination = drop.Node.Data as IExplorerItemViewModel;
-                        if (destination != null && !destination.CanDrop && !dropParentNodeManager.CanDrop)
+                        if (!destination.CanDrop && !destination.CanDrop)
                         {
                             ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Collapsed;
                             ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Collapsed;
@@ -230,15 +232,14 @@ namespace Warewolf.Studio.Views
                         _dropAfter = true;
                     }
                 }
-
             }
-	    }
+        }
 
-	    void DragSource_OnDragLeave(object sender, DragDropEventArgs e)
-	    {
+        void DragSource_OnDragLeave(object sender, DragDropEventArgs e)
+        {
             var drop = Utilities.GetAncestorFromType(e.DropTarget, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
             Reset(drop);
-	    }
+        }
 
         void DragSource_OnDrop(object sender, DropEventArgs e)
         {
@@ -261,12 +262,15 @@ namespace Warewolf.Studio.Views
                     }
                 }
 
-                var l = drop.Node.Data as IWorkflowDesignerViewModel;
-                //var vm = Application.Current.Resources["vm"] as VM;
-                //vm.Leagues.Remove(l);
-                //vm.ListboxLeagues.Add(l);
-
                 Reset(drop);
+            }
+            else
+            {
+                var target = e.DropTarget as ContentControl;
+                if (target != null)
+                {
+                    DragDrop.DoDragDrop(this, _dragData, DragDropEffects.Link | DragDropEffects.Copy);
+                }
             }
         }
         private void Reset(XamDataTreeNodeControl drop)
@@ -280,5 +284,48 @@ namespace Warewolf.Studio.Views
                 parent = null;
             }
         }
-	}
+
+        void DragSource_OnDragStart(object sender, DragDropStartEventArgs e)
+        {
+            var textBlock = e.OriginalDragSource as FrameworkElement;
+            if (textBlock != null)
+            {
+                var context = textBlock.DataContext as XamDataTreeNodeDataContext;
+                if (context != null)
+                {
+                    var dataContext = context.Data as ExplorerItemViewModel;
+                    if (dataContext != null)
+                    {
+                        var dragData = new DataObject();
+
+                        if (dataContext.IsRenaming)
+                        {
+                            return;
+                        }
+
+                        var environmentModel = EnvironmentRepository.Instance.FindSingle(model => model.ID == dataContext.Server.EnvironmentID);
+                        bool hasPermissionToDrag = true;
+                        if (environmentModel != null && environmentModel.AuthorizationService != null)
+                        {
+                            bool canExecute = environmentModel.AuthorizationService.IsAuthorized(AuthorizationContext.Execute, dataContext.ResourceId.ToString());
+                            bool canView = environmentModel.AuthorizationService.IsAuthorized(AuthorizationContext.View, dataContext.ResourceId.ToString());
+                            hasPermissionToDrag = canExecute && canView;
+                        }
+                        if (hasPermissionToDrag)
+                        {
+                            if (dataContext.ResourceType <= ResourceType.WebService)
+                            {
+                                dragData.SetData(DragDropHelper.WorkflowItemTypeNameFormat, dataContext.ActivityName);
+                                dragData.SetData(dataContext);
+                            }
+                            dragData.SetData(dataContext);
+                        }
+
+                        _dragData = dragData;
+                    }
+                }
+            }
+
+        }
+    }
 }

@@ -18,6 +18,7 @@ namespace Dev2.Common.Interfaces
         IServer SelectedServer { get;  }
 	    IConnectControlViewModel ConnectControlViewModel { get; }
         string SearchText { get; set; }
+        bool IsFromActivityDrop { get; set; }
 	    ICommand RefreshCommand { get; set; }
         bool IsRefreshing { get; set; }
 	    bool ShowConnectControl { get; set; }

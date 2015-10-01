@@ -10,9 +10,11 @@
 
 using System.Reactive;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.Workflow;
+using Infragistics.DragDrop;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.Views.Workflow
@@ -75,6 +77,18 @@ namespace Dev2.Studio.Views.Workflow
             {
                 workflowDesignerViewModel.AddMissingWithNoPopUpAndFindUnusedDataListItems();
             }
+        }
+
+        void DragSource_OnDrop(object sender, DropEventArgs e)
+        {
+            var targetContainer = (e.DropTarget as ContentControl);
+            var draggedElement = (e.OriginalDragSource as TextBlock);
+
+            
+        }
+
+        void DragSource_OnDragEnter(object sender, DragDropCancelEventArgs e)
+        {
         }
     }
     public interface IWorkflowDesignerView
