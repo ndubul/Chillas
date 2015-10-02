@@ -392,7 +392,7 @@ namespace Warewolf.Studio.ViewModels
         void SetFromServer(IWindowsGroupPermission serverPermission)
         {
             CanEdit = serverPermission.Contribute;
-            CanExecute = serverPermission.Contribute || serverPermission.Execute;
+            CanExecute = serverPermission.Contribute || serverPermission.Execute && ResourceType == ResourceType.WorkflowService;
             CanView = serverPermission.View || serverPermission.Contribute || serverPermission.Administrator;
             CanRename = serverPermission.Contribute || serverPermission.Administrator;
             CanDelete = serverPermission.Contribute || serverPermission.Administrator;
@@ -403,7 +403,7 @@ namespace Warewolf.Studio.ViewModels
         void SetFromPermission(IWindowsGroupPermission resourcePermission)
         {
             CanEdit = resourcePermission.Contribute;
-            CanExecute = resourcePermission.Contribute || resourcePermission.Execute;
+            CanExecute = resourcePermission.Contribute || resourcePermission.Execute && ResourceType == ResourceType.WorkflowService;
             CanView = resourcePermission.View || resourcePermission.Contribute || resourcePermission.Administrator;
             CanRename = resourcePermission.Contribute || resourcePermission.Administrator;
             CanDelete = resourcePermission.Contribute || resourcePermission.Administrator;

@@ -212,6 +212,7 @@ namespace Warewolf.Studio.ViewModels
                         AuthenticationType = environmentConnection.AuthenticationType,
                         UserName = environmentConnection.UserName,
                         Password = environmentConnection.Password,
+                        ServerName = environmentConnection.WebServerUri.Host,
                         Name = server.ResourceName,
                         ResourcePath = server.ResourcePath
                     });

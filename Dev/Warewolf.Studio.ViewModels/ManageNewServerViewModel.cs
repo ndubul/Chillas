@@ -118,7 +118,7 @@ namespace Warewolf.Studio.ViewModels
             ResourceName = _serverSource.Name;
             AuthenticationType = _serverSource.AuthenticationType;
             UserName = _serverSource.UserName;
-            ServerName = ComputerNames.FirstOrDefault(name => _serverSource.ServerName == name.Name);
+            ServerName = ComputerNames.FirstOrDefault(name => _serverSource.ServerName.ToUpper() == name.Name.ToUpper());
             Address = GetAddressName();
             Password = _serverSource.Password;
             Header = ResourceName;

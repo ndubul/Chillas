@@ -10,6 +10,7 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:core="clr-namespace:Warewolf.Studio.Core;assembly=Warewolf.Studio.Core"
              xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
+             xmlns:dataList="clr-namespace:Dev2.Studio.Views.DataList"
              LostKeyboardFocus="UserControlLostKeyboardFocus"
              x:Name="DataListViewControl"
              AutomationProperties.AutomationId="UI_DataListView_AutoID">
@@ -53,7 +54,7 @@
                 <fa:FontAwesome Icon="Trash" FontSize="15"></fa:FontAwesome>
                 <i:Interaction.Behaviors>
                     <core:HelpSetter Text="{x:Static languages:Core.DataListDeleteButtonHelp}"
-                                                         DataContext="{Binding}" />
+                                                         DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=dataList:DataListView}}" />
                 </i:Interaction.Behaviors>
             </Button>
             <TextBlock Grid.Column="2" Text="Sort list"></TextBlock>
@@ -67,7 +68,7 @@
                 <fa:FontAwesome Icon="Sort" FontSize="15"></fa:FontAwesome>
                 <i:Interaction.Behaviors>
                     <core:HelpSetter Text="{x:Static languages:Core.DataListSortButtonHelp}"
-                                                         DataContext="{Binding}" />
+                                                         DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=dataList:DataListView}}" />
                 </i:Interaction.Behaviors>
             </Button>
         </Grid>
@@ -126,7 +127,7 @@
                                     <i:Interaction.Behaviors>
                                         <behaviors:TextboxSelectAllOnFocusBehavior />
                                         <core:HelpSetter Text="{x:Static languages:Core.DataListVariableInputHelp}"
-                                                         DataContext="{Binding}" />
+                                                         DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=dataList:DataListView}}" />
                                     </i:Interaction.Behaviors>
                                 </customControls:VariableTextBox>
                             </ScrollViewer>
@@ -142,7 +143,7 @@
                                   AutomationProperties.AutomationId="UI_IsInputCheckbox_AutoID" >
                                 <i:Interaction.Behaviors>
                                     <core:HelpSetter Text="{x:Static languages:Core.DataListInputCheckBoxHelp}"
-                                                         DataContext="{Binding}" />
+                                                         DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=dataList:DataListView}}" />
                                 </i:Interaction.Behaviors>
                             </CheckBox>
 
@@ -157,7 +158,7 @@
                                   AutomationProperties.AutomationId="UI_IsOutputCheckbox_AutoID" >
                                 <i:Interaction.Behaviors>
                                     <core:HelpSetter Text="{x:Static languages:Core.DataListOutputCheckBoxHelp}"
-                                                         DataContext="{Binding}" />
+                                                         DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=dataList:DataListView}}" />
                                 </i:Interaction.Behaviors>
                             </CheckBox>
                         </Grid>
