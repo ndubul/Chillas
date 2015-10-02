@@ -1,5 +1,6 @@
 ﻿using System.Activities.Presentation;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -256,9 +257,23 @@ namespace Warewolf.Studio.Views
                     {
                         return;
                     }
-                    if (!source.Move(destination))
+                    if (destination.Children.Count >= 1)
                     {
-                        //DO NOTHING
+                        var checkExists = destination.Children.FirstOrDefault(o => o.ResourceId == source.ResourceId);
+                        if (checkExists == null)
+                        {
+                            if (!source.Move(destination))
+                            {
+                                //DO NOTHING
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (!source.Move(destination))
+                        {
+                            //DO NOTHING
+                        }
                     }
                 }
 

@@ -606,7 +606,7 @@
                 <ig:XamDataTree.GlobalNodeLayouts>
                     <ig:NodeLayout Key="Environments"
                                    DisplayMemberPath="DisplayName"
-                                   IsDropTarget="{Binding Path=Data.IsDropTarget}"
+                                   IsDropTarget="True"
                                    IsExpandedMemberPath="IsExpanded"
                                    TargetTypeName="IEnvironmentViewModel">
                         <ig:NodeLayout.ItemTemplate>
@@ -803,7 +803,7 @@
                     <ig:NodeLayout Key="Children"
                                    DisplayMemberPath="ResourceName"
                                    IsExpandedMemberPath="IsExpanded"
-                                   IsDropTarget="{Binding Path=Data.IsDropTarget}"
+                                   IsDropTarget="True"
                                    TargetTypeName="IExplorerItemViewModel" 
                                    Visibility="{Binding Path=Data.IsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                         <ig:NodeLayout.EditorTemplate>

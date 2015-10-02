@@ -862,6 +862,12 @@ namespace Warewolf.Studio.ViewModels
         {
             if (Parent != null)
             {
+                //THE CHILD IS NOT FOUND WHEN MOVING FROM CHILD TO PARENT DUE TO DIFFERENT PARENT LOAD
+                var findChild = Parent.Children.FirstOrDefault(o => o.ResourceId == ResourceId);
+                if (findChild != null)
+                {
+                    
+                }
                 Parent.RemoveChild(this);
             }
         }
