@@ -1,5 +1,5 @@
 
-<Service Name="Switch" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="f4cdad38-f3a0-414f-b6cd-4fc4c9854dd9" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5751.14940">
+<Service Name="Switch" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="f4cdad38-f3a0-414f-b6cd-4fc4c9854dd9" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sads sap" x:Class="Switch"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
@@ -238,9 +238,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>IWoMAP0LofQRMOQxyH6T/Gh+vek=</DigestValue>
+        <DigestValue>M9uPlR2FuCqmFTGbyadtUtm7A1E=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>gO4c7o8TnugXuBbmMOAFpK6LYemBWvb6ad7Tpipac263U5m/imT9u5ZhGT471JRC9pjwlLs5pta0kR7D3GoWLG/USeLRrQCx8ipqcuVZMXjx4+LjOC7KPuDwKaKyGugnDCKbe9/+o5vSyho2AFAQlgqiVe/oMsKYWp69UYXKU/A=</SignatureValue>
+    <SignatureValue>Vd+YeZBQh7OLrz+Xt42lZtIihc0/EdzmOMtOlhvm7Ez3s+9UZD6ejRX6ecfjCWqgtFkGx/dss8pCPUKCjbkpthaF2wRM7Q/dEyQv/k8P/Haenw/Ny3hlWSJOgwRk8rSuji3T/cSzhrwinItvdclX7tO34p58qJw/GG5Gmdon8kc=</SignatureValue>
   </Signature>
 </Service>

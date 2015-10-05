@@ -1,5 +1,5 @@
 
-<Service ID="6f2a453f-c5ee-48b0-b1a1-c86db0eb8376" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="BaseConvertIntegrationTest" ResourceType="WorkflowService" ServerVersion="0.0.5751.14940">
+<Service ID="6f2a453f-c5ee-48b0-b1a1-c86db0eb8376" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="BaseConvertIntegrationTest" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
   <DisplayName>BaseConvertIntegrationTest</DisplayName>
   <Category>Acceptance Testing Resources\BaseConvertIntegrationTest</Category>
   <AuthorRoles>
@@ -237,9 +237,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>vDDxLS10e18Y9dTtEXWmZk++qb4=</DigestValue>
+        <DigestValue>LASGsaa93vCAlUDRA5/Gu/gNmAg=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>aGISFQ+9CcS2FfJpwX4q2wbIC54FYfPk9W/rRSmN6GJG5k3rC/US1d2sQpwQWBmSOhYq9HcZsaLU/bvCwzCWpO5jaDMNUmItHG4aUQOcbYxvslBRFiEMXYFk0W2MpDu/ggZaCKP3eATKebgp76GA2cdHu4fX57Dy3TkmGi7TuPA=</SignatureValue>
+    <SignatureValue>SyW0cG35GJwyIPaQPjgsCCqVAWqudk47moCPyyjBpbinnfHBpHKtZWY5LQS7AXTPR+EsjDguBtnmV6NtI7w2BIAHFPnWInbAOFw6xspVWhnTVDcuuWUXo8RuvRa+OXpLEJPcDO+RglVOEkpWRrOov9REXVXpCmO9f/8FILN/oKc=</SignatureValue>
   </Signature>
 </Service>
