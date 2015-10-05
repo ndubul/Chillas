@@ -633,23 +633,23 @@ namespace Dev2.Studio.ViewModels.Workflow
 
         void InitialiseWithDataObject(DsfActivity droppedActivity)
         {
-            var navigationItemViewModel = DataObject as ExplorerItemModel;
+            var viewModel = DataObject as ExplorerItemViewModel;
 
-            if (navigationItemViewModel != null)
+            if (viewModel != null)
             {
-                IEnvironmentModel environmentModel = EnvironmentRepository.Instance.FindSingle(c => c.ID == navigationItemViewModel.EnvironmentId);
+                IEnvironmentModel environmentModel = EnvironmentRepository.Instance.FindSingle(c => c.ID == viewModel.Server.EnvironmentID);
                 if (environmentModel != null)
                 {
-                    var theResource = environmentModel.ResourceRepository.FindSingle(c => c.ID == navigationItemViewModel.ResourceId, true) as IContextualResourceModel;
+                    var theResource = environmentModel.ResourceRepository.LoadContextualResourceModel(viewModel.ResourceId);
                     //06-12-2012 - Massimo.Guerrera - Added for PBI 6665
                     DsfActivity d = DsfActivityFactory.CreateDsfActivity(theResource, droppedActivity, true, EnvironmentRepository.Instance, _resourceModel.Environment.IsLocalHostCheck());
-                    d.ServiceName = d.DisplayName = d.ToolboxFriendlyName = navigationItemViewModel.ResourcePath;
+                    d.ServiceName = d.DisplayName = d.ToolboxFriendlyName = viewModel.ResourcePath;
                     if (theResource != null)
                     {
                         d.ServiceName = d.DisplayName = d.ToolboxFriendlyName = theResource.Category;
                     }
                     ExplorerItemModelToIconConverter converter = new ExplorerItemModelToIconConverter();
-                    var bitmapImage = converter.Convert(new object[] { navigationItemViewModel.ResourceType, false }, null, null, null) as BitmapImage;
+                    var bitmapImage = converter.Convert(new object[] { viewModel.ResourceType, false }, null, null, null) as BitmapImage;
                     if (bitmapImage != null)
                     {
                         d.IconPath = bitmapImage.UriSource.ToString();
@@ -1784,7 +1784,7 @@ namespace Dev2.Studio.ViewModels.Workflow
 
             bool dropOccured = true;
             SetLastDroppedPoint(e);
-            DataObject = e.Data.GetData(typeof(ExplorerItemModel));
+            DataObject = e.Data.GetData(typeof(ExplorerItemViewModel));
             if (DataObject != null)
             {
                 IsItemDragged.Instance.IsDragged = true;

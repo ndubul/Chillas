@@ -1015,10 +1015,7 @@ namespace Dev2.Studio.ViewModels
             var environmentModel = EnvironmentRepository.Get(server.EnvironmentID);
             if (environmentModel != null)
             {
-                environmentModel.ResourceRepository.LoadResourceFromWorkspace( resourceId, Guid.Empty);
-                var resource = environmentModel.ResourceRepository.FindSingle(model => model.ID == resourceId, true);
-                var contextualResourceModel = new ResourceModel(environmentModel,EventPublisher);
-                contextualResourceModel.Update(resource);
+                var contextualResourceModel = environmentModel.ResourceRepository.LoadContextualResourceModel(resourceId);
                 DisplayResourceWizard(contextualResourceModel,true);
             }
         }

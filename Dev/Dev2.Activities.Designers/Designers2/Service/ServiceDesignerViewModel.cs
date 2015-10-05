@@ -662,20 +662,9 @@ namespace Dev2.Activities.Designers2.Service
             }
             if (resourceId != Guid.Empty) // if we have a GUID then get the model
             {
-                ResourceModel = environmentModel.ResourceRepository.FindSingle(c => c.ID == resourceId, true) as IContextualResourceModel;
+                ResourceModel = environmentModel.ResourceRepository.LoadContextualResourceModel(resourceId);
 
-            }
-            else
-            {
-                if (!String.IsNullOrEmpty(ServiceName)) // otherwise try to get the resource model using a name
-                {
-                    ResourceModel =
-                        environmentModel.ResourceRepository.FindSingle(c => c.ResourceName == ServiceName, true) as
-                        IContextualResourceModel;
-
-                }
-                // else return;
-            }
+            }            
             if (ResourceModel == null && environmentModel.IsConnected) // if we have no name, guid and no resource, then set deleted
             {
 
