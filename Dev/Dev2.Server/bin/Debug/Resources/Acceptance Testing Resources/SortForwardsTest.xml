@@ -1,5 +1,5 @@
 
-<Service ID="14299d4b-5276-4076-872d-1b5aadb0a141" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="SortForwardsTest" ResourceType="WorkflowService" ServerVersion="0.0.5756.25789">
+<Service ID="14299d4b-5276-4076-872d-1b5aadb0a141" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="SortForwardsTest" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
   <DisplayName>SortForwardsTest</DisplayName>
   <Category>Acceptance Testing Resources\SortForwardsTest</Category>
   <AuthorRoles>
@@ -256,9 +256,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>fLUZwKk7NkRR8KvfvV+F5PzIo5I=</DigestValue>
+        <DigestValue>eSzllia1I2ATZwAT+3T892oYggw=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>mtY8gdGx2lAA385xFKnp5uqygtWAVkXsdIaZdD0fjeNJMEs1I8V30dloMylr7aDdt3FSexGtmzR8eujpVFukvtch+Alh+UGSZBg5vVxWeqKVsPiyJ8vWPHt5ZoLQNQK9g9gyzQ5QC2yqKD1WwqZ4SVdkO//Qqn5s1XjiREVx+60=</SignatureValue>
+    <SignatureValue>pfEFmq3ipf42/xF0lqItCzUO0bob1mtn9xWEwSStgU259a6j6CDz1oasjuQ5k0FuVxX2Os7Rn1cySUTSlHUwVttMCrwb2H4dMu/8plOdnTAILtGyDVlt71IckEJZ2aCa2tdjPfdwGDoMqsGXiyYl75XfMoP1JuxrJqmZYiX5ieE=</SignatureValue>
   </Signature>
 </Service>

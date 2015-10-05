@@ -1,5 +1,5 @@
 
-<Service Name="FindRecordsMutiTest" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="fcb853f3-3032-4735-b9bd-8212e05a219e" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.25789">
+<Service Name="FindRecordsMutiTest" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="fcb853f3-3032-4735-b9bd-8212e05a219e" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap" x:Class="FindRecordsMutiTest" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:dsca="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uaba="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:uf="clr-namespace:Unlimited.Framework;assembly=Dev2.Core" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;x:Members&gt;
@@ -270,9 +270,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>fDNMvThQ1nXq+zQjHZErYMn3stU=</DigestValue>
+        <DigestValue>eRRQS2tc4nKzp1t2WreqwoQGxO0=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>VFHX+rnIfSF5RDojrGn24H3Pvgqhi6928my1zQPFtlygL9YxxfGvZXJhDpbSqi/E4iDrIQcEER+wd8ko3w7pTBAq7tCAhU3zEJ9NvmdAsQtbGVt4pzSYTjjnQ8bUuB+V98mthRpbHvaaY72R0CEKdjMwDYY3+2oYJMu9eZnBuo0=</SignatureValue>
+    <SignatureValue>IkTzBMEt7bcxOCy6yAiOtoBFybCAqnZg3Y5MB8C00bgUqzqDdOIG4sh25cknXPZvJPgh9Do/bjQgnNoc0g9CJ6tcWG2sHznp9w2C0g8CGxMoVztKN2BBdv82okvZzXWn5b4OQPP9xyCawIhtCnYzqEdpnTtQ+rY80+aGvoeKalA=</SignatureValue>
   </Signature>
 </Service>

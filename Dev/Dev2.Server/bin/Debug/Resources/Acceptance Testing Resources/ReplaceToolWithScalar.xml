@@ -1,5 +1,5 @@
 
-<Service Name="ReplaceToolWithScalar" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="6d9cbd85-13fb-404e-9434-e0f1bdb0e44e" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.25789">
+<Service Name="ReplaceToolWithScalar" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="6d9cbd85-13fb-404e-9434-e0f1bdb0e44e" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap sads" x:Class="ReplaceToolWithScalar"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
@@ -156,9 +156,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>qPZkOoyJ4/JFMawzAuiT3UoFA/I=</DigestValue>
+        <DigestValue>pqoqosgqIgfWTPCDCctoIf1yT7g=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>bIJF3BQqL+KypCNuC7UUIWZUp/H7fkX3OWtAOUW6gCERgK/QVKUqpQxz2IxjOp5LmKXEDrkvOahr6HkGWMobp6nlF8XKE14is4cVNpawXifvlnGxkZFWIkZI6q5M61C9n2ocnjwO8cr2TAO3eqEelETElToii4vj3KFX/pcO7V4=</SignatureValue>
+    <SignatureValue>mKUYG4GlM2W25uRWR8pER8wxThuaJ7rLLqOw1qhJo9XD4Y4gzz4z+OZr/N2o0zC/NUbvrNK2o9u2uAvsx5u92BP4QD8/exv9n+uIFvQ2QALr3VndML8YkcQnl9cNeZJLfzsMtxBpAUrVqkan3d7myP3IIlaz2RZX0DQVeHoCO8c=</SignatureValue>
   </Signature>
 </Service>

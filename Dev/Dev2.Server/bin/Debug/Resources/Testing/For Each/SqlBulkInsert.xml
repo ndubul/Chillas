@@ -1,5 +1,5 @@
 
-<Service ID="f4fdbe0e-0eb5-4bef-9684-3c4da7ccfed5" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="SqlBulkInsert" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.25789">
+<Service ID="f4fdbe0e-0eb5-4bef-9684-3c4da7ccfed5" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="SqlBulkInsert" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.27500">
   <DisplayName>SqlBulkInsert</DisplayName>
   <Category>Testing\For Each\SqlBulkInsert</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>ARWUijTDw0PaXz4/gE0Q+c1Zcro=</DigestValue>
+        <DigestValue>e0h4swOFUsvqHmaBvXiH4L9nP24=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>nLH7WnE2gGDSl34dYsaKTTAyIHgbezjmeUEqQ7ZomOX4JVG9DSzLyU7jotr32gG+uMl6eJA8/ZaUfwnNvaJc1WRfFIOT/jOHQxDUm/gnNCMJlNjiiaV12OP/WYY+SljyRHyJ1HlaCwscM7yB66hDrCvIaqcPt4xDclhDkWTxmwk=</SignatureValue>
+    <SignatureValue>tNeYlPGoJ+/xt0Q9x6H1h45En6bJgEF1s9fdthMiULh/B3aFzFGSrfOHmrWMgYHB8ZfwWrQ40FME8LB42RIA9FWbj9Npdxm0KtM2b29j8+y39W3wIpvHGr+kybDfAhh7mkcEh1TICcgyh3m8teqf8TDxTmiAF1eTVc16EZvaacM=</SignatureValue>
   </Signature>
 </Service>
