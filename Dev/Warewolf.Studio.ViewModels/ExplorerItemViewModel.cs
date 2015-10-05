@@ -244,6 +244,8 @@ namespace Warewolf.Studio.ViewModels
                     CanCreateServerSource = CanCreateServerSource,
                     CanCreateWebService = CanCreateWebService,
                     CanCreateWebSource = CanCreateWebSource,
+                    CanDeploy = CanDeploy,
+                    CanShowDependencies = CanShowDependencies,
                     ResourcePath = ResourcePath + "\\" + name,
                     CanCreateWorkflowService = CanCreateWorkflowService,
                     IsSelected = true,

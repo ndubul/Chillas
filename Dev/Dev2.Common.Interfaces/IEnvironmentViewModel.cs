@@ -14,7 +14,7 @@ namespace Dev2.Common.Interfaces
         Task<bool> Connect();
         bool IsConnecting { get; }
         Task<bool> Load();
-        Task<bool> LoadDialog(Guid? selectedId);
+        Task<bool> LoadDialog(string selectedId);
         void Filter(string filter);
         ICollection<IExplorerItemViewModel> AsList();
         void SetItemCheckedState(Guid id, bool state);
@@ -28,5 +28,7 @@ namespace Dev2.Common.Interfaces
         void SetPropertiesForDialog();
 
         void SelectItem(string selectedPath, Action<IExplorerItemViewModel> foundAction);
+
+        Task<bool> LoadDialog(Guid selectedPath);
     }
 }
