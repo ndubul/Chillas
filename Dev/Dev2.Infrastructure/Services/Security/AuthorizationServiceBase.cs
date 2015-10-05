@@ -190,7 +190,7 @@ namespace Dev2.Services.Security
 
             foreach(var perm in _securityService.Permissions)
             {
-                Dev2Logger.Log.Error("SERVER PERM -> " + perm.WindowsGroup);
+                Dev2Logger.Log.Error("PERM -> " + perm.WindowsGroup);
                 Dev2Logger.Log.Error("IS USER IN IT [ " + principal.IsInRole(perm.WindowsGroup) + " ]");
             }
         }
@@ -206,7 +206,6 @@ namespace Dev2.Services.Security
         {
             var serverPermissions = _securityService.Permissions;
             var resourcePermissions = serverPermissions.Where(p => IsInRole(principal, p) && p.Matches(resource) && !p.IsServer).ToList();
-
             var groupPermissions = new List<WindowsGroupPermission>();
             // ReSharper disable LoopCanBeConvertedToQuery
             foreach(var permission in serverPermissions)
@@ -230,7 +229,6 @@ namespace Dev2.Services.Security
         protected virtual bool IsInRole(IPrincipal principal, WindowsGroupPermission p)
         {
             var isInRole = false;
-
             if(principal == null)
             {
                 return p.IsBuiltInGuestsForExecution;
