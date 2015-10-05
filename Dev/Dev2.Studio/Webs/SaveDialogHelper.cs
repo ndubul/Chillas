@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using Dev2.AppResources.Repositories;
 using Dev2.Common.Interfaces;
@@ -48,13 +49,13 @@ namespace Dev2.Webs
 
         static async void ShowSaveDialog(IContextualResourceModel resourceModel, WebsiteCallbackHandler callbackHandler)
         {
-            if(resourceModel == null)
+            if (resourceModel == null)
             {
                 throw new ArgumentNullException("resourceModel");
             }
             IEnvironmentModel environment = resourceModel.Environment;
 
-            if(environment == null)
+            if (environment == null)
             {
                 // ReSharper disable NotResolvedInText
                 throw new ArgumentNullException("environment");
@@ -63,7 +64,7 @@ namespace Dev2.Webs
             EnvironmentRepository.Instance.ActiveEnvironment = environment;
 
             IServer server = new Server(environment);
-            if(server.Permissions == null)
+            if (server.Permissions == null)
             {
                 server.Permissions = new List<IWindowsGroupPermission>();
                 server.Permissions.AddRange(environment.AuthorizationService.SecurityService.Permissions);
@@ -79,16 +80,17 @@ namespace Dev2.Webs
                 selectedPath = selectedPath.Substring(0, lastIndexOf);
             }
             selectedPath = selectedPath.Replace("\\", "\\\\");
+            var env = new EnvironmentViewModel(server, CustomContainer.Get<IShellViewModel>(),true);
 
-            var item = StudioResourceRepository.Instance.FindItem(model => model.ResourcePath.Equals(selectedPath, StringComparison.OrdinalIgnoreCase));
-            var requestViewModel = await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server,CustomContainer.Get<IShellViewModel>()), new RequestServiceNameView(), item.ResourceId);
+            var requestViewModel = await RequestServiceNameViewModel.CreateAsync(env, new RequestServiceNameView(), selectedPath);
             var messageBoxResult = requestViewModel.ShowSaveDialog();
-            if(messageBoxResult == MessageBoxResult.OK)
+            if (messageBoxResult == MessageBoxResult.OK)
             {
-                var value = new { resourceName = requestViewModel.ResourceName.Name, resourcePath=requestViewModel.ResourceName.Path};
+                var value = new { resourceName = requestViewModel.ResourceName.Name, resourcePath = requestViewModel.ResourceName.Path };
                 var serializeObject = JsonConvert.SerializeObject(value);
                 callbackHandler.Save(serializeObject, environment);
             }
+
         }
 
 

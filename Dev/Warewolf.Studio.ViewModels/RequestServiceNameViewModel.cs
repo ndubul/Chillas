@@ -20,6 +20,7 @@ namespace Warewolf.Studio.ViewModels
         private ResourceName _resourceName;
 		private IRequestServiceNameView _view;
         Guid _selectedGuid;
+        string _selectedPath;
         MessageBoxResult ViewResult { get; set; }
 
         private RequestServiceNameViewModel()
@@ -28,7 +29,7 @@ namespace Warewolf.Studio.ViewModels
         }
         /// <exception cref="ArgumentNullException"><paramref name="environmentViewModel"/> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="view"/> is <see langword="null" />.</exception>
-        private async Task<IRequestServiceNameViewModel> InitializeAsync(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, Guid selectedGuid)
+        private async Task<IRequestServiceNameViewModel> InitializeAsync(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, string selectedPath)
         {
             if (environmentViewModel == null)
             {
@@ -39,8 +40,8 @@ namespace Warewolf.Studio.ViewModels
                 throw new ArgumentNullException("view");
             }
             await environmentViewModel.Connect();
-            _selectedGuid = selectedGuid;
-            await environmentViewModel.LoadDialog(_selectedGuid);
+            _selectedPath = selectedPath;
+            await environmentViewModel.LoadDialog(selectedPath);
             _view = view;
            
 			OkCommand = new DelegateCommand(SetServiceName, () => String.IsNullOrEmpty(ErrorMessage));
@@ -61,10 +62,10 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public static Task<IRequestServiceNameViewModel> CreateAsync(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, Guid selectedGuid)
+        public static Task<IRequestServiceNameViewModel> CreateAsync(IEnvironmentViewModel environmentViewModel, IRequestServiceNameView view, string selectedPath)
         {
             var ret = new RequestServiceNameViewModel();
-            return ret.InitializeAsync(environmentViewModel, view, selectedGuid);
+            return ret.InitializeAsync(environmentViewModel, view, selectedPath);
         }
 
         private void CloseView()
@@ -127,7 +128,7 @@ namespace Warewolf.Studio.ViewModels
 
         public MessageBoxResult ShowSaveDialog()
         {
-            SingleEnvironmentExplorerViewModel.SelectItem(_selectedGuid);
+            SingleEnvironmentExplorerViewModel.SelectItem(_selectedPath);
             _view.ShowView();
             
             return ViewResult;

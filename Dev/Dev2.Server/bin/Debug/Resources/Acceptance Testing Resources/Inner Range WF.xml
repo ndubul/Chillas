@@ -1,5 +1,5 @@
 
-<Service ID="6dc30d82-da56-4f6b-954a-900faa0265fc" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Inner Range WF" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5751.14940">
+<Service ID="6dc30d82-da56-4f6b-954a-900faa0265fc" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Inner Range WF" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5756.24008">
   <DisplayName>Inner Range WF</DisplayName>
   <Category>Acceptance Testing Resources\Inner Range WF</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -136,9 +136,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>Y0KIbrlUDK3SWw/hDQhMQaXdcLM=</DigestValue>
+        <DigestValue>wd7myN1ERqyJyfWlU776aKLjEN0=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>p6N3Mqll8pvryeCfEvmrkIv/l3kK7lIRY2KfKFkO24H55WOgV5D7bqBJCY/f/hUrq417Dn28m80P9q9d6m/mHz8/UgX7r0diGFjafHVTuVntMoD3Vy3YhTV8uzflAnaZt/vS/5d0u/zE6fhT42oI+S+gzC5nrwGxF1CVeGFqEqU=</SignatureValue>
+    <SignatureValue>N05J+Hw+vKmphgt3PYthmMV1kARRsNe8mWHk2DrJ+6g27N6Jp9CgKKqWROHAoSSQltVhuvbigdpGZDi9r+AiN62p4gzygdvJaCpslV+GVvTdqgOPoh+2eynCeVBVzghCDLXbGvPNA64r2jTlJUsLRIODlGSi5UfxJ3plnmq2xl8=</SignatureValue>
   </Signature>
 </Service>

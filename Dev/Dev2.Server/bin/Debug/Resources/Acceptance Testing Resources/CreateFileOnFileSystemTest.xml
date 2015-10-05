@@ -1,5 +1,5 @@
 
-<Service Name="CreateFileOnFileSystemTest" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="ae35211b-0d2d-4a53-9eca-5b8564ccfef2" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5751.14940">
+<Service Name="CreateFileOnFileSystemTest" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="ae35211b-0d2d-4a53-9eca-5b8564ccfef2" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.24008">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap" x:Class="CreateFileOnFileSystemTest" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:dsca="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uaba="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:uf="clr-namespace:Unlimited.Framework;assembly=Dev2.Core" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;x:Members&gt;
@@ -109,9 +109,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>GiqF5jvrTrjlQvX7Lhkyd8rV3Ro=</DigestValue>
+        <DigestValue>EMF8I8HMd7q+i9MJ0ziIDF7QrpI=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>lmpiWhvb4SQT2cMAQuhs9PDcHxy44ZI3aZcKitABGMrectjfcPSePNKBZLB/mQSiFhodz4G7SWDz8YQghxjEnpUO/oFeZuvdvI/OXu0bZgUEKliP9d+Z4I+I3K+N2WFV5IRPBuhDh1Te0ebV0rkP8NSKH9j+ccq7c1rb9WanLIk=</SignatureValue>
+    <SignatureValue>vXhYiwTNcMKZnGEgx5mmwKem8j4U+PJsZf8hTLMoHjRfUNKgTRxucbrlCoIl7QWRvuR9aTyQ8R/Yj7mkaO2UfhWog6mr0snoSBTbShzv1YcHyHyvKyHuiyt6y6xHCKcr2XFjQUI2vJdVewLEFi8VyjZyDl0mQ7sDMGOTDOq4Dek=</SignatureValue>
   </Signature>
 </Service>

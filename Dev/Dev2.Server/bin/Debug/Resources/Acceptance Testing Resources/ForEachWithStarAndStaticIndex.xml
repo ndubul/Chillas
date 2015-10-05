@@ -1,5 +1,5 @@
 
-<Service ID="8596e4e5-c938-4dbc-9c85-a4c2df7bb894" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="ForEachWithStarAndStaticIndex" ResourceType="WorkflowService" ServerVersion="0.0.5751.14940">
+<Service ID="8596e4e5-c938-4dbc-9c85-a4c2df7bb894" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="ForEachWithStarAndStaticIndex" ResourceType="WorkflowService" ServerVersion="0.0.5756.24008">
   <DisplayName>ForEachWithStarAndStaticIndex</DisplayName>
   <Category>Acceptance Testing Resources\ForEachWithStarAndStaticIndex</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -185,9 +185,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>a/ZfseTDfZ9YmxQldBvxw5B69Jc=</DigestValue>
+        <DigestValue>BkIkAYUeqKcXV56WT8y8EIvq1m4=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>hRzpfMnMqt4zzhDX++doTHQeMBrGDK2eZf4EiwthLtySmmyLfCDr5dHgZ5q+43PraLd8WKsy4NvKUyYLttrGVffmxR/iCY7HusPuRPSNLlUN7viBOs5iAl1BwNPc/ObFwBiBxgqw7fC5RCcuzAbY4ZAs9ExTJeoxifIYxz9pNv4=</SignatureValue>
+    <SignatureValue>msPbH2KM1WraYSSSAr0gndp8ZANCGm1940+Y+LVn2s+nqKe255w70jrGKYcAdcY9wxFG/PGIbxCn+HMP6EJtu2snd5lmhZOsl/FbHH/f0xSHR8BVuFxqY4AZ4ladEq+iPiF3IxwyK9/JrQ6mqKcSLn3a0wUluDxhsNdg16qls2M=</SignatureValue>
   </Signature>
 </Service>

@@ -1,5 +1,5 @@
 
-<Service ID="bf34b775-f047-466c-b807-7c27450e0fd1" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="WriteToFileOnFileSysytemTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5751.14940">
+<Service ID="bf34b775-f047-466c-b807-7c27450e0fd1" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="WriteToFileOnFileSysytemTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5756.24008">
   <DisplayName>WriteToFileOnFileSysytemTest</DisplayName>
   <Category>Acceptance Testing Resources\WriteToFileOnFileSysytemTest</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -32,9 +32,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>A55PfDCvv/bVvymvJySwjfFrVzU=</DigestValue>
+        <DigestValue>VfyUU/hZRJCqZ7CmgCvct/sAfVg=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>QfEEgNznak70XMV4bEOWADLulgAykYC54PTViu4E3y/D20G72KbARw5SCAyNPwaAIbpDjoRnQsvA1oBN42aHqUobgL4bL0sF+pWapXsmntlxv51LW4INtDL+T9IkiKIUaDX7vxtOkr8tqy7S4QdaWofmP4nfc3G3liFPHsb+4aA=</SignatureValue>
+    <SignatureValue>UHHkejaA3yl2LJqLm8kioKH16NhnFxp6p/k5zSz+Iht/1zBMZhlAszzVhix5BYM7EnMkYSVf7jNeM3C0L1m1vCH8gtMUYtp4E/AhkDa1K7fXZzpeubxSzQf/WYYNLUOf8sZMjmBoeYjZNV3yrZQWfiVJg9PxGjXrjcCh2uDsbj8=</SignatureValue>
   </Signature>
 </Service>

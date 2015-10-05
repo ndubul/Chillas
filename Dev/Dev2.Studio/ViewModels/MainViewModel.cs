@@ -1269,7 +1269,7 @@ namespace Dev2.Studio.ViewModels
         private async Task<IRequestServiceNameViewModel> GetSaveViewModel(IServer server, string resourcePath)
         {
             var item = server.ExplorerRepository.FindItem(model => model.ResourcePath.Equals(resourcePath, StringComparison.OrdinalIgnoreCase));
-            return await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server, this), new RequestServiceNameView(), item.ResourceId);
+            return await RequestServiceNameViewModel.CreateAsync(new EnvironmentViewModel(server, this), new RequestServiceNameView(), item.ResourcePath);
         }
 
         async void AddNewServerSourceSurface(string resourcePath)

@@ -1,5 +1,5 @@
 
-<Service Name="DataSplitTestWithScalar" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="79ef45e5-39ff-4b5f-920f-662d2027733f" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5751.14940">
+<Service Name="DataSplitTestWithScalar" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="79ef45e5-39ff-4b5f-920f-662d2027733f" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.24008">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap" x:Class="DataSplitTestWithScalar" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:dsca="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uaba="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:uf="clr-namespace:Unlimited.Framework;assembly=Dev2.Core" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;x:Members&gt;
@@ -114,9 +114,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>2eakcucBNUcpl8QUBchFEaU0Hwo=</DigestValue>
+        <DigestValue>GND2ham4D4xrtNV9n3U9fbltPj0=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>bIh3Pf53R4z7LFu/jsw1GxEwM9oJzjMZ1B3kMDHWIv1+vbcd2HTt2dYRAHkegquusng623LRT2TsHszd4YVWlPAPWi6d3phWE+yw+fMt8oNPwLXKgZvZUbRNWuruWvNGYJew2jhIfk7PiUsCilpJj4N5gYi2+SKoZaKL2M4xtAM=</SignatureValue>
+    <SignatureValue>bu1ee+EdtW378I6ygLVzKySUwcfXdhbK2ctkfpKeZ+eVb47WEr0+fwWAoz2+J7NhF6zNlCUCv27wkyE48qLTO0hk0lPhpiY4wuylnRDewHNMgMU0oibDZQfGab18z2gtkNwJAd+Vl6iOWGI0u0rhzF5NIaBSIzGm7rGUTflmP48=</SignatureValue>
   </Signature>
 </Service>

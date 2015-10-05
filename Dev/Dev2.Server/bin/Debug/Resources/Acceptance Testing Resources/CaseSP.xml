@@ -1,5 +1,5 @@
 
-<Service ID="6258e89c-76cc-4d8a-82f7-bf42617d1c68" Version="1.0" Name="CaseSP" ResourceType="DbService" IsValid="false" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5751.14940">
+<Service ID="6258e89c-76cc-4d8a-82f7-bf42617d1c68" Version="1.0" Name="CaseSP" ResourceType="DbService" IsValid="false" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5756.24008">
   <Actions>
     <Action Name="dbo_ReturnCasedData" Type="InvokeStoredProc" SourceID="ebba47dc-e5d4-4303-a203-09e2e9761d16" SourceName="testingDBSrc" SourceMethod="dbo.ReturnCasedData">
       <Inputs>
@@ -35,9 +35,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>B7wL201FYRRhunaH3aLxQxDlWhs=</DigestValue>
+        <DigestValue>XrMCJ22dmIuA+1LXktgbcP7gklw=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>dQV9e2Tn06q8JZV7TJ30ygtF5n4JOE1dQT+A7Mv1bFrncvJ4j2YhT3Z9AQBvabL0uiJP/y1aqn1PenHWg5WUt6THi0AuFPxzImLvh1ExtHW/VG7vb7XF/uhgEvGfQjA13vS9wcLKOKjWTp2FAM76oR5mhcRbVSWJE3jZkq6oZoQ=</SignatureValue>
+    <SignatureValue>VdnCX2ZCdarHnGTojoDJRxRTfz54y1pS6fi+9UpGQWGRZd9RLXXTyB7FR/9rrSYCR9qEi872wDwg0p8gUd/8p2AKIVd5wi0H9ZFvhKJbqYx0IHhWWp0syJepGN5zMU/3is1mMxgrQn7VLvH/7UmUHP9sDcQRJNaChQ22ZYn9QY0=</SignatureValue>
   </Signature>
 </Service>

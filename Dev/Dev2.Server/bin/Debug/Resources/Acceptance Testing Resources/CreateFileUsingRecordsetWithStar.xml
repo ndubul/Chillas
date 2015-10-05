@@ -1,5 +1,5 @@
 
-<Service ID="01445e61-c292-4a83-83f6-7e0ef90835a3" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="CreateFileUsingRecordsetWithStar" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5751.14940">
+<Service ID="01445e61-c292-4a83-83f6-7e0ef90835a3" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="CreateFileUsingRecordsetWithStar" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5756.24008">
   <DisplayName>CreateFileUsingRecordsetWithStar</DisplayName>
   <Category>Acceptance Testing Resources\CreateFileUsingRecordsetWithStar</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -36,9 +36,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>th7p9ZSiWgWPYDqXS87zSloUb6U=</DigestValue>
+        <DigestValue>4oXlR9Z5/KievYOHHLw50LRjCv4=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>sfj97hJz9EFY3oE38pxe33cZsUMJ1C8koEwzsRYCcFq0IrANfTSXEUQMvagYblrQd2PODjYpMb+cugxo8Sr7KZaEPGKS312UTkq3oLlXNAxXgVHGFUMTnJ9DB1rEVjfTqUTKz/qyCoKLdA6rUUgmVQVio3Se7VgFAVZFws2KgZ8=</SignatureValue>
+    <SignatureValue>Q+DpbmKqoiKa4BAvN0Law5h6kZUAmmkYHdqSAmshYXjY3jRf8HsRZccb5U0xGU7eIYk8f+3jKnyMF7eeX5qV97aJJRCkzY3epdFSeNR5cqYNNtQntfJIlA/ExnHqFZ5/e7oJqEU95Ls4f5bqJt+jJTwOla8uDxd6yLyW/UAN36E=</SignatureValue>
   </Signature>
 </Service>

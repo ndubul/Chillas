@@ -1,5 +1,5 @@
 
-<Service ID="c9f3d67b-99f6-4722-85a2-57c4e2f82f09" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="11365_WebService" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5751.14940">
+<Service ID="c9f3d67b-99f6-4722-85a2-57c4e2f82f09" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="11365_WebService" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.24008">
   <DisplayName>11365_WebService</DisplayName>
   <Category>Acceptance Testing Resources\11365_WebService</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>7CPQGMb5/Yb/QbPflh3QfNYsvPs=</DigestValue>
+        <DigestValue>BxtrvDehFSz7yeGn0Ld/JG+tEmE=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>lIEqFeZs4rMBy3x2QsAQmvamS3H1+J5glpFO2JtgeEI3nACEUV/wcly8dpP+Gt1QWTczLNRudaUYryKM1QswrjaVEyXvGL171j/bTdB7auZ2mFCDy5kQBnKB54FZZU7Qa3vjLVIZ/AGV+QWc53HCs4UZjPa8tJCP+A5ypd6XuWc=</SignatureValue>
+    <SignatureValue>HS2t22KvtuYMyMi5Uqxn3cxGztQM4JHRxnhACwQlrirpmSObAh0rjtiDTu1uDJ3guXFgLUmNf6/2Ps3fcY/YMJciQVxA1ZqfnXERUVmyRV9x3kwvUBLmwRpZJ/2bNfIa/F0z7XwP4vBkRqKDmw9bpG9gTmyKl0HNTRJD0MCKPLI=</SignatureValue>
   </Signature>
 </Service>

@@ -205,7 +205,14 @@ namespace Warewolf.Studio.ViewModels
                 environmentViewModel.SelectAction = a=>SelectedItem =a;
 			}
 		}
-
+        public void SelectItem(string path)
+        {
+            foreach (var environmentViewModel in Environments)
+            {
+                environmentViewModel.SelectItem(path, (a => SelectedItem = a));
+                environmentViewModel.SelectAction = a => SelectedItem = a;
+            }
+        }
 		public IList<IExplorerItemViewModel> FindItems(Func<IExplorerItemViewModel, bool> filterFunc)
 		{
 			return null;

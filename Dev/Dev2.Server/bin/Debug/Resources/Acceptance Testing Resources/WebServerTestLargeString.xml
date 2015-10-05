@@ -1,5 +1,5 @@
 
-<Service ID="169e4a16-69d8-41ae-aeed-31586fd965ac" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="WebServerTestLargeString" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5751.14940">
+<Service ID="169e4a16-69d8-41ae-aeed-31586fd965ac" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="WebServerTestLargeString" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5756.24008">
   <DisplayName>WebServerTestLargeString</DisplayName>
   <Category>Acceptance Testing Resources\WebServerTestLargeString</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -32,9 +32,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>Xqe5A/Bm0zcyZn9W4M2F92b5ips=</DigestValue>
+        <DigestValue>ZnxHmPglKZQj/x4wd6YLcIU0PE8=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>LsGXNYym1/EUZjsuN1lJp2bzTwBLivJcp6WXA+CfG9kBkLP74OvdOF1Hlalyc7LInj1Gj7RuN2MY2jZreqvo/zZAnMiFQcmKdE5SCRHfSRIWKZ9IwBf22UNlGcfYSJzC1VcROGdkjzAiqpI76+C+c9aPX2ghvLlQJlOVEPDDS5A=</SignatureValue>
+    <SignatureValue>Jcg0ztcWyXLKEf3Dr8rRRUZnzltlxwiPvJvlDe7RXeYh8jPMq3FVFa+RNzJuC8KxJvnbW8jy6fZPq671uK+3anGA9GUaY3SgQmHmpPOTRyXMsBZK4Kd2XOaSYQsCMBc9UafJY1MqM3c3qgS2mq8mNzsN/cT+95etXSfBVQNEtxk=</SignatureValue>
   </Signature>
 </Service>

@@ -29,5 +29,7 @@ namespace Dev2.Common.Interfaces
 
 	    void SelectItem(Guid id);
 	    IList<IExplorerItemViewModel> FindItems(Func<IExplorerItemViewModel, bool> filterFunc);
+
+	    void SelectItem(string path);
 	}
 }

@@ -1,5 +1,5 @@
 
-<Service ID="f03204a7-2d2b-4b4a-b5b9-afa6cb14873b" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Bug9139" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5751.14940">
+<Service ID="f03204a7-2d2b-4b4a-b5b9-afa6cb14873b" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Bug9139" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5756.24008">
   <DisplayName>Bug9139</DisplayName>
   <Category>Acceptance Testing Resources\Bug9139</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -40,9 +40,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>IZn5Ua6T+gXD+dbA89bOZP3FiTs=</DigestValue>
+        <DigestValue>N0Tz4Fo8pqP8Aig1tZ2RN+tk49o=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>hGcIk+Zkj1c39Zlb/MN8lGWdVtd1pptPvzCajyteOFpA5B9fvU4ouB13EXpwREpx2XmWYFInP+MZ/okwEbmwnEl0w7Kb1jImqZhmoix+rHyrHRlwtGrA5EAAvbe2CVgYG4jGfsH71NTuQ/41MlH2T5TG+VyPtXIqabzYj9DfKDU=</SignatureValue>
+    <SignatureValue>W5i9hVT5IcsACsioJ+tq/y0maKhVMjGn20YzEKw1xFvUt9i7j9iej4bnDVWN/tytDnCAw9Ux1A2qJcqq7Syo1JniB503c6CEOF9h+oHsWDlZcE4bWimRk2cPz/NXUgzWOVMqbUAhSqPxHcrcE9wsEGJokupyGNS+0mARmy1ilwY=</SignatureValue>
   </Signature>
 </Service>
