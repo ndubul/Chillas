@@ -95,5 +95,6 @@ namespace Dev2.Studio.Core.Interfaces
         void LoadResourceFromWorkspace(Guid resourceId, ResourceType resourceType, Guid? serverWorkspaceID);
 
         IContextualResourceModel LoadContextualResourceModel(Guid resourceID);
+
     }
 }

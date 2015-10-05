@@ -456,11 +456,6 @@ namespace Dev2.Runtime.Hosting
 
         public IList<Resource> GetResourceList(Guid workspaceId, string guidCsv, string type)
         {
-            if(type == null)
-            {
-                throw new ArgumentNullException("type");
-            }
-
             if(guidCsv == null)
             {
                 guidCsv = string.Empty;
@@ -475,12 +470,19 @@ namespace Dev2.Runtime.Hosting
                     guids.Add(guid);
                 }
             }
-
-            var resourceTypes = ResourceTypeConverter.ToResourceTypes(type);
             var workspaceResources = GetResources(workspaceId);
-            var resources = workspaceResources.FindAll(r => guids.Contains(r.ResourceID)
-                                                            && resourceTypes.Contains(r.ResourceType));
-
+            List<IResource> resources;
+            if (string.IsNullOrEmpty(type))
+            {
+                resources = workspaceResources.FindAll(r => guids.Contains(r.ResourceID));
+            }
+            else
+            {
+                var resourceTypes = ResourceTypeConverter.ToResourceTypes(type);
+                resources = workspaceResources.FindAll(r => guids.Contains(r.ResourceID)
+                                                                && resourceTypes.Contains(r.ResourceType));
+            }
+            
             return resources.Cast<Resource>().ToList();
         }
 

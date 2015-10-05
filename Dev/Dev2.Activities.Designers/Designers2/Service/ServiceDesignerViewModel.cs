@@ -708,7 +708,7 @@ namespace Dev2.Activities.Designers2.Service
         {
             if (ResourceModel != null && (ResourceModel.ResourceType == Studio.Core.AppResources.Enums.ResourceType.Service && _environment != null))
             {
-                var resourceModel = _environment.ResourceRepository.FindSingle(c => c.ID == ResourceModel.ID, true) as IContextualResourceModel;
+                var resourceModel = _environment.ResourceRepository.LoadContextualResourceModel(ResourceModel.ID);
                 if (resourceModel != null)
                 {
                     string srcId;
@@ -729,7 +729,7 @@ namespace Dev2.Activities.Designers2.Service
                     if (Guid.TryParse(srcId, out sourceId))
                     {
                         SourceId = sourceId;
-                        var sourceResource = _environment.ResourceRepository.FindSingle(c => c.ID == sourceId);
+                        var sourceResource = _environment.ResourceRepository.LoadContextualResourceModel(sourceId);
                         if (sourceResource == null)
                         {
                             UpdateLastValidationMemoWithSourceNotFoundError();
