@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using Dev2;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.DB;
@@ -14,6 +15,8 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 {
     public class StudioResourceUpdateManager : IStudioUpdateManager
     {
+        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
@@ -33,27 +36,46 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         }
 
+        public event ItemSaved ItemSaved;
+        public event ServerSaved ServerSaved;
+             
         IUpdateManager UpdateManagerProxy { get; set; }
 
         public void Save(IServerSource serverSource)
         {
-
             UpdateManagerProxy.SaveServerSource(serverSource, GlobalConstants.ServerWorkspaceID);
+            if(ItemSaved != null)
+            {
+                ItemSaved();
+            }
+            if (ServerSaved != null)
+            {
+                ServerSaved();
+            }
         }
 
         public void Save(IPluginSource source)
         {
             UpdateManagerProxy.SavePluginSource(source, GlobalConstants.ServerWorkspaceID);
+            if (ItemSaved != null)
+            {
+                ItemSaved();
+            }
         }
 
         public void Save(IEmailServiceSource emailServiceSource)
         {
             UpdateManagerProxy.SaveEmailServiceSource(emailServiceSource, GlobalConstants.ServerWorkspaceID);
+            if (ItemSaved != null)
+            {
+                ItemSaved();
+            }
         }
 
         public void TestConnection(IServerSource serverSource)
         {
             UpdateManagerProxy.TestConnection(serverSource);
+
         }
 
         public string TestConnection(IEmailServiceSource emailServiceSource)
@@ -79,12 +101,20 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         public void Save(IDbSource toDbSource)
         {
             UpdateManagerProxy.SaveDbSource(toDbSource, GlobalConstants.ServerWorkspaceID);
+            if (ItemSaved != null)
+            {
+                ItemSaved();
+            }
 
         }
 
         public void Save(IWebService model)
         {
             UpdateManagerProxy.SaveWebservice(model, GlobalConstants.ServerWorkspaceID);
+            if (ItemSaved != null)
+            {
+                ItemSaved();
+            }
         }
 
         public void Save(IWebServiceSource resource)
@@ -95,6 +125,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
                 if (WebServiceSourceSaved != null)
                 {
                     WebServiceSourceSaved(resource);
+                }
+                if (ItemSaved != null)
+                {
+                    ItemSaved();
                 }
             }
             catch (Exception)
@@ -112,6 +146,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
                 {
                     SharePointServiceSourceSaved(resource);
                 }
+                if (ItemSaved != null)
+                {
+                    ItemSaved();
+                }
             }
             catch (Exception)
             {
@@ -122,12 +160,17 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         public void Save(IDatabaseService toDbSource)
         {
             UpdateManagerProxy.SaveDbService(toDbSource);
+            if (ItemSaved != null)
+            {
+                ItemSaved();
+            }
 
         }
 
         public DataTable TestDbService(IDatabaseService inputValues)
         {
             return UpdateManagerProxy.TestDbService(inputValues);
+
         }
 
         public string TestWebService(IWebService inputValues)
@@ -147,6 +190,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         public void Save(IPluginService toDbSource)
         {
             UpdateManagerProxy.SavePluginService(toDbSource);
+            if(ItemSaved != null)
+            {
+                ItemSaved();
+            }
         }
     }
 }

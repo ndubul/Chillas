@@ -1,5 +1,5 @@
 
-<Service ID="473d8088-8cb6-4430-8341-36626e66db94" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="NewForeachUpgradeDifferentExecutionTests" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5751.14940">
+<Service ID="473d8088-8cb6-4430-8341-36626e66db94" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="NewForeachUpgradeDifferentExecutionTests" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.25789">
   <DisplayName>NewForeachUpgradeDifferentExecutionTests</DisplayName>
   <Category>Acceptance Testing Resources\NewForeachUpgradeDifferentExecutionTests</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>6Oz51fnAhIgiWlw+IO/sV/hauHo=</DigestValue>
+        <DigestValue>YzfF8H2WfnyCs4XsX1C/zDOzYV0=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>OfcM2bFvVRPwwZS/S85pCnnQTQ9uVlb1yhG8fpSl+JN/T6LwwnSwCkp30sV1eynM+2eLM6cJy9JO+66dBm9fdufmzQ4KghpkycvxDaN0ZjNVoYNFckIHDhFBMZ6p6p67kcrtar3yUznK3rorilSU6vZG/ZbPBSw3O5GpnjjTSIA=</SignatureValue>
+    <SignatureValue>gaJEM2vutq+l1j7xceJXzOf+lLRuJFeRXZub4Cpq9vZh2ayyengFKqtabxMX0TJNeyZydkpHgCRNRVdCJN073yKUXGk30zEB2/jfVCfnnaWEkVhEjer3IrGqnxYH/pSG4xQZez35qlCOrMhVPTLF3LEU4K3EPX7fdzF5dkwaSnM=</SignatureValue>
   </Signature>
 </Service>

@@ -1,5 +1,5 @@
 
-<Service ID="a2eb1fc4-37ce-4cad-a213-40b0d33a3a56" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="CMDLine" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5751.14940">
+<Service ID="a2eb1fc4-37ce-4cad-a213-40b0d33a3a56" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="CMDLine" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.25789">
   <DisplayName>CMDLine</DisplayName>
   <Category>Testing\For Each\CMDLine</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -39,9 +39,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>8Q/y66GY0SGY+TUft8+Okp815O4=</DigestValue>
+        <DigestValue>uWQ6J6pU3mPQjmOJuv6TIOCvnKg=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>hfSGpD0cujDNy0ZiSG0oF+W7F3AHqWidAqzaNuK20YW3V0NJyRjdixlmBcMPhxjZliHPifgxCU/8WdDsT0uZdRyS6gIjj992fwWxuXQOU/MKhfIA+SxLT5AdUjQJNYrviGmbUzusEMUB7LNX3v0JMvnejqJ4Ktz7rPZNp7lfMrk=</SignatureValue>
+    <SignatureValue>KK3UVSxga897RQ56dPCRR+jRINetbiqlb0NHJCuJGW8IBsZccRQRMS5qdxFJd7/cakwiB4HUJECbhXhNXMsEiuhhNkaY1t4n2JDB83228byXbm44l04Srlm4u2fAxvaeDMdNEpTEolMxXjkxKYBGYLxcASflJHJYau+qEGLAZos=</SignatureValue>
   </Signature>
 </Service>

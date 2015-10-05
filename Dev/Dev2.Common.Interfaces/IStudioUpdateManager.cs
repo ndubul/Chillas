@@ -31,5 +31,11 @@ namespace Dev2.Common.Interfaces
         string TestPluginService(IPluginService inputValues);
 
         void Save(IPluginService toDbSource);
+
+        event ItemSaved ItemSaved;
+        event ServerSaved ServerSaved;
     }
+
+    public delegate void ItemSaved();
+    public delegate void ServerSaved();
 }

@@ -1,5 +1,5 @@
 
-<Service ID="a88c583c-6d78-47d7-aa2f-08f0177b6832" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="ReadFileOffFileSystemTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5751.14940">
+<Service ID="a88c583c-6d78-47d7-aa2f-08f0177b6832" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="ReadFileOffFileSystemTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5756.25789">
   <DisplayName>ReadFileOffFileSystemTest</DisplayName>
   <Category>Acceptance Testing Resources\ReadFileOffFileSystemTest</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -33,9 +33,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>o8ec9mSU7aOCyF8bYahX9E8N8fA=</DigestValue>
+        <DigestValue>MTPsyMW7PAxlj0hv2+BWUX5lTO8=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>qjt2boQn3KsK71Bn/sNY3oBKXUpNAcJrcUztzJR6WbRBa/RJAFmaiYDuNkpAhMNEbLwdjgC5LaUn1v1fsWVlCjoi3E364Ebo0g4fnuDwK+Jrx1Lra6deIw8Y4Fb8DZpIXPlgHrXBuEaoRzUoqzMeLQth9Mge/bIPXpkXrU7FCSk=</SignatureValue>
+    <SignatureValue>n90f4GgzC8vI0tWLOxqTfkTQyAthnab2PSa5o6bUivZPDwpsPGLVKRFBpbPquqFO2qTnvkvtKdd4zQvNyhtkkabEmsRRjiM5dvzRe2PZMLVITJxkwEFxmpSC6oo53IeX6x+N1/QU8XVwSAERhqBAtdo2d5r3p3KHvEP5a3scZFY=</SignatureValue>
   </Signature>
 </Service>

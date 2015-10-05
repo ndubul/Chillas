@@ -1,5 +1,5 @@
 
-<Service ID="7fae60bd-89e1-46a8-898d-c88ba3e581fa" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Tool Testing" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5751.14940">
+<Service ID="7fae60bd-89e1-46a8-898d-c88ba3e581fa" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Tool Testing" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.25789">
   <DisplayName>Tool Testing</DisplayName>
   <Category>Acceptance Testing Resources\Tool Testing</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -40,9 +40,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>j72hA1nhV3QCY1g1VRfV475sstE=</DigestValue>
+        <DigestValue>uADLMDeQYToxHSOz4Tp0JOgKipg=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>lEt4cFSIwayMPDgU+HQ0Gauh0yCuBdqIgmyHzOhnRYMxo2xM+Flj2C+fU7l4JklHQ2N+9E5HcW1AHRWoWgxQyUb10THsQwvn8pEQp8TyyFm9ffdINqO5jhYgH5/zatFnf4fr69h9lNQUkhsUEyh75lOQeGJ1yyZ7hMP8uts0EVI=</SignatureValue>
+    <SignatureValue>Sq3bL5X+V59xLP8umIwWSh/V4bx2kEUihQiu+5vURu/r36zjRUlve5VQII0/5Fbw4mEtgsx+1qu7MqM0hHa5r5Z91T59Jht2k5wrY5hvVK9YV1C7uGRIQKMoIzeKdcqt0dDHSN8oQt4cQWmrNX7VfEgCXC4fs0RaEMQgGd/P21A=</SignatureValue>
   </Signature>
 </Service>

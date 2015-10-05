@@ -1,5 +1,5 @@
 
-<Service Name="TestForEachOutput" ID="7baeb3dc-8257-405a-a59b-10ff935e699e" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5751.14940">
+<Service Name="TestForEachOutput" ID="7baeb3dc-8257-405a-a59b-10ff935e699e" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.25789">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sads sap" x:Class="TestForEachOutput"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
@@ -94,9 +94,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>wJJ3GNC2YJuO6H4QHj71+8VagNY=</DigestValue>
+        <DigestValue>Cj0gWx8KXH9LXm6iXqrdDAc2/1Q=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>Lqk3L9/BP+FKi+tcSbOhf/7NC6ppn8aj/vMTpW76ufQtpje3s0iK7SvAd4Wlba1VkNfLHMQt5LY60j4ReQLoCj3olaFgwyW2qFAIN496+4+hyX45kXLDP5C8jyj51PAYwNzSrljzIGdN7ajfpL8/DOolxQT/TwJhnvrgkLrsn3w=</SignatureValue>
+    <SignatureValue>pHsy3g3hX1SMjIKabCWOZ3WM+qCiwJk3cgYMD0Os7bciue0nrNF7Dw0u1iF90lKb3Xt+SApK5xmtUQqACqpQ3pHBjgUrUcj+juD96UEYeVvENrFQD1kBrVNTvvIsB0lznmTfbtwNXnFSOMF73Audx+38fe8Tqzyd4zJILNpzMDU=</SignatureValue>
   </Signature>
 </Service>

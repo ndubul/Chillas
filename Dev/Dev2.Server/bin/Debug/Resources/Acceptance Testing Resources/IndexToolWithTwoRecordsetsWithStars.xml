@@ -1,5 +1,5 @@
 
-<Service Name="IndexToolWithTwoRecordsetsWithStars" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="4db3f406-ffab-49d5-8ca6-edb827cab32a" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5751.14940">
+<Service Name="IndexToolWithTwoRecordsetsWithStars" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="4db3f406-ffab-49d5-8ca6-edb827cab32a" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.25789">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sads sap" x:Class="IndexToolWithTwoRecordsetsWithStars"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
@@ -225,9 +225,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>QTnOj+Hy1T4wWSed0h3ZI+4rDOA=</DigestValue>
+        <DigestValue>FgdS8eDtGMhPjVHWGeg5Tfyf4Ys=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>Amj83uH1u7KExwM/wmDGuljff4aHeAhPqKTfVWs3ylLUGibiV+RBGQukDZy7ACMZd18VK9FZ65bD9U26BYGpNBsAeHE8M4ZoRW5ruCe768uix+5MAAtk7RAOdbbyAhHVW+vPusDzYUU49MVLFXb+kelVLrmeR0pB6KtVMiRWGjA=</SignatureValue>
+    <SignatureValue>JHHEZ7/axUpuGOmlk/oa+WAiBc8w1ljmZh/CEl9BGQzHriH9RYr52rdL3gK01N2jFt04nFUK61CVNQGCJdMpmo+Tp8FUz7isWvfbYcY7dvFxjPCOLM9iF0HsBs3Fdhk9lE0BTEykMY5WPhVOeDScv6VcQZqhkeN5fssHlpzQepM=</SignatureValue>
   </Signature>
 </Service>

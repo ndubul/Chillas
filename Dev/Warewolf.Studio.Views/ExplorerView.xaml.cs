@@ -281,6 +281,12 @@ namespace Warewolf.Studio.Views
             }
             else
             {
+                var target = e.DropTarget as ContentControl;
+                if (target != null)
+                {
+                    DragDrop.DoDragDrop(this, _dragData, DragDropEffects.Link | DragDropEffects.Copy);
+                }
+
                 if (drop != null && drag != null)
                 {
                     var destination = drop.Node.Data as IEnvironmentViewModel;

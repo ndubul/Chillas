@@ -1,5 +1,5 @@
 
-<Source ID="52ab7a23-69c1-4810-a366-9f49fd44fe0e" Version="1.0" Name="Dev2 Testing DB Src Faulty" ResourceType="DbSource" IsValid="false" ServerType="SqlDatabase" Type="SqlDatabase" ConnectionString="Data Source=RSAKLFSVRGENDEV,1433;Initial Catalog=Dev2TestingDB;User ID=testUser;Password=test1233;" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5751.14940">
+<Source ID="52ab7a23-69c1-4810-a366-9f49fd44fe0e" Version="1.0" Name="Dev2 Testing DB Src Faulty" ResourceType="DbSource" IsValid="false" ServerType="SqlDatabase" Type="SqlDatabase" ConnectionString="Data Source=RSAKLFSVRGENDEV,1433;Initial Catalog=Dev2TestingDB;User ID=testUser;Password=test1233;" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5756.25789">
   <DisplayName>Dev2 Testing DB Src Faulty</DisplayName>
   <Category>Acceptance Testing Resources\Dev2 Testing DB Src Faulty</Category>
   <AuthorRoles>
@@ -30,9 +30,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>BQbzvlHHrT0wRyN7R9tkAj0x1U0=</DigestValue>
+        <DigestValue>sI3ICvqLIEgAoQKQB9lT2mgCS+E=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>ioqkK1doJUMrfA0w8ZzYzAthw2v4hNLNiMRE8IW/zGCW4ur/LW66l4m7O4F30LoYgjskhJQz0tJ0BEcP90YIcpK9GEVkhqYohNvcKPCNocbEQyAS8v9L8qLSostmRRaYz7hbv8ScsQ7W5sihPI0RHs8LYX0oeB1fqEnQBR3ZI30=</SignatureValue>
+    <SignatureValue>njSqQCaeFUJnBxkaqc7vAOcVJ1dBajrS0NRKoN26VkZaChW/FM1SLoaesrX4jRBt8zea6TbZcW2iMYcW5FkSiygUdp+cnNG7rHVtQS5IZfY4F4cD5j6/2TSvabkQTyFhtoabl4T7InZJXWL3/SRCKauvGV/HjrNeVCSuNgv5G9c=</SignatureValue>
   </Signature>
 </Source>
