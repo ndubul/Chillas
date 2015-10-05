@@ -1,5 +1,5 @@
 
-<Service ID="f4caadd6-0044-4f64-a4b8-3f231c3cdf3a" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="RelativeUriResourceTest" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.25789">
+<Service ID="f4caadd6-0044-4f64-a4b8-3f231c3cdf3a" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="RelativeUriResourceTest" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.27500">
   <DisplayName>RelativeUriResourceTest</DisplayName>
   <Category>Acceptance Testing Resources\RelativeUriResourceTest</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -26,9 +26,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>F010sEC2hp5zvimKAhrDFVi50dI=</DigestValue>
+        <DigestValue>jYv2PZU3VO1QKG22ipSvJULKWP0=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>Y3EB1fwGAb2Tms2VKdRSHveELaVQJKY+hZ04HtlRKjIJ4tpGupAn/oyQSqL3tM8uKvccwZhvGn1GR2ItzhIEYg7pyvzcjS11modzRvEOWiYeEKithUUm0ev9CD4hmySDcasos3ss6ha977J8vP4U9McgN1mVzFDzXjwHsTJmj0Y=</SignatureValue>
+    <SignatureValue>vaUG7kqAl59W/B2n3N6rjXbHSonpLMEqgxKDG5yjpLzi+TbheyAYZKQ+xCMjIBPHqao44Nep2zK//j+6Nv3ZH4r3/tnAJLYjncwvv+b3LPCrXJvjVVj35fhvGRmGnkN6/RrYILwp+UDwIUSoRtqoiOxqylGqQc8PjlndZFcV8jE=</SignatureValue>
   </Signature>
 </Service>

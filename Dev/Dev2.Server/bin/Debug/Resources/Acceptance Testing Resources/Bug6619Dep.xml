@@ -1,5 +1,5 @@
 
-<Service ID="ec636256-5f11-40ab-a044-10e731d87555" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Bug6619Dep" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.25789">
+<Service ID="ec636256-5f11-40ab-a044-10e731d87555" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Bug6619Dep" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.27500">
   <DisplayName>Bug6619Dep</DisplayName>
   <Category>Acceptance Testing Resources\Bug6619Dep</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -29,9 +29,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>Ab59JPPUyOO0w5SfRoxCzbCyB4w=</DigestValue>
+        <DigestValue>2T1iLt02LNCbs5KJk0AL4TFjkvA=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>fccCd7jC3iUjavKAT1lWB13qgCxlcfOP8UMXt3HfgESTtxVVx00N4CxktKGCxyv/Y7P7locBb2dzqhRhXVYeSGicvLAE98iNUYlLUHSHKgNzj4k2yDFD7TPqlwiRowueakrMVxKk6PrOnuTsRGbtMZ7DNJoVUZ3N9/sGdTOiEyg=</SignatureValue>
+    <SignatureValue>Ib5XUDWVnTamkjHp36F5bLHlR2+GmT3uclUjUmoXnvMFnDqPEYKctjaob4AhgvdvQ4kW0SZQpFWWBge12NqZmQUPT18bcFXliWRGOYm68eBU4JZw5N8ZTjMdBFNxHLGlk2NvTBEd35XU6kLzkuRt6043X/04xtkKkC0ujnYoMbQ=</SignatureValue>
   </Signature>
 </Service>

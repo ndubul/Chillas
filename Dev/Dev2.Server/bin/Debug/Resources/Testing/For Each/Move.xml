@@ -1,5 +1,5 @@
 
-<Service ID="541fae1d-0fc9-4091-9a93-1cac1b606684" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Move" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.25789">
+<Service ID="541fae1d-0fc9-4091-9a93-1cac1b606684" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Move" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.27500">
   <DisplayName>Move</DisplayName>
   <Category>Testing\For Each\Move</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>fM7GRSwh8+8EEPJPt2+mJvZZbFY=</DigestValue>
+        <DigestValue>Eu0DTxWA02EMo/AomAVOZ5/bHQQ=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>e0JqZUOqF2jTEhsDrYfF6D1xxluNaeijpBF+M7/pHaQLbnXmk7BysBjiyVyb5440InnlZp6zyML8cJGG8z4FNAK1K2RG3KDJO/Fid4QK5Qv2VQdszLbCJZTV8aahwZFbpuWooCNIBbEXkwwfYBNFYJoboOk/Vp57/i+0Kbjppew=</SignatureValue>
+    <SignatureValue>uF/L3CgX8IwrINyyBU1w6gcsSafJmwR6gSRYTzshUtcbzJblUIFA1hwrKqPpvveUlNOtTdYP93yv3DO4xjXIafgwd/LS9HVXAvmBuNV2MXmApKX4548R6WJWZXGgwN6WGGT56/ZwLaO0kf01fXm4KqX6brgMHZ7/b+ZC6ovWHnI=</SignatureValue>
   </Signature>
 </Service>

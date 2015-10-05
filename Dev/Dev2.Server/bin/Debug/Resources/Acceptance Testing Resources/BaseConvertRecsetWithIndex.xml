@@ -1,5 +1,5 @@
 
-<Service ID="7e6b90ba-5c7d-4bc6-95f0-2abc6ed5d649" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="BaseConvertRecsetWithIndex" ResourceType="WorkflowService" ServerVersion="0.0.5756.25789">
+<Service ID="7e6b90ba-5c7d-4bc6-95f0-2abc6ed5d649" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="BaseConvertRecsetWithIndex" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
   <DisplayName>BaseConvertRecsetWithIndex</DisplayName>
   <Category>Acceptance Testing Resources\BaseConvertRecsetWithIndex</Category>
   <AuthorRoles>
@@ -180,9 +180,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>PVK5vMfF3+enj8+35Csr1duUImc=</DigestValue>
+        <DigestValue>J1D1RBVC9VUXwyw6hk3qLiCbYvA=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>S9KxN2KfmBed8fynai8+o3aZVfMbzIvTCskTvKBLbARP8YZeRpCOAZxmy/WJ5Gf3DmFDe99jzvKNR4Obh5jaOZKPZ2muspsg9jAKkkB7OuvWGPKh+GVmSBAXCquGtzwLEcXB2GsUwikurJhpHcJxAPQMMVvR3fzjZVDL2dIGbxU=</SignatureValue>
+    <SignatureValue>kqDZKeUvtwRHBuTeA6h+ev+18xvbXZqVOCgeDhjvK8frfVpUGtWkp7RFR/5sCv39+ievkiWbArccwVLvgkgozq7Nj+sr5kxcuVguBlr5M9Fyql3s7DVpE1AwmVdwTUGQhxg+3thpaIEVJUHLyRU0v5QsYem7IDsEAuVl+xWyNeA=</SignatureValue>
   </Signature>
 </Service>

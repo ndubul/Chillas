@@ -213,6 +213,12 @@ namespace Dev2.Runtime.Hosting
             return Find(items, id);
         }
 
+        public IExplorerItem Find(Func<IExplorerItem, bool> predicate)
+        {
+            var items = Load(Guid.Empty);
+            return Find(items, predicate);
+        }
+
         public IExplorerItem UpdateItem(IResource resource)
         {
             if (Find(resource.ResourceID) == null)
@@ -260,6 +266,18 @@ namespace Dev2.Runtime.Hosting
                 return null;
             }
             return item.Children.Select(child => Find(child, itemToFind)).FirstOrDefault(found => found != null);
+        }
+
+        public IExplorerItem Find(IExplorerItem item, Func<IExplorerItem, bool> predicate)
+        {
+
+            if (predicate(item))
+                return item;
+            if (item.Children == null || item.Children.Count == 0)
+            {
+                return null;
+            }
+            return item.Children.Select(child => Find(child, predicate)).FirstOrDefault(found => found != null);
         }
 
         public void MessageSubscription(IExplorerRepositorySync sync)

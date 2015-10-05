@@ -127,6 +127,10 @@ namespace Warewolf.Studio.ViewModels
                 else
                 {
                     AllowConnection = true;
+                    if (_selectedConnection.ResourceName.Equals("localhost"))
+                    {
+                        AllowConnection = false;
+                    }
                     IsConnected = _selectedConnection.IsConnected;
                     OnPropertyChanged(() => SelectedConnection);
                 }

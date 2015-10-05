@@ -1,5 +1,5 @@
 
-<Service ID="a4d6ccc8-eaa3-400f-a976-ee989ec02569" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="NowTimezoneChanges" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5756.25789">
+<Service ID="a4d6ccc8-eaa3-400f-a976-ee989ec02569" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="NowTimezoneChanges" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5756.27500">
   <DisplayName>NowTimezoneChanges</DisplayName>
   <Category>Acceptance Testing Resources\NowTimezoneChanges</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -31,9 +31,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>FQn6FNISG6YcMer7lup0rZMFbe0=</DigestValue>
+        <DigestValue>XtzI33w67eFIRVzDq13WE80zYSw=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>n5FHwSwc4AAhBoXsZkoUhsXrMSI/7kis4AXwiN8IY3kh9tYfr0ZCSEkW0ILcnC7rfS5hXKKjpPP80JdoZzwVWVQWd7CZOufeP7/I/foTtli4pJm4M4uNREFGvDCdalqlHGsAU/3sH1sBe2LQ62eWQLfGMOORYCYTNDgrb15AZOQ=</SignatureValue>
+    <SignatureValue>gw3qI8pQcSdMJEwRCUwn+mpkZsT6Dh8yECFbIxMRRo9VUt5CrUIapYO1N/QVOXPCDupMCpOSzT6TZa1Yy4o6CNldCAPyu1OR9zSjYcNWIiexnBZorQWsTBQpTf+YZx4hCGkuDavumlw1t0+BeBA9kCsvAOfyiFWFO3fWh4CTG6c=</SignatureValue>
   </Signature>
 </Service>

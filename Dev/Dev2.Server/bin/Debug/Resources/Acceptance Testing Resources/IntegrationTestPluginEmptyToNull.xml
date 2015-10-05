@@ -1,5 +1,5 @@
 
-<Service ID="11649a43-b764-4421-a70d-6930756fb82a" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="IntegrationTestPluginEmptyToNull" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.25789">
+<Service ID="11649a43-b764-4421-a70d-6930756fb82a" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="IntegrationTestPluginEmptyToNull" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.27500">
   <DisplayName>IntegrationTestPluginEmptyToNull</DisplayName>
   <Category>Acceptance Testing Resources\IntegrationTestPluginEmptyToNull</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -38,9 +38,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>HzLPs1dR2aUclRlV/sVRz9pujpE=</DigestValue>
+        <DigestValue>37X8j+GNgGaeNYerQkXEAtQInV4=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>qLdZCc9fSxot7YtC+5kiulwVPsFujtvaeofgonzSyZ90UqFdfPxcrkg4N4rUhNgg7+jaIg9fg5vri3DSnH4Bj+5ph/4UHh4yoVsJ3lqa9GzaHLvYY3Mav8Ig8yN2RU/ciZIoIBuuSPATCFs8z+DgFcDA5nQhe4nWzXw9OOUScSQ=</SignatureValue>
+    <SignatureValue>UmqtHq8DQBpA30Ob56MhaRcWufelgutoydKeGsdpDRFmxQie7zATuh7pT0Aw7rD1qXLqvo9doxA867rIWQ6GsWL8+itENR8IcpxdZzxya2qQvrZ2ukfRqv4XxjF2Zi+UqevLvtnyrrFN4ZkXSEOUEvUSMqXcuwvpt4nlh4loCyE=</SignatureValue>
   </Signature>
 </Service>

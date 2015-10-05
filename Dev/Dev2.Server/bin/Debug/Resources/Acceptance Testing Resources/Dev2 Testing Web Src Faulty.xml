@@ -1,5 +1,5 @@
 
-<Source ID="cb95b41d-b5f8-4507-8f7c-bb718b168dcf" Version="1.0" Name="Dev2 Testing Web Src Faulty" ResourceType="WebSource" IsValid="false" ConnectionString="Address=http://www.webservicex.net.co.za/globalweather.asmx;DefaultQuery=/GetCitiesByCountry?CountryName=US;AuthenticationType=Anonymous" Type="WebSource" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5756.25789">
+<Source ID="cb95b41d-b5f8-4507-8f7c-bb718b168dcf" Version="1.0" Name="Dev2 Testing Web Src Faulty" ResourceType="WebSource" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAcJP3pxLHx0q8X0+OqW6qAwQAAAACAAAAAAADZgAAwAAAABAAAADX0QVhV0pQFHGKBVPhO3HzAAAAAASAAACgAAAAEAAAADUwnXLHtqqka8QZTdj3zFsYAQAAjZkUEmA6I11JHsL8ZwwspH/7cyPXq7zpyxYUqWuZfiH5uyFyzNjij8/TPTh29HhkdGUX3akV2SVk9XuQAWbEyzL6Z5p2MXaI7/JE9/ZgKrxoQK2a6QDaWT8mVxUOa7jaKX9yiNyyRgr3oMcCymKdj4p4v1HooYoLE2J+XeVq4borg6z5t6IGGIEDEmAYz0I6vYxhiOXpaWGv5Yc41nP8gNlj/EVgfe3H1CEb/r+x8cxpS5GXY2bIgvFAZAIFDWvXAZ6rJRh36vyEBr9nCvky/7ZV0c6uOjdzyZtyjtMvefboVqr0/JS3SuxJ8DdHBIsQN5ZrdmiNxhRzHKdag2oSlmyFO0y52mdvg9nF+bF4AHRIyOQaTQr4TBQAAAADvleBAIj5otAAOjXOjy7sbuDj+A==" Type="WebSource" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5756.27500">
   <DisplayName>Dev2 Testing Web Src Faulty</DisplayName>
   <Category>Acceptance Testing Resources\Dev2 Testing Web Src Faulty</Category>
   <AuthorRoles>
@@ -15,9 +15,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>VkhIdUlSI+zW3d+iZTvDeSRVE5w=</DigestValue>
+        <DigestValue>nhclTlSs+BStQNwl/EC27zySMNA=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>vJ0NfSgJQz/O/e5kXd3FQgQY4rlqEOzPcaW08Rod0aKA6ILKNWdqr5oW2hiTCdUeG6W9UQoW8yEkG5Y2FbtMTVJO5jo7GYP9pk2t+WPH/UaQ634Rt3ucpa0KIKSZ2xO98CY7zVs0/7Z3yEFRIBQAOlkKKzxRADwR2JG93GAVJS0=</SignatureValue>
+    <SignatureValue>GwURKG3+mgxT+Wv2ZIfODnDA9hBdAoVgmkCaBpRk3w90snn17CA6U5zyZalpUzNcQVd47Lf1KkhGiNNt0e6zNbwZIWXTsygmziVGXF2I8Iibn+NcnwI44Cnu7Tmoo2wnOUjdVexAnzHbLrDMOEA1MRaZVKvqFoZ0LZdhcfz/RxE=</SignatureValue>
   </Signature>
 </Source>
