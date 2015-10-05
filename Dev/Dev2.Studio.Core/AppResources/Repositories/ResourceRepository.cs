@@ -463,6 +463,15 @@ namespace Dev2.Studio.Core.AppResources.Repositories
                 case ResourceType.PluginService:
                 case ResourceType.WebService:
                     return Enums.ResourceType.Service;
+                case ResourceType.DbSource:
+                case ResourceType.DropboxSource:
+                case ResourceType.EmailSource:
+                case ResourceType.OauthSource:
+                case ResourceType.PluginSource:
+                case ResourceType.ServerSource:
+                case ResourceType.SharepointServerSource:
+                case ResourceType.WebSource:
+                    return Enums.ResourceType.Source;
                 default:
                     throw new ArgumentOutOfRangeException("resourceType", resourceType, null);
             }
