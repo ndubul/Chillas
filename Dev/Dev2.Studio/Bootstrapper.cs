@@ -80,11 +80,8 @@ namespace Dev2
             CustomContainer.Register<IShellViewModel>(mainViewModel);
             CustomContainer.Register<IWindowsServiceManager>(new WindowsServiceManager());
             CustomContainer.Register<IDialogViewModelFactory>(new DialogViewModelFactory());
-            var fact = new CommunicationControllerFactory();
             var conn = new ServerProxy("http://localHost:3142",CredentialCache.DefaultNetworkCredentials, new AsyncWorker());
-           conn.Connect(Guid.NewGuid());
-            CustomContainer.Register<IStudioUpdateManager>(new StudioResourceUpdateManager(fact,conn));
-            CustomContainer.Register<IQueryManager>(new QueryManagerProxy(fact,conn));
+            conn.Connect(Guid.NewGuid());
             CustomContainer.Register<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>(new Microsoft.Practices.Prism.PubSubEvents.EventAggregator());
             
             ClassRoutedEventHandlers.RegisterEvents();

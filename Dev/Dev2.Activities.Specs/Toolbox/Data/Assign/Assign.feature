@@ -748,6 +748,19 @@ Scenario: Removing variable and value from assign
 	Then the assign tool row index is update
 
 
+##Complex types
+#@ignore
+#Scenario Outline:  Assigning value to a complex type
+#	Given I assign the value "4" to a variable "[[granparent().parent().NumberOfChildren]]"	
+#	When the assign tool is executed
+#	Then the value of "[[granparent().parent().NumberOfChildren]]" equals 4
+#	And the execution has "NO" error
+#	And the debug inputs as
+#	| # | Variable                                     | New Value |
+#	| 1 | [[granparent().parent().NumberOfChildren]] = | 4         |
+#	And the debug output as 
+#	| # |                                                |
+#	| 1 | [[granparent().parent().NumberOfChildren]] = 4 |
 
 
 

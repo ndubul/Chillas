@@ -1,5 +1,5 @@
 
-<Service Name="DateAndTimeWithComplexLiteral" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="10ca3301-ba80-4816-b7be-f0f9dd712832" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5751.14940">
+<Service Name="DateAndTimeWithComplexLiteral" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="10ca3301-ba80-4816-b7be-f0f9dd712832" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap" x:Class="DateAndTimeWithComplexLiteral" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:dsca="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uaba="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:uf="clr-namespace:Unlimited.Framework;assembly=Dev2.Core" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;x:Members&gt;
@@ -125,9 +125,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>zMyLxG8onCuphFsS5rUNiEVMoVM=</DigestValue>
+        <DigestValue>tFkRcCA68QruYRfDEW5PgHQvbCM=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>JF4dvlG0eR75qDh1Z2vMnrmhks4ob0QB1A+HmJOvtnV3HRvaK/YzWfXo/dl5X9UgQim2/1CozsZAFfg4oRBDCR5vLjMkbr6up7HbY4VZBD7Q5LrBBdT8/RtlurgbI94T/k/L+ce4MjP5RETHW6Y/SlQRiuDjncRvvJoMVH8rQ4c=</SignatureValue>
+    <SignatureValue>JQ7io8wtysLReyHMK9I3dYRbS2UMywjGgQdmM5NJzS/WuQCTRAI+YQ0SzWdmwKZXlDUP6O5FXcXU+ULpDo8Rl92Dg5Glt5udVQPowK1mtI7smp0olOA/RQScp6gPQSAHRSdljuRezUDjttZ1YMAHDCE2zvT+5cjZoMf8eUR7PSM=</SignatureValue>
   </Signature>
 </Service>

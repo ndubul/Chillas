@@ -806,7 +806,7 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        public virtual void FindAllOccurancesOfCharactersInAString(string no, string index, string characters, string directon, string result, string[] exampleTags)
+        public virtual void FindAllOccurancesOfCharactersInAString(string no, string index, string characters, string error, string directon, string result, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find all occurances of Characters in a string", exampleTags);
 #line 250
@@ -824,7 +824,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 256
  testRunner.Then(string.Format("the find index result is \"{0}\"", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 257
- testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("the execution has \"{0}\" error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
                         "In Field",
@@ -856,11 +856,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "All Occurrences")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "\"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "No Character to search")]
         public virtual void FindAllOccurancesOfCharactersInAString_1()
         {
-            this.FindAllOccurancesOfCharactersInAString("1", "All Occurrences", "\"\"", "Left to Right", "No Character to search", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("1", "All Occurrences", "\"\"", "An", "Left to Right", "No Character to search", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -870,11 +871,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "All Occurrences")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "\" \"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = 1")]
         public virtual void FindAllOccurancesOfCharactersInAString_2()
         {
-            this.FindAllOccurancesOfCharactersInAString("2", "All Occurrences", "\" \"", "Left to Right", "[[result]] = 1", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("2", "All Occurrences", "\" \"", "An", "Left to Right", "[[result]] = 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -884,11 +886,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "All Occurrences")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 1,[[rs(2).a]] = 5")]
         public virtual void FindAllOccurancesOfCharactersInAString_3()
         {
-            this.FindAllOccurancesOfCharactersInAString("3", "All Occurrences", "w", "Left to Right", "[[rs(1).a]] = 1,[[rs(2).a]] = 5", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("3", "All Occurrences", "w", "An", "Left to Right", "[[rs(1).a]] = 1,[[rs(2).a]] = 5", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -898,11 +901,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "4")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "All Occurrences")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[b]] = \"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = -1")]
         public virtual void FindAllOccurancesOfCharactersInAString_4()
         {
-            this.FindAllOccurancesOfCharactersInAString("4", "All Occurrences", "[[b]] = \"\"", "Left to Right", "[[result]] = -1", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("4", "All Occurrences", "[[b]] = \"\"", "An", "Left to Right", "[[result]] = -1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -912,11 +916,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "5")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "All Occurrences")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs(1).a]] = a")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = 2")]
         public virtual void FindAllOccurancesOfCharactersInAString_5()
         {
-            this.FindAllOccurancesOfCharactersInAString("5", "All Occurrences", "[[rs(1).a]] = a", "Left to Right", "[[result]] = 2", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("5", "All Occurrences", "[[rs(1).a]] = a", "No", "Left to Right", "[[result]] = 2", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -926,11 +931,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "6")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "All Occurrences")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs().a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 1,[[rs(2).a]] = 5")]
         public virtual void FindAllOccurancesOfCharactersInAString_6()
         {
-            this.FindAllOccurancesOfCharactersInAString("6", "All Occurrences", "[[rs().a]] = w", "Left to Right", "[[rs(1).a]] = 1,[[rs(2).a]] = 5", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("6", "All Occurrences", "[[rs().a]] = w", "No", "Left to Right", "[[rs(1).a]] = 1,[[rs(2).a]] = 5", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -940,11 +946,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "7")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "All Occurrences")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs().a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Right to Left")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 4,[[rs(2).a]] = 8")]
         public virtual void FindAllOccurancesOfCharactersInAString_7()
         {
-            this.FindAllOccurancesOfCharactersInAString("7", "All Occurrences", "[[rs().a]] = w", "Right to Left", "[[rs(1).a]] = 4,[[rs(2).a]] = 8", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("7", "All Occurrences", "[[rs().a]] = w", "No", "Right to Left", "[[rs(1).a]] = 4,[[rs(2).a]] = 8", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -954,11 +961,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "8")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "All Occurrences")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs(*).a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Right to Left")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 4,[[rs(2).a]] = 8")]
         public virtual void FindAllOccurancesOfCharactersInAString_8()
         {
-            this.FindAllOccurancesOfCharactersInAString("8", "All Occurrences", "[[rs(*).a]] = w", "Right to Left", "[[rs(1).a]] = 4,[[rs(2).a]] = 8", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("8", "All Occurrences", "[[rs(*).a]] = w", "No", "Right to Left", "[[rs(1).a]] = 4,[[rs(2).a]] = 8", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -968,11 +976,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "9")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "All Occurrences")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[int]] = 1,[[rs([[int]]).a]] = a")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Right to Left")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 7")]
         public virtual void FindAllOccurancesOfCharactersInAString_9()
         {
-            this.FindAllOccurancesOfCharactersInAString("9", "All Occurrences", "[[int]] = 1,[[rs([[int]]).a]] = a", "Right to Left", "[[rs(1).a]] = 7", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("9", "All Occurrences", "[[int]] = 1,[[rs([[int]]).a]] = a", "No", "Right to Left", "[[rs(1).a]] = 7", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -982,11 +991,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "10")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "First Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "\"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "No Character to search")]
         public virtual void FindAllOccurancesOfCharactersInAString_10()
         {
-            this.FindAllOccurancesOfCharactersInAString("10", "First Occurrence", "\"\"", "Left to Right", "No Character to search", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("10", "First Occurrence", "\"\"", "An", "Left to Right", "No Character to search", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -996,11 +1006,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "11")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "First Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "\" \"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = 1")]
         public virtual void FindAllOccurancesOfCharactersInAString_11()
         {
-            this.FindAllOccurancesOfCharactersInAString("11", "First Occurrence", "\" \"", "Left to Right", "[[result]] = 1", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("11", "First Occurrence", "\" \"", "An", "Left to Right", "[[result]] = 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1010,11 +1021,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "12")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "First Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = 2")]
         public virtual void FindAllOccurancesOfCharactersInAString_12()
         {
-            this.FindAllOccurancesOfCharactersInAString("12", "First Occurrence", "w", "Left to Right", "[[result]] = 2", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("12", "First Occurrence", "w", "An", "Left to Right", "[[result]] = 2", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1024,11 +1036,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "13")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "First Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[b]] = \"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = -1")]
         public virtual void FindAllOccurancesOfCharactersInAString_13()
         {
-            this.FindAllOccurancesOfCharactersInAString("13", "First Occurrence", "[[b]] = \"\"", "Left to Right", "[[result]] = -1", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("13", "First Occurrence", "[[b]] = \"\"", "An", "Left to Right", "[[result]] = -1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1038,11 +1051,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "14")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "First Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs(1).a]] = a")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = 2")]
         public virtual void FindAllOccurancesOfCharactersInAString_14()
         {
-            this.FindAllOccurancesOfCharactersInAString("14", "First Occurrence", "[[rs(1).a]] = a", "Left to Right", "[[result]] = 2", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("14", "First Occurrence", "[[rs(1).a]] = a", "No", "Left to Right", "[[result]] = 2", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1052,11 +1066,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "15")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "First Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs().a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 1")]
         public virtual void FindAllOccurancesOfCharactersInAString_15()
         {
-            this.FindAllOccurancesOfCharactersInAString("15", "First Occurrence", "[[rs().a]] = w", "Left to Right", "[[rs(1).a]] = 1", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("15", "First Occurrence", "[[rs().a]] = w", "No", "Left to Right", "[[rs(1).a]] = 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1066,11 +1081,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "16")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "First Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs().a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Right to Left")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 4")]
         public virtual void FindAllOccurancesOfCharactersInAString_16()
         {
-            this.FindAllOccurancesOfCharactersInAString("16", "First Occurrence", "[[rs().a]] = w", "Right to Left", "[[rs(1).a]] = 4", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("16", "First Occurrence", "[[rs().a]] = w", "No", "Right to Left", "[[rs(1).a]] = 4", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1080,11 +1096,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "17")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "First Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs(*).a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Right to Left")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 4")]
         public virtual void FindAllOccurancesOfCharactersInAString_17()
         {
-            this.FindAllOccurancesOfCharactersInAString("17", "First Occurrence", "[[rs(*).a]] = w", "Right to Left", "[[rs(1).a]] = 4", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("17", "First Occurrence", "[[rs(*).a]] = w", "No", "Right to Left", "[[rs(1).a]] = 4", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1094,11 +1111,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "18")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "First Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[int]] = 1,[[rs([[int]]).a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Right to Left")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 4")]
         public virtual void FindAllOccurancesOfCharactersInAString_18()
         {
-            this.FindAllOccurancesOfCharactersInAString("18", "First Occurrence", "[[int]] = 1,[[rs([[int]]).a]] = w", "Right to Left", "[[rs(1).a]] = 4", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("18", "First Occurrence", "[[int]] = 1,[[rs([[int]]).a]] = w", "No", "Right to Left", "[[rs(1).a]] = 4", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1108,11 +1126,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "19")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "Last Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "\"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "No Character to search")]
         public virtual void FindAllOccurancesOfCharactersInAString_19()
         {
-            this.FindAllOccurancesOfCharactersInAString("19", "Last Occurrence", "\"\"", "Left to Right", "No Character to search", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("19", "Last Occurrence", "\"\"", "An", "Left to Right", "No Character to search", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1122,11 +1141,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "20")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "Last Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "\" \"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = 1")]
         public virtual void FindAllOccurancesOfCharactersInAString_20()
         {
-            this.FindAllOccurancesOfCharactersInAString("20", "Last Occurrence", "\" \"", "Left to Right", "[[result]] = 1", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("20", "Last Occurrence", "\" \"", "An", "Left to Right", "[[result]] = 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1136,11 +1156,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "21")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "Last Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = 2")]
         public virtual void FindAllOccurancesOfCharactersInAString_21()
         {
-            this.FindAllOccurancesOfCharactersInAString("21", "Last Occurrence", "w", "Left to Right", "[[result]] = 2", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("21", "Last Occurrence", "w", "An", "Left to Right", "[[result]] = 2", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1150,11 +1171,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "22")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "Last Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[b]] = \"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = -1")]
         public virtual void FindAllOccurancesOfCharactersInAString_22()
         {
-            this.FindAllOccurancesOfCharactersInAString("22", "Last Occurrence", "[[b]] = \"\"", "Left to Right", "[[result]] = -1", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("22", "Last Occurrence", "[[b]] = \"\"", "An", "Left to Right", "[[result]] = -1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1164,11 +1186,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "23")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "Last Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs(1).a]] = a")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[result]] = 2")]
         public virtual void FindAllOccurancesOfCharactersInAString_23()
         {
-            this.FindAllOccurancesOfCharactersInAString("23", "Last Occurrence", "[[rs(1).a]] = a", "Left to Right", "[[result]] = 2", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("23", "Last Occurrence", "[[rs(1).a]] = a", "No", "Left to Right", "[[result]] = 2", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1178,11 +1201,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "24")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "Last Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs().a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Left to Right")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 1")]
         public virtual void FindAllOccurancesOfCharactersInAString_24()
         {
-            this.FindAllOccurancesOfCharactersInAString("24", "Last Occurrence", "[[rs().a]] = w", "Left to Right", "[[rs(1).a]] = 1", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("24", "Last Occurrence", "[[rs().a]] = w", "No", "Left to Right", "[[rs(1).a]] = 1", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1192,11 +1216,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "25")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "Last Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs().a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Right to Left")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 4")]
         public virtual void FindAllOccurancesOfCharactersInAString_25()
         {
-            this.FindAllOccurancesOfCharactersInAString("25", "Last Occurrence", "[[rs().a]] = w", "Right to Left", "[[rs(1).a]] = 4", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("25", "Last Occurrence", "[[rs().a]] = w", "No", "Right to Left", "[[rs(1).a]] = 4", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1206,11 +1231,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "26")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "Last Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs(*).a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Right to Left")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs(1).a]] = 4")]
         public virtual void FindAllOccurancesOfCharactersInAString_26()
         {
-            this.FindAllOccurancesOfCharactersInAString("26", "Last Occurrence", "[[rs(*).a]] = w", "Right to Left", "[[rs(1).a]] = 4", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("26", "Last Occurrence", "[[rs(*).a]] = w", "No", "Right to Left", "[[rs(1).a]] = 4", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -1220,11 +1246,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "27")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "Last Occurrence")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[int]] = 1,[[rs([[int]]).a]] = w")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Directon", "Right to Left")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "[[rs([[int]]).a]] = 4, [[int]]=1")]
         public virtual void FindAllOccurancesOfCharactersInAString_27()
         {
-            this.FindAllOccurancesOfCharactersInAString("27", "Last Occurrence", "[[int]] = 1,[[rs([[int]]).a]] = w", "Right to Left", "[[rs([[int]]).a]] = 4, [[int]]=1", ((string[])(null)));
+            this.FindAllOccurancesOfCharactersInAString("27", "Last Occurrence", "[[int]] = 1,[[rs([[int]]).a]] = w", "No", "Right to Left", "[[rs([[int]]).a]] = 4, [[int]]=1", ((string[])(null)));
         }
         
         public virtual void FindAllRecordsetsWithInvalidIndexes(string no, string var, string value, string characters, string result, string error, string[] exampleTags)
@@ -1359,26 +1386,41 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Find all Recordsets with invalid Indexes")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "FindIndex")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:var", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Characters", "[[rs([[var]]).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[result]] = -1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "Index is not valid")]
+        public virtual void FindAllRecordsetsWithInvalidIndexes_7()
+        {
+            this.FindAllRecordsetsWithInvalidIndexes("7", "", "", "[[rs([[var]]).a]]", "[[result]] = -1", "Index is not valid", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Tool does not return")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "FindIndex")]
         public virtual void ToolDoesNotReturn()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tool does not return", ((string[])(null)));
-#line 319
-this.ScenarioSetup(scenarioInfo);
 #line 320
- testRunner.Given("I have a findindex variable \"\" equal to \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 321
- testRunner.And("I selected Index \"All Occurrence\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I have a findindex variable \"\" equal to \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 322
- testRunner.And("I search for characters \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I selected Index \"All Occurrence\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 323
- testRunner.And("I selected direction as \"Left to Right\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I search for characters \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 324
- testRunner.When("the data find index tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I selected direction as \"Left to Right\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 325
- testRunner.Then("the find index result is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("the data find index tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 326
+ testRunner.Then("the find index result is \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 327
  testRunner.And("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1391,14 +1433,14 @@ this.ScenarioSetup(scenarioInfo);
                         "All Occurrence",
                         "",
                         "Left to Right"});
-#line 327
+#line 328
  testRunner.And("the debug inputs as", ((string)(null)), table36, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table37.AddRow(new string[] {
-                        "[[result]] ="});
-#line 330
+                        "[[result]] = Index is not an integer"});
+#line 331
  testRunner.And("the debug output as", ((string)(null)), table37, "And ");
 #line hidden
             this.ScenarioCleanup();

@@ -286,6 +286,37 @@ namespace Warewolf.Studio.Views
                 {
                     DragDrop.DoDragDrop(this, _dragData, DragDropEffects.Link | DragDropEffects.Copy);
                 }
+
+                if (drop != null && drag != null)
+                {
+                    var destination = drop.Node.Data as IEnvironmentViewModel;
+                    var source = drag.Node.Data as IExplorerItemViewModel;
+                    if (source != null && destination != null)
+                    {
+                        if (!source.CanDrag)
+                        {
+                            return;
+                        }
+                        if (destination.Children.Count >= 1)
+                        {
+                            var checkExists = destination.Children.FirstOrDefault(o => o.ResourceId == source.ResourceId);
+                            if (checkExists == null)
+                            {
+                                if (!source.Move(destination))
+                                {
+                                    //DO NOTHING
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (!source.Move(destination))
+                            {
+                                //DO NOTHING
+                            }
+                        }
+                    }
+                }
             }
         }
         private void Reset(XamDataTreeNodeControl drop)

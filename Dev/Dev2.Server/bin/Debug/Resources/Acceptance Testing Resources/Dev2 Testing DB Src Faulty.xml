@@ -1,5 +1,5 @@
 
-<Source ID="52ab7a23-69c1-4810-a366-9f49fd44fe0e" Version="1.0" Name="Dev2 Testing DB Src Faulty" ResourceType="DbSource" IsValid="false" ServerType="SqlDatabase" Type="SqlDatabase" ConnectionString="Data Source=RSAKLFSVRGENDEV,1433;Initial Catalog=Dev2TestingDB;User ID=testUser;Password=test1233;" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5751.14940">
+<Source ID="52ab7a23-69c1-4810-a366-9f49fd44fe0e" Version="1.0" Name="Dev2 Testing DB Src Faulty" ResourceType="DbSource" IsValid="false" ServerType="SqlDatabase" Type="SqlDatabase" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAcJP3pxLHx0q8X0+OqW6qAwQAAAACAAAAAAADZgAAwAAAABAAAADjvkp0BxIQ8vAcvAvU3zDwAAAAAASAAACgAAAAEAAAAGF5fir5yLTq6sJP0NpAmcLIAAAAhLImi91jdoh5gJRDng/UmBELLLmssMe6riDv07pFmgyt2q9rdbWLXtaoBE+20P9+GEN/6862J+yVhUYCExQBy9gV4RLH5WA5jgZ5dVmclfkrtHfLoeCSKQOghPaDf3sF94hWdF+Unsh4qks3OCN0uqjPps/tsZ3FyMjAX1N9/WCGGKKrMYQA9ShwzxoZcBZc0eM13nliI1ta1urv55x8AC77mQvQqNH6dyJX+Ouy4kkZCKQq/+OD695HeeH9TmjM01Ld5HPg/BkUAAAAwgfrzIrKSLMcGSapj7+YQEte4k0=" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5756.27500">
   <DisplayName>Dev2 Testing DB Src Faulty</DisplayName>
   <Category>Acceptance Testing Resources\Dev2 Testing DB Src Faulty</Category>
   <AuthorRoles>
@@ -30,9 +30,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>BQbzvlHHrT0wRyN7R9tkAj0x1U0=</DigestValue>
+        <DigestValue>2Jl/9NH1ZzEM8h9f0D5PlyRb9lE=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>ioqkK1doJUMrfA0w8ZzYzAthw2v4hNLNiMRE8IW/zGCW4ur/LW66l4m7O4F30LoYgjskhJQz0tJ0BEcP90YIcpK9GEVkhqYohNvcKPCNocbEQyAS8v9L8qLSostmRRaYz7hbv8ScsQ7W5sihPI0RHs8LYX0oeB1fqEnQBR3ZI30=</SignatureValue>
+    <SignatureValue>Wn+BMthvhXWgjnb+Q30wQPl9GceAPf5LwU95tCiqOmAml3SfJ1+YjgUtxm8Ns3vdBGMgWTWDMrjWFux78kzWR7REtef4Pk9c/oQISC/hTSSoGn9Egi2/nZU7maSPd1LfQX7Jo7cPcmX9LcleTJjlMj9MBgv0dDpDsRPWC+izLUM=</SignatureValue>
   </Signature>
 </Source>

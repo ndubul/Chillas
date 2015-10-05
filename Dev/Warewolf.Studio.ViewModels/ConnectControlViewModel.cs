@@ -20,6 +20,7 @@ namespace Warewolf.Studio.ViewModels
         bool _isConnecing;
         IServer _selectedConnection;
         bool _allowConnection;
+        IList<IServer> _servers;
         public const string NewServerText = "New Remote Server...";
 
         public ConnectControlViewModel(IServer server, IEventAggregator aggregator)
@@ -33,12 +34,17 @@ namespace Warewolf.Studio.ViewModels
                 throw new ArgumentNullException("aggregator");
             }
             Server = server;
-            Servers = new List<IServer>(Server.GetServerConnections());
-            Servers.Add(CreateNewRemoteServerEnvironment());
+            Server.UpdateRepository.ServerSaved += LoadServers;
+            LoadServers();
             SelectedConnection = server;
             aggregator.GetEvent<ServerAddedEvent>().Subscribe(ServerAdded);
             EditConnectionCommand = new DelegateCommand(AllowConnectionEdit);
             ToggleConnectionStateCommand = new DelegateCommand(ConnectOrDisconnect);
+        }
+
+        public void LoadServers()
+        {
+            Servers = new List<IServer>(Server.GetServerConnections()) { CreateNewRemoteServerEnvironment() };
         }
 
         IServer CreateNewRemoteServerEnvironment()
@@ -89,7 +95,18 @@ namespace Warewolf.Studio.ViewModels
         }
 
         public IServer Server { get; set; }
-        public IList<IServer> Servers { get; set; }
+        public IList<IServer> Servers
+        {
+            get
+            {
+                return _servers;
+            }
+            set
+            {
+                _servers = value;
+                OnPropertyChanged(()=>Servers);
+            }
+        }
         public IServer SelectedConnection
         {
             get
@@ -110,6 +127,10 @@ namespace Warewolf.Studio.ViewModels
                 else
                 {
                     AllowConnection = true;
+                    if (_selectedConnection.ResourceName.Equals("localhost"))
+                    {
+                        AllowConnection = false;
+                    }
                     IsConnected = _selectedConnection.IsConnected;
                     OnPropertyChanged(() => SelectedConnection);
                 }
