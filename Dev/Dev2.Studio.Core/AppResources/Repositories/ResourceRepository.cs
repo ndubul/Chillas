@@ -433,6 +433,25 @@ namespace Dev2.Studio.Core.AppResources.Repositories
             return FindSingle(expression, true);
         }
 
+        public IContextualResourceModel LoadContextualResourceModel(Guid resourceID)
+        {
+            var con = _environmentModel.Connection;
+            var comsController = new CommunicationController { ServiceName = "FindResourcesByID" };
+            comsController.AddPayloadArgument("GuidCsv", resourceID.ToString());
+            comsController.AddPayloadArgument("ResourceType", Enum.GetName(typeof(Enums.ResourceType), Enums.ResourceType.WorkflowService));
+            var toReloadResources = comsController.ExecuteCommand<List<SerializableResource>>(con, GlobalConstants.ServerWorkspaceID);
+            if (toReloadResources != null && toReloadResources.Count == 1)
+            {
+                var serializableResource = toReloadResources[0];
+                var resource = HydrateResourceModel(Enums.ResourceType.WorkflowService, serializableResource, _environmentModel.Connection.ServerID, true);
+                var contextualResourceModel = new ResourceModel(_environmentModel);
+                contextualResourceModel.Update(resource);
+                return contextualResourceModel;
+            }
+            Dev2Logger.Log.Error("Multiple Resources found for Resource ID: "+resourceID);
+            return null;
+        }
+
         public IResourceModel FindSingle(Expression<Func<IResourceModel, bool>> expression, bool fetchPayload = false, bool prepairForDeployment = false)
         {
             if (expression != null && _reservedServices != null)
