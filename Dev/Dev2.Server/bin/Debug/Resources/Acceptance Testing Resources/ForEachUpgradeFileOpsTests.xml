@@ -1,5 +1,5 @@
 
-<Service ID="b05a38b9-e4a2-4f7f-995b-fac82a83851e" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="ForEachUpgradeFileOpsTests" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5751.14940">
+<Service ID="b05a38b9-e4a2-4f7f-995b-fac82a83851e" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="ForEachUpgradeFileOpsTests" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.25789">
   <DisplayName>ForEachUpgradeFileOpsTests</DisplayName>
   <Category>Acceptance Testing Resources\ForEachUpgradeFileOpsTests</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -63,9 +63,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>AYPnYSV2JLNc61PE8Lvslt0Tio4=</DigestValue>
+        <DigestValue>c4bP9nHddJ0ZMPAY2T2cLaMUlUk=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>ZY8RmlLAwXXziNReUtlrpSxgDrDk+OLr56o1qxtWwPG+Mg0JyiqNn1E6iRcqbPI4hyYNP46dMeDN9r+4j2pXnE+/phQLKYdabFDND/3XP6kE4PQlWIfJq2JxZV80uWmyFGAbGaTs9g2JuWbRFN+i2VspPEpSIoFjUQtf48ZZTmU=</SignatureValue>
+    <SignatureValue>EXTp2Tf7qH4um6MC9lxh2b16QQJFJqlnFWuuCrYl6SZTbq/JgBIo017RaUtFF+qlZKi4l9n2rd/2WyU8gshYnep+nv4y7BzW7aslBbK962DQwU4fakAakolRVPyHhKBwzp1rj8KEutn3H27sJE2x4ShNRNiq++t8dtIGJvN6YKg=</SignatureValue>
   </Signature>
 </Service>

@@ -23,6 +23,17 @@ namespace Dev2.Runtime.ESB.Management.Services
     {
         IExplorerServerResourceRepository _serverExplorerRepository;
 
+        public static int GETSpecifiedIndexOf(string str, char ch, int index)
+        {
+            int i = 0, o = 1;
+            while ((i = str.IndexOf(ch, i)) != -1)
+            {
+                if (o == index) return i;
+                o++;
+                i++;
+            }
+            return 0;
+        }
         public StringBuilder Execute(Dictionary<string, StringBuilder> values, IWorkspace theWorkspace)
         {
             ExecuteMessage msg = new ExecuteMessage();
@@ -38,12 +49,17 @@ namespace Dev2.Runtime.ESB.Management.Services
 
                 IServerSource src = serializer.Deserialize<ServerSource>(resourceDefinition);
                 Connection con = new Connection();
+
+                int portIndex = GETSpecifiedIndexOf(src.Address, ':', 2);
+                string port = src.Address.Substring(portIndex + 1);
+
                 con.Address = src.Address;
                 con.AuthenticationType = src.AuthenticationType;
                 con.UserName = src.UserName;
                 con.Password = src.Password;
                 con.ResourceName = src.Name;
                 con.ResourcePath = src.ResourcePath;
+                con.WebServerPort = int.Parse(port);
                 Connections tester = new Connections();
                 var res = tester.CanConnectToServer(con);
                 if(res.IsValid)
