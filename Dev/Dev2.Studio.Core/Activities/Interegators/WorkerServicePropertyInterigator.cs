@@ -57,7 +57,7 @@ namespace Dev2.Studio.Core.Activities.Interegators
                                         {
                                             Guid sourceId;
                                             Guid.TryParse( node.Attributes["SourceID"].Value, out sourceId);
-                                            activity.FriendlySourceName = resourceRepository.FindSingle(a => !(a.ID.ToString() != sourceId.ToString()),false).DisplayName;
+                                            activity.FriendlySourceName = resourceRepository.LoadContextualResourceModel(sourceId).DisplayName;
                                         }
                                         else
                                         activity.FriendlySourceName = attr.Value;

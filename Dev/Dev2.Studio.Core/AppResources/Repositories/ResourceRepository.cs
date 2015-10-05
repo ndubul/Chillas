@@ -443,7 +443,7 @@ namespace Dev2.Studio.Core.AppResources.Repositories
             {
                 var serializableResource = toReloadResources[0];
                 var resourceType = GetResourceType(serializableResource.ResourceType);
-                var resource = HydrateResourceModel(resourceType, serializableResource, _environmentModel.Connection.ServerID, true);
+                var resource = HydrateResourceModel(resourceType, serializableResource, _environmentModel.Connection.ServerID, true,true,true);
                 var contextualResourceModel = new ResourceModel(_environmentModel);
                 contextualResourceModel.Update(resource);
                 return contextualResourceModel;
