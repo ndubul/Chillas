@@ -1,5 +1,5 @@
 
-<Service ID="c7bf731b-b84a-4a37-9195-ac21a9f6a5c7" Version="1.0" Name="Html From DB" ResourceType="DbService" IsValid="false" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5756.24008">
+<Service ID="c7bf731b-b84a-4a37-9195-ac21a9f6a5c7" Version="1.0" Name="Html From DB" ResourceType="DbService" IsValid="false" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5751.14940">
   <Actions>
     <Action Name="dbo_FetchHtmlFragment" Type="InvokeStoredProc" SourceID="ebba47dc-e5d4-4303-a203-09e2e9761d16" SourceName="testingDBSrc" SourceMethod="dbo.FetchHtmlFragment">
       <Inputs />
@@ -49,9 +49,9 @@ var $j = jQuery.noConflict();
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>NMSgSL65gguoMeAXLHWi5VMvglU=</DigestValue>
+        <DigestValue>VaoFalzEvLzm0jDf2wVTr5mdbcQ=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>t1G0xRUIcgt6Jgk66iZEpREXeEDOw/mvXV3hLQ0MCZkFFL1AqvUU7vWWzuFONeXZTBsqL47yvfnV1GnP/UzHgJ9WTh8AYAWCKAUiX2491KFTSAExs4RRc+dcMdh10owKWUAneS/ug3TNQt3jKRRj0RTT2XabzSStcLIOYTc161I=</SignatureValue>
+    <SignatureValue>VTD7Xt7CjOq9TXK4WVlA6czRX0/6QUvE+deRt7BXq0vLyXk8vSkM4BfcvT/0RFllsAheILbFcVkwp0//ddcF35GaRAMtDSkh9eP0m34N7h5Kg6jCEAyNcydjmXffKtIC5ZJRWniooLJXr5pezl0VdLs8AG9VwWmdFt8UEVuG4wU=</SignatureValue>
   </Signature>
 </Service>

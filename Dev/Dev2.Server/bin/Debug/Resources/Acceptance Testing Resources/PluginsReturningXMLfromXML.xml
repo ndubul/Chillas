@@ -1,5 +1,5 @@
 
-<Service ID="87093935-5381-487a-b984-3d08ac762cfc" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="PluginsReturningXMLfromXML" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.24008">
+<Service ID="87093935-5381-487a-b984-3d08ac762cfc" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="PluginsReturningXMLfromXML" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5751.14940">
   <DisplayName>PluginsReturningXMLfromXML</DisplayName>
   <Category>Acceptance Testing Resources\PluginsReturningXMLfromXML</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -47,9 +47,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>4EtjOKMo6gRRUZlpCZOdgd02GDw=</DigestValue>
+        <DigestValue>8/1erQA2+VNc5m5xXtbdw1R7Puc=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>sXWCRSCOVB/oCGkGvYKXn8/xUD9ZSbKGCPJmdKonGlDOOsx1mvRmrTFTRSqDUtMG+fMsuJl0qIA/UZhX0z8hMHUnyr/WpENDXKqPTLW7SF/woRZQuPBFwx/HYJ2lzqCX73Q42H27Vhsx76dRFDlOLAZXQIns2lrDdaPrQ2EHh0M=</SignatureValue>
+    <SignatureValue>L/3whw8aaqVGEKfwVkHJCvYmsYw8RIR0Kf0rbpwq7x2H1w6WsV0MKuqN5ZcVx82Xnk+hlh/BeRTjvNn2LLbkieRedh0LrKzxJeseMBvTU4hlOQJCv7Ed2ESTDr50D0G1TEgnrCGkWJG1OJiKL/BIWNLkS5E/brK0St1zDYjAmOo=</SignatureValue>
   </Signature>
 </Service>

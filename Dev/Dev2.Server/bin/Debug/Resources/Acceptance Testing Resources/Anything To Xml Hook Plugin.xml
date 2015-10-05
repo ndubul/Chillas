@@ -1,5 +1,5 @@
 
-<Source Name="Anything To Xml Hook Plugin" Type="Plugin" AssemblyName="Dev2.AnytingToXmlHook.Plugin.AnythignToXmlHookPlugin" AssemblyLocation="Plugins/Dev2.AnytingToXmlHook.Plugin.dll" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="a0663ef3-0254-40c6-a53f-c9a5d24ac70d" Version="1.0" ResourceType="PluginSource" ServerVersion="0.0.5756.24008">
+<Source Name="Anything To Xml Hook Plugin" Type="Plugin" AssemblyName="Dev2.AnytingToXmlHook.Plugin.AnythignToXmlHookPlugin" AssemblyLocation="Plugins/Dev2.AnytingToXmlHook.Plugin.dll" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="a0663ef3-0254-40c6-a53f-c9a5d24ac70d" Version="1.0" ResourceType="PluginSource" ServerVersion="0.0.5751.14940">
   <AuthorRoles>Schema Admins,Enterprise Admins,Domain Admins,Domain Users,Windows SBS Remote Web Workplace Users,Windows SBS Fax Users,Windows SBS Fax Administrators,Windows SBS Virtual Private Network Users,All Users,Windows SBS Administrators,Windows SBS SharePoint_OwnersGroup,Windows SBS Link Users,Windows SBS Admin Tools Group,Company Users,Business Design Studio Developers,</AuthorRoles>
   <Comment>.NET Assembly Used as an entry point to the databrowser map functionality and to emit any given string data.</Comment>
   <HelpLink>http://d</HelpLink>
@@ -21,9 +21,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>pzZb3q1ImsDd0qKem5azlnHKq3s=</DigestValue>
+        <DigestValue>OzsYKGOLck1gMz7ccB0dd9vHVfE=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>eLv47qzmK/GKHVpR/89yuSI4b0wpjEqJxA3QSQ6sRX0nlA5ThcfxGfifk2Y9jXUXhOA7Wt1L3ngT3Ou2IiFb3qG/Zg3TFRiMrKmCuaMkS5evGF5PARDf6zqk1Ll20Fd6U1JJJ6AllosVxiwu1u1JkUJ0Poc3xBVN4Y3XcXGr5f0=</SignatureValue>
+    <SignatureValue>Q81ELUlWVV/WTdJqWH/wFwOXdn7EXnuvbuAyzjBT3hIiS1HOnPKkcnFKeSSUuXgbqrQQYJDYo9EFfWNnGfnalyoo6ivh/8R1MqmAYgx2JZm4UzpYIAxQq1hMQm3tvYDYEyX1lRimrbweGY9wzoPok36CoA9rtNI0gNhTehUxuto=</SignatureValue>
   </Signature>
 </Source>
