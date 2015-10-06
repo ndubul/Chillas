@@ -18,6 +18,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Xml;
+using Dev2.Common;
 using Dev2.Studio.ViewModels;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Views;
@@ -60,8 +61,19 @@ namespace Dev2.Studio.Views
                 }
                 if (!string.IsNullOrEmpty(_savedLayout))
                 {
-                    DockManager.LoadLayout(_savedLayout);
+                    try
+                    {
 
+                          DockManager.LoadLayout(_savedLayout);
+
+                    }
+                    catch (Exception err)
+                    {
+                        _savedLayout = null;
+                        File.Delete(FilePath);
+                        Dev2Logger.Log.Error("Unable to load layout");
+                        Dev2Logger.Log.Error(err);
+                    }
                 }
             }
         }

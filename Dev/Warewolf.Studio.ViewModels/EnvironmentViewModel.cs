@@ -211,23 +211,44 @@ namespace Warewolf.Studio.ViewModels
 
         public void SetPropertiesForDialog()
         {
-            CanCreateDbService = true;
-            CanCreateDbSource = true;
-            CanCreateFolder = true;
-            CanCreatePluginService = true;
-            CanCreatePluginSource = true;
-            CanCreateEmailSource = true;
-            CanCreateDropboxSource = true;
-            CanCreateSharePointSource = true;
-            CanCreateServerSource = true;
-            CanCreateWebService = true;
-            CanCreateWebSource = true;
-            CanDelete = false;
-            CanDeploy = false;
-            CanRename = false;
-            CanRollback = false;
-            CanShowVersions = false;
-            CanCreateWorkflowService = true;
+            if (_isDialog)
+            {
+                CanCreateDbService = false;
+                CanCreateDbSource = false;
+                CanCreateDropboxSource = false;
+                CanCreateEmailSource = false;
+                CanCreatePluginService = false;
+                CanCreateServerSource = false;
+                CanCreateSharePointSource = false;
+                CanCreatePluginSource = false;
+                CanCreateWebService = false;
+                CanCreateWebSource = false;
+                CanCreateWorkflowService = false;
+                CanDeploy = false;
+                
+            }
+            else
+            {
+
+
+                CanCreateDbService = true;
+                CanCreateDbSource = true;
+                CanCreateFolder = true;
+                CanCreatePluginService = true;
+                CanCreatePluginSource = true;
+                CanCreateEmailSource = true;
+                CanCreateDropboxSource = true;
+                CanCreateSharePointSource = true;
+                CanCreateServerSource = true;
+                CanCreateWebService = true;
+                CanCreateWebSource = true;
+                CanDelete = false;
+                CanDeploy = false;
+                CanRename = false;
+                CanRollback = false;
+                CanShowVersions = false;
+                CanCreateWorkflowService = true;
+            }
         }
 
 
@@ -655,7 +676,7 @@ namespace Warewolf.Studio.ViewModels
             return null;
         }
 
-        private static void SetPropertiesForDialog(ExplorerItemViewModel itemCreated)
+        private static void SetPropertiesForDialog(IExplorerItemViewModel itemCreated)
         {
             itemCreated.CanCreateDbService = false;
             itemCreated.CanCreateDbSource = false;

@@ -294,6 +294,7 @@ namespace Warewolf.Studio.ViewModels
 			{
 				environmentViewModel
 			};
+          
             IsRefreshing = false;
 			ShowConnectControl = false;
             SelectItem(_selectedId);
