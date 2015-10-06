@@ -775,6 +775,27 @@ namespace Dev2.Studio.ViewModels
                 case "SharepointServerSource":
                     EditSharePointSource(resourceModel);
                     break;
+                case "Server":
+                case "ServerSource":
+                    var connection = new Connection(resourceModel.WorkflowXaml.ToXElement());
+                    string address = null;
+                    Uri uri;
+                    if (Uri.TryCreate(connection.Address,UriKind.RelativeOrAbsolute, out uri))
+                    {
+                        address = uri.Host;
+                    }
+                    EditServer(new ServerSource
+                    {
+                        Address = connection.Address,
+                        ID = connection.ResourceID,
+                        AuthenticationType = connection.AuthenticationType,
+                        UserName = connection.UserName,
+                        Password = connection.Password,
+                        ServerName = address,
+                        Name = connection.ResourceName,
+                        ResourcePath = connection.ResourcePath
+                    });
+                    break;
                 default:
                     AddWorkSurfaceContext(resourceModel);
                     break;

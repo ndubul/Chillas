@@ -31,6 +31,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             ResourceName = EnvironmentConnection.DisplayName;
             EnvironmentConnection.NetworkStateChanged+=RaiseNetworkStateChangeEvent;
             EnvironmentConnection.ItemAddedMessageAction+=ItemAdded;
+            environmentModel.WorkflowSaved += (sender, args) => UpdateRepository.FireItemSaved();
         }
 
         public Server()

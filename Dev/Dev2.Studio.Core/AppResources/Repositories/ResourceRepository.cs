@@ -467,11 +467,13 @@ namespace Dev2.Studio.Core.AppResources.Repositories
                 case ResourceType.DropboxSource:
                 case ResourceType.EmailSource:
                 case ResourceType.OauthSource:
-                case ResourceType.PluginSource:
-                case ResourceType.ServerSource:
+                case ResourceType.PluginSource:                
                 case ResourceType.SharepointServerSource:
                 case ResourceType.WebSource:
                     return Enums.ResourceType.Source;
+                case ResourceType.ServerSource:
+                case ResourceType.Server:
+                    return Enums.ResourceType.Server;
                 default:
                     throw new ArgumentOutOfRangeException("resourceType", resourceType, null);
             }
@@ -547,7 +549,12 @@ namespace Dev2.Studio.Core.AppResources.Repositories
             {
                 ResourceModels.Add(instanceObj);
             }
-            return SaveResource(_environmentModel, instanceObj.ToServiceDefinition(), GlobalConstants.ServerWorkspaceID);
+            var saveResource = SaveResource(_environmentModel, instanceObj.ToServiceDefinition(), GlobalConstants.ServerWorkspaceID);
+            if (!saveResource.HasError)
+            {
+                _environmentModel.FireWorkflowSaved();
+            }
+            return saveResource;
         }
 
         public void Rename(string resourceId, string newName)
@@ -977,7 +984,7 @@ namespace Dev2.Studio.Core.AppResources.Repositories
 
             var con = targetEnvironment.Connection;
             var result = comsController.ExecuteCommand<ExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-
+            
             return result;
         }
 

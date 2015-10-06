@@ -38,7 +38,16 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         public event ItemSaved ItemSaved;
         public event ServerSaved ServerSaved;
-             
+
+        public void FireItemSaved()
+        {
+            var handler = ItemSaved;
+            if (handler != null)
+            {
+                handler();
+            }
+        }
+
         IUpdateManager UpdateManagerProxy { get; set; }
 
         public void Save(IServerSource serverSource)

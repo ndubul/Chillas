@@ -33,6 +33,7 @@ namespace Dev2.Studio.Core.Models
         public event EventHandler<ConnectedEventArgs> IsConnectedChanged;
         public event EventHandler<ResourcesLoadedEventArgs> ResourcesLoaded;
         public event EventHandler AuthorizationServiceSet;
+        public event EventHandler WorkflowSaved;
 
         protected virtual void OnAuthorizationServiceSet()
         {
@@ -229,6 +230,15 @@ namespace Dev2.Studio.Core.Models
                 return true;
             }
             return false;
+        }
+
+        public void FireWorkflowSaved()
+        {
+            var handler = WorkflowSaved;
+            if (handler != null)
+            {
+                handler(this,EventArgs.Empty);
+            }
         }
 
         #endregion
