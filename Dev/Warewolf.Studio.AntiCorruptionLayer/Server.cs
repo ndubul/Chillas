@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
@@ -11,10 +13,11 @@ using Dev2.Controller;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Security;
 using Dev2.Studio.Core;
+using Warewolf.Studio.AntiCorruptionLayer.Annotations;
 
 namespace Warewolf.Studio.AntiCorruptionLayer
 {
-    public class Server : Resource,IServer
+    public class Server : Resource,IServer,INotifyPropertyChanged
     {
         readonly Guid _serverId;
         readonly StudioServerProxy _proxyLayer;
@@ -87,13 +90,36 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             if(!EnvironmentConnection.IsConnected)
             {
                 EnvironmentConnection.Connect(_serverId);
+                OnPropertyChanged("IsConnected");
+                OnPropertyChanged("DisplayName");
             }
         }
 
 
         public async Task<bool> ConnectAsync()
         {
-            return await EnvironmentConnection.ConnectAsync(_serverId);
+            var connected = await EnvironmentConnection.ConnectAsync(_serverId);
+            OnPropertyChanged("IsConnected");
+            OnPropertyChanged("DisplayName");
+            return connected;
+        }
+
+        public string DisplayName
+        {
+            get
+            {
+                var displayName = "New Remote Server...";
+                if (EnvironmentConnection != null)
+                {
+                    displayName = EnvironmentConnection.DisplayName;
+                    if (IsConnected)
+                    {
+                        displayName += " (Connected)";
+                    }
+                }
+                
+                return displayName;
+            }
         }
 
         public List<IResource> Load()
@@ -136,7 +162,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         
         public bool IsConnected
         {
-            get { return EnvironmentConnection.IsConnected; }
+            get
+            {
+                return EnvironmentConnection != null && EnvironmentConnection.IsConnected;
+            }
         }
 
         public bool AllowEdit
@@ -151,6 +180,8 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         public void Disconnect()
         {
             EnvironmentConnection.Disconnect();
+            OnPropertyChanged("IsConnected");
+            OnPropertyChanged("DisplayName");
         }
 
         public void Edit()
@@ -186,13 +217,21 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         /// </returns>
         public override string ToString()
         {
-            if(EnvironmentConnection != null)
-            {
-                return EnvironmentConnection.DisplayName;
-            }
-            return "New Remote Server...";
+           return DisplayName;
         }
 
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if(handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }
