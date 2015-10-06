@@ -391,6 +391,15 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  (Connected).
+        /// </summary>
+        public static string ConnectedLabel {
+            get {
+                return ResourceManager.GetString("ConnectedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://warewolf.io/contributors.php.
         /// </summary>
         public static string ContributorsUrl {
@@ -2817,6 +2826,15 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to localhost.
+        /// </summary>
+        public static string LocalhostLabel {
+            get {
+                return ResourceManager.GetString("LocalhostLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MappingsAliasHelp.
         /// </summary>
         public static string MappingsAliasHelp {
@@ -3397,6 +3415,15 @@ namespace Warewolf.Studio.Resources.Languages {
         public static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Remote Server....
+        /// </summary>
+        public static string NewServerLabel {
+            get {
+                return ResourceManager.GetString("NewServerLabel", resourceCulture);
             }
         }
         
