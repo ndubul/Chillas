@@ -580,7 +580,6 @@
 
             </Grid>
             <!--  EXPLORER TREE  -->
-
             <ig:XamDataTree Margin="{StaticResource ElementBorderTop}" 
                             x:Name="ExplorerTree"
                             Grid.Row="2"

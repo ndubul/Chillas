@@ -19,6 +19,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
 using Warewolf.Studio.AntiCorruptionLayer;
+using Warewolf.Studio.Core;
 using Warewolf.Studio.Core.Popup;
 
 namespace Warewolf.Studio.ViewModels
@@ -41,7 +42,7 @@ namespace Warewolf.Studio.ViewModels
         ResourceType _resourceType;
         bool _userShouldEditValueNow;
         string _versionNumber;
-        ICollection<IExplorerItemViewModel> _children;
+        ObservableCollection<IExplorerItemViewModel> _children;
         bool _isExpanded;
         bool _canCreateServerSource;
         bool _canCreateFolder;
@@ -518,11 +519,11 @@ namespace Warewolf.Studio.ViewModels
             return ResourcePath.Substring(0, 1 + ResourcePath.LastIndexOf('\\')) + value;
         }
 
-        public ICollection<IExplorerItemViewModel> Children
+        public ObservableCollection<IExplorerItemViewModel> Children
         {
             get
             {
-                return String.IsNullOrEmpty(_filter) ? _children : new ObservableCollection<IExplorerItemViewModel>(_children.Where(a => a.IsVisible));
+                return String.IsNullOrEmpty(_filter) ? _children : new AsyncObservableCollection<IExplorerItemViewModel>(_children.Where(a => a.IsVisible));
             }
             set
             {
