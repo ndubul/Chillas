@@ -811,7 +811,6 @@ You need Administrator permission.</value>
   <data name="SharepointServiceSourceTestHelp" xml:space="preserve">
     <value>SharepointServiceSourceTestHelp</value>
   </data>
-
   <data name="MenuNewServiceHelp" xml:space="preserve">
     <value>MenuNewServiceHelp</value>
   </data>
@@ -848,7 +847,6 @@ You need Administrator permission.</value>
   <data name="MenuLockMenuHelp" xml:space="preserve">
     <value>MenuLockMenuHelp</value>
   </data>
-
   <data name="WebServiceSourceSaveHelp" xml:space="preserve">
     <value>WebServiceSourceSaveHelp</value>
   </data>
@@ -1023,7 +1021,6 @@ You need Administrator permission.</value>
   <data name="MappingsAliasHelp" xml:space="preserve">
     <value>MappingsAliasHelp</value>
   </data>
-
   <data name="DataListDeleteButtonHelp" xml:space="preserve">
     <value>DataListDeleteButtonHelp</value>
   </data>
@@ -1039,7 +1036,6 @@ You need Administrator permission.</value>
   <data name="DataListOutputCheckBoxHelp" xml:space="preserve">
     <value>DataListOutputCheckBoxHelp</value>
   </data>
-  
   <data name="ServerProtocolHelp" xml:space="preserve">
     <value>ServerProtocolHelp</value>
   </data>
@@ -3416,5 +3412,14 @@ Data
             &lt;li&gt;[[Recordset(*).Field]]&lt;/li&gt;
             &lt;li&gt;[[Recordset().Field]]&lt;/li&gt;
         &lt;/ol&gt;</value>
+  </data>
+  <data name="ConnectedLabel" xml:space="preserve">
+    <value> (Connected)</value>
+  </data>
+  <data name="LocalhostLabel" xml:space="preserve">
+    <value>localhost</value>
+  </data>
+  <data name="NewServerLabel" xml:space="preserve">
+    <value>New Remote Server...</value>
   </data>
 </root>

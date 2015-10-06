@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -23,7 +22,6 @@ namespace Warewolf.Studio.ViewModels
         IServer _selectedConnection;
         bool _allowConnection;
         ObservableCollection<IServer> _servers;
-        public const string NewServerText = "New Remote Server...";
 
         public ConnectControlViewModel(IServer server, IEventAggregator aggregator)
         {
@@ -56,7 +54,7 @@ namespace Warewolf.Studio.ViewModels
         {
             return new Server
             {
-                ResourceName = NewServerText
+                ResourceName = Resources.Languages.Core.NewServerLabel
             };
         }
 
@@ -125,7 +123,7 @@ namespace Warewolf.Studio.ViewModels
                 if (value != null)
                 {
                     _selectedConnection = value;
-                    if (_selectedConnection.ResourceName.Equals(NewServerText))
+                    if (_selectedConnection.ResourceName.Equals(Resources.Languages.Core.NewServerLabel))
                     {
                         var mainViewModel = CustomContainer.Get<IShellViewModel>();
                         mainViewModel.NewResource("ServerSource", "");
@@ -136,7 +134,7 @@ namespace Warewolf.Studio.ViewModels
                     else
                     {
                         AllowConnection = true;
-                        if (_selectedConnection.ResourceName.Equals("localhost"))
+                        if (_selectedConnection.ResourceName.Equals(Resources.Languages.Core.LocalhostLabel))
                         {
                             AllowConnection = false;
                         }

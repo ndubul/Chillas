@@ -108,13 +108,13 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         {
             get
             {
-                var displayName = "New Remote Server...";
+                var displayName = Resources.Languages.Core.NewServerLabel;
                 if (EnvironmentConnection != null)
                 {
                     displayName = EnvironmentConnection.DisplayName;
                     if (IsConnected)
                     {
-                        displayName += " (Connected)";
+                        displayName += Resources.Languages.Core.ConnectedLabel;
                     }
                 }
                 
