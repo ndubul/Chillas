@@ -234,7 +234,7 @@ namespace Warewolf.Studio.ServerProxyLayer
                 }
                 throw new WarewolfTestException("Unable to contact Server: " + output.TestMessage, null);
             }
-            sharepointSource.IsSharepointOnline = output.IsSharepointOnline;
+            resource.IsSharepointOnline = output.IsSharepointOnline;
         }
 
         public string TestWebService(IWebService service)

@@ -12,6 +12,7 @@ namespace Dev2.Common.Interfaces.Core
         public string Name { get; set; }
         public string Path { get; set; }
         public Guid Id { get; set; }
+        public bool IsSharepointOnline { get; set; }
 
         #region Equality members
 
