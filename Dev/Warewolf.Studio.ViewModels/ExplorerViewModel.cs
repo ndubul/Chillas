@@ -250,9 +250,8 @@ namespace Warewolf.Studio.ViewModels
 	    async void ServerConnected(object _, IServer server)
 	    {
             var environmentModel = CreateEnvironmentFromServer(server, _shellViewModel);
-            
-            await environmentModel.Load();
             Environments.Add(environmentModel);
+	        await environmentModel.Load();
 	    }
 
 	    void ServerDisconnected(object _, IServer server)

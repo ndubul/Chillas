@@ -26,7 +26,7 @@ namespace Warewolf.Studio.ViewModels
         public IExplorerItemNodeViewModel Self { get; set; }
         public int Weight { get; set; }
         // ReSharper disable ReturnTypeCanBeEnumerable.Global
-        public ICollection<ExplorerItemNodeViewModel> NodeChildren
+        public ObservableCollection<ExplorerItemNodeViewModel> NodeChildren
         // ReSharper restore ReturnTypeCanBeEnumerable.Global
         {
             get

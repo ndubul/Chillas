@@ -10,6 +10,7 @@ using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Security;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.Core;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -279,16 +280,16 @@ namespace Warewolf.Studio.ViewModels
             set;
         }
 
-        public ICollection<IExplorerItemViewModel> Children
+        public ObservableCollection<IExplorerItemViewModel> Children
         {
             get
             {
                 if (_children == null) return _children;
-                return new ObservableCollection<IExplorerItemViewModel>(_children.Where(a => a.IsVisible));
+                return new AsyncObservableCollection<IExplorerItemViewModel>(_children.Where(a => a.IsVisible));
             }
             set
             {
-                _children = new ObservableCollection<IExplorerItemViewModel>(value);
+                _children = new AsyncObservableCollection<IExplorerItemViewModel>(value);
                 OnPropertyChanged(() => Children);
                 OnPropertyChanged(() => ChildrenCount);
             }
@@ -513,8 +514,9 @@ namespace Warewolf.Studio.ViewModels
             {
                 IsConnecting = true;
                 var explorerItems = await Server.LoadExplorer();
-                var explorerItemViewModels = CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != null);
-                Children = explorerItemViewModels;
+                //var explorerItemViewModels = CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != null);
+                await CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != null);
+                //Children = explorerItemViewModels;
 
                 IsLoaded = true;
                 IsConnecting = false;
@@ -530,8 +532,9 @@ namespace Warewolf.Studio.ViewModels
             {
                 IsConnecting = true;
                 var explorerItems = await Server.LoadExplorer();
-                var explorerItemViewModels = CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != Guid.Empty);
-                Children = explorerItemViewModels;
+                //var explorerItemViewModels = CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != Guid.Empty);
+                await CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != Guid.Empty);
+                //Children = explorerItemViewModels;
 
                 IsLoaded = true;
                 IsConnecting = false;
@@ -611,14 +614,14 @@ namespace Warewolf.Studio.ViewModels
         }
 
         // ReSharper disable ParameterTypeCanBeEnumerable.Local
-        ObservableCollection<IExplorerItemViewModel> CreateExplorerItems(IList<IExplorerItem> explorerItems, IServer server, IExplorerTreeItem parent, bool isDialog = false)
+        async Task<ObservableCollection<IExplorerItemViewModel>> CreateExplorerItems(IList<IExplorerItem> explorerItems, IServer server, IExplorerTreeItem parent, bool isDialog = false)
         // ReSharper restore ParameterTypeCanBeEnumerable.Local
         {
-            if (explorerItems == null) return new ObservableCollection<IExplorerItemViewModel>();
+            if (explorerItems == null) return null;
             var explorerItemModels = new ObservableCollection<IExplorerItemViewModel>();
             if (parent != null)
             {
-                parent.Children = new ObservableCollection<IExplorerItemViewModel>();
+                parent.Children = new AsyncObservableCollection<IExplorerItemViewModel>();
             }
             // ReSharper disable once LoopCanBeConvertedToQuery
             foreach (var explorerItem in explorerItems)
@@ -637,11 +640,19 @@ namespace Warewolf.Studio.ViewModels
                 {
                     SetPropertiesForDialog(itemCreated);
                 }
-                itemCreated.Children = CreateExplorerItems(explorerItem.Children, server, itemCreated, isDialog);
-                explorerItemModels.Add(itemCreated);
 
+                await CreateExplorerItems(explorerItem.Children, server, itemCreated, isDialog);
+                //itemCreated.Children = CreateExplorerItems(explorerItem.Children, server, itemCreated, isDialog);
+                explorerItemModels.Add(itemCreated);
             }
-            return explorerItemModels;
+            if (parent != null)
+            {
+                var col = parent.Children as AsyncObservableCollection<IExplorerItemViewModel>;
+                col.AddRange(explorerItemModels);
+                parent.Children = col;
+            }
+            //return explorerItemModels;
+            return null;
         }
 
         private static void SetPropertiesForDialog(ExplorerItemViewModel itemCreated)
