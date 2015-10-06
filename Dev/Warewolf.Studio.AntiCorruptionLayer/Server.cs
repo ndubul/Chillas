@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -13,10 +14,10 @@ using Dev2.Controller;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Security;
 using Dev2.Studio.Core;
-using Warewolf.Studio.AntiCorruptionLayer.Annotations;
 
 namespace Warewolf.Studio.AntiCorruptionLayer
 {
+    [SuppressMessage("ReSharper", "ExplicitCallerInfoArgument")]
     public class Server : Resource,IServer,INotifyPropertyChanged
     {
         readonly Guid _serverId;
@@ -225,7 +226,6 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;

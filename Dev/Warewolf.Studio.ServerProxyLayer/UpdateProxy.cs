@@ -4,7 +4,6 @@ using System.Data;
 using System.Text;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
-using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.ErrorHandling;
@@ -226,11 +225,16 @@ namespace Warewolf.Studio.ServerProxyLayer
             sharepointSource.ResourceName = resource.Name;
             sharepointSource.ResourceID = resource.Id;
             comsController.AddPayloadArgument("SharepointServer", serialiser.SerializeToBuilder(sharepointSource));
-            var output = comsController.ExecuteCommand<IExecuteMessage>(con, GlobalConstants.ServerWorkspaceID);
-            if (output == null)
-                throw new WarewolfTestException("Unable to contact Server", null);
-            if (output.HasError)
-                throw new WarewolfTestException(output.Message.ToString(), null);
+            var output = comsController.ExecuteCommand<SharepointSourceTo>(con, GlobalConstants.ServerWorkspaceID);
+            if (output == null || output.TestMessage.Contains("Failed"))
+            {
+                if (output == null)
+                {
+                    throw new WarewolfTestException("No Test Response returned",null);
+                }
+                throw new WarewolfTestException("Unable to contact Server: " + output.TestMessage, null);
+            }
+            sharepointSource.IsSharepointOnline = output.IsSharepointOnline;
         }
 
         public string TestWebService(IWebService service)
