@@ -44,6 +44,7 @@ namespace Warewolf.Studio.ViewModels
             NewCommand = new DelegateCommand<ResourceType?>(type =>
             {
                 shellViewModel.SetActiveEnvironment(Server.EnvironmentID);
+                shellViewModel.SetActiveServer(Server);
                 shellViewModel.NewResource(type.ToString(), ResourcePath);
             });
             DisplayName = server.ResourceName;

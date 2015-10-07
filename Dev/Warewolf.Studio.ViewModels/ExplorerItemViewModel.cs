@@ -93,6 +93,7 @@ namespace Warewolf.Studio.ViewModels
             NewCommand = new DelegateCommand<ResourceType?>(type =>
             {
                 shellViewModel.SetActiveEnvironment(Server.EnvironmentID);
+                shellViewModel.SetActiveServer(Server);
                 shellViewModel.NewResource(type.ToString(), ResourcePath);
             });
             ShowDependenciesCommand = new DelegateCommand((() =>
@@ -596,6 +597,7 @@ namespace Warewolf.Studio.ViewModels
                     if (_isSelected)
                     {
                         _shellViewModel.SetActiveEnvironment(Server.EnvironmentID);
+                        _shellViewModel.SetActiveServer(Server);
                         //var helpDescriptor = new HelpDescriptor("", string.Format("<body><H1>{0}</H1><a href=\"http://warewolf.io\">Warewolf</a><p>Inputs: {1}</p><p>Outputs: {2}</p></body>", ResourceName, Inputs, Outputs), null);
                         //_shellViewModel.UpdateHelpDescriptor(helpDescriptor);
                     }

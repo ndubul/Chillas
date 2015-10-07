@@ -91,7 +91,7 @@ namespace Warewolf.Studio.ViewModels
         {
             WebRequestMethods = new ObservableCollection<WebRequestMethod>(Dev2EnumConverter.GetEnumsToList<WebRequestMethod>());
             // SelectedWebRequestMethod = WebRequestMethods.First();
-            Sources = Model.Sources;
+            
             Inputs = new ObservableCollection<IServiceInput>();
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
             var variables = new ObservableCollection<NameValue>();
@@ -103,6 +103,20 @@ namespace Warewolf.Studio.ViewModels
             Headers.Add(new ObservableAwareNameValue(headerCollection, UpdateRequestVariables));
             RequestBody = "";
             Response = "";
+            try
+            {
+                Sources = Model.Sources;
+            }
+            catch (Exception ex)
+            {
+                Exception exception = new Exception();
+                if (ex.InnerException != null)
+                {
+                    exception = ex.InnerException;
+                }
+                ErrorMessage = exception.Message;
+            }
+
             TestCommand = new DelegateCommand(() => Test(_model, ToModel()), CanTest);
 
             SaveCommand = new DelegateCommand(Save, CanSave);
@@ -117,8 +131,19 @@ namespace Warewolf.Studio.ViewModels
             : base(ResourceType.WebService)
         {
             _model = model;
-            //Init();
-            Sources = _model.Sources;
+            try
+            {
+                Sources = _model.Sources;
+            }
+            catch (Exception ex)
+            {
+                Exception exception = new Exception();
+                if (ex.InnerException != null)
+                {
+                    exception = ex.InnerException;
+                }
+                ErrorMessage = exception.Message;
+            }
             _webService = service;
             Item = service;
             FromModel(service);

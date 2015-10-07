@@ -29,6 +29,8 @@ namespace Dev2.Common.Interfaces
 
         void SetActiveEnvironment(Guid environmentID);
 
+        void SetActiveServer(IServer server);
+
         void Debug();
 
         void ShowDependencies(Guid resourceId, IServer server);

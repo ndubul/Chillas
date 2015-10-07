@@ -164,6 +164,15 @@ namespace Warewolf.Studio.ViewModels
                 {
                     additionalUiAction();
                 }
+            }, exception =>
+            {
+                TestFailed = true;
+                TestPassed = false;
+                if (exception.InnerException != null)
+                {
+                    exception = exception.InnerException;
+                }
+                TestMessage = exception.Message;
             });
         }
 
