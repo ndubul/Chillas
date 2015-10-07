@@ -2125,7 +2125,7 @@ namespace Dev2.Studio.ViewModels
             AddWorkSurfaceContextImpl(resourceModel, false);
         }
 
-        private async void AddWorkSurfaceContextImpl(IContextualResourceModel resourceModel, bool isLoadingWorkspace)
+        private void AddWorkSurfaceContextImpl(IContextualResourceModel resourceModel, bool isLoadingWorkspace)
         {
             if (resourceModel == null)
             {
@@ -2150,11 +2150,11 @@ namespace Dev2.Studio.ViewModels
             }
 
             //This is done for when the app starts up because the item isnt open but it must load it from the server or the user will lose all thier changes
-            IWorkspaceItem workspaceItem = _getWorkspaceItemRepository().WorkspaceItems.FirstOrDefault(c => c.ID == resourceModel.ID);
-            if(workspaceItem == null)
-            {
-                await resourceModel.Environment.ResourceRepository.ReloadResourceAsync(resourceModel.ID, resourceModel.ResourceType, ResourceModelEqualityComparer.Current, true);
-            }
+            // IWorkspaceItem workspaceItem = _getWorkspaceItemRepository().WorkspaceItems.FirstOrDefault(c => c.ID == resourceModel.ID);
+//            if(workspaceItem == null)
+//            {
+//                await resourceModel.Environment.ResourceRepository.ReloadResourceAsync(resourceModel.ID, resourceModel.ResourceType, ResourceModelEqualityComparer.Current, true);
+//            }
 
             // NOTE: only if from server ;)
             if (!isLoadingWorkspace)
