@@ -2243,6 +2243,31 @@ namespace Dev2.Studio.ViewModels
                             {
                                 remove = !resource.IsAuthorized(AuthorizationContext.Contribute) || resource.IsWorkflowSaved;
 
+                                var connection = workflowVm.ResourceModel.Environment.Connection;
+
+                                if (connection != null && !connection.IsConnected)
+                                {
+                                    var msgBoxViewModel = new MessageBoxViewModel(string.Format(StringResources.DialogBody_DisconnectedItemNotSaved, workflowVm.ResourceModel.ResourceName),
+                                        String.Format("Save not allowed {0}?", workflowVm.ResourceModel.ResourceName), MessageBoxButton.OKCancel, FontAwesomeIcon.ExclamationTriangle, false);
+
+                                    MessageBoxView msgBoxView = new MessageBoxView
+                                    {
+                                        DataContext = msgBoxViewModel
+                                    };
+                                    msgBoxView.ShowDialog();
+                                    var result = msgBoxViewModel.Result;
+
+                                    switch (result)
+                                    {
+                                        case MessageBoxResult.OK:
+                                            remove = true;
+                                            break;
+                                        case MessageBoxResult.Cancel:
+                                            return false;
+                                        default:
+                                            return false;
+                                    }
+                                }
                                 if (!remove)
                                 {
                                     remove = ShowRemovePopup(workflowVm);
