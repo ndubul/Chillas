@@ -125,11 +125,14 @@ namespace Dev2.Controller
                 {
                     try
                     {
-                        var popupController = CustomContainer.Get<IPopupController>();
-                        if(popupController != null)
+                        if (!connection.IsConnecting)
                         {
-                            popupController.Show(string.Format("Server: {0} has disconnected.", connection.DisplayName) + Environment.NewLine +
-                                                 "Please reconnect before performing any actions", "Disconnected Server", MessageBoxButton.OK, MessageBoxImage.Information, "");
+                            var popupController = CustomContainer.Get<IPopupController>();
+                            if (popupController != null)
+                            {
+                                popupController.Show(string.Format("Server: {0} has disconnected.", connection.DisplayName) + Environment.NewLine +
+                                                     "Please reconnect before performing any actions", "Disconnected Server", MessageBoxButton.OK, MessageBoxImage.Information, "");
+                            }
                         }
                     }
                     catch(Exception e)
@@ -171,11 +174,14 @@ namespace Dev2.Controller
             {
                 if (connection != null)
                 {
-                    var popupController = CustomContainer.Get<IPopupController>();
-                    if (popupController != null)
+                    if (!connection.IsConnecting)
                     {
-                        popupController.Show(string.Format("Server: {0} has disconnected.", connection.DisplayName) + Environment.NewLine +
-                                                                     "Please reconnect before performing any actions", "Disconnected Server", MessageBoxButton.OK, MessageBoxImage.Information, "");
+                        var popupController = CustomContainer.Get<IPopupController>();
+                        if (popupController != null)
+                        {
+                            popupController.Show(string.Format("Server: {0} has disconnected.", connection.DisplayName) + Environment.NewLine +
+                                                                         "Please reconnect before performing any actions", "Disconnected Server", MessageBoxButton.OK, MessageBoxImage.Information, "");
+                        }
                     }
                 }
             }

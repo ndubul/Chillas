@@ -341,6 +341,22 @@ Sofware development by: www.dev2.co.za
   <data name="NewWorkflowBaseName" xml:space="preserve">
     <value>Unsaved</value>
   </data>
+  <data name="DialogBody_DisconnectedItemNotSaved" xml:space="preserve">
+    <value>The workflow '{0}' that you are closing is not saved.
+The workflow is linked to a disconnected server. 
+To save the workflow, select Cancel and reconnect the server, or select Ok to discard your changes.
+-----------------------------------------------------------------
+Ok - Discard your changes.
+Cancel - Returns you to the workflow.</value>
+  </data>
+  <data name="ItemSource_NotSaved" xml:space="preserve">
+    <value>Your changes have not been saved.
+Would you like to save? 
+-----------------------------------------------------------------
+Yes - Save your changes.
+No - Discard your changes.
+Cancel - Returns you to the tab.</value>
+  </data>
   <data name="DialogBody_NotSaved" xml:space="preserve">
     <value>The workflow '{0}' that you are closing is not saved.
 Would you like to save the workflow?

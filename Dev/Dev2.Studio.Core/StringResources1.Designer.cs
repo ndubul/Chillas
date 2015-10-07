@@ -283,6 +283,20 @@ namespace Dev2 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The workflow &apos;{0}&apos; that you are closing is not saved.
+        ///The workflow is linked to a disconnected server. 
+        ///To save the workflow, select Cancel and reconnect the server, or select Ok to discard your changes.
+        ///-----------------------------------------------------------------
+        ///Ok - Discard your changes.
+        ///Cancel - Returns you to the workflow..
+        /// </summary>
+        public static string DialogBody_DisconnectedItemNotSaved {
+            get {
+                return ResourceManager.GetString("DialogBody_DisconnectedItemNotSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This folder cannot be deleted because it contains resources with dependants..
         /// </summary>
         public static string DialogBody_FolderContentsHaveDependencies {
