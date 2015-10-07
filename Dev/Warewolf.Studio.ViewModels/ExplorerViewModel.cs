@@ -157,11 +157,11 @@ namespace Warewolf.Studio.ViewModels
 		protected virtual void Refresh()
 		{
 			IsRefreshing = true;
-			Environments.ForEach(model =>
+			Environments.ForEach(async model =>
 			{
 				if (model.IsConnected)
 				{
-				    model.Load();
+				    await model.Load();
                     if (!string.IsNullOrEmpty(SearchText))
                     {
                         Filter(SearchText);
@@ -169,6 +169,7 @@ namespace Warewolf.Studio.ViewModels
 				}
 			});
 			IsRefreshing = false;
+
 		}
 
 		public void Filter(string filter)

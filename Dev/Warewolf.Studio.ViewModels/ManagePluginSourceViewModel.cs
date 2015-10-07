@@ -362,6 +362,7 @@ namespace Warewolf.Studio.ViewModels
                     src.Id = Guid.NewGuid();
                     src.Path = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
                     Save(src);
+                    Path = src.Path;
                     _pluginSource = src;
                     ToItem();
                     SetupHeaderTextFromExisting();
@@ -369,9 +370,15 @@ namespace Warewolf.Studio.ViewModels
             }
             else
             {
-                Save(ToModel());
+                var src = ToModel();
+                Save(src);
+                _pluginSource = src;
+                ToItem();
             }
+            OnPropertyChanged(() => Header);
         }
+
+        public string Path { get; set; }
 
         void ToItem()
         {
@@ -399,6 +406,7 @@ namespace Warewolf.Studio.ViewModels
                 {
                     Name = ResourceName,
                     SelectedDll = _selectedDll,
+                    Path = Path
                 };
             }
             _pluginSource.SelectedDll = _selectedDll;

@@ -243,16 +243,16 @@ namespace Warewolf.Studio.ViewModels
                     src.Path = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
                     Save(src);
                     _dbSource = src;
-                    Item = src;
+                    Path = _dbSource.Path;
                     SetupHeaderTextFromExisting();
-                 //   ResourceName = RequestServiceNameViewModel.ResourceName.Name;
                 }
             }
             else
             {
-                Save(ToDbSource());
+                var src = ToDbSource();
+                Save(src);
+                _dbSource = src;
             }
-            Reset();
         }
         void Reset()
         {
