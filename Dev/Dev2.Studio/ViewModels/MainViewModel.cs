@@ -1876,34 +1876,11 @@ namespace Dev2.Studio.ViewModels
 
                 DeleteContext(contextualModel);
 
-                if (contextualModel.Environment.ResourceRepository.DeleteResource(contextualModel).HasError)
-                {
-                    return;
-                }
-                //If its deleted from loalhost, and is a server, also delete from repository
-                if (contextualModel.Environment.IsLocalHost)
-                {
-                    if (contextualModel.ResourceType == ResourceType.Source)
-                    {
-                        if (contextualModel.ServerResourceType == "Server")
-                        {
-                            var environment = EnvironmentRepository.Get(contextualModel.ID);
-
-                            if (environment != null)
-                            {
-                                Dev2Logger.Log.Debug("Publish message of type - " + typeof(EnvironmentDeletedMessage));
-                                EventPublisher.Publish(new EnvironmentDeletedMessage(environment));
-                                EnvironmentRepository.Remove(environment);
-                            }
-                        }
-                    }
-                }
                 if (actionToDoOnDelete != null)
                 {
                     actionToDoOnDelete();
                 }
             }
-            //ExplorerViewModel.NavigationViewModel.UpdateSearchFilter();
         }
 
         #endregion delete

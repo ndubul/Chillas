@@ -314,16 +314,10 @@ namespace Warewolf.Studio.ViewModels
                     if (childModel.ResourceType != ResourceType.Folder)
                     {
                         var child = childModel;
-                        environmentModel.ResourceRepository.LoadResourceFromWorkspace(child.ResourceId, Guid.Empty);
-                        var resourceModel = environmentModel.ResourceRepository.FindSingle(model => model.ID == child.ResourceId);
-                        if (resourceModel == null && childModel.ResourceType == ResourceType.WebSource)
-                        {
-                            environmentModel.ResourceRepository.ReloadResource(child.ResourceId, Dev2.Studio.Core.AppResources.Enums.ResourceType.Source, ResourceModelEqualityComparer.Current, true);
-                            resourceModel = environmentModel.ResourceRepository.FindSingle(model => model.ID == child.ResourceId);
-                        }
+                        var resourceModel = environmentModel.ResourceRepository.LoadContextualResourceModel(child.ResourceId);
                         if (resourceModel != null)
                         {
-                            contextualResourceModels.Add(resourceModel as IContextualResourceModel);
+                            contextualResourceModels.Add(resourceModel);
                         }
                     }
                     else
