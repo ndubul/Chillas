@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
@@ -14,7 +17,8 @@ using Dev2.Studio.Core;
 
 namespace Warewolf.Studio.AntiCorruptionLayer
 {
-    public class Server : Resource,IServer
+    [SuppressMessage("ReSharper", "ExplicitCallerInfoArgument")]
+    public class Server : Resource,IServer,INotifyPropertyChanged
     {
         readonly Guid _serverId;
         readonly StudioServerProxy _proxyLayer;
@@ -31,6 +35,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             ResourceName = EnvironmentConnection.DisplayName;
             EnvironmentConnection.NetworkStateChanged+=RaiseNetworkStateChangeEvent;
             EnvironmentConnection.ItemAddedMessageAction+=ItemAdded;
+            environmentModel.WorkflowSaved += (sender, args) => UpdateRepository.FireItemSaved();
         }
 
         public Server()
@@ -87,13 +92,36 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             if(!EnvironmentConnection.IsConnected)
             {
                 EnvironmentConnection.Connect(_serverId);
+                OnPropertyChanged("IsConnected");
+                OnPropertyChanged("DisplayName");
             }
         }
 
 
         public async Task<bool> ConnectAsync()
         {
-            return await EnvironmentConnection.ConnectAsync(_serverId);
+            var connected = await EnvironmentConnection.ConnectAsync(_serverId);
+            OnPropertyChanged("IsConnected");
+            OnPropertyChanged("DisplayName");
+            return connected;
+        }
+
+        public string DisplayName
+        {
+            get
+            {
+                var displayName = Resources.Languages.Core.NewServerLabel;
+                if (EnvironmentConnection != null)
+                {
+                    displayName = EnvironmentConnection.DisplayName;
+                    if (IsConnected)
+                    {
+                        displayName += Resources.Languages.Core.ConnectedLabel;
+                    }
+                }
+                
+                return displayName;
+            }
         }
 
         public List<IResource> Load()
@@ -136,7 +164,10 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         
         public bool IsConnected
         {
-            get { return EnvironmentConnection.IsConnected; }
+            get
+            {
+                return EnvironmentConnection != null && EnvironmentConnection.IsConnected;
+            }
         }
 
         public bool AllowEdit
@@ -151,6 +182,8 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         public void Disconnect()
         {
             EnvironmentConnection.Disconnect();
+            OnPropertyChanged("IsConnected");
+            OnPropertyChanged("DisplayName");
         }
 
         public void Edit()
@@ -186,13 +219,20 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         /// </returns>
         public override string ToString()
         {
-            if(EnvironmentConnection != null)
-            {
-                return EnvironmentConnection.DisplayName;
-            }
-            return "New Remote Server...";
+           return DisplayName;
         }
 
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if(handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }

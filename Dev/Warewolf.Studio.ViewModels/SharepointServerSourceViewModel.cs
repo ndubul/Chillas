@@ -87,18 +87,37 @@ namespace Warewolf.Studio.ViewModels
             _sharePointServiceSource = sharePointServiceSource;
             _warewolfserverName = updateManager.ServerName;
             FromSource(sharePointServiceSource);
+            SetupHeaderTextFromExisting();
+            ToItem();
         }
 
-        void FromSource(ISharepointServerSource webServiceSource)
+        void ToItem()
         {
-            ResourceName = webServiceSource.Name;
-            AuthenticationType = webServiceSource.AuthenticationType;
-            UserName = webServiceSource.UserName;
-            ServerName = webServiceSource.Server;
-            Password = webServiceSource.Password;
-
+            Item = new SharePointServiceSourceDefinition
+            {
+                Id = _sharePointServiceSource.Id,
+                Name = _sharePointServiceSource.Name,
+                Path = _sharePointServiceSource.Path,
+                AuthenticationType = _sharePointServiceSource.AuthenticationType,
+                Server = _sharePointServiceSource.Server,
+                UserName = _sharePointServiceSource.UserName,
+                Password = _sharePointServiceSource.Password,
+                IsSharepointOnline = _sharePointServiceSource.IsSharepointOnline
+                
+            };
         }
 
+        void FromSource(ISharepointServerSource sharepointServerSource)
+        {
+            ResourceName = sharepointServerSource.Name;
+            AuthenticationType = sharepointServerSource.AuthenticationType;
+            UserName = sharepointServerSource.UserName;
+            ServerName = sharepointServerSource.Server;
+            Password = sharepointServerSource.Password;
+            IsSharepointOnline = sharepointServerSource.IsSharepointOnline;
+        }
+
+       
         public string TestResult
         {
             get
@@ -456,8 +475,12 @@ namespace Warewolf.Studio.ViewModels
                 TestFailed = false;
                 TestPassed = false;
             });
-            _updateManager.TestConnection(ToNewSource());
+            var sharepointServerSource = ToNewSource();
+            _updateManager.TestConnection(sharepointServerSource);
+            IsSharepointOnline = sharepointServerSource.IsSharepointOnline;
         }
+
+        public bool IsSharepointOnline { get; set; }
 
         public string UserName
         {

@@ -12,6 +12,7 @@
 using System;
 using System.Activities.Presentation;
 using System.Activities.Presentation.View;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Automation;
@@ -25,16 +26,17 @@ using Dev2.Activities.Designers2.Core.Adorners;
 using Dev2.Activities.Designers2.Core.Errors;
 using Dev2.Activities.Designers2.Core.Help;
 using Dev2.Activities.Designers2.Sequence;
-using Dev2.Services.Events;
+using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
+using Dev2.Common.Interfaces.Infrastructure.Providers.Validation;
 using Dev2.Studio.Core.Activities.Services;
-using Dev2.Studio.Core.ViewModels;
 using Dev2.Utilities;
 using FontAwesome.WPF;
 
 namespace Dev2.Activities.Designers2.Core
 {
     [ActivityDesignerOptions(AllowDrillIn = false, AlwaysCollapseChildren = true)]
-    public class ActivityDesigner<TViewModel> : ActivityDesigner, IDisposable
+    public class ActivityDesigner<TViewModel> : ActivityDesigner, IDisposable, IUpdatesHelp, IErrorsSource
         where TViewModel : ActivityDesignerViewModel
     {
         bool _isInitialFocusDone;
@@ -253,6 +255,11 @@ namespace Dev2.Activities.Designers2.Core
             Dispose(false);
         }
 
+        public void UpdateHelpDescriptor(string helpText)
+        {
+            ViewModel.UpdateHelpDescriptor(helpText);
+        }
+
         /// <summary>
         /// Child classes can override this method to perform 
         /// clean-up logic, such as removing event handlers.
@@ -389,5 +396,21 @@ namespace Dev2.Activities.Designers2.Core
                 }
             }
         }
+
+        #region Implementation of IErrorsSource
+
+        public List<IActionableErrorInfo> Errors
+        {
+            get
+            {
+                return ViewModel.Errors;
+            }
+            set
+            {
+                ViewModel.Errors = value;
+            }
+        }
+
+        #endregion
     }
 }

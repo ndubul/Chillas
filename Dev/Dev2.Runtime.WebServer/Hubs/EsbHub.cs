@@ -84,13 +84,12 @@ namespace Dev2.Runtime.WebServer.Hubs
 
         void ResourceSaved(IResource resource)
         {
-            var factory = new ExplorerItemFactory(ResourceCatalog.Instance, new DirectoryWrapper(), ServerAuthorizationService.Instance);
-            var resourceItem = factory.CreateResourceItem(resource);
             if (ServerExplorerRepository.Instance != null)
             {
-                ServerExplorerRepository.Instance.AddItem(resourceItem, GlobalConstants.ServerWorkspaceID);
+                var resourceItem = ServerExplorerRepository.Instance.UpdateItem(resource);
+                AddItemMessage(resourceItem);
             }
-            AddItemMessage(resourceItem);
+            
         }
 
         void PermissionsHaveBeenModified(object sender, PermissionsModifiedEventArgs permissionsModifiedEventArgs)

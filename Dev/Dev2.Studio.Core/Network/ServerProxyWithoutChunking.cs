@@ -173,12 +173,14 @@ namespace Dev2.Network
             {
                 case ConnectionStateWrapped.Connected:
                     IsConnected = true;
+                    IsConnecting = false;
                     UpdateIsAuthorized(true);
                     OnNetworkStateChanged(new NetworkStateEventArgs(NetworkState.Offline, NetworkState.Online));
                     break;
                 case ConnectionStateWrapped.Connecting:
                 case ConnectionStateWrapped.Reconnecting:
                     IsConnected = false;
+                    IsConnecting = true;
                     UpdateIsAuthorized(false);
                     OnNetworkStateChanged(new NetworkStateEventArgs(NetworkState.Offline, NetworkState.Connecting));
                     break;
@@ -189,6 +191,7 @@ namespace Dev2.Network
         }
 
         public bool IsConnected { get; set; }
+        public bool IsConnecting { get; set; }
         public string Alias { get; set; }
         public string DisplayName { get; set; }
 
@@ -391,6 +394,7 @@ namespace Dev2.Network
             {
                 IsShuttingDown = true;
                 IsConnected = false;
+                IsConnecting = false;
                 HubConnection.Stop(new TimeSpan(0, 0, 0, 5));
             }
             catch (AggregateException aex)

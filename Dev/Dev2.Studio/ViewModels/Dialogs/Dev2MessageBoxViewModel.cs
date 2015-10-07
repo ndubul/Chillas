@@ -19,6 +19,9 @@ using Caliburn.Micro;
 using Dev2.Common;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.ViewModels.Dialogs;
+using FontAwesome.WPF;
+using Warewolf.Studio.ViewModels;
+using Warewolf.Studio.Views;
 
 // ReSharper disable CheckNamespace
 namespace Dev2.Studio.ViewModels.Dialogs
@@ -424,31 +427,15 @@ namespace Dev2.Studio.ViewModels.Dialogs
                 return dontShowAgainOption.Item2;
             }
 
-            // Construct and show the message box
-            Dev2MessageBoxViewModel dev2MessageBoxViewModel = new Dev2MessageBoxViewModel(messageBoxText, caption, button, icon, defaultResult, dontShowAgainKey);
-            IWindowManager windowManager = CustomContainer.Get<IWindowManager>();
+            var msgBoxViewModel = new MessageBoxViewModel(messageBoxText, caption, button, FontAwesomeIcon.ExclamationTriangle, false);
 
-            if(windowManager == null)
+            MessageBoxView msgBoxView = new MessageBoxView
             {
-                throw new Exception("Unable to locate an instance of the window manager.");
-            }
+                DataContext = msgBoxViewModel
+            };
+            msgBoxView.ShowDialog();
 
-            try
-            {
-                windowManager.ShowDialog(dev2MessageBoxViewModel);
-            }
-            catch(Exception e)
-            {
-                Dev2Logger.Log.Error("Showing popup",e);
-            }
-
-            // Save don't so again option
-            if(dev2MessageBoxViewModel.DontShowAgain)
-            {
-                SetDontShowAgainOption(dontShowAgainKey, dev2MessageBoxViewModel.Result);
-            }
-
-            return dev2MessageBoxViewModel.Result;
+            return msgBoxViewModel.Result;
         }
 
         ///<summary>

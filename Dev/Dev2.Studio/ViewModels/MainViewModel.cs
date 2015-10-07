@@ -775,6 +775,27 @@ namespace Dev2.Studio.ViewModels
                 case "SharepointServerSource":
                     EditSharePointSource(resourceModel);
                     break;
+                case "Server":
+                case "ServerSource":
+                    var connection = new Connection(resourceModel.WorkflowXaml.ToXElement());
+                    string address = null;
+                    Uri uri;
+                    if (Uri.TryCreate(connection.Address,UriKind.RelativeOrAbsolute, out uri))
+                    {
+                        address = uri.Host;
+                    }
+                    EditServer(new ServerSource
+                    {
+                        Address = connection.Address,
+                        ID = connection.ResourceID,
+                        AuthenticationType = connection.AuthenticationType,
+                        UserName = connection.UserName,
+                        Password = connection.Password,
+                        ServerName = address,
+                        Name = connection.ResourceName,
+                        ResourcePath = connection.ResourcePath
+                    });
+                    break;
                 default:
                     AddWorkSurfaceContext(resourceModel);
                     break;
@@ -1855,34 +1876,11 @@ namespace Dev2.Studio.ViewModels
 
                 DeleteContext(contextualModel);
 
-                if (contextualModel.Environment.ResourceRepository.DeleteResource(contextualModel).HasError)
-                {
-                    return;
-                }
-                //If its deleted from loalhost, and is a server, also delete from repository
-                if (contextualModel.Environment.IsLocalHost)
-                {
-                    if (contextualModel.ResourceType == ResourceType.Source)
-                    {
-                        if (contextualModel.ServerResourceType == "Server")
-                        {
-                            var environment = EnvironmentRepository.Get(contextualModel.ID);
-
-                            if (environment != null)
-                            {
-                                Dev2Logger.Log.Debug("Publish message of type - " + typeof(EnvironmentDeletedMessage));
-                                EventPublisher.Publish(new EnvironmentDeletedMessage(environment));
-                                EnvironmentRepository.Remove(environment);
-                            }
-                        }
-                    }
-                }
                 if (actionToDoOnDelete != null)
                 {
                     actionToDoOnDelete();
                 }
             }
-            //ExplorerViewModel.NavigationViewModel.UpdateSearchFilter();
         }
 
         #endregion delete
@@ -2127,7 +2125,7 @@ namespace Dev2.Studio.ViewModels
             AddWorkSurfaceContextImpl(resourceModel, false);
         }
 
-        private async void AddWorkSurfaceContextImpl(IContextualResourceModel resourceModel, bool isLoadingWorkspace)
+        private void AddWorkSurfaceContextImpl(IContextualResourceModel resourceModel, bool isLoadingWorkspace)
         {
             if (resourceModel == null)
             {
@@ -2152,11 +2150,11 @@ namespace Dev2.Studio.ViewModels
             }
 
             //This is done for when the app starts up because the item isnt open but it must load it from the server or the user will lose all thier changes
-            IWorkspaceItem workspaceItem = _getWorkspaceItemRepository().WorkspaceItems.FirstOrDefault(c => c.ID == resourceModel.ID);
-            if(workspaceItem == null)
-            {
-                await resourceModel.Environment.ResourceRepository.ReloadResourceAsync(resourceModel.ID, resourceModel.ResourceType, ResourceModelEqualityComparer.Current, true);
-            }
+            // IWorkspaceItem workspaceItem = _getWorkspaceItemRepository().WorkspaceItems.FirstOrDefault(c => c.ID == resourceModel.ID);
+//            if(workspaceItem == null)
+//            {
+//                await resourceModel.Environment.ResourceRepository.ReloadResourceAsync(resourceModel.ID, resourceModel.ResourceType, ResourceModelEqualityComparer.Current, true);
+//            }
 
             // NOTE: only if from server ;)
             if (!isLoadingWorkspace)
@@ -2245,6 +2243,31 @@ namespace Dev2.Studio.ViewModels
                             {
                                 remove = !resource.IsAuthorized(AuthorizationContext.Contribute) || resource.IsWorkflowSaved;
 
+                                var connection = workflowVm.ResourceModel.Environment.Connection;
+
+                                if (connection != null && !connection.IsConnected)
+                                {
+                                    var msgBoxViewModel = new MessageBoxViewModel(string.Format(StringResources.DialogBody_DisconnectedItemNotSaved, workflowVm.ResourceModel.ResourceName),
+                                        String.Format("Save not allowed {0}?", workflowVm.ResourceModel.ResourceName), MessageBoxButton.OKCancel, FontAwesomeIcon.ExclamationTriangle, false);
+
+                                    MessageBoxView msgBoxView = new MessageBoxView
+                                    {
+                                        DataContext = msgBoxViewModel
+                                    };
+                                    msgBoxView.ShowDialog();
+                                    var result = msgBoxViewModel.Result;
+
+                                    switch (result)
+                                    {
+                                        case MessageBoxResult.OK:
+                                            remove = true;
+                                            break;
+                                        case MessageBoxResult.Cancel:
+                                            return false;
+                                        default:
+                                            return false;
+                                    }
+                                }
                                 if (!remove)
                                 {
                                     remove = ShowRemovePopup(workflowVm);

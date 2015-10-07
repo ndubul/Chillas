@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Dev2.Common.Interfaces.Data;
 
@@ -41,7 +41,7 @@ namespace Dev2.Common.Interfaces
         ICommand RollbackCommand { get; set; }
         IServer Server { get; set; }
         ICommand Expand { get; set; }
-        ICollection<IExplorerItemViewModel> Children { get; set; }
+        ObservableCollection<IExplorerItemViewModel> Children { get; set; }
         IExplorerTreeItem Parent { get; set; }
         bool CanCreateWorkflowService { get; set; }
         bool AreVersionsVisible { get; set; }

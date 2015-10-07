@@ -786,7 +786,7 @@ namespace Dev2.Runtime.Hosting
                     throw new InvalidDataContractException("ResourceName or Type is missing from the request");
                 }
 
-                var resourceTypes = ResourceTypeConverter.ToResourceTypes(type, false);
+                var resourceTypes = ResourceTypeConverter.ToResourceTypes(type);
 
                 var workspaceResources = GetResources(workspaceID);
                 var resources = workspaceResources.FindAll(r =>

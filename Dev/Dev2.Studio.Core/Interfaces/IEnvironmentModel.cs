@@ -50,6 +50,10 @@ namespace Dev2.Studio.Core.Interfaces
         event EventHandler AuthorizationServiceSet;
 
         Task<bool> ForceLoadResourcesAsync();
+
+        void FireWorkflowSaved();
+
+        event EventHandler WorkflowSaved;
     }
 
     public class ConnectedEventArgs : EventArgs

@@ -34,6 +34,8 @@ namespace Dev2.Common.Interfaces
 
         event ItemSaved ItemSaved;
         event ServerSaved ServerSaved;
+
+        void FireItemSaved();
     }
 
     public delegate void ItemSaved();

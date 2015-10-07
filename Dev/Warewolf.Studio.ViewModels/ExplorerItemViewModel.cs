@@ -1,3 +1,14 @@
+
+/*
+*  Warewolf - The Easy Service Bus
+*  Copyright 2015 by Warewolf Ltd <alpha@warewolf.io>
+*  Licensed under GNU Affero General Public License 3.0 or later. 
+*  Some rights reserved.
+*  Visit our website for more information <http://warewolf.io/>
+*  AUTHORS <http://warewolf.io/authors.php> , CONTRIBUTORS <http://warewolf.io/contributors.php>
+*  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,13 +23,13 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Services.Events;
 using Dev2.Studio.Core;
-using Dev2.Studio.Core.AppResources.DependencyInjection.EqualityComparers;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
 using Warewolf.Studio.AntiCorruptionLayer;
+using Warewolf.Studio.Core;
 using Warewolf.Studio.Core.Popup;
 
 namespace Warewolf.Studio.ViewModels
@@ -41,7 +52,7 @@ namespace Warewolf.Studio.ViewModels
         ResourceType _resourceType;
         bool _userShouldEditValueNow;
         string _versionNumber;
-        ICollection<IExplorerItemViewModel> _children;
+        ObservableCollection<IExplorerItemViewModel> _children;
         bool _isExpanded;
         bool _canCreateServerSource;
         bool _canCreateFolder;
@@ -326,16 +337,10 @@ namespace Warewolf.Studio.ViewModels
                     if (childModel.ResourceType != ResourceType.Folder)
                     {
                         var child = childModel;
-                        environmentModel.ResourceRepository.LoadResourceFromWorkspace(child.ResourceId, Guid.Empty);
-                        var resourceModel = environmentModel.ResourceRepository.FindSingle(model => model.ID == child.ResourceId);
-                        if (resourceModel == null && childModel.ResourceType == ResourceType.WebSource)
-                        {
-                            environmentModel.ResourceRepository.ReloadResource(child.ResourceId, Dev2.Studio.Core.AppResources.Enums.ResourceType.Source, ResourceModelEqualityComparer.Current, true);
-                            resourceModel = environmentModel.ResourceRepository.FindSingle(model => model.ID == child.ResourceId);
-                        }
+                        var resourceModel = environmentModel.ResourceRepository.LoadContextualResourceModel(child.ResourceId);
                         if (resourceModel != null)
                         {
-                            contextualResourceModels.Add(resourceModel as IContextualResourceModel);
+                            contextualResourceModels.Add(resourceModel);
                         }
                     }
                     else
@@ -385,6 +390,12 @@ namespace Warewolf.Studio.ViewModels
             if (ResourceType == ResourceType.Folder)
             {
                 CanEdit = false;
+                CanExecute = false;
+                return;
+            }
+            if (ResourceType != ResourceType.WorkflowService)
+            {
+                CanEdit = true;
                 CanExecute = false;
                 return;
             }
@@ -531,11 +542,11 @@ namespace Warewolf.Studio.ViewModels
             return ResourcePath.Substring(0, 1 + ResourcePath.LastIndexOf('\\')) + value;
         }
 
-        public ICollection<IExplorerItemViewModel> Children
+        public ObservableCollection<IExplorerItemViewModel> Children
         {
             get
             {
-                return String.IsNullOrEmpty(_filter) ? _children : new ObservableCollection<IExplorerItemViewModel>(_children.Where(a => a.IsVisible));
+                return String.IsNullOrEmpty(_filter) ? _children : new AsyncObservableCollection<IExplorerItemViewModel>(_children.Where(a => a.IsVisible));
             }
             set
             {

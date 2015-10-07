@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -8,7 +9,7 @@ namespace Dev2.Common.Interfaces
     public interface IConnectControlViewModel
     {
         IServer Server { get; set; }
-        IList<IServer> Servers { get; set; }
+        ObservableCollection<IServer> Servers { get; set; }
         IServer SelectedConnection { get; set; }
         ICommand EditConnectionCommand { get; set; }
         ICommand ToggleConnectionStateCommand { get; set; }

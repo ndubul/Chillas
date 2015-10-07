@@ -1,11 +1,23 @@
+
+/*
+*  Warewolf - The Easy Service Bus
+*  Copyright 2015 by Warewolf Ltd <alpha@warewolf.io>
+*  Licensed under GNU Affero General Public License 3.0 or later. 
+*  Some rights reserved.
+*  Visit our website for more information <http://warewolf.io/>
+*  AUTHORS <http://warewolf.io/authors.php> , CONTRIBUTORS <http://warewolf.io/contributors.php>
+*  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
+*/
+
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Interfaces;
+using Microsoft.Practices.Prism;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
@@ -20,8 +32,7 @@ namespace Warewolf.Studio.ViewModels
         bool _isConnecing;
         IServer _selectedConnection;
         bool _allowConnection;
-        IList<IServer> _servers;
-        public const string NewServerText = "New Remote Server...";
+        ObservableCollection<IServer> _servers;
 
         public ConnectControlViewModel(IServer server, IEventAggregator aggregator)
         {
@@ -44,14 +55,17 @@ namespace Warewolf.Studio.ViewModels
 
         public void LoadServers()
         {
-            Servers = new List<IServer>(Server.GetServerConnections()) { CreateNewRemoteServerEnvironment() };
+            var serverConnections = Server.GetServerConnections();
+            var servers = new ObservableCollection<IServer> { CreateNewRemoteServerEnvironment() };
+            servers.AddRange(serverConnections);
+            Servers = servers;
         }
 
         IServer CreateNewRemoteServerEnvironment()
         {
             return new Server
             {
-                ResourceName = NewServerText
+                ResourceName = Resources.Languages.Core.NewServerLabel
             };
         }
 
@@ -76,6 +90,7 @@ namespace Warewolf.Studio.ViewModels
             if (SelectedConnection.IsConnected)
             {
                 Disconnect(SelectedConnection);
+                
                 IsConnected = false;
             }
             else
@@ -95,7 +110,7 @@ namespace Warewolf.Studio.ViewModels
         }
 
         public IServer Server { get; set; }
-        public IList<IServer> Servers
+        public ObservableCollection<IServer> Servers
         {
             get
             {
@@ -115,24 +130,29 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _selectedConnection = value;
-                if (_selectedConnection.ResourceName.Equals("New Remote Server..."))
+               
+                if (value != null)
                 {
-                    var mainViewModel = CustomContainer.Get<IShellViewModel>();
-                    mainViewModel.NewResource("ServerSource", "");
-
-                    IsConnected = false;
-                    AllowConnection = false;
-                }
-                else
-                {
-                    AllowConnection = true;
-                    if (_selectedConnection.ResourceName.Equals("localhost"))
+                    _selectedConnection = value;
+                    if (_selectedConnection.ResourceName.Equals(Resources.Languages.Core.NewServerLabel))
                     {
+                        var mainViewModel = CustomContainer.Get<IShellViewModel>();
+                        mainViewModel.SetActiveEnvironment(Server.EnvironmentID);
+                        mainViewModel.NewResource("ServerSource", "");
+
+                        IsConnected = false;
                         AllowConnection = false;
                     }
-                    IsConnected = _selectedConnection.IsConnected;
-                    OnPropertyChanged(() => SelectedConnection);
+                    else
+                    {
+                        AllowConnection = true;
+                        if (_selectedConnection.ResourceName.Equals(Resources.Languages.Core.LocalhostLabel))
+                        {
+                            AllowConnection = false;
+                        }
+                        IsConnected = _selectedConnection.IsConnected;
+                        OnPropertyChanged(() => SelectedConnection);
+                    }
                 }
             }
         }
@@ -182,7 +202,7 @@ namespace Warewolf.Studio.ViewModels
                 try
                 {
                     await connection.ConnectAsync();
-
+                    OnPropertyChanged(() => connection.IsConnected);
                     if (ServerConnected != null)
                     {
                         ServerConnected(this, connection);
@@ -202,6 +222,7 @@ namespace Warewolf.Studio.ViewModels
             if (connection != null)
             {
                 connection.Disconnect();
+                OnPropertyChanged(() => connection.IsConnected);
                 if (ServerDisconnected != null)
                 {
                     ServerDisconnected(this, connection);

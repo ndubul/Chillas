@@ -40,6 +40,7 @@ namespace Dev2.Common.Interfaces
 
         void Connect();
         Task<bool> ConnectAsync();
+        string DisplayName { get; }
 
     }
 

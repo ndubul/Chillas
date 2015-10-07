@@ -1,4 +1,15 @@
-﻿using System;
+﻿
+/*
+*  Warewolf - The Easy Service Bus
+*  Copyright 2015 by Warewolf Ltd <alpha@warewolf.io>
+*  Licensed under GNU Affero General Public License 3.0 or later. 
+*  Some rights reserved.
+*  Visit our website for more information <http://warewolf.io/>
+*  AUTHORS <http://warewolf.io/authors.php> , CONTRIBUTORS <http://warewolf.io/contributors.php>
+*  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
@@ -77,9 +88,9 @@ namespace Warewolf.Studio.ViewModels
 			{
                 if (_selectedItem != value)
                 {
-                    _selectedItem = value;
-
-                    OnPropertyChanged(() => SelectedItem);
+				_selectedItem = value;
+          
+				OnPropertyChanged(() => SelectedItem);
                     if(SelectedItemChanged!= null)
                     {
                         SelectedItemChanged(this, _selectedItem);
@@ -258,9 +269,8 @@ namespace Warewolf.Studio.ViewModels
 	    async void ServerConnected(object _, IServer server)
 	    {
             var environmentModel = CreateEnvironmentFromServer(server, _shellViewModel);
-            
-            await environmentModel.Load();
             Environments.Add(environmentModel);
+            await environmentModel.Load();
 	    }
 
 	    void ServerDisconnected(object _, IServer server)
@@ -271,11 +281,6 @@ namespace Warewolf.Studio.ViewModels
                 Environments.Remove(environmentModel);
             }
         }
-
-	    //		void ItemAdded(IExplorerItem obj)
-//		{
-//
-//		}
 
 		private async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment)
 		{
