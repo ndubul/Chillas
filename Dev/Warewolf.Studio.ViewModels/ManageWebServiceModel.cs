@@ -28,7 +28,7 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                if(_sources == null)
+                if (_sources == null)
                 {
                     _sources = new ObservableCollection<IWebServiceSource>(QueryProxy.FetchWebServiceSources());
                 }
@@ -42,15 +42,14 @@ namespace Warewolf.Studio.ViewModels
         }
 
         readonly IShellViewModel _shell;
-        readonly string _serverName;
         ObservableCollection<IWebServiceSource> _sources;
 
-        public ManageWebServiceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy, IShellViewModel shell, string serverName)
+        public ManageWebServiceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy, IShellViewModel shell, IServer server)
         {
             UpdateRepository = updateRepository;
             QueryProxy = queryProxy;
-            _serverName = serverName;
             _shell = shell;
+            shell.SetActiveServer(server);
             updateRepository.WebServiceSourceSaved += UpdateSourcesCollection;
         }
 
@@ -63,7 +62,7 @@ namespace Warewolf.Studio.ViewModels
         void UpdateSourcesCollection(IWebServiceSource serviceSource)
         {
             var webServiceSource = Sources.FirstOrDefault(source => source.Id == serviceSource.Id);
-            if(webServiceSource != null)
+            if (webServiceSource != null)
             {
                 Sources.Remove(webServiceSource);
             }
@@ -76,7 +75,7 @@ namespace Warewolf.Studio.ViewModels
 
         public void CreateNewSource()
         {
-            _shell.NewResource(ResourceType.WebSource.ToString(),"");
+            _shell.NewResource(ResourceType.WebSource.ToString(), "");
         }
 
         public void EditSource(IWebServiceSource selectedSource)
@@ -86,7 +85,7 @@ namespace Warewolf.Studio.ViewModels
 
         public string TestService(IWebService inputValues)
         {
-            if(UpdateRepository != null)
+            if (UpdateRepository != null)
             {
                 return UpdateRepository.TestWebService(inputValues);
             }

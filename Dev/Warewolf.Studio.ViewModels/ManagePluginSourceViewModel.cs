@@ -110,7 +110,14 @@ namespace Warewolf.Studio.ViewModels
                 });
             }, () =>
             {
-                
+
+            }, exception =>
+            {
+                //if (exception.InnerException != null)
+                //{
+                //    exception = exception.InnerException;
+                //}
+                //TestMessage = exception.Message;
             });            
         }
 

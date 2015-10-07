@@ -99,12 +99,25 @@ namespace Warewolf.Studio.ViewModels
             OutputMapping = new ObservableCollection<IServiceOutputMapping>();
             AvalaibleActions = new ObservableCollection<IPluginAction>();
             NameSpaces = new ObservableCollection<INamespaceItem>();
-            Sources = _model.RetrieveSources();
             Header = Resources.Languages.Core.PluginServiceNewHeaderLabel;
             HeaderText = Resources.Languages.Core.PluginServiceNewHeaderLabel;
             ResourceName = HeaderText;
             RefreshCommand = new DelegateCommand(Refresh);
             ErrorText = "";
+            try
+            {
+                Sources = _model.RetrieveSources();
+            }
+            catch(Exception ex)
+            {
+                Exception exception = new Exception();
+                if (ex.InnerException != null)
+                {
+                    exception = ex.InnerException;
+                }
+                ErrorText = exception.Message;
+            }
+            
             TestPluginCommand = new DelegateCommand(() => Test(_model));
             SaveCommand = new DelegateCommand(Save, CanSave);
             CreateNewSourceCommand = new DelegateCommand(() => _model.CreateNewSource());

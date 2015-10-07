@@ -19,41 +19,37 @@ using Warewolf.Core;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class ManagePluginServiceModel: IPluginServiceModel
+    public class ManagePluginServiceModel : IPluginServiceModel
     {
         readonly IStudioUpdateManager _updateRepository;
         readonly IQueryManager _queryProxy;
         readonly IShellViewModel _shell;
-        readonly string _serverName;
 
         #region Implementation of IDbServiceModel
 
-        public ManagePluginServiceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy, IShellViewModel shell, string serverName)
+        public ManagePluginServiceModel(IStudioUpdateManager updateRepository, IQueryManager queryProxy, IShellViewModel shell, IServer server)
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object>
             {
                 { "updateRepository", updateRepository }, 
                 { "queryProxy", queryProxy }, 
                 { "shell", shell } ,
-                {"serverName",serverName}
+                {"server",server}
             });
             _updateRepository = updateRepository;
             _queryProxy = queryProxy;
             _shell = shell;
-            _serverName = serverName;
-
+            shell.SetActiveServer(server);
         }
 
         public ICollection<IPluginSource> RetrieveSources()
         {
-
             return _queryProxy.FetchPluginSources();
-
         }
 
         public ICollection<IPluginAction> GetActions(IPluginSource source, INamespaceItem ns)
         {
-            return _queryProxy.PluginActions(source,ns).Where(a=>a.Method!= "GetType").ToList();
+            return _queryProxy.PluginActions(source, ns).Where(a => a.Method != "GetType").ToList();
         }
 
         public ICollection<INamespaceItem> GetNameSpaces(IPluginSource source)
@@ -63,28 +59,26 @@ namespace Warewolf.Studio.ViewModels
 
         public void CreateNewSource()
         {
-            _shell.NewResource(ResourceType.PluginSource.ToString(),"");
+            _shell.NewResource(ResourceType.PluginSource.ToString(), "");
         }
 
         public void EditSource(IPluginSource selectedSource)
         {
             _shell.EditResource(selectedSource);
-
         }
 
-        public  string TestService(IPluginService inputValues)
+        public string TestService(IPluginService inputValues)
         {
-           return _updateRepository.TestPluginService(inputValues);          
+            return _updateRepository.TestPluginService(inputValues);
         }
 
         public IEnumerable<IServiceOutputMapping> GetPluginOutputMappings(IPluginAction action)
         {
-            return new List<IServiceOutputMapping> { new ServiceOutputMapping("bob", "The"), new ServiceOutputMapping("dora", "The"), new ServiceOutputMapping("Tree", "The") }; 
+            return new List<IServiceOutputMapping> { new ServiceOutputMapping("bob", "The"), new ServiceOutputMapping("dora", "The"), new ServiceOutputMapping("Tree", "The") };
         }
 
         public void SaveService(IPluginService toModel)
         {
-      
             _updateRepository.Save(toModel);
         }
 

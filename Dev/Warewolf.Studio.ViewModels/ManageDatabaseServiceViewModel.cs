@@ -77,7 +77,6 @@ namespace Warewolf.Studio.ViewModels
             IsNew = true;
             CreateNewSourceCommand = new DelegateCommand(model.CreateNewSource);
             EditSourceCommand = new DelegateCommand(() => model.EditSource(SelectedSource));
-            Sources = model.RetrieveSources();
 
             Header = Resources.Languages.Core.DatabaseServiceDBSourceTabHeader;
             HeaderText = Resources.Languages.Core.DatabaseServiceDBSourceTabHeader;
@@ -92,6 +91,19 @@ namespace Warewolf.Studio.ViewModels
             IsInputsEmptyRows = false;
             IsOutputMappingEmptyRows = false;
             ShowRecordSet = true;
+            try
+            {
+                Sources = _model.RetrieveSources();
+            }
+            catch (Exception ex)
+            {
+                Exception exception = new Exception();
+                if (ex.InnerException != null)
+                {
+                    exception = ex.InnerException;
+                }
+                ErrorText = exception.Message;
+            }
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="model" /> is <see langword="null" />.</exception>
