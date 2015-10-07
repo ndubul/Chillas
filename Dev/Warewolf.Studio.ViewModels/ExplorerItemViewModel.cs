@@ -376,6 +376,12 @@ namespace Warewolf.Studio.ViewModels
                 CanExecute = false;
                 return;
             }
+            if (ResourceType != ResourceType.WorkflowService)
+            {
+                CanEdit = true;
+                CanExecute = false;
+                return;
+            }
             var resourcePermission = permissions.FirstOrDefault(permission => permission.ResourceID == ResourceId);
             if (resourcePermission != null)
             {
