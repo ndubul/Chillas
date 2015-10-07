@@ -170,6 +170,13 @@ namespace Dev2.Network
                 return _wrappedConnection.IsConnected;
             }
         }
+        public bool IsConnecting
+        {
+            get
+            {
+                return _wrappedConnection.IsConnecting;
+            }
+        }
         public string Alias
         {
             get

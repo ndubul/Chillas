@@ -51,6 +51,7 @@ namespace Dev2.Studio.Core.Interfaces
         IHubProxyWrapper EsbProxy { get; }
 
         bool IsConnected { get; }
+        bool IsConnecting { get; }
         string Alias { get; set; }
         string DisplayName { get; set; }
 
