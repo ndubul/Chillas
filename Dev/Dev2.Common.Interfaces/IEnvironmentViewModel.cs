@@ -16,6 +16,7 @@ namespace Dev2.Common.Interfaces
         Task<bool> Load();
         Task<bool> LoadDialog(string selectedId);
         void Filter(string filter);
+        void Filter(Func<IExplorerItemViewModel, bool> filter);
         ICollection<IExplorerItemViewModel> AsList();
         void SetItemCheckedState(Guid id, bool state);
         void RemoveItem(IExplorerItemViewModel vm);

@@ -44,7 +44,9 @@ using Dev2.Activities.Designers2.Core;
 using Dev2.AppResources.Converters;
 using Dev2.Common;
 using Dev2.Common.Common;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core.Collections;
+using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Common.Interfaces.Infrastructure.Providers.Errors;
 using Dev2.Common.Interfaces.Security;
 using Dev2.Common.Interfaces.Studio.Controller;
@@ -79,6 +81,7 @@ using Dev2.Studio.Core.Messages;
 using Dev2.Studio.Core.Network;
 using Dev2.Studio.Core.Utils;
 using Dev2.Studio.Core.ViewModels;
+using Dev2.Studio.Enums;
 using Dev2.Studio.ViewModels.WorkSurface;
 using Dev2.Threading;
 using Dev2.UndoFramework;
@@ -89,6 +92,7 @@ using Dev2.Workspaces;
 using FontAwesome.WPF;
 using Newtonsoft.Json;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
+using Warewolf.Studio.AntiCorruptionLayer;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
 
@@ -128,7 +132,9 @@ namespace Dev2.Studio.ViewModels.Workflow
         protected WorkflowDesigner _wd;
         DesignerMetadata _wdMeta;
         protected DsfActivityDropViewModel _vm;
+#pragma warning disable 414
         ResourcePickerDialog _resourcePickerDialog;
+#pragma warning restore 414
 
         VirtualizedContainerService _virtualizedContainerService;
         MethodInfo _virtualizedContainerServicePopulateAllMethod;
@@ -1773,6 +1779,28 @@ namespace Dev2.Studio.ViewModels.Workflow
             return false;
         }
 
+        public IResourcePickerDialog CreateResourcePickerDialog(enDsfActivityType activityType)
+        {
+            var env = GetEnvironment();
+            var res = new ResourcePickerDialog(enDsfActivityType.All, env);
+            ResourcePickerDialog.CreateAsync(activityType, env);
+            return res;
+        }
+
+        static IEnvironmentViewModel GetEnvironment()
+        {
+            var environment = EnvironmentRepository.Instance.ActiveEnvironment;
+
+            IServer server = new Server(environment);
+
+            if (server.Permissions == null)
+            {
+                server.Permissions = new List<IWindowsGroupPermission>();
+                server.Permissions.AddRange(environment.AuthorizationService.SecurityService.Permissions);
+            }
+            var env = new EnvironmentViewModel(server, CustomContainer.Get<IShellViewModel>(), true);
+            return env;
+        }
 
         /// <summary>
         /// Views the preview drop.
@@ -1794,14 +1822,21 @@ namespace Dev2.Studio.ViewModels.Workflow
             if (isWorkflow != null)
             {
                 // PBI 10652 - 2013.11.04 - TWR - Refactored to enable re-use!
-
-                var resourcePicked = ResourcePickerDialog.ShowDropDialog(ref _resourcePickerDialog, isWorkflow, out _vm);
-
-                if (_vm != null && resourcePicked)
+                var d = CreateResourcePickerDialog(enDsfActivityType.Workflow);
+                if (d.ShowDialog())
                 {
-                    e.Data.SetData(_vm.SelectedExplorerItemModel);
+                    var res = d.SelectedResource;
+                    if (res != null)
+                    {
+                        e.Data.SetData(res);
+                    }
+                    if (res == null )
+                    {
+                        e.Handled = true;
+                        dropOccured = false;
+                    }
                 }
-                if (_vm != null && !resourcePicked)
+                else
                 {
                     e.Handled = true;
                     dropOccured = false;
@@ -1916,11 +1951,11 @@ namespace Dev2.Studio.ViewModels.Workflow
             {
                 if (_vm != null)
                 {
-                    IContextualResourceModel resource = _vm.SelectedResourceModel;
+                    var resource = _vm.SelectedResourceModel;
                     if (resource != null)
                     {
                         DsfActivity droppedActivity = DsfActivityFactory.CreateDsfActivity(resource, null, true, EnvironmentRepository.Instance, _resourceModel.Environment.IsLocalHostCheck());
-
+                        
                         droppedActivity.ServiceName = droppedActivity.DisplayName = droppedActivity.ToolboxFriendlyName = resource.Category;
                         droppedActivity.IconPath = resource.IconPath;
 

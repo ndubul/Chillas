@@ -20,36 +20,64 @@ using System.Windows.Input;
 using CubicOrange.Windows.Forms.ActiveDirectory;
 using Dev2.Activities.Designers2.Core;
 using Dev2.Activities.Designers2.Core.Help;
+using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Dialogs;
 using Dev2.Runtime.Configuration.ViewModels.Base;
 using Dev2.Services.Security;
+using Dev2.Studio.Core;
 using Dev2.Studio.Core.AppResources.ExtensionMethods;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Enums;
+using Warewolf.Studio.AntiCorruptionLayer;
+using Warewolf.Studio.ViewModels;
 
 namespace Dev2.Settings.Security
 {
     public class SecurityViewModel : SettingsItemViewModel, IHelpSource
     {
-        readonly IResourcePickerDialog _resourcePicker;
+         IResourcePickerDialog _resourcePicker;
         readonly DirectoryObjectPickerDialog _directoryObjectPicker;
         readonly IWin32Window _parentWindow;
         readonly IEnvironmentModel _environment;
         bool _isUpdatingHelpText;
 
         internal SecurityViewModel(SecuritySettingsTO securitySettings, IWin32Window parentWindow, IEnvironmentModel environment)
-            : this(securitySettings, new ResourcePickerDialog(enDsfActivityType.All, environment), new DirectoryObjectPickerDialog(), parentWindow, environment)
+            : this(securitySettings,new DirectoryObjectPickerDialog(), parentWindow, environment)
         {
         }
 
-        public SecurityViewModel(SecuritySettingsTO securitySettings, IResourcePickerDialog resourcePicker, DirectoryObjectPickerDialog directoryObjectPicker, IWin32Window parentWindow, IEnvironmentModel environment)
+        public IResourcePickerDialog CreateResourcePickerDialog()
         {
-            VerifyArgument.IsNotNull("resourcePicker", resourcePicker);
+            var env = GetEnvironment();
+             var res =  new ResourcePickerDialog(enDsfActivityType.All, env);
+             ResourcePickerDialog.CreateAsync(enDsfActivityType.Workflow, env).ContinueWith(a=> _resourcePicker=a.Result);
+             return res;
+        }
+
+        static IEnvironmentViewModel GetEnvironment()
+        {
+            var environment = EnvironmentRepository.Instance.ActiveEnvironment;
+
+            IServer server = new Server(environment);
+
+            if (server.Permissions == null)
+            {
+                server.Permissions = new List<IWindowsGroupPermission>();
+                server.Permissions.AddRange(environment.AuthorizationService.SecurityService.Permissions);
+            }
+            var env = new EnvironmentViewModel(server, CustomContainer.Get<IShellViewModel>(), true);
+            return env;
+        }
+
+        public SecurityViewModel(SecuritySettingsTO securitySettings, DirectoryObjectPickerDialog directoryObjectPicker, IWin32Window parentWindow, IEnvironmentModel environment)
+        {
+
             VerifyArgument.IsNotNull("directoryObjectPicker", directoryObjectPicker);
             VerifyArgument.IsNotNull("parentWindow", parentWindow);
             VerifyArgument.IsNotNull("environment", environment);
 
-            _resourcePicker = resourcePicker;
+            _resourcePicker = CreateResourcePickerDialog();
             _directoryObjectPicker = directoryObjectPicker;
             _parentWindow = parentWindow;
             _environment = environment;
@@ -195,12 +223,17 @@ namespace Dev2.Settings.Security
                     var foundResourceModel = _environment.ResourceRepository.FindSingle(model => model.ID == permission.ResourceID);
                     if(foundResourceModel != null)
                     {
-                        _resourcePicker.SelectedResource = foundResourceModel;
+                        _resourcePicker.SelectResource( foundResourceModel.ID);
                     }
                 }
             }
             var hasResult = _resourcePicker.ShowDialog(_environment);
-            return hasResult ? _resourcePicker.SelectedResource : null;
+
+            if(_environment.ResourceRepository != null)
+            {
+                return hasResult ? _environment.ResourceRepository.FindSingle(model => model.ID == _resourcePicker.SelectedResource.ResourceId) : null;
+            }
+            throw  new Exception("Server does not exist");
         }
 
         void PickWindowsGroup(object obj)

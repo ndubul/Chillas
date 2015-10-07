@@ -104,7 +104,10 @@ namespace Warewolf.Studio.ViewModels
             CanCreateWebService = true;
             _explorerRepository = server.ExplorerRepository;
             Server.PermissionsChanged += UpdatePermissions;
-            SetPermissions(Server.Permissions);
+            if(Server.Permissions != null)
+            {
+                SetPermissions(Server.Permissions);
+            }
             ShowVersionHistory = new DelegateCommand((() => AreVersionsVisible = (!AreVersionsVisible)));
             DeleteCommand = new DelegateCommand(Delete);
             // OpenVersionCommand = new DelegateCommand(() => { if (ResourceType == ResourceType.Version) ShellViewModel.OpenVersion(ResourceId, VersionNumber); });
@@ -279,6 +282,16 @@ namespace Warewolf.Studio.ViewModels
                 return Children.Select(explorerItemViewModel => explorerItemViewModel.Find(name)).FirstOrDefault(item => item != null);
             }
             return null;
+        }
+
+        public void Filter(Func<IExplorerItemViewModel, bool> filter)
+        {
+            Children = new ObservableCollection<IExplorerItemViewModel>(_children.Where(filter));
+            foreach (var explorerItemViewModel in _children)
+            {
+                explorerItemViewModel.Filter(filter);
+            }
+            OnPropertyChanged(() => Children);
         }
 
         string GetChildNameFromChildren()

@@ -75,10 +75,16 @@ namespace Warewolf.Studio.ViewModels
 			get { return _selectedItem; }
 			set
 			{
-				_selectedItem = value;
-          
-				OnPropertyChanged(() => SelectedItem);
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
 
+                    OnPropertyChanged(() => SelectedItem);
+                    if(SelectedItemChanged!= null)
+                    {
+                        SelectedItemChanged(this, _selectedItem);
+                    }
+                }
 			}
 		}
 
@@ -192,6 +198,8 @@ namespace Warewolf.Studio.ViewModels
 		}
 
 		public event SelectedExplorerEnvironmentChanged SelectedEnvironmentChanged;
+        public event SelectedExplorerItemChanged SelectedItemChanged;
+
 
 
 		public ICommand ClearSearchTextCommand { get; private set; }

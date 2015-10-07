@@ -25,13 +25,14 @@ using Dev2.Activities.Designers2.Core;
 using Dev2.Activities.Designers2.Core.Help;
 using Dev2.Common;
 using Dev2.Common.ExtMethods;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Data.TO;
 using Dev2.Common.Interfaces.Diagnostics.Debug;
+using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Common.Interfaces.Scheduler.Interfaces;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Common.Interfaces.Threading;
-using Dev2.CustomControls.Connections;
 using Dev2.DataList.Contract;
 using Dev2.Dialogs;
 using Dev2.Interfaces;
@@ -40,6 +41,7 @@ using Dev2.Scheduler;
 using Dev2.Services.Events;
 using Dev2.Services.Security;
 using Dev2.Studio.Controller;
+using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
 using Dev2.Studio.Enums;
@@ -47,6 +49,7 @@ using Dev2.Studio.ViewModels.WorkSurface;
 using Dev2.TaskScheduler.Wrappers;
 using Dev2.Threading;
 using Microsoft.Win32.TaskScheduler;
+using Warewolf.Studio.AntiCorruptionLayer;
 using Warewolf.Studio.ViewModels;
 
 namespace Dev2.Settings.Scheduler
@@ -62,7 +65,7 @@ namespace Dev2.Settings.Scheduler
         const string BlankNameErrorMessage = "The name can not be blank";
         const string SaveErrorPrefix = "Error while saving:";
         const string NewTaskName = "New Task";
-        IResourcePickerDialog _resourcePicker;
+        IResourcePickerDialog _currentResourcePicker;
         int _newTaskCounter = 1;
         ICommand _saveCommand;
         ICommand _newCommand;
@@ -87,7 +90,7 @@ namespace Dev2.Settings.Scheduler
         string _connectionError;
         bool _hasConnectionError;
         IEnvironmentModel _currentEnvironment;
-        IConnectControlViewModel _connectControlViewModel;
+        CustomControls.Connections.IConnectControlViewModel _connectControlViewModel;
 
         #endregion
 
@@ -99,7 +102,7 @@ namespace Dev2.Settings.Scheduler
         }
 
 
-        public SchedulerViewModel(IEventAggregator eventPublisher, DirectoryObjectPickerDialog directoryObjectPicker, IPopupController popupController, IAsyncWorker asyncWorker, IConnectControlViewModel connectControlViewModel)
+        public SchedulerViewModel(IEventAggregator eventPublisher, DirectoryObjectPickerDialog directoryObjectPicker, IPopupController popupController, IAsyncWorker asyncWorker, CustomControls.Connections.IConnectControlViewModel connectControlViewModel)
             : base(eventPublisher)
         {
             VerifyArgument.IsNotNull("directoryObjectPicker", directoryObjectPicker);
@@ -157,15 +160,15 @@ namespace Dev2.Settings.Scheduler
             }
         }
 
-        public IResourcePickerDialog ResourcePickerDialog
+        public IResourcePickerDialog CurrentResourcePickerDialog
         {
             get
             {
-                return _resourcePicker;
+                return _currentResourcePicker;
             }
             set
             {
-                _resourcePicker = value;
+                _currentResourcePicker = value;
             }
         }
 
@@ -182,7 +185,7 @@ namespace Dev2.Settings.Scheduler
             }
         }
 
-        public IConnectControlViewModel ConnectControlViewModel
+        public CustomControls.Connections.IConnectControlViewModel ConnectControlViewModel
         {
             get
             {
@@ -913,18 +916,18 @@ namespace Dev2.Settings.Scheduler
                     var resourceModel = CurrentEnvironment.ResourceRepository.FindSingle(c => c.ResourceName == WorkflowName);
                     if(resourceModel != null)
                     {
-                        _resourcePicker.SelectedResource = resourceModel;
+                        _currentResourcePicker.SelectResource(resourceModel.ID);
                     }
                 }
-                var hasResult = _resourcePicker.ShowDialog(CurrentEnvironment);
+                var hasResult = _currentResourcePicker.ShowDialog(CurrentEnvironment);
                 if(hasResult)
                 {
-                    WorkflowName = _resourcePicker.SelectedResource.Category;
+                    WorkflowName = _currentResourcePicker.SelectedResource.ResourcePath;
 
-                    SelectedTask.ResourceId = _resourcePicker.SelectedResource.ID;
+                    SelectedTask.ResourceId = _currentResourcePicker.SelectedResource.ResourceId;
                     if(SelectedTask.Name.StartsWith("New Task"))
                     {
-                        Name = _resourcePicker.SelectedResource.ResourceName;
+                        Name = _currentResourcePicker.SelectedResource.ResourceName;
                         NotifyOfPropertyChange(() => Name);
                     }
                     SelectedTask.IsDirty = true;
@@ -935,6 +938,11 @@ namespace Dev2.Settings.Scheduler
         }
 
         void OnServerChanged(object obj)
+        {
+             ServerChangedAsync(obj);
+        }
+
+         void  ServerChangedAsync(object obj)
         {
             var tmpEnv = obj as IEnvironmentModel;
 
@@ -949,30 +957,44 @@ namespace Dev2.Settings.Scheduler
                 if(CurrentEnvironment.AuthorizationService.IsAuthorized(AuthorizationContext.Administrator, null))
                 {
                     ClearConnectionError();
-                    _resourcePicker = new ResourcePickerDialog(enDsfActivityType.Workflow, CurrentEnvironment);
+                    var environment = EnvironmentRepository.Instance.ActiveEnvironment;
+
+                    IServer server = new Server(environment);
+                    if (server.Permissions == null)
+                    {
+                        server.Permissions = new List<IWindowsGroupPermission>();
+                        server.Permissions.AddRange(environment.AuthorizationService.SecurityService.Permissions);
+                    }
+                    var env = new EnvironmentViewModel(server, CustomContainer.Get<IShellViewModel>(), true);
+                   
+
+                    ; // new ResourcePickerDialog(enDsfActivityType.Workflow, env);
                     ScheduledResourceModel = new ClientScheduledResourceModel(CurrentEnvironment);
                     IsLoading = true;
-                    _asyncWorker.Start(
+#pragma warning disable 4014
+                     _asyncWorker.Start(
+#pragma warning restore 4014
                         () =>
+                        {
+                            ResourcePickerDialog.CreateAsync(enDsfActivityType.Workflow, env).ContinueWith(a=>_currentResourcePicker =a.Result);
+                            var resources = ScheduledResourceModel.GetScheduledResources();
+                            resources.Add(new DummyResource(this) { Name = "Schedule a new task." });
+                            ScheduledResourceModel.ScheduledResources = resources;
+                        }, () =>
+                        {
+                            foreach(var scheduledResource in ScheduledResourceModel.ScheduledResources.Where(a => !a.IsNewItem))
                             {
-                                var resources = ScheduledResourceModel.GetScheduledResources();
-                                resources.Add(new DummyResource(this){Name = "Schedule a new task."});
-                                ScheduledResourceModel.ScheduledResources = resources;
-                            }, () =>
-                    {
-                        foreach(var scheduledResource in ScheduledResourceModel.ScheduledResources.Where(a=>!a.IsNewItem))
-                        {
-                            scheduledResource.NextRunDate = scheduledResource.Trigger.Trigger.StartBoundary;
-                            scheduledResource.OldName = scheduledResource.Name;
-                        }
+                                scheduledResource.NextRunDate = scheduledResource.Trigger.Trigger.StartBoundary;
+                                scheduledResource.OldName = scheduledResource.Name;
+                            }
 
-                        NotifyOfPropertyChange(() => TaskList);
-                        if(TaskList.Count > 0)
-                        {
-                            SelectedTask = TaskList[0];
-                        }
-                        IsLoading = false;
-                    });
+                            NotifyOfPropertyChange(() => TaskList);
+                            if(TaskList.Count > 0)
+                            {
+                                SelectedTask = TaskList[0];
+                            }
+                            IsLoading = false;
+                        });
                 }
                 else
                 {
