@@ -331,52 +331,10 @@ namespace Warewolf.Studio.ViewModels
             var environmentModel = EnvironmentRepository.Instance.FindSingle(model => model.ID == Server.EnvironmentID);
             if (environmentModel != null)
             {
-                var folderList = new List<IExplorerItemViewModel>();
-                var contextualResourceModels = new Collection<IContextualResourceModel>();
-                foreach (var childModel in this.Descendants())
+                _explorerRepository.Delete(this);
+                if (Parent != null)
                 {
-                    if (childModel.ResourceType != ResourceType.Folder)
-                    {
-                        var child = childModel;
-                        var resourceModel = environmentModel.ResourceRepository.LoadContextualResourceModel(child.ResourceId);
-                        if (resourceModel != null)
-                        {
-                            contextualResourceModels.Add(resourceModel);
-                        }
-                    }
-                    else
-                    {
-                        folderList.Add(childModel);
-                    }
-                }
-                if (contextualResourceModels.Any())
-                {
-                    var displayName = ResourceName;
-                    EventPublishers.Aggregator.Publish(new DeleteResourcesMessage(contextualResourceModels, displayName, true, () =>
-                    {
-                        _explorerRepository.Delete(this);
-                        if (Parent != null)
-                        {
-                            Parent.RemoveChild(this);
-                        }
-                    }));
-                }
-                else
-                {
-                    EventPublishers.Aggregator.Publish(new DeleteFolderMessage(ResourceName, () =>
-                    {
-                        for (int i = folderList.Count - 1; i >= 0; i--)
-                        {
-                            if (folderList[i].ResourceType == ResourceType.Folder && (folderList[i].Children.Count == 0 || folderList[i].Children.All(c => c.ResourceType == ResourceType.Folder)))
-                            {
-                                _explorerRepository.Delete(folderList[i]);
-                                if (Parent != null)
-                                {
-                                    Parent.RemoveChild(folderList[i]);
-                                }
-                            }
-                        }
-                    }));
+                    Parent.RemoveChild(this);
                 }
             }
         }
