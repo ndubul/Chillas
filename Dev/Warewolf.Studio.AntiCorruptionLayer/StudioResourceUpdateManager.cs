@@ -59,7 +59,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             }
             if (ServerSaved != null)
             {
-                ServerSaved();
+                ServerSaved(serverSource);
             }
         }
 
