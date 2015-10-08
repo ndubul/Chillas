@@ -1782,7 +1782,7 @@ namespace Dev2.Studio.ViewModels.Workflow
         public IResourcePickerDialog CreateResourcePickerDialog(enDsfActivityType activityType)
         {
             var env = GetEnvironment();
-            var res = new ResourcePickerDialog(enDsfActivityType.All, env);
+            var res = new ResourcePickerDialog(activityType, env);
             ResourcePickerDialog.CreateAsync(activityType, env);
             return res;
         }
@@ -1822,31 +1822,38 @@ namespace Dev2.Studio.ViewModels.Workflow
             if (isWorkflow != null)
             {
                 // PBI 10652 - 2013.11.04 - TWR - Refactored to enable re-use!
-                var d = CreateResourcePickerDialog(enDsfActivityType.Workflow);
-                if (d.ShowDialog())
+                var activityType = ResourcePickerDialog.DetermineDropActivityType(isWorkflow);
+            
+                
+                if (activityType != enDsfActivityType.All)
                 {
-                    var res = d.SelectedResource;
-                    if (res != null)
+                    var dialog = CreateResourcePickerDialog(activityType);
+                    if (dialog.ShowDialog())
                     {
-                        e.Data.SetData(res);
+                        var res = dialog.SelectedResource;
+                        if (res != null)
+                        {
+                            e.Data.SetData(res);
+                            DataObject = res;
+                        }
+                        if (res == null)
+                        {
+                            e.Handled = true;
+                            dropOccured = false;
+                        }
                     }
-                    if (res == null )
+                    else
                     {
                         e.Handled = true;
                         dropOccured = false;
                     }
                 }
-                else
+                if (dropOccured)
                 {
-                    e.Handled = true;
-                    dropOccured = false;
+                    _workspaceSave = false;
+                    ResourceModel.IsWorkflowSaved = false;
+                    NotifyOfPropertyChange(() => DisplayName);
                 }
-            }
-            if (dropOccured)
-            {
-                _workspaceSave = false;
-                ResourceModel.IsWorkflowSaved = false;
-                NotifyOfPropertyChange(() => DisplayName);
             }
             _resourcePickerDialog = null;
 

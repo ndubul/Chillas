@@ -100,7 +100,7 @@ namespace Dev2.Dialogs
                     environmentViewModel.Filter(a => a.ResourceType == ResourceType.Folder || (a.ResourceType >= ResourceType.DbSource && a.ResourceType < ResourceType.Folder));
                     break;
                 case enDsfActivityType.Service:
-                    environmentViewModel.Filter(a => a.ResourceType == ResourceType.Folder || (a.ResourceType >= ResourceType.WorkflowService && a.ResourceType <= ResourceType.DbService));
+                    environmentViewModel.Filter(a => a.ResourceType == ResourceType.Folder || (a.ResourceType > ResourceType.WorkflowService && a.ResourceType <= ResourceType.DbService));
                     break;
                 
             }
@@ -181,31 +181,19 @@ namespace Dev2.Dialogs
             return enDsfActivityType.All;
         }
 
-        public static async Task<bool> ShowDropDialog(string typeName)
-
+        public static bool ShowDropDialog<T>(ref T picker, string typeName, out DsfActivityDropViewModel dropViewModel)
+     where T : ResourcePickerDialog
         {
             var activityType = DetermineDropActivityType(typeName);
-            var environment = EnvironmentRepository.Instance.ActiveEnvironment;
-
-            IServer server = new Server(environment);
-            if (server.Permissions == null)
+            if (activityType != enDsfActivityType.All)
             {
-                server.Permissions = new List<IWindowsGroupPermission>();
-                server.Permissions.AddRange(environment.AuthorizationService.SecurityService.Permissions);
+                if (picker == null)
+                {
+                    picker = (T)Activator.CreateInstance(typeof(T), activityType);
+                }
+                return picker.ShowDialog(out dropViewModel);
             }
-            var env = new EnvironmentViewModel(server, CustomContainer.Get<IShellViewModel>(), true);
-            var a = await ResourcePickerDialog.CreateAsync(activityType, env);
-        
-            var picker = a as ResourcePickerDialog;
-            if(picker != null)
-            {
-                
-                picker.ShowDialog();
-            }
-            else
-            {
-                throw new Exception("invalid resource picker");
-            }
+            dropViewModel = null;
             return false;
         }
     }

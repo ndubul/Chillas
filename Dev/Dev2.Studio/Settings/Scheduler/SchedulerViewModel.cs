@@ -966,9 +966,7 @@ namespace Dev2.Settings.Scheduler
                         server.Permissions.AddRange(environment.AuthorizationService.SecurityService.Permissions);
                     }
                     var env = new EnvironmentViewModel(server, CustomContainer.Get<IShellViewModel>(), true);
-                   
 
-                    ; // new ResourcePickerDialog(enDsfActivityType.Workflow, env);
                     ScheduledResourceModel = new ClientScheduledResourceModel(CurrentEnvironment);
                     IsLoading = true;
 #pragma warning disable 4014

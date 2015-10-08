@@ -70,14 +70,14 @@ namespace Dev2.Settings.Security
             return env;
         }
 
-        public SecurityViewModel(SecuritySettingsTO securitySettings, DirectoryObjectPickerDialog directoryObjectPicker, IWin32Window parentWindow, IEnvironmentModel environment)
+        public SecurityViewModel(SecuritySettingsTO securitySettings, DirectoryObjectPickerDialog directoryObjectPicker, IWin32Window parentWindow, IEnvironmentModel environment, Func<IResourcePickerDialog> createfunc = null)
         {
 
             VerifyArgument.IsNotNull("directoryObjectPicker", directoryObjectPicker);
             VerifyArgument.IsNotNull("parentWindow", parentWindow);
             VerifyArgument.IsNotNull("environment", environment);
 
-            _resourcePicker = CreateResourcePickerDialog();
+            _resourcePicker =(createfunc?? CreateResourcePickerDialog)();
             _directoryObjectPicker = directoryObjectPicker;
             _parentWindow = parentWindow;
             _environment = environment;
@@ -210,11 +210,11 @@ namespace Dev2.Settings.Security
                 return;
             }
 
-            permission.ResourceID = resourceModel.ID;
-            permission.ResourceName = string.Format("{0}\\{1}\\{2}", resourceModel.ResourceType.GetTreeDescription(), resourceModel.Category, resourceModel.ResourceName);
+            permission.ResourceID = resourceModel.ResourceId;
+            permission.ResourceName = string.Format("{0}\\{1}\\{2}", resourceModel.ResourceType.GetTreeDescription(), resourceModel.ResourcePath, resourceModel.ResourceName);
         }
 
-        IResourceModel PickResource(WindowsGroupPermission permission)
+        IExplorerTreeItem PickResource(WindowsGroupPermission permission)
         {
             if(permission != null && permission.ResourceID != Guid.Empty)
             {
@@ -231,7 +231,7 @@ namespace Dev2.Settings.Security
 
             if(_environment.ResourceRepository != null)
             {
-                return hasResult ? _environment.ResourceRepository.FindSingle(model => model.ID == _resourcePicker.SelectedResource.ResourceId) : null;
+                return hasResult ? _resourcePicker.SelectedResource : null;
             }
             throw  new Exception("Server does not exist");
         }
