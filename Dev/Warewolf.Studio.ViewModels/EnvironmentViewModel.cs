@@ -30,6 +30,7 @@ namespace Warewolf.Studio.ViewModels
         readonly IShellViewModel _shellViewModel;
         readonly bool _isDialog;
         bool _allowEdit;
+        Guid _resourceId;
 
         public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel, bool isDialog=false)
         {
@@ -355,6 +356,17 @@ namespace Warewolf.Studio.ViewModels
         public string ResourcePath { get; set; }
 
         public string ResourceName { get; set; }
+        public Guid ResourceId
+        {
+            get
+            {
+                return _resourceId;
+            }
+            set
+            {
+                _resourceId = value;
+            }
+        }
 
         public bool IsExpanderVisible
         {
@@ -596,7 +608,15 @@ namespace Warewolf.Studio.ViewModels
 
             OnPropertyChanged(() => Children);
         }
-
+        public void Filter(Func<IExplorerItemViewModel,bool> filter)
+        {
+           Children = new ObservableCollection<IExplorerItemViewModel>(_children.Where(filter));
+            foreach(var explorerItemViewModel in _children)
+            {
+               explorerItemViewModel.Filter(filter);
+            }
+            OnPropertyChanged(() => Children);
+        }
         public ICollection<IExplorerItemViewModel> AsList()
         {
             return AsList(Children);

@@ -9,7 +9,9 @@ namespace Dev2.Common.Interfaces
     {
         ResourceType ResourceType { get; set; }
         string ResourcePath { get; set; }
-        string ResourceName { get; set; } 
+        string ResourceName { get; set; }
+        Guid ResourceId { get; set; }
+
         bool IsExpanderVisible { get; set; }
         ICommand NewCommand { get; set; }
         ICommand DeployCommand { get; set; }

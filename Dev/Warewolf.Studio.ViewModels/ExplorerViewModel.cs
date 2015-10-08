@@ -86,10 +86,16 @@ namespace Warewolf.Studio.ViewModels
 			get { return _selectedItem; }
 			set
 			{
+                if (_selectedItem != value)
+                {
 				_selectedItem = value;
           
 				OnPropertyChanged(() => SelectedItem);
-
+                    if(SelectedItemChanged!= null)
+                    {
+                        SelectedItemChanged(this, _selectedItem);
+                    }
+                }
 			}
 		}
 
@@ -157,11 +163,11 @@ namespace Warewolf.Studio.ViewModels
 		protected virtual void Refresh()
 		{
 			IsRefreshing = true;
-			Environments.ForEach(model =>
+			Environments.ForEach(async model =>
 			{
 				if (model.IsConnected)
 				{
-				    model.Load();
+				    await model.Load();
                     if (!string.IsNullOrEmpty(SearchText))
                     {
                         Filter(SearchText);
@@ -169,6 +175,7 @@ namespace Warewolf.Studio.ViewModels
 				}
 			});
 			IsRefreshing = false;
+
 		}
 
 		public void Filter(string filter)
@@ -203,6 +210,8 @@ namespace Warewolf.Studio.ViewModels
 		}
 
 		public event SelectedExplorerEnvironmentChanged SelectedEnvironmentChanged;
+        public event SelectedExplorerItemChanged SelectedItemChanged;
+
 
 
 		public ICommand ClearSearchTextCommand { get; private set; }

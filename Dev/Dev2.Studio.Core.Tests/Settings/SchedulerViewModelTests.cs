@@ -1598,9 +1598,9 @@ Warewolf leverages Windows Task Scheduler and the schedules can be viewed there 
             var schedulerViewModel = new SchedulerViewModel(new Mock<IEventAggregator>().Object, new Mock<DirectoryObjectPickerDialog>().Object, new Mock<IPopupController>().Object, new SynchronousAsyncWorker(), new Mock<IConnectControlViewModel>().Object) { CurrentEnvironment = mockEnvironmentModel.Object };
             Mock<IResourcePickerDialog> mockResourcePickerDialog = new Mock<IResourcePickerDialog>();
             mockResourcePickerDialog.Setup(c => c.ShowDialog(It.IsAny<IEnvironmentModel>())).Returns(true);
-            mockResourcePickerDialog.Setup(c => c.SelectedResource).Returns(setupResourceModelMock.Object);
+            //mockResourcePickerDialog.Setup(c => c.SelectedResource).Returns(setupResourceModelMock.Object);
 
-            schedulerViewModel.ResourcePickerDialog = mockResourcePickerDialog.Object;
+            schedulerViewModel.CurrentResourcePickerDialog = mockResourcePickerDialog.Object;
 
             Mock<IScheduledResourceModel> scheduledResourceModelMock = new Mock<IScheduledResourceModel>();
             scheduledResourceModelMock.Setup(c => c.ScheduledResources).Returns(resources);

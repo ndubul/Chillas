@@ -7,7 +7,6 @@ namespace Dev2.Common.Interfaces
     {
         
         bool Checked { get; set; }
-        Guid ResourceId { get; set; }
         ICommand OpenCommand { get; set; }
         bool IsRenaming{ get; set; }
         bool IsNotRenaming { get;  }
@@ -41,6 +40,7 @@ namespace Dev2.Common.Interfaces
         void CreateNewFolder();
         void Apply(Action<IExplorerItemViewModel> action);
         IExplorerItemViewModel Find(string resourcePath);
+        void Filter(Func<IExplorerItemViewModel, bool> filter);
 
     }
 
