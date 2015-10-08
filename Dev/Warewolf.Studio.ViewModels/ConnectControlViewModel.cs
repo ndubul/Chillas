@@ -133,26 +133,35 @@ namespace Warewolf.Studio.ViewModels
                
                 if (value != null)
                 {
-                    _selectedConnection = value;
-                    if (_selectedConnection.ResourceName.Equals(Resources.Languages.Core.NewServerLabel))
+                    var mainViewModel = CustomContainer.Get<IShellViewModel>();
+                    if (value.ResourceName.Equals(Resources.Languages.Core.NewServerLabel))
                     {
-                        var mainViewModel = CustomContainer.Get<IShellViewModel>();
-                        mainViewModel.SetActiveEnvironment(Server.EnvironmentID);
-                        mainViewModel.NewResource("ServerSource", "");
-
+                        if(mainViewModel != null)
+                        {
+                            mainViewModel.NewResource("ServerSource", "");
+                        }
                         IsConnected = false;
                         AllowConnection = false;
                     }
                     else
                     {
+                        _selectedConnection = value;
                         AllowConnection = true;
                         if (_selectedConnection.ResourceName.Equals(Resources.Languages.Core.LocalhostLabel))
                         {
                             AllowConnection = false;
                         }
                         IsConnected = _selectedConnection.IsConnected;
-                        OnPropertyChanged(() => SelectedConnection);
                     }
+                    if(mainViewModel != null)
+                    {
+                        if (_selectedConnection.IsConnected)
+                        {
+                            mainViewModel.SetActiveEnvironment(_selectedConnection.EnvironmentID);
+                        }
+                        mainViewModel.SetActiveServer(_selectedConnection);
+                    }
+                    OnPropertyChanged(() => SelectedConnection);
                 }
             }
         }
@@ -201,7 +210,12 @@ namespace Warewolf.Studio.ViewModels
             {
                 try
                 {
-                    await connection.ConnectAsync();
+                    var connected = await connection.ConnectAsync();
+                    if (connected)
+                    {
+                        var mainViewModel = CustomContainer.Get<IShellViewModel>();
+                        mainViewModel.SetActiveEnvironment(connection.EnvironmentID);
+                    }
                     OnPropertyChanged(() => connection.IsConnected);
                     if (ServerConnected != null)
                     {

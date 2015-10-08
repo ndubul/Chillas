@@ -457,7 +457,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" 
                                Style="{StaticResource ErrorTextBlockStyle}" 
-                               Text="{Binding ErrorText}" 
+                               Text="{Binding ErrorMessage}" 
                                HorizontalAlignment="Left" 
                                TextWrapping="WrapWithOverflow" 
                                x:Name="ErrorTextBlock" ></TextBlock>               

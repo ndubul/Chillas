@@ -161,9 +161,13 @@ namespace Warewolf.Studio.ServerProxyLayer
 
             var workspaceId = Connection.WorkspaceID;
             var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-            if(result.HasError)
+            if (result == null || result.HasError)
             {
-                throw new WarewolfSupportServiceException(result.Message.ToString(),null);
+                if (result != null)
+                {
+                    throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                }
+                throw new WarewolfSupportServiceException("Service does not exist", null);
             }
             Dev2JsonSerializer serializer = new Dev2JsonSerializer();
             return serializer.Deserialize<IList<string>>(result.Message.ToString());
@@ -175,9 +179,13 @@ namespace Warewolf.Studio.ServerProxyLayer
 
             var workspaceId = Connection.WorkspaceID;
             var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-            if (result.HasError)
+            if (result == null || result.HasError)
             {
-                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                if (result != null)
+                {
+                    throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                }
+                throw new WarewolfSupportServiceException("Service does not exist", null);
             }
             Dev2JsonSerializer serializer = new Dev2JsonSerializer();
             return serializer.Deserialize<IList<IDbSource>>(result.Message.ToString());
@@ -190,8 +198,14 @@ namespace Warewolf.Studio.ServerProxyLayer
             comsController.AddPayloadArgument("source", serializer.SerializeToBuilder(source));
             var workspaceId = Connection.WorkspaceID;
             var payload = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-            if (payload.HasError)
-                throw new WarewolfTestException(payload.Message.ToString(), null);
+            if (payload == null || payload.HasError)
+            {
+                if (payload != null)
+                {
+                    throw new WarewolfSupportServiceException(payload.Message.ToString(), null);
+                }
+                throw new WarewolfSupportServiceException("Service does not exist", null);
+            }
             return serializer.Deserialize<IList<IDbAction>>(payload.Message);
         }
 
@@ -201,9 +215,13 @@ namespace Warewolf.Studio.ServerProxyLayer
 
             var workspaceId = Connection.WorkspaceID;
             var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-            if (result.HasError)
+            if (result==null || result.HasError)
             {
-                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                if(result != null)
+                {
+                    throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                }
+                throw new WarewolfSupportServiceException("Service does not exist", null);
             }
             Dev2JsonSerializer serializer = new Dev2JsonSerializer();
             List<IWebServiceSource> fetchWebServiceSources = serializer.Deserialize<List<IWebServiceSource>>(result.Message.ToString());
@@ -219,9 +237,13 @@ namespace Warewolf.Studio.ServerProxyLayer
             comsController.AddPayloadArgument("currentDllListing", serializer.Serialize(listing));
             var workspaceId = Connection.WorkspaceID;
             var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-            if (result.HasError)
+            if (result == null || result.HasError)
             {
-                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                if (result != null)
+                {
+                    throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                }
+                throw new WarewolfSupportServiceException("Service does not exist", null);
             }
             var dllListings = serializer.Deserialize<List<IFileListing>>(result.Message.ToString());
             return dllListings;
@@ -234,8 +256,14 @@ namespace Warewolf.Studio.ServerProxyLayer
             comsController.AddPayloadArgument("source", serializer.SerializeToBuilder(source));
             var workspaceId = Connection.WorkspaceID;
             var payload = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-            if (payload.HasError)
-                throw new WarewolfTestException(payload.Message.ToString(), null);
+            if (payload == null || payload.HasError)
+            {
+                if (payload != null)
+                {
+                    throw new WarewolfSupportServiceException(payload.Message.ToString(), null);
+                }
+                throw new WarewolfSupportServiceException("Service does not exist", null);
+            }
             return serializer.Deserialize<List<INamespaceItem>>(payload.Message);
         }
 
@@ -277,9 +305,13 @@ namespace Warewolf.Studio.ServerProxyLayer
 
             var workspaceId = Connection.WorkspaceID;
             var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-            if (result.HasError)
+            if (result == null || result.HasError)
             {
-                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                if (result != null)
+                {
+                    throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                }
+                throw new WarewolfSupportServiceException("Service does not exist", null);
             }
             Dev2JsonSerializer serializer = new Dev2JsonSerializer();
             return serializer.Deserialize<List<IPluginSource>>(result.Message.ToString());
@@ -294,9 +326,13 @@ namespace Warewolf.Studio.ServerProxyLayer
             comsController.AddPayloadArgument("namespace", serializer.SerializeToBuilder(ns));
             var workspaceId = Connection.WorkspaceID;
             var result = comsController.ExecuteCommand<ExecuteMessage>(Connection, workspaceId);
-            if (result.HasError)
+            if (result == null || result.HasError)
             {
-                throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                if (result != null)
+                {
+                    throw new WarewolfSupportServiceException(result.Message.ToString(), null);
+                }
+                throw new WarewolfSupportServiceException("Service does not exist", null);
             }
 
 
