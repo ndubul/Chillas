@@ -26,5 +26,7 @@ namespace Dev2.Common.Interfaces.Infrastructure
         IExplorerItem Find(Func<IExplorerItem,bool> predicate);
 
         IExplorerItem Reload(Guid workSpaceId);
+
+        void RemoveItemFromCollection(IExplorerItem serverExplorerItem);
     }
 }

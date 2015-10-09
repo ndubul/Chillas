@@ -425,9 +425,13 @@ namespace Dev2.Runtime.Hosting
                     {
                         MoveItem(explorerItem, newPath, workSpaceId);
                     }
-                    MoveItem(explorerItem, newPath + "\\" + explorerItem.DisplayName, workSpaceId);
+                    else
+                    {
+                        MoveItem(explorerItem, newPath, workSpaceId); 
+                    }
+ 
                 }
-               // Directory.Delete(DirectoryStructureFromPath(itemToMove.ResourcePath),true);
+               // 
                 return new ExplorerRepositoryResult(ExecStatus.Success, "");
             }
             // ReSharper disable once RedundantIfElseBlock
