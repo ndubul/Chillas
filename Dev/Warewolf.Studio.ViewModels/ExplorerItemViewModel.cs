@@ -865,13 +865,35 @@ namespace Warewolf.Studio.ViewModels
 
                 if (destination.ResourceType == ResourceType.Folder)
                 {
-                    destination.AddChild(this);
-                    RemoveChildFromParent();
-                    Parent = destination;
+                    if (destination.Children.Any(a => a.ResourceName == ResourceName && a.ResourceType == ResourceType.Folder))
+                    {
+                        var destfolder = destination.Children.FirstOrDefault(a => a.ResourceName == ResourceName && a.ResourceType == ResourceType.Folder);
+                        foreach(var explorerItemViewModel in Children)
+                        {
+                            if(destfolder != null)
+                            {
+                                explorerItemViewModel.ResourcePath = destfolder.ResourcePath+"\\"+explorerItemViewModel.ResourceName;
+                                destfolder.Children.Add(explorerItemViewModel);
+                            }
+                        }
+                    }
+                    else
+                    {
+
+
+                        destination.AddChild(this);
+                        RemoveChildFromParent();
+                        Parent = destination;
+                        foreach(var explorerItemViewModel in Children)
+                        {
+                            explorerItemViewModel.ResourcePath = destination.ResourcePath+"\\"+explorerItemViewModel.ResourceName;
+                        }
+                    }
                 }
                 else if (destination.ResourceType <= ResourceType.Folder)
                 {
                     destination.AddChild(this);
+                   
                     RemoveChildFromParent();
                 }
                 else if (destination.Parent == null)
@@ -884,6 +906,10 @@ namespace Warewolf.Studio.ViewModels
             catch (Exception)
             {
                 return false;
+            }
+            finally
+            {
+                
             }
         }
 

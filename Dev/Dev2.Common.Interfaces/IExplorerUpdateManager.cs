@@ -30,12 +30,14 @@ namespace Dev2.Common.Interfaces
         /// <param name="id">the resource id</param>
         /// <param name="newName">the new name</param>
         void Rename(Guid id, string newName);
+
         /// <summary>
         /// Move a resource to another folder
         /// </summary>
         /// <param name="sourcePath"></param>
         /// <param name="destinationPath"></param>
-        void MoveItem(string sourcePath, string destinationPath);
+        /// <param name="itemPath"></param>
+        void MoveItem(Guid sourcePath, string destinationPath,string itemPath);
 
     }
 }
