@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Input;
 using Dev2;
 using Dev2.Activities;
@@ -28,6 +29,7 @@ using Dev2.Services.Events;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
+using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
@@ -824,62 +826,79 @@ namespace Warewolf.Studio.ViewModels
 
         public bool Move(IExplorerTreeItem destination)
         {
-            try
+            if (destination.Children.Any(a => a.ResourceName == ResourceName))
+            {
+                var a = new PopupMessage
+                {
+                    Buttons = MessageBoxButton.OK,
+                    Description = "The destination folder has a resource with the same name",
+                    Header = "Move Not allowed",
+                    Image = MessageBoxImage.Error
+                };
+                ShellViewModel.ShowPopup(a);
+                return false;
+            }
+            // ReSharper disable once RedundantIfElseBlock
+            else
             {
 
-                _explorerRepository.Move(this, destination);
 
-                if (destination.ResourceType == ResourceType.Folder)
+                try
                 {
-                    if (destination.Children.Any(a => a.ResourceName == ResourceName && a.ResourceType == ResourceType.Folder))
+
+                    _explorerRepository.Move(this, destination);
+
+                    if (destination.ResourceType == ResourceType.Folder)
                     {
-                        var destfolder = destination.Children.FirstOrDefault(a => a.ResourceName == ResourceName && a.ResourceType == ResourceType.Folder);
-                        foreach(var explorerItemViewModel in Children)
+                        if (destination.Children.Any(a => a.ResourceName == ResourceName && a.ResourceType == ResourceType.Folder))
                         {
-                            if(destfolder != null)
+                            var destfolder = destination.Children.FirstOrDefault(a => a.ResourceName == ResourceName && a.ResourceType == ResourceType.Folder);
+                            foreach (var explorerItemViewModel in Children)
                             {
-                                explorerItemViewModel.ResourcePath = destfolder.ResourcePath+"\\"+explorerItemViewModel.ResourceName;
-                                destfolder.Children.Add(explorerItemViewModel);
+                                if (destfolder != null)
+                                {
+                                    explorerItemViewModel.ResourcePath = destfolder.ResourcePath + "\\" + explorerItemViewModel.ResourceName;
+                                    destfolder.Children.Add(explorerItemViewModel);
+                                }
+                            }
+                        }
+                        else
+                        {
+
+
+                            destination.AddChild(this);
+                            RemoveChildFromParent();
+                            Parent = destination;
+                            foreach (var explorerItemViewModel in Children)
+                            {
+                                explorerItemViewModel.ResourcePath = destination.ResourcePath + "\\" + explorerItemViewModel.ResourceName;
                             }
                         }
                     }
-                    else
+                    else if (destination.ResourceType <= ResourceType.Folder)
                     {
+                        destination.AddChild(this);
 
-
-                    destination.AddChild(this);
-                    RemoveChildFromParent();
-                    Parent = destination;
-                        foreach(var explorerItemViewModel in Children)
-                        {
-                            explorerItemViewModel.ResourcePath = destination.ResourcePath+"\\"+explorerItemViewModel.ResourceName;
-                        }
+                        RemoveChildFromParent();
                     }
-                }
-                else if (destination.ResourceType <= ResourceType.Folder)
-                {
-                    destination.AddChild(this);
-                   
-                    RemoveChildFromParent();
-                }
-                else if (destination.Parent == null)
-                {
-                    destination.AddChild(this);
-                    RemoveChildFromParent();
-                }
+                    else if (destination.Parent == null)
+                    {
+                        destination.AddChild(this);
+                        RemoveChildFromParent();
+                    }
 
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            finally
-            {
-                Server.UpdateRepository.FireItemSaved();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                finally
+                {
+                    Server.UpdateRepository.FireItemSaved();
+                }
             }
         }
-
         private void RemoveChildFromParent()
         {
             if (Parent != null)
