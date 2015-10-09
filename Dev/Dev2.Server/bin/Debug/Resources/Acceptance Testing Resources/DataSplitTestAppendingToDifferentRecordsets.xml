@@ -1,5 +1,5 @@
 
-<Service Name="DataSplitTestAppendingToDifferentRecordsets" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="2f5ecdb0-397b-445a-b541-b02c8cf5ae5b" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
+<Service Name="DataSplitTestAppendingToDifferentRecordsets" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="2f5ecdb0-397b-445a-b541-b02c8cf5ae5b" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5760.15534">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap" x:Class="DataSplitTestAppendingToDifferentRecordsets" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:dsca="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uaba="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:uf="clr-namespace:Unlimited.Framework;assembly=Dev2.Core" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;x:Members&gt;
@@ -125,9 +125,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>OsLteGOBQub3Xvhk+5os0e88XcQ=</DigestValue>
+        <DigestValue>nuYKcwN5nAOvXWiwVpp6LxEQxHA=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>QLsGgy9xGOFupE9UeXa2kbwt720rP5NH+8kTW3gQKKETW+rp1KKQYN1J6Y5LGI/UQOM2DsoyDHWVPKQq9QizrKdoM57CSGCSwVTHLHDOCMKb4iEO/rKm/alZeDm2Uo1carsHCZL4vHD4Jfas7uRT3uKNIF3ztiZQ4DSzuYyQhK8=</SignatureValue>
+    <SignatureValue>D6nGMHLL2dJLzvTcv1Upvsif6Q6lPMiLudWwg1P/eJ5Y5shbl/Ex/MiNkZSK75Dn6pCwMxws8hmuqpcng/3SGpJQ70h4XwhfdlOlzGXOgh4jMREg3YhxcbsVK+tFK12vtrFLzZGwSwVksFXm3jj6xR2LOHwtV2KXowVk89d0gH8=</SignatureValue>
   </Signature>
 </Service>

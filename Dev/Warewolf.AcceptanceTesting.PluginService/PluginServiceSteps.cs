@@ -219,7 +219,7 @@ namespace Warewolf.AcceptanceTesting.PluginService
         public void GivenTabIsOpened(string headerText)
         {
             var viewModel = Utils.GetViewModel<ManagePluginServiceViewModel>();
-            Assert.AreEqual(headerText, viewModel.Header.Replace(" *", ""));
+            Assert.AreEqual(headerText, viewModel.Header);
         }
 
         [Given(@"Select a source is focused")]

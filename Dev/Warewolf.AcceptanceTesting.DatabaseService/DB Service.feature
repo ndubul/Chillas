@@ -157,7 +157,7 @@ Scenario: Refresh in select Action
 
 Scenario: Changing Actions
 	Given I click New Data Base Service Connector
-	Then "New Database Connector" tab is opened
+	Then "New DB Connector" tab is opened
 	And "1 Data Source" is "Enabled"
 	And "2 Select Action" is "Disabled"
 	And "3 Test Connector and Calculate Outputs" is "Disabled" 
@@ -196,7 +196,7 @@ Scenario: Changing Actions
 	
 Scenario: Creating a new Data Source
 	Given I click New Data Base Service Connector
-	Then "New Database Connector" tab is opened
+	Then "New DB Connector" tab is opened
 	And Data Source is focused
 	And "New" is "Enabled"
 	And "2 Select Action" is "Disabled"

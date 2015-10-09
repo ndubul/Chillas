@@ -392,6 +392,20 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             Assert.IsTrue(expectedVisibility);
         }
 
+        [When(@"I filter new for ""(.*)""")]
+        public void WhenIFilterNewFor(string assemblyName)
+        {
+            var expectedVisibility = String.Equals(assemblyName, "vjslib", StringComparison.InvariantCultureIgnoreCase);
+            Assert.IsTrue(expectedVisibility);
+        }
+
+        [When(@"I ""(.*)"" the filter")]
+        public void WhenITheFilter(string p0)
+        {
+            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            manageWebserviceSourceControl.ClearFilter();
+        }
+
         [When(@"I save Plugin source")]
         public void WhenISavePluginSource()
         {

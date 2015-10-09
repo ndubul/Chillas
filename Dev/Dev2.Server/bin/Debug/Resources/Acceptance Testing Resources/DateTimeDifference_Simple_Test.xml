@@ -1,5 +1,5 @@
 
-<Service Name="DateTimeDifference_Simple_Test" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="a3bedd6e-c1d3-4051-a165-e8febd75b073" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
+<Service Name="DateTimeDifference_Simple_Test" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="a3bedd6e-c1d3-4051-a165-e8febd75b073" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5760.15534">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap" x:Class="DateTimeDifference_Simple_Test" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:dsca="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uaba="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:uf="clr-namespace:Unlimited.Framework;assembly=Dev2.Core" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;x:Members&gt;
@@ -223,9 +223,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>WjRWSJU7uFc3rYh5FTpMzlAFybo=</DigestValue>
+        <DigestValue>sxOcgHH8L8kTCj2PkCIHKqrUCi4=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>A+6HCXojpsMsIS5g7BjatbLLw76NWvaBHR8Dy5/gIgNQUB/nic/eYWeraaM+Kbvmy2H2qcRfVEm5aZbQv+DW6iawxoxJXIZyNRrSJTxgp2Hng56lY9FroaMp8K4G36GwQ/DIQBmhyA8408ODnL131TCA5RStzOj2bNN/MvLZYnU=</SignatureValue>
+    <SignatureValue>N6brtZJx1hMvjpsoiBcXQzgnvIaAbhYKK4SL7cQamqqQABzm88+hojL707ARVLGvsSrg6dji1xiJYFgietwaMVyptugbpZPWXkds/CVRLFHE8ZgG/E3eHPjOiPcLSLqVz4oBcqbeaVS7RongBCaUAIDl6q1SnsIpi+25SxCJkj4=</SignatureValue>
   </Signature>
 </Service>

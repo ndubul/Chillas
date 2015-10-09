@@ -1,5 +1,5 @@
 
-<Service ID="1c3f96c0-242a-437a-9240-d3da855e0863" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="DefaultDateTimeInputFormatTest" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
+<Service ID="1c3f96c0-242a-437a-9240-d3da855e0863" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="DefaultDateTimeInputFormatTest" ResourceType="WorkflowService" ServerVersion="0.0.5760.15534">
   <DisplayName>DefaultDateTimeInputFormatTest</DisplayName>
   <Category>Acceptance Testing Resources\DefaultDateTimeInputFormatTest</Category>
   <AuthorRoles>
@@ -99,9 +99,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>3dWFU8JGlDzY8rY9R6f8udqbtkc=</DigestValue>
+        <DigestValue>xBRui0Qa0dKZQkkHrUjqW4ek9qE=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>dD0y6qeJxZm8uLVTZ4xPSIfTesoaH2vuOFvYDi9YBOyryodMnFnNjlp352ffdkwomCSQeASK3/w5InwgU+6px5rMGNbJJVu0bC+EiL9kmnhZCgx8/6Ub2JC2DgDUmaGNyUh6RhN2BECTM3anXww89vG3PGxibPrxeHKABCpgWfE=</SignatureValue>
+    <SignatureValue>vOaqCP/jq8SqTAHMp9tCtwmj+vAlNUf9vqnQoIY6s8Sf/p8CC4q9E+dSoWCzLE6ijqZP0Q8GFBzq/78F82ppm5Y8QA2x7auB1Jk3U+G2R/qyquqybKT4lZSuOj20UtA79t9fxX9dq/sngRrmmSpIRQq6MNEGifugqBJ1ovqpXPI=</SignatureValue>
   </Signature>
 </Service>

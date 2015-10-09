@@ -1,5 +1,5 @@
 
-<Service ID="1c453c6f-cd53-4756-9d60-de46f37a7add" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Inner Star WF" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.27500">
+<Service ID="1c453c6f-cd53-4756-9d60-de46f37a7add" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Inner Star WF" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5760.15534">
   <DisplayName>Inner Star WF</DisplayName>
   <Category>Acceptance Testing Resources\Inner Star WF</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -237,9 +237,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>iLEU3exMd+vpK0EKZ3GQMCHpQIk=</DigestValue>
+        <DigestValue>iSIhDoT2pmviiXzxRj9nWe3ArdU=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>YRbLnHiJZhWKxuo/iuonnxKA3y8moV4Kfarc8AmrymxhhR3ZTKPNIYgjQV3HWsrMmxLiACKGN+I6juyXN09ejhNFofS5YmT7UwgHf8Mv4HBzpvBgeECRXOzm92S583MebhUE5xuAzTUz9bYqEU8sF7m63gIK/kUxkkAqZmqnu9g=</SignatureValue>
+    <SignatureValue>d0unXrJ5gU/jb8w2qa3Xdt6Y56fWDUt7Cplan7yQj0tyeEe0KQkeEwqOL9SHvP1Hb58I77zBrNX3r+E424ACl5FT5mh9AI+Q5+nMV+xoKfeQYo/9U1Zt1nHxWBBrEFv94O1tciOkIJSTuN+3Vp5mxATmD79fTOTbjJYc+zjA6Oo=</SignatureValue>
   </Signature>
 </Service>

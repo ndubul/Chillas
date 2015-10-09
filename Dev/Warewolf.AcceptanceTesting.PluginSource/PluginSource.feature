@@ -138,8 +138,8 @@ Scenario: Clear filter using clear filter button
 	Given I open New Plugin Source
 	When I click "GAC"
 	And "Save" is "Disabled"
-	When I filter for "vjslib"
-	And I click "Clear"
+	When I filter new for "vjslib"
+	And I "Clear" the filter
 	Then "GAC" tree-view is "visible"
 	And "Save" is "Disabled"
 	
