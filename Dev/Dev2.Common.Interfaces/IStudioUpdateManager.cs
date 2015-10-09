@@ -39,5 +39,5 @@ namespace Dev2.Common.Interfaces
     }
 
     public delegate void ItemSaved();
-    public delegate void ServerSaved();
+    public delegate void ServerSaved(IServerSource server);
 }
