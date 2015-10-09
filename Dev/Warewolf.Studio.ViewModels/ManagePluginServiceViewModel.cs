@@ -164,6 +164,7 @@ namespace Warewolf.Studio.ViewModels
                     Id = Guid.NewGuid();
                     _model.SaveService(ToModel());
                     Item = ToModel();
+                    IsNew = false;
                     Header = Path + Name;
 
                 }

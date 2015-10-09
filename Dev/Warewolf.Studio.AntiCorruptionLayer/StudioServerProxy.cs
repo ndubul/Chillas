@@ -66,7 +66,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
 
         public bool Move(IExplorerItemViewModel explorerItemViewModel, IExplorerTreeItem destination)
         {
-                UpdateManagerProxy.MoveItem(explorerItemViewModel.ResourcePath,destination.ResourcePath);
+                UpdateManagerProxy.MoveItem(explorerItemViewModel.ResourceId,destination.ResourcePath,explorerItemViewModel.ResourcePath);
                 return true;
         }
 

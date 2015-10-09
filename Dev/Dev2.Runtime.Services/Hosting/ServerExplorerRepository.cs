@@ -24,6 +24,7 @@ using Dev2.Common.Interfaces.Wrappers;
 using Dev2.Common.Wrappers;
 using Dev2.Explorer;
 using Dev2.Runtime.Security;
+using ServiceStack.Common.Extensions;
 
 namespace Dev2.Runtime.Hosting
 {
@@ -149,7 +150,7 @@ namespace Dev2.Runtime.Hosting
                     return new ExplorerRepositoryResult(ExecStatus.NoMatch, "Requested folder does not exist on server. Folder: " + path);
                 }
                 var resourceCatalogResult = ResourceCatalogue.RenameCategory(workSpaceId, path, newPath);
-
+                Apply(_root, a => a.ResourcePath.StartsWith(newPath + "\\"), b => b.ResourcePath = b.ResourcePath.Replace(path, newPath));
                 if (resourceCatalogResult.Status == ExecStatus.Success)
                 {
                     MoveVersionFolder(path, newPath);
@@ -280,6 +281,18 @@ namespace Dev2.Runtime.Hosting
             return item.Children.Select(child => Find(child, predicate)).FirstOrDefault(found => found != null);
         }
 
+
+        public void Apply(IExplorerItem item, Func<IExplorerItem, bool> predicate, Action<IExplorerItem> action)
+        {
+            if (predicate(item))
+                action( item);
+            if (item.Children == null || item.Children.Count == 0)
+            {
+                return;
+            }
+             item.Children.ForEach(child => Apply( child, predicate,action));
+        }
+
         public void MessageSubscription(IExplorerRepositorySync sync)
         {
             VerifyArgument.IsNotNull("sync", sync);
@@ -407,22 +420,52 @@ namespace Dev2.Runtime.Hosting
 
         public IExplorerRepositoryResult MoveItem(IExplorerItem itemToMove, string newPath, Guid workSpaceId)
         {
-
-            IEnumerable<IResource> item =
-                ResourceCatalogue.GetResourceList(workSpaceId)
-                                 .Where(
-                                     a =>
-                                     (a.ResourcePath == newPath));
-            if (item.Any())
+            if (itemToMove.ResourceType == ResourceType.Folder)
             {
-                return new ExplorerRepositoryResult(ExecStatus.Fail, "There is an item that exists with the same name and path");
+                newPath = newPath + "\\" + itemToMove.DisplayName;
+                foreach(var explorerItem in itemToMove.Children)
+                {
+                    if(explorerItem.ResourceType==ResourceType.Folder)
+                    {
+                        MoveItem(explorerItem, newPath, workSpaceId);
+                    }
+                    else
+                    {
+                        MoveItem(explorerItem, newPath, workSpaceId); 
+                    }
+ 
+                }
+               // 
+                return new ExplorerRepositoryResult(ExecStatus.Success, "");
             }
+            // ReSharper disable once RedundantIfElseBlock
+            else
+            {
+                IEnumerable<IResource> item = ResourceCatalogue.GetResourceList(workSpaceId)
+        .Where(
+            a =>
+                (a.ResourcePath == newPath));
+                if (item.Any())
+                {
+                    return new ExplorerRepositoryResult(ExecStatus.Fail, "There is an item that exists with the same name and path");
+                }
+                return MoveSingeItem(itemToMove, newPath, workSpaceId);
+            }
+
+
+            
+        }
+
+        IExplorerRepositoryResult MoveSingeItem(IExplorerItem itemToMove, string newPath, Guid workSpaceId)
+        {
             MoveVersions(itemToMove, newPath);
             ResourceCatalogResult result = ResourceCatalogue.RenameCategory(workSpaceId, itemToMove.ResourcePath, newPath, new List<IResource> { ResourceCatalogue.GetResource(workSpaceId, itemToMove.ResourceId) });
             _file.Delete(string.Format("{0}.xml", DirectoryStructureFromPath(itemToMove.ResourcePath)));
             Reload(workSpaceId);
             return new ExplorerRepositoryResult(result.Status, result.Message);
         }
+
+
 
         void MoveVersions(IExplorerItem itemToMove, string newPath)
         {

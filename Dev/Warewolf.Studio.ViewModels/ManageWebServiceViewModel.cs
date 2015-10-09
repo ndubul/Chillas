@@ -44,7 +44,7 @@ namespace Warewolf.Studio.ViewModels
         ICommand _newWebSourceCommand;
         ICollection<IWebServiceSource> _sources;
         IWebServiceSource _selectedSource;
-        readonly IWebService _webService;
+        IWebService _webService;
         ICollection<NameValue> _headers;
         string _requestUrlQuery;
         string _sourceUrl;
@@ -238,7 +238,7 @@ namespace Warewolf.Studio.ViewModels
                         _model.SaveService(ToModel());
                         Item = ToModel();
                         Header = Path + Name;
-
+                        _webService = ToModel();
                     }
                 }
                 else
