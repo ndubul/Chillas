@@ -18,9 +18,12 @@ using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Dev2;
 using Dev2.Activities;
+using Dev2.Common.Common;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Infrastructure;
+using Dev2.Data.ServiceModel;
 using Dev2.Services.Events;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
@@ -331,11 +334,16 @@ namespace Warewolf.Studio.ViewModels
             var environmentModel = EnvironmentRepository.Instance.FindSingle(model => model.ID == Server.EnvironmentID);
             if (environmentModel != null)
             {
-                        _explorerRepository.Delete(this);
-                        if (Parent != null)
-                        {
-                            Parent.RemoveChild(this);
-                        }
+                _explorerRepository.Delete(this);
+                if (Parent != null)
+                {
+                    Parent.RemoveChild(this);
+                }
+                
+                if (ResourceType == ResourceType.ServerSource || ResourceType == ResourceType.Server)
+                {
+                    Server.UpdateRepository.FireServerSaved();
+                }
             }
         }
 

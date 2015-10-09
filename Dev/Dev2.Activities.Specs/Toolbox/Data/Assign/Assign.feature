@@ -748,19 +748,25 @@ Scenario: Removing variable and value from assign
 	Then the assign tool row index is update
 
 
-##Complex types
-#@ignore
-#Scenario Outline:  Assigning value to a complex type
-#	Given I assign the value "4" to a variable "[[granparent().parent().NumberOfChildren]]"	
-#	When the assign tool is executed
-#	Then the value of "[[granparent().parent().NumberOfChildren]]" equals 4
-#	And the execution has "NO" error
-#	And the debug inputs as
-#	| # | Variable                                     | New Value |
-#	| 1 | [[granparent().parent().NumberOfChildren]] = | 4         |
-#	And the debug output as 
-#	| # |                                                |
-#	| 1 | [[granparent().parent().NumberOfChildren]] = 4 |
+#Complex types
+@ignore
+Scenario Outline:  Assigning value to a complex type
+	Given I assign the value "<value>" to a variable "<object>"	
+	When the assign tool is executed
+	And the execution has "NO" error
+	And the debug output as 
+	| # |                                                |
+	| 1 | <result> |
+	Examples: 
+	| Object                                                        | Value | result                                           |
+	| [[granparent().parent().NumberOfChildren]]                    | 4     | [[granparent().parent().NumberOfChildren]] = 4   |
+	| [[granparent().parent(1).NumberOfChildren]]                   | 6     | [[granparent().parent(1).NumberOfChildren]] = 6  |
+	| [[granparent().parent(*).NumberOfChildren]]                   | 10    | [[granparent().parent(1).NumberOfChildren]] = 10 |
+	| [[granparent().parent([[int]]).NumberOfChildren]],[[int]] = 2 | 4     | [[granparent().parent(2).NumberOfChildren]] = 4  |
+	| [[granparent(*).parent(1).NumberOfChildren]]                  | 7     | [[granparent(*).parent(1).NumberOfChildren]] = 7 |
+	| [[granparent(*).parent(*).NumberOfChildren]]                  | 14    | [[granparent().parent(1).NumberOfChildren]] = 14 |
+	
+
 
 
 

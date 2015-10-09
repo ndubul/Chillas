@@ -137,7 +137,7 @@ Scenario: saving to a disconnected server
 	When I close the save dialog
 	And I "Disconnect" from "Remote Integration Connection"
 	And I open the save dialog
-	Then a warning message should appear "You are no longer connected to [[server]]. Would you like to connect?"
+	Then a warning message should appear "The workflow is linked to a disconnected server. To save the workflow, select cancel and reconnect the server, or select Ok to discard your changes"
 
 #Wolf-1023
 Scenario Outline: Context menu in save dialog on server name
@@ -149,5 +149,7 @@ Scenario Outline: Context menu in save dialog on server name
 	| localhost                  | New Folder                 |
 	| localhost\Acceptance Tests | New Folder, Rename, Delete |
 	| localhost\Hello World      | Rename, Delete             |
+
+
 
 

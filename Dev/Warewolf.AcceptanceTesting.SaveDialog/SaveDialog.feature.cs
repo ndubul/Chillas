@@ -392,8 +392,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 139
  testRunner.And("I open the save dialog", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 140
- testRunner.Then("a warning message should appear \"You are no longer connected to [[server]]. Would" +
-                    " you like to connect?\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("a warning message should appear \"The workflow is linked to a disconnected server." +
+                    " To save the workflow, select cancel and reconnect the server, or select Ok to d" +
+                    "iscard your changes\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
