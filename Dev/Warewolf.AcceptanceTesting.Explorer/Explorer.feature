@@ -303,14 +303,25 @@ Scenario: Opening Dependencies Of All Services In Explorer
 	Then "PluginServ1 Dependents" is opened
 
 #wolf-996
-Scenario: Context menu
+Scenario Outline: Context menu Deploy
 	Given the explorer is visible
-	When I right-click on "Localhost"
+	When I right-click on "<Server>"
 	Then the context menu appears as
-	| Menu Items     |
-	| New Folder     |
-	| Server Version |
-	And I right-click on "Local/Examples"
+	| Menu Items                |
+	| New Workflow Service      |
+	| New Server Source         |
+	| New Database Connector    |
+	| New Database Source       |
+	| New Web Service Connector |
+	| New Web Service Source    |
+	| New Plugin Connector      |
+	| New Plugin Source         |
+	| New Email Source          |
+	| New Dropbox Source        |
+	| New Sharepoint Source     |
+	| New Folder                |
+	| Server Version            |
+	And I right-click on "Local/Hello World"
 	Then the context menu appears as
 	| Menu Items                |
 	| New Workflow Service      |
@@ -329,7 +340,10 @@ Scenario: Context menu
 	| Delete                    |
 	| Deploy                    |
 	| Show Dependencies         |
-
+	Examples: 
+	| Server                        |
+	| localhost                     |
+	| Remote Integration Connection |
 	
 #wolf-996
 Scenario: Disconnected from remote server
@@ -341,3 +355,72 @@ Scenario: Disconnected from remote server
 	When I click "Disconnect"
 	Then "Remote Connection Integration" is "Disconnected"
 	And "Localhost" is visible
+
+#wolf-996
+Scenario Outline: Create a new folder
+	Given the explorer is visible
+	And I right-click on "<Server>"
+	Then the context menu appears as
+         | Menu Items                |
+         | New Workflow Service      |
+         | New Server Source         |
+         | New Database Connector    |
+         | New Database Source       |
+         | New Web Service Connector |
+         | New Web Service Source    |
+         | New Plugin Connector      |
+         | New Plugin Source         |
+         | New Email Source          |
+         | New Dropbox Source        |
+         | New Sharepoint Source     |
+         | New Folder                |
+         | Server Version            |
+	And I select "New Folder"
+	Then "New Folder" is visible in the Explorer
+	Examples: 
+	| Server                        |
+	| localhost                     |
+	| Remote Integration Connection |
+
+#Wolf-350
+Scenario Outline: Create a new folder
+	Given the explorer is visible
+	And I right-click on "<Server>"
+	And the context menu is visible
+	And I select "<Action>"
+	Then the "<Action>" window is opened
+	Examples: 
+	| Server                        | Action                 |
+	| Localhost                     | New Database Connector |
+	| Remote Integration Connection | New Web Service Source |
+
+#wolf-996
+Scenario: Debug from Explorer using play icon
+	Given the explorer is visible
+	And "Dice Roll Example/Dice Roll" is visible
+	And I select the "play" icon to Debug
+	Then the workflow is executed
+	And there are "No" errors
+	And the Debug output window is populated
+
+
+#Wolf-1025
+Scenario: Moving Nested folders
+	Given the explorer is visible
+	And path "Localhost/Dice Roll Example/Tests" is visible
+	And I move "Localhost/Dice Roll Example/Tests" to "Localhost/Tests"
+	Then "Localhost/Tests" is visible in the Explorer
+
+
+Scenario: Conflicting file names
+	Given the explorer is visible
+	And path "Localhost/Examples" is visible
+	And path "Localhost/Category" is visible
+	And I create "New Folder" in "Localhost/Category" named "Examples"
+	Then path "Localhost/Category/Examples" is visible
+	And I move "Localhost/Examples" to "Localhost/Category"
+	Then "Localhost/Examples" is merged with "Localhost/Category/Examples"
+	
+	 
+
+
