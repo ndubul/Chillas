@@ -55,10 +55,9 @@ namespace Warewolf.Studio.ViewModels
             Server.UpdateRepository.ServerSaved += UpdateRepositoryOnServerSaved;
         }
 
-        void UpdateRepositoryOnServerSaved(IServerSource server)
+        void UpdateRepositoryOnServerSaved()
         {
             LoadServers();
-            SelectedConnection = Servers.FirstOrDefault(a => a.EnvironmentID == server.ID);
         }
 
         public void LoadServers()
@@ -71,6 +70,7 @@ namespace Warewolf.Studio.ViewModels
                 Servers = new ObservableCollection<IServer>();
             }
             var x = servers.Where(a => !Servers.Select(q => q.EnvironmentID).Contains(a.EnvironmentID));
+            Servers.Clear();
             Servers.AddRange(x);
         }
 

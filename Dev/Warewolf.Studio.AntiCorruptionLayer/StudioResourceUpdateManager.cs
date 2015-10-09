@@ -48,6 +48,15 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             }
         }
 
+        public void FireServerSaved()
+        {
+            var handler = ServerSaved;
+            if (handler != null)
+            {
+                handler();
+            }
+        }
+
         IUpdateManager UpdateManagerProxy { get; set; }
 
         public void Save(IServerSource serverSource)
@@ -59,7 +68,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             }
             if (ServerSaved != null)
             {
-                ServerSaved(serverSource);
+                ServerSaved();
             }
         }
 

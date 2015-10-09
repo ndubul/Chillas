@@ -305,6 +305,10 @@ namespace Dev2.Runtime.Hosting
                     }
                 default:
                     ResourceCatalogResult result = ResourceCatalogue.DeleteResource(workSpaceId, itemToDelete.DisplayName, itemToDelete.ResourceType.ToString());
+                    if (result.Status == ExecStatus.Success)
+                    {
+                        RemoveItemFromCollection(itemToDelete);
+                    }
                     return new ExplorerRepositoryResult(result.Status, result.Message);
             }
         }
