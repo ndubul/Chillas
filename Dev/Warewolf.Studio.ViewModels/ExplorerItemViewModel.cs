@@ -867,6 +867,7 @@ namespace Warewolf.Studio.ViewModels
                     destination.AddChild(this);
                     RemoveChildFromParent();
                 }
+
                 return true;
             }
             catch (Exception)
@@ -875,7 +876,7 @@ namespace Warewolf.Studio.ViewModels
             }
             finally
             {
-                
+                Server.UpdateRepository.FireItemSaved();
             }
         }
 
