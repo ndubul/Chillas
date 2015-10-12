@@ -1,5 +1,5 @@
 
-<Service ID="0762ae1a-b92e-450b-ae30-b00ed5be5ebb" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Random" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.27500">
+<Service ID="0762ae1a-b92e-450b-ae30-b00ed5be5ebb" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Random" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5760.15534">
   <DisplayName>Random</DisplayName>
   <Category>Testing\For Each\Random</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>LanQz50KNc1K63lQBYSH02knTDA=</DigestValue>
+        <DigestValue>14bl8gRIEAS0+zaHJ4Zq5RnwyVM=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>n56zXp9pZhC+sraxa792op87SyPEF8nVcu5XHT7jrdL3NECSD7ZWdC6sCN38u0hrbooObn50PE/r/+Pk2hWjeC79uAHBqV0oAR4vuOn9fHf83MQT6Lor4HBrbVOYbUxBFAI+enBd3qBwrhagKJKSy/5gP+S55a9xhf3gZcUHHjA=</SignatureValue>
+    <SignatureValue>WqoYjtzGolaLgVisp03J3uEXc9sDOE3R2oO4k/9DZZBILWPw1pEWQ0tNSc9rtj2n7TJg5UmZEtG+NUuLwZSpzCiSgA9NYMzEorTjZN1xrquXj/TAoIG1U04A6782Q7gmzuY6xAjnHxEz10JqCzRynTpelkZ7uXhRNluzz3wgd5U=</SignatureValue>
   </Signature>
 </Service>

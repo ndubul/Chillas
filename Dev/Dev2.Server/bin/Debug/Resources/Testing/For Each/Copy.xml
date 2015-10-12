@@ -1,5 +1,5 @@
 
-<Service ID="18fade8b-b657-48d7-95c8-01fc8801f646" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Copy" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.27500">
+<Service ID="18fade8b-b657-48d7-95c8-01fc8801f646" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Copy" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5760.15534">
   <DisplayName>Copy</DisplayName>
   <Category>Testing\For Each\Copy</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>uUW9mkdeX2jT23Ko7AtEV16pmo0=</DigestValue>
+        <DigestValue>DMQVHcD62QlN9zDuZ5cdf03PXAg=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>WqVGoWeTWEElWlPSv4bnHHOcZV2G8SzR4hbIjnnMS40If5zzqAtig6lmeC7dgx0WieY3ALMtZrC7irmp9VJL8UQI4NvfwQbwovQ0N9sSEpYg6FIQEUdo9LiPtJ8fjbeWfPM04k9yblcU7wNnbrKYewlphq/KreOfE9amSdVhZVg=</SignatureValue>
+    <SignatureValue>PT+8zob+UYaHvuaEO43kCarBOV7JLmuO4loLrwI3QljgTF4PjhuP8gUHFu69to9Lk02IGKq1zl2kKSOHZqSdc5/6SKLGLMj6vhXFbgVkOpnI6ckqoAV/1N1ya9xLh7MWuzd39GlqFrSZR4W5uVew5e9qljZmdoEVIfSdHvMKZQM=</SignatureValue>
   </Signature>
 </Service>

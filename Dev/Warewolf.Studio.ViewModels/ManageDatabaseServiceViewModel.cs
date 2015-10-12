@@ -379,6 +379,7 @@ namespace Warewolf.Studio.ViewModels
                         Path = _saveDialog.ResourceName.Path;
                         Id = Guid.NewGuid();
                         _model.SaveService(ToModel());
+                        IsNew = false;
                         Item = ToModel();
                         Header = Path + Name;
                     }

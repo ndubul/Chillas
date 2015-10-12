@@ -1,5 +1,5 @@
 
-<Source ID="a00626a4-ec09-46ad-8c97-ea6c44bbc582" Version="1.0" Name="Google Address Lookup" ResourceType="WebSource" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxcMhaMVPTEy5uq+gNU++GQQAAAACAAAAAAADZgAAwAAAABAAAAA7gSe2orkR0CJ+aEWIVj4RAAAAAASAAACgAAAAEAAAAInPa7Dxbw7D+iir3VLRHmAQAQAAE1kygtyaJLP0kCDecubURimXgCf8FPTdwHCWTG+Gwu9g7C6arU2MbxCSRDkD/R1kvB+zfV4AAcYhteuZS2I0ecD5kTkunt9tzgfcKTAkA99QaGbH4rUYXudh2d604l/o/VXmnbKtxuGua+mbcAUq/TCYWO4pfcOhv8k0G1PQSmYStHbyRKzamUzo/ngGpkDYNrzJN5ZP2btuoYJRJKzsyol93sJh6wS334n3eJI9a04JwOu3wd5w1+W+mjH3JEnSJPQTdECHttb8/F89j/TRsBfWKS3kKljhiCNGA1TI6MWOzBVp7li2GGfQMJFFbzxkl860UXbLthT16+0n6cW2WBOpGvIjpa1GP+Awg5+OTbYUAAAAbh3BInlB81yhE2tqxXOIbzu0tKw=" Type="WebSource" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5756.27500">
+<Source ID="a00626a4-ec09-46ad-8c97-ea6c44bbc582" Version="1.0" Name="Google Address Lookup" ResourceType="WebSource" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxcMhaMVPTEy5uq+gNU++GQQAAAACAAAAAAADZgAAwAAAABAAAAA7gSe2orkR0CJ+aEWIVj4RAAAAAASAAACgAAAAEAAAAInPa7Dxbw7D+iir3VLRHmAQAQAAE1kygtyaJLP0kCDecubURimXgCf8FPTdwHCWTG+Gwu9g7C6arU2MbxCSRDkD/R1kvB+zfV4AAcYhteuZS2I0ecD5kTkunt9tzgfcKTAkA99QaGbH4rUYXudh2d604l/o/VXmnbKtxuGua+mbcAUq/TCYWO4pfcOhv8k0G1PQSmYStHbyRKzamUzo/ngGpkDYNrzJN5ZP2btuoYJRJKzsyol93sJh6wS334n3eJI9a04JwOu3wd5w1+W+mjH3JEnSJPQTdECHttb8/F89j/TRsBfWKS3kKljhiCNGA1TI6MWOzBVp7li2GGfQMJFFbzxkl860UXbLthT16+0n6cW2WBOpGvIjpa1GP+Awg5+OTbYUAAAAbh3BInlB81yhE2tqxXOIbzu0tKw=" Type="WebSource" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5760.15534">
   <DisplayName>Google Address Lookup</DisplayName>
   <Category>Acceptance Testing Resources\Google Address Lookup</Category>
   <AuthorRoles>
@@ -16,9 +16,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>QyGThYQBGQgeY//KTFDUbv/EnaQ=</DigestValue>
+        <DigestValue>XcAFzlKsLcu546QH3oCi8vYb45o=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>R2npEaRXJZBqUra/OrRazvPTckeJQIFkU9HBaAFuSGYQ3Ej6f+GbLjpeltp74p0+bTl0iBfo6fQdD9T42OawwoVznhp7mYuJBMG8ijbl3jAvamwDtt3aSI+Nuwk2apFohoAjj4gshaelJ0huzxO4o64u6viefr7e7Kul77pNhAw=</SignatureValue>
+    <SignatureValue>j92TKni27hY9V9sJigVhAjEI5p4iDElsatd+Oh3WqX7rMsulo2fJF2Kbpn5Um3SSbqDfb+m1IZNRyT7QNVgqYfR/MFBrmpMZmBu6F9ZTJt71t9osyQGu/Z2sfR2QKPp+AOHRwpRgadgzgkeie8BIH8Bdnw6TE3OGD3RS8GgN/yE=</SignatureValue>
   </Signature>
 </Source>

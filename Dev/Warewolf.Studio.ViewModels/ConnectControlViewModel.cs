@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Dev2;
@@ -45,12 +46,18 @@ namespace Warewolf.Studio.ViewModels
                 throw new ArgumentNullException("aggregator");
             }
             Server = server;
-            Server.UpdateRepository.ServerSaved += LoadServers;
             LoadServers();
+
             SelectedConnection = server;
             aggregator.GetEvent<ServerAddedEvent>().Subscribe(ServerAdded);
             EditConnectionCommand = new DelegateCommand(AllowConnectionEdit);
             ToggleConnectionStateCommand = new DelegateCommand(ConnectOrDisconnect);
+            Server.UpdateRepository.ServerSaved += UpdateRepositoryOnServerSaved;
+        }
+
+        void UpdateRepositoryOnServerSaved()
+        {
+            LoadServers();
         }
 
         public void LoadServers()
@@ -58,14 +65,23 @@ namespace Warewolf.Studio.ViewModels
             var serverConnections = Server.GetServerConnections();
             var servers = new ObservableCollection<IServer> { CreateNewRemoteServerEnvironment() };
             servers.AddRange(serverConnections);
-            Servers = servers;
+            if (Servers == null)
+            {
+                Servers = new ObservableCollection<IServer>();
+            }
+            var x = servers.Where(a => !Servers.Select(q => q.EnvironmentID).Contains(a.EnvironmentID));
+            Servers.Clear();
+            Servers.AddRange(x);
         }
+
+        public IServer DefaultSelectedConnection { get; set; }
 
         IServer CreateNewRemoteServerEnvironment()
         {
             return new Server
             {
-                ResourceName = Resources.Languages.Core.NewServerLabel
+                ResourceName = Resources.Languages.Core.NewServerLabel,
+                EnvironmentID = Guid.NewGuid()
             };
         }
 
@@ -90,7 +106,7 @@ namespace Warewolf.Studio.ViewModels
             if (SelectedConnection.IsConnected)
             {
                 Disconnect(SelectedConnection);
-                
+
                 IsConnected = false;
             }
             else
@@ -119,7 +135,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _servers = value;
-                OnPropertyChanged(()=>Servers);
+                OnPropertyChanged(() => Servers);
             }
         }
         public IServer SelectedConnection
@@ -130,18 +146,19 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-               
                 if (value != null)
                 {
                     var mainViewModel = CustomContainer.Get<IShellViewModel>();
                     if (value.ResourceName.Equals(Resources.Languages.Core.NewServerLabel))
                     {
-                        if(mainViewModel != null)
+                        if (mainViewModel != null)
                         {
+                            mainViewModel.SetActiveEnvironment(_selectedConnection.EnvironmentID);
                             mainViewModel.NewResource("ServerSource", "");
                         }
                         IsConnected = false;
                         AllowConnection = false;
+
                     }
                     else
                     {
@@ -153,13 +170,13 @@ namespace Warewolf.Studio.ViewModels
                         }
                         IsConnected = _selectedConnection.IsConnected;
                     }
-                    if(mainViewModel != null)
+                    if (mainViewModel != null)
                     {
-                        if (_selectedConnection.IsConnected)
+                        if (_selectedConnection.IsConnected && !_selectedConnection.ResourceName.Equals(Resources.Languages.Core.NewServerLabel))
                         {
                             mainViewModel.SetActiveEnvironment(_selectedConnection.EnvironmentID);
+                            mainViewModel.SetActiveServer(_selectedConnection);
                         }
-                        mainViewModel.SetActiveServer(_selectedConnection);
                     }
                     OnPropertyChanged(() => SelectedConnection);
                 }
@@ -222,7 +239,7 @@ namespace Warewolf.Studio.ViewModels
                         ServerConnected(this, connection);
                     }
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     return false;
                 }

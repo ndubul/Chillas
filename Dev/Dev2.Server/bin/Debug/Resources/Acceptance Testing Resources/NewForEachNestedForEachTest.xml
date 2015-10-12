@@ -1,5 +1,5 @@
 
-<Service ID="8658e08a-0949-411f-b7b5-bc46cb38d3f3" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="NewForEachNestedForEachTest" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5756.27500">
+<Service ID="8658e08a-0949-411f-b7b5-bc46cb38d3f3" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="NewForEachNestedForEachTest" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5760.15534">
   <DisplayName>NewForEachNestedForEachTest</DisplayName>
   <Category>Acceptance Testing Resources\NewForEachNestedForEachTest</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -36,9 +36,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>x+4dEssoljUqPqEbimv7zuVdZRw=</DigestValue>
+        <DigestValue>c5m4AUzoFR+SuGyMHRtGMHF+BFQ=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>qLsWs+PNCeQgfv0PAIZbZFgO6p6/TwUcjnBQaJmB2cDs1ej16jp2MjPPoHkZIVN4AwEnasypOPvTf0HD4JoisqoQ7/0EIeE8geE77YiI/zu03MtB4oSeKH2Q8Q1xQOMEkj8JerOf3nIbMQJMtTClyWGTUA3XB9/EwYwxThEOcwA=</SignatureValue>
+    <SignatureValue>JbpzmKCk0SGZXYU82uHxsaYhuqvayO5YOZmHlOxPpe0o+GB6E+x/p7nHrdsT2zsFg1DrB0MpQFd4zXZ11JyIlOOi9cDEnp5wqYocsl5FdR7ipypMZEtOR77wxlUzWtrFxJyDbxqtnCXiAgqlZUzrWz4V1DE6tm+/BQ61LEDdZns=</SignatureValue>
   </Signature>
 </Service>

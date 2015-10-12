@@ -1,5 +1,5 @@
 
-<Service Name="CreateFileOnFileSystemTest" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="ae35211b-0d2d-4a53-9eca-5b8564ccfef2" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
+<Service Name="CreateFileOnFileSystemTest" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="ae35211b-0d2d-4a53-9eca-5b8564ccfef2" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5760.15534">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap" x:Class="CreateFileOnFileSystemTest" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:dsca="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uaba="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:uf="clr-namespace:Unlimited.Framework;assembly=Dev2.Core" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;x:Members&gt;
@@ -109,9 +109,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>CNLe2t+gRJBk0+UidRe9o2QOU44=</DigestValue>
+        <DigestValue>WS4sxNJx1OkvC7PpE1JMlOu5tTE=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>bOGr47jcNW6LRa0Z55gkJa02A1jWKwCktT9AeAPCLGQ9V0SGAdX6mKxko0zka0L8ZE/zZLW0NyKaJJ4mLgfcTWtwsxrDoU2ZDnvhDQGhomO2iG8LZnQOivTGZ9DnQxVVJAQXDFI7MokUj8gXteUsCYzkHkdwJLRixfj9XDil4tk=</SignatureValue>
+    <SignatureValue>mGd6TMeoPZG3o9i75Me744fy+6YgtqeB3EkKF4PhlXfjOIsalWLlJN/E4/dbDAZFvhDjKodOH3QLzXVU/ifS283jyTHL2QEPfahOTN6e3WS0VadT/BqT/EEvXe7rVAYGP7DOF3K0WQq2JKGwzYA+Ay72x1Q1nuDz2j0oOcIYxws=</SignatureValue>
   </Signature>
 </Service>

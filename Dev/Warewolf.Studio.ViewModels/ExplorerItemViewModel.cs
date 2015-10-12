@@ -15,16 +15,21 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Input;
 using Dev2;
 using Dev2.Activities;
+using Dev2.Common.Common;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Infrastructure;
+using Dev2.Data.ServiceModel;
 using Dev2.Services.Events;
 using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
+using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
@@ -331,52 +336,15 @@ namespace Warewolf.Studio.ViewModels
             var environmentModel = EnvironmentRepository.Instance.FindSingle(model => model.ID == Server.EnvironmentID);
             if (environmentModel != null)
             {
-                var folderList = new List<IExplorerItemViewModel>();
-                var contextualResourceModels = new Collection<IContextualResourceModel>();
-                foreach (var childModel in this.Descendants())
+                _explorerRepository.Delete(this);
+                if (Parent != null)
                 {
-                    if (childModel.ResourceType != ResourceType.Folder)
-                    {
-                        var child = childModel;
-                        var resourceModel = environmentModel.ResourceRepository.LoadContextualResourceModel(child.ResourceId);
-                        if (resourceModel != null)
-                        {
-                            contextualResourceModels.Add(resourceModel);
-                        }
-                    }
-                    else
-                    {
-                        folderList.Add(childModel);
-                    }
+                    Parent.RemoveChild(this);
                 }
-                if (contextualResourceModels.Any())
+                
+                if (ResourceType == ResourceType.ServerSource || ResourceType == ResourceType.Server)
                 {
-                    var displayName = ResourceName;
-                    EventPublishers.Aggregator.Publish(new DeleteResourcesMessage(contextualResourceModels, displayName, true, () =>
-                    {
-                        _explorerRepository.Delete(this);
-                        if (Parent != null)
-                        {
-                            Parent.RemoveChild(this);
-                        }
-                    }));
-                }
-                else
-                {
-                    EventPublishers.Aggregator.Publish(new DeleteFolderMessage(ResourceName, () =>
-                    {
-                        for (int i = folderList.Count - 1; i >= 0; i--)
-                        {
-                            if (folderList[i].ResourceType == ResourceType.Folder && (folderList[i].Children.Count == 0 || folderList[i].Children.All(c => c.ResourceType == ResourceType.Folder)))
-                            {
-                                _explorerRepository.Delete(folderList[i]);
-                                if (Parent != null)
-                                {
-                                    Parent.RemoveChild(folderList[i]);
-                                }
-                            }
-                        }
-                    }));
+                    Server.UpdateRepository.FireServerSaved();
                 }
             }
         }
@@ -858,35 +826,79 @@ namespace Warewolf.Studio.ViewModels
 
         public bool Move(IExplorerTreeItem destination)
         {
-            try
+            if (destination.Children.Any(a => a.ResourceName == ResourceName))
             {
-
-                _explorerRepository.Move(this, destination);
-
-                if (destination.ResourceType == ResourceType.Folder)
+                var a = new PopupMessage
                 {
-                    destination.AddChild(this);
-                    RemoveChildFromParent();
-                    Parent = destination;
-                }
-                else if (destination.ResourceType <= ResourceType.Folder)
-                {
-                    destination.AddChild(this);
-                    RemoveChildFromParent();
-                }
-                else if (destination.Parent == null)
-                {
-                    destination.AddChild(this);
-                    RemoveChildFromParent();
-                }
-                return true;
-            }
-            catch (Exception)
-            {
+                    Buttons = MessageBoxButton.OK,
+                    Description = "The destination folder has a resource with the same name",
+                    Header = "Move Not allowed",
+                    Image = MessageBoxImage.Error
+                };
+                ShellViewModel.ShowPopup(a);
                 return false;
             }
-        }
+            // ReSharper disable once RedundantIfElseBlock
+            else
+            {
 
+
+                try
+                {
+
+                    _explorerRepository.Move(this, destination);
+
+                    if (destination.ResourceType == ResourceType.Folder)
+                    {
+                        if (destination.Children.Any(a => a.ResourceName == ResourceName && a.ResourceType == ResourceType.Folder))
+                        {
+                            var destfolder = destination.Children.FirstOrDefault(a => a.ResourceName == ResourceName && a.ResourceType == ResourceType.Folder);
+                            foreach (var explorerItemViewModel in Children)
+                            {
+                                if (destfolder != null)
+                                {
+                                    explorerItemViewModel.ResourcePath = destfolder.ResourcePath + "\\" + explorerItemViewModel.ResourceName;
+                                    destfolder.Children.Add(explorerItemViewModel);
+                                }
+                            }
+                        }
+                        else
+                        {
+
+
+                            destination.AddChild(this);
+                            RemoveChildFromParent();
+                            Parent = destination;
+                            foreach (var explorerItemViewModel in Children)
+                            {
+                                explorerItemViewModel.ResourcePath = destination.ResourcePath + "\\" + explorerItemViewModel.ResourceName;
+                            }
+                        }
+                    }
+                    else if (destination.ResourceType <= ResourceType.Folder)
+                    {
+                        destination.AddChild(this);
+
+                        RemoveChildFromParent();
+                    }
+                    else if (destination.Parent == null)
+                    {
+                        destination.AddChild(this);
+                        RemoveChildFromParent();
+                    }
+
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                finally
+                {
+                    Server.UpdateRepository.FireItemSaved();
+                }
+            }
+        }
         private void RemoveChildFromParent()
         {
             if (Parent != null)

@@ -188,16 +188,16 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             switch(name)
             {
                 case "1 Data Source" :
-                    Utils.CheckControlEnabled("name",state,view);
+                    Utils.CheckControlEnabled(name, state, view);
                     break;
                 case "2 Select Action":
-                    Utils.CheckControlEnabled("name", state, view);
+                    Utils.CheckControlEnabled(name, state, view);
                     break;
                 case "3 Test Connector and Calculate Outputs":
-                    Utils.CheckControlEnabled("name", state, view);
+                    Utils.CheckControlEnabled(name, state, view);
                     break;
                 case "4 Edit Default and Mapping Names":
-                    Utils.CheckControlEnabled("name", state, view);
+                    Utils.CheckControlEnabled(name, state, view);
                     break;
 
             }
