@@ -35,8 +35,11 @@ namespace Dev2.Runtime.ServiceModel.Data
             : base(xml)
         {
             ResourceType = ResourceType.DbService;
-            var action = xml;
-
+            var action = xml.Descendants("Action").FirstOrDefault();
+            if (action == null)
+            {
+                return;
+            }
             Source = CreateSource<DbSource>(action);
             Method = CreateInputsMethod(action);
 
