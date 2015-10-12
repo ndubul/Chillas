@@ -245,7 +245,7 @@ namespace Warewolf.AcceptanceTesting.WebSource
         [Then(@"Username field is ""(.*)""")]
         public void WhenUsernameFieldIs(string visibility)
         {
-            var expectedVisibility = String.Equals(visibility, "Invisible", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
+            var expectedVisibility = String.Equals(visibility, "Collapsed", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
 
             var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageWebserviceSourceControl>(Utils.ViewNameKey);
             var databaseDropDownVisibility = manageWebserviceSourceControl.GetUsernameVisibility();
@@ -257,7 +257,7 @@ namespace Warewolf.AcceptanceTesting.WebSource
         [Then(@"Password field is ""(.*)""")]
         public void WhenPasswordFieldIs(string visibility)
         {
-            var expectedVisibility = String.Equals(visibility, "Invisible", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
+            var expectedVisibility = String.Equals(visibility, "Collapsed", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
 
             var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageWebserviceSourceControl>(Utils.ViewNameKey);
             var databaseDropDownVisibility = manageWebserviceSourceControl.GetPasswordVisibility();

@@ -383,7 +383,7 @@ Scenario Outline: Create a new folder
 	| Remote Integration Connection |
 
 #Wolf-350
-Scenario Outline: Create a new folder
+Scenario Outline: Create a new Resource using the context menu in the explorer
 	Given the explorer is visible
 	And I right-click on "<Server>"
 	And the context menu is visible
@@ -411,7 +411,7 @@ Scenario: Moving Nested folders
 	And I move "Localhost/Dice Roll Example/Tests" to "Localhost/Tests"
 	Then "Localhost/Tests" is visible in the Explorer
 
-
+#wolf-1155
 Scenario: Conflicting file names
 	Given the explorer is visible
 	And path "Localhost/Examples" is visible

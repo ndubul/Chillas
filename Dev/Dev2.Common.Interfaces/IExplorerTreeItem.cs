@@ -11,7 +11,6 @@ namespace Dev2.Common.Interfaces
         string ResourcePath { get; set; }
         string ResourceName { get; set; }
         Guid ResourceId { get; set; }
-
         bool IsExpanderVisible { get; set; }
         ICommand NewCommand { get; set; }
         ICommand DeployCommand { get; set; }
@@ -34,6 +33,7 @@ namespace Dev2.Common.Interfaces
         bool IsExpanded { get; set; }
         bool IsSelected { get; set; }
 		bool CanShowServerVersion { get; set; }
+       
         ICommand RenameCommand { get; set; }
         ICommand CreateFolderCommand { get; set; }
         ICommand DeleteCommand { get; set; }

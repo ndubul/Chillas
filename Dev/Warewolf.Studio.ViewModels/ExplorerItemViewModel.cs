@@ -201,8 +201,28 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return Children != null ? Children.Count : 0;
+                return GetChildrenCount();
             }
+        }
+        private int GetChildrenCount()
+        {
+            int total = 0;
+            foreach (var explorerItemModel in Children)
+            {
+                if (explorerItemModel.ResourceType != ResourceType.Version &&
+                   explorerItemModel.ResourceType != ResourceType.Message)
+                {
+                    if (explorerItemModel.ResourceType == ResourceType.Folder)
+                    {
+                        total += explorerItemModel.ChildrenCount;
+                    }
+                    else
+                    {
+                        total++;
+                    }
+                }
+            }
+            return total;
         }
 
         public void AddChild(IExplorerItemViewModel child)
@@ -826,7 +846,7 @@ namespace Warewolf.Studio.ViewModels
 
         public bool Move(IExplorerTreeItem destination)
         {
-            if (destination.Children.Any(a => a.ResourceName == ResourceName))
+            if (destination.Children.Any(a => a.ResourceName == ResourceName) && ResourceType != ResourceType.Folder)
             {
                 var a = new PopupMessage
                 {
