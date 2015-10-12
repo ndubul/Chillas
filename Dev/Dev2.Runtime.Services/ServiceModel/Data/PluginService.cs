@@ -44,7 +44,7 @@ namespace Dev2.Runtime.ServiceModel.Data
             : base(xml)
         {
             ResourceType = ResourceType.PluginService;
-            var action = xml;
+            var action = xml.Descendants("Action").FirstOrDefault(); ;
             if(action == null)
             {
                 return;
@@ -58,15 +58,17 @@ namespace Dev2.Runtime.ServiceModel.Data
             if(string.IsNullOrEmpty(Namespace))
             {
                 var mySource = action.AttributeSafe("SourceName");
-
-                // Now look up the old source and fetch namespace ;)
-                var services = ResourceCatalog.Instance.GetDynamicObjects<Source>(GlobalConstants.ServerWorkspaceID, mySource);
-
-                var tmp = services.FirstOrDefault();
-
-                if(tmp != null)
+                if (!string.IsNullOrEmpty(mySource))
                 {
-                    Namespace = tmp.AssemblyName;
+                    // Now look up the old source and fetch namespace ;)
+                    var services = ResourceCatalog.Instance.GetDynamicObjects<Source>(GlobalConstants.ServerWorkspaceID, mySource);
+
+                    var tmp = services.FirstOrDefault();
+
+                    if (tmp != null)
+                    {
+                        Namespace = tmp.AssemblyName;
+                    }
                 }
             }
 

@@ -99,7 +99,7 @@ namespace Dev2.Tests.Runtime.ServiceModel.Data
             var dbService = DbService.Create();
             dbService.Method = new ServiceMethod { Name = ExpectedName };
 
-            var xml = dbService.ToXml();
+             var xml = dbService.ToXml();
 
             //------------Execute Test---------------------------
             var actual = new DbService(xml);
