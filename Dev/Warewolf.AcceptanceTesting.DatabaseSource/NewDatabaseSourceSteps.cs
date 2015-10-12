@@ -309,7 +309,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
         [Then(@"Database dropdown is ""(.*)""")]
         public void GivenDropdownIs(string visibility)
         {
-            var expectedVisibility = String.Equals(visibility, "Invisible", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
+            var expectedVisibility = String.Equals(visibility, "Collapsed", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
 
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
             var databaseDropDownVisibility = manageDatabaseSourceControl.GetDatabaseDropDownVisibility();
@@ -388,7 +388,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
         [Then(@"Username field is ""(.*)""")]
         public void ThenUsernameFieldIs(string visibility)
         {
-            var expectedVisibility = String.Equals(visibility, "Invisible", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
+            var expectedVisibility = String.Equals(visibility, "Collapsed", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
 
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
             var databaseDropDownVisibility = manageDatabaseSourceControl.GetUsernameVisibility();
@@ -416,7 +416,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
         [Then(@"Password field is ""(.*)""")]
         public void ThenPasswordFieldIs(string visibility)
         {
-            var expectedVisibility = String.Equals(visibility, "Invisible", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
+            var expectedVisibility = String.Equals(visibility, "Collapsed", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
 
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
             var databaseDropDownVisibility = manageDatabaseSourceControl.GetPasswordVisibility();
