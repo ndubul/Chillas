@@ -1037,7 +1037,7 @@ namespace Dev2.Studio.ViewModels
 
         public void SetActiveEnvironment(Guid environmentID)
         {
-            ActiveEnvironment = EnvironmentRepository.Get(environmentID);
+            ActiveEnvironment = EnvironmentRepository.Get(environmentID).IsConnected || EnvironmentRepository.Get(environmentID).IsLocalHost ? EnvironmentRepository.Get(environmentID) : EnvironmentRepository.Get(Guid.Empty);
         }
 
         public void SetActiveServer(IServer server)

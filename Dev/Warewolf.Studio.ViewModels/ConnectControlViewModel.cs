@@ -153,6 +153,7 @@ namespace Warewolf.Studio.ViewModels
                     {
                         if (mainViewModel != null)
                         {
+                            mainViewModel.SetActiveEnvironment(_selectedConnection.EnvironmentID);
                             mainViewModel.NewResource("ServerSource", "");
                         }
                         IsConnected = false;
@@ -171,11 +172,11 @@ namespace Warewolf.Studio.ViewModels
                     }
                     if (mainViewModel != null)
                     {
-                        if (_selectedConnection.IsConnected)
+                        if (_selectedConnection.IsConnected && !_selectedConnection.ResourceName.Equals(Resources.Languages.Core.NewServerLabel))
                         {
                             mainViewModel.SetActiveEnvironment(_selectedConnection.EnvironmentID);
+                            mainViewModel.SetActiveServer(_selectedConnection);
                         }
-                        mainViewModel.SetActiveServer(_selectedConnection);
                     }
                     OnPropertyChanged(() => SelectedConnection);
                 }

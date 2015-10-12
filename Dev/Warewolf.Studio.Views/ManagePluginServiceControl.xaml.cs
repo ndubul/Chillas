@@ -94,7 +94,6 @@ namespace Warewolf.Studio.Views
             BindingExpression bindingExpression = SourcesComboBox.GetBindingExpression(Selector.SelectedItemProperty);
             if (bindingExpression != null)
             {
-                bindingExpression.UpdateTarget();
                 var manageWebServiceViewModel = bindingExpression.DataItem as IPluginServiceViewModel;
                 selectedSource = SourcesComboBox.SelectedItem as IPluginSource;
                 if (manageWebServiceViewModel != null)

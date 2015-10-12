@@ -1,5 +1,5 @@
 
-<Service ID="e1c3864b-9687-411c-923c-9064254a2b3d" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Find Index" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
+<Service ID="e1c3864b-9687-411c-923c-9064254a2b3d" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Find Index" ResourceType="WorkflowService" ServerVersion="0.0.5760.15534">
   <DisplayName>Find Index</DisplayName>
   <Category>Acceptance Testing Resources\Find Index</Category>
   <AuthorRoles>
@@ -509,9 +509,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>P9THI43V+OU3I8HdNJlFWO8F7VA=</DigestValue>
+        <DigestValue>9kj9C0HulKjYkQKMYZr4obcNZ9I=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>tN53CHDoM1kOSiEACy3Wz5VkT8Temgat3BUaqipA341rJFcRybFJHgEgZ01tN1ap0NGWasVq99pHEdTiNe5JHY+k71mmBhqCMTsajSKgoVPPKhYSajbJ5rdT11onejjtHhgwq/jkMxwGeIeYkgCb9JIJXnVm4DqMOqrcUfipWR8=</SignatureValue>
+    <SignatureValue>WJHVq0zaf7I3Cb2MhCXl6clH4PLQOPf9krUQFg7yOy0q7OVaF9UULhr68vfZNFxqv6tN+uPy3ZyLkDMDj8dikg6zfz5TwQGrd4cCpyrgxOazaX3mtIj1R4rZK1ttgv7n8ml+wuB04iLpdjrCSPgaranBkxa3WtUTlZU+nh9mXZQ=</SignatureValue>
   </Signature>
 </Service>

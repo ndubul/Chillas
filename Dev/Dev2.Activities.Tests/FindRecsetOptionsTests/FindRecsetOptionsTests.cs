@@ -29,6 +29,8 @@ namespace Dev2.Tests.Activities.FindRecsetOptionsTests
         {
             //------------Setup for test--------------------------
             ObservableCollection<string> expected = GlobalConstants.FindRecordsOperations.ToObservableCollection();
+            expected.Remove("There is No Error");
+            expected.Remove("There is An Error");
             //------------Execute Test---------------------------
             var actual = new ObservableCollection<string>(FindRecsetOptions.FindAll().Select(c => c.HandlesType()));
             //------------Assert Results-------------------------

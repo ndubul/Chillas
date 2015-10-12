@@ -63,7 +63,7 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         {
             var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
             var viewModel = GetViewModel(manageServerControl);
-            Assert.AreEqual(headerText, viewModel.Header);
+            Assert.AreEqual(headerText, viewModel.HeaderText);
         }
 
         [Then(@"selected protocol is ""(.*)""")]

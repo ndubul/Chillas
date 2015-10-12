@@ -1,5 +1,5 @@
 
-<Source ID="8a5c2119-08f5-4a58-888e-bbc95b996e88" Version="1.0" Name="Dev2GetCountriesWebService" ResourceType="WebSource" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAcJP3pxLHx0q8X0+OqW6qAwQAAAACAAAAAAADZgAAwAAAABAAAADz2u3FcMBc+1GjIToPF3yDAAAAAASAAACgAAAAEAAAALNcwNYrsD3NVAVY/d2iEtAYAQAApl8Ydl9ti3kmjHpiI5NVpST9G9sYNSjCf7zoogZ4JenJfqMNg5DUb0Al/9pxBkrOcNywUtTWlV5LxkJoZexui2XLO923CYQ6ok70t7yCriz3+iL5eMVOgzNo6FPLQSzkoivSPFXSsghsojXWoy+0pXSK4uoBl8nRBim1Ny0XYuivSUlruyUOgxNXBYHskLQmZlvqrIdWoL6eBZlfsphKuujDHiMhqJmzINC+IqoMWMcm7fov+v9jQGWERAiOOXG5+HW2Er5DlBT15gSKqPzNqmENQ5mXqCzpJvhXUiZ90OqV9KS36vjl+4dyI8O9z/eqhM8RFoTj4IPn70GvdGXxsiXMq71iL7uaVrQsJIym0nsnz6cDrZZOuRQAAAABkEvUAFLegPmZAKrinhkZ08Aj2Q==" Type="WebSource" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5756.27500">
+<Source ID="8a5c2119-08f5-4a58-888e-bbc95b996e88" Version="1.0" Name="Dev2GetCountriesWebService" ResourceType="WebSource" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAcJP3pxLHx0q8X0+OqW6qAwQAAAACAAAAAAADZgAAwAAAABAAAADz2u3FcMBc+1GjIToPF3yDAAAAAASAAACgAAAAEAAAALNcwNYrsD3NVAVY/d2iEtAYAQAApl8Ydl9ti3kmjHpiI5NVpST9G9sYNSjCf7zoogZ4JenJfqMNg5DUb0Al/9pxBkrOcNywUtTWlV5LxkJoZexui2XLO923CYQ6ok70t7yCriz3+iL5eMVOgzNo6FPLQSzkoivSPFXSsghsojXWoy+0pXSK4uoBl8nRBim1Ny0XYuivSUlruyUOgxNXBYHskLQmZlvqrIdWoL6eBZlfsphKuujDHiMhqJmzINC+IqoMWMcm7fov+v9jQGWERAiOOXG5+HW2Er5DlBT15gSKqPzNqmENQ5mXqCzpJvhXUiZ90OqV9KS36vjl+4dyI8O9z/eqhM8RFoTj4IPn70GvdGXxsiXMq71iL7uaVrQsJIym0nsnz6cDrZZOuRQAAAABkEvUAFLegPmZAKrinhkZ08Aj2Q==" Type="WebSource" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5760.15534">
   <DisplayName>Dev2GetCountriesWebService</DisplayName>
   <Category>Acceptance Testing Resources\Dev2GetCountriesWebService</Category>
   <AuthorRoles>
@@ -15,9 +15,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>4PwBeBabkUvDBeAlOFR0ixy7oKU=</DigestValue>
+        <DigestValue>DBKf+JpCQpCStsNPxJQ6uLn8qJM=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>i7DA9whQWIiBHbMbMt2D0dZ1HVMlM1CkRa/fP3knzhxUHDIYmiTTnjUjEwjQd5jFunG44b/eLyf9/hRFQYZCiV9m9qjVaJhgq5ACy5bXoSjNFtrmmkUYMqg3k6Qk/yPxGSu/evxZE5GJ4uIw+3o5BXP9qwHj8rXqNbeUt4T/fpU=</SignatureValue>
+    <SignatureValue>pcPqQmFw3x3kzBFEB+gci6djEzUBo+CQ1oE5SdHm2gDpjEwqjcloGk8FOsdZkjKiybstWG9TIt18lIj3L6y0vRFy/vYd241mVdXyjgzkiVxn24h5tigbGh9NkypEBya3BKbkKCnPuzOdacOp57ZSzGuBu8OxYdPvYWyo+orRfH4=</SignatureValue>
   </Signature>
 </Source>

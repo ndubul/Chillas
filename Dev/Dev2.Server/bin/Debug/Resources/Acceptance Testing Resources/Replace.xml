@@ -1,5 +1,5 @@
 
-<Service ID="ac09e872-90d3-4e8b-ae34-e1b0f3543e95" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Replace" ResourceType="WorkflowService" ServerVersion="0.0.5756.27500">
+<Service ID="ac09e872-90d3-4e8b-ae34-e1b0f3543e95" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Replace" ResourceType="WorkflowService" ServerVersion="0.0.5760.15534">
   <DisplayName>Replace</DisplayName>
   <Category>Acceptance Testing Resources\Replace</Category>
   <AuthorRoles>
@@ -114,9 +114,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>FX71QbmdR3ze5PMDfAJKnKyFmys=</DigestValue>
+        <DigestValue>V3dGoXzBDoYYK8zGVjBMS0J0Ong=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>Q2H0oTB231IgSXibj820s0Yrb6fLoRqZH5GJQqTaHWp5+EmUOOP6vuFZKjGfmo5cIkCDiV6XixPHmZPwx1xVi3ayWZooqwDRNlFAorn6uxjU6PMIrp85LR2meo4a9O2eIakcLIDQco2WXyZpFV97Hko2Z1YwWsFlp3u2ii4SCfA=</SignatureValue>
+    <SignatureValue>SouOC3DRY+21srKLOc89T57Kud9yXBNA8Ll1YNWfG/h/MTiLJ4uMFMJTpe+83uGozBOS9fjtMfU+zgHcZOgHaG+EpIlF/RU3sfOtISfccSxPHh2PxoFi5iAvYvwE1bGsrV4I/rUVeqb5r53a5iLrKkuR1OB5mY7PVLXViC5CKtU=</SignatureValue>
   </Signature>
 </Service>

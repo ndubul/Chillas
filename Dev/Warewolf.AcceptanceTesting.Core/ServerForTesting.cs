@@ -21,6 +21,7 @@ namespace Warewolf.AcceptanceTesting.Core
             MockExplorerRepo = explorerRepository;
             _explorerProxy = explorerRepository.Object;
             ResourceName = "localhost";
+            DisplayName = "localhost";
             ServerID = Guid.Empty; 
         }
 
@@ -42,6 +43,8 @@ namespace Warewolf.AcceptanceTesting.Core
         {
             return null;
         }
+
+        public string DisplayName { get; private set; }
 
         public List<IResource> Load()
         {

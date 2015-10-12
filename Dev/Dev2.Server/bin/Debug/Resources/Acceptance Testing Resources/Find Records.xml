@@ -1,5 +1,5 @@
 
-<Service ID="26742926-d4c6-4cbf-97c1-4789320a0606" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Find Records" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5756.27500">
+<Service ID="26742926-d4c6-4cbf-97c1-4789320a0606" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Find Records" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5760.15534">
   <DisplayName>Find Records</DisplayName>
   <Category>Acceptance Testing Resources\Find Records</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -39,9 +39,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>gqiZL0rskJkINRF3p9RN/j29M9s=</DigestValue>
+        <DigestValue>5XQylqbPJ4kKz0iIF1IEi/G2qQY=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>bFNJBmny1NXGzhiX+eVzC5Y7UNPH1lGgXDnpy/VOMJ5imiQWaOG9ELJxor3F9NRfNuext9hsubt0pS3UtMuafhGPNPOFzG6L4p5019m2Vhe7XdjHw8fPOTZm3vbgy0pU85k07+7WpJGilgdw+TnCOn/XyQVePRCS/+RiwfB9FRU=</SignatureValue>
+    <SignatureValue>tTqy24pmUrRPNea6cGdlOhkeylMD4q67AvIdUDn/vnAC4qvdhWBa9fjpFyJtSTxdmfZImarsvkxriWtWg/t0jvbXbLVB+pqY3nmAX0Kjtq6ArYiwomlYZ/WuSU1sWLXbXkj2PCvU91Vtv4Q8FNkae47rJ5wAb1ocpJgoduWDSsY=</SignatureValue>
   </Signature>
 </Service>

@@ -119,6 +119,11 @@ namespace Warewolf.Studio.Views
             return AssemblyNameTextBox.Text;
         }
 
+        public void ClearFilter()
+        {
+            SearchTextBox.ClearSearchCommand.Execute(null);
+        }
+
         public void PerformSave()
         {
             var viewModel = DataContext as ManagePluginSourceViewModel;

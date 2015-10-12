@@ -1,5 +1,5 @@
 
-<Source ID="62505a00-b304-4ac0-a55c-50ce85111f16" Version="1.0" Name="GenDev" ResourceType="DbSource" IsValid="false" ServerType="SqlDatabase" Type="SqlDatabase" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAcJP3pxLHx0q8X0+OqW6qAwQAAAACAAAAAAADZgAAwAAAABAAAACT26klHQO7SkBwYH897viaAAAAAASAAACgAAAAEAAAAK+WyLJ3HjHPr9+GsRfz57ewAAAA5cgkCcet087uryV77QGwXiFqX0us6FDVY9wnFw09CcMQQTduVkMeKTQJWd/+wRIE3AxX29OfmLUZFdL25zrTSj9bkGXoCWyMGuwjHcyjr5H2Cl/kXOIEUOPtsiUkxt2Ar1EL9aPDvj3YiwMOrkpXwLoH59mnTysw9kJBr5QHClwB8I1l2kK7uE5uIsGNkP444f4uor0fGa0Op2uuGzaeLYIi997Kgwa1PbL3STfQ23cUAAAAB3HTBxPm+udBWqPCXgckCODRRh8=" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5756.27500">
+<Source ID="62505a00-b304-4ac0-a55c-50ce85111f16" Version="1.0" Name="GenDev" ResourceType="DbSource" IsValid="false" ServerType="SqlDatabase" Type="SqlDatabase" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAcJP3pxLHx0q8X0+OqW6qAwQAAAACAAAAAAADZgAAwAAAABAAAACT26klHQO7SkBwYH897viaAAAAAASAAACgAAAAEAAAAK+WyLJ3HjHPr9+GsRfz57ewAAAA5cgkCcet087uryV77QGwXiFqX0us6FDVY9wnFw09CcMQQTduVkMeKTQJWd/+wRIE3AxX29OfmLUZFdL25zrTSj9bkGXoCWyMGuwjHcyjr5H2Cl/kXOIEUOPtsiUkxt2Ar1EL9aPDvj3YiwMOrkpXwLoH59mnTysw9kJBr5QHClwB8I1l2kK7uE5uIsGNkP444f4uor0fGa0Op2uuGzaeLYIi997Kgwa1PbL3STfQ23cUAAAAB3HTBxPm+udBWqPCXgckCODRRh8=" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5760.15534">
   <DisplayName>GenDev</DisplayName>
   <Category>Acceptance Testing Resources\GenDev</Category>
   <AuthorRoles>
@@ -30,9 +30,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>KUe3RJK6Y9HYfQiOvaDzCL+cTts=</DigestValue>
+        <DigestValue>CdP/Ty3r6Mz5TdRVOed5wK7lZMI=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>RH1sHrr5ckYIrBUnBaWWzALCf2CwGU7Zny14Fh6fDRCW5RyrTEMuFW8sS5iWw1GbG5AhNPL4Ho3PmAXnKx1LxA6ivUML8jxn5sZvZbfKAhsxJ8f3NxxSsPwieauu4iZek9bk9tE4hCPsm2hVfkGoUcf9TRycW/oOHTnM+rv+/cs=</SignatureValue>
+    <SignatureValue>kiKY5mgC8MneBvh+3oq2B8e9xqQ/0QlI5vza8OVsfaJh3cPms2LIoPPygJSZXQ9sj5Oo4EVYgrVMgN0Kvfdv6UJgMNyN164XHfIDhdF477Q2bSu3p4ofKtxmi/FO4UL5KVWqketvtAHdKP6nZasFbLdHtRAohTxdiJYkgavG6Ss=</SignatureValue>
   </Signature>
 </Source>
