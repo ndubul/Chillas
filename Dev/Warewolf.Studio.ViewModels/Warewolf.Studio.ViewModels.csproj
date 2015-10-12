@@ -146,6 +146,7 @@
     <Compile Include="RequestServiceNameViewModel.cs" />
     <Compile Include="SharepointServerSourceModel.cs" />
     <Compile Include="SharepointServerSourceViewModel.cs" />
+    <Compile Include="SingleEnvironmentExplorerViewModel.cs" />
     <Compile Include="SourceBaseImpl.cs" />
     <Compile Include="SplashViewModel.cs" />
     <Compile Include="ToolBox\ToolBoxCategoryViewModel.cs" />

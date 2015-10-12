@@ -826,7 +826,7 @@ namespace Warewolf.Studio.ViewModels
 
         public bool Move(IExplorerTreeItem destination)
         {
-            if (destination.Children.Any(a => a.ResourceName == ResourceName))
+            if (destination.Children.Any(a => a.ResourceName == ResourceName) && ResourceType != ResourceType.Folder)
             {
                 var a = new PopupMessage
                 {
