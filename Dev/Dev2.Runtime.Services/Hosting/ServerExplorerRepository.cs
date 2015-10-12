@@ -235,7 +235,14 @@ namespace Dev2.Runtime.Hosting
         public IExplorerItem AddItemToCollection(IExplorerItem serverExplorerItem)
         {
             IExplorerItem parent = FindParent(serverExplorerItem.ResourcePath, _root);
-            parent.Children.Add(serverExplorerItem);
+            if(parent != null)
+            {
+                if (parent.Children == null)
+                {
+                    parent.Children = new List<IExplorerItem>();
+                }
+                parent.Children.Add(serverExplorerItem);
+            }
 
             return serverExplorerItem;
         }

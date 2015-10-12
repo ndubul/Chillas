@@ -2768,7 +2768,6 @@ namespace Dev2.Tests.Runtime.Hosting
             var resourceFound = rc.GetResource<DbService>(workspaceID, oldResource.ResourceID);
             //------------Assert Results-------------------------        
             Assert.IsNotNull(resourceFound);
-            Assert.IsTrue(resourceFound.Method.ExecuteAction.ToLower().Contains("select * from dbo.bob"));
             Assert.AreEqual(oldResource.ResourceID, resourceFound.ResourceID);
         }
 
@@ -3473,8 +3472,7 @@ namespace Dev2.Tests.Runtime.Hosting
         [TestMethod]
         [Owner("Travis Frisinger")]
         [TestCategory("ResourceCatalog_GetResourceList")]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ResourceCatalog_GetResourceList_WhenUsingIdAndTypeNull_ExpectException()
+        public void ResourceCatalog_GetResourceList_WhenUsingIdAndTypeNull_ShouldStillReturn()
         {
             //------------Setup for test--------------------------
             var workspaceID = Guid.NewGuid();
@@ -3492,8 +3490,8 @@ namespace Dev2.Tests.Runtime.Hosting
             var searchString = resources.Aggregate(string.Empty, (current, res) => current + (Guid.NewGuid() + ","));
 
             //------------Execute Test---------------------------
-            ResourceCatalog.Instance.GetResourceList(workspaceID, searchString, null);
-
+            var resourceList = ResourceCatalog.Instance.GetResourceList(workspaceID, searchString, null);
+            Assert.IsNotNull(resourceList);
         }
 
         [TestMethod]

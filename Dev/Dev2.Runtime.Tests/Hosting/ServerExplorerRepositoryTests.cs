@@ -750,7 +750,7 @@ namespace Dev2.Tests.Runtime.Hosting
             //------------Execute Test---------------------------
             var result = serverExplorerRepository.AddItem(item, Guid.NewGuid());
             //------------Assert Results-------------------------
-            Assert.AreEqual(result.Message, "");
+            Assert.AreEqual("",result.Message);
             Assert.AreEqual(result.Status, ExecStatus.Success);
             dir.Verify(a => a.Exists(It.IsAny<string>()));
             dir.Verify(a => a.CreateIfNotExists(It.IsAny<string>()));
