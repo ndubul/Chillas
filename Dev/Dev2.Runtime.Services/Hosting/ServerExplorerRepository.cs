@@ -150,7 +150,15 @@ namespace Dev2.Runtime.Hosting
                     return new ExplorerRepositoryResult(ExecStatus.NoMatch, "Requested folder does not exist on server. Folder: " + path);
                 }
                 var resourceCatalogResult = ResourceCatalogue.RenameCategory(workSpaceId, path, newPath);
-                Apply(_root, a => a.ResourcePath.StartsWith(newPath + "\\"), b => b.ResourcePath = b.ResourcePath.Replace(path, newPath));
+                if(_root != null)
+                {
+                    Apply(_root, a => a != null && a.ResourcePath.StartsWith(newPath + "\\"), b => {
+                                                                                                       if(b != null)
+                                                                                                       {
+                                                                                                           b.ResourcePath = b.ResourcePath.Replace(path, newPath);
+                                                                                                       }
+                    });
+                }
                 if (resourceCatalogResult.Status == ExecStatus.Success)
                 {
                     MoveVersionFolder(path, newPath);
@@ -177,15 +185,18 @@ namespace Dev2.Runtime.Hosting
 
         void UpdateFolderName(string path, string newPath)
         {
-            var parent = FindParent(path, _root);
-            var toRename = parent.Children.FirstOrDefault(a => a.DisplayName == GetNameFromPath(path));
-            if(toRename!= null)
+            if(_root != null)
             {
-                toRename.DisplayName = GetNameFromPath(newPath);
-                toRename.ResourcePath = newPath;
+                var parent = FindParent(path, _root);
+                var toRename = parent.Children.FirstOrDefault(a => a.DisplayName == GetNameFromPath(path));
+                if(toRename!= null)
+                {
+                    toRename.DisplayName = GetNameFromPath(newPath);
+                    toRename.ResourcePath = newPath;
+                }
+                else
+                    IsDirty = true;
             }
-            else
-                IsDirty = true;
         }
 
         string GetNameFromPath(string path)
@@ -291,13 +302,16 @@ namespace Dev2.Runtime.Hosting
 
         public void Apply(IExplorerItem item, Func<IExplorerItem, bool> predicate, Action<IExplorerItem> action)
         {
-            if (predicate(item))
+            if (item != null && predicate(item))
                 action( item);
-            if (item.Children == null || item.Children.Count == 0)
+            if (item != null && (item.Children == null || item.Children.Count == 0))
             {
                 return;
             }
-             item.Children.ForEach(child => Apply( child, predicate,action));
+            if(item != null)
+            {
+                item.Children.ForEach(child => Apply( child, predicate,action));
+            }
         }
 
         public void MessageSubscription(IExplorerRepositorySync sync)
