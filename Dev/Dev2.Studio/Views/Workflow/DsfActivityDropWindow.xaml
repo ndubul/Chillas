@@ -30,7 +30,7 @@
     <i:Interaction.Behaviors>
         <local:WindowCloseBehviour CloseIndicator="{Binding CloseRequested}" />
     </i:Interaction.Behaviors>
-    <Grid Margin="{StaticResource ElementBorder}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
@@ -44,6 +44,7 @@
                                 DataContext="{Binding SingleEnvironmentExplorerViewModel}" />
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
+                    Margin="{StaticResource ElementBorder}"
                     HorizontalAlignment="Left">
             <Button Content="Cancel"
                     Command="{Binding CancelCommand}"
@@ -53,6 +54,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right"
+                    Margin="{StaticResource ElementBorder}"
                     Grid.Row="1">
             <Button Content="OK"
                     Command="{Binding OkCommand}"
