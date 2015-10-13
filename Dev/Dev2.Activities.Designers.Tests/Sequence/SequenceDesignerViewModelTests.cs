@@ -85,8 +85,7 @@ namespace Dev2.Activities.Designers.Tests.Sequence
             //------------Assert Results-------------------------
             Assert.IsNotNull(sequenceDesignerViewModel);
             Assert.IsTrue(sequenceDesignerViewModel.HasLargeView);
-            Assert.AreEqual(1, sequenceDesignerViewModel.TitleBarToggles.Count);
-            StringAssert.Contains(sequenceDesignerViewModel.TitleBarToggles[0].ExpandToolTip, "Help");
+            Assert.AreEqual(0, sequenceDesignerViewModel.TitleBarToggles.Count);
         }
 
         [TestMethod]

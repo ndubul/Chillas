@@ -50,7 +50,7 @@ namespace Dev2.Activities.Designers.Tests.BaseConvert
             var expectedOptions = Dev2EnumConverter.ConvertEnumsTypeToStringList<enDev2BaseConvertType>().ToList();
             CollectionAssert.AreEqual(expectedOptions, viewModel.ConvertTypes.ToList());
 
-            Assert.AreEqual(2, viewModel.TitleBarToggles.Count);
+            Assert.AreEqual(1, viewModel.TitleBarToggles.Count);
         }
 
 
