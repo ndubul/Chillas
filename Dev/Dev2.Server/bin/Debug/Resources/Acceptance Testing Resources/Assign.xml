@@ -1,5 +1,5 @@
 
-<Service Name="Assign" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="6361dbc7-9830-4465-984e-0767c049ba72" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5760.15534">
+<Service Name="Assign" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="6361dbc7-9830-4465-984e-0767c049ba72" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5764.15529">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sads sap" x:Class="Assign"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
@@ -386,9 +386,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>/lSqY/yUIbdgBHTD8XokoDlB9AY=</DigestValue>
+        <DigestValue>N5edg2Fn+cUfbE78G4OhyVvlq6M=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>iPlMkLwDP51CyyL+6GRfmq6Zwcqm4CO/arNNByUopiz+bOsHMD2BQNjzJrPQGSfY5oXYkOVGe//75LBPyREOL/RNVK0VLFESQGiGYVNsCfkeZ7MqnwOYmoiy1Y5077Umdbr60qbeiq+9+31Yl9trri/gXGvZ1H2TWRKlgSK0wZ0=</SignatureValue>
+    <SignatureValue>oFoxK39VDE8dIGurLdF00IkuXYzIC7OkcwWOIGA9y7Ue/z0MQEQxESgJLnfvRiH8ymWXNKnToaSSjsHu7b+0bKcv9r4DQej4fuZzcgwEejQpO66yzMEYzttY1Vkm2lwAUaistpMCXTlBFx07D3hpu5q+MR9r3HBU5Ssse/EfoQs=</SignatureValue>
   </Signature>
 </Service>

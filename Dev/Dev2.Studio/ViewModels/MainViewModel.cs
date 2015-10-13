@@ -379,7 +379,7 @@ namespace Dev2.Studio.ViewModels
             get
             {
                 return _deployCommand ??
-                       (_deployCommand = new RelayCommand(param => AddDeployResourcesWorkSurface(CurrentResourceModel)));
+                       (_deployCommand = new RelayCommand(param => AddDeploySurface(new List<IExplorerTreeItem>())));
             }
         }
 
@@ -1360,6 +1360,13 @@ namespace Dev2.Studio.ViewModels
         {
             var resource = ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
             SaveDropBoxSource(activeEnvironment, resourceType, resourcePath, resource, shouldAuthorise);
+        }
+
+        void AddDeploySurface(IEnumerable<IExplorerTreeItem> items )
+        {
+            var vm = new SingleExplorerDeployViewModel(new DeploySourceViewModel(),new DeploySourceExplorerViewModel(CustomContainer.Get<IShellViewModel>(),CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator >()) ,items,new DeployStatsViewerViewModel() );
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources) as WorkSurfaceKey, new DeployWorksurfaceViewModel(EventPublisher,vm,PopupProvider, new DeployView())); //todo:view is null
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
         public IDropboxFactory DropboxFactory

@@ -454,6 +454,7 @@
     <Compile Include="ViewModels\Administration\DialogueViewModel.cs" />
     <Compile Include="RibbonControl\Dev2RibbonApplicationMenu.cs" />
     <Compile Include="ViewModels\DependencyVisualization\DependencyGraphGenerator.cs" />
+    <Compile Include="ViewModels\DeployWorksurfaceViewModel.cs" />
     <Compile Include="ViewModels\Deploy\DeployDialogTO.cs" />
     <Compile Include="ViewModels\Deploy\DeployDialogViewModel.cs" />
     <Compile Include="ViewModels\Deploy\DeployNavigationViewModel.cs" />
@@ -1198,6 +1199,7 @@
   <ItemGroup>
     <Folder Include="AppResources\Exceptions\" />
     <Folder Include="Resources\NewFolder1\" />
+    <Folder Include="ViewModels\SingleExplorerDeploy\" />
     <Folder Include="Views\SharepointServerSource\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

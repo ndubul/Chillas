@@ -1,5 +1,5 @@
 
-<Service ID="301b1440-d4ef-4f6b-b350-199e4704dc2a" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="FindIndex" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5760.15534">
+<Service ID="301b1440-d4ef-4f6b-b350-199e4704dc2a" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="FindIndex" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5764.15529">
   <DisplayName>FindIndex</DisplayName>
   <Category>Testing\For Each\FindIndex</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -36,9 +36,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>ueZADEVXOOsgNJ44ksW5dWpE/ks=</DigestValue>
+        <DigestValue>MqK0p8klahArPoJNlFV2LDS+jdQ=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>PlL4s48P/qbW3TN1me4GDXrSLTKGxB+ahu+VkuRbQzFn82pByYnu9O0r+eqOyIqkf3Xr4FYQLPQGTBEMdFwoOZ595O4ahwEq3/K2BJUZ45EnE8LTUOJT3VXg8I70uq9172L6whn2K2oTftS6hH0+a3j5NDC5iBDWfQ3bNExkeIg=</SignatureValue>
+    <SignatureValue>jeWpcbh2VrYncG7/G17k521d/SerOSXlwh9vj88LaiRXQwzkqwmx0ZFHNdmtnx4bFZsoGYOlhu0hw/Ok2RibLEtSc/Ptttn8QZcHJUPUOyAX2/Vx/y7SVZGQvUDICjuWXI6lTuIm6nen2JfC3ULIk51cghwvhhG7hdRFY+Y9N5Q=</SignatureValue>
   </Signature>
 </Service>

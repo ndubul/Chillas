@@ -1,5 +1,5 @@
 
-<Source ID="70171112-34c9-498a-87e4-eef9e423e85a" Name="Drop" ResourceType="OauthSource" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAu+OtSyXmrE+QRjpVXbV/kQQAAAACAAAAAAADZgAAwAAAABAAAAAS02p60sjmxf2PXOjFiDP1AAAAAASAAACgAAAAEAAAAE0DRZa9GN2m//7hBgNRKMhYAAAAgSrB4DELKE5jZDZgJdgwS/eCt8zN1GLWH5So1zx1eRK2IiOZppaGerw6EFOsg0r+sC3wLAyX17Hi9hj2m3GmddwDObEO1znUZhIrC6v6RZI3Z8kvOdxrKBQAAACOtR/GCzx6FYOTk3WD+QuF/nWZbg==" Type="OauthSource" ServerVersion="0.0.5760.15534" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
+<Source ID="70171112-34c9-498a-87e4-eef9e423e85a" Name="Drop" ResourceType="OauthSource" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAu+OtSyXmrE+QRjpVXbV/kQQAAAACAAAAAAADZgAAwAAAABAAAAAS02p60sjmxf2PXOjFiDP1AAAAAASAAACgAAAAEAAAAE0DRZa9GN2m//7hBgNRKMhYAAAAgSrB4DELKE5jZDZgJdgwS/eCt8zN1GLWH5So1zx1eRK2IiOZppaGerw6EFOsg0r+sC3wLAyX17Hi9hj2m3GmddwDObEO1znUZhIrC6v6RZI3Z8kvOdxrKBQAAACOtR/GCzx6FYOTk3WD+QuF/nWZbg==" Type="OauthSource" ServerVersion="0.0.5764.15529" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
   <DisplayName>Drop</DisplayName>
   <Category>Drop</Category>
   <AuthorRoles>
@@ -16,9 +16,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>dWKBA3swpnu9I1Z53zE7B5PPxtE=</DigestValue>
+        <DigestValue>H3OrHD3+vUwNQwqS3BMeD3vqjao=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>XNc6fjm/KP8H49XwE4+e4CiigZ50bWktndIrOhgfCcTDd7pF06LbkpYCTXMAoLD6O9yH/M5Xz0a8WHjaHDxZX+/AuX5E4js+vE3OGVpRJwfQgvsb7tzrtbh+TVGzfQ0/Wl7mq5fLDVxuiikVEsdCVN0cq/ZaW6lkhvz1RBIpH0A=</SignatureValue>
+    <SignatureValue>FgN0JFS0GxMEY8BO2GvXlJMTy55vyYfZ9851itJ0D3zWKmFAp9gftvPScTzFNgGonzerNQf+Lj8YfMSLJ2Vpr1Nu8rR76Iw1/J0kueqe/taVAT2Us6EHOce0s0AQmuqdPUYmKwxVdvYVTDeJIeYxHkAXoSOmspqPJkgky5goDzM=</SignatureValue>
   </Signature>
 </Source>

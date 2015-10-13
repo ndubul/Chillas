@@ -9,10 +9,15 @@
 *  @license GNU Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>
 */
 
+using System.Collections.Generic;
+using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Deploy;
 using Dev2.Models;
 using Dev2.Studio.Core.Helpers;
 using Dev2.Studio.Core.Models;
 using Dev2.Studio.ViewModels.Deploy;
+using Microsoft.Practices.Prism.PubSubEvents;
+using Warewolf.Studio.ViewModels;
 
 namespace Dev2.Factory
 {
@@ -37,6 +42,18 @@ namespace Dev2.Factory
             }
 
             return deployViewModel;
+        }
+
+        public static  IDeployViewModel GetDeployViewModel(IEventAggregator aggregator, IShellViewModel vm, IEnumerable<IExplorerTreeItem> items)
+        {
+            IDeployDestinationExplorerViewModel vmdest = new DeploySourceViewModel() ;
+            IDeploySourceExplorerViewModel vmsrc = new DeploySourceExplorerViewModel(vm,aggregator);
+
+            IDeployStatsViewerViewModel stats = new DeployStatsViewerViewModel();
+            return  new SingleExplorerDeployViewModel
+                (
+                vmdest,vmsrc,items,stats
+                );
         }
     }
 }

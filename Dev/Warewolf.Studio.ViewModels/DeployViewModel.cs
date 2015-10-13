@@ -6,20 +6,21 @@ using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class DeployViewModel:BindableBase, IDeployViewModel
+    public class SingleExplorerDeployViewModel : BindableBase, IDeployViewModel
     {
         IDeploySourceExplorerViewModel _source;
         readonly IDeployStatsViewerViewModel _stats;
         IDeployDestinationExplorerViewModel _destination;
 
+
         #region Implementation of IDeployViewModel
 
-        public DeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source,IEnumerable<IExplorerTreeItem> selectedItems,IDeployStatsViewerViewModel stats)
+        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source,IEnumerable<IExplorerTreeItem> selectedItems,IDeployStatsViewerViewModel stats) 
         {
             _destination = destination;
-            _destination.SelectItemsForDeploy(selectedItems);
+            
             _source = source;
-
+            _source.SelectItemsForDeploy(selectedItems);
             _stats = stats;
         }
 
@@ -35,7 +36,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _source = value;
-                OnPropertyChanged(()=>Source);
+                OnPropertyChanged("Source");
             }
         }
         /// <summary>
@@ -50,7 +51,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _destination = value;
-                OnPropertyChanged(()=>Destination);
+                OnPropertyChanged("Destination");
             }
         }
         /// <summary>
@@ -76,5 +77,7 @@ namespace Warewolf.Studio.ViewModels
         public IDeployStatsViewerViewModel StatsViewModel { get; set; }
 
         #endregion
+
+      
     }
 }
