@@ -47,6 +47,8 @@ namespace Dev2.Common.Interfaces
         bool AreVersionsVisible { get; set; }
         IShellViewModel ShellViewModel { get;}
         int ChildrenCount { get; }
+        Action<IExplorerItemViewModel> SelectAction { get; set; }
+
         void AddChild(IExplorerItemViewModel child);
         void RemoveChild(IExplorerItemViewModel child);
         void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction);
