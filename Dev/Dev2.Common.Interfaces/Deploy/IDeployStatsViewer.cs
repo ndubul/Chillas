@@ -34,5 +34,9 @@ namespace Dev2.Common.Interfaces.Deploy
         string Status { get; set; }
 
         void Calculate( IList<IExplorerTreeItem> items);
+
+        IList<IExplorerTreeItem> Conflicts { get; }
+
+        IList<IExplorerTreeItem> New { get; }
     }
 }
