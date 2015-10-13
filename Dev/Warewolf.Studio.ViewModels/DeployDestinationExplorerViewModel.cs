@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Caliburn.Micro;
 using Dev2.Common.Interfaces;
@@ -8,30 +7,33 @@ using Dev2.Common.Interfaces.Deploy;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class DeploySourceExplorerViewModel :ExplorerViewModelBase, IDeploySourceExplorerViewModel {
-        readonly IEnvironmentViewModel _environmentViewModel;
+    public class DeploySourceExplorerViewModel :ExplorerViewModel, IDeploySourceExplorerViewModel {
+ 
 
 
         #region Implementation of IDeployDestinationExplorerViewModel
 
 
-        public DeploySourceExplorerViewModel(IEnvironmentViewModel environmentViewModel)
+        public DeploySourceExplorerViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator):base(shellViewModel,aggregator)
         {
-            _environmentViewModel = environmentViewModel;
-            environmentViewModel.SetPropertiesForDialog();
-            UpdateItemForDeploy();
-            Environments = new ObservableCollection<IEnvironmentViewModel>
-            {
-                environmentViewModel
-            };
 
+            if (SelectedEnvironment != null)
+            {
+                UpdateItemForDeploy();
+            }
             IsRefreshing = false;
             ShowConnectControl = false;
+            this.SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
+        }
+
+        void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, IEnvironmentViewModel e)
+        {
+            UpdateItemForDeploy();
         }
 
         private void UpdateItemForDeploy()
         {
-            _environmentViewModel.AsList().Apply(a=>
+            SelectedEnvironment.AsList().Apply(a=>
             {
                 a.CanDrag = false;
                 a.CanRename = false;
@@ -89,6 +91,12 @@ namespace Warewolf.Studio.ViewModels
 
         #endregion
 
+
+    }
+
+    public class DeploySourceViewModel: ExplorerViewModelBase, IDeployDestinationExplorerViewModel
+    {
+        
 
     }
 }

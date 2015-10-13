@@ -74,6 +74,7 @@ using Dev2.Studio.Views.DependencyVisualization;
 using Dev2.Threading;
 using Dev2.Utils;
 using Dev2.ViewModels;
+using Dev2.ViewModels.SingleExplorerDeploy;
 using Dev2.Views.Dialogs;
 using Dev2.Views.DropBox;
 using Dev2.Webs;
@@ -379,7 +380,7 @@ namespace Dev2.Studio.ViewModels
             get
             {
                 return _deployCommand ??
-                       (_deployCommand = new RelayCommand(param => AddDeployResourcesWorkSurface(CurrentResourceModel)));
+                       (_deployCommand = new RelayCommand(param => AddDeploySurface(new List<IExplorerTreeItem>())));
             }
         }
 
@@ -1360,6 +1361,13 @@ namespace Dev2.Studio.ViewModels
         {
             var resource = ResourceModelFactory.CreateResourceModel(ActiveEnvironment, resourceType);
             SaveDropBoxSource(activeEnvironment, resourceType, resourcePath, resource, shouldAuthorise);
+        }
+
+        void AddDeploySurface(IEnumerable<IExplorerTreeItem> items )
+        {
+            var vm = new SingleExplorerDeployViewModel(new DeploySourceViewModel(),new DeploySourceExplorerViewModel(CustomContainer.Get<IShellViewModel>(),CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator >()) ,items,new DeployStatsViewerViewModel() );
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources) as WorkSurfaceKey, new DeployWorksurfaceViewModel(EventPublisher,vm,PopupProvider,null)); //todo:view is null
+            AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
         public IDropboxFactory DropboxFactory
