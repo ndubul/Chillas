@@ -31,8 +31,7 @@ namespace Dev2.Activities.Designers.Tests.Replace
             var viewModel = new ReplaceDesignerViewModel(CreateModelItem());
 
             //------------Assert Results-------------------------
-            Assert.AreEqual(1, viewModel.TitleBarToggles.Count);
-            StringAssert.Contains(viewModel.TitleBarToggles[0].ExpandToolTip, "Help");
+            Assert.AreEqual(0, viewModel.TitleBarToggles.Count);
         }
 
 
