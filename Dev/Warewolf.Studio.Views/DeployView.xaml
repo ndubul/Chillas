@@ -6,8 +6,9 @@
              xmlns:views="clr-namespace:Warewolf.Studio.Views"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:customControls="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
+             xmlns:viewModels="clr-namespace:Warewolf.Studio.ViewModels;assembly=Warewolf.Studio.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DataContext="{d:DesignInstance viewModels:DeployViewModel}">
 
     <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
@@ -36,6 +37,7 @@
             </StackPanel>
 
             <views:ConnectControl Grid.Row="1"
+                                  DataContext="{Binding ConnectControlViewModel}"
                                   Margin="{StaticResource ControlBorderTop}"
                                   ConnectButtonAutomationID="UI_SourceConnectServerbtn_AutoID"
                                   EditButtonAutomationID="UI_SourceServerEditbtn_AutoID"
@@ -64,6 +66,7 @@
             </StackPanel>
 
             <views:ConnectControl Grid.Row="1"
+                                  DataContext="{Binding ConnectControlViewModel}"
                                   Margin="{StaticResource ControlBorderTop}"
                                   ConnectButtonAutomationID="UI_DestinationServerConnectbtn_AutoID"
                                   EditButtonAutomationID="UI_DestinationServerEditbtn_AutoID"
@@ -94,7 +97,7 @@
 
                     <ItemsControl Grid.Row="1"
                                   Margin="{StaticResource ElementBorder}"
-                                  >
+                                  ItemsSource="{Binding SourceStats}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -106,13 +109,13 @@
                                                Foreground="White" 
                                                FontSize="{StaticResource FontSize-Medium}"
                                                HorizontalAlignment="Left">
-                                    <Run Text="Name" />
+                                    <Run Text="{Binding Name}" />
                                     </TextBlock>
                                     <TextBlock Grid.Column="1"
                                                Margin="0,-2,0,0"
                                                Foreground="White"
                                                FontSize="{StaticResource FontSize-Medium}"
-                                               Text="Description"
+                                               Text="{Binding Description}"
                                                HorizontalAlignment="Left" />
                                 </Grid>
                             </DataTemplate>
@@ -125,6 +128,7 @@
                         <Button AutomationProperties.AutomationId="UI_SelectDepbtn_AutoID"
                                 x:Name="Dependencies"
                                 Content="Select All Dependencies"
+                                Command="{Binding SelectDependenciesCommand}"
                                 Width="Auto"
                                 Style="{StaticResource ButtonOrangeStyle}"
                                 Margin="{StaticResource ElementBorder}"/>
@@ -151,6 +155,7 @@
                         <ListBox Style="{StaticResource DeployListBoxStyle}"
                                  Background="#7F7F7F"
                                  BorderThickness="0"
+                                 ItemsSource="{Binding TargetStats}"
                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -158,11 +163,11 @@
                                         <TextBlock Foreground="White" 
                                                    Margin="5,0,0,0"
                                                    FontSize="{StaticResource FontSize-Medium}"
-                                                   Text="Name"/>
+                                                   Text="{Binding Name}"/>
                                         <TextBlock Margin="5,0,0,0">
                                             <Hyperlink x:Name="TestDefault" Click="TestDefault_OnClick">
                                                 <TextBlock Foreground="White"
-                                                           Text="Description"
+                                                           Text="{Binding Description}"
                                                            FontSize="28" 
                                                            HorizontalAlignment="Center"
                                                            Style="{StaticResource HoverUnderlineStyle}"/>
@@ -184,6 +189,7 @@
                                 Margin="{StaticResource ElementBorder}">
                         <Button AutomationProperties.AutomationId="UI_Deploybtn_AutoID"
                                 Content="Deploy"
+                                Command="{Binding DeployCommand}"
                                 Style="{StaticResource ButtonOrangeStyle}"
                                 Margin="{StaticResource ControlBorderRight}"
                                 MaxWidth="50"
@@ -192,9 +198,11 @@
                         <customControls:CircularProgressBar Height="15"
                                                             Width="15"
                                                             VerticalAlignment="Center"
-                                                            Margin="{StaticResource ControlBorderRight}" />
+                                                            Margin="{StaticResource ControlBorderRight}"
+                                                            Visibility="{Binding IsDeploying, Converter={StaticResource BoolToVisConverter}}" />
                         <StackPanel Orientation="Horizontal"
-                                    Margin="{StaticResource ControlBorderRight}">
+                                    Margin="{StaticResource ControlBorderRight}"
+                                    Visibility="{Binding DeploySuccessfull, Converter={StaticResource BoolToVisibilityConverterPositive}}">
                             <fa:ImageAwesome Width="14" 
                                              Height="14" 
                                              Foreground="{StaticResource WareWolfOrangeBrush}" 
@@ -203,7 +211,8 @@
                                              HorizontalAlignment="Right" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
-                                    Margin="{StaticResource ControlBorderRight}">
+                                    Margin="{StaticResource ControlBorderRight}"
+                                    Visibility="{Binding ServersAreNotTheSame, Converter={StaticResource BoolToVisibilityConverterNegative}}">
                             <TextBlock x:Name="ServersNotSame" 
                                        Foreground="{StaticResource ValidationErrorElement}"
                                        Text="Source and Destination cannot be the same."
