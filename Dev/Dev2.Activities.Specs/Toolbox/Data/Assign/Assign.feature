@@ -4,7 +4,7 @@
 	I want a tool that assigns data to variables
 
 Scenario: Assign a value to a variable
-	Given I assign the value 10 to a variable "[[var]]"	
+	Given I assign the value "10" to a variable "[[var]]"	
 	When the assign tool is executed
 	Then the value of "[[var]]" equals 10
 	And the execution has "NO" error
@@ -16,7 +16,7 @@ Scenario: Assign a value to a variable
 	| 1 | [[var]] = 10 |
 	
 Scenario: Assign a value with plus in it to a variable
-	Given I assign the value +10 to a variable "[[var]]"	
+	Given I assign the value "+10" to a variable "[[var]]"	
 	When the assign tool is executed
 	Then the value of "[[var]]" equals +10
 	And the execution has "NO" error
