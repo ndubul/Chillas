@@ -248,8 +248,8 @@ Scenario: Warning message no longer appears
 	 And "Examples\Utility - Date and Time" is visible on Destination Server
 	 And I select "Examples\Utility - Date and Time" from Source Server
 	 When I deploy
-	 Then a warning popup appears ""
-	 When I click OK on Resource exists in the destination server popup
+	 Then a warning popup appears "Resource exists in the destination server"
+	 When I click "OK"
 	 When I deploy again
 	 Then warning popup no longer appears
 
@@ -273,6 +273,16 @@ Scenario: Renaming resource after deploying and re-deploy
 	 And "Examples\Utility - Date and Time update" is visible on "Remote"
 
 
+#wolf-117
+Scenario: Deploying to an Older server version
+	Given I have deploy tab opened
+	 And selected Source Server is "localhost"
+     And selected Destination Server is "Sandbox-dev2"
+	 And I select "Localhost\Testing\For Each\SharepointCreate" from Source Server
+	 When I deploy 	
+	 Then a warning message appears "Deploying to an older server version could result in resources not working on destination server"
+	 When I click "OK"
+	 Then deploy is successfull
 
 ###REQUIREMENTS Check to see what needs to be included
 

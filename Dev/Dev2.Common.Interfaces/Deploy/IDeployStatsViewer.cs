@@ -1,6 +1,8 @@
-﻿namespace Dev2.Common.Interfaces.Deploy
+﻿using System.Collections.Generic;
+
+namespace Dev2.Common.Interfaces.Deploy
 {
-    public interface IDeployStatsViewer 
+    public interface IDeployStatsViewerViewModel
     {
         /// <summary>
         /// Services being deployed
@@ -30,5 +32,7 @@
         /// The status of the last deploy
         /// </summary>
         string Status { get; set; }
+
+        void Calculate( IList<IExplorerTreeItem> items);
     }
 }

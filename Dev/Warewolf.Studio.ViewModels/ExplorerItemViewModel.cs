@@ -19,21 +19,13 @@ using System.Windows;
 using System.Windows.Input;
 using Dev2;
 using Dev2.Activities;
-using Dev2.Common.Common;
 using Dev2.Common.Interfaces;
-using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Infrastructure;
-using Dev2.Data.ServiceModel;
-using Dev2.Services.Events;
 using Dev2.Studio.Core;
-using Dev2.Studio.Core.Interfaces;
-using Dev2.Studio.Core.Messages;
-using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Unlimited.Applications.BusinessDesignStudio.Activities;
-using Warewolf.Studio.AntiCorruptionLayer;
 using Warewolf.Studio.Core;
 using Warewolf.Studio.Core.Popup;
 
@@ -41,7 +33,7 @@ namespace Warewolf.Studio.ViewModels
 {
     public class ExplorerItemViewModel : BindableBase, IExplorerItemViewModel
     {
-        readonly Action<IExplorerItemViewModel> _selectAction;
+        public Action<IExplorerItemViewModel> SelectAction { get;  set; }
         string _resourceName;
         private bool _isVisible;
         bool _allowEditing;
@@ -70,7 +62,7 @@ namespace Warewolf.Studio.ViewModels
 
         public ExplorerItemViewModel(IServer server, IExplorerTreeItem parent, Action<IExplorerItemViewModel> selectAction, IShellViewModel shellViewModel)
         {
-            _selectAction = selectAction;
+            SelectAction = selectAction;
             _shellViewModel = shellViewModel;
             RollbackCommand = new DelegateCommand(() =>
             {
@@ -267,7 +259,7 @@ namespace Warewolf.Studio.ViewModels
                 var id = Guid.NewGuid();
                 var name = GetChildNameFromChildren();
                 _explorerRepository.CreateFolder(ResourcePath, name, id);
-                var child = new ExplorerItemViewModel(Server, this, _selectAction, _shellViewModel)
+                var child = new ExplorerItemViewModel(Server, this, SelectAction, _shellViewModel)
                 {
                     ResourceName = name,
                     ResourceId = id,
@@ -976,7 +968,7 @@ namespace Warewolf.Studio.ViewModels
                 _isExpanded = value;
                 if (value && !prev)
                 {
-                    _selectAction(this);
+                    SelectAction(this);
                 }
                 OnPropertyChanged(() => IsExpanded);
             }

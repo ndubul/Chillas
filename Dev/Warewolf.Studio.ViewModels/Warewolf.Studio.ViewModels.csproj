@@ -125,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectControlViewModel.cs" />
+    <Compile Include="DeployDestinationExplorerViewModel.cs" />
+    <Compile Include="DeployStatsViewerViewModel.cs" />
+    <Compile Include="DeployViewModel.cs" />
     <Compile Include="EmailAttachmentModel.cs" />
     <Compile Include="EmailAttachmentVm.cs" />
     <Compile Include="EnvironmentViewModel.cs" />

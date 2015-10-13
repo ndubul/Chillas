@@ -10,26 +10,21 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Dev2.AppResources.Repositories;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
-using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Common.Interfaces.Threading;
 using Dev2.ConnectionHelpers;
 using Dev2.Services.Events;
-using Dev2.Studio.Core;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.ViewModels.Base;
 using Dev2.Studio.Enums;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Studio.Views.Workflow;
 using Dev2.Threading;
-using Warewolf.Studio.AntiCorruptionLayer;
 using Warewolf.Studio.ViewModels;
 
 namespace Dev2.Dialogs
@@ -42,7 +37,6 @@ namespace Dev2.Dialogs
 
         public IExplorerViewModel SingleEnvironmentExplorerViewModel{get; private set;}
         IEnvironmentModel _environmentModel;
-        IStudioResourceRepository _studio;
         IExplorerTreeItem _selectedResource;
 
         /// <summary>
@@ -68,7 +62,6 @@ namespace Dev2.Dialogs
             VerifyArgument.IsNotNull("eventPublisher", eventPublisher);
             VerifyArgument.IsNotNull("asyncWorker", asyncWorker);
             VerifyArgument.IsNotNull("connectControlSingleton", connectControlSingleton);
-            _studio = studioResourceRepository;
 
             SingleEnvironmentExplorerViewModel = new SingleEnvironmentExplorerViewModel(environmentViewModel, Guid.Empty);
             SingleEnvironmentExplorerViewModel.SelectedItemChanged += (sender, item) => { SelectedResource = item; };
