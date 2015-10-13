@@ -6,7 +6,6 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.WorkSurface;
-using Dev2.ViewModels.SingleExplorerDeploy;
 using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Mvvm;
 using Warewolf.Studio.ViewModels;
@@ -19,7 +18,7 @@ namespace Dev2.ViewModels
     {
         readonly IPopupController _popupController;
 
-        public DeployWorksurfaceViewModel(IEventAggregator eventPublisher, SingleExplorerDeploy.SingleExplorerDeployViewModel vm, IPopupController popupController,IView view)
+        public DeployWorksurfaceViewModel(IEventAggregator eventPublisher, SingleExplorerDeployViewModel vm, IPopupController popupController,IView view)
             : base(eventPublisher)
         {
             ViewModel = vm;

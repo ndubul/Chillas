@@ -16,7 +16,6 @@ using Dev2.Models;
 using Dev2.Studio.Core.Helpers;
 using Dev2.Studio.Core.Models;
 using Dev2.Studio.ViewModels.Deploy;
-using Dev2.ViewModels.SingleExplorerDeploy;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Warewolf.Studio.ViewModels;
 

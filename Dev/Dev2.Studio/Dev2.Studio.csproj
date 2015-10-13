@@ -464,7 +464,6 @@
     <Compile Include="ViewModels\Help\IHelpViewWrapper.cs" />
     <Compile Include="ViewModels\Help\HelpViewWrapper.cs" />
     <Compile Include="ViewModels\Navigation\INavigationViewModel.cs" />
-    <Compile Include="ViewModels\SingleExplorerDeploy\DeployViewModel.cs" />
     <Compile Include="ViewModels\SourceViewModel.cs" />
     <Compile Include="ViewModels\Workflow\DataListConversionUtils.cs" />
     <Compile Include="ViewModels\Workflow\WorkflowDesignerDataPartUtils.cs" />
@@ -1200,6 +1199,7 @@
   <ItemGroup>
     <Folder Include="AppResources\Exceptions\" />
     <Folder Include="Resources\NewFolder1\" />
+    <Folder Include="ViewModels\SingleExplorerDeploy\" />
     <Folder Include="Views\SharepointServerSource\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

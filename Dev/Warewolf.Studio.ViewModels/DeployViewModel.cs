@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
-using Caliburn.Micro;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Deploy;
-using Dev2.Studio.ViewModels.WorkSurface;
 using Microsoft.Practices.Prism.Mvvm;
 
-namespace Dev2.ViewModels.SingleExplorerDeploy
+namespace Warewolf.Studio.ViewModels
 {
     public class SingleExplorerDeployViewModel : BindableBase, IDeployViewModel
     {

@@ -74,7 +74,6 @@ using Dev2.Studio.Views.DependencyVisualization;
 using Dev2.Threading;
 using Dev2.Utils;
 using Dev2.ViewModels;
-using Dev2.ViewModels.SingleExplorerDeploy;
 using Dev2.Views.Dialogs;
 using Dev2.Views.DropBox;
 using Dev2.Webs;
