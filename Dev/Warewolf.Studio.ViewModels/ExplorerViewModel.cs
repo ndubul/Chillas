@@ -292,8 +292,11 @@ namespace Warewolf.Studio.ViewModels
 
 		IEnvironmentViewModel CreateEnvironmentFromServer(IServer server, IShellViewModel shellViewModel)
 		{
-            server.UpdateRepository.ItemSaved += Refresh;
-            return new EnvironmentViewModel(server, shellViewModel);
+		    if(server != null && server.UpdateRepository != null)
+		    {
+		        server.UpdateRepository.ItemSaved += Refresh;
+		    }
+		    return new EnvironmentViewModel(server, shellViewModel);
 		}
 	}
 }

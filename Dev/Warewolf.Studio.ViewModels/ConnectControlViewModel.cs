@@ -49,10 +49,17 @@ namespace Warewolf.Studio.ViewModels
             LoadServers();
 
             SelectedConnection = server;
-            aggregator.GetEvent<ServerAddedEvent>().Subscribe(ServerAdded);
+            var evt = aggregator.GetEvent<ServerAddedEvent>();
+            if(evt != null)
+            {
+                evt.Subscribe(ServerAdded);
+            }
             EditConnectionCommand = new DelegateCommand(AllowConnectionEdit);
             ToggleConnectionStateCommand = new DelegateCommand(ConnectOrDisconnect);
-            Server.UpdateRepository.ServerSaved += UpdateRepositoryOnServerSaved;
+            if(Server.UpdateRepository != null)
+            {
+                Server.UpdateRepository.ServerSaved += UpdateRepositoryOnServerSaved;
+            }
         }
 
         void UpdateRepositoryOnServerSaved()
@@ -149,7 +156,7 @@ namespace Warewolf.Studio.ViewModels
                 if (value != null)
                 {
                     var mainViewModel = CustomContainer.Get<IShellViewModel>();
-                    if (value.ResourceName.Equals(Resources.Languages.Core.NewServerLabel))
+                    if (value.ResourceName != null && value.ResourceName.Equals(Resources.Languages.Core.NewServerLabel))
                     {
                         if (mainViewModel != null)
                         {

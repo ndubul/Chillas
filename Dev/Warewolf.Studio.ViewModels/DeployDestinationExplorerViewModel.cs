@@ -8,14 +8,14 @@ using Dev2.Common.Interfaces.Deploy;
 namespace Warewolf.Studio.ViewModels
 {
     public class DeploySourceExplorerViewModel :ExplorerViewModel, IDeploySourceExplorerViewModel {
- 
-
+        readonly IDeployStatsViewerViewModel _statsArea;
 
         #region Implementation of IDeployDestinationExplorerViewModel
 
 
-        public DeploySourceExplorerViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator):base(shellViewModel,aggregator)
+        public DeploySourceExplorerViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator,IDeployStatsViewerViewModel statsArea):base(shellViewModel,aggregator)
         {
+            _statsArea = statsArea;
 
             if (SelectedEnvironment != null)
             {
@@ -23,7 +23,7 @@ namespace Warewolf.Studio.ViewModels
             }
             IsRefreshing = false;
             ShowConnectControl = false;
-            this.SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
+            SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
         }
 
         void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, IEnvironmentViewModel e)
@@ -49,6 +49,7 @@ namespace Warewolf.Studio.ViewModels
                 a.CanCreateWebService = false;
                 a.CanCreateWebSource = false;
                 a.CanCreateWorkflowService = false;
+                a.SelectAction = (ax => { _statsArea.Calculate(SelectedItems.ToList()); });
             });
         }
 
@@ -94,7 +95,7 @@ namespace Warewolf.Studio.ViewModels
 
     }
 
-    public class DeploySourceViewModel: ExplorerViewModelBase, IDeployDestinationExplorerViewModel
+    public class DeployDestinationViewModel: ExplorerViewModelBase, IDeployDestinationExplorerViewModel
     {
         
 

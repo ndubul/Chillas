@@ -31,8 +31,77 @@ using Warewolf.Studio.Core.Popup;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class ExplorerItemViewModel : BindableBase, IExplorerItemViewModel
+    public class ExplorerItemViewModel : BindableBase, IExplorerItemViewModel, IEquatable<ExplorerItemViewModel>
     {
+        #region Equality members
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+        /// </returns>
+        /// <param name="other">An object to compare with this object.</param>
+        public bool Equals(ExplorerItemViewModel other)
+        {
+            if(ReferenceEquals(null, other))
+            {
+                return false;
+            }
+            if(ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            return ResourceId.Equals(other.ResourceId);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// true if the specified object  is equal to the current object; otherwise, false.
+        /// </returns>
+        /// <param name="obj">The object to compare with the current object. </param>
+        public override bool Equals(object obj)
+        {
+            if(ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+            if(ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+            if(obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+            return Equals((ExplorerItemViewModel)obj);
+        }
+
+        /// <summary>
+        /// Serves as a hash function for a particular type. 
+        /// </summary>
+        /// <returns>
+        /// A hash code for the current <see cref="T:System.Object"/>.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return ResourceId.GetHashCode();
+        }
+
+        public static bool operator ==(ExplorerItemViewModel left, ExplorerItemViewModel right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(ExplorerItemViewModel left, ExplorerItemViewModel right)
+        {
+            return !Equals(left, right);
+        }
+
+        #endregion
+
         public Action<IExplorerItemViewModel> SelectAction { get;  set; }
         string _resourceName;
         private bool _isVisible;
@@ -595,6 +664,9 @@ namespace Warewolf.Studio.ViewModels
                         //var helpDescriptor = new HelpDescriptor("", string.Format("<body><H1>{0}</H1><a href=\"http://warewolf.io\">Warewolf</a><p>Inputs: {1}</p><p>Outputs: {2}</p></body>", ResourceName, Inputs, Outputs), null);
                         //_shellViewModel.UpdateHelpDescriptor(helpDescriptor);
                     }
+                  
+                        SelectAction(this);
+                  
                 }
             }
         }
@@ -966,10 +1038,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 var prev = _isExpanded;
                 _isExpanded = value;
-                if (value && !prev)
-                {
-                    SelectAction(this);
-                }
+       
                 OnPropertyChanged(() => IsExpanded);
             }
         }
@@ -1025,5 +1094,7 @@ namespace Warewolf.Studio.ViewModels
         //                return _shellViewModel;
         //            }
         //        }
+
+        
     }
 }
