@@ -32,6 +32,6 @@ namespace Dev2.Common.Interfaces.Deploy
         ///     Overridden resource in Destination
         ///     Static steps of how to deploy
         /// </summary>
-        IDeployStatsViewer Stats { get; set; }
+        IDeployStatsViewerViewModel StatsViewModel { get; set; }
     }
 }
