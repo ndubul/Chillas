@@ -63,7 +63,7 @@ namespace Warewolf.Studio.ViewModels
             server.Connect();
             IsConnected = server.IsConnected;
             AllowEdit = server.AllowEdit;
-            //ShowServerVersionCommand = new DelegateCommand(ShowServerVersionAbout);
+            ShowServerVersionCommand = new DelegateCommand(ShowServerVersionAbout);
             CanCreateFolder = Server.UserPermissions == Permissions.Administrator || server.UserPermissions == Permissions.Contribute;
             CreateFolderCommand = new DelegateCommand(CreateFolder);
             Parent = null;
@@ -468,10 +468,10 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        //	    void ShowServerVersionAbout()
-        //        {
-        //            ShellViewModel.ShowAboutBox(Server);
-        //        }
+        void ShowServerVersionAbout()
+        {
+            ShellViewModel.ShowAboutBox();
+        }
 
         string GetChildNameFromChildren()
         {
