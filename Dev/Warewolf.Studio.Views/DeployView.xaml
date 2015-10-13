@@ -12,7 +12,7 @@
     <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60*" />
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="40*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -20,14 +20,15 @@
         </Grid.RowDefinitions>
 
         <!-- SOURCE SERVER -->
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <StackPanel HorizontalAlignment="Stretch" 
+            <StackPanel Background="{StaticResource WareWolfMenuBrush}" 
+                        HorizontalAlignment="Stretch" 
                         Orientation="Horizontal">
                 <TextBlock Margin="{StaticResource ElementBorder}" 
                            Text="Source Server" 
@@ -42,9 +43,10 @@
                                   x:Name="SourceConnectControl" />
         </Grid>
 
-        <GridSplitter Grid.Column="1" Width="2" Margin="3,0,3,0" FlowDirection="LeftToRight" />
+        <GridSplitter Grid.Column="1" Width="2" Margin="3,0,3,0" HorizontalAlignment="Stretch" />
 
-        <Grid Grid.Column="2">
+        <!-- DESTINATION SERVER -->
+        <Grid Grid.Column="2" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -68,10 +70,11 @@
                                   ServerComboBoxAutomationID="UI_DestinationServercbx_AutoID" 
                                   x:Name="DestinationConnectControl" />
 
-            <Grid Grid.Row="2" Background="#7F7F7F">
+            <Grid Grid.Row="2" Background="#7F7F7F" Margin="{StaticResource ControlBorderTop}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50*"/>
-                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="40*"/>
                 </Grid.RowDefinitions>
 
                 <!-- SELECTED FOR DEPLOY -->
@@ -156,11 +159,15 @@
                                                    Margin="5,0,0,0"
                                                    FontSize="{StaticResource FontSize-Medium}"
                                                    Text="Name"/>
-                                        <TextBlock Foreground="White"
-                                                   Text="Description"
-                                                   FontSize="28"
-                                                   Margin="5,0,0,0"
-                                                   HorizontalAlignment="Center" />
+                                        <TextBlock Margin="5,0,0,0">
+                                            <Hyperlink x:Name="TestDefault" Click="TestDefault_OnClick">
+                                                <TextBlock Foreground="White"
+                                                           Text="Description"
+                                                           FontSize="28" 
+                                                           HorizontalAlignment="Center"
+                                                           Style="{StaticResource HoverUnderlineStyle}"/>
+                                            </Hyperlink>
+                                        </TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -206,12 +213,42 @@
                         <StackPanel Orientation="Horizontal"
                                     Visibility="{Binding ShowServerDisconnectedMessage, Converter={StaticResource BoolToVisibilityConverterPositive}}">
                             <TextBlock Foreground="{StaticResource ValidationErrorElement}"
-                                       Text="ServerDisconnectedMessage"
+                                       Text="Server Disconnected Message"
                                        AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
                                        VerticalAlignment="Center"
                                        x:Name="ErrorMessage" />
                         </StackPanel>
                     </StackPanel>
+                </Grid>
+                
+                <Grid Grid.Row="2" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Foreground="White"
+                               Margin="{StaticResource ElementBorder}"
+                               FontSize="{StaticResource FontSize-Larger}"
+                               Text="Conflicts / New Resources"
+                               FontWeight="Bold"/>
+
+                    <ScrollViewer Grid.Row="1" 
+                                  Margin="{StaticResource ElementBorder}" 
+                                  HorizontalScrollBarVisibility="Hidden" 
+                                  VerticalScrollBarVisibility="Auto">
+                    <ItemsControl>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="White" 
+                                           FontSize="{StaticResource FontSize-Medium}"
+                                           Text="Resource Name"
+                                           HorizontalAlignment="Left">
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    </ScrollViewer>
                 </Grid>
             </Grid>
         </Grid>
