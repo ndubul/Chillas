@@ -8,14 +8,14 @@ using Dev2.Common.Interfaces.Deploy;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class DeployDestinationExplorerViewModel :ExplorerViewModelBase, IDeploySourceExplorerViewModel {
+    public class DeploySourceExplorerViewModel :ExplorerViewModelBase, IDeploySourceExplorerViewModel {
         readonly IEnvironmentViewModel _environmentViewModel;
-        IExplorerTreeItem _selectedItems;
+
 
         #region Implementation of IDeployDestinationExplorerViewModel
 
 
-        public DeployDestinationExplorerViewModel(IEnvironmentViewModel environmentViewModel)
+        public DeploySourceExplorerViewModel(IEnvironmentViewModel environmentViewModel)
         {
             _environmentViewModel = environmentViewModel;
             environmentViewModel.SetPropertiesForDialog();
@@ -56,6 +56,22 @@ namespace Warewolf.Studio.ViewModels
             {
                 return  SelectedEnvironment!= null ?  SelectedEnvironment.AsList().Select(a=> a as IExplorerTreeItem).Where(a=>a.IsSelected).ToList():new List<IExplorerTreeItem>();
             }
+            set
+            {
+                foreach(var explorerTreeItem in value)
+                {
+                    Select(explorerTreeItem);
+                }
+            }
+        }
+
+        void Select(IExplorerTreeItem explorerTreeItem)
+        {
+            var item= SelectedEnvironment != null ? SelectedEnvironment.AsList().FirstOrDefault(a=>a.ResourceId == explorerTreeItem.ResourceId):null;
+           if(item!=null)
+           {
+               item.IsSelected = true;
+           }
         }
 
         public void SelectItemsForDeploy(IEnumerable selectedItems)
