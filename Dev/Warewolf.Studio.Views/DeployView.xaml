@@ -8,13 +8,13 @@
              xmlns:customControls="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
              xmlns:viewModels="clr-namespace:Warewolf.Studio.ViewModels;assembly=Warewolf.Studio.ViewModels"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance viewModels:DeployViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:SingleExplorerDeployViewModel}">
 
     <Grid Margin="{StaticResource ElementBorder}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60*" />
+            <ColumnDefinition Width="60*" MinWidth="150" />
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="40*" />
+            <ColumnDefinition Width="40*" MinWidth="150" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -37,7 +37,7 @@
             </StackPanel>
 
             <views:ConnectControl Grid.Row="1"
-                                  DataContext="{Binding ConnectControlViewModel}"
+                                  DataContext="{Binding SourceConnectControlViewModel}"
                                   Margin="{StaticResource ControlBorderTop}"
                                   ConnectButtonAutomationID="UI_SourceConnectServerbtn_AutoID"
                                   EditButtonAutomationID="UI_SourceServerEditbtn_AutoID"
@@ -66,7 +66,7 @@
             </StackPanel>
 
             <views:ConnectControl Grid.Row="1"
-                                  DataContext="{Binding ConnectControlViewModel}"
+                                  DataContext="{Binding DestinationConnectControlViewModel}"
                                   Margin="{StaticResource ControlBorderTop}"
                                   ConnectButtonAutomationID="UI_DestinationServerConnectbtn_AutoID"
                                   EditButtonAutomationID="UI_DestinationServerEditbtn_AutoID"
@@ -95,32 +95,30 @@
                                Text="Selected for Deploy"
                                FontWeight="Bold"/>
 
-                    <ItemsControl Grid.Row="1"
-                                  Margin="{StaticResource ElementBorder}"
-                                  ItemsSource="{Binding SourceStats}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" 
-                                               Foreground="White" 
-                                               FontSize="{StaticResource FontSize-Medium}"
-                                               HorizontalAlignment="Left">
-                                    <Run Text="{Binding Name}" />
-                                    </TextBlock>
-                                    <TextBlock Grid.Column="1"
-                                               Margin="0,-2,0,0"
-                                               Foreground="White"
-                                               FontSize="{StaticResource FontSize-Medium}"
-                                               Text="{Binding Description}"
-                                               HorizontalAlignment="Left" />
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <Grid Grid.Row="1" Margin="{StaticResource ElementBorder}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Services" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding ConnectorsCount}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Workflows" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ServicesCount}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Sources" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding SourcesCount}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Unknown" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding UnknownCount}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                    </Grid>
 
                     <StackPanel Grid.Row="2"
                                 HorizontalAlignment="Left"
@@ -150,38 +148,32 @@
                                Text="Deploy Summary"
                                FontWeight="Bold"></TextBlock>
 
-                    <StackPanel Grid.Row="1" 
-                                Orientation="Horizontal">
-                        <ListBox Style="{StaticResource DeployListBoxStyle}"
-                                 Background="#7F7F7F"
-                                 BorderThickness="0"
-                                 ItemsSource="{Binding TargetStats}"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Foreground="White" 
-                                                   Margin="5,0,0,0"
-                                                   FontSize="{StaticResource FontSize-Medium}"
-                                                   Text="{Binding Name}"/>
-                                        <TextBlock Margin="5,0,0,0">
-                                            <Hyperlink x:Name="TestDefault" Click="TestDefault_OnClick">
-                                                <TextBlock Foreground="White"
-                                                           Text="{Binding Description}"
-                                                           FontSize="28" 
-                                                           HorizontalAlignment="Center"
-                                                           Style="{StaticResource HoverUnderlineStyle}"/>
-                                            </Hyperlink>
-                                        </TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel IsItemsHost="True" Orientation="Horizontal"  />
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                        </ListBox>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="New Resources" Margin="{StaticResource ElementBorder}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="Override" Margin="{StaticResource ElementBorder}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" >
+                                <Hyperlink x:Name="NewResourcesView" Command="{Binding NewResourcesViewCommand}" >
+                                    <TextBlock Text="{Binding NewResourcesCount}" FontSize="28"></TextBlock>
+                                </Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" >
+                                <Hyperlink x:Name="OverridesCountView" Command="{Binding OverridesViewCommand}"  >
+                                    <TextBlock Text="{Binding OverridesCount}" FontSize="28"></TextBlock>
+                                </Hyperlink>
+                            </TextBlock>
+                        </Grid>
                     </StackPanel>
 
                     <StackPanel Grid.Row="2"
@@ -215,6 +207,7 @@
                                     Visibility="{Binding ServersAreNotTheSame, Converter={StaticResource BoolToVisibilityConverterNegative}}">
                             <TextBlock x:Name="ServersNotSame" 
                                        Foreground="{StaticResource ValidationErrorElement}"
+                                       TextWrapping="Wrap"
                                        Text="Source and Destination cannot be the same."
                                        AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
                                        VerticalAlignment="Center" />
@@ -222,41 +215,41 @@
                         <StackPanel Orientation="Horizontal"
                                     Visibility="{Binding ShowServerDisconnectedMessage, Converter={StaticResource BoolToVisibilityConverterPositive}}">
                             <TextBlock Foreground="{StaticResource ValidationErrorElement}"
-                                       Text="Server Disconnected Message"
+                                       Text="{Binding ServerDisconnectedMessage}"
                                        AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
                                        VerticalAlignment="Center"
                                        x:Name="ErrorMessage" />
                         </StackPanel>
                     </StackPanel>
                 </Grid>
-                
-                <Grid Grid.Row="2" Visibility="Collapsed">
+
+                <Grid Grid.Row="2" Visibility="{Binding ShowConflicts, Converter={StaticResource BoolToVisConverter}}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
+
                     <TextBlock Foreground="White"
                                Margin="{StaticResource ElementBorder}"
                                FontSize="{StaticResource FontSize-Larger}"
-                               Text="Conflicts / New Resources"
+                               Text="{Binding ConflictNewResourceText}"
                                FontWeight="Bold"/>
 
                     <ScrollViewer Grid.Row="1" 
                                   Margin="{StaticResource ElementBorder}" 
                                   HorizontalScrollBarVisibility="Hidden" 
                                   VerticalScrollBarVisibility="Auto">
-                    <ItemsControl>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Foreground="White" 
+                        <ItemsControl>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="White" 
                                            FontSize="{StaticResource FontSize-Medium}"
                                            Text="Resource Name"
                                            HorizontalAlignment="Left">
-                                </TextBlock>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </ScrollViewer>
                 </Grid>
             </Grid>

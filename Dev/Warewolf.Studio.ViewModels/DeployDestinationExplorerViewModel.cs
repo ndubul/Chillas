@@ -96,7 +96,18 @@ namespace Warewolf.Studio.ViewModels
 
     public class DeploySourceViewModel: ExplorerViewModelBase, IDeployDestinationExplorerViewModel
     {
-        
+        #region Implementation of IDeployDestinationExplorerViewModel
 
+        public ICollection<IExplorerTreeItem> SelectedItems { get; private set; }
+
+        /// <summary>
+        /// used to select a list of items from the explorer
+        /// </summary>
+        /// <param name="selectedItems"></param>
+        public void SelectItemsForDeploy(IEnumerable<IExplorerTreeItem> selectedItems)
+        {
+        }
+
+        #endregion
     }
 }

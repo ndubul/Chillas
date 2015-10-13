@@ -199,11 +199,8 @@ namespace Dev2.Studio.Views
         {
             if (e.Key == Key.Home && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                //var imageWindow = new ImageWindow();
-                //imageWindow.Show();
-
-                Window window = new Window { Content = new DeployView() };
-                window.Show();
+                var imageWindow = new ImageWindow();
+                imageWindow.Show();
             }
             if (e.Key == Key.G && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {

@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Dev2.Common.Interfaces;
+﻿using Dev2.Common.Interfaces;
 using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.Views
@@ -13,10 +11,6 @@ namespace Warewolf.Studio.Views
         public DeployView()
         {
             InitializeComponent();
-        }
-
-        void TestDefault_OnClick(object sender, RoutedEventArgs e)
-        {
         }
 
         #region Implementation of IComponentConnector
