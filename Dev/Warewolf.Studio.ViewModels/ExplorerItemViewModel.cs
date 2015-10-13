@@ -58,6 +58,7 @@ namespace Warewolf.Studio.ViewModels
         bool _canShowVersions;
         readonly IShellViewModel _shellViewModel;
         Dictionary<ResourceType, Type> _activityNames;
+        bool _canShowDependencies;
 
         public ExplorerItemViewModel(IServer server, IExplorerTreeItem parent, Action<IExplorerItemViewModel> selectAction, IShellViewModel shellViewModel)
         {
@@ -715,7 +716,18 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public bool CanShowDependencies { get; set; }
+        public bool CanShowDependencies
+        {
+            get
+            {
+                return _canShowDependencies && ResourceType != ResourceType.Folder;
+            }
+            set
+            {
+                _canShowDependencies = value;
+                OnPropertyChanged(() => CanShowDependencies);
+            }
+        }
 
         public bool IsVersion { get; set; }
         public bool CanShowVersions

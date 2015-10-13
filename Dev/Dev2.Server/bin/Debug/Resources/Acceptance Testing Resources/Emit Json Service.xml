@@ -1,5 +1,5 @@
 
-<Service ID="95f50aad-3e38-49bf-b68e-b71d1a56812d" Version="1.0" Name="Emit Json Service" ResourceType="PluginService" IsValid="false" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5760.15534">
+<Service ID="95f50aad-3e38-49bf-b68e-b71d1a56812d" Version="1.0" Name="Emit Json Service" ResourceType="PluginService" IsValid="false" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5764.15529">
   <Actions>
     <Action Name="Emit Json Service" Type="Plugin" SourceID="a0663ef3-0254-40c6-a53f-c9a5d24ac70d" SourceName="Anything To Xml Hook Plugin" SourceMethod="EmitStringData" Namespace="Dev2.AnytingToXmlHook.Plugin.AnythignToXmlHookPlugin">
       <Inputs>
@@ -48,9 +48,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>hju83mqxI22ulFgMFGvOGVGaMvo=</DigestValue>
+        <DigestValue>ZSPsl8SZq5rLIG8ll/3m1gSnrks=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>K+1JJ40O6PAYFuGVqxTiiA65mG2OjHDDH9amujPN9MxIRSesPb1soZVM9jBthUB83zRVf+uG/5xpiPRxfR0pXoaD9ZNXNncDPAAgw7lD9gpETqZKi/m7A2eqHP1gHrB/+ikedcof2rSc69WlDjiIfFJr1tzHF0YbA1XRXDm5egw=</SignatureValue>
+    <SignatureValue>r3JMnVMRzQq6eV4WQyo2U7oKvdBlpoK9iTLMYM+20XwO9PszkYKuezZpzvI0KyrMG5P72tEEYYMpS1uKiN9FFVU3SwBXsYguO7g40VpPpIMHbhnO9ZuCxf2mToSu2MhUApvC2XpsJa6+BkHCfLp0kf2pd4xtGeXfWf7OC2YOJQ8=</SignatureValue>
   </Signature>
 </Service>

@@ -33,6 +33,8 @@ namespace Dev2.Common.Interfaces
 
         void Debug();
 
+        void ShowAboutBox();
+
         void ShowDependencies(Guid resourceId, IServer server);
     }
 }

@@ -1,5 +1,5 @@
 
-<Service Name="DateTimeDifference_Complex_Test" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="07c3665e-6fc6-4493-9caa-5d4ca137174c" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5760.15534">
+<Service Name="DateTimeDifference_Complex_Test" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="07c3665e-6fc6-4493-9caa-5d4ca137174c" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5764.15529">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap" x:Class="DateTimeDifference_Complex_Test" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:dsca="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uaba="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:uf="clr-namespace:Unlimited.Framework;assembly=Dev2.Core" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;x:Members&gt;
@@ -132,9 +132,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>ztr1u+VNCC2eRXwGnR5RL1h68W8=</DigestValue>
+        <DigestValue>4bn08MDlxSLkBT177XVsb+bGVb4=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>oly1fdK/wlVViELj1KFzvt2Fv8Wk1Mq2xyymFSlJlp4cnFI4Oyc6/HV6TeKRP+kNySj2h8bi6yn2uxdWUSaJV/4AbPrMkGvrM920yX52EArK8tNOGLKyIvN12LPvgzVMU1BBStD16FauLDJpT85iyheVULwY2o6IEI8cXu4rI4M=</SignatureValue>
+    <SignatureValue>qE5jv9B9tw24ZK2LrHScc1uCUTrSFb+EjbKRg1cv41z7iQq1eaWbaPV2Yi2L9gSMIAT++1b1QnoM2w7HMfHGTPALIDgR0nccK46VjIbtFLLbGFXZLFTx1KR406LYWZ3PruHTxQFnCBba26ZTp/LhtKLqGV03F6fRqdqdFW5Xnso=</SignatureValue>
   </Signature>
 </Service>

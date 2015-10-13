@@ -1,0 +1,256 @@
+﻿<UserControl x:Class="Warewolf.Studio.Views.DeployView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:Warewolf.Studio.Views"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:customControls="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Margin="{StaticResource ElementBorder}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60*" />
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="40*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- SOURCE SERVER -->
+        <Grid Grid.Column="0" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Background="{StaticResource WareWolfMenuBrush}" 
+                        HorizontalAlignment="Stretch" 
+                        Orientation="Horizontal">
+                <TextBlock Margin="{StaticResource ElementBorder}" 
+                           Text="Source Server" 
+                           Style="{StaticResource SourceHeader}"></TextBlock>
+            </StackPanel>
+
+            <views:ConnectControl Grid.Row="1"
+                                  Margin="{StaticResource ControlBorderTop}"
+                                  ConnectButtonAutomationID="UI_SourceConnectServerbtn_AutoID"
+                                  EditButtonAutomationID="UI_SourceServerEditbtn_AutoID"
+                                  ServerComboBoxAutomationID="UI_SourceServercbx_AutoID" 
+                                  x:Name="SourceConnectControl" />
+        </Grid>
+
+        <GridSplitter Grid.Column="1" Width="2" Margin="3,0,3,0" HorizontalAlignment="Stretch" />
+
+        <!-- DESTINATION SERVER -->
+        <Grid Grid.Column="2" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" 
+                        Grid.Column="0" 
+                        Background="{StaticResource WareWolfMenuBrush}" 
+                        HorizontalAlignment="Stretch" 
+                        Orientation="Horizontal">
+                <TextBlock Margin="{StaticResource ElementBorder}" 
+                           Text="Destination Server" 
+                           Style="{StaticResource SourceHeader}"/>
+            </StackPanel>
+
+            <views:ConnectControl Grid.Row="1"
+                                  Margin="{StaticResource ControlBorderTop}"
+                                  ConnectButtonAutomationID="UI_DestinationServerConnectbtn_AutoID"
+                                  EditButtonAutomationID="UI_DestinationServerEditbtn_AutoID"
+                                  ServerComboBoxAutomationID="UI_DestinationServercbx_AutoID" 
+                                  x:Name="DestinationConnectControl" />
+
+            <Grid Grid.Row="2" Background="#7F7F7F" Margin="{StaticResource ControlBorderTop}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="40*"/>
+                </Grid.RowDefinitions>
+
+                <!-- SELECTED FOR DEPLOY -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Foreground="White"
+                               Margin="{StaticResource ElementBorder}"
+                               FontSize="{StaticResource FontSize-Larger}"
+                               Text="Selected for Deploy"
+                               FontWeight="Bold"/>
+
+                    <ItemsControl Grid.Row="1"
+                                  Margin="{StaticResource ElementBorder}"
+                                  >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" 
+                                               Foreground="White" 
+                                               FontSize="{StaticResource FontSize-Medium}"
+                                               HorizontalAlignment="Left">
+                                    <Run Text="Name" />
+                                    </TextBlock>
+                                    <TextBlock Grid.Column="1"
+                                               Margin="0,-2,0,0"
+                                               Foreground="White"
+                                               FontSize="{StaticResource FontSize-Medium}"
+                                               Text="Description"
+                                               HorizontalAlignment="Left" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <StackPanel Grid.Row="2"
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+                        <Button AutomationProperties.AutomationId="UI_SelectDepbtn_AutoID"
+                                x:Name="Dependencies"
+                                Content="Select All Dependencies"
+                                Width="Auto"
+                                Style="{StaticResource ButtonOrangeStyle}"
+                                Margin="{StaticResource ElementBorder}"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- DEPLOY SUMMARY -->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Foreground="White"
+                               Margin="{StaticResource ElementBorder}"
+                               FontSize="{StaticResource FontSize-Larger}"
+                               Text="Deploy Summary"
+                               FontWeight="Bold"></TextBlock>
+
+                    <StackPanel Grid.Row="1" 
+                                Orientation="Horizontal">
+                        <ListBox Style="{StaticResource DeployListBoxStyle}"
+                                 Background="#7F7F7F"
+                                 BorderThickness="0"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Foreground="White" 
+                                                   Margin="5,0,0,0"
+                                                   FontSize="{StaticResource FontSize-Medium}"
+                                                   Text="Name"/>
+                                        <TextBlock Margin="5,0,0,0">
+                                            <Hyperlink x:Name="TestDefault" Click="TestDefault_OnClick">
+                                                <TextBlock Foreground="White"
+                                                           Text="Description"
+                                                           FontSize="28" 
+                                                           HorizontalAlignment="Center"
+                                                           Style="{StaticResource HoverUnderlineStyle}"/>
+                                            </Hyperlink>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" Orientation="Horizontal"  />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal"
+                                Margin="{StaticResource ElementBorder}">
+                        <Button AutomationProperties.AutomationId="UI_Deploybtn_AutoID"
+                                Content="Deploy"
+                                Style="{StaticResource ButtonOrangeStyle}"
+                                Margin="{StaticResource ControlBorderRight}"
+                                MaxWidth="50"
+                                MinWidth="50" 
+                                x:Name="Deploy"/>
+                        <customControls:CircularProgressBar Height="15"
+                                                            Width="15"
+                                                            VerticalAlignment="Center"
+                                                            Margin="{StaticResource ControlBorderRight}" />
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="{StaticResource ControlBorderRight}">
+                            <fa:ImageAwesome Width="14" 
+                                             Height="14" 
+                                             Foreground="{StaticResource WareWolfOrangeBrush}" 
+                                             Margin="{StaticResource ControlBorderRight}" 
+                                             Icon="Check" 
+                                             HorizontalAlignment="Right" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="{StaticResource ControlBorderRight}">
+                            <TextBlock x:Name="ServersNotSame" 
+                                       Foreground="{StaticResource ValidationErrorElement}"
+                                       Text="Source and Destination cannot be the same."
+                                       AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding ShowServerDisconnectedMessage, Converter={StaticResource BoolToVisibilityConverterPositive}}">
+                            <TextBlock Foreground="{StaticResource ValidationErrorElement}"
+                                       Text="Server Disconnected Message"
+                                       AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
+                                       VerticalAlignment="Center"
+                                       x:Name="ErrorMessage" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                
+                <Grid Grid.Row="2" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Foreground="White"
+                               Margin="{StaticResource ElementBorder}"
+                               FontSize="{StaticResource FontSize-Larger}"
+                               Text="Conflicts / New Resources"
+                               FontWeight="Bold"/>
+
+                    <ScrollViewer Grid.Row="1" 
+                                  Margin="{StaticResource ElementBorder}" 
+                                  HorizontalScrollBarVisibility="Hidden" 
+                                  VerticalScrollBarVisibility="Auto">
+                    <ItemsControl>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="White" 
+                                           FontSize="{StaticResource FontSize-Medium}"
+                                           Text="Resource Name"
+                                           HorizontalAlignment="Left">
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,5 +1,5 @@
 
-<Source ID="d04b0566-5614-4b8b-bbf2-abb4b41aa522" Version="1.0" Name="PrimitivePluginTestSrc" ResourceType="PluginSource" IsValid="false" AssemblyLocation="Plugins\PrimativesTestDLL.dll" AssemblyName="PrimativesTestDLL" Type="Plugin" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5760.15534">
+<Source ID="d04b0566-5614-4b8b-bbf2-abb4b41aa522" Version="1.0" Name="PrimitivePluginTestSrc" ResourceType="PluginSource" IsValid="false" AssemblyLocation="Plugins\PrimativesTestDLL.dll" AssemblyName="PrimativesTestDLL" Type="Plugin" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5764.15529">
   <DisplayName>PrimitivePluginTestSrc</DisplayName>
   <Category>Acceptance Testing Resources\PrimitivePluginTestSrc</Category>
   <AuthorRoles>
@@ -15,9 +15,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>RIu3WgX/UzFf0S87MNEte+/ZQgs=</DigestValue>
+        <DigestValue>UUUACLKmcvXpVKAZy5TSq+U7k7o=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>pAJt4xvFN4JJBlnbbAmGQq7lXeo7S45zQt7m7zzIZQni5ztXGHHUydM0KmyPOtfEI5MtPlyYGsUTS0IGZmr1I/rvgkPvBnyRYthOWRivnmzGQvakaXePngXFV4+MbOkhO0X1CCJp2HvDpvG1tCa2o0XW6rUu9DNZh1JnZppzyVQ=</SignatureValue>
+    <SignatureValue>mR9b04TIAxq4+Kvkrcv/oHIKHVB0oMmupgPEJwSf6nFypp5gXXg4b2f9dnaNNPJs/EX9Qk7UMU+D+aTL25GBLK57wFb60EVb4e9Y/pyypLhZmCHSMh3waQQ+HEeX4WEaO1Ae50GS4NcMUznaI4v+u8C2DiJ5EiOLLGpKEqLlW4k=</SignatureValue>
   </Signature>
 </Source>

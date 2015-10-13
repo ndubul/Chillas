@@ -1,5 +1,5 @@
 
-<Service ID="033cdf59-8f7e-45ea-b767-864ce4abfec8" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="UnZipOnFileSystemTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5760.15534">
+<Service ID="033cdf59-8f7e-45ea-b767-864ce4abfec8" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="UnZipOnFileSystemTest" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5764.15529">
   <DisplayName>UnZipOnFileSystemTest</DisplayName>
   <Category>Acceptance Testing Resources\UnZipOnFileSystemTest</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -41,9 +41,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>6FN/hKoASk0EABjmn5kShrZIKBU=</DigestValue>
+        <DigestValue>mFNaxbNHStMpGARwXvgJvnzZnv0=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>rRG4lnk0AJEhLI+jC5z8kXmo9i6nF6qXeAplw9hEUmk4MWYfJHbd4sIOt/6EAGXHdWDV/EuZ5ewfWbKuWAXFgUy/CBF/bJp9TkK0LUxpy66eLybviRqakthWjqHa4a2PtD9N1maMgz/Ozfc1qQ/lfcCgZl+q44hrwnIblyMK/44=</SignatureValue>
+    <SignatureValue>RVMteGMQRK/Vw05yZnc3P8C0d2KPfJzGNQbfmtRpdny04kg5NtaMwlHb1zGSFssI0+EM7znVkusinkBKb6IIMpwftx2uEgOF+L8X/QPQEiF3LvzN9mF9II6r1lgPw+ZWBcasWUvtNpK2XS53Fh4GmHIntox5Daa3n8EE1ouO/EQ=</SignatureValue>
   </Signature>
 </Service>
