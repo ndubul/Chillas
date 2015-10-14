@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Caliburn.Micro;
 using Dev2.Common.Interfaces;
@@ -19,15 +20,15 @@ namespace Warewolf.Studio.ViewModels
             : base(shellViewModel, aggregator,null,false)
         {
             _statsArea = statsArea;
-            foreach(var environmentViewModel in Environments)
+            foreach(var environmentViewModel in _environments)
             {
                 
                 environmentViewModel.SelectAction = SelectAction;
             }
-            if(Environments.Count>0)
+            if(_environments.Count>0)
             {
-                LoadEnvironment(Environments.First(),true);
-                SelectedEnvironment = Environments.First();
+                LoadEnvironment(_environments.First(), true);
+                SelectedEnvironment = _environments.First();
             }
             if (ConnectControlViewModel.SelectedConnection != null)
             {
@@ -45,11 +46,25 @@ namespace Warewolf.Studio.ViewModels
             UpdateItemForDeploy(environmentId);
         }
 
+        public override ICollection<IEnvironmentViewModel> Environments
+        {
+            get
+            {
+                return new ObservableCollection<IEnvironmentViewModel>(_environments.Where(a => a.IsVisible));
+            }
+            set
+            {
+                _environments = value;
+                OnPropertyChanged(() => Environments);
+            }
+        }
+
         private void UpdateItemForDeploy(Guid environmentId)
         {
-            var environmentViewModel = Environments.FirstOrDefault(a=>a.Server.EnvironmentID==environmentId);
+            var environmentViewModel = _environments.FirstOrDefault(a=>a.Server.EnvironmentID==environmentId);
             if(environmentViewModel != null)
             {
+                environmentViewModel.IsVisible = true;
                 SelectedEnvironment = environmentViewModel;
                 environmentViewModel.AsList().Apply(a=>
                 {
@@ -72,11 +87,12 @@ namespace Warewolf.Studio.ViewModels
                     a.AllowResourceCheck = true;
                 });
             }
-            foreach(var env  in  Environments.Where(a => a.Server.EnvironmentID != environmentId))
+            foreach (var env in _environments.Where(a => a.Server.EnvironmentID != environmentId))
             {
-                Environments.Remove(env);
+
+                env.IsVisible = false;
             }
-           
+           OnPropertyChanged(()=>Environments);
         }
 
         void SelectAction(IExplorerItemViewModel ax)
@@ -85,6 +101,11 @@ namespace Warewolf.Studio.ViewModels
             {
                 ax.Children.Apply(ay => { ay.IsResourceChecked = ax.IsResourceChecked; });
             }
+            else
+            {
+                ax.Parent.IsFolderChecked = ax.IsResourceChecked;
+            }
+           
             _statsArea.Calculate(SelectedItems.ToList());
         }
 
@@ -139,12 +160,12 @@ namespace Warewolf.Studio.ViewModels
         {
 
             ConnectControlViewModel.SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
-            SelectedEnvironment = Environments.FirstOrDefault();
+            SelectedEnvironment = _environments.FirstOrDefault();
         }
 
         void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, Guid environmentid)
         {
-            var environmentViewModel = Environments.FirstOrDefault(a => a.Server.EnvironmentID == environmentid);
+            var environmentViewModel = _environments.FirstOrDefault(a => a.Server.EnvironmentID == environmentid);
             if (environmentViewModel != null)
             {
                 SelectedEnvironment = environmentViewModel;

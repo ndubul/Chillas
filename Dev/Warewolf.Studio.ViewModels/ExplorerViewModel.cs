@@ -23,7 +23,7 @@ namespace Warewolf.Studio.ViewModels
 {
 	public class ExplorerViewModelBase : BindableBase, IExplorerViewModel
 	{
-		private ICollection<IEnvironmentViewModel> _environments;
+	    protected ICollection<IEnvironmentViewModel> _environments;
 		private string _searchText;
 		private bool _isRefreshing;
 		private IExplorerTreeItem _selectedItem;
@@ -109,11 +109,11 @@ namespace Warewolf.Studio.ViewModels
 			}
 		}
 
-		public ICollection<IEnvironmentViewModel> Environments
+		public virtual ICollection<IEnvironmentViewModel> Environments
 		{
 			get
 			{
-				return _environments;
+                return _environments;
 			}
 			set
 			{
@@ -274,19 +274,21 @@ namespace Warewolf.Studio.ViewModels
 	    async void ServerConnected(object _, IServer server)
 	    {
             var environmentModel = CreateEnvironmentFromServer(server, _shellViewModel);
-            Environments.Add(environmentModel);
+            _environments.Add(environmentModel);
 	        await environmentModel.Load(IsDeploy);
+            OnPropertyChanged(() => Environments);
 	    }
 
 	    public bool IsDeploy { get; set; }
 
 	    void ServerDisconnected(object _, IServer server)
         {
-            var environmentModel = Environments.FirstOrDefault(model => model.Server.EnvironmentID == server.EnvironmentID);
+            var environmentModel = _environments.FirstOrDefault(model => model.Server.EnvironmentID == server.EnvironmentID);
             if (environmentModel!=null)
             {
-                Environments.Remove(environmentModel);
+                _environments.Remove(environmentModel);
             }
+            OnPropertyChanged(()=>Environments);
         }
 
 		protected async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment,bool isDeploy = false)

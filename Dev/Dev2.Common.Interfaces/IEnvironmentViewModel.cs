@@ -25,6 +25,7 @@ namespace Dev2.Common.Interfaces
         bool IsServerUnavailableIconVisible { get; set; }
         ICommand ShowServerVersionCommand { get; set; }
         Action<IExplorerItemViewModel> SelectAction { get; set; }
+        bool IsVisible { get; set; }
 
         void SetPropertiesForDialog();
 

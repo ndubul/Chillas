@@ -711,6 +711,20 @@ namespace Warewolf.Studio.ViewModels
                 OnPropertyChanged(() => IsResourceChecked);
             }
         }
+        public bool IsFolderChecked
+        {
+            get
+            {
+                return _isResourceChecked;
+            }
+            set
+            {
+                _isResourceChecked = value;
+
+                OnPropertyChanged(() => IsResourceChecked);
+            }
+        }
+
 
         public ICommand RenameCommand { get; set; }
         public bool CanCreateDbService { get; set; }
