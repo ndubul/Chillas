@@ -212,7 +212,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                     Margin="{StaticResource ControlBorderRight}"
-                                    Visibility="{Binding ServersAreNotTheSame, Converter={StaticResource BoolToVisibilityConverterNegative}}">
+                                    Visibility="{Binding ServersAreNotTheSame, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverterNegative}}">
                             <TextBlock x:Name="ServersNotSame" 
                                        Foreground="{StaticResource ValidationErrorElement}"
                                        TextWrapping="Wrap"

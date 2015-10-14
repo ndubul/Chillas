@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Caliburn.Micro;
@@ -27,6 +28,7 @@ namespace Warewolf.Studio.ViewModels
         bool _isDeploying;
         bool _deploySuccessfull;
         string _conflictNewResourceText;
+        bool _serversAreNotTheSame;
 
         #region Implementation of IDeployViewModel
 
@@ -50,12 +52,20 @@ namespace Warewolf.Studio.ViewModels
             SourceConnectControlViewModel = _source.ConnectControlViewModel;
             DestinationConnectControlViewModel = _destination.ConnectControlViewModel;
 
+            SourceConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
+            DestinationConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
+
             DeployCommand = new DelegateCommand(Deploy);
             SelectDependenciesCommand = new DelegateCommand(SelectDependencies);
             NewResourcesViewCommand = new DelegateCommand(ViewNewResources);
             OverridesViewCommand = new DelegateCommand(ViewOverrides);
 
             ShowConflicts = false;
+        }
+
+        void UpdateServerCompareChanged(object sender, Guid environmentid)
+        {
+            ServersAreNotTheSame = DestinationConnectControlViewModel.SelectedConnection.EnvironmentID != SourceConnectControlViewModel.SelectedConnection.EnvironmentID;
         }
 
         void ViewOverrides()
@@ -160,7 +170,12 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return (Destination.SelectedEnvironment == null || Source.SelectedEnvironment == null) || (Destination.SelectedEnvironment != Source.SelectedEnvironment);
+                return _serversAreNotTheSame;
+            }
+            set
+            {
+                _serversAreNotTheSame = value;
+                OnPropertyChanged(() => ServersAreNotTheSame);
             }
         }
 
