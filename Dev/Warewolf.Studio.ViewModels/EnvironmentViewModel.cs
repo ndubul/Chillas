@@ -33,6 +33,7 @@ namespace Warewolf.Studio.ViewModels
         Guid _resourceId;
         bool _allowResourceCheck;
         bool _isResourceChecked;
+        bool _isVisible;
 
         public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel, bool isDialog=false,Action<IExplorerItemViewModel> selectAction=null)
         {
@@ -74,6 +75,7 @@ namespace Warewolf.Studio.ViewModels
             ResourceName = DisplayName;
             CanShowServerVersion = true;
             AreVersionsVisible = false;
+            IsVisible = true;
             SetPropertiesForDialog();
 
         }
@@ -199,6 +201,18 @@ namespace Warewolf.Studio.ViewModels
         public ICommand ShowServerVersionCommand { get; set; }
 
         public Action<IExplorerItemViewModel> SelectAction { get; set; }
+        public bool IsVisible
+        {
+            get
+            {
+                return _isVisible;
+            }
+            set
+            {
+                _isVisible = value;
+                OnPropertyChanged(()=>IsVisible);
+            }
+        }
 
         public void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction)
         {
