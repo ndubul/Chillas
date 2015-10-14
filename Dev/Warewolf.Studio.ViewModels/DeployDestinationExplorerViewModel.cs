@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,41 +18,47 @@ namespace Warewolf.Studio.ViewModels
         {
             _statsArea = statsArea;
 
-            if (SelectedEnvironment != null)
+            if (ConnectControlViewModel.SelectedConnection != null)
             {
-                UpdateItemForDeploy();
+                UpdateItemForDeploy(ConnectControlViewModel.SelectedConnection.EnvironmentID);
             }
             IsRefreshing = false;
             ShowConnectControl = false;
-            SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
+           
+            ConnectControlViewModel.SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
         }
 
-        void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, IEnvironmentViewModel e)
+        void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, Guid environmentId)
         {
-            UpdateItemForDeploy();
+            UpdateItemForDeploy(environmentId);
         }
 
-        private void UpdateItemForDeploy()
+        private void UpdateItemForDeploy(Guid environmentId)
         {
-            SelectedEnvironment.AsList().Apply(a=>
+            var environmentViewModel = Environments.FirstOrDefault(a=>a.Server.EnvironmentID==environmentId);
+            if(environmentViewModel != null)
             {
-                a.CanDrag = false;
-                a.CanRename = false;
-                a.CanShowDependencies = false;
-                a.CanCreateDbService = false;
-                a.CanCreateDbSource = false;
-                a.CanCreateDropboxSource = false;
-                a.CanCreateEmailSource = false;
-                a.CanCreateEmailSource = false;
-                a.CanCreateFolder = false;
-                a.CanCreatePluginService = false;
-                a.CanCreatePluginSource = false;
-                a.CanCreateWebService = false;
-                a.CanCreateWebSource = false;
-                a.CanCreateWorkflowService = false;
-                a.SelectAction = (ax => { _statsArea.Calculate(SelectedItems.ToList()); });
-                a.AllowResourceCheck = true;
-            });
+                SelectedEnvironment = environmentViewModel;
+                environmentViewModel.AsList().Apply(a=>
+                {
+                    a.CanDrag = false;
+                    a.CanRename = false;
+                    a.CanShowDependencies = false;
+                    a.CanCreateDbService = false;
+                    a.CanCreateDbSource = false;
+                    a.CanCreateDropboxSource = false;
+                    a.CanCreateEmailSource = false;
+                    a.CanCreateEmailSource = false;
+                    a.CanCreateFolder = false;
+                    a.CanCreatePluginService = false;
+                    a.CanCreatePluginSource = false;
+                    a.CanCreateWebService = false;
+                    a.CanCreateWebSource = false;
+                    a.CanCreateWorkflowService = false;
+                    a.SelectAction = (ax => { _statsArea.Calculate(SelectedItems.ToList()); });
+                    a.AllowResourceCheck = true;
+                });
+            }
         }
 
         public ICollection<IExplorerTreeItem> SelectedItems
@@ -103,10 +110,19 @@ namespace Warewolf.Studio.ViewModels
         public DeployDestinationViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator)
             : base(shellViewModel, aggregator)
         {
+
+            ConnectControlViewModel.SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
         }
 
-
-
+        void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, Guid environmentid)
+        {
+            var environmentViewModel = Environments.FirstOrDefault(a => a.Server.EnvironmentID == environmentid);
+            if (environmentViewModel != null)
+            {
+                SelectedEnvironment = environmentViewModel;
+              
+            }
+        }
 
         #endregion
     }

@@ -495,6 +495,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _isResourceChecked = value;
+               
                 OnPropertyChanged(() => IsResourceChecked);
             }
         }

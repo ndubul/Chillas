@@ -319,7 +319,7 @@ namespace Warewolf.Studio.ServerProxyLayer
             comsController.AddPayloadArgument("ResourceIds", serializer.SerializeToBuilder(enumerable.Select(a=>a.ToString()).ToList()));
             comsController.AddPayloadArgument("GetDependsOnMe", "false");
 
-            var result = comsController.ExecuteCommand<List<string>>(Connection, GlobalConstants.ServerWorkspaceID);
+            var result = comsController.ExecuteCommand<List<string>>(Connection, GlobalConstants.ServerWorkspaceID).Select(Guid.Parse).ToList();
 
             if (result == null)
             {

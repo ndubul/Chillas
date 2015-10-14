@@ -122,8 +122,8 @@ namespace Warewolf.Studio.ViewModels
 			}
 		}
 
-		public IEnvironmentViewModel SelectedEnvironment { get; set; }
-		public IServer SelectedServer { get { return SelectedEnvironment.Server; } }
+	    public IEnvironmentViewModel SelectedEnvironment { get; set; }
+	    public IServer SelectedServer { get { return SelectedEnvironment.Server; } }
 
 
 		public string SearchText

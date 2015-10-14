@@ -186,6 +186,10 @@ namespace Warewolf.Studio.ViewModels
                         }
                     }
                     OnPropertyChanged(() => SelectedConnection);
+                if(SelectedEnvironmentChanged!=null)
+                {
+                    SelectedEnvironmentChanged(this,value.EnvironmentID);
+                }
                 }
             }
         }
@@ -299,6 +303,8 @@ namespace Warewolf.Studio.ViewModels
                 }
             }
         }
+
+        public event SelectedServerChanged SelectedEnvironmentChanged;
 
         public string ToggleConnectionToolTip
         {

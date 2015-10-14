@@ -29,5 +29,7 @@ namespace Dev2.Common.Interfaces
         void Refresh();
 
         void Edit();
+
+        event SelectedServerChanged SelectedEnvironmentChanged;
     }
 }

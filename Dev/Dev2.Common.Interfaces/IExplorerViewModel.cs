@@ -7,6 +7,7 @@ namespace Dev2.Common.Interfaces
 {
 
     public delegate void SelectedExplorerEnvironmentChanged(object sender, IEnvironmentViewModel e);
+    public delegate void SelectedServerChanged(object sender, Guid environmentId);
     public delegate void SelectedExplorerItemChanged(object sender, IExplorerTreeItem e);
 	public interface IExplorerViewModel:INotifyPropertyChanged
 	{
