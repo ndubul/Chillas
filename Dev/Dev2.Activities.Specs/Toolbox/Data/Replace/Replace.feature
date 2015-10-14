@@ -161,5 +161,17 @@ Examples:
 | 7  | [[rs(1).set]]                 | Wahewolf | [[rs().set]]        | h                                         | [[rec(*).set]]              | [[rec(1).set]] = "r",[[rec(2).set]] = "t" } | 1     | Wahewolf               |
 
 
-
+#Complex types
+Scenario Outline: Replace values using complex types
+	Given I have a replace variable "<var>" equal to "<value>"
+	And I have a sentence "<var>"
+	And I want to find the characters "<characters>" 
+	And I want to replace them with "<replacement>" 
+	When the replace tool is executed
+	Then the replace result should be "<count>"
+	And "<var>" should be "<result>"
+	And the execution has "NO" error
+Examples: 
+| No | var                        | value    | characters | replacement | count | result    |
+| 1  | [[Member().Details().Title | Ms.Wolfe | Ms.Wolfe   | Mrs.Blake   | 5     | Mrs.Blake |
 
