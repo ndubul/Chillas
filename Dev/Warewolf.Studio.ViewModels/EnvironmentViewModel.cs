@@ -31,6 +31,8 @@ namespace Warewolf.Studio.ViewModels
         readonly bool _isDialog;
         bool _allowEdit;
         Guid _resourceId;
+        bool _allowResourceCheck;
+        bool _isResourceChecked;
 
         public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel, bool isDialog=false)
         {
@@ -172,6 +174,8 @@ namespace Warewolf.Studio.ViewModels
             };
             if(_isDialog)
             {
+                child.AllowResourceCheck = false;
+                child.IsResourceChecked = false;
                 child.CanCreateDbService = false;
                 child.CanCreateDbSource = false;
                 child.CanCreateDropboxSource = false;
@@ -236,6 +240,8 @@ namespace Warewolf.Studio.ViewModels
         {
             if (_isDialog)
             {
+                AllowResourceCheck = false;
+                IsResourceChecked = false;
                 CanCreateDbService = false;
                 CanCreateDbSource = false;
                 CanCreateDropboxSource = false;
@@ -253,7 +259,8 @@ namespace Warewolf.Studio.ViewModels
             else
             {
 
-
+                AllowResourceCheck = false;
+                IsResourceChecked = false;
                 CanCreateDbService = true;
                 CanCreateDbSource = true;
                 CanCreateFolder = true;
@@ -465,6 +472,30 @@ namespace Warewolf.Studio.ViewModels
             {
                 _canShowServerVersion = value;
                 OnPropertyChanged(() => CanShowServerVersion);
+            }
+        }
+        public bool AllowResourceCheck
+        {
+            get
+            {
+                return _allowResourceCheck;
+            }
+            set
+            {
+                _allowResourceCheck = value;
+                OnPropertyChanged(() => AllowResourceCheck);
+            }
+        }
+        public bool IsResourceChecked
+        {
+            get
+            {
+                return _isResourceChecked;
+            }
+            set
+            {
+                _isResourceChecked = value;
+                OnPropertyChanged(() => IsResourceChecked);
             }
         }
 
@@ -720,6 +751,8 @@ namespace Warewolf.Studio.ViewModels
 
         private static void SetPropertiesForDialog(IExplorerItemViewModel itemCreated)
         {
+            itemCreated.AllowResourceCheck = false;
+            itemCreated.IsResourceChecked = false;
             itemCreated.CanCreateDbService = false;
             itemCreated.CanCreateDbSource = false;
             itemCreated.CanCreatePluginService = false;

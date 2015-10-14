@@ -566,7 +566,6 @@ Examples:
 Scenario Outline: Validation messages when Convert Invalid Variables  
 	Given I have a convert variable '<Variable>' with a value of '<Value>'
 	And I convert a variable '<Variable>' from type '<From>' to type '<To>' 	
-
 	When the base conversion tool is executed
 	Then the execution has "AN" error
 Examples: 
@@ -745,3 +744,22 @@ Examples:
 	| 47 | [[rs().row]]        |       | Base 64 | Hex     | Invalid Recordset |
 	| 48 | [[rs().row]]        |       | Base 64 | Base 64 | Invalid Recordset |
  
+
+ #Complex types
+Scenario Outline: Convert from text to binary using complex types
+	Given I have a convert variable '<variable>' with a value of '<value>'
+	And I convert a variable '<variable>' from type "Text" to type '<types>' 
+	When the base conversion tool is executed
+	Then the result is '<result>'
+	And the execution has "NO" error
+	And the debug inputs as  
+	| # | Convert     | From    | To      |
+	| 1 | <variables> | <types> | <types> |
+	And the debug output as  
+	| # |                       |
+	| 1 | <variables> = <value> |
+	Examples: 
+	| variables                           | value | types   | results                                                |
+	| [[granparent().parents().initials]] | AA    | Binary  | [[granparent().parents().initials]] = 0100000101000001 |
+	| [[granparent().parents().initials]] | AA    | Base 64 | [[granparent().parents().initials]] = QUE=             |
+	| [[granparent().parents().initials]] | AA    | Hex     | [[granparent().parents().initials]] = 0x4141           |

@@ -531,7 +531,7 @@
                                     </Button>
 
                                     <views:CircularProgressBar Grid.Row="0" Grid.Column="0" Visibility="{Binding Path=Data.IsConnecting, Converter={StaticResource BoolToVisibilityConverter}}" />
-                                    
+
                                     <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                                         <TextBlock FontSize="12" Foreground="Black" Padding="0,4,0,4"  Text="{Binding Data.DisplayName}" />
                                         <TextBlock Text=" (" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
@@ -936,7 +936,7 @@
                                                             <Image Width="12" Height="12" Source="{StaticResource AddSharepointBlackLogo}" />
                                                         </ig:XamMenuItem.Icon>
                                                     </ig:XamMenuItem>
-                                                    
+
                                                     <ig:XamMenuSeparator />
                                                     <ig:XamMenuItem Name="NewFolderFromItem"
                                                                 InputGestureText="[Ctrl+Shift+F]"
@@ -1016,16 +1016,21 @@
                                     </ig:ContextMenuService.Manager>
 
                                     <!-- ADD TEXT TRIMMING TO DISPLAY ECLIPSE ON VIEW WIDTH SETTING -->
-                                    
-                                        <Grid Margin="0,0,-22,0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                        
-                                        <TextBlock x:Name="ResourceNameTextBlock"
+
+                                    <Grid Margin="0,0,-22,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <CheckBox x:Name="ResourceNameCheckBox"
+                                                      Margin="{StaticResource ControlBorderRight}"
+                                                      IsChecked="{Binding Path=Data.IsResourceChecked}"
+                                                      Visibility="{Binding Path=Data.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                            <TextBlock x:Name="ResourceNameTextBlock"
                                                    MinWidth="5"
                                                    Height="20"
                                                    Focusable="True"
@@ -1038,13 +1043,14 @@
                                                     <i:InvokeCommandAction Command="{Binding Path=Data.Expand}" />
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
-                                        </TextBlock>
+                                            </TextBlock>
+                                        </StackPanel>
                                         <TextBlock Grid.Column="1" Text="(" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                            <TextBlock Grid.Column="2" Text="{Binding Data.ChildrenCount, Mode=OneWay}" Padding="0,4,0,4" 
+                                        <TextBlock Grid.Column="2" Text="{Binding Data.ChildrenCount, Mode=OneWay}" Padding="0,4,0,4" 
                                                    Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                            <TextBlock Grid.Column="3" Text=")" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                        </Grid>
-                                    
+                                        <TextBlock Grid.Column="3" Text=")" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                    </Grid>
+
                                     <!-- VIEW ICON -->
                                     <Button x:Name="EditButton"
                                             Width="22"

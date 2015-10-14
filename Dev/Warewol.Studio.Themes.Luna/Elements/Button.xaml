@@ -21,11 +21,14 @@
     <SolidColorBrush x:Key="DisabledVisualElement" Color="{StaticResource WarewolfButtonGrey}" />
     <SolidColorBrush x:Key="DisabledSideMenuVisualElement" Color="{StaticResource WarewolfMenuGrey}" />
 
+    <Cursor x:Key="CursorGrab">../Fonts/grab.cur</Cursor>
+    <Cursor x:Key="CursorGrabbing">../Fonts/grabbing.cur</Cursor>
     <!--  *********************************  ButtonStyle  *********************************  -->
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Width" Value="25" />
         <Setter Property="Height" Value="25" />
         <Setter Property="MinHeight" Value="25" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="MinWidth" Value="25" />
         <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
@@ -112,6 +115,7 @@
         <Setter Property="Width" Value="25" />
         <Setter Property="Height" Value="25" />
         <Setter Property="MinHeight" Value="25" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="MinWidth" Value="25" />
         <Setter Property="Background" Value="{StaticResource ButtonPressedTransparentBrush}" />
@@ -198,6 +202,7 @@
         <Setter Property="Width" Value="25" />
         <Setter Property="Height" Value="25" />
         <Setter Property="MinHeight" Value="25" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="MinWidth" Value="25" />
         <Setter Property="Background" Value="{StaticResource ButtonPressedTransparentBrush}" />
@@ -272,6 +277,7 @@
     </Style>
     <Style x:Key="ButtonSchedulerTransparentStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="{StaticResource ButtonPressedTransparentBrush}" />
         <Setter Property="Foreground" Value="{StaticResource WareWolfBlackBrush}" />
         <Setter Property="Template">
@@ -353,6 +359,7 @@
     </Style>
     <Style x:Key="ButtonSchedulerDeleteTransparentStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="{StaticResource ButtonPressedTransparentBrush}" />
         <Setter Property="Foreground" Value="{StaticResource WareWolfHeaderButtonBrush}" />
         <Setter Property="Template">
@@ -438,6 +445,7 @@
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="MinWidth" Value="25" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="{StaticResource ButtonPressedBorderBrush}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Template">
@@ -671,6 +679,7 @@
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="MinWidth" Value="25" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Template">
@@ -867,6 +876,7 @@
         <Setter Property="Height" Value="35" />
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="MinWidth" Value="25" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="{StaticResource ButtonMenuBackgroundBrush}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Template">
@@ -940,6 +950,7 @@
         <Setter Property="Height" Value="35" />
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="MinWidth" Value="25" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="{StaticResource ButtonMenuBackgroundBrush}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Template">
@@ -1099,6 +1110,7 @@
         <Setter Property="Height" Value="25" />
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="MinWidth" Value="25" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="{StaticResource ButtonHoverBackgroundBrush}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -1192,6 +1204,7 @@
         <Setter Property="Height" Value="25" />
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="MinWidth" Value="25" />
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="{StaticResource ButtonPressedBackgroundBrush}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />

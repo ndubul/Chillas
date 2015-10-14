@@ -33,6 +33,8 @@ namespace Dev2.Common.Interfaces
         bool IsExpanded { get; set; }
         bool IsSelected { get; set; }
 		bool CanShowServerVersion { get; set; }
+        bool AllowResourceCheck { get; set; }
+        bool IsResourceChecked { get; set; }
        
         ICommand RenameCommand { get; set; }
         ICommand CreateFolderCommand { get; set; }

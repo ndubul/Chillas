@@ -1326,20 +1326,98 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ConvertAVariableThatDoesNotExist()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Convert a Variable That Does Not Exist", ((string[])(null)));
-#line 309
+#line 306
  this.ScenarioSetup(scenarioInfo);
-#line 310
+#line 307
  testRunner.Given("I have a case convert variable \"[[my(1).sentenct]]\" with a value of \"[[a]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 311
+#line 308
  testRunner.And("I convert a variable \"[[my(1).sentenct]]\" to \"lower\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 312
+#line 309
  testRunner.When("the case conversion tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 313
+#line 310
  testRunner.Then("the execution has \"AN\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 314
+#line 311
  testRunner.And("the execution has \"invalid recordset\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        public virtual void ConvertASentenceToUppercaseUsingComplexTypes(string variable, string value, string to, string result, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Convert a sentence to uppercase using complex types", exampleTags);
+#line 313
+this.ScenarioSetup(scenarioInfo);
+#line 314
+ testRunner.Given(string.Format("I have a case convert variable \'{0}\' with a value of \'{1}\'", variable, value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 315
+ testRunner.And(string.Format("I convert a variable \'{0}\' to \'{1}\'", variable, to), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 316
+ testRunner.When("the case conversion tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 317
+ testRunner.Then("the sentence will be \'<result>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 318
+ testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
+                        "#",
+                        "Convert",
+                        "To"});
+            table41.AddRow(new string[] {
+                        "1",
+                        string.Format("{0} = {1}", variable, value),
+                        string.Format("{0}", to)});
+#line 319
+ testRunner.And("the debug inputs as", ((string)(null)), table41, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
+                        "#",
+                        ""});
+            table42.AddRow(new string[] {
+                        "1",
+                        string.Format("{0} = <results>", variable)});
+#line 322
+ testRunner.And("the debug output as", ((string)(null)), table42, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Convert a sentence to uppercase using complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CaseConversion")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[granparent().parents().childName]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "troy-ave")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "TITLE CASE")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "Troy-Ave")]
+        public virtual void ConvertASentenceToUppercaseUsingComplexTypes_Variant0()
+        {
+            this.ConvertASentenceToUppercaseUsingComplexTypes("[[granparent().parents().childName]]", "troy-ave", "TITLE CASE", "Troy-Ave", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Convert a sentence to uppercase using complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CaseConversion")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[granparent().parents().childName]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Jesse")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "LOWER")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "jesse")]
+        public virtual void ConvertASentenceToUppercaseUsingComplexTypes_Variant1()
+        {
+            this.ConvertASentenceToUppercaseUsingComplexTypes("[[granparent().parents().childName]]", "Jesse", "LOWER", "jesse", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Convert a sentence to uppercase using complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CaseConversion")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[granparent(1).parents(1).childName]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Jesse")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "UPPER")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "JESSE")]
+        public virtual void ConvertASentenceToUppercaseUsingComplexTypes_Variant2()
+        {
+            this.ConvertASentenceToUppercaseUsingComplexTypes("[[granparent(1).parents(1).childName]]", "Jesse", "UPPER", "JESSE", ((string[])(null)));
         }
     }
 }
