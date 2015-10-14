@@ -34,6 +34,7 @@ namespace Warewolf.Studio.ViewModels
         bool _allowResourceCheck;
         bool _isResourceChecked;
         bool _isVisible;
+        bool _isFolderChecked;
 
         public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel, bool isDialog=false,Action<IExplorerItemViewModel> selectAction=null)
         {
@@ -201,6 +202,17 @@ namespace Warewolf.Studio.ViewModels
         public ICommand ShowServerVersionCommand { get; set; }
 
         public Action<IExplorerItemViewModel> SelectAction { get; set; }
+        public bool IsFolderChecked
+        {
+            get
+            {
+                return _isResourceChecked;
+            }
+            set
+            {
+                _isResourceChecked = value;
+            }
+        }
         public bool IsVisible
         {
             get

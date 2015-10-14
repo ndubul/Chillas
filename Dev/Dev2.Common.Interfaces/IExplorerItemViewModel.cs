@@ -36,6 +36,7 @@ namespace Dev2.Common.Interfaces
         string ExecuteToolTip { get; }
         string EditToolTip { get; }
         string ActivityName { get; }
+       
 
         void AddSibling(IExplorerItemViewModel sibling);
         void CreateNewFolder();

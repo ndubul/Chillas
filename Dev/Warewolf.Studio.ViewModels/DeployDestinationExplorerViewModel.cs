@@ -101,6 +101,11 @@ namespace Warewolf.Studio.ViewModels
             {
                 ax.Children.Apply(ay => { ay.IsResourceChecked = ax.IsResourceChecked; });
             }
+            else
+            {
+                ax.Parent.IsFolderChecked = ax.IsResourceChecked;
+            }
+           
             _statsArea.Calculate(SelectedItems.ToList());
         }
 

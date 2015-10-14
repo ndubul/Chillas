@@ -50,7 +50,7 @@ namespace Dev2.Common.Interfaces
         IShellViewModel ShellViewModel { get;}
         int ChildrenCount { get; }
         Action<IExplorerItemViewModel> SelectAction { get; set; }
-
+        bool IsFolderChecked { get; set; }
         void AddChild(IExplorerItemViewModel child);
         void RemoveChild(IExplorerItemViewModel child);
         void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction);
