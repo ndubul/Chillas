@@ -399,6 +399,15 @@ namespace Warewolf.Studio.ViewModels
             OnPropertyChanged(() => Children);
         }
 
+        public IEnumerable<IExplorerItemViewModel> AsList()
+        {
+            if(Children != null)
+            {
+                return Children.Union( Children.SelectMany(a => a.AsList()));
+            }
+            return new List<IExplorerItemViewModel>();
+        }
+
         string GetChildNameFromChildren()
         {
             const string NewFolder = "New Folder";

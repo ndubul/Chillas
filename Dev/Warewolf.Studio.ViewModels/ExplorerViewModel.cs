@@ -248,8 +248,9 @@ namespace Warewolf.Studio.ViewModels
 	public class ExplorerViewModel : ExplorerViewModelBase
 	{
 	    readonly IShellViewModel _shellViewModel;
+	    readonly Action<IExplorerItemViewModel> _selectAction;
 
-	    public ExplorerViewModel(IShellViewModel shellViewModel, IEventAggregator aggregator)
+	    public ExplorerViewModel(IShellViewModel shellViewModel, IEventAggregator aggregator, Action<IExplorerItemViewModel> selectAction = null)
 		{
 			if (shellViewModel == null)
 			{
@@ -257,7 +258,9 @@ namespace Warewolf.Studio.ViewModels
 			}
 			var localhostEnvironment = CreateEnvironmentFromServer(shellViewModel.LocalhostServer, shellViewModel);
             _shellViewModel = shellViewModel;
-			Environments = new ObservableCollection<IEnvironmentViewModel> { localhostEnvironment };
+	        _selectAction = selectAction;
+            localhostEnvironment.SelectAction = selectAction ?? (a => { });
+	        Environments = new ObservableCollection<IEnvironmentViewModel> { localhostEnvironment };
 			LoadEnvironment(localhostEnvironment);
 
 			ConnectControlViewModel = new ConnectControlViewModel(shellViewModel.LocalhostServer, aggregator);
@@ -296,7 +299,7 @@ namespace Warewolf.Studio.ViewModels
 		    {
 		        server.UpdateRepository.ItemSaved += Refresh;
 		    }
-		    return new EnvironmentViewModel(server, shellViewModel);
+		    return new EnvironmentViewModel(server, shellViewModel,false,_selectAction);
 		}
 	}
 }

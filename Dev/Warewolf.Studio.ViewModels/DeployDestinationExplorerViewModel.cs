@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Deploy;
 
 namespace Warewolf.Studio.ViewModels
@@ -17,7 +18,10 @@ namespace Warewolf.Studio.ViewModels
         public DeploySourceExplorerViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator,IDeployStatsViewerViewModel statsArea):base(shellViewModel,aggregator)
         {
             _statsArea = statsArea;
-
+            foreach(var environmentViewModel in Environments)
+            {
+                environmentViewModel.SelectAction = SelectAction;
+            }
             if (ConnectControlViewModel.SelectedConnection != null)
             {
                 UpdateItemForDeploy(ConnectControlViewModel.SelectedConnection.EnvironmentID);
@@ -55,10 +59,19 @@ namespace Warewolf.Studio.ViewModels
                     a.CanCreateWebService = false;
                     a.CanCreateWebSource = false;
                     a.CanCreateWorkflowService = false;
-                    a.SelectAction = (ax => { _statsArea.Calculate(SelectedItems.ToList()); });
+                    a.SelectAction = (SelectAction );
                     a.AllowResourceCheck = true;
                 });
             }
+        }
+
+        void SelectAction(IExplorerItemViewModel ax)
+        {
+            if(ax.ResourceType == ResourceType.Folder)
+            {
+                ax.Children.Apply(ay => { ay.IsResourceChecked = ax.IsResourceChecked; });
+            }
+            _statsArea.Calculate(SelectedItems.ToList());
         }
 
         public ICollection<IExplorerTreeItem> SelectedItems
@@ -112,6 +125,7 @@ namespace Warewolf.Studio.ViewModels
         {
 
             ConnectControlViewModel.SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
+            SelectedEnvironment = Environments.FirstOrDefault();
         }
 
         void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, Guid environmentid)

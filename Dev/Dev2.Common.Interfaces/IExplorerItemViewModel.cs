@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Dev2.Common.Interfaces
@@ -42,6 +43,7 @@ namespace Dev2.Common.Interfaces
         IExplorerItemViewModel Find(string resourcePath);
         void Filter(Func<IExplorerItemViewModel, bool> filter);
 
+        IEnumerable<IExplorerItemViewModel> AsList();
     }
 
     public enum ExplorerEventContext

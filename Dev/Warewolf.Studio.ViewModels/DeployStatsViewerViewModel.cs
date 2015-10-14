@@ -144,9 +144,17 @@ namespace Warewolf.Studio.ViewModels
                 Services = items.Count(a => a.ResourceType >= ResourceType.WorkflowService);
                 Sources = items.Count(a => IsSource(a.ResourceType));
                 Unknown = items.Count(a => a.ResourceType == ResourceType.Unknown);
-                _conflicts = items.Intersect(_destination.SelectedEnvironment.AsList());
-                _new = items.Except(_destination.SelectedEnvironment.AsList());
-           
+                if(_destination.SelectedEnvironment != null)
+                {
+                    _conflicts = items.Intersect(_destination.SelectedEnvironment.AsList());
+                    _new = items.Except(_destination.SelectedEnvironment.AsList());
+                }
+                else
+                {
+                    _conflicts = new List<IExplorerTreeItem>();
+                    _new = new List<IExplorerTreeItem>();
+                }
+
                 Overrides = New.Count;
                 NewResources = New.Count;
 

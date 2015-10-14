@@ -34,7 +34,7 @@ namespace Warewolf.Studio.ViewModels
         bool _allowResourceCheck;
         bool _isResourceChecked;
 
-        public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel, bool isDialog=false)
+        public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel, bool isDialog=false,Action<IExplorerItemViewModel> selectAction=null)
         {
             if (server == null) throw new ArgumentNullException("server");
             if (shellViewModel == null) throw new ArgumentNullException("shellViewModel");
@@ -53,7 +53,7 @@ namespace Warewolf.Studio.ViewModels
             DisplayName = server.ResourceName;
             RefreshCommand = new DelegateCommand(async () => await Load());
             IsServerIconVisible = true;
-            SelectAction = a => { };
+            SelectAction = selectAction?? (a => { });
             Expand = new DelegateCommand<int?>(clickCount =>
             {
                 if (clickCount != null && clickCount == 2)
@@ -657,7 +657,7 @@ namespace Warewolf.Studio.ViewModels
         // ReSharper disable once ParameterTypeCanBeEnumerable.Local
         private ICollection<IExplorerItemViewModel> AsList(ICollection<IExplorerItemViewModel> rootCollection)
         {
-            return rootCollection.ToList();
+            return rootCollection.Union( rootCollection.SelectMany(a=>a.AsList())).ToList();
 
         }
         public void SetItemCheckedState(Guid id, bool state)
