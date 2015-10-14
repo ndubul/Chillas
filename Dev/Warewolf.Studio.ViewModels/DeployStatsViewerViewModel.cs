@@ -157,7 +157,7 @@ namespace Warewolf.Studio.ViewModels
                     _new = new List<IExplorerTreeItem>();
                 }
 
-                Overrides = New.Count;
+                Overrides = Conflicts.Count;
                 NewResources = New.Count;
 
             }

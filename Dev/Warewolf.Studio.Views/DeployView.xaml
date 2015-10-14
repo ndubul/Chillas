@@ -247,17 +247,27 @@
                                   Margin="{StaticResource ElementBorder}" 
                                   HorizontalScrollBarVisibility="Hidden" 
                                   VerticalScrollBarVisibility="Auto">
-                        <ItemsControl>
-                            <ItemsControl.ItemTemplate>
+                        <ListBox Style="{StaticResource DeployListBoxStyle}"
+                                 BorderThickness="0"
+                                 ItemsSource="{Binding OpenViewItems}" >
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Foreground="White" 
-                                           FontSize="{StaticResource FontSize-Medium}"
-                                           Text="Resource Name"
-                                           HorizontalAlignment="Left">
-                                    </TextBlock>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Foreground="White" 
+                                                   Margin="3,-3,0,0"
+                                                   FontSize="{StaticResource FontSize-Medium}">
+                                            <Run Text="> "/>
+                                            <Run Text="{Binding ResourceName}"/>
+                                        </TextBlock>
+                                    </StackPanel>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" Orientation="Vertical"  />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
                     </ScrollViewer>
                 </Grid>
             </Grid>

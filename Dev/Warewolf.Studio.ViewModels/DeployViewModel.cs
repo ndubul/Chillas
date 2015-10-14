@@ -29,6 +29,7 @@ namespace Warewolf.Studio.ViewModels
         bool _deploySuccessfull;
         string _conflictNewResourceText;
         bool _serversAreNotTheSame;
+        IList<IExplorerTreeItem> _openViewItems;
 
         #region Implementation of IDeployViewModel
 
@@ -40,6 +41,7 @@ namespace Warewolf.Studio.ViewModels
             _source = source;
             _source.SelectItemsForDeploy(selectedItems);
             _stats = stats;
+            OpenViewItems = new List<IExplorerTreeItem>();
             _stats.CalculateAction = () =>
             {
                 ConnectorsCount = _stats.Connectors.ToString();
@@ -48,6 +50,9 @@ namespace Warewolf.Studio.ViewModels
                 UnknownCount = _stats.Unknown.ToString();
                 NewResourcesCount = _stats.NewResources.ToString();
                 OverridesCount = _stats.Overrides.ToString();
+                ConflictItems = _stats.Conflicts;
+                NewItems = _stats.New;
+                ShowConflicts = false;
             };
             SourceConnectControlViewModel = _source.ConnectControlViewModel;
             DestinationConnectControlViewModel = _destination.ConnectControlViewModel;
@@ -63,15 +68,35 @@ namespace Warewolf.Studio.ViewModels
             ShowConflicts = false;
         }
 
+        public IList<IExplorerTreeItem> NewItems { get; set; }
+
+        public IList<IExplorerTreeItem> ConflictItems { get; set; }
+
         void UpdateServerCompareChanged(object sender, Guid environmentid)
         {
             ServersAreNotTheSame = DestinationConnectControlViewModel.SelectedConnection.EnvironmentID != SourceConnectControlViewModel.SelectedConnection.EnvironmentID;
+            ShowConflicts = false;
         }
 
         void ViewOverrides()
         {
             ShowConflicts = true;
             ConflictNewResourceText = "List of Overrides";
+            OpenViewItems.Clear();
+            OpenViewItems = ConflictItems;
+        }
+
+        public IList<IExplorerTreeItem> OpenViewItems
+        {
+            get
+            {
+                return _openViewItems;
+            }
+            set
+            {
+                _openViewItems = value;
+                OnPropertyChanged(() => OpenViewItems);
+            }
         }
 
         public string ConflictNewResourceText
@@ -104,6 +129,8 @@ namespace Warewolf.Studio.ViewModels
         {
             ShowConflicts = true;
             ConflictNewResourceText = "List of New Resources";
+            OpenViewItems.Clear();
+            OpenViewItems = NewItems;
         }
 
         void Deploy()
