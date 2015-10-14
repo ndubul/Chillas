@@ -128,6 +128,8 @@ namespace Warewolf.Studio.ViewModels
         readonly IShellViewModel _shellViewModel;
         Dictionary<ResourceType, Type> _activityNames;
         bool _canShowDependencies;
+        bool _allowResourceCheck;
+        bool _isResourceChecked;
 
         public ExplorerItemViewModel(IServer server, IExplorerTreeItem parent, Action<IExplorerItemViewModel> selectAction, IShellViewModel shellViewModel)
         {
@@ -167,6 +169,8 @@ namespace Warewolf.Studio.ViewModels
             {
                 shellViewModel.ShowDependencies(ResourceId, Server);
             }));
+            AllowResourceCheck = true;
+            IsResourceChecked = false;
             CanCreateDbService = true;
             CanCreateWorkflowService = true;
             CanCreateServerSource = true;
@@ -334,6 +338,8 @@ namespace Warewolf.Studio.ViewModels
                     ResourceId = id,
                     ResourceType = ResourceType.Folder,
                     CanCreateDbService = CanCreateDbService,
+                    AllowResourceCheck = AllowResourceCheck,
+                    IsResourceChecked = IsResourceChecked,
                     CanCreateFolder = CanCreateFolder,
                     CanCreateDbSource = CanCreateDbSource,
                     CanCreatePluginService = CanCreatePluginService,
@@ -671,6 +677,30 @@ namespace Warewolf.Studio.ViewModels
             }
         }
         public bool CanShowServerVersion { get; set; }
+        public bool AllowResourceCheck
+        {
+            get
+            {
+                return _allowResourceCheck;
+            }
+            set
+            {
+                _allowResourceCheck = value;
+                OnPropertyChanged(() => AllowResourceCheck);
+            }
+        }
+        public bool IsResourceChecked
+        {
+            get
+            {
+                return _isResourceChecked;
+            }
+            set
+            {
+                _isResourceChecked = value;
+                OnPropertyChanged(() => IsResourceChecked);
+            }
+        }
 
         public ICommand RenameCommand { get; set; }
         public bool CanCreateDbService { get; set; }
@@ -857,6 +887,8 @@ namespace Warewolf.Studio.ViewModels
                         CanCreateDbSource = false,
                         CanCreatePluginService = false,
                         CanCreateWebSource = false,
+                        AllowResourceCheck = false,
+                        IsResourceChecked = false,
                         ResourceType = ResourceType.Version
                     }
                     ));

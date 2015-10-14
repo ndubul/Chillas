@@ -163,6 +163,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\grab.cur" />
+    <Resource Include="Fonts\grabbing.cur" />
     <Content Include="Fonts\SourceSansPro-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

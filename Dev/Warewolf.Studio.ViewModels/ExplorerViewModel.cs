@@ -86,7 +86,7 @@ namespace Warewolf.Studio.ViewModels
 			get { return _selectedItem; }
 			set
 			{
-                if (_selectedItem != value)
+                if (!Equals(_selectedItem, value))
                 {
 				_selectedItem = value;
           

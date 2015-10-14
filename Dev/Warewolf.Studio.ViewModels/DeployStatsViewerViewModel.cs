@@ -140,8 +140,8 @@ namespace Warewolf.Studio.ViewModels
         {
             if(items != null)
             {
-                Connectors = items.Count(a => a.IsSelected && a.ResourceType >= ResourceType.DbService && a.ResourceType <= ResourceType.WebService);
-                Services = items.Count(a => a.IsSelected && a.ResourceType >= ResourceType.WorkflowService);
+                Connectors = items.Count(a => a.ResourceType >= ResourceType.DbService && a.ResourceType <= ResourceType.WebService);
+                Services = items.Count(a => a.ResourceType >= ResourceType.WorkflowService);
                 Sources = items.Count(a => IsSource(a.ResourceType));
                 Unknown = items.Count(a => a.ResourceType == ResourceType.Unknown);
                 _conflicts = items.Intersect(_destination.SelectedEnvironment.AsList());
@@ -182,7 +182,7 @@ namespace Warewolf.Studio.ViewModels
 
         bool IsSource(ResourceType res)
         {
-            return (res == ResourceType.DbSource) || (res == ResourceType.OauthSource) || (res == ResourceType.EmailSource) || (res == ResourceType.PluginService) || (res == ResourceType.ServerSource);
+            return (res >= ResourceType.DbSource && res <= ResourceType.SharepointServerSource) || (res == ResourceType.DropboxSource);
         }
 
     

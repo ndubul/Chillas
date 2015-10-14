@@ -50,6 +50,7 @@ namespace Warewolf.Studio.ViewModels
                 a.CanCreateWebSource = false;
                 a.CanCreateWorkflowService = false;
                 a.SelectAction = (ax => { _statsArea.Calculate(SelectedItems.ToList()); });
+                a.AllowResourceCheck = true;
             });
         }
 
