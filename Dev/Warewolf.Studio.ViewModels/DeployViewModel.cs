@@ -106,7 +106,7 @@ namespace Warewolf.Studio.ViewModels
             if (Source != null && Source.SelectedEnvironment != null && Source.SelectedEnvironment.Server != null)
             {
                 var guids = Source.SelectedEnvironment.Server.QueryProxy.FetchDependenciesOnList(Source.SelectedItems.Select(a => a.ResourceId));
-                Source.SelectedEnvironment.AsList().Where(a => guids.Contains(a.ResourceId)).Apply(a=>a.IsSelected=true);
+                Source.SelectedEnvironment.AsList().Where(a => guids.Contains(a.ResourceId)).Apply(a=>a.IsResourceChecked=true);
             }
         }
 

@@ -15,12 +15,19 @@ namespace Warewolf.Studio.ViewModels
         #region Implementation of IDeployDestinationExplorerViewModel
 
 
-        public DeploySourceExplorerViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator,IDeployStatsViewerViewModel statsArea):base(shellViewModel,aggregator)
+        public DeploySourceExplorerViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator, IDeployStatsViewerViewModel statsArea)
+            : base(shellViewModel, aggregator,null,false)
         {
             _statsArea = statsArea;
             foreach(var environmentViewModel in Environments)
             {
+                
                 environmentViewModel.SelectAction = SelectAction;
+            }
+            if(Environments.Count>0)
+            {
+                LoadEnvironment(Environments.First(),true);
+                SelectedEnvironment = Environments.First();
             }
             if (ConnectControlViewModel.SelectedConnection != null)
             {

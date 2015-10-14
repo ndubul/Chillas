@@ -13,8 +13,8 @@ namespace Dev2.Common.Interfaces
         bool IsLoaded { get; }
         Task<bool> Connect();
         bool IsConnecting { get; }
-        Task<bool> Load();
-        Task<bool> LoadDialog(string selectedId);
+        Task<bool> Load(bool b=false);
+        Task<bool> LoadDialog(string selectedId,bool b=false);
         void Filter(string filter);
         void Filter(Func<IExplorerItemViewModel, bool> filter);
         ICollection<IExplorerItemViewModel> AsList();

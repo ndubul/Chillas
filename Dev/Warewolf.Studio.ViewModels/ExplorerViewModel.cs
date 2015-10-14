@@ -250,7 +250,7 @@ namespace Warewolf.Studio.ViewModels
 	    readonly IShellViewModel _shellViewModel;
 	    readonly Action<IExplorerItemViewModel> _selectAction;
 
-	    public ExplorerViewModel(IShellViewModel shellViewModel, IEventAggregator aggregator, Action<IExplorerItemViewModel> selectAction = null)
+	    public ExplorerViewModel(IShellViewModel shellViewModel, IEventAggregator aggregator, Action<IExplorerItemViewModel> selectAction = null,bool loadLocalHost=true)
 		{
 			if (shellViewModel == null)
 			{
@@ -261,7 +261,8 @@ namespace Warewolf.Studio.ViewModels
 	        _selectAction = selectAction;
             localhostEnvironment.SelectAction = selectAction ?? (a => { });
 	        Environments = new ObservableCollection<IEnvironmentViewModel> { localhostEnvironment };
-			LoadEnvironment(localhostEnvironment);
+			if(loadLocalHost)
+                LoadEnvironment(localhostEnvironment);
 
 			ConnectControlViewModel = new ConnectControlViewModel(shellViewModel.LocalhostServer, aggregator);
 			ShowConnectControl = true;
@@ -286,10 +287,10 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-		private async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment)
+		protected async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment,bool isDeploy = false)
 		{
 			await localhostEnvironment.Connect();
-			await localhostEnvironment.Load();
+			await localhostEnvironment.Load(isDeploy);
 		}
 
 

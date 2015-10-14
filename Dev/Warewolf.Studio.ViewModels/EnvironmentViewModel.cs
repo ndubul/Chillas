@@ -589,25 +589,26 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public async Task<bool> Load()
+        public async Task<bool> Load(bool isDeploy = false)
         {
-            var result = await LoadDialog(null);
+            var result = await LoadDialog(null, isDeploy);
             return result;
         }
 
-        public async Task<bool> LoadDialog(string selectedPath)
+        public async Task<bool> LoadDialog(string selectedPath,bool isDeploy = false)
         {
             if (IsConnected)
             {
                 IsConnecting = true;
                 var explorerItems = await Server.LoadExplorer();
                 //var explorerItemViewModels = CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != null);
-                await CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != null);
+                await CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != null, isDeploy);
                 //Children = explorerItemViewModels;
 
                 IsLoaded = true;
                 IsConnecting = false;
                 IsExpanded = true;
+
                 return IsLoaded;
             }
             return false;
@@ -709,7 +710,7 @@ namespace Warewolf.Studio.ViewModels
         }
 
         // ReSharper disable ParameterTypeCanBeEnumerable.Local
-        async Task<ObservableCollection<IExplorerItemViewModel>> CreateExplorerItems(IList<IExplorerItem> explorerItems, IServer server, IExplorerTreeItem parent, bool isDialog = false)
+        async Task<ObservableCollection<IExplorerItemViewModel>> CreateExplorerItems(IList<IExplorerItem> explorerItems, IServer server, IExplorerTreeItem parent, bool isDialog = false, bool isDeploy = false)
         // ReSharper restore ParameterTypeCanBeEnumerable.Local
         {
             if (explorerItems == null) return null;
@@ -726,7 +727,9 @@ namespace Warewolf.Studio.ViewModels
                     ResourceName = explorerItem.DisplayName,
                     ResourceId = explorerItem.ResourceId,
                     ResourceType = explorerItem.ResourceType,
-                    ResourcePath = explorerItem.ResourcePath
+                    ResourcePath = explorerItem.ResourcePath,
+                    AllowResourceCheck =  isDeploy
+
                     //Inputs = explorerItem.Inputs,
                     //Outputs = explorerItem.Outputs
                 };
@@ -736,7 +739,7 @@ namespace Warewolf.Studio.ViewModels
                     SetPropertiesForDialog(itemCreated);
                 }
 
-                await CreateExplorerItems(explorerItem.Children, server, itemCreated, isDialog);
+                await CreateExplorerItems(explorerItem.Children, server, itemCreated, isDialog,isDeploy);
                 //itemCreated.Children = CreateExplorerItems(explorerItem.Children, server, itemCreated, isDialog);
                 explorerItemModels.Add(itemCreated);
             }
