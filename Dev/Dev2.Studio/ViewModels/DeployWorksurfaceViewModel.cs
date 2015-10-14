@@ -52,7 +52,7 @@ namespace Dev2.ViewModels
         {
             get
             {
-                return "";
+                return "Deploy";
             }            
         }
 
@@ -72,7 +72,7 @@ namespace Dev2.ViewModels
             get
             {
 
-                return ResourceType.Unknown;
+                return ResourceType.DeployViewer;
             }
         }
 

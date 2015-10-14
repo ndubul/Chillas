@@ -26,7 +26,7 @@ namespace Warewolf.Studio.ViewModels
         {
             VerifyArgument.IsNotNull("destination",destination);
             _destination = destination;
-            Status = "bob";
+            Status = "";
         }
 
         #region Implementation of IDeployStatsViewerViewModel

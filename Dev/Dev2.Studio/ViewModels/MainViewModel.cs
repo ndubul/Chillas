@@ -599,7 +599,7 @@ namespace Dev2.Studio.ViewModels
         public void Handle(DeployResourcesMessage message)
         {
             Dev2Logger.Log.Debug(message.GetType().Name);
-            var key = WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources) as WorkSurfaceKey;
+            var key = WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployViewer) as WorkSurfaceKey;
 
             var exist = ActivateWorkSurfaceIfPresent(key);
             if (message.ViewModel != null)
@@ -1367,7 +1367,7 @@ namespace Dev2.Studio.ViewModels
             var dest = new DeployDestinationViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
             var stats = new DeployStatsViewerViewModel(dest);
             var vm = new SingleExplorerDeployViewModel(dest, new DeploySourceExplorerViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>(),stats), items,stats );
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources) as WorkSurfaceKey, new DeployWorksurfaceViewModel(EventPublisher,vm,PopupProvider, new DeployView())); //todo:view is null
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployViewer) as WorkSurfaceKey, new DeployWorksurfaceViewModel(EventPublisher, vm, PopupProvider, new DeployView())); //todo:view is null
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 
@@ -1988,7 +1988,7 @@ namespace Dev2.Studio.ViewModels
 
         public void AddDeployResourcesWorkSurface(object input)
         {
-            WorkSurfaceKey key = WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources) as WorkSurfaceKey;
+            WorkSurfaceKey key = WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployViewer) as WorkSurfaceKey;
             bool exist = ActivateWorkSurfaceIfPresent(key);
             DeployResource = input as IContextualResourceModel;
             if (exist)

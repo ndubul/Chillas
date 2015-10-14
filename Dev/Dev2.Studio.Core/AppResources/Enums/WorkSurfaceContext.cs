@@ -39,7 +39,7 @@ namespace Dev2.Studio.Core.AppResources.Enums
         LanguageHelp,
 
         [Description("Deploy")]
-        DeployResources,
+        DeployViewer,
 
         [Description("Start Page")]
         StartPage,

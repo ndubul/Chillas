@@ -30,15 +30,23 @@ namespace Warewolf.Studio.ViewModels
 
         #region Implementation of IDeployViewModel
 
-        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source,IEnumerable<IExplorerTreeItem> selectedItems,IDeployStatsViewerViewModel stats) 
+        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source, IEnumerable<IExplorerTreeItem> selectedItems, IDeployStatsViewerViewModel stats)
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "destination", destination }, { "source", source }, { "selectedItems", selectedItems }, { "stats", stats } });
             _destination = destination;
-            
+
             _source = source;
             _source.SelectItemsForDeploy(selectedItems);
             _stats = stats;
-            _stats.CalculateAction = () => { ServicesCount = _stats.Services.ToString(); };
+            _stats.CalculateAction = () =>
+            {
+                ConnectorsCount = _stats.Connectors.ToString();
+                ServicesCount = _stats.Services.ToString();
+                SourcesCount = _stats.Sources.ToString();
+                UnknownCount = _stats.Unknown.ToString();
+                NewResourcesCount = _stats.NewResources.ToString();
+                OverridesCount = _stats.Overrides.ToString();
+            };
             SourceConnectControlViewModel = _source.ConnectControlViewModel;
             DestinationConnectControlViewModel = _destination.ConnectControlViewModel;
 
@@ -48,12 +56,6 @@ namespace Warewolf.Studio.ViewModels
             OverridesViewCommand = new DelegateCommand(ViewOverrides);
 
             ShowConflicts = false;
-            ConnectorsCount = stats.Connectors.ToString();
-            ServicesCount = stats.Services.ToString();
-            SourcesCount = stats.Sources.ToString();
-            UnknownCount = stats.Unknown.ToString();
-            NewResourcesCount = stats.NewResources.ToString();
-            OverridesCount = stats.Overrides.ToString();
         }
 
         void ViewOverrides()
@@ -99,14 +101,12 @@ namespace Warewolf.Studio.ViewModels
 
         }
 
-
-
         public void SelectDependencies()
         {
             if (Source != null && Source.SelectedEnvironment != null && Source.SelectedEnvironment.Server != null)
             {
                 var guids = Source.SelectedEnvironment.Server.QueryProxy.FetchDependenciesOnList(Source.SelectedItems.Select(a => a.ResourceId));
-                Source.SelectedEnvironment.AsList().Where(a => guids.Contains(a.ResourceId)).Apply(a=>a.IsResourceChecked=true);
+                Source.SelectedEnvironment.AsList().Where(a => guids.Contains(a.ResourceId)).Apply(a => a.IsResourceChecked = true);
             }
         }
 
@@ -150,6 +150,17 @@ namespace Warewolf.Studio.ViewModels
             get
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// check is source and destination are the same
+        /// </summary>
+        public bool ServersAreNotTheSame
+        {
+            get
+            {
+                return (Destination.SelectedEnvironment == null || Source.SelectedEnvironment == null) || (Destination.SelectedEnvironment != Source.SelectedEnvironment);
             }
         }
 
@@ -280,7 +291,11 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _source = value;
+                if (!Equals(_source, value))
+                {
+                    _source = value;
+                    ShowConflicts = false;
+                }
                 OnPropertyChanged("Source");
             }
         }
@@ -333,7 +348,5 @@ namespace Warewolf.Studio.ViewModels
         public IDeployStatsViewerViewModel StatsViewModel { get; set; }
 
         #endregion
-
-      
     }
 }
