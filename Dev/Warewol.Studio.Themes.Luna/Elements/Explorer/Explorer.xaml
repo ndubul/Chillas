@@ -167,7 +167,7 @@
 
     <!--  ********************************** XamDataTree Style **********************************  -->
     <Style x:Key="XamDataTreeStyle" TargetType="igDt:XamDataTree">
-        <Setter Property="Background" Value="{StaticResource TreeBackgroundBrush}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{StaticResource TreeBorderBrush}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />

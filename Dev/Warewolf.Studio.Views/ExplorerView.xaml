@@ -1027,9 +1027,9 @@
 
                                         <StackPanel Orientation="Horizontal">
                                             <CheckBox x:Name="ResourceNameCheckBox"
-                                                      Margin="{StaticResource ControlBorderRight}"
+                                                      Style="{StaticResource DeployCheckBoxStyle}"
                                                       IsChecked="{Binding Path=Data.IsResourceChecked}"
-                                                      Visibility="{Binding Path=Data.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                                      Visibility="{Binding ElementName=ExplorerTree, Path=DataContext.SelectedEnvironment.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"/>
                                             <TextBlock x:Name="ResourceNameTextBlock"
                                                    MinWidth="5"
                                                    Height="20"
