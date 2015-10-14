@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
+using Caliburn.Micro;
 using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Deploy;
@@ -98,9 +100,15 @@ namespace Warewolf.Studio.ViewModels
 
         }
 
-        void SelectDependencies()
-        {
 
+
+        public void SelectDependencies()
+        {
+            if (Source != null && Source.SelectedEnvironment != null && Source.SelectedEnvironment.Server != null)
+            {
+                var guids = Source.SelectedEnvironment.Server.QueryProxy.FetchDependenciesOnList(Source.SelectedItems.Select(a => a.ResourceId));
+                Source.SelectedEnvironment.AsList().Where(a => guids.Contains(a.ResourceId)).Apply(a=>a.IsSelected=true);
+            }
         }
 
         /// <summary>

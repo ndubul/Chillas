@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dev2.Common;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.DB;
@@ -298,6 +300,34 @@ namespace Warewolf.Studio.ServerProxyLayer
             return fileListings;
         }
 
+        /// <summary>
+        /// Get the list of dependencies for the deploy screen
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public IList<Guid> FetchDependenciesOnList(IEnumerable<Guid> values)
+        {
+            var enumerable = values as Guid[] ?? values.ToArray();
+            if (!enumerable.Any() )
+            {
+                return new List<Guid>();
+            }
+
+
+            Dev2JsonSerializer serializer = new Dev2JsonSerializer();
+            var comsController = CommunicationControllerFactory.CreateController("GetDependanciesOnListService");
+            comsController.AddPayloadArgument("ResourceIds", serializer.SerializeToBuilder(enumerable.Select(a=>a.ToString()).ToList()));
+            comsController.AddPayloadArgument("GetDependsOnMe", "false");
+
+            var result = comsController.ExecuteCommand<List<string>>(Connection, GlobalConstants.ServerWorkspaceID);
+
+            if (result == null)
+            {
+                throw new Exception(string.Format(GlobalConstants.NetworkCommunicationErrorTextFormat, "GetDependanciesOnListService"));
+            }
+
+            return result;
+        }
 
         public IList<IPluginSource> FetchPluginSources()
         {

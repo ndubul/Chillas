@@ -34,26 +34,7 @@ namespace Dev2.Common.Interfaces
         /// <param name="resourceId"></param>
         /// <returns></returns>
         StringBuilder FetchResourceXaml(Guid resourceId);
-        /// <summary>
-        /// Get a list of tables froma db source
-        /// </summary>
-        /// <param name="sourceId"></param>
-        /// <returns></returns>
-        //IList<IDbTable> FetchTables(Guid sourceId);
-
-        /// <summary>
-        /// Fetch the resource as per the resource catalogue, without any notion of XML
-        /// </summary>
-        /// <param name="resourceId"></param>
-        /// <returns></returns>
-        //IResourceDefinition FetchResource(Guid resourceId);
-
-        /// <summary>
-        /// Fetch the resource including the xaml
-        /// </summary>
-        /// <param name="resourceId"></param>
-        /// <returns></returns>
-        //IXamlResource FetchResourceWithXaml(Guid resourceId);
+       
 
         /// <summary>
         /// Loads the Tree.
@@ -72,19 +53,54 @@ namespace Dev2.Common.Interfaces
 
         IEnumerable<IWebServiceSource> FetchWebServiceSources();
 
-       // ObservableCollection<IWebServiceSource> WebSources { get; set; }
 
-
-
+        /// <summary>
+        /// Get the list of plugin sources
+        /// </summary>
+        /// <returns></returns>
         IList<IPluginSource> FetchPluginSources();
 
+        /// <summary>
+        /// get the available methods of a class
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="ns"></param>
+        /// <returns></returns>
         IList<IPluginAction> PluginActions(IPluginSource source, INamespaceItem ns);
+
+        /// <summary>
+        /// Get the list of dlls for plugin source
+        /// </summary>
+        /// <param name="listing"></param>
+        /// <returns></returns>
         List<IFileListing> GetDllListings(IFileListing listing);
 
+        /// <summary>
+        /// Fetch namespaces for a plugin source
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         ICollection<INamespaceItem> FetchNamespaces(IPluginSource source);
+
+        /// <summary>
+        /// fetch files for plugin source
+        /// </summary>
+        /// <returns></returns>
 
         IList<IFileListing> FetchFiles();
 
+        /// <summary>
+        /// fetch files for new plugin service
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         IList<IFileListing> FetchFiles(IFileListing file);
+
+        /// <summary>
+        /// Get the list of dependencies for the deploy screen
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        IList<Guid> FetchDependenciesOnList(IEnumerable<Guid> values);
     }
 }
