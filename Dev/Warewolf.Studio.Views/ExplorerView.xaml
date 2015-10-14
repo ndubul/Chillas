@@ -532,7 +532,11 @@
 
                                     <views:CircularProgressBar Grid.Row="0" Grid.Column="0" Visibility="{Binding Path=Data.IsConnecting, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-                                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="1,0,0,0">
+                                        <CheckBox x:Name="EnvironmentNameCheckBox"
+                                                      Style="{StaticResource DeployCheckBoxStyle}"
+                                                      IsChecked="{Binding Path=Data.IsResourceChecked}"
+                                                      Visibility="{Binding ElementName=ExplorerTree, Path=DataContext.SelectedEnvironment.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"/>
                                         <TextBlock FontSize="12" Foreground="Black" Padding="0,4,0,4"  Text="{Binding Data.DisplayName}" />
                                         <TextBlock Text=" (" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
                                         <TextBlock Text="{Binding Data.ChildrenCount, Mode=OneWay}" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
@@ -1017,7 +1021,7 @@
 
                                     <!-- ADD TEXT TRIMMING TO DISPLAY ECLIPSE ON VIEW WIDTH SETTING -->
 
-                                    <Grid Margin="0,0,-22,0">
+                                    <Grid Margin="0,1,-22,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
