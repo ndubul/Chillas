@@ -1364,7 +1364,7 @@ namespace Dev2.Studio.ViewModels
 
         void AddDeploySurface(IEnumerable<IExplorerTreeItem> items )
         {
-            var dest = new DeployDestinationViewModel();
+            var dest = new DeployDestinationViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
             var stats = new DeployStatsViewerViewModel(dest);
             var vm = new SingleExplorerDeployViewModel(dest, new DeploySourceExplorerViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>(),stats), items,stats );
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources) as WorkSurfaceKey, new DeployWorksurfaceViewModel(EventPublisher,vm,PopupProvider, new DeployView())); //todo:view is null
