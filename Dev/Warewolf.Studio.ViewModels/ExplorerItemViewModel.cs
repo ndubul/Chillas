@@ -169,7 +169,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 shellViewModel.ShowDependencies(ResourceId, Server);
             }));
-            AllowResourceCheck = true;
+            AllowResourceCheck = false;
             IsResourceChecked = false;
             CanCreateDbService = true;
             CanCreateWorkflowService = true;

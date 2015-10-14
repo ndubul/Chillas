@@ -532,11 +532,17 @@
 
                                     <views:CircularProgressBar Grid.Row="0" Grid.Column="0" Visibility="{Binding Path=Data.IsConnecting, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-                                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                                        <TextBlock FontSize="12" Foreground="Black" Padding="0,4,0,4"  Text="{Binding Data.DisplayName}" />
-                                        <TextBlock Text=" (" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                        <TextBlock Text="{Binding Data.ChildrenCount, Mode=OneWay}" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                        <TextBlock Text=")" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="1,0,0,0">
+                                        <CheckBox x:Name="EnvironmentNameCheckBox"
+                                                      Style="{StaticResource DeployCheckBoxStyle}"
+                                                      IsChecked="{Binding Path=Data.IsResourceChecked}"
+                                                      Visibility="{Binding Path=Data.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                        <TextBlock FontSize="12" Padding="0,4,0,4" Margin="4,0,0,0"  Text="{Binding Data.DisplayName}" />
+                                        <TextBlock FontSize="12" Padding="0,4,0,4" Margin="4,0,0,0" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}">
+                                            <Run Text=" (" />
+                                            <Run Text="{Binding Data.ChildrenCount, Mode=OneWay}" />
+                                            <Run Text=")" />
+                                        </TextBlock>
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseLeftButtonDown">
                                                 <i:InvokeCommandAction Command="{Binding Path=Data.Expand}"  />
@@ -1017,17 +1023,15 @@
 
                                     <!-- ADD TEXT TRIMMING TO DISPLAY ECLIPSE ON VIEW WIDTH SETTING -->
 
-                                    <Grid Margin="0,0,-22,0">
+                                    <Grid Margin="0,1,-22,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
                                         <StackPanel Orientation="Horizontal">
                                             <CheckBox x:Name="ResourceNameCheckBox"
-                                                      Margin="{StaticResource ControlBorderRight}"
+                                                      Style="{StaticResource DeployCheckBoxStyle}"
                                                       IsChecked="{Binding Path=Data.IsResourceChecked}"
                                                       Visibility="{Binding Path=Data.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"/>
                                             <TextBlock x:Name="ResourceNameTextBlock"
@@ -1045,10 +1049,11 @@
                                             </i:Interaction.Triggers>
                                             </TextBlock>
                                         </StackPanel>
-                                        <TextBlock Grid.Column="1" Text="(" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                        <TextBlock Grid.Column="2" Text="{Binding Data.ChildrenCount, Mode=OneWay}" Padding="0,4,0,4" 
-                                                   Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
-                                        <TextBlock Grid.Column="3" Text=")" Padding="0,4,0,4" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}"/>
+                                        <TextBlock Grid.Column="1" FontSize="12" Padding="0,4,0,4" Margin="4,0,0,0" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}">
+                                            <Run Text="(" />
+                                            <Run Text="{Binding Data.ChildrenCount, Mode=OneWay}" />
+                                            <Run Text=")" />
+                                        </TextBlock>
                                     </Grid>
 
                                     <!-- VIEW ICON -->

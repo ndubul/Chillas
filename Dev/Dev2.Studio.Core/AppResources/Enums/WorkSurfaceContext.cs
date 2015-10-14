@@ -38,7 +38,6 @@ namespace Dev2.Studio.Core.AppResources.Enums
         [Description("Language Help")]
         LanguageHelp,
 
-        [IconLocation("/images/Deploy-32.png")]
         [Description("Deploy")]
         DeployResources,
 

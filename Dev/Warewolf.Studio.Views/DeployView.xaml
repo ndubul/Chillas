@@ -47,7 +47,7 @@
             <views:ExplorerView Grid.Row="2" 
                                 DataContext="{Binding Source}"
                                 x:Name="SourceNavigationView"
-                                Margin="{StaticResource ControlBorderTop}"
+                                Margin="-5"
                                 AllowDrop="False">
                 
             </views:ExplorerView>
