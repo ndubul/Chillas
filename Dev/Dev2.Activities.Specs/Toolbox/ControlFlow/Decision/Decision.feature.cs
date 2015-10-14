@@ -3718,6 +3718,69 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        public virtual void EnsuringAllComplexTypeInputsWorkAsExpected(string variable1, string var1, string variable2, string var2, string matchType, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensuring all complex type inputs work as expected", exampleTags);
+#line 1297
+this.ScenarioSetup(scenarioInfo);
+#line 1298
+ testRunner.Given(string.Format("a decision variable \'{0}\' value \'{1}\'", variable1, var1), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 1299
+ testRunner.And(string.Format("a decision variable \'{0}\' value \'{1}\'", variable2, var2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1300
+ testRunner.And(string.Format("check if \'{0}\' \'<matchtype>\' \'{1}\'", variable1, variable2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1301
+ testRunner.And("\"Require All decisions to be True\" is \'<Requirement>\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 1302
+ testRunner.When("the decision tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 1303
+ testRunner.Then("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensuring all complex type inputs work as expected")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Decision")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable1", "[[granparent(1).parent(2).childrenName")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var1", "Lee")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable2", "[[granparent(2).parent(2).childrenName")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "Lee")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:MatchType", "Equals")]
+        public virtual void EnsuringAllComplexTypeInputsWorkAsExpected_Variant0()
+        {
+            this.EnsuringAllComplexTypeInputsWorkAsExpected("[[granparent(1).parent(2).childrenName", "Lee", "[[granparent(2).parent(2).childrenName", "Lee", "Equals", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensuring all complex type inputs work as expected")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Decision")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable1", "[[granparent().parent().Numchildren")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var1", "10")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable2", "[[granparent(1).parent(1).Numchildren")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:MatchType", ">")]
+        public virtual void EnsuringAllComplexTypeInputsWorkAsExpected_Variant1()
+        {
+            this.EnsuringAllComplexTypeInputsWorkAsExpected("[[granparent().parent().Numchildren", "10", "[[granparent(1).parent(1).Numchildren", "5", ">", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensuring all complex type inputs work as expected")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Decision")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable1", "[[granparent(*).parent(*).Numchildren")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var1", "27")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable2", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Var2", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:MatchType", "isNumeric")]
+        public virtual void EnsuringAllComplexTypeInputsWorkAsExpected_Variant2()
+        {
+            this.EnsuringAllComplexTypeInputsWorkAsExpected("[[granparent(*).parent(*).Numchildren", "27", "", "", "isNumeric", ((string[])(null)));
+        }
     }
 }
 #pragma warning restore

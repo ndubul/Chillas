@@ -1291,3 +1291,18 @@ Scenario: decide if variable [[A]] greater than a variable [[B]] (False)
 	And the debug output as 
 	|       |
 	| False |
+
+
+#Complex Types
+Scenario Outline: Ensuring all complex type inputs work as expected
+	Given a decision variable '<variable1>' value '<Var1>'	
+	And a decision variable '<variable2>' value '<Var2>'
+	And check if '<variable1>' '<matchtype>' '<variable2>'
+	And "Require All decisions to be True" is '<Requirement>'
+	When the decision tool is executed
+	Then the execution has "NO" error
+	Examples: 
+	| variable1                              | Var1 | variable2                              | Var2 | MatchType |
+	| [[granparent(1).parent(2).childrenName | Lee  | [[granparent(2).parent(2).childrenName | Lee  | Equals    |
+	| [[granparent().parent().Numchildren    | 10   | [[granparent(1).parent(1).Numchildren  | 5    | >         |
+	| [[granparent(*).parent(*).Numchildren  | 27   |                                        |      | isNumeric |

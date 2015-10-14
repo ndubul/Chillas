@@ -280,7 +280,7 @@ Examples:
 	| 6  | [[rec".a]]                                | UPPER | Variable name [[rec".a]] contains invalid character(s)                                                                                                                                                                                                  |
 	| 7  | [[rec.a]]                                 | UPPER | Variable name [[rec.a]]  contains invalid character(s)                                                                                                                                                                                                  |
 	| 8  | [[rec()*.a]]                              | UPPER | Variable name [[rec()*.a]] contains invalid character(s)                                                                                                                                                                                                |
-	| 9 | [[rec().a]]*                              | UPPER | One variable only allowed in the output field                                                                                                                                                                                                           |
+	| 9  | [[rec().a]]*                              | UPPER | One variable only allowed in the output field                                                                                                                                                                                                           |
 	| 10 | [[1]]                                     | UPPER | Variable name [[1]] begins with a number                                                                                                                                                                                                                |
 	| 11 | [[@]]                                     | UPPER | Variable name [[@]] contains invalid character(s)                                                                                                                                                                                                       |
 	| 12 | [[var#]]                                  | UPPER | Variable name [[var#]] contains invalid character(s)                                                                                                                                                                                                    |
@@ -303,9 +303,6 @@ Examples:
 
 
 
-
-
-
 	Scenario: Convert a Variable That Does Not Exist
 	Given I have a case convert variable "[[my(1).sentenct]]" with a value of "[[a]]"
 	And I convert a variable "[[my(1).sentenct]]" to "lower"		
@@ -313,6 +310,22 @@ Examples:
 	Then the execution has "AN" error
 	And the execution has "invalid recordset" error
 
-
+Scenario Outline: Convert a sentence to uppercase using complex types
+	Given I have a case convert variable '<variable>' with a value of '<value>'
+	And I convert a variable '<variable>' to '<To>'	
+	When the case conversion tool is executed
+	Then the sentence will be '<result>'
+	And the execution has "NO" error
+	And the debug inputs as  
+	| # | Convert              | To   |
+	| 1 | <variable> = <value> | <To> |
+	And the debug output as  
+	| # |                        |
+	| 1 | <variable> = <results> | 
+	Examples: 
+	| variable                               | value    | To         | Result   |
+	| [[granparent().parents().childName]]   | troy-ave | TITLE CASE | Troy-Ave |
+	| [[granparent().parents().childName]]   | Jesse    | LOWER      | jesse    |
+	| [[granparent(1).parents(1).childName]] | Jesse    | UPPER      | JESSE    |
 
 

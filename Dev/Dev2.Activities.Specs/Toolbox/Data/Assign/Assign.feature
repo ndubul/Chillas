@@ -758,17 +758,34 @@ Scenario Outline:  Assigning value to a complex type
 	| # |                                                |
 	| 1 | <result> |
 	Examples: 
+	| Object                                                         | Value | result                                           |
+	| [[granparent().parent().NumberOfChildren]]                     | 4     | [[granparent().parent().NumberOfChildren]] = 4   |
+	| [[granparent().parent(1).NumberOfChildren]]                    | 6     | [[granparent().parent(1).NumberOfChildren]] = 6  |
+	| [[granparent().parent(*).NumberOfChildren]]                    | 10    | [[granparent().parent(1).NumberOfChildren]] = 10 |
+	| [[granparent().parent([[int]]).NumberOfChildren]],[[int]] = 2  | 4     | [[granparent().parent(2).NumberOfChildren]] = 4  |
+	| [[granparent(*).parent(1).NumberOfChildren]]                   | 7     | [[granparent(*).parent(1).NumberOfChildren]] = 7 |
+	| [[granparent(*).parent(*).NumberOfChildren]]                   | 14    | [[granparent().parent(1).NumberOfChildren]] = 14 |
+	| [[granparent([[rec().var]]).parent(*).NumberOfChildren]]       | 4     | [[granparent(2).parent().NumberOfChildren]] = 4  |
+	| [[granparent([[rec().var().set]]).parent(*).NumberOfChildren]] | 4     | [[granparent(2).parent().NumberOfChildren]] = 4  |	
+
+
+Scenario Outline:  Assigning value to a complex type that is incorrectly formatted
+	Given I assign the value "<value>" to a variable "<object>"	
+	When the assign tool is executed
+	And the execution has "An" error
+	And the debug output as 
+	| # |                                                |
+	| 1 | <result> |
+	Examples: 
 	| Object                                                        | Value | result                                           |
-	| [[granparent().parent().NumberOfChildren]]                    | 4     | [[granparent().parent().NumberOfChildren]] = 4   |
-	| [[granparent().parent(1).NumberOfChildren]]                   | 6     | [[granparent().parent(1).NumberOfChildren]] = 6  |
-	| [[granparent().parent(*).NumberOfChildren]]                   | 10    | [[granparent().parent(1).NumberOfChildren]] = 10 |
-	| [[granparent().parent([[int]]).NumberOfChildren]],[[int]] = 2 | 4     | [[granparent().parent(2).NumberOfChildren]] = 4  |
-	| [[granparent(*).parent(1).NumberOfChildren]]                  | 7     | [[granparent(*).parent(1).NumberOfChildren]] = 7 |
-	| [[granparent(*).parent(*).NumberOfChildren]]                  | 14    | [[granparent().parent(1).NumberOfChildren]] = 14 |
+	| [[granparent.parent().NumberOfChildren]]                      | 4     | [[granparent.parent().NumberOfChildren]] = Error |
+	| [[granparent().parent(1).NumberOfChildren()]]                 | 6     | [[granparent().parent(1).NumberOfChildren()]] = Error  |
+	| [[granparent(Test).parent(*).NumberOfChildren]]               | 10    | [[granparent(Test).parent(1).NumberOfChildren]] = Error |
 	
 
-
-
+	#| [[granparent().parent([[int]]).NumberOfChildren]]| 4     | [[granparent().parent(2).NumberOfChildren]] = 4  |
+	#| [[granparent(*).parent(1).NumberOfChildren]]                  | 7     | [[granparent(*).parent(1).NumberOfChildren]] = 7 |
+	#| [[granparent(*).parent(*).NumberOfChildren]]                  | 14    | [[granparent().parent(1).NumberOfChildren]] = 14 |
 
 
 
