@@ -3466,6 +3466,92 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.AssigningValueToAComplexType("[[granparent(*).parent(*).NumberOfChildren]]", "14", "[[granparent().parent(1).NumberOfChildren]] = 14", ((string[])(null)));
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Assigning value to a complex type")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Assign")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 6")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Object", "[[granparent([[rec().var]]).parent(*).NumberOfChildren]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value", "4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[granparent(2).parent().NumberOfChildren]] = 4")]
+        public virtual void AssigningValueToAComplexType_Variant6()
+        {
+            this.AssigningValueToAComplexType("[[granparent([[rec().var]]).parent(*).NumberOfChildren]]", "4", "[[granparent(2).parent().NumberOfChildren]] = 4", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Assigning value to a complex type")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Assign")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Object", "[[granparent([[rec().var().set]]).parent(*).NumberOfChildren]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value", "4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[granparent(2).parent().NumberOfChildren]] = 4")]
+        public virtual void AssigningValueToAComplexType_Variant7()
+        {
+            this.AssigningValueToAComplexType("[[granparent([[rec().var().set]]).parent(*).NumberOfChildren]]", "4", "[[granparent(2).parent().NumberOfChildren]] = 4", ((string[])(null)));
+        }
+        
+        public virtual void AssigningValueToAComplexTypeThatIsIncorrectlyFormatted(string @object, string value, string result, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Assigning value to a complex type that is incorrectly formatted", exampleTags);
+#line 772
+this.ScenarioSetup(scenarioInfo);
+#line 773
+ testRunner.Given("I assign the value \"<value>\" to a variable \"<object>\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 774
+ testRunner.When("the assign tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 775
+ testRunner.And("the execution has \"An\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table64 = new TechTalk.SpecFlow.Table(new string[] {
+                        "#",
+                        ""});
+            table64.AddRow(new string[] {
+                        "1",
+                        string.Format("{0}", result)});
+#line 776
+ testRunner.And("the debug output as", ((string)(null)), table64, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Assigning value to a complex type that is incorrectly formatted")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Assign")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[granparent.parent().NumberOfChildren]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Object", "[[granparent.parent().NumberOfChildren]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value", "4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[granparent.parent().NumberOfChildren]] = Error")]
+        public virtual void AssigningValueToAComplexTypeThatIsIncorrectlyFormatted_Granparent_Parent_NumberOfChildren()
+        {
+            this.AssigningValueToAComplexTypeThatIsIncorrectlyFormatted("[[granparent.parent().NumberOfChildren]]", "4", "[[granparent.parent().NumberOfChildren]] = Error", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Assigning value to a complex type that is incorrectly formatted")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Assign")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[granparent().parent(1).NumberOfChildren()]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Object", "[[granparent().parent(1).NumberOfChildren()]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value", "6")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[granparent().parent(1).NumberOfChildren()]] = Error")]
+        public virtual void AssigningValueToAComplexTypeThatIsIncorrectlyFormatted_Granparent_Parent1_NumberOfChildren()
+        {
+            this.AssigningValueToAComplexTypeThatIsIncorrectlyFormatted("[[granparent().parent(1).NumberOfChildren()]]", "6", "[[granparent().parent(1).NumberOfChildren()]] = Error", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Assigning value to a complex type that is incorrectly formatted")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Assign")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[granparent(Test).parent(*).NumberOfChildren]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Object", "[[granparent(Test).parent(*).NumberOfChildren]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Value", "10")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[granparent(Test).parent(1).NumberOfChildren]] = Error")]
+        public virtual void AssigningValueToAComplexTypeThatIsIncorrectlyFormatted_GranparentTest_Parent_NumberOfChildren()
+        {
+            this.AssigningValueToAComplexTypeThatIsIncorrectlyFormatted("[[granparent(Test).parent(*).NumberOfChildren]]", "10", "[[granparent(Test).parent(1).NumberOfChildren]] = Error", ((string[])(null)));
+        }
     }
 }
 #pragma warning restore
