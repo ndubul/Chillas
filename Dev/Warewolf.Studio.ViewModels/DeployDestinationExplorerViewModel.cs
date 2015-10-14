@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Caliburn.Micro;
 using Dev2.Common.Interfaces;
@@ -8,30 +7,33 @@ using Dev2.Common.Interfaces.Deploy;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class DeploySourceExplorerViewModel :ExplorerViewModelBase, IDeploySourceExplorerViewModel {
-        readonly IEnvironmentViewModel _environmentViewModel;
-
+    public class DeploySourceExplorerViewModel :ExplorerViewModel, IDeploySourceExplorerViewModel {
+        readonly IDeployStatsViewerViewModel _statsArea;
 
         #region Implementation of IDeployDestinationExplorerViewModel
 
 
-        public DeploySourceExplorerViewModel(IEnvironmentViewModel environmentViewModel)
+        public DeploySourceExplorerViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator,IDeployStatsViewerViewModel statsArea):base(shellViewModel,aggregator)
         {
-            _environmentViewModel = environmentViewModel;
-            environmentViewModel.SetPropertiesForDialog();
-            UpdateItemForDeploy();
-            Environments = new ObservableCollection<IEnvironmentViewModel>
-            {
-                environmentViewModel
-            };
+            _statsArea = statsArea;
 
+            if (SelectedEnvironment != null)
+            {
+                UpdateItemForDeploy();
+            }
             IsRefreshing = false;
             ShowConnectControl = false;
+            SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
+        }
+
+        void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, IEnvironmentViewModel e)
+        {
+            UpdateItemForDeploy();
         }
 
         private void UpdateItemForDeploy()
         {
-            _environmentViewModel.AsList().Apply(a=>
+            SelectedEnvironment.AsList().Apply(a=>
             {
                 a.CanDrag = false;
                 a.CanRename = false;
@@ -47,6 +49,7 @@ namespace Warewolf.Studio.ViewModels
                 a.CanCreateWebService = false;
                 a.CanCreateWebSource = false;
                 a.CanCreateWorkflowService = false;
+                a.SelectAction = (ax => { _statsArea.Calculate(SelectedItems.ToList()); });
             });
         }
 
@@ -90,5 +93,20 @@ namespace Warewolf.Studio.ViewModels
         #endregion
 
 
+    }
+
+    public class DeployDestinationViewModel : ExplorerViewModel, IDeployDestinationExplorerViewModel
+    {
+        #region Implementation of IDeployDestinationExplorerViewModel
+
+        public DeployDestinationViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator)
+            : base(shellViewModel, aggregator)
+        {
+        }
+
+
+
+
+        #endregion
     }
 }

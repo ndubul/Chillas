@@ -1,28 +1,267 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
+using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Deploy;
+using Dev2.Studio.Core.Interfaces;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class DeployViewModel:BindableBase, IDeployViewModel
+    public class SingleExplorerDeployViewModel : BindableBase, IDeployViewModel
     {
         IDeploySourceExplorerViewModel _source;
         readonly IDeployStatsViewerViewModel _stats;
         IDeployDestinationExplorerViewModel _destination;
+        IConnectControlViewModel _sourceconnectControlViewModel;
+        IConnectControlViewModel _destinationConnectControlViewModel;
+        string _unknownCount;
+        string _sourcesCount;
+        string _servicesCount;
+        string _connectorsCount;
+        string _newResourcesCount;
+        string _overridesCount;
+        bool _showConflicts;
+        bool _isDeploying;
+        bool _deploySuccessfull;
+        string _conflictNewResourceText;
 
         #region Implementation of IDeployViewModel
 
-        public DeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source,IEnumerable<IExplorerTreeItem> selectedItems,IDeployStatsViewerViewModel stats)
+        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source,IEnumerable<IExplorerTreeItem> selectedItems,IDeployStatsViewerViewModel stats) 
         {
+            VerifyArgument.AreNotNull(new Dictionary<string, object> { { "destination", destination }, { "source", source }, { "selectedItems", selectedItems }, { "stats", stats } });
             _destination = destination;
-            _destination.SelectItemsForDeploy(selectedItems);
+            
             _source = source;
-
+            _source.SelectItemsForDeploy(selectedItems);
             _stats = stats;
+
+            SourceConnectControlViewModel = _source.ConnectControlViewModel;
+            DestinationConnectControlViewModel = _destination.ConnectControlViewModel;
+
+            DeployCommand = new DelegateCommand(Deploy);
+            SelectDependenciesCommand = new DelegateCommand(SelectDependencies);
+            NewResourcesViewCommand = new DelegateCommand(ViewNewResources);
+            OverridesViewCommand = new DelegateCommand(ViewOverrides);
+
+            ShowConflicts = false;
+            ConnectorsCount = stats.Connectors.ToString();
+            ServicesCount = stats.Services.ToString();
+            SourcesCount = stats.Sources.ToString();
+            UnknownCount = stats.Unknown.ToString();
+            NewResourcesCount = stats.NewResources.ToString();
+            OverridesCount = stats.Overrides.ToString();
         }
 
+        void ViewOverrides()
+        {
+            ShowConflicts = true;
+            ConflictNewResourceText = "List of Overrides";
+        }
+
+        public string ConflictNewResourceText
+        {
+            get
+            {
+                return _conflictNewResourceText;
+            }
+            set
+            {
+                _conflictNewResourceText = value;
+                OnPropertyChanged(() => ConflictNewResourceText);
+            }
+        }
+
+        public bool ShowConflicts
+        {
+            get
+            {
+                return _showConflicts;
+            }
+            set
+            {
+                _showConflicts = value;
+                OnPropertyChanged(() => ShowConflicts);
+            }
+        }
+
+        void ViewNewResources()
+        {
+            ShowConflicts = true;
+            ConflictNewResourceText = "List of New Resources";
+        }
+
+        void Deploy()
+        {
+
+        }
+
+        void SelectDependencies()
+        {
+
+        }
+
+        /// <summary>
+        /// Used to indicate a successfull deploy has happened
+        /// </summary>
+        public bool DeploySuccessfull
+        {
+            get
+            {
+                return _deploySuccessfull;
+            }
+            private set
+            {
+                _deploySuccessfull = value;
+                OnPropertyChanged(() => DeploySuccessfull);
+            }
+        }
+
+        /// <summary>
+        /// Used to indicate if a deploy is in progress
+        /// </summary>
+        public bool IsDeploying
+        {
+            get
+            {
+                return _isDeploying;
+            }
+            private set
+            {
+                _isDeploying = value;
+                OnPropertyChanged(() => IsDeploying);
+                OnPropertyChanged(() => CanDeploy);
+            }
+        }
+        /// <summary>
+        /// Can Deploy test to enable button
+        /// </summary>
+        public bool CanDeploy
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public string OverridesCount
+        {
+            get
+            {
+                return _overridesCount;
+            }
+            set
+            {
+                _overridesCount = value;
+                OnPropertyChanged(() => OverridesCount);
+            }
+        }
+
+        public string NewResourcesCount
+        {
+            get
+            {
+                return _newResourcesCount;
+            }
+            set
+            {
+                _newResourcesCount = value;
+                OnPropertyChanged(() => NewResourcesCount);
+            }
+        }
+
+        public string UnknownCount
+        {
+            get
+            {
+                return _unknownCount;
+            }
+            set
+            {
+                _unknownCount = value;
+                OnPropertyChanged(() => UnknownCount);
+            }
+        }
+
+        public string SourcesCount
+        {
+            get
+            {
+                return _sourcesCount;
+            }
+            set
+            {
+                _sourcesCount = value;
+                OnPropertyChanged(() => SourcesCount);
+            }
+        }
+
+        public string ServicesCount
+        {
+            get
+            {
+                return _servicesCount;
+            }
+            set
+            {
+                _servicesCount = value;
+                OnPropertyChanged(() => ServicesCount);
+            }
+        }
+
+        public string ConnectorsCount
+        {
+            get
+            {
+                return _connectorsCount;
+            }
+            set
+            {
+                _connectorsCount = value;
+                OnPropertyChanged(() => ConnectorsCount);
+            }
+        }
+
+        /// <summary>
+        /// source connection
+        /// </summary>
+        public IConnectControlViewModel SourceConnectControlViewModel
+        {
+            get
+            {
+                return _sourceconnectControlViewModel;
+            }
+            set
+            {
+                if (Equals(value, _sourceconnectControlViewModel))
+                {
+                    return;
+                }
+                _sourceconnectControlViewModel = value;
+                OnPropertyChanged(() => SourceConnectControlViewModel);
+            }
+        }
+        /// <summary>
+        /// destination connection
+        /// </summary>
+        public IConnectControlViewModel DestinationConnectControlViewModel
+        {
+            get
+            {
+                return _destinationConnectControlViewModel;
+            }
+            set
+            {
+                if (Equals(value, _destinationConnectControlViewModel))
+                {
+                    return;
+                }
+                _destinationConnectControlViewModel = value;
+                OnPropertyChanged(() => DestinationConnectControlViewModel);
+            }
+        }
         /// <summary>
         /// Source Server
         /// </summary>
@@ -35,7 +274,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _source = value;
-                OnPropertyChanged(()=>Source);
+                OnPropertyChanged("Source");
             }
         }
         /// <summary>
@@ -50,9 +289,20 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _destination = value;
-                OnPropertyChanged(()=>Destination);
+                OnPropertyChanged("Destination");
             }
         }
+
+        /// <summary>
+        /// Overrides Hyperlink Clicked
+        /// Must show list of New Resources conflicts
+        /// </summary>
+        public ICommand NewResourcesViewCommand { get; set; }
+        /// <summary>
+        /// Overrides Hyperlink Clicked
+        /// Must show list of Override conflicts
+        /// </summary>
+        public ICommand OverridesViewCommand { get; set; }
         /// <summary>
         /// Deploy Button Clicked
         /// Must bring up conflict screen. Conflict screen can modify collection
@@ -76,5 +326,7 @@ namespace Warewolf.Studio.ViewModels
         public IDeployStatsViewerViewModel StatsViewModel { get; set; }
 
         #endregion
+
+      
     }
 }

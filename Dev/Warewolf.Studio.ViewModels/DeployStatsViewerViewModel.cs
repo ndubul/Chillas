@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
+using Dev2;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Deploy;
 using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.ViewModels
 {
     public class DeployStatsViewerViewModel : BindableBase, IDeployStatsViewerViewModel {
+        readonly IExplorerViewModel _destination;
         int _connectors;
         int _services;
         int _sources;
@@ -13,13 +17,15 @@ namespace Warewolf.Studio.ViewModels
         int _newResources;
         int _overrides;
         string _status;
+        IEnumerable<IExplorerTreeItem> _conflicts;
+        IEnumerable<IExplorerTreeItem> _new;
 
-        public  DeployStatsViewerViewModel()
+        public  DeployStatsViewerViewModel(IExplorerViewModel destination)
         {
+            VerifyArgument.IsNotNull("destination",destination);
+            _destination = destination;
             Status = "";
         }
-
-
 
         #region Implementation of IDeployStatsViewerViewModel
 
@@ -132,12 +138,54 @@ namespace Warewolf.Studio.ViewModels
 
         public void Calculate(IList<IExplorerTreeItem> items)
         {
+            if(items != null)
+            {
+                Connectors = items.Count(a => a.IsSelected && a.ResourceType >= ResourceType.DbService && a.ResourceType <= ResourceType.WebService);
+                Services = items.Count(a => a.IsSelected && a.ResourceType >= ResourceType.WorkflowService);
+                Sources = items.Count(a => IsSource(a.ResourceType));
+                Unknown = items.Count(a => a.ResourceType == ResourceType.Unknown);
+                _conflicts = items.Intersect(_destination.SelectedEnvironment.AsList());
+                _new = items.Except(_destination.SelectedEnvironment.AsList());
+           
+                Overrides = New.Count;
+                NewResources = New.Count;
+
+            }
+            else
+            {
+                Connectors = 0;
+                Services = 0;
+                Sources = 0;
+                Unknown = 0;
+                _conflicts = new List<IExplorerTreeItem>();
+                _new = new List<IExplorerTreeItem>();
+            }
+
+            OnPropertyChanged(() => Conflicts);
+            OnPropertyChanged(() => New);
         }
 
-        public void Calculate(IExplorerTreeItem items, IExplorerTreeItem destination)
+        public IList<IExplorerTreeItem> Conflicts
         {
-
+            get
+            {
+                return _conflicts.ToList();
+            }
         }
+        public IList<IExplorerTreeItem> New
+        {
+            get
+            {
+                return _new.ToList();
+            }
+        }
+
+        bool IsSource(ResourceType res)
+        {
+            return (res == ResourceType.DbSource) || (res == ResourceType.OauthSource) || (res == ResourceType.EmailSource) || (res == ResourceType.PluginService) || (res == ResourceType.ServerSource);
+        }
+
+    
 
         #endregion
     }

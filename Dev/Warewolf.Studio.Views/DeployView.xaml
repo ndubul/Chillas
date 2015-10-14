@@ -1,0 +1,258 @@
+﻿<UserControl x:Class="Warewolf.Studio.Views.DeployView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:Warewolf.Studio.Views"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:customControls="clr-namespace:Dev2.CustomControls;assembly=Dev2.CustomControls"
+             xmlns:viewModels="clr-namespace:Warewolf.Studio.ViewModels;assembly=Warewolf.Studio.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModels:SingleExplorerDeployViewModel}">
+
+    <Grid Margin="{StaticResource ElementBorder}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60*" MinWidth="150" />
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="40*" MinWidth="150" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- SOURCE SERVER -->
+        <Grid Grid.Column="0" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Background="{StaticResource WareWolfMenuBrush}" 
+                        HorizontalAlignment="Stretch" 
+                        Orientation="Horizontal">
+                <TextBlock Margin="{StaticResource ElementBorder}" 
+                           Text="Source Server" 
+                           Style="{StaticResource SourceHeader}"></TextBlock>
+            </StackPanel>
+
+            <views:ConnectControl Grid.Row="1"
+                                  DataContext="{Binding SourceConnectControlViewModel}"
+                                  Margin="{StaticResource ControlBorderTop}"
+                                  ConnectButtonAutomationID="UI_SourceConnectServerbtn_AutoID"
+                                  EditButtonAutomationID="UI_SourceServerEditbtn_AutoID"
+                                  ServerComboBoxAutomationID="UI_SourceServercbx_AutoID" 
+                                  x:Name="SourceConnectControl" />
+        </Grid>
+
+        <GridSplitter Grid.Column="1" Width="2" Margin="3,0,3,0" HorizontalAlignment="Stretch" />
+
+        <!-- DESTINATION SERVER -->
+        <Grid Grid.Column="2" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" 
+                        Grid.Column="0" 
+                        Background="{StaticResource WareWolfMenuBrush}" 
+                        HorizontalAlignment="Stretch" 
+                        Orientation="Horizontal">
+                <TextBlock Margin="{StaticResource ElementBorder}" 
+                           Text="Destination Server" 
+                           Style="{StaticResource SourceHeader}"/>
+            </StackPanel>
+
+            <views:ConnectControl Grid.Row="1"
+                                  DataContext="{Binding DestinationConnectControlViewModel}"
+                                  Margin="{StaticResource ControlBorderTop}"
+                                  ConnectButtonAutomationID="UI_DestinationServerConnectbtn_AutoID"
+                                  EditButtonAutomationID="UI_DestinationServerEditbtn_AutoID"
+                                  ServerComboBoxAutomationID="UI_DestinationServercbx_AutoID" 
+                                  x:Name="DestinationConnectControl" />
+
+            <Grid Grid.Row="2" Background="#7F7F7F" Margin="{StaticResource ControlBorderTop}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="40*"/>
+                </Grid.RowDefinitions>
+
+                <!-- SELECTED FOR DEPLOY -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Foreground="White"
+                               Margin="{StaticResource ElementBorder}"
+                               FontSize="{StaticResource FontSize-Larger}"
+                               Text="Selected for Deploy"
+                               FontWeight="Bold"/>
+
+                    <Grid Grid.Row="1" Margin="{StaticResource ElementBorder}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Services" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding ConnectorsCount}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Workflows" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding ServicesCount}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Sources" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding SourcesCount}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Unknown" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding UnknownCount}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                    </Grid>
+
+                    <StackPanel Grid.Row="2"
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+                        <Button AutomationProperties.AutomationId="UI_SelectDepbtn_AutoID"
+                                x:Name="Dependencies"
+                                Content="Select All Dependencies"
+                                Command="{Binding SelectDependenciesCommand}"
+                                Width="Auto"
+                                Style="{StaticResource ButtonOrangeStyle}"
+                                Margin="{StaticResource ElementBorder}"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- DEPLOY SUMMARY -->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Foreground="White"
+                               Margin="{StaticResource ElementBorder}"
+                               FontSize="{StaticResource FontSize-Larger}"
+                               Text="Deploy Summary"
+                               FontWeight="Bold"></TextBlock>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="New Resources" Margin="{StaticResource ElementBorder}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="Override" Margin="{StaticResource ElementBorder}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" >
+                                <Hyperlink x:Name="NewResourcesView" Command="{Binding NewResourcesViewCommand}" >
+                                    <TextBlock Text="{Binding NewResourcesCount}" FontSize="28"></TextBlock>
+                                </Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" >
+                                <Hyperlink x:Name="OverridesCountView" Command="{Binding OverridesViewCommand}"  >
+                                    <TextBlock Text="{Binding OverridesCount}" FontSize="28"></TextBlock>
+                                </Hyperlink>
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal"
+                                Margin="{StaticResource ElementBorder}">
+                        <Button AutomationProperties.AutomationId="UI_Deploybtn_AutoID"
+                                Content="Deploy"
+                                Command="{Binding DeployCommand}"
+                                Style="{StaticResource ButtonOrangeStyle}"
+                                Margin="{StaticResource ControlBorderRight}"
+                                MaxWidth="50"
+                                MinWidth="50" 
+                                x:Name="Deploy"/>
+                        <customControls:CircularProgressBar Height="15"
+                                                            Width="15"
+                                                            VerticalAlignment="Center"
+                                                            Margin="{StaticResource ControlBorderRight}"
+                                                            Visibility="{Binding IsDeploying, Converter={StaticResource BoolToVisConverter}}" />
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="{StaticResource ControlBorderRight}"
+                                    Visibility="{Binding DeploySuccessfull, Converter={StaticResource BoolToVisibilityConverterPositive}}">
+                            <fa:ImageAwesome Width="14" 
+                                             Height="14" 
+                                             Foreground="{StaticResource WareWolfOrangeBrush}" 
+                                             Margin="{StaticResource ControlBorderRight}" 
+                                             Icon="Check" 
+                                             HorizontalAlignment="Right" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="{StaticResource ControlBorderRight}"
+                                    Visibility="{Binding ServersAreNotTheSame, Converter={StaticResource BoolToVisibilityConverterNegative}}">
+                            <TextBlock x:Name="ServersNotSame" 
+                                       Foreground="{StaticResource ValidationErrorElement}"
+                                       TextWrapping="Wrap"
+                                       Text="Source and Destination cannot be the same."
+                                       AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding ShowServerDisconnectedMessage, Converter={StaticResource BoolToVisibilityConverterPositive}}">
+                            <TextBlock Foreground="{StaticResource ValidationErrorElement}"
+                                       Text="{Binding ServerDisconnectedMessage}"
+                                       AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
+                                       VerticalAlignment="Center"
+                                       x:Name="ErrorMessage" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="2" Visibility="{Binding ShowConflicts, Converter={StaticResource BoolToVisConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Foreground="White"
+                               Margin="{StaticResource ElementBorder}"
+                               FontSize="{StaticResource FontSize-Larger}"
+                               Text="{Binding ConflictNewResourceText}"
+                               FontWeight="Bold"/>
+
+                    <ScrollViewer Grid.Row="1" 
+                                  Margin="{StaticResource ElementBorder}" 
+                                  HorizontalScrollBarVisibility="Hidden" 
+                                  VerticalScrollBarVisibility="Auto">
+                        <ItemsControl>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="White" 
+                                           FontSize="{StaticResource FontSize-Medium}"
+                                           Text="Resource Name"
+                                           HorizontalAlignment="Left">
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
