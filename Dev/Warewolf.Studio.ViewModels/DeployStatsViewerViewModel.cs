@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Dev2;
@@ -19,12 +20,13 @@ namespace Warewolf.Studio.ViewModels
         string _status;
         IEnumerable<IExplorerTreeItem> _conflicts;
         IEnumerable<IExplorerTreeItem> _new;
+        Action _calculateAction;
 
         public  DeployStatsViewerViewModel(IExplorerViewModel destination)
         {
             VerifyArgument.IsNotNull("destination",destination);
             _destination = destination;
-            Status = "";
+            Status = "bob";
         }
 
         #region Implementation of IDeployStatsViewerViewModel
@@ -141,7 +143,7 @@ namespace Warewolf.Studio.ViewModels
             if(items != null)
             {
                 Connectors = items.Count(a => a.ResourceType >= ResourceType.DbService && a.ResourceType <= ResourceType.WebService);
-                Services = items.Count(a => a.ResourceType >= ResourceType.WorkflowService);
+                Services = items.Count(a => a.ResourceType == ResourceType.WorkflowService);
                 Sources = items.Count(a => IsSource(a.ResourceType));
                 Unknown = items.Count(a => a.ResourceType == ResourceType.Unknown);
                 if(_destination.SelectedEnvironment != null)
@@ -171,6 +173,10 @@ namespace Warewolf.Studio.ViewModels
 
             OnPropertyChanged(() => Conflicts);
             OnPropertyChanged(() => New);
+            if(CalculateAction != null)
+            {
+                CalculateAction();
+            }
         }
 
         public IList<IExplorerTreeItem> Conflicts
@@ -185,6 +191,17 @@ namespace Warewolf.Studio.ViewModels
             get
             {
                 return _new.ToList();
+            }
+        }
+        public Action CalculateAction
+        {
+            get
+            {
+                return _calculateAction;
+            }
+            set
+            {
+                _calculateAction = value;
             }
         }
 

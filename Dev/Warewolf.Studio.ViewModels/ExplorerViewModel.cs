@@ -275,8 +275,10 @@ namespace Warewolf.Studio.ViewModels
 	    {
             var environmentModel = CreateEnvironmentFromServer(server, _shellViewModel);
             Environments.Add(environmentModel);
-	        await environmentModel.Load();
+	        await environmentModel.Load(IsDeploy);
 	    }
+
+	    public bool IsDeploy { get; set; }
 
 	    void ServerDisconnected(object _, IServer server)
         {

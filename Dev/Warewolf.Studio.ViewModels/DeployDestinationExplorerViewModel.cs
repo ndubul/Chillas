@@ -37,6 +37,7 @@ namespace Warewolf.Studio.ViewModels
             ShowConnectControl = false;
            
             ConnectControlViewModel.SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
+            IsDeploy = true;
         }
 
         void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, Guid environmentId)
@@ -52,6 +53,7 @@ namespace Warewolf.Studio.ViewModels
                 SelectedEnvironment = environmentViewModel;
                 environmentViewModel.AsList().Apply(a=>
                 {
+                    
                     a.CanDrag = false;
                     a.CanRename = false;
                     a.CanShowDependencies = false;
@@ -70,6 +72,11 @@ namespace Warewolf.Studio.ViewModels
                     a.AllowResourceCheck = true;
                 });
             }
+            foreach(var env  in  Environments.Where(a => a.Server.EnvironmentID != environmentId))
+            {
+                Environments.Remove(env);
+            }
+           
         }
 
         void SelectAction(IExplorerItemViewModel ax)
@@ -85,7 +92,7 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return  SelectedEnvironment!= null ?  SelectedEnvironment.AsList().Select(a=> a as IExplorerTreeItem).Where(a=>a.IsSelected).ToList():new List<IExplorerTreeItem>();
+                return  SelectedEnvironment!= null ?  SelectedEnvironment.AsList().Select(a=> a as IExplorerTreeItem).Where(a=>a.IsResourceChecked).ToList():new List<IExplorerTreeItem>();
             }
             set
             {

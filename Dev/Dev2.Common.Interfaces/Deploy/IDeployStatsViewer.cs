@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Dev2.Common.Interfaces.Deploy
 {
@@ -38,5 +39,6 @@ namespace Dev2.Common.Interfaces.Deploy
         IList<IExplorerTreeItem> Conflicts { get; }
 
         IList<IExplorerTreeItem> New { get; }
+        Action CalculateAction { get; set; }
     }
 }

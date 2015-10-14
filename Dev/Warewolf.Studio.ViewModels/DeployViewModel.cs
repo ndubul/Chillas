@@ -38,7 +38,7 @@ namespace Warewolf.Studio.ViewModels
             _source = source;
             _source.SelectItemsForDeploy(selectedItems);
             _stats = stats;
-
+            _stats.CalculateAction = () => { ServicesCount = _stats.Services.ToString(); };
             SourceConnectControlViewModel = _source.ConnectControlViewModel;
             DestinationConnectControlViewModel = _destination.ConnectControlViewModel;
 
