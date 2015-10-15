@@ -35,6 +35,7 @@ namespace Warewolf.Studio.ViewModels
         bool? _isResourceChecked;
         bool _isVisible;
         bool _isFolderChecked;
+        bool _showContextMenu;
 
         public EnvironmentViewModel(IServer server, IShellViewModel shellViewModel, bool isDialog=false,Action<IExplorerItemViewModel> selectAction=null)
         {
@@ -117,6 +118,19 @@ namespace Warewolf.Studio.ViewModels
             return total;
         }
 
+        public bool ShowContextMenu
+        {
+            get
+            {
+                return _showContextMenu;
+            }
+            set
+            {
+                _showContextMenu = value;
+                OnPropertyChanged(() => ShowContextMenu);
+            }
+        }
+
         public bool CanCreateWorkflowService
         {
             get { return _canCreateWorkflowService; }
@@ -190,6 +204,7 @@ namespace Warewolf.Studio.ViewModels
                 child.CanCreateWebService = false;
                 child.CanCreateWebSource = false;
                 child.CanCreateWorkflowService = false;
+                child.ShowContextMenu = false;
                 child.CanDeploy = false;
                 child.CanShowDependencies = false;
             }
@@ -283,6 +298,7 @@ namespace Warewolf.Studio.ViewModels
                 CanCreateWebService = false;
                 CanCreateWebSource = false;
                 CanCreateWorkflowService = false;
+                ShowContextMenu = false;
                 CanDeploy = false;
                 
             }
@@ -308,6 +324,7 @@ namespace Warewolf.Studio.ViewModels
                 CanRollback = false;
                 CanShowVersions = false;
                 CanCreateWorkflowService = true;
+                ShowContextMenu = true;
             }
         }
 
@@ -798,6 +815,7 @@ namespace Warewolf.Studio.ViewModels
             itemCreated.CanCreateWebService = false;
             itemCreated.CanCreateWebSource = false;
             itemCreated.CanCreateWorkflowService = false;
+            itemCreated.ShowContextMenu = false;
             itemCreated.CanDeploy = false;
             itemCreated.CanShowVersions = false;
             itemCreated.CanEdit = false;

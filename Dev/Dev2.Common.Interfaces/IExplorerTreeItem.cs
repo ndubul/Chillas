@@ -47,6 +47,7 @@ namespace Dev2.Common.Interfaces
         IExplorerTreeItem Parent { get; set; }
         bool CanCreateWorkflowService { get; set; }
         bool AreVersionsVisible { get; set; }
+        bool ShowContextMenu { get; set; }
         IShellViewModel ShellViewModel { get;}
         int ChildrenCount { get; }
         Action<IExplorerItemViewModel> SelectAction { get; set; }
