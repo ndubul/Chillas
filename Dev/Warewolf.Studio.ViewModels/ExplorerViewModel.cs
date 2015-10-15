@@ -300,6 +300,7 @@ namespace Warewolf.Studio.ViewModels
 		{
 			await localhostEnvironment.Connect();
 			await localhostEnvironment.Load(isDeploy);
+            AfterLoad(localhostEnvironment.Server.EnvironmentID);
 		}
 
 

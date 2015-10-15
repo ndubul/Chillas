@@ -707,10 +707,16 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                if(ResourceType== ResourceType.Folder)
-                    Children.Apply(a=>a.IsResourceChecked = value);
+                if (ResourceType == ResourceType.Folder)
+                {
+                    Children.Apply(a => a.IsResourceChecked = value);
+                    _isResourceChecked = value;
+                    Parent.IsFolderChecked = value;
+                }
                 else
-                _isResourceChecked = value.HasValue && ResourceType!= ResourceType.Folder && value.Value;
+                {
+                    _isResourceChecked = value.HasValue && ResourceType != ResourceType.Folder && value.Value;
+                }
                 SelectAction(this);
                 OnPropertyChanged(() => IsResourceChecked);
             }
@@ -735,6 +741,7 @@ namespace Warewolf.Studio.ViewModels
                 {
                     _isResourceChecked = false;
                 }
+   
                 OnPropertyChanged(() => IsResourceChecked);
             }
         }
