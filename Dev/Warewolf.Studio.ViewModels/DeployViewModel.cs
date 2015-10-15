@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using Caliburn.Micro;
 using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Deploy;
+using Dev2.Common.Interfaces.Studio.Controller;
+using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.Core.Popup;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -33,13 +38,15 @@ namespace Warewolf.Studio.ViewModels
         bool _serversAreNotTheSame;
         IList<IExplorerTreeItem> _openViewItems;
         bool _canSelectDependencies;
+        readonly IPopupController _popupController;
 
         #region Implementation of IDeployViewModel
 
-        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source, IEnumerable<IExplorerTreeItem> selectedItems, IDeployStatsViewerViewModel stats, IShellViewModel shell)
+        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source, IEnumerable<IExplorerTreeItem> selectedItems, IDeployStatsViewerViewModel stats, IShellViewModel shell, IPopupController popupController)
         {
-            VerifyArgument.AreNotNull(new Dictionary<string, object> { { "destination", destination }, { "source", source }, { "selectedItems", selectedItems }, { "stats", stats } });
+            VerifyArgument.AreNotNull(new Dictionary<string, object> { { "destination", destination }, { "source", source }, { "selectedItems", selectedItems }, { "stats", stats }, { "popupController", popupController } });
             _destination = destination;
+            _popupController = popupController;
             
             _source = source;
             _source.SelectItemsForDeploy(selectedItems);
@@ -64,19 +71,24 @@ namespace Warewolf.Studio.ViewModels
             SourceConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
             DestinationConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
 
-            DeployCommand = new DelegateCommand(Deploy, ()=>CanDeploy);
-            SelectDependenciesCommand = new DelegateCommand(SelectDependencies,()=>CanSelectDependencies);
+            DeployCommand = new DelegateCommand(Deploy, () => CanDeploy);
+            SelectDependenciesCommand = new DelegateCommand(SelectDependencies, () => CanSelectDependencies);
             NewResourcesViewCommand = new DelegateCommand(ViewNewResources);
             OverridesViewCommand = new DelegateCommand(ViewOverrides);
-           
+            Destination.ServerStateChanged += DestinationServerStateChanged;
             ShowConflicts = false;
+        }
+           
+        void DestinationServerStateChanged(object sender, IServer server)
+        {
+            RaiseCanExecuteDependencies();
         }
 
         public bool CanSelectDependencies
         {
             get
             {
-                return Source.SelectedItems.Count>0;
+                return Source.SelectedItems.Count > 0;
             }
 
         }
@@ -155,11 +167,25 @@ namespace Warewolf.Studio.ViewModels
 
         void Deploy()
         {
+            bool canDeploy = false;
+            if (ConflictItems.Count >= 1)
+            {
+                var msgResult = _popupController.ShowDeployConflict(ConflictItems.Count);
+                if (msgResult == MessageBoxResult.Yes)
+                {
+                    canDeploy = true;
+                }
+            }
+            if (!canDeploy)
+            {
+                ViewOverrides();
+            }
+            else
+            {
             var selected = Source.SelectedItems.Where(a => a.ResourceType != ResourceType.Folder);
             var notfolders = selected.Select(a => a.ResourceId).ToList();
             _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.SelectedEnvironment.Server.EnvironmentID, notfolders);
-           
-
+            }
         }
 
         public void SelectDependencies()
@@ -210,12 +236,12 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-              if( Source == null)
+                if (Source == null)
               {
                   return false;
 
               }
-              if(Source.SelectedEnvironment == null || !Source.SelectedEnvironment.IsConnected)
+                if (Source.SelectedEnvironment == null || !Source.SelectedEnvironment.IsConnected)
               {
                   return false;
               }
@@ -228,10 +254,12 @@ namespace Warewolf.Studio.ViewModels
               {
                   return false;
               }
-              if(Source.SelectedItems== null || Source.SelectedItems.Count<=0)
+                if (Source.SelectedItems == null || Source.SelectedItems.Count <= 0)
               {
                     return false;
               }
+              if (Source.SelectedEnvironment.Server.EnvironmentID == Destination.ConnectControlViewModel.SelectedConnection.EnvironmentID)
+                  return false;
 
                 return true;
             }
@@ -270,7 +298,13 @@ namespace Warewolf.Studio.ViewModels
         void RaiseCanExecuteDependencies()
         {
             var delegateCommand = SelectDependenciesCommand as DelegateCommand;
-            if(delegateCommand != null)
+            if (delegateCommand != null)
+            {
+                delegateCommand.RaiseCanExecuteChanged();
+            }
+
+             delegateCommand = DeployCommand as DelegateCommand;
+            if (delegateCommand != null)
             {
                 delegateCommand.RaiseCanExecuteChanged();
             }

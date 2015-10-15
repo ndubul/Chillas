@@ -174,6 +174,7 @@ namespace Warewolf.Studio.ViewModels
             IsResourceChecked = false;
             CanCreateDbService = true;
             CanCreateWorkflowService = true;
+            ShowContextMenu = true;
             CanCreateServerSource = true;
             CanCreateDbSource = true;
             CanRename = true;
@@ -357,6 +358,7 @@ namespace Warewolf.Studio.ViewModels
                     CanShowDependencies = CanShowDependencies,
                     ResourcePath = ResourcePath + "\\" + name,
                     CanCreateWorkflowService = CanCreateWorkflowService,
+                    ShowContextMenu = ShowContextMenu,
                     IsSelected = true,
                     IsRenaming = true
                 };
@@ -707,10 +709,17 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                if(ResourceType== ResourceType.Folder)
-                    Children.Apply(a=>a.IsResourceChecked = value);
+                if (ResourceType == ResourceType.Folder)
+                {
+                    Children.Apply(a => a.IsResourceChecked = value);
+                    _isResourceChecked = value;
+                    if(Parent.ResourceType==ResourceType.Folder)
+                    Parent.IsFolderChecked = value;
+                }
                 else
-                _isResourceChecked = value.HasValue && ResourceType!= ResourceType.Folder && value.Value;
+                {
+                    _isResourceChecked = value.HasValue && ResourceType != ResourceType.Folder && value.Value;
+                }
                 SelectAction(this);
                 OnPropertyChanged(() => IsResourceChecked);
             }
@@ -723,17 +732,20 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                if (Children.Any() && Children.All(a => (a.IsResourceChecked.HasValue ) && a.IsResourceChecked.Value ))
+                if (ResourceType == ResourceType.Folder)
                 {
-                    _isResourceChecked = true;
-                }
-                else if (Children.Any(a => (!a.IsResourceChecked.HasValue) || a.IsResourceChecked.Value))
-                {
-                    _isResourceChecked = null;
-                }
-                else
-                {
-                    _isResourceChecked = false;
+                    if (Children.Any() && Children.All(a => (a.IsResourceChecked.HasValue) && a.IsResourceChecked.Value))
+                    {
+                        _isResourceChecked = true;
+                    }
+                    else if (Children.Any(a => (!a.IsResourceChecked.HasValue) || a.IsResourceChecked.Value))
+                    {
+                        _isResourceChecked = null;
+                    }
+                    else
+                    {
+                        _isResourceChecked = false;
+                    }
                 }
                 OnPropertyChanged(() => IsResourceChecked);
             }
@@ -764,6 +776,7 @@ namespace Warewolf.Studio.ViewModels
         public bool CanCreateSharePointSource { get; set; }
         // ReSharper disable MemberCanBePrivate.Global
         public bool CanCreateWorkflowService { get; set; }
+        public bool ShowContextMenu { get; set; }
         // ReSharper restore MemberCanBePrivate.Global
 
         public bool CanRename

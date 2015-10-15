@@ -82,21 +82,9 @@ namespace Warewolf.Studio.ViewModels
                 SelectedEnvironment = environmentViewModel;
                 environmentViewModel.AsList().Apply(a=>
                 {
-                    
-                    a.CanDrag = false;
-                    a.CanRename = false;
-                    a.CanShowDependencies = false;
-                    a.CanCreateDbService = false;
-                    a.CanCreateDbSource = false;
-                    a.CanCreateDropboxSource = false;
-                    a.CanCreateEmailSource = false;
-                    a.CanCreateEmailSource = false;
-                    a.CanCreateFolder = false;
-                    a.CanCreatePluginService = false;
-                    a.CanCreatePluginSource = false;
-                    a.CanCreateWebService = false;
-                    a.CanCreateWebSource = false;
-                    a.CanCreateWorkflowService = false;
+                    a.CanExecute = false;
+                    a.CanEdit = false;
+                    a.ShowContextMenu = false;
                     a.SelectAction = (SelectAction );
                     a.AllowResourceCheck = true;
                 });
@@ -120,7 +108,12 @@ namespace Warewolf.Studio.ViewModels
             }
             else
             {
-                ax.Parent.IsFolderChecked = ax.IsResourceChecked;
+                if (ax.Parent.ResourceType == ResourceType.Folder)
+                {
+
+
+                    ax.Parent.IsFolderChecked = ax.IsResourceChecked;
+                }
             }
 
             _statsArea.Calculate(SelectedItems.ToList());

@@ -552,7 +552,7 @@
                                     <ig:ContextMenuService.Manager>
                                         <ig:ContextMenuManager>
                                             <ig:ContextMenuManager.ContextMenu>
-                                                <ig:XamContextMenu x:Name="ExplorerEnvironmentMenu">
+                                                <ig:XamContextMenu x:Name="ExplorerEnvironmentMenu" Visibility="{Binding Path=Data.ShowContextMenu, Converter={StaticResource BoolToVisibilityConverter}}">
                                                     <ig:XamContextMenu.ItemsPanel>
                                                         <ItemsPanelTemplate>
                                                             <VirtualizingStackPanel Background="{StaticResource WareWolfWhiteBrush}" Orientation="Vertical" />
@@ -786,7 +786,7 @@
                                     <ig:ContextMenuService.Manager>
                                         <ig:ContextMenuManager>
                                             <ig:ContextMenuManager.ContextMenu>
-                                                <ig:XamContextMenu x:Name="ExplorerMenu">
+                                                <ig:XamContextMenu x:Name="ExplorerMenu" Visibility="{Binding Path=Data.ShowContextMenu, Converter={StaticResource BoolToVisibilityConverter}}">
                                                     <ig:XamContextMenu.ItemsPanel>
                                                         <ItemsPanelTemplate>
                                                             <VirtualizingStackPanel Background="{StaticResource WareWolfWhiteBrush}" Orientation="Vertical" />
