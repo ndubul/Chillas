@@ -99,12 +99,14 @@ namespace Warewolf.Studio.ViewModels
         {
             if(ax.ResourceType == ResourceType.Folder)
             {
-                ax.Children.Apply(ay => { ay.IsResourceChecked = ax.IsResourceChecked; });
+                ax.Children.Apply(ay =>
+                {
+                    ay.IsResourceChecked = ax.IsResourceChecked;
+                });
             }
             else
             {
-                var hasChildrenChecked = ax.Parent.Children.Count(a => a.IsResourceChecked);
-                ax.Parent.IsFolderChecked = hasChildrenChecked >= 1;
+                ax.Parent.IsFolderChecked = ax.IsResourceChecked;
             }
 
             _statsArea.Calculate(SelectedItems.ToList());
@@ -114,7 +116,7 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return  SelectedEnvironment!= null ?  SelectedEnvironment.AsList().Select(a=> a as IExplorerTreeItem).Where(a=>a.IsResourceChecked).ToList():new List<IExplorerTreeItem>();
+                return  SelectedEnvironment!= null ?  SelectedEnvironment.AsList().Select(a=> a as IExplorerTreeItem).Where(a=>a.IsResourceChecked.HasValue && a.IsResourceChecked.Value).ToList():new List<IExplorerTreeItem>();
             }
             set
             {

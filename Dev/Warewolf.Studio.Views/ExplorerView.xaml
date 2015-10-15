@@ -1033,7 +1033,8 @@
                                             <CheckBox x:Name="ResourceNameCheckBox"
                                                       Style="{StaticResource DeployCheckBoxStyle}"
                                                       IsChecked="{Binding Path=Data.IsResourceChecked}"
-                                                      Visibility="{Binding Path=Data.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                                      Visibility="{Binding Path=Data.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                      IsThreeState="True"/>
                                             <TextBlock x:Name="ResourceNameTextBlock"
                                                    MinWidth="5"
                                                    Height="20"
