@@ -1067,6 +1067,7 @@ namespace Dev2.Studio.ViewModels
             var sourceEnvironmentModel = EnvironmentRepository.Get(sourceEnvironmentId);
             var dto = new DeployDto { ResourceModels = resources.Select(a=>sourceEnvironmentModel.ResourceRepository.LoadContextualResourceModel(a)as IResourceModel).ToList() };
             environmentModel.ResourceRepository.DeployResources(sourceEnvironmentModel,environmentModel,dto,CustomContainer.Get<IEventAggregator>());
+            ExplorerViewModel.RefreshEnvironment(destinationEnvironmentId);
         }
 
         public void ShowPopup(IPopupMessage popupMessage)

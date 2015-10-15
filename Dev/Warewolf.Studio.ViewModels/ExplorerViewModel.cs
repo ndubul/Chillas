@@ -160,7 +160,25 @@ namespace Warewolf.Studio.ViewModels
 			}
 		}
 
-		protected virtual void Refresh()
+        public async void RefreshEnvironment(Guid environmentID)
+        {
+            var environmentViewModel = Environments.FirstOrDefault(model => model.Server.EnvironmentID == environmentID);
+            if (environmentViewModel != null)
+            {
+                IsRefreshing = true;
+                if (environmentViewModel.IsConnected)
+                {
+                    await environmentViewModel.Load();
+                    if (!string.IsNullOrEmpty(SearchText))
+                    {
+                        Filter(SearchText);
+                    }
+                }
+                IsRefreshing = false;
+            }
+        }
+
+	    protected virtual void Refresh()
 		{
 			IsRefreshing = true;
 			Environments.ForEach(async model =>
