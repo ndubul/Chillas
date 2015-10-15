@@ -32,6 +32,7 @@ namespace Warewolf.Studio.ViewModels
         IShellViewModel _shell;
         bool _serversAreNotTheSame;
         IList<IExplorerTreeItem> _openViewItems;
+        bool _canSelectDependencies;
 
         #region Implementation of IDeployViewModel
 
@@ -64,11 +65,20 @@ namespace Warewolf.Studio.ViewModels
             DestinationConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
 
             DeployCommand = new DelegateCommand(Deploy, ()=>CanDeploy);
-            SelectDependenciesCommand = new DelegateCommand(SelectDependencies);
+            SelectDependenciesCommand = new DelegateCommand(SelectDependencies,()=>CanSelectDependencies);
             NewResourcesViewCommand = new DelegateCommand(ViewNewResources);
             OverridesViewCommand = new DelegateCommand(ViewOverrides);
            
             ShowConflicts = false;
+        }
+
+        public bool CanSelectDependencies
+        {
+            get
+            {
+                return Source.SelectedItems.Count>0;
+            }
+
         }
 
         public IList<IExplorerTreeItem> NewItems { get; set; }
@@ -252,7 +262,17 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _overridesCount = value;
+                RaiseCanExecuteDependencies();
                 OnPropertyChanged(() => OverridesCount);
+            }
+        }
+
+        void RaiseCanExecuteDependencies()
+        {
+            var delegateCommand = SelectDependenciesCommand as DelegateCommand;
+            if(delegateCommand != null)
+            {
+                delegateCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -265,6 +285,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _newResourcesCount = value;
+                RaiseCanExecuteDependencies();
                 OnPropertyChanged(() => NewResourcesCount);
             }
         }
