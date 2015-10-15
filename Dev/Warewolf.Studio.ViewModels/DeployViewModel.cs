@@ -274,6 +274,12 @@ namespace Warewolf.Studio.ViewModels
             {
                 delegateCommand.RaiseCanExecuteChanged();
             }
+
+             delegateCommand = DeployCommand as DelegateCommand;
+            if (delegateCommand != null)
+            {
+                delegateCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public string NewResourcesCount
