@@ -34,6 +34,7 @@ namespace Dev2.Common.Interfaces.Studio.Controller
         MessageBoxResult ShowNotConnected();
         MessageBoxResult ShowDeleteConfirmation(string nameOfItemBeingDeleted);
         MessageBoxResult ShowNameChangedConflict(string oldName, string newName);
+        MessageBoxResult ShowDeployConflict(int conflictCount);
         MessageBoxResult ShowSettingsCloseConfirmation();
         MessageBoxResult ShowSchedulerCloseConfirmation();
         MessageBoxResult ShowNoInputsSelectedWhenClickLink();

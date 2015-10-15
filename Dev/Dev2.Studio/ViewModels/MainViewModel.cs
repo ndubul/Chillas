@@ -1375,7 +1375,7 @@ namespace Dev2.Studio.ViewModels
         {
             var dest = new DeployDestinationViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
             var stats = new DeployStatsViewerViewModel(dest);
-            var vm = new SingleExplorerDeployViewModel(dest, new DeploySourceExplorerViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>(), stats), items, stats, CustomContainer.Get<IShellViewModel>());
+            var vm = new SingleExplorerDeployViewModel(dest, new DeploySourceExplorerViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>(), stats), items, stats, CustomContainer.Get<IShellViewModel>(), PopupProvider);
             var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployViewer) as WorkSurfaceKey, new DeployWorksurfaceViewModel(EventPublisher, vm, PopupProvider, new DeployView()));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
