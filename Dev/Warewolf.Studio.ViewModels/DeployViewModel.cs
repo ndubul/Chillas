@@ -39,6 +39,7 @@ namespace Warewolf.Studio.ViewModels
         bool _showConflictItemsList;
         IList<Conflict> _conflictItems;
         IList<IExplorerTreeItem> _newItems;
+        string _errorMessage;
 
         #region Implementation of IDeployViewModel
 
