@@ -142,7 +142,8 @@
                                 Style="{StaticResource ButtonOrangeStyle}"
                                 Margin="{StaticResource ElementBorder}">
                             <i:Interaction.Behaviors>
-                                <core:HelpSetter Text="{x:Static languages:Core.DeploySelectDependenciesHelp}" DataContext="{Binding}" />
+                                <core:HelpSetter Text="{x:Static languages:Core.DeploySelectDependenciesHelp}" 
+                                                 DataContext="{Binding}"/>
                             </i:Interaction.Behaviors>
                         </Button>
                     </StackPanel>
