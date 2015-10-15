@@ -1677,6 +1677,42 @@ namespace Warewolf.Studio.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DeployCommandHelp.
+        /// </summary>
+        public static string DeployCommandHelp {
+            get {
+                return ResourceManager.GetString("DeployCommandHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DeployNewResourcesViewHelp.
+        /// </summary>
+        public static string DeployNewResourcesViewHelp {
+            get {
+                return ResourceManager.GetString("DeployNewResourcesViewHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DeployOverridesCountViewHelp.
+        /// </summary>
+        public static string DeployOverridesCountViewHelp {
+            get {
+                return ResourceManager.GetString("DeployOverridesCountViewHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DeploySelectDependenciesHelp.
+        /// </summary>
+        public static string DeploySelectDependenciesHelp {
+            get {
+                return ResourceManager.GetString("DeploySelectDependenciesHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://dev2.co.za/.
         /// </summary>
         public static string DevUrl {
