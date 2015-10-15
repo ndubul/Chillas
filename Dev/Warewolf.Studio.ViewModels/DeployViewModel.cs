@@ -49,7 +49,8 @@ namespace Warewolf.Studio.ViewModels
             _popupController = popupController;
 
             _source = source;
-            _source.SelectItemsForDeploy(selectedItems);
+            _errorMessage = "";
+            _source.Preselected = selectedItems;
             _stats = stats;
             _shell = shell;
             _stats.CalculateAction = () =>
@@ -69,13 +70,17 @@ namespace Warewolf.Studio.ViewModels
 
             SourceConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
             DestinationConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
-
             DeployCommand = new DelegateCommand(Deploy, () => CanDeploy);
             SelectDependenciesCommand = new DelegateCommand(SelectDependencies, () => CanSelectDependencies);
             NewResourcesViewCommand = new DelegateCommand(ViewNewResources);
             OverridesViewCommand = new DelegateCommand(ViewOverrides);
-
+            Destination.ServerStateChanged += DestinationServerStateChanged;
             ShowConflicts = false;
+        }
+
+        void DestinationServerStateChanged(object sender, IServer server)
+        {
+            RaiseCanExecuteDependencies();
         }
 
         public bool CanSelectDependencies
@@ -91,7 +96,7 @@ namespace Warewolf.Studio.ViewModels
             get
             {
                 return _newItems;
-            }
+        }
             set
             {
                 _newItems = value;
@@ -194,11 +199,16 @@ namespace Warewolf.Studio.ViewModels
 
         void Deploy()
         {
+            IsDeploying = true;
+            try
+            {
+
+                ErrorMessage = "";
             bool canDeploy = false;
             if (ConflictItems.Count >= 1)
             {
                 var msgResult = _popupController.ShowDeployConflict(ConflictItems.Count);
-                if (msgResult == MessageBoxResult.Yes)
+                    if (msgResult == MessageBoxResult.Yes || msgResult == MessageBoxResult.OK)
                 {
                     canDeploy = true;
                 }
@@ -211,8 +221,16 @@ namespace Warewolf.Studio.ViewModels
             {
                 var selected = Source.SelectedItems.Where(a => a.ResourceType != ResourceType.Folder);
                 var notfolders = selected.Select(a => a.ResourceId).ToList();
-                _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.SelectedEnvironment.Server.EnvironmentID, notfolders);
+                    _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.ConnectControlViewModel.SelectedConnection.EnvironmentID, notfolders);
+                    ErrorMessage = String.Format("{0} Resource{1} Deployed Successfully.", notfolders.Count,notfolders.Count==1?"":"s");
+                }
             }
+            catch (Exception e)
+            {
+
+                ErrorMessage = "Deploy error." + e.Message;
+            }
+            IsDeploying = false;
         }
 
         public void SelectDependencies()
@@ -233,7 +251,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 return _deploySuccessfull;
             }
-            private set
+            set
             {
                 _deploySuccessfull = value;
                 OnPropertyChanged(() => DeploySuccessfull);
@@ -249,7 +267,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 return _isDeploying;
             }
-            private set
+            set
             {
                 _isDeploying = value;
                 OnPropertyChanged(() => IsDeploying);
@@ -263,6 +281,8 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
+                if (IsDeploying)
+                    return false;
                 if (Source == null)
                 {
                     return false;
@@ -277,7 +297,7 @@ namespace Warewolf.Studio.ViewModels
                     return false;
 
                 }
-                if (Destination.SelectedEnvironment == null || !Destination.SelectedEnvironment.IsConnected)
+              if (Destination.SelectedEnvironment == null || !Destination.ConnectControlViewModel.SelectedConnection.IsConnected)
                 {
                     return false;
                 }
@@ -285,6 +305,8 @@ namespace Warewolf.Studio.ViewModels
                 {
                     return false;
                 }
+              if (Source.SelectedEnvironment.Server.EnvironmentID == Destination.ConnectControlViewModel.SelectedConnection.EnvironmentID)
+                  return false;
 
                 return true;
             }
@@ -505,6 +527,18 @@ namespace Warewolf.Studio.ViewModels
         ///     Static steps of how to deploy
         /// </summary>
         public IDeployStatsViewerViewModel StatsViewModel { get; set; }
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(() => ErrorMessage);
+            }
+        }
 
         #endregion
     }

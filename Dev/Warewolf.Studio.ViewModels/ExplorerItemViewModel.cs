@@ -142,6 +142,7 @@ namespace Warewolf.Studio.ViewModels
                 parent.AreVersionsVisible = true;
                 parent.ResourceName = output.DisplayName;
             });
+            DeployCommand = new DelegateCommand<IExplorerItemViewModel>(a=>ShellViewModel.AddDeploySurface(AsList().Union(new []{this})));
             _canShowVersions = true;
             Parent = parent;
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "server", server }, });
@@ -711,8 +712,10 @@ namespace Warewolf.Studio.ViewModels
             {
                 if (ResourceType == ResourceType.Folder)
                 {
-                    Children.Apply(a => a.IsResourceChecked = value);
-                    _isResourceChecked = value;
+
+                    Children.Apply(a => a.IsResourceChecked = value??false);
+                    _isResourceChecked = value??false;
+                    if(Parent.ResourceType==ResourceType.Folder)
                     Parent.IsFolderChecked = value;
                 }
                 else
@@ -731,19 +734,26 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                if (Children.Any() && Children.All(a => (a.IsResourceChecked.HasValue ) && a.IsResourceChecked.Value ))
+                if (ResourceType == ResourceType.Folder)
                 {
-                    _isResourceChecked = true;
+                    if (Children.Any() && Children.All(a => (a.IsResourceChecked.HasValue) && a.IsResourceChecked.Value))
+                    {
+                        _isResourceChecked = true;
+                    }
+                    else if (Children.Any(a => (!a.IsResourceChecked.HasValue) || a.IsResourceChecked.Value))
+                    {
+                        _isResourceChecked = null;
+                    }
+                    else
+                    {
+                        _isResourceChecked = false;
+                    }
+                    if( !_isResourceChecked.HasValue ||_isResourceChecked.Value)
+                    {
+                        if(Parent.ResourceType==ResourceType.Folder)
+                        Parent.IsFolderChecked = _isResourceChecked;
+                    }
                 }
-                else if (Children.Any(a => (!a.IsResourceChecked.HasValue) || a.IsResourceChecked.Value))
-                {
-                    _isResourceChecked = null;
-                }
-                else
-                {
-                    _isResourceChecked = false;
-                }
-   
                 OnPropertyChanged(() => IsResourceChecked);
             }
         }

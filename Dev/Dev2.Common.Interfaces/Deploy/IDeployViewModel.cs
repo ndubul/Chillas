@@ -33,5 +33,6 @@ namespace Dev2.Common.Interfaces.Deploy
         ///     Static steps of how to deploy
         /// </summary>
         IDeployStatsViewerViewModel StatsViewModel { get; set; }
+        string ErrorMessage { get; set; }
     }
 }

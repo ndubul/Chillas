@@ -39,5 +39,7 @@ namespace Dev2.Common.Interfaces
         void ShowDependencies(Guid resourceId, IServer server);
 
         void DeployResources(Guid sourceEnvironmentId,Guid destinationEnvironmentId,IList<Guid> resources  );
+
+        void AddDeploySurface(IEnumerable<IExplorerTreeItem> items );
     }
 }

@@ -12,6 +12,7 @@ namespace Warewolf.Studio.ViewModels
 {
     public class DeploySourceExplorerViewModel :ExplorerViewModel, IDeploySourceExplorerViewModel {
         readonly IDeployStatsViewerViewModel _statsArea;
+        IEnumerable<IExplorerTreeItem> _preselected;
 
         #region Implementation of IDeployDestinationExplorerViewModel
 
@@ -55,6 +56,11 @@ namespace Warewolf.Studio.ViewModels
             {
                 UpdateItemForDeploy( environmentViewModel.Server.EnvironmentID);
             }
+            if(Preselected!=null && Preselected.Any())
+            {
+                SelectItemsForDeploy(Preselected);
+                Preselected = null;
+            }
    
         }
 
@@ -89,9 +95,9 @@ namespace Warewolf.Studio.ViewModels
                     a.AllowResourceCheck = true;
                 });
             }
+            SelectedEnvironment.AllowResourceCheck = true;
             foreach (var env in _environments.Where(a => a.Server.EnvironmentID != environmentId))
             {
-
                 env.IsVisible = false;
             }
            OnPropertyChanged(()=>Environments);
@@ -108,7 +114,12 @@ namespace Warewolf.Studio.ViewModels
             }
             else
             {
-                ax.Parent.IsFolderChecked = ax.IsResourceChecked;
+                if (ax.Parent.ResourceType == ResourceType.Folder)
+                {
+
+
+                    ax.Parent.IsFolderChecked = ax.IsResourceChecked;
+                }
             }
 
             _statsArea.Calculate(SelectedItems.ToList());
@@ -126,6 +137,17 @@ namespace Warewolf.Studio.ViewModels
                 {
                     Select(explorerTreeItem);
                 }
+            }
+        }
+        public IEnumerable<IExplorerTreeItem> Preselected
+        {
+            get
+            {
+                return _preselected;    
+            }
+            set
+            {
+                _preselected = value;
             }
         }
 
@@ -148,7 +170,7 @@ namespace Warewolf.Studio.ViewModels
         /// <param name="selectedItems"></param>
         public void SelectItemsForDeploy(IEnumerable<IExplorerTreeItem> selectedItems)
         {
-            SelectedEnvironment.AsList().Apply(a=>a.IsSelected=selectedItems.Contains(a));
+            SelectedEnvironment.AsList().Apply(a=>a.IsResourceChecked=selectedItems.Contains(a));
         }
 
         #endregion

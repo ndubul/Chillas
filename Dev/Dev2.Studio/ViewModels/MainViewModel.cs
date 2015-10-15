@@ -1371,7 +1371,7 @@ namespace Dev2.Studio.ViewModels
             SaveDropBoxSource(activeEnvironment, resourceType, resourcePath, resource, shouldAuthorise);
         }
 
-        void AddDeploySurface(IEnumerable<IExplorerTreeItem> items )
+        public void AddDeploySurface(IEnumerable<IExplorerTreeItem> items )
         {
             var dest = new DeployDestinationViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
             var stats = new DeployStatsViewerViewModel(dest);

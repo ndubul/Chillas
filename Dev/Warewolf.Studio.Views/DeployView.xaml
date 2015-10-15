@@ -210,7 +210,7 @@
                                              Icon="Check" 
                                              HorizontalAlignment="Right" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal"
+                        <!--<StackPanel Orientation="Horizontal"
                                     Margin="{StaticResource ControlBorderRight}"
                                     Visibility="{Binding ServersAreNotTheSame, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverterNegative}}">
                             <TextBlock x:Name="ServersNotSame" 
@@ -219,15 +219,18 @@
                                        Text="Source and Destination cannot be the same."
                                        AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
                                        VerticalAlignment="Center" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"
-                                    Visibility="{Binding ShowServerDisconnectedMessage, Converter={StaticResource BoolToVisibilityConverterPositive}}">
-                            <TextBlock Foreground="{StaticResource ValidationErrorElement}"
-                                       Text="{Binding ServerDisconnectedMessage}"
+
+                        </StackPanel>-->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="Status" 
+                                       Text="{Binding ErrorMessage}"
+                                       Foreground="{StaticResource ValidationErrorElement}"
+                                       TextWrapping="Wrap"
                                        AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
-                                       VerticalAlignment="Center"
-                                       x:Name="ErrorMessage" />
+                                       VerticalAlignment="Center" />
+
                         </StackPanel>
+
                     </StackPanel>
                 </Grid>
 
