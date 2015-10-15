@@ -20,7 +20,6 @@ using Caliburn.Micro;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Studio.Controller;
-using Dev2.Controller;
 using Dev2.Diagnostics;
 using Dev2.Interfaces;
 using Dev2.Network;
@@ -34,8 +33,6 @@ using Dev2.Studio.Core.Services.System;
 using Dev2.Studio.Factory;
 using Dev2.Studio.ViewModels;
 using Dev2.Threading;
-using Warewolf.Studio.AntiCorruptionLayer;
-using Warewolf.Studio.ServerProxyLayer;
 
 namespace Dev2
 {

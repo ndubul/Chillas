@@ -54,7 +54,18 @@ namespace Warewolf.Studio.ViewModels
                 shellViewModel.NewResource(type.ToString(), ResourcePath);
             });
             DisplayName = server.ResourceName;
-            RefreshCommand = new DelegateCommand(async () => await Load());
+            RefreshCommand = new DelegateCommand(async () =>
+            {
+                if (Children.Any(a => a.AllowResourceCheck))
+                {
+                    await Load(true);
+                }
+                else
+                {
+                    await Load();
+                }
+                
+            });
             IsServerIconVisible = true;
             SelectAction = selectAction?? (a => { });
             Expand = new DelegateCommand<int?>(clickCount =>
@@ -649,7 +660,7 @@ namespace Warewolf.Studio.ViewModels
                 IsConnecting = true;
                 var explorerItems = await Server.LoadExplorer();
                 //var explorerItemViewModels = CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != null);
-                await CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != null, isDeploy);
+                await CreateExplorerItems(explorerItems.Children, Server, this, selectedPath != null, Children.Any(a=>AllowResourceCheck));
                 //Children = explorerItemViewModels;
 
                 IsLoaded = true;

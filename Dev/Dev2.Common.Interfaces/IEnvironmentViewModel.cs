@@ -26,6 +26,7 @@ namespace Dev2.Common.Interfaces
         ICommand ShowServerVersionCommand { get; set; }
 
         bool IsVisible { get; set; }
+      
 
         void SetPropertiesForDialog();
 
