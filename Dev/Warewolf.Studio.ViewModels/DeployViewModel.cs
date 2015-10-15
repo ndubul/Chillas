@@ -34,9 +34,7 @@ namespace Warewolf.Studio.ViewModels
         IShellViewModel _shell;
         bool _serversAreNotTheSame;
         IList<IExplorerTreeItem> _openViewItems;
-        bool _canSelectDependencies;
         readonly IPopupController _popupController;
-        IEnumerable<IExplorerTreeItem> _preselected;
         string _errorMessage;
 
         #region Implementation of IDeployViewModel
@@ -70,7 +68,6 @@ namespace Warewolf.Studio.ViewModels
 
             SourceConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
             DestinationConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
-
             DeployCommand = new DelegateCommand(Deploy, () => CanDeploy);
             SelectDependenciesCommand = new DelegateCommand(SelectDependencies, () => CanSelectDependencies);
             NewResourcesViewCommand = new DelegateCommand(ViewNewResources);
@@ -167,6 +164,7 @@ namespace Warewolf.Studio.ViewModels
 
         void Deploy()
         {
+            IsDeploying = true;
             try
             {
 
@@ -197,6 +195,7 @@ namespace Warewolf.Studio.ViewModels
 
                 ErrorMessage = "Deploy error." + e.Message;
             }
+            IsDeploying = false;
         }
 
         public void SelectDependencies()
@@ -217,7 +216,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 return _deploySuccessfull;
             }
-            private set
+            set
             {
                 _deploySuccessfull = value;
                 OnPropertyChanged(() => DeploySuccessfull);
@@ -233,7 +232,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 return _isDeploying;
             }
-            private set
+            set
             {
                 _isDeploying = value;
                 OnPropertyChanged(() => IsDeploying);
@@ -247,6 +246,8 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
+                if (IsDeploying)
+                    return false;
                 if (Source == null)
               {
                   return false;
@@ -261,7 +262,7 @@ namespace Warewolf.Studio.ViewModels
                   return false;
 
               }
-              if (Destination.SelectedEnvironment == null || !Destination.SelectedEnvironment.IsConnected)
+              if (Destination.SelectedEnvironment == null || !Destination.ConnectControlViewModel.SelectedConnection.IsConnected)
               {
                   return false;
               }
