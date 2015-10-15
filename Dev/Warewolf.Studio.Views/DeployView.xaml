@@ -49,7 +49,7 @@
                                 x:Name="SourceNavigationView"
                                 Margin="-5"
                                 AllowDrop="False">
-                
+
             </views:ExplorerView>
         </Grid>
 
@@ -247,29 +247,114 @@
                                   Margin="{StaticResource ElementBorder}" 
                                   HorizontalScrollBarVisibility="Auto" 
                                   VerticalScrollBarVisibility="Auto">
-                        <ListBox Style="{StaticResource DeployListBoxStyle}"
-                                 BorderThickness="0"
-                                 ItemContainerStyle="{StaticResource DeployListBoxItemStyle}"
-                                 ItemsSource="{Binding OpenViewItems}" >
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Foreground="White" 
+                        <StackPanel>
+                            <ListBox x:Name="NewItemsList" 
+                                     Style="{StaticResource DeployListBoxStyle}"
+                                     BorderThickness="0"
+                                     Visibility="{Binding ShowNewItemsList, Converter={StaticResource BoolToVisConverter}}"
+                                     ItemContainerStyle="{StaticResource DeployListBoxItemStyle}"
+                                     ItemsSource="{Binding OpenViewItems}" >
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Foreground="White" 
                                                    Margin="3,-5,0,0"
                                                    Style="{StaticResource TextBlockNoPaddingStyle}"
                                                    FontSize="{StaticResource FontSize-Medium}">
                                             <Run Text="> "/>
                                             <Run Text="{Binding ResourceName}"/>
-                                        </TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel IsItemsHost="True" Orientation="Vertical"  />
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                        </ListBox>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel IsItemsHost="True" Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                            
+                            <Grid Width="{Binding ElementName=ConflictItemsList, Path=ActualWidth}"
+                                  Margin="0,5,0,5"
+                                  Visibility="{Binding ShowConflictItemsList, Converter={StaticResource BoolToVisConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="50*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Foreground="White" 
+                                           HorizontalAlignment="Center"
+                                           Margin="3,-5,0,0"
+                                           Style="{StaticResource TextBlockNoPaddingStyle}"
+                                           Text="Source"
+                                           TextDecorations="Underline"
+                                           FontSize="16">
+                                </TextBlock>
+                                <TextBlock Text="" 
+                                           Grid.Column="1"
+                                           Foreground="White" 
+                                           Style="{StaticResource TextBlockNoPaddingStyle}"
+                                           FontSize="16"/>
+                                <TextBlock Foreground="White" 
+                                           Grid.Column="2"
+                                           HorizontalAlignment="Center"
+                                           Margin="3,-5,0,0"
+                                           Style="{StaticResource TextBlockNoPaddingStyle}"
+                                           Text="Destination"
+                                           TextDecorations="Underline"
+                                           FontSize="16">
+                                </TextBlock>
+                            </Grid>
+                            <ListBox x:Name="ConflictItemsList" 
+                                     Style="{StaticResource DeployListBoxStyle}"
+                                     BorderThickness="0"
+                                     Visibility="{Binding ShowConflictItemsList, Converter={StaticResource BoolToVisConverter}}"
+                                     ItemContainerStyle="{StaticResource DeployListBoxItemStyle}"
+                                     ItemsSource="{Binding ConflictItems}" >
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="45*"/>
+                                                <ColumnDefinition Width="20"/>
+                                                <ColumnDefinition Width="45*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Foreground="White" 
+                                                           Margin="3,-5,0,0"
+                                                           Style="{StaticResource TextBlockNoPaddingStyle}"
+                                                           FontSize="11">
+                                                    <Run Text="- "/>
+                                                        <Run Text="{Binding SourceName}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Orientation="Vertical">
+                                                <TextBlock Text="" 
+                                                           Foreground="White" 
+                                                           Margin="6,-10,6,-10"
+                                                           Style="{StaticResource TextBlockNoPaddingStyle}"
+                                                           FontSize="16"></TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2" Orientation="Vertical">
+                                                <TextBlock Foreground="White" 
+                                                           Margin="3,-5,0,0"
+                                                           Style="{StaticResource TextBlockNoPaddingStyle}"
+                                                           FontSize="11">
+                                                        <Run Text="> "/>
+                                                        <Run Text="{Binding DestinationName}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel IsItemsHost="True" Orientation="Vertical"  />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </StackPanel>
+
                     </ScrollViewer>
                 </Grid>
             </Grid>

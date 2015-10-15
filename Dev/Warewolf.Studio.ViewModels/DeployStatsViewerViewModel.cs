@@ -9,7 +9,8 @@ using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class DeployStatsViewerViewModel : BindableBase, IDeployStatsViewerViewModel {
+    public class DeployStatsViewerViewModel : BindableBase, IDeployStatsViewerViewModel
+    {
         readonly IExplorerViewModel _destination;
         int _connectors;
         int _services;
@@ -18,13 +19,13 @@ namespace Warewolf.Studio.ViewModels
         int _newResources;
         int _overrides;
         string _status;
-        IEnumerable<IExplorerTreeItem> _conflicts;
+        List<Conflict> _conflicts;
         IEnumerable<IExplorerTreeItem> _new;
         Action _calculateAction;
 
-        public  DeployStatsViewerViewModel(IExplorerViewModel destination)
+        public DeployStatsViewerViewModel(IExplorerViewModel destination)
         {
-            VerifyArgument.IsNotNull("destination",destination);
+            VerifyArgument.IsNotNull("destination", destination);
             _destination = destination;
             Status = "";
         }
@@ -43,7 +44,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _connectors = value;
-                OnPropertyChanged(()=>Connectors);
+                OnPropertyChanged(() => Connectors);
             }
         }
         /// <summary>
@@ -119,7 +120,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _overrides = value;
-                OnPropertyChanged(()=> Overrides);
+                OnPropertyChanged(() => Overrides);
             }
         }
         /// <summary>
@@ -140,20 +141,25 @@ namespace Warewolf.Studio.ViewModels
 
         public void Calculate(IList<IExplorerTreeItem> items)
         {
-            if(items != null)
+            if (items != null)
             {
                 Connectors = items.Count(a => a.ResourceType >= ResourceType.DbService && a.ResourceType <= ResourceType.WebService);
                 Services = items.Count(a => a.ResourceType == ResourceType.WorkflowService);
                 Sources = items.Count(a => IsSource(a.ResourceType));
                 Unknown = items.Count(a => a.ResourceType == ResourceType.Unknown);
-                if(_destination.SelectedEnvironment != null)
+                if (_destination.SelectedEnvironment != null)
                 {
-                    _conflicts = items.Intersect(_destination.SelectedEnvironment.AsList());
+                    var conf = from b in _destination.SelectedEnvironment.AsList()
+                               join explorerTreeItem in items on b.ResourceId equals explorerTreeItem.ResourceId
+                               where b.ResourceType != ResourceType.Folder && explorerTreeItem.ResourceType != ResourceType.Folder
+                               select new Conflict { SourceName = explorerTreeItem.ResourceName, DestinationName = b.ResourceName };
+
+                    _conflicts = conf.ToList();
                     _new = items.Except(_destination.SelectedEnvironment.AsList());
                 }
                 else
                 {
-                    _conflicts = new List<IExplorerTreeItem>();
+                    _conflicts = new List<Conflict>();
                     _new = new List<IExplorerTreeItem>();
                 }
 
@@ -166,23 +172,23 @@ namespace Warewolf.Studio.ViewModels
                 Services = 0;
                 Sources = 0;
                 Unknown = 0;
-                _conflicts = new List<IExplorerTreeItem>();
+                _conflicts = new List<Conflict>();
                 _new = new List<IExplorerTreeItem>();
             }
 
             OnPropertyChanged(() => Conflicts);
             OnPropertyChanged(() => New);
-            if(CalculateAction != null)
+            if (CalculateAction != null)
             {
                 CalculateAction();
             }
         }
 
-        public IList<IExplorerTreeItem> Conflicts
+        public IList<Conflict> Conflicts
         {
             get
             {
-                return _conflicts.Where(a => a.ResourceType != ResourceType.Folder).ToList();
+                return _conflicts.ToList();
             }
         }
         public IList<IExplorerTreeItem> New
@@ -208,9 +214,7 @@ namespace Warewolf.Studio.ViewModels
         {
             return (res >= ResourceType.DbSource && res <= ResourceType.SharepointServerSource) || (res == ResourceType.DropboxSource);
         }
-
-    
-
         #endregion
     }
+
 }

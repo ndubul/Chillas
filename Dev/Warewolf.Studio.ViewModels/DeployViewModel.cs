@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using Caliburn.Micro;
 using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Deploy;
 using Dev2.Common.Interfaces.Studio.Controller;
-using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
-using Warewolf.Studio.Core.Popup;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -36,9 +33,12 @@ namespace Warewolf.Studio.ViewModels
         string _conflictNewResourceText;
         IShellViewModel _shell;
         bool _serversAreNotTheSame;
-        IList<IExplorerTreeItem> _openViewItems;
         bool _canSelectDependencies;
         readonly IPopupController _popupController;
+        bool _showNewItemsList;
+        bool _showConflictItemsList;
+        IList<Conflict> _conflictItems;
+        IList<IExplorerTreeItem> _newItems;
 
         #region Implementation of IDeployViewModel
 
@@ -52,7 +52,6 @@ namespace Warewolf.Studio.ViewModels
             _source.SelectItemsForDeploy(selectedItems);
             _stats = stats;
             _shell = shell;
-            OpenViewItems = new List<IExplorerTreeItem>();
             _stats.CalculateAction = () =>
             {
                 ConnectorsCount = _stats.Connectors.ToString();
@@ -85,12 +84,33 @@ namespace Warewolf.Studio.ViewModels
             {
                 return Source.SelectedItems.Count > 0;
             }
-
         }
 
-        public IList<IExplorerTreeItem> NewItems { get; set; }
+        public IList<IExplorerTreeItem> NewItems
+        {
+            get
+            {
+                return _newItems;
+            }
+            set
+            {
+                _newItems = value;
+                OnPropertyChanged(() => NewItems);
+            }
+        }
 
-        public IList<IExplorerTreeItem> ConflictItems { get; set; }
+        public IList<Conflict> ConflictItems
+        {
+            get
+            {
+                return _conflictItems;
+            }
+            set
+            {
+                _conflictItems = value;
+                OnPropertyChanged(()=>ConflictItems);
+            }
+        }
 
         void UpdateServerCompareChanged(object sender, Guid environmentid)
         {
@@ -102,27 +122,39 @@ namespace Warewolf.Studio.ViewModels
             UnknownCount = _stats.Unknown.ToString();
             NewResourcesCount = _stats.NewResources.ToString();
             OverridesCount = _stats.Overrides.ToString();
-
         }
 
         void ViewOverrides()
         {
             ShowConflicts = true;
             ConflictNewResourceText = "List of Overrides";
-            OpenViewItems.Clear();
-            OpenViewItems = ConflictItems;
+            ShowNewItemsList = false;
+            ShowConflictItemsList = true;
         }
 
-        public IList<IExplorerTreeItem> OpenViewItems
+        public bool ShowConflictItemsList
         {
             get
             {
-                return _openViewItems;
+                return _showConflictItemsList;
             }
             set
             {
-                _openViewItems = value;
-                OnPropertyChanged(() => OpenViewItems);
+                _showConflictItemsList = value;
+                OnPropertyChanged(() => ShowConflictItemsList);
+            }
+        }
+
+        public bool ShowNewItemsList
+        {
+            get
+            {
+                return _showNewItemsList;
+            }
+            set
+            {
+                _showNewItemsList = value;
+                OnPropertyChanged(() => ShowNewItemsList);
             }
         }
 
@@ -156,8 +188,8 @@ namespace Warewolf.Studio.ViewModels
         {
             ShowConflicts = true;
             ConflictNewResourceText = "List of New Resources";
-            OpenViewItems.Clear();
-            OpenViewItems = NewItems;
+            ShowNewItemsList = true;
+            ShowConflictItemsList = false;
         }
 
         void Deploy()
