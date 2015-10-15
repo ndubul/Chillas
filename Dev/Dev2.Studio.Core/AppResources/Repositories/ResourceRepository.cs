@@ -107,17 +107,17 @@ namespace Dev2.Studio.Core.AppResources.Repositories
 
             // Deploy - Seems a bit silly to go out to another service only to comeback in?
             Dev2Logger.Log.Info(String.Format("Deploy Resources. Source:{0} Destination:{1}", sourceEnviroment.DisplayName, targetEnviroment.Name));
-            _deployService.Deploy(trueDto, targetEnviroment);
+            _deployService.Deploy(dto, targetEnviroment);
 
             var targetResourceRepo = targetEnviroment.ResourceRepository;
 
             // Inform the repo to reload the deployed resources against the targetEnviroment ;)
-            var deployables = deployableResources.GroupBy(a => a.ResourceType);
-            foreach (var x in deployables)
-            {
-                targetResourceRepo.FindAffectedResources(x.Select(a => a.ID).ToList(), x.First().ResourceType, ResourceModelEqualityComparer.Current, true);
+            //var deployables = deployableResources.GroupBy(a => a.ResourceType);
+            //foreach (var x in deployables)
+            //{
+            //    targetResourceRepo.FindAffectedResources(x.Select(a => a.ID).ToList(), x.First().ResourceType, ResourceModelEqualityComparer.Current, true);
 
-            }
+            //}
         }
 
         public async Task<ExecuteMessage> SaveResourceAsync(IEnvironmentModel targetEnvironment, StringBuilder resourceDefinition, Guid workspaceId)

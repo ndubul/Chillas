@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Caliburn.Micro;
 using Dev2;
 using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Deploy;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
@@ -27,10 +28,11 @@ namespace Warewolf.Studio.ViewModels
         bool _isDeploying;
         bool _deploySuccessfull;
         string _conflictNewResourceText;
+        IShellViewModel _shell;
 
         #region Implementation of IDeployViewModel
 
-        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source,IEnumerable<IExplorerTreeItem> selectedItems,IDeployStatsViewerViewModel stats) 
+        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source,IEnumerable<IExplorerTreeItem> selectedItems,IDeployStatsViewerViewModel stats,IShellViewModel shell) 
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "destination", destination }, { "source", source }, { "selectedItems", selectedItems }, { "stats", stats } });
             _destination = destination;
@@ -54,6 +56,7 @@ namespace Warewolf.Studio.ViewModels
             UnknownCount = stats.Unknown.ToString();
             NewResourcesCount = stats.NewResources.ToString();
             OverridesCount = stats.Overrides.ToString();
+            _shell = shell;
         }
 
         void ViewOverrides()
@@ -96,6 +99,8 @@ namespace Warewolf.Studio.ViewModels
 
         void Deploy()
         {
+            _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.SelectedEnvironment.Server.EnvironmentID, Source.SelectedItems.Where(a=>a.ResourceType!= ResourceType.Folder).Select(a => a.ResourceId).ToList());
+           
 
         }
 

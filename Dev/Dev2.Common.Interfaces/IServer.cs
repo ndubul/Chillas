@@ -31,16 +31,16 @@ namespace Dev2.Common.Interfaces
         List<IWindowsGroupPermission> Permissions { get; set; }
         Guid EnvironmentID { get; set; }
         Guid? ServerID { get; }
-
         event PermissionsChanged PermissionsChanged;
-         event NetworkStateChanged NetworkStateChanged;
-         event ItemAddedEvent ItemAddedEvent;
+        event NetworkStateChanged NetworkStateChanged;
+        event ItemAddedEvent ItemAddedEvent;
        
         string GetServerVersion();
 
         void Connect();
         Task<bool> ConnectAsync();
         string DisplayName { get; }
+
 
     }
 

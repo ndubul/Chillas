@@ -57,6 +57,7 @@ using Dev2.Studio.Core.AppResources.DependencyInjection.EqualityComparers;
 using Dev2.Studio.Core.AppResources.Enums;
 using Dev2.Studio.Core.Factories;
 using Dev2.Studio.Core.Helpers;
+using Dev2.Studio.Core.InterfaceImplementors;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.Core.Messages;
 using Dev2.Studio.Core.Models;
@@ -1060,6 +1061,14 @@ namespace Dev2.Studio.ViewModels
             }
         }
 
+        public void DeployResources(Guid sourceEnvironmentId,Guid destinationEnvironmentId,IList<Guid> resources  )
+        {
+            var environmentModel = EnvironmentRepository.Get(destinationEnvironmentId);
+            var sourceEnvironmentModel = EnvironmentRepository.Get(sourceEnvironmentId);
+            var dto = new DeployDto { ResourceModels = resources.Select(a=>sourceEnvironmentModel.ResourceRepository.LoadContextualResourceModel(a)as IResourceModel).ToList() };
+            environmentModel.ResourceRepository.DeployResources(sourceEnvironmentModel,environmentModel,dto,CustomContainer.Get<IEventAggregator>());
+        }
+
         public void ShowPopup(IPopupMessage popupMessage)
         {
             var msgBoxViewModel = new MessageBoxViewModel(popupMessage.Description, popupMessage.Header,
@@ -1366,8 +1375,8 @@ namespace Dev2.Studio.ViewModels
         {
             var dest = new DeployDestinationViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
             var stats = new DeployStatsViewerViewModel(dest);
-            var vm = new SingleExplorerDeployViewModel(dest, new DeploySourceExplorerViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>(),stats), items,stats );
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources) as WorkSurfaceKey, new DeployWorksurfaceViewModel(EventPublisher,vm,PopupProvider, new DeployView())); //todo:view is null
+            var vm = new SingleExplorerDeployViewModel(dest, new DeploySourceExplorerViewModel(CustomContainer.Get<IShellViewModel>(), CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>(), stats), items, stats, CustomContainer.Get<IShellViewModel>());
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources) as WorkSurfaceKey, new DeployWorksurfaceViewModel(EventPublisher,vm,PopupProvider, new DeployView())); 
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 

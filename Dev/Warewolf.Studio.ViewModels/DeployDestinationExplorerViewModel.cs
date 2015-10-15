@@ -46,6 +46,19 @@ namespace Warewolf.Studio.ViewModels
             UpdateItemForDeploy(environmentId);
         }
 
+        #region Overrides of ExplorerViewModel
+
+        public override void AfterLoad(Guid environmentID)
+        {
+            var environmentViewModel = _environments.FirstOrDefault(a=>a.Server.EnvironmentID == environmentID);
+            if(environmentViewModel != null)
+            {
+                UpdateItemForDeploy( environmentViewModel.Server.EnvironmentID);
+            }
+        }
+
+        #endregion
+
         public override ICollection<IEnvironmentViewModel> Environments
         {
             get
@@ -149,30 +162,5 @@ namespace Warewolf.Studio.ViewModels
         #endregion
 
 
-    }
-
-    public class DeployDestinationViewModel : ExplorerViewModel, IDeployDestinationExplorerViewModel
-    {
-        #region Implementation of IDeployDestinationExplorerViewModel
-
-        public DeployDestinationViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator)
-            : base(shellViewModel, aggregator)
-        {
-
-            ConnectControlViewModel.SelectedEnvironmentChanged += DeploySourceExplorerViewModelSelectedEnvironmentChanged;
-            SelectedEnvironment = _environments.FirstOrDefault();
-        }
-
-        void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, Guid environmentid)
-        {
-            var environmentViewModel = _environments.FirstOrDefault(a => a.Server.EnvironmentID == environmentid);
-            if (environmentViewModel != null)
-            {
-                SelectedEnvironment = environmentViewModel;
-              
-            }
-        }
-
-        #endregion
     }
 }

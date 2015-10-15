@@ -277,7 +277,12 @@ namespace Warewolf.Studio.ViewModels
             _environments.Add(environmentModel);
 	        await environmentModel.Load(IsDeploy);
             OnPropertyChanged(() => Environments);
+            AfterLoad(server.EnvironmentID);
 	    }
+        public virtual void AfterLoad(Guid environmentID)
+        {
+            
+        }
 
 	    public bool IsDeploy { get; set; }
 

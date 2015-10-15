@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.PopupController;
 using Dev2.Common.Interfaces.ServerProxyLayer;
@@ -36,5 +37,7 @@ namespace Dev2.Common.Interfaces
         void ShowAboutBox();
 
         void ShowDependencies(Guid resourceId, IServer server);
+
+        void DeployResources(Guid sourceEnvironmentId,Guid destinationEnvironmentId,IList<Guid> resources  );
     }
 }
