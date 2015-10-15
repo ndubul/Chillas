@@ -159,7 +159,6 @@ namespace Warewolf.Studio.ViewModels
 
                 Overrides = Conflicts.Count;
                 NewResources = New.Count;
-
             }
             else
             {
@@ -183,14 +182,14 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return _conflicts.ToList();
+                return _conflicts.Where(a => a.ResourceType != ResourceType.Folder).ToList();
             }
         }
         public IList<IExplorerTreeItem> New
         {
             get
             {
-                return _new.ToList();
+                return _new.Where(a => a.ResourceType != ResourceType.Folder).ToList();
             }
         }
         public Action CalculateAction

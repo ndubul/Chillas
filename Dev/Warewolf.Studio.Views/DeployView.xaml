@@ -83,9 +83,9 @@
 
             <Grid Grid.Row="2" Background="#7F7F7F" Margin="{StaticResource ControlBorderTop}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30*"/>
-                    <RowDefinition Height="30*"/>
-                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <!-- SELECTED FOR DEPLOY -->
@@ -245,16 +245,18 @@
 
                     <ScrollViewer Grid.Row="1" 
                                   Margin="{StaticResource ElementBorder}" 
-                                  HorizontalScrollBarVisibility="Hidden" 
+                                  HorizontalScrollBarVisibility="Auto" 
                                   VerticalScrollBarVisibility="Auto">
                         <ListBox Style="{StaticResource DeployListBoxStyle}"
                                  BorderThickness="0"
+                                 ItemContainerStyle="{StaticResource DeployListBoxItemStyle}"
                                  ItemsSource="{Binding OpenViewItems}" >
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Foreground="White" 
-                                                   Margin="3,-3,0,0"
+                                                   Margin="3,-5,0,0"
+                                                   Style="{StaticResource TextBlockNoPaddingStyle}"
                                                    FontSize="{StaticResource FontSize-Medium}">
                                             <Run Text="> "/>
                                             <Run Text="{Binding ResourceName}"/>
