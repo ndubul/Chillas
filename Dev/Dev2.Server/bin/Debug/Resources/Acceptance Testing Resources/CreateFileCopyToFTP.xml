@@ -1,5 +1,5 @@
 
-<Service ID="a09d3216-a4c4-477e-b873-4180aa23f7ec" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="CreateFileCopyToFTP" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5764.15529">
+<Service ID="a09d3216-a4c4-477e-b873-4180aa23f7ec" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="CreateFileCopyToFTP" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5766.15599">
   <DisplayName>CreateFileCopyToFTP</DisplayName>
   <Category>Acceptance Testing Resources\CreateFileCopyToFTP</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -38,9 +38,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>X8T3oAjQWr15834Hal9BWrIQFIg=</DigestValue>
+        <DigestValue>gyrrL71rHNFzonGIW8Zge7HGmEE=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>azVzZjB1AxUpaEtxsbdEzgf67/BW4QCloF9meLx3RGkBEIwds+r1hE1aAtq4fZP9X8KflgsK7L9cqHSszgf9rUruteHxhjzfv+pZ8jcf+Umw2GPAM9veUlQ7roriBuSHlO7FGRu7pQ/SIXtAp9T1FPeSnQAYZVIaFRLZKIzAyes=</SignatureValue>
+    <SignatureValue>iXILChl0qVfwts6AFWcx66PTG2KxqWPLEtKE5L2mql4xKbIHdWrJBnz3JYetfl9kKwSPjXBXwIZ9un7/Bwh3vNv110szUmQHXmzSI1E9tk1QfjYRwVoqChMMOCs+iymHE9P8D90W4s3e8C99V92ZvW7Bz+Uil562JMYlgMgRBRA=</SignatureValue>
   </Signature>
 </Service>

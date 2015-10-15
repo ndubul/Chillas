@@ -1,5 +1,5 @@
 
-<Service ID="e0838235-3b01-4ac5-ae72-c4fbfe26bf32" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="DataMergeRecordsetsUsingStarAndCharMerge" ResourceType="WorkflowService" ServerVersion="0.0.5764.15529">
+<Service ID="e0838235-3b01-4ac5-ae72-c4fbfe26bf32" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="DataMergeRecordsetsUsingStarAndCharMerge" ResourceType="WorkflowService" ServerVersion="0.0.5766.15599">
   <DisplayName>DataMergeRecordsetsUsingStarAndCharMerge</DisplayName>
   <Category>Acceptance Testing Resources\DataMergeRecordsetsUsingStarAndCharMerge</Category>
   <AuthorRoles>
@@ -402,9 +402,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>DCXW9X23UZwsmOhidzdrb1/k1xQ=</DigestValue>
+        <DigestValue>Ut6ZEj7dgEi07YkDJyeqUT714yo=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>ODn7VKE4J+du7ZPyikMQXb5Jbhlmz3q/FBJdFLXrdvBx5Z5aqItZprhQ9ggJgHbYuICXcz4HvWchXHup7UCSnqjWIR1B4Xut7PlLUz5A0IDycqLf9NBKsQf0FnE7w9hxE9u/2YCNVPpAB5nGvdRQdX7CDUZqBm7VJ5ochZJ1iNM=</SignatureValue>
+    <SignatureValue>ebvFPDfAIQOEscU2JTLssFp/a+ZgDmGJnTKuct/TOYHuXdLJ175wo+qG7tkG9tT8O65DaJWJ11t7m8P3eeg6S+SZii0F3W0Lt8hXewos6S7FIMzmF3P5NR84xk0YfEOFBxotg/xWtMf+HVs1KFe1ZVauo654WGLjknHeV89i2Jg=</SignatureValue>
   </Signature>
 </Service>

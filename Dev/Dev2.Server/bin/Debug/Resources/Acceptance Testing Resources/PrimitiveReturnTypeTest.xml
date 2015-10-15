@@ -1,5 +1,5 @@
 
-<Service ID="9da6ff7b-7b63-4412-883f-0a6e9fb92254" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="PrimitiveReturnTypeTest" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5764.15529">
+<Service ID="9da6ff7b-7b63-4412-883f-0a6e9fb92254" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="PrimitiveReturnTypeTest" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5766.15599">
   <DisplayName>PrimitiveReturnTypeTest</DisplayName>
   <Category>Acceptance Testing Resources\PrimitiveReturnTypeTest</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -34,9 +34,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>jwmoTrVKD9KRmSST3t24+yGJevY=</DigestValue>
+        <DigestValue>KL3Y8YbhiCdHRr/RM1sZST8cRjA=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>TgPK2x72YeLPSHA5p/jYIYxlEmIooQkt8UxZMg5ObO7a8NLhP7cUN+kf5F++Q+1nbayvFgDTlZVaY4IQ+2xnE7iiYcgXaVkFwFfWIcineDfLjxqesZcY5NoHb5Zt7YNVKQiSDhZH45krSSeE6wVCqz73OCAjntuudq/SyGlEOvQ=</SignatureValue>
+    <SignatureValue>lOUBspuEbJbsEr1Hri/aKjGXpbJMKi1RdXHae+Sr94mEBxj0j4IKEcgLq3htw23fWZ7zLZc4f3devm2MshtYhDieoMTpiTGV/WrSzzfi9Z8R3hv4q/h5U0IskcSwwD8dEC/0EBJ4XCIxmyV17ed5ZBa5UHEkvIhC/lL8j9QaI8g=</SignatureValue>
   </Signature>
 </Service>

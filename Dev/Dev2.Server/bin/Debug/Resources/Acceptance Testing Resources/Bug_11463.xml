@@ -1,5 +1,5 @@
 
-<Service ID="61a24a17-f609-4934-8c6f-47c7d7e729c0" Name="Bug_11463" ResourceType="DbService" IsValid="false" ServerVersion="0.0.5764.15529" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
+<Service ID="61a24a17-f609-4934-8c6f-47c7d7e729c0" Name="Bug_11463" ResourceType="DbService" IsValid="false" ServerVersion="0.0.5766.15599" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
   <Actions>
     <Action Name="dbo_Pr_CitiesGetCountries" Type="InvokeStoredProc" SourceID="ebba47dc-e5d4-4303-a203-09e2e9761d16" SourceName="testingDBSrc" ExecuteAction="dbo.Pr_CitiesGetCountries" SourceMethod="dbo.Pr_CitiesGetCountries">
       <Inputs>
@@ -37,9 +37,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>JFtxIrSdpacLQTUI4WsXqvotVDk=</DigestValue>
+        <DigestValue>OgLBjEo+jdrnOdtqOWol336Z2VU=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>BozcW/yWE7UEMTmyUdP/RZHQ+2+mHFG2kV29rvJbRTlC4+yRqzKom2mkxKpsdYhj4NvMYGB0d4VE/SZm8LsbN9YtEYOk3E0cPrOaygX/mdGpVRUkhpL9H8M/EGzB93qCgfRC9ya0FOECtS1iESpJTGnIt2IIewxkKpP0VQKVxaI=</SignatureValue>
+    <SignatureValue>my5vMXKL6XMw6elub3brbcI9aPtF1xSeK/z5CG1WEtGfgLeLeUqBGqSV3EKIWKf4py7VANVUsQwk0VIYB2mvDbVHxVq38/jRK59QhGydVdBPLRVA5YqsKfJuBz2TYiJF5VE+yBZGzQt9G8mUqlORrRQOU7FRJ8rP8TNFo2hcBwc=</SignatureValue>
   </Signature>
 </Service>

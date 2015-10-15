@@ -1,5 +1,5 @@
 
-<Service ID="e02527dd-92e0-4148-8b42-c6ef8ba0ea8f" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Decision Testing" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5764.15529">
+<Service ID="e02527dd-92e0-4148-8b42-c6ef8ba0ea8f" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Decision Testing" ResourceType="WorkflowService" IsValid="false" ServerVersion="0.0.5766.15599">
   <DisplayName>Decision Testing</DisplayName>
   <Category>Acceptance Testing Resources\Decision Testing</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -36,9 +36,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>XGAReAlI6cBBoLqpPncAKfebbaE=</DigestValue>
+        <DigestValue>wjnYu2NNyv4DMxbVT+bnCdsLKA8=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>jrpyO4dQY29NGumZMkQmKTyMipptLz6pGxfmN9NkRR+O3gL8S8pMV01DWjIO0jQDEU1AmZLjS14ZqJieo70YU8ldI7jE6tv/DoqnQsOLQ6XcEPtZGrmnsurVVI8peCIZSEwUn4kRkjVM3LheRWYBpWXBPJfmqk7b5imdwvBqQPM=</SignatureValue>
+    <SignatureValue>nKPzH5ljb8zwLrvdOXgFnxhx2Wa3GPJ4LU3ajZsD1DBLk2/VH02lknFkii271HnJNHyxJ3JERyrBGBAbIyanjSU4vCyEraNvHChRz53jEiIHdg0upVgNChfc8xVmzzO/ocQV8vCsdcL986oxBPyDBUGcyPNf5CF2YS9h283IkZo=</SignatureValue>
   </Signature>
 </Service>

@@ -1,5 +1,5 @@
 
-<Service ID="748d7f31-74b1-446d-a9c5-a5aa8fc9680f" Version="1.0" Name="newgooglemaps" ResourceType="WebService" IsValid="false" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5764.15529">
+<Service ID="748d7f31-74b1-446d-a9c5-a5aa8fc9680f" Version="1.0" Name="newgooglemaps" ResourceType="WebService" IsValid="false" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ServerVersion="0.0.5766.15599">
   <Actions>
     <Action Name="newgooglemaps" Type="InvokeWebService" SourceID="a00626a4-ec09-46ad-8c97-ea6c44bbc582" SourceName="Google Address Lookup" SourceMethod="" RequestUrl="/maps/api/geocode/json?sensor=true&amp;address=[[address]]" RequestMethod="Get" JsonPath="">
       <RequestHeaders><![CDATA[]]></RequestHeaders>
@@ -53,9 +53,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>4mW0x26dJhqWJkKcpXMyuYdOU8w=</DigestValue>
+        <DigestValue>hWFDhZr6cZghhA0ODptygKTSCWE=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>HFVVHI9XmnxBR3n7TQdjfegDbviMd0xkk9FLnAFXS/MjvcfO9R/HSKhBW/O34hlvqtALQfUMVI9Uyid1ySkkFcSMvEwM5w3a7+TFU5/+6qxuxuT3hDO4Bj/j4wwe4nh0cp+OMfPqh4pNqHSOdhzA00eD850T1h/6ZvaWwmCqgbE=</SignatureValue>
+    <SignatureValue>r7BMuXUcKxzhfUz3MQhlqJ95dcMwgoTjxODL00IP1JwqvpxLjPAOqlL7FlA3TftBvgZEmlKv0HNP0gAUt687KJgNBHsVAh/hk6NF0paZULiCj8hnL9a1PqLmdOnPV7xBvbAMPhF05faVVS2Vhfy6SIDE4AuChhKvPYaN10EJwtY=</SignatureValue>
   </Signature>
 </Service>

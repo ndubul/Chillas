@@ -1,5 +1,5 @@
 
-<Service ID="86c7244a-7a0d-42a1-a641-2fa4342ec79e" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="SharepointCreate" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5764.15529">
+<Service ID="86c7244a-7a0d-42a1-a641-2fa4342ec79e" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="SharepointCreate" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5766.15599">
   <DisplayName>SharepointCreate</DisplayName>
   <Category>Testing\For Each\SharepointCreate</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -50,9 +50,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>gn1FWTBpJOGuYtmHXtismJ/3b3c=</DigestValue>
+        <DigestValue>ilAF/MHwx8Wv1vwtahwDlHeQg3E=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>Q1eCGeS0Nm9bF77NTiuQKukkS0EVDIlT0/lkUYlqijNuvM3J53emMxYc9c+WIIsYwD0JDDDvRs5w3ioGAv8guBC3Sh0nmalppM8ue2vcSoRti8RueW0gl+3lx9Xowsh2uzC+l4W/Zaz/RcecLOciPau9pkesiSKXF0Od5XH2Idk=</SignatureValue>
+    <SignatureValue>VnRls0D84TEmKDFt1u6y2ttNA8L9f3S1I4lh/tyEzkuiS2yTFPcQi8NbVu/b15C6CeJGlj+AnR51fZ1ZpOT47eiU7F2xyAvTWTY5zv0hoktzg2bSd5fSZU9j/VZSkAFxPXWBiAx//Gk/IyaySu3x3K7h11ZrxM+EtIumI3LvD0E=</SignatureValue>
   </Signature>
 </Service>

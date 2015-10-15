@@ -1,5 +1,5 @@
 
-<Service ID="d04e7af1-3517-440a-b136-d94c3b0758de" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="SharepointUpdate" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5764.15529">
+<Service ID="d04e7af1-3517-440a-b136-d94c3b0758de" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="SharepointUpdate" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5766.15599">
   <DisplayName>SharepointUpdate</DisplayName>
   <Category>Testing\For Each\SharepointUpdate</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -47,9 +47,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>X4fjJnD7N3exDk+eU+DvpSUgiU8=</DigestValue>
+        <DigestValue>w+KVFPoZ6895bpEhc/bd3EPvlh8=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>NwUR1w9ArKKBlnppy/Wt3gEc3uFg17vO9Q9ctwpLkhaNuJGIqpjg+kj31qksSObuU40Xq+43AksxeqJuHscA+USgnJ4Q1VYuMb4oWhyMrlT3aSA5jYwErggWstQcyOaQw5N8lE/MQDyTqIvQynda3zzutWkF2D1f8mlflFz3lm4=</SignatureValue>
+    <SignatureValue>nGGaNRWgHc6heC/xBhOU/6heXyxJ8oOHnqlo76LAOZN7djAyWzZlA9EPGFdIcpw5UTWo6fUvu+w1nCYJpX2fLFo/5kOcOCFixKmWYNySScSeIXsHWKOqZe4haIovOkydLAvbK9lftomGOn9255yRLnbEw82VyubJUl3HrF3iDCg=</SignatureValue>
   </Signature>
 </Service>

@@ -1,5 +1,5 @@
 
-<Service ID="3f9a27d6-3d4c-41f6-bfcc-ed078a693d97" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Service Serialization Test" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5764.15529">
+<Service ID="3f9a27d6-3d4c-41f6-bfcc-ed078a693d97" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Service Serialization Test" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5766.15599">
   <DisplayName>Service Serialization Test</DisplayName>
   <Category>Acceptance Testing Resources\Service Serialization Test</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -139,9 +139,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>Q81sHCglsc8JWqGqKeLsstUMxf4=</DigestValue>
+        <DigestValue>M2S9Ti51utU5+Vkyua4EBMTtiNI=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>eWOqR8dELqI32JfIFu0rb66LszZVHbEOuCFB842D9+PuLfS9Lvd/rSEPyLocISp+GnjtRiiKPE65fHH1goAZipYMJTETVNxP46U8Gon2vtWqJsNaf9sRMD5oM9I8IJx2SPrpoakaH69twGVDC2KwL4Ogwnsr/Gz06NbHylHiKww=</SignatureValue>
+    <SignatureValue>migjLYEyxTVY9AYwqMoHOxZ8tECbUY9g1VZKVLsYv5qHrqx1wQfNoe5aVp+g+nlw9q48TpPQvfQbOkwyWhONylbP6w7jQ38iyGCGR8WJB8S3Ka4KC/CpRiIvPzK6hzxobSw12A3uPGoybj5B7EsCgIUERfv579DrOCs81LpGJJA=</SignatureValue>
   </Signature>
 </Service>
