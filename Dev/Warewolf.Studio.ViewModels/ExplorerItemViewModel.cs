@@ -174,6 +174,7 @@ namespace Warewolf.Studio.ViewModels
             IsResourceChecked = false;
             CanCreateDbService = true;
             CanCreateWorkflowService = true;
+            ShowContextMenu = true;
             CanCreateServerSource = true;
             CanCreateDbSource = true;
             CanRename = true;
@@ -357,6 +358,7 @@ namespace Warewolf.Studio.ViewModels
                     CanShowDependencies = CanShowDependencies,
                     ResourcePath = ResourcePath + "\\" + name,
                     CanCreateWorkflowService = CanCreateWorkflowService,
+                    ShowContextMenu = ShowContextMenu,
                     IsSelected = true,
                     IsRenaming = true
                 };
@@ -774,6 +776,7 @@ namespace Warewolf.Studio.ViewModels
         public bool CanCreateSharePointSource { get; set; }
         // ReSharper disable MemberCanBePrivate.Global
         public bool CanCreateWorkflowService { get; set; }
+        public bool ShowContextMenu { get; set; }
         // ReSharper restore MemberCanBePrivate.Global
 
         public bool CanRename

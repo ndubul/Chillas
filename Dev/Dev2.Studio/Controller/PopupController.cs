@@ -87,6 +87,28 @@ namespace Dev2.Studio.Controller
             return Show();
         }
 
+        public MessageBoxResult ShowDeployConflict(int conflictCount)
+        {
+            string correctDesc = String.Empty;
+            Buttons = MessageBoxButton.OKCancel;
+            Header = "Deploy conflicts";
+            if (conflictCount == 1)
+            {
+                correctDesc = "There is [ " + conflictCount + " ] conflict that occurs";
+            }
+            if (conflictCount > 1)
+            {
+                correctDesc = "There are [ " + conflictCount + " ] conflicts that occur";
+            }
+            Description = correctDesc + " in this deploy." + Environment.NewLine + "Click OK to override the conflicts or Cancel to view the conflicting resources." + Environment.NewLine +
+                          "--------------------------------------------------------------------------------" +
+                              Environment.NewLine +
+                          "OK - Continue to deploy resources." + Environment.NewLine +
+                          "Cancel - Cancel the deploy and view the conflicts.";
+            ImageType = MessageBoxImage.Information;
+            return Show();
+        }
+
         public MessageBoxResult ShowSettingsCloseConfirmation()
         {
 
