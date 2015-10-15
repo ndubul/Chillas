@@ -55,6 +55,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 UpdateItemForDeploy( environmentViewModel.Server.EnvironmentID);
             }
+   
         }
 
         #endregion

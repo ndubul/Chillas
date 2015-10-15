@@ -35,7 +35,7 @@ namespace Warewolf.Studio.ViewModels
 
         #region Implementation of IDeployViewModel
 
-        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source, IEnumerable<IExplorerTreeItem> selectedItems, IDeployStatsViewerViewModel stats)
+        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source, IEnumerable<IExplorerTreeItem> selectedItems, IDeployStatsViewerViewModel stats, IShellViewModel shell)
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "destination", destination }, { "source", source }, { "selectedItems", selectedItems }, { "stats", stats } });
             _destination = destination;
@@ -43,6 +43,7 @@ namespace Warewolf.Studio.ViewModels
             _source = source;
             _source.SelectItemsForDeploy(selectedItems);
             _stats = stats;
+            _shell = shell;
             OpenViewItems = new List<IExplorerTreeItem>();
             _stats.CalculateAction = () =>
             {
@@ -62,11 +63,11 @@ namespace Warewolf.Studio.ViewModels
             SourceConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
             DestinationConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
 
-            DeployCommand = new DelegateCommand(Deploy);
+            DeployCommand = new DelegateCommand(Deploy, ()=>CanDeploy);
             SelectDependenciesCommand = new DelegateCommand(SelectDependencies);
             NewResourcesViewCommand = new DelegateCommand(ViewNewResources);
             OverridesViewCommand = new DelegateCommand(ViewOverrides);
-
+           
             ShowConflicts = false;
         }
 
@@ -78,13 +79,13 @@ namespace Warewolf.Studio.ViewModels
         {
             ServersAreNotTheSame = DestinationConnectControlViewModel.SelectedConnection.EnvironmentID != SourceConnectControlViewModel.SelectedConnection.EnvironmentID;
             ShowConflicts = false;
-            ConnectorsCount = stats.Connectors.ToString();
-            ServicesCount = stats.Services.ToString();
-            SourcesCount = stats.Sources.ToString();
-            UnknownCount = stats.Unknown.ToString();
-            NewResourcesCount = stats.NewResources.ToString();
-            OverridesCount = stats.Overrides.ToString();
-            _shell = shell;
+            ConnectorsCount = _stats.Connectors.ToString();
+            ServicesCount = _stats.Services.ToString();
+            SourcesCount = _stats.Sources.ToString();
+            UnknownCount = _stats.Unknown.ToString();
+            NewResourcesCount = _stats.NewResources.ToString();
+            OverridesCount = _stats.Overrides.ToString();
+
         }
 
         void ViewOverrides()
@@ -144,7 +145,9 @@ namespace Warewolf.Studio.ViewModels
 
         void Deploy()
         {
-            _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.SelectedEnvironment.Server.EnvironmentID, Source.SelectedItems.Where(a=>a.ResourceType!= ResourceType.Folder).Select(a => a.ResourceId).ToList());
+            var selected = Source.SelectedItems.Where(a => a.ResourceType != ResourceType.Folder);
+            var notfolders = selected.Select(a => a.ResourceId).ToList();
+            _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.SelectedEnvironment.Server.EnvironmentID, notfolders);
            
 
         }
@@ -197,7 +200,30 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return false;
+              if( Source == null)
+              {
+                  return false;
+
+              }
+              if(Source.SelectedEnvironment == null || !Source.SelectedEnvironment.IsConnected)
+              {
+                  return false;
+              }
+              if (Destination == null)
+              {
+                  return false;
+
+              }
+              if (Destination.SelectedEnvironment == null || !Destination.SelectedEnvironment.IsConnected)
+              {
+                  return false;
+              }
+              if(Source.SelectedItems== null || Source.SelectedItems.Count<=0)
+              {
+                    return false;
+              }
+
+                return true;
             }
         }
 
