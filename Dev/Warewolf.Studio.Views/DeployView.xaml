@@ -179,22 +179,14 @@
                             <TextBlock Grid.Column="1" Grid.Row="0" Text="Override" Margin="{StaticResource ElementBorder}" Foreground="White" FontSize="{StaticResource FontSize-Medium}"/>
 
                             <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" >
-                                <Hyperlink x:Name="NewResourcesView" Command="{Binding NewResourcesViewCommand}" >
-                                    <TextBlock Text="{Binding NewResourcesCount}" FontSize="28">
-                                        <i:Interaction.Behaviors>
-                                            <core:HelpSetter Text="{x:Static languages:Core.DeployNewResourcesViewHelp}" DataContext="{Binding}" />
-                                        </i:Interaction.Behaviors>
-                                    </TextBlock>
+                                <Hyperlink x:Name="NewResourcesView" Command="{Binding NewResourcesViewCommand}" ToolTip="{x:Static languages:Core.DeployNewResourcesViewHelp}" >
+                                    <TextBlock Text="{Binding NewResourcesCount}" FontSize="28"/>
                                 </Hyperlink>
                             </TextBlock>
 
                             <TextBlock Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" >
-                                <Hyperlink x:Name="OverridesCountView" Command="{Binding OverridesViewCommand}"  >
-                                    <TextBlock Text="{Binding OverridesCount}" FontSize="28">
-                                        <i:Interaction.Behaviors>
-                                            <core:HelpSetter Text="{x:Static languages:Core.DeployOverridesCountViewHelp}" DataContext="{Binding}" />
-                                        </i:Interaction.Behaviors>
-                                    </TextBlock>
+                                <Hyperlink x:Name="OverridesCountView" Command="{Binding OverridesViewCommand}" ToolTip="{x:Static languages:Core.DeployOverridesCountViewHelp}" >
+                                    <TextBlock Text="{Binding OverridesCount}" FontSize="28"/>
                                 </Hyperlink>
                             </TextBlock>
                         </Grid>
