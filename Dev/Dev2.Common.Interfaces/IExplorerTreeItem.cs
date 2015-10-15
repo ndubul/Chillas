@@ -34,7 +34,7 @@ namespace Dev2.Common.Interfaces
         bool IsSelected { get; set; }
 		bool CanShowServerVersion { get; set; }
         bool AllowResourceCheck { get; set; }
-        bool? IsResourceChecked { get; set; }
+        bool IsResourceChecked { get; set; }
        
         ICommand RenameCommand { get; set; }
         ICommand CreateFolderCommand { get; set; }
@@ -50,7 +50,7 @@ namespace Dev2.Common.Interfaces
         IShellViewModel ShellViewModel { get;}
         int ChildrenCount { get; }
         Action<IExplorerItemViewModel> SelectAction { get; set; }
-        bool? IsFolderChecked { get; set; }
+        bool IsFolderChecked { get; set; }
         void AddChild(IExplorerItemViewModel child);
         void RemoveChild(IExplorerItemViewModel child);
         void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction);

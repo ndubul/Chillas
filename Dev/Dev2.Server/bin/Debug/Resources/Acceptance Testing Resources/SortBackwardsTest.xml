@@ -1,5 +1,5 @@
 
-<Service ID="0ac7a76e-9c15-4312-a13e-055915f6da56" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="SortBackwardsTest" ResourceType="WorkflowService" ServerVersion="0.0.5766.15599">
+<Service ID="0ac7a76e-9c15-4312-a13e-055915f6da56" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="SortBackwardsTest" ResourceType="WorkflowService" ServerVersion="0.0.5764.15529">
   <DisplayName>SortBackwardsTest</DisplayName>
   <Category>Acceptance Testing Resources\SortBackwardsTest</Category>
   <AuthorRoles>
@@ -256,9 +256,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>IPdLQVXkS48Qph47PAkmhHxHcZo=</DigestValue>
+        <DigestValue>AO+2fja/Owuo11HqxQXCD8KF5Uo=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>o3dXMq1axD+85a4DFMgKrp3ZgAEw+7JjvCz71UJmFcx2T1Qu26bjB8U2heDJavquyjBr/GLwivQoWyA+mUp47yoVRDCTkK2PbDYmippDtiBzc+NRL6Qu5jzjY1/6p0M2QTkzn3JZYZY9zqaUQBIzkrF8POx4ykouahKIIQX+P08=</SignatureValue>
+    <SignatureValue>O0UYo4Sfw0ltB1wVNwaRBfqbowWGVPh8/ifEY0zjSFaChreK7KiUOrafjxDNvl+KJb7tV+YOdYQy885xUHrcs0DAsmDZwjW/cWz5RWPsGS16o0CVII4aYQZB0VkdSxbMI0g5gjmsOsRVn6nMW61Bns2YpuwjG2rHSZhIRcCAssw=</SignatureValue>
   </Signature>
 </Service>

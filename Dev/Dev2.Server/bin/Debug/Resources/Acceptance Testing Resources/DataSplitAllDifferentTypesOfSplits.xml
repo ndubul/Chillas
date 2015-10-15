@@ -1,5 +1,5 @@
 
-<Service Name="DataSplitAllDifferentTypesOfSplits" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="39b0faf6-9168-4e17-af1c-4a61d9b585df" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5766.15599">
+<Service Name="DataSplitAllDifferentTypesOfSplits" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="39b0faf6-9168-4e17-af1c-4a61d9b585df" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5764.15529">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap" x:Class="DataSplitAllDifferentTypesOfSplits" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:dsca="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uaba="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:uf="clr-namespace:Unlimited.Framework;assembly=Dev2.Core" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;x:Members&gt;
@@ -114,9 +114,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>FcBDnF0U5/dxCzdtu2oVFS6aBmw=</DigestValue>
+        <DigestValue>fzYRcegAcoRIjgDUyNQ6qhYy6hA=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>oPwcFFpglgvFCmfUiirq9Pm6S6aHfpFH7maHmvwOCq+k+DRkuv8NwXmQlxw8KipCGCv1528qNQUFoMc0klGa5TrF6nDGs/itTuZzN7JNQCo/vedH5drF64Wc3A5Dm0oqzm1ojNktffhA+lep9jUjc9dQIq0Uug78/GtSuEnzEN4=</SignatureValue>
+    <SignatureValue>gZAm9ALdE6bS/NIRyGcOu41dDbLrBPmkWARoawfQHwR/cEClgR49BsdEOpRc3/7m/SIJuclkRJSfrzf6zX93y1pUvL1oLeJPx/aigAY71EGGSJ9GaHvguUWBV9+mzaUJTpVmDCnSpcjEbz9AhVzISIDpUZCSRDyn1xp9wVN3o7Y=</SignatureValue>
   </Signature>
 </Service>

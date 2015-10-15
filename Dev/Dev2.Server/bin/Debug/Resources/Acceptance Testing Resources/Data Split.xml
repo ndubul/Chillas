@@ -1,5 +1,5 @@
 
-<Service Name="Data Split" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="1453b3c9-14cc-4c0b-aa42-a6188c3e00cf" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5766.15599">
+<Service Name="Data Split" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="1453b3c9-14cc-4c0b-aa42-a6188c3e00cf" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5764.15529">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sads sap" x:Class="Data Split"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
@@ -339,9 +339,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>XmhNe9q1q411d9eusLc//MmliB0=</DigestValue>
+        <DigestValue>eLQv4JOU84/5rgJlA2A+m23FI+I=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>F93xQKlc6lRHBCkI4LCdAJVT39BKdqikInDl0BVOMX63BUYHBozRDa+g8Z0MhA4t9LIVPUsKsUnjaTUnN8Mv/jjJMWF+FY4umoqHUdGSoJa7IQDInMGgw2opVPX+kIu6ztF5SARDHLodnH3/mYgQNxlP7urK/JFg7RsLEO+/bpc=</SignatureValue>
+    <SignatureValue>DzIhKaiw2cEh4S9PZFFt4Zfias8I1cKB4NvqkLtRbZR6xob1nZCd0I+9brGWMxxkASFZo/zC7Xed/yUebbFp4Tqz/uihEL5mR6ehT5PogkQ1gKnYtrY3rJjo3EZqkSz9jKnXk8DsMwpt40QMwsDAPERLG2WnWW259meQquLTAgA=</SignatureValue>
   </Signature>
 </Service>

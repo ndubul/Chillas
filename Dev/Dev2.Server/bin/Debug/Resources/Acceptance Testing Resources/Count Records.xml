@@ -1,5 +1,5 @@
 
-<Service ID="a55f49e0-d262-4011-8ba5-e0810ca126b0" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Count Records" ResourceType="WorkflowService" ServerVersion="0.0.5766.15599">
+<Service ID="a55f49e0-d262-4011-8ba5-e0810ca126b0" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="Count Records" ResourceType="WorkflowService" ServerVersion="0.0.5764.15529">
   <DisplayName>Count Records</DisplayName>
   <Category>Acceptance Testing Resources\Count Records</Category>
   <AuthorRoles>
@@ -353,9 +353,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>1lHlzSLiX1DSWEClnmmzzccBusY=</DigestValue>
+        <DigestValue>yOFMEnejkqG0kQHQ2HQI2K4BV1M=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>jo124ZoovtEYACbVxtT4V6IU202+bnRfiD7AqFEI/gVI80IurmwH8D47j4Wfb0xf6bCIxMXdOlfkKUnpFALyLIZJwCLmJr9OqJ8aCTlDHQxON5a91p/YkCpN4qPlOBbK4ixGPx1xaZ8GunQd27tastkm0VAGH3w71/z7gFBOUCI=</SignatureValue>
+    <SignatureValue>oIsdo3yOo9kkA+G5iu8To4X90AoZj9fOSoLNVg4Ln4UIdVztPItYDiVfQeWYAmVROK4+FzAOb71buD/3NPogmy2XrzjlXJBdkp3uvVgSPg4tA0X0FlHIW0zk0Yw4Dq+P+EDqKjkCIO2RlqSOffIVEd1Jh9jjkwEyu9O4c10GNo8=</SignatureValue>
   </Signature>
 </Service>

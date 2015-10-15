@@ -32,7 +32,7 @@ namespace Warewolf.Studio.ViewModels
         bool _allowEdit;
         Guid _resourceId;
         bool _allowResourceCheck;
-        bool? _isResourceChecked;
+        bool _isResourceChecked;
         bool _isVisible;
         bool _isFolderChecked;
 
@@ -202,7 +202,7 @@ namespace Warewolf.Studio.ViewModels
         public ICommand ShowServerVersionCommand { get; set; }
 
         public Action<IExplorerItemViewModel> SelectAction { get; set; }
-        public bool? IsFolderChecked
+        public bool IsFolderChecked
         {
             get
             {
@@ -210,11 +210,7 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                if(value != null)
-                {
-                    _isResourceChecked = (bool)value;
-                }
-                OnPropertyChanged(() => IsVisible);
+                _isResourceChecked = value;
             }
         }
         public bool IsVisible
@@ -516,7 +512,7 @@ namespace Warewolf.Studio.ViewModels
                 OnPropertyChanged(() => AllowResourceCheck);
             }
         }
-        public bool? IsResourceChecked
+        public bool IsResourceChecked
         {
             get
             {

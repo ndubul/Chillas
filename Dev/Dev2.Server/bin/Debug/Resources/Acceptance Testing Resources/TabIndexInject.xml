@@ -1,5 +1,5 @@
 
-<Service ID="8516fa3d-d025-411e-ad2d-8dc3c51d5ca0" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="TabIndexInject" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5766.15599">
+<Service ID="8516fa3d-d025-411e-ad2d-8dc3c51d5ca0" Version="1.0" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" Name="TabIndexInject" ResourceType="WorkflowService" IsValid="true" ServerVersion="0.0.5764.15529">
   <DisplayName>TabIndexInject</DisplayName>
   <Category>Acceptance Testing Resources\TabIndexInject</Category>
   <IsNewWorkflow>false</IsNewWorkflow>
@@ -32,9 +32,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>MRsxiVyI9l2nxZ7iyzA1BcehI4U=</DigestValue>
+        <DigestValue>HrSkn1ylza1IKQqv2Zd8DdJ0wJc=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>dROcWrEr7pCzavbRiWNb1OjrJDdOPLVxUeNkmlp/vQFYnL9oikvaEMJUhcApPPr21RBsBjnDSE9/4U67rFAFCdteWvMN/m1D6+tYOoeVXp9dcahw9oQCk1UGEDeK/KVkskvFhvzkSjKiEYazmGkQhzWC07E/BOCJU38pSUIYIPw=</SignatureValue>
+    <SignatureValue>oha/peASQK5DMKASFTeS08e9NY9YHNiV9q8I/654ad878zXz+9FGjbI4CIU+UeDOWT3SR/l+QV1o0dOUx+8t+hefeFaSRNBZTjw9AR9y/CAU0U2LSJjnXCbbW7TteKVNQbsSfXec4qglGVIFGpAPIvNl/OY3ivYADG7RKFa//AE=</SignatureValue>
   </Signature>
 </Service>

@@ -1,5 +1,5 @@
 
-<Service Name="FindRecordsGeneralTest" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="f7bc68ca-58c7-4aa6-a55a-129627338951" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5766.15599">
+<Service Name="FindRecordsGeneralTest" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55" ID="f7bc68ca-58c7-4aa6-a55a-129627338951" Version="1.0" ResourceType="WorkflowService" ServerVersion="0.0.5764.15529">
   <Action Name="InvokeWorkflow" Type="Workflow">
     <XamlDefinition>&lt;Activity mc:Ignorable="sap" x:Class="FindRecordsGeneralTest" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:dsca="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:uaba="clr-namespace:Unlimited.Applications.BusinessDesignStudio.Activities;assembly=Dev2.Activities" xmlns:uf="clr-namespace:Unlimited.Framework;assembly=Dev2.Core" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
   &lt;x:Members&gt;
@@ -215,9 +215,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>NY3IVSRRqBbArBSUnl9wbBTI3jU=</DigestValue>
+        <DigestValue>7J24Neayzj81wffR/Az0RVN96Dc=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>qjOBGYK7Vs6G3yvshJzsrZVhWpQW6RHpZ0SLhgOXoKemsVpbAKzDw8/sI5HaULCPN9d9kYN0gLSVM6U8tFgLSZ/syHxdpVyIjOSHB7PfmW0PvKz06MD26xtHG7Cmch6DnsTTKR39B2dE/9piuPVGfvwkinTrXrxdNbMtIC4xdzg=</SignatureValue>
+    <SignatureValue>BR0y7q7StM6PD13Fq3xCgGeKOoOwgh99fP3odiXBu5ebaReaRnjAcxOAUCG3L5AXCtE4VNlsMYTEnUdzexowM2mVRH6MHlBXusvVIk5Tsi6KqxMXXd8Zt+Swq3P/OVZM0iKiOW3N0gEaIxYkkz2uT1FqEZ1VtIkYU6XK7bG+CJU=</SignatureValue>
   </Signature>
 </Service>
