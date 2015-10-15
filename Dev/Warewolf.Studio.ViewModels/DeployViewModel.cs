@@ -188,8 +188,8 @@ namespace Warewolf.Studio.ViewModels
                 {
                     var selected = Source.SelectedItems.Where(a => a.ResourceType != ResourceType.Folder);
                     var notfolders = selected.Select(a => a.ResourceId).ToList();
-                    _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.SelectedEnvironment.Server.EnvironmentID, notfolders);
-                    ErrorMessage = String.Format("{0} Resources Deployed Successfully.", notfolders.Count);
+                    _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.ConnectControlViewModel.SelectedConnection.EnvironmentID, notfolders);
+                    ErrorMessage = String.Format("{0} Resource{1} Deployed Successfully.", notfolders.Count,notfolders.Count==1?"":"s");
                 }
             }
             catch (Exception e)
