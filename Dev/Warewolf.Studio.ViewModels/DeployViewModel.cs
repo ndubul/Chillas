@@ -9,12 +9,13 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Deploy;
 using Dev2.Common.Interfaces.Studio.Controller;
+using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public class SingleExplorerDeployViewModel : BindableBase, IDeployViewModel
+    public class SingleExplorerDeployViewModel : BindableBase, IDeployViewModel, IUpdatesHelp
     {
         IDeploySourceExplorerViewModel _source;
         readonly IDeployStatsViewerViewModel _stats;
@@ -538,6 +539,15 @@ namespace Warewolf.Studio.ViewModels
             {
                 _errorMessage = value;
                 OnPropertyChanged(() => ErrorMessage);
+            }
+        }
+
+        public void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
             }
         }
 

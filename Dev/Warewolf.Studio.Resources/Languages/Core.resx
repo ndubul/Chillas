@@ -763,6 +763,18 @@ You need Administrator permission.</value>
   <data name="CancelTest" xml:space="preserve">
     <value>Cancel Test</value>
   </data>
+  <data name="DeploySelectDependenciesHelp" xml:space="preserve">
+    <value>DeploySelectDependenciesHelp</value>
+  </data>
+  <data name="DeployNewResourcesViewHelp" xml:space="preserve">
+    <value>DeployNewResourcesViewHelp</value>
+  </data>
+  <data name="DeployOverridesCountViewHelp" xml:space="preserve">
+    <value>DeployOverridesCountViewHelp</value>
+  </data>
+  <data name="DeployCommandHelp" xml:space="preserve">
+    <value>DeployCommandHelp</value>
+  </data>
   <data name="DatabaseSourceServerTypesHelp" xml:space="preserve">
     <value>DatabaseSourceServerTypesHelp</value>
   </data>
