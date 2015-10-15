@@ -215,6 +215,7 @@
         <Setter Property="MinHeight" Value="20" />
         <Setter Property="MinWidth" Value="20" />
         <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="IsThreeState" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">

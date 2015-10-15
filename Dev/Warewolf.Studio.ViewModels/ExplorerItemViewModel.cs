@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
+using Caliburn.Micro;
 using Dev2;
 using Dev2.Activities;
 using Dev2.Common.Interfaces;
@@ -129,7 +130,7 @@ namespace Warewolf.Studio.ViewModels
         Dictionary<ResourceType, Type> _activityNames;
         bool _canShowDependencies;
         bool _allowResourceCheck;
-        bool _isResourceChecked;
+        bool? _isResourceChecked;
 
         public ExplorerItemViewModel(IServer server, IExplorerTreeItem parent, Action<IExplorerItemViewModel> selectAction, IShellViewModel shellViewModel)
         {
@@ -698,7 +699,7 @@ namespace Warewolf.Studio.ViewModels
                 OnPropertyChanged(() => AllowResourceCheck);
             }
         }
-        public bool IsResourceChecked
+        public bool? IsResourceChecked
         {
             get
             {
@@ -706,12 +707,15 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _isResourceChecked = value;
+                if(ResourceType== ResourceType.Folder)
+                    Children.Apply(a=>a.IsResourceChecked = value);
+                else
+                _isResourceChecked = value.HasValue && ResourceType!= ResourceType.Folder && value.Value;
                 SelectAction(this);
                 OnPropertyChanged(() => IsResourceChecked);
             }
         }
-        public bool IsFolderChecked
+        public bool? IsFolderChecked
         {
             get
             {
@@ -719,8 +723,18 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
-                _isResourceChecked = value;
-
+                if (Children.Any() && Children.All(a => (a.IsResourceChecked.HasValue ) && a.IsResourceChecked.Value ))
+                {
+                    _isResourceChecked = true;
+                }
+                else if (Children.Any(a => (!a.IsResourceChecked.HasValue) || a.IsResourceChecked.Value))
+                {
+                    _isResourceChecked = null;
+                }
+                else
+                {
+                    _isResourceChecked = false;
+                }
                 OnPropertyChanged(() => IsResourceChecked);
             }
         }
