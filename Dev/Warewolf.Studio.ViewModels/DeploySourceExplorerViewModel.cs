@@ -101,9 +101,9 @@ namespace Warewolf.Studio.ViewModels
                     a.AllowResourceCheck = true;
                 });
             }
+            SelectedEnvironment.AllowResourceCheck = true;
             foreach (var env in _environments.Where(a => a.Server.EnvironmentID != environmentId))
             {
-
                 env.IsVisible = false;
             }
            OnPropertyChanged(()=>Environments);
