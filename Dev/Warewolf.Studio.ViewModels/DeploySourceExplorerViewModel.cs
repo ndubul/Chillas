@@ -120,7 +120,12 @@ namespace Warewolf.Studio.ViewModels
             }
             else
             {
-                ax.Parent.IsFolderChecked = ax.IsResourceChecked;
+                if (ax.Parent.ResourceType == ResourceType.Folder)
+                {
+
+
+                    ax.Parent.IsFolderChecked = ax.IsResourceChecked;
+                }
             }
 
             _statsArea.Calculate(SelectedItems.ToList());

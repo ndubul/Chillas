@@ -68,8 +68,13 @@ namespace Warewolf.Studio.ViewModels
             SelectDependenciesCommand = new DelegateCommand(SelectDependencies,()=>CanSelectDependencies);
             NewResourcesViewCommand = new DelegateCommand(ViewNewResources);
             OverridesViewCommand = new DelegateCommand(ViewOverrides);
-           
+            Destination.ServerStateChanged += DestinationServerStateChanged;
             ShowConflicts = false;
+        }
+
+        void DestinationServerStateChanged(object sender, IServer server)
+        {
+            RaiseCanExecuteDependencies();
         }
 
         public bool CanSelectDependencies
@@ -232,6 +237,8 @@ namespace Warewolf.Studio.ViewModels
               {
                     return false;
               }
+              if (Source.SelectedEnvironment.Server.EnvironmentID == Destination.ConnectControlViewModel.SelectedConnection.EnvironmentID)
+                  return false;
 
                 return true;
             }
