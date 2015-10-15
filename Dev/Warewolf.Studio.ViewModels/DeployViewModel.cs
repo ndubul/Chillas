@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Caliburn.Micro;
@@ -29,10 +30,12 @@ namespace Warewolf.Studio.ViewModels
         bool _deploySuccessfull;
         string _conflictNewResourceText;
         IShellViewModel _shell;
+        bool _serversAreNotTheSame;
+        IList<IExplorerTreeItem> _openViewItems;
 
         #region Implementation of IDeployViewModel
 
-        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source,IEnumerable<IExplorerTreeItem> selectedItems,IDeployStatsViewerViewModel stats,IShellViewModel shell) 
+        public SingleExplorerDeployViewModel(IDeployDestinationExplorerViewModel destination, IDeploySourceExplorerViewModel source, IEnumerable<IExplorerTreeItem> selectedItems, IDeployStatsViewerViewModel stats)
         {
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "destination", destination }, { "source", source }, { "selectedItems", selectedItems }, { "stats", stats } });
             _destination = destination;
@@ -40,15 +43,40 @@ namespace Warewolf.Studio.ViewModels
             _source = source;
             _source.SelectItemsForDeploy(selectedItems);
             _stats = stats;
-            _stats.CalculateAction = () => { ServicesCount = _stats.Services.ToString(); };
+            OpenViewItems = new List<IExplorerTreeItem>();
+            _stats.CalculateAction = () =>
+            {
+                ConnectorsCount = _stats.Connectors.ToString();
+                ServicesCount = _stats.Services.ToString();
+                SourcesCount = _stats.Sources.ToString();
+                UnknownCount = _stats.Unknown.ToString();
+                NewResourcesCount = _stats.NewResources.ToString();
+                OverridesCount = _stats.Overrides.ToString();
+                ConflictItems = _stats.Conflicts;
+                NewItems = _stats.New;
+                ShowConflicts = false;
+            };
             SourceConnectControlViewModel = _source.ConnectControlViewModel;
             DestinationConnectControlViewModel = _destination.ConnectControlViewModel;
+
+            SourceConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
+            DestinationConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
 
             DeployCommand = new DelegateCommand(Deploy);
             SelectDependenciesCommand = new DelegateCommand(SelectDependencies);
             NewResourcesViewCommand = new DelegateCommand(ViewNewResources);
             OverridesViewCommand = new DelegateCommand(ViewOverrides);
 
+            ShowConflicts = false;
+        }
+
+        public IList<IExplorerTreeItem> NewItems { get; set; }
+
+        public IList<IExplorerTreeItem> ConflictItems { get; set; }
+
+        void UpdateServerCompareChanged(object sender, Guid environmentid)
+        {
+            ServersAreNotTheSame = DestinationConnectControlViewModel.SelectedConnection.EnvironmentID != SourceConnectControlViewModel.SelectedConnection.EnvironmentID;
             ShowConflicts = false;
             ConnectorsCount = stats.Connectors.ToString();
             ServicesCount = stats.Services.ToString();
@@ -63,6 +91,21 @@ namespace Warewolf.Studio.ViewModels
         {
             ShowConflicts = true;
             ConflictNewResourceText = "List of Overrides";
+            OpenViewItems.Clear();
+            OpenViewItems = ConflictItems;
+        }
+
+        public IList<IExplorerTreeItem> OpenViewItems
+        {
+            get
+            {
+                return _openViewItems;
+            }
+            set
+            {
+                _openViewItems = value;
+                OnPropertyChanged(() => OpenViewItems);
+            }
         }
 
         public string ConflictNewResourceText
@@ -95,6 +138,8 @@ namespace Warewolf.Studio.ViewModels
         {
             ShowConflicts = true;
             ConflictNewResourceText = "List of New Resources";
+            OpenViewItems.Clear();
+            OpenViewItems = NewItems;
         }
 
         void Deploy()
@@ -104,14 +149,12 @@ namespace Warewolf.Studio.ViewModels
 
         }
 
-
-
         public void SelectDependencies()
         {
             if (Source != null && Source.SelectedEnvironment != null && Source.SelectedEnvironment.Server != null)
             {
                 var guids = Source.SelectedEnvironment.Server.QueryProxy.FetchDependenciesOnList(Source.SelectedItems.Select(a => a.ResourceId));
-                Source.SelectedEnvironment.AsList().Where(a => guids.Contains(a.ResourceId)).Apply(a=>a.IsResourceChecked=true);
+                Source.SelectedEnvironment.AsList().Where(a => guids.Contains(a.ResourceId)).Apply(a => a.IsResourceChecked = true);
             }
         }
 
@@ -155,6 +198,22 @@ namespace Warewolf.Studio.ViewModels
             get
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// check is source and destination are the same
+        /// </summary>
+        public bool ServersAreNotTheSame
+        {
+            get
+            {
+                return _serversAreNotTheSame;
+            }
+            set
+            {
+                _serversAreNotTheSame = value;
+                OnPropertyChanged(() => ServersAreNotTheSame);
             }
         }
 
@@ -285,7 +344,11 @@ namespace Warewolf.Studio.ViewModels
             }
             set
             {
+                if (!Equals(_source, value))
+                {
                 _source = value;
+                    ShowConflicts = false;
+                }
                 OnPropertyChanged("Source");
             }
         }
@@ -338,7 +401,5 @@ namespace Warewolf.Studio.ViewModels
         public IDeployStatsViewerViewModel StatsViewModel { get; set; }
 
         #endregion
-
-      
     }
 }

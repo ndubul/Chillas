@@ -10,9 +10,7 @@
 */
 
 using System;
-using System.Collections.Generic;
 using Dev2.Common.ExtMethods;
-using Dev2.Common.Interfaces;
 using Dev2.Factory;
 using Dev2.Helpers;
 using Dev2.Studio.AppResources.Comparers;
@@ -21,7 +19,6 @@ using Dev2.Studio.Core.AppResources.ExtensionMethods;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.ViewModels.Workflow;
 using Dev2.Studio.ViewModels.WorkSurface;
-using Microsoft.Practices.Prism.PubSubEvents;
 
 // ReSharper disable once CheckNamespace
 namespace Dev2.Studio.Factory
@@ -47,7 +44,7 @@ namespace Dev2.Studio.Factory
         {
             var vm = DeployViewModelFactory.GetDeployViewModel(input);
             vm.ResourceType = Common.Interfaces.Data.ResourceType.DeployViewer;
-            var context = CreateUniqueWorkSurfaceContextViewModel(vm, WorkSurfaceContext.DeployResources);
+            var context = CreateUniqueWorkSurfaceContextViewModel(vm, WorkSurfaceContext.DeployViewer);
             return context;
         }
 

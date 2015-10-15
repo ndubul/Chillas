@@ -50,13 +50,13 @@ namespace Warewolf.Studio.ViewModels
 
             SelectedConnection = server;
             var evt = aggregator.GetEvent<ServerAddedEvent>();
-            if(evt != null)
+            if (evt != null)
             {
                 evt.Subscribe(ServerAdded);
             }
             EditConnectionCommand = new DelegateCommand(AllowConnectionEdit);
             ToggleConnectionStateCommand = new DelegateCommand(ConnectOrDisconnect);
-            if(Server.UpdateRepository != null)
+            if (Server.UpdateRepository != null)
             {
                 Server.UpdateRepository.ServerSaved += UpdateRepositoryOnServerSaved;
             }
@@ -186,10 +186,10 @@ namespace Warewolf.Studio.ViewModels
                         }
                     }
                     OnPropertyChanged(() => SelectedConnection);
-                if(SelectedEnvironmentChanged!=null)
-                {
-                    SelectedEnvironmentChanged(this,value.EnvironmentID);
-                }
+                    if (SelectedEnvironmentChanged != null)
+                    {
+                        SelectedEnvironmentChanged(this, value.EnvironmentID);
+                    }
                 }
             }
         }

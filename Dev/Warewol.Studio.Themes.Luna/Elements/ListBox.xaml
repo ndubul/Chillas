@@ -480,7 +480,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="Transparent" />
         <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="MinHeight" Value="20" />
         <Setter Property="Padding" Value="6,2" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

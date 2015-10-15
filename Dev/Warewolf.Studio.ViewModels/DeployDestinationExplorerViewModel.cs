@@ -116,9 +116,10 @@ namespace Warewolf.Studio.ViewModels
             }
             else
             {
-                ax.Parent.IsFolderChecked = ax.IsResourceChecked;
+                var hasChildrenChecked = ax.Parent.Children.Count(a => a.IsResourceChecked);
+                ax.Parent.IsFolderChecked = hasChildrenChecked >= 1;
             }
-           
+
             _statsArea.Calculate(SelectedItems.ToList());
         }
 

@@ -25,6 +25,7 @@ namespace Warewolf.Studio.Core
             const string pathname = "/Warewolf.Studio.Themes.Luna;component/Images.xaml";
             ResourceDictionary dict = Application.LoadComponent(new Uri(pathname, System.UriKind.Relative)) as ResourceDictionary;           
             ResourceType resourceType;
+            Brush brush = new SolidColorBrush(Color.FromArgb(255, 51, 51, 51));
             if (value != null && Enum.TryParse(value.ToString(), out resourceType))
             {
                 switch (resourceType)
@@ -52,18 +53,18 @@ namespace Warewolf.Studio.Core
                     case ResourceType.Server:
                         return dict[CustomMenuIcons.Server] as DrawingImage;
                     case ResourceType.StartPage:
-                        var imageSource = ImageAwesome.CreateImageSource(FontAwesomeIcon.Home, Brushes.Black);
+                        var imageSource = ImageAwesome.CreateImageSource(FontAwesomeIcon.Home, brush);
                         return imageSource;
                     case ResourceType.OauthSource:
                         return Application.Current.Resources["AddDropBoxBlackLogo"];
                     case ResourceType.Scheduler:
-                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.History, Brushes.Black);
+                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.History, brush);
                     case ResourceType.Settings:
-                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.Cogs, Brushes.Black);
+                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.Cogs, brush);
                     case ResourceType.DependencyViewer:
-                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.Sitemap, Brushes.Black);
+                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.Sitemap, brush);
                     case ResourceType.DeployViewer:
-                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.PaperPlane, Brushes.Black);
+                        return ImageAwesome.CreateImageSource(FontAwesomeIcon.PaperPlane, brush);
                     default:
                         return dict[CustomMenuIcons.Folder] as DrawingImage;
                 }
