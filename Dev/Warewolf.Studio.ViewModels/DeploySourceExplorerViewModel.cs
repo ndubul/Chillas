@@ -12,6 +12,7 @@ namespace Warewolf.Studio.ViewModels
 {
     public class DeploySourceExplorerViewModel :ExplorerViewModel, IDeploySourceExplorerViewModel {
         readonly IDeployStatsViewerViewModel _statsArea;
+        IEnumerable<IExplorerTreeItem> _preselected;
 
         #region Implementation of IDeployDestinationExplorerViewModel
 
@@ -54,6 +55,11 @@ namespace Warewolf.Studio.ViewModels
             if(environmentViewModel != null)
             {
                 UpdateItemForDeploy( environmentViewModel.Server.EnvironmentID);
+            }
+            if(Preselected!=null && Preselected.Any())
+            {
+                SelectItemsForDeploy(Preselected);
+                Preselected = null;
             }
    
         }
@@ -133,6 +139,17 @@ namespace Warewolf.Studio.ViewModels
                 }
             }
         }
+        public IEnumerable<IExplorerTreeItem> Preselected
+        {
+            get
+            {
+                return _preselected;    
+            }
+            set
+            {
+                _preselected = value;
+            }
+        }
 
         void Select(IExplorerTreeItem explorerTreeItem)
         {
@@ -153,7 +170,7 @@ namespace Warewolf.Studio.ViewModels
         /// <param name="selectedItems"></param>
         public void SelectItemsForDeploy(IEnumerable<IExplorerTreeItem> selectedItems)
         {
-            SelectedEnvironment.AsList().Apply(a=>a.IsSelected=selectedItems.Contains(a));
+            SelectedEnvironment.AsList().Apply(a=>a.IsResourceChecked=selectedItems.Contains(a));
         }
 
         #endregion

@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using Caliburn.Micro;
 using Dev2;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Deploy;
 using Dev2.Common.Interfaces.Studio.Controller;
-using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
-using Warewolf.Studio.Core.Popup;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -39,6 +36,8 @@ namespace Warewolf.Studio.ViewModels
         IList<IExplorerTreeItem> _openViewItems;
         bool _canSelectDependencies;
         readonly IPopupController _popupController;
+        IEnumerable<IExplorerTreeItem> _preselected;
+        string _errorMessage;
 
         #region Implementation of IDeployViewModel
 
@@ -49,7 +48,8 @@ namespace Warewolf.Studio.ViewModels
             _popupController = popupController;
             
             _source = source;
-            _source.SelectItemsForDeploy(selectedItems);
+            _errorMessage = "";
+            _source.Preselected = selectedItems;
             _stats = stats;
             _shell = shell;
             OpenViewItems = new List<IExplorerTreeItem>();
@@ -167,24 +167,35 @@ namespace Warewolf.Studio.ViewModels
 
         void Deploy()
         {
-            bool canDeploy = false;
-            if (ConflictItems.Count >= 1)
+            try
             {
-                var msgResult = _popupController.ShowDeployConflict(ConflictItems.Count);
-                if (msgResult == MessageBoxResult.Yes)
+
+                ErrorMessage = "";
+                bool canDeploy = false;
+                if (ConflictItems.Count >= 1)
                 {
-                    canDeploy = true;
+                    var msgResult = _popupController.ShowDeployConflict(ConflictItems.Count);
+                    if (msgResult == MessageBoxResult.Yes || msgResult == MessageBoxResult.OK)
+                    {
+                        canDeploy = true;
+                    }
+                }
+                if (!canDeploy)
+                {
+                    ViewOverrides();
+                }
+                else
+                {
+                    var selected = Source.SelectedItems.Where(a => a.ResourceType != ResourceType.Folder);
+                    var notfolders = selected.Select(a => a.ResourceId).ToList();
+                    _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.SelectedEnvironment.Server.EnvironmentID, notfolders);
+                    ErrorMessage = String.Format("{0} Resources Deployed Successfully.", notfolders.Count);
                 }
             }
-            if (!canDeploy)
+            catch (Exception e)
             {
-                ViewOverrides();
-            }
-            else
-            {
-            var selected = Source.SelectedItems.Where(a => a.ResourceType != ResourceType.Folder);
-            var notfolders = selected.Select(a => a.ResourceId).ToList();
-            _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.SelectedEnvironment.Server.EnvironmentID, notfolders);
+
+                ErrorMessage = "Deploy error." + e.Message;
             }
         }
 
@@ -480,6 +491,18 @@ namespace Warewolf.Studio.ViewModels
         ///     Static steps of how to deploy
         /// </summary>
         public IDeployStatsViewerViewModel StatsViewModel { get; set; }
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(() => ErrorMessage);
+            }
+        }
 
         #endregion
     }

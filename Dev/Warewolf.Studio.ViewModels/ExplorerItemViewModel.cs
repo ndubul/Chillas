@@ -142,6 +142,7 @@ namespace Warewolf.Studio.ViewModels
                 parent.AreVersionsVisible = true;
                 parent.ResourceName = output.DisplayName;
             });
+            DeployCommand = new DelegateCommand<IExplorerItemViewModel>(a=>ShellViewModel.AddDeploySurface(AsList().Union(new []{this})));
             _canShowVersions = true;
             Parent = parent;
             VerifyArgument.AreNotNull(new Dictionary<string, object> { { "server", server }, });
