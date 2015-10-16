@@ -268,7 +268,7 @@
                                      BorderThickness="0"
                                      Visibility="{Binding ShowNewItemsList, Converter={StaticResource BoolToVisConverter}}"
                                      ItemContainerStyle="{StaticResource DeployListBoxItemStyle}"
-                                     ItemsSource="{Binding OpenViewItems}" >
+                                     ItemsSource="{Binding NewItems}" >
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Vertical">
