@@ -294,6 +294,7 @@ namespace Warewolf.Studio.ViewModels
                 _environments.Remove(environmentModel);
             }
             OnPropertyChanged(()=>Environments);
+            AfterLoad(server.EnvironmentID);
         }
 
 		protected async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment,bool isDeploy = false)
