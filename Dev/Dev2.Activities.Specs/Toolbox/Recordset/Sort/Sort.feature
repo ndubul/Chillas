@@ -264,3 +264,20 @@ Scenario Outline: Sort recordset
 	| input                          | direction | result             |
 	| [[rs(1).a]]                    | Forward   | Mongolia,Zambia    |
 	| [[rs([[int]]).a]], [[int]] = 2 | Forward   | America, Australia |
+
+
+
+Scenario Outline: Sort recordset using complex types
+	Given I have the following recordset to sort
+	| rs            | value     |
+	| rec().rs(1).a | Zambia    |
+	| rg().rec(1).a | Mangolia  |
+	| rj().rs(2).a  | America   |
+	| rc().rec(2).a | Australia |
+	And I sort a record "<input>"
+	And my sort order is "<direction>"
+	When the sort records tool is executed
+	Then the execution has "No" error
+	Examples: 
+	| input             | direction | result          |
+	| [[rec().rs(1).a]] | Forward   | Mongolia,Zambia |

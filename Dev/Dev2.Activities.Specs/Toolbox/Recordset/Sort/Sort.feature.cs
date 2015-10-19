@@ -918,6 +918,53 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.SortRecordset("[[rs([[int]]).a]], [[int]] = 2", "Forward", "America, Australia", ((string[])(null)));
         }
+        
+        public virtual void SortRecordsetUsingComplexTypes(string input, string direction, string result, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sort recordset using complex types", exampleTags);
+#line 270
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+                        "rs",
+                        "value"});
+            table29.AddRow(new string[] {
+                        "rec().rs(1).a",
+                        "Zambia"});
+            table29.AddRow(new string[] {
+                        "rg().rec(1).a",
+                        "Mangolia"});
+            table29.AddRow(new string[] {
+                        "rj().rs(2).a",
+                        "America"});
+            table29.AddRow(new string[] {
+                        "rc().rec(2).a",
+                        "Australia"});
+#line 271
+ testRunner.Given("I have the following recordset to sort", ((string)(null)), table29, "Given ");
+#line 277
+ testRunner.And(string.Format("I sort a record \"{0}\"", input), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 278
+ testRunner.And(string.Format("my sort order is \"{0}\"", direction), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 279
+ testRunner.When("the sort records tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 280
+ testRunner.Then("the execution has \"No\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sort recordset using complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Sort")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec().rs(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "[[rec().rs(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:direction", "Forward")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "Mongolia,Zambia")]
+        public virtual void SortRecordsetUsingComplexTypes_Rec_Rs1_A()
+        {
+            this.SortRecordsetUsingComplexTypes("[[rec().rs(1).a]]", "Forward", "Mongolia,Zambia", ((string[])(null)));
+        }
     }
 }
 #pragma warning restore

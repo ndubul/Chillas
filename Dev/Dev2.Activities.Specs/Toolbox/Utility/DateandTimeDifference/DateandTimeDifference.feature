@@ -107,7 +107,7 @@ Scenario: Calculate the number of split seconds between two given dates
 	| Input 1    | Input 2    | Input Format | Output In  |
 	| 2013-11-29 | 2014-11-01 | yyyy-mm-dd   | Split Secs |
 	And the debug output as 
-	|                           |
+	|                          |
 	| [[result]] = 29116800000 |
 
 Scenario: Calculate the number of weeks between two given dates
@@ -498,3 +498,18 @@ Scenario: Variables that do not exist
 	And the debug output as 
 	|            |                                            |
 	| [[result]] | The expression [[a]] has no value assigned |
+
+
+Scenario Outline: Calculate the number of months using complex types
+	Given I have a first date '<input1>' equals '<Val1>' 
+	And I have a second date '<input2>' equals '<Val2>' 
+	And the date format as '<inputformat>' equals '<Val3>'
+	And I selected output in "months" 	
+	When the datetime difference tool is executed
+	Then the difference should be "7"
+	And the execution has "NO" error
+	And the result variable '<res>' will be '<result>'
+Examples: 
+	| input1              | Val1       | input2                 | Val2       | inputformat          | Val3       | res                              | result            |
+	| [[rec().row().set]] | 30/07/2015 | [[rs(*).date().value]] | 01/01/2016 | [[rj(1).date().val]] | dd/mm/yyyy | [[rg([[int]]).set]], [[int]] = 1 | [[rg(1).set]] = 7 |
+	

@@ -185,4 +185,23 @@ Scenario Outline: Write file at location with invalid directories
 		| UNC with Overwrite    | [[variable]] |                                                        | Overwrite  | [[var]]       | warewolf rules | ""                | ""       | [[result]] | Error | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 		| FTP with Overwrite    | 878787       | 878787                                                 | Overwrite  | [[var]]       | warewolf rules | ""                | ""       | [[result]] | Error | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 
-		
+
+Scenario Outline: Write file at location using complex types
+	Given I have a source path '<source>' with value '<sourceLocation>' 
+	And source credentials as '<username>' and '<password>'	
+	And Method is '<method>'
+	And input contents as '<content>' with value '<values>'    
+	And result as '<resultVar>'
+    When the write file tool is executed
+	Then the result variable '<resultVar>' will be '<result>'
+	And the execution has "<errorOccured>" error
+	And the debug inputs as
+         | Output Path                 | Method   | Username   | Password | File Contents |
+         | <source> = <sourceLocation> | <method> | <username> | String   | <content>     |
+	And the debug output as
+		|                        |
+		| <resultVar> = <result> |
+		Examples: 
+		| Name                 | source                      | sourceLocation           | method    | content | values         | username | password | resultVar  | result  | errorOccured |
+		| Local with Overwrite | [[file().resources().path]] | c:\Temp\filetowrite0.txt | Overwrite | [[var]] | warewolf rules | ""       | ""       | [[result]] | Success | NO           |
+				

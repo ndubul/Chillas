@@ -328,10 +328,10 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Toolbox\FileAndFolder\Create\CreateSteps.cs" />
-    <Compile Include="Toolbox\FileAndFolder\Delete\Delete.feature.cs">
-      <DependentUpon>Delete.feature</DependentUpon>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Toolbox\FileAndFolder\Delete\Delete1.feature.cs">
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Delete.feature</DependentUpon>
     </Compile>
     <Compile Include="Toolbox\FileAndFolder\Delete\DeleteSteps.cs" />
     <Compile Include="Toolbox\FileAndFolder\Move\Move.feature.cs">
@@ -566,6 +566,7 @@
     </None>
     <None Include="Toolbox\FileAndFolder\Delete\Delete.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Delete1.feature.cs</LastGenOutput>
     </None>
     <None Include="Toolbox\FileAndFolder\Move\Move.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -284,6 +284,23 @@ Scenario: Deploying to an Older server version
 	 When I click "OK"
 	 Then deploy is successfull
 
+#New layout
+Scenario: Design layout
+	Given I have deploy tab opened
+	Then the Source Server "Connect Control" is "visible"
+	And the Destination Server "Connect Control" is "visible"
+	And the Source Server "Explorer" is "visible"
+	And the Destination Server "Stats Calculator" is "visible"
+	And the "Stats Calculator" has an option to "Select All Dependencies"
+	And "Select All Dependencies" is "Disabled"
+	And the "Stats Calculator" has an option to "Deploy"
+	And "Deploy" is "Disabled"
+	And "Context Menu" is "Disabled"
+
+
+
+
+
 ###REQUIREMENTS Check to see what needs to be included
 
 

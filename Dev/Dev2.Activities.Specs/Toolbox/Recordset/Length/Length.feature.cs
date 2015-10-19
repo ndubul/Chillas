@@ -657,6 +657,69 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.EnsureRecordsetLengthInputsWorkAsExpected("[[c]]", "\"\"", "No", "Scalar not allowed", "[[d]]", "Failure", ((string[])(null)));
         }
+        
+        public virtual void EnsureTheComplexTypeLengthInputsWorkAsExpected(string variable, string val, string error, string message, string result, string value, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure the Complex type length inputs work as expected", exampleTags);
+#line 183
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                        "rs",
+                        ""});
+            table22.AddRow(new string[] {
+                        "rs().row().set",
+                        "1"});
+            table22.AddRow(new string[] {
+                        "rs().row().set",
+                        "2"});
+            table22.AddRow(new string[] {
+                        "rs().row().set",
+                        "3"});
+            table22.AddRow(new string[] {
+                        "rs().row().set",
+                        "4"});
+            table22.AddRow(new string[] {
+                        "rs().row().set",
+                        "5"});
+            table22.AddRow(new string[] {
+                        "rs().row().set",
+                        "6"});
+            table22.AddRow(new string[] {
+                        "rs().row().set",
+                        "7"});
+#line 184
+ testRunner.Given("I get  the length from a object that looks like with this shape", ((string)(null)), table22, "Given ");
+#line 193
+ testRunner.And(string.Format("get length on record \"{0}\"", variable), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 194
+ testRunner.When("the length tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 195
+ testRunner.Then(string.Format("the length result should be \"{0}\"", val), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 196
+ testRunner.And(string.Format("the result variable \'{0}\' will be \"{1}\"", result, value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 197
+ testRunner.And("the execution has \"<Error>\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 198
+ testRunner.And(string.Format("the debug inputs as \"{0}\"", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure the Complex type length inputs work as expected")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Length")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rs().row().set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variable", "[[rs().row().set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:error", "No")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:message", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rec(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "1")]
+        public virtual void EnsureTheComplexTypeLengthInputsWorkAsExpected_Rs_Row_Set()
+        {
+            this.EnsureTheComplexTypeLengthInputsWorkAsExpected("[[rs().row().set]]", "1", "No", "", "[[rec(1).a]]", "1", ((string[])(null)));
+        }
     }
 }
 #pragma warning restore

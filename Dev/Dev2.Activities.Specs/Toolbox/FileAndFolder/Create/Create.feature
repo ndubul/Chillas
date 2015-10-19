@@ -130,3 +130,23 @@ Scenario Outline: Create file at location with invalid directories
 		| 2  | Local | [[var]]      |                     | False    | dev2     | Q/ulw&]  | [[result]] | Error  | AN           | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 		| 3  | Local | 8751         | 8751                | False    | dev2     | Q/ulw&]  | [[result]] | Error  | AN           | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 		
+
+#Complex Type
+Scenario Outline: Create file at location using complex types
+	Given I have a destination path '<destination>' with value '<destinationLocation>'
+	And overwrite is '<selected>'
+	And destination credentials as '<username>' and '<password>'
+	And result as '<resultVar>'
+	When the create file tool is executed
+	Then the result variable '<resultVar>' will be '<result>'
+	And the execution has "<errorOccured>" error
+	And the debug inputs as
+         | File or Folder                        | Overwrite  | Username   | Password |
+         | <destination> = <destinationLocation> | <selected> | <username> | String   |
+	And the debug output as
+		|                        |
+		| <resultVar> = <result> |
+	Examples: 
+		| No | Name  | destination                 | destinationLocation | selected | username | password | resultVar  | result  | errorOccured |
+		| 1  | Local | [[file().resources().path]] | c:\myfile.txt       | True     | ""       | ""       | [[result]] | Success | NO           |
+		

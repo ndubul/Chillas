@@ -449,6 +449,32 @@ Examples:
 | InRange        |                                |       | [[rec([[int]]).a]] = 3,[[int]] = 3 | " "                                | An    | The To field cannot be left empty                        |
 
 	
+
+#Complex Types
+Scenario Outline: Execute a foreach over a tool using complex types
+	Given There is a recordset in the datalist with this shape
+	| rs                     | value |
+	| [[rs().field().value]] | 1     |
+	| [[rs().field().value]] | 2     |
+	| [[rs().field().value]] | 3     |	
+	And I have selected the foreach type as "<Type>" and used "<variable>"	
+	And the underlying dropped activity is a(n) "Tool"
+	When the foreach tool is executed
+	Then the foreach executes <value> times
+	And the execution has "<Error>" error
+	And the debug outputs as "<Message>"
+Examples: 
+| Type           | Variable           | value | from                 | To                   | Error | Message                                                  |
+| InRecordset    | [[rs(*).field(*)]] |       |                      |                      | An    | Number of Executes must be a whole number from 1 onwards |
+| InRecordset    | [[rs().field()]]   | 5     |                      |                      | No    |                                                          |
+| InCSV          | [[rs(*).field(*)]] |       |                      |                      | An    | Number of Executes must be a whole number from 1 onwards |
+| InCSV          | [[rs().field()]]   | 5     |                      |                      | No    |                                                          |
+| InRange        |                    |       | [[rs(*).field(*)]]   | [[rs(*).field(*)]]   | An    | Number of Executes must be a whole number from 1 onwards |
+| InRange        |                    |       | [[rs().field()]] = 1 | [[rs().field()]] = 2 | No    |                                                          |
+| NumOfExecution | [[rs(*).field(*)]] |       |                      |                      | An    | Number of Executes must be a whole number from 1 onwards |
+| NumOfExecution | [[rs().field()]]   | 5     |                      |                      | No    |                                                          |
+
+
 	#Not Sure of below
 
 #Scenario: Execute a foreach over an activity with number of executions equals +1 invalid
