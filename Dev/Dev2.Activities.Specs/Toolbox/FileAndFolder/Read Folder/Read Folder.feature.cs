@@ -1975,6 +1975,69 @@ this.ScenarioSetup(scenarioInfo);
             this.ReadFolderFileAtLocationWithInvalidDirectories("3", "FTP", "[[variable]]", "\"\"", "Files", "\"\"", "\"\"", "[[result]]", "String", "Invalid Path. Please ensure that the path provided is an absolute path, if you in" +
                     "tend to access the local file system.", ((string[])(null)));
         }
+        
+        public virtual void ReadFolderFileAtLocationUsingComplexTypes(string no, string name, string source, string sourceLocation, string read, string username, string password, string resultVar, string result, string errorOccured, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Read Folder file at location using complex types", exampleTags);
+#line 155
+this.ScenarioSetup(scenarioInfo);
+#line 156
+ testRunner.Given(string.Format("I have a source path \'{0}\' with value \'{1}\'", source, sourceLocation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 157
+ testRunner.And(string.Format("source credentials as \'{0}\' and \'{1}\'", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 158
+ testRunner.And(string.Format("Read is \'{0}\'", read), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 159
+ testRunner.And(string.Format("result as \'{0}\'", resultVar), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 160
+    testRunner.When("the read folder file tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 161
+ testRunner.Then(string.Format("the result variable \'{0}\' will be \'{1}\'", resultVar, result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 162
+ testRunner.And(string.Format("the execution has \"{0}\" error", errorOccured), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Input Path",
+                        "Read",
+                        "Username",
+                        "Password"});
+            table7.AddRow(new string[] {
+                        string.Format("{0} = {1}", source, sourceLocation),
+                        string.Format("{0}", read),
+                        string.Format("{0}", username),
+                        "String"});
+#line 163
+ testRunner.And("the debug inputs as", ((string)(null)), table7, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table8.AddRow(new string[] {
+                        string.Format("{0} = {1}", resultVar, result)});
+#line 166
+ testRunner.And("the debug output as", ((string)(null)), table8, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Read Folder file at location using complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Read Folder")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("fileFeature")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Name", "Local Files")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:source", "[[file().resources().path]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:sourceLocation", "c:\\")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:read", "Files")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:username", "\"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:password", "\"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:resultVar", "[[result]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "String")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorOccured", "NO")]
+        public virtual void ReadFolderFileAtLocationUsingComplexTypes_1()
+        {
+            this.ReadFolderFileAtLocationUsingComplexTypes("1", "Local Files", "[[file().resources().path]]", "c:\\", "Files", "\"\"", "\"\"", "[[result]]", "String", "NO", ((string[])(null)));
+        }
     }
 }
 #pragma warning restore

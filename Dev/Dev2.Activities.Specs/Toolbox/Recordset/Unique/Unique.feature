@@ -14,7 +14,7 @@ Scenario: Find unique records in a recordset
 	And The result variable is "[[rec().unique]]"
 	When the unique tool is executed	
 	Then the unique result will be
-	|               | unique |
+	|              | unique |
 	| rec().unique | 10     |
 	| rec().unique | 20     |
 	| rec().unique | 30     |
@@ -25,8 +25,8 @@ Scenario: Find unique records in a recordset
 	And the debug output as 
 	| # |                        |
 	| 1 | [[rec(1).unique]] = 10 |
-	|   | [[rec(2).unique]] = 20 |
-	|   | [[rec(3).unique]] = 30 |
+	| 2 | [[rec(2).unique]] = 20 |
+	| 3 | [[rec(3).unique]] = 30 |
 
 Scenario: Find unique records in an empty recordset
 	Given I have the following empty recordset
@@ -297,3 +297,27 @@ Scenario Outline: Ensure recordsets with scalar values work
 	Examples: 
 	| InField                        | Return                          |
 	| [[rec([[int]].set),[[int]] = 4 | [[rs([[int]]).row]],[[int]] = 2 |
+
+#Complex Types
+Scenario: Find unique records in a complex type
+	Given I have the following duplicated recordset
+	| rs             | val |
+	| rs().row().set | 10  |
+	| rs().row().set | 20  |
+	| rs().row().set | 20  |
+	| rs().row().set | 30  |
+	And I want to find unique in field "[[rs().row]]" with the return field "[[rs().row]]"
+	And The result variable is "[[rec().unique]]"
+	When the unique tool is executed	
+	Then the unique result will be
+	|                    | unique |
+	| rec().unique().set | 10     |
+	| rec().unique().set | 20     |
+	| rec().unique().set | 30     |
+	And the execution has "NO" error
+	And the debug inputs as  
+	| #           |                          | Return Fields        |
+	| In Field(s) | [[rs(4).row().set]] = 30 | [[rs().row().set]] = |	
+	And the debug output as 
+	| # |                              |
+	| 1 | [[rec(1).unique().set]] = 10 |

@@ -562,7 +562,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureVariablesOfDifferentTypesProduceDesiredResults(string count, string val, string error, string message, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "Ignore"};
+                    "ignore"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -769,6 +769,62 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureRecordsetResultAreCorrect_Variant3()
         {
             this.EnsureRecordsetResultAreCorrect("[[rec(1).a]]", "[[rec(1).a]] = 3", ((string[])(null)));
+        }
+        
+        public virtual void EnsureTheCorrectValuesAreReturnedUsingComplexTypes(string debug, string output, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure the correct values are returned using complex types", exampleTags);
+#line 232
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+                        "complex types",
+                        ""});
+            table28.AddRow(new string[] {
+                        "rs().row().set",
+                        "1"});
+            table28.AddRow(new string[] {
+                        "rs().row().set",
+                        "2"});
+            table28.AddRow(new string[] {
+                        "rs().row().set",
+                        "3"});
+#line 233
+ testRunner.Given("I have a complex type with this shape", ((string)(null)), table28, "Given ");
+#line 238
+ testRunner.And("count on record \"[[rs().row()]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 239
+ testRunner.When("the count tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 240
+ testRunner.Then("the result count should be 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 241
+ testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Recordset"});
+            table29.AddRow(new string[] {
+                        "[[rs().row(1).set]] = 1"});
+            table29.AddRow(new string[] {
+                        "[[rs().row(2).set]] = 2"});
+            table29.AddRow(new string[] {
+                        "[[rs().row(3).set]] = 3"});
+#line 242
+ testRunner.And("the debug inputs as", ((string)(null)), table29, "And ");
+#line 247
+ testRunner.And(string.Format("the debug output as \"{0}\" with \"{1}\"", debug, output), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure the correct values are returned using complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Count")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Debug", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "[[rec(1).a]] = 3")]
+        public virtual void EnsureTheCorrectValuesAreReturnedUsingComplexTypes_Rec_A()
+        {
+            this.EnsureTheCorrectValuesAreReturnedUsingComplexTypes("[[rec().a]]", "[[rec(1).a]] = 3", ((string[])(null)));
         }
     }
 }

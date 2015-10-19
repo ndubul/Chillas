@@ -173,5 +173,5 @@ Scenario Outline: Replace values using complex types
 	And the execution has "NO" error
 Examples: 
 | No | var                        | value    | characters | replacement | count | result    |
-| 1  | [[Member().Details().Title | Ms.Wolfe | Ms.Wolfe   | Mrs.Blake   | 5     | Mrs.Blake |
+| 1  | [[Member().Details().Title | Ms.Wolfe | Ms.Wolfe   | Mrs.Blake   | 1     | Mrs.Blake |
 

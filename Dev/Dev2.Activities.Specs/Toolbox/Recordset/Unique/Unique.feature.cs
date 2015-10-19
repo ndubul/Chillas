@@ -138,10 +138,10 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "[[rec(1).unique]] = 10"});
             table4.AddRow(new string[] {
-                        "",
+                        "2",
                         "[[rec(2).unique]] = 20"});
             table4.AddRow(new string[] {
-                        "",
+                        "3",
                         "[[rec(3).unique]] = 30"});
 #line 25
  testRunner.And("the debug output as", ((string)(null)), table4, "And ");
@@ -1102,6 +1102,80 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void EnsureRecordsetsWithScalarValuesWork_RecInt_SetInt4()
         {
             this.EnsureRecordsetsWithScalarValuesWork("[[rec([[int]].set),[[int]] = 4", "[[rs([[int]]).row]],[[int]] = 2", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Find unique records in a complex type")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Unique")]
+        public virtual void FindUniqueRecordsInAComplexType()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find unique records in a complex type", ((string[])(null)));
+#line 302
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
+                        "rs",
+                        "val"});
+            table50.AddRow(new string[] {
+                        "rs().row().set",
+                        "10"});
+            table50.AddRow(new string[] {
+                        "rs().row().set",
+                        "20"});
+            table50.AddRow(new string[] {
+                        "rs().row().set",
+                        "20"});
+            table50.AddRow(new string[] {
+                        "rs().row().set",
+                        "30"});
+#line 303
+ testRunner.Given("I have the following duplicated recordset", ((string)(null)), table50, "Given ");
+#line 309
+ testRunner.And("I want to find unique in field \"[[rs().row]]\" with the return field \"[[rs().row]]" +
+                    "\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 310
+ testRunner.And("The result variable is \"[[rec().unique]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 311
+ testRunner.When("the unique tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
+                        "",
+                        "unique"});
+            table51.AddRow(new string[] {
+                        "rec().unique().set",
+                        "10"});
+            table51.AddRow(new string[] {
+                        "rec().unique().set",
+                        "20"});
+            table51.AddRow(new string[] {
+                        "rec().unique().set",
+                        "30"});
+#line 312
+ testRunner.Then("the unique result will be", ((string)(null)), table51, "Then ");
+#line 317
+ testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table52 = new TechTalk.SpecFlow.Table(new string[] {
+                        "#",
+                        "",
+                        "Return Fields"});
+            table52.AddRow(new string[] {
+                        "In Field(s)",
+                        "[[rs(4).row().set]] = 30",
+                        "[[rs().row().set]] ="});
+#line 318
+ testRunner.And("the debug inputs as", ((string)(null)), table52, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table53 = new TechTalk.SpecFlow.Table(new string[] {
+                        "#",
+                        ""});
+            table53.AddRow(new string[] {
+                        "1",
+                        "[[rec(1).unique().set]] = 10"});
+#line 321
+ testRunner.And("the debug output as", ((string)(null)), table53, "And ");
+#line hidden
+            this.ScenarioCleanup();
         }
     }
 }

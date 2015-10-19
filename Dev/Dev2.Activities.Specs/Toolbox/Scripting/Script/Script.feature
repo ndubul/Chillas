@@ -369,3 +369,19 @@ Scenario Outline:Execute Javascript using recordsets
 	| [[a]]                         | return "a message"; | [[rs().a]]                  | a message |
 	| [[rec(*).a]]                  | return "a message"; | [[rs(*).a]]                 | a message |
 	| [[rec([[int]]).a]],[[int]] =1 | return "a message"; | [[rs([[int]]).a]],[[int]]=1 | a message |
+
+
+Scenario Outline:Execute Javascript using complex types
+	Given I have the script to execute '<script>' equals to '<val>'
+	And I have selected the language as "JavaScript"
+	When I execute the script tool
+	Then the execution has "No" error
+	And the debug inputs as  
+	| Language   | Script   |
+	| JavaScript | <script> |
+	And the debug output as 
+	|                        |
+	| <result> = <ResultVal> |
+	Examples: 
+	| Script                | val                 | result               | ResultVal |
+	| [[rec().row().value]] | return "a message"; | [[rs().row().value]] | a message |

@@ -367,10 +367,10 @@ Scenario Outline: Calculate using Recordset () input in an agregate function lik
 	And the execution has "NO" error
 	Then the calculate "<result>" should be "<value>"
 	Examples: 
-		| No | fx                               | result      | value |
-		| 1  | SUM([[var().int]])               | [[rs().a]]  | 3     |
-		| 2  | SUM([[var().int]],[[var().int]]) | [[rs(*).a]] | 6     |
-		|    | SUM([[var().int]],[[var().int]]) | [[rs(4).a]] | 6     |
+		| No | fx                                             | result      | value |
+		| 1  | SUM([[var([[val]]).int]])                      | [[rs().a]]  | 3     |
+		| 2  | SUM([[var([[val]]).int]],[[var([[val]]).int]]) | [[rs(*).a]] | 6     |
+		| 3  | SUM([[var([[val]]).int]],[[var([[val]]).int]]) | [[rs(4).a]] | 6     |
 
 
 Scenario: Variable that does not exist
@@ -379,11 +379,26 @@ Scenario: Variable that does not exist
 	And I have the formula "Sum([[a]],[[b]],[[c]])"
 	When the calculate tool is executed
 	Then the execution has "AN" error
-	
-
 	And the debug inputs as  
 	| fx =                             |
 	| SUM([[var().int]]) = SUM(3) |	
 		And the debug output as 
 	|                |
 	| [[rs().a]] = 3 |
+
+
+
+Scenario Outline: Calculate using complex types () input in an agregate function like SUM
+	Given I have a calculate variable "[[var().int().value]]" equal to 
+	| var().int().value |
+	| 1                 |
+	| 2                 |
+	| 3                 |
+	And I have the formula "<fx>"
+	When the calculate tool is executed
+	Then the calculate result should be "3"
+	And the execution has "NO" error
+	Then the calculate "<result>" should be "<value>"
+	Examples: 
+	| No | fx                      | result     | value |
+	| 1  | SUM([[var().().value]]) | [[rs().a]] | 3     |

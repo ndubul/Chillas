@@ -268,7 +268,7 @@
                                      BorderThickness="0"
                                      Visibility="{Binding ShowNewItemsList, Converter={StaticResource BoolToVisConverter}}"
                                      ItemContainerStyle="{StaticResource DeployListBoxItemStyle}"
-                                     ItemsSource="{Binding OpenViewItems}" >
+                                     ItemsSource="{Binding NewItems}" >
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Vertical">
@@ -289,17 +289,23 @@
                                 </ListBox.ItemsPanel>
                             </ListBox>
 
-                            <Grid Width="{Binding ElementName=ConflictItemsList, Path=ActualWidth}"
+                            <Grid Grid.IsSharedSizeScope="True">
+                                <!-- Look HERE -->
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid Width="{Binding ElementName=ConflictItemsList, Path=ActualWidth}"
                                   Margin="0,5,0,5"
                                   Visibility="{Binding ShowConflictItemsList, Converter={StaticResource BoolToVisConverter}}">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50*"/>
-                                    <ColumnDefinition Width="15"/>
-                                    <ColumnDefinition Width="50*"/>
+                                    <ColumnDefinition SharedSizeGroup="SourceColumn"/>
+                                    <ColumnDefinition SharedSizeGroup="SeperatedColumn"/>
+                                    <ColumnDefinition SharedSizeGroup="DestinationColumn"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Foreground="White" 
-                                           HorizontalAlignment="Center"
-                                           Margin="3,-5,0,0"
+                                           HorizontalAlignment="Left"
+                                           Margin="20,-5,0,0"
                                            Style="{StaticResource TextBlockNoPaddingStyle}"
                                            Text="Source"
                                            TextDecorations="Underline"
@@ -312,8 +318,8 @@
                                            FontSize="16"/>
                                 <TextBlock Foreground="White" 
                                            Grid.Column="2"
-                                           HorizontalAlignment="Center"
-                                           Margin="3,-5,0,0"
+                                           HorizontalAlignment="Left"
+                                           Margin="22,-5,0,0"
                                            Style="{StaticResource TextBlockNoPaddingStyle}"
                                            Text="Destination"
                                            TextDecorations="Underline"
@@ -321,6 +327,7 @@
                                 </TextBlock>
                             </Grid>
                             <ListBox x:Name="ConflictItemsList" 
+                                     Grid.Row="1"
                                      Style="{StaticResource DeployListBoxStyle}"
                                      BorderThickness="0"
                                      Visibility="{Binding ShowConflictItemsList, Converter={StaticResource BoolToVisConverter}}"
@@ -330,9 +337,9 @@
                                     <DataTemplate>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="45*"/>
-                                                <ColumnDefinition Width="20"/>
-                                                <ColumnDefinition Width="45*"/>
+                                                <ColumnDefinition SharedSizeGroup="SourceColumn" Width="45*"/>
+                                                <ColumnDefinition SharedSizeGroup="SeperatedColumn" Width="15"/>
+                                                <ColumnDefinition SharedSizeGroup="DestinationColumn" Width="45*"/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Orientation="Vertical">
                                                 <TextBlock Foreground="White" 
@@ -368,6 +375,7 @@
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>
+                            </Grid>
                         </StackPanel>
 
                     </ScrollViewer>

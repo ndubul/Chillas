@@ -28,7 +28,7 @@ namespace Warewolf.Studio.Views
                 var dataContext = grid.DataContext as ToolDescriptorViewModel;
                 if (dataContext != null)
                 {
-                    DragDrop.DoDragDrop(this, dataContext.ActivityType, DragDropEffects.Link | DragDropEffects.Copy);
+                    DragDrop.DoDragDrop((DependencyObject)e.Source, dataContext.ActivityType, DragDropEffects.Copy);
                 }
             }
         }
@@ -106,5 +106,29 @@ namespace Warewolf.Studio.Views
         }
 
         #endregion
+
+        private Cursor _customCursor;
+
+        void UIElement_OnGiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+            if (e.Effects == DragDropEffects.Copy)
+            {
+                if (_customCursor == null)
+                    _customCursor = Application.Current.TryFindResource("CursorGrabbing") as Cursor;
+
+                e.UseDefaultCursors = false;
+                Mouse.SetCursor(_customCursor);
+            }
+            else
+                e.UseDefaultCursors = true;
+
+            e.Handled = true;
+        }
+
+        void UIElement_OnDragEnter(object sender, DragEventArgs e)
+        {
+            var Source = e.Source;
+            var originalSource = e.OriginalSource;
+        }
     }
 }

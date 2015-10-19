@@ -246,7 +246,6 @@
     <Compile Include="Server Test\Workspace\XML\XmlResource.cs" />
     <Compile Include="Dev2.Studio.Core.Tests\Models\EnviromentModelTests.cs" />
     <Compile Include="Dev2.Studio.Core.Tests\MoqConfigurationReader.cs" />
-    <Compile Include="Dev2.Studio.Core.Tests\MoqPopup.cs" />
     <Compile Include="Dev2.Studio.Core.Tests\StudioServerCommsTests.cs" />
     <Compile Include="Enums\Activities.cs" />
     <Compile Include="Enums\enViewModelType.cs" />
