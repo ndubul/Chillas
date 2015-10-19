@@ -1040,6 +1040,7 @@
                                                    Height="20"
                                                    Focusable="True"
                                                    TextTrimming="CharacterEllipsis"
+                                                       ToolTip="{Binding Path=Data.ResourceName}"
                                                    VerticalAlignment="Center"
                                                    HorizontalAlignment="Stretch"
                                                    Text="{Binding Path=Data.ResourceName}">
