@@ -20,11 +20,12 @@
                 <PropertyGroupDescription PropertyName="Tool.Category" />
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
-        <Cursor x:Key="Grab"  >Grab.cur</Cursor>
-        <Cursor x:Key="Grabbing"  >Grabbing.cur</Cursor>
         <DataTemplate x:Key="ToolDataTemplate" DataType="toolBox:ToolDescriptorViewModel">
             <Grid MouseMove="UIElement_OnMouseMove" 
-                  Cursor="Hand" 
+                  GiveFeedback="UIElement_OnGiveFeedback"
+                  DragEnter="UIElement_OnDragEnter"
+                  x:Name="ToolGrid"
+                  Cursor="{StaticResource CursorGrab}" 
                   HorizontalAlignment="Stretch" 
                   VerticalAlignment="Stretch"
                   Background="Transparent" AllowDrop="True">
