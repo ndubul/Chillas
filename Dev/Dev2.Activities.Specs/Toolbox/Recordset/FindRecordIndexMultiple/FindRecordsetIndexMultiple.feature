@@ -153,10 +153,10 @@ Scenario: Find an index of data in a recordset with Is Binary
 
 Scenario: Find an index of data in a recordset with Is Hex
 	Given I have the following recordset to search for multiple criteria
-	| rs       | value    |
-	| rs().field | You      |
-	| rs().field | are      |
-	| rs().field | the      |	
+	| rs         | value            |
+	| rs().field | You              |
+	| rs().field | are              |
+	| rs().field | the              |
 	| rs().field | 77617265776f6c66 |	
 	And field to search is "[[rs().field]]"
 	And search the recordset with type "Is Hex" and criteria is ""
@@ -2449,3 +2449,18 @@ Scenario Outline:Find index using valid inputs
 	| [[rec().set]]                 | 2313       | Contains    | 23                           |         | 2     | [[a]]                        | 2      |
 	| [[rec().set]]                 | Super      | Contains    | [[va]]                       | s       | 2     | [[a]]                        | 1      |
 	| [[rec().set]]                 | Super      | Contains    | [[var]]                      | ""      | 2     | [[a]]                        | 1,2    |
+
+
+
+#Complex Types
+Scenario Outline:Find index using valid inputs complex types
+	Given I have the following in field '<inField>' equals '<values>'
+	And the fields to search is '<Match>'
+	And search the recordset with type '<Match>' and criteria is '<Criteria>' equals '<Critval>'
+	And The result variable is "<result>" equals '<varVal>'
+	When the find records index multiple tool is executed
+	Then the find records index multiple result should be '<Index>'
+	And the execution has "No" error
+	Examples: 
+	| inField             | values | Match       | Criteria           | Critval | Index | result           | varVal |
+	| [[rec().row().set]] | Super  | Starts With | [[rc().row().set]] | s       | 1     | [[rs().a().set]] | 1      |

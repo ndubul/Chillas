@@ -88,3 +88,21 @@ Scenario Outline: Execute a command that requires recordsets
 	| [[rec(1).set]]                    | Echo a message     | [[rj([[int]]).a]],[[int]] =3 | a message                                                                                 | No    |
 	| [[var]]                           | 444                | [[rj([[int]]).a]],[[int]] =3 | '444' is not recognized as an internal or external command,operable program or batch file | An    |
 	| [[v]]                             |                    | [[int]]                      | Empty script to execute                                                                   | An    |
+
+
+
+
+Scenario Outline: Execute a command that requires complex types
+	Given I have this command script to execute '<object>' with '<val>'
+	When the command tool is executed
+	Then the '<resultVariable>' of the command tool will be '<Result>'
+	And the execution has '<Error>' error
+	And the debug inputs as  
+	| object   | Command |
+	| <object> | <val>   |  
+	And the debug output as 
+	|                             |
+	| <resultVariable> = <result> |
+	Examples: 
+	| object                | Val            | resultVariable       | Result    | Error |
+	| [[rec().set().value]] | Echo a message | [[rj().set().value]] | a message | No    |

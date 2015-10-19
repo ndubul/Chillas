@@ -188,4 +188,26 @@ Scenario Outline: Unzip file at location with invalid directories
 	| 2  | UNC to Local   | [[b]]  |                | ""       | ""       | [[path1]]   | c:\ZIP1             | ""           | ""           | True     | ""              | [[result]] | Error  | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 	| 3  | FTP to Local   | 121    | 121            | ""       | ""       | [[path1]]   | c:\ZIP2             | ""           | ""           | True     | ""              | [[result]] | Error  | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 
-			  	  										
+
+#Complex Types
+Scenario Outline: Unzip file at location using complex types
+	Given I have a source path '<source>' with value '<sourceLocation>'
+	And zip credentials as '<username>' and '<password>'
+	And I have a destination path '<destination>' with value '<destinationLocation>'
+	And destination credentials as '<destUsername>' and '<destPassword>'
+	And overwrite is '<selected>'
+	And result as '<resultVar>'	
+	And Archive Password as '<archivepassword>'
+    When the Unzip file tool is executed
+	Then the result variable '<resultVar>' will be '<result>'
+	And the execution has "<errorOccured>" error
+	And the debug inputs as
+         | Source Path                 | Username   | Password | Destination Path                      | Destination Username | Destination Password | Overwrite  | Archive Password |
+         | <source> = <sourceLocation> | <username> | String   | <destination> = <destinationLocation> | <destUsername>       | String               | <selected> | String           |         
+	And the debug output as
+		|                        |
+		| <resultVar> = <result> |
+	Examples: 
+	| No | Name           | source                      | sourceLocation | username | password | destination | destinationLocation | destUsername | destPassword | selected | archivepassword | resultVar  | result  | errorOccured |
+	| 1  | Local to Local | [[file().resources().path]] | c:\test0.zip   | ""       | ""       | [[path1]]   | c:\ZIP0             | ""           | ""           | True     | ""              | [[result]] | Success | NO           |
+				  	  										

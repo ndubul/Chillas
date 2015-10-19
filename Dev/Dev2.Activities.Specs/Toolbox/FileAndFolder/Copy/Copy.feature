@@ -53,7 +53,32 @@ Scenario Outline: Copy file at location
 		 | 29 | [[sourcePath]] | sftp://localhost/copyfile4.txt                               | dev2              | Q/ulw&]  | [[destPath]] | C:\copied41.txt                                            | ""                | ""           | True     | [[result]] | Success | NO           |
 		 | 30 | [[sourcePath]] | sftp://localhost/copyfile5.txt                               | dev2              | Q/ulw&]  | [[destPath]] | sftp://localhost/copied4.txt                               | dev2              | Q/ulw&]      | True     | [[result]] | Success | NO           |
 		 | 31 | [[sourcePath]] | E:\test.txt                                                  | dev2              | Q/ulw&]  | [[d(*).a]]   | [[d(1).a]] = E:\AppData, [[d(2).a]] = E:\App               | dev2              | Q/ulw&]      | True     | [[result]] | Success | NO           |
+
+
+
+Scenario Outline: Copy file at location using complex types
+	Given I have a source path '<source>' with value '<sourceLocation>' 
+	And source credentials as '<username>' and '<password>'
+	And I have a destination path '<destination>' with value '<destinationLocation>'
+    And destination credentials as '<destUsername>' and '<destPassword>'
+	And overwrite is '<selected>'
+	And result as '<resultVar>'
+    When the copy file tool is executed
+	Then the result variable '<resultVar>' will be '<result>'
+	And the execution has "<errorOccured>" error
+	And the debug inputs as
+         | Source Path                 | Username   | Password | Destination Path                      | Destination Username | Destination Password | Overwrite  |
+         | <source> = <sourceLocation> | <username> | String   | <destination> = <destinationLocation> | <destUsername>       | String               | <selected> |
+	And the debug output as
+		|                        |
+		| <resultVar> = <result> |
+	Examples: 
+		 | No | source                        | sourceLocation   | username | password | destination  | destinationLocation                               | destUsername | destPassword | selected | resultVar  | result  | errorOccured |
+		 | 1  | [[file().resources().path]]   | c:\copyfile0.txt | ""       | ""       | [[destPath]] | C:\copied00.txt                                   | ""           | ""           | True     | [[result]] | Success | NO           |
+		 
                        																										 
+
+
 
 #Scenario Outline: Copy file at location1
 #   Given I have a variable "[[a]]" with a value '<Val1>'

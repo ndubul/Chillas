@@ -286,4 +286,15 @@ Examples:
 	| [[b]]                     |            | [[a]]                     |            |             | [[d]]                     |           | [[c]]                               | 07-31-2015 |
 
 
-
+#Complex Types
+Scenario Outline: Ensure Date and Time Input and outputs accepts complex types
+       Given I have a date '<Date>'  with '<DateVal>'
+       And the input format as '<Input>' with '<value>'
+       And the output format as '<Output>' with '<val>'
+	   And I selected Add time as "Years" with a value of '<years>'
+       When the datetime tool is executed
+       Then the execution has '<Error>' error
+	   And the result variable '<res>' will be '<result>'
+Examples: 
+	| Date                   | Dateval    | Input               | value      | years | Output             | val       | res                    | result     | Error |
+	| [[rec(1).row().value]] | 31/07/2015 | [[rs(1).row().set]] | dd/mm/yyyy | 0     | [[rs().row().set]] | mm-dd-yyy | [[rec(3).row().value]] | 31-07-2015 | No    |
