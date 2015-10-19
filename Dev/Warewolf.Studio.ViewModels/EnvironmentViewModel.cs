@@ -59,6 +59,7 @@ namespace Warewolf.Studio.ViewModels
                 if (Children.Any(a => a.AllowResourceCheck))
                 {
                     await Load(true);
+                    ShowContextMenu = false;
                 }
                 else
                 {
@@ -786,8 +787,8 @@ namespace Warewolf.Studio.ViewModels
                     ResourceId = explorerItem.ResourceId,
                     ResourceType = explorerItem.ResourceType,
                     ResourcePath = explorerItem.ResourcePath,
-                    AllowResourceCheck =  isDeploy
-
+                    AllowResourceCheck =  isDeploy,
+                    ShowContextMenu = !isDeploy
                     //Inputs = explorerItem.Inputs,
                     //Outputs = explorerItem.Outputs
                 };
@@ -806,6 +807,10 @@ namespace Warewolf.Studio.ViewModels
                 var col = parent.Children as AsyncObservableCollection<IExplorerItemViewModel>;
                 col.AddRange(explorerItemModels);
                 parent.Children = col;
+            }
+            if(isDeploy)
+            {
+                ShowContextMenu = false;
             }
             //return explorerItemModels;
             return null;
