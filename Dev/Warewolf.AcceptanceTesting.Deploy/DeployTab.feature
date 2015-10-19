@@ -297,9 +297,25 @@ Scenario: Design layout
 	And "Deploy" is "Disabled"
 	And "Context Menu" is "Disabled"
 
+#Wolf-1158
+Scenario: Disable deploy button
+	Given I have deploy tab opened
+	Then the Source Server is "Localhost"
+	And the Destination Server is "Remote Connection Integration"
+	And I check "Hello World" on Source Server
+	Then "Deploy" is "Enabled"
+	And "Show Dependancies" is "Enabled" 
+	When "Remote Connection Integration" is "Disconnected"
+	Then "Deploy" is "Disabled"
+	
 
-
-
+Scenario: Select All resources to deploy
+	Given I have deploy tab opened
+	Then the Source Server is "Localhost"
+	And the Destination Server is "Remote Connection Integration"
+	And I check "LocalHost" on Source Server
+	Then "All" the resources are checked
+	And "Deploy" is "Enabled"
 
 ###REQUIREMENTS Check to see what needs to be included
 
