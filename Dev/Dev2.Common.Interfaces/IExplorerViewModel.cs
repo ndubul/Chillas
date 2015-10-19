@@ -28,6 +28,7 @@ namespace Dev2.Common.Interfaces
 	    object[] SelectedDataItems { get; set; }
 	    ICommand ClearSearchTextCommand { get; }
 	    ICommand CreateFolderCommand { get; }
+        bool AllowDrag { get; set; }
 
 	    void SelectItem(Guid id);
 	    IList<IExplorerItemViewModel> FindItems(Func<IExplorerItemViewModel, bool> filterFunc);

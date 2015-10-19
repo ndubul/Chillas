@@ -33,7 +33,7 @@ namespace Dev2.Runtime.Hosting
         IExplorerRepositorySync _sync;
         readonly IFile _file;
         public static IExplorerServerResourceRepository Instance { get; private set; }
-        private IExplorerItem _root;
+       
         bool _isDirty;
         public bool IsDirty
         {
@@ -89,16 +89,20 @@ namespace Dev2.Runtime.Hosting
 
         public IExplorerItem Load(Guid workSpaceId)
         {
-            if(!IsDirty)
-                return _root ?? (_root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId));
-            _root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId);
-            return _root;
+
+            var root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId);
+            return root;
         }
         public IExplorerItem Reload(Guid workSpaceId)
         {
-            _root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId);
-            return _root;
+            var root = ExplorerItemFactory.CreateRootExplorerItem(EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId);
+            return root;
         }
+
+        public void RemoveItemFromCollection(IExplorerItem serverExplorerItem)
+        {
+        }
+
         public IExplorerItem Load(ResourceType type, Guid workSpaceId)
         {
             return ExplorerItemFactory.CreateRootExplorerItem(type, EnvironmentVariables.GetWorkspacePath(workSpaceId), workSpaceId);
@@ -137,7 +141,7 @@ namespace Dev2.Runtime.Hosting
                 return new ExplorerRepositoryResult(ExecStatus.Fail, "There is an item that exists with the same name and path");
             }
             ResourceCatalogResult result = ResourceCatalogue.RenameResource(workSpaceId, itemToRename.ResourceId, itemToRename.DisplayName);
-            Reload(workSpaceId);
+           // Reload(workSpaceId);
             return new ExplorerRepositoryResult(result.Status, result.Message);
         }
 
@@ -150,15 +154,15 @@ namespace Dev2.Runtime.Hosting
                     return new ExplorerRepositoryResult(ExecStatus.NoMatch, "Requested folder does not exist on server. Folder: " + path);
                 }
                 var resourceCatalogResult = ResourceCatalogue.RenameCategory(workSpaceId, path, newPath);
-                if(_root != null)
-                {
-                    Apply(_root, a => a != null && a.ResourcePath.StartsWith(newPath + "\\"), b => {
-                                                                                                       if(b != null)
-                                                                                                       {
-                                                                                                           b.ResourcePath = b.ResourcePath.Replace(path, newPath);
-                                                                                                       }
-                    });
-                }
+                //if(_root != null)
+                //{
+                //    Apply(_root, a => a != null && a.ResourcePath.StartsWith(newPath + "\\"), b => {
+                //                                                                                       if(b != null)
+                //                                                                                       {
+                //                                                                                           b.ResourcePath = b.ResourcePath.Replace(path, newPath);
+                //                                                                                       }
+                //    });
+                //}
                 if (resourceCatalogResult.Status == ExecStatus.Success)
                 {
                     MoveVersionFolder(path, newPath);
@@ -170,11 +174,11 @@ namespace Dev2.Runtime.Hosting
                 {
                     Directory.Move(DirectoryStructureFromPath(path), DirectoryStructureFromPath(newPath));
                     MoveVersionFolder(path, newPath);
-                    UpdateFolderName(path, newPath);
+                    //UpdateFolderName(path, newPath);
                     //Reload(workSpaceId);
                     return new ExplorerRepositoryResult(ExecStatus.Success, "");
                 }
-                Reload(workSpaceId);
+            //    Reload(workSpaceId);
                 return new ExplorerRepositoryResult(ExecStatus.Fail, resourceCatalogResult.Message);
             }
             catch (Exception err)
@@ -183,21 +187,7 @@ namespace Dev2.Runtime.Hosting
             }
         }
 
-        void UpdateFolderName(string path, string newPath)
-        {
-            if(_root != null)
-            {
-                var parent = FindParent(path, _root);
-                var toRename = parent.Children.FirstOrDefault(a => a.DisplayName == GetNameFromPath(path));
-                if(toRename!= null)
-                {
-                    toRename.DisplayName = GetNameFromPath(newPath);
-                    toRename.ResourcePath = newPath;
-                }
-                else
-                    IsDirty = true;
-            }
-        }
+        
 
         string GetNameFromPath(string path)
         {
@@ -219,6 +209,11 @@ namespace Dev2.Runtime.Hosting
             }
         }
 
+        public IExplorerItem UpdateItem(IResource resource)
+        {
+            return null;
+        }
+
         public IExplorerItem Find(Guid id)
         {
             var items = Load(Guid.Empty);
@@ -231,39 +226,9 @@ namespace Dev2.Runtime.Hosting
             return Find(items, predicate);
         }
 
-        public IExplorerItem UpdateItem(IResource resource)
-        {
-            if (Find(resource.ResourceID) == null)
-            {
-                var exp = new ServerExplorerItem(resource.ResourceName, resource.ResourceID, resource.ResourceType, null, ServerAuthorizationService.Instance.GetResourcePermissions(Guid.Empty), resource.ResourcePath, "", "");
-                var succ = AddItemToCollection(exp);
-               // _sync.AddItemMessage(exp);
-                return succ;
-            }
-            return Find(resource.ResourceID);
-        }
 
-        public IExplorerItem AddItemToCollection(IExplorerItem serverExplorerItem)
-        {
-            IExplorerItem parent = FindParent(serverExplorerItem.ResourcePath, _root);
-            if(parent != null)
-            {
-                if (parent.Children == null)
-                {
-                    parent.Children = new List<IExplorerItem>();
-                }
-                parent.Children.Add(serverExplorerItem);
-            }
 
-            return serverExplorerItem;
-        }
 
-        public void RemoveItemFromCollection(IExplorerItem serverExplorerItem)
-        {
-            IExplorerItem parent = FindParent(serverExplorerItem.ResourcePath, _root);
-            parent.Children.Remove(serverExplorerItem);
-
-        }
 
         IExplorerItem FindParent(string resourcePath, IExplorerItem rooItem)
         {
@@ -333,7 +298,7 @@ namespace Dev2.Runtime.Hosting
                         var deleteResult = DeleteFolder(itemToDelete.ResourcePath, true, workSpaceId);
                         if (deleteResult.Status == ExecStatus.Success)
                         {
-                            RemoveItemFromCollection(itemToDelete);
+               
                         }
                         return deleteResult;
                     }
@@ -341,7 +306,7 @@ namespace Dev2.Runtime.Hosting
                     ResourceCatalogResult result = ResourceCatalogue.DeleteResource(workSpaceId, itemToDelete.DisplayName, itemToDelete.ResourceType.ToString());
                     if (result.Status == ExecStatus.Success)
                     {
-                        RemoveItemFromCollection(itemToDelete);
+        
                     }
                     return new ExplorerRepositoryResult(result.Status, result.Message);
             }
@@ -402,7 +367,7 @@ namespace Dev2.Runtime.Hosting
                                 return new ExplorerRepositoryResult(ExecStatus.Fail, "Requested folder already exists on server.");
                             }
                             Directory.CreateIfNotExists(dir);
-                            AddItemToCollection(itemToAdd);
+                           
                             _sync.AddItemMessage(itemToAdd);
                             return new ExplorerRepositoryResult(ExecStatus.Success, "");
                         }
@@ -425,7 +390,7 @@ namespace Dev2.Runtime.Hosting
                         try
                         {
                             _sync.AddItemMessage(itemToAdd);
-                            AddItemToCollection(itemToAdd);
+             
                             return new ExplorerRepositoryResult(ExecStatus.Success, "");
                         }
                         catch (Exception err)
@@ -482,7 +447,7 @@ namespace Dev2.Runtime.Hosting
             MoveVersions(itemToMove, newPath);
             ResourceCatalogResult result = ResourceCatalogue.RenameCategory(workSpaceId, itemToMove.ResourcePath, newPath, new List<IResource> { ResourceCatalogue.GetResource(workSpaceId, itemToMove.ResourceId) });
             _file.Delete(string.Format("{0}.xml", DirectoryStructureFromPath(itemToMove.ResourcePath)));
-            Reload(workSpaceId);
+            //Reload(workSpaceId);
             return new ExplorerRepositoryResult(result.Status, result.Message);
         }
 

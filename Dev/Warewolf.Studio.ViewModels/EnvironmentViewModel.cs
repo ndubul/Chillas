@@ -636,7 +636,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 return _isConnecting;
             }
-            private set
+             set
             {
                 _isConnecting = value;
                 IsServerIconVisible = !value;

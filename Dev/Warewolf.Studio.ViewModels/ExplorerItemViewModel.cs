@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
@@ -1010,7 +1011,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public bool Move(IExplorerTreeItem destination)
+        public async Task<bool> Move(IExplorerTreeItem destination)
         {
             if (destination.Children.Any(a => a.ResourceName == ResourceName) && ResourceType != ResourceType.Folder)
             {
@@ -1032,7 +1033,7 @@ namespace Warewolf.Studio.ViewModels
                 try
                 {
 
-                    _explorerRepository.Move(this, destination);
+                   await _explorerRepository.Move(this, destination);
 
                     if (destination.ResourceType == ResourceType.Folder)
                     {

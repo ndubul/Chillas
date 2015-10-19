@@ -29,6 +29,7 @@ namespace Warewolf.Studio.ViewModels
 		private IExplorerTreeItem _selectedItem;
 		private object[] _selectedDataItems;
 	    bool _fromActivityDrop;
+	    bool _allowDrag;
 
 	    protected ExplorerViewModelBase()
 		{
@@ -216,6 +217,18 @@ namespace Warewolf.Studio.ViewModels
 
 		public ICommand ClearSearchTextCommand { get; private set; }
 	    public ICommand CreateFolderCommand { get; private set; }
+	    public bool AllowDrag
+	    {
+	        get
+	        {
+	            return _allowDrag;
+	        }
+            set
+            {
+                _allowDrag = value;
+                OnPropertyChanged(()=>AllowDrag);
+            }
+	    }
 
 	    public void SelectItem(Guid id)
 		{
