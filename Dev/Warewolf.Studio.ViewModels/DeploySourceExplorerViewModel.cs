@@ -114,6 +114,8 @@ namespace Warewolf.Studio.ViewModels
                     a.ShowContextMenu = false;
                     a.SelectAction = (SelectAction );
                     a.AllowResourceCheck = true;
+                    a.CanDrop = false;
+                    a.CanDrag = false;
                 });
             }
             SelectedEnvironment.AllowResourceCheck = true;

@@ -130,6 +130,9 @@ namespace Warewolf.Studio.ViewModels
         Dictionary<ResourceType, Type> _activityNames;
         bool _canShowDependencies;
         bool _allowResourceCheck;
+        bool? _isResourceChecked;
+        bool _candrop;
+        bool _canDrag;
         bool? _isResource;
 
         public ExplorerItemViewModel(IServer server, IExplorerTreeItem parent, Action<IExplorerItemViewModel> selectAction, IShellViewModel shellViewModel)
@@ -231,6 +234,8 @@ namespace Warewolf.Studio.ViewModels
                         ResourceType.WebService, typeof(DsfWebserviceActivity) 
                     }
                 };
+            _candrop = true;
+            _canDrag = true;
         }
 
         public string ActivityName
@@ -725,8 +730,8 @@ namespace Warewolf.Studio.ViewModels
                         Children.Apply(a => a.IsResourceChecked = value ?? false);
                         _isResource = value ?? false;
                         if (Parent.ResourceType == ResourceType.Folder)
-                            Parent.IsFolderChecked = value;
-                    }
+                    Parent.IsFolderChecked = value;
+                }
                 }
                 else
                 {
@@ -1107,20 +1112,24 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return ResourceType == ResourceType.Folder;
+                return ResourceType == ResourceType.Folder && _candrop;
             }
             set
             {
+                _candrop = value;
+                OnPropertyChanged(() => CanDrop);
             }
         }
         public bool CanDrag
         {
             get
             {
-                return ResourceType < ResourceType.Server && ResourceType != ResourceType.Version;
+                return (_canDrag) && (ResourceType < ResourceType.Server && ResourceType != ResourceType.Version);
             }
             set
             {
+                _canDrag = value;
+                OnPropertyChanged(() => CanDrag);
             }
         }
 

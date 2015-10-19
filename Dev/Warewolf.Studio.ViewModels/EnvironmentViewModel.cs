@@ -60,12 +60,13 @@ namespace Warewolf.Studio.ViewModels
                 if (Children.Any(a => a.AllowResourceCheck))
                 {
                     await Load(true);
+                    ShowContextMenu = false;
                 }
                 else
                 {
                     await Load();
                 }
-
+                
             });
             IsServerIconVisible = true;
             SelectAction = selectAction ?? (a => { });
@@ -200,7 +201,7 @@ namespace Warewolf.Studio.ViewModels
                 ResourcePath = name,
                 IsSelected = true,
                 IsRenaming = true,
-
+                
             };
             if (_isDialog)
             {
@@ -315,7 +316,7 @@ namespace Warewolf.Studio.ViewModels
                 CanCreateWorkflowService = false;
                 ShowContextMenu = false;
                 CanDeploy = false;
-
+                
             }
             else
             {
@@ -528,8 +529,8 @@ namespace Warewolf.Studio.ViewModels
                 {
                     _shellViewModel.SetActiveEnvironment(Server.EnvironmentID);
                     _shellViewModel.SetActiveServer(Server);
-                }
             }
+        }
         }
 
         public bool CanShowServerVersion
@@ -562,7 +563,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _isResourceChecked = value ?? false;
-
+               
                 OnPropertyChanged(() => IsResourceChecked);
                 AsList().Apply(a => a.IsResourceUnchecked = value ?? false);
                 if (SelectAll != null)
@@ -713,10 +714,10 @@ namespace Warewolf.Studio.ViewModels
         }
         public void Filter(Func<IExplorerItemViewModel, bool> filter)
         {
-            Children = new ObservableCollection<IExplorerItemViewModel>(_children.Where(filter));
+           Children = new ObservableCollection<IExplorerItemViewModel>(_children.Where(filter));
             foreach (var explorerItemViewModel in _children)
             {
-                explorerItemViewModel.Filter(filter);
+               explorerItemViewModel.Filter(filter);
             }
             OnPropertyChanged(() => Children);
         }
@@ -798,8 +799,8 @@ namespace Warewolf.Studio.ViewModels
                     ResourceId = explorerItem.ResourceId,
                     ResourceType = explorerItem.ResourceType,
                     ResourcePath = explorerItem.ResourcePath,
-                    AllowResourceCheck = isDeploy
-
+                    AllowResourceCheck =  isDeploy,
+                    ShowContextMenu = !isDeploy
                     //Inputs = explorerItem.Inputs,
                     //Outputs = explorerItem.Outputs
                 };
@@ -818,6 +819,10 @@ namespace Warewolf.Studio.ViewModels
                 var col = parent.Children as AsyncObservableCollection<IExplorerItemViewModel>;
                 col.AddRange(explorerItemModels);
                 parent.Children = col;
+            }
+            if(isDeploy)
+            {
+                ShowContextMenu = false;
             }
             //return explorerItemModels;
             return null;
