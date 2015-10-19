@@ -725,12 +725,12 @@ namespace Warewolf.Studio.ViewModels
             {
                 if (ResourceType == ResourceType.Folder)
                 {
-                    if (Children.Count >= 1)
+                    if (ChildrenCount >= 1)
                     {
                         Children.Apply(a => a.IsResourceChecked = value ?? false);
                         _isResource = value ?? false;
                         if (Parent.ResourceType == ResourceType.Folder)
-                    Parent.IsFolderChecked = value;
+                            Parent.IsFolderChecked = value;
                 }
                 }
                 else

@@ -565,7 +565,7 @@ namespace Warewolf.Studio.ViewModels
                 _isResourceChecked = value ?? false;
                
                 OnPropertyChanged(() => IsResourceChecked);
-                AsList().Apply(a => a.IsResourceUnchecked = value ?? false);
+                AsList().Where(o => (o.ResourceType == ResourceType.Folder && o.ChildrenCount >= 1) || o.ResourceType != ResourceType.Folder).Apply(a => a.IsResourceUnchecked = value ?? false);
                 if (SelectAll != null)
                     SelectAll();
             }
