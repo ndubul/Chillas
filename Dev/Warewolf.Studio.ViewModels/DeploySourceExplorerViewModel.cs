@@ -7,12 +7,12 @@ using Caliburn.Micro;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Deploy;
+using Dev2.Common.Interfaces.Infrastructure;
 
 namespace Warewolf.Studio.ViewModels
 {
     public class DeploySourceExplorerViewModel :ExplorerViewModel, IDeploySourceExplorerViewModel {
         readonly IDeployStatsViewerViewModel _statsArea;
-        IEnumerable<IExplorerTreeItem> _preselected;
 
         #region Implementation of IDeployDestinationExplorerViewModel
 
@@ -58,8 +58,27 @@ namespace Warewolf.Studio.ViewModels
             }
             if(Preselected!=null && Preselected.Any())
             {
-                SelectItemsForDeploy(Preselected);
-                Preselected = null;
+                var envId =Preselected.First().Server.EnvironmentID;
+              if( envId != environmentID)
+              {
+                  ConnectControlViewModel.SelectedConnection = ConnectControlViewModel.Servers.FirstOrDefault(a => a.EnvironmentID == envId);
+                  if(ConnectControlViewModel.SelectedConnection != null)
+                  {
+                      var server = ConnectControlViewModel.SelectedConnection;
+                      if (server.Permissions == null)
+                      {
+                          server.Permissions = new List<IWindowsGroupPermission>();
+ 
+                      }
+                      ConnectControlViewModel.Connect(ConnectControlViewModel.SelectedConnection);
+                  }
+              }
+              else
+              {
+                  SelectItemsForDeploy(Preselected);
+                  Preselected = null; 
+              }
+
             }
    
         }
@@ -86,6 +105,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 environmentViewModel.IsVisible = true;
                 SelectedEnvironment = environmentViewModel;
+                environmentViewModel.ShowContextMenu = false;
                 environmentViewModel.AsList().Apply(a=>
                 {
                     a.CanExecute = false;
@@ -139,17 +159,7 @@ namespace Warewolf.Studio.ViewModels
                 }
             }
         }
-        public IEnumerable<IExplorerTreeItem> Preselected
-        {
-            get
-            {
-                return _preselected;    
-            }
-            set
-            {
-                _preselected = value;
-            }
-        }
+        public IEnumerable<IExplorerTreeItem> Preselected { get; set; }
 
         void Select(IExplorerTreeItem explorerTreeItem)
         {

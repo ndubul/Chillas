@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace Dev2.Common.Interfaces.Deploy
 {
+    public class Conflict
+    {
+        public string SourceName { get; set; }
+        public string DestinationName { get; set; }
+    }
     public interface IDeployStatsViewerViewModel
     {
         /// <summary>
@@ -36,7 +41,7 @@ namespace Dev2.Common.Interfaces.Deploy
 
         void Calculate( IList<IExplorerTreeItem> items);
 
-        IList<IExplorerTreeItem> Conflicts { get; }
+        IList<Conflict> Conflicts { get; }
 
         IList<IExplorerTreeItem> New { get; }
         Action CalculateAction { get; set; }

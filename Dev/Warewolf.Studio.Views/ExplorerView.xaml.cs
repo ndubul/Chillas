@@ -8,6 +8,7 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Services.Security;
 using Dev2.Studio.Core;
+using Dev2.Studio.Core.ViewModels;
 using Infragistics.Controls.Menus;
 using Infragistics.DragDrop;
 using Infragistics.Windows;
@@ -234,6 +235,39 @@ namespace Warewolf.Studio.Views
                     }
                 }
             }
+            else
+            {
+                var dropActivity = Utilities.GetAncestorFromType(e.DropTarget, typeof(ContentControl), false) as ContentControl;
+                var dragTool = Utilities.GetAncestorFromType(e.DragSource, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
+
+                if (dropActivity != null)
+                {
+                    var dragData = new DataObject();
+                    if (dragTool != null)
+                    {
+                        var context = dragTool.DataContext as XamDataTreeNodeDataContext;
+                        var wfContext = dropActivity.DataContext as IWorkflowDesignerViewModel;
+                        if (context != null)
+                        {
+                            var dataContext = context.Data as ExplorerItemViewModel;
+
+                            if (dataContext != null)
+                            {
+                                dragData.SetData(DragDropHelper.WorkflowItemTypeNameFormat, dataContext.ActivityName);
+                                dragData.SetData(dataContext);
+                                if (wfContext != null)
+                                {
+                                    wfContext.BindToModel();
+                                    wfContext.DesignerView.AllowDrop = true;
+                                    wfContext.DesignerView.UpdateLayout();
+                                }
+                            }
+                            _dragData = dragData;
+                            //DragDrop.DoDragDrop(e.DragSource, dragData, DragDropEffects.Copy);
+                        }
+                    }
+                }
+            }
         }
 
         void DragSource_OnDragLeave(object sender, DragDropEventArgs e)
@@ -284,7 +318,7 @@ namespace Warewolf.Studio.Views
                 var target = e.DropTarget as ContentControl;
                 if (target != null)
                 {
-                    DragDrop.DoDragDrop(this, _dragData, DragDropEffects.Link | DragDropEffects.Copy);
+                    DragDrop.DoDragDrop(e.DragSource, _dragData, DragDropEffects.Copy);
                 }
 
                 if (drop != null && drag != null)

@@ -99,17 +99,13 @@ namespace Dev2.Studio.Core.AppResources.Repositories
                 var b = model != null;
                 return b;
             });
-            var guids = resourceModels.Select(resource => resource.ID);
-            IList<IResourceModel> deployableResources = guids.Select(fetchId => sourceEnviroment.ResourceRepository.FindSingle(c => c.ID == fetchId)).ToList();
 
             // Create the real deployment payload ;)
-            IDeployDto trueDto = new DeployDto { ResourceModels = deployableResources };
 
             // Deploy - Seems a bit silly to go out to another service only to comeback in?
             Dev2Logger.Log.Info(String.Format("Deploy Resources. Source:{0} Destination:{1}", sourceEnviroment.DisplayName, targetEnviroment.Name));
             _deployService.Deploy(dto, targetEnviroment);
 
-            var targetResourceRepo = targetEnviroment.ResourceRepository;
 
             // Inform the repo to reload the deployed resources against the targetEnviroment ;)
             //var deployables = deployableResources.GroupBy(a => a.ResourceType);

@@ -125,8 +125,24 @@ Scenario Outline: Read File at location using incorrect directory
 	| 3  | UNC Secure | 45454        | 45454          | dev2.local\IntegrationTester | I73573r0 | [[result]] | Error  | AN           | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 
 
-
-
+#Complex Types
+Scenario Outline: Read File at location using complex types
+	Given I have a source path '<source>' with value '<sourceLocation>'
+	And source credentials as '<username>' and '<password>'
+	And result as '<resultVar>'
+	When the read file tool is executed
+	Then the result variable '<resultVar>' will be '<result>'
+	And the execution has "<errorOccured>" error
+	And the debug inputs as
+         | Input Path                  | Username   | Password |
+         | <source> = <sourceLocation> | <username> | String   |
+	And the debug output as
+		|                        |
+		| <resultVar> = <result> |
+	Examples: 
+	| NO | Name  | source                      | sourceLocation    | username | password | resultVar      | result | errorOccured |
+	| 1  | Local | [[file().resources().path]] | c:\filetoread.txt | ""       | ""       | [[rec(*).set]] | Guid   | NO           |
+	
 
 
 

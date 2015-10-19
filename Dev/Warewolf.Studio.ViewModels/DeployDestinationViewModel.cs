@@ -21,10 +21,11 @@ namespace Warewolf.Studio.ViewModels
         void DeploySourceExplorerViewModelSelectedEnvironmentChanged(object sender, Guid environmentid)
         {
             var environmentViewModel = _environments.FirstOrDefault(a => a.Server.EnvironmentID == environmentid);
+
             if (environmentViewModel != null)
             {
                 SelectedEnvironment = environmentViewModel;
-              
+                  
             }
         }
 

@@ -31,5 +31,7 @@ namespace Dev2.Common.Interfaces
         void Edit();
 
         event SelectedServerChanged SelectedEnvironmentChanged;
+
+        void ConnectOrDisconnect();
     }
 }

@@ -1087,6 +1087,48 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.EnsureDateAndTimeInputAndOutputsAcceptVariablesAndRecordsets("[[b]]", "", "[[a]]", "", "", "[[d]]", "", "[[c]]", "07-31-2015", ((string[])(null)));
         }
+        
+        public virtual void EnsureDateAndTimeInputAndOutputsAcceptsComplexTypes(string date, string dateval, string input, string value, string years, string output, string val, string res, string result, string error, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure Date and Time Input and outputs accepts complex types", exampleTags);
+#line 290
+this.ScenarioSetup(scenarioInfo);
+#line 291
+       testRunner.Given(string.Format("I have a date \'{0}\'  with \'<DateVal>\'", date), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 292
+       testRunner.And(string.Format("the input format as \'{0}\' with \'{1}\'", input, value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 293
+       testRunner.And(string.Format("the output format as \'{0}\' with \'{1}\'", output, val), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 294
+    testRunner.And(string.Format("I selected Add time as \"Years\" with a value of \'{0}\'", years), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 295
+       testRunner.When("the datetime tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 296
+       testRunner.Then(string.Format("the execution has \'{0}\' error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 297
+    testRunner.And(string.Format("the result variable \'{0}\' will be \'{1}\'", res, result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure Date and Time Input and outputs accepts complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DateandTime")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec(1).row().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Date", "[[rec(1).row().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Dateval", "31/07/2015")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Input", "[[rs(1).row().set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "dd/mm/yyyy")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:years", "0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Output", "[[rs().row().set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "mm-dd-yyy")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rec(3).row().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "31-07-2015")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
+        public virtual void EnsureDateAndTimeInputAndOutputsAcceptsComplexTypes_Rec1_Row_Value()
+        {
+            this.EnsureDateAndTimeInputAndOutputsAcceptsComplexTypes("[[rec(1).row().value]]", "31/07/2015", "[[rs(1).row().set]]", "dd/mm/yyyy", "0", "[[rs().row().set]]", "mm-dd-yyy", "[[rec(3).row().value]]", "31-07-2015", "No", ((string[])(null)));
+        }
     }
 }
 #pragma warning restore

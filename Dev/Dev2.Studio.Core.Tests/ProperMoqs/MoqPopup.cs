@@ -87,6 +87,11 @@ namespace Dev2.Core.Tests.ProperMoqs
             return _result;
         }
 
+        public MessageBoxResult ShowDeployConflict(int conflictCount)
+        {
+            return MessageBoxResult.None;
+        }
+
         public MessageBoxResult ShowSettingsCloseConfirmation()
         {
             return _result;

@@ -690,11 +690,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "Ms.Wolfe")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:characters", "Ms.Wolfe")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:replacement", "Mrs.Blake")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:count", "5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:count", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "Mrs.Blake")]
         public virtual void ReplaceValuesUsingComplexTypes_1()
         {
-            this.ReplaceValuesUsingComplexTypes("1", "[[Member().Details().Title", "Ms.Wolfe", "Ms.Wolfe", "Mrs.Blake", "5", "Mrs.Blake", ((string[])(null)));
+            this.ReplaceValuesUsingComplexTypes("1", "[[Member().Details().Title", "Ms.Wolfe", "Ms.Wolfe", "Mrs.Blake", "1", "Mrs.Blake", ((string[])(null)));
         }
     }
 }

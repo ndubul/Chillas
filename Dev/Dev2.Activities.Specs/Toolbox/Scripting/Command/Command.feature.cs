@@ -378,6 +378,53 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.ExecuteACommandThatRequiresRecordsets("[[v]]", "", "[[int]]", "Empty script to execute", "An", ((string[])(null)));
         }
+        
+        public virtual void ExecuteACommandThatRequiresComplexTypes(string @object, string val, string resultVariable, string result, string error, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Execute a command that requires complex types", exampleTags);
+#line 95
+this.ScenarioSetup(scenarioInfo);
+#line 96
+ testRunner.Given(string.Format("I have this command script to execute \'{0}\' with \'<val>\'", @object), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 97
+ testRunner.When("the command tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 98
+ testRunner.Then(string.Format("the \'{0}\' of the command tool will be \'{1}\'", resultVariable, result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 99
+ testRunner.And(string.Format("the execution has \'{0}\' error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "object",
+                        "Command"});
+            table14.AddRow(new string[] {
+                        string.Format("{0}", @object),
+                        "<val>"});
+#line 100
+ testRunner.And("the debug inputs as", ((string)(null)), table14, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table15.AddRow(new string[] {
+                        string.Format("{0} = <result>", resultVariable)});
+#line 103
+ testRunner.And("the debug output as", ((string)(null)), table15, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Execute a command that requires complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Command")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec().set().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:object", "[[rec().set().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Val", "Echo a message")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:resultVariable", "[[rj().set().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Result", "a message")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
+        public virtual void ExecuteACommandThatRequiresComplexTypes_Rec_Set_Value()
+        {
+            this.ExecuteACommandThatRequiresComplexTypes("[[rec().set().value]]", "Echo a message", "[[rj().set().value]]", "a message", "No", ((string[])(null)));
+        }
     }
 }
 #pragma warning restore

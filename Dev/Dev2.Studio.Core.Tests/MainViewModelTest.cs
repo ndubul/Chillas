@@ -1002,7 +1002,7 @@ namespace Dev2.Core.Tests
             MainViewModel.DeployAllCommand.Execute(null);
             var activectx = MainViewModel.ActiveItem;
             Assert.IsTrue(activectx.WorkSurfaceKey.Equals(
-                WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployResources)));
+                WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployViewer)));
         }
 
         [TestMethod]
