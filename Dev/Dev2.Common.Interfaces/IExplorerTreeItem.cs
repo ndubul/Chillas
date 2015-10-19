@@ -52,6 +52,8 @@ namespace Dev2.Common.Interfaces
         int ChildrenCount { get; }
         Action<IExplorerItemViewModel> SelectAction { get; set; }
         bool? IsFolderChecked { get; set; }
+        bool? IsResourceUnchecked { get; set; }
+
         void AddChild(IExplorerItemViewModel child);
         void RemoveChild(IExplorerItemViewModel child);
         void SelectItem(Guid id, Action<IExplorerItemViewModel> foundAction);

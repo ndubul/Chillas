@@ -160,9 +160,9 @@ Scenario: Web Source returns text
    And title is "New Web Service Source"
    And I type Address as "http://warewolf.io/version.txt"
    And "Test Connection" is "Enabled"
-   When Test Connecton is "Successfull"
+   When Test Connecton is "Successful"
    Then "Save" is "Enabled"	
-   When I save the source
+   When I save as "Testing Return Text"
    Then the save dialog is opened
-    Then title is "Testing Return Text"
+   Then title is "Testing Return Text"
    And "Testing Return Text" tab is opened
