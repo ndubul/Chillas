@@ -131,6 +131,8 @@ namespace Warewolf.Studio.ViewModels
         bool _canShowDependencies;
         bool _allowResourceCheck;
         bool? _isResourceChecked;
+        bool _candrop;
+        bool _canDrag;
 
         public ExplorerItemViewModel(IServer server, IExplorerTreeItem parent, Action<IExplorerItemViewModel> selectAction, IShellViewModel shellViewModel)
         {
@@ -231,6 +233,8 @@ namespace Warewolf.Studio.ViewModels
                         ResourceType.WebService, typeof(DsfWebserviceActivity) 
                     }
                 };
+            _candrop = true;
+            _canDrag = true;
         }
 
         public string ActivityName
@@ -1097,20 +1101,24 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return ResourceType == ResourceType.Folder;
+                return ResourceType == ResourceType.Folder && _candrop;
             }
             set
             {
+                _candrop = value;
+                OnPropertyChanged(() => CanDrop);
             }
         }
         public bool CanDrag
         {
             get
             {
-                return ResourceType < ResourceType.Server && ResourceType != ResourceType.Version;
+                return (_canDrag) && (ResourceType < ResourceType.Server && ResourceType != ResourceType.Version);
             }
             set
             {
+                _canDrag = value;
+                OnPropertyChanged(() => CanDrag);
             }
         }
 
