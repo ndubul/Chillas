@@ -55,6 +55,7 @@ namespace Warewolf.Studio.ViewModels
             if(environmentViewModel != null)
             {
                 UpdateItemForDeploy( environmentViewModel.Server.EnvironmentID);
+                environmentViewModel.SelectAll = (() => _statsArea.Calculate(environmentViewModel.AsList().Where(o => o.IsResourceChecked == true).Select(x=>x as IExplorerTreeItem).ToList()));
             }
             if(Preselected!=null && Preselected.Any())
             {
@@ -134,15 +135,13 @@ namespace Warewolf.Studio.ViewModels
             }
             else
             {
-                if (ax.Parent.ResourceType == ResourceType.Folder)
+                if (ax.Parent.ResourceType == ResourceType.Folder || ax.Parent.ResourceType == ResourceType.ServerSource)
                 {
-
-
                     ax.Parent.IsFolderChecked = ax.IsResourceChecked;
                 }
             }
 
-            _statsArea.Calculate(SelectedItems.ToList());
+           _statsArea.Calculate(SelectedItems.ToList());
         }
 
         public ICollection<IExplorerTreeItem> SelectedItems
