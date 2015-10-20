@@ -45,6 +45,12 @@ namespace Warewolf.AcceptanceTesting.Core
         }
 
         public string DisplayName { get; private set; }
+        public bool HasLoaded { get; private set; }
+
+        public IServer Clone()
+        {
+            return null;
+        }
 
         public List<IResource> Load()
         {

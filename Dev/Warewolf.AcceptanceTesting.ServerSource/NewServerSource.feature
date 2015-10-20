@@ -5,7 +5,7 @@ Feature: NewServerSource
 	I want to be able to manager connections to Warewolf servers
 
 @ServerSource
-Scenario: Opening New Server Source
+Scenario: Create New Server Source
 	Given I open New Server Source
 	Then "New Server Source" tab is opened
 	And selected protocol is "https" 

@@ -119,7 +119,7 @@ namespace Warewolf.AcceptanceTesting.ServerSource
                 var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
                 manageServerControl.EnterServerName(serverName);
                 var viewModel = GetViewModel(manageServerControl);
-                if(viewModel != null)
+                if (viewModel != null)
                 {
                     Assert.AreEqual(serverName, viewModel.ServerName.Name);
                 }
@@ -202,21 +202,22 @@ namespace Warewolf.AcceptanceTesting.ServerSource
             FeatureContext.Current["svrsrc"] = serverSourceDefinition;
             var viewModel = GetViewModel(manageServerControl);
             var manageServerSourceViewModel = new ManageNewServerViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object, serverSourceDefinition, new SynchronousAsyncWorker(), mockExecutor.Object);
-            
-                manageServerControl.EnterPassword(manageServerSourceViewModel.Password);
-                manageServerControl.EnterUserName(manageServerSourceViewModel.UserName);
-                manageServerControl.SetPort(manageServerSourceViewModel.SelectedPort);
-                manageServerControl.SetProtocol(manageServerSourceViewModel.Protocol);
-                manageServerControl.SetAuthenticationType(manageServerSourceViewModel.AuthenticationType);
-                manageServerControl.EnterServerName(manageServerSourceViewModel.ServerName.Name);
-                manageServerControl.SelectServer(manageServerSourceViewModel.ServerName.Name);
-                viewModel.Password = manageServerSourceViewModel.Password;
-                viewModel.UserName = manageServerSourceViewModel.UserName;
-                viewModel.Protocol = manageServerSourceViewModel.Protocol;
-                viewModel.AuthenticationType = manageServerSourceViewModel.AuthenticationType;
-                viewModel.ServerName = manageServerSourceViewModel.ServerName;
-                viewModel.Header = manageServerSourceViewModel.Header;
-                viewModel.Item = manageServerSourceViewModel.Item;
+
+            manageServerControl.EnterPassword(manageServerSourceViewModel.Password);
+            manageServerControl.EnterUserName(manageServerSourceViewModel.UserName);
+            manageServerControl.SetPort(manageServerSourceViewModel.SelectedPort);
+            manageServerControl.SetProtocol(manageServerSourceViewModel.Protocol);
+            manageServerControl.SetAuthenticationType(manageServerSourceViewModel.AuthenticationType);
+            manageServerControl.EnterServerName(manageServerSourceViewModel.ServerName.Name);
+            manageServerControl.SelectServer(manageServerSourceViewModel.ServerName.Name);
+            viewModel.Password = manageServerSourceViewModel.Password;
+            viewModel.UserName = manageServerSourceViewModel.UserName;
+            viewModel.Protocol = manageServerSourceViewModel.Protocol;
+            viewModel.AuthenticationType = manageServerSourceViewModel.AuthenticationType;
+            viewModel.ServerName = manageServerSourceViewModel.ServerName;
+            viewModel.Header = manageServerSourceViewModel.Header;
+            viewModel.HeaderText = manageServerSourceViewModel.HeaderText;
+            viewModel.Item = manageServerSourceViewModel.Item;
         }
 
         [Then(@"Server as ""(.*)""")]
@@ -334,7 +335,7 @@ namespace Warewolf.AcceptanceTesting.ServerSource
                     .Throws(new WarewolfTestException("Connection Error: Unauthorized", null));
 
             }
-            
+
             manageServerControl.TestAction();
         }
 
@@ -376,7 +377,7 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         {
             var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
             var viewModel = GetViewModel(manageServerControl);
-            Assert.AreEqual(headerText, viewModel.Header); 
+            Assert.AreEqual(headerText, viewModel.Header);
         }
 
         [AfterScenario("ServerSource")]
@@ -388,7 +389,7 @@ namespace Warewolf.AcceptanceTesting.ServerSource
             mockUpdateManager.Setup(model => model.GetComputerNames()).Returns(new List<string> { "rsaklfhuggspc", "barney", "SANDBOX-1" });
             var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
             var mockEventAggregator = new Mock<IEventAggregator>();
-            
+
             var viewModel = new ManageNewServerViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockExecutor.Object);
             var manageServerControl = ScenarioContext.Current.Get<ManageServerControl>(Utils.ViewNameKey);
             var originalViewModel = GetViewModel(manageServerControl);
@@ -403,7 +404,7 @@ namespace Warewolf.AcceptanceTesting.ServerSource
             originalViewModel.Protocol = viewModel.Protocol;
             originalViewModel.AuthenticationType = viewModel.AuthenticationType;
             originalViewModel.ServerName = viewModel.ServerName;
-            
+
             FeatureContext.Current.Remove("externalProcessExecutor");
             FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
 
