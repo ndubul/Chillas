@@ -791,8 +791,7 @@ namespace Warewolf.Studio.ViewModels
                     AllowResourceCheck =  isDeploy,
                     ShowContextMenu = !isDeploy,
                     CanExecute = !isDeploy,
-                    CanEdit = !isDeploy
-                    ShowContextMenu = !isDeploy,
+                    CanEdit = !isDeploy,
                     CanDrop = ! isDeploy
                     //Inputs = explorerItem.Inputs,
                     //Outputs = explorerItem.Outputs
