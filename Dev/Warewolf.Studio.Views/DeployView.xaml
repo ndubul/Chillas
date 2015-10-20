@@ -221,6 +221,12 @@
                                              Margin="{StaticResource ControlBorderRight}" 
                                              Icon="Check" 
                                              HorizontalAlignment="Right" />
+                            <TextBlock x:Name="StatusPass" 
+                                       Text="{Binding DeploySuccessMessage}"
+                                       Foreground="{StaticResource WareWolfOrangeBrush}"
+                                       TextWrapping="Wrap"
+                                       AutomationProperties.AutomationId="UI_DeploySelectTB_AutoID"
+                                       VerticalAlignment="Center" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                     Margin="{StaticResource ControlBorderRight}"
@@ -242,7 +248,6 @@
                                        VerticalAlignment="Center" />
 
                         </StackPanel>
-
                     </StackPanel>
                 </Grid>
 

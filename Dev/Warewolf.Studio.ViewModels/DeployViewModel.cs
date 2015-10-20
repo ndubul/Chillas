@@ -41,6 +41,7 @@ namespace Warewolf.Studio.ViewModels
         IList<Conflict> _conflictItems;
         IList<IExplorerTreeItem> _newItems;
         string _errorMessage;
+        string _deploySuccessMessage;
 
         #region Implementation of IDeployViewModel
 
@@ -215,6 +216,10 @@ namespace Warewolf.Studio.ViewModels
                     canDeploy = true;
                 }
             }
+            else
+            {
+                canDeploy = true;
+            }
             if (!canDeploy)
             {
                 ViewOverrides();
@@ -224,7 +229,8 @@ namespace Warewolf.Studio.ViewModels
                 var selected = Source.SelectedItems.Where(a => a.ResourceType != ResourceType.Folder);
                 var notfolders = selected.Select(a => a.ResourceId).ToList();
                     _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.ConnectControlViewModel.SelectedConnection.EnvironmentID, notfolders);
-                    ErrorMessage = String.Format("{0} Resource{1} Deployed Successfully.", notfolders.Count,notfolders.Count==1?"":"s");
+                    DeploySuccessfull = true;
+                    DeploySuccessMessage = String.Format("{0} Resource{1} Deployed Successfully.", notfolders.Count, notfolders.Count == 1 ? "" : "s");
                 }
             }
             catch (Exception e)
@@ -539,6 +545,18 @@ namespace Warewolf.Studio.ViewModels
             {
                 _errorMessage = value;
                 OnPropertyChanged(() => ErrorMessage);
+            }
+        }
+        public string DeploySuccessMessage
+        {
+            get
+            {
+                return _deploySuccessMessage;
+            }
+            set
+            {
+                _deploySuccessMessage = value;
+                OnPropertyChanged(() => DeploySuccessMessage);
             }
         }
 

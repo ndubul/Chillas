@@ -900,6 +900,68 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.DeleteARecord("[[rj([[int]])]], [[int]]= 1", "Success", ((string[])(null)));
         }
+        
+        public virtual void DeleteAComplexTypes(string result, string success, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a complex types", exampleTags);
+#line 277
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
+                        "rs",
+                        "val"});
+            table48.AddRow(new string[] {
+                        "rs().row().set",
+                        "1"});
+            table48.AddRow(new string[] {
+                        "rs().row().set",
+                        "2"});
+            table48.AddRow(new string[] {
+                        "rs().row().set",
+                        "3"});
+#line 278
+ testRunner.Given("I have the following recordset", ((string)(null)), table48, "Given ");
+#line 283
+ testRunner.And("I delete a record \"[[rs().row(2).set]]\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 284
+ testRunner.When("the delete tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 285
+ testRunner.Then("the delete result should be \"Success\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
+                        "rs",
+                        "val"});
+            table49.AddRow(new string[] {
+                        "rs().row().set",
+                        "1"});
+            table49.AddRow(new string[] {
+                        "rs().row().set",
+                        "3"});
+#line 286
+ testRunner.And("the recordset \"[[rs(*).row]]\" will be as follows", ((string)(null)), table49, "And ");
+#line 290
+ testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
+                        "result"});
+            table50.AddRow(new string[] {
+                        string.Format("{0} = {1}", result, success)});
+#line 291
+ testRunner.And("the debug output as", ((string)(null)), table50, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Delete a complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Delete")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rj().set().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rj().set().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Success", "Success")]
+        public virtual void DeleteAComplexTypes_Rj_Set_Value()
+        {
+            this.DeleteAComplexTypes("[[rj().set().value]]", "Success", ((string[])(null)));
+        }
     }
 }
 #pragma warning restore
