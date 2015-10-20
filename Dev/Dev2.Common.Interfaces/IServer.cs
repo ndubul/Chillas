@@ -40,8 +40,9 @@ namespace Dev2.Common.Interfaces
         void Connect();
         Task<bool> ConnectAsync();
         string DisplayName { get; }
+        bool HasLoaded { get;  }
 
-
+        IServer Clone();
     }
 
     public delegate void PermissionsChanged(PermissionsChangedArgs args);

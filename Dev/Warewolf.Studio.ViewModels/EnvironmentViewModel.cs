@@ -31,7 +31,6 @@ namespace Warewolf.Studio.ViewModels
         readonly IShellViewModel _shellViewModel;
         readonly bool _isDialog;
         bool _allowEdit;
-        Guid _resourceId;
         bool _allowResourceCheck;
         bool? _isResourceChecked;
         bool _isVisible;
@@ -426,17 +425,7 @@ namespace Warewolf.Studio.ViewModels
         public string ResourcePath { get; set; }
 
         public string ResourceName { get; set; }
-        public Guid ResourceId
-        {
-            get
-            {
-                return _resourceId;
-            }
-            set
-            {
-                _resourceId = value;
-            }
-        }
+        public Guid ResourceId { get; set; }
 
         public bool IsExpanderVisible
         {
@@ -803,6 +792,8 @@ namespace Warewolf.Studio.ViewModels
                     ShowContextMenu = !isDeploy,
                     CanExecute = !isDeploy,
                     CanEdit = !isDeploy
+                    ShowContextMenu = !isDeploy,
+                    CanDrop = ! isDeploy
                     //Inputs = explorerItem.Inputs,
                     //Outputs = explorerItem.Outputs
                 };
