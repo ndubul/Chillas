@@ -110,7 +110,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 return;
             }
-            if (SelectedConnection.IsConnected)
+            if (SelectedConnection.IsConnected && SelectedConnection.HasLoaded)
             {
                 Disconnect(SelectedConnection);
 
@@ -175,7 +175,7 @@ namespace Warewolf.Studio.ViewModels
                         {
                             AllowConnection = false;
                         }
-                        IsConnected = _selectedConnection.IsConnected;
+                        IsConnected = _selectedConnection.IsConnected&& _selectedConnection.HasLoaded;
                     }
                     if (mainViewModel != null)
                     {
