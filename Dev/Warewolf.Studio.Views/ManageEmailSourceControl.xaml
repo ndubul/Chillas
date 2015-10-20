@@ -34,7 +34,7 @@
                             Background="{StaticResource WareWolfMenuBrush}" 
                             HorizontalAlignment="Stretch" 
                             Orientation="Horizontal">
-                    <TextBlock Margin="5" Text="{Binding HeaderText}" Style="{StaticResource SourceHeader}" />
+                    <TextBlock x:Name="HeaderTextBlock" Margin="5" Text="{Binding HeaderText}" Style="{StaticResource SourceHeader}" />
                 </StackPanel>
                 <Grid Grid.Row="1" Margin="{StaticResource ElementBorderTop}">
                     <Grid.ColumnDefinitions>
@@ -96,6 +96,7 @@
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <RadioButton Padding="0,0,5,0" 
+                                     x:Name="EnableSslYes"
                                      VerticalAlignment="Center" 
                                      HorizontalAlignment="Left" 
                                      Margin="{StaticResource ElementBorderControlRight}"
@@ -107,6 +108,7 @@
                         </RadioButton>
                         <RadioButton Grid.Column="1" 
                                      Padding="0,0,5,0" 
+                                     x:Name="EnableSslNo"
                                      VerticalAlignment="Center" 
                                      HorizontalAlignment="Left" 
                                      Margin="{StaticResource ElementBorderControlRight}"
@@ -200,6 +202,7 @@
                                        Margin="{StaticResource ElementBorderControlRight}" 
                                        Visibility="{Binding Path=Testing,Converter={StaticResource BoolToVisibilityConverter}}" />
                         <Button ToolTip="{Binding Path=SendToolTip}" 
+                                x:Name="TestSendCommand"
                                 HorizontalAlignment="Right" 
                                 Width="50" 
                                 IsEnabled="{Binding EnableSend}"
