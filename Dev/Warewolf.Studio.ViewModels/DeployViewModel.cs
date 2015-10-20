@@ -12,6 +12,7 @@ using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.AntiCorruptionLayer;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -42,6 +43,7 @@ namespace Warewolf.Studio.ViewModels
         IList<IExplorerTreeItem> _newItems;
         string _errorMessage;
         string _deploySuccessMessage;
+        bool _isConnecting;
 
         #region Implementation of IDeployViewModel
 
@@ -70,6 +72,7 @@ namespace Warewolf.Studio.ViewModels
             };
             SourceConnectControlViewModel = _source.ConnectControlViewModel;
             DestinationConnectControlViewModel = _destination.ConnectControlViewModel;
+            //IsConnecting = DestinationConnectControlViewModel.IsConnecting;
 
             SourceConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
             DestinationConnectControlViewModel.SelectedEnvironmentChanged += UpdateServerCompareChanged;
@@ -99,7 +102,7 @@ namespace Warewolf.Studio.ViewModels
             get
             {
                 return _newItems;
-        }
+            }
             set
             {
                 _newItems = value;
@@ -116,7 +119,7 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _conflictItems = value;
-                OnPropertyChanged(()=>ConflictItems);
+                OnPropertyChanged(() => ConflictItems);
             }
         }
 
@@ -205,37 +208,39 @@ namespace Warewolf.Studio.ViewModels
             IsDeploying = true;
             try
             {
-
                 ErrorMessage = "";
-            bool canDeploy = false;
-            if (ConflictItems.Count >= 1)
-            {
-                var msgResult = _popupController.ShowDeployConflict(ConflictItems.Count);
+                bool canDeploy = false;
+                if (ConflictItems.Count >= 1)
+                {
+                    var msgResult = _popupController.ShowDeployConflict(ConflictItems.Count);
                     if (msgResult == MessageBoxResult.Yes || msgResult == MessageBoxResult.OK)
+                    {
+                        canDeploy = true;
+                    }
+                }
+                else
                 {
                     canDeploy = true;
                 }
-            }
-            else
-            {
-                canDeploy = true;
-            }
-            if (!canDeploy)
-            {
-                ViewOverrides();
-            }
-            else
-            {
-                var selected = Source.SelectedItems.Where(a => a.ResourceType != ResourceType.Folder);
-                var notfolders = selected.Select(a => a.ResourceId).ToList();
+                if (!canDeploy)
+                {
+                    ViewOverrides();
+                }
+                else
+                {
+                    var selected = Source.SelectedItems.Where(a => a.ResourceType != ResourceType.Folder);
+                    var notfolders = selected.Select(a => a.ResourceId).ToList();
                     _shell.DeployResources(Source.Environments.First().Server.EnvironmentID, Destination.ConnectControlViewModel.SelectedConnection.EnvironmentID, notfolders);
                     DeploySuccessfull = true;
                     DeploySuccessMessage = String.Format("{0} Resource{1} Deployed Successfully.", notfolders.Count, notfolders.Count == 1 ? "" : "s");
+
+                    _stats.Calculate(new List<IExplorerTreeItem>());
+                    UpdateServerCompareChanged(this, Guid.Empty);
+                    Source.SelectedEnvironment.AsList().Apply(o => o.IsResourceUnchecked = false);
                 }
             }
             catch (Exception e)
             {
-
                 ErrorMessage = "Deploy error." + e.Message;
             }
             IsDeploying = false;
@@ -282,6 +287,18 @@ namespace Warewolf.Studio.ViewModels
                 OnPropertyChanged(() => CanDeploy);
             }
         }
+        public bool IsConnecting
+        {
+            get
+            {
+                return _isConnecting;
+            }
+            set
+            {
+                _isConnecting = value;
+                OnPropertyChanged(() => IsConnecting);
+            }
+        }
         /// <summary>
         /// Can Deploy test to enable button
         /// </summary>
@@ -305,7 +322,7 @@ namespace Warewolf.Studio.ViewModels
                     return false;
 
                 }
-              if (Destination.SelectedEnvironment == null || !Destination.ConnectControlViewModel.SelectedConnection.IsConnected)
+                if (Destination.SelectedEnvironment == null || !Destination.ConnectControlViewModel.SelectedConnection.IsConnected)
                 {
                     return false;
                 }
@@ -313,8 +330,8 @@ namespace Warewolf.Studio.ViewModels
                 {
                     return false;
                 }
-              if (Source.SelectedEnvironment.Server.EnvironmentID == Destination.ConnectControlViewModel.SelectedConnection.EnvironmentID)
-                  return false;
+                if (Source.SelectedEnvironment.Server.EnvironmentID == Destination.ConnectControlViewModel.SelectedConnection.EnvironmentID)
+                    return false;
 
                 return true;
             }

@@ -460,7 +460,7 @@ namespace Warewolf.Studio.ViewModels
             SetPermissions(args.WindowsGroupPermissions);
         }
 
-        public void SetPermissions(List<IWindowsGroupPermission> permissions)
+        public void SetPermissions(List<IWindowsGroupPermission> permissions, bool isDeploy = false)
         {
             if (ResourceType == ResourceType.Folder)
             {
@@ -472,12 +472,16 @@ namespace Warewolf.Studio.ViewModels
             {
                 CanEdit = true;
                 CanExecute = false;
+                if (isDeploy)
+                {
+                    CanEdit = false;
+                }
                 return;
             }
             var resourcePermission = permissions.FirstOrDefault(permission => permission.ResourceID == ResourceId);
             if (resourcePermission != null)
             {
-                SetFromPermission(resourcePermission);
+                SetFromPermission(resourcePermission, isDeploy);
             }
             else
             {
@@ -485,15 +489,15 @@ namespace Warewolf.Studio.ViewModels
                     permissions.FirstOrDefault(permission => permission.IsServer && permission.ResourceID == Guid.Empty);
                 if (serverPermission != null)
                 {
-                    SetFromServer(serverPermission);
+                    SetFromServer(serverPermission, isDeploy);
                 }
             }
         }
 
-        void SetFromServer(IWindowsGroupPermission serverPermission)
+        void SetFromServer(IWindowsGroupPermission serverPermission, bool isDeploy = false)
         {
-            CanEdit = serverPermission.Contribute;
-            CanExecute = serverPermission.Contribute || serverPermission.Execute && ResourceType == ResourceType.WorkflowService;
+            CanEdit = serverPermission.Contribute && !isDeploy;
+            CanExecute = serverPermission.Contribute && !isDeploy || serverPermission.Execute && ResourceType == ResourceType.WorkflowService && !isDeploy;
             CanView = serverPermission.View || serverPermission.Contribute || serverPermission.Administrator;
             CanRename = serverPermission.Contribute || serverPermission.Administrator;
             CanDelete = serverPermission.Contribute || serverPermission.Administrator;
@@ -501,10 +505,10 @@ namespace Warewolf.Studio.ViewModels
             CanDeploy = serverPermission.DeployFrom || serverPermission.Administrator;
         }
 
-        void SetFromPermission(IWindowsGroupPermission resourcePermission)
+        void SetFromPermission(IWindowsGroupPermission resourcePermission, bool isDeploy = false)
         {
-            CanEdit = resourcePermission.Contribute;
-            CanExecute = resourcePermission.Contribute || resourcePermission.Execute && ResourceType == ResourceType.WorkflowService;
+            CanEdit = resourcePermission.Contribute && !isDeploy;
+            CanExecute = resourcePermission.Contribute && !isDeploy || resourcePermission.Execute && ResourceType == ResourceType.WorkflowService && !isDeploy;
             CanView = resourcePermission.View || resourcePermission.Contribute || resourcePermission.Administrator;
             CanRename = resourcePermission.Contribute || resourcePermission.Administrator;
             CanDelete = resourcePermission.Contribute || resourcePermission.Administrator;
