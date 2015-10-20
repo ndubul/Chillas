@@ -421,7 +421,7 @@
             <!-- URI LOOKUP-->
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                         Visibility="{Binding ShowConnectControl, Converter={StaticResource BoolToVisibilityConverter}}" >
-                <views:ConnectControl DataContext="{Binding ConnectControlViewModel}"/>
+                <views:ConnectControl DataContext="{Binding ConnectControlViewModel}" x:Name="ConnectControl"/>
             </StackPanel>
             <!--  SERVICE FILTER  -->
             <Grid Grid.Row="1" Margin="0,-1,0,0">

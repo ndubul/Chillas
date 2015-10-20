@@ -12,6 +12,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows;
+using Dev2.Common.Interfaces;
 using Dev2.ConnectionHelpers;
 
 namespace Warewolf.Studio.Views
@@ -57,11 +58,23 @@ namespace Warewolf.Studio.Views
             get { return (string)GetValue(ConnectButtonAutomationIDProperty); }
             set { SetValue(ConnectButtonAutomationIDProperty, value); }
         }
+        public IServer SelectedServer
+        {
+            get
+            {
+                return (IServer)TheServerComboBox.SelectedItem;
+            }
+            set
+            {
+                _selectedServer = value;
+            }
+        }
 
         // Using a DependencyProperty as the backing store for ConnectButtonAutomationID.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ConnectButtonAutomationIDProperty =
             DependencyProperty.Register("ConnectButtonAutomationID", typeof(string), typeof(ConnectControl),
                 new PropertyMetadata("UI_ConnectServerBtn_AutoID"));
+        IServer _selectedServer;
 
         #endregion
 

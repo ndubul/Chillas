@@ -65,7 +65,10 @@ namespace Warewolf.AcceptanceTesting.Core
             app.Resources.MergedDictionaries.Add(themeDictionary);
             themeDictionary.Source = new Uri("pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Common/Styles.xaml", UriKind.RelativeOrAbsolute);
             app.Resources.MergedDictionaries.Add(themeDictionary);
-
+            //themeDictionary.Source = new Uri("pack://application:,,,/Warewolf.Studio.Themes.Luna;component/Common/generic.xaml", UriKind.RelativeOrAbsolute);
+            //app.Resources.MergedDictionaries.Add(themeDictionary);
+            themeDictionary.Source = new Uri("pack://application:,,,/Warewolf Studio;component/Resources/Converters.xaml", UriKind.RelativeOrAbsolute);
+            app.Resources.MergedDictionaries.Add(themeDictionary);
         }
 
 

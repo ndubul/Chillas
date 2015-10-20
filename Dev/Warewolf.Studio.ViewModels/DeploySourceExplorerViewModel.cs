@@ -28,7 +28,7 @@ namespace Warewolf.Studio.ViewModels
 			{
 				throw new ArgumentNullException("shellViewModel");
 			}
-			var localhostEnvironment = CreateEnvironmentFromServer(shellViewModel.LocalhostServer.Clone(), shellViewModel);
+			var localhostEnvironment = CreateEnvironmentFromServer(shellViewModel.LocalhostServer, shellViewModel);
             _shellViewModel = shellViewModel;
 	        _selectAction = SelectAction;
             Environments = new ObservableCollection<IEnvironmentViewModel> { localhostEnvironment };
