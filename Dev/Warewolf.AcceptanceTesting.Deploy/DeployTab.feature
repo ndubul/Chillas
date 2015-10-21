@@ -30,7 +30,7 @@ Feature: DeployTab
 Scenario: Deploy Tab
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-	 When selected Destination Server is "localhost"
+	 And selected Destination Server is "localhost"
 	 Then the validation message is "Source and Destination cannot be the same."
 	 And "Deploy" is "Disabled"
 	 And Select All Dependencies is "Disabled"	 
@@ -46,18 +46,18 @@ Scenario: Deploy button is enabling when selecting resource in source side
 Scenario: Deploy is successfull
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-     And selected Destination Server is "Remote"
+     When selected Destination Server is "Remote"
 	 And I select "Examples\Utility - Date and Time" from Source Server
 	 When I deploy 
 	 Then deploy is successfull
 	 And the validation message is "Items deployed successfully"
-	 And "Examples\Utility - Date and Time" is visible on Destination Server
+
 
 
 Scenario: Conflicting resources on Source and Destination server
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-     And selected Destination Server is "Remote"
+     When selected Destination Server is "Remote"
 	 And I select "Examples\Utility - Date and Time" from Source Server
 	 And I deploy 
 	 Then Resource exists in the destination server popup is shown
@@ -70,7 +70,7 @@ Scenario: Conflicting resources on Source and Destination server
 Scenario: Conflicting resources on Source and Destination server deploy is not successful
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-     And selected Destination Server is "Remote"
+     When selected Destination Server is "Remote"
 	 And I select "Examples\Utility - Date and Time" from Source Server
 	 And I deploy 
 	 Then Resource exists in the destination server popup is shown
@@ -84,7 +84,7 @@ Scenario: Conflicting resources on Source and Destination server deploy is not s
 Scenario: Select all Dependecies is selecting dependecies
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-     And selected Destination Server is "Remote"
+     When selected Destination Server is "Remote"
 	 When I select "My Category\Double Roll and Check" from Source Server
 	 Then "Deploy" is "Enabled" 
 	 And "Select All Dependencies" is "Enabled"
@@ -95,7 +95,7 @@ Scenario: Select all Dependecies is selecting dependecies
 Scenario: Deploying a connector with a source
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-     And selected Destination Server is "Remote"
+     When selected Destination Server is "Remote"
 	 When I select "Double Roll Example\Roll Dice for Players" from Source Server
 	 Then "Deploy" is "Enabled" 
 	 And "Select All Dependencies" is "Enabled"
@@ -109,7 +109,7 @@ Scenario: Deploying a connector with a source
 Scenario: Mouse right click select Dependecies is selecting dependecies
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-     And selected Destination Server is "Remote"
+     When selected Destination Server is "Remote"
 	 When I select "My Category\Double Roll and Check" from Source Server
 	 Then "Deploy" is "Enabled" 
 	 When I Select All Dependecies

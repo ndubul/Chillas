@@ -77,12 +77,13 @@
             </StackPanel>
 
             <views:ConnectControl Grid.Row="1"
+                                  x:Name="DestinationConnectControl"
                                   DataContext="{Binding DestinationConnectControlViewModel}"
                                   Margin="{StaticResource ControlBorderTop}"
                                   ConnectButtonAutomationID="UI_DestinationServerConnectbtn_AutoID"
                                   EditButtonAutomationID="UI_DestinationServerEditbtn_AutoID"
                                   ServerComboBoxAutomationID="UI_DestinationServercbx_AutoID" 
-                                  x:Name="DestinationConnectControl" />
+                                   />
 
             <Grid Grid.Row="2" Background="#7F7F7F" Margin="{StaticResource ControlBorderTop}">
                 <Grid.RowDefinitions>

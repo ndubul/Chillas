@@ -1,218 +1,325 @@
-﻿using TechTalk.SpecFlow;
+﻿using System;
+using System.Windows;
+using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Core;
+using Dev2.Common.Interfaces.SaveDialog;
+using Dev2.Runtime.ServiceModel.Data;
+using Dev2.Threading;
+using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using TechTalk.SpecFlow;
+using Warewolf.AcceptanceTesting.Core;
+using Warewolf.Studio.Core.Infragistics_Prism_Region_Adapter;
+using Warewolf.Studio.ServerProxyLayer;
+using Warewolf.Studio.ViewModels;
+using Warewolf.Studio.Views;
 
 namespace Warewolf.AcceptanceTesting.SharepointSource
 {
     [Binding]
     public class SharepointSteps
     {
+        [BeforeFeature("SharepointSource")]
+        public static void SetupForSystem()
+        {
+            Utils.SetupResourceDictionary();
+            var manageSharepointServerSource = new SharepointServerSource();
+            var mockStudioUpdateManager = new Mock<ISharePointSourceModel>();
+            var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            var mockExecutor = new Mock<IExternalProcessExecutor>();
+
+            var manageSharepointServerSourceViewModel = new SharepointServerSourceViewModel(mockStudioUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockExecutor.Object);
+            manageSharepointServerSource.DataContext = manageSharepointServerSourceViewModel;
+            Utils.ShowTheViewForTesting(manageSharepointServerSource);
+            FeatureContext.Current.Add(Utils.ViewNameKey, manageSharepointServerSource);
+            FeatureContext.Current.Add(Utils.ViewModelNameKey, manageSharepointServerSourceViewModel);
+            FeatureContext.Current.Add("updateManager", mockStudioUpdateManager);
+            FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
+            FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+        }
+
+        [BeforeScenario("SharepointSource")]
+        public void SetupForSharepointSource()
+        {
+            ScenarioContext.Current.Add(Utils.ViewNameKey, FeatureContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey));
+            ScenarioContext.Current.Add("updateManager", FeatureContext.Current.Get<Mock<ISharePointSourceModel>>("updateManager"));
+            ScenarioContext.Current.Add("requestServiceNameViewModel", FeatureContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel"));
+            ScenarioContext.Current.Add("externalProcessExecutor", FeatureContext.Current.Get<Mock<IExternalProcessExecutor>>("externalProcessExecutor"));
+            ScenarioContext.Current.Add(Utils.ViewModelNameKey, FeatureContext.Current.Get<SharepointServerSourceViewModel>(Utils.ViewModelNameKey));
+        }
+
         [Given(@"I open New Sharepoint Source")]
         public void GivenIOpenNewSharepointSource()
         {
-            ScenarioContext.Current.Pending();
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            Assert.IsNotNull(manageSharepointServerSource);
+            Assert.IsNotNull(manageSharepointServerSource.DataContext); 
         }
-        
-        [Given(@"I type Address as ""(.*)""")]
-        public void GivenITypeAddressAs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"""(.*)"" is ""(.*)""")]
-        public void GivenIs(string p0, string p1)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"I Select Authentication Type as ""(.*)""")]
-        public void GivenISelectAuthenticationTypeAs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"Username field is ""(.*)""")]
-        public void GivenUsernameFieldIs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"Password field is ""(.*)""")]
-        public void GivenPasswordFieldIs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"I type Username as ""(.*)""")]
-        public void GivenITypeUsernameAs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"I type Password as ""(.*)""")]
-        public void GivenITypePasswordAs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"I open ""(.*)"" Sharepoint source")]
-        public void GivenIOpenSharepointSource(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"Test Connecton is ""(.*)""")]
-        public void WhenTestConnectonIs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"""(.*)"" is ""(.*)""")]
-        public void WhenIs(string p0, string p1)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"I save as ""(.*)""")]
-        public void WhenISaveAs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"I save the source")]
-        public void WhenISaveTheSource()
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"Validation message is thrown")]
-        public void WhenValidationMessageIsThrown()
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"Validation message is Not thrown")]
-        public void WhenValidationMessageIsNotThrown()
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"I Select Authentication Type as ""(.*)""")]
-        public void WhenISelectAuthenticationTypeAs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"Username field is ""(.*)""")]
-        public void WhenUsernameFieldIs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"Password field is ""(.*)""")]
-        public void WhenPasswordFieldIs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"I change Address to ""(.*)""")]
-        public void WhenIChangeAddressTo(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"I edit Authentication Type as ""(.*)""")]
-        public void WhenIEditAuthenticationTypeAs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"Username field as ""(.*)""")]
-        public void WhenUsernameFieldAs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"Password field as ""(.*)""")]
-        public void WhenPasswordFieldAs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [When(@"I Cancel the Test")]
-        public void WhenICancelTheTest()
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
+
         [Then(@"""(.*)"" tab is opened")]
-        public void ThenTabIsOpened(string p0)
+        public void ThenTabIsOpened(string headerText)
         {
-            ScenarioContext.Current.Pending();
+            var viewModel = ScenarioContext.Current.Get<IDockAware>("viewModel");
+            Assert.AreEqual(headerText, viewModel.Header);
         }
-        
+
         [Then(@"title is ""(.*)""")]
-        public void ThenTitleIs(string p0)
+        public void ThenTitleIs(string title)
         {
-            ScenarioContext.Current.Pending();
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            Assert.AreEqual(title, viewModel.HeaderText);
+            Assert.AreEqual(title, manageSharepointServerSource.GetHeaderText());
         }
-        
+
         [Then(@"I type Address as ""(.*)""")]
-        public void ThenITypeAddressAs(string p0)
+        [When(@"I type Address as ""(.*)""")]
+        [Given(@"I type Address as ""(.*)""")]
+        public void ThenITypeAddressAs(string serverName)
         {
-            ScenarioContext.Current.Pending();
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageSharepointServerSource.EnterServerName(serverName);
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            Assert.AreEqual(serverName, viewModel.ServerName);
         }
-        
+
         [Then(@"""(.*)"" is ""(.*)""")]
-        public void ThenIs(string p0, string p1)
+        [When(@"""(.*)"" is ""(.*)""")]
+        [Given(@"""(.*)"" is ""(.*)""")]
+        public void ThenIs(string controlName, string enabledString)
         {
-            ScenarioContext.Current.Pending();
+            Utils.CheckControlEnabled(controlName, enabledString, ScenarioContext.Current.Get<ICheckControlEnabledView>(Utils.ViewNameKey));
         }
-        
+
         [Then(@"I Select Authentication Type as ""(.*)""")]
-        public void ThenISelectAuthenticationTypeAs(string p0)
+        [When(@"I Select Authentication Type as ""(.*)""")]
+        [Given(@"I Select Authentication Type as ""(.*)""")]
+        public void ThenISelectAuthenticationTypeAs(string authenticationTypeString)
         {
-            ScenarioContext.Current.Pending();
+            var authenticationType = String.Equals(authenticationTypeString, "Windows",
+                StringComparison.InvariantCultureIgnoreCase)
+                ? AuthenticationType.Windows
+                : AuthenticationType.User;
+
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageSharepointServerSource.SetAuthenticationType(authenticationType);
         }
-        
+
         [Then(@"Username field is ""(.*)""")]
-        public void ThenUsernameFieldIs(string p0)
+        [When(@"Username field is ""(.*)""")]
+        [Given(@"Username field is ""(.*)""")]
+        public void ThenUsernameFieldIs(string visibility)
         {
-            ScenarioContext.Current.Pending();
+            var expectedVisibility = String.Equals(visibility, "Collapsed", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
+
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            var databaseDropDownVisibility = manageSharepointServerSource.GetUsernameVisibility();
+            Assert.AreEqual(expectedVisibility, databaseDropDownVisibility);
         }
-        
+
         [Then(@"Password field is ""(.*)""")]
-        public void ThenPasswordFieldIs(string p0)
+        [When(@"Password field is ""(.*)""")]
+        [Given(@"Password field is ""(.*)""")]
+        public void ThenPasswordFieldIs(string visibility)
         {
-            ScenarioContext.Current.Pending();
+            var expectedVisibility = String.Equals(visibility, "Collapsed", StringComparison.InvariantCultureIgnoreCase) ? Visibility.Collapsed : Visibility.Visible;
+
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            var databaseDropDownVisibility = manageSharepointServerSource.GetPasswordVisibility();
+            Assert.AreEqual(expectedVisibility, databaseDropDownVisibility);
         }
-        
+
+        [When(@"Test Connecton is ""(.*)""")]
+        public void WhenTestConnectonIs(string successString)
+        {
+            var mockUpdateManager = ScenarioContext.Current.Get<Mock<ISharePointSourceModel>>("updateManager");
+            var isSuccess = String.Equals(successString, "Successful", StringComparison.InvariantCultureIgnoreCase);
+            var isLongRunning = String.Equals(successString, "Long Running", StringComparison.InvariantCultureIgnoreCase);
+            if (isSuccess)
+            {
+                mockUpdateManager.Setup(manager => manager.TestConnection(It.IsAny<ISharepointServerSource>()));
+            }
+            else if (isLongRunning)
+            {
+                var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+                mockUpdateManager.Setup(manager => manager.TestConnection(It.IsAny<ISharepointServerSource>()));
+                viewModel.AsyncWorker = new AsyncWorker();
+            }
+            else
+            {
+                mockUpdateManager.Setup(manager => manager.TestConnection(It.IsAny<ISharepointServerSource>()))
+                    .Throws(new WarewolfTestException("Server not found", null));
+
+            }
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageSharepointServerSource.PerformTestConnection();
+        }
+
+        [When(@"I save as ""(.*)""")]
+        public void WhenISaveAs(string resourceName)
+        {
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Returns(MessageBoxResult.OK).Verifiable();
+            mockRequestServiceNameViewModel.Setup(a => a.ResourceName).Returns(new ResourceName("", resourceName));
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageSharepointServerSource.PerformSave();
+        }
+
         [Then(@"the save dialog is opened")]
         public void ThenTheSaveDialogIsOpened()
         {
-            ScenarioContext.Current.Pending();
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            mockRequestServiceNameViewModel.Verify();
         }
-        
-        [Then(@"Address is ""(.*)""")]
-        public void ThenAddressIs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Then(@"Select Authentication Type as ""(.*)""")]
-        public void ThenSelectAuthenticationTypeAs(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
+
         [Then(@"Validation message is thrown")]
+        [When(@"Validation message is thrown")]
         public void ThenValidationMessageIsThrown()
         {
-            ScenarioContext.Current.Pending();
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            var errorMessageFromControl = manageSharepointServerSource.GetErrorMessage();
+            var errorMessageOnViewModel = viewModel.TestMessage;
+            Assert.IsFalse(string.IsNullOrEmpty(errorMessageFromControl));
+            var isErrorMessage = !errorMessageOnViewModel.Contains("Passed");
+            Assert.IsTrue(isErrorMessage);
         }
-        
+
         [Then(@"Validation message is ""(.*)""")]
-        public void ThenValidationMessageIs(string p0)
+        public void ThenValidationMessageIs(string message)
         {
-            ScenarioContext.Current.Pending();
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            var errorMessageFromControl = manageSharepointServerSource.GetErrorMessage();
+            var errorMessageOnViewModel = viewModel.TestMessage;
+            var isErrorMessageOnControl = errorMessageFromControl.Equals(message, StringComparison.OrdinalIgnoreCase);
+            Assert.IsTrue(isErrorMessageOnControl);
+            var isErrorMessage = errorMessageOnViewModel.Equals(message, StringComparison.OrdinalIgnoreCase);
+            Assert.IsTrue(isErrorMessage);
         }
+
+        [When(@"Validation message is Not thrown")]
+        public void WhenValidationMessageIsNotThrown()
+        {
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            var errorMessageFromControl = manageSharepointServerSource.GetErrorMessage();
+            var errorMessageOnViewModel = viewModel.TestMessage;
+            var isErrorMessageOnViewModel = errorMessageOnViewModel.Contains("Passed");
+            var isErrorMessageOnControl = errorMessageFromControl.Contains("Passed");
+            Assert.IsFalse(isErrorMessageOnViewModel);
+            Assert.IsFalse(isErrorMessageOnControl);
+        }
+
+        [When(@"I Cancel the Test")]
+        public void WhenICancelTheTest()
+        {
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageSharepointServerSource.CancelTest();
+        }
+
+        [Given(@"I type Username as ""(.*)""")]
+        public void GivenITypeUsernameAs(string userName)
+        {
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageSharepointServerSource.EnterUserName(userName);
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            Assert.AreEqual(userName, viewModel.UserName);
+        }
+
+        [Given(@"I type Password as ""(.*)""")]
+        public void GivenITypePasswordAs(string password)
+        {
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageSharepointServerSource.EnterPassword(password);
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            Assert.AreEqual(password, viewModel.Password);
+        }
+
+        [When(@"Username field as ""(.*)""")]
+        public void WhenUsernameFieldAs(string userName)
+        {
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            Assert.AreEqual(userName, viewModel.UserName);
+            Assert.AreEqual(userName, manageSharepointServerSource.GetUsername());
+        }
+
+        [When(@"Password field as ""(.*)""")]
+        public void WhenPasswordFieldAs(string password)
+        {
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            Assert.AreEqual(password, viewModel.Password);
+            Assert.AreEqual(password, manageSharepointServerSource.GetPassword());
+        }
+
+        [When(@"I save the source")]
+        public void WhenISaveTheSource()
+        {
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Verifiable();
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageSharepointServerSource.PerformSave();
+        }
+
+        [Given(@"I open ""(.*)"" Sharepoint source")]
+        public void GivenIOpenSharepointSource(string p0)
+        {
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            var mockStudioUpdateManager = new Mock<ISharePointSourceModel>();
+            mockStudioUpdateManager.Setup(model => model.ServerName).Returns("localhost");
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            var mockExecutor = new Mock<IExternalProcessExecutor>();
+
+            var sharePointServiceSourceDefinition = new SharePointServiceSourceDefinition
+            {
+                Name = "Test",
+                Server = "http://rsaklfsvrsharep",
+                AuthenticationType = AuthenticationType.Windows,
+                UserName = "IntegrationTester",
+                Password = "I73573r0"
+            };
+            var manageSharepointServerSourceViewModel = new SharepointServerSourceViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object, sharePointServiceSourceDefinition, new SynchronousAsyncWorker(), mockExecutor.Object);
+            manageSharepointServerSource.DataContext = manageSharepointServerSourceViewModel;
+            ScenarioContext.Current.Remove("viewModel");
+            ScenarioContext.Current.Add("viewModel", manageSharepointServerSourceViewModel);
+        }
+
+        [Then(@"Address is ""(.*)""")]
+        public void ThenAddressIs(string address)
+        {
+            var manageSharepointServerSource = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            Assert.AreEqual(address, viewModel.ServerName);
+            Assert.AreEqual(address, manageSharepointServerSource.GetAddress());
+        }
+
+        [Then(@"Authentication Type is ""(.*)""")]
+        public void ThenAuthenticationTypeIs(string authenticationType)
+        {
+            var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
+            Assert.AreEqual(authenticationType, viewModel.AuthenticationType.ToString());
+        }
+
+        [AfterScenario("SharepointSource")]
+        public void Cleanup()
+        {
+            var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockUpdateManager = ScenarioContext.Current.Get<Mock<ISharePointSourceModel>>("updateManager");
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            var viewModel = new SharepointServerSourceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockExecutor.Object);
+            var manageWebserviceSourceControl = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageWebserviceSourceControl.DataContext = viewModel;
+            FeatureContext.Current.Remove("viewModel");
+            FeatureContext.Current.Add("viewModel", viewModel);
+            FeatureContext.Current.Remove("externalProcessExecutor");
+            FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+
+        }
+
     }
 }
