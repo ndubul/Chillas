@@ -304,5 +304,22 @@ namespace Warewolf.AcceptanceTesting.SharepointSource
             Assert.AreEqual(authenticationType, viewModel.AuthenticationType.ToString());
         }
 
+        [AfterScenario("SharepointSource")]
+        public void Cleanup()
+        {
+            var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockUpdateManager = ScenarioContext.Current.Get<Mock<ISharePointSourceModel>>("updateManager");
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            var viewModel = new SharepointServerSourceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockExecutor.Object);
+            var manageWebserviceSourceControl = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageWebserviceSourceControl.DataContext = viewModel;
+            FeatureContext.Current.Remove("viewModel");
+            FeatureContext.Current.Add("viewModel", viewModel);
+            FeatureContext.Current.Remove("externalProcessExecutor");
+            FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+
+        }
+
     }
 }

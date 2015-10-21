@@ -156,9 +156,10 @@
                                            Visibility="{Binding Testing, Converter={StaticResource BoolToVisibilityConverterPositive},Mode=OneWay}"
                                            AutomationProperties.AutomationId="UI_SettingsProgress_Indicator" />
                 <Button x:Name="TestConnection" 
-                        Width="50" 
+                        Width="120" 
+                        Height="30" 
                         Margin="{StaticResource ControlBorderRight}" 
-                        Command="{Binding TestCommand}" >Test
+                        Command="{Binding TestCommand}" >Test Connection
                     <i:Interaction.Behaviors>
                         <core:HelpSetter Text="{x:Static languages:Core.SharepointServiceSourceTestHelp}" DataContext="{Binding}" />
                     </i:Interaction.Behaviors>
