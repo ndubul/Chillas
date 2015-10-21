@@ -4,6 +4,7 @@ using System.Windows;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.SaveDialog;
+using Dev2.Threading;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -66,7 +67,7 @@ namespace Warewolf.AcceptanceTesting.EmailSource
             var mockEventAggregator = new Mock<IEventAggregator>();
             var mockExecutor = new Mock<IExternalProcessExecutor>();
 
-            var webServiceSourceDefinition = new EmailServiceSourceDefinition
+            var emailServiceSourceDefinition = new EmailServiceSourceDefinition
             {
                 ResourceName = "Test Email Source",
                 HostName = "smtp.gmail.com",
@@ -78,7 +79,7 @@ namespace Warewolf.AcceptanceTesting.EmailSource
                 EmailFrom = "this@to.com",
                 EmailTo = "another@rt.com"
             };
-            var manageEmailSourceViewModel = new ManageEmailSourceViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object, webServiceSourceDefinition);
+            var manageEmailSourceViewModel = new ManageEmailSourceViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object, emailServiceSourceDefinition);
             manageEmailSourceControl.DataContext = manageEmailSourceViewModel;
             ScenarioContext.Current.Remove("viewModel");
             ScenarioContext.Current.Add("viewModel", manageEmailSourceViewModel);
@@ -111,8 +112,8 @@ namespace Warewolf.AcceptanceTesting.EmailSource
         [Then(@"I type Host as ""(.*)""")]
         public void ThenITypeHostAs(string hostname)
         {
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.EnterHostName(hostname);
+            var manageEmailSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
+            manageEmailSourceControl.EnterHostName(hostname);
             var viewModel = ScenarioContext.Current.Get<ManageEmailSourceViewModel>("viewModel");
             Assert.AreEqual(hostname, viewModel.HostName);
         }
@@ -120,8 +121,8 @@ namespace Warewolf.AcceptanceTesting.EmailSource
         [Then(@"I type Username as ""(.*)""")]
         public void ThenITypeUsernameAs(string username)
         {
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.EnterUserName(username);
+            var manageEmailSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
+            manageEmailSourceControl.EnterUserName(username);
             var viewModel = ScenarioContext.Current.Get<ManageEmailSourceViewModel>("viewModel");
             Assert.AreEqual(username, viewModel.UserName);
         }
@@ -129,8 +130,8 @@ namespace Warewolf.AcceptanceTesting.EmailSource
         [Then(@"I type Password as ""(.*)""")]
         public void ThenITypePasswordAs(string password)
         {
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.EnterPassword(password);
+            var manageEmailSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
+            manageEmailSourceControl.EnterPassword(password);
             var viewModel = ScenarioContext.Current.Get<ManageEmailSourceViewModel>("viewModel");
             Assert.AreEqual(password, viewModel.Password);
         }
@@ -138,17 +139,17 @@ namespace Warewolf.AcceptanceTesting.EmailSource
         [Then(@"I type From as ""(.*)""")]
         public void ThenITypeFromAs(string emailFrom)
         {
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.EnterEmailFrom(emailFrom);
+            var manageEmailSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
+            manageEmailSourceControl.EnterEmailFrom(emailFrom);
             var viewModel = ScenarioContext.Current.Get<ManageEmailSourceViewModel>("viewModel");
-            Assert.AreEqual(emailFrom, viewModel.EmailTo);
+            Assert.AreEqual(emailFrom, viewModel.EmailFrom);
         }
 
         [Then(@"I type To as ""(.*)""")]
         public void ThenITypeToAs(string emailTo)
         {
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.EnterEmailTo(emailTo);
+            var manageEmailSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
+            manageEmailSourceControl.EnterEmailTo(emailTo);
             var viewModel = ScenarioContext.Current.Get<ManageEmailSourceViewModel>("viewModel");
             Assert.AreEqual(emailTo, viewModel.EmailTo);
         }
@@ -215,6 +216,23 @@ namespace Warewolf.AcceptanceTesting.EmailSource
         public void GivenIEdit(string p0)
         {
             ScenarioContext.Current.Pending();
+        }
+
+        [AfterScenario("EmailSource")]
+        public void Cleanup()
+        {
+            var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockUpdateManager = ScenarioContext.Current.Get<Mock<IManageEmailSourceModel>>("updateManager");
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            var viewModel = new ManageEmailSourceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object);
+            var manageEmailSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
+            manageEmailSourceControl.DataContext = viewModel;
+            FeatureContext.Current.Remove("viewModel");
+            FeatureContext.Current.Add("viewModel", viewModel);
+            FeatureContext.Current.Remove("externalProcessExecutor");
+            FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+
         }
     }
 }

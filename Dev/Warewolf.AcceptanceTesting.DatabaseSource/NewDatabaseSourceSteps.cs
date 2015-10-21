@@ -14,6 +14,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TechTalk.SpecFlow;
 using Warewolf.AcceptanceTesting.Core;
+using Warewolf.Studio.Core.Infragistics_Prism_Region_Adapter;
 using Warewolf.Studio.ServerProxyLayer;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
@@ -23,30 +24,36 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
     [Binding]
     public class NewDatabaseSourceSteps
     {
-        [BeforeFeature("CreatingNewDBSource")]
+        [BeforeFeature("DbSource")]
         public static void SetupForSystem()
         {
             Utils.SetupResourceDictionary();
-            var databaseSourceControlView = new ManageDatabaseSourceControl();
+            var manageDatabaseSourceControl = new ManageDatabaseSourceControl();
             var mockStudioUpdateManager = new Mock<IManageDatabaseSourceModel>();
-            mockStudioUpdateManager.Setup(model => model.GetComputerNames()).Returns(new List<string> { "TEST", "RSAKLFSVRGENDEV","RSAKLFSVRSBSPDC","RSAKLFSVRTFSBLD","RSAKLFSVRWRWBLD" });
+            mockStudioUpdateManager.Setup(model => model.GetComputerNames()).Returns(new List<string> { "TEST", "RSAKLFSVRGENDEV", "RSAKLFSVRSBSPDC", "RSAKLFSVRTFSBLD", "RSAKLFSVRWRWBLD" });
+            mockStudioUpdateManager.Setup(model => model.ServerName).Returns("localhost");
             var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
-            mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Returns(MessageBoxResult.OK);
             var mockEventAggregator = new Mock<IEventAggregator>();
-            var manageDatabaseSourceControlViewModel = new ManageDatabaseSourceViewModel(mockStudioUpdateManager.Object,mockRequestServiceNameViewModel.Object, mockEventAggregator.Object,new SynchronousAsyncWorker());
-            manageDatabaseSourceControlViewModel.AsyncWorker = new SynchronousAsyncWorker();
-            databaseSourceControlView.DataContext = manageDatabaseSourceControlViewModel;
-            Utils.ShowTheViewForTesting(databaseSourceControlView);
-            FeatureContext.Current.Add(Utils.ViewNameKey, databaseSourceControlView);
-            FeatureContext.Current.Add(Utils.ViewModelNameKey, manageDatabaseSourceControlViewModel);
-            FeatureContext.Current.Add("updateManager", mockStudioUpdateManager);
-            mockStudioUpdateManager.Setup(a => a.ServerName).Returns("localhost");
-            FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
-        }
-        public static void ReSetupForSystem()
-        {
-    
+            var mockExecutor = new Mock<IExternalProcessExecutor>();
 
+            var manageDatabaseSourceViewModel = new ManageDatabaseSourceViewModel(mockStudioUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker());
+            manageDatabaseSourceControl.DataContext = manageDatabaseSourceViewModel;
+            Utils.ShowTheViewForTesting(manageDatabaseSourceControl);
+            FeatureContext.Current.Add(Utils.ViewNameKey, manageDatabaseSourceControl);
+            FeatureContext.Current.Add(Utils.ViewModelNameKey, manageDatabaseSourceViewModel);
+            FeatureContext.Current.Add("updateManager", mockStudioUpdateManager);
+            FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
+            FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+        }
+
+        [BeforeScenario("DbSource")]
+        public void SetupForWebSource()
+        {
+            ScenarioContext.Current.Add(Utils.ViewNameKey, FeatureContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey));
+            ScenarioContext.Current.Add("updateManager", FeatureContext.Current.Get<Mock<IManageDatabaseSourceModel>>("updateManager"));
+            ScenarioContext.Current.Add("requestServiceNameViewModel", FeatureContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel"));
+            ScenarioContext.Current.Add("externalProcessExecutor", FeatureContext.Current.Get<Mock<IExternalProcessExecutor>>("externalProcessExecutor"));
+            ScenarioContext.Current.Add(Utils.ViewModelNameKey, FeatureContext.Current.Get<ManageDatabaseSourceViewModel>(Utils.ViewModelNameKey));
         }
 
         [Given(@"the server is Unreachable")]
@@ -65,10 +72,10 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
         }
 
         [Then(@"""(.*)"" tab is opened")]
-        public void ThenTabIsOpened(string p0)
+        public void ThenTabIsOpened(string headerText)
         {
-            //var name =FeatureContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
-            //name.Verify(a=>a.ShowView());
+            var viewModel = ScenarioContext.Current.Get<IDockAware>("viewModel");
+            Assert.AreEqual(headerText, viewModel.Header);
         }
         [Then(@"title is ""(.*)""")]
         public void ThenTitleIs(string p0)
@@ -254,8 +261,8 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
             manageDatabaseSourceControl.SelectServer(p0);
         }
 
-        [Then(@"the intellisense containts these options")]
-        public void ThenTheIntellisenseContaintsTheseOptions(Table table)
+        [Then(@"the intellisense contains these options")]
+        public void ThenTheIntellisenseContainsTheseOptions(Table table)
         {
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
 
@@ -451,10 +458,17 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
         {
             var mockUpdateManager = ScenarioContext.Current.Get<Mock<IManageDatabaseSourceModel>>("updateManager");
             var isSuccess = String.Equals(successString, "Successful", StringComparison.InvariantCultureIgnoreCase);
+            var isLongRunning = String.Equals(successString, "Long Running", StringComparison.InvariantCultureIgnoreCase);
             if (isSuccess)
             {
                 mockUpdateManager.Setup(manager => manager.TestDbConnection(It.IsAny<IDbSource>()))
                     .Returns(new List<string> {"Dev2TestingDB"});
+            }
+            else if (isLongRunning)
+            {
+                var viewModel = ScenarioContext.Current.Get<ManageDatabaseSourceViewModel>("viewModel");
+                mockUpdateManager.Setup(manager => manager.TestDbConnection(It.IsAny<IDbSource>()));
+                viewModel.AsyncWorker = new AsyncWorker();
             }
             else
             {
@@ -465,6 +479,26 @@ namespace Warewolf.AcceptanceTesting.DatabaseSource
             var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
             manageDatabaseSourceControl.PerformTestConnection();
             Thread.Sleep(1000);
+        }
+
+        [When(@"I Cancel the Test")]
+        public void WhenICancelTheTest()
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            manageDatabaseSourceControl.CancelTest();
+        }
+
+        [Then(@"the validation message as ""(.*)""")]
+        public void ThenTheValidationMessageAs(string message)
+        {
+            var manageDatabaseSourceControl = ScenarioContext.Current.Get<ManageDatabaseSourceControl>(Utils.ViewNameKey);
+            var viewModel = ScenarioContext.Current.Get<ManageDatabaseSourceViewModel>("viewModel");
+            var errorMessageFromControl = manageDatabaseSourceControl.GetErrorMessage();
+            var errorMessageOnViewModel = viewModel.TestMessage;
+            var isErrorMessageOnControl = errorMessageFromControl.Equals(message, StringComparison.OrdinalIgnoreCase);
+            Assert.IsTrue(isErrorMessageOnControl);
+            var isErrorMessage = errorMessageOnViewModel.Equals(message, StringComparison.OrdinalIgnoreCase);
+            Assert.IsTrue(isErrorMessage);
         }
 
         [Then(@"I save the source as ""(.*)""")]
