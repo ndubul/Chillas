@@ -105,7 +105,7 @@ Scenario: Deploying a connector with a source
 
 
 #coded ui
-@ignore
+
 Scenario: Mouse right click select Dependecies is selecting dependecies
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"

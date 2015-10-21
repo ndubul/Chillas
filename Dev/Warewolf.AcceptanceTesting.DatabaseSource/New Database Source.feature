@@ -5,23 +5,23 @@ Feature: New Database Source
 	I want to be told the sum of two numbers
 
 
-##// REQUIREMENTS
-##* Ensure User allows to save server source with windows credentials
-##* Ensure user allows to save server source as specfic user.
-##* Ensure user is able to select Authonication type as Windows or User
-##* Ensure UserName and Password fields are visible when user selects authentication type as User
-##* Ensure UserName and Password fields are Disappear when user changes authentication type from User to Windows.
-##* Ensure user is testing the source before saving
-##* Ensure user is allowing to save server source when test connection is successfull
-##* Ensure user is allowing to save server source when test connection is Unsuccessfull
-##* Ensure system is throwing validation message when test connection is unsuccessfull
-##* Ensure save button is disabled before user clicks on test connection
-##* Ensure save button is Enabled when test connection is successfull
-##* Ensure user is able to cancel Test connection.
-##* Ensur Cancel Tesrt button is in disabled when Test Connection button is enabled 
-##* Ensur Tesrt Connection is in Enabled when Cancel Test button is Disabled 
-##* Ensure Database dropdown is visible when test connection is successfull
-##* Ensure user is able to select database from the database dropdown 
+##/ REQUIREMENTS
+## Ensure User allows to save server source with windows credentials
+## Ensure user allows to save server source as specfic user.
+## Ensure user is able to select Authonication type as Windows or User
+## Ensure UserName and Password fields are visible when user selects authentication type as User
+## Ensure UserName and Password fields are Disappear when user changes authentication type from User to Windows.
+## Ensure user is testing the source before saving
+## Ensure user is allowing to save server source when test connection is successfull
+## Ensure user is allowing to save server source when test connection is Unsuccessfull
+## Ensure system is throwing validation message when test connection is unsuccessfull
+## Ensure save button is disabled before user clicks on test connection
+## Ensure save button is Enabled when test connection is successfull
+## Ensure user is able to cancel Test connection.
+## Ensur Cancel Tesrt button is in disabled when Test Connection button is enabled 
+## Ensur Tesrt Connection is in Enabled when Cancel Test button is Disabled 
+## Ensure Database dropdown is visible when test connection is successfull
+## Ensure user is able to select database from the database dropdown 
 
 
 
@@ -46,8 +46,8 @@ Scenario: Creating New DB Source General Testing
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
    Then Username field is "Collapsed"
-   And Password field is "InVisible"
-   Then Database dropdown is "InVisible"
+   And Password field is "Collapsed"
+   Then Database dropdown is "Collapsed"
    And "Test Connection" is "Enabled"
    And "Cancel Test" is "Disabled"
    When I click "Test Connection"
@@ -72,7 +72,7 @@ Scenario: Creating New DB Source as User Auth
     And I Select Authentication Type as "User"
     Then Username field is "Visible"
     And Password field is "Visible"
-    And "Test Connection" is "Disbled"
+    And "Test Connection" is "Disabled"
     And "Save" is "Disabled"
     When I type Username as "testuser"
     And I type Password as "test123"
@@ -233,19 +233,22 @@ Scenario: Editing saved DB Source and canceling without saving
     When I Cancel the source
 	And I open "Edit Database Source - Test" 
 	Then underlying Authentication Type is selected as "User"
-    Then underlying Username is "testuser"
-    And underlying Password  is "******"
+    Then  Username is "testuser"
+    And  Password  is "******"
 	Then "Test Connection" is "Enabled" 
 
 Scenario: Cancel Test
    Given I open New Database Source
    When I type Server as "RSAKLFSVRGENDEV"
-   And I Select Authentication Type as "User"
-   When I type Username as "testuser"
-   And I type Password as "test123"
-   When I click "Test Connection"
-   And I click Cancel Test
-   And the validation message as "Test Cancelled" 
+   And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
-    And "Save" is "Disabled"
+   And Authentication Type is selected as "User"
+   When I type Username as "testuser"
+   And I type Password as "******"
+   Then I select "Test Connection"
+   And I select "Cancel Test"
+   Then the validation message as "Test Cancelled" 
+   Then "Test Connection" is "Enabled"
+   And "Save" is "Disabled"
+  
      

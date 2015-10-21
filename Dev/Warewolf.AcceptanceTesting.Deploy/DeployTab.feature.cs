@@ -289,11 +289,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Mouse right click select Dependecies is selecting dependecies")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DeployTab")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("Deploy")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void MouseRightClickSelectDependeciesIsSelectingDependecies()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Mouse right click select Dependecies is selecting dependecies", new string[] {
-                        "ignore"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Mouse right click select Dependecies is selecting dependecies", ((string[])(null)));
 #line 109
 this.ScenarioSetup(scenarioInfo);
 #line 110
