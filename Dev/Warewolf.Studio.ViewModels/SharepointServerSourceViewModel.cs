@@ -93,17 +93,8 @@ namespace Warewolf.Studio.ViewModels
 
         void SetupHeaderTextFromExisting()
         {
-            var serverName = _warewolfserverName;
-            if (serverName.Equals("localhost", StringComparison.OrdinalIgnoreCase))
-            {
-                HeaderText = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
-                Header = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
-            }
-            else
-            {
-                HeaderText = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
-                Header = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
-            }
+            HeaderText = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
+            Header = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
         }
 
         public override bool CanSave()
