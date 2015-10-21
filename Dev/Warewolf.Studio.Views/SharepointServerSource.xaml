@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Background="{StaticResource WareWolfMenuBrush}" HorizontalAlignment="Stretch">
-            <TextBlock Margin="3" Text="SharePoint Server Source" Style="{StaticResource SourceHeader}" x:Name="HeaderTextBlock" />
+            <TextBlock Margin="3" Text="{Binding HeaderText}" Style="{StaticResource SourceHeader}" x:Name="HeaderTextBlock" />
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>

@@ -7,15 +7,15 @@ Feature: Sharepoint
 @SharepointSource
 Scenario: Creating New Sharepoint Source 
    Given I open New Sharepoint Source 
-   Then "New Sharepoint Service Source" tab is opened
-   And title is "New Sharepoint Service Source"
+   Then "New SharePoint Service Source" tab is opened
+   And title is "New SharePoint Service Source"
    And I type Address as "http://rsaklfsvrsharep"
-   Then "New Sharepoint Service Source *" tab is opened
+   Then "New SharePoint Service Source *" tab is opened
    And "Save" is "Disabled"
-   And "Test" is "Enabled"
+   And "Test Connection" is "Enabled"
    And I Select Authentication Type as "Windows"
-   And Username field is "InVisible"
-   And Password field is "InVisible"
+   And Username field is "Collapsed"
+   And Password field is "Collapsed"
    When Test Connecton is "Successful"
    And "Save" is "Enabled"
    When I save as "Testing Sharepoint Resource Save"
@@ -28,7 +28,7 @@ Scenario: Creating New Sharepoint Source under auth type as user
    Given I open New Sharepoint Source
    And I type Address as "http://rsaklfsvrsharep"
    And "Save" is "Disabled"
-   And "Test" is "Enabled"
+   And "Test Connection" is "Enabled"
    And I Select Authentication Type as "User"
    And Username field is "Visible"
    And Password field is "Visible"
@@ -45,7 +45,7 @@ Scenario: Incorrect address anonymous auth type not allowing save
    And I type Address as "sdfsdfd"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
-   And I Select Authentication Type as "Anonymous"
+   And I Select Authentication Type as "Windows"
    When Test Connecton is "UnSuccessful"
    And Validation message is thrown
    And "Save" is "Disabled"
@@ -76,9 +76,9 @@ Scenario: Testing Auth type as Anonymous and swaping it resets the test connecti
    When Test Connecton is "Successful"
    And Validation message is Not thrown
    And "Save" is "Enabled"
-   And I Select Authentication Type as "Anonymous"
-   And Username field is "InVisible"
-   And Password field is "InVisible"
+   And I Select Authentication Type as "Windows"
+   And Username field is "Collapsed"
+   And Password field is "Collapsed"
    And "Save" is "Disabled"
    When Test Connecton is "Successful"
    And Validation message is Not thrown
@@ -96,9 +96,9 @@ Scenario: Editing saved Sharepoint Source
    And Address is "http://rsaklfsvrsharep"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
-   And Authentication Type is "Anonymous"
-   And Username field is "InVisible"
-   And Password field is "InVisible"
+   And Authentication Type is "Windows"
+   And Username field is "Collapsed"
+   And Password field is "Collapsed"
    And "Save" is "Disabled"
    When I type Address as "http://rsaklfsvrshareps"
    Then "Test *" tab is opened
@@ -116,9 +116,9 @@ Scenario: Editing saved Sharepoint Source
    And Address is "http://rsaklfsvrsharep"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
-   And Authentication Type is "Anonymous"
-   And Username field is "InVisible"
-   And Password field is "InVisible"
+   And Authentication Type is "Windows"
+   And Username field is "Collapsed"
+   And Password field is "Collapsed"
    When I Select Authentication Type as "User"
    And Username field is "Visible"
    And Password field is "Visible"
@@ -131,8 +131,8 @@ Scenario: Editing saved Sharepoint Source
 @SharepointSource
 Scenario: Cancel Test
    Given I open New Sharepoint Source 
-   Then "New Sharepoint Source" tab is opened
-   And title is "New Sharepoint Source"
+   Then "New SharePoint Service Source" tab is opened
+   And title is "New SharePoint Service Source"
    And I type Address as "http://rsaklfsvrsharep"
    When Test Connecton is "Long Running"
    And I Cancel the Test

@@ -86,8 +86,9 @@ namespace Warewolf.Studio.ViewModels
             VerifyArgument.IsNotNull("sharePointServiceSource", sharePointServiceSource);
             _sharePointServiceSource = sharePointServiceSource;
             _warewolfserverName = updateManager.ServerName;
-            FromSource(sharePointServiceSource);
+            
             SetupHeaderTextFromExisting();
+            FromSource(sharePointServiceSource);
             ToItem();
         }
 
@@ -635,6 +636,8 @@ namespace Warewolf.Studio.ViewModels
                 Name = ResourceName,
                 Server = ServerName,
                 AuthenticationType = AuthenticationType,
+                UserName = UserName,
+                Password = Password,
                 Id = Item.Id,
                 Path = Path
             };
