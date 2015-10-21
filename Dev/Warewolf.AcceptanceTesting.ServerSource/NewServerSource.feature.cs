@@ -71,13 +71,13 @@ namespace Warewolf.AcceptanceTesting.ServerSource
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Opening New Server Source")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Create New Server Source")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "NewServerSource")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ServerSource")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("ServerSource")]
-        public virtual void OpeningNewServerSource()
+        public virtual void CreateNewServerSource()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening New Server Source", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create New Server Source", new string[] {
                         "ServerSource"});
 #line 8
 this.ScenarioSetup(scenarioInfo);

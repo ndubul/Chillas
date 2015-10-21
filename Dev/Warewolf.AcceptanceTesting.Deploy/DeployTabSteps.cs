@@ -33,8 +33,7 @@ namespace Warewolf.AcceptanceTesting.Deploy
 
         protected override void LoadEnvironment(IEnvironmentViewModel localhostEnvironment, bool isDeploy = false)
         {
-            localhostEnvironment.Connect().RunSynchronously();
-            localhostEnvironment.Load(isDeploy).RunSynchronously();
+
             AfterLoad(localhostEnvironment.Server.EnvironmentID);
         }
 

@@ -790,11 +790,13 @@ namespace Warewolf.Studio.ViewModels
                     ResourcePath = explorerItem.ResourcePath,
                     AllowResourceCheck =  isDeploy,
                     ShowContextMenu = !isDeploy,
+                    CanExecute = !isDeploy,
+                    CanEdit = !isDeploy,
                     CanDrop = ! isDeploy
                     //Inputs = explorerItem.Inputs,
                     //Outputs = explorerItem.Outputs
                 };
-                itemCreated.SetPermissions(server.Permissions);
+                itemCreated.SetPermissions(server.Permissions, isDeploy);
                 if (isDialog)
                 {
                     SetPropertiesForDialog(itemCreated);

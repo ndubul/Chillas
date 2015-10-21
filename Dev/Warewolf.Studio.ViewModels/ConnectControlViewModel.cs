@@ -34,6 +34,7 @@ namespace Warewolf.Studio.ViewModels
         IServer _selectedConnection;
         bool _allowConnection;
         ObservableCollection<IServer> _servers;
+        bool _isLoading;
 
         public ConnectControlViewModel(IServer server, IEventAggregator aggregator)
         {
@@ -120,6 +121,7 @@ namespace Warewolf.Studio.ViewModels
             {
                 IsConnecting = true;
                 IsConnected = false;
+                IsLoading = true;
                 await Connect(SelectedConnection);
                 IsConnected = true;
                 IsConnecting = false;
@@ -216,7 +218,19 @@ namespace Warewolf.Studio.ViewModels
             set
             {
                 _isConnecing = value;
-                OnPropertyChanged(() => IsConnecting);
+                OnPropertyChanged(() => IsConnecting);                
+            }
+        }
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(() => IsLoading);
             }
         }
         public bool AllowConnection
@@ -247,7 +261,7 @@ namespace Warewolf.Studio.ViewModels
                     OnPropertyChanged(() => connection.IsConnected);
                     if (ServerConnected != null)
                     {
-                        ServerConnected(this, connection);
+                       ServerConnected(this, connection);
                     }
                 }
                 catch (Exception)

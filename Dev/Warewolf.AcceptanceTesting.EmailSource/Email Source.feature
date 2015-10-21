@@ -1,4 +1,5 @@
-﻿Feature: Email Source
+﻿@EmailSource
+Feature: Email Source
 	In order to share settings
 	I want to save my Email source Settings
 	So that I can reuse them
@@ -11,86 +12,83 @@
 
 
 @EmailSource
-Scenario: New Email source
-	Given I click "New Email Source"
+Scenario: Create New Email source
+	Given I open New Email Source
 	Then "New Email Source" tab is opened
 	And the title is "New Email Source"
-	Then "Host" has the focus
-	And "Host" is ""
-	And "User Name" is ""
-	And "Password" is ""
-	And "Enable SSL" is "No"
-	And "Port" is "25"
-	And "Timeout" is "100"
-	And "From" is ""
-	And "To" is ""
-	And "Send" is "disabled"
-	And "Save" is "disabled"
+	And "Host" input is ""
+	And "User Name" input is ""
+	And "Password" input is ""
+	And "Enable SSL" input is "False"
+	And "Port" input is "25"
+	And "Timeout" input is "100"
+	And "From" input is ""
+	And "To" input is ""
+	And "Send" is "Disabled"
+	And "Save" is "Disabled"
 
+@EmailSource
 Scenario: From Defaults to User Name But Not After Change
-	Given I click "New Email Source"
+	Given I open New Email Source
 	Then "New Email Source" tab is opened
-	When "User Name" is "someone"
-	Then "From" is "someone"
-	When "From" is "some"
-	Then "User Name" is "someone"
+	When "User Name" input is "someone"
+	Then "From" input is "someone"
+	When "From" input is "some"
+	Then "User Name" input is "someone"
 
+@EmailSource
 Scenario: Enable Send and Enable Save With Validation
-	Given I click "New Email Source"
+	Given I open New Email Source
 	Then "New Email Source" tab is opened
-	When "Host" is "smtp.gmail.com"
-	And "User Name" is "someone"
-	And "Password" is "•••••••"
-	And "Enable SSL" is "Yes"
-	And "Port" is "25"
-	And "Timeout" is "100"
-	And "Send" is "disabled"
-	And "Save" is "disabled"
-	When "To" is "noone@nowhere"
+	And I type Host as "smtp.gmail.com"
+	And I type Username as "someone"
+	And I type Password as "123456"
+	And "Enable SSL" input is "False"
+	And "Port" input is "25"
+	And "Timeout" input is "100"
+	And "Send" is "Enabled"
+	And "Save" is "Disabled"
+	And I type To as "another@rt.com"
 	And "Send" is "Enabled"
 	When I click "Send"
-	And Send validation is "Successfully Sent"
+	And Send is "Successful"
 	Then "Save" is "Enabled"
-	When Save is clicked
+	When I save as "TestEmail"
 	And the save dialog is opened
-	And I save as "TestEmail"
     Then the title is "TestEmail"
 	And "TestEmail" tab is opened
 	
-
+@EmailSource
 Scenario: Fail Send
-	Given I click "New Email Source"
+	Given I open New Email Source
 	Then "New Email Source" tab is opened
-	When "Host" is "smtp.gmail.com"
-	And "User Name" is "someone"
-	And "Password" is ""•••••••""
-	And "Enable SSL" is "Yes"
-	And "Port" is "25"
-	And "Timeout" is "100"
-	And "Send" is "disabled"
-	And "Save" is "disabled"
-	And "From" is "someone@somewhere.com"
-	And "To" is "sd@sdfsd@fdfs.com"
+	And I type Host as "smtp.gmail.com"
+	And I type Username as "someone"
+	And I type Password as "123456"
+	And "Enable SSL" input is "False"
+	And "Port" input is "25"
+	And "Timeout" input is "100"
+	And "Send" is "Enabled"
+	And "Save" is "Disabled"
+	And I type From as "someone@somewhere.com"
+	And I type To as "sd@sdfsd@fdfs.com"
 	Then "Send" is "Enabled"
-	And I click "Send"
 	And "Send" is "Unsuccessful"
-	Then Send Validation is "Failed to Send: One or more errors occurred"
-	And "Save" id "disabled"
+	Then Send is "Failed to Send: One or more errors occurred"
+	And "Save" is "Disabled"
 
-
+@EmailSource
 Scenario: Edit saves From and To
-	Given I click "Test Email Source"
+	Given I open "Test Email Source"
 	Then "Test Email Source" tab is opened
-	When the page loads
-	Then "Host" has the focus
-	And "Host" is "somehost"
-	And "User Name" is "username"
-	And "Password" is "•••••••"
-	And "Enable SSL" is "No"
-	And "Port" is "25"
-	And "Timeout" is "100"
-	And "From" is "this@to.com"
-	And "To" is "another@rt.com"
-	And "Send" is "enabled"
-	And "Save" is "disabled"
+	And "Host" input is "smtp.gmail.com"
+	And "User Name" input is "someone"
+	And "Password" input is "123456"
+	And "Enable SSL" input is "False"
+	And "Port" input is "25"
+	And "Timeout" input is "100"
+	And "From" input is "this@to.com"
+	And "To" input is "another@rt.com"
+	And "Send" is "Enabled"
+	And "Save" is "Disabled"
 	
