@@ -53,22 +53,30 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             var listing = new List<IFileListing>();
             var fileSystemListing = new DllListing{FullName = "",IsDirectory = true,Name = "File System"};
             _dllListingForGac = new DllListing {
-                FullName = "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll", IsDirectory = false, Name = "AuditPolicyGPManagedStubs.Interop, Version=6.1.0.0"
+                FullName = "GAC:AuditPolicyGPManagedStubs, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a.dll", 
+                IsDirectory = false, 
+                Name = "AuditPolicyGPManagedStubs.Interop, Version=6.1.0.0"
             };
             var gacListing = new DllListing
             {
-                FullName = "",IsDirectory = true,Name = "GAC",
+                FullName = "",
+                IsDirectory = true,
+                Name = "GAC",
                 Children = new List<IFileListing>
                 {
                     _dllListingForGac,
                     new DllListing {
-                        FullName = "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll", IsDirectory = false, Name = "BDATunePIA, Version=6.1.0.0"
+                        FullName = "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll", 
+                        IsDirectory = false, 
+                        Name = "BDATunePIA, Version=6.1.0.0"
                     }
                 }
             };
             _dllListingForFile = new DllListing
             {
-                FullName = "C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools.Testing.Fakes.dll", IsDirectory = false, Name = "Microsoft.QualityTools.Testing.Fakes.dll"
+                FullName = "C:\\Development\\Dev\\Binaries\\MS Fakes\\Microsoft.QualityTools.Testing.Fakes.dll", 
+                IsDirectory = false, 
+                Name = "Microsoft.QualityTools.Testing.Fakes.dll"
             };
             var cDrive = new DllListing
             {
@@ -432,6 +440,22 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         public void ThenGACIsNotSelected()
         {
             ScenarioContext.Current.Pending();
+        }
+
+        [AfterScenario("PluginSource")]
+        public void Cleanup()
+        {
+            var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockUpdateManager = ScenarioContext.Current.Get<Mock<IManagePluginSourceModel>>("updateManager");
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            var viewModel = new ManagePluginSourceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker());
+            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            manageWebserviceSourceControl.DataContext = viewModel;
+            FeatureContext.Current.Remove("viewModel");
+            FeatureContext.Current.Add("viewModel", viewModel);
+            FeatureContext.Current.Remove("externalProcessExecutor");
+            FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
         }
 
     }
