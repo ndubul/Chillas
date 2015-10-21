@@ -80,11 +80,11 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("I click \"New DataBase Service Connector\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I open New DataBase Service Connector", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
  testRunner.Then("\"New DB Connector\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 10
- testRunner.And("Data Source is focused", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"Data Source\" is focused", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
  testRunner.And("\"1 Data Source\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
@@ -96,11 +96,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 15
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
- testRunner.When("I select \"DemoDB\" as data source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I select data source as \"DemoDB\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 17
  testRunner.Then("\"2 Select Action\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 18
- testRunner.When("I select \"dbo.ConverToint\" as the action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I select action as \"dbo.ConverToint\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 19
  testRunner.Then("\"3 Test Connector and Calculate Outputs\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 20
@@ -169,7 +169,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 42
 this.ScenarioSetup(scenarioInfo);
 #line 43
-   testRunner.Given("I open \"InsertDummyUser\" service", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+   testRunner.Given("I open \"InsertDummyUser\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 44
    testRunner.And("\"InsertDummyUser\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 45
@@ -177,7 +177,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 46
    testRunner.And("Data Source is focused", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 47
-   testRunner.When("\"DemoDB\" is selected as the data source", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+   testRunner.When("I select data source as \"DemoDB\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 48
    testRunner.Then("\"2 Select Action\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 49
@@ -443,11 +443,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Refresh in select Action")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DB Service")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DBService")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void RefreshInSelectAction()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Refresh in select Action", new string[] {
-                        "ignore"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Refresh in select Action", ((string[])(null)));
 #line 128
 this.ScenarioSetup(scenarioInfo);
 #line 129
@@ -667,11 +665,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Ensure recordset values can be saved to a variable")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DB Service")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("DBService")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         public virtual void EnsureRecordsetValuesCanBeSavedToAVariable()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure recordset values can be saved to a variable", new string[] {
-                        "ignore"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Ensure recordset values can be saved to a variable", ((string[])(null)));
 #line 211
 this.ScenarioSetup(scenarioInfo);
 #line 212
