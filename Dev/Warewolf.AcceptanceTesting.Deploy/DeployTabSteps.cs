@@ -22,6 +22,26 @@ using Warewolf.Studio.Views;
 
 namespace Warewolf.AcceptanceTesting.Deploy
 {
+    class DeploySourceExplorerViewModelForTesting : DeploySourceExplorerViewModel
+    {
+        public DeploySourceExplorerViewModelForTesting(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator, IDeployStatsViewerViewModel statsArea)
+            : base(shellViewModel, aggregator, statsArea)
+        {
+        }
+
+        #region Overrides of DeploySourceExplorerViewModel
+
+        protected override void LoadEnvironment(IEnvironmentViewModel localhostEnvironment, bool isDeploy = false)
+        {
+            localhostEnvironment.Connect().RunSynchronously();
+            localhostEnvironment.Load(isDeploy).RunSynchronously();
+            AfterLoad(localhostEnvironment.Server.EnvironmentID);
+        }
+
+        #endregion
+    }
+
+
     [Binding]
     public class DeployTabSteps
     {
@@ -33,7 +53,7 @@ namespace Warewolf.AcceptanceTesting.Deploy
             Core.Utils.SetupResourceDictionary();
             var dest = new DeployDestinationViewModel(GetMockShellVM(),GetMockAggegator() );
             var stats = new DeployStatsViewerViewModel(dest);
-            var vm = new SingleExplorerDeployViewModel(dest, new DeploySourceExplorerViewModel(GetMockShellVM(), GetMockAggegator(),GetStatsVM(dest)),new List<IExplorerTreeItem>(), stats, GetMockShellVM(), GetPopup());
+            var vm = new SingleExplorerDeployViewModel(dest, new DeploySourceExplorerViewModelForTesting(GetMockShellVM(), GetMockAggegator(), GetStatsVM(dest)), new List<IExplorerTreeItem>(), stats, GetMockShellVM(), GetPopup());
            // var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployViewer) as WorkSurfaceKey, new DeployWorksurfaceViewModel(new EventAggregator(), vm, GetPopup(), new DeployView()));
             var view = new DeployView { DataContext = vm };
             ScenarioContext.Current["View"] = view;
@@ -76,9 +96,8 @@ namespace Warewolf.AcceptanceTesting.Deploy
         {
             var server = new Mock<IServer>();
             server.Setup(a => a.LoadExplorer()).Returns(new Task<IExplorerItem>(() => { return CreateExplorerSourceItems(); }));
-            server.Setup(a => a.GetServerConnections()).Returns(GetServers());
-            server.Setup(a => a.DisplayName).Returns("Remote");
-            server.Setup(a => a.ResourceName).Returns("Remote");
+            server.Setup(a => a.DisplayName).Returns("Remote Connection Integration");
+            server.Setup(a => a.ResourceName).Returns("Remote Connection Integration");
             return new List<IServer>
             {
                 server.Object

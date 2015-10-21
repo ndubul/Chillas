@@ -44,11 +44,7 @@ namespace Warewolf.Studio.ViewModels
                 
                 environmentViewModel.SelectAction = SelectAction;
             }
-            if(_environments.Count>0)
-            {
-                LoadEnvironment(_environments.First(), true);
-                SelectedEnvironment = _environments.First();
-            }
+
             if (ConnectControlViewModel.SelectedConnection != null)
             {
                 UpdateItemForDeploy(ConnectControlViewModel.SelectedConnection.EnvironmentID);
@@ -229,7 +225,7 @@ namespace Warewolf.Studio.ViewModels
             AfterLoad(server.EnvironmentID);
         }
 
-		protected async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment,bool isDeploy = false)
+		protected virtual async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment,bool isDeploy = false)
 		{
 			await localhostEnvironment.Connect();
 			await localhostEnvironment.Load(isDeploy);
@@ -247,4 +243,6 @@ namespace Warewolf.Studio.ViewModels
 		}
 
     }
+
+
 }
