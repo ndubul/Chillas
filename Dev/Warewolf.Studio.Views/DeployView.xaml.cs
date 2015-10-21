@@ -1,5 +1,9 @@
-﻿using Dev2.Common.Interfaces;
+﻿using System.Linq;
+using Caliburn.Micro;
+using Dev2.Common.Interfaces;
+using Dev2.Common.Interfaces.Deploy;
 using Microsoft.Practices.Prism.Mvvm;
+using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.Views
 {
@@ -8,9 +12,69 @@ namespace Warewolf.Studio.Views
     /// </summary>
     public partial class DeployView : IView, ICheckControlEnabledView
     {
+        string _errorMessage;
+        string _canDeploy;
+        string _canSelectDependencies;
+
         public DeployView()
         {
             InitializeComponent();
+        }
+
+        public IServer SelectedServer
+        {
+            get
+            {
+                return (SourceNavigationView).SelectedServer;
+            }
+            set
+            {
+                (SourceNavigationView).SelectedServer = value;
+            }
+        }
+        public IServer SelectedDestinationServer
+        {
+            get
+            {
+                return DestinationConnectControl.SelectedServer;
+            }
+            set
+            {
+                DestinationConnectControl.SelectedServer = value;
+            }
+        }
+        public string ErrorMessage
+        {
+            get
+            {
+                return ServersNotSame.Text;
+            }
+            set
+            {
+                ServersNotSame.Text = value;
+            }
+        }
+        public string CanDeploy
+        {
+            get
+            {
+                return Deploy.IsEnabled ? "Enabled" : "Disabled";
+            }
+            set
+            {
+                Deploy.IsEnabled = value=="Enabled";
+            }
+        }
+        public string CanSelectDependencies
+        {
+            get
+            {
+                return Dependencies.IsEnabled ? "Enabled" : "Disabled"; 
+            }
+            set
+            {
+                Dependencies.IsEnabled = value=="Enabled";
+            }
         }
 
         #region Implementation of IComponentConnector
@@ -33,5 +97,15 @@ namespace Warewolf.Studio.Views
         }
 
         #endregion
+
+        public void SelectPath(string path)
+        {
+            ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().Apply(a => { if (a.ResourcePath == path) a.IsFolderChecked = true; });
+        }
+
+        public void SelectDestinationServer(string servername)
+        {
+            DestinationConnectControl.SelectedServer = ((IDeployViewModel)DataContext).Destination.ConnectControlViewModel.Servers.FirstOrDefault(a => a.ResourceName == servername);
+        }
     }
 }

@@ -421,7 +421,7 @@
             <!-- URI LOOKUP-->
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                         Visibility="{Binding ShowConnectControl, Converter={StaticResource BoolToVisibilityConverter}}" >
-                <views:ConnectControl DataContext="{Binding ConnectControlViewModel}"/>
+                <views:ConnectControl DataContext="{Binding ConnectControlViewModel}" x:Name="ConnectControl"/>
             </StackPanel>
             <!--  SERVICE FILTER  -->
             <Grid Grid.Row="1" Margin="0,-1,0,0">
@@ -534,9 +534,10 @@
 
                                     <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="1,0,0,0">
                                         <CheckBox x:Name="EnvironmentNameCheckBox"
-                                                      Style="{StaticResource DeployCheckBoxStyle}"
-                                                      IsChecked="{Binding Path=Data.IsResourceChecked}"
-                                                      Visibility="{Binding Path=Data.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                                  Style="{StaticResource DeployCheckBoxStyle}" ClickMode="Press"
+                                                  IsChecked="{Binding Path=Data.IsResourceChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  Visibility="{Binding Path=Data.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                  IsThreeState="True"/>
                                         <TextBlock FontSize="12" Padding="0,4,0,4" Margin="4,0,0,0"  Text="{Binding Data.DisplayName}" />
                                         <TextBlock FontSize="12" Padding="0,4,0,4" Margin="4,0,0,0" Visibility="{Binding Data.ChildrenCount, Converter={StaticResource IntToVisibilityConverter}}">
                                             <Run Text=" (" />
@@ -1031,8 +1032,8 @@
 
                                         <StackPanel Orientation="Horizontal">
                                             <CheckBox x:Name="ResourceNameCheckBox"
-                                                      Style="{StaticResource DeployCheckBoxStyle}"
-                                                      IsChecked="{Binding Path=Data.IsResourceChecked}"
+                                                      Style="{StaticResource DeployCheckBoxStyle}" ClickMode="Press"
+                                                      IsChecked="{Binding Path=Data.IsResourceChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       Visibility="{Binding Path=Data.AllowResourceCheck, Converter={StaticResource BoolToVisibilityConverter}}"
                                                       IsThreeState="True"/>
                                             <TextBlock x:Name="ResourceNameTextBlock"
@@ -1040,6 +1041,7 @@
                                                    Height="20"
                                                    Focusable="True"
                                                    TextTrimming="CharacterEllipsis"
+                                                       ToolTip="{Binding Path=Data.ResourceName}"
                                                    VerticalAlignment="Center"
                                                    HorizontalAlignment="Stretch"
                                                    Text="{Binding Path=Data.ResourceName}">

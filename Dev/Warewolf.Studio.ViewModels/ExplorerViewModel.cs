@@ -267,6 +267,7 @@ namespace Warewolf.Studio.ViewModels
 	{
 	    readonly IShellViewModel _shellViewModel;
 	    readonly Action<IExplorerItemViewModel> _selectAction;
+	    bool _isLoading;
 
 	    public ExplorerViewModel(IShellViewModel shellViewModel, IEventAggregator aggregator, Action<IExplorerItemViewModel> selectAction = null,bool loadLocalHost=true)
 		{
@@ -291,11 +292,13 @@ namespace Warewolf.Studio.ViewModels
 
 	    async void ServerConnected(object _, IServer server)
 	    {
+            IsLoading = true;
             var environmentModel = CreateEnvironmentFromServer(server, _shellViewModel);
             _environments.Add(environmentModel);
 	        await environmentModel.Load(IsDeploy);
             OnPropertyChanged(() => Environments);
             AfterLoad(server.EnvironmentID);
+            IsLoading = false;
 	    }
         public virtual void AfterLoad(Guid environmentID)
         {
@@ -303,6 +306,19 @@ namespace Warewolf.Studio.ViewModels
         }
 
 	    public bool IsDeploy { get; set; }
+
+	    public virtual bool IsLoading
+	    {
+	        get
+	        {
+	            return _isLoading;
+	        }
+	        set
+	        {
+	            _isLoading = value;
+                OnPropertyChanged(() => IsLoading);
+	        }
+	    }
 
 	    void ServerDisconnected(object _, IServer server)
         {
@@ -312,6 +328,7 @@ namespace Warewolf.Studio.ViewModels
                 _environments.Remove(environmentModel);
             }
             OnPropertyChanged(()=>Environments);
+            AfterLoad(server.EnvironmentID);
         }
 
 		protected async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment,bool isDeploy = false)

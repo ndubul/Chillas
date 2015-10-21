@@ -14,6 +14,7 @@ using Dev2.Controller;
 using Dev2.Runtime.ServiceModel.Data;
 using Dev2.Services.Security;
 using Dev2.Studio.Core;
+using Dev2.Studio.Core.Interfaces;
 
 namespace Warewolf.Studio.AntiCorruptionLayer
 {
@@ -23,6 +24,9 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         readonly Guid _serverId;
         readonly StudioServerProxy _proxyLayer;
         IList<IToolDescriptor> _tools;
+        IEnvironmentModel _environmentModel;
+        bool _hasloaded;
+        bool _hasLoaded;
 
         public Server(Dev2.Studio.Core.Interfaces.IEnvironmentModel environmentModel)
         {
@@ -36,6 +40,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             EnvironmentConnection.NetworkStateChanged+=RaiseNetworkStateChangeEvent;
             EnvironmentConnection.ItemAddedMessageAction+=ItemAdded;
             environmentModel.WorkflowSaved += (sender, args) => UpdateRepository.FireItemSaved();
+            _environmentModel = environmentModel;
         }
 
         public Server()
@@ -49,6 +54,21 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             {
                 return EnvironmentConnection.ServerID;
         }
+        }
+
+        public bool HasLoaded
+        {
+            get
+            {
+                return _hasloaded;
+            }
+            private set
+            {
+
+                _hasloaded = value;
+                OnPropertyChanged("IsConnected");
+                OnPropertyChanged("DisplayName");
+            }
         }
 
         void ItemAdded(IExplorerItem obj)
@@ -114,7 +134,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
                 if (EnvironmentConnection != null)
                 {
                     displayName = EnvironmentConnection.DisplayName;
-                    if (IsConnected)
+                    if (IsConnected &&HasLoaded)
                     {
                         displayName += Resources.Languages.Core.ConnectedLabel;
                     }
@@ -122,6 +142,15 @@ namespace Warewolf.Studio.AntiCorruptionLayer
                 
                 return displayName;
             }
+        }
+
+
+        public IServer Clone()
+        {
+            return new Server(_environmentModel)
+            {
+                Permissions = Permissions
+            };
         }
 
         public List<IResource> Load()
@@ -132,6 +161,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
         public async Task<IExplorerItem> LoadExplorer()
         {
             var result = await ProxyLayer.LoadExplorer();
+            HasLoaded = true;
             return result;
         }
 

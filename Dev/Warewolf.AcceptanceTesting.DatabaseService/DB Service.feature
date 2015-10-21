@@ -5,17 +5,17 @@ Feature: DB Service
 	I want to be shown the database service setup
 
 Scenario: Creating DB Service
-	Given I click "New DataBase Service Connector"
+	Given I open New DataBase Service Connector
 	Then "New DB Connector" tab is opened
-	And Data Source is focused
+	And "Data Source" is focused
 	And "1 Data Source" is "Enabled"
 	And "2 Select Action" is "Disabled"
 	And "3 Test Connector and Calculate Outputs" is "Disabled" 
 	And "4 Edit Default and Mapping Names" is "Disabled" 
 	And "Save" is "Disabled"
-	When I select "DemoDB" as data source
+	When I select data source as "DemoDB"
 	Then "2 Select Action" is "Enabled"
-	When I select "dbo.ConverToint" as the action
+	When I select action as "dbo.ConverToint"
 	Then "3 Test Connector and Calculate Outputs" is "Enabled" 
 	And "Test" is "Enabled"
 	And inputs are
@@ -40,11 +40,11 @@ Scenario: Creating DB Service
 
 
 Scenario: Opening Saved DB Service
-   Given I open "InsertDummyUser" service
+   Given I open "InsertDummyUser"
    And "InsertDummyUser" tab is opened
    Then "1 Data Source" is "Enabled"
    And Data Source is focused
-   When "DemoDB" is selected as the data source
+   When I select data source as "DemoDB"
    Then "2 Select Action" is "Enabled"
    And "dbo.InsertDummyUser" is selected as the action
    Then "3 Test Connector and Calculate Outputs" is "Enabled" 
@@ -124,7 +124,7 @@ Scenario: Opening Saved DB Service
 	And "Save" is "Disabled"
 
 #--
-@ignore
+
 Scenario: Refresh in select Action
 	Given I click New Data Base Service Connector
 	Then "New Database Connector" tab is opened
@@ -207,7 +207,7 @@ Scenario: Creating a new Data Source
 	Then New Data Source Dialog is opened
 
 #WOLF-860
-@ignore
+
 Scenario: Ensure recordset values can be saved to a variable
 	Given I have a new Workspace opened
 	And I have a saved Data Connector called "MyDataCon"

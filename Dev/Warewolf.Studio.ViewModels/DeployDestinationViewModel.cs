@@ -8,6 +8,8 @@ namespace Warewolf.Studio.ViewModels
 
     public class DeployDestinationViewModel : ExplorerViewModel, IDeployDestinationExplorerViewModel
     {
+        bool _isLoading;
+
         #region Implementation of IDeployDestinationExplorerViewModel
 
         public DeployDestinationViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator)
@@ -31,6 +33,23 @@ namespace Warewolf.Studio.ViewModels
 
         #region Overrides of ExplorerViewModel
 
+        public override sealed bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(() => IsLoading);
+            }
+        }
+
+        #endregion
+
+        #region Overrides of ExplorerViewModel
+
         public override void AfterLoad(Guid environmentID)
         {
             var environmentViewModel = _environments.FirstOrDefault(a => a.Server.EnvironmentID == environmentID);
@@ -42,6 +61,7 @@ namespace Warewolf.Studio.ViewModels
             if(ServerStateChanged!=null)
             {
                 ServerStateChanged(this, SelectedEnvironment.Server);
+                ConnectControlViewModel.IsLoading = false;
             
             }
  

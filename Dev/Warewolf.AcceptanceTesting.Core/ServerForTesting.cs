@@ -26,6 +26,7 @@ namespace Warewolf.AcceptanceTesting.Core
         }
 
         private readonly IExplorerRepository _explorerProxy;
+        bool _hasLoaded;
 
         public ServerForTesting(IResource copy) : base(copy)
         {
@@ -45,6 +46,18 @@ namespace Warewolf.AcceptanceTesting.Core
         }
 
         public string DisplayName { get; private set; }
+        public bool HasLoaded
+        {
+            get
+            {
+                return _hasLoaded;
+            }
+        }
+
+        public IServer Clone()
+        {
+            return null;
+        }
 
         public List<IResource> Load()
         {

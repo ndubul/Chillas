@@ -131,6 +131,9 @@ namespace Warewolf.Studio.ViewModels
         bool _canShowDependencies;
         bool _allowResourceCheck;
         bool? _isResourceChecked;
+        bool _candrop;
+        bool _canDrag;
+        bool? _isResource;
 
         public ExplorerItemViewModel(IServer server, IExplorerTreeItem parent, Action<IExplorerItemViewModel> selectAction, IShellViewModel shellViewModel)
         {
@@ -231,6 +234,8 @@ namespace Warewolf.Studio.ViewModels
                         ResourceType.WebService, typeof(DsfWebserviceActivity) 
                     }
                 };
+            _candrop = true;
+            _canDrag = true;
         }
 
         public string ActivityName
@@ -455,7 +460,7 @@ namespace Warewolf.Studio.ViewModels
             SetPermissions(args.WindowsGroupPermissions);
         }
 
-        public void SetPermissions(List<IWindowsGroupPermission> permissions)
+        public void SetPermissions(List<IWindowsGroupPermission> permissions, bool isDeploy = false)
         {
             if (ResourceType == ResourceType.Folder)
             {
@@ -467,12 +472,16 @@ namespace Warewolf.Studio.ViewModels
             {
                 CanEdit = true;
                 CanExecute = false;
+                if (isDeploy)
+                {
+                    CanEdit = false;
+                }
                 return;
             }
             var resourcePermission = permissions.FirstOrDefault(permission => permission.ResourceID == ResourceId);
             if (resourcePermission != null)
             {
-                SetFromPermission(resourcePermission);
+                SetFromPermission(resourcePermission, isDeploy);
             }
             else
             {
@@ -480,15 +489,15 @@ namespace Warewolf.Studio.ViewModels
                     permissions.FirstOrDefault(permission => permission.IsServer && permission.ResourceID == Guid.Empty);
                 if (serverPermission != null)
                 {
-                    SetFromServer(serverPermission);
+                    SetFromServer(serverPermission, isDeploy);
                 }
             }
         }
 
-        void SetFromServer(IWindowsGroupPermission serverPermission)
+        void SetFromServer(IWindowsGroupPermission serverPermission, bool isDeploy = false)
         {
-            CanEdit = serverPermission.Contribute;
-            CanExecute = serverPermission.Contribute || serverPermission.Execute && ResourceType == ResourceType.WorkflowService;
+            CanEdit = serverPermission.Contribute && !isDeploy;
+            CanExecute = serverPermission.Contribute && !isDeploy || serverPermission.Execute && ResourceType == ResourceType.WorkflowService && !isDeploy;
             CanView = serverPermission.View || serverPermission.Contribute || serverPermission.Administrator;
             CanRename = serverPermission.Contribute || serverPermission.Administrator;
             CanDelete = serverPermission.Contribute || serverPermission.Administrator;
@@ -496,10 +505,10 @@ namespace Warewolf.Studio.ViewModels
             CanDeploy = serverPermission.DeployFrom || serverPermission.Administrator;
         }
 
-        void SetFromPermission(IWindowsGroupPermission resourcePermission)
+        void SetFromPermission(IWindowsGroupPermission resourcePermission, bool isDeploy = false)
         {
-            CanEdit = resourcePermission.Contribute;
-            CanExecute = resourcePermission.Contribute || resourcePermission.Execute && ResourceType == ResourceType.WorkflowService;
+            CanEdit = resourcePermission.Contribute && !isDeploy;
+            CanExecute = resourcePermission.Contribute && !isDeploy || resourcePermission.Execute && ResourceType == ResourceType.WorkflowService && !isDeploy;
             CanView = resourcePermission.View || resourcePermission.Contribute || resourcePermission.Administrator;
             CanRename = resourcePermission.Contribute || resourcePermission.Administrator;
             CanDelete = resourcePermission.Contribute || resourcePermission.Administrator;
@@ -680,12 +689,7 @@ namespace Warewolf.Studio.ViewModels
                     {
                         _shellViewModel.SetActiveEnvironment(Server.EnvironmentID);
                         _shellViewModel.SetActiveServer(Server);
-                        //var helpDescriptor = new HelpDescriptor("", string.Format("<body><H1>{0}</H1><a href=\"http://warewolf.io\">Warewolf</a><p>Inputs: {1}</p><p>Outputs: {2}</p></body>", ResourceName, Inputs, Outputs), null);
-                        //_shellViewModel.UpdateHelpDescriptor(helpDescriptor);
                     }
-                  
-                        SelectAction(this);
-                  
                 }
             }
         }
@@ -702,25 +706,40 @@ namespace Warewolf.Studio.ViewModels
                 OnPropertyChanged(() => AllowResourceCheck);
             }
         }
+
+        public bool? IsResourceUnchecked
+        {
+            get
+            {
+                return _isResource;
+            }
+            set
+            {
+                _isResource = value;
+                OnPropertyChanged(() => IsResourceChecked);
+            }
+        }
         public bool? IsResourceChecked
         {
             get
             {
-                return _isResourceChecked;
+                return _isResource;
             }
             set
             {
                 if (ResourceType == ResourceType.Folder)
                 {
-
-                    Children.Apply(a => a.IsResourceChecked = value??false);
-                    _isResourceChecked = value??false;
-                    if(Parent.ResourceType==ResourceType.Folder)
-                    Parent.IsFolderChecked = value;
+                    if (ChildrenCount >= 1)
+                    {
+                        Children.Apply(a => a.IsResourceChecked = value ?? false);
+                        _isResource = value ?? false;
+                        if (Parent.ResourceType == ResourceType.Folder)
+                            Parent.IsFolderChecked = value;
+                }
                 }
                 else
                 {
-                    _isResourceChecked = value.HasValue && ResourceType != ResourceType.Folder && value.Value;
+                    _isResource = value.HasValue && ResourceType != ResourceType.Folder && value.Value;
                 }
                 SelectAction(this);
                 OnPropertyChanged(() => IsResourceChecked);
@@ -730,7 +749,7 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return _isResourceChecked;
+                return _isResource;
             }
             set
             {
@@ -738,20 +757,20 @@ namespace Warewolf.Studio.ViewModels
                 {
                     if (Children.Any() && Children.All(a => (a.IsResourceChecked.HasValue) && a.IsResourceChecked.Value))
                     {
-                        _isResourceChecked = true;
+                        _isResource = true;
                     }
                     else if (Children.Any(a => (!a.IsResourceChecked.HasValue) || a.IsResourceChecked.Value))
                     {
-                        _isResourceChecked = null;
+                        _isResource = null;
                     }
                     else
                     {
-                        _isResourceChecked = false;
+                        _isResource = false;
                     }
-                    if( !_isResourceChecked.HasValue ||_isResourceChecked.Value)
+                    if( !_isResource.HasValue ||_isResource.Value)
                     {
                         if(Parent.ResourceType==ResourceType.Folder)
-                        Parent.IsFolderChecked = _isResourceChecked;
+                        Parent.IsFolderChecked = _isResource;
                     }
                 }
                 OnPropertyChanged(() => IsResourceChecked);
@@ -1097,20 +1116,24 @@ namespace Warewolf.Studio.ViewModels
         {
             get
             {
-                return ResourceType == ResourceType.Folder;
+                return ResourceType == ResourceType.Folder && _candrop;
             }
             set
             {
+                _candrop = value;
+                OnPropertyChanged(() => CanDrop);
             }
         }
         public bool CanDrag
         {
             get
             {
-                return ResourceType < ResourceType.Server && ResourceType != ResourceType.Version;
+                return (_canDrag) && (ResourceType < ResourceType.Server && ResourceType != ResourceType.Version);
             }
             set
             {
+                _canDrag = value;
+                OnPropertyChanged(() => CanDrag);
             }
         }
 

@@ -26,6 +26,7 @@ namespace Warewolf.Studio.Views
         private bool _dropAfter;
         private XamDataTreeNode parent;
         DataObject _dragData;
+        IServer _selectedServer;
 
         public ExplorerView()
         {
@@ -36,6 +37,17 @@ namespace Warewolf.Studio.Views
         public ExplorerViewTestClass ExplorerViewTestClass
         {
             get { return _explorerViewTestClass; }
+        }
+        public IServer SelectedServer
+        {
+            get
+            {
+                return ConnectControl.SelectedServer;
+            }
+            set
+            {
+                _selectedServer = value;
+            }
         }
 
         public IEnvironmentViewModel OpenEnvironmentNode(string nodeName)

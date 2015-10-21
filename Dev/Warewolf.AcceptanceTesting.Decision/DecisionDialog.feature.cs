@@ -31,8 +31,8 @@ namespace Warewolf.AcceptanceTesting.Decision
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DecisionDialog", "In order to create a decision\nAs a Warewolf User\nI want to be shown the decision " +
-                    "window setup", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DecisionDialog", "In order to create a decision\r\nAs a Warewolf User\r\nI want to be shown the decisio" +
+                    "n window setup", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -163,7 +163,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 30
  testRunner.Then("the Decision tool window is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 31
- testRunner.And("\"If [[A]] Is = 123 234\" is visible in tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"If [[A]] Is = a123 234\" is visible in tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

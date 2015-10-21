@@ -1,20 +1,21 @@
-﻿Feature: Sharepoint
+﻿@SharepointSource
+Feature: Sharepoint
 	In order to avoid silly mistakes
 	As a math idiot
 	I want to be told the sum of two numbers
 
-@ignore
+@SharepointSource
 Scenario: Creating New Sharepoint Source 
    Given I open New Sharepoint Source 
-   Then "New Sharepoint Service Source" tab is opened
-   And title is "New Sharepoint Service Source"
+   Then "New SharePoint Service Source" tab is opened
+   And title is "New SharePoint Service Source"
    And I type Address as "http://rsaklfsvrsharep"
-   Then "New Sharepoint Service Source *" tab is opened
+   Then "New SharePoint Service Source *" tab is opened
    And "Save" is "Disabled"
-   And "Test" is "Enabled"
+   And "Test Connection" is "Enabled"
    And I Select Authentication Type as "Windows"
-   And Username field is "InVisible"
-   And Password field is "InVisible"
+   And Username field is "Collapsed"
+   And Password field is "Collapsed"
    When Test Connecton is "Successful"
    And "Save" is "Enabled"
    When I save as "Testing Sharepoint Resource Save"
@@ -22,12 +23,12 @@ Scenario: Creating New Sharepoint Source
    Then title is "Testing Sharepoint Resource Save"
    And "Testing Sharepoint Resource Save" tab is opened
 
-
+@SharepointSource
 Scenario: Creating New Sharepoint Source under auth type as user
    Given I open New Sharepoint Source
    And I type Address as "http://rsaklfsvrsharep"
    And "Save" is "Disabled"
-   And "Test" is "Enabled"
+   And "Test Connection" is "Enabled"
    And I Select Authentication Type as "User"
    And Username field is "Visible"
    And Password field is "Visible"
@@ -38,16 +39,18 @@ Scenario: Creating New Sharepoint Source under auth type as user
    When I save the source
    Then the save dialog is opened
 
+@SharepointSource
 Scenario: Incorrect address anonymous auth type not allowing save
    Given I open New Sharepoint Source
    And I type Address as "sdfsdfd"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
-   And I Select Authentication Type as "Anonymous"
+   And I Select Authentication Type as "Windows"
    When Test Connecton is "UnSuccessful"
    And Validation message is thrown
    And "Save" is "Disabled"
 
+@SharepointSource
 Scenario: Incorrect address user auth type is not allowing to save
    Given I open New Sharepoint Source
    And I type Address as "sdfsdfd"
@@ -60,6 +63,7 @@ Scenario: Incorrect address user auth type is not allowing to save
    And Validation message is thrown
    And "Save" is "Disabled"
 
+@SharepointSource
 Scenario: Testing Auth type as Anonymous and swaping it resets the test connection 
    Given I open New Sharepoint Source
    And "Save" is "Disabled"
@@ -72,9 +76,9 @@ Scenario: Testing Auth type as Anonymous and swaping it resets the test connecti
    When Test Connecton is "Successful"
    And Validation message is Not thrown
    And "Save" is "Enabled"
-   And I Select Authentication Type as "Anonymous"
-   And Username field is "InVisible"
-   And Password field is "InVisible"
+   And I Select Authentication Type as "Windows"
+   And Username field is "Collapsed"
+   And Password field is "Collapsed"
    And "Save" is "Disabled"
    When Test Connecton is "Successful"
    And Validation message is Not thrown
@@ -84,6 +88,7 @@ Scenario: Testing Auth type as Anonymous and swaping it resets the test connecti
    And Password field is "Visible"
    And "Save" is "Disabled" 
 
+@SharepointSource
 Scenario: Editing saved Sharepoint Source 
    Given I open "Test" Sharepoint source
    Then "Test" tab is opened
@@ -91,11 +96,11 @@ Scenario: Editing saved Sharepoint Source
    And Address is "http://rsaklfsvrsharep"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
-   And Select Authentication Type as "Anonymous"
-   And Username field is "InVisible"
-   And Password field is "InVisible"
+   And Authentication Type is "Windows"
+   And Username field is "Collapsed"
+   And Password field is "Collapsed"
    And "Save" is "Disabled"
-   When I change Address to "http://rsaklfsvrshareps"
+   When I type Address as "http://rsaklfsvrshareps"
    Then "Test *" tab is opened
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
@@ -104,16 +109,17 @@ Scenario: Editing saved Sharepoint Source
    Then "Save" is "Enabled" 
    When I save the source
 
+@SharepointSource
  Scenario: Editing saved Sharepoint Source auth type
    Given I open "Test" Sharepoint source
    Then "Test" tab is opened
    And Address is "http://rsaklfsvrsharep"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
-   And Select Authentication Type as "Anonymous"
-   And Username field is "InVisible"
-   And Password field is "InVisible"
-   When I edit Authentication Type as "User"
+   And Authentication Type is "Windows"
+   And Username field is "Collapsed"
+   And Password field is "Collapsed"
+   When I Select Authentication Type as "User"
    And Username field is "Visible"
    And Password field is "Visible"
    And Username field as "IntegrationTester"
@@ -122,10 +128,11 @@ Scenario: Editing saved Sharepoint Source
    When Test Connecton is "Successfull"
    Then "Save" is "Enabled" 
 
+@SharepointSource
 Scenario: Cancel Test
    Given I open New Sharepoint Source 
-   Then "New Sharepoint Source" tab is opened
-   And title is "New Sharepoint Source"
+   Then "New SharePoint Service Source" tab is opened
+   And title is "New SharePoint Service Source"
    And I type Address as "http://rsaklfsvrsharep"
    When Test Connecton is "Long Running"
    And I Cancel the Test

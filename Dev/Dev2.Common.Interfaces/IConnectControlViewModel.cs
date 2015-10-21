@@ -16,6 +16,7 @@ namespace Dev2.Common.Interfaces
 
         bool IsConnected { get;set; }
         bool IsConnecting { get; set; }
+        bool IsLoading { get; set; }
         string ToggleConnectionToolTip { get; }
         string EditConnectionToolTip { get; }
         string ConnectionsToolTip { get; }

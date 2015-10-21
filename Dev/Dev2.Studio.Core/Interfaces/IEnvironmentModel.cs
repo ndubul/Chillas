@@ -54,6 +54,8 @@ namespace Dev2.Studio.Core.Interfaces
         void FireWorkflowSaved();
 
         event EventHandler WorkflowSaved;
+
+     
     }
 
     public class ConnectedEventArgs : EventArgs
