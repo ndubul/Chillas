@@ -387,3 +387,20 @@ Scenario Outline: Saving results in recordsets
 	| [[rec([[int]]).a]],[[int]] =3 | Success |
 
 
+#Complex Types
+Scenario Outline: Saving results in complex types
+	Given I have DB as "DemoDB"
+	And table as "dbo.[Country]"
+	And I have this data
+	| InputData                          | ToField     | Type        |
+	| [[Country(*).CountryID().value]]   | CountryID   | int         |
+	| [[Country(*).Description().value]] | Description | varchar(50) |
+	And "skip blank rows" is checked by default
+	And The result variable '<result>' equals '<value>'
+	When the tool is executed
+	And the execution has "NO" error 
+	Examples: 
+	| result                | value   |
+	| [[rec().set().value]] | Success |
+
+

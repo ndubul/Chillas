@@ -266,7 +266,7 @@ Scenario Outline: Sort recordset
 	| [[rs([[int]]).a]], [[int]] = 2 | Forward   | America, Australia |
 
 
-
+#Complex Types
 Scenario Outline: Sort recordset using complex types
 	Given I have the following recordset to sort
 	| rs            | value     |
@@ -277,7 +277,7 @@ Scenario Outline: Sort recordset using complex types
 	And I sort a record "<input>"
 	And my sort order is "<direction>"
 	When the sort records tool is executed
-	Then the execution has "No" error
+	Then the execution has "<error>" error
 	Examples: 
-	| input             | direction | result          |
-	| [[rec().rs(1).a]] | Forward   | Mongolia,Zambia |
+	| input             | direction | error | result          |
+	| [[rec().rs(1).a]] | Forward   | No    | Mongolia,Zambia |
