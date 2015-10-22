@@ -15,6 +15,12 @@ namespace Warewolf.Studio.Views
         string _errorMessage;
         string _canDeploy;
         string _canSelectDependencies;
+        string _statusPassed;
+        string _connectors;
+        string _services;
+        string _sources;
+        string _new;
+        int _overrides;
 
         public DeployView()
         {
@@ -58,7 +64,7 @@ namespace Warewolf.Studio.Views
         {
             get
             {
-                return Deploy.IsEnabled ? "Enabled" : "Disabled";
+                return ((IDeployViewModel)DataContext).DeployCommand.CanExecute(null) ? "Enabled" : "Disabled";
             }
             set
             {
@@ -74,6 +80,55 @@ namespace Warewolf.Studio.Views
             set
             {
                 Dependencies.IsEnabled = value=="Enabled";
+            }
+        }
+        public string StatusPassedMessage
+        {
+            get
+            {
+
+                return ((IDeployViewModel)DataContext).DeploySuccessMessage??"";
+            }
+            set
+            {
+                StatusPass.Text = value;
+            }
+        }
+        public string Connectors
+        {
+            get
+            {
+                return ((IDeployViewModel)DataContext).ConnectorsCount;
+            }
+          
+       }
+        public string Services
+        {
+            get
+            {
+                return ((IDeployViewModel)DataContext).ServicesCount;
+            }
+        }
+        public string Sources
+        {
+            get
+            {
+                return ((IDeployViewModel)DataContext).SourcesCount;
+            }
+
+        }
+        public string New
+        {
+            get
+            {
+                return ((IDeployViewModel)DataContext).NewResourcesCount;
+            }
+        }
+        public string Overrides
+        {
+            get
+            {
+                return ((IDeployViewModel)DataContext).OverridesCount;
             }
         }
 
@@ -100,12 +155,71 @@ namespace Warewolf.Studio.Views
 
         public void SelectPath(string path)
         {
-            ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().Apply(a => { if (a.ResourcePath == path) a.IsFolderChecked = true; });
+            ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().Apply(a =>
+            {
+                if (a.ResourcePath == path) 
+                    a.IsResourceUnchecked = true; 
+                
+            });
+            ((IDeployViewModel)DataContext).StatsViewModel.Calculate(((IDeployViewModel)DataContext).Source.SelectedItems.ToList());
+        }
+        public void UnSelectPath(string path)
+        {
+            ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().Apply(a =>
+            {
+                if (a.ResourcePath == path)
+                    a.IsResourceUnchecked = false;
+
+            });
+            ((IDeployViewModel)DataContext).StatsViewModel.Calculate(((IDeployViewModel)DataContext).Source.SelectedItems.ToList());
         }
 
         public void SelectDestinationServer(string servername)
         {
             DestinationConnectControl.SelectedServer = ((IDeployViewModel)DataContext).Destination.ConnectControlViewModel.Servers.FirstOrDefault(a => a.ResourceName == servername);
+        }
+
+        public void DeployItems()
+        {
+            ((IDeployViewModel)DataContext).DeployCommand.Execute(null);
+        }
+
+        public void SelectDependencies()
+        {
+            Dependencies.Command.Execute(null);
+        }
+
+        public string VerifySelectPath(string path)
+        {
+            var res = ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().FirstOrDefault(a =>  (a.ResourcePath ==path) && (a.IsResourceChecked ?? false));
+            if(res==null)
+            {
+                return "Selected";
+            }
+            else
+            {
+                return "Not Selected";
+            }
+        }
+
+        public void SetFilter(string filter)
+        {
+            ((IDeployViewModel)DataContext).Source.SearchText = filter;
+        }
+
+        public string VerifySelectPathVisibility(string path)
+        {
+            var res = ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().FirstOrDefault(a => (a.ResourcePath == path) );
+            if (res == null)
+            {
+                return "Not Visible";
+            }
+            else 
+            {
+                if(!res.IsVisible)
+                return "Not Visible";
+                return "Visible";
+            }
         }
     }
 }

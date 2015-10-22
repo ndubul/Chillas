@@ -109,6 +109,17 @@ namespace Dev2.Studio.Controller
             return Show();
         }
 
+        public MessageBoxResult ShowDeployNameConflict(string message)
+        {
+
+            Buttons = MessageBoxButton.OKCancel;
+            Header = "Deploy Name conflicts";
+
+            Description = message;
+            ImageType = MessageBoxImage.Error;
+            return Show();
+        }
+
         public MessageBoxResult ShowSettingsCloseConfirmation()
         {
 

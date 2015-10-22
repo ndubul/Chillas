@@ -45,5 +45,6 @@ namespace Dev2.Common.Interfaces.Deploy
 
         IList<IExplorerTreeItem> New { get; }
         Action CalculateAction { get; set; }
+        string RenameErrors { get; }
     }
 }

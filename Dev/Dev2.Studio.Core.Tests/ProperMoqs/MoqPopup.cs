@@ -131,6 +131,11 @@ namespace Dev2.Core.Tests.ProperMoqs
             return MessageBoxResult.None;
         }
 
+        public MessageBoxResult ShowDeployNameConflict(string message)
+        {
+            return MessageBoxResult.None;
+        }
+
         public MessageBoxResult ShowDeleteVersionMessage(string displayName)
         {
             return MessageBoxResult.None;

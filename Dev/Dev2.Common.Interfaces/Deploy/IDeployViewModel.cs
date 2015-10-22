@@ -32,7 +32,14 @@ namespace Dev2.Common.Interfaces.Deploy
         ///     Overridden resource in Destination
         ///     Static steps of how to deploy
         /// </summary>
-        IDeployStatsViewerViewModel StatsViewModel { get; set; }
+        IDeployStatsViewerViewModel StatsViewModel { get;  }
         string ErrorMessage { get; set; }
+        string DeploySuccessMessage { get; set; }
+        string UnknownCount { get; set; }
+        string SourcesCount { get; set; }
+        string ServicesCount { get; set; }
+        string ConnectorsCount { get; set; }
+        string OverridesCount { get; set; }
+        string NewResourcesCount { get; set; }
     }
 }
