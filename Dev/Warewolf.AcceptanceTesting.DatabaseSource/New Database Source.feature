@@ -1,10 +1,9 @@
-﻿@CreatingNewDBSource
+﻿@DbSource
 Feature: New Database Source
 	In order to avoid silly mistakes
 	As a math idiot
 	I want to be told the sum of two numbers
-
-
+	
 ##/ REQUIREMENTS
 ## Ensure User allows to save server source with windows credentials
 ## Ensure user allows to save server source as specfic user.
@@ -23,14 +22,13 @@ Feature: New Database Source
 ## Ensure Database dropdown is visible when test connection is successfull
 ## Ensure user is able to select database from the database dropdown 
 
-
-
+@DbSource
 Scenario: Creating New DB Source General Testing
    Given I open New Database Source
    Then "New Database Source" tab is opened
    And title is "New Database Source"
    When I type Server as "RSAKLFSVR"
-   Then the intellisense containts these options
+   Then the intellisense contains these options
    | Options         |
    | RSAKLFSVRGENDEV |
    | RSAKLFSVRSBSPDC |
@@ -43,6 +41,7 @@ Scenario: Creating New DB Source General Testing
    And I type Select The Server as "RSAKLFSVRGENDEV"
    And type options has "Microsoft SQL Server" as the default
    And Database dropdown is "Collapsed"
+   And I Select Authentication Type as "Windows"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
    Then Username field is "Collapsed"
@@ -64,15 +63,14 @@ Scenario: Creating New DB Source General Testing
    Then "SavedDBSource *" is the tab Header
    And title is "SavedDBSource"
    
-
-	
+@DbSource
 Scenario: Creating New DB Source as User Auth
     Given I open New Database Source
     And I type Server as "RSAKLFSVRGENDEV"
     And I Select Authentication Type as "User"
     Then Username field is "Visible"
     And Password field is "Visible"
-    And "Test Connection" is "Disabled"
+    And "Test Connection" is "Enabled"
     And "Save" is "Disabled"
     When I type Username as "testuser"
     And I type Password as "test123"
@@ -88,6 +86,7 @@ Scenario: Creating New DB Source as User Auth
     When I save the source
     Then the save dialog is opened
 
+@DbSource
 Scenario: Incorrect Server Address Doesnt Allow Save Windows Auth
       Given I open New Database Source
 	  And "Save" is "Disabled"
@@ -100,11 +99,11 @@ Scenario: Incorrect Server Address Doesnt Allow Save Windows Auth
       Then Database dropdown is "Collapsed"
       And "Test Connection" is "Enabled"
       When Test Connecton is "Unsuccessful"
-      And the validation message as "Server not found"
+      And the validation message as "One or more errors occurred."
       Then Database dropdown is "Collapsed"
       And "Save" is "Disabled"
 
-  
+ @DbSource
 Scenario: Incorrect Server Address Doesnt Allow Save User Auth
       Given I open New Database Source
       And I type Server as "RSAKLFSVRTFSBLD"
@@ -118,14 +117,13 @@ Scenario: Incorrect Server Address Doesnt Allow Save User Auth
       Then Database dropdown is "Collapsed"
       And "Test Connection" is "Enabled"
       When Test Connecton is "Unsuccessful"
-      And the validation message as "Server not found" 
+      And the validation message as "One or more errors occurred." 
 	  # above message comes from mocked network layer and cannot be tested here
       Then Database dropdown is "Collapsed"
       And "Save" is "Disabled"
 
-
-
-Scenario: Testing as Windows and swaping it resets the test connection 
+@DbSource
+Scenario: Testing as Windows and swapping it resets the test connection 
       Given I open New Database Source
       And "Save" is "Disabled"
       And I type Server as "RSAKLFSVRTFSBLD"
@@ -143,7 +141,7 @@ Scenario: Testing as Windows and swaping it resets the test connection
       And "Save" is "Disabled"
       Then Database dropdown is "Collapsed"
       Then Test Connecton is "Successful"
-      And "Save" is "Disabled"
+      And "Save" is "Enabled"
       And Database dropdown is "Visible"
       When I select "Dev2TestingDB" as Database
       And I Select Authentication Type as "Windows"
@@ -155,16 +153,14 @@ Scenario: Testing as Windows and swaping it resets the test connection
       When I Select Authentication Type as "User"
       Then Username field is "Visible"
       And Password field is "Visible"
-      And "Test Connection" is "Enabled"
+      And "Test Connection" is "Disabled"
       And "Save" is "Disabled"
 	  Then Database dropdown is "Collapsed"
 
-
-Scenario: Editing saved DB Source Remembers Previouse Auth Selection
+@DbSource
+Scenario: Editing saved DB Source Remembers Previous Auth Selection
 	Given I open "Database Source - Test" 
     And Server as "RSAKLFSVRGENDEV"
-    And "Save" is "Disabled"
-    And "Test Connection" is "Enabled"
     And Authentication Type is selected as "User"
     And Username field is "testuser"
     And Password field is "******"
@@ -181,18 +177,16 @@ Scenario: Editing saved DB Source Remembers Previouse Auth Selection
     And I select "Dev2TestingDB2" as Database
     And "Save" is "Enabled" 
     When I Select Authentication Type as "User"
-    Then "Test Connection" is "Enabled" 
+    Then "Test Connection" is "Disabled" 
     And "Save" is "Disabled"
 	And Database "Dev2TestingDB" is selected 
-    And "Test Connection" is "Enabled"
+    And "Test Connection" is "Disabled"
     And "Save" is "Disabled"
 	
-
+@DbSource
 Scenario: Editing saved DB Source Remembers credentials
 	Given I open "Database Source - Test" 
     And Server as "RSAKLFSVRGENDEV"
-    And "Save" is "Disabled"
-    And "Test Connection" is "Enabled"
     And Authentication Type is selected as "User"
     And Username field is "testuser"
     And Password field is "******"
@@ -209,8 +203,9 @@ Scenario: Editing saved DB Source Remembers credentials
     And "Test Connection" is "Enabled"
     When Test Connecton is "Successful"
 	Then "Save" is "Enabled"
-	    
-Scenario: Editing saved DB Source and canceling without saving
+
+@DbSource
+Scenario: Editing saved DB Source and cancelling without saving
 	Given I open "Database Source - Test" 
     And Server as "RSAKLFSVRGENDEV"
     And "Save" is "Disabled"
@@ -237,16 +232,17 @@ Scenario: Editing saved DB Source and canceling without saving
     And  Password  is "******"
 	Then "Test Connection" is "Enabled" 
 
+@DbSource
 Scenario: Cancel Test
    Given I open New Database Source
    When I type Server as "RSAKLFSVRGENDEV"
    And "Save" is "Disabled"
    And "Test Connection" is "Enabled"
-   And Authentication Type is selected as "User"
+   And I Select Authentication Type as "User"
    When I type Username as "testuser"
    And I type Password as "******"
-   Then I select "Test Connection"
-   And I select "Cancel Test"
+   When Test Connecton is "Long Running"
+   And I Cancel the Test
    Then the validation message as "Test Cancelled" 
    Then "Test Connection" is "Enabled"
    And "Save" is "Disabled"

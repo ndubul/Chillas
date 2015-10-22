@@ -31,8 +31,8 @@ namespace Warewolf.AcceptanceTesting.EmailSource
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Email Source", "In order to share settings\nI want to save my Email source Settings\nSo that I can " +
-                    "reuse them", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Email Source", "In order to share settings\r\nI want to save my Email source Settings\r\nSo that I ca" +
+                    "n reuse them", ProgrammingLanguage.CSharp, new string[] {
                         "EmailSource"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -127,13 +127,13 @@ this.ScenarioSetup(scenarioInfo);
 #line 33
  testRunner.Then("\"New Email Source\" tab is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 34
- testRunner.When("\"User Name\" input is \"someone\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("\"User Name\" input is \"warewolf@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 35
- testRunner.Then("\"From\" input is \"someone\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"From\" input is \"warewolf@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 36
- testRunner.When("\"From\" input is \"some\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("\"From\" input is \"info@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 37
- testRunner.Then("\"User Name\" input is \"someone\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("\"User Name\" input is \"warewolf@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -156,9 +156,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 43
  testRunner.And("I type Host as \"smtp.gmail.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 44
- testRunner.And("I type Username as \"someone\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I type Username as \"warewolf@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 45
- testRunner.And("I type Password as \"123456\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I type Password as \"Dev_tech*\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 46
  testRunner.And("\"Enable SSL\" input is \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 47
@@ -170,7 +170,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 50
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 51
- testRunner.And("I type To as \"another@rt.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I type To as \"info@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 52
  testRunner.And("\"Send\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 53
@@ -209,9 +209,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 65
  testRunner.And("I type Host as \"smtp.gmail.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 66
- testRunner.And("I type Username as \"someone\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I type Username as \"warewolf@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 67
- testRunner.And("I type Password as \"123456\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I type Password as \"Dev_tech*\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 68
  testRunner.And("\"Enable SSL\" input is \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 69
@@ -223,9 +223,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 72
  testRunner.And("\"Save\" is \"Disabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
- testRunner.And("I type From as \"someone@somewhere.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I type From as \"warewolf@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74
- testRunner.And("I type To as \"sd@sdfsd@fdfs.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I type To as \"queries@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 75
  testRunner.Then("\"Send\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 76
@@ -256,9 +256,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 84
  testRunner.And("\"Host\" input is \"smtp.gmail.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 85
- testRunner.And("\"User Name\" input is \"someone\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"User Name\" input is \"warewolf@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 86
- testRunner.And("\"Password\" input is \"123456\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"Password\" input is \"Dev_tech*\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 87
  testRunner.And("\"Enable SSL\" input is \"False\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 88
@@ -266,9 +266,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 89
  testRunner.And("\"Timeout\" input is \"100\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 90
- testRunner.And("\"From\" input is \"this@to.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"From\" input is \"warewolf@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 91
- testRunner.And("\"To\" input is \"another@rt.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\"To\" input is \"info@dev2.co.za\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 92
  testRunner.And("\"Send\" is \"Enabled\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 93
