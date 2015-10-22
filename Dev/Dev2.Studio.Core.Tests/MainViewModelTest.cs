@@ -54,7 +54,6 @@ using Dev2.Studio.ViewModels.WorkSurface;
 using Dev2.Threading;
 using Dev2.Util;
 using Dev2.Utilities;
-using Dev2.ViewModels.Deploy;
 using Dev2.Views.DropBox;
 using Dev2.Workspaces;
 using DropNet;
@@ -994,16 +993,6 @@ namespace Dev2.Core.Tests
             Assert.Fail("The resource passed in was null");
         }
 
-        [TestMethod]
-        public void DeployAllCommandWithoutCurrentResourceExpectsDeplouViewModelActive()
-        {
-            CreateFullExportsAndVmWithEmptyRepo();
-            MainViewModel.Handle(new SetActiveEnvironmentMessage(EnvironmentModel.Object));
-            MainViewModel.DeployAllCommand.Execute(null);
-            var activectx = MainViewModel.ActiveItem;
-            Assert.IsTrue(activectx.WorkSurfaceKey.Equals(
-                WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployViewer)));
-        }
 
         [TestMethod]
         [Description("Makes sure that new workflow only calls TempSave, not save on the resource repository")]
@@ -2111,94 +2100,7 @@ namespace Dev2.Core.Tests
 
         #endregion
 
-        [TestMethod]
-        [TestCategory("MainViewModel_HandleDeployResourcesMessage")]
-        [Description("Handle DeployResourcesMessage must open the deploy tab and select the resource in the view.")]
-        [Owner("Trevor Williams-Ros")]
-        public void MainViewModel_HandleDeployResourcesMessage_PublishesSelectItemInDeployMessage()
-        {
-            SelectItemInDeployMessage actual = null;
-            var eventAggregator = new Mock<IEventAggregator>();
-            eventAggregator.Setup(e => e.Publish(It.IsAny<object>())).Callback((object msg) => actual = msg as SelectItemInDeployMessage).Verifiable();
-            #region Setup ImportService - GRRR!
-            //Barney, commented out when I removed the feedback stuff from the studio
-            //SetupDefaultMef();
-            #endregion
-
-            var resourceID = Guid.NewGuid();
-            var environmentID = Guid.NewGuid();
-            var envRepo = new Mock<IEnvironmentRepository>();
-            envRepo.Setup(e => e.All()).Returns(new List<IEnvironmentModel>());
-            Mock<IResourceRepository> mockResourceRepository = new Mock<IResourceRepository>();
-            Mock<IContextualResourceModel> mockResourceModel = new Mock<IContextualResourceModel>();
-            mockResourceModel.Setup(model => model.ID).Returns(resourceID);
-            mockResourceRepository.Setup(repository => repository.FindSingle(It.IsAny<Expression<Func<IResourceModel, bool>>>(), false, false)).Returns(mockResourceModel.Object);
-            Mock<IEnvironmentModel> mockEnvironmentModel = new Mock<IEnvironmentModel>();
-            mockEnvironmentModel.Setup(model => model.ID).Returns(environmentID);
-            mockEnvironmentModel.Setup(model => model.ResourceRepository).Returns(mockResourceRepository.Object);
-            mockEnvironmentModel.Setup(model => model.AuthorizationService).Returns(new Mock<IAuthorizationService>().Object);
-            var environmentModel = mockEnvironmentModel.Object;
-            mockResourceModel.Setup(model => model.Environment).Returns(environmentModel);
-            envRepo.Setup(e => e.Source).Returns(environmentModel);
-            envRepo.Setup(e => e.FindSingle(It.IsAny<Expression<Func<IEnvironmentModel, bool>>>())).Returns(environmentModel);
-            envRepo.Setup(e => e.Source.IsConnected).Returns(false);
-            envRepo.Setup(e => e.Source.Connection.IsConnected).Returns(false);
-            var vm = new MainViewModel(eventAggregator.Object, new SynchronousAsyncWorker(), envRepo.Object, new Mock<IVersionChecker>().Object, false, new Mock<IBrowserPopupController>().Object);
-            vm.AddDeployResourcesWorkSurface(mockResourceModel.Object);
-            var expected = new Mock<IExplorerItemModel>();
-            expected.Setup(model => model.ResourceId).Returns(resourceID);
-            expected.Setup(model => model.EnvironmentId).Returns(environmentModel.ID);
-            var deployMessage = new DeployResourcesMessage(expected.Object);
-            vm.Handle(deployMessage);
-            eventAggregator.Verify(e => e.Publish(It.IsAny<object>()), "MainViewModel Handle DeployResourcesMessage did not publish message with the selected view model.");
-            Assert.IsNotNull(actual, "MainViewModel Handle DeployResourcesMessage did not publish message with the selected view model.");
-            Assert.AreEqual(expected.Object.ResourceId, actual.ResourceID, "MainViewModel Handle DeployResourcesMessage did not publish message with the selected display name.");
-            Assert.AreEqual(expected.Object.EnvironmentId, actual.EnvironmentID, "MainViewModel Handle DeployResourcesMessage did not publish message with the selected environment.");
-        }
-
-        [TestMethod]
-        [TestCategory("MainViewModel_AddDeployResourceWorksurface")]
-        [Owner("Trevor Williams-Ros")]
-        public void MainViewModel_AddDeployResourceWorksurface_PublishesSelectItemInDeployMessage()
-        {
-            SelectItemInDeployMessage actual = null;
-            var eventAggregator = new Mock<IEventAggregator>();
-            eventAggregator.Setup(e => e.Publish(It.IsAny<object>())).Callback((object msg) => actual = msg as SelectItemInDeployMessage).Verifiable();
-            #region Setup ImportService - GRRR!
-            //Barney, commented out when I removed the feedback stuff from the studio
-            //SetupDefaultMef();
-            #endregion
-
-            var resourceID = Guid.NewGuid();
-            var environmentID = Guid.NewGuid();
-            var envRepo = new Mock<IEnvironmentRepository>();
-            envRepo.Setup(e => e.All()).Returns(new List<IEnvironmentModel>());
-            Mock<IResourceRepository> mockResourceRepository = new Mock<IResourceRepository>();
-            Mock<IContextualResourceModel> mockResourceModel = new Mock<IContextualResourceModel>();
-            mockResourceModel.Setup(model => model.ID).Returns(resourceID);
-            mockResourceRepository.Setup(repository => repository.FindSingle(It.IsAny<Expression<Func<IResourceModel, bool>>>(), false, false)).Returns(mockResourceModel.Object);
-            Mock<IEnvironmentModel> mockEnvironmentModel = new Mock<IEnvironmentModel>();
-            mockEnvironmentModel.Setup(model => model.ID).Returns(environmentID);
-            mockEnvironmentModel.Setup(model => model.ResourceRepository).Returns(mockResourceRepository.Object);
-            var environmentModel = mockEnvironmentModel.Object;
-            mockResourceModel.Setup(model => model.Environment).Returns(environmentModel);
-            envRepo.Setup(e => e.Source).Returns(environmentModel);
-            envRepo.Setup(e => e.FindSingle(It.IsAny<Expression<Func<IEnvironmentModel, bool>>>())).Returns(environmentModel);
-            envRepo.Setup(e => e.Source.IsConnected).Returns(false);
-            envRepo.Setup(e => e.Source.Connection.IsConnected).Returns(false);
-            var vm = new MainViewModel(eventAggregator.Object, new SynchronousAsyncWorker(), envRepo.Object, new Mock<IVersionChecker>().Object, false, new Mock<IBrowserPopupController>().Object);
-            vm.AddDeployResourcesWorkSurface(mockResourceModel.Object);
-            var expected = new Mock<IExplorerItemModel>();
-            expected.Setup(model => model.ResourceId).Returns(resourceID);
-            expected.Setup(model => model.EnvironmentId).Returns(environmentModel.ID);
-            vm.AddDeployResourcesWorkSurface(mockResourceModel.Object);
-            eventAggregator.Verify(e => e.Publish(It.IsAny<object>()), "MainViewModel Handle DeployResourcesMessage did not publish message with the selected view model.");
-            Assert.IsNotNull(actual, "MainViewModel Handle DeployResourcesMessage did not publish message with the selected view model.");
-            Assert.AreEqual(expected.Object.ResourceId, actual.ResourceID, "MainViewModel Handle DeployResourcesMessage did not publish message with the selected display name.");
-            Assert.AreEqual(expected.Object.EnvironmentId, actual.EnvironmentID, "MainViewModel Handle DeployResourcesMessage did not publish message with the selected environment.");
-        }
-
-      
+       
 
         static ExecuteMessage MakeMsg(string msg)
         {

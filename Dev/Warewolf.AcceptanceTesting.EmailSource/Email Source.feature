@@ -31,24 +31,24 @@ Scenario: Create New Email source
 Scenario: From Defaults to User Name But Not After Change
 	Given I open New Email Source
 	Then "New Email Source" tab is opened
-	When "User Name" input is "someone"
-	Then "From" input is "someone"
-	When "From" input is "some"
-	Then "User Name" input is "someone"
+	When I type Username as "warewolf@dev2.co.za"
+	Then "From" input is "warewolf@dev2.co.za"
+	When I type From as "info@dev2.co.za"
+	Then "User Name" input is "warewolf@dev2.co.za"
 
 @EmailSource
 Scenario: Enable Send and Enable Save With Validation
 	Given I open New Email Source
 	Then "New Email Source" tab is opened
 	And I type Host as "smtp.gmail.com"
-	And I type Username as "someone"
-	And I type Password as "123456"
+	And I type Username as "warewolf@dev2.co.za"
+	And I type Password as "Dev_tech*"
 	And "Enable SSL" input is "False"
 	And "Port" input is "25"
 	And "Timeout" input is "100"
 	And "Send" is "Enabled"
 	And "Save" is "Disabled"
-	And I type To as "another@rt.com"
+	And I type To as "info@dev2.co.za"
 	And "Send" is "Enabled"
 	When I click "Send"
 	And Send is "Successful"
@@ -63,17 +63,17 @@ Scenario: Fail Send
 	Given I open New Email Source
 	Then "New Email Source" tab is opened
 	And I type Host as "smtp.gmail.com"
-	And I type Username as "someone"
-	And I type Password as "123456"
+	And I type Username as "warewolf@dev2.co.za"
+	And I type Password as "Dev_tech*"
 	And "Enable SSL" input is "False"
 	And "Port" input is "25"
 	And "Timeout" input is "100"
 	And "Send" is "Enabled"
 	And "Save" is "Disabled"
-	And I type From as "someone@somewhere.com"
-	And I type To as "sd@sdfsd@fdfs.com"
+	And I type From as "warewolf@dev2.co.za"
+	And I type To as "queries@dev2.co.za"
 	Then "Send" is "Enabled"
-	And "Send" is "Unsuccessful"
+	And Send is "Unsuccessful"
 	Then Send is "Failed to Send: One or more errors occurred"
 	And "Save" is "Disabled"
 
@@ -82,13 +82,13 @@ Scenario: Edit saves From and To
 	Given I open "Test Email Source"
 	Then "Test Email Source" tab is opened
 	And "Host" input is "smtp.gmail.com"
-	And "User Name" input is "someone"
-	And "Password" input is "123456"
+	And "User Name" input is "warewolf@dev2.co.za"
+	And "Password" input is "Dev_tech*"
 	And "Enable SSL" input is "False"
 	And "Port" input is "25"
 	And "Timeout" input is "100"
-	And "From" input is "this@to.com"
-	And "To" input is "another@rt.com"
+	And "From" input is "warewolf@dev2.co.za"
+	And "To" input is "info@dev2.co.za"
 	And "Send" is "Enabled"
 	And "Save" is "Disabled"
 	

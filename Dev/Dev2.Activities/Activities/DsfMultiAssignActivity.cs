@@ -29,6 +29,7 @@ using Dev2.MathOperations;
 using Warewolf.Core;
 using Warewolf.Storage;
 using WarewolfParserInterop;
+// ReSharper disable UnusedMember.Global
 
 // ReSharper disable CheckNamespace
 namespace Unlimited.Applications.BusinessDesignStudio.Activities
@@ -212,7 +213,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
             }
         }
 
-        AssignValue DoCalculation(IExecutionEnvironment environment, string fieldName, string cleanExpression, int update)
+        private AssignValue DoCalculation(IExecutionEnvironment environment, string fieldName, string cleanExpression, int update)
         {
             var functionEvaluator = new FunctionEvaluator();
             var warewolfEvalResult = environment.Eval(cleanExpression, update);
@@ -261,7 +262,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
             return null;
         }
 
-        DebugItem AddSingleInputDebugItem(IExecutionEnvironment environment, int innerCount, IAssignValue assignValue, int update)
+        private DebugItem AddSingleInputDebugItem(IExecutionEnvironment environment, int innerCount, IAssignValue assignValue, int update)
         {
             var debugItem = new DebugItem();
             const string VariableLabelText = "Variable";
@@ -364,7 +365,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
             return debugItem;
         }
 
-        void AddSingleDebugOutputItem(IExecutionEnvironment environment, int innerCount, IAssignValue assignValue, int update)
+        private void AddSingleDebugOutputItem(IExecutionEnvironment environment, int innerCount, IAssignValue assignValue, int update)
         {
             const string VariableLabelText = "";
             const string NewFieldLabelText = "";
@@ -411,6 +412,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
                         var recSetResult = evalResult as WarewolfDataEvaluationCommon.WarewolfEvalResult.WarewolfAtomListresult;
                         if (recSetResult != null)
                         {
+                            // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
                             if (DataListUtil.GetRecordsetIndexType(assignValue.Name) == enRecordsetIndexType.Blank)
                             {
                                 AddDebugItem(new DebugItemWarewolfAtomListResult(recSetResult, evalResult2, "", assignValue.Name, VariableLabelText, NewFieldLabelText, "="), debugItem);

@@ -28,6 +28,8 @@ using Dev2.Diagnostics;
 using Dev2.Runtime.Security;
 using Dev2.Services.Security;
 using Warewolf.Storage;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable MemberCanBePrivate.Global
 
 // ReSharper disable CheckNamespace
 namespace Unlimited.Applications.BusinessDesignStudio.Activities

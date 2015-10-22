@@ -13,7 +13,7 @@ using System.IO;
 
 namespace Dev2.Common.Common
 {
-    public class DeleteHelper
+    public static class DeleteHelper
     {
         public static bool Delete(string path)
         {
@@ -34,7 +34,7 @@ namespace Dev2.Common.Common
             // wild-card char
             if (path.IndexOf("*", StringComparison.Ordinal) >= 0)
             {
-                if (pattern != null && dirRoot != null)
+                if (dirRoot != null)
                 {
                     string[] fileList = Directory.GetFileSystemEntries(dirRoot, pattern, SearchOption.TopDirectoryOnly);
                     foreach (string file in fileList)

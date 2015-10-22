@@ -1,13 +1,14 @@
-﻿@DBService
+﻿@DbService
 Feature: DB Service
 	In order to manage my database services
 	As a Warewolf User
 	I want to be shown the database service setup
 
+@DbService
 Scenario: Creating DB Service
-	Given I click "New DataBase Service Connector"
+	Given I open New DataBase Service Connector
 	Then "New DB Connector" tab is opened
-	And Data Source is focused
+	And "Data Source" is focused
 	And "1 Data Source" is "Enabled"
 	And "2 Select Action" is "Disabled"
 	And "3 Test Connector and Calculate Outputs" is "Disabled" 
@@ -37,14 +38,13 @@ Scenario: Creating DB Service
 	When I save
 	Then Save Dialog is opened 
 
-
-
+@DbService
 Scenario: Opening Saved DB Service
    Given I open "InsertDummyUser" service
    And "InsertDummyUser" tab is opened
    Then "1 Data Source" is "Enabled"
    And Data Source is focused
-   When "DemoDB" is selected as the data source
+   When I select "DemoDB" as data source
    Then "2 Select Action" is "Enabled"
    And "dbo.InsertDummyUser" is selected as the action
    Then "3 Test Connector and Calculate Outputs" is "Enabled" 
@@ -65,6 +65,7 @@ Scenario: Opening Saved DB Service
 	| UserID | UserID       | dbo_InsertDummyUser |
    And "Save" is "Disabled"
 
+@DbService
  Scenario: Editing DB Service Mappings
    Given I open "InsertDummyUser" service
    And "InsertDummyUser" tab is opened
@@ -100,6 +101,7 @@ Scenario: Opening Saved DB Service
    When I save
    Then "InsertDummyUser" is saved
 
+@DbService
  Scenario: Editing DB Service and Test Execution is unsuccesful
    Given I open "InsertDummyUser" service
    And "InsertDummyUser" tab is opened
@@ -123,8 +125,7 @@ Scenario: Opening Saved DB Service
 	| Output | Output Alias | Recordset Name      |
 	And "Save" is "Disabled"
 
-#--
-@ignore
+@DbService
 Scenario: Refresh in select Action
 	Given I click New Data Base Service Connector
 	Then "New Database Connector" tab is opened
@@ -155,6 +156,7 @@ Scenario: Refresh in select Action
 	When I save
 	Then Save Dialog is opened 
 
+@DbService
 Scenario: Changing Actions
 	Given I click New Data Base Service Connector
 	Then "New DB Connector" tab is opened
@@ -193,7 +195,7 @@ Scenario: Changing Actions
 	When I save
 	Then Save Dialog is opened 
 	
-	
+@DbService
 Scenario: Creating a new Data Source
 	Given I click New Data Base Service Connector
 	Then "New DB Connector" tab is opened
@@ -207,19 +209,19 @@ Scenario: Creating a new Data Source
 	Then New Data Source Dialog is opened
 
 #WOLF-860
-@ignore
-Scenario: Ensure recordset values can be saved to a variable
-	Given I have a new Workspace opened
-	And I have a saved Data Connector called "MyDataCon"
-	And "MyDataCon" returns [[dbo_GetCountries().CountryID]] and [[dbo_GetCountries().Description]]
-	When I drop "MyDataCon" on the design surface
-	And I open the Database Connector to a large view
-	When I change  [[dbo_GetCountries().CountryID]] to "[[variable]]"
-	And "MyDataCon" is executed
-	Then the workflow execution has "NO" error     
-	And the debug output is
-	|              |                           |
-	| [[variable]] | Murali,Murali,india,india |
+
+#Scenario: Ensure recordset values can be saved to a variable
+#	Given I have a new Workspace opened
+#	And I have a saved Data Connector called "MyDataCon"
+#	And "MyDataCon" returns [[dbo_GetCountries().CountryID]] and [[dbo_GetCountries().Description]]
+#	When I drop "MyDataCon" on the design surface
+#	And I open the Database Connector to a large view
+#	When I change  [[dbo_GetCountries().CountryID]] to "[[variable]]"
+#	And "MyDataCon" is executed
+#	Then the workflow execution has "NO" error     
+#	And the debug output is
+#	|              |                           |
+#	| [[variable]] | Murali,Murali,india,india |
    
 
 

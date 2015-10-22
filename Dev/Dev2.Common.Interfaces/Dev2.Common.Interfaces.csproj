@@ -122,7 +122,6 @@
     <Compile Include="..\AssemblyCommonInfo.cs">
       <Link>Properties\AssemblyCommonInfo.cs</Link>
     </Compile>
-    <Compile Include="Activity\IWorkflowActivityMessage.cs" />
     <Compile Include="AuthenticationType.cs" />
     <Compile Include="Communication\IMemo.cs" />
     <Compile Include="Communication\ISerializer.cs" />
@@ -378,6 +377,7 @@
     <Compile Include="Wrappers\IWrappedObject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Activity\" />
     <Folder Include="Core\Convertors\DateTime\" />
     <Folder Include="Core\Data\" />
     <Folder Include="Email\" />

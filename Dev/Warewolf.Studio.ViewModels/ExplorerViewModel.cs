@@ -28,7 +28,7 @@ namespace Warewolf.Studio.ViewModels
 		private bool _isRefreshing;
 		private IExplorerTreeItem _selectedItem;
 		private object[] _selectedDataItems;
-	    bool _fromActivityDrop;
+	    private bool _fromActivityDrop;
 
 	    protected ExplorerViewModelBase()
 		{
@@ -38,7 +38,7 @@ namespace Warewolf.Studio.ViewModels
             CreateFolderCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(CreateFolder);
 		}
 
-	    void CreateFolder()
+	    private void CreateFolder()
 	    {
 	        if(SelectedItem != null)
 	        {
@@ -160,7 +160,25 @@ namespace Warewolf.Studio.ViewModels
 			}
 		}
 
-		protected virtual void Refresh()
+        public async void RefreshEnvironment(Guid environmentID)
+        {
+            var environmentViewModel = Environments.FirstOrDefault(model => model.Server.EnvironmentID == environmentID);
+            if (environmentViewModel != null)
+            {
+                IsRefreshing = true;
+                if (environmentViewModel.IsConnected)
+                {
+                    await environmentViewModel.Load();
+                    if (!string.IsNullOrEmpty(SearchText))
+                    {
+                        Filter(SearchText);
+                    }
+                }
+                IsRefreshing = false;
+            }
+        }
+
+	    protected virtual void Refresh()
 		{
 			IsRefreshing = true;
 			Environments.ForEach(async model =>

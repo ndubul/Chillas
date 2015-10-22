@@ -3,12 +3,12 @@ using System.Activities.Presentation;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Services.Security;
 using Dev2.Studio.Core;
 using Infragistics.Controls.Menus;
 using Infragistics.DragDrop;
-using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.CustomControls
 {
@@ -68,10 +68,10 @@ namespace Warewolf.Studio.CustomControls
             }
 
             var context = AssociatedObject.DataContext as XamDataTreeNodeDataContext;
-            ExplorerItemViewModel navigationItemViewModel = null;
+            IExplorerItemViewModel navigationItemViewModel = null;
             if (context != null)
             {
-                navigationItemViewModel = context.Data as ExplorerItemViewModel;
+                navigationItemViewModel = context.Data as IExplorerItemViewModel;
             }
             if(navigationItemViewModel == null)
             {
@@ -115,15 +115,15 @@ namespace Warewolf.Studio.CustomControls
         {
            
             var context = AssociatedObject.DataContext as XamDataTreeNodeDataContext;
-            ExplorerItemViewModel dragSourceDataContext = null;
+            IExplorerItemViewModel dragSourceDataContext = null;
             if (context != null)
             {
-                dragSourceDataContext = context.Data as ExplorerItemViewModel;
+                dragSourceDataContext = context.Data as IExplorerItemViewModel;
             }
             MouseMove(sender, e, dragSourceDataContext);
         }
 
-        public void MouseMove(object sender, MouseEventArgs e, ExplorerItemViewModel dragSourceDataContext)
+        public void MouseMove(object sender, MouseEventArgs e, IExplorerItemViewModel dragSourceDataContext)
         {
             if(!DontAllowDraging)
             {

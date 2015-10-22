@@ -26,45 +26,41 @@ namespace Warewolf.Studio.ViewModels
         public IAsyncWorker AsyncWorker { get; set; }
         public IExternalProcessExecutor Executor { get; set; }
         ISharepointServerSource _sharePointServiceSource;
-        readonly IRequestServiceNameViewModel _saveDialog;
-        readonly IEnvironmentModel _environment;
-        readonly ISharePointSourceModel _updateManager;
-        readonly IEventAggregator _aggregator;
-        string _serverName;
-        bool _isWindows;
-        bool _isUser;
-        string _userName;
-        string _password;
-        string _testResult;
-        readonly string _warewolfserverName;
-        IContextualResourceModel _resource;
-        AuthenticationType _authenticationType;
-        CancellationTokenSource _token;
-        bool _testComplete;
-        bool _isLoading;
-        bool _testPassed;
-        string _resourceName;
-        bool _testing;
-        string _headerText;
-        string _testMessage;
-        bool _testFailed;
-        string _path;
-        bool _isDisposed;
+        private readonly IEnvironmentModel _environment;
+        private readonly ISharePointSourceModel _updateManager;
+        private string _serverName;
+        private bool _isWindows;
+        private bool _isUser;
+        private string _userName;
+        private string _password;
+        private string _testResult;
+        private IContextualResourceModel _resource;
+        private AuthenticationType _authenticationType;
+        private CancellationTokenSource _token;
+        private bool _testComplete;
+        private bool _isLoading;
+        private bool _testPassed;
+        private string _resourceName;
+        private bool _testing;
+        private string _headerText;
+        private string _testMessage;
+        private bool _testFailed;
+        private string _path;
+        private bool _isDisposed;
 
-        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
+        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IEventAggregator aggregator, IAsyncWorker asyncWorker, IEnvironmentModel environment)
             : base(ResourceType.SharepointServerSource)
         {
-            VerifyArgument.IsNotNull("executor", executor);
             VerifyArgument.IsNotNull("asyncWorker", asyncWorker);
             VerifyArgument.IsNotNull("updateManager", updateManager);
             VerifyArgument.IsNotNull("aggregator", aggregator);
             AsyncWorker = asyncWorker;
-            Executor = executor;
+            _environment = environment;
             _updateManager = updateManager;
-            _aggregator = aggregator;
-            ServerName = String.Empty;
-            _warewolfserverName = updateManager.ServerName;
             _authenticationType = AuthenticationType.Windows;
+            _serverName = String.Empty;
+            _userName = String.Empty;
+            _password = String.Empty;
             IsWindows = true;
             HeaderText = Resources.Languages.Core.SharePointServiceNewHeaderLabel;
             Header = Resources.Languages.Core.SharePointServiceNewHeaderLabel;
@@ -73,38 +69,77 @@ namespace Warewolf.Studio.ViewModels
             CancelTestCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(CancelTest, CanCancelTest);
         }
 
-        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
-            : this(updateManager, aggregator, asyncWorker, executor)
+        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator, IAsyncWorker asyncWorker, IEnvironmentModel environment)
+            : this(updateManager, aggregator, asyncWorker, environment)
         {
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
             RequestServiceNameViewModel = requestServiceNameViewModel;
         }
-
-        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IEventAggregator aggregator, ISharepointServerSource sharePointServiceSource, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
-            : this(updateManager, aggregator, asyncWorker, executor)
+        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IEventAggregator aggregator, ISharepointServerSource sharePointServiceSource, IAsyncWorker asyncWorker, IEnvironmentModel environment)
+            : this(updateManager, aggregator, asyncWorker, environment)
         {
             VerifyArgument.IsNotNull("sharePointServiceSource", sharePointServiceSource);
             _sharePointServiceSource = sharePointServiceSource;
-            _warewolfserverName = updateManager.ServerName;
-            FromSource(sharePointServiceSource);
             SetupHeaderTextFromExisting();
-            ToItem();
+            FromSource(sharePointServiceSource);
         }
 
-        void ToItem()
+        void SetupHeaderTextFromExisting()
         {
-            Item = new SharePointServiceSourceDefinition
+            HeaderText = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
+            Header = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
+        }
+
+        public override bool CanSave()
+        {
+            return TestPassed;
+        }
+
+        bool CanCancelTest()
+        {
+            return Testing;
+        }
+
+        void CancelTest()
+        {
+            if (_token != null)
             {
-                Id = _sharePointServiceSource.Id,
-                Name = _sharePointServiceSource.Name,
-                Path = _sharePointServiceSource.Path,
-                AuthenticationType = _sharePointServiceSource.AuthenticationType,
-                Server = _sharePointServiceSource.Server,
-                UserName = _sharePointServiceSource.UserName,
-                Password = _sharePointServiceSource.Password,
-                IsSharepointOnline = _sharePointServiceSource.IsSharepointOnline
-                
-            };
+                if (!_token.IsCancellationRequested && _token.Token.CanBeCanceled)
+                {
+                    _token.Cancel();
+                    Dispatcher.CurrentDispatcher.Invoke(() =>
+                    {
+                        Testing = false;
+                        TestFailed = true;
+                        TestPassed = false;
+                        TestMessage = "Test Cancelled";
+                    });
+                }
+            }
+        }
+
+        public bool CanTest()
+        {
+            if (Testing)
+                return false;
+            if (String.IsNullOrEmpty(ServerName))
+            {
+                return false;
+            }
+            if (AuthenticationType == AuthenticationType.User)
+            {
+                return !String.IsNullOrEmpty(UserName) && !String.IsNullOrEmpty(Password);
+            }
+            return true;
+        }
+
+        public override void UpdateHelpDescriptor(string helpText)
+        {
+            var mainViewModel = CustomContainer.Get<IMainViewModel>();
+            if (mainViewModel != null)
+            {
+                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+            }
         }
 
         void FromSource(ISharepointServerSource sharepointServerSource)
@@ -117,24 +152,61 @@ namespace Warewolf.Studio.ViewModels
             IsSharepointOnline = sharepointServerSource.IsSharepointOnline;
         }
 
-       
-        public string TestResult
+        public string ResourceName
         {
             get
             {
-                return _testResult;
+                return _resourceName;
             }
             set
             {
-                _testResult = value;
-                if (!_testResult.Contains("Failed"))
-                {
-                    TestComplete = true;
-                }
-                OnPropertyChanged("TestResult");
+                _resourceName = value;
+                OnPropertyChanged(_resourceName);
             }
         }
 
+        public bool UserAuthenticationSelected
+        {
+            get { return AuthenticationType == AuthenticationType.User; }
+        }
+
+        void SaveConnection()
+        {
+            if (_sharePointServiceSource == null)
+            {
+                var res = RequestServiceNameViewModel.ShowSaveDialog();
+
+                if (res == MessageBoxResult.OK)
+                {
+                    ResourceName = RequestServiceNameViewModel.ResourceName.Name;
+                    var src = ToSource();
+                    src.Path = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
+                    Save(src);
+                    Item = src;
+                    _sharePointServiceSource = src;
+                    SetupHeaderTextFromExisting();
+                }
+            }
+            else
+            {
+                var src = ToSource();
+                Save(src);
+                Item = src;
+                _sharePointServiceSource = src;
+                SetupHeaderTextFromExisting();
+            }
+        }
+
+        public void Save(ISharepointServerSource source)
+        {
+            _updateManager.Save(source);
+        }
+        public override void Save()
+        {
+            SaveConnection();
+        }
+
+        
         void TestConnection()
         {
             _token = new CancellationTokenSource();
@@ -154,9 +226,106 @@ namespace Warewolf.Studio.ViewModels
             });
         }
 
-        public void Save(ISharepointServerSource source)
+        void SetupProgressSpinner()
         {
-            _updateManager.Save(source);
+            Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                Testing = true;
+                TestFailed = false;
+                TestPassed = false;
+            });
+            var sharepointServerSource = ToNewSource();
+            _updateManager.TestConnection(sharepointServerSource);
+            IsSharepointOnline = sharepointServerSource.IsSharepointOnline;
+        }
+
+        ISharepointServerSource ToNewSource()
+        {
+            return new SharePointServiceSourceDefinition
+            {
+                AuthenticationType = AuthenticationType,
+                Server = ServerName,
+                Password = Password,
+                UserName = UserName,
+                Name = ResourceName,
+                Id = _sharePointServiceSource == null ? Guid.NewGuid() : _sharePointServiceSource.Id
+            };
+        }
+
+        ISharepointServerSource ToSource()
+        {
+            if (_sharePointServiceSource == null)
+                return new SharePointServiceSourceDefinition
+                {
+                    AuthenticationType = AuthenticationType,
+                    Server = ServerName,
+                    Password = Password,
+                    UserName = UserName,
+                    Name = ResourceName,
+                    Id = _sharePointServiceSource == null ? Guid.NewGuid() : _sharePointServiceSource.Id
+                };
+            // ReSharper disable once RedundantIfElseBlock
+            else
+            {
+                _sharePointServiceSource.AuthenticationType = AuthenticationType;
+                _sharePointServiceSource.Server = ServerName;
+                _sharePointServiceSource.Password = Password;
+                _sharePointServiceSource.UserName = UserName;
+                return _sharePointServiceSource;
+            }
+        }
+
+        public override ISharepointServerSource ToModel()
+        {
+            if (Item == null)
+            {
+                Item = ToSource();
+                return Item;
+            }
+
+            return new SharePointServiceSourceDefinition
+            {
+                Name = ResourceName,
+                Server = ServerName,
+                AuthenticationType = AuthenticationType,
+                UserName = UserName,
+                Password = Password,
+                Id = Item.Id,
+                Path = Path
+            };
+        }
+
+        public IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
+
+        public AuthenticationType AuthenticationType
+        {
+            get
+            {
+                return _authenticationType;
+            }
+            set
+            {
+                if (_authenticationType != value)
+                {
+                    _authenticationType = value;
+                    if (_authenticationType == AuthenticationType.Windows)
+                    {
+                        IsWindows = true;
+                        OnPropertyChanged(() => IsWindows);
+                    }
+                    else
+                    {
+                        IsUser = true;
+                        OnPropertyChanged(() => IsUser);
+                    }
+                    OnPropertyChanged(() => AuthenticationType);
+                    OnPropertyChanged(() => Header);
+                    OnPropertyChanged(() => UserAuthenticationSelected);
+                    TestPassed = false;
+                    ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
+                    ViewModelUtils.RaiseCanExecuteChanged(SaveCommand);
+                }
+            }
         }
 
         public string ServerName
@@ -177,6 +346,41 @@ namespace Warewolf.Studio.ViewModels
                 ViewModelUtils.RaiseCanExecuteChanged(SaveCommand);
             }
         }
+
+        public string UserName
+        {
+            get
+            {
+                return _userName;
+            }
+            set
+            {
+                _userName = value;
+                OnPropertyChanged(() => UserName);
+                OnPropertyChanged(() => Header);
+                TestPassed = false;
+                ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
+                ViewModelUtils.RaiseCanExecuteChanged(SaveCommand);
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                _password = value;
+                OnPropertyChanged(() => Password);
+                OnPropertyChanged(() => Header);
+                TestPassed = false;
+                ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
+                ViewModelUtils.RaiseCanExecuteChanged(SaveCommand);
+            }
+        }
+
         public bool IsWindows
         {
             get
@@ -200,6 +404,7 @@ namespace Warewolf.Studio.ViewModels
                 ViewModelUtils.RaiseCanExecuteChanged(SaveCommand);
             }
         }
+
         public bool IsUser
         {
             get
@@ -255,32 +460,9 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public IRequestServiceNameViewModel RequestServiceNameViewModel { get; set; }
         public ICommand TestCommand { get; set; }
         public ICommand SaveCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
         public ICommand CancelTestCommand { get; set; }
-        public IContextualResourceModel Resource
-        {
-            get
-            {
-                return _resource;
-            }
-            set
-            {
-                _resource = value;
-                var xaml = _resource.WorkflowXaml;
-                if (xaml.IsNullOrEmpty() && _resource.ID != Guid.Empty)
-                {
-                    var message = _environment.ResourceRepository.FetchResourceDefinition(_environment, GlobalConstants.ServerWorkspaceID, _resource.ID, false);
-                    xaml = message.Message;
-                }
-                if (!xaml.IsNullOrEmpty())
-                {
-                    UpdateBasedOnResource(new SharepointSource(xaml.ToXElement()));
-                }
-            }
-        }
 
         public bool TestComplete
         {
@@ -325,62 +507,6 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        bool CanCancelTest()
-        {
-            return Testing;
-        }
-
-        void CancelTest()
-        {
-            if (_token != null)
-            {
-                if (!_token.IsCancellationRequested && _token.Token.CanBeCanceled)
-                {
-                    _token.Cancel();
-                    Dispatcher.CurrentDispatcher.Invoke(() =>
-                    {
-                        Testing = false;
-                        TestFailed = true;
-                        TestPassed = false;
-                        TestMessage = "Test Cancelled";
-                    });
-                }
-            }
-        }
-
-        void SaveConnection()
-        {
-            if (_sharePointServiceSource == null)
-            {
-                var res = RequestServiceNameViewModel.ShowSaveDialog();
-
-                if (res == MessageBoxResult.OK)
-                {
-                    ResourceName = RequestServiceNameViewModel.ResourceName.Name;
-                    var src = ToSource();
-                    src.Path = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
-                    Save(src);
-                    Item = src;
-                    _sharePointServiceSource = src;
-                    SetupHeaderTextFromExisting();
-                }
-            }
-            else
-            {
-                var src = ToSource();
-                Save(src);
-                Item = src;
-                _sharePointServiceSource = src;
-                SetupHeaderTextFromExisting();
-            }
-        }
-
-        void SetupHeaderTextFromExisting()
-        {
-            HeaderText = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
-            Header = (_sharePointServiceSource == null ? ResourceName : _sharePointServiceSource.Name).Trim();
-        }
-
         public string HeaderText
         {
             get { return _headerText; }
@@ -392,22 +518,21 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        public string ResourceName
+        public string TestResult
         {
             get
             {
-                return _resourceName;
+                return _testResult;
             }
             set
             {
-                _resourceName = value;
-                OnPropertyChanged(_resourceName);
+                _testResult = value;
+                if (!_testResult.Contains("Failed"))
+                {
+                    TestComplete = true;
+                }
+                OnPropertyChanged("TestResult");
             }
-        }
-
-        public bool UserAuthenticationSelected
-        {
-            get { return AuthenticationType == AuthenticationType.User; }
         }
 
         public string Path
@@ -423,127 +548,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        ISharepointServerSource ToNewSource()
-        {
-            return new SharePointServiceSourceDefinition
-            {
-                AuthenticationType = AuthenticationType,
-                Server = ServerName,
-                Password = Password,
-                UserName = UserName,
-                Name = ResourceName,
-                Id = _sharePointServiceSource == null ? Guid.NewGuid() : _sharePointServiceSource.Id
-            };
-        }
-        ISharepointServerSource ToSource()
-        {
-            if (_sharePointServiceSource == null)
-                return new SharePointServiceSourceDefinition
-                {
-                    AuthenticationType = AuthenticationType,
-                    Server = ServerName,
-                    Password = Password,
-                    UserName = UserName,
-                    Name = ResourceName,
-                    Id = _sharePointServiceSource == null ? Guid.NewGuid() : _sharePointServiceSource.Id
-                };
-            // ReSharper disable once RedundantIfElseBlock
-            else
-            {
-                _sharePointServiceSource.AuthenticationType = AuthenticationType;
-                _sharePointServiceSource.Server = ServerName;
-                _sharePointServiceSource.Password = Password;
-                _sharePointServiceSource.UserName = UserName;
-                return _sharePointServiceSource;
-            }
-        }
-
-        void UpdateBasedOnResource(SharepointSource sharepointSource)
-        {
-            ServerName = sharepointSource.Server;
-            UserName = sharepointSource.UserName;
-            Password = sharepointSource.Password;
-            AuthenticationType = sharepointSource.AuthenticationType;
-
-        }
-
-        void SetupProgressSpinner()
-        {
-            Dispatcher.CurrentDispatcher.Invoke(() =>
-            {
-                Testing = true;
-                TestFailed = false;
-                TestPassed = false;
-            });
-            var sharepointServerSource = ToNewSource();
-            _updateManager.TestConnection(sharepointServerSource);
-            IsSharepointOnline = sharepointServerSource.IsSharepointOnline;
-        }
-
         public bool IsSharepointOnline { get; set; }
-
-        public string UserName
-        {
-            get
-            {
-                return _userName;
-            }
-            set
-            {
-                _userName = value;
-                OnPropertyChanged(() => UserName);
-                OnPropertyChanged(() => Header);
-                TestPassed = false;
-                ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
-                ViewModelUtils.RaiseCanExecuteChanged(SaveCommand);
-            }
-        }
-        public string Password
-        {
-            get
-            {
-                return _password;
-            }
-            set
-            {
-                _password = value;
-                OnPropertyChanged(() => Password);
-                OnPropertyChanged(() => Header);
-                TestPassed = false;
-                ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
-                ViewModelUtils.RaiseCanExecuteChanged(SaveCommand);
-            }
-        }
-        public AuthenticationType AuthenticationType
-        {
-            get
-            {
-                return _authenticationType;
-            }
-            set
-            {
-                if (_authenticationType != value)
-                {
-                    _authenticationType = value;
-                    if (_authenticationType == AuthenticationType.Windows)
-                    {
-                        IsWindows = true;
-                        OnPropertyChanged(() => IsWindows);
-                    }
-                    else
-                    {
-                        IsUser = true;
-                        OnPropertyChanged(() => IsUser);
-                    }
-                    OnPropertyChanged(() => AuthenticationType);
-                    OnPropertyChanged(() => Header);
-                    OnPropertyChanged(() => UserAuthenticationSelected);
-                    TestPassed = false;
-                    ViewModelUtils.RaiseCanExecuteChanged(TestCommand);
-                    ViewModelUtils.RaiseCanExecuteChanged(SaveCommand);
-                }
-            }
-        }
 
         [ExcludeFromCodeCoverage]
         public string ServerNameLabel
@@ -620,61 +625,52 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-        #region Overrides of SourceBaseImpl<ISharepointServerSource>
+        
 
-        public override ISharepointServerSource ToModel()
+        void ToItem()
         {
-            if (Item == null)
+            Item = new SharePointServiceSourceDefinition
             {
-                Item = ToSource();
-                return Item;
-            }
+                Id = _sharePointServiceSource.Id,
+                Name = _sharePointServiceSource.Name,
+                Path = _sharePointServiceSource.Path,
+                AuthenticationType = _sharePointServiceSource.AuthenticationType,
+                Server = _sharePointServiceSource.Server,
+                UserName = _sharePointServiceSource.UserName,
+                Password = _sharePointServiceSource.Password,
+                IsSharepointOnline = _sharePointServiceSource.IsSharepointOnline
 
-            return new SharePointServiceSourceDefinition
-            {
-                Name = ResourceName,
-                Server = ServerName,
-                AuthenticationType = AuthenticationType,
-                Id = Item.Id,
-                Path = Path
             };
         }
-
-        public override void Save()
+        public IContextualResourceModel Resource
         {
-            SaveConnection();
-        }
-
-        public bool CanTest()
-        {
-            if (Testing)
-                return false;
-            if (String.IsNullOrEmpty(ServerName))
+            get
             {
-                return false;
+                return _resource;
             }
-            if (AuthenticationType == AuthenticationType.User)
+            set
             {
-                return !String.IsNullOrEmpty(UserName) && !String.IsNullOrEmpty(Password);
-            }
-            return true;
-        }
-
-        public override bool CanSave()
-        {
-            return TestPassed;
-        }
-
-        public override void UpdateHelpDescriptor(string helpText)
-        {
-            var mainViewModel = CustomContainer.Get<IMainViewModel>();
-            if (mainViewModel != null)
-            {
-                mainViewModel.HelpViewModel.UpdateHelpText(helpText);
+                _resource = value;
+                var xaml = _resource.WorkflowXaml;
+                if (xaml.IsNullOrEmpty() && _resource.ID != Guid.Empty)
+                {
+                    var message = _environment.ResourceRepository.FetchResourceDefinition(_environment, GlobalConstants.ServerWorkspaceID, _resource.ID, false);
+                    xaml = message.Message;
+                }
+                if (!xaml.IsNullOrEmpty())
+                {
+                    UpdateBasedOnResource(new SharepointSource(xaml.ToXElement()));
+                }
             }
         }
+        void UpdateBasedOnResource(SharepointSource sharepointSource)
+        {
+            ServerName = sharepointSource.Server;
+            UserName = sharepointSource.UserName;
+            Password = sharepointSource.Password;
+            AuthenticationType = sharepointSource.AuthenticationType;
 
-        #endregion
+        }
 
         #region Implementation of IDisposable
 

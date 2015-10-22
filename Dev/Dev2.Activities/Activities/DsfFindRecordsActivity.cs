@@ -15,13 +15,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Dev2;
 using Dev2.Activities;
-using Dev2.Common.Interfaces.Toolbox;
 using Dev2.DataList.Contract;
 using Dev2.Diagnostics;
 using Dev2.Util;
 using Dev2.Utilities;
 using Unlimited.Applications.BusinessDesignStudio.Activities.Utilities;
-using Warewolf.Core;
 using Warewolf.Storage;
 
 // ReSharper disable CheckNamespace

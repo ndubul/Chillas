@@ -47,7 +47,7 @@ namespace Warewolf.AcceptanceTesting.SharepointSource
             ScenarioContext.Current.Add("updateManager", FeatureContext.Current.Get<Mock<ISharePointSourceModel>>("updateManager"));
             ScenarioContext.Current.Add("requestServiceNameViewModel", FeatureContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel"));
             ScenarioContext.Current.Add("externalProcessExecutor", FeatureContext.Current.Get<Mock<IExternalProcessExecutor>>("externalProcessExecutor"));
-            ScenarioContext.Current.Add(Utils.ViewModelNameKey, FeatureContext.Current.Get<ManageEmailSourceViewModel>(Utils.ViewModelNameKey));
+            ScenarioContext.Current.Add(Utils.ViewModelNameKey, FeatureContext.Current.Get<SharepointServerSourceViewModel>(Utils.ViewModelNameKey));
         }
 
         [Given(@"I open New Sharepoint Source")]
@@ -207,8 +207,8 @@ namespace Warewolf.AcceptanceTesting.SharepointSource
             var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
             var errorMessageFromControl = manageSharepointServerSource.GetErrorMessage();
             var errorMessageOnViewModel = viewModel.TestMessage;
-            var isErrorMessageOnViewModel = !errorMessageOnViewModel.Contains("Passed");
-            var isErrorMessageOnControl = !errorMessageFromControl.Contains("Passed");
+            var isErrorMessageOnViewModel = errorMessageOnViewModel.Contains("Passed");
+            var isErrorMessageOnControl = errorMessageFromControl.Contains("Passed");
             Assert.IsFalse(isErrorMessageOnViewModel);
             Assert.IsFalse(isErrorMessageOnControl);
         }
@@ -274,15 +274,15 @@ namespace Warewolf.AcceptanceTesting.SharepointSource
             var mockEventAggregator = new Mock<IEventAggregator>();
             var mockExecutor = new Mock<IExternalProcessExecutor>();
 
-            var webServiceSourceDefinition = new SharePointServiceSourceDefinition
+            var sharePointServiceSourceDefinition = new SharePointServiceSourceDefinition
             {
                 Name = "Test",
                 Server = "http://rsaklfsvrsharep",
-                AuthenticationType = AuthenticationType.Anonymous,
+                AuthenticationType = AuthenticationType.Windows,
                 UserName = "IntegrationTester",
                 Password = "I73573r0"
             };
-            var manageSharepointServerSourceViewModel = new SharepointServerSourceViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object, webServiceSourceDefinition, new SynchronousAsyncWorker(), mockExecutor.Object);
+            var manageSharepointServerSourceViewModel = new SharepointServerSourceViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object, sharePointServiceSourceDefinition, new SynchronousAsyncWorker(), mockExecutor.Object);
             manageSharepointServerSource.DataContext = manageSharepointServerSourceViewModel;
             ScenarioContext.Current.Remove("viewModel");
             ScenarioContext.Current.Add("viewModel", manageSharepointServerSourceViewModel);
@@ -301,7 +301,24 @@ namespace Warewolf.AcceptanceTesting.SharepointSource
         public void ThenAuthenticationTypeIs(string authenticationType)
         {
             var viewModel = ScenarioContext.Current.Get<SharepointServerSourceViewModel>("viewModel");
-            Assert.AreEqual(authenticationType, viewModel.AuthenticationType);
+            Assert.AreEqual(authenticationType, viewModel.AuthenticationType.ToString());
+        }
+
+        [AfterScenario("SharepointSource")]
+        public void Cleanup()
+        {
+            var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockUpdateManager = ScenarioContext.Current.Get<Mock<ISharePointSourceModel>>("updateManager");
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            var viewModel = new SharepointServerSourceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockExecutor.Object);
+            var manageWebserviceSourceControl = ScenarioContext.Current.Get<SharepointServerSource>(Utils.ViewNameKey);
+            manageWebserviceSourceControl.DataContext = viewModel;
+            FeatureContext.Current.Remove("viewModel");
+            FeatureContext.Current.Add("viewModel", viewModel);
+            FeatureContext.Current.Remove("externalProcessExecutor");
+            FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+
         }
 
     }

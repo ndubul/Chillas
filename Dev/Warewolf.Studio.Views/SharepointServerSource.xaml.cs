@@ -65,7 +65,7 @@ namespace Warewolf.Studio.Views
                 case "Save":
                     var viewModel = DataContext as SharepointServerSourceViewModel;
                     return viewModel != null && viewModel.SaveCommand.CanExecute(null);
-                case "Test":
+                case "Test Connection":
                     return TestConnection.Command.CanExecute(null);
             }
             return false;

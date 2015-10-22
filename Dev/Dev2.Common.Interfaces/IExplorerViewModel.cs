@@ -33,5 +33,7 @@ namespace Dev2.Common.Interfaces
 	    IList<IExplorerItemViewModel> FindItems(Func<IExplorerItemViewModel, bool> filterFunc);
 
 	    void SelectItem(string path);
+
+	    void RefreshEnvironment(Guid environmentID);
 	}
 }
