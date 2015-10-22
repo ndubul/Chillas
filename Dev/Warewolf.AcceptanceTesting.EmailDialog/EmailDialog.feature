@@ -7,10 +7,10 @@
 # Send Email with an attachment
 # Selecting multiple attachments
 
-@ignore
+
 #wolf - 991
 Scenario: Send Email with an attachment
-	Given I have a workflow "New Workflow"
+	Given I open a "New Workflow"
 	And I drag the "Email" tool onto the design surface
 	And Mail Source is "EmaiSource" 
 	And "From" account is "warewolf@dev2.co.za"

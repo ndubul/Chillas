@@ -111,8 +111,8 @@ namespace Warewolf.Studio.ViewModels
         {
             if (_emailServiceSource != null)
             {
-                HeaderText = _warewolfserverName.Trim() + "\\" + (_emailServiceSource.ResourceName ?? ResourceName).Trim();
-                Header = ((_emailServiceSource.ResourceName ?? ResourceName));
+                HeaderText = (_emailServiceSource.ResourceName ?? ResourceName).Trim();
+                Header = (_emailServiceSource.ResourceName ?? ResourceName).Trim();
             }
         }
 
@@ -172,11 +172,11 @@ namespace Warewolf.Studio.ViewModels
 
                 if (res == MessageBoxResult.OK)
                 {
-
                     var src = ToSource();
                     src.ResourceName = RequestServiceNameViewModel.ResourceName.Name;
                     src.Path = RequestServiceNameViewModel.ResourceName.Path ?? RequestServiceNameViewModel.ResourceName.Name;
                     Save(src);
+                    Item = src;
                     _emailServiceSource = src;
                     ResourceName = _emailServiceSource.ResourceName;
                     SetupHeaderTextFromExisting();
@@ -184,7 +184,11 @@ namespace Warewolf.Studio.ViewModels
             }
             else
             {
-                Save(_emailServiceSource);
+                var src = ToSource();
+                Save(src);
+                Item = src;
+                _emailServiceSource = src;
+                SetupHeaderTextFromExisting();
             }
         }
 
@@ -537,7 +541,6 @@ namespace Warewolf.Studio.ViewModels
                 _emailServiceSource.EnableSsl = EnableSsl;
                 _emailServiceSource.EmailFrom = EmailFrom;
                 _emailServiceSource.EmailTo = EmailTo;
-                _emailServiceSource.Id = _emailServiceSource == null ? Guid.NewGuid() : _emailServiceSource.Id;
                 return _emailServiceSource;
 
             }
