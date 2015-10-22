@@ -24,17 +24,18 @@ using Dev2.DataList.Contract;
 using Dev2.Diagnostics.Debug;
 using Microsoft.VisualBasic.Activities;
 using Warewolf.Storage;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable MemberCanBeProtected.Global
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable RedundantAssignment
 
 // ReSharper disable CheckNamespace
 // ReSharper disable InconsistentNaming
 namespace Unlimited.Applications.BusinessDesignStudio.Activities
-// ReSharper restore CheckNamespace
 {
     public abstract class DsfActivityAbstract<T> : DsfNativeActivity<T>, IActivityTemplateFactory, INotifyPropertyChanged
     {
-        // TODO: Remove legacy properties - when we've figured out how to load files when these are not present
         public string SimulationOutput { get; set; }
-        // END TODO: Remove legacy properties 
 
         public OutArgument<bool> HasError { get; set; }
         public OutArgument<bool> IsValid { get; set; }
@@ -51,9 +52,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
         public bool DatabindRecursive { get; set; }
         public string CurrentResult { get; set; }
         public InOutArgument<string> ParentInstanceID { get; set; }
-        // ReSharper disable RedundantAssignment
         public IRecordsetScopingObject ScopingObject { get { return null; } set { value = null; } }
-        // ReSharper restore RedundantAssignment
 
         #region Ctor
 

@@ -31,9 +31,9 @@ Scenario: Create New Email source
 Scenario: From Defaults to User Name But Not After Change
 	Given I open New Email Source
 	Then "New Email Source" tab is opened
-	When "User Name" input is "warewolf@dev2.co.za"
+	When I type Username as "warewolf@dev2.co.za"
 	Then "From" input is "warewolf@dev2.co.za"
-	When "From" input is "info@dev2.co.za"
+	When I type From as "info@dev2.co.za"
 	Then "User Name" input is "warewolf@dev2.co.za"
 
 @EmailSource
@@ -73,7 +73,7 @@ Scenario: Fail Send
 	And I type From as "warewolf@dev2.co.za"
 	And I type To as "queries@dev2.co.za"
 	Then "Send" is "Enabled"
-	And "Send" is "Unsuccessful"
+	And Send is "Unsuccessful"
 	Then Send is "Failed to Send: One or more errors occurred"
 	And "Save" is "Disabled"
 

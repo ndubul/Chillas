@@ -332,7 +332,6 @@
     <Compile Include="Interfaces\IWizardEditable.cs" />
     <Compile Include="TO\ActivityDTO.cs" />
     <Compile Include="Activities\DsfActivity.cs" />
-    <Compile Include="Activities\DsfAssignActivity.cs" />
     <Compile Include="Activities\DsfForEachActivity.cs" />
     <Compile Include="TO\DataMergeDTO.cs" />
     <Compile Include="TO\DataSplitDTO.cs" />

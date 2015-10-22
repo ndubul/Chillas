@@ -37,10 +37,6 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
 
         #region Get Debug Inputs/Outputs
 
-        public List<DebugItem> GetDebugInputs()
-        {
-            return DebugItem.EmptyList;
-        }
 
         public override List<DebugItem> GetDebugOutputs(IExecutionEnvironment dataList, int update)
         {
