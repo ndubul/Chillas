@@ -148,7 +148,15 @@ namespace Warewolf.Studio.Views
 
         public bool GetControlEnabled(string controlName)
         {
-            return false;
+            switch (controlName)
+            {
+       
+                case "Dependencies":
+                    return Dependencies.IsEnabled;
+                case "Deploy":
+                    return Deploy.IsEnabled;
+                default: return false;
+            }
         }
 
         #endregion
@@ -176,11 +184,12 @@ namespace Warewolf.Studio.Views
 
         public void SelectDestinationServer(string servername)
         {
-            DestinationConnectControl.SelectedServer = ((IDeployViewModel)DataContext).Destination.ConnectControlViewModel.Servers.FirstOrDefault(a => a.ResourceName == servername);
+            ((IDeployViewModel)DataContext).Destination.ConnectControlViewModel.SelectedConnection = ((IDeployViewModel)DataContext).Destination.ConnectControlViewModel.Servers.FirstOrDefault(a => a.ResourceName == servername);
         }
 
         public void DeployItems()
         {
+            if (((IDeployViewModel)DataContext).DeployCommand.CanExecute(null))
             ((IDeployViewModel)DataContext).DeployCommand.Execute(null);
         }
 
@@ -220,6 +229,34 @@ namespace Warewolf.Studio.Views
                 return "Not Visible";
                 return "Visible";
             }
+        }
+
+        public bool CheckVisibility(string control, string visibility)
+        {
+            switch (control)
+            {
+                case "SourceConnectControl":
+                    return SourceConnectControl.Visibility.ToString().ToLower() == visibility.ToLower();
+                case "DestinationConnectControl":
+                    return DestinationConnectControl.Visibility.ToString().ToLower() == visibility.ToLower();
+                case "SourceNavigationView":
+                    return SourceNavigationView.Visibility.ToString().ToLower() == visibility.ToLower();
+                case "Dependencies":
+                    return Dependencies.Visibility.ToString().ToLower() == visibility.ToLower();
+                case "Deploy":
+                    return Deploy.Visibility.ToString().ToLower() == visibility.ToLower();
+                default: return false;
+            }
+        }
+
+        public void SelectServer(string p0)
+        {
+            ((IDeployViewModel)DataContext).Source.SelectedEnvironment.IsResourceChecked = true;
+        }
+
+        public bool VerifyAllSelected(string p0)
+        {
+           return ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().All(a => a.IsResourceChecked ?? false);
         }
     }
 }

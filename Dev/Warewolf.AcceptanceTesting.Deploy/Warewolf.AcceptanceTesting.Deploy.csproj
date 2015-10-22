@@ -93,6 +93,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DeployDestinationViewModelForTesting.cs" />
+    <Compile Include="DeploySourceExplorerViewModelForTesting.cs" />
     <Compile Include="DeployTab.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
