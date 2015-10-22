@@ -1174,7 +1174,7 @@ namespace Dev2.Studio.ViewModels
         public void EditResource(ISharepointServerSource selectedSource, IWorkSurfaceKey workSurfaceKey = null)
         {
             var server = CustomContainer.Get<IServer>();
-            var viewModel = new SharepointServerSourceViewModel(new SharepointServerSourceModel(server.UpdateRepository, ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource, _asyncWorker, new ExternalProcessExecutor());
+            var viewModel = new SharepointServerSourceViewModel(new SharepointServerSourceModel(server.UpdateRepository, ""), new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), selectedSource, _asyncWorker,null);
             var vm = new SourceViewModel<ISharepointServerSource>(EventPublisher, viewModel, PopupProvider, new SharepointServerSource());
 
             if (workSurfaceKey == null)
@@ -1302,7 +1302,7 @@ namespace Dev2.Studio.ViewModels
 
         void AddNewSharePointServerSource(IRequestServiceNameViewModel saveViewModel)
         {
-            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.SharepointServerSource) as WorkSurfaceKey, new SourceViewModel<ISharepointServerSource>(EventPublisher, new SharepointServerSourceViewModel(new SharepointServerSourceModel(ActiveServer.UpdateRepository, ActiveEnvironment.Name), saveViewModel, new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker, new ExternalProcessExecutor()), PopupProvider, new SharepointServerSource()));
+            var workSurfaceContextViewModel = new WorkSurfaceContextViewModel(WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.SharepointServerSource) as WorkSurfaceKey, new SourceViewModel<ISharepointServerSource>(EventPublisher, new SharepointServerSourceViewModel(new SharepointServerSourceModel(ActiveServer.UpdateRepository, ActiveEnvironment.Name), saveViewModel, new Microsoft.Practices.Prism.PubSubEvents.EventAggregator(), _asyncWorker,null), PopupProvider, new SharepointServerSource()));
             AddAndActivateWorkSurface(workSurfaceContextViewModel);
         }
 

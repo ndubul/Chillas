@@ -26,43 +26,37 @@ namespace Warewolf.Studio.ViewModels
         public IAsyncWorker AsyncWorker { get; set; }
         public IExternalProcessExecutor Executor { get; set; }
         ISharepointServerSource _sharePointServiceSource;
-        readonly IRequestServiceNameViewModel _saveDialog;
-        readonly IEnvironmentModel _environment;
-        readonly ISharePointSourceModel _updateManager;
-        readonly IEventAggregator _aggregator;
-        string _serverName;
-        bool _isWindows;
-        bool _isUser;
-        string _userName;
-        string _password;
-        string _testResult;
-        readonly string _warewolfserverName;
-        IContextualResourceModel _resource;
-        AuthenticationType _authenticationType;
-        CancellationTokenSource _token;
-        bool _testComplete;
-        bool _isLoading;
-        bool _testPassed;
-        string _resourceName;
-        bool _testing;
-        string _headerText;
-        string _testMessage;
-        bool _testFailed;
-        string _path;
-        bool _isDisposed;
+        private readonly IEnvironmentModel _environment;
+        private readonly ISharePointSourceModel _updateManager;
+        private string _serverName;
+        private bool _isWindows;
+        private bool _isUser;
+        private string _userName;
+        private string _password;
+        private string _testResult;
+        private IContextualResourceModel _resource;
+        private AuthenticationType _authenticationType;
+        private CancellationTokenSource _token;
+        private bool _testComplete;
+        private bool _isLoading;
+        private bool _testPassed;
+        private string _resourceName;
+        private bool _testing;
+        private string _headerText;
+        private string _testMessage;
+        private bool _testFailed;
+        private string _path;
+        private bool _isDisposed;
 
-        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
+        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IEventAggregator aggregator, IAsyncWorker asyncWorker, IEnvironmentModel environment)
             : base(ResourceType.SharepointServerSource)
         {
-            VerifyArgument.IsNotNull("executor", executor);
             VerifyArgument.IsNotNull("asyncWorker", asyncWorker);
             VerifyArgument.IsNotNull("updateManager", updateManager);
             VerifyArgument.IsNotNull("aggregator", aggregator);
             AsyncWorker = asyncWorker;
-            Executor = executor;
+            _environment = environment;
             _updateManager = updateManager;
-            _aggregator = aggregator;
-            _warewolfserverName = updateManager.ServerName;
             _authenticationType = AuthenticationType.Windows;
             _serverName = String.Empty;
             _userName = String.Empty;
@@ -75,18 +69,17 @@ namespace Warewolf.Studio.ViewModels
             CancelTestCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(CancelTest, CanCancelTest);
         }
 
-        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
-            : this(updateManager, aggregator, asyncWorker, executor)
+        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator, IAsyncWorker asyncWorker, IEnvironmentModel environment)
+            : this(updateManager, aggregator, asyncWorker, environment)
         {
             VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
             RequestServiceNameViewModel = requestServiceNameViewModel;
         }
-        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IEventAggregator aggregator, ISharepointServerSource sharePointServiceSource, IAsyncWorker asyncWorker, IExternalProcessExecutor executor)
-            : this(updateManager, aggregator, asyncWorker, executor)
+        public SharepointServerSourceViewModel(ISharePointSourceModel updateManager, IEventAggregator aggregator, ISharepointServerSource sharePointServiceSource, IAsyncWorker asyncWorker, IEnvironmentModel environment)
+            : this(updateManager, aggregator, asyncWorker, environment)
         {
             VerifyArgument.IsNotNull("sharePointServiceSource", sharePointServiceSource);
             _sharePointServiceSource = sharePointServiceSource;
-            _warewolfserverName = updateManager.ServerName;
             SetupHeaderTextFromExisting();
             FromSource(sharePointServiceSource);
         }
@@ -469,7 +462,6 @@ namespace Warewolf.Studio.ViewModels
 
         public ICommand TestCommand { get; set; }
         public ICommand SaveCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
         public ICommand CancelTestCommand { get; set; }
 
         public bool TestComplete
