@@ -499,7 +499,7 @@ Scenario: Variables that do not exist
 	|            |                                            |
 	| [[result]] | The expression [[a]] has no value assigned |
 
-
+#Complex Types 
 Scenario Outline: Calculate the number of months using complex types
 	Given I have a first date '<input1>' equals '<Val1>' 
 	And I have a second date '<input2>' equals '<Val2>' 
@@ -507,9 +507,9 @@ Scenario Outline: Calculate the number of months using complex types
 	And I selected output in "months" 	
 	When the datetime difference tool is executed
 	Then the difference should be "7"
-	And the execution has "NO" error
+	And the execution has "<error>" error
 	And the result variable '<res>' will be '<result>'
 Examples: 
-	| input1              | Val1       | input2                 | Val2       | inputformat          | Val3       | res                              | result            |
-	| [[rec().row().set]] | 30/07/2015 | [[rs(*).date().value]] | 01/01/2016 | [[rj(1).date().val]] | dd/mm/yyyy | [[rg([[int]]).set]], [[int]] = 1 | [[rg(1).set]] = 7 |
+	| input1              | Val1       | input2                 | Val2       | inputformat          | Val3       | res                              | error | result            |
+	| [[rec().row().set]] | 30/07/2015 | [[rs(*).date().value]] | 01/01/2016 | [[rj(1).date().val]] | dd/mm/yyyy | [[rg([[int]]).set]], [[int]] = 1 | No    | [[rg(1).set]] = 7 |
 	

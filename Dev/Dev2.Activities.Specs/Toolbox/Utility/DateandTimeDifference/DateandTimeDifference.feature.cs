@@ -1649,7 +1649,7 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        public virtual void CalculateTheNumberOfMonthsUsingComplexTypes(string input1, string val1, string input2, string val2, string inputformat, string val3, string res, string result, string[] exampleTags)
+        public virtual void CalculateTheNumberOfMonthsUsingComplexTypes(string input1, string val1, string input2, string val2, string inputformat, string val3, string res, string error, string result, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate the number of months using complex types", exampleTags);
 #line 503
@@ -1667,7 +1667,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 509
  testRunner.Then("the difference should be \"7\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 510
- testRunner.And("the execution has \"NO\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("the execution has \"{0}\" error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 511
  testRunner.And(string.Format("the result variable \'{0}\' will be \'{1}\'", res, result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -1685,10 +1685,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:inputformat", "[[rj(1).date().val]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Val3", "dd/mm/yyyy")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rg([[int]]).set]], [[int]] = 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rg(1).set]] = 7")]
         public virtual void CalculateTheNumberOfMonthsUsingComplexTypes_Rec_Row_Set()
         {
-            this.CalculateTheNumberOfMonthsUsingComplexTypes("[[rec().row().set]]", "30/07/2015", "[[rs(*).date().value]]", "01/01/2016", "[[rj(1).date().val]]", "dd/mm/yyyy", "[[rg([[int]]).set]], [[int]] = 1", "[[rg(1).set]] = 7", ((string[])(null)));
+            this.CalculateTheNumberOfMonthsUsingComplexTypes("[[rec().row().set]]", "30/07/2015", "[[rs(*).date().value]]", "01/01/2016", "[[rj(1).date().val]]", "dd/mm/yyyy", "[[rg([[int]]).set]], [[int]] = 1", "No", "[[rg(1).set]] = 7", ((string[])(null)));
         }
     }
 }

@@ -197,8 +197,8 @@ Scenario Outline: Ensure the Complex type length inputs work as expected
 	And the execution has "<Error>" error
 	And the debug inputs as "<message>"
 Examples: 
-| variable           | val | error | message | result       | value |
-| [[rs().row().set]] | 1   | No    |         | [[rec(1).a]] | 1     |
+| variable           | val | error | message | result               | value |
+| [[rs().row().set]] | 1   | No    |         | [[rec(1).row().val]] | 1     |
 
 
 
