@@ -14,9 +14,9 @@ Scenario: Creating DB Service
 	And "3 Test Connector and Calculate Outputs" is "Disabled" 
 	And "4 Edit Default and Mapping Names" is "Disabled" 
 	And "Save" is "Disabled"
-	When I select data source as "DemoDB"
+	When I select "DemoDB" as data source
 	Then "2 Select Action" is "Enabled"
-	When I select action as "dbo.ConverToint"
+	When I select "dbo.ConverToint" as the action
 	Then "3 Test Connector and Calculate Outputs" is "Enabled" 
 	And "Test" is "Enabled"
 	And inputs are
@@ -40,11 +40,11 @@ Scenario: Creating DB Service
 
 @DbService
 Scenario: Opening Saved DB Service
-   Given I open "InsertDummyUser"
+   Given I open "InsertDummyUser" service
    And "InsertDummyUser" tab is opened
    Then "1 Data Source" is "Enabled"
    And Data Source is focused
-   When I select data source as "DemoDB"
+   When I select "DemoDB" as data source
    Then "2 Select Action" is "Enabled"
    And "dbo.InsertDummyUser" is selected as the action
    Then "3 Test Connector and Calculate Outputs" is "Enabled" 
@@ -210,18 +210,18 @@ Scenario: Creating a new Data Source
 
 #WOLF-860
 
-Scenario: Ensure recordset values can be saved to a variable
-	Given I have a new Workspace opened
-	And I have a saved Data Connector called "MyDataCon"
-	And "MyDataCon" returns [[dbo_GetCountries().CountryID]] and [[dbo_GetCountries().Description]]
-	When I drop "MyDataCon" on the design surface
-	And I open the Database Connector to a large view
-	When I change  [[dbo_GetCountries().CountryID]] to "[[variable]]"
-	And "MyDataCon" is executed
-	Then the workflow execution has "NO" error     
-	And the debug output is
-	|              |                           |
-	| [[variable]] | Murali,Murali,india,india |
+#Scenario: Ensure recordset values can be saved to a variable
+#	Given I have a new Workspace opened
+#	And I have a saved Data Connector called "MyDataCon"
+#	And "MyDataCon" returns [[dbo_GetCountries().CountryID]] and [[dbo_GetCountries().Description]]
+#	When I drop "MyDataCon" on the design surface
+#	And I open the Database Connector to a large view
+#	When I change  [[dbo_GetCountries().CountryID]] to "[[variable]]"
+#	And "MyDataCon" is executed
+#	Then the workflow execution has "NO" error     
+#	And the debug output is
+#	|              |                           |
+#	| [[variable]] | Murali,Murali,india,india |
    
 
 
