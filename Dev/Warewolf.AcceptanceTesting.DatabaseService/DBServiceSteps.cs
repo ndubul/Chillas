@@ -78,7 +78,11 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
                 new ServiceInput("lname","Test"),
                 new ServiceInput("username","wolf"),
                 new ServiceInput("password","Dev"),
-                new ServiceInput("lastAccessDate","10/1/1990"),
+                new ServiceInput("lastAccessDate","10/1/1990")
+            };
+            var dbOutputs = new List<IServiceOutputMapping>
+            {
+                new ServiceOutputMapping("dbo_ConverToInt(1)", "1")
             };
             _dbInsertDummyAction = new DbAction
             {
@@ -146,7 +150,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         public void WhenISelectAsTheAction(string actionName)
         {
             var view = Utils.GetView<ManageDatabaseServiceControl>();
-            view.SelectDbAction(_dbInsertDummyAction);
+            view.SelectDbAction(_dbAction);
             var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
             Assert.AreEqual(actionName, viewModel.SelectedAction.Name);
         }
@@ -166,7 +170,6 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             view.TestAction();
             var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
             Assert.IsNotNull(viewModel.TestResults);
-
         }
 
         [When(@"I save")]
