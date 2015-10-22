@@ -28,7 +28,7 @@ namespace Warewolf.Studio.ViewModels
 		private bool _isRefreshing;
 		private IExplorerTreeItem _selectedItem;
 		private object[] _selectedDataItems;
-	    bool _fromActivityDrop;
+	    private bool _fromActivityDrop;
 
 	    protected ExplorerViewModelBase()
 		{
@@ -38,7 +38,7 @@ namespace Warewolf.Studio.ViewModels
             CreateFolderCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand(CreateFolder);
 		}
 
-	    void CreateFolder()
+	    private void CreateFolder()
 	    {
 	        if(SelectedItem != null)
 	        {

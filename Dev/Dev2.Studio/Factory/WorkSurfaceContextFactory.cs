@@ -38,15 +38,7 @@ namespace Dev2.Studio.Factory
                 };
 
             return contextVm;
-        }
-
-        public static WorkSurfaceContextViewModel CreateDeployViewModel(object input)
-        {
-            var vm = DeployViewModelFactory.GetDeployViewModel(input);
-            vm.ResourceType = Common.Interfaces.Data.ResourceType.DeployViewer;
-            var context = CreateUniqueWorkSurfaceContextViewModel(vm, WorkSurfaceContext.DeployViewer);
-            return context;
-        }
+        }       
 
         //public static WorkSurfaceContextViewModel CreateSingleEnvironmentDeployViewModel(object input)
         //{

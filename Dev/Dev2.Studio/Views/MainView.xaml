@@ -7,7 +7,6 @@
         xmlns:viewModels="clr-namespace:Dev2.Studio.ViewModels"
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:customControls="clr-namespace:Dev2.Studio.Core.CustomControls;assembly=Dev2.Studio.Core"
-        xmlns:explorer="clr-namespace:Dev2.Studio.Views.Explorer"
         xmlns:dataList="clr-namespace:Dev2.Studio.Views.DataList"
         xmlns:dock="clr-namespace:Dev2.Studio.Dock"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"

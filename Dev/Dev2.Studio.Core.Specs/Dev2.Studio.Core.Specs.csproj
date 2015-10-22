@@ -109,12 +109,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Deploy\Deploy.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Deploy.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Deploy\DeploySteps.cs" />
     <Compile Include="Helper\FileQueryHelper.cs" />
     <Compile Include="IntellisenseSpecs\IntellisenseProvider.feature.cs">
       <AutoGen>True</AutoGen>
@@ -128,10 +122,6 @@
     <None Include="App.config" />
     <None Include="Default.srprofile">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Deploy\Deploy.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Deploy.feature.cs</LastGenOutput>
     </None>
     <None Include="IntellisenseSpecs\IntellisenseProvider.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
