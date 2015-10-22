@@ -714,11 +714,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:val", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:message", "")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rec(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rec(1).row().val]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "1")]
         public virtual void EnsureTheComplexTypeLengthInputsWorkAsExpected_Rs_Row_Set()
         {
-            this.EnsureTheComplexTypeLengthInputsWorkAsExpected("[[rs().row().set]]", "1", "No", "", "[[rec(1).a]]", "1", ((string[])(null)));
+            this.EnsureTheComplexTypeLengthInputsWorkAsExpected("[[rs().row().set]]", "1", "No", "", "[[rec(1).row().val]]", "1", ((string[])(null)));
         }
     }
 }

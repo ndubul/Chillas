@@ -919,7 +919,7 @@ this.ScenarioSetup(scenarioInfo);
             this.SortRecordset("[[rs([[int]]).a]], [[int]] = 2", "Forward", "America, Australia", ((string[])(null)));
         }
         
-        public virtual void SortRecordsetUsingComplexTypes(string input, string direction, string result, string[] exampleTags)
+        public virtual void SortRecordsetUsingComplexTypes(string input, string direction, string error, string result, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sort recordset using complex types", exampleTags);
 #line 270
@@ -949,7 +949,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 279
  testRunner.When("the sort records tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 280
- testRunner.Then("the execution has \"No\" error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("the execution has \"{0}\" error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -960,10 +960,11 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec().rs(1).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "[[rec().rs(1).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:direction", "Forward")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "Mongolia,Zambia")]
         public virtual void SortRecordsetUsingComplexTypes_Rec_Rs1_A()
         {
-            this.SortRecordsetUsingComplexTypes("[[rec().rs(1).a]]", "Forward", "Mongolia,Zambia", ((string[])(null)));
+            this.SortRecordsetUsingComplexTypes("[[rec().rs(1).a]]", "Forward", "No", "Mongolia,Zambia", ((string[])(null)));
         }
     }
 }
