@@ -1,9 +1,10 @@
-﻿@DBService
+﻿@DbService
 Feature: DB Service
 	In order to manage my database services
 	As a Warewolf User
 	I want to be shown the database service setup
 
+@DbService
 Scenario: Creating DB Service
 	Given I open New DataBase Service Connector
 	Then "New DB Connector" tab is opened
@@ -37,8 +38,7 @@ Scenario: Creating DB Service
 	When I save
 	Then Save Dialog is opened 
 
-
-
+@DbService
 Scenario: Opening Saved DB Service
    Given I open "InsertDummyUser"
    And "InsertDummyUser" tab is opened
@@ -65,6 +65,7 @@ Scenario: Opening Saved DB Service
 	| UserID | UserID       | dbo_InsertDummyUser |
    And "Save" is "Disabled"
 
+@DbService
  Scenario: Editing DB Service Mappings
    Given I open "InsertDummyUser" service
    And "InsertDummyUser" tab is opened
@@ -100,6 +101,7 @@ Scenario: Opening Saved DB Service
    When I save
    Then "InsertDummyUser" is saved
 
+@DbService
  Scenario: Editing DB Service and Test Execution is unsuccesful
    Given I open "InsertDummyUser" service
    And "InsertDummyUser" tab is opened
@@ -123,8 +125,7 @@ Scenario: Opening Saved DB Service
 	| Output | Output Alias | Recordset Name      |
 	And "Save" is "Disabled"
 
-#--
-
+@DbService
 Scenario: Refresh in select Action
 	Given I click New Data Base Service Connector
 	Then "New Database Connector" tab is opened
@@ -155,6 +156,7 @@ Scenario: Refresh in select Action
 	When I save
 	Then Save Dialog is opened 
 
+@DbService
 Scenario: Changing Actions
 	Given I click New Data Base Service Connector
 	Then "New DB Connector" tab is opened
@@ -193,7 +195,7 @@ Scenario: Changing Actions
 	When I save
 	Then Save Dialog is opened 
 	
-	
+@DbService
 Scenario: Creating a new Data Source
 	Given I click New Data Base Service Connector
 	Then "New DB Connector" tab is opened

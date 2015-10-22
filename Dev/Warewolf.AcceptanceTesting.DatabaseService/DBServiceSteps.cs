@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TechTalk.SpecFlow;
 using Warewolf.AcceptanceTesting.Core;
 using Warewolf.Core;
+using Warewolf.Studio.Core.Infragistics_Prism_Region_Adapter;
 using Warewolf.Studio.ViewModels;
 using Warewolf.Studio.Views;
 
@@ -25,25 +28,24 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         private static DbAction _dbAction;
         private static DbAction _dbInsertDummyAction;
 
-        [BeforeFeature("DBService")]
+        [BeforeFeature("DbService")]
         public static void SetupForSystem()
         {
             Utils.SetupResourceDictionary();
-            var view = new ManageDatabaseServiceControl();
+            var manageDatabaseServiceControl = new ManageDatabaseServiceControl();
+            var mockStudioUpdateManager = new Mock<IManageDbServiceViewModel>();
             var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
-            mockRequestServiceNameViewModel.Setup(model => model.ShowSaveDialog()).Verifiable();
-            var mockDbServiceModel = new Mock<IDbServiceModel>();
-            SetupModel(mockDbServiceModel);
-            var viewModel = new ManageDatabaseServiceViewModel(mockDbServiceModel.Object, mockRequestServiceNameViewModel.Object);
-            view.DataContext = viewModel;
+            var mockEventAggregator = new Mock<IEventAggregator>();
+            var mockExecutor = new Mock<IExternalProcessExecutor>();
 
-           
-
-            FeatureContext.Current.Add(Utils.ViewNameKey, view);
-            FeatureContext.Current.Add("viewModel", viewModel);
-            FeatureContext.Current.Add("model",mockDbServiceModel);
+            var manageDatabaseServiceViewModel = new ManageDatabaseServiceViewModel(mockStudioUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockExecutor.Object);
+            manageDatabaseServiceControl.DataContext = manageDatabaseServiceViewModel;
+            Utils.ShowTheViewForTesting(manageDatabaseServiceControl);
+            FeatureContext.Current.Add(Utils.ViewNameKey, manageDatabaseServiceControl);
+            FeatureContext.Current.Add(Utils.ViewModelNameKey, manageDatabaseServiceViewModel);
+            FeatureContext.Current.Add("updateManager", mockStudioUpdateManager);
             FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
-           
+            FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
         }
 
         private static void SetupModel(Mock<IDbServiceModel> mockDbServiceModel)
@@ -102,6 +104,15 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             ScenarioContext.Current.Add("requestServiceNameViewModel", FeatureContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel"));
             ScenarioContext.Current.Add("model", FeatureContext.Current.Get<Mock<IDbServiceModel>>("model"));            
         }
+
+        [Given(@"I open New DataBase Service Connector")]
+        public void GivenIOpenNewDataBaseServiceConnector()
+        {
+            var manageDatabaseServiceControl = ScenarioContext.Current.Get<ManageDatabaseServiceControl>(Utils.ViewNameKey);
+            Assert.IsNotNull(manageDatabaseServiceControl);
+            Assert.IsNotNull(manageDatabaseServiceControl.DataContext); 
+        }
+
 
         [Given(@"I click New Data Base Service Connector")]
         public void GivenIClickNewDataBaseServiceConnector()
@@ -166,10 +177,10 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         [Given(@"""(.*)"" tab is opened")]
         [When(@"""(.*)"" tab is opened")]
         [Then(@"""(.*)"" tab is opened")]
-        public void ThenTabIsOpened(string tabName)
+        public void ThenTabIsOpened(string headerText)
         {
-            var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
-            Assert.AreEqual(tabName,viewModel.Header);
+            var viewModel = ScenarioContext.Current.Get<IDockAware>("viewModel");
+            Assert.AreEqual(headerText, viewModel.Header);
         }
 
         [Given(@"Data Source is focused")]
