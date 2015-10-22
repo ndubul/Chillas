@@ -201,7 +201,6 @@
     <Compile Include="AppResources\Converters\SimpleEnumToBoolConverterTests.cs" />
     <Compile Include="ConnectionHelpers\ConnectControlSingletonTests.cs" />
     <Compile Include="CustomContainerTests.cs" />
-    <Compile Include="DeployNavigationViewModelTest.cs" />
     <Compile Include="DialogFactoryTests.cs" />
     <Compile Include="Dialogs\ProgressDialogViewModelTests.cs" />
     <Compile Include="Dock\ContentPaneFactoryTests.cs" />
@@ -233,7 +232,6 @@
     <Compile Include="IntellisenseProvider\DateTimeIntellisenseProviderTests.cs" />
     <Compile Include="DebugOutputViewModelTest.Append.cs" />
     <Compile Include="DependencyGraph\NodeTest.cs" />
-    <Compile Include="Deploy\DeployViewModelTestBase.cs" />
     <Compile Include="Dialogs\ResourcePickerDialogTests.cs" />
     <Compile Include="Dialogs\TestResourcePickerDialog.cs" />
     <Compile Include="Dialogs\TestResourcePickerDialogOkay.cs" />
@@ -250,9 +248,6 @@
     <Compile Include="Custom Dev2 Controls\Dev2DataGridTests.cs" />
     <Compile Include="Custom Dev2 Controls\Intellisense\IntellisenseTextBoxTests.cs" />
     <Compile Include="ModelTests\ExplorerItemModelTest.cs" />
-    <Compile Include="NavigationViewModelTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Network\ServerProxyChunkedTests.Specs.cs" />
     <Compile Include="Network\ServerProxyChunkedTests.UnitTests.cs" />
     <Compile Include="Network\ServerProxyTests.UnitTests.cs" />
@@ -288,8 +283,6 @@
     <Compile Include="DebugOutputFilterStrategyTests.cs" />
     <Compile Include="DebugOutputViewModelTest.cs" />
     <Compile Include="DeployServiceTest.cs" />
-    <Compile Include="DeployStatsCalculatorTests.cs" />
-    <Compile Include="Deploy\DeployViewModelTest.cs" />
     <Compile Include="Dev2DialogueTest.cs" />
     <Compile Include="Diagnostics\AppExceptionHandlerTests.cs" />
     <Compile Include="Diagnostics\ExceptionFactoryTests.cs" />
@@ -305,7 +298,6 @@
     <Compile Include="Environments\TestEnvironmentRespository.cs" />
     <Compile Include="Environments\TestLoadEnvironmentRespository.cs" />
     <Compile Include="Environments\TestServerProvider.cs" />
-    <Compile Include="ExplorerViewModelTests.cs" />
     <Compile Include="Factories\DsfActivityFactoryTests.cs" />
     <Compile Include="Helpers\LatestWebGetterTests.cs" />
     <Compile Include="Helpers\TestProgressFileDownloader.cs" />
@@ -332,7 +324,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Environments\ServerProviderTest.cs" />
-    <Compile Include="SplashScreenTest.cs" />
     <Compile Include="StringResourcesTest1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -351,7 +342,6 @@
     <Compile Include="ViewModelTests\BaseWorkSurfaceViewModelTests.cs" />
     <Compile Include="ViewModelTests\HelpViewModelTests.cs" />
     <Compile Include="ViewModelTests\WorkSurfaceContextViewModelTests.cs" />
-    <Compile Include="Views\ExplorerViewTests.cs" />
     <Compile Include="TestResourceStringsTest.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -367,7 +357,6 @@
     <Compile Include="ViewModelTests\Dialogs\Dev2MessageBoxViewModelTests.cs" />
     <Compile Include="ViewModelTests\ExceptionViewModelTest.cs" />
     <Compile Include="WebActivityTests.cs" />
-    <Compile Include="WebResourceViewModelTest.cs" />
     <Compile Include="WindowNavigationBehavior.cs" />
     <Compile Include="Workflows\DesignerDataListUtilsTest.cs" />
     <Compile Include="Workflows\TestActivity.cs" />
@@ -490,14 +479,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\" />
-    <Folder Include="Configuration\" />
     <Folder Include="Diagnostics\Debug\" />
     <Folder Include="ViewModelTests\Configuration\" />
     <Folder Include="ViewModelTests\ViewModelMocks\" />
     <Folder Include="Views\Global\" />
-    <Folder Include="Webs\" />
-    <Folder Include="WizardTests\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

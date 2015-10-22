@@ -16,7 +16,6 @@ using System.Linq;
 using System.Windows;
 using System.Xml.Linq;
 using Caliburn.Micro;
-using Dev2.Common;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.ViewModels.Dialogs;
 using FontAwesome.WPF;

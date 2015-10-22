@@ -7,6 +7,7 @@ using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
+using Dev2.Threading;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -33,19 +34,20 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         {
             Utils.SetupResourceDictionary();
             var manageDatabaseServiceControl = new ManageDatabaseServiceControl();
-            var mockStudioUpdateManager = new Mock<IManageDbServiceViewModel>();
             var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
-            var mockEventAggregator = new Mock<IEventAggregator>();
             var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockDbServiceModel = new Mock<IDbServiceModel>();
+            SetupModel(mockDbServiceModel);
 
-            var manageDatabaseServiceViewModel = new ManageDatabaseServiceViewModel(mockStudioUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockExecutor.Object);
+            var manageDatabaseServiceViewModel = new ManageDatabaseServiceViewModel(mockDbServiceModel.Object, mockRequestServiceNameViewModel.Object);
             manageDatabaseServiceControl.DataContext = manageDatabaseServiceViewModel;
             Utils.ShowTheViewForTesting(manageDatabaseServiceControl);
             FeatureContext.Current.Add(Utils.ViewNameKey, manageDatabaseServiceControl);
             FeatureContext.Current.Add(Utils.ViewModelNameKey, manageDatabaseServiceViewModel);
-            FeatureContext.Current.Add("updateManager", mockStudioUpdateManager);
+            //FeatureContext.Current.Add("updateManager", mockDbServiceModel);
             FeatureContext.Current.Add("requestServiceNameViewModel", mockRequestServiceNameViewModel);
             FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+            FeatureContext.Current.Add("model", mockDbServiceModel);
         }
 
         private static void SetupModel(Mock<IDbServiceModel> mockDbServiceModel)
@@ -89,20 +91,18 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
                 _dbInsertDummyAction
             });
             var dataTable = new DataTable("dbo_ConverToInt");
-            dataTable.Columns.Add("Result",typeof(int));
-            dataTable.LoadDataRow(new object[] {"1"}, true);
-            mockDbServiceModel.Setup(model => model.TestService(It.IsAny<IDatabaseService>()))
-                .Returns(dataTable);
-           
+            dataTable.Columns.Add("Result", typeof(int));
+            dataTable.LoadDataRow(new object[] { "1" }, true);
+            mockDbServiceModel.Setup(model => model.TestService(It.IsAny<IDatabaseService>())).Returns(dataTable);
         }
 
-        [BeforeScenario("DBService")]
+        [BeforeScenario("DbService")]
         public void SetupForDatabaseService()
         {
             ScenarioContext.Current.Add("view", FeatureContext.Current.Get<ManageDatabaseServiceControl>(Utils.ViewNameKey));
             ScenarioContext.Current.Add("viewModel", FeatureContext.Current.Get<ManageDatabaseServiceViewModel>("viewModel"));
             ScenarioContext.Current.Add("requestServiceNameViewModel", FeatureContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel"));
-            ScenarioContext.Current.Add("model", FeatureContext.Current.Get<Mock<IDbServiceModel>>("model"));            
+            ScenarioContext.Current.Add("model", FeatureContext.Current.Get<Mock<IDbServiceModel>>("model"));
         }
 
         [Given(@"I open New DataBase Service Connector")]
@@ -110,9 +110,8 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         {
             var manageDatabaseServiceControl = ScenarioContext.Current.Get<ManageDatabaseServiceControl>(Utils.ViewNameKey);
             Assert.IsNotNull(manageDatabaseServiceControl);
-            Assert.IsNotNull(manageDatabaseServiceControl.DataContext); 
+            Assert.IsNotNull(manageDatabaseServiceControl.DataContext);
         }
-
 
         [Given(@"I click New Data Base Service Connector")]
         public void GivenIClickNewDataBaseServiceConnector()
@@ -120,8 +119,9 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             var view = Utils.GetView<ManageDatabaseServiceControl>();
             Assert.IsNotNull(view);
             Assert.IsNotNull(view.DataContext);
-            Assert.IsInstanceOfType(view.DataContext,typeof(ManageDatabaseServiceViewModel));
+            Assert.IsInstanceOfType(view.DataContext, typeof(ManageDatabaseServiceViewModel));
         }
+
         [Given(@"I click ""(.*)""")]
         public void GivenIClick(string p0)
         {
@@ -131,14 +131,13 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             Assert.IsInstanceOfType(view.DataContext, typeof(ManageDatabaseServiceViewModel));
         }
 
-
         [When(@"I select ""(.*)"" as data source")]
         public void WhenISelectAsDataSource(string dbSourceName)
         {
             var view = Utils.GetView<ManageDatabaseServiceControl>();
             view.SelectDbSource(_demoDbSourceDefinition);
             var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
-            Assert.AreEqual(dbSourceName,viewModel.SelectedSource.Name);
+            Assert.AreEqual(dbSourceName, viewModel.SelectedSource.Name);
         }
 
         [Given(@"I select ""(.*)"" as the action")]
@@ -147,12 +146,16 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         public void WhenISelectAsTheAction(string actionName)
         {
             var view = Utils.GetView<ManageDatabaseServiceControl>();
-            view.SelectDbAction(_dbAction);
+            view.SelectDbAction(_dbInsertDummyAction);
             var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
-            Assert.AreEqual(actionName,viewModel.SelectedAction.Name);
+            Assert.AreEqual(actionName, viewModel.SelectedAction.Name);
         }
 
-        
+        [When(@"I change the action from ""(.*)"" to ""(.*)""")]
+        public void WhenIChangeTheActionFromTo(string p0, string p1)
+        {
+            ScenarioContext.Current.Pending();
+        }
 
         [When(@"I test the action")]
         public void WhenITestTheAction()
@@ -163,7 +166,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             view.TestAction();
             var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
             Assert.IsNotNull(viewModel.TestResults);
-            
+
         }
 
         [When(@"I save")]
@@ -171,7 +174,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         {
             var view = Utils.GetView<ManageDatabaseServiceControl>();
             view.Save();
-           
+
         }
 
         [Given(@"""(.*)"" tab is opened")]
@@ -183,6 +186,14 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             Assert.AreEqual(headerText, viewModel.Header);
         }
 
+        [Then(@"""(.*)"" is focused")]
+        public void ThenIsFocused(string p0)
+        {
+            var view = Utils.GetView<ManageDatabaseServiceControl>();
+            var isDataSourceFocused = view.IsDataSourceFocused();
+            Assert.IsTrue(isDataSourceFocused);
+        }
+
         [Given(@"Data Source is focused")]
         [When(@"Data Source is focused")]
         [Then(@"Data Source is focused")]
@@ -192,13 +203,14 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             var isDataSourceFocused = view.IsDataSourceFocused();
             Assert.IsTrue(isDataSourceFocused);
         }
+
         [Then(@"""(.*)"" is ""(.*)""")]
         public void ThenIs(string name, string state)
         {
             var view = Utils.GetView<ManageDatabaseServiceControl>();
-            switch(name)
+            switch (name)
             {
-                case "1 Data Source" :
+                case "1 Data Source":
                     Utils.CheckControlEnabled(name, state, view);
                     break;
                 case "2 Select Action":
@@ -214,6 +226,24 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             }
         }
 
+        [Then(@"""(.*)"" is selected as the action")]
+        public void ThenIsSelectedAsTheAction(string action)
+        {
+            var dbAction = FeatureContext.Current.Get<IDbAction>();
+            dbAction.Name = action;
+            var manageDatabaseServiceControl = ScenarioContext.Current.Get<ManageDatabaseServiceControl>(Utils.ViewNameKey);
+            manageDatabaseServiceControl.SelectDbAction(dbAction);
+        }
+
+        [When(@"""(.*)"" is selected as the data source")]
+        public void WhenIsSelectedAsTheDataSource(string source)
+        {
+            var dbSource = FeatureContext.Current.Get<IDbSource>();
+            dbSource.Name = source;
+            var manageDatabaseServiceControl = ScenarioContext.Current.Get<ManageDatabaseServiceControl>(Utils.ViewNameKey);
+            manageDatabaseServiceControl.SelectDbSource(dbSource);
+        }
+
         [Given(@"inputs are")]
         [When(@"inputs are")]
         [Then(@"inputs are")]
@@ -226,7 +256,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
                 var dbInput = input as IServiceInput;
                 if (dbInput != null)
                 {
-                    Assert.AreEqual(dbInput.Value,table.Rows[0][dbInput.Name]);
+                    Assert.AreEqual(dbInput.Value, table.Rows[0][dbInput.Name]);
                 }
             }
         }
@@ -243,7 +273,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
                 var rowOutput = output as DataRowView;
                 if (rowOutput != null)
                 {
-                    Assert.AreEqual(rowOutput[0].ToString(),table.Rows[0][1]);
+                    Assert.AreEqual(rowOutput[0].ToString(), table.Rows[0][1]);
                 }
             }
         }
@@ -258,7 +288,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             var i = 0;
             if (inputMappings.SourceCollection == null)
             {
-                Assert.AreEqual(0,table.RowCount);
+                Assert.AreEqual(0, table.RowCount);
             }
             else
             {
@@ -300,7 +330,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         [Given(@"I open ""(.*)"" service")]
         public void GivenIOpenService(string serviceName)
         {
-            var databaseService = new Warewolf.Core.DatabaseService { Name = serviceName, Source = _demoDbSourceDefinition, Action = _dbInsertDummyAction,Inputs = _dbInsertDummyAction.Inputs};
+            var databaseService = new Warewolf.Core.DatabaseService { Name = serviceName, Source = _demoDbSourceDefinition, Action = _dbInsertDummyAction, Inputs = _dbInsertDummyAction.Inputs };
             var dbOutputMapping = new ServiceOutputMapping("UserID", "UserID") { RecordSetName = "dbo_InsertDummyUser" };
             databaseService.OutputMappings = new List<IServiceOutputMapping> { dbOutputMapping };
             ScenarioContext.Current.Remove("viewModel");
@@ -308,7 +338,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             var requestServiceNameViewModelMock = new Mock<IRequestServiceNameViewModel>();
             ScenarioContext.Current.Add("requestServiceNameViewModel", requestServiceNameViewModelMock);
             var viewModel = new ManageDatabaseServiceViewModel(ScenarioContext.Current.Get<Mock<IDbServiceModel>>("model").Object, requestServiceNameViewModelMock.Object, databaseService);
-            ScenarioContext.Current.Add("viewModel",viewModel);
+            ScenarioContext.Current.Add("viewModel", viewModel);
             var view = Utils.GetView<ManageDatabaseServiceControl>();
             try
             {
@@ -319,7 +349,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             {
                 //Do nothing
             }
-            
+
         }
 
         [Given(@"""(.*)"" is selected as the data source")]
@@ -327,7 +357,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         {
             var view = Utils.GetView<ManageDatabaseServiceControl>();
             var selectedDataSource = view.GetSelectedDataSource();
-            Assert.AreEqual(selectedDataSourceName,selectedDataSource.Name);
+            Assert.AreEqual(selectedDataSourceName, selectedDataSource.Name);
         }
 
         [Given(@"Inspect Data Connector hyper link is ""(.*)""")]
@@ -340,14 +370,14 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         [Then(@"""(.*)"" is saved")]
         public void ThenIsSaved(string p0)
         {
-            
+
         }
 
         [Then(@"Save Dialog is not opened")]
         public void ThenSaveDialogIsNotOpened()
         {
             var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
-            mockRequestServiceNameViewModel.Verify(model => model.ShowSaveDialog(),Times.Never());
+            mockRequestServiceNameViewModel.Verify(model => model.ShowSaveDialog(), Times.Never());
         }
 
         [When(@"testing the action fails")]
@@ -367,7 +397,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         {
             var view = Utils.GetView<ManageDatabaseServiceControl>();
             var selectedAction = view.GetSelectedAction();
-            Assert.AreEqual(selectedActionName,selectedAction.Name);
+            Assert.AreEqual(selectedActionName, selectedAction.Name);
 
         }
 
@@ -378,5 +408,20 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             mockRequestServiceNameViewModel.Verify();
         }
 
+        [AfterScenario("DbService")]
+        public void Cleanup()
+        {
+            var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockUpdateManager = ScenarioContext.Current.Get<Mock<IDbServiceModel>>("model");
+            var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
+            var viewModel = new ManageDatabaseServiceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object);
+            var manageDatabaseServiceControl = ScenarioContext.Current.Get<ManageDatabaseServiceControl>(Utils.ViewNameKey);
+            manageDatabaseServiceControl.DataContext = viewModel;
+            FeatureContext.Current.Remove("viewModel");
+            FeatureContext.Current.Add("viewModel", viewModel);
+            FeatureContext.Current.Remove("externalProcessExecutor");
+            FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
+
+        }
     }
 }

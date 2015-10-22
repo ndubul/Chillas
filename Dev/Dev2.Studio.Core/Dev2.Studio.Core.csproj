@@ -219,7 +219,6 @@
     <Compile Include="Activities\Services\DesignerManagementService.cs" />
     <Compile Include="Activities\Services\IDesignerManagementService.cs" />
     <Compile Include="Activities\Utils\ModelItemUtils.cs" />
-    <Compile Include="AppResources\Administration\BDSAdminChannel.cs" />
     <Compile Include="AppResources\Attributes\ResourceHelper.cs" />
     <Compile Include="AppResources\Behaviors\PreventHorizontalScrollWhenFocusedTreeViewItemBehavior.cs" />
     <Compile Include="AppResources\Browsers\Browser.cs" />
@@ -286,8 +285,6 @@
     <Compile Include="AppResources\Enums\ResourceType.cs" />
     <Compile Include="AppResources\Enums\WorkSurfaceContext.cs" />
     <Compile Include="AppResources\EventArgs\DomainControllerUncontactableEventArgs.cs" />
-    <Compile Include="AppResources\Exceptions\WebResourceRemoveFailedException.cs" />
-    <Compile Include="AppResources\Exceptions\WebResourceUploadFailedException.cs" />
     <Compile Include="AppResources\Expression\ExpressionEvaluator.cs" />
     <Compile Include="AppResources\Expression\ExpressionVisitor.cs" />
     <Compile Include="AppResources\Expression\ExpressionVisitorDSFImpl.cs" />
@@ -302,7 +299,6 @@
     <Compile Include="AppResources\Repositories\DataListRepository.cs" />
     <Compile Include="AppResources\Repositories\IStudioResourceRepository.cs" />
     <Compile Include="AppResources\Repositories\StudioResourceRepository.cs" />
-    <Compile Include="AppResources\Repositories\UserInterfaceLayoutRepository.cs" />
     <Compile Include="AppResources\TriggerActions\SetCaretIndexAction.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -318,6 +314,8 @@
     <Compile Include="ConnectionHelpers\IConnectControlSingleton.cs" />
     <Compile Include="Controller\CommunicationController.cs" />
     <Compile Include="Controller\ICommunicationControllerFactory.cs" />
+    <Compile Include="InterfaceImplementors\FilePersistenceProvider.cs" />
+    <Compile Include="Interfaces\IFilePersistenceProvider.cs" />
     <Compile Include="Interfaces\IMainViewModel.cs" />
     <Compile Include="Messages\DeleteFolderMessage.cs" />
     <Compile Include="Messages\DisplayMessageBoxMessage.cs" />
@@ -352,20 +350,14 @@
     <Compile Include="Interfaces\DataList\IDataListItemModel.cs" />
     <Compile Include="Interfaces\IDataMappingViewModelFactory.cs" />
     <Compile Include="Interfaces\IDataMappingViewModel.cs" />
-    <Compile Include="Interfaces\IDirectoryPersistenceProvider.cs" />
-    <Compile Include="InterfaceImplementors\DirectoryPersistenceProvider.cs" />
     <Compile Include="InterfaceImplementors\ServerProvider.cs" />
     <Compile Include="Interfaces\IDeployService.cs" />
     <Compile Include="Interfaces\IDeployDTO.cs" />
     <Compile Include="Interfaces\IContextualResourceModel.cs" />
     <Compile Include="Factories\ServiceDebugInfoModelFactory.cs" />
     <Compile Include="Factories\WebActivityFactory.cs" />
-    <Compile Include="Factories\WebCommunicationResponseFactory.cs" />
-    <Compile Include="InterfaceImplementors\FilePersistenceProvider.cs" />
     <Compile Include="InterfaceImplementors\ObjectCloner.cs" />
     <Compile Include="InterfaceImplementors\WebActivity.cs" />
-    <Compile Include="InterfaceImplementors\WebCommunication.cs" />
-    <Compile Include="InterfaceImplementors\WebCommunicationResponse.cs" />
     <Compile Include="Interfaces\DataList\IDataListViewModel.cs" />
     <Compile Include="Interfaces\IDataMappingOutputs.cs" />
     <Compile Include="Interfaces\IEnvironmentConnection.cs" />
@@ -382,18 +374,14 @@
     <Compile Include="Interfaces\IDecisionType.cs" />
     <Compile Include="Interfaces\IDev2StudioView.cs" />
     <Compile Include="Interfaces\IEnvironmentModel.cs" />
-    <Compile Include="Interfaces\IFilePersistenceProvider.cs" />
     <Compile Include="Interfaces\ILayoutObjectViewModel.cs" />
     <Compile Include="Interfaces\IResourceModel.cs" />
     <Compile Include="Interfaces\IResourceRepository.cs" />
-    <Compile Include="Interfaces\IScriptableClassDataHandler.cs" />
     <Compile Include="Interfaces\IServerProvider.cs" />
     <Compile Include="Interfaces\IServiceDebugInfoModel.cs" />
     <Compile Include="Interfaces\IStudioTab.cs" />
     <Compile Include="Interfaces\IUserMessageProvider.cs" />
     <Compile Include="Interfaces\IWebActivity.cs" />
-    <Compile Include="Interfaces\IWebCommunication.cs" />
-    <Compile Include="Interfaces\IWebCommunicationResponse.cs" />
     <Compile Include="Interfaces\IPropertyEditorWizard.cs" />
     <Compile Include="Interfaces\IWorkflowDesignerViewModel.cs" />
     <Compile Include="Messages\AbstractEnvironmentMessage.cs" />
@@ -459,18 +447,14 @@
     <Compile Include="Models\DataMapping\TransferObject.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ITagModel.cs" />
     <Compile Include="Models\EnvironmentModel.cs" />
     <Compile Include="Models\ExplorerItemModel.cs" />
     <Compile Include="Models\IWorkSurfaceObject.cs" />
     <Compile Include="Models\OperatorType.cs" />
     <Compile Include="Models\QuickVariableInput\QuickVariableInputModel.cs" />
     <Compile Include="Models\ResourceModel.cs" />
-    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\ServiceDebugInfoModel.cs" />
-    <Compile Include="Models\TagModel.cs" />
     <Compile Include="Models\UserInterfaceLayoutModel.cs" />
-    <Compile Include="Models\WorkflowActivityMessage.cs" />
     <Compile Include="Network\Enums.cs" />
     <Compile Include="Network\ServerState.cs" />
     <Compile Include="Network\ServerProxy.cs" />
@@ -514,8 +498,6 @@
       <DependentUpon>StringResources.resx</DependentUpon>
     </Compile>
     <Compile Include="AppResources\Converters\InverseBooleanConverter.cs" />
-    <Compile Include="TO\IWebBrowserNavigateRequestTO.cs" />
-    <Compile Include="TO\WebBrowserNavigateRequestTO.cs" />
     <Compile Include="Activities\TO\ActivityViewModelTO.cs" />
     <Compile Include="Activities\Interfaces\IServiceXmlTranslator.cs" />
     <Compile Include="Activities\Translators\ServiceXmlTranslator.cs" />
@@ -535,16 +517,11 @@
     <Compile Include="ViewModels\DataList\InputOutputViewModel.cs" />
     <Compile Include="ViewModels\DataList\InputOutputViewModelFactory.cs" />
     <Compile Include="ViewModels\Global\ResourceHelper.cs" />
-    <Compile Include="ViewModels\Navigation\INavigationContext.cs" />
     <Compile Include="Interfaces\IResourceDesignerViewModel.cs" />
     <Compile Include="ViewModels\ResourceManagement\ResourceDesignerViewModel.cs" />
     <Compile Include="Interfaces\ILayoutGridViewModel.cs" />
-    <Compile Include="Interfaces\IWebResourceViewModel.cs" />
-    <Compile Include="ViewModels\UserInterfaceBuilder\WebResourceViewModel.cs" />
     <Compile Include="ViewModels\Wizards\DataListChangeNotificationViewModel.cs" />
     <Compile Include="Interfaces\IConfigureDecisionViewModel.cs" />
-    <Compile Include="Wizards\Interfaces\IWizardCallbackHandler.cs" />
-    <Compile Include="Wizards\WizardInvocationTO.cs" />
     <Compile Include="Workspaces\IWorkspaceItemRepository.cs" />
     <Compile Include="Workspaces\WorkspaceItemRepository.cs" />
   </ItemGroup>
@@ -643,11 +620,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CalculateParser\" />
-    <Folder Include="Configuration\" />
+    <Folder Include="AppResources\Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

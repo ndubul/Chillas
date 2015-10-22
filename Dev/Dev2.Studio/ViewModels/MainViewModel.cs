@@ -100,7 +100,6 @@ namespace Dev2.Studio.ViewModels
                                         IHandle<AddWorkSurfaceMessage>,
                                         IHandle<SetActiveEnvironmentMessage>,
                                         IHandle<ShowEditResourceWizardMessage>,
-                                        IHandle<DeployResourcesMessage>,
                                         IHandle<ShowHelpTabMessage>,
                                         IHandle<ShowNewResourceWizard>,
                                         IHandle<RemoveResourceAndCloseTabMessage>,
@@ -112,13 +111,11 @@ namespace Dev2.Studio.ViewModels
         #region Fields
 
         private IEnvironmentModel _activeEnvironment;
-        private ExplorerViewModel _explorerViewModel;
         private WorkSurfaceContextViewModel _previousActive;
         private bool _disposed;
 
         private AuthorizeCommand<string> _newResourceCommand;
         private ICommand _addLanguageHelpPageCommand;
-        private RelayCommand _deployAllCommand;
         private ICommand _deployCommand;
         private ICommand _displayAboutDialogueCommand;
         private ICommand _exitCommand;
@@ -182,7 +179,6 @@ namespace Dev2.Studio.ViewModels
                     _activeEnvironment = value;
                     OnActiveEnvironmentChanged();
                     NotifyOfPropertyChange(() => ActiveEnvironment);
-                    DeployAllCommand.RaiseCanExecuteChanged();
 
                 }
             }
@@ -323,16 +319,7 @@ namespace Dev2.Studio.ViewModels
         {
             get { return _showCommunityPageCommand ?? (_showCommunityPageCommand = new DelegateCommand(param => ShowCommunityPage())); }
         }
-
-        public RelayCommand DeployAllCommand
-        {
-            get
-            {
-                return _deployAllCommand ?? (_deployAllCommand = new RelayCommand(param => DeployAll(),
-                                                                     param => IsActiveEnvironmentConnected()));
-            }
-        }
-
+        
         public AuthorizeCommand SettingsCommand
         {
             get
@@ -597,37 +584,6 @@ namespace Dev2.Studio.ViewModels
 
         }
 
-        public void Handle(DeployResourcesMessage message)
-        {
-            Dev2Logger.Log.Debug(message.GetType().Name);
-            var key = WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployViewer) as WorkSurfaceKey;
-
-            var exist = ActivateWorkSurfaceIfPresent(key);
-            if (message.ViewModel != null)
-            {
-                var environmentModel = EnvironmentRepository.FindSingle(model => model.ID == message.ViewModel.EnvironmentId);
-                message.ViewModel.ResourceType = Common.Interfaces.Data.ResourceType.DeployViewer;
-                if(environmentModel != null)
-                {
-                    var resourceModel = environmentModel.ResourceRepository.FindSingle(model => model.ID == message.ViewModel.ResourceId);
-                    
-                    if(resourceModel != null)
-                    {
-                        resourceModel.ResourceType = (ResourceType)Common.Interfaces.Data.ResourceType.DeployViewer;
-                        DeployResource = resourceModel as IContextualResourceModel;
-                    }
-                }
-                if (!exist)
-                {
-                    AddAndActivateWorkSurface(WorkSurfaceContextFactory.CreateDeployViewModel(message.ViewModel));
-                }
-                else
-                {
-                    Dev2Logger.Log.Info("Publish message of type - " + typeof(SelectItemInDeployMessage));
-                    EventPublisher.Publish(new SelectItemInDeployMessage(message.ViewModel.ResourceId, message.ViewModel.EnvironmentId));
-                }
-            }
-        }
 
         public IContextualResourceModel DeployResource { get; set; }
 
@@ -666,22 +622,6 @@ namespace Dev2.Studio.ViewModels
 
             AddAndActivateWorkSurface(WorkSurfaceContextFactory.CreateResourceViewModel(tempResource));
             AddWorkspaceItem(tempResource);
-        }
-
-        private void DeployAll()
-        {
-            object payload = null;
-
-            if (CurrentResourceModel != null && CurrentResourceModel.Environment != null)
-            {
-                payload = CurrentResourceModel.Environment;
-            }
-            else if (ActiveEnvironment != null)
-            {
-                payload = ActiveEnvironment;
-            }
-
-            AddDeployResourcesWorkSurface(payload);
         }
 
         private void DisplayAboutDialogue()
@@ -1067,6 +1007,7 @@ namespace Dev2.Studio.ViewModels
             var sourceEnvironmentModel = EnvironmentRepository.Get(sourceEnvironmentId);
             var dto = new DeployDto { ResourceModels = resources.Select(a=>sourceEnvironmentModel.ResourceRepository.LoadContextualResourceModel(a)as IResourceModel).ToList() };
             environmentModel.ResourceRepository.DeployResources(sourceEnvironmentModel,environmentModel,dto,CustomContainer.Get<IEventAggregator>());
+            ExplorerViewModel.RefreshEnvironment(destinationEnvironmentId);
         }
 
         public void ShowPopup(IPopupMessage popupMessage)
@@ -1995,29 +1936,7 @@ namespace Dev2.Studio.ViewModels
 
         #region Tab Management
 
-        public void AddDeployResourcesWorkSurface(object input)
-        {
-            WorkSurfaceKey key = WorkSurfaceKeyFactory.CreateKey(WorkSurfaceContext.DeployViewer) as WorkSurfaceKey;
-            bool exist = ActivateWorkSurfaceIfPresent(key);
-            DeployResource = input as IContextualResourceModel;
-            if (exist)
-            {
-                if (input is IContextualResourceModel)
-                {
-                    Dev2Logger.Log.Info("Publish message of type - " + typeof(SelectItemInDeployMessage));
-                    EventPublisher.Publish(
-                        new SelectItemInDeployMessage((input as IContextualResourceModel).ID,
-                            (input as IContextualResourceModel).Environment.ID));
-                }
-            }
-            else
-            {
-                WorkSurfaceContextViewModel context = WorkSurfaceContextFactory.CreateDeployViewModel(input);
-                Items.Add(context);
-                ActivateItem(context);
-                Tracker.TrackEvent(TrackerEventGroup.Deploy, TrackerEventName.Opened);
-            }
-        }
+        
 
         private void DeleteContext(IContextualResourceModel model)
         {
@@ -2421,6 +2340,7 @@ namespace Dev2.Studio.ViewModels
         IDropboxFactory _dropboxFactory;
         IMenuViewModel _menuViewModel;
         IServer _activeServer;
+        private ExplorerViewModel _explorerViewModel;
 
         public bool IsDownloading()
         {

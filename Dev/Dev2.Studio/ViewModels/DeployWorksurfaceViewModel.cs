@@ -6,10 +6,8 @@ using Dev2.Common.Interfaces.Data;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Interfaces;
 using Dev2.Studio.ViewModels.WorkSurface;
-using FontAwesome.WPF;
 using Microsoft.Practices.Prism.Mvvm;
 using Warewolf.Studio.ViewModels;
-using Warewolf.Studio.Views;
 
 namespace Dev2.ViewModels
 {
