@@ -71,13 +71,13 @@ namespace Warewolf.AcceptanceTesting.EmailSource
             {
                 ResourceName = "Test Email Source",
                 HostName = "smtp.gmail.com",
-                UserName = "someone",
-                Password = "123456",
+                UserName = "warewolf@dev2.co.za",
+                Password = "Dev_tech*",
                 EnableSsl = false,
                 Port = 25,
                 Timeout = 100,
-                EmailFrom = "this@to.com",
-                EmailTo = "another@rt.com"
+                EmailFrom = "warewolf@dev2.co.za",
+                EmailTo = "info@dev2.co.za"
             };
             var manageEmailSourceViewModel = new ManageEmailSourceViewModel(mockStudioUpdateManager.Object, mockEventAggregator.Object, emailServiceSourceDefinition);
             manageEmailSourceControl.DataContext = manageEmailSourceViewModel;
@@ -119,6 +119,7 @@ namespace Warewolf.AcceptanceTesting.EmailSource
         }
 
         [Then(@"I type Username as ""(.*)""")]
+        [When(@"I type Username as ""(.*)""")]
         public void ThenITypeUsernameAs(string username)
         {
             var manageEmailSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
@@ -137,6 +138,7 @@ namespace Warewolf.AcceptanceTesting.EmailSource
         }
 
         [Then(@"I type From as ""(.*)""")]
+        [When(@"I type From as ""(.*)""")]
         public void ThenITypeFromAs(string emailFrom)
         {
             var manageEmailSourceControl = ScenarioContext.Current.Get<ManageEmailSourceControl>(Utils.ViewNameKey);
