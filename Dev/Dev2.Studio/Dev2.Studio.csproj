@@ -381,7 +381,6 @@
     <Compile Include="CustomControls\Progress\VersionChecker.cs" />
     <Compile Include="CustomControls\SplitterExpansionButton.cs" />
     <Compile Include="CustomControls\SplitterPanel.cs" />
-    <Compile Include="Deploy\IDeployStatsCalculator.cs" />
     <Compile Include="Diagnostics\AppExceptionHandlerAbstract.cs" />
     <Compile Include="Diagnostics\AppExceptionPopupController.cs" />
     <Compile Include="Diagnostics\AppExceptionPopupControllerAbstract.cs" />
@@ -406,7 +405,6 @@
     <Compile Include="Dock\UIElementHelper.cs" />
     <Compile Include="Enums\enDsfActivityType.cs" />
     <Compile Include="Factory\DebugStateFactory.cs" />
-    <Compile Include="Factory\DeployViewModelFactory.cs" />
     <Compile Include="Factory\DialogViewModelFactory.cs" />
     <Compile Include="Factory\WorkSurfaceContextFactory.cs" />
     <Compile Include="Factory\WorkSurfaceKeyFactory.cs" />
@@ -452,32 +450,22 @@
     <Compile Include="Utils\OpeningWorkflowsHelper.cs" />
     <Compile Include="Utils\ResourceChangeHandler.cs" />
     <Compile Include="ViewModels\Administration\DialogueViewModel.cs" />
-    <Compile Include="RibbonControl\Dev2RibbonApplicationMenu.cs" />
     <Compile Include="ViewModels\DependencyVisualization\DependencyGraphGenerator.cs" />
     <Compile Include="ViewModels\DeployWorksurfaceViewModel.cs" />
-    <Compile Include="ViewModels\Deploy\DeployDialogTO.cs" />
-    <Compile Include="ViewModels\Deploy\DeployDialogViewModel.cs" />
-    <Compile Include="ViewModels\Deploy\DeployNavigationViewModel.cs" />
-    <Compile Include="ViewModels\Deploy\NavigationViewModelBase.cs" />
     <Compile Include="ViewModels\Diagnostics\DebugStatus.cs" />
     <Compile Include="ViewModels\Diagnostics\ReportsViewerViewModel.cs" />
     <Compile Include="ViewModels\Help\IHelpViewWrapper.cs" />
     <Compile Include="ViewModels\Help\HelpViewWrapper.cs" />
-    <Compile Include="ViewModels\Navigation\INavigationViewModel.cs" />
     <Compile Include="ViewModels\SourceViewModel.cs" />
     <Compile Include="ViewModels\Workflow\DataListConversionUtils.cs" />
     <Compile Include="ViewModels\Workflow\WorkflowDesignerDataPartUtils.cs" />
     <Compile Include="ViewModels\WorkSurface\IWorkSurfaceContextViewModel.cs" />
-    <Compile Include="Views\Deploy\DeployViewDialog.xaml.cs">
-      <DependentUpon>DeployViewDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Dialogs\WebLatestVersionDialog.xaml.cs">
       <DependentUpon>WebLatestVersionDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialog\Dev2MessageBoxWithCustomButtons.xaml.cs">
       <DependentUpon>Dev2MessageBoxWithCustomButtons.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Explorer\ExplorerViewModel.cs" />
     <Compile Include="ViewModels\Help\HelpViewModel.cs" />
     <Compile Include="ViewModels\Workflow\WorkflowInputDataViewModel.cs" />
     <Compile Include="ViewModels\Workflow\DsfActivityDropViewModel.cs">
@@ -531,19 +519,15 @@
       <DependentUpon>WorkflowInputDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Webs\Callbacks\DropBoxSourceSourceCallbackHandler.cs" />
-    <Compile Include="Webs\Callbacks\FileChooserCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\IShowDependencyProvider.cs" />
     <Compile Include="Webs\Callbacks\NetworkHelper.cs" />
-    <Compile Include="Webs\Callbacks\SharepointServerSourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\ShowDependencyProvider.cs" />
     <Compile Include="Webs\Callbacks\SaveNewWorkflowCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\SourceCallbackHandler.cs" />
     <Compile Include="Webs\Callbacks\WebsiteCallbackHandler.cs" />
-    <Compile Include="Webs\Callbacks\ServiceCallbackHandler.cs" />
     <Compile Include="Webs\SaveDialogHelper.cs" />
     <Compile Include="Webs\WebHelper.cs" />
     <Compile Include="Webs\Callbacks\Dev2DecisionCallbackHandler.cs" />
-    <Compile Include="AppResources\Comparers\DeployStatsTOComparer.cs" />
     <Compile Include="AppResources\DependencyVisualization\Arrows\ArrowEnds.cs" />
     <Compile Include="AppResources\DependencyVisualization\Arrows\ArrowLine.cs" />
     <Compile Include="AppResources\DependencyVisualization\Arrows\ArrowLineBase.cs" />
@@ -559,25 +543,15 @@
     <Compile Include="AppResources\ExtensionMethods\FrameworkElementExtensionMethods.cs" />
     <Compile Include="AppResources\TextEditorCompletion\TextEditorCompletionData.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Webs\Callbacks\ConnectCallbackHandler.cs" />
     <Compile Include="Diagnostics\DebugOutputFilterStrategy.cs" />
-    <Compile Include="Deploy\DeployStatsCalculator.cs" />
     <Compile Include="Factory\ExceptionFactory.cs" />
     <Compile Include="InterfaceImplementors\BlankIntellisenseProvider.cs" />
     <Compile Include="InterfaceImplementors\UserMessageProviderImpl.cs" />
     <Compile Include="InterfaceImplementors\WizardResourceKeys\ResourceKeys.cs" />
     <Compile Include="Model\ExceptionUIModel.cs" />
-    <Compile Include="StartupResources\SplashScreen.cs" />
-    <Compile Include="Deploy\DeployStatsTO.cs" />
-    <Compile Include="ViewModels\Deploy\DeployViewModel.cs" />
     <Compile Include="ViewModels\Diagnostics\ExceptionViewModel.cs" />
     <Compile Include="ViewModels\Diagnostics\IExceptionViewModel.cs" />
-    <Compile Include="ViewModels\Help\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\Navigation\IContextCommands.cs" />
-    <Compile Include="ViewModels\Navigation\NavigationViewModel.cs" />
-    <Compile Include="ViewModels\Navigation\TreeViewModelHelper.cs" />
-    <Compile Include="ViewModels\UiAutomation\AutomationIdCreaterViewModel.cs" />
     <Compile Include="ViewModels\Workflow\WorkflowDesignerViewModel.cs" />
     <Compile Include="Views\DataList\DataListView.xaml.cs">
       <DependentUpon>DataListView.xaml</DependentUpon>
@@ -617,17 +591,11 @@
     <Compile Include="Views\DependencyVisualization\GraphWithDetailsView.xaml.cs">
       <DependentUpon>GraphWithDetailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Deploy\DeployView.xaml.cs">
-      <DependentUpon>DeployView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\Diagnostics\DebugTreeViewItemViewModel.cs" />
     <Compile Include="Views\Diagnostics\DebugOutputView.xaml.cs">
       <DependentUpon>DebugOutputView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Diagnostics\DebugOutputViewModel.cs" />
-    <Compile Include="Views\Explorer\ExplorerView.xaml.cs">
-      <DependentUpon>ExplorerView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Global\GetStringValueWindow.xaml.cs">
       <DependentUpon>GetStringValueWindow.xaml</DependentUpon>
     </Compile>
@@ -636,9 +604,6 @@
     </Compile>
     <Compile Include="Views\Global\ToolboxUserControl.xaml.cs">
       <DependentUpon>ToolboxUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Navigation\NavigationView.xaml.cs">
-      <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -791,10 +756,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Deploy\DeployViewDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Dialogs\WebLatestVersionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -883,15 +844,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Deploy\DeployView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Diagnostics\DebugOutputView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Explorer\ExplorerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -908,10 +861,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Global\ToolboxUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Navigation\NavigationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1003,10 +952,6 @@
     <Resource Include="Resources\RemoteWarewolf-32_files\image1.png" />
     <Resource Include="Resources\ExplorerWarewolfConnection-32_files\image0.png" />
     <Resource Include="Resources\ExplorerWarewolfConnection-32_files\image1.png" />
-    <Resource Include="Resources\Deploy-32_files\image0.png" />
-    <Resource Include="Resources\Deploy-32_files\image1.png" />
-    <Resource Include="Resources\Deploy-32_files\image2.png" />
-    <Resource Include="Resources\Deploy-32_files\image3.png" />
     <Resource Include="Images\StartNode.png" />
     <Content Include="Help\PageNotAvailable.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1196,12 +1141,7 @@
       <Name>Warewolf.Studio.Views</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppResources\Exceptions\" />
-    <Folder Include="Resources\NewFolder1\" />
-    <Folder Include="ViewModels\SingleExplorerDeploy\" />
-    <Folder Include="Views\SharepointServerSource\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)'=='true'">
     <PostBuildEvent>

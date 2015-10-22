@@ -17,7 +17,6 @@ using System.ComponentModel;
 using System.Windows;
 using Dev2;
 using Dev2.Common.Interfaces;
-using Dev2.Common.Interfaces.Activity;
 using Dev2.Common.Interfaces.Diagnostics.Debug;
 using Dev2.Data;
 using Dev2.Data.Util;
@@ -92,14 +91,7 @@ namespace Unlimited.Applications.BusinessDesignStudio.Activities
         }
         #endregion
 
-        public void Notify(IApplicationMessage messageNotifier, string message)
-        {
-            if(messageNotifier != null && !string.IsNullOrEmpty(message))
-            {
-                messageNotifier.SendMessage(message);
-            }
-        }
-
+        
         public Activity Create(DependencyObject target)
         {
             return this;
