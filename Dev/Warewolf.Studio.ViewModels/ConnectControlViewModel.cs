@@ -72,7 +72,10 @@ namespace Warewolf.Studio.ViewModels
         {
             var serverConnections = Server.GetServerConnections();
             var servers = new ObservableCollection<IServer> { CreateNewRemoteServerEnvironment() };
-            servers.AddRange(serverConnections);
+            if(serverConnections != null)
+            {
+                servers.AddRange(serverConnections);
+            }
             if (Servers == null)
             {
                 Servers = new ObservableCollection<IServer>();
