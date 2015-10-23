@@ -190,6 +190,16 @@ namespace Warewolf.Studio.ViewModels
             Item = ToModel();
         }
 
+        public ManagePluginSourceViewModel(IManagePluginSourceModel updateManager, IRequestServiceNameViewModel requestServiceNameViewModel, IEventAggregator aggregator, IAsyncWorker asyncWorker, Action<Action> dispatcherAction)
+            : this(updateManager, aggregator, asyncWorker)
+        {
+            DispatcherAction = dispatcherAction;
+            VerifyArgument.IsNotNull("requestServiceNameViewModel", requestServiceNameViewModel);
+            PerformLoadAll();
+            RequestServiceNameViewModel = requestServiceNameViewModel;
+            Item = ToModel();
+        }
+
         /// <exception cref="Exception">A delegate callback throws an exception.</exception>
         public ManagePluginSourceViewModel(IManagePluginSourceModel updateManager, IEventAggregator aggregator, IPluginSource pluginSource,IAsyncWorker asyncWorker)
             : this(updateManager, aggregator,asyncWorker)
