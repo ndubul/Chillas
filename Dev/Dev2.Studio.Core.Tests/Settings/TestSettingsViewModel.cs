@@ -47,7 +47,7 @@ namespace Dev2.Core.Tests.Settings
         public LogSettingsViewModel TheLogSettingsViewModel { get; set; }
         protected override SecurityViewModel CreateSecurityViewModel()
         {
-            return TheSecurityViewModel ?? new SecurityViewModel(Settings.Security, new Mock<DirectoryObjectPickerDialog>().Object, new Mock<IWin32Window>().Object, new Mock<IEnvironmentModel>().Object);
+            return TheSecurityViewModel ?? new SecurityViewModel(Settings.Security, new Mock<DirectoryObjectPickerDialog>().Object, new Mock<IWin32Window>().Object, new Mock<IEnvironmentModel>().Object, ()=> new Mock<IResourcePickerDialog>().Object);
         }
 
         protected override LogSettingsViewModel CreateLoggingViewModel()
