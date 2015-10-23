@@ -57,7 +57,7 @@
                 <TabControl Style="{StaticResource TabControlStyle}">
                     <TabItem Style="{StaticResource TabItemStyle}" BorderThickness="0">
                         <TabItem.Header>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Cursor="Hand">
                                 <fa:FontAwesome Icon="Lock" FontSize="17" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
                                 <TextBlock FontSize="15" Text="{Binding SecurityHeader}"/>
                             </StackPanel>
@@ -68,7 +68,7 @@
                     </TabItem>
                     <TabItem Style="{StaticResource TabItemStyle}">
                         <TabItem.Header>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Cursor="Hand">
                                 <fa:FontAwesome Icon="Table" FontSize="17" Margin="{StaticResource ControlBorderTop}"></fa:FontAwesome>
                                 <TextBlock FontSize="15" Text="{Binding LogHeader}"/>
                             </StackPanel>
@@ -102,12 +102,12 @@
                            Visibility="{Binding IsErrorsVisible, Converter={StaticResource BoolToVisibilityConverterPositive}}"
                            AutomationProperties.AutomationId="UI_Errors_AutoID" />
 
-                <Button Content="Save"
+                <!--<Button Content="Save"
                         Command="{Binding SaveCommand}"
                         Margin="5,0,0,0"
                         Width="90"
                         Height="28" 
-                        AutomationProperties.AutomationId="UI_SaveSettingsbtn_AutoID"/>
+                        AutomationProperties.AutomationId="UI_SaveSettingsbtn_AutoID"/>-->
             </StackPanel>
         </Grid>
     </Grid>
