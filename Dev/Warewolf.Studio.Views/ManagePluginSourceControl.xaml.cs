@@ -174,6 +174,8 @@ namespace Warewolf.Studio.Views
                 case "Save":
                     var viewModel = DataContext as ManagePluginSourceViewModel;
                     return viewModel != null && viewModel.OkCommand.CanExecute(null);
+                case "Filter":
+                    return SearchTextBox.IsEnabled;
             }
             return false;
         }

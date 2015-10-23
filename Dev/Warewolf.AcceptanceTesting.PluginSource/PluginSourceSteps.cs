@@ -406,10 +406,11 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         }
 
         [When(@"Assembly is ""(.*)""")]
+        [Then(@"Assembly is ""(.*)""")]
         public void WhenAssemblyIs(string assembly)
         {
             var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
-            managePluginSourceControl.GetAssemblyName();
+            Assert.AreEqual(assembly, managePluginSourceControl.GetAssemblyName());
         }
 
         [When(@"I filter for ""(.*)""")]
@@ -419,11 +420,10 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             Assert.IsTrue(expectedVisibility);
         }
 
-        [When(@"the tree-view is not completely loaded")]
-        public void WhenTheTree_ViewIsNotCompletelyLoaded()
+        [When(@"filter is disabled")]
+        public void WhenFilterIsDisabled()
         {
-            var viewModel = ScenarioContext.Current.Get<ManagePluginSourceViewModel>("viewModel");
-            Assert.IsFalse(viewModel.IsLoading);
+            
         }
 
         [When(@"GAC is ""(.*)""")]
@@ -480,9 +480,11 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         {
             var mockExecutor = new Mock<IExternalProcessExecutor>();
             var mockUpdateManager = ScenarioContext.Current.Get<Mock<IManagePluginSourceModel>>("updateManager");
+            mockUpdateManager.Setup(model => model.GetDllListings(null)).Returns(BuildBaseListing());
             var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
             var mockEventAggregator = new Mock<IEventAggregator>();
-            var viewModel = new ManagePluginSourceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker());
+            var mockViewModel = ScenarioContext.Current.Get<ManagePluginSourceViewModel>(Utils.ViewModelNameKey);
+            var viewModel = new ManagePluginSourceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockViewModel.DispatcherAction);
             var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
             managePluginSourceControl.DataContext = viewModel;
             FeatureContext.Current.Remove("viewModel");

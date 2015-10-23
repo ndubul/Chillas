@@ -22,7 +22,7 @@ Scenario: New Plugin Source File
 	Then local drive "C:\" is visible
 	Then local drive "D:\" is visible
 	When I open "C:\"
-	And Assembly value is ""
+	And Assembly is ""
 	And "Save" is "Disabled"
 	When I click 
 	| Clicks                                   |
@@ -32,7 +32,7 @@ Scenario: New Plugin Source File
 	| MS Fakes                                 |
 	| Microsoft.QualityTools.Testing.Fakes.dll |
 	Then "Save" is "Enabled"
-	And Assembly value is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
+	And Assembly is "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
 	When I change Assembly to "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dl"
 	Then "Save" is "Disabled"
 	When I change Assembly to "C:\Development\Dev\Binaries\MS Fakes\Microsoft.QualityTools.Testing.Fakes.dll"
@@ -100,7 +100,7 @@ Scenario: Refresh New Plugin Source GAC
 	And I open "GAC"
 	And "GAC" is "Expanded"
 	When I filter for "BDATunePIA"
-	And "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll" is "visible"
+	And "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll" is "Visible"
 	And GAC only has one option in the tree
 	When I refresh the filter
 	And GAC only has one option in the tree
@@ -111,20 +111,21 @@ Scenario: Refresh New Plugin Source GAC
 Scenario: load all dependancies after filter cleared 
 	Given I open New Plugin Source
 	When I open "GAC"
+	And "Filter" is "Disabled"
 	And GAC is "loading"
 	And I filter for "BDATunePIA"
-	And "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll" is "visible"
+	And "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll" is "Visible"
 	And GAC only has one option in the tree
 	When I "clear" the filter
-	Then "GAC" is "visible"
+	Then "GAC" is "Visible"
 
 
 Scenario: Search while GAC tree view is loading
 	Given I open New Plugin Source
 	When I open "GAC"
 	And "Save" is "Disabled"
+	And "Filter" is "Disabled"
 	When I filter new for "vjslib" 
-	And the tree-view is not completely loaded
 	And I click "vjslib, Version=2.0.0.0"
 	Then Assembly value is "GAC:vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 	And "Save" is "Enabled"
