@@ -21,15 +21,15 @@ Scenario Outline: Create file at location
 		| <resultVar> = <result> |
 	Examples: 
 		| No | Name       | destination          | destinationLocation                                            | selected | username                     | password | resultVar  | result  | errorOccured                                                                                                           |
-		| 1  | Local      | [[path]]             | c:\myfile.txt                                                  | True     | ""                           | ""       | [[result]] | Success | NO                                                                                                                     |
+		| 1  | Local      | [[path]]             | c:\temp\myfile.txt                                                  | True     | ""                           | ""       | [[result]] | Success | NO                                                                                                                     |
 		| 2  | UNC        | [[path]]             | \\\\RSAKLFSVRSBSPDC\FileSystemShareTestingSite\test.txt        | True     | ""                           | ""       | [[result]] | Success | NO                                                                                                                     |
 		| 3  | UNC Secure | [[path]]             | \\\\RSAKLFSVRSBSPDC\FileSystemShareTestingSite\Secure\test.txt | True     | dev2.local\IntegrationTester | I73573r0 | [[result]] | Success | NO                                                                                                                     |
 		| 4  | FTP        | [[path]]             | ftp://rsaklfsvrsbspdc:1001/FORTESTING/test.txt                 | True     | ""                           | ""       | [[result]] | Success | NO                                                                                                                     |
 		| 5  | FTPS       | [[path]]             | ftp://rsaklfsvrsbspdc:1002/FORTESTING/test.txt                 | True     | IntegrationTester            | I73573r0 | [[result]] | Success | NO                                                                                                                     |
 		| 6  | SFTP       | [[path]]             | sftp://localhost/test.txt                                      | True     | dev2                         | Q/ulw&]  | [[result]] | Success | NO                                                                                                                     |
-		| 7  | Local      | [[rec(1).set]]       | E:\Transactions                                                | False    | dev2                         | Q/ulw&]  | [[result]] | Success | NO                                                                                                                     |
-		| 8  | Local      | [[rec([[int]]).set]] | E:\Memo                                                        | False    | dev2                         | Q/ulw&]  | [[result]] | Success | NO                                                                                                                     |
-		| 9  | Local      | [[rec(*).set]]       | E:\Test                                                        | False    | dev2                         | Q/ulw&]  | [[result]] | Success | NO                                                                                                                     |
+		| 7  | Local      | [[rec(1).set]]       | C:\temp\Transactions                                                | False    | dev2                         | Q/ulw&]  | [[result]] | Success | NO                                                                                                                     |
+		| 8  | Local      | [[rec([[int]]).set]] | C:\temp\Memo                                                        | False    | dev2                         | Q/ulw&]  | [[result]] | Success | NO                                                                                                                     |
+		| 9  | Local      | [[rec(*).set]]       | C:\temp\Test                                                        | False    | dev2                         | Q/ulw&]  | [[result]] | Success | NO                                                                                                                     |
 
 
 Scenario Outline: Check Validation Messages
@@ -132,6 +132,7 @@ Scenario Outline: Create file at location with invalid directories
 		
 
 #Complex Type
+@ignore		
 Scenario Outline: Create file at location using complex types
 	Given I have a destination path '<destination>' with value '<destinationLocation>'
 	And overwrite is '<selected>'
