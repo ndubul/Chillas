@@ -14,6 +14,7 @@ namespace Dev2.Common.Interfaces
         ICommand EditConnectionCommand { get; set; }
         ICommand ToggleConnectionStateCommand { get; set; }
 
+        bool AllowConnection { get; set; }
         bool IsConnected { get;set; }
         bool IsConnecting { get; set; }
         bool IsLoading { get; set; }

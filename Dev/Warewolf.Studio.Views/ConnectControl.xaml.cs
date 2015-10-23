@@ -110,5 +110,21 @@ namespace Warewolf.Studio.Views
         }
 
         #endregion
+
+        void UIElement_OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue.Equals(false) && e.NewValue.Equals(true))
+            {
+                TheServerComboBox.IsEnabled = false;
+                EditButton.IsEnabled = false;
+                ConnectButton.Visibility = Visibility.Collapsed;
+            }
+            if (e.OldValue.Equals(true) && e.NewValue.Equals(false))
+            {
+                TheServerComboBox.IsEnabled = true;
+                EditButton.IsEnabled = true;
+                ConnectButton.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

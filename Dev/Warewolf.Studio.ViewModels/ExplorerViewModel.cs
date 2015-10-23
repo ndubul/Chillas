@@ -302,7 +302,7 @@ namespace Warewolf.Studio.ViewModels
 	    }
         public virtual void AfterLoad(Guid environmentID)
         {
-            
+            ConnectControlViewModel.IsLoading = false;
         }
 
 	    public bool IsDeploy { get; set; }

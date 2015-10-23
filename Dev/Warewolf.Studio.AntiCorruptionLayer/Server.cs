@@ -134,7 +134,7 @@ namespace Warewolf.Studio.AntiCorruptionLayer
                 if (EnvironmentConnection != null)
                 {
                     displayName = EnvironmentConnection.DisplayName;
-                    if (IsConnected &&HasLoaded)
+                    if (IsConnected && (HasLoaded || EnvironmentConnection.IsLocalHost))
                     {
                         displayName += Resources.Languages.Core.ConnectedLabel;
                     }
