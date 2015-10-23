@@ -195,5 +195,10 @@ namespace Warewolf.Studio.Views
         public static void Test()
         {
         }
+
+        public void Refresh()
+        {
+            RefreshButton.Command.Execute(null);
+        }
     }
 }

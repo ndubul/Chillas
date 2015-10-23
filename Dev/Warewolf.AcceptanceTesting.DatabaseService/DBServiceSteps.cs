@@ -204,6 +204,8 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             Assert.IsTrue(isDataSourceFocused);
         }
 
+        [Given(@"""(.*)"" is ""(.*)""")]
+        [When(@"""(.*)"" is ""(.*)""")]
         [Then(@"""(.*)"" is ""(.*)""")]
         public void ThenIs(string name, string state)
         {
@@ -229,11 +231,18 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         [Then(@"""(.*)"" is selected as the action")]
         public void ThenIsSelectedAsTheAction(string action)
         {
-            var dbAction = ScenarioContext.Current.Get<IDbAction>();
-            dbAction.Name = action;
             var manageDatabaseServiceControl = ScenarioContext.Current.Get<ManageDatabaseServiceControl>(Utils.ViewNameKey);
-            manageDatabaseServiceControl.SelectDbAction(dbAction);
+            var selectedAction = manageDatabaseServiceControl.GetSelectedAction();
+            Assert.AreEqual(action,selectedAction.Name);
         }
+
+        [When(@"I select Refresh")]
+        public void WhenISelectRefresh()
+        {
+            var manageDatabaseServiceControl = ScenarioContext.Current.Get<ManageDatabaseServiceControl>(Utils.ViewNameKey);
+            manageDatabaseServiceControl.Refresh();
+        }
+
 
         [When(@"""(.*)"" is selected as the data source")]
         public void WhenIsSelectedAsTheDataSource(string source)
