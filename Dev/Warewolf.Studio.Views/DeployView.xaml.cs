@@ -3,7 +3,6 @@ using Caliburn.Micro;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Deploy;
 using Microsoft.Practices.Prism.Mvvm;
-using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.Views
 {
@@ -12,15 +11,7 @@ namespace Warewolf.Studio.Views
     /// </summary>
     public partial class DeployView : IView, ICheckControlEnabledView
     {
-        string _errorMessage;
-        string _canDeploy;
-        string _canSelectDependencies;
-        string _statusPassed;
-        string _connectors;
-        string _services;
-        string _sources;
-        string _new;
-        int _overrides;
+
 
         public DeployView()
         {
@@ -205,10 +196,7 @@ namespace Warewolf.Studio.Views
             {
                 return "Selected";
             }
-            else
-            {
-                return "Not Selected";
-            }
+            return "Not Selected";
         }
 
         public void SetFilter(string filter)
@@ -223,12 +211,9 @@ namespace Warewolf.Studio.Views
             {
                 return "Not Visible";
             }
-            else 
-            {
-                if(!res.IsVisible)
+            if(!res.IsVisible)
                 return "Not Visible";
-                return "Visible";
-            }
+            return "Visible";
         }
 
         public bool CheckVisibility(string control, string visibility)
