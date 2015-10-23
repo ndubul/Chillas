@@ -18,7 +18,7 @@ Scenario: New Plugin Source File
 	Given I open New Plugin Source
 	Then "New Plugin Source" tab is opened
 	And title is "New Plugin Source"
-	And I click "File System"
+	And I open "File System"
 	Then local drive "C:\" is visible
 	Then local drive "D:\" is visible
 	When I open "C:\"
@@ -45,7 +45,7 @@ Scenario: New Plugin Source File
 
 Scenario: New Plugin Source GAC
 	Given I open New Plugin Source
-	When I click "GAC"
+	When I open "GAC"
 	And Assembly is ""
 	And "Save" is "Disabled"
 	When I Search for "AuditPolicyGPMan"
@@ -97,7 +97,7 @@ Scenario: Refresh New Plugin Source File
 
 Scenario: Refresh New Plugin Source GAC
 	Given I open New Plugin Source
-	And I click "GAC"
+	And I open "GAC"
 	And "GAC" is "Expanded"
 	When I filter for "BDATunePIA"
 	And "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll" is "visible"
@@ -106,14 +106,12 @@ Scenario: Refresh New Plugin Source GAC
 	And GAC only has one option in the tree
 
 
-
-
 #Wolf-1001
 
 Scenario: load all dependancies after filter cleared 
 	Given I open New Plugin Source
-	When I click "GAC"
-	And "GAC" is "loading"
+	When I open "GAC"
+	And GAC is "loading"
 	And I filter for "BDATunePIA"
 	And "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll" is "visible"
 	And GAC only has one option in the tree
@@ -123,11 +121,11 @@ Scenario: load all dependancies after filter cleared
 
 Scenario: Search while GAC tree view is loading
 	Given I open New Plugin Source
-	When I click "GAC"
+	When I open "GAC"
 	And "Save" is "Disabled"
-	When I filter for "vjslib" 
+	When I filter new for "vjslib" 
 	And the tree-view is not completely loaded
-	And I click "vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+	And I click "vjslib, Version=2.0.0.0"
 	Then Assembly value is "GAC:vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 	And "Save" is "Enabled"
 	When I save Plugin source
@@ -136,7 +134,7 @@ Scenario: Search while GAC tree view is loading
 
 Scenario: Clear filter using clear filter button
 	Given I open New Plugin Source
-	When I click "GAC"
+	When I open "GAC"
 	And "Save" is "Disabled"
 	When I filter new for "vjslib"
 	And I "Clear" the filter

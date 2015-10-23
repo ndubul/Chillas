@@ -47,5 +47,7 @@ namespace Dev2.Common.Interfaces.Studio.Controller
 
         MessageBoxResult ShowItemCloseCloseConfirmation(string nameOfItem);
         MessageBoxResult ShowItemSourceCloseConfirmation(string nameOfItem);
+
+        MessageBoxResult ShowDeployNameConflict(string message);
     }
 }

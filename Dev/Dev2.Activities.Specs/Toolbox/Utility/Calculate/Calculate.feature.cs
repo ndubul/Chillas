@@ -2620,12 +2620,16 @@ this.ScenarioSetup(scenarioInfo);
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
-                        "var().int().value"});
+                        "var().int().value",
+                        "value"});
             table27.AddRow(new string[] {
+                        "var().int().value",
                         "1"});
             table27.AddRow(new string[] {
+                        "var().int().value",
                         "2"});
             table27.AddRow(new string[] {
+                        "var().int().value",
                         "3"});
 #line 392
  testRunner.Given("I have a calculate variable \"[[var().int().value]]\" equal to", ((string)(null)), table27, "Given ");
@@ -2648,12 +2652,12 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Calculate")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:No", "1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fx", "SUM([[var().().value]])")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fx", "SUM([[var().int().value]])")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs().set().value]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "3")]
         public virtual void CalculateUsingComplexTypesInputInAnAgregateFunctionLikeSUM_1()
         {
-            this.CalculateUsingComplexTypesInputInAnAgregateFunctionLikeSUM("1", "SUM([[var().().value]])", "[[rs().a]]", "3", ((string[])(null)));
+            this.CalculateUsingComplexTypesInputInAnAgregateFunctionLikeSUM("1", "SUM([[var().int().value]])", "[[rs().set().value]]", "3", ((string[])(null)));
         }
     }
 }

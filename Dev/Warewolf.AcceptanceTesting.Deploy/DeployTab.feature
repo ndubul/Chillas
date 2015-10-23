@@ -1,4 +1,4 @@
-﻿@Deploy
+﻿@DeployTab
 Feature: DeployTab
 	In order to Deploy resource.
 	As a warewolf user
@@ -41,7 +41,8 @@ Scenario: Deploy button is enabling when selecting resource in source side
      When selected Destination Server is "Remote"
 	 When I select "Examples\Utility - Date and Time" from Source Server
 	 Then "Deploy" is "Enabled" 
-
+	 When "Remote" is Disconnected
+	 Then "Deploy" is "Disabled"
 
 Scenario: Deploy is successfull
      Given I have deploy tab opened
@@ -50,7 +51,7 @@ Scenario: Deploy is successfull
 	 And I select "Examples\Utility - Date and Time" from Source Server
 	 When I deploy 
 	 Then deploy is successfull
-	 And the validation message is "Items deployed successfully"
+	 And the validation message is "1 Resource Deployed Successfully."
 
 
 
@@ -59,24 +60,22 @@ Scenario: Conflicting resources on Source and Destination server
 	 And selected Source Server is "localhost"
      When selected Destination Server is "Remote"
 	 And I select "Examples\Utility - Date and Time" from Source Server
+	 When I click OK on Resource exists in the destination server popup
 	 And I deploy 
 	 Then Resource exists in the destination server popup is shown
 	 | # | Source Resource         | Destination Resource    |
 	 | 1 | Utility - Date and Time | Utility - Date and Time |
-	 When I click OK on Resource exists in the destination server popup
 	 Then deploy is successfull
-	 And the validation message is "Items deployed successfully"
+	 And the validation message is "1 Resource Deployed Successfully."
 
 Scenario: Conflicting resources on Source and Destination server deploy is not successful
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
      When selected Destination Server is "Remote"
-	 And I select "Examples\Utility - Date and Time" from Source Server
-	 And I deploy 
-	 Then Resource exists in the destination server popup is shown
-	 | # | Source Resource         | Destination Resource    |
-	 | 1 | Utility - Date and Time | Utility - Date and Time |
+	 And I select "Examples\bob" from Source Server
 	 When I click Cancel on Resource exists in the destination server popup
+	 And I deploy 
+
 	 Then deploy is not successfull
 	 And the validation message is ""
 
@@ -85,9 +84,8 @@ Scenario: Select all Dependecies is selecting dependecies
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
      When selected Destination Server is "Remote"
-	 When I select "My Category\Double Roll and Check" from Source Server
-	 Then "Deploy" is "Enabled" 
-	 And "Select All Dependencies" is "Enabled"
+	 When I select "Examples\Utility - Date and Time" from Source Server
+	 Then "Select All Dependencies" is "Enabled"
 	 When I Select All Dependecies
 	 Then "My Category\Double Roll" from Source Server is "Selected"
 
@@ -96,63 +94,50 @@ Scenario: Deploying a connector with a source
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
      When selected Destination Server is "Remote"
-	 When I select "Double Roll Example\Roll Dice for Players" from Source Server
+	 When I select "Examples\Utility - Date and Time" from Source Server
 	 Then "Deploy" is "Enabled" 
 	 And "Select All Dependencies" is "Enabled"
 	 When I Select All Dependecies
-	 Then "sqlServers\DemoDB" from Source Server is "Selected"
+	 Then "Examples\bob" from Source Server is "Selected"
 	 
 
 
 #coded ui
 
-Scenario: Mouse right click select Dependecies is selecting dependecies
-     Given I have deploy tab opened
-	 And selected Source Server is "localhost"
-     When selected Destination Server is "Remote"
-	 When I select "My Category\Double Roll and Check" from Source Server
-	 Then "Deploy" is "Enabled" 
-	 When I Select All Dependecies
-	 Then "My Category\Double Roll" is "Selected"
-	 And "Deploy" is "Enabled" 
-
 Scenario: Filtering and clearing filter on source side
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-     When I type "Utility - Date and Time" in Source Server filter
-	 Then "Examples\Utility - Date and Time" from Source Server is "Visible"
-	 And "Examples\Data - Data - Data Split" from Source Server is "Not Visible"
-	 And "Examples\Control Flow - Switch" from Source Server is "Not Visible"
-	 And "Examples\Control Flow - Sequence" from Source Server is "Not Visible"
-	 And "Examples\File and Folder - Copy" from Source Server is "Not Visible"
-	 And "Examples\File and Folder - Create" from Source Server is "Not Visible"
-	 When I clear filter on Source Server
-	 Then "Examples\Utility - Date and Time" from Source Server is "Visible"
-	 And "Examples\Data - Data - Data Split" from Source Server is "Visible"
-	 And "Examples\Control Flow - Switch" from Source Server is "Visible"
-	 And "Examples\Control Flow - Sequence" from Source Server is "Visible"
-	 And "Examples\File and Folder - Copy" from Source Server is "Visible"
-	 And "Examples\File and Folder - Create" from Source Server is "Visible"
+     When I type "Date and Time" in Source Server filter
+	 Then visibility of "Examples\Utility - Date and Time" from Source Server is "Visible"
+	 And visibility of "Examples\Data - Data - Data Split" from Source Server is "Not Visible"
+	 And visibility of "Examples\Control Flow - Switch" from Source Server is "Not Visible"
+	 And visibility of "Examples\Control Flow - Sequence" from Source Server is "Not Visible"
+	 And visibility of "Examples\File and Folder - Copy" from Source Server is "Not Visible"
+	 And visibility of "Examples\File and Folder - Create" from Source Server is "Not Visible"
+	 When I type "" in Source Server filter
+	 Then  visibility of "Examples\Utility - Date and Time" from Source Server is "Visible"
+	 And visibility of "Examples\Data - Data - Data Split" from Source Server is "Visible"
+	 And visibility of "Examples\Control Flow - Switch" from Source Server is "Visible"
+	 And visibility of "Examples\Control Flow - Sequence" from Source Server is "Visible"
+	 And visibility of "Examples\File and Folder - Copy" from Source Server is "Visible"
+	 And visibility of "Examples\File and Folder - Create" from Source Server is "Visible"
 
 
-Scenario: Deploy is successfull when filter is on on both sides
+Scenario: Deploying with filter enabled
      Given I have deploy tab opened
-	 And selected Destination Server is "localhost"
-	 And selected Destination Server is "Remote"
-     When I type "Utility - Date and Time" in Destination Server filter
-	 Then "Examples\Utility - Date and Time" from Source Server is "Visible"
-	 And I select "Examples\Utility - Date and Time" from Source Server
-	 When I type "Utility - Date and Time" in Destination Server filter
-	 Then "Examples\Utility - Date and Time" from Destination Server is "Visible"
-	 And "Deploy" is "Enabled"
+	 And selected Source Server is "localhost"
+	 When selected Destination Server is "Remote"
+     When I type "Date and Time" in Source Server filter
+	 Then visibility of "Examples\Utility - Date and Time" from Source Server is "Visible"
+	 And visibility of "Examples\Data - Data - Data Split" from Source Server is "Not Visible"
+	 And visibility of "Examples\Control Flow - Switch" from Source Server is "Not Visible"
+	 And visibility of "Examples\Control Flow - Sequence" from Source Server is "Not Visible"
+	 And visibility of "Examples\File and Folder - Copy" from Source Server is "Not Visible"
+	 And visibility of "Examples\File and Folder - Create" from Source Server is "Not Visible"
+	 When I select "Examples\Utility - Date and Time" from Source Server
 	 When I deploy 
-	 Then Resource exists in the destination server popup is shown
-	 | # | Source Resource         | Destination Resource    |
-	 | 1 | Utility - Date and Time | Utility - Date and Time |
-	 When I click OK on Resource exists in the destination server popup
 	 Then deploy is successfull
-	 And the validation message is "Items deployed successfully"
-
+	 And the validation message is "1 Resource Deployed Successfully."
 
 Scenario: Selected for deploy items type is showing on deploy tab
      Given I have deploy tab opened
@@ -167,27 +152,21 @@ Scenario: Selected for deploy items type is showing on deploy tab
 
 Scenario: Deploy Summary is showing new and overiding resources 
      Given I have deploy tab opened
-	 And selected Destination Server is "localhost"
-	 And selected Destination Server is "Remote"
-	 When I select "Examples\Utility - Date and Time" from Source Server
+	 And selected Source Server is "localhost"
+     When selected Destination Server is "Remote"
+	 And I select "Examples\bob" from Source Server
 	 Then New Resource is "0"
 	 And Override is "1"
-	 When I select "New\New" from Source Server
+	 When I select "DB Service\FetchPlayers" from Source Server
 	 Then New Resource is "1"
 	 And Override is "1"
-	 When I Unselect "Examples\Utility - Date and Time" from Source Server
-	 And Override is "0"
+	 When I Unselect "Examples\bob" from Source Server
+	 Then Override is "0"
 
 
-Scenario: Not allowing to deploy when source and destination servers are same 
-     Given I have deploy tab opened
-	 And selected Destination Server is "localhost"
-	 And selected Destination Server is "localhost"
-	 When I select "Examples\Utility - Date and Time" from Source Server
-	 Then "Deploy" is "Disabled" 
-	 And the validation message is "Source and Destination cannot be the same"
 
-
+#req
+@ignore
 Scenario: One server with different names in both sides not allow to deploy
      Given I have deploy tab opened
 	 And selected Destination Server is "Remote"
@@ -199,8 +178,8 @@ Scenario: One server with different names in both sides not allow to deploy
 
 Scenario: Deploy is enabled when I change server after validation thrown
      Given I have deploy tab opened
-	 And selected Destination Server is "localhost"
-	 And selected Destination Server is "localhost"
+	 And selected Source Server is "localhost"
+     When selected Destination Server is "localhost"
 	 When I select "Examples\Utility - Date and Time" from Source Server
 	 Then "Deploy" is "Disabled" 
 	 And the validation message is "Source and Destination cannot be the same."
@@ -228,52 +207,37 @@ Scenario: Deploy a resource without dependency is showing popup
 Scenario: Deploying items from one server to the next with the same name
 	 Given I have deploy tab opened
 	 And selected Destination Server is "localhost"
-	 And "LocalHost" has a resource "Hello World" with ID "12"
-	 And selected Destination Server is "Remote Connection Integration"
-	 And "Remote Connection" has a resource "Hello World" with ID "56"
-	 When I select "localhost\Hello World" from Source Server
-	 And "Remote Connection Integration" contains a workflow "Hello World"
-	 And "localhost\Hello World" cantains a different createdID than "Remote Connection Integration\Hello World"
+     When selected Destination Server is "Remote"
+	 When I select "Examples\NameIdConflict" from Source Server
 	 Then the User is prompted to "Rename or Delete" one of the resources
 
 #Wolf-312
 Scenario: Warning message no longer appears
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-     And selected Destination Server is "Remote"
-	 And I select "Examples\Utility - Date and Time" from Source Server
-	 When I deploy 
+     When selected Destination Server is "Remote"
+	 And I select "Examples\bob" from Source Server
+	 When I click OK on Resource exists in the destination server popup
+	 And I deploy 
 	 Then deploy is successfull
-	 And the validation message is "Items deployed successfully"
-	 And "Examples\Utility - Date and Time" is visible on Destination Server
-	 And I select "Examples\Utility - Date and Time" from Source Server
-	 When I deploy
-	 Then a warning popup appears "Resource exists in the destination server"
-	 When I click "OK"
-	 When I deploy again
-	 Then warning popup no longer appears
+	 And the validation message is "1 Resource Deployed Successfully."
+	 When I select "Examples\bob" from Source Server
+	 When I click OK on Resource exists in the destination server popup
+	 And I deploy 
+	 Then deploy is successfull
+	 And the validation message is "1 Resource Deployed Successfully."
 
 #wolf-329
 Scenario: Renaming resource after deploying and re-deploy
      Given I have deploy tab opened
 	 And selected Source Server is "localhost"
-     And selected Destination Server is "Remote"
-	 And I select "Examples\Utility - Date and Time" from Source Server
-	 When I deploy 
-	 Then deploy is successfull
-	 And the validation message is "Items deployed successfully"
-	 And "Examples\Utility - Date and Time" is visible on Destination Server
-	 And I select "Examples\Utility - Date and Time" from Source Server
-	 When I deploy
-	 Then a warning popup appears ""
-	 When I click OK on Resource exists in the destination server popup
-	 And I rename "Examples\Utility - Date and Time" to "Examples\Utility - Date and Time updated"
-	 And I deploy
-	 Then "Examples\Utility - Date and Time" is over-written on "Remote" 
-	 And "Examples\Utility - Date and Time update" is visible on "Remote"
+     When selected Destination Server is "Remote"
+	 And I select "Examples\DifferentNameSameID" from Source Server
+	 Then Override is "1"
 
 
 #wolf-117
+@ignore
 Scenario: Deploying to an Older server version
 	Given I have deploy tab opened
 	 And selected Source Server is "localhost"
@@ -287,32 +251,22 @@ Scenario: Deploying to an Older server version
 #New layout
 Scenario: Design layout
 	Given I have deploy tab opened
-	Then the Source Server "Connect Control" is "visible"
-	And the Destination Server "Connect Control" is "visible"
-	And the Source Server "Explorer" is "visible"
-	And the Destination Server "Stats Calculator" is "visible"
-	And the "Stats Calculator" has an option to "Select All Dependencies"
+	Then the "SourceConnectControl" is "visible"
+	And the "DestinationConnectControl" is "visible"
+	And the "SourceNavigationView" is "visible"
+	And the "Dependencies" is "visible"
+	And the "Deploy" is "visible"
 	And "Select All Dependencies" is "Disabled"
-	And the "Stats Calculator" has an option to "Deploy"
 	And "Deploy" is "Disabled"
-	And "Context Menu" is "Disabled"
+	And Context Menu is "Disabled"
 
-#Wolf-1158
-Scenario: Disable deploy button
-	Given I have deploy tab opened
-	Then the Source Server is "Localhost"
-	And the Destination Server is "Remote Connection Integration"
-	And I check "Hello World" on Source Server
-	Then "Deploy" is "Enabled"
-	And "Show Dependancies" is "Enabled" 
-	When "Remote Connection Integration" is "Disconnected"
-	Then "Deploy" is "Disabled"
+
 	
 
 Scenario: Select All resources to deploy
-	Given I have deploy tab opened
-	Then the Source Server is "Localhost"
-	And the Destination Server is "Remote Connection Integration"
+    Given I have deploy tab opened
+	And selected Source Server is "localhost"
+    When selected Destination Server is "Remote"
 	And I check "LocalHost" on Source Server
 	Then "All" the resources are checked
 	And "Deploy" is "Enabled"
