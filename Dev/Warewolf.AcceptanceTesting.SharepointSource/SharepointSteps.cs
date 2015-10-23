@@ -28,9 +28,9 @@ namespace Warewolf.AcceptanceTesting.SharepointSource
             var mockStudioUpdateManager = new Mock<ISharePointSourceModel>();
             var mockRequestServiceNameViewModel = new Mock<IRequestServiceNameViewModel>();
             var mockEventAggregator = new Mock<IEventAggregator>();
-            var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockExecutor = new Mock<Dev2.Studio.Core.Interfaces.IEnvironmentModel>();
 
-            var manageSharepointServerSourceViewModel = new SharepointServerSourceViewModel(mockStudioUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockExecutor.Object);
+            var manageSharepointServerSourceViewModel = new SharepointServerSourceViewModel(mockStudioUpdateManager.Object,mockRequestServiceNameViewModel.Object,mockEventAggregator.Object,new SynchronousAsyncWorker(),mockExecutor.Object);
             manageSharepointServerSource.DataContext = manageSharepointServerSourceViewModel;
             Utils.ShowTheViewForTesting(manageSharepointServerSource);
             FeatureContext.Current.Add(Utils.ViewNameKey, manageSharepointServerSource);
@@ -272,7 +272,7 @@ namespace Warewolf.AcceptanceTesting.SharepointSource
             var mockStudioUpdateManager = new Mock<ISharePointSourceModel>();
             mockStudioUpdateManager.Setup(model => model.ServerName).Returns("localhost");
             var mockEventAggregator = new Mock<IEventAggregator>();
-            var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockExecutor = new Mock<Dev2.Studio.Core.Interfaces.IEnvironmentModel>();
 
             var sharePointServiceSourceDefinition = new SharePointServiceSourceDefinition
             {
@@ -307,7 +307,7 @@ namespace Warewolf.AcceptanceTesting.SharepointSource
         [AfterScenario("SharepointSource")]
         public void Cleanup()
         {
-            var mockExecutor = new Mock<IExternalProcessExecutor>();
+            var mockExecutor = new Mock<Dev2.Studio.Core.Interfaces.IEnvironmentModel>();
             var mockUpdateManager = ScenarioContext.Current.Get<Mock<ISharePointSourceModel>>("updateManager");
             var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
             var mockEventAggregator = new Mock<IEventAggregator>();

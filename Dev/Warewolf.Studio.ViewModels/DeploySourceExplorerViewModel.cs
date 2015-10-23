@@ -11,7 +11,7 @@ using Dev2.Common.Interfaces.Infrastructure;
 
 namespace Warewolf.Studio.ViewModels
 {
-    public sealed class DeploySourceExplorerViewModel :ExplorerViewModelBase, IDeploySourceExplorerViewModel {
+    public class DeploySourceExplorerViewModel :ExplorerViewModelBase, IDeploySourceExplorerViewModel {
         readonly IDeployStatsViewerViewModel _statsArea;
 
         #region Implementation of IDeployDestinationExplorerViewModel
@@ -239,7 +239,7 @@ namespace Warewolf.Studio.ViewModels
             AfterLoad(server.EnvironmentID);
         }
 
-        async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment,bool isDeploy = false)
+        protected virtual async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment,bool isDeploy = false)
 		{
 			await localhostEnvironment.Connect();
 			await localhostEnvironment.Load(isDeploy);

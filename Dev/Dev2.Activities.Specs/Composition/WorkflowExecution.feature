@@ -4249,6 +4249,7 @@ Scenario: View Dependancies on a workflow with no dependancies
 	And "Hello World" is visible
 	And "Hello World" has no dependancies
 
+	@ignore
 Scenario: View workflow with multiple dependancies
 	Given I have a workflow "11365_WebService"	
 	And I select "Show All Dependancies"
@@ -4261,6 +4262,7 @@ Scenario: View workflow with multiple dependancies
 	Then "FetchCities" is shown as the first level of dependancy
 	And "Dev2GetCountriesWebService" is shown as the second level of dependancy
 
+	@ignore
 Scenario: View workflow based on nested levels
 	Given I have a workflow "11365_WebService"	
 	And I select "Show All Dependancies"
@@ -4276,6 +4278,7 @@ Scenario: View workflow based on nested levels
 	Then "FetchCities" is shown as the first level of dependancy
 	And "Dev2GetCountriesWebService" is shown as the second level of dependancy
 
+	@ignore
 Scenario: Viewing Depenancies
 	Given I have a workflow "11365_WebService"	
 	And I select "Show All Dependancies"
@@ -4285,6 +4288,7 @@ Scenario: Viewing Depenancies
 	And I double click "Dev2GetCountriesWebService"
 	Then the "Edit - Dev2GetCountriesWebService" tab is opened
 
+	@ignore
 Scenario: Studio persistence 
 	Given I  have the Warewolf studio opened
 	And an option to "Lock/Unlock" the side menu is visible
@@ -4295,11 +4299,13 @@ Scenario: Studio persistence
 	And the Tool Box window is in the right panel in the studio 
 
 
+	@ignore
 Scenario: Drop menu for opened tabs
 	Given I have many tabs opened
 	And the tabs are not all visible
 	Then  an option to view all hidden tabs is available
 
+	@ignore
 Scenario: Launch workflow using hyper-link
 	Given I have a workflow "Hello World"	
 	And "http://rsaklfleroy:3142/secure/Hello%20World.json?<DataList></DataList>" is visible
