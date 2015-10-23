@@ -16,22 +16,22 @@ Scenario: Creating DB Service
 	And "Save" is "Disabled"
 	When I select "DemoDB" as data source
 	Then "2 Select Action" is "Enabled"
-	When I select "dbo.ConverToint" as the action
+	When I select "dbo.ImportOrder" as the action
 	Then "3 Test Connector and Calculate Outputs" is "Enabled" 
 	And "Test" is "Enabled"
 	And inputs are
-	| charValue |
+	| ProductId |
 	| 1         |	
 	And "4 Edit Default and Mapping Names" is "Disabled" 
 	When I test the action
 	Then outputs are
 	| Recordset Name     | Result |
-	| dbo_ConverToInt(1) | 1      |
+	| dbo.ImportOrder(1) | 1      |
 	And "4 Edit Default and Mapping Names" is "Enabled" 
     And "Save" is "Enabled"
 	And input mappings are
 	| Inputs    | Required Field | Empty is Null |
-	| charValue |                |               |
+	| ProductId |                |               |
 	And output mappings are
 	| Output | Output Alias | Recordset Name  |
 	| result | result       | dbo_ConverToInt |
@@ -172,9 +172,9 @@ Scenario: Changing Actions
 	Then "3 Test Connector and Calculate Outputs" is "Enabled" 
 	And inputs are
 	| fname | lname | username | password | lastAccessDate |
-	| Dummy | User  | Test     | password | 12/05/2001     |
-	When I change the action from "dbo.InsertDummyUser" to "dbo.ImportOrder"
-	Then "3 Test Connector and Calculate Outputs" is "Reloaded"
+	| Change | Test  | wolf     | Dev | 10/1/1990     |
+	When I select "dbo.ImportOrder" as the action
+	Then "3 Test Connector and Calculate Outputs" is "Enabled"
 	And "Test" is "Enabled"
 	And inputs are
 	| ProductId |
@@ -188,26 +188,13 @@ Scenario: Changing Actions
     And "Save" is "Enabled"
 	And input mappings are
 	| Inputs    | Required Field | Empty is Null |
-	| charValue |                |               |
+	| ProductId |                |               |
 	And output mappings are
 	| Output | Output Alias | Recordset Name  |
 	| result | result       | dbo.ImportOrder |
 	When I save
 	Then Save Dialog is opened 
 	
-@DbService
-Scenario: Creating a new Data Source
-	Given I click New Data Base Service Connector
-	Then "New DB Connector" tab is opened
-	And Data Source is focused
-	And "New" is "Enabled"
-	And "2 Select Action" is "Disabled"
-	And "3 Test Connector and Calculate Outputs" is "Disabled" 
-	And "4 Edit Default and Mapping Names" is "Disabled" 
-	And "Save" is "Disabled"
-	When I select "New" as data source
-	Then New Data Source Dialog is opened
-
 #WOLF-860
 
 #Scenario: Ensure recordset values can be saved to a variable

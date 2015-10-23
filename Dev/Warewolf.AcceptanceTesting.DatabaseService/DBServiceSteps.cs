@@ -7,8 +7,6 @@ using Dev2.Common.Interfaces.Core;
 using Dev2.Common.Interfaces.DB;
 using Dev2.Common.Interfaces.SaveDialog;
 using Dev2.Common.Interfaces.ServerProxyLayer;
-using Dev2.Threading;
-using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TechTalk.SpecFlow;
@@ -69,8 +67,8 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
             });
             _dbAction = new DbAction
             {
-                Name = "dbo.ConverToint",
-                Inputs = new List<IServiceInput> { new ServiceInput("charValue", "1") }
+                Name = "dbo.ImportOrder",
+                Inputs = new List<IServiceInput> { new ServiceInput("ProductId", "1") }
             };
             var dbInputs = new List<IServiceInput>
             {
@@ -146,17 +144,19 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         public void WhenISelectAsTheAction(string actionName)
         {
             var view = Utils.GetView<ManageDatabaseServiceControl>();
-            view.SelectDbAction(_dbInsertDummyAction);
+            if (actionName == "dbo.InsertDummyUser")
+            {
+                view.SelectDbAction(_dbInsertDummyAction);
+            }
+            if (actionName == "dbo.ImportOrder")
+            {
+                view.SelectDbAction(_dbAction);
+            }
             var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
             Assert.AreEqual(actionName, viewModel.SelectedAction.Name);
         }
 
-        [When(@"I change the action from ""(.*)"" to ""(.*)""")]
-        public void WhenIChangeTheActionFromTo(string p0, string p1)
-        {
-            ScenarioContext.Current.Pending();
-        }
-
+       
         [When(@"I test the action")]
         public void WhenITestTheAction()
         {
@@ -229,7 +229,7 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         [Then(@"""(.*)"" is selected as the action")]
         public void ThenIsSelectedAsTheAction(string action)
         {
-            var dbAction = FeatureContext.Current.Get<IDbAction>();
+            var dbAction = ScenarioContext.Current.Get<IDbAction>();
             dbAction.Name = action;
             var manageDatabaseServiceControl = ScenarioContext.Current.Get<ManageDatabaseServiceControl>(Utils.ViewNameKey);
             manageDatabaseServiceControl.SelectDbAction(dbAction);
@@ -238,10 +238,9 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         [When(@"""(.*)"" is selected as the data source")]
         public void WhenIsSelectedAsTheDataSource(string source)
         {
-            var dbSource = FeatureContext.Current.Get<IDbSource>();
-            dbSource.Name = source;
-            var manageDatabaseServiceControl = ScenarioContext.Current.Get<ManageDatabaseServiceControl>(Utils.ViewNameKey);
-            manageDatabaseServiceControl.SelectDbSource(dbSource);
+            var manageDatabaseServiceControl = Utils.GetView<ManageDatabaseServiceControl>();
+            var dataSource = manageDatabaseServiceControl.GetSelectedDataSource();
+            Assert.AreEqual(source,dataSource.Name);
         }
 
         [Given(@"inputs are")]
@@ -266,11 +265,10 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         [Then(@"outputs are")]
         public void ThenOutputsAre(Table table)
         {
-            var view = Utils.GetView<ManageDatabaseServiceControl>();
-            var outputs = view.GetOutputs();
-            foreach (var output in outputs.SourceCollection)
+            var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
+            foreach (var output in viewModel.TestResults.Rows)
             {
-                var rowOutput = output as DataRowView;
+                var rowOutput = output as DataRow;
                 if (rowOutput != null)
                 {
                     Assert.AreEqual(rowOutput[0].ToString(), table.Rows[0][1]);
@@ -309,19 +307,19 @@ namespace Warewolf.AcceptanceTesting.DatabaseService
         [Then(@"output mappings are")]
         public void ThenOutputMappingsAre(Table table)
         {
-            var view = Utils.GetView<ManageDatabaseServiceControl>();
-            var outputMappings = view.GetOutputs();
-            if (outputMappings.SourceCollection == null)
+            var viewModel = Utils.GetViewModel<ManageDatabaseServiceViewModel>();
+            var outputMappings = viewModel.OutputMapping;
+            if (outputMappings == null)
             {
                 Assert.AreEqual(0, table.RowCount);
             }
             else
             {
-                foreach (var output in outputMappings.SourceCollection)
+                foreach (var output in outputMappings)
                 {
-                    var outputMapping = output as IServiceOutputMapping;
-                    if (outputMapping != null)
+                    if (output != null)
                     {
+                        Assert.AreEqual(table.Rows[0][1].ToLower(),output.Name.ToLower());
                     }
                 }
             }
