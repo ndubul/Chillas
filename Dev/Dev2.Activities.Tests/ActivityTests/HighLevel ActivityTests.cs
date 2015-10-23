@@ -343,22 +343,6 @@ namespace Dev2.Tests.Activities.ActivityTests
         }
 
 
-
-        [TestMethod]
-        public void DsfAssignActivity_Property_Name_Check_Expected_No_Change_To_Properties()
-        {
-            Type type = _activityList.FirstOrDefault(c => c.Name == "DsfAssignActivity");
-            if(type == null)
-            {
-                Assert.Fail("Could not find DsfAssignActivity.");
-            }
-
-            MemberInfo[] FieldName = type.FindMembers(MemberTypes.Property, BindingFlags.Public | BindingFlags.Instance, Type.FilterName, "FieldName");
-            MemberInfo[] FieldValue = type.FindMembers(MemberTypes.Property, BindingFlags.Public | BindingFlags.Instance, Type.FilterName, "FieldValue");
-            Assert.IsTrue(FieldName != null && FieldValue != null && FieldName.Length == 1 && FieldValue.Length == 1, "This will fail on designer binding, please update this before proceeding");
-        }
-
-
         [TestMethod]
         public void DsfDataSplitActivity_Property_Name_Check_Expected_No_Change_To_Properties()
         {
