@@ -162,6 +162,7 @@ Examples:
 
 
 #Complex types
+@ignore
 Scenario Outline: Replace values using complex types
 	Given I have a replace variable "<var>" equal to "<value>"
 	And I have a sentence "<var>"

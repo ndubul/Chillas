@@ -480,10 +480,10 @@
                             ActiveDataItem="{Binding SelectedItem, Mode=TwoWay}"
                             IsSelectedMemberPath="IsSelected"
                             DisplayMemberPath="DisplayName"
+                            IsDraggable="{Binding AllowDrag}"
+                            IsDropTarget="{Binding AllowDrag}"
                             GiveFeedback="ExplorerTree_OnGiveFeedback"
                             MouseUp="ExplorerTree_OnMouseUp"
-                            IsDraggable="True"
-                            IsDropTarget="True"
                             InitializeNode="ExplorerTree_OnInitializeNode"
                             NodeExitedEditMode="ExplorerTree_OnNodeExitedEditMode"
                             SelectedDataItems="{Binding SelectedDataItems}"
@@ -501,7 +501,7 @@
                 <ig:XamDataTree.GlobalNodeLayouts>
                     <ig:NodeLayout Key="Environments"
                                    DisplayMemberPath="DisplayName"
-                                   IsDropTarget="True"
+                                   IsDropTarget="{Binding AllowDrag}"
                                    IsExpandedMemberPath="IsExpanded"
                                    TargetTypeName="IEnvironmentViewModel">
                         <ig:NodeLayout.ItemTemplate>

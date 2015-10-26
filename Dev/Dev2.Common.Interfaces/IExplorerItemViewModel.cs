@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Dev2.Common.Interfaces
@@ -24,7 +25,7 @@ namespace Dev2.Common.Interfaces
         string VersionNumber { get; set; }
         string VersionHeader { get; set; }
         void Filter(string filter);
-        bool Move(IExplorerTreeItem destination);
+        Task<bool> Move(IExplorerTreeItem destination);
         bool CanDrop { get; set; }
         bool CanDrag { get; set; }
         ICommand OpenVersionCommand { get; set; }

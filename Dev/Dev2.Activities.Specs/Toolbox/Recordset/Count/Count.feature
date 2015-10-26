@@ -86,7 +86,6 @@ Scenario: Count record with invalid variables
 	| Recordset          |
 	And the debug output as 
 	|              |
-	| [[result]] = |
 
 Scenario: Count only one column record
 	Given I have a recordset with this shape
@@ -107,7 +106,6 @@ Scenario: Count only one column record
 	| Recordset          |
 	And the debug output as 
 	|              |
-	| [[result]] = |
 
 Scenario: Count only one coloumn record
 	Given I have a recordset with this shape
@@ -128,7 +126,6 @@ Scenario: Count only one coloumn record
 	| Recordset          |
 	And the debug output as 
 	|              |
-	| [[result]] = |
 
 Scenario: Count a number of records when two recordsets are defined.
 	Given I have a recordset with this shape
@@ -176,8 +173,6 @@ Scenario: Executing Count with two variables in result field
 	| [[rs(4).row]] = 4 |
 	And the debug output as 
 	|                |
-	| [[rs().r]] = 4 |
-	| [[a]] = 4      |
 
 
 

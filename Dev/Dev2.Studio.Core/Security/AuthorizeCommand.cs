@@ -12,7 +12,6 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
-using Dev2.Common;
 using Dev2.Services.Security;
 using Dev2.Studio.Core.Interfaces;
 

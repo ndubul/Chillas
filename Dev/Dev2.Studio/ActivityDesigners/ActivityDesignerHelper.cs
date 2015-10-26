@@ -10,7 +10,6 @@
 */
 
 using System;
-using System.Activities.Statements;
 using System.Collections.Generic;
 using Dev2.Activities;
 using Dev2.Activities.Designers2.BaseConvert;
@@ -26,7 +25,6 @@ using Dev2.Activities.Designers2.DataMerge;
 using Dev2.Activities.Designers2.DataSplit;
 using Dev2.Activities.Designers2.DateTime;
 using Dev2.Activities.Designers2.DateTimeDifference;
-using Dev2.Activities.Designers2.Decision;
 using Dev2.Activities.Designers2.Delete;
 using Dev2.Activities.Designers2.DeleteRecords;
 using Dev2.Activities.Designers2.DropBox.Upload;
@@ -55,7 +53,6 @@ using Dev2.Activities.Designers2.SharepointListRead;
 using Dev2.Activities.Designers2.SharepointListUpdate;
 using Dev2.Activities.Designers2.SortRecords;
 using Dev2.Activities.Designers2.SqlBulkInsert;
-using Dev2.Activities.Designers2.Switch;
 using Dev2.Activities.Designers2.UniqueRecords;
 using Dev2.Activities.Designers2.Unzip;
 using Dev2.Activities.Designers2.WriteFile;

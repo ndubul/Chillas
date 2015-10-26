@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Dev2.AppResources.Repositories;
 using Dev2.Common;
 using Dev2.Common.Interfaces;
@@ -102,13 +103,13 @@ namespace Warewolf.Studio.ServerProxyLayer
         /// <param name="sourceId"></param>
         /// <param name="destinationPath"></param>
         /// <param name="resourcePath"></param>
-        public void MoveItem(Guid sourceId, string destinationPath, string resourcePath)
+        public  async Task MoveItem(Guid sourceId, string destinationPath, string resourcePath)
         {
             var controller = CommunicationControllerFactory.CreateController("MoveItemService");
             controller.AddPayloadArgument("itemToMove", sourceId.ToString());
             controller.AddPayloadArgument("newPath", destinationPath);
             controller.AddPayloadArgument("itemToBeRenamedPath", resourcePath);
-            controller.ExecuteCommand<IExplorerRepositoryResult>(Connection, GlobalConstants.ServerWorkspaceID);
+           await  controller.ExecuteCommandAsync<IExplorerRepositoryResult>(Connection, GlobalConstants.ServerWorkspaceID);
         }
 
 

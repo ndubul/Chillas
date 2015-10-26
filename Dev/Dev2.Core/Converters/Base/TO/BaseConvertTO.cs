@@ -178,6 +178,7 @@ namespace Dev2
         ///     An error message indicating what is wrong with this object. The default is an empty string ("").
         /// </returns>
         // ReSharper disable UnusedAutoPropertyAccessor.Local
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public string Error { get; private set; }
 
         // ReSharper restore UnusedAutoPropertyAccessor.Local

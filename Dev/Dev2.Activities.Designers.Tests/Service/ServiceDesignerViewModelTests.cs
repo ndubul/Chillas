@@ -472,7 +472,7 @@ namespace Dev2.Activities.Designers.Tests.Service
                 Assert.AreEqual(m.Errors.Count, model.DesignValidationErrors.Count);
             };
 
-            model.ResourceModel.Environment.Connection.ServerEvents.Publish(memo);
+            model.RootModel.Environment.Connection.ServerEvents.Publish(memo);
         }
 
         [TestMethod]
@@ -492,7 +492,7 @@ namespace Dev2.Activities.Designers.Tests.Service
                 Assert.AreSame(ServiceDesignerViewModel.NoError, model.DesignValidationErrors[0]);
             };
 
-            model.ResourceModel.Environment.Connection.ServerEvents.Publish(memo);
+            model.RootModel.Environment.Connection.ServerEvents.Publish(memo);
         }
 
         #endregion
