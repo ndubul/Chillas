@@ -349,18 +349,15 @@ namespace Warewolf.Studio.ViewModels
         {
             List<IServiceOutputMapping> mappings = new List<IServiceOutputMapping>();
             // ReSharper disable once LoopCanBeConvertedToQuery
-            for (int i = 0; i < testResults.Columns.Count; i++)
+            for(int i = 0; i < testResults.Columns.Count; i++)
             {
                 var column = testResults.Columns[i];
-                if (i == 0)
+                if(i == 0)
                 {
                     RecordsetName = SelectedAction.Name;
                 }
-                else
-                {
-                    var dbOutputMapping = new ServiceOutputMapping(column.ToString(), column.ToString()) { RecordSetName = RecordsetName };
-                    mappings.Add(dbOutputMapping);
-                }
+                var dbOutputMapping = new ServiceOutputMapping(column.ToString(), column.ToString()) { RecordSetName = RecordsetName };
+                mappings.Add(dbOutputMapping);
             }
 
             return mappings;

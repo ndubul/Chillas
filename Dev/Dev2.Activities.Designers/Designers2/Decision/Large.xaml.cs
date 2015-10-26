@@ -12,7 +12,6 @@
 using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using Dev2.TO;
 using Microsoft.Practices.Prism.Mvvm;
 

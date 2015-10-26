@@ -152,6 +152,7 @@
                             </i:Interaction.Behaviors>
                         </ComboBox>
                         <Button Width="25" Height="25" 
+                                x:Name="RefreshButton"
                                 Margin="{StaticResource ElementBorderControlLeftTop}"
                                 Command="{Binding RefreshCommand}"
                                 Visibility="{Binding Path=IsRefreshing, Converter={StaticResource NotConverter}}">

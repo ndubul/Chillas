@@ -12,7 +12,6 @@ using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
-using Warewolf.Studio.AntiCorruptionLayer;
 
 namespace Warewolf.Studio.ViewModels
 {
@@ -33,9 +32,8 @@ namespace Warewolf.Studio.ViewModels
         bool _isDeploying;
         bool _deploySuccessfull;
         string _conflictNewResourceText;
-        IShellViewModel _shell;
+        readonly IShellViewModel _shell;
         bool _serversAreNotTheSame;
-        bool _canSelectDependencies;
         readonly IPopupController _popupController;
         bool _showNewItemsList;
         bool _showConflictItemsList;
@@ -69,6 +67,11 @@ namespace Warewolf.Studio.ViewModels
                 ConflictItems = _stats.Conflicts;
                 NewItems = _stats.New;
                 ShowConflicts = false;
+                if (_stats.RenameErrors.Length > 0)
+                {
+                    _popupController.ShowDeployNameConflict(_stats.RenameErrors);
+                    
+                }
             };
             SourceConnectControlViewModel = _source.ConnectControlViewModel;
             DestinationConnectControlViewModel = _destination.ConnectControlViewModel;
@@ -206,11 +209,12 @@ namespace Warewolf.Studio.ViewModels
         void Deploy()
         {
             IsDeploying = true;
+   
             try
             {
                 ErrorMessage = "";
                 bool canDeploy = false;
-                if (ConflictItems.Count >= 1)
+                if (ConflictItems!=null && ConflictItems.Count >= 1  )
                 {
                     var msgResult = _popupController.ShowDeployConflict(ConflictItems.Count);
                     if (msgResult == MessageBoxResult.Yes || msgResult == MessageBoxResult.OK)
@@ -551,7 +555,7 @@ namespace Warewolf.Studio.ViewModels
         ///     Overridden resource in Destination
         ///     Static steps of how to deploy
         /// </summary>
-        public IDeployStatsViewerViewModel StatsViewModel { get; set; }
+        public IDeployStatsViewerViewModel StatsViewModel { get { return _stats; }  }
         public string ErrorMessage
         {
             get

@@ -480,8 +480,8 @@
                             ActiveDataItem="{Binding SelectedItem, Mode=TwoWay}"
                             IsSelectedMemberPath="IsSelected"
                             DisplayMemberPath="DisplayName"
-                            IsDraggable="True"
-                            IsDropTarget="True"
+                            IsDraggable="{Binding AllowDrag}"
+                            IsDropTarget="{Binding AllowDrag}"
                             InitializeNode="ExplorerTree_OnInitializeNode"
                             NodeExitedEditMode="ExplorerTree_OnNodeExitedEditMode"
                             SelectedDataItems="{Binding SelectedDataItems}"
@@ -499,7 +499,7 @@
                 <ig:XamDataTree.GlobalNodeLayouts>
                     <ig:NodeLayout Key="Environments"
                                    DisplayMemberPath="DisplayName"
-                                   IsDropTarget="True"
+                                   IsDropTarget="{Binding AllowDrag}"
                                    IsExpandedMemberPath="IsExpanded"
                                    TargetTypeName="IEnvironmentViewModel">
                         <ig:NodeLayout.ItemTemplate>
@@ -650,7 +650,7 @@
 
                                                     <ig:XamMenuItem Name="NewDropboxSource"
                                                                     Command="{Binding Path=Data.NewCommand}"
-                                                                    CommandParameter="{x:Static data:ResourceType.OauthSource}"
+                                                                    CommandParameter="{x:Static data:ResourceType.DropboxSource}"
                                                                     Header="New Dropbox Source"
                                                                     Visibility="{Binding Path=Data.CanCreateDropboxSource, Converter={StaticResource BoolToVisibilityConverter}}">
                                                         <ig:XamMenuItem.Icon>

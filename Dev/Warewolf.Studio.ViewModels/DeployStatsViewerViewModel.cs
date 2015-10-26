@@ -19,9 +19,9 @@ namespace Warewolf.Studio.ViewModels
         int _newResources;
         int _overrides;
         string _status;
+        public string RenameErrors { get; private set; }
         List<Conflict> _conflicts;
         IEnumerable<IExplorerTreeItem> _new;
-        Action _calculateAction;
 
         public DeployStatsViewerViewModel(IExplorerViewModel destination)
         {
@@ -156,6 +156,25 @@ namespace Warewolf.Studio.ViewModels
 
                     _conflicts = conf.ToList();
                     _new = items.Except(_destination.SelectedEnvironment.AsList());
+                    var ren = from b in _destination.SelectedEnvironment.AsList()
+                               join explorerTreeItem in items on b.ResourcePath equals explorerTreeItem.ResourcePath 
+                               where b.ResourceType != ResourceType.Folder && explorerTreeItem.ResourceType != ResourceType.Folder
+                               select new  { SourceName = explorerTreeItem.ResourcePath, DestinationName = b.ResourcePath  , SourceId = explorerTreeItem.ResourceId , DestinationId = b.ResourceId};
+                    var errors = ren.Where(ax=>ax.SourceId!= ax.DestinationId).ToArray();
+                   if(errors.Any())
+                   {
+                       
+                       RenameErrors = "The following resources have the same path and name on the source and destination server but different Ids";
+                       foreach(var error in errors)
+                       {
+                           RenameErrors += string.Format("\n{0}-->{1}", error.SourceName, error.DestinationName);
+                       }
+                       RenameErrors += "\nPlease rename either the source or destination before continueing";
+                   }
+                   else
+                   {
+                       RenameErrors = "";
+                   }
                 }
                 else
                 {
@@ -198,17 +217,7 @@ namespace Warewolf.Studio.ViewModels
                 return _new.Where(a => a.ResourceType != ResourceType.Folder).ToList();
             }
         }
-        public Action CalculateAction
-        {
-            get
-            {
-                return _calculateAction;
-            }
-            set
-            {
-                _calculateAction = value;
-            }
-        }
+        public Action CalculateAction { get; set; }
 
         bool IsSource(ResourceType res)
         {

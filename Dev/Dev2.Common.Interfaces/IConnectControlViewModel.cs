@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,6 +13,7 @@ namespace Dev2.Common.Interfaces
         ICommand EditConnectionCommand { get; set; }
         ICommand ToggleConnectionStateCommand { get; set; }
 
+        bool AllowConnection { get; set; }
         bool IsConnected { get;set; }
         bool IsConnecting { get; set; }
         bool IsLoading { get; set; }

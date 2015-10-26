@@ -18,6 +18,7 @@ namespace Warewolf.Studio.ViewModels
 
         readonly IShellViewModel _shellViewModel;
         readonly Action<IExplorerItemViewModel> _selectAction;
+        bool _isLoading;
 
         public DeploySourceExplorerViewModel(IShellViewModel shellViewModel, Microsoft.Practices.Prism.PubSubEvents.IEventAggregator aggregator, IDeployStatsViewerViewModel statsArea)
 
@@ -63,6 +64,19 @@ namespace Warewolf.Studio.ViewModels
 
         #region Overrides of ExplorerViewModel
 
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(() => IsLoading);
+            }
+        }
+
         public  void AfterLoad(Guid environmentID)
         {
             var environmentViewModel = _environments.FirstOrDefault(a=>a.Server.EnvironmentID == environmentID);
@@ -95,7 +109,7 @@ namespace Warewolf.Studio.ViewModels
               }
 
             }
-   
+            ConnectControlViewModel.IsLoading = false;
         }
 
         #endregion
@@ -225,7 +239,7 @@ namespace Warewolf.Studio.ViewModels
             AfterLoad(server.EnvironmentID);
         }
 
-		protected virtual async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment,bool isDeploy = false)
+        protected virtual async void LoadEnvironment(IEnvironmentViewModel localhostEnvironment,bool isDeploy = false)
 		{
 			await localhostEnvironment.Connect();
 			await localhostEnvironment.Load(isDeploy);

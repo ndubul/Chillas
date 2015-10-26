@@ -36,9 +36,8 @@ namespace WPF.JoshSmith.Input
         /// <summary>
         ///     Initializes a new instance.
         /// </summary>
-        // ReSharper disable EmptyConstructor
+        // ReSharper disable once EmptyConstructor
         public CommandGroup()
-            // ReSharper restore EmptyConstructor
         {
             // Parameterless public ctor required for XAML instantiation.
         }

@@ -36,7 +36,6 @@ using Dev2.Common.Interfaces.Studio;
 using Dev2.Common.Interfaces.Threading;
 using Dev2.Common.Interfaces.Toolbox;
 using Dev2.Common.Interfaces.WebServices;
-using Dev2.ConnectionHelpers;
 using Dev2.Data.ServiceModel;
 using Dev2.Factory;
 using Dev2.Helpers;
@@ -145,7 +144,7 @@ namespace Dev2.Studio.ViewModels
 
         public bool CloseCurrent { get; private set; }
 
-        public ExplorerViewModel ExplorerViewModel
+        public IExplorerViewModel ExplorerViewModel
         {
             get { return _explorerViewModel; }
             set
@@ -399,7 +398,7 @@ namespace Dev2.Studio.ViewModels
 
         public MainViewModel(IEventAggregator eventPublisher, IAsyncWorker asyncWorker, IEnvironmentRepository environmentRepository,
             IVersionChecker versionChecker, bool createDesigners = true, IBrowserPopupController browserPopupController = null,
-            Common.Interfaces.Studio.Controller.IPopupController popupController = null, IWindowManager windowManager = null, IStudioResourceRepository studioResourceRepository = null, IConnectControlSingleton connectControlSingleton = null, Dev2.CustomControls.Connections.IConnectControlViewModel connectControlViewModel = null)
+            Common.Interfaces.Studio.Controller.IPopupController popupController = null, IWindowManager windowManager = null, IStudioResourceRepository studioResourceRepository = null,IExplorerViewModel explorer = null)
             : base(eventPublisher)
         {
             if (environmentRepository == null)
@@ -427,6 +426,10 @@ namespace Dev2.Studio.ViewModels
             MenuPanelWidth = 60;
             _menuExpanded = false;
 
+            if(explorer != null)
+            {
+                ExplorerViewModel = explorer;
+            }
             if(ExplorerViewModel == null)
             {
                 ExplorerViewModel = new ExplorerViewModel(this,CustomContainer.Get<Microsoft.Practices.Prism.PubSubEvents.IEventAggregator>());
@@ -2340,7 +2343,7 @@ namespace Dev2.Studio.ViewModels
         IDropboxFactory _dropboxFactory;
         IMenuViewModel _menuViewModel;
         IServer _activeServer;
-        private ExplorerViewModel _explorerViewModel;
+        private IExplorerViewModel _explorerViewModel;
 
         public bool IsDownloading()
         {

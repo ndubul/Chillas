@@ -3,7 +3,6 @@ using Caliburn.Micro;
 using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Deploy;
 using Microsoft.Practices.Prism.Mvvm;
-using Warewolf.Studio.ViewModels;
 
 namespace Warewolf.Studio.Views
 {
@@ -12,9 +11,7 @@ namespace Warewolf.Studio.Views
     /// </summary>
     public partial class DeployView : IView, ICheckControlEnabledView
     {
-        string _errorMessage;
-        string _canDeploy;
-        string _canSelectDependencies;
+
 
         public DeployView()
         {
@@ -58,7 +55,7 @@ namespace Warewolf.Studio.Views
         {
             get
             {
-                return Deploy.IsEnabled ? "Enabled" : "Disabled";
+                return ((IDeployViewModel)DataContext).DeployCommand.CanExecute(null) ? "Enabled" : "Disabled";
             }
             set
             {
@@ -74,6 +71,55 @@ namespace Warewolf.Studio.Views
             set
             {
                 Dependencies.IsEnabled = value=="Enabled";
+            }
+        }
+        public string StatusPassedMessage
+        {
+            get
+            {
+
+                return ((IDeployViewModel)DataContext).DeploySuccessMessage??"";
+            }
+            set
+            {
+                StatusPass.Text = value;
+            }
+        }
+        public string Connectors
+        {
+            get
+            {
+                return ((IDeployViewModel)DataContext).ConnectorsCount;
+            }
+          
+       }
+        public string Services
+        {
+            get
+            {
+                return ((IDeployViewModel)DataContext).ServicesCount;
+            }
+        }
+        public string Sources
+        {
+            get
+            {
+                return ((IDeployViewModel)DataContext).SourcesCount;
+            }
+
+        }
+        public string New
+        {
+            get
+            {
+                return ((IDeployViewModel)DataContext).NewResourcesCount;
+            }
+        }
+        public string Overrides
+        {
+            get
+            {
+                return ((IDeployViewModel)DataContext).OverridesCount;
             }
         }
 
@@ -93,19 +139,109 @@ namespace Warewolf.Studio.Views
 
         public bool GetControlEnabled(string controlName)
         {
-            return false;
+            switch (controlName)
+            {
+       
+                case "Dependencies":
+                    return Dependencies.IsEnabled;
+                case "Deploy":
+                    return Deploy.IsEnabled;
+                default: return false;
+            }
         }
 
         #endregion
 
         public void SelectPath(string path)
         {
-            ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().Apply(a => { if (a.ResourcePath == path) a.IsFolderChecked = true; });
+            ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().Apply(a =>
+            {
+                if (a.ResourcePath == path) 
+                    a.IsResourceUnchecked = true; 
+                
+            });
+            ((IDeployViewModel)DataContext).StatsViewModel.Calculate(((IDeployViewModel)DataContext).Source.SelectedItems.ToList());
+        }
+        public void UnSelectPath(string path)
+        {
+            ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().Apply(a =>
+            {
+                if (a.ResourcePath == path)
+                    a.IsResourceUnchecked = false;
+
+            });
+            ((IDeployViewModel)DataContext).StatsViewModel.Calculate(((IDeployViewModel)DataContext).Source.SelectedItems.ToList());
         }
 
         public void SelectDestinationServer(string servername)
         {
-            DestinationConnectControl.SelectedServer = ((IDeployViewModel)DataContext).Destination.ConnectControlViewModel.Servers.FirstOrDefault(a => a.ResourceName == servername);
+            ((IDeployViewModel)DataContext).Destination.ConnectControlViewModel.SelectedConnection = ((IDeployViewModel)DataContext).Destination.ConnectControlViewModel.Servers.FirstOrDefault(a => a.ResourceName == servername);
+        }
+
+        public void DeployItems()
+        {
+            if (((IDeployViewModel)DataContext).DeployCommand.CanExecute(null))
+            ((IDeployViewModel)DataContext).DeployCommand.Execute(null);
+        }
+
+        public void SelectDependencies()
+        {
+            Dependencies.Command.Execute(null);
+        }
+
+        public string VerifySelectPath(string path)
+        {
+            var res = ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().FirstOrDefault(a =>  (a.ResourcePath ==path) && (a.IsResourceChecked ?? false));
+            if(res==null)
+            {
+                return "Selected";
+            }
+            return "Not Selected";
+        }
+
+        public void SetFilter(string filter)
+        {
+            ((IDeployViewModel)DataContext).Source.SearchText = filter;
+        }
+
+        public string VerifySelectPathVisibility(string path)
+        {
+            var res = ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().FirstOrDefault(a => (a.ResourcePath == path) );
+            if (res == null)
+            {
+                return "Not Visible";
+            }
+            if(!res.IsVisible)
+                return "Not Visible";
+            return "Visible";
+        }
+
+        public bool CheckVisibility(string control, string visibility)
+        {
+            switch (control)
+            {
+                case "SourceConnectControl":
+                    return SourceConnectControl.Visibility.ToString().ToLower() == visibility.ToLower();
+                case "DestinationConnectControl":
+                    return DestinationConnectControl.Visibility.ToString().ToLower() == visibility.ToLower();
+                case "SourceNavigationView":
+                    return SourceNavigationView.Visibility.ToString().ToLower() == visibility.ToLower();
+                case "Dependencies":
+                    return Dependencies.Visibility.ToString().ToLower() == visibility.ToLower();
+                case "Deploy":
+                    return Deploy.Visibility.ToString().ToLower() == visibility.ToLower();
+                default: return false;
+            }
+        }
+
+        public void SelectServer(string p0)
+        {
+            ((IDeployViewModel)DataContext).Source.SelectedEnvironment.IsResourceChecked = true;
+        }
+
+        public bool VerifyAllSelected(string p0)
+        {
+           return ((IDeployViewModel)DataContext).Source.SelectedEnvironment.AsList().All(a => a.IsResourceChecked ?? false);
         }
     }
 }

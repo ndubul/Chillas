@@ -29,6 +29,7 @@
                            IsEditable="False"
                            AllowDrop="False"
                            ToolTip="{Binding Path=ConnectionsToolTip}"
+                           ItemContainerStyle="{StaticResource ComboEditorItemControlStyle}"
                            DisplayMemberPath="DisplayName"
                            MaxDropDownHeight="200"
                            CustomValueEnteredAction="Allow"
@@ -41,6 +42,7 @@
         </ig:XamComboEditor>
         <Button AutomationProperties.AutomationId="{Binding EditButtonAutomationID, Mode=TwoWay, ElementName=ConnectUserControl}"
                 Grid.Column="1"
+                x:Name="EditButton"
                 Content="..."
                 IsEnabled="{Binding SelectedConnection.AllowEdit}"
                 ToolTip="{Binding Path=EditConnectionToolTip}"
@@ -51,6 +53,7 @@
         </Button>
         <Button AutomationProperties.AutomationId="{Binding ConnectButtonAutomationID, Mode=TwoWay, ElementName=ConnectUserControl}"
                 Grid.Column="2"
+                x:Name="ConnectButton"
                 Margin="{StaticResource ControlBorderLeft}"
                 Command="{Binding ToggleConnectionStateCommand}"
                 IsEnabled="{Binding AllowConnection}"
@@ -72,6 +75,14 @@
                                             Margin="3,0,2,0"
                                             VerticalAlignment="Center" HorizontalAlignment="Center"
                                             Visibility="{Binding IsConnecting, Converter={StaticResource BoolToVisibilityConverterPositive}}"
+                                            AutomationProperties.AutomationId="UI_IndicatorConnecting_AutoID" />
+        <customControls:CircularProgressBar Grid.Column="2" 
+                                            Height="22" 
+                                            Width="22" 
+                                            Margin="3,0,2,0"
+                                            IsVisibleChanged="UIElement_OnIsVisibleChanged"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                                            Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisConverter}}"
                                             AutomationProperties.AutomationId="UI_IndicatorConnecting_AutoID" />
     </Grid>
 </UserControl>

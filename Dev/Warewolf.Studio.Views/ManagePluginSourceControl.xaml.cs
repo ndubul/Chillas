@@ -56,9 +56,23 @@ namespace Warewolf.Studio.Views
                 var node = e.Node.Data as DllListingModel;
                 if (node != null)
                 {
+                    if (node.Name.Contains("GAC") && e.Node.IsExpanded)
+                    {
+                        SearchTextBox.IsEnabled = false;
+                        RefreshButton.IsEnabled = false;
+                    }
                     node.IsExpanded = e.Node.IsExpanded;
                     node.ExpandingCommand.Execute(null);
                 }
+            }
+        }
+
+        void UIElement_OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue.Equals(true) && e.NewValue.Equals(false))
+            {
+                SearchTextBox.IsEnabled = true;
+                RefreshButton.IsEnabled = true;
             }
         }
 
@@ -160,6 +174,8 @@ namespace Warewolf.Studio.Views
                 case "Save":
                     var viewModel = DataContext as ManagePluginSourceViewModel;
                     return viewModel != null && viewModel.OkCommand.CanExecute(null);
+                case "Filter":
+                    return SearchTextBox.IsEnabled;
             }
             return false;
         }
@@ -187,5 +203,7 @@ namespace Warewolf.Studio.Views
         {
             
         }
+
+        
     }
 }

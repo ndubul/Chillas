@@ -189,6 +189,10 @@ namespace Dev2.Activities.Specs.Toolbox.ControlFlow.Decision
         {
             var modelData = ScenarioContext.Current.Get<string>("modelData");
             var result = ScenarioContext.Current.Get<IDSFDataObject>("result");
+            if (result.DataListID== Guid.Empty)
+            {
+                result.DataListID = Guid.NewGuid();
+            }
             try
             {
                 Dev2DataListDecisionHandler.Instance.RemoveEnvironment(result.DataListID);

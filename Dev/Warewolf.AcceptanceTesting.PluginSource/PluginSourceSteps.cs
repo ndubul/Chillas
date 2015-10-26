@@ -66,6 +66,21 @@ namespace Warewolf.AcceptanceTesting.PluginSource
                 {
                     _dllListingForGac,
                     new DllListing {
+                        FullName = "GAC:vjslib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", 
+                        IsDirectory = false, 
+                        Name = "vjslib, Version=2.0.0.0"
+                    }
+                }
+            };
+            var gacFilterListing = new DllListing
+            {
+                FullName = "",
+                IsDirectory = true,
+                Name = "GAC",
+                Children = new List<IFileListing>
+                {
+                    _dllListingForGac,
+                    new DllListing {
                         FullName = "GAC:BDATunePIA, Version=6.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35.dll", 
                         IsDirectory = false, 
                         Name = "BDATunePIA, Version=6.1.0.0"
@@ -121,6 +136,7 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             fileSystemListing.Children = new List<IFileListing>{cDrive,dDrive};
             listing.Add(fileSystemListing);
             listing.Add(gacListing);
+            listing.Add(gacFilterListing);
             return listing;
         }
 
@@ -224,7 +240,6 @@ namespace Warewolf.AcceptanceTesting.PluginSource
             Assert.IsTrue(isSameAsViewModel);
         }
 
-
         [Given(@"file is selected")]
         public void GivenFileIsSelected()
         {
@@ -323,9 +338,9 @@ namespace Warewolf.AcceptanceTesting.PluginSource
                 Name = name,
                 Id = Guid.NewGuid(),
                 Path = "",
+                SelectedDll = name.Equals("Test", StringComparison.OrdinalIgnoreCase) ? _dllListingForGac : _dllListingForFile,
             };
-            pluginSrc.SelectedDll = name.Equals("Test", StringComparison.OrdinalIgnoreCase) ? _dllListingForGac : _dllListingForFile;
-            
+
             var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
             var mockStudioUpdateManager = FeatureContext.Current.Get<Mock<IManagePluginSourceModel>>("updateManager").Object;
             var mockEventAggregator = FeatureContext.Current.Get<Mock<IEventAggregator>>("eventAggregator").Object;
@@ -337,9 +352,11 @@ namespace Warewolf.AcceptanceTesting.PluginSource
                     try
                     {
                         a.Invoke(); 
-                        
                     }
-                    catch{} 
+                    catch
+                    {
+                        // ignored
+                    }
                 });
 
                 managePluginSourceControl.DataContext = managePluginSourceViewModel;
@@ -359,6 +376,8 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         }
 
         [When(@"I open ""(.*)""")]
+        [Then(@"I open ""(.*)""")]
+        [Given(@"I open ""(.*)""")]
         public void WhenIOpen(string itemNameToOpen)
         {
             var sourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
@@ -387,10 +406,11 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         }
 
         [When(@"Assembly is ""(.*)""")]
+        [Then(@"Assembly is ""(.*)""")]
         public void WhenAssemblyIs(string assembly)
         {
             var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
-            managePluginSourceControl.GetAssemblyName();
+            Assert.AreEqual(assembly, managePluginSourceControl.GetAssemblyName());
         }
 
         [When(@"I filter for ""(.*)""")]
@@ -398,6 +418,19 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         {
             var expectedVisibility = String.Equals(assemblyName, "BDATunePIA", StringComparison.InvariantCultureIgnoreCase);
             Assert.IsTrue(expectedVisibility);
+        }
+
+        [When(@"filter is disabled")]
+        public void WhenFilterIsDisabled()
+        {
+            
+        }
+
+        [When(@"GAC is ""(.*)""")]
+        public void WhenGACIs(string isLoading)
+        {
+            var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            managePluginSourceControl.ExecuteRefresh();
         }
 
         [When(@"I filter new for ""(.*)""")]
@@ -447,16 +480,17 @@ namespace Warewolf.AcceptanceTesting.PluginSource
         {
             var mockExecutor = new Mock<IExternalProcessExecutor>();
             var mockUpdateManager = ScenarioContext.Current.Get<Mock<IManagePluginSourceModel>>("updateManager");
+            mockUpdateManager.Setup(model => model.GetDllListings(null)).Returns(BuildBaseListing());
             var mockRequestServiceNameViewModel = ScenarioContext.Current.Get<Mock<IRequestServiceNameViewModel>>("requestServiceNameViewModel");
             var mockEventAggregator = new Mock<IEventAggregator>();
-            var viewModel = new ManagePluginSourceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker());
-            var manageWebserviceSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
-            manageWebserviceSourceControl.DataContext = viewModel;
+            var mockViewModel = ScenarioContext.Current.Get<ManagePluginSourceViewModel>(Utils.ViewModelNameKey);
+            var viewModel = new ManagePluginSourceViewModel(mockUpdateManager.Object, mockRequestServiceNameViewModel.Object, mockEventAggregator.Object, new SynchronousAsyncWorker(), mockViewModel.DispatcherAction);
+            var managePluginSourceControl = ScenarioContext.Current.Get<ManagePluginSourceControl>(Utils.ViewNameKey);
+            managePluginSourceControl.DataContext = viewModel;
             FeatureContext.Current.Remove("viewModel");
             FeatureContext.Current.Add("viewModel", viewModel);
             FeatureContext.Current.Remove("externalProcessExecutor");
             FeatureContext.Current.Add("externalProcessExecutor", mockExecutor);
         }
-
     }
 }

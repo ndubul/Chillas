@@ -121,7 +121,7 @@ namespace Dev2.Runtime.ESB.Management.Services
         {
             get
             {
-                return _pluginServices ?? (IPluginServices)new PluginServices();
+                return _pluginServices ?? new PluginServices();
             }
             set
             {

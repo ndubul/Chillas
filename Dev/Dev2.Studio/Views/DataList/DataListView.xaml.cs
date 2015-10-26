@@ -19,7 +19,6 @@ using Dev2.Services.Events;
 using Dev2.Studio.Core.Interfaces.DataList;
 using Dev2.Studio.Core.Messages;
 using Dev2.Studio.ViewModels.WorkSurface;
-using Infragistics.Controls.Grids;
 using Microsoft.Practices.Prism.Mvvm;
 
 // ReSharper disable once CheckNamespace

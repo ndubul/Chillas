@@ -10,11 +10,13 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:customControls="clr-namespace:Warewolf.Studio.CustomControls;assembly=Warewolf.Studio.CustomControls"
              xmlns:ig="http://schemas.infragistics.com/xaml"
+             xmlns:converters="clr-namespace:Dev2.CustomControls.Converters;assembly=Dev2.Studio.Core"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverterNegative" TrueValue="Collapsed" FalseValue="Visible" />
         <views:NotConverter x:Key="NotConverter" />
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
@@ -93,7 +95,7 @@
                     </Grid.ColumnDefinitions>
                     <ProgressBar HorizontalAlignment="Stretch"
                                  Orientation="Horizontal"
-                                 Minimum="0"
+                                 Minimum="0" IsVisibleChanged="UIElement_OnIsVisibleChanged"
                                  Margin="{StaticResource ControlBorderTop}"
                                  Value="{Binding Path=CurrentProgress, Mode=TwoWay}"
                                  Maximum="100"

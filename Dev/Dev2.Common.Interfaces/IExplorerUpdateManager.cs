@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Dev2.Common.Interfaces
 {
@@ -37,7 +38,7 @@ namespace Dev2.Common.Interfaces
         /// <param name="sourcePath"></param>
         /// <param name="destinationPath"></param>
         /// <param name="itemPath"></param>
-        void MoveItem(Guid sourcePath, string destinationPath,string itemPath);
+        Task MoveItem(Guid sourcePath, string destinationPath,string itemPath);
 
     }
 }

@@ -197,7 +197,7 @@
         <Setter Property="FontSize" Value="13.333" />
         <Setter Property="Height" Value="25" />
         <Setter Property="Padding" Value="5 3" />
-        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -276,10 +276,10 @@
                                    Stroke="{TemplateBinding BorderBrush}"
                                    StrokeThickness="{TemplateBinding BorderThickness}" />
                         <Rectangle x:Name="selectedRectangle"
-                                   Fill="{StaticResource ComboBoxItemPressedBackgroundBrush}"
+                                   Fill="Transparent"
                                    IsHitTestVisible="False"
                                    Opacity="0"
-                                   Stroke="{StaticResource ComboBoxItemPressedBorderBrush}" />
+                                   Stroke="Transparent" />
                         <StackPanel x:Name="content"
                                     Margin="{TemplateBinding Padding}"
                                     Orientation="Horizontal">
@@ -298,8 +298,8 @@
                         </StackPanel>
                         <Rectangle x:Name="FocusedVisualElement"
                                    Opacity="0"
-                                   Stroke="{StaticResource ComboBoxItemPressedBorderBrush}"
-                                   StrokeThickness="2" />
+                                   Stroke="Transparent"
+                                   StrokeThickness="1" />
                         <Rectangle x:Name="DisabledVisualElement"
                                    Fill="{StaticResource DisabledVisualElement}"
                                    Visibility="Collapsed" />
@@ -557,7 +557,6 @@
                                 <igPrim:SpecializedTextBox x:Name="TextBoxPresenter"
                                                            Background="{StaticResource TransparentBrush}"
                                                            BorderThickness="0"
-                                                           Foreground="{StaticResource ForegroundBrush}"
                                                            IsTabStop="{TemplateBinding IsTabStop}"
                                                            Style="{StaticResource TextBoxStyle}"
                                                            Visibility="Collapsed" />

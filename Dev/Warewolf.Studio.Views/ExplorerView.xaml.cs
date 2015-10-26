@@ -290,6 +290,9 @@ namespace Warewolf.Studio.Views
 
         void DragSource_OnDrop(object sender, DropEventArgs e)
         {
+
+            var exp = DataContext as ExplorerViewModelBase;
+
             var drop = Utilities.GetAncestorFromType(e.DropTarget, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
             var drag = Utilities.GetAncestorFromType(e.DragSource, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
 
@@ -297,29 +300,48 @@ namespace Warewolf.Studio.Views
             {
                 var destination = drop.Node.Data as IExplorerItemViewModel;
                 var source = drag.Node.Data as IExplorerItemViewModel;
+
+              
+
                 if (source != null && destination != null)
                 {
                     if (!destination.CanDrop || !source.CanDrag)
                     {
                         return;
                     }
+                    IEnvironmentViewModel vm = GetEnv(source);
+                    vm.IsConnecting = true;
                     if (destination.Children.Count >= 1)
                     {
                         var checkExists = destination.Children.FirstOrDefault(o => o.ResourceId == source.ResourceId);
                         if (checkExists == null)
                         {
-                            if (!source.Move(destination))
+                            if(exp != null)
                             {
-                                //DO NOTHING
+                                exp.AllowDrag = false;
                             }
-                        }
+                                var moved = source.Move(destination).ContinueWith(async=>
+                                {
+                                    vm.IsConnecting = false;
+                                    if(exp != null)
+                                    {
+                                        exp.AllowDrag = true;
+                                    }
+                                });
+                            }
+                        
                     }
                     else
                     {
-                        if (!source.Move(destination))
+                        var moved = source.Move(destination).ContinueWith(async =>
                         {
-                            //DO NOTHING
-                        }
+                            vm.IsConnecting = false;
+                            if (exp != null)
+                            {
+                                exp.AllowDrag = true;
+                            }
+                        });
+         
                     }
                 }
 
@@ -337,6 +359,8 @@ namespace Warewolf.Studio.Views
                 {
                     var destination = drop.Node.Data as IEnvironmentViewModel;
                     var source = drag.Node.Data as IExplorerItemViewModel;
+                    IEnvironmentViewModel vm = GetEnv(source);
+                    vm.IsConnecting = true;
                     if (source != null && destination != null)
                     {
                         if (!source.CanDrag)
@@ -348,23 +372,43 @@ namespace Warewolf.Studio.Views
                             var checkExists = destination.Children.FirstOrDefault(o => o.ResourceId == source.ResourceId);
                             if (checkExists == null)
                             {
-                                if (!source.Move(destination))
+                                var moved = source.Move(destination).ContinueWith(async=>
                                 {
-                                    //DO NOTHING
-                                }
+                                    vm.IsConnecting = false;
+                                    if(exp != null)
+                                    {
+                                        exp.AllowDrag = true;
+                                    }
+                                });
+                          
                             }
                         }
                         else
                         {
-                            if (!source.Move(destination))
+                            var moved = source.Move(destination).ContinueWith(async=>
                             {
-                                //DO NOTHING
-                            }
+                                vm.IsConnecting = false;
+                                if(exp != null)
+                                {
+                                    exp.AllowDrag = true;
+                                }
+                            });
+
                         }
                     }
                 }
             }
         }
+
+        IEnvironmentViewModel GetEnv(IExplorerTreeItem source)
+        {
+            var x = source;
+            var env = source as IEnvironmentViewModel;
+            if (env != null)
+                return env;
+            return GetEnv(x.Parent);
+        }
+
         private void Reset(XamDataTreeNodeControl drop)
         {
             if (drop != null)

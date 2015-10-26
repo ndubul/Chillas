@@ -21,7 +21,6 @@ using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Communication;
 using Dev2.DynamicServices;
 using Dev2.DynamicServices.Objects;
-using Dev2.Explorer;
 using Dev2.Runtime.Hosting;
 using Dev2.Workspaces;
 
@@ -70,7 +69,7 @@ namespace Dev2.Runtime.ESB.Management.Services
                 {
                     if (Directory.Exists(ServerExplorerRepository.DirectoryStructureFromPath(itemToMove.ResourcePath)))
                           Directory.Delete(ServerExplorerRepository.DirectoryStructureFromPath(itemToMove.ResourcePath),true);
-                    ServerExplorerRepo.Reload(Guid.Empty);
+                    //ServerExplorerRepo.Reload(Guid.Empty);
                 }
             }
             catch (Exception e)
