@@ -52,24 +52,24 @@
                                     <!-- Custom Copy Cursor -->
                                     <ig:DragSource.CopyCursorTemplate>
                                         <DataTemplate>
-                                            <Button Style="{StaticResource PulseStyle}">
-                                                <fa:FontAwesome Icon="Plus" FontSize="14"/>
+                                            <Button Style="{StaticResource ButtonTransparentStyle}" Cursor="{StaticResource CursorGrabbing}">
+                                                <!--<fa:FontAwesome Icon="Plus" FontSize="14"/>-->
                                             </Button>
                                         </DataTemplate>
                                     </ig:DragSource.CopyCursorTemplate>
                                     <!-- Custom Drop Not Allowed Cursor -->
                                     <ig:DragSource.DropNotAllowedCursorTemplate>
                                         <DataTemplate>
-                                            <Button Style="{StaticResource PulseStyle}">
-                                                <fa:FontAwesome Icon="ExclamationCircle" FontSize="16" Foreground="Red"/>
+                                            <Button Style="{StaticResource ButtonTransparentStyle}" Cursor="Cross">
+                                                <!--<fa:FontAwesome Icon="ExclamationCircle" FontSize="16" Foreground="Red"/>-->
                                             </Button>
                                         </DataTemplate>
                                     </ig:DragSource.DropNotAllowedCursorTemplate>
                                     <!-- Custom Move Cursor -->
                                     <ig:DragSource.MoveCursorTemplate>
                                         <DataTemplate>
-                                            <Button Style="{StaticResource PulseStyle}">
-                                                <fa:FontAwesome Icon="Arrows" FontSize="14"/>
+                                            <Button Style="{StaticResource ButtonTransparentStyle}" Cursor="{StaticResource CursorGrab}">
+                                                <!--<fa:FontAwesome Icon="Arrows" FontSize="14"/>-->
                                             </Button>
                                         </DataTemplate>
                                     </ig:DragSource.MoveCursorTemplate>
@@ -480,6 +480,8 @@
                             ActiveDataItem="{Binding SelectedItem, Mode=TwoWay}"
                             IsSelectedMemberPath="IsSelected"
                             DisplayMemberPath="DisplayName"
+                            GiveFeedback="ExplorerTree_OnGiveFeedback"
+                            MouseUp="ExplorerTree_OnMouseUp"
                             IsDraggable="True"
                             IsDropTarget="True"
                             InitializeNode="ExplorerTree_OnInitializeNode"

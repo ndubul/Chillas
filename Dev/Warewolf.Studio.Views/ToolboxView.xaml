@@ -24,6 +24,7 @@
             <Grid MouseMove="UIElement_OnMouseMove" 
                   GiveFeedback="UIElement_OnGiveFeedback"
                   DragEnter="UIElement_OnDragEnter"
+                  MouseDown="ToolGrid_OnMouseDown"
                   x:Name="ToolGrid"
                   Cursor="{StaticResource CursorGrab}" 
                   HorizontalAlignment="Stretch" 

@@ -8,7 +8,6 @@ using Dev2.Common.Interfaces;
 using Dev2.Common.Interfaces.Data;
 using Dev2.Services.Security;
 using Dev2.Studio.Core;
-using Dev2.Studio.Core.ViewModels;
 using Infragistics.Controls.Menus;
 using Infragistics.DragDrop;
 using Infragistics.Windows;
@@ -202,7 +201,10 @@ namespace Warewolf.Studio.Views
         {
             var drop = Utilities.GetAncestorFromType(e.DropTarget, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
             var drag = Utilities.GetAncestorFromType(e.DragSource, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
+            Cursor grabCursor = Application.Current.TryFindResource("CursorGrab") as Cursor;
+            Cursor grabbingCursor = Application.Current.TryFindResource("CursorGrabbing") as Cursor;
 
+            Mouse.SetCursor(grabbingCursor);
             if (drag != null && (drop != null && drag.Node.Manager.ParentNode != null && drop.Node.Manager.ParentNode != null))
             {
                 var dragType = drag.Node.Data.GetType();
@@ -217,6 +219,7 @@ namespace Warewolf.Studio.Views
                     {
                         if (!destination.CanDrop && !destination.CanDrop)
                         {
+                            Mouse.SetCursor(Cursors.No);
                             ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Collapsed;
                             ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Collapsed;
                             _dropBefore = false;
@@ -233,6 +236,7 @@ namespace Warewolf.Studio.Views
                     {
                         if (!destination.CanDrop && !destination.CanDrop)
                         {
+                            Mouse.SetCursor(Cursors.No);
                             ((Grid)Utilities.GetDescendantFromName(drop, "DropAfterElem")).Visibility = Visibility.Collapsed;
                             ((Grid)Utilities.GetDescendantFromName(drop, "DropBeforeElem")).Visibility = Visibility.Collapsed;
                             _dropBefore = false;
@@ -246,9 +250,14 @@ namespace Warewolf.Studio.Views
                         _dropAfter = true;
                     }
                 }
+                else
+                {
+                    Mouse.SetCursor(Cursors.No);
+                }
             }
             else
             {
+                Mouse.SetCursor(grabbingCursor);
                 var dropActivity = Utilities.GetAncestorFromType(e.DropTarget, typeof(ContentControl), false) as ContentControl;
                 var dragTool = Utilities.GetAncestorFromType(e.DragSource, typeof(XamDataTreeNodeControl), false) as XamDataTreeNodeControl;
 
@@ -258,7 +267,6 @@ namespace Warewolf.Studio.Views
                     if (dragTool != null)
                     {
                         var context = dragTool.DataContext as XamDataTreeNodeDataContext;
-                        var wfContext = dropActivity.DataContext as IWorkflowDesignerViewModel;
                         if (context != null)
                         {
                             var dataContext = context.Data as ExplorerItemViewModel;
@@ -267,15 +275,10 @@ namespace Warewolf.Studio.Views
                             {
                                 dragData.SetData(DragDropHelper.WorkflowItemTypeNameFormat, dataContext.ActivityName);
                                 dragData.SetData(dataContext);
-                                if (wfContext != null)
-                                {
-                                    wfContext.BindToModel();
-                                    wfContext.DesignerView.AllowDrop = true;
-                                    wfContext.DesignerView.UpdateLayout();
-                                }
                             }
                             _dragData = dragData;
-                            //DragDrop.DoDragDrop(e.DragSource, dragData, DragDropEffects.Copy);
+                            DragDrop.DoDragDrop(e.DragSource, dragData, DragDropEffects.Copy);
+                            DragDropManager.EndDrag(true);
                         }
                     }
                 }
@@ -412,12 +415,33 @@ namespace Warewolf.Studio.Views
                             }
                             dragData.SetData(dataContext);
                         }
-
+                        Mouse.SetCursor(Application.Current.TryFindResource("CursorGrabbing") as Cursor);
                         _dragData = dragData;
                     }
                 }
             }
 
+        }
+
+        private Cursor _customCursor;
+        void ExplorerTree_OnGiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+            if (e.Effects == DragDropEffects.Copy)
+            {
+                if (_customCursor == null)
+                    _customCursor = Application.Current.TryFindResource("CursorGrabbing") as Cursor;
+
+                e.UseDefaultCursors = false;
+                Mouse.SetCursor(_customCursor);
+            }
+            else
+                e.UseDefaultCursors = true;            
+            e.Handled = true;
+        }
+
+        void ExplorerTree_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
