@@ -572,7 +572,6 @@
     </None>
     <None Include="Toolbox\FileAndFolder\Rename\Rename.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Rename.feature.cs</LastGenOutput>
     </None>
     <EmbeddedResource Include="Toolbox\FileAndFolder\Unzip\TestFile.zip" />
     <None Include="Toolbox\FileAndFolder\Unzip\Unzip.feature">

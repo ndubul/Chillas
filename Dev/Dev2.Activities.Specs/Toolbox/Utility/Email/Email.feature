@@ -266,7 +266,8 @@ Scenario Outline: Sending an email
 	| warewolf@dev2.co.za                         | info@dev2.co.za                             | New Email Test                    | Test123                  | [[rs([[int]]).a]] =   warewolf@dev2.co.za | [[rs([[int]]).a]] =   info@dev2.co.za | This is a test               |                                            | No    | [[rs(1).a]] = Success                                   |
 	| warewolf@dev2.co.za                         | info@dev2.co.za                             | New Email Test                    | Test123                  | [[rs([[int]]).a]] =   warewolf@dev2.co.za | [[rs([[int]]).a]] =   info@dev2.co.za | This is a test               | 121                                        | AN    | [[result]] = Attachment is not the valid format :121    |
 
-
+@ignore
+#Complex Types
 Scenario Outline: Sending an email using complex types
 	Given the from account is '<from>' equals '<FromVal>'
 	And to address is '<To>' equals '<ToVal>'
@@ -279,6 +280,7 @@ Scenario Outline: Sending an email using complex types
 	And the execution has '<error>' error
 	And Result is '<result>'
 	Examples: 
-	| from                      | FromVal             | To                      | ToVal           | subject      | password | Bcc             | Cc              | body        | attachments | error | result                                             |
-	| [[client().set().value]]  | warewolf@dev2.co.za | [[rs(1).set().value()]] | ""              | Numeric Test | 3        | 100             | 50              | hello world |             | An    | [[result]] = To address is not in the valid format |
-	| [[client(1).set().value]] | warewolf@dev2.co.za | [[rs(1).set().value]]   | info@dev2.co.za | ""           | test123  | test@dev2.co.za | user@dev2.co.za | [[b]]       | E:\test.txt | No    | [[rs(*).a]] = Success                              |
+	| from                             | FromVal             | To                      | ToVal           | subject      | password | Bcc             | Cc              | body        | attachments | error | result                                             |
+	| [[client().set().value]]         | warewolf@dev2.co.za | [[rs(1).set().value()]] | ""              | Numeric Test | 3        | 100             | 50              | hello world |             | An    | [[result]] = To address is not in the valid format |
+	| [[client(1).set(*).value]]       | warewolf@dev2.co.za | [[rs(1).set().value]]   | info@dev2.co.za | ""           | test123  | test@dev2.co.za | user@dev2.co.za | [[b]]       | E:\test.txt | No    | [[rs(*).a]] = Success                              |
+	| [[client(1).set([[int]]).value]] | warewolf@dev2.co.za | [[rs(1).set().value]]   | info@dev2.co.za | ""           | test123  | test@dev2.co.za | user@dev2.co.za | [[b]]       | E:\test.txt | No    | [[rs(*).a]] = Success                              |

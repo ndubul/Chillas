@@ -189,7 +189,7 @@ Scenario Outline: Rename file at location with invalid directories
 	| 5  | Local to FTP   | [[variable]] | E:\tr.txt      | ""       | ""       | [[v]]        | ""                                                 | ""                | ""           | True     | [[result]] | Success | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 	| 6  | Local to FTPS  | [[path]]     | E:\test.txt    | ""       | ""       | 5453         | 5453                                               | integrationtester | I73573r0     | True     | [[result]] | Success | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 
-		
+@ignore
 #Complex Types
 Scenario Outline: Rename file at location using complex types
 	Given I have a source path '<source>' with value '<sourceLocation>' 
@@ -208,8 +208,10 @@ Scenario Outline: Rename file at location using complex types
 		|                        |
 		| <resultVar> = <result> |
 	Examples: 
-	| No | Name           | source                      | sourceLocation     | username | password | destination  | destinationLocation | destUsername | destPassword | selected | resultVar  | result  | errorOccured |
-	| 1  | Local to Local | [[file().resources().path]] | c:\renamefile0.txt | ""       | ""       | [[destPath]] | C:\renamed0.txt     | ""           | ""           | True     | [[result]] | Success | NO           |
+	| No | Name           | source                              | sourceLocation     | username | password | destination  | destinationLocation | destUsername | destPassword | selected | resultVar  | result  | errorOccured |
+	| 1  | Local to Local | [[file().resources().path]]         | c:\renamefile0.txt | ""       | ""       | [[destPath]] | C:\renamed0.txt     | ""           | ""           | True     | [[result]] | Success | NO           |
+	| 2  | Local to Local | [[file(1).resources([[int]]).path]] | d:\renamefile0.txt | ""       | ""       | [[destPath]] | C:\renamed0.txt     | ""           | ""           | True     | [[result]] | Success | NO           |
+	| 3  | Local to Local | [[file(*).resources().path]]        | e:\renamefile0.txt | ""       | ""       | [[destPath]] | C:\renamed0.txt     | ""           | ""           | True     | [[result]] | Success | NO           |
 		
 		
 

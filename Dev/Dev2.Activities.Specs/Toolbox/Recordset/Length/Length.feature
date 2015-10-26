@@ -178,7 +178,7 @@ Examples:
 
 
 
-
+@ignore
 #Complex Types
 Scenario Outline: Ensure the Complex type length inputs work as expected 
 	Given I get  the length from a object that looks like with this shape
@@ -197,8 +197,9 @@ Scenario Outline: Ensure the Complex type length inputs work as expected
 	And the execution has "<Error>" error
 	And the debug inputs as "<message>"
 Examples: 
-| variable           | val | error | message | result               | value |
-| [[rs().row().set]] | 1   | No    |         | [[rec(1).row().val]] | 1     |
+| variable                   | val | error | message | result                | value |
+| [[rs(1).row().set]]        | 1   | No    |         | [[rec(1).row().val]]  | 1     |
+| [[rs(*).row([[int]]).set]] | 4   | No    |         | [[rec(1).row(3).val]] | 4     |
 
 
 

@@ -173,6 +173,7 @@ Scenario Outline: Replace values using complex types
 	And "<var>" should be "<result>"
 	And the execution has "NO" error
 Examples: 
-| No | var                        | value    | characters | replacement | count | result    |
-| 1  | [[Member().Details().Title | Ms.Wolfe | Ms.Wolfe   | Mrs.Blake   | 1     | Mrs.Blake |
-
+| No | var                                | value    | characters | replacement | count | result    |
+| 1  | [[Member().Details().Title         | Ms.Wolfe | Ms.Wolfe   | Mrs.Blake   | 1     | Mrs.Blake |
+| 2  | [[Member(1).Details(1).Title       | Mr West  | e          | ei          | 1     | Mr Weist  |
+| 3  | [[Member(*).Details([[int]]).Title | Dave     | D          | Ste         | 1     | Steave    |

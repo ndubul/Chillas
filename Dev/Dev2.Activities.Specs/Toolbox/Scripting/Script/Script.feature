@@ -371,6 +371,7 @@ Scenario Outline:Execute Javascript using recordsets
 	| [[rec([[int]]).a]],[[int]] =1 | return "a message"; | [[rs([[int]]).a]],[[int]]=1 | a message |
 
 #Complex Types
+@ignore
 Scenario Outline:Execute Javascript using complex types
 	Given I have the script to execute '<script>' equals to '<val>'
 	And I have selected the language as "JavaScript"
@@ -383,5 +384,5 @@ Scenario Outline:Execute Javascript using complex types
 	|                        |
 	| <result> = <ResultVal> |
 	Examples: 
-	| Script                | val                 | result               | ResultVal |
-	| [[rec().row().value]] | return "a message"; | [[rs().row().value]] | a message |
+	| Script                 | val                 | result                       | ResultVal |
+	| [[rec().row(*).value]] | return "a message"; | [[rs(1).row([[int]]).value]] | a message |

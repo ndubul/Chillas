@@ -148,6 +148,8 @@ Scenario Outline: Create file at location using complex types
 		|                        |
 		| <resultVar> = <result> |
 	Examples: 
-		| No | Name  | destination                 | destinationLocation | selected | username | password | resultVar  | result  | errorOccured |
-		| 1  | Local | [[file().resources().path]] | c:\myfile.txt       | True     | ""       | ""       | [[result]] | Success | NO           |
+		| No | Name  | destination                         | destinationLocation | selected | username | password | resultVar  | result  | errorOccured |
+		| 1  | Local | [[file().resources().path]]         | c:\myfile.txt       | True     | ""       | ""       | [[result]] | Success | NO           |
+		| 2  | Local | [[file(1).resources(1).path]]       | c:\myfile.txt       | True     | ""       | ""       | [[result]] | Success | NO           |
+		| 3  | Local | [[file(*).resources([[int]]).path]] | c:\Config.txt       | True     | ""       | ""       | [[result]] | Success | NO           |
 		

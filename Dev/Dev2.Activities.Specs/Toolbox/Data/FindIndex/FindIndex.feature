@@ -331,7 +331,8 @@ Scenario: Tool does not return
 	|                                      |
 	| [[result]] = Index is not an integer |
 
-#Complex Type
+@ignore
+#Complex Types
 Scenario Outline: Find all occurances using complex types
 	Given I have a Find Index variable '<variable>' equal to '<value>'
 	And I selected Index "All Occurrence"
@@ -341,5 +342,7 @@ Scenario Outline: Find all occurances using complex types
 	Then the find index result is '<result>'
 	And the execution has "No" error
 	Examples: 
-	| variable                | value                                                     | result               |
-	| [[rec().set().comment]] | I have reserved my right to comment at this point in time | 24,26,35,38,40,49,54 |
+	| variable                              | value                                                     | result               |
+	| [[rec().set().comment]]               | I have reserved my right to comment at this point in time | 24,26,35,38,40,49,54 |
+	| [[rec(1).set(*).comment]]             | Great Day                                                 | 5                    |
+	| [[rec([[var]]).set([[int]]).comment]] | I have reserved my right to comment at this point in time | 24,26,35,38,40,49,54 |

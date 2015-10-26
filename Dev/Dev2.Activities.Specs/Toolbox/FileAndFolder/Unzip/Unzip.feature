@@ -188,7 +188,7 @@ Scenario Outline: Unzip file at location with invalid directories
 	| 2  | UNC to Local   | [[b]]  |                | ""       | ""       | [[path1]]   | c:\ZIP1             | ""           | ""           | True     | ""              | [[result]] | Error  | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 	| 3  | FTP to Local   | 121    | 121            | ""       | ""       | [[path1]]   | c:\ZIP2             | ""           | ""           | True     | ""              | [[result]] | Error  | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 
-
+@ignore
 #Complex Types
 Scenario Outline: Unzip file at location using complex types
 	Given I have a source path '<source>' with value '<sourceLocation>'
@@ -208,6 +208,8 @@ Scenario Outline: Unzip file at location using complex types
 		|                        |
 		| <resultVar> = <result> |
 	Examples: 
-	| No | Name           | source                      | sourceLocation | username | password | destination | destinationLocation | destUsername | destPassword | selected | archivepassword | resultVar  | result  | errorOccured |
-	| 1  | Local to Local | [[file().resources().path]] | c:\test0.zip   | ""       | ""       | [[path1]]   | c:\ZIP0             | ""           | ""           | True     | ""              | [[result]] | Success | NO           |
+	| No | Name           | source                             | sourceLocation | username | password | destination | destinationLocation | destUsername | destPassword | selected | archivepassword | resultVar  | result  | errorOccured |
+	| 1  | Local to Local | [[file().resources().path]]        | c:\test0.zip   | ""       | ""       | [[path1]]   | c:\ZIP0             | ""           | ""           | True     | ""              | [[result]] | Success | NO           |
+	| 2  | Local to Local | [[file(*).resources(1).path]]      | c:\test0.zip   | ""       | ""       | [[path1]]   | c:\ZIP0             | ""           | ""           | True     | ""              | [[result]] | Success | NO           |
+	| 3  | Local to Local | [[file().resources([[int]]).path]] | c:\test0.zip   | ""       | ""       | [[path1]]   | c:\ZIP0             | ""           | ""           | True     | ""              | [[result]] | Success | NO           |
 				  	  										

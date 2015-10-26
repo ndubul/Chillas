@@ -957,28 +957,34 @@ this.ScenarioSetup(scenarioInfo);
         
         public virtual void SendingAnEmailUsingComplexTypes(string from, string fromVal, string to, string toVal, string subject, string password, string bcc, string cc, string body, string attachments, string error, string result, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sending an email using complex types", exampleTags);
-#line 270
-this.ScenarioSetup(scenarioInfo);
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sending an email using complex types", @__tags);
 #line 271
- testRunner.Given(string.Format("the from account is \'{0}\' equals \'{1}\'", from, fromVal), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 272
- testRunner.And(string.Format("to address is \'{0}\' equals \'{1}\'", to, toVal), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given(string.Format("the from account is \'{0}\' equals \'{1}\'", from, fromVal), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 273
- testRunner.And(string.Format("the subject is \'{0}\'", subject), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("to address is \'{0}\' equals \'{1}\'", to, toVal), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 274
- testRunner.And(string.Format("Password is \'{0}\'", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("the subject is \'{0}\'", subject), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 275
- testRunner.And(string.Format("the Bcc is \'{0}\'", bcc), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("Password is \'{0}\'", password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 276
- testRunner.And(string.Format("the Cc is \'{0}\'", cc), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("the Bcc is \'{0}\'", bcc), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 277
- testRunner.And(string.Format("body is \'{0}\'", body), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("the Cc is \'{0}\'", cc), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 278
- testRunner.And(string.Format("the attachment is \'{0}\'", attachments), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("body is \'{0}\'", body), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 279
- testRunner.And(string.Format("the execution has \'{0}\' error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("the attachment is \'{0}\'", attachments), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 280
+ testRunner.And(string.Format("the execution has \'{0}\' error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 281
  testRunner.And(string.Format("Result is \'{0}\'", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -987,6 +993,7 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sending an email using complex types")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Email")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[client().set().value]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:from", "[[client().set().value]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:FromVal", "warewolf@dev2.co.za")]
@@ -1008,8 +1015,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sending an email using complex types")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Email")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[client(1).set().value]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:from", "[[client(1).set().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[client(1).set(*).value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:from", "[[client(1).set(*).value]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:FromVal", "warewolf@dev2.co.za")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "[[rs(1).set().value]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ToVal", "info@dev2.co.za")]
@@ -1023,7 +1031,29 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs(*).a]] = Success")]
         public virtual void SendingAnEmailUsingComplexTypes_Client1_Set_Value()
         {
-            this.SendingAnEmailUsingComplexTypes("[[client(1).set().value]]", "warewolf@dev2.co.za", "[[rs(1).set().value]]", "info@dev2.co.za", "\"\"", "test123", "test@dev2.co.za", "user@dev2.co.za", "[[b]]", "E:\\test.txt", "No", "[[rs(*).a]] = Success", ((string[])(null)));
+            this.SendingAnEmailUsingComplexTypes("[[client(1).set(*).value]]", "warewolf@dev2.co.za", "[[rs(1).set().value]]", "info@dev2.co.za", "\"\"", "test123", "test@dev2.co.za", "user@dev2.co.za", "[[b]]", "E:\\test.txt", "No", "[[rs(*).a]] = Success", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sending an email using complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Email")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[client(1).set([[int]]).value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:from", "[[client(1).set([[int]]).value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:FromVal", "warewolf@dev2.co.za")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "[[rs(1).set().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:ToVal", "info@dev2.co.za")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:subject", "\"\"")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:password", "test123")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Bcc", "test@dev2.co.za")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Cc", "user@dev2.co.za")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:body", "[[b]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:attachments", "E:\\test.txt")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:error", "No")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs(*).a]] = Success")]
+        public virtual void SendingAnEmailUsingComplexTypes_Client1_SetInt_Value()
+        {
+            this.SendingAnEmailUsingComplexTypes("[[client(1).set([[int]]).value]]", "warewolf@dev2.co.za", "[[rs(1).set().value]]", "info@dev2.co.za", "\"\"", "test123", "test@dev2.co.za", "user@dev2.co.za", "[[b]]", "E:\\test.txt", "No", "[[rs(*).a]] = Success", ((string[])(null)));
         }
     }
 }

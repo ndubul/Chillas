@@ -744,7 +744,7 @@ Examples:
 	| 47 | [[rs().row]]        |       | Base 64 | Hex     | Invalid Recordset |
 	| 48 | [[rs().row]]        |       | Base 64 | Base 64 | Invalid Recordset |
  
-
+ @ignore
  #Complex types
 Scenario Outline: Convert from text to binary using complex types
 	Given I have a convert variable '<variable>' with a value of '<value>'
@@ -759,7 +759,7 @@ Scenario Outline: Convert from text to binary using complex types
 	| # |                       |
 	| 1 | <variables> = <value> |
 	Examples: 
-	| variables                           | value | types   | results                                                |
-	| [[granparent().parents().initials]] | AA    | Binary  | [[granparent().parents().initials]] = 0100000101000001 |
-	| [[granparent().parents().initials]] | AA    | Base 64 | [[granparent().parents().initials]] = QUE=             |
-	| [[granparent().parents().initials]] | AA    | Hex     | [[granparent().parents().initials]] = 0x4141           |
+	| variables                                  | value | types   | results                                                |
+	| [[granparent(*).parents().initials]]       | AA    | Binary  | [[granparent().parents().initials]] = 0100000101000001 |
+	| [[granparent().parents([[int]]).initials]] | AA    | Base 64 | [[granparent().parents().initials]] = QUE=             |
+	| [[granparent(*).parents(*).initials]]      | AA    | Hex     | [[granparent().parents().initials]] = 0x4141           |
