@@ -1,8 +1,8 @@
 ﻿@SharepointSource
 Feature: Sharepoint
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+	In order to connect with Sharepoint Online
+	As a Warewolf User
+	I want to be able to interact with a sharepoint server
 
 @SharepointSource
 Scenario: Creating New Sharepoint Source 

@@ -768,7 +768,7 @@ Scenario Outline:  Assigning value to a complex type
 	| [[granparent([[rec().var]]).parent(*).NumberOfChildren]]       | 4     | [[granparent(2).parent().NumberOfChildren]] = 4  |
 	| [[granparent([[rec().var().set]]).parent(*).NumberOfChildren]] | 4     | [[granparent(2).parent().NumberOfChildren]] = 4  |	
 
-
+@ignore
 Scenario Outline:  Assigning value to a complex type that is incorrectly formatted
 	Given I assign the value "<value>" to a variable "<object>"	
 	When the assign tool is executed

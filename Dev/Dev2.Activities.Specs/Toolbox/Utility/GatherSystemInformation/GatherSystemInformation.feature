@@ -237,3 +237,17 @@ Scenario Outline: Assign a DateTime into a recordset
 	| [[rec().a]]                   | DateTime | 2015/08/05 11:40:36.975 AM |
 	| [[rec(*).a]]                  | DateTime | 2015/08/05 11:41:40.775 AM |
 	| [[rec([[int]]).a]],[[int]] =2 | DateTime | 2015/08/05 11:42:36.934 AM |
+
+#Complex Types
+Scenario Outline: Assign a DateTime into a complex types
+	Given I have a variable '<object>' and I selected '<Type>'	
+	When the gather system infomartion tool is executed
+	Then the value of the variable '<object>' is a valid "DateTime"
+	And the execution has "<error>" error
+	And the debug output as 
+	| # | Variable   | Type   | results  |
+	| 1 | <object> | <Type> | <output> |
+	Examples: 
+	| object                | Type     | error | output                     |
+	| [[rec().set().value]] | DateTime | NO    | 2015/08/05 11:40:36.975 AM |
+	| [[rec(*).set.value]]  | DateTime | AN    | 2015/08/05 11:40:36.975 AM |

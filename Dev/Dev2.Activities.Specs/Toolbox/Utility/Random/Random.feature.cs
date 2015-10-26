@@ -1210,6 +1210,60 @@ this.ScenarioSetup(scenarioInfo);
         {
             this.GenerateErrorUsingVariablesAndRecordsets("Letters", "", "", "[[q]]", "[[rec().a]]", "The expression [[u]] has no value assigned", ((string[])(null)));
         }
+        
+        public virtual void GenerateNumbersUsingComplexTypes(string type, string from, string to, string length, string res, string error, string message, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Generate numbers using complex types", exampleTags);
+#line 347
+this.ScenarioSetup(scenarioInfo);
+#line 348
+ testRunner.Given(string.Format("I have a type as \'{0}\'", type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 349
+ testRunner.And(string.Format("I have a range from \'{0}\' to \'{1}\'", from, to), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 350
+ testRunner.When("the random tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 351
+ testRunner.Then(string.Format("the result from the random tool should be of type \"System.Int32\" with a length of" +
+                        " \'{0}\'", length), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 352
+ testRunner.And(string.Format("the execution has \"{0}\" error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 353
+ testRunner.And(string.Format("the execution has \'{0}\' error", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Generate numbers using complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Random")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Numbers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:From", "[[rec(1).count(3).val]] = 9")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "[[rec(1).count(1).val]] = 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:length", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rec().a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "An")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "Please ensure that the Start is an Integer or decimal from -1")]
+        public virtual void GenerateNumbersUsingComplexTypes_Variant0()
+        {
+            this.GenerateNumbersUsingComplexTypes("Numbers", "[[rec(1).count(3).val]] = 9", "[[rec(1).count(1).val]] = 0", "", "[[rec().a]]", "An", "Please ensure that the Start is an Integer or decimal from -1", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Generate numbers using complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Random")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Type", "Numbers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:From", "[[rec(1).count(1).val]] = 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:To", "[[rec(1).count(3).val]] = 9")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:length", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rec().result().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Error", "No")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Message", "[[rec().result().value]] = 5")]
+        public virtual void GenerateNumbersUsingComplexTypes_Variant1()
+        {
+            this.GenerateNumbersUsingComplexTypes("Numbers", "[[rec(1).count(1).val]] = 0", "[[rec(1).count(3).val]] = 9", "", "[[rec().result().value]]", "No", "[[rec().result().value]] = 5", ((string[])(null)));
+        }
     }
 }
 #pragma warning restore

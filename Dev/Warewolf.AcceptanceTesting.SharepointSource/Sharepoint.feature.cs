@@ -31,8 +31,8 @@ namespace Warewolf.AcceptanceTesting.SharepointSource
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Sharepoint", "In order to avoid silly mistakes\r\nAs a math idiot\r\nI want to be told the sum of t" +
-                    "wo numbers", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Sharepoint", "In order to connect with Sharepoint Online\r\nAs a Warewolf User\r\nI want to be able" +
+                    " to interact with a sharepoint server", ProgrammingLanguage.CSharp, new string[] {
                         "SharepointSource"});
             testRunner.OnFeatureStart(featureInfo);
         }

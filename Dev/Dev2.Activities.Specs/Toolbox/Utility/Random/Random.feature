@@ -341,3 +341,17 @@ Examples:
 	| Letters |           |           | sdf    | [[rec().a]]                   | Please ensure that the length is an integer value             |
 	| Letters |           |           | [[u]]  | [[rec().a]]                   | The expression [[u]] has no value assigned                    |
 	| Letters |           |           | [[q]]  | [[rec().a]]                   | The expression [[u]] has no value assigned                    |
+
+
+#Complex Types
+Scenario Outline: Generate numbers using complex types
+	Given I have a type as '<Type>'
+	And I have a range from '<From>' to '<To>' 
+	When the random tool is executed 
+	Then the result from the random tool should be of type "System.Int32" with a length of '<length>'
+	And the execution has "<Error>" error
+	And the execution has '<Message>' error
+Examples: 
+	| Type    | From                        | To                          | length | res                      | Error | Message                                                       |
+	| Numbers | [[rec(1).count(3).val]] = 9 | [[rec(1).count(1).val]] = 0 |        | [[rec().a]]              | An    | Please ensure that the Start is an Integer or decimal from -1 |
+	| Numbers | [[rec(1).count(1).val]] = 0 | [[rec(1).count(3).val]] = 9 |        | [[rec().result().value]] | No    | [[rec().result().value]] = 5                                  |

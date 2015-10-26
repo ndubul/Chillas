@@ -1,7 +1,7 @@
 ﻿Feature: DropboxSource
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+	In order to save content to an Online Server
+	As a Warewolf User
+	I want to be to backup/move files to a dropbox account
 
 @ignore
 Scenario: New Dropbox Source
