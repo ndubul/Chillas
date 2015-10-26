@@ -25,6 +25,7 @@ namespace Warewolf.Studio.Views
             var grid = sender as Grid;
             if (grid != null && e.LeftButton == MouseButtonState.Pressed)
             {
+                Mouse.SetCursor(_customCursor);
                 var dataContext = grid.DataContext as ToolDescriptorViewModel;
                 if (dataContext != null)
                 {
@@ -129,6 +130,12 @@ namespace Warewolf.Studio.Views
         {
             var Source = e.Source;
             var originalSource = e.OriginalSource;
+        }
+
+        void ToolGrid_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Cursor grabCursor = Application.Current.TryFindResource("CursorGrabbing") as Cursor;
+            Mouse.SetCursor(grabCursor);
         }
     }
 }
