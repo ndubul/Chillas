@@ -221,8 +221,6 @@
     <Compile Include="Activities\Utils\ModelItemUtils.cs" />
     <Compile Include="AppResources\Attributes\ResourceHelper.cs" />
     <Compile Include="AppResources\Behaviors\PreventHorizontalScrollWhenFocusedTreeViewItemBehavior.cs" />
-    <Compile Include="AppResources\Browsers\Browser.cs" />
-    <Compile Include="AppResources\Browsers\BrowserHandler.cs" />
     <Compile Include="AppResources\Browsers\InternalBrowserPopupController.cs" />
     <Compile Include="AppResources\Browsers\BrowserPopupControllerAbstract.cs" />
     <Compile Include="AppResources\Browsers\ExternalBrowserPopupController.cs" />
@@ -231,7 +229,6 @@
     <Compile Include="AppResources\Converters\BooleanInvertConverter.cs" />
     <Compile Include="AppResources\Attributes\IconLocation.cs" />
     <Compile Include="AppResources\Attributes\TreeCategory.cs" />
-    <Compile Include="AppResources\Browsers\Dev2RequestHandler.cs" />
     <Compile Include="AppResources\Converters\BoolToValueConverter.cs" />
     <Compile Include="AppResources\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="AppResources\Converters\CollectionToVisibilityConverterPositive.cs" />
@@ -367,7 +364,6 @@
     <Compile Include="Interfaces\IOperatorType.cs" />
     <Compile Include="AppResources\Repositories\EnvironmentRepository.cs" />
     <Compile Include="AppResources\Repositories\ResourceRepository.cs" />
-    <Compile Include="AppResources\Browsers\WebPropertyEditorScriptableClass.cs" />
     <Compile Include="AppResources\Workflow\WorkflowDebugger.CustomTrackingEventArgs.cs" />
     <Compile Include="AppResources\Workflow\WorkflowDebugger.CustomTrackingParticipant.cs" />
     <Compile Include="Factories\ResourceModelFactory.cs" />
@@ -491,7 +487,9 @@
     <Compile Include="Services\System\SystemInfoTO.cs" />
     <Compile Include="Services\WindowsServiceManager.cs" />
     <Compile Include="SortableObservableCollection.cs" />
-    <Compile Include="StringResources.Designer.cs" />
+    <Compile Include="StringResources.Designer.cs">
+      <DependentUpon>StringResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="StringResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

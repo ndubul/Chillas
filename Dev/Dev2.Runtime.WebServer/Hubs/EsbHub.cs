@@ -22,7 +22,6 @@ using Dev2.Common.Interfaces.Diagnostics.Debug;
 using Dev2.Common.Interfaces.Explorer;
 using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Common.Interfaces.Infrastructure.SharedModels;
-using Dev2.Common.Wrappers;
 using Dev2.Communication;
 using Dev2.Data.ServiceModel.Messages;
 using Dev2.Diagnostics.Debug;

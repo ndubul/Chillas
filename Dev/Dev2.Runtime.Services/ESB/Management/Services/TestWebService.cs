@@ -91,7 +91,7 @@ namespace Dev2.Runtime.ESB.Management.Services
         {
             get
             {
-                return _webServices ?? (IWebServices)new WebServices();
+                return _webServices ?? new WebServices();
             }
             set
             {

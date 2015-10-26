@@ -15,17 +15,14 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using Dev2.Common;
 using Dev2.Common.Interfaces.Diagnostics.Debug;
-using Dev2.Common.Interfaces.Threading;
 using Dev2.Communication;
 using Dev2.Controller;
 using Dev2.Core.Tests.Utils;
 using Dev2.Integration.Tests.MEF.WebTester;
 using Dev2.Network;
-using Moq;
 
 namespace Dev2.Integration.Tests.Helpers
 {

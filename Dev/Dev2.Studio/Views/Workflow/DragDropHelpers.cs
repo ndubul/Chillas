@@ -10,11 +10,9 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Dev2.Common.Interfaces.Data;
-using Dev2.Common.Interfaces.Infrastructure;
 using Dev2.Common.Interfaces.Security;
 using Dev2.Common.Interfaces.Studio.Controller;
 using Dev2.Models;
@@ -111,7 +109,7 @@ namespace Dev2.Studio.Views.Workflow
                         {
                             return true;
                         }
-                        if (workflowDesignerViewModel.EnvironmentModel.ID != explorerItemViewModel.Server.EnvironmentID && !workflowDesignerViewModel.EnvironmentModel.IsLocalHostCheck() && explorerItemModel.ResourceType == ResourceType.WorkflowService)
+                        if (workflowDesignerViewModel.EnvironmentModel.ID != explorerItemViewModel.Server.EnvironmentID && !workflowDesignerViewModel.EnvironmentModel.IsLocalHostCheck() && explorerItemViewModel.ResourceType == ResourceType.WorkflowService)
                         {
                             CustomContainer.Get<IPopupController>().Show(StringResources.DragRemoteNotSupported, StringResources.DragRemoteNotSupportedHeader, MessageBoxButton.OK, MessageBoxImage.Error, null);
                             return true;

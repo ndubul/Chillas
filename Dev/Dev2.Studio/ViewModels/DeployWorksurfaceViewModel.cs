@@ -1,5 +1,3 @@
-using System;
-using System.Windows;
 using Caliburn.Micro;
 using Dev2.Activities.Designers2.Core.Help;
 using Dev2.Common.Interfaces.Data;

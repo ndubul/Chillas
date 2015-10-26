@@ -12,7 +12,6 @@
 using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
-using Dev2.AppResources.DependencyVisualization;
 using Dev2.Services.Events;
 using Dev2.Studio.Core.Interfaces;
 using Dev2.Studio.ViewModels.DependencyVisualization;

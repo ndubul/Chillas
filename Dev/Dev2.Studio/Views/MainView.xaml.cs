@@ -25,7 +25,6 @@ using Dev2.Views;
 using FontAwesome.WPF;
 using Infragistics.Windows.DockManager;
 using Infragistics.Windows.DockManager.Events;
-using Warewolf.Studio.Views;
 using WinInterop = System.Windows.Interop;
 
 // ReSharper disable CheckNamespace
