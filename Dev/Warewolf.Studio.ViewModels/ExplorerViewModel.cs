@@ -28,7 +28,8 @@ namespace Warewolf.Studio.ViewModels
 		private bool _isRefreshing;
 		private IExplorerTreeItem _selectedItem;
 		private object[] _selectedDataItems;
-	    private bool _fromActivityDrop;
+	    bool _fromActivityDrop;
+	    bool _allowDrag;
 
 	    protected ExplorerViewModelBase()
 		{
@@ -178,7 +179,7 @@ namespace Warewolf.Studio.ViewModels
             }
         }
 
-	    protected virtual void Refresh()
+		protected virtual void Refresh()
 		{
 			IsRefreshing = true;
 			Environments.ForEach(async model =>
@@ -234,6 +235,18 @@ namespace Warewolf.Studio.ViewModels
 
 		public ICommand ClearSearchTextCommand { get; private set; }
 	    public ICommand CreateFolderCommand { get; private set; }
+	    public bool AllowDrag
+	    {
+	        get
+	        {
+	            return _allowDrag;
+	        }
+            set
+            {
+                _allowDrag = value;
+                OnPropertyChanged(()=>AllowDrag);
+            }
+	    }
 
 	    public void SelectItem(Guid id)
 		{

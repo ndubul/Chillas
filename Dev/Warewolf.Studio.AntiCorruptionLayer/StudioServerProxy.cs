@@ -64,9 +64,9 @@ namespace Warewolf.Studio.AntiCorruptionLayer
             return true;            
         }
 
-        public bool Move(IExplorerItemViewModel explorerItemViewModel, IExplorerTreeItem destination)
+        public async Task<bool> Move(IExplorerItemViewModel explorerItemViewModel, IExplorerTreeItem destination)
         {
-                UpdateManagerProxy.MoveItem(explorerItemViewModel.ResourceId,destination.ResourcePath,explorerItemViewModel.ResourcePath);
+                await UpdateManagerProxy.MoveItem(explorerItemViewModel.ResourceId,destination.ResourcePath,explorerItemViewModel.ResourcePath);
                 return true;
         }
 

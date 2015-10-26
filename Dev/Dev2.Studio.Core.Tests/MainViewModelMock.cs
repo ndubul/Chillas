@@ -24,7 +24,7 @@ namespace Dev2.Core.Tests
     public class MainViewModelMock : MainViewModel
     {
         public MainViewModelMock(IEventAggregator eventPublisher, IAsyncWorker asyncWorker, IEnvironmentRepository environmentRepository, IVersionChecker versionChecker, IStudioResourceRepository studioResourceRepository, IConnectControlSingleton connectControlSingleton, IConnectControlViewModel connectControlViewModel, bool createDesigners = true, IBrowserPopupController browserPopupController = null)
-            : base(eventPublisher, asyncWorker, environmentRepository, versionChecker, createDesigners, browserPopupController, studioResourceRepository:studioResourceRepository, connectControlSingleton:connectControlSingleton, connectControlViewModel: connectControlViewModel)
+            : base(eventPublisher, asyncWorker, environmentRepository, versionChecker, createDesigners, browserPopupController, studioResourceRepository:studioResourceRepository)
         {
         }
 
