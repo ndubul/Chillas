@@ -145,7 +145,7 @@
     <value>Studio: Version {0}
 Server: Version {1}
 
-Sofware development by: www.dev2.co.za
+Software development by: www.dev2.co.za
 </value>
   </data>
   <data name="About_Header_Text" xml:space="preserve">
@@ -286,7 +286,7 @@ Version History will also be deleted.</value>
     <value>feedback@warewolf.io</value>
   </data>
   <data name="IntellisenseErrorMisMacthingBrackets" xml:space="preserve">
-    <value>Invalid expression: Opening and closing brackets dont match.</value>
+    <value>Invalid expression: Opening and closing brackets don't match.</value>
   </data>
   <data name="CriticalExceptionMessage" xml:space="preserve">
     <value>Critical : Warewolf Must Restart. All open tabs will be saved. Please take the time to report this error to the community.</value>
@@ -427,7 +427,7 @@ You need Administrator permission.</value>
   </data>
   <data name="SaveSettingsDuplicateServerPermissions" xml:space="preserve">
     <value>There are duplicate server permissions, 
-    i.e Server permissions have been setup up with the same group twice. 
+    i.e. Server permissions have been setup up with the same group twice. 
     Please clear the duplicates before saving.</value>
   </data>
   <data name="DragRemoteNotSupported" xml:space="preserve">
@@ -458,13 +458,13 @@ You need Administrator permission.</value>
     <value>"Invalid text"</value>
   </data>
   <data name="InvalidTextMessage" xml:space="preserve">
-    <value>"{0} is invalid. Warewolf only supports latin characters"</value>
+    <value>"{0} is invalid. Warewolf only supports Latin characters"</value>
   </data>
   <data name="InvalidPermissionHeader" xml:space="preserve">
     <value>"Invalid text"</value>
   </data>
   <data name="InvalidPermissionMessage" xml:space="preserve">
-    <value>"{0} is invalid. Warewolf only supports latin characters"</value>
+    <value>"{0} is invalid. Warewolf only supports Latin characters"</value>
   </data>
   <data name="RenameConflictDescription" xml:space="preserve">
     <value>The following task has been renamed {0} -&gt; {1}. You will lose the history for the old task.{2} Would you like to save the new name?{2}-------------------------------------------------------------------" + "Yes - Save with the new name.{2}No - Save with the old name.{2}Cancel - Returns you to Scheduler.</value>
@@ -587,7 +587,7 @@ You need Administrator permission.</value>
     <value>Web</value>
   </data>
   <data name="ConnectControlConnectionsToolTip" xml:space="preserve">
-    <value>Select the Warewolf server you want to use or add a new one</value>
+    <value>Select the Warewolf server you want to use or click New Remote Server...</value>
   </data>
   <data name="ConnectControlEditConnectionToolTip" xml:space="preserve">
     <value>Edit the selected server</value>
@@ -623,7 +623,7 @@ You need Administrator permission.</value>
     <value>A new version of Warewolf is available for download</value>
   </data>
   <data name="MenuHelpToolTip" xml:space="preserve">
-    <value>Get some help from the community and other resources</value>
+    <value>Knowledge Base</value>
   </data>
   <data name="MenuLockToolTip" xml:space="preserve">
     <value>Lock / unlock the menu</value>
@@ -651,9 +651,6 @@ You need Administrator permission.</value>
   </data>
   <data name="ServerSourceDialogAddressPortTip" xml:space="preserve">
     <value>Enter the port on the server</value>
-  </data>
-  <data name="ServerSourceDialogAddressSaveTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ServerSourceDialogAddressToolTip" xml:space="preserve">
     <value>Enter the IP address, domain name or computer name of the server you want to connect to</value>
@@ -724,9 +721,6 @@ You need Administrator permission.</value>
   <data name="SharePointServiceEditHeaderLabel" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="DatabaseSourceServerToolTip" xml:space="preserve">
-    <value>Select the database source you want to use</value>
-  </data>
   <data name="DatabaseSourceTypeLabel" xml:space="preserve">
     <value>Type:</value>
   </data>
@@ -764,58 +758,64 @@ You need Administrator permission.</value>
     <value>Cancel Test</value>
   </data>
   <data name="DeploySelectDependenciesHelp" xml:space="preserve">
-    <value>DeploySelectDependenciesHelp</value>
+    <value>Automatically include everything that this resource would need to execute at the destination.&lt;br/&gt;
+&lt;br/&gt;
+&lt;b&gt;Warning: &lt;b/&gt;Deploying Sources that are already on the destination Server, will overwrite their connection strings. </value>
   </data>
   <data name="DeployNewResourcesViewHelp" xml:space="preserve">
-    <value>DeployNewResourcesViewHelp</value>
+    <value>These are the new resources that will be found on the remote server after deploy.</value>
   </data>
   <data name="DeployOverridesCountViewHelp" xml:space="preserve">
-    <value>DeployOverridesCountViewHelp</value>
+    <value>These resources will be overwritten on the destination server.&lt;br/&gt;
+&lt;br/&gt;
+If the names are different, it is because the resource has been renamed. It will still be overwritten and then Source name will be used at the Destination.</value>
   </data>
   <data name="DeployCommandHelp" xml:space="preserve">
-    <value>DeployCommandHelp</value>
+    <value>Deploy the selected Source files to the Destination Server.</value>
   </data>
   <data name="DatabaseSourceServerTypesHelp" xml:space="preserve">
-    <value>DatabaseSourceServerTypesHelp</value>
+    <value>These are the currently supported database engines.</value>
   </data>
   <data name="DatabaseSourceDatabasesHelp" xml:space="preserve">
-    <value>DatabaseSourceDatabasesHelp</value>
-  </data>
-  <data name="DatabaseSourceSaveHelp" xml:space="preserve">
-    <value>DatabaseSourceSaveHelp</value>
+    <value>The available databases on the Server.</value>
   </data>
   <data name="DatabaseSourceServerHelp" xml:space="preserve">
-    <value>DatabaseSourceServerHelp</value>
+    <value>The Server/Computer Name on your network with the Database Engine.&lt;br/&gt;
+&lt;br/&gt;
+Alternatively, the URL for your online Server, such as Azure SQL.</value>
   </data>
   <data name="DatabaseSourceTestConnectionHelp" xml:space="preserve">
-    <value>DatabaseSourceTestConnectionHelp</value>
+    <value>Test the connection to the Database. </value>
   </data>
   <data name="DatabaseSourceCancelHelp" xml:space="preserve">
-    <value>DatabaseSourceCancelHelp</value>
+    <value>Cancels the setup of this database source.</value>
   </data>
   <data name="DatabaseServiceSourceTypesHelp" xml:space="preserve">
-    <value>DatabaseServiceSourceTypesHelp</value>
+    <value>The available database connections. To create a new connection, click New.</value>
   </data>
   <data name="DatabaseServiceEditSourceHelp" xml:space="preserve">
-    <value>DatabaseServiceEditSourceHelp</value>
+    <value>Change the connection string properties of the selected Database.&lt;br&gt;
+&lt;br/&gt;
+Change the connection string from, say, a development database to a live database.&lt;br/&gt;
+&lt;br/&gt;
+&lt;a href="http://warewolf.io/knowledge-base/data-connectors" target="_blank"&gt;Read more in the Knowledge Base.&lt;/a&gt;</value>
   </data>
   <data name="DatabaseServiceNewSourceHelp" xml:space="preserve">
-    <value>DatabaseServiceNewSourceHelp</value>
+    <value>Create a connection to a new database server.</value>
   </data>
   <data name="DatabaseServiceSelectActionHelp" xml:space="preserve">
-    <value>DatabaseServiceSelectActionHelp</value>
+    <value>The available database actions you can perform such as stored procedures or function calls.</value>
   </data>
   <data name="DatabaseServiceRefreshHelp" xml:space="preserve">
-    <value>DatabaseServiceRefreshHelp</value>
+    <value>Refreshes the list of available actions on the database.</value>
   </data>
   <data name="DatabaseServiceInputsHelp" xml:space="preserve">
-    <value>DatabaseServiceInputsHelp</value>
+    <value>Input some test data to execute the procedure.&lt;br/&gt;
+&lt;br/&gt;
+This data will not be stored and the execution will be rolled back if supported by the database.</value>
   </data>
   <data name="DatabaseServiceTestHelp" xml:space="preserve">
-    <value>DatabaseServiceTestHelp</value>
-  </data>
-  <data name="DatabaseServiceSaveHelp" xml:space="preserve">
-    <value>DatabaseServiceSaveHelp</value>
+    <value>Test the execution of this resource.</value>
   </data>
   <data name="SharepointServiceSourceServerHelp" xml:space="preserve">
     <value>SharepointServiceSourceServerHelp</value>
@@ -824,148 +824,151 @@ You need Administrator permission.</value>
     <value>SharepointServiceSourceTestHelp</value>
   </data>
   <data name="MenuNewServiceHelp" xml:space="preserve">
-    <value>MenuNewServiceHelp</value>
+    <value>Create a new Warewolf Hosted Service. This flow based service is that start of all orchestration in Warewolf.&lt;br/&gt;
+&lt;br/&gt;
+&lt;a href="http://warewolf.io/knowledge-base/getting-started/" target="_blank"&gt;Read more in the Knowledgebase.&lt;/a&gt;</value>
   </data>
   <data name="MenuSaveTabHelp" xml:space="preserve">
-    <value>MenuSaveTabHelp</value>
+    <value>Saves the active tab in the studio</value>
   </data>
   <data name="MenuDeployHelp" xml:space="preserve">
-    <value>MenuDeployHelp</value>
+    <value>Move resources between multiple Warewolf Servers.&lt;br/&gt;
+&lt;br/&gt;
+Deploy is the safest and recommended way of moving resources between Warewolf Servers.</value>
   </data>
   <data name="MenuNewDatabaseConnectorHelp" xml:space="preserve">
-    <value>MenuNewDatabaseConnectorHelp</value>
+    <value>Connect to a database to execute stored procedures, functions and TSQL.</value>
   </data>
   <data name="MenuNewPluginConnectorHelp" xml:space="preserve">
-    <value>MenuNewPluginConnectorHelp</value>
+    <value>Connect to dll's to execute any custom code.</value>
   </data>
   <data name="MenuNewWebConnectorHelp" xml:space="preserve">
-    <value>MenuNewWebConnectorHelp</value>
+    <value>Connect to using REST or SOAP to execute any webservice.</value>
   </data>
   <data name="MenuSchedulerHelp" xml:space="preserve">
-    <value>MenuSchedulerHelp</value>
+    <value>Schedule workflow executions</value>
   </data>
   <data name="MenuDebugHelp" xml:space="preserve">
-    <value>MenuDebugHelp</value>
+    <value>Debug your Service in either the Studio or the Browser.&lt;br/&gt;
+&lt;br/&gt;
+&lt;a href="http://warewolf.io/knowledge-base/debugging/"  target="_blank"&gt;Read more in the Knowledge Base.&lt;/a&gt;</value>
   </data>
   <data name="MenuSettingsHelp" xml:space="preserve">
-    <value>MenuSettingsHelp</value>
+    <value>Edit or View system settings such as Security and Logging.</value>
   </data>
   <data name="MenuHelp" xml:space="preserve">
-    <value>MenuHelp</value>
+    <value>A quick link to the Knowledge Base and other helpful resources.</value>
   </data>
   <data name="MenuNewVersionHelp" xml:space="preserve">
-    <value>MenuNewVersionHelp</value>
+    <value>A new version of Warewolf is available for download.</value>
   </data>
   <data name="MenuLockMenuHelp" xml:space="preserve">
-    <value>MenuLockMenuHelp</value>
-  </data>
-  <data name="WebServiceSourceSaveHelp" xml:space="preserve">
-    <value>WebServiceSourceSaveHelp</value>
+    <value>Lock the Menu bar either open or closed, or Unlock to allow dynamic menu opening on mouse over.</value>
   </data>
   <data name="WebServiceSourceServerHelp" xml:space="preserve">
-    <value>WebServiceSourceServerHelp</value>
+    <value>The base URL of the Webservice.&lt;br/&gt;
+&lt;br/&gt;
+This should be up to the part of the URL that contains the difference between your live and demo environments. e.g. https://myservices.mycompany.com/demo&lt;br/&gt;
+&lt;br/&gt;
+This will allow you to ship webservice connectors to live without having to change the base URL every time you do.</value>
   </data>
   <data name="WebServiceWebRequestHelp" xml:space="preserve">
-    <value>&lt;h3&gt;HTTP Methods&lt;/h3&gt;
-    &lt;p&gt;Indicates the method to be performed on the object identified by the URL&lt;/p&gt;
-    &lt;ol&gt;
-        &lt;li&gt;GET&lt;/li&gt;
-        &lt;li&gt;POST&lt;/li&gt;
-        &lt;li&gt;PUT&lt;/li&gt;
-    &lt;/ol&gt;
-    &lt;h1&gt;Examples&lt;/h1&gt;
-    &lt;p&gt; GET http://www.example.com/customers/12345 &lt;/p&gt;
-    &lt;p&gt; POST http://www.example.com/customers &lt;/p&gt;
-    &lt;p&gt; PUT http://www.example.com/customers/12345 &lt;/p&gt;</value>
+    <value>Indicates the method to be performed on the object identified by the URL&lt;br/&gt;
+&lt;br/&gt;
+These should be set by the webservice creator and found in the webservice documentation.&lt;br/&gt;
+&lt;br/&gt;
+Note that the GET method, does not have a request Body.</value>
   </data>
   <data name="WebServiceSourcesHelp" xml:space="preserve">
-    <value>&lt;h1&gt;Web Sources&lt;/h1&gt;
-    &lt;p&gt;Provides a list of available saved web sources. If a Web Source does not exist under this list, then click the 'New' button to create a new Web Source&lt;/p&gt;</value>
+    <value>Provides a list of available saved web sources.&lt;br/&gt;
+&lt;br/&gt;
+If a Web Source does not exist under this list, then click the 'New' button to create a new Web Source.</value>
   </data>
   <data name="WebServiceSelectedSourceHelp" xml:space="preserve">
-    <value>&lt;h1&gt;Edit Selected Web Source&lt;/h1&gt;
-    &lt;p&gt;Allows a user to edit the selected Web Source&lt;/p&gt;</value>
+    <value>Change the connection string properties of the selected Webservice.&lt;br&gt;
+&lt;br/&gt;
+Change the connection string from, say, a development service to a live service.&lt;br/&gt;
+&lt;br/&gt;
+&lt;a href="http://warewolf.io/knowledge-base/data-connectors" target="_blank"&gt;Read more in the Knowledgebase.&lt;/a&gt;</value>
   </data>
   <data name="WebServiceNewWebSourceHelp" xml:space="preserve">
-    <value>&lt;h1&gt;Create New Web Source&lt;/h1&gt;
-    &lt;p&gt;Allows a user to create a new Web Source&lt;/p&gt;</value>
+    <value>Create a reusable connection to a web service.&lt;br/&gt;
+&lt;br/&gt;
+This allows you to create a general connection string and the create the actual web service from there so you do not need to update the core address in every service from this provider / source.</value>
   </data>
   <data name="WebServiceRequestBodyHelp" xml:space="preserve">
-    <value>&lt;h1&gt;Web Service Request Body&lt;/h1&gt;
-    &lt;p&gt;HTTP Message Body is the data bytes transmitted in an HTTP transaction message immediately following the headers if there is any&lt;/p&gt;</value>
+    <value>The request body.&lt;br/&gt;
+&lt;br/&gt;
+This is typically directly after the header text in the Request.</value>
   </data>
   <data name="WebServiceRequestUrlHelp" xml:space="preserve">
-    <value>&lt;h1&gt;Web Service Request Url&lt;/h1&gt;
-    &lt;p&gt;A URL is a reference to a resource that specifies the location of the resource on a computer network and a mechanism for retrieving it&lt;/p&gt;</value>
+    <value>Web Service Request URL to execute.&lt;br/&gt;
+&lt;br/&gt;
+The un-editable part is determined by the Source you are using, so its easy to change when moving environments, for example, going from development to testing, or live.</value>
   </data>
   <data name="WebServiceTestCommandHelp" xml:space="preserve">
-    <value>WebServiceTestCommandHelp</value>
+    <value>Test the Webservice to get response payload. &lt;br/&gt;
+&lt;br/&gt;
+This allows us to map response data back into the system for you.</value>
   </data>
   <data name="WebServicePasteHelp" xml:space="preserve">
-    <value>WebServicePasteHelp</value>
-  </data>
-  <data name="WebServiceSaveCommandHelp" xml:space="preserve">
-    <value>WebServiceSaveCommandHelp</value>
-  </data>
-  <data name="WebServiceCancelCommandHelp" xml:space="preserve">
-    <value>WebServiceCancelCommandHelp</value>
+    <value>You can manually add the response body here.</value>
   </data>
   <data name="WebServicePasteInputHelp" xml:space="preserve">
-    <value>WebServicePasteInputHelp</value>
+    <value>Paste the XML, JSON or plain text response of the web service call here.&lt;br/&gt;
+&lt;br/&gt;
+If you do not know the response body exactly, rather execute the Test execution.</value>
   </data>
   <data name="WebServicePasteSaveCommandHelp" xml:space="preserve">
-    <value>WebServicePasteSaveCommandHelp</value>
+    <value>Saves this as the mapping that will be used by Warewolf when executing.</value>
   </data>
   <data name="WebServicePasteCancelCommandHelp" xml:space="preserve">
-    <value>WebServicePasteCancelCommandHelp</value>
+    <value>Cancel your changes to the response body.</value>
   </data>
   <data name="PluginSourceClearSearchHelp" xml:space="preserve">
-    <value>PluginSourceClearSearchHelp</value>
+    <value>Clears the Search Filter</value>
   </data>
   <data name="PluginSourceRefreshCommandHelp" xml:space="preserve">
-    <value>PluginSourceRefreshCommandHelp</value>
+    <value>Refresh the view based on the filter.&lt;br/&gt;
+&lt;br/&gt;
+Newly added resources should show after a refresh.</value>
   </data>
   <data name="PluginSourceDllFullNameHelp" xml:space="preserve">
-    <value>PluginSourceDllFullNameHelp</value>
-  </data>
-  <data name="PluginSourceOkCommandHelp" xml:space="preserve">
-    <value>PluginSourceOkCommandHelp</value>
-  </data>
-  <data name="PluginSourceCancelCommandHelp" xml:space="preserve">
-    <value>PluginSourceCancelCommandHelp</value>
+    <value>The full path to the dll. e.g. &lt;b&gt;D:\My Project\Core.dll&lt;/b&gt;&lt;br/&gt;
+or
+The full GAC address e.g. &lt;b&gt;GAC:TaskScheduler, Version=6.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35&lt;/b&gt;
+</value>
   </data>
   <data name="PluginServiceSourcesHelp" xml:space="preserve">
-    <value>PluginServiceSourcesHelp</value>
+    <value>Select  the dll you want to use from previously setup sources.</value>
   </data>
   <data name="PluginServiceEditSourceHelp" xml:space="preserve">
-    <value>PluginServiceEditSourceHelp</value>
+    <value>Change the connection string properties of the selected dll.&lt;br&gt;
+&lt;br/&gt;
+Change the connection string from, say, a development dll to a live dll.&lt;br/&gt;
+&lt;br/&gt;
+&lt;a href="http://warewolf.io/knowledge-base/data-connectors" target="_blank"&gt;Read more in the Knowledgebase.&lt;/a&gt;</value>
   </data>
   <data name="PluginServiceNewSourceHelp" xml:space="preserve">
-    <value>PluginServiceNewSourceHelp</value>
+    <value>To create a reference to a new dll, click New.</value>
   </data>
   <data name="PluginServiceNamespaceHelp" xml:space="preserve">
-    <value>PluginServiceNamespaceHelp</value>
+    <value>Select the Namespace from the DLL that has the method you want to execute.</value>
   </data>
   <data name="PluginServiceSelectActionHelp" xml:space="preserve">
-    <value>PluginServiceSelectActionHelp</value>
+    <value>Select the method in the dll you want to execute.</value>
   </data>
   <data name="PluginServiceRefreshHelp" xml:space="preserve">
-    <value>PluginServiceRefreshHelp</value>
+    <value>Refresh the available actions.</value>
   </data>
   <data name="PluginServiceTestHelp" xml:space="preserve">
-    <value>PluginServiceTestHelp</value>
+    <value>Test the dll so that we have a response object that can be used to map data back into the system.</value>
   </data>
   <data name="PluginServiceTestInputHelp" xml:space="preserve">
-    <value>PluginServiceTestInputHelp</value>
+    <value>Put the information you want to test with into the variables and execute the Test.</value>
   </data>
   <data name="PluginServiceTestResultsHelp" xml:space="preserve">
-    <value>PluginServiceTestResultsHelp</value>
-  </data>
-  <data name="PluginServiceSaveCommandHelp" xml:space="preserve">
-    <value>PluginServiceSaveCommandHelp</value>
-  </data>
-  <data name="PluginServiceCancelCommandHelp" xml:space="preserve">
-    <value>PluginServiceCancelCommandHelp</value>
+    <value>The results from the dll execution test based on your inputs.</value>
   </data>
   <data name="EmailSourceNewHeaderLabel" xml:space="preserve">
     <value>New Email Source</value>
@@ -992,88 +995,133 @@ You need Administrator permission.</value>
     <value>To</value>
   </data>
   <data name="EmailSourceHostNameHelp" xml:space="preserve">
-    <value>EmailSourceHostNameHelp</value>
+    <value>The Host name of the server you want to use for sending emails.
+&lt;style type="text/css"&gt;#smtptable td{text-align:center;border:0px;}&lt;/style&gt;&lt;br/&gt;
+e.g.&lt;br/&gt;
+&lt;table border="1" id="smtptable"&gt;
+&lt;tr align="center"&gt;&lt;th&gt;Host&lt;/th&gt;&lt;th&gt;Require SSL&lt;/th&gt;&lt;th&gt;Port&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;gmail&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;587&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;yahoo&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;zoho&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;465&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp-mail.&lt;b&gt;outlook&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;587&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;live&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;587&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</value>
   </data>
   <data name="EmailSourceEnableSslHelp" xml:space="preserve">
-    <value>EmailSourceEnableSslHelp</value>
+    <value>Does the Host require a secure connection?
+&lt;style type="text/css"&gt;#smtptable td{text-align:center;border:0px;}&lt;/style&gt;&lt;br/&gt;
+e.g.&lt;br/&gt;
+&lt;table border="1" id="smtptable"&gt;
+&lt;tr align="center"&gt;&lt;th&gt;Host&lt;/th&gt;&lt;th&gt;Require SSL&lt;/th&gt;&lt;th&gt;Port&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;gmail&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;587&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;yahoo&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;zoho&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;465&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp-mail.&lt;b&gt;outlook&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;587&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;live&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;587&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</value>
   </data>
   <data name="EmailSourcePortHelp" xml:space="preserve">
-    <value>EmailSourcePortHelp</value>
+    <value>&lt;style type="text/css"&gt;
+#smtptable td
+{
+text-align:center;
+border:0px;
+}
+&lt;/style&gt;
+The Port of the email server.
+&lt;br/&gt;
+e.g.&lt;br/&gt;
+&lt;table border="1" id="smtptable"&gt;
+&lt;tr align="center"&gt;&lt;th&gt;Host&lt;/th&gt;&lt;th&gt;Require SSL&lt;/th&gt;&lt;th&gt;Port&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;gmail&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;587&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;yahoo&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;zoho&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;465&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp-mail.&lt;b&gt;outlook&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;587&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;smtp.&lt;b&gt;live&lt;/b&gt;.com&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;587&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</value>
   </data>
   <data name="EmailSourceTimeoutHelp" xml:space="preserve">
-    <value>EmailSourceTimeoutHelp</value>
+    <value>The time allowed for the operation to connect before throwing an error.</value>
   </data>
   <data name="EmailSourceEmailFromHelp" xml:space="preserve">
-    <value>EmailSourceEmailFromHelp</value>
+    <value>The email address that will be used to send the email from.&lt;br/&gt;
+&lt;br/&gt;
+This account needs to be a valid email address/account for the Host server.</value>
   </data>
   <data name="EmailSourceEmailToHelp" xml:space="preserve">
-    <value>EmailSourceEmailToHelp</value>
+    <value>The email address you want to send the test message to.</value>
   </data>
   <data name="EmailSourceTestHelp" xml:space="preserve">
-    <value>EmailSourceTestHelp</value>
-  </data>
-  <data name="EmailSourceSaveHelp" xml:space="preserve">
-    <value>EmailSourceSaveHelp</value>
-  </data>
-  <data name="EmailSourceCancelHelp" xml:space="preserve">
-    <value>EmailSourceCancelHelp</value>
+    <value>Test the settings you have entered by sending a test email.</value>
   </data>
   <data name="MappingsRecordsetNameHelp" xml:space="preserve">
-    <value>MappingsRecordsetNameHelp</value>
+    <value>If you would like the default variables in a recordset, put the recordset name in here.</value>
   </data>
   <data name="MappingsDefaultValueHelp" xml:space="preserve">
-    <value>MappingsDefaultValueHelp</value>
+    <value>The default value to be used when mapping this field.</value>
   </data>
   <data name="MappingsRequiredFieldHelp" xml:space="preserve">
-    <value>MappingsRequiredFieldHelp</value>
+    <value>Mark this field as required for Input.</value>
   </data>
   <data name="MappingsEmptyIsNullHelp" xml:space="preserve">
-    <value>MappingsEmptyIsNullHelp</value>
-  </data>
-  <data name="MappingsAliasHelp" xml:space="preserve">
-    <value>MappingsAliasHelp</value>
+    <value>If the input variable is blank, or there is no data passed in, then use &lt;i&gt;NULL&lt;/i&gt;.</value>
   </data>
   <data name="DataListDeleteButtonHelp" xml:space="preserve">
-    <value>DataListDeleteButtonHelp</value>
+    <value>When the variable is not used in the service at all, you can select Marks the variable as an input to the service. To pass this variable into the workflow, make this checkbox selected.&lt;br/&gt;
+&lt;br/&gt;
+This variable is not being used in the service and can safely be deleted.</value>
   </data>
   <data name="DataListSortButtonHelp" xml:space="preserve">
-    <value>DataListSortButtonHelp</value>
+    <value>Sort the variable list alphabetically.</value>
   </data>
   <data name="DataListVariableInputHelp" xml:space="preserve">
-    <value>DataListVariableInputHelp</value>
+    <value>Input the variable you want to use in your service.&lt;br/&gt;
+&lt;br/&gt;
+If you use a variable on the design surface it will automatically appear here.&lt;br/&gt;
+&lt;br/&gt;
+&lt;a href="http://warewolf.io/knowledge-base/the-variable-list/"  target="_blank"&gt;Read more in the Knowledge Base.&lt;/a&gt;</value>
   </data>
   <data name="DataListInputCheckBoxHelp" xml:space="preserve">
-    <value>DataListInputCheckBoxHelp</value>
+    <value>Marks the variable as an input to the service. To pass this variable into the workflow, make this checkbox selected.&lt;br/&gt;
+&lt;br/&gt;
+&lt;a href="http://warewolf.io/knowledge-base/the-variable-list/"  target="_blank"&gt;Read more in the Knowledge Base.&lt;/a&gt;</value>
   </data>
   <data name="DataListOutputCheckBoxHelp" xml:space="preserve">
-    <value>DataListOutputCheckBoxHelp</value>
+    <value>Marks the variable as an output of the service. To return this variable from the workflow service, make this checkbox selected.&lt;br/&gt;
+&lt;br/&gt;
+&lt;a href="http://warewolf.io/knowledge-base/warewolf-language/"  target="_blank"&gt;Read more in the Knowledge Base.&lt;/a&gt;</value>
   </data>
   <data name="ServerProtocolHelp" xml:space="preserve">
-    <value>ServerProtocolHelp</value>
+    <value>By default, you can connect to other Warewolf Servers over HTTP or HTTPS.&lt;br/&gt;</value>
   </data>
   <data name="ServerAddressHelp" xml:space="preserve">
-    <value>ServerAddressHelp</value>
+    <value>For network computers, type in the name of the computer on the network and select it from the drop down list.&lt;br/&gt;
+&lt;br/&gt;
+For remote servers, such as Hybrid cloud environments, Azure hosted servers etc., put the server URL in here.</value>
   </data>
   <data name="ServerSelectWindowsHelp" xml:space="preserve">
-    <value>ServerSelectWindowsHelp</value>
+    <value>Uses the logged on windows account to authenticate on the remote server.</value>
   </data>
   <data name="ServerSelectUserHelp" xml:space="preserve">
-    <value>ServerSelectUserHelp</value>
+    <value>Use a specific windows account to authenticate on the remote server.&lt;br/&gt;
+&lt;br/&gt;
+Use the domain if relevant e.g. DOMAIN\Username</value>
   </data>
   <data name="ServerSelectPublicHelp" xml:space="preserve">
-    <value>ServerSelectPublicHelp</value>
+    <value>Use the public account to authenticate on the remote server.&lt;br/&gt;
+&lt;br/&gt;
+If there are no resources on the remote server, there will be no Public authentication.</value>
   </data>
   <data name="ServerSelectPortHelp" xml:space="preserve">
-    <value>ServerSelectPortHelp</value>
+    <value>By default this port will be 3143 for HTTPS connections and 3142 for HTTP connections.&lt;br/&gt;
+&lt;br/&gt;
+Do not change this unless you know the ports on the remote machine have been altered.</value>
   </data>
   <data name="ServerTestConnectionHelp" xml:space="preserve">
     <value>ServerTestConnectionHelp</value>
   </data>
-  <data name="ServerSaveHelp" xml:space="preserve">
-    <value>ServerSaveHelp</value>
-  </data>
   <data name="PasswordAuthenticationHelp" xml:space="preserve">
-    <value>PasswordAuthenticationHelp</value>
+    <value>Enter the password for the account you want to use for authenticating.</value>
   </data>
   <data name="UserAuthenticationHelp" xml:space="preserve">
     <value>UserAuthenticationHelp</value>
@@ -1082,22 +1130,34 @@ You need Administrator permission.</value>
     <value>&lt;body&gt;&lt;p&gt;UserNameAuthenticationHelp&lt;/p&gt;&lt;/body&gt;</value>
   </data>
   <data name="WindowsAuthenticationHelp" xml:space="preserve">
-    <value>WindowsAuthenticationHelp</value>
+    <value>Uses the Windows Authentication protocols to authenticate the executing account. </value>
   </data>
   <data name="ConnectControlViewSelectHelp" xml:space="preserve">
-    <value>ConnectControlViewSelectHelp</value>
+    <value>Select the Warewolf Server from the drop down list that you want to use. &lt;br/&gt;
+&lt;br/&gt;
+If you want to connect to a Warewolf Server that is not in the drop down list, then select  &lt;b&gt;New Remote Server…&lt;/b&gt;&lt;br/&gt;
+&lt;br/&gt;
+Servers with an active connection will show &lt;b&gt;(Connected)&lt;/b&gt; next to them.</value>
   </data>
   <data name="ConnectControlViewEditHelp" xml:space="preserve">
-    <value>ConnectControlViewEditHelp</value>
+    <value>Change the connection properties of the selected Warewolf Server.&lt;br&gt;
+&lt;br/&gt;
+Allows you to change remote server URL, Port and Authentication.&lt;br&gt;
+&lt;br/&gt;
+&lt;b&gt;localhost&lt;/b&gt; cannot be edited in this way.</value>
   </data>
   <data name="ConnectControlViewToggleConnectionHelp" xml:space="preserve">
-    <value>ConnectControlViewToggleConnectionHelp</value>
+    <value>Disconnects or Connects to the selected remote Warewolf Server. &lt;br/&gt;
+&lt;br/&gt;
+Connected Servers will be Disconnected and vice versa. &lt;br/&gt;
+&lt;br/&gt;
+&lt;b&gt;localhost&lt;/b&gt; cannot be disconnected and should always be connected. If it is not connected, try restarting the Warewolf Server service in Task Manager.</value>
   </data>
   <data name="ExplorerViewFilterSearchHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ExplorerViewFilterSearchHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>Search the connected servers by filtering based on this input.</value>
   </data>
   <data name="ExplorerViewRefreshHelp" xml:space="preserve">
-    <value>&lt;body&gt;&lt;p&gt;ExplorerViewRefreshHelp&lt;/p&gt;&lt;/body&gt;</value>
+    <value>Refresh the connected server(s) content.</value>
   </data>
   <data name="DatabaseServiceActionHeader" xml:space="preserve">
     <value>Select an Action</value>
@@ -1120,9 +1180,6 @@ You need Administrator permission.</value>
   <data name="DatabaseServiceMappingsHeader" xml:space="preserve">
     <value>Edit Defaults and Mapping Names</value>
   </data>
-  <data name="DatabaseServiceMappingsNameHeader" xml:space="preserve">
-    <value>h</value>
-  </data>
   <data name="DatabaseServiceOutputsLabel" xml:space="preserve">
     <value>Outputs</value>
   </data>
@@ -1133,7 +1190,7 @@ You need Administrator permission.</value>
     <value>New</value>
   </data>
   <data name="AnonymousAuthenticationToolTip" xml:space="preserve">
-    <value>Connect using anonymous</value>
+    <value>Connect using anonymous security credentials</value>
   </data>
   <data name="ViewInBrowserLabel" xml:space="preserve">
     <value>View Results In Browser</value>
@@ -1159,11 +1216,11 @@ You need Administrator permission.</value>
   <data name="WarewolfHelpURL" xml:space="preserve">
     <value>http://warewolf.io/knowledge-base/</value>
   </data>
-  <data name="EmailAttachmentCancelCommandHelp" xml:space="preserve">
-    <value>EmailAttachmentCancelCommandHelp</value>
+  <data name="EmailAttachmentCancelButtonToolTip" xml:space="preserve">
+    <value>Cancel changes and close window</value>
   </data>
-  <data name="EmailAttachmentSaveCommandHelp" xml:space="preserve">
-    <value>EmailAttachmentSaveCommandHelp</value>
+  <data name="EmailAttachmentAttachButtonToolTip" xml:space="preserve">
+    <value>Attach the selected files to the email.</value>
   </data>
   <data name="StandardBodyParagraphClosing" xml:space="preserve">
     <value>&lt;/div&gt;
@@ -1340,18 +1397,9 @@ You need Administrator permission.</value>
     &lt;div&gt;</value>
   </data>
   <data name="WebServiceRequestHeadersTableHelp" xml:space="preserve">
-    <value>&lt;h1&gt;Web Service Request Headers&lt;/h1&gt;
-    &lt;p&gt;HTTP header fields are components of the header section of request and response messages in the Hypertext Transfer Protocol (HTTP)&lt;/p&gt;
-    &lt;table&gt;
-        &lt;tr&gt;
-            &lt;th&gt;Name&lt;/th&gt;
-            &lt;th&gt;Value&lt;/th&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-            &lt;td&gt;&lt;label&gt;Header&lt;/label&gt;&lt;/td&gt;
-            &lt;td&gt;&lt;label&gt;Value&lt;/label&gt;&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/table&gt;</value>
+    <value>Web Service Request Headers.&lt;br/&gt;
+&lt;br/&gt;
+You can use variables here in the value field like [[Header_ResponseType]]. These variable values will be requested when you drop the service on the workflow designer.</value>
   </data>
   <data name="AssignHelpVariable" xml:space="preserve">
     <value>Only variables go in here.&lt;br /&gt;
@@ -1656,7 +1704,7 @@ Data
     <value>To create JSON data, enter the Name and Data of the JSON variables.&lt;br /&gt;
         To create JSON Arrays use a single recordset field with a star for every record e.g.&lt;br /&gt;
         [[rec(*).name]]&lt;br /&gt;
-        To create JSON Objects, use a comma seperated list of recordset fields, or, just the recordset name to use the whole recordset. e.g.&lt;br /&gt;
+        To create JSON Objects, use a comma separated list of recordset fields, or, just the recordset name to use the whole recordset. e.g.&lt;br /&gt;
         [[rec(*).surname]], [[rec(*).name]], [[rec(*).middle]]&lt;br /&gt;
         or simply&lt;br /&gt;
         [[rec(*)]]&lt;br /&gt;
@@ -2348,9 +2396,7 @@ Data
         Should all the fields match?</value>
   </data>
   <data name="FindHelpTo" xml:space="preserve">
-    <value>The value that the search will end at, this must be a number, date or time and must be the same type as the "From" type.&lt;br /&gt;
-        &lt;br /&gt;
-
+    <value>The value that the search will end at, this must be a number, date or time and must be the same type as the "From" type.&lt;br /&gt;&lt;br /&gt;
         Allowed:&lt;br /&gt;
         Data   
         &lt;ol&gt;
@@ -2361,7 +2407,7 @@ Data
         &lt;/ol&gt;</value>
   </data>
   <data name="ForEachHelpForEachType" xml:space="preserve">
-    <value>Generaly Replaces the * in the activity with the relevant index. e.g.&lt;br/&gt;
+    <value>Generally Replaces the * in the activity with the relevant index. e.g.&lt;br/&gt;
         If 1-3 is provided then [[Customer(*).ID]] will execute as [[Customer(1).ID]], [[Customer(2).ID]], [[Customer(3).ID]].&lt;br /&gt;
         * in Range allows you to input a range of indexes.&lt;br/&gt;
         * in CSV allows a specific set of indexes to be specified e.g. 1,5,7,9.&lt;br/&gt;
@@ -2977,7 +3023,7 @@ Data
         Select a list to read data from.</value>
   </data>
   <data name="SharepointHelpServer" xml:space="preserve">
-    <value>Select a preconfigured Sharepoint server source or "New Sharepoint Server Source..." to add a new one.</value>
+    <value>Select a preconfigured SharePoint server source or "New SharePoint Server Source..." to add a new one.</value>
   </data>
   <data name="SharepointInsertHelpResult" xml:space="preserve">
     <value>Only variables go in here.&lt;br /&gt;

@@ -1,5 +1,5 @@
 
-<Source ID="ebc70411-74bf-4fae-b886-3e782da659d5" Name="new" ResourceType="Server" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAVwjp6S8+eUS4qT8Nu9ZwtQQAAAACAAAAAAADZgAAwAAAABAAAAAL32g+lJqOwv4pjAzqv0eVAAAAAASAAACgAAAAEAAAABBgSz+aKphK7HrknRJ/Wh6wAAAAq2AXRFYKLBCh5cS+1DdBKBm+KudX6g3myj46uatHRPocyLOar+wCrF/sbCQo7DRYYw1bXuC9iygcv2Hl8aP3SI57I8xg/9Q1KRodABGUtQjNKmZH+vnZ/+p3KR+gLFiiJK48/rHuLE9pnKcdhyIs/PFioGNgi1lHtX/VlI/Ih+gc7Us1t6meKVhZiqrAKdU4+E0faxZ8rNhTKXTnEltToF1itLvN27Mj3fYt+McMYQkUAAAA9oUJTEcM7QrrAUaKESnww6W4F/k=" Type="Dev2Server" ServerVersion="0.0.5767.27259" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
+<Source ID="ebc70411-74bf-4fae-b886-3e782da659d5" Name="new" ResourceType="Server" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAVwjp6S8+eUS4qT8Nu9ZwtQQAAAACAAAAAAADZgAAwAAAABAAAAAL32g+lJqOwv4pjAzqv0eVAAAAAASAAACgAAAAEAAAABBgSz+aKphK7HrknRJ/Wh6wAAAAq2AXRFYKLBCh5cS+1DdBKBm+KudX6g3myj46uatHRPocyLOar+wCrF/sbCQo7DRYYw1bXuC9iygcv2Hl8aP3SI57I8xg/9Q1KRodABGUtQjNKmZH+vnZ/+p3KR+gLFiiJK48/rHuLE9pnKcdhyIs/PFioGNgi1lHtX/VlI/Ih+gc7Us1t6meKVhZiqrAKdU4+E0faxZ8rNhTKXTnEltToF1itLvN27Mj3fYt+McMYQkUAAAA9oUJTEcM7QrrAUaKESnww6W4F/k=" Type="Dev2Server" ServerVersion="0.0.5777.21067" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
   <DisplayName>new</DisplayName>
   <Category>My Category\bob2\new</Category>
   <AuthorRoles>
@@ -16,9 +16,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>LxfJOJzFg+bn6YMx4Szrf/F/kJg=</DigestValue>
+        <DigestValue>5ptQr281K8eLADUVE3V3hsvMxBQ=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>dGgSIKxpo0gf8JJ5CEx/QvxRGNakDDY3EZw6t8agZNinG/TB145hf0jb+ShLhA8X+7wipH6iboehFuMw7Snz5c1g3wCSiC38IzcDmGVMp5SbvTELqqddxhBRCZvqdKWn4Eg4Bh07QoZ/c0463mKzDy0SE2VU5+R++5nEMofvMak=</SignatureValue>
+    <SignatureValue>vWXHeirtUbBkp0sHWTZGngZXR6Ct5WO/H7hO+7T7hrV5v2HdnoY+jJABhKGhBX0B1XmHDDpopqkDRKoajXKdFwFlBmFDMH7QsUfHGJVOLETnvwBwyr02WrQAD6L9/e90jMS1uatZ4WzP6usV7km4VU/JhLJLw2VxUBUaaqgWiC0=</SignatureValue>
   </Signature>
 </Source>

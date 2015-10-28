@@ -1,5 +1,5 @@
 
-<Source ID="90752ffc-ace2-43e1-a0de-84c3c06e92b8" Name="goog" ResourceType="WebSource" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAVwjp6S8+eUS4qT8Nu9ZwtQQAAAACAAAAAAADZgAAwAAAABAAAADXxmMQkRfsKQD8i7gCASw5AAAAAASAAACgAAAAEAAAACD4JMgO+oEwsQlPpV73BLyYAAAA57z46+U0f73Xc5xzrM8PN6o7RowP00qwhcIuaJy6FanPqt7cVfG10AgInNBHOi9cpSQcCFxy+xtzKfAbxiB7AJx4UGgBWGENyfDmm6Ukkt2chto82tREDMDLraUT+8i18VPDentAJk4NmEskK6izSg05fHZnxHD1YEKo671LR2qwhLkwCzVP3CM7cP6npULKRhcdz1kzKJwUAAAAyp57fijIdog/z8tp5PtunU9lN+4=" Type="WebSource" ServerVersion="0.0.5767.27259" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
+<Source ID="90752ffc-ace2-43e1-a0de-84c3c06e92b8" Name="goog" ResourceType="WebSource" IsValid="false" ConnectionString="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAVwjp6S8+eUS4qT8Nu9ZwtQQAAAACAAAAAAADZgAAwAAAABAAAADXxmMQkRfsKQD8i7gCASw5AAAAAASAAACgAAAAEAAAACD4JMgO+oEwsQlPpV73BLyYAAAA57z46+U0f73Xc5xzrM8PN6o7RowP00qwhcIuaJy6FanPqt7cVfG10AgInNBHOi9cpSQcCFxy+xtzKfAbxiB7AJx4UGgBWGENyfDmm6Ukkt2chto82tREDMDLraUT+8i18VPDentAJk4NmEskK6izSg05fHZnxHD1YEKo671LR2qwhLkwCzVP3CM7cP6npULKRhcdz1kzKJwUAAAAyp57fijIdog/z8tp5PtunU9lN+4=" Type="WebSource" ServerVersion="0.0.5777.21067" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
   <DisplayName>goog</DisplayName>
   <Category>Load Test Resources\goog</Category>
   <AuthorRoles>
@@ -16,9 +16,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>ENLpctFNYf5ZNK86kc7hZnEXmag=</DigestValue>
+        <DigestValue>fWuT/AK4EysC4Q2AKS9iZ12J6eo=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>m8HGbCDnZLwi2oKx7/ryBJqeMXsDR9gbNJB2Ke5UFfuZhAJr2xjTUg1D8AdZZFb84+AdOQP/mfqqbJRqgaKxGG92apdnw9MmoGBLNguQGkjuaYMzAXkV5uvwRg5uzUUq/V04pdzgv5zcz5wMufIT/xnfbJJSUhAiQXBx4ImNA/Y=</SignatureValue>
+    <SignatureValue>D54U2xRfy0PquzxxmPYPfdZOdDk0Z+axy6GWLG3bbzO3zrc/wPpahFEVbIGDHnVc6t4j2eRAeaxVCliCCemTnu5NtTJwkCCbvbA6qoDT2K9oKi4KLG0YxYI5SOoOFs4ShhPctlM5HGJGg+Z0r+Nm71XFBtsxgHUK91lTFb8YQ34=</SignatureValue>
   </Signature>
 </Source>

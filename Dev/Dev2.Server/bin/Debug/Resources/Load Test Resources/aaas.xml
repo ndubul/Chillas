@@ -1,5 +1,5 @@
 
-<Service ID="43d5c574-28de-4cb7-8ba6-a3cbd03129df" Name="aaas" ResourceType="WebService" IsValid="false" ServerVersion="0.0.5767.27259" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
+<Service ID="43d5c574-28de-4cb7-8ba6-a3cbd03129df" Name="aaas" ResourceType="WebService" IsValid="false" ServerVersion="0.0.5777.21067" ServerID="51a58300-7e9d-4927-a57b-e5d700b11b55">
   <Actions>
     <Action Name="aaas" Type="InvokeWebService" SourceID="90752ffc-ace2-43e1-a0de-84c3c06e92b8" SourceName="goog" ExecuteAction="test" SourceMethod="aaas" RequestUrl="http://www.google.com" RequestMethod="Get" JsonPath="">
       <RequestHeaders><![CDATA[]]></RequestHeaders>
@@ -36,9 +36,9 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <DigestValue>ea+MFFZA++1Mxv0LscVUA30tZCA=</DigestValue>
+        <DigestValue>DV1sq9y6wfRaY0Sx7NN2UV06o48=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>QLKwz8Du7YSXpBh2sAktODoqjL6EsDla5jvcRSxRexXYeZC/wUFgoHFvGPOlPDTtPsQD6GlJKelmKL6gulNp8IESpCoaJOkhAKaOhrhM1XBZAoQCaVXlmKCsJGphQuLt6ScppN4f4mbVVq/XOBp/Udh4toU9INCZiGGbe9Q2y88=</SignatureValue>
+    <SignatureValue>ebQgGsv84o3gT9ki2LQi1p8hxU0CDuiGvQ5NlGxQTRpSsLy/oAFbSg/pdJtcETJEV9i5AKjqiMbkUoVw6IPVbD0RfKdDpmwFQx+cyy0ZNx1ALKi+P7SxYp64DCM1hmlks+J0W91fBqGMEyo4gSyk4yQAX7Hi4TdUxA3nv6wd8oc=</SignatureValue>
   </Signature>
 </Service>

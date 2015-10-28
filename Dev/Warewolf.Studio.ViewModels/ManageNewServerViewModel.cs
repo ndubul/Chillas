@@ -703,13 +703,6 @@ namespace Warewolf.Studio.ViewModels
                 return Resources.Languages.Core.ServerSourceDialogsTestToolTip;
             }
         }
-        public string SaveToolTip
-        {
-            get
-            {
-                return Resources.Languages.Core.ServerSourceDialogAddressSaveTip;
-            }
-        }
 
         public override void UpdateHelpDescriptor(string helpText)
         {

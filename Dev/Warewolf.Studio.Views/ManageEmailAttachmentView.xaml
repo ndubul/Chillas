@@ -9,7 +9,7 @@
                     xmlns:languages="clr-namespace:Warewolf.Studio.Resources.Languages;assembly=Warewolf.Studio.Resources"
                     mc:Ignorable="d" 
                     Style="{StaticResource XamDialogWindowStyle}"
-                    Header="Choose File(s)"
+                    Header="Choose File(s) to Attach"
                     Width="600"
                     Height="450"
                     d:DesignHeight="300" d:DesignWidth="300">
@@ -72,21 +72,15 @@
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="{StaticResource ControlBorderTop}">
             <Button Command="{Binding SaveCommand}" 
-                    Content="Save"
+                    Content="Attach"
+                    ToolTip="{Binding Path=EmailAttachmentAttachButtonToolTip}" 
                     Width="Auto"
                     Margin="{StaticResource ControlBorderRight}">
-                <i:Interaction.Behaviors>
-                    <core:HelpSetter Text="{x:Static languages:Core.EmailAttachmentSaveCommandHelp}"
-                                                         DataContext="{Binding}" />
-                </i:Interaction.Behaviors>
             </Button>
             <Button Content="Cancel"
+                    ToolTip="{Binding Path=EmailAttachmentCancelButtonToolTip}" 
                     Width="Auto"
                     Command="{Binding CancelCommand}" >
-                <i:Interaction.Behaviors>
-                    <core:HelpSetter Text="{x:Static languages:Core.EmailAttachmentCancelCommandHelp}"
-                                                         DataContext="{Binding}" />
-                </i:Interaction.Behaviors>
             </Button>
         </StackPanel>
     </Grid>
