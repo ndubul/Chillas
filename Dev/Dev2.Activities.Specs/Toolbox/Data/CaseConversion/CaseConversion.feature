@@ -310,6 +310,8 @@ Examples:
 	Then the execution has "AN" error
 	And the execution has "invalid recordset" error
 
+@ignore
+#Complex Types
 Scenario Outline: Convert a sentence to uppercase using complex types
 	Given I have a case convert variable '<variable>' with a value of '<value>'
 	And I convert a variable '<variable>' to '<To>'	
@@ -323,9 +325,9 @@ Scenario Outline: Convert a sentence to uppercase using complex types
 	| # |                        |
 	| 1 | <variable> = <results> | 
 	Examples: 
-	| variable                               | value    | To         | Result   |
-	| [[granparent().parents().childName]]   | troy-ave | TITLE CASE | Troy-Ave |
-	| [[granparent().parents().childName]]   | Jesse    | LOWER      | jesse    |
-	| [[granparent(1).parents(1).childName]] | Jesse    | UPPER      | JESSE    |
+	| variable                                    | value    | To         | Result   |
+	| [[granparent(1).parents(*).childName]]      | troy-ave | TITLE CASE | Troy-Ave |
+	| [[granparent().parents([[int]]).childName]] | Jesse    | LOWER      | jesse    |
+	| [[granparent(1).parents(1).childName]]      | Jesse    | UPPER      | JESSE    |
 
 

@@ -238,7 +238,8 @@ Examples:
 | [[rec(*).a]] = 788.894564545645                    | Normal   | [[rs(1).set]] =  0                  | [[rj([[int]]).a]], [[int]] = 1 | 0          | [[rec(*).a]] = 789                    |
 | [[rec([[int]]).a]] = 788.894564545645, [[int]] = 2 | Normal   | [[rs().set]] =  0                   | [[a]]                          | 0          | [[rec([[int]]).a]] = 789, [[int]] = 1 |
 
-
+@ignore
+#Complex Types
 Scenario Outline: Format number using complex types 
 	Given I have a number '<Number>'
 	And I selected rounding '<Rounding>' to '<RoundingValue>' 
@@ -253,6 +254,7 @@ Scenario Outline: Format number using complex types
 	| Result   |
 	| <result> |
 Examples: 
-| Number           | Rounding | RoundingValue            | Decimals               | DecimalVal | Error | Result                          |
-| 788.894564545645 | Normal   | [[rs().set().value]] = 0 | [[rj().count().value]] | 0          | No    | [[rec(2).result().value]] = 789 |
-| 788.894564545645 | Normal   | [[rs().set().value()]]   | [[rj().count().value]] | 0          | An    | Error                           |
+| Number           | Rounding | RoundingValue                       | Decimals               | DecimalVal | Error | Result                          |
+| 788.894564545645 | Normal   | [[rs().set().value]] = 0            | [[rj().count().value]] | 0          | No    | [[rec(2).result().value]] = 789 |
+| 788.894564545645 | Normal   | [[rs(1).set([[int]]).value(*).set]] | [[rj().count().value]] | 0          | No    | [[rec(1).result(2).value]] = 10 |
+| 788.894564545645 | Normal   | [[rs(*).set().value()]]             | [[rj().count().value]] | 0          | No    | [[rec(2).result(1).value]] = 50 |

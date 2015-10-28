@@ -151,7 +151,8 @@ Scenario Outline: Read Folder file at location with invalid directories
 
 	
 	
-#Complex types
+@ignore
+#Complex Types
 Scenario Outline: Read Folder file at location using complex types
 	Given I have a source path '<source>' with value '<sourceLocation>'
 	And source credentials as '<username>' and '<password>'
@@ -167,6 +168,7 @@ Scenario Outline: Read Folder file at location using complex types
 		|                        |
 		| <resultVar> = <result> |
     Examples: 
-	| No | Name        | source                      | sourceLocation | read  | username | password | resultVar  | result | errorOccured |
-	| 1  | Local Files | [[file().resources().path]] | c:\            | Files | ""       | ""       | [[result]] | String | NO           |
-									 									
+	| No | Name        | source                              | sourceLocation | read  | username | password | resultVar  | result | errorOccured |
+	| 1  | Local Files | [[file().resources().path]]         | c:\            | Files | ""       | ""       | [[result]] | String | NO           |
+	| 2  | Local Files | [[file(*).resources().path]]        | e:\            | Files | ""       | ""       | [[result]] | String | NO           |
+	| 3  | Local Files | [[file([[int]]).resources(1).path]] | d:\            | Files | ""       | ""       | [[result]] | String | NO           |							 									

@@ -50,7 +50,8 @@ Scenario Outline: Move file at location
 
 
 
-#COMPLEX TYPES
+@ignore
+#Complex Types
 Scenario Outline: Move file at location using complex types
 	Given I have a source path '<source>' with value '<sourceLocation>' 
 	And source credentials as '<username>' and '<password>'
@@ -68,9 +69,10 @@ Scenario Outline: Move file at location using complex types
 		|                        |
 		| <resultVar> = <result> |
 	Examples: 
-	   | No | Name           | source                      | sourceLocation   | username | password | destination  | destinationLocation | destUsername | destPassword | selected | resultVar  | result  | errorOccured |
-	   | 1  | Local to Local | [[file().resources().path]] | c:\movefile0.txt | ""       | ""       | [[destPath]] | C:\moved0.txt       | ""           | ""           | True     | [[result]] | Success | NO           |
-	  	 
+	   | No | Name           | source                              | sourceLocation   | username | password | destination  | destinationLocation | destUsername | destPassword | selected | resultVar  | result  | errorOccured |
+	   | 1  | Local to Local | [[file().resources().path]]         | c:\movefile0.txt | ""       | ""       | [[destPath]] | C:\moved0.txt       | ""           | ""           | True     | [[result]] | Success | NO           |
+	   | 2  | Local to Local | [[file(*).resources(1).path]]       | c:\movefile0.txt | ""       | ""       | [[destPath]] | C:\moved0.txt       | ""           | ""           | True     | [[result]] | Success | NO           |
+	   | 3  | Local to Local | [[file([[int]]).resources(1).path]] | c:\movefile1.txt | ""       | ""       | [[destPath]] | C:\moved0.txt       | ""           | ""           | True     | [[result]] | Success | NO           |
 
 
 #cenario Outline: Move file Validation

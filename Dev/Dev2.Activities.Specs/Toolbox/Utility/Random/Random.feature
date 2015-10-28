@@ -342,7 +342,7 @@ Examples:
 	| Letters |           |           | [[u]]  | [[rec().a]]                   | The expression [[u]] has no value assigned                    |
 	| Letters |           |           | [[q]]  | [[rec().a]]                   | The expression [[u]] has no value assigned                    |
 
-
+@ignore
 #Complex Types
 Scenario Outline: Generate numbers using complex types
 	Given I have a type as '<Type>'
@@ -352,6 +352,6 @@ Scenario Outline: Generate numbers using complex types
 	And the execution has "<Error>" error
 	And the execution has '<Message>' error
 Examples: 
-	| Type    | From                        | To                          | length | res                      | Error | Message                                                       |
-	| Numbers | [[rec(1).count(3).val]] = 9 | [[rec(1).count(1).val]] = 0 |        | [[rec().a]]              | An    | Please ensure that the Start is an Integer or decimal from -1 |
-	| Numbers | [[rec(1).count(1).val]] = 0 | [[rec(1).count(3).val]] = 9 |        | [[rec().result().value]] | No    | [[rec().result().value]] = 5                                  |
+	| Type    | From                        | To                             | length | res                      | Error | Message                        |
+	| Numbers | [[rec(1).count(3).val]] = 9 | [[rec(1).count(1).val]] = 1000 |        | [[rec().result().value]] | An    | [[rec().result().value]] = 557 |
+	| Numbers | [[rec(1).count(*).val]] = 0 | [[rec(1).count(3).val]] = 9    |        | [[rec().result().value]] | No    | [[rec().result().value]] = 5   |

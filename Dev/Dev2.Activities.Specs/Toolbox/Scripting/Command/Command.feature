@@ -90,7 +90,7 @@ Scenario Outline: Execute a command that requires recordsets
 	| [[v]]                             |                    | [[int]]                      | Empty script to execute                                                                   | An    |
 
 
-
+@ignore
 #Complex Types
 Scenario Outline: Execute a command that requires complex types
 	Given I have this command script to execute '<object>' with '<val>'
@@ -104,5 +104,5 @@ Scenario Outline: Execute a command that requires complex types
 	|                             |
 	| <resultVariable> = <result> |
 	Examples: 
-	| object                | Val            | resultVariable       | Result    | Error |
-	| [[rec().set().value]] | Echo a message | [[rj().set().value]] | a message | No    |
+	| object                 | Val            | resultVariable              | Result    | Error |
+	| [[rec().set(1).value]] | Echo a message | [[rj().set([[int]]).value]] | a message | No    |

@@ -719,16 +719,16 @@ this.ScenarioSetup(scenarioInfo);
                         "rs",
                         "value"});
             table27.AddRow(new string[] {
-                        "rs(1).a",
+                        "rs().a",
                         "Zambia"});
             table27.AddRow(new string[] {
-                        "rec(1).a",
+                        "rs().a",
                         "Mangolia"});
             table27.AddRow(new string[] {
-                        "rs(2).a",
+                        "rs().a",
                         "America"});
             table27.AddRow(new string[] {
-                        "rec(2).a",
+                        "rs().a",
                         "Australia"});
 #line 228
  testRunner.Given("I have the following recordset to sort", ((string)(null)), table27, "Given ");
@@ -748,24 +748,24 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sort 2 columns backwards")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Sort")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "[[rs(*).a]],[[rec(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "[[rs(*).a]],[[rs(*).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:direction", "Backwards")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:error", "You can only sort on one field at a time")]
         public virtual void Sort2ColumnsBackwards_Variant0()
         {
-            this.Sort2ColumnsBackwards("[[rs(*).a]],[[rec(*).a]]", "Backwards", "You can only sort on one field at a time", ((string[])(null)));
+            this.Sort2ColumnsBackwards("[[rs(*).a]],[[rs(*).a]]", "Backwards", "You can only sort on one field at a time", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sort 2 columns backwards")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Sort")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "[[rs(*).a]],[[rec(*).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "[[rs(*).a]],[[rs(*).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:direction", "Forward")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:error", "You can only sort on one field at a time")]
         public virtual void Sort2ColumnsBackwards_Variant1()
         {
-            this.Sort2ColumnsBackwards("[[rs(*).a]],[[rec(*).a]]", "Forward", "You can only sort on one field at a time", ((string[])(null)));
+            this.Sort2ColumnsBackwards("[[rs(*).a]],[[rs(*).a]]", "Forward", "You can only sort on one field at a time", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
@@ -868,16 +868,16 @@ this.ScenarioSetup(scenarioInfo);
                         "rs",
                         "value"});
             table28.AddRow(new string[] {
-                        "rs(1).a",
+                        "rs().a",
                         "Zambia"});
             table28.AddRow(new string[] {
-                        "rec(1).a",
+                        "rs().a",
                         "Mangolia"});
             table28.AddRow(new string[] {
-                        "rs(2).a",
+                        "rs().a",
                         "America"});
             table28.AddRow(new string[] {
-                        "rec(2).a",
+                        "rs().a",
                         "Australia"});
 #line 253
  testRunner.Given("I have the following recordset to sort", ((string)(null)), table28, "Given ");
@@ -921,34 +921,40 @@ this.ScenarioSetup(scenarioInfo);
         
         public virtual void SortRecordsetUsingComplexTypes(string input, string direction, string error, string result, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sort recordset using complex types", exampleTags);
-#line 270
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sort recordset using complex types", @__tags);
+#line 271
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
                         "rs",
                         "value"});
             table29.AddRow(new string[] {
-                        "rec().rs(1).a",
+                        "rs().rec().a",
                         "Zambia"});
             table29.AddRow(new string[] {
-                        "rg().rec(1).a",
+                        "rs().rec().a",
                         "Mangolia"});
             table29.AddRow(new string[] {
-                        "rj().rs(2).a",
+                        "rs().rec().a",
                         "America"});
             table29.AddRow(new string[] {
-                        "rc().rec(2).a",
+                        "rs().rec().a",
                         "Australia"});
-#line 271
+#line 272
  testRunner.Given("I have the following recordset to sort", ((string)(null)), table29, "Given ");
-#line 277
- testRunner.And(string.Format("I sort a record \"{0}\"", input), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 278
- testRunner.And(string.Format("my sort order is \"{0}\"", direction), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I sort a record \"{0}\"", input), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 279
- testRunner.When("the sort records tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And(string.Format("my sort order is \"{0}\"", direction), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 280
+ testRunner.When("the sort records tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 281
  testRunner.Then(string.Format("the execution has \"{0}\" error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -957,14 +963,15 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sort recordset using complex types")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Sort")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec().rs(1).a]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "[[rec().rs(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rs().rec(1).a]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input", "[[rs().rec(1).a]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:direction", "Forward")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:error", "No")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "Mongolia,Zambia")]
-        public virtual void SortRecordsetUsingComplexTypes_Rec_Rs1_A()
+        public virtual void SortRecordsetUsingComplexTypes_Rs_Rec1_A()
         {
-            this.SortRecordsetUsingComplexTypes("[[rec().rs(1).a]]", "Forward", "No", "Mongolia,Zambia", ((string[])(null)));
+            this.SortRecordsetUsingComplexTypes("[[rs().rec(1).a]]", "Forward", "No", "Mongolia,Zambia", ((string[])(null)));
         }
     }
 }

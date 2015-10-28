@@ -185,7 +185,8 @@ Scenario Outline: Write file at location with invalid directories
 		| UNC with Overwrite    | [[variable]] |                                                        | Overwrite  | [[var]]       | warewolf rules | ""                | ""       | [[result]] | Error | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 		| FTP with Overwrite    | 878787       | 878787                                                 | Overwrite  | [[var]]       | warewolf rules | ""                | ""       | [[result]] | Error | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 
-
+@Ignore
+#Complex Types
 Scenario Outline: Write file at location using complex types
 	Given I have a source path '<source>' with value '<sourceLocation>' 
 	And source credentials as '<username>' and '<password>'	
@@ -202,6 +203,7 @@ Scenario Outline: Write file at location using complex types
 		|                        |
 		| <resultVar> = <result> |
 		Examples: 
-		| Name                 | source                      | sourceLocation           | method    | content | values         | username | password | resultVar  | result  | errorOccured |
-		| Local with Overwrite | [[file().resources().path]] | c:\Temp\filetowrite0.txt | Overwrite | [[var]] | warewolf rules | ""       | ""       | [[result]] | Success | NO           |
-				
+		| Name                 | source                              | sourceLocation           | method    | content | values         | username | password | resultVar  | result  | errorOccured |
+		| Local with Overwrite | [[file().resources().path]]         | c:\Temp\filetowrite0.txt | Overwrite | [[var]] | warewolf rules | ""       | ""       | [[result]] | Success | NO           |
+		| Local with Overwrite | [[file(1).resources([[int]]).path]] | c:\Temp\filetowrite0.txt | Overwrite | [[var]] | warewolf rules | ""       | ""       | [[result]] | Success | NO           |
+		| Local with Overwrite | [[file().resources(*).path]]        | c:\Temp\filetowrite0.txt | Overwrite | [[var]] | warewolf rules | ""       | ""       | [[result]] | Success | NO           |		

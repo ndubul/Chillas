@@ -287,6 +287,7 @@ Examples:
 
 
 #Complex Types
+@ignore
 Scenario Outline: Ensure Date and Time Input and outputs accepts complex types
        Given I have a date '<Date>'  with '<DateVal>'
        And the input format as '<Input>' with '<value>'
@@ -296,5 +297,6 @@ Scenario Outline: Ensure Date and Time Input and outputs accepts complex types
        Then the execution has '<Error>' error
 	   And the result variable '<res>' will be '<result>'
 Examples: 
-	| Date                   | Dateval    | Input               | value      | years | Output             | val       | res                    | result     | Error |
-	| [[rec(1).row().value]] | 31/07/2015 | [[rs(1).row().set]] | dd/mm/yyyy | 0     | [[rs().row().set]] | mm-dd-yyy | [[rec(3).row().value]] | 31-07-2015 | No    |
+	| Date                          | Dateval    | Input               | value      | years | Output             | val       | res                    | result     | Error |
+	| [[rec(1).row().value]]        | 31/07/2015 | [[rs(1).row().set]] | dd/mm/yyyy | 0     | [[rs().row().set]] | mm-dd-yyy | [[rec(3).row().value]] | 31-07-2015 | No    |
+	| [[rec(*).row([[int]]).value]] | 31/08/2015 | [[rs(1).row().set]] | dd/mm/yyyy | 0     | [[rs().row().set]] | mm-dd-yyy | [[rec(3).row().value]] | 31-08-2015 | No    |

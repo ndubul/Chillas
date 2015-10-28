@@ -121,6 +121,7 @@ Scenario Outline: Delete file at location with incorrect directories
 	| UNC        | [[var]]      |                     | ""                           | ""       | [[result]] | Success | An           | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 	| UNC Secure | [[variable]] | ""                  | dev2.local\IntegrationTester | I73573r0 | [[result]] | Success | An           | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 	
+@ignore
 #Complex Types
 Scenario Outline: Delete file at location using complex types
 	Given I have a source path '<source>' with value '<sourceLocation>'
@@ -136,7 +137,9 @@ Scenario Outline: Delete file at location using complex types
 		|                        |
 		| <resultVar> = <result> |
 	Examples: 
-	| Name  | source                      | sourceLocation      | username | password | resultVar  | result  | errorOccured |
-	| Local | [[file().resources().path]] | c:\filetodelete.txt | ""       | ""       | [[result]] | Success | NO           |
+	| Name  | source                              | sourceLocation      | username | password | resultVar  | result  | errorOccured |
+	| Local | [[file().resources().path]]         | c:\filetodelete.txt | ""       | ""       | [[result]] | Success | NO           |
+	| Local | [[file(*).resources(3).path]]       | c:\filetodelete.txt | ""       | ""       | [[result]] | Success | NO           |
+	| Local | [[file(1).resources([[int]]).path]] | c:\delete.txt       | ""       | ""       | [[result]] | Success | NO           |
 
 

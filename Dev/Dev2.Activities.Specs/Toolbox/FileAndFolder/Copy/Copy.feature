@@ -56,6 +56,7 @@ Scenario Outline: Copy file at location
 
 
 @ignore
+#Complex types
 Scenario Outline: Copy file at location using complex types
 	Given I have a source path '<source>' with value '<sourceLocation>' 
 	And source credentials as '<username>' and '<password>'
@@ -75,7 +76,8 @@ Scenario Outline: Copy file at location using complex types
 	Examples: 
 		 | No | source                        | sourceLocation   | username | password | destination  | destinationLocation                               | destUsername | destPassword | selected | resultVar  | result  | errorOccured |
 		 | 1  | [[file().resources().path]]   | c:\copyfile0.txt | ""       | ""       | [[destPath]] | C:\copied00.txt                                   | ""           | ""           | True     | [[result]] | Success | NO           |
-		 
+		 | 2  | [[file(1).resources(*).path]]   | c:\copyfile0.txt | ""       | ""       | [[destPath]] | C:\copied00.txt                                   | ""           | ""           | True     | [[result]] | Success | NO           |
+		 | 3  | [[file([[int]]).resources([[var]]).path]]   | c:\copyfile0.txt | ""       | ""       | [[destPath]] | C:\copied00.txt                                   | ""           | ""           | True     | [[result]] | Success | NO           |
                        																										 
 
 

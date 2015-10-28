@@ -11751,7 +11751,13 @@ this.ScenarioSetup(scenarioInfo);
         
         public virtual void FindIndexUsingValidInputsComplexTypes(string inField, string values, string match, string criteria, string critval, string index, string result, string varVal, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find index using valid inputs complex types", exampleTags);
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find index using valid inputs complex types", @__tags);
 #line 2456
 this.ScenarioSetup(scenarioInfo);
 #line 2457
@@ -11775,18 +11781,19 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Find index using valid inputs complex types")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "FindRecordsetIndexMultiple")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec().row().set]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:inField", "[[rec().row().set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec().row(1).set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:inField", "[[rec().row(1).set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:values", "Super")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Match", "Starts With")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Criteria", "[[rc().row().set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Criteria", "[[rc([[int]]).row(*).set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Critval", "s")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Index", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rs().a().set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:varVal", "1")]
-        public virtual void FindIndexUsingValidInputsComplexTypes_Rec_Row_Set()
+        public virtual void FindIndexUsingValidInputsComplexTypes_Rec_Row1_Set()
         {
-            this.FindIndexUsingValidInputsComplexTypes("[[rec().row().set]]", "Super", "Starts With", "[[rc().row().set]]", "s", "1", "[[rs().a().set]]", "1", ((string[])(null)));
+            this.FindIndexUsingValidInputsComplexTypes("[[rec().row(1).set]]", "Super", "Starts With", "[[rc([[int]]).row(*).set]]", "s", "1", "[[rs().a().set]]", "1", ((string[])(null)));
         }
     }
 }

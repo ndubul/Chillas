@@ -226,19 +226,19 @@ Scenario: Sort a recordset backwards recordset  with one row
 
 Scenario Outline: Sort 2 columns backwards
 	Given I have the following recordset to sort
-	| rs       | value     |
-	| rs(1).a  | Zambia    |
-	| rec(1).a | Mangolia  |
-	| rs(2).a  | America   |
-	| rec(2).a | Australia |
+	| rs     | value     |
+	| rs().a | Zambia    |
+	| rs().a | Mangolia  |
+	| rs().a | America   |
+	| rs().a | Australia |
 	And I sort a record "<input>"
 	And my sort order is "<direction>"
 	When the sort records tool is executed
 	Then the execution has '<error>' error
 	Examples: 
 	| input                    | direction | error                                    |
-	| [[rs(*).a]],[[rec(*).a]] | Backwards | You can only sort on one field at a time |
-	| [[rs(*).a]],[[rec(*).a]] | Forward   | You can only sort on one field at a time |
+	| [[rs(*).a]],[[rs(*).a]] | Backwards | You can only sort on one field at a time |
+	| [[rs(*).a]],[[rs(*).a]] | Forward   | You can only sort on one field at a time |
 	| [[rs(*)]]                | Backwards | Please provide a field to sort on        |
 	| [[rs(*)]]                | Forward   | Please provide a field to sort on        |
 	| [[va]] = tree            | Forward   | Only recordsets can be sorted            |
@@ -251,11 +251,11 @@ Scenario Outline: Sort 2 columns backwards
 @ignore
 Scenario Outline: Sort recordset
 	Given I have the following recordset to sort
-	| rs       | value     |
-	| rs(1).a  | Zambia    |
-	| rec(1).a | Mangolia  |
-	| rs(2).a  | America   |
-	| rec(2).a | Australia |
+	| rs     | value     |
+	| rs().a | Zambia    |
+	| rs().a | Mangolia  |
+	| rs().a | America   |
+	| rs().a | Australia |
 	And I sort a record "<input>"
 	And my sort order is "<direction>"
 	When the sort records tool is executed
@@ -267,17 +267,18 @@ Scenario Outline: Sort recordset
 
 
 #Complex Types
+@ignore
 Scenario Outline: Sort recordset using complex types
 	Given I have the following recordset to sort
-	| rs            | value     |
-	| rec().rs(1).a | Zambia    |
-	| rg().rec(1).a | Mangolia  |
-	| rj().rs(2).a  | America   |
-	| rc().rec(2).a | Australia |
+	| rs           | value     |
+	| rs().rec().a | Zambia    |
+	| rs().rec().a | Mangolia  |
+	| rs().rec().a | America   |
+	| rs().rec().a | Australia |
 	And I sort a record "<input>"
 	And my sort order is "<direction>"
 	When the sort records tool is executed
 	Then the execution has "<error>" error
 	Examples: 
 	| input             | direction | error | result          |
-	| [[rec().rs(1).a]] | Forward   | No    | Mongolia,Zambia |
+	| [[rs().rec(1).a]] | Forward   | No    | Mongolia,Zambia |

@@ -388,6 +388,7 @@ Scenario: Variable that does not exist
 
 
 #Complex Types
+@ignore
 Scenario Outline: Calculate using complex types () input in an agregate function like SUM
 	Given I have a calculate variable "[[var().int().value]]" equal to 
 	| var().int().value | value |
@@ -400,5 +401,7 @@ Scenario Outline: Calculate using complex types () input in an agregate function
 	And the execution has "NO" error
 	Then the calculate "<result>" should be "<value>"
 	Examples: 
-	| No | fx                         | result               | value |
-	| 1  | SUM([[var().int().value]]) | [[rs().set().value]] | 3     |
+	| No | fx                                 | result               | value |
+	| 1  | SUM([[var().int().value]])         | [[rs().set().value]] | 3     |
+	| 1  | SUM([[var(1).int([[val]]).value]]) | [[rs().set().value]] | 10000 |
+	| 1  | SUM([[var().int(*).value]])        | [[rs().set().value]] | 10007 |

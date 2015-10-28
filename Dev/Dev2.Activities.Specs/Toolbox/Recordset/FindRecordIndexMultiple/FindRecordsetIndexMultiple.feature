@@ -2451,7 +2451,7 @@ Scenario Outline:Find index using valid inputs
 	| [[rec().set]]                 | Super      | Contains    | [[var]]                      | ""      | 2     | [[a]]                        | 1,2    |
 
 
-
+@ignore
 #Complex Types
 Scenario Outline:Find index using valid inputs complex types
 	Given I have the following in field '<inField>' equals '<values>'
@@ -2462,5 +2462,5 @@ Scenario Outline:Find index using valid inputs complex types
 	Then the find records index multiple result should be '<Index>'
 	And the execution has "No" error
 	Examples: 
-	| inField             | values | Match       | Criteria           | Critval | Index | result           | varVal |
-	| [[rec().row().set]] | Super  | Starts With | [[rc().row().set]] | s       | 1     | [[rs().a().set]] | 1      |
+	| inField              | values | Match       | Criteria                   | Critval | Index | result           | varVal |
+	| [[rec().row(1).set]] | Super  | Starts With | [[rc([[int]]).row(*).set]] | s       | 1     | [[rs().a().set]] | 1      |

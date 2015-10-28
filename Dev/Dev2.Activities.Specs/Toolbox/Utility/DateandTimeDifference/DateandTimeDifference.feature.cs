@@ -1651,24 +1651,30 @@ this.ScenarioSetup(scenarioInfo);
         
         public virtual void CalculateTheNumberOfMonthsUsingComplexTypes(string input1, string val1, string input2, string val2, string inputformat, string val3, string res, string error, string result, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate the number of months using complex types", exampleTags);
-#line 503
-this.ScenarioSetup(scenarioInfo);
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate the number of months using complex types", @__tags);
 #line 504
- testRunner.Given(string.Format("I have a first date \'{0}\' equals \'{1}\'", input1, val1), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 505
- testRunner.And(string.Format("I have a second date \'{0}\' equals \'{1}\'", input2, val2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given(string.Format("I have a first date \'{0}\' equals \'{1}\'", input1, val1), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 506
- testRunner.And(string.Format("the date format as \'{0}\' equals \'{1}\'", inputformat, val3), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I have a second date \'{0}\' equals \'{1}\'", input2, val2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 507
- testRunner.And("I selected output in \"months\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("the date format as \'{0}\' equals \'{1}\'", inputformat, val3), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 508
- testRunner.When("the datetime difference tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I selected output in \"months\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 509
- testRunner.Then("the difference should be \"7\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("the datetime difference tool is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 510
- testRunner.And(string.Format("the execution has \"{0}\" error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("the difference should be \"7\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 511
+ testRunner.And(string.Format("the execution has \"{0}\" error", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 512
  testRunner.And(string.Format("the result variable \'{0}\' will be \'{1}\'", res, result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1677,8 +1683,9 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Calculate the number of months using complex types")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DateandTimeDifference")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec().row().set]]")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input1", "[[rec().row().set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec().row(*).set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input1", "[[rec().row(*).set]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Val1", "30/07/2015")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input2", "[[rs(*).date().value]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Val2", "01/01/2016")]
@@ -1689,7 +1696,26 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rg(1).set]] = 7")]
         public virtual void CalculateTheNumberOfMonthsUsingComplexTypes_Rec_Row_Set()
         {
-            this.CalculateTheNumberOfMonthsUsingComplexTypes("[[rec().row().set]]", "30/07/2015", "[[rs(*).date().value]]", "01/01/2016", "[[rj(1).date().val]]", "dd/mm/yyyy", "[[rg([[int]]).set]], [[int]] = 1", "No", "[[rg(1).set]] = 7", ((string[])(null)));
+            this.CalculateTheNumberOfMonthsUsingComplexTypes("[[rec().row(*).set]]", "30/07/2015", "[[rs(*).date().value]]", "01/01/2016", "[[rj(1).date().val]]", "dd/mm/yyyy", "[[rg([[int]]).set]], [[int]] = 1", "No", "[[rg(1).set]] = 7", ((string[])(null)));
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Calculate the number of months using complex types")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DateandTimeDifference")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "[[rec(1).row([[int]]).set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input1", "[[rec(1).row([[int]]).set]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Val1", "31/07/2015")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:input2", "[[rs(*).date().value]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Val2", "02/01/2016")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:inputformat", "[[rj(1).date().val]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:Val3", "dd/mm/yyyy")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:res", "[[rg([[int]]).set]], [[int]] = 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:error", "No")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:result", "[[rg(1).set]] = 7")]
+        public virtual void CalculateTheNumberOfMonthsUsingComplexTypes_Rec1_RowInt_Set()
+        {
+            this.CalculateTheNumberOfMonthsUsingComplexTypes("[[rec(1).row([[int]]).set]]", "31/07/2015", "[[rs(*).date().value]]", "02/01/2016", "[[rj(1).date().val]]", "dd/mm/yyyy", "[[rg([[int]]).set]], [[int]] = 1", "No", "[[rg(1).set]] = 7", ((string[])(null)));
         }
     }
 }

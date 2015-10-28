@@ -124,7 +124,7 @@ Scenario Outline: Read File at location using incorrect directory
 	| 2  | UNC        | [[variable]] | ""             | ""                           | ""       | [[result]] | Error  | AN           | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 	| 3  | UNC Secure | 45454        | 45454          | dev2.local\IntegrationTester | I73573r0 | [[result]] | Error  | AN           | Invalid Path. Please ensure that the path provided is an absolute path, if you intend to access the local file system. |
 
-
+@ignore
 #Complex Types
 Scenario Outline: Read File at location using complex types
 	Given I have a source path '<source>' with value '<sourceLocation>'
@@ -140,8 +140,10 @@ Scenario Outline: Read File at location using complex types
 		|                        |
 		| <resultVar> = <result> |
 	Examples: 
-	| NO | Name  | source                      | sourceLocation    | username | password | resultVar      | result | errorOccured |
-	| 1  | Local | [[file().resources().path]] | c:\filetoread.txt | ""       | ""       | [[rec(*).set]] | Guid   | NO           |
+	| NO | Name  | source                              | sourceLocation    | username | password | resultVar      | result | errorOccured |
+	| 1  | Local | [[file().resources().path]]         | c:\filetoread.txt | ""       | ""       | [[rec(*).set]] | Guid   | NO           |
+	| 2  | Local | [[file(1).resources(1).path]]       | c:\filetoread.txt | ""       | ""       | [[rec(*).set]] | Guid   | NO           |
+	| 3  | Local | [[file([[int]]).resources(*).path]] | c:\Read.txt       | ""       | ""       | [[rec(*).set]] | Guid   | NO           |
 	
 
 

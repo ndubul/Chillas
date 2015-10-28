@@ -4630,7 +4630,13 @@ this.ScenarioSetup(scenarioInfo);
         
         public virtual void ConvertFromTextToBinaryUsingComplexTypes(string variables, string value, string types, string results, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Convert from text to binary using complex types", exampleTags);
+            string[] @__tags = new string[] {
+                    "ignore"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Convert from text to binary using complex types", @__tags);
 #line 749
 this.ScenarioSetup(scenarioInfo);
 #line 750
@@ -4672,40 +4678,43 @@ this.ScenarioSetup(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Convert from text to binary using complex types")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BaseConversion")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variables", "[[granparent().parents().initials]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variables", "[[granparent(*).parents().initials]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "AA")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:types", "Binary")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:results", "[[granparent().parents().initials]] = 0100000101000001")]
         public virtual void ConvertFromTextToBinaryUsingComplexTypes_Variant0()
         {
-            this.ConvertFromTextToBinaryUsingComplexTypes("[[granparent().parents().initials]]", "AA", "Binary", "[[granparent().parents().initials]] = 0100000101000001", ((string[])(null)));
+            this.ConvertFromTextToBinaryUsingComplexTypes("[[granparent(*).parents().initials]]", "AA", "Binary", "[[granparent().parents().initials]] = 0100000101000001", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Convert from text to binary using complex types")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BaseConversion")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variables", "[[granparent().parents().initials]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variables", "[[granparent().parents([[int]]).initials]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "AA")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:types", "Base 64")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:results", "[[granparent().parents().initials]] = QUE=")]
         public virtual void ConvertFromTextToBinaryUsingComplexTypes_Variant1()
         {
-            this.ConvertFromTextToBinaryUsingComplexTypes("[[granparent().parents().initials]]", "AA", "Base 64", "[[granparent().parents().initials]] = QUE=", ((string[])(null)));
+            this.ConvertFromTextToBinaryUsingComplexTypes("[[granparent().parents([[int]]).initials]]", "AA", "Base 64", "[[granparent().parents().initials]] = QUE=", ((string[])(null)));
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Convert from text to binary using complex types")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BaseConversion")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variables", "[[granparent().parents().initials]]")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:variables", "[[granparent(*).parents(*).initials]]")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:value", "AA")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:types", "Hex")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:results", "[[granparent().parents().initials]] = 0x4141")]
         public virtual void ConvertFromTextToBinaryUsingComplexTypes_Variant2()
         {
-            this.ConvertFromTextToBinaryUsingComplexTypes("[[granparent().parents().initials]]", "AA", "Hex", "[[granparent().parents().initials]] = 0x4141", ((string[])(null)));
+            this.ConvertFromTextToBinaryUsingComplexTypes("[[granparent(*).parents(*).initials]]", "AA", "Hex", "[[granparent().parents().initials]] = 0x4141", ((string[])(null)));
         }
     }
 }
