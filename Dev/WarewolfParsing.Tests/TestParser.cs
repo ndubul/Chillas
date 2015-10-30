@@ -1550,7 +1550,74 @@ namespace WarewolfParsingTest
             Assert.AreEqual(env.AllErrors.Count, 2);
 
         }
-        
+
+        [TestMethod]
+        [Owner("Leon Rajindrapersadh")]
+        [TestCategory("Intellisense")]
+        public void WarewolfEnvironment_GetIntellisenseCombinationsForAScalar()
+        {
+
+           var a = new List<LanguageAST.LanguageExpression>{  WarewolfDataEvaluationCommon.ParseLanguageExpression("[[a]]",0)};
+           var opt =  IntellisenseStringProvider.Combine(a,1).ToList();
+           Assert.AreEqual(opt.Count,1);
+            Assert.AreEqual(opt[0],"[[a]]");
+        }
+
+         [TestMethod]
+        [Owner("Leon Rajindrapersadh")]
+        [TestCategory("Intellisense")]
+        public void WarewolfEnvironment_GetIntellisenseCombinationsFormultipleScalar()
+        {
+
+           var a = new List<LanguageAST.LanguageExpression>
+           {
+               WarewolfDataEvaluationCommon.ParseLanguageExpression("[[a]]",0),
+                WarewolfDataEvaluationCommon.ParseLanguageExpression("[[b]]",0)
+           };
+           var opt =  IntellisenseStringProvider.Combine(a,1).ToList();
+           Assert.AreEqual(opt.Count,2);
+           Assert.AreEqual(opt[0],"[[a]]");
+           Assert.AreEqual(opt[1],"[[b]]");
+        }
+
+
+         [TestMethod]
+         [Owner("Leon Rajindrapersadh")]
+         [TestCategory("Intellisense")]
+         public void WarewolfEnvironment_GetIntellisenseCombinationsFormultipleScalarSingleRecset()
+         {
+
+             var a = new List<LanguageAST.LanguageExpression>
+           {
+               WarewolfDataEvaluationCommon.ParseLanguageExpression("[[a]]",0),
+                WarewolfDataEvaluationCommon.ParseLanguageExpression("[[b]]",0),
+                WarewolfDataEvaluationCommon.ParseLanguageExpression("[[rec().a]]",0)
+           };
+             var opt = IntellisenseStringProvider.Combine(a, 1).ToList();
+             Assert.AreEqual(opt.Count, 2);
+             Assert.AreEqual(opt[0], "[[a]]");
+             Assert.AreEqual(opt[1], "[[b]]");
+         }
+
+
+         [TestMethod]
+         [Owner("Leon Rajindrapersadh")]
+         [TestCategory("Intellisense")]
+         public void WarewolfEnvironment_GetIntellisenseCombinationsFormultipleScalarSingleRecsetTwoLevels()
+         {
+
+             var a = new List<LanguageAST.LanguageExpression>
+           {
+               WarewolfDataEvaluationCommon.ParseLanguageExpression("[[a]]",0),
+                WarewolfDataEvaluationCommon.ParseLanguageExpression("[[b]]",0),
+                WarewolfDataEvaluationCommon.ParseLanguageExpression("[[rec().a]]",0)
+           };
+             var opt = IntellisenseStringProvider.Combine(a, 2).ToList();
+             Assert.AreEqual(opt.Count, 2);
+             Assert.AreEqual(opt[0], "[[a]]");
+             Assert.AreEqual(opt[1], "[[b]]");
+         }
+
         // ReSharper restore InconsistentNaming
     }
 }
