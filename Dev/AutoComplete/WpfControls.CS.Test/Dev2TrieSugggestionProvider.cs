@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Data;
 using Gma.DataStructures.StringSearch;
+using Microsoft.BusinessData.MetadataModel;
 using WpfControls.Editors;
 
 namespace WpfControls.CS.Test
@@ -9,9 +11,23 @@ namespace WpfControls.CS.Test
     public class Dev2TrieSugggestionProvider:ISuggestionProvider
     {
         #region Implementation of ISuggestionProvider
-        private readonly ITrie<string> m_PatriciaTrie;
+
+        public ITrie<string> PatriciaTrie
+        {
+            get
+            {
+                return _patriciaTrie;
+            }
+            private set
+            {
+                _patriciaTrie = value;
+            }
+        }
         private long m_WordCount;
         ObservableCollection<string> _variableList;
+        int _level;
+        IntellisenseStringProvider.FilterOption _filter;
+        ITrie<string> _patriciaTrie;
         public ObservableCollection<string> VariableList
         {
             get
@@ -21,29 +37,51 @@ namespace WpfControls.CS.Test
             set
             {
                 _variableList = value;
-                var vars = IntellisenseStringProvider.Combine( _variableList.Select(a => WarewolfDataEvaluationCommon.ParseLanguageExpression(a, 0)),1);
+                PatriciaTrie = new PatriciaTrie<string>();
+                var vars = IntellisenseStringProvider.getOptions( _variableList.Select(a => WarewolfDataEvaluationCommon.ParseLanguageExpression(a, 0)),Level,Filter);
                 foreach(var @var in vars)
                 {
-                    m_PatriciaTrie.Add(@var,@var);  
+                    PatriciaTrie.Add(@var,@var);  
                 }
                
             }
         }
-
-        public Dev2TrieSugggestionProvider()
+        public int Level
         {
-            VariableList = new ObservableCollection<string>();
-            m_PatriciaTrie = new PatriciaTrie<string>();
-            
+            get
+            {
+                return _level;
+            }
+            set
+            {
+                _level = value;
+            }
         }
 
 
-        
 
+        public Dev2TrieSugggestionProvider(IntellisenseStringProvider.FilterOption filter, int level)
+        {
+            VariableList = new ObservableCollection<string>();
+            PatriciaTrie = new PatriciaTrie<string>();
+            Level = level;
+            Filter = filter;
+        }
+        public IntellisenseStringProvider.FilterOption Filter
+        {
+            get
+            {
+                return _filter;
+            }
+            set
+            {
+                _filter = value;
+            }
+        }
 
         public IEnumerable GetSuggestions(string filter)
         {
-           return m_PatriciaTrie.Retrieve(filter);
+           return PatriciaTrie.Retrieve(filter);
         }
 
         #endregion

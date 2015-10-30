@@ -75,14 +75,21 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Label Content="_Open" />
+        <Label Content="level"></Label>
+        <TextBox Text="{Binding Level}" Grid.Column="1"></TextBox>
+        
+        <Label Content="_Open"   Grid.Column="0"
+                                 Grid.Row="1" />
         <wpf:AutoCompleteTextBox VerticalAlignment="Top"
                                  Height="25"
                                  Grid.Column="1"
-                                 
-                               
-                                 Watermark="Search here"
+                                 Grid.Row="1"
+
+            Watermark="Search here"
                                  IconPlacement="Left"
                                  IconVisibility="Visible"
                                  Provider="{Binding Dev2Provider}"
@@ -110,9 +117,83 @@
                 </Border>
             </wpf:AutoCompleteTextBox.Icon>
         </wpf:AutoCompleteTextBox>
+
+        <Label Content="Recset"   Grid.Column="0"
+                                 Grid.Row="2" />
+        <wpf:AutoCompleteTextBox VerticalAlignment="Top"
+                                 Height="25"
+                                 Grid.Column="1"
+                                 Grid.Row="2"
+
+            Watermark="Search here"
+                                 IconPlacement="Left"
+                                 IconVisibility="Visible"
+                                 Provider="{Binding Dev2RecsetProvider}"
+                                 x:Name="Act2b">
+            <wpf:AutoCompleteTextBox.SelectedItem>
+                <Binding Path="SelectedPathRecset" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <local:RequiredValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </wpf:AutoCompleteTextBox.SelectedItem>
+            <wpf:AutoCompleteTextBox.LoadingContent>
+                <TextBlock Text="Loading..."
+                           Margin="5"
+                           FontSize="14" />
+            </wpf:AutoCompleteTextBox.LoadingContent>
+            <wpf:AutoCompleteTextBox.Icon>
+                <Border Width="20"
+                        Height="20">
+                    <Image Source="Resources/search_icon.png"
+                           Height="16"
+                           Width="16"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+                </Border>
+            </wpf:AutoCompleteTextBox.Icon>
+        </wpf:AutoCompleteTextBox>
+
+
+        <Label Content="Scalar"   Grid.Column="0"
+                                 Grid.Row="3" />
+        <wpf:AutoCompleteTextBox VerticalAlignment="Top"
+                                 Height="25"
+                                 Grid.Column="1"
+                                 Grid.Row="3"
+
+            Watermark="Search here"
+                                 IconPlacement="Left"
+                                 IconVisibility="Visible"
+                                 Provider="{Binding Dev2ScalarProvider}"
+                                 x:Name="Actb2">
+            <wpf:AutoCompleteTextBox.SelectedItem>
+                <Binding Path="SelectedPathScalar" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <local:RequiredValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </wpf:AutoCompleteTextBox.SelectedItem>
+            <wpf:AutoCompleteTextBox.LoadingContent>
+                <TextBlock Text="Loading..."
+                           Margin="5"
+                           FontSize="14" />
+            </wpf:AutoCompleteTextBox.LoadingContent>
+            <wpf:AutoCompleteTextBox.Icon>
+                <Border Width="20"
+                        Height="20">
+                    <Image Source="Resources/search_icon.png"
+                           Height="16"
+                           Width="16"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+                </Border>
+            </wpf:AutoCompleteTextBox.Icon>
+        </wpf:AutoCompleteTextBox>
+
         <StackPanel Grid.Column="1"
-                    Grid.Row="1"
-                    Margin="0,10"
+                    Grid.Row="4"
+            Margin="0,10"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
             <Button Content="Open"

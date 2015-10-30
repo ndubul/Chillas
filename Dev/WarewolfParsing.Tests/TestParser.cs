@@ -1558,7 +1558,7 @@ namespace WarewolfParsingTest
         {
 
            var a = new List<LanguageAST.LanguageExpression>{  WarewolfDataEvaluationCommon.ParseLanguageExpression("[[a]]",0)};
-           var opt =  IntellisenseStringProvider.Combine(a,1).ToList();
+           var opt =  IntellisenseStringProvider.Combine(a,1,a).ToList();
            Assert.AreEqual(opt.Count,1);
             Assert.AreEqual(opt[0],"[[a]]");
         }
@@ -1574,7 +1574,7 @@ namespace WarewolfParsingTest
                WarewolfDataEvaluationCommon.ParseLanguageExpression("[[a]]",0),
                 WarewolfDataEvaluationCommon.ParseLanguageExpression("[[b]]",0)
            };
-           var opt =  IntellisenseStringProvider.Combine(a,1).ToList();
+           var opt =  IntellisenseStringProvider.Combine(a,1,a).ToList();
            Assert.AreEqual(opt.Count,2);
            Assert.AreEqual(opt[0],"[[a]]");
            Assert.AreEqual(opt[1],"[[b]]");
@@ -1593,7 +1593,7 @@ namespace WarewolfParsingTest
                 WarewolfDataEvaluationCommon.ParseLanguageExpression("[[b]]",0),
                 WarewolfDataEvaluationCommon.ParseLanguageExpression("[[rec().a]]",0)
            };
-             var opt = IntellisenseStringProvider.Combine(a, 1).ToList();
+             var opt = IntellisenseStringProvider.Combine(a, 1,a).ToList();
              Assert.AreEqual(opt.Count, 2);
              Assert.AreEqual(opt[0], "[[a]]");
              Assert.AreEqual(opt[1], "[[b]]");
@@ -1612,7 +1612,7 @@ namespace WarewolfParsingTest
                 WarewolfDataEvaluationCommon.ParseLanguageExpression("[[b]]",0),
                 WarewolfDataEvaluationCommon.ParseLanguageExpression("[[rec().a]]",0)
            };
-             var opt = IntellisenseStringProvider.Combine(a, 2).ToList();
+             var opt = IntellisenseStringProvider.Combine(a, 2,a).ToList();
              Assert.AreEqual(opt.Count, 2);
              Assert.AreEqual(opt[0], "[[a]]");
              Assert.AreEqual(opt[1], "[[b]]");

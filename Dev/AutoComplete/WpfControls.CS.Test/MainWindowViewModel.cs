@@ -20,37 +20,128 @@ namespace WpfControls.CS.Test
         private ICommand _openCommand;
 
         private string _selectedPath;
+        int _level;
+        Dev2TrieSugggestionProvider _dev2Provider;
+        Dev2TrieSugggestionProvider _dev2RecsetProvider;
+        Dev2TrieSugggestionProvider _dev2ScalarProvider;
+        string _selectedPathrecset;
+        string _selectedPathScalar;
+
         #endregion
 
         #region "Constructor"
         public MainWindowViewModel()
         {
             SelectedPath = "";
-            Dev2Provider = new Dev2TrieSugggestionProvider
+            SelectedPathRecset = "";
+            SelectedPathScalar = "";
+            
+            Level = 5;
+            BuildTrie(Level);
+        }
+
+        void BuildTrie(int level)
+        {
+            Dev2Provider = new Dev2TrieSugggestionProvider(IntellisenseStringProvider.FilterOption.All, level)
             {
+                Level = level,
                 VariableList = new ObservableCollection<string>
                 {
                     "[[a]]",
                     "[[b]]",
                     "[[Rec().a]]",
                     "[[Rec().b]]",
-                    "[[Rec()]]",
-                    "[[Bob()]]",
-                    "[[The()]]",
-                    "[[Builder()]]",
-                    "[[Can()]]",
-                    "[[We()]]",
-                    "[[Build()]]",
-                    "[[Build().it]]",
-
+                    //"[[Rec()]]",
+                    //"[[Bob()]]",
+                    //"[[The()]]",
+                    //"[[Builder()]]",
+                    //"[[Can()]]",
+                    //"[[We()]]",
+                    //"[[Build()]]",
+                    //"[[Build().it]]",
+                }
+                
+            };
+            Dev2RecsetProvider = new Dev2TrieSugggestionProvider(IntellisenseStringProvider.FilterOption.Recordsets,level)
+            {
+          
+                VariableList = new ObservableCollection<string>
+                {
+                    "[[a]]",
+                    "[[b]]",
+                    "[[Rec().a]]",
+                    "[[Rec().b]]",
+                    //"[[Rec()]]",
+                    //"[[Bob()]]",
+                    //"[[The()]]",
+                    //"[[Builder()]]",
+                    //"[[Can()]]",
+                    //"[[We()]]",
+                    //"[[Build()]]",
+                    //"[[Build().it]]",
+                }
+            };
+            Dev2ScalarProvider = new Dev2TrieSugggestionProvider(IntellisenseStringProvider.FilterOption.Scalars,level)
+            {
+              
+                VariableList = new ObservableCollection<string>
+                {
+                    "[[a]]",
+                    "[[b]]",
+                    "[[Rec().a]]",
+                    "[[Rec().b]]",
+                    //"[[Rec()]]",
+                    //"[[Bob()]]",
+                    //"[[The()]]",
+                    //"[[Builder()]]",
+                    //"[[Can()]]",
+                    //"[[We()]]",
+                    //"[[Build()]]",
+                    //"[[Build().it]]",
                 }
             };
         }
+
         #endregion
 
         #region "Events"
 
-        public Dev2TrieSugggestionProvider Dev2Provider { get; set; }
+        public Dev2TrieSugggestionProvider Dev2Provider
+        {
+            get
+            {
+                return _dev2Provider;
+            }
+            set
+            {
+                _dev2Provider = value;
+                RaisePropertyChanged("Dev2Provider");
+            }
+        }
+        public Dev2TrieSugggestionProvider Dev2RecsetProvider
+        {
+            get
+            {
+                return _dev2RecsetProvider;
+            }
+            set
+            {
+                _dev2RecsetProvider = value;
+                RaisePropertyChanged("Dev2RecsetProvider");
+            }
+        }
+        public Dev2TrieSugggestionProvider Dev2ScalarProvider
+        {
+            get
+            {
+                return _dev2ScalarProvider;
+            }
+            set
+            {
+                _dev2ScalarProvider = value;
+                RaisePropertyChanged("Dev2ScalarProvider");
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -93,6 +184,18 @@ namespace WpfControls.CS.Test
             get { return _selectedPath; }
             set { _selectedPath = value; RaisePropertyChanged("SelectedPath"); }
         }
+
+        public string SelectedPathRecset
+        {
+            get { return _selectedPathrecset; }
+            set { _selectedPathrecset = value; RaisePropertyChanged("SelectedPath"); }
+        }
+
+        public string SelectedPathScalar
+        {
+            get { return _selectedPathScalar; }
+            set { _selectedPathScalar = value; RaisePropertyChanged("SelectedPath"); }
+        }
         #endregion
 
         #region "Methods"
@@ -125,5 +228,18 @@ namespace WpfControls.CS.Test
 
         #endregion
 
+        public int Level
+        {
+            get
+            {
+                return _level;
+            }
+            set
+            {
+                _level = value;
+                BuildTrie(Level);
+                RaisePropertyChanged("Level"); 
+            }
+        }
     }
 }
